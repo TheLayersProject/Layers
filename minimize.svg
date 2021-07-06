@@ -1,0 +1,7 @@
+<svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="500px" height="500px">
+<path id="bar" fill-rule="evenodd"  fill="#000000" transform="translate(0,417)"
+ d="M-0.000,-0.000 L500.000,-0.000 L500.000,83.000 L-0.000,83.000 L-0.000,-0.000 Z"/>
+</svg>

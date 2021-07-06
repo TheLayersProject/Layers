@@ -1,0 +1,17 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="20px" height="6px">
+<path id="mll" fill-rule="evenodd"  fill="#000000"
+ d="M0.000,6.000 L0.000,-0.000 L20.000,-0.000 L20.000,6.000 L0.000,6.000 ZM5.000,5.000 L1.000,5.000 L1.000,1.000 L5.000,1.000 L5.000,5.000 ZM7.000,4.000 L7.000,2.000 L18.000,2.000 L18.000,4.000 L7.000,4.000 Z"/>
+<path id="mll" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(1, 1)"
+ d="M-0.000,-0.000 L-0.000,1.000 L1.000,1.000 L1.000,-0.000 L-0.000,-0.000 Z"/>
+<path id="mll" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(4, 1)"
+ d="M-0.000,-0.000 L-0.000,1.000 L1.000,1.000 L1.000,-0.000 L-0.000,-0.000 Z"/>
+<path id="mll" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(1, 4)"
+ d="M-0.000,-0.000 L-0.000,1.000 L1.000,1.000 L1.000,-0.000 L-0.000,-0.000 Z"/>
+<path id="mll" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(4, 4)"
+ d="M-0.000,-0.000 L-0.000,1.000 L1.000,1.000 L1.000,-0.000 L-0.000,-0.000 Z"/>
+<path id="mll" fill-rule="evenodd" opacity="0.5"  fill="#000000" transform="translate(7, 2)"
+ d="M-0.000,1.000 L-0.000,-0.000 L11.000,-0.000 L11.000,1.000 L-0.000,1.000 Z"/>
+</svg>

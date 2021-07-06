@@ -1,0 +1,37 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="20px" height="20px">
+<path id="panel" fill-rule="evenodd"  fill="#000000" transform="translate(8, 0)"
+ d="M-0.000,0.000 L9.000,0.000 C10.657,0.000 12.000,1.343 12.000,3.000 L12.000,17.000 C12.000,18.657 10.657,20.000 9.000,20.000 L-0.000,20.000 L-0.000,0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.8" transform="translate(7, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.7" transform="translate(6, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.6" transform="translate(5, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(4, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.4" transform="translate(3, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.3" transform="translate(2, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.2" transform="translate(1, 0)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.8" transform="translate(7, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.7" transform="translate(6, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.6" transform="translate(5, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.5" transform="translate(4, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.4" transform="translate(3, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.3" transform="translate(2, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.2" transform="translate(1, 19)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="panel" fill-rule="evenodd"  fill="#000000" opacity="0.1" transform="translate(0, 1)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,18.000 L-0.000,18.000 L-0.000,-0.000 Z"/>
+</svg>

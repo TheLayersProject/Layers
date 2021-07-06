@@ -1,0 +1,127 @@
+\hypertarget{class_layers_1_1_gradient___selection___box}{}\doxysection{Layers\+::Gradient\+\_\+\+Selection\+\_\+\+Box Class Reference}
+\label{class_layers_1_1_gradient___selection___box}\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+Inheritance diagram for Layers\+::Gradient\+\_\+\+Selection\+\_\+\+Box\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_layers_1_1_gradient___selection___box}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a5746ff1d3c057cc357062ebe7e51ff04}\label{class_layers_1_1_gradient___selection___box_a5746ff1d3c057cc357062ebe7e51ff04}} 
+void {\bfseries click\+\_\+control} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a7cd7f63e0dd38e72a851d3efb36453c4}\label{class_layers_1_1_gradient___selection___box_a7cd7f63e0dd38e72a851d3efb36453c4}} 
+{\bfseries Gradient\+\_\+\+Selection\+\_\+\+Box} (QGradient\+Stops gradient\+\_\+stops, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a1a537aedee91621c92a887c083280cc9}\label{class_layers_1_1_gradient___selection___box_a1a537aedee91621c92a887c083280cc9}} 
+void {\bfseries add\+\_\+gradient\+\_\+stop} (double stop\+\_\+val, QColor color)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a36e32489ef9b3bf2e71f3289390ece43}\label{class_layers_1_1_gradient___selection___box_a36e32489ef9b3bf2e71f3289390ece43}} 
+QGradient\+Stops {\bfseries gradient\+\_\+stops} () const
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a57d55bfc461dd909abbae635eef57a81}{issue\+\_\+update}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_ae462285b0e1ebd5654e5b043e07c0090}{setup\+\_\+customize\+\_\+panel}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a645ea9e0b558fd86a92dd48b04e2a84a}\label{class_layers_1_1_gradient___selection___box_a645ea9e0b558fd86a92dd48b04e2a84a}} 
+void {\bfseries update\+\_\+gradient} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a239c5242db1ce64cb9ba4c3652258f68}{update\+\_\+theme\+\_\+dependencies}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a767e9c078ebe8b5c4e04e236f4b43520}\label{class_layers_1_1_gradient___selection___box_a767e9c078ebe8b5c4e04e236f4b43520}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a6dc13593d7a3daedb0aee5710b813e45}{init\+\_\+attributes}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_adbca36db66a254f91607cf85ea52b232}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_aaaf6497646e17f1bfac487678fcecb4e}\label{class_layers_1_1_gradient___selection___box_aaaf6497646e17f1bfac487678fcecb4e}} 
+bool {\bfseries native\+Event} (const QByte\+Array \&event\+Type, void $\ast$message, long $\ast$result) override
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a53397634902727fe328bc7d0ae613881}\label{class_layers_1_1_gradient___selection___box_a53397634902727fe328bc7d0ae613881}} 
+void {\bfseries paint\+Event} (QPaint\+Event $\ast$event) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a6dc13593d7a3daedb0aee5710b813e45}\label{class_layers_1_1_gradient___selection___box_a6dc13593d7a3daedb0aee5710b813e45}} 
+\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Gradient\+\_\+\+Selection\+\_\+\+Box\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}}.
+
+This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_a3b15ca4301a58c901ab606aefb2b7f18}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_adbca36db66a254f91607cf85ea52b232}\label{class_layers_1_1_gradient___selection___box_adbca36db66a254f91607cf85ea52b232}} 
+\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Gradient\+\_\+\+Selection\+\_\+\+Box\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
+
+This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a57d55bfc461dd909abbae635eef57a81}\label{class_layers_1_1_gradient___selection___box_a57d55bfc461dd909abbae635eef57a81}} 
+\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}!issue\_update@{issue\_update}}
+\index{issue\_update@{issue\_update}!Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+\doxysubsubsection{\texorpdfstring{issue\_update()}{issue\_update()}}
+{\footnotesize\ttfamily void Gradient\+\_\+\+Selection\+\_\+\+Box\+::issue\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls the inheriting QWidget\textquotesingle{}s update() function
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to call the inheriting QWidget\textquotesingle{}s update(). 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_ae462285b0e1ebd5654e5b043e07c0090}\label{class_layers_1_1_gradient___selection___box_ae462285b0e1ebd5654e5b043e07c0090}} 
+\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}!setup\_customize\_panel@{setup\_customize\_panel}}
+\index{setup\_customize\_panel@{setup\_customize\_panel}!Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+\doxysubsubsection{\texorpdfstring{setup\_customize\_panel()}{setup\_customize\_panel()}}
+{\footnotesize\ttfamily void Gradient\+\_\+\+Selection\+\_\+\+Box\+::setup\+\_\+customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prepares the themeable\textquotesingle{}s customize panel with connections to the themeable\textquotesingle{}s attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. \mbox{\hyperlink{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}{init\+\_\+customize\+\_\+panel()}} is responsible for calling this function. 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_gradient___selection___box_a239c5242db1ce64cb9ba4c3652258f68}\label{class_layers_1_1_gradient___selection___box_a239c5242db1ce64cb9ba4c3652258f68}} 
+\index{Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}!update\_theme\_dependencies@{update\_theme\_dependencies}}
+\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Gradient\_Selection\_Box@{Layers::Gradient\_Selection\_Box}}
+\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
+{\footnotesize\ttfamily void Gradient\+\_\+\+Selection\+\_\+\+Box\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ad51ea7b83f4df45e53880526839a8b46}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Layers\+RW.\+h\item 
+Gradient\+\_\+\+Selection\+\_\+\+Box.\+cpp\end{DoxyCompactItemize}

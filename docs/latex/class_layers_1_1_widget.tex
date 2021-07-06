@@ -1,0 +1,159 @@
+\hypertarget{class_layers_1_1_widget}{}\doxysection{Layers\+::Widget Class Reference}
+\label{class_layers_1_1_widget}\index{Layers::Widget@{Layers::Widget}}
+
+
+{\ttfamily \#include $<$Layers\+RW.\+h$>$}
+
+Inheritance diagram for Layers\+::Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{class_layers_1_1_widget}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}\label{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}} 
+{\bfseries Widget} (QWidget $\ast$parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}{set\+\_\+margin}} (int margin)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}{set\+\_\+margin}} (int left, int top, int right, int bottom)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{update\+\_\+theme\+\_\+dependencies}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}{event\+Filter}} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{init\+\_\+attributes}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_adb31975853723210fbc1cd4315baf643}{issue\+\_\+update}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paint\+Event}} (QPaint\+Event $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_widget_a1ee3c3d3a0874d617553299c6f8b64ab}{setup\+\_\+customize\+\_\+panel}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_widget_a66dc4695cd3b275e243b4ac29c301748}\label{class_layers_1_1_widget_a66dc4695cd3b275e243b4ac29c301748}} 
+QPainter {\bfseries painter}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class wraps a QWidget with a \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} to give QWidgets compatibility with the Layers theme system. The Layers \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class overrides the QWidget\textquotesingle{}s \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paint\+Event()}} and uses the attributes provided by the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle the widget\textquotesingle{}s appearance. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}\label{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}} 
+\index{Layers::Widget@{Layers::Widget}!eventFilter@{eventFilter}}
+\index{eventFilter@{eventFilter}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{eventFilter()}{eventFilter()}}
+{\footnotesize\ttfamily bool Widget\+::event\+Filter (\begin{DoxyParamCaption}\item[{QObject $\ast$}]{object,  }\item[{QEvent $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+Overrides the QWidget\+::event\+Filter() to handle widget hover coloring \mbox{\Hypertarget{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}\label{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}} 
+\index{Layers::Widget@{Layers::Widget}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Widget\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the widget\textquotesingle{}s attributes.
+
+This function uses calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}} to define attributes.
+
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_a3b15ca4301a58c901ab606aefb2b7f18}{Layers\+::\+Themeable}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_settings___tab_aa7db5123c40b349e08def9f2ca482df4}{Layers\+::\+Settings\+\_\+\+Tab}}, \mbox{\hyperlink{class_layers_1_1_themes___settings___panel_a04ae7a54656a4693ecf412036517e372}{Layers\+::\+Themes\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_menu___label___layer_a7fc0ed2658c4633fe2710855333ca7b5}{Layers\+::\+Menu\+\_\+\+Label\+\_\+\+Layer}}, \mbox{\hyperlink{class_layers_1_1_customize___panel_ab3b42b5926615bb96dbd1eef8be57236}{Layers\+::\+Customize\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_gradient___control_a41ba2c946f8afaff8c25cac22789652b}{Layers\+::\+Gradient\+\_\+\+Control}}, \mbox{\hyperlink{class_layers_1_1_color___control_a0ac15e7e2689419e442435c6e41a8da6}{Layers\+::\+Color\+\_\+\+Control}}, \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_line___editor_a4861b99545d8f3ed0e7bde88f25c7ebb}{Layers\+::\+Line\+\_\+\+Editor}}, \mbox{\hyperlink{class_layers_1_1_combobox_abda7de15ee2d4c5264b6dee0f790593f}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}{Layers\+::\+Button}}, and \mbox{\hyperlink{class_layers_1_1_toggle___switch_a31b4f9b31220396582ad2ab791c798af}{Layers\+::\+Toggle\+\_\+\+Switch}}.
+
+\mbox{\Hypertarget{class_layers_1_1_widget_adb31975853723210fbc1cd4315baf643}\label{class_layers_1_1_widget_adb31975853723210fbc1cd4315baf643}} 
+\index{Layers::Widget@{Layers::Widget}!issue\_update@{issue\_update}}
+\index{issue\_update@{issue\_update}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{issue\_update()}{issue\_update()}}
+{\footnotesize\ttfamily void Widget\+::issue\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Calls the QWidget\textquotesingle{}s update() function 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}\label{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}} 
+\index{Layers::Widget@{Layers::Widget}!paintEvent@{paintEvent}}
+\index{paintEvent@{paintEvent}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{paintEvent()}{paintEvent()}}
+{\footnotesize\ttfamily void Widget\+::paint\+Event (\begin{DoxyParamCaption}\item[{QPaint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+Paints the widget with values obtained from the widget\textquotesingle{}s attributes. \mbox{\Hypertarget{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}\label{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}} 
+\index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
+\index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{int}]{left,  }\item[{int}]{top,  }\item[{int}]{right,  }\item[{int}]{bottom }\end{DoxyParamCaption})}
+
+Sets the margin attributes individually.
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & margin \\
+\hline
+{\em top} & margin \\
+\hline
+{\em right} & margin \\
+\hline
+{\em bottom} & margin \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}\label{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}} 
+\index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
+\index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{int}]{margin }\end{DoxyParamCaption})}
+
+Sets all margin attributes with one value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em margin} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_widget_a1ee3c3d3a0874d617553299c6f8b64ab}\label{class_layers_1_1_widget_a1ee3c3d3a0874d617553299c6f8b64ab}} 
+\index{Layers::Widget@{Layers::Widget}!setup\_customize\_panel@{setup\_customize\_panel}}
+\index{setup\_customize\_panel@{setup\_customize\_panel}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{setup\_customize\_panel()}{setup\_customize\_panel()}}
+{\footnotesize\ttfamily void Widget\+::setup\+\_\+customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Prepares the widget\textquotesingle{}s customize panel with connections to the widget\textquotesingle{}s attributes.
+
+\mbox{\hyperlink{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}{Themeable\+::init\+\_\+customize\+\_\+panel()}} is responsible for calling this function. 
+
+Implements \mbox{\hyperlink{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}{Layers\+::\+Themeable}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_titlebar_aba13776288da7f17853285c1c46694a5}{Layers\+::\+Titlebar}}, \mbox{\hyperlink{class_layers_1_1_customize___menu_a32f9812105b1ddb174c35d8a2b07d998}{Layers\+::\+Customize\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___menu_ab731bdc166f22d5e335e133c24715ce2}{Layers\+::\+Settings\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___tab_a597d73df158516add67840ed041176a5}{Layers\+::\+Settings\+\_\+\+Tab}}, \mbox{\hyperlink{class_layers_1_1_settings___sidebar_a0c56d70e4585d646a520ac04fe32c2b5}{Layers\+::\+Settings\+\_\+\+Sidebar}}, \mbox{\hyperlink{class_layers_1_1_themes___settings___panel_a41c76cebaf6383e851f9db4ba266250d}{Layers\+::\+Themes\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_app___preferences___settings___panel_ae879fcffbdfc18810ff73b212c69b4e6}{Layers\+::\+App\+\_\+\+Preferences\+\_\+\+Settings\+\_\+\+Panel}}, and \mbox{\hyperlink{class_layers_1_1_menu___label___layer_a57cba0388bd8c4a77fef54488c86ba6e}{Layers\+::\+Menu\+\_\+\+Label\+\_\+\+Layer}}.
+
+\mbox{\Hypertarget{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}\label{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}} 
+\index{Layers::Widget@{Layers::Widget}!update\_theme\_dependencies@{update\_theme\_dependencies}}
+\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
+{\footnotesize\ttfamily void Widget\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates anything that can\textquotesingle{}t be changed with attributes.
+
+As a \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}, this function updates the border margins of the layout if the layout happens to be a \mbox{\hyperlink{class_layers_1_1_horizontal___layout}{Layers\+::\+Horizontal\+\_\+\+Layout}} or \mbox{\hyperlink{class_layers_1_1_vertical___layout}{Layers\+::\+Vertical\+\_\+\+Layout}}. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ad51ea7b83f4df45e53880526839a8b46}{Layers\+::\+Themeable}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}{Layers\+::\+Window}}, \mbox{\hyperlink{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_line___editor_af25a9b7b7f1f0309d399a349647b92a9}{Layers\+::\+Line\+\_\+\+Editor}}, and \mbox{\hyperlink{class_layers_1_1_combobox_afc82e71733028cbd4314cad925d43e9b}{Layers\+::\+Combobox}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Layers\+RW.\+h\item 
+Widget.\+cpp\end{DoxyCompactItemize}

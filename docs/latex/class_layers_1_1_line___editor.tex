@@ -1,0 +1,87 @@
+\hypertarget{class_layers_1_1_line___editor}{}\doxysection{Layers\+::Line\+\_\+\+Editor Class Reference}
+\label{class_layers_1_1_line___editor}\index{Layers::Line\_Editor@{Layers::Line\_Editor}}
+Inheritance diagram for Layers\+::Line\+\_\+\+Editor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_layers_1_1_line___editor}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a8f52d5ed31b6409930497facdbf75bb5}\label{class_layers_1_1_line___editor_a8f52d5ed31b6409930497facdbf75bb5}} 
+void {\bfseries text\+\_\+edited} (const QString \&text)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_ab8770cc580cc726db4a8de09ed4858e5}\label{class_layers_1_1_line___editor_ab8770cc580cc726db4a8de09ed4858e5}} 
+{\bfseries Line\+\_\+\+Editor} (QWidget $\ast$parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_line___editor_a4861b99545d8f3ed0e7bde88f25c7ebb}{init\+\_\+attributes}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a8c506697d9d1f265c2541706058d7646}\label{class_layers_1_1_line___editor_a8c506697d9d1f265c2541706058d7646}} 
+void {\bfseries set\+\_\+default\+\_\+value} (const QString \&default\+\_\+value)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_aa2c094bed5e80fc4f8782667a050567a}\label{class_layers_1_1_line___editor_aa2c094bed5e80fc4f8782667a050567a}} 
+void {\bfseries set\+\_\+disabled} (bool cond=true)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_ab48cc855f9b918b99bdbccb23b35ed7b}\label{class_layers_1_1_line___editor_ab48cc855f9b918b99bdbccb23b35ed7b}} 
+void {\bfseries set\+\_\+font\+\_\+size} (int size)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a2d60fab1e0b9116d0dcb34643bbeb093}\label{class_layers_1_1_line___editor_a2d60fab1e0b9116d0dcb34643bbeb093}} 
+void {\bfseries set\+\_\+margin} (int margin)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_ab3e66bb561df7f2cbbc2b0ba582900b5}\label{class_layers_1_1_line___editor_ab3e66bb561df7f2cbbc2b0ba582900b5}} 
+void {\bfseries set\+\_\+margin} (int left, int top, int right, int bottom)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a120d2a0b155813344a5d05a929f69a8a}\label{class_layers_1_1_line___editor_a120d2a0b155813344a5d05a929f69a8a}} 
+void {\bfseries set\+\_\+text} (const QString \&text)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a56e3cc4232e593953029fb7dd4be53bb}\label{class_layers_1_1_line___editor_a56e3cc4232e593953029fb7dd4be53bb}} 
+void {\bfseries set\+\_\+validator} (const QValidator $\ast$validator)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_line___editor_af25a9b7b7f1f0309d399a349647b92a9}{update\+\_\+theme\+\_\+dependencies}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a328ba6b2fa76b986185a0b418dec86af}\label{class_layers_1_1_line___editor_a328ba6b2fa76b986185a0b418dec86af}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_line___editor_a4861b99545d8f3ed0e7bde88f25c7ebb}\label{class_layers_1_1_line___editor_a4861b99545d8f3ed0e7bde88f25c7ebb}} 
+\index{Layers::Line\_Editor@{Layers::Line\_Editor}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::Line\_Editor@{Layers::Line\_Editor}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Line\+\_\+\+Editor\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Initializes the widget\textquotesingle{}s attributes.
+
+This function uses calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}} to define attributes.
+
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{Layers\+::\+Widget}}.
+
+\mbox{\Hypertarget{class_layers_1_1_line___editor_af25a9b7b7f1f0309d399a349647b92a9}\label{class_layers_1_1_line___editor_af25a9b7b7f1f0309d399a349647b92a9}} 
+\index{Layers::Line\_Editor@{Layers::Line\_Editor}!update\_theme\_dependencies@{update\_theme\_dependencies}}
+\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Line\_Editor@{Layers::Line\_Editor}}
+\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
+{\footnotesize\ttfamily void Line\+\_\+\+Editor\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates anything that can\textquotesingle{}t be changed with attributes.
+
+As a \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}, this function updates the border margins of the layout if the layout happens to be a \mbox{\hyperlink{class_layers_1_1_horizontal___layout}{Layers\+::\+Horizontal\+\_\+\+Layout}} or \mbox{\hyperlink{class_layers_1_1_vertical___layout}{Layers\+::\+Vertical\+\_\+\+Layout}}. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{Layers\+::\+Widget}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Layers\+RW.\+h\item 
+Line\+\_\+\+Editor.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,84 @@
+\hypertarget{class_layers_1_1_slider}{}\doxysection{Layers\+::Slider Class Reference}
+\label{class_layers_1_1_slider}\index{Layers::Slider@{Layers::Slider}}
+Inheritance diagram for Layers\+::Slider\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_layers_1_1_slider}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_a5109da88072a5d6c3dffaa80d6b148e0}\label{class_layers_1_1_slider_a5109da88072a5d6c3dffaa80d6b148e0}} 
+{\bfseries Slider} (int range\+\_\+start, int range\+\_\+end, QWidget $\ast$parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{init\+\_\+attributes}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_a948dae3a9d357a41d79a7fa85324ec51}\label{class_layers_1_1_slider_a948dae3a9d357a41d79a7fa85324ec51}} 
+int {\bfseries range\+\_\+difference} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_afc800fad379ecaa214e5afe859d179c5}\label{class_layers_1_1_slider_afc800fad379ecaa214e5afe859d179c5}} 
+void {\bfseries update\+\_\+handle\+\_\+pos} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}{update\+\_\+theme\+\_\+dependencies}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_ae9df2df20b8b2baeaef93781db2b260d}\label{class_layers_1_1_slider_ae9df2df20b8b2baeaef93781db2b260d}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}\label{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}} 
+\index{Layers::Slider@{Layers::Slider}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::Slider@{Layers::Slider}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Slider\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Initializes the widget\textquotesingle{}s attributes.
+
+This function uses calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}} to define attributes.
+
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{Layers\+::\+Widget}}.
+
+\mbox{\Hypertarget{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}\label{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}} 
+\index{Layers::Slider@{Layers::Slider}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Slider@{Layers::Slider}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Slider\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
+
+This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}\label{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}} 
+\index{Layers::Slider@{Layers::Slider}!update\_theme\_dependencies@{update\_theme\_dependencies}}
+\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Slider@{Layers::Slider}}
+\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
+{\footnotesize\ttfamily void Slider\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates anything that can\textquotesingle{}t be changed with attributes.
+
+As a \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}, this function updates the border margins of the layout if the layout happens to be a \mbox{\hyperlink{class_layers_1_1_horizontal___layout}{Layers\+::\+Horizontal\+\_\+\+Layout}} or \mbox{\hyperlink{class_layers_1_1_vertical___layout}{Layers\+::\+Vertical\+\_\+\+Layout}}. 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{Layers\+::\+Widget}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Layers\+RW.\+h\item 
+Slider.\+cpp\end{DoxyCompactItemize}

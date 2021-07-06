@@ -1,0 +1,33 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="20px" height="20px">
+<path id="sidebar" fill-rule="evenodd"  fill="#000000"
+ d="M2.990,0.000 L7.990,0.000 L7.990,20.000 L2.990,20.000 C1.333,20.000 -0.010,18.657 -0.010,17.000 L-0.010,3.000 C-0.010,1.343 1.333,0.000 2.990,0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.8" transform="translate(8, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.6" transform="translate(10, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.4" transform="translate(12, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.2" transform="translate(14, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.1" transform="translate(16, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.05" transform="translate(18, 0)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.8" transform="translate(8, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.6" transform="translate(10, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.4" transform="translate(12, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.2" transform="translate(14, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.1" transform="translate(16, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.05" transform="translate(18, 19)"
+ d="M-0.000,-0.000 L2.000,-0.000 L2.000,1.000 L-0.000,1.000 L-0.000,-0.000 Z"/>
+<path id="sidebar" fill-rule="evenodd"  fill="#000000" opacity="0.05" transform="translate(19, 1)"
+ d="M-0.000,-0.000 L1.000,-0.000 L1.000,18.000 L-0.000,18.000 L-0.000,-0.000 Z"/>
+</svg>

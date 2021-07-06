@@ -1,0 +1,71 @@
+\hypertarget{class_layers_1_1_attribute___sharing___combo}{}\doxysection{Layers\+::Attribute\+\_\+\+Sharing\+\_\+\+Combo Class Reference}
+\label{class_layers_1_1_attribute___sharing___combo}\index{Layers::Attribute\_Sharing\_Combo@{Layers::Attribute\_Sharing\_Combo}}
+
+
+{\ttfamily \#include $<$Layers\+RW.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_af1d3cabf8a8b0ae0d1e4f6528424b209}\label{class_layers_1_1_attribute___sharing___combo_af1d3cabf8a8b0ae0d1e4f6528424b209}} 
+{\bfseries Attribute\+\_\+\+Sharing\+\_\+\+Combo} (\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$f\+\_\+themeable, const QString \&f\+\_\+state, const QString \&f\+\_\+attribute, \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$t\+\_\+themeable, const QString \&t\+\_\+state, const QString \&t\+\_\+attribute)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_ad3a556883fad2b2b3236c00c52caf7cd}\label{class_layers_1_1_attribute___sharing___combo_ad3a556883fad2b2b3236c00c52caf7cd}} 
+\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$ {\bfseries from\+\_\+themeable} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_ac87c97bd67f788ec781d0403d60924e5}\label{class_layers_1_1_attribute___sharing___combo_ac87c97bd67f788ec781d0403d60924e5}} 
+QString \& {\bfseries from\+\_\+state} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_a921f8259f252356ff0cdd6525e2076e6}\label{class_layers_1_1_attribute___sharing___combo_a921f8259f252356ff0cdd6525e2076e6}} 
+QString \& {\bfseries from\+\_\+attribute} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo_ae656737b77ee0de92cb5de93d8fc292d}{obtain\+\_\+attribute}} (bool update\+\_\+shares\+\_\+and\+\_\+dependencies=true)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo_a9297cb85ba599536d65bbde19c3d79a5}{share\+\_\+attribute}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_a95bcdfb88c3cd89b8f03153cb95cfd4a}\label{class_layers_1_1_attribute___sharing___combo_a95bcdfb88c3cd89b8f03153cb95cfd4a}} 
+\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$ {\bfseries to\+\_\+themeable} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_a456abcc145d959732389810f026c73c8}\label{class_layers_1_1_attribute___sharing___combo_a456abcc145d959732389810f026c73c8}} 
+QString \& {\bfseries to\+\_\+state} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_a026e25e3c5ac60d818c623d05b5bdfe5}\label{class_layers_1_1_attribute___sharing___combo_a026e25e3c5ac60d818c623d05b5bdfe5}} 
+QString \& {\bfseries to\+\_\+attribute} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores the themeable addresses, states, and attributes needed to establish an attribute sharing connection.
+
+An \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} is created and stored when \mbox{\hyperlink{class_layers_1_1_themeable_ac3a27ba0db996852f59afb3f67b6fee5}{Themeable\+::share\+\_\+attribute\+\_\+with\+\_\+themeable()}} is called 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_ae656737b77ee0de92cb5de93d8fc292d}\label{class_layers_1_1_attribute___sharing___combo_ae656737b77ee0de92cb5de93d8fc292d}} 
+\index{Layers::Attribute\_Sharing\_Combo@{Layers::Attribute\_Sharing\_Combo}!obtain\_attribute@{obtain\_attribute}}
+\index{obtain\_attribute@{obtain\_attribute}!Layers::Attribute\_Sharing\_Combo@{Layers::Attribute\_Sharing\_Combo}}
+\doxysubsubsection{\texorpdfstring{obtain\_attribute()}{obtain\_attribute()}}
+{\footnotesize\ttfamily void Attribute\+\_\+\+Sharing\+\_\+\+Combo\+::obtain\+\_\+attribute (\begin{DoxyParamCaption}\item[{bool}]{update\+\_\+shares\+\_\+and\+\_\+dependencies = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Obtains the value of the to\+\_\+attribute
+
+If the from\+\_\+attribute is a QString, and the to\+\_\+attribute is an int, or vice-\/versa, then this function will convert the incoming to\+\_\+attribute value into the type of the from\+\_\+attribute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+\_\+shares\+\_\+and\+\_\+dependencies} & controls whether attribute shares and theme dependencies gets updated or not, true by default \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_attribute___sharing___combo_a9297cb85ba599536d65bbde19c3d79a5}\label{class_layers_1_1_attribute___sharing___combo_a9297cb85ba599536d65bbde19c3d79a5}} 
+\index{Layers::Attribute\_Sharing\_Combo@{Layers::Attribute\_Sharing\_Combo}!share\_attribute@{share\_attribute}}
+\index{share\_attribute@{share\_attribute}!Layers::Attribute\_Sharing\_Combo@{Layers::Attribute\_Sharing\_Combo}}
+\doxysubsubsection{\texorpdfstring{share\_attribute()}{share\_attribute()}}
+{\footnotesize\ttfamily void Attribute\+\_\+\+Sharing\+\_\+\+Combo\+::share\+\_\+attribute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Shares the value of the from\+\_\+attribute
+
+If the from\+\_\+attribute is a QString, and the to\+\_\+attribute is an int, or vice-\/versa, then this function will convert the outgoing to\+\_\+attribute value into the type of the from\+\_\+attribute. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Layers\+RW.\+h\item 
+Attribute\+\_\+\+Sharing\+\_\+\+Combo.\+cpp\end{DoxyCompactItemize}
