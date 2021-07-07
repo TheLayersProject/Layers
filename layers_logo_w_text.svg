@@ -30,7 +30,7 @@
  d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
 <path id="red_in" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(42,142)"
  d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<text kerning="auto" font-family="Roboto" fill="rgb(0, 0, 0)" font-size="250px" x="540px" y="335px"><tspan font-size="250px" font-family="Roboto" fill="#000000">Layers</tspan></text>
+<text kerning="auto" font-family="Roboto" fill="#808080" font-size="250px" x="540px" y="335px"><tspan font-size="250px" font-family="Roboto" fill="#808080">Layers</tspan></text>
 
 <animateTransform
 	xlink:href="#red_out"
