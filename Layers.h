@@ -1878,7 +1878,7 @@ namespace Layers
 
 		Button* m_window_icon{ new Button(new Graphic_Widget(QDir("./data/logo_animate"), QSize(35, 35)), true) };
 
-		Label* m_window_title_label{ new Label("Layers - Window Demo") };
+		Label* m_window_title_label{ new Label("Layers - Demo") };
 
 		Button* m_settings_button{ new Button(new Graphic_Widget(":/svgs/settings.svg", QSize(20, 20)), true) };
 		Button* m_minimize_button{ new Button(new Graphic_Widget(":/svgs/minimize.svg", QSize(20, 20)), true) };
