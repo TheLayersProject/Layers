@@ -2,6 +2,10 @@
 
 Layers is an application template library with a focus on themes and user customization.
 
+## Demo
+
+The [Layers Demo](https://github.com/huntermalm/Layers-Demo) is a minimal Layers application that demonstrates the capabilities of the Layers software library. The source-code demonstrates how to get a basic Layers application up and running, while the binary release is provided to let developers see a Layers app in action.
+
 ## Development and Testing
 
 These are the steps to install a copy of Layers source-code on your local machine for development and testing purposes.
