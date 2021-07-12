@@ -33,6 +33,7 @@ A list of project goals is still in progress.  Once it is completed, a link will
 Grab the latest version of Layers from the downloads below.  Follow the standard library linking process for your IDE.
 
 ## Downloads
+
 * [Layers-2.0.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.0.0a/Layers-2.0.0a.zip)
 
 ## Authors
@@ -40,3 +41,7 @@ Grab the latest version of Layers from the downloads below.  Follow the standard
 * Hunter Malm - *Project creator/Lead developer* - [huntermalm](https://github.com/huntermalm)
 
 See also the list of [contributors](https://github.com/huntermalm/Layers/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/huntermalm/Layers/blob/main/LICENSE) file for details.
