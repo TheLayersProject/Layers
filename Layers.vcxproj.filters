@@ -149,5 +149,8 @@
     <ClCompile Include="Attribute_Widgets\Switch_Attribute_Widget.cpp">
       <Filter>Source Files\Attribute_Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="serialization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

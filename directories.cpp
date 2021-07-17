@@ -1,6 +1,26 @@
 #include "Layers.h"
 
-QString Layers::app_data_dir()
+QString Layers::app_path(const QString& app_name)
+{
+	return QString(local_app_data_path() + app_name + "\\");
+}
+
+QString Layers::app_themes_path(const QString& app_name)
+{
+	return QString(app_path(app_name) + "Themes\\");
+}
+
+QString Layers::deprecated_layers_path()
+{
+	return QString(local_app_data_path() + "Layers-alpha\\"); // Alpha
+}
+
+QString Layers::deprecated_layers_themes_path()
+{
+	return QString(deprecated_layers_path() + "Themes\\");
+}
+
+QString Layers::local_app_data_path()
 {
 	char* app_data_dir_char_ptr = nullptr;
 	size_t app_data_dir_char_size = 0;
@@ -10,15 +30,4 @@ QString Layers::app_data_dir()
 	app_data_dir_string += "\\";
 	delete(app_data_dir_char_ptr);
 	return QString::fromStdString(app_data_dir_string);
-}
-
-QString Layers::layers_dir()
-{
-	//return QString(app_data_dir() + "Layers\\"); // Production
-	return QString(app_data_dir() + "Layers-alpha\\"); // Alpha
-}
-
-QString Layers::layers_themes_dir()
-{
-	return QString(layers_dir() + "Themes\\");
 }

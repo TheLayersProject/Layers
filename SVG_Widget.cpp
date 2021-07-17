@@ -32,11 +32,11 @@ SVG_Widget::SVG_Widget(const SVG_Widget& svg_w)
 
 void SVG_Widget::init_attributes()
 {
-	add_attribute("Default", "use_common_color", true);
-	add_attribute("Default", "use_common_hover_color", true);
+	add_attribute("use_common_color", true);
+	add_attribute("use_common_hover_color", true);
 
-	add_attribute("Default", "common_color", QColor(Qt::black));
-	add_attribute("Default", "common_hover_color", QColor(Qt::darkGray));
+	add_attribute("common_color", QColor(Qt::black));
+	add_attribute("common_hover_color", QColor(Qt::darkGray));
 
 	// Build attributes from elements
 	for (int i = 0; i < m_svg_elements.size(); i++)
@@ -54,8 +54,8 @@ void SVG_Widget::init_attributes()
 
 				QString color = m_svg_elements[i].mid(color_start_index, color_length);
 
-				add_attribute("Default", "#" + l_element_id + "/color", QColor(color));
-				add_attribute("Default", "#" + l_element_id + "/hover_color", QColor(color));
+				add_attribute("#" + l_element_id + "/color", QColor(color));
+				add_attribute("#" + l_element_id + "/hover_color", QColor(color));
 			}
 		}
 	}

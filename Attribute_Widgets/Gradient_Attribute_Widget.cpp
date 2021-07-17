@@ -20,14 +20,21 @@ Gradient_Attribute_Widget::Gradient_Attribute_Widget(const QString& attribute_la
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("Default", "background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("Default", "background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Color Control
-	m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable("Default", m_gradient_control->attributes()["background_gradient_stops"], attribute.state(), attribute, true); // m_customizing_state
+	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
+			m_gradient_control->attributes()["background_gradient_stops"], attribute,
+			"", attribute.state(), true);
+	else
+		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
+			m_gradient_control->attributes()["background_gradient_stops"], attribute,
+			"", "", true);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;

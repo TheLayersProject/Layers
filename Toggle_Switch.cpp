@@ -116,24 +116,20 @@ bool Toggle_Switch::eventFilter(QObject* object, QEvent* event)
 
 void Toggle_Switch::init_attributes()
 {
-	make_attributes_common();
+	set_attribute_value("background_disabled", true);
 
-	set_attribute_value("Common", "background_disabled", true);
+	m_square->set_attribute_value("corner_radius_tl", 2);
+	m_square->set_attribute_value("corner_radius_tr", 2);
+	m_square->set_attribute_value("corner_radius_bl", 2);
+	m_square->set_attribute_value("corner_radius_br", 2);
 
-	m_spacer->make_attributes_common();
+	m_switch->set_attribute_value("border_thickness", 3);
+	m_switch->set_attribute_value("corner_radius_tl", 4);
+	m_switch->set_attribute_value("corner_radius_tr", 4);
+	m_switch->set_attribute_value("corner_radius_bl", 4);
+	m_switch->set_attribute_value("corner_radius_br", 4);
 
-	m_square->set_attribute_value("Common", "corner_radius_tl", 2);
-	m_square->set_attribute_value("Common", "corner_radius_tr", 2);
-	m_square->set_attribute_value("Common", "corner_radius_bl", 2);
-	m_square->set_attribute_value("Common", "corner_radius_br", 2);
-
-	m_switch->set_attribute_value("Common", "border_thickness", 3);
-	m_switch->set_attribute_value("Common", "corner_radius_tl", 4);
-	m_switch->set_attribute_value("Common", "corner_radius_tr", 4);
-	m_switch->set_attribute_value("Common", "corner_radius_bl", 4);
-	m_switch->set_attribute_value("Common", "corner_radius_br", 4);
-
-	m_spacer->set_attribute_value("Common", "background_disabled", true);
+	m_spacer->set_attribute_value("background_disabled", true);
 
 	m_switch->make_attribute_stateful("background_color", {
 		{ "Untoggled", QColor(Qt::white) },

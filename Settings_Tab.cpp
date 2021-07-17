@@ -32,14 +32,14 @@ Settings_Tab::Settings_Tab(Graphic_Widget* icon, const QString& label_text, QWid
 
     m_spacer->setAttribute(Qt::WA_TransparentForMouseEvents);
     m_spacer->setFixedSize(12, 12);
-    m_spacer->set_attribute_value("Default", "background_disabled", true);
+    m_spacer->set_attribute_value("background_disabled", true);
 
     m_stretch_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_stretch_widget->set_attribute_value("Default", "background_disabled", true);
+    m_stretch_widget->set_attribute_value("background_disabled", true);
     m_stretch_widget->hide();
 
     m_stretch_widget2->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_stretch_widget2->set_attribute_value("Default", "background_disabled", true);
+    m_stretch_widget2->set_attribute_value("background_disabled", true);
 
     setup_layout();
 }
@@ -64,10 +64,8 @@ void Settings_Tab::shrink()
 
 void Settings_Tab::init_attributes()
 {
-	make_attributes_common();
-
-	set_attribute_value("Common", "corner_radius_tl", 5);
-	set_attribute_value("Common", "corner_radius_bl", 5);
+	set_attribute_value("corner_radius_tl", 5);
+	set_attribute_value("corner_radius_bl", 5);
 
 	make_attribute_stateful("background_color", {
 		{ "Unselected", QColor(Qt::lightGray) },

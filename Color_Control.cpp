@@ -18,7 +18,7 @@ void Color_Control::click()
 
 	if (dlg.exec())
 	{
-		set_attribute_value("Default", "background_color", dlg.currentColor());
+		set_attribute_value("background_color", dlg.currentColor());
 
 		emit color_changed();
 
@@ -35,10 +35,10 @@ void Layers::Color_Control::disable_clicking(bool cond)
 
 void Color_Control::init_attributes()
 {
-    set_attribute_value("Default", "background_color", QColor(Qt::white));
-	add_attribute("Default", "corner_radius", 5);
-	add_attribute("Default", "outer_border_color", QColor("#2c2c2c"));
-	add_attribute("Default", "inner_border_color", QColor("#d6d6d6"));
+    set_attribute_value("background_color", QColor(Qt::white));
+	add_attribute("corner_radius", 5);
+	add_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_attribute("inner_border_color", QColor("#d6d6d6"));
 }
 
 bool Color_Control::eventFilter(QObject* object, QEvent* event)

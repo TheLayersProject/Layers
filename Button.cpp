@@ -9,11 +9,11 @@ Button::Button(Graphic_Widget* graphic, const QString& text, bool auto_touch_tar
 {
 	init();
 	
-	set_attribute_value("Default", "corner_radius_tl", 7);
-	set_attribute_value("Default", "corner_radius_tr", 7);
-	set_attribute_value("Default", "corner_radius_bl", 7);
-	set_attribute_value("Default", "corner_radius_br", 7);
-	set_attribute_value("Default", "background_color_hover_disabled", false);
+	set_attribute_value("corner_radius_tl", 7);
+	set_attribute_value("corner_radius_tr", 7);
+	set_attribute_value("corner_radius_bl", 7);
+	set_attribute_value("corner_radius_br", 7);
+	set_attribute_value("background_color_hover_disabled", false);
 }
 
 Button::Button(Graphic_Widget* graphic, bool auto_touch_target_compliance, QWidget* parent) :
@@ -22,7 +22,7 @@ Button::Button(Graphic_Widget* graphic, bool auto_touch_target_compliance, QWidg
 {
 	init();
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 
 	//filter_attribute("background_color");
 	//filter_attribute("background_color_hover");
@@ -43,11 +43,11 @@ Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* 
 {
 	init();
 
-	set_attribute_value("Default", "corner_radius_tl", 7);
-	set_attribute_value("Default", "corner_radius_tr", 7);
-	set_attribute_value("Default", "corner_radius_bl", 7);
-	set_attribute_value("Default", "corner_radius_br", 7);
-	set_attribute_value("Default", "background_color_hover_disabled", false);
+	set_attribute_value("corner_radius_tl", 7);
+	set_attribute_value("corner_radius_tr", 7);
+	set_attribute_value("corner_radius_bl", 7);
+	set_attribute_value("corner_radius_br", 7);
+	set_attribute_value("background_color_hover_disabled", false);
 }
 
 Button::Button(Graphic_Widget* graphic_before, Graphic_Widget* graphic_after, bool auto_touch_target_compliance, QWidget* parent) :
@@ -56,7 +56,7 @@ Button::Button(Graphic_Widget* graphic_before, Graphic_Widget* graphic_after, bo
 {
 	init();
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 
 	filter_attribute("background_color");
 	filter_attribute("background_color_hover");
@@ -193,9 +193,9 @@ void Button::resize()
 	}
 }
 
-void Button::set_attribute_value(const QString& state, const QString& attribute, QVariant value)
+void Button::set_attribute_value(const QString& attribute, QVariant value)
 {
-	Themeable::set_attribute_value(state, attribute, value);
+	Themeable::set_attribute_value(attribute, value);
 
 	if (attribute == "border_thickness") resize();
 	if (attribute.startsWith("#") ||
@@ -209,12 +209,12 @@ void Button::set_disabled(bool cond)
 
 	if (m_disabled)
 	{
-		set_attribute_value("Default", "background_color_hover_disabled", true);
+		set_attribute_value("background_color_hover_disabled", true);
 		if (m_button_opacity->opacity() != 0.25) m_button_opacity->setOpacity(0.25);
 	}
 	else if (!m_disabled)
 	{
-		set_attribute_value("Default", "background_color_hover_disabled", false);
+		set_attribute_value("background_color_hover_disabled", false);
 		if (m_button_opacity->opacity() != 1.0) m_button_opacity->setOpacity(1.0);
 	}
 }

@@ -21,9 +21,9 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");
-	m_topbar->set_attribute_value("Default", "background_color", QColor(Qt::lightGray));
-	m_topbar->set_attribute_value("Default", "corner_radius_tr", 10);
-	m_topbar->set_attribute_value("Default", "corner_radius_br", 10);
+	m_topbar->set_attribute_value("background_color", QColor(Qt::lightGray));
+	m_topbar->set_attribute_value("corner_radius_tr", 10);
+	m_topbar->set_attribute_value("corner_radius_br", 10);
 	m_topbar->set_ACW_primary("border_awc", false);
 	m_topbar->set_ACW_primary("hover_background_caw", false);
 	m_topbar->set_ACW_primary("outline_caw", false);
@@ -43,16 +43,16 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_sidebar->setMouseTracking(true);
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
-	m_sidebar->set_attribute_value("Default", "background_color", QColor(Qt::lightGray));
-	m_sidebar->share_attribute_with_themeable("Default", "background_color", m_preview_widget, "Default", "corner_color");
+	m_sidebar->set_attribute_value("background_color", QColor(Qt::lightGray));
+	m_sidebar->share_attribute_with_themeable(m_sidebar->attributes()["background_color"], m_preview_widget->attributes()["corner_color"]);
 	m_sidebar->set_ACW_primary("border_awc", false);
 	m_sidebar->set_ACW_primary("hover_background_caw", false);
 	m_sidebar->set_ACW_primary("outline_caw", false);
 	m_sidebar->set_ACW_primary("corner_color_caw", false);
 	m_sidebar->set_ACW_primary("corner_radii_awc", false);
 
-	m_preview_widget->set_attribute_value("Default", "corner_radius_tl", 10);
-	m_preview_widget->set_attribute_value("Default", "corner_color_disabled", false);
+	m_preview_widget->set_attribute_value("corner_radius_tl", 10);
+	m_preview_widget->set_attribute_value("corner_color_disabled", false);
 
 	setup_layout();
 }
@@ -64,7 +64,7 @@ Button* Customize_Menu::apply_button() const
 
 void Customize_Menu::init_preview_window()
 {
-	m_preview_window = new Window(true);
+	m_preview_window = new Window("", true);
 	m_preview_window->setMinimumSize(500, 400);
 	m_preview_window->setMaximumSize(800, 600);
 	m_preview_window->titlebar()->exit_button()->set_disabled();
@@ -133,7 +133,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 		Button* label_button = new Button(*customize_panel->proper_name(), true);
 		label_button->disable_text_hover_color();
-		label_button->set_attribute_value("Default", "background_disabled", true);
+		label_button->set_attribute_value("background_disabled", true);
 		label_button->set_font_size(14);
 		label_button->set_name("label_button");
 		label_button->set_padding(0, label_button->top_padding(), 0, label_button->bottom_padding());
@@ -242,7 +242,7 @@ void Customize_Menu::setup_layout()
 	m_preview_layout->setSpacing(0);
 
 	m_preview_widget->setLayout(m_preview_layout);
-	m_preview_widget->set_attribute_value("Default", "background_disabled", true);
+	m_preview_widget->set_attribute_value("background_disabled", true);
 
 	m_preview_scroll_area->setWidget(m_preview_widget);
 

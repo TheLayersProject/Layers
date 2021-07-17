@@ -8,7 +8,7 @@ App_Preferences_Settings_Panel::App_Preferences_Settings_Panel(QWidget* parent) 
 	set_name("app_preferences_settings_panel");
 	set_proper_name("App Preferences Panel");
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 void App_Preferences_Settings_Panel::init_attribute_widgets()

@@ -20,11 +20,11 @@ Number_Attribute_Widget::Number_Attribute_Widget(const QString& attribute_label_
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("Default", "background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("Default", "background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Line Editor
 	m_line_editor->set_default_value("0");
@@ -32,7 +32,15 @@ Number_Attribute_Widget::Number_Attribute_Widget(const QString& attribute_label_
 	m_line_editor->set_name("line_editor");
 	m_line_editor->set_text(QString::number(attribute.value().value<int>()));
 	m_line_editor->set_validator(m_int_validator);
-	m_line_editor_asc = m_line_editor->share_attribute_with_themeable("Default", m_line_editor->attributes()["text"], attribute.state(), attribute, true);
+
+	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
+			m_line_editor->attributes()["text"], attribute,
+			"", attribute.state(), true);
+	else
+		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
+			m_line_editor->attributes()["text"], attribute,
+			"", "", true);
 
 	// Setup Unit Label
 	m_unit_label->set_name("label");
@@ -65,8 +73,8 @@ void Number_Attribute_Widget::enable_silder()
 	hbox2->setSpacing(0);
 	hbox2->addWidget(m_slider);
 
-	m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable("Default", m_line_editor->attributes()["text"], "Default", m_slider->attributes()["value"]);
-	m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable("Default", m_slider->attributes()["value"], "Default", m_line_editor->attributes()["text"]);
+	m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
+	m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
 
 	setFixedHeight(105);
 
@@ -93,20 +101,22 @@ void Number_Attribute_Widget::update_customizing_state(const QString& customizin
 {
 	if (m_customize_states.contains(customizing_state))
 	{
-		m_line_editor->unshare_attribute_with_themeable("Default", m_line_editor->attributes()["text"], m_line_editor_asc->to_state(), *m_attribute);
+		m_line_editor->unshare_attribute_with_themeable(m_line_editor->attributes()["text"], *m_attribute, "", m_line_editor_asc->to_state());
 
 		if (m_slider)
 		{
-			m_line_editor->unshare_attribute_with_themeable("Default", m_line_editor->attributes()["text"], "Default", m_slider->attributes()["value"]);
-			m_slider->unshare_attribute_with_themeable("Default", m_slider->attributes()["value"], "Default", m_line_editor->attributes()["text"]);
+			m_line_editor->unshare_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
+			m_slider->unshare_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
 		}
 
-		m_line_editor_asc = m_line_editor->share_attribute_with_themeable("Default", m_line_editor->attributes()["text"], customizing_state, *m_attribute, true);
+		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
+			m_line_editor->attributes()["text"], *m_attribute,
+			"", customizing_state, true);
 
 		if (m_slider)
 		{
-			m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable("Default", m_line_editor->attributes()["text"], "Default", m_slider->attributes()["value"]);
-			m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable("Default", m_slider->attributes()["value"], "Default", m_line_editor->attributes()["text"]);
+			m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
+			m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
 		}
 	}
 }

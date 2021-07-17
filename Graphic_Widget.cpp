@@ -7,7 +7,7 @@ Graphic_Widget::Graphic_Widget(const QDir& img_seq_dir, QSize size, QWidget* par
 {
 	setFixedSize(size);
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic_Widget::Graphic_Widget(const QString& filepath, QSize size, QWidget* parent) :
@@ -40,7 +40,7 @@ Graphic_Widget::Graphic_Widget(const QString& filepath, QSize size, QWidget* par
 
 	setFixedSize(size);
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic_Widget::Graphic_Widget(const QImage& image, QWidget* parent) :
@@ -52,7 +52,7 @@ Graphic_Widget::Graphic_Widget(const QImage& image, QWidget* parent) :
 
 	setFixedSize(image.size());
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic_Widget::Graphic_Widget(const Graphic_Widget& gw) : Widget()
@@ -90,7 +90,7 @@ Graphic_Widget::Graphic_Widget(const Graphic_Widget& gw) : Widget()
 
 	setFixedSize(gw.size());
 
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 void Graphic_Widget::make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)

@@ -84,7 +84,7 @@ void Attribute_Widget_Container::enable_secondary_background_color(bool cond)
 
 void Attribute_Widget_Container::init_attributes()
 {
-	set_attribute_value("Default", "border_thickness", 2);
+	set_attribute_value("border_thickness", 2);
 }
 
 void Attribute_Widget_Container::init_child_themeable_reference_list()

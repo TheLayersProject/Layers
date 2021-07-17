@@ -14,11 +14,11 @@ void Gradient_Control::init_attributes()
 {
     QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 
-	add_attribute("Default", "corner_radius", 5);
-	add_attribute("Default", "outer_border_color", QColor("#2c2c2c"));
-	add_attribute("Default", "inner_border_color", QColor("#d6d6d6"));
+	add_attribute("corner_radius", 5);
+	add_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_attribute("inner_border_color", QColor("#d6d6d6"));
 
-    set_attribute_value("Default", "background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+    set_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
 }
 
 bool Gradient_Control::eventFilter(QObject* object, QEvent* event)
@@ -37,7 +37,7 @@ bool Gradient_Control::eventFilter(QObject* object, QEvent* event)
 
 			if (gsb.exec())
 			{
-				set_attribute_value("Default", "background_gradient_stops", QVariant::fromValue(gsb.gradient_stops()));
+				set_attribute_value("background_gradient_stops", QVariant::fromValue(gsb.gradient_stops()));
 
 				emit gradient_changed();
 

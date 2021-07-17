@@ -25,18 +25,18 @@ Slider::Slider(int range_start, int range_end, QWidget* parent) :
 
 void Slider::init_attributes()
 {
-	set_attribute_value("Default", "background_disabled", true);
-	add_attribute("Default", "value", 0);
+	set_attribute_value("background_disabled", true);
+	add_attribute("value", 0);
 
-	m_bar->set_attribute_value("Default", "corner_radius_tl", 2);
-	m_bar->set_attribute_value("Default", "corner_radius_tr", 2);
-	m_bar->set_attribute_value("Default", "corner_radius_bl", 2);
-	m_bar->set_attribute_value("Default", "corner_radius_br", 2);
+	m_bar->set_attribute_value("corner_radius_tl", 2);
+	m_bar->set_attribute_value("corner_radius_tr", 2);
+	m_bar->set_attribute_value("corner_radius_bl", 2);
+	m_bar->set_attribute_value("corner_radius_br", 2);
 
-	m_handle->set_attribute_value("Default", "corner_radius_tl", 3);
-	m_handle->set_attribute_value("Default", "corner_radius_tr", 3);
-	m_handle->set_attribute_value("Default", "corner_radius_bl", 3);
-	m_handle->set_attribute_value("Default", "corner_radius_br", 3);
+	m_handle->set_attribute_value("corner_radius_tl", 3);
+	m_handle->set_attribute_value("corner_radius_tr", 3);
+	m_handle->set_attribute_value("corner_radius_bl", 3);
+	m_handle->set_attribute_value("corner_radius_br", 3);
 }
 
 void Slider::init_child_themeable_reference_list()
@@ -100,7 +100,7 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 		{
 			if (attributes()["value"].value().value<int>() != m_range_start)
 			{
-				set_attribute_value("Default", "value", m_range_start);
+				set_attribute_value("value", m_range_start);
 				update_handle_pos();
 				share_attributes();
 			}
@@ -109,14 +109,14 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 		{
 			if (attributes()["value"].value().value<int>() != m_range_end)
 			{
-				set_attribute_value("Default", "value", m_range_end);
+				set_attribute_value("value", m_range_end);
 				update_handle_pos();
 				share_attributes();
 			}
 		}
 		else
 		{
-			set_attribute_value("Default", "value", new_value);
+			set_attribute_value("value", new_value);
 			update_handle_pos();
 			share_attributes();
 		}

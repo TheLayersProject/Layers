@@ -9,7 +9,7 @@ Settings_Sidebar::Settings_Sidebar(QWidget* parent) : Widget(parent)
 	set_icon(new Graphic_Widget(":/svgs/sidebar_icon.svg", QSize(20, 20)));
 	set_name("sidebar");
 	set_proper_name("Sidebar");
-	set_attribute_value("Default", "background_color", QColor(Qt::lightGray));
+	set_attribute_value("background_color", QColor(Qt::lightGray));
 }
 
 void Settings_Sidebar::init_attribute_widgets()

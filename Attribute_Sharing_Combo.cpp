@@ -4,10 +4,9 @@ using Layers::Attribute;
 using Layers::Attribute_Sharing_Combo;
 using Layers::Themeable;
 
-
 Attribute_Sharing_Combo::Attribute_Sharing_Combo(
-	QString from_state, Attribute& from_attribute,
-	QString to_state, Attribute& to_attribute) :
+	Attribute& from_attribute, Attribute& to_attribute,
+	QString from_state, QString to_state) :
 	m_from_state{ from_state }, m_from_attribute{ from_attribute },
 	m_to_state{ to_state }, m_to_attribute{ to_attribute }
 {
@@ -35,17 +34,68 @@ QString& Attribute_Sharing_Combo::from_attribute_name()
 
 void Attribute_Sharing_Combo::obtain_attribute(bool update_shares_and_dependencies)
 {
-	if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
-		QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+	if (m_from_state == "")
 	{
-		m_from_attribute.set_value(m_from_state, QString::number(m_to_attribute.value(m_to_state).value<int>()));
+		if (m_to_state == "")
+		{
+			if (QString(m_from_attribute.value().typeName()) == "QString" &&
+				QString(m_to_attribute.value().typeName()) == "int")
+			{
+				m_from_attribute.set_value(QString::number(m_to_attribute.value().value<int>()));
+			}
+			else if (QString(m_from_attribute.value().typeName()) == "int" &&
+				QString(m_to_attribute.value().typeName()) == "QString")
+			{
+				m_from_attribute.set_value(m_to_attribute.value().value<QString>().toInt());
+			}
+			else m_from_attribute.set_value(m_to_attribute.value());
+		}
+		else
+		{
+			if (QString(m_from_attribute.value().typeName()) == "QString" &&
+				QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+			{
+				m_from_attribute.set_value(QString::number(m_to_attribute.value(m_to_state).value<int>()));
+			}
+			else if (QString(m_from_attribute.value().typeName()) == "int" &&
+				QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
+			{
+				m_from_attribute.set_value(m_to_attribute.value(m_to_state).value<QString>().toInt());
+			}
+			else m_from_attribute.set_value(m_to_attribute.value(m_to_state));
+		}
 	}
-	else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
-		QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
+	else
 	{
-		m_from_attribute.set_value(m_from_state, m_to_attribute.value(m_to_state).value<QString>().toInt());
+		if (m_to_state == "")
+		{
+			if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
+				QString(m_to_attribute.value().typeName()) == "int")
+			{
+				m_from_attribute.set_value(m_from_state, QString::number(m_to_attribute.value().value<int>()));
+			}
+			else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
+				QString(m_to_attribute.value().typeName()) == "QString")
+			{
+				m_from_attribute.set_value(m_from_state, m_to_attribute.value().value<QString>().toInt());
+			}
+			else m_from_attribute.set_value(m_from_state, m_to_attribute.value());
+		}
+		else
+		{
+			if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
+				QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+			{
+				m_from_attribute.set_value(m_from_state, QString::number(m_to_attribute.value(m_to_state).value<int>()));
+			}
+			else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
+				QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
+			{
+				m_from_attribute.set_value(m_from_state, m_to_attribute.value(m_to_state).value<QString>().toInt());
+			}
+			else m_from_attribute.set_value(m_from_state, m_to_attribute.value(m_to_state));
+		}
 	}
-	else m_from_attribute.set_value(m_from_state, m_to_attribute.value(m_to_state));
 
 	if (update_shares_and_dependencies)
 	{
@@ -58,28 +108,84 @@ void Attribute_Sharing_Combo::share_attribute()
 {
 	if (to_themeable())
 	{
-		if (m_from_state != "" && m_to_state != "")
+		if (m_from_state == "")
 		{
-			// TODO: See if the QString wrapping is necessary
-			if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
-				QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+			if (m_to_state == "")
 			{
-				m_to_attribute.set_value(
-					m_to_state,
-					m_from_attribute.value(m_from_state).value<QString>().toInt());
-			}
-			else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
-				QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
-			{
-				m_to_attribute.set_value(
-					m_to_state,
-					QString::number(m_from_attribute.value(m_from_state).value<int>()));
+				if (QString(m_from_attribute.value().typeName()) == "QString" &&
+					QString(m_to_attribute.value().typeName()) == "int")
+				{
+					m_to_attribute.set_value(m_from_attribute.value().value<QString>().toInt());
+				}
+				else if (QString(m_from_attribute.value().typeName()) == "int" &&
+					QString(m_to_attribute.value().typeName()) == "QString")
+				{
+					m_to_attribute.set_value(QString::number(m_from_attribute.value().value<int>()));
+				}
+				else m_to_attribute.set_value(m_from_attribute.value());
 			}
 			else
 			{
-				m_to_attribute.set_value(
-					m_to_state,
-					m_from_attribute.value(m_from_state));
+				if (QString(m_from_attribute.value().typeName()) == "QString" &&
+					QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+				{
+					m_to_attribute.set_value(
+						m_to_state,
+						m_from_attribute.value().value<QString>().toInt());
+				}
+				else if (QString(m_from_attribute.value().typeName()) == "int" &&
+					QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
+				{
+					m_to_attribute.set_value(
+						m_to_state,
+						QString::number(m_from_attribute.value().value<int>()));
+				}
+				else
+					m_to_attribute.set_value(
+						m_to_state,
+						m_from_attribute.value());
+			}
+		}
+		else
+		{
+			if (m_to_state == "")
+			{
+				if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
+					QString(m_to_attribute.value().typeName()) == "int")
+				{
+					m_to_attribute.set_value(
+						m_from_attribute.value(m_from_state).value<QString>().toInt());
+				}
+				else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
+					QString(m_to_attribute.value().typeName()) == "QString")
+				{
+					m_to_attribute.set_value(
+						QString::number(m_from_attribute.value(m_from_state).value<int>()));
+				}
+				else m_to_attribute.set_value(m_from_attribute.value(m_from_state));
+			}
+			else
+			{
+				if (QString(m_from_attribute.value(m_from_state).typeName()) == "QString" &&
+					QString(m_to_attribute.value(m_to_state).typeName()) == "int")
+				{
+					m_to_attribute.set_value(
+						m_to_state,
+						m_from_attribute.value(m_from_state).value<QString>().toInt());
+				}
+				else if (QString(m_from_attribute.value(m_from_state).typeName()) == "int" &&
+					QString(m_to_attribute.value(m_to_state).typeName()) == "QString")
+				{
+					m_to_attribute.set_value(
+						m_to_state,
+						QString::number(m_from_attribute.value(m_from_state).value<int>()));
+				}
+				else
+				{
+					m_to_attribute.set_value(
+						m_to_state,
+						m_from_attribute.value(m_from_state));
+				}
 			}
 		}
 

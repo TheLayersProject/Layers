@@ -21,9 +21,7 @@ Combobox_Item::Combobox_Item(const QString& item_text, QWidget* parent) :
 
 void Combobox_Item::init_attributes()
 {
-	make_attributes_common();
-
-	set_attribute_value("Common", "background_color_hover_disabled", false);
+	set_attribute_value("background_color_hover_disabled", false);
 
 	make_attribute_stateful("corner_radius_tl", {
 		{ "Single", 10 },
@@ -177,10 +175,10 @@ void Combobox_Item::setFixedSize(int w, int h)
 bool Combobox_Item::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::Enter)
-		set_attribute_value("Common", "using_background_color_hover", true, true);
+		set_attribute_value("using_background_color_hover", true, true);
 
 	else if (event->type() == QEvent::Leave)
-		set_attribute_value("Common", "using_background_color_hover", false, true);
+		set_attribute_value("using_background_color_hover", false, true);
 
 	return false;
 }

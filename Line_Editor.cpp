@@ -16,7 +16,7 @@ Line_Editor::Line_Editor(QWidget* parent) : Widget(parent)
         if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
         else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
         {
-            set_attribute_value("Default", "text", m_line_edit->text());
+            set_attribute_value("text", m_line_edit->text());
             share_attributes();
         }
         else m_line_edit->setText(attributes()["text"].value().value<QString>());
@@ -27,14 +27,14 @@ Line_Editor::Line_Editor(QWidget* parent) : Widget(parent)
 
 void Line_Editor::init_attributes()
 {
-    set_attribute_value("Default", "background_color", QColor(Qt::lightGray));
-    set_attribute_value("Default", "corner_radius_tl", 5);
-    set_attribute_value("Default", "corner_radius_tr", 5);
-    set_attribute_value("Default", "corner_radius_bl", 5);
-    set_attribute_value("Default", "corner_radius_br", 5);
-    add_attribute("Default", "left_padding", 3);
-    add_attribute("Default", "text_color", QColor(Qt::black));
-    add_attribute("Default", "text", QString(""));
+    set_attribute_value("background_color", QColor(Qt::lightGray));
+    set_attribute_value("corner_radius_tl", 5);
+    set_attribute_value("corner_radius_tr", 5);
+    set_attribute_value("corner_radius_bl", 5);
+    set_attribute_value("corner_radius_br", 5);
+    add_attribute("left_padding", 3);
+    add_attribute("text_color", QColor(Qt::black));
+    add_attribute("text", QString(""));
 }
 
 void Line_Editor::set_default_value(const QString& default_value)
@@ -78,7 +78,7 @@ void Line_Editor::set_text(const QString& text)
 {
     m_line_edit->setText(text);
 
-    set_attribute_value("Default", "text", text);
+    set_attribute_value("text", text);
 
 	share_attributes();
 }

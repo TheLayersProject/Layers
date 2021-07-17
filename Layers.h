@@ -77,9 +77,11 @@ namespace Layers
 		return value;
 	}
 
-	QString app_data_dir();
-	QString layers_dir();
-	QString layers_themes_dir();
+	QString app_path(const QString& app_name);
+	QString app_themes_path(const QString& app_name);
+	QString deprecated_layers_path();
+	QString deprecated_layers_themes_path();
+	QString local_app_data_path();
 
 	Theme build_dark_theme();
 	Theme build_light_theme();
@@ -89,11 +91,12 @@ namespace Layers
 		Provides structure for storing attribute values and handles attribute states.
 
 		The Attribute class is a data structure used by Themes and Themeables to store
-		values, their associated states, and the current state of the attribute.
+		attribute values, their associated states, and the current state of the attribute.
 
 		Attributes can store different values mapped from different states. However,
 		attributes are not required to be stateful. In fact, most attributes do not
-		need states and only need to store a single value.
+		need states and only need to store a single value. Atttributes that only need
+		one value store the value under the 'Default' state.
 	*/
 	class Attribute
 	{
@@ -103,41 +106,131 @@ namespace Layers
 		Attribute(const QString& name, const QString& state, QVariant value);
 		Attribute(const QString& name, QMap<QString, QVariant> state_value_map);
 
+		/*!
+			Add a state-value pair to the data structure.
+
+			Only works if the state does not already exist.
+
+			@param state to be added
+			@param value paired with the state
+		*/
 		void add_state_and_value(const QString& state, QVariant value);
 
+		/*!
+			Copies the values of the incoming theme attribute reference.
+
+			@param theme_attribute reference to copy values from
+		*/
 		void apply_theme_attribute(Attribute& theme_attribute);
 
-		bool contains(const QString& key) const;
+		/*!
+			Checks if the provided state already exists in the data structure.
 
+			@param state to check
+			@returns True if state exists, false if not
+		*/
+		bool contains_state(const QString& state) const;
+
+		/*!
+			Checks if the attribute uses states (other than the 'Default' state)
+
+			@returns True if attribute uses states, false if not
+		*/
 		bool is_stateful() const;
 
+		/*!
+			Populates the data structure with provided state-value pairs.
+
+			Also marks the attribute as being stateful.
+
+			@param state_value_map Map of state-value pairs to add 
+		*/
 		void make_stateful(QMap<QString, QVariant> state_value_map);
 
+		/*!
+			Returns the name of the attribute.
+
+			@returns Name of attribute
+		*/
 		QString& name();
 
+		/*!
+			Returns pointer to the parent themeable associated with the attribute.
+
+			Attributes stored in themes will not have associated parent themeables so
+			this function will return nullptr for those attributes.
+
+			@returns Pointer to associated parent themeable, if one exists
+		*/
 		Themeable* parent_themeable() const;
 
-		void set_common(QVariant value);
+		/*!
+			Stores the provided parent themeable pointer.
 
+			@param parent_themeable pointer to store
+		*/
 		void set_parent_themeable(Themeable* parent_themeable);
 
+		/*!
+			Sets the current state of the attribute.
+
+			@param state to mark as the current attribute state
+		*/
 		void set_state(const QString& state);
 
+		/*!
+			Sets the value of the provided state.
+
+			This function only works if the provided state already exists in the data structure.
+
+			@param state to update value of
+			@param value pair with state
+		*/
 		void set_value(const QString& state, QVariant value);
 
+		/*!
+			Sets the value.
+
+			@param value to set
+		*/
+		void set_value(QVariant value);
+
+		/*!
+			Returns the current state of the attribute.
+
+			@returns Current state of attribute
+		*/
 		QString state() const;
 
+		/*!
+			Returns list of all the attribute's states.
+
+			@returns List of attribute's states
+		*/
 		QList<QString> states() const;
 
+		/*!
+			Returns the value paired with the current state.
+
+			@returns Attribute value of current state
+		*/
 		QVariant& value();
+
+		/*!
+			Returns the value paired with the provided state.
+
+			@returns Attribute value of the provided state
+		*/
 		QVariant& value(const QString& state);
 
 		bool m_is_stateful{ false };
 
 		QString m_name;
-		QString m_state;
+		QString m_state{ "" };
 
 		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
+
+		QVariant m_value{ QVariant() };
 
 		Themeable* m_parent_themeable{ nullptr };
 	};
@@ -145,27 +238,49 @@ namespace Layers
 	inline QDataStream& operator <<(QDataStream& stream, const Attribute& a)
 	{
 		stream << a.m_name;
+		stream << a.m_is_stateful;
 		stream << a.m_state;
 		stream << a.m_values;
+		stream << a.m_value;
 		return stream;
 	}
 
 	inline QDataStream& operator >>(QDataStream& stream, Attribute& a)
 	{
 		stream >> a.m_name;
+		stream >> a.m_is_stateful;
 		stream >> a.m_state;
 		stream >> a.m_values;
+		stream >> a.m_value;
 		return stream;
 	}
 
+	/*!
+		Provides structure for Layers themes.
+
+		Layers themes store sets of attributes associated with their themeable tags. When a theme is applied,
+		themeables retrieve their attribute sets from the theme by passing along their tags.
+	*/
 	class Theme
 	{
 	public:
+		/*!
+			Add an attribute to the theme.
+
+			This implementation of this function adds an attribute with a single value.
+
+			@param themeable_tag of themeable associated with attribute
+		*/
 		void add_attribute(
 			const QString& themeable_tag,
-			const QString& state,
-			const QString& attribute,
+			const QString& attribute_name,
 			QVariant value);
+
+		//void add_attribute(
+		//	const QString& themeable_tag,
+		//	const QString& state,
+		//	const QString& attribute,
+		//	QVariant value);
 
 		void add_attribute(
 			const QString& themeable_tag,
@@ -234,7 +349,7 @@ namespace Layers
 	public:
 		~Themeable();
 
-		void add_attribute(const QString& state, const QString& attribute, QVariant value);
+		void add_attribute(const QString& attribute, QVariant value);
 
 		/*!
 			Adds a themeable to the child themeable references list.
@@ -346,10 +461,6 @@ namespace Layers
 		*/
 		virtual void issue_update() = 0;
 
-		//void make_attribute_common(const QString& attribute, QVariant value);
-
-		void make_attributes_common();
-
 		void make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		/*!
@@ -374,6 +485,11 @@ namespace Layers
 		void remove_child_themeable_reference(Themeable* child_themeable);
 
 		void set_ACW_primary(const QString& ACW_name, bool is_primary);
+
+		void set_attribute_value(
+			const QString& attribute_name,
+			QVariant value,
+			bool update = false);
 
 		void set_attribute_value(
 			const QString& state,
@@ -450,15 +566,15 @@ namespace Layers
 			@param obtain_attribute Whether or not to obtain the value of the to_themeable, false by default
 			@returns the address of the new attribute sharing combo
 		*/
-		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			const QString& from_state, const QString& from_attribute,
-			Themeable* to_themeable, QString to_state = "", QString to_attribute = "",
-			bool obtain_attribute = false
-		);
+		//Attribute_Sharing_Combo* share_attribute_with_themeable(
+		//	const QString& from_state, const QString& from_attribute,
+		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = "",
+		//	bool obtain_attribute = false
+		//);
 
 		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			const QString& from_state, Attribute& from_attribute,
-			QString to_state, Attribute& to_attribute,
+			Attribute& from_attribute, Attribute& to_attribute,
+			QString from_state = "", QString to_state = "",
 			bool obtain_attribute = false
 		);
 
@@ -545,15 +661,14 @@ namespace Layers
 			@param from_state - The state of the attribute set of the from_attribute
 			@param to_state - The state of the attribute set of the to_attribute
 		*/
-		void unshare_attribute_with_themeable(
-			const QString& from_state, const QString& from_attribute,
-			Themeable* to_themeable, QString to_state = "", QString to_attribute = ""
-		);
+		//void unshare_attribute_with_themeable(
+		//	const QString& from_state, const QString& from_attribute,
+		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = ""
+		//);
 
 		void unshare_attribute_with_themeable(
-			const QString& from_state, Attribute& from_attribute,
-			const QString& to_state, Attribute& to_attribute
-		);
+			Attribute& from_attribute, Attribute& to_attribute,
+			QString from_state = "", QString to_state = "");
 
 		/*!
 			Updates things that depend on the theme. Called by apply_theme().
@@ -614,7 +729,7 @@ namespace Layers
 		QString* m_app_name{ nullptr };
 		QString* m_name{ nullptr };
 		QString* m_proper_name{ nullptr };
-		QString m_state{ "Default" };
+		QString m_state{ "" };
 		QString m_theme_tag{ "" };
 
 		QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
@@ -640,10 +755,10 @@ namespace Layers
 	{
 	public:
 		Attribute_Sharing_Combo(
-			QString from_state,
 			Attribute& from_attribute,
-			QString to_state,
-			Attribute& to_attribute);
+			Attribute& to_attribute,
+			QString from_state = "",
+			QString to_state = "");
 
 		Attribute& from_attribute();
 		Themeable* from_themeable() const;
@@ -1009,7 +1124,7 @@ namespace Layers
 
 		void resize();
 
-		void set_attribute_value(const QString& state, const QString& attribute, QVariant value);
+		void set_attribute_value(const QString& attribute, QVariant value);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
 		void set_padding(int padding);
@@ -1901,7 +2016,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Window(bool is_preview_window = false, QWidget* parent = nullptr);
+		Window(const QString& app_name, bool is_preview_window = false, QWidget* parent = nullptr);
 
 		void add_menu(Menu* menu);
 		void add_theme(const QString& name, const Theme& theme);
@@ -1963,6 +2078,9 @@ namespace Layers
 		QList<Menu*> m_menus;
 		QList<Menu*> m_menu_stack;
 
+		QDir m_app_dir;
+		QDir m_app_themes_dir;
+
 		Titlebar* m_titlebar{ new Titlebar };
 
 		// TODO: Make Menu constructor that does not require an icon
@@ -1979,8 +2097,17 @@ namespace Layers
 		if (typeid(*this) == typeid(*themeable))
 		{
 			for (Attribute& attribute : m_attributes)
-				for (const QString& state : attribute.states())
-					share_attribute_with_themeable(state, attribute, state, themeable->attributes()[attribute.name()]);
+			{
+				if (attribute.is_stateful())
+				{
+					for (const QString& state : attribute.states())
+						share_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()], state, state);
+				}
+				else
+				{
+					share_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()]);
+				}
+			}
 
 
 			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
@@ -1999,8 +2126,17 @@ namespace Layers
 		if (typeid(*this) == typeid(*themeable))
 		{
 			for (Attribute& attribute : m_attributes)
-				for (const QString& state : attribute.states())
-					unshare_attribute_with_themeable(state, attribute, state, themeable->attributes()[attribute.name()]);
+			{
+				if (attribute.is_stateful())
+				{
+					for (const QString& state : attribute.states())
+						unshare_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()], state, state);
+				}
+				else
+				{
+					unshare_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()]);
+				}
+			}
 
 			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
 			{
@@ -2011,6 +2147,60 @@ namespace Layers
 			}
 		}
 	}
+}
+
+// Serialization:
+
+namespace Layers
+{
+	// 2.0.0a
+
+	class Attribute_2_0_0_a
+	{
+	public:
+		bool m_is_stateful{ false };
+
+		QString m_name;
+		QString m_state;
+
+		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
+	};
+
+	inline QDataStream& operator >>(QDataStream& stream, Attribute_2_0_0_a& a)
+	{
+		stream >> a.m_name;
+		stream >> a.m_state;
+		stream >> a.m_values;
+		return stream;
+	}
+
+	class Theme_2_0_0_a
+	{
+	public:
+		bool built_in{ false };
+
+		QHash<QString, QMap<QString, Attribute_2_0_0_a>> m_data{ QHash<QString, QMap<QString, Attribute_2_0_0_a>>() };
+
+		QString name;
+	};
+
+	inline QDataStream& operator >>(QDataStream& stream, Theme_2_0_0_a& t)
+	{
+		stream >> t.name;
+		stream >> t.built_in;
+		stream >> t.m_data;
+		return stream;
+	}
+
+	Theme_2_0_0_a load_theme_2_0_0_a(QFile& file);
+
+	// 2.1.0a (Current)
+
+	Theme load_theme_2_1_0_a(QFile& file);
+
+	// Theme update functions
+
+	Theme update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme);
 }
 
 #endif // LAYERS_H

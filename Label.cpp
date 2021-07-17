@@ -16,13 +16,13 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 
 void Label::init_attributes()
 {
-	add_attribute("Default", "background_color", QColor(Qt::white));
-	add_attribute("Default", "background_disabled", true);
-	add_attribute("Default", "color", QColor(Qt::black));
-	add_attribute("Default", "color_active", QColor(Qt::black));
-	add_attribute("Default", "color_hover", QColor(Qt::black));
-	add_attribute("Default", "outline_color", QColor(Qt::white));
-	add_attribute("Default", "outline_disabled", true);
+	add_attribute("background_color", QColor(Qt::white));
+	add_attribute("background_disabled", true);
+	add_attribute("color", QColor(Qt::black));
+	add_attribute("color_active", QColor(Qt::black));
+	add_attribute("color_hover", QColor(Qt::black));
+	add_attribute("outline_color", QColor(Qt::white));
+	add_attribute("outline_disabled", true);
 }
 
 void Label::init_attribute_widgets()

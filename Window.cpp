@@ -7,15 +7,31 @@ using Layers::Theme;
 using Layers::Titlebar;
 using Layers::Window;
 
-Window::Window(bool is_preview_window, QWidget* parent) : Widget(parent)
+Window::Window(const QString& app_name, bool is_preview_window, QWidget* parent) :
+	m_app_dir{ QDir(app_path(app_name)) }, m_app_themes_dir{ QDir(app_themes_path(app_name)) }, Widget(parent)
 {
     Q_INIT_RESOURCE(Layers);
 
 	qRegisterMetaTypeStreamOperators<QGradientStops>("QGradientStops");
 
-	if (!QDir(layers_dir()).exists()) QDir().mkdir(layers_dir());
-	//if (!QDir(layers_apps_dir()).exists()) QDir().mkdir(layers_apps_dir());
-	if (!QDir(layers_themes_dir()).exists()) QDir().mkdir(layers_themes_dir());
+	if (!m_app_dir.exists())
+	{
+		m_app_dir.mkdir(m_app_dir.absolutePath());
+		m_app_themes_dir.mkdir(m_app_themes_dir.absolutePath());
+
+		QDir deprecated_layers_dir(deprecated_layers_path());
+
+		// If the deprecated Layers path exists, move the theme files into the new themes directory and delete the deprecated directory
+		if (deprecated_layers_dir.exists())
+		{
+			QDir deprecated_themes_dir(deprecated_layers_themes_path());
+
+			for (const QString& file_name : deprecated_themes_dir.entryList(QDir::Files))
+				QDir().rename(deprecated_themes_dir.absoluteFilePath(file_name), m_app_themes_dir.absoluteFilePath(file_name));
+
+			deprecated_layers_dir.removeRecursively();
+		}
+	}
 
     connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
     connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
@@ -31,25 +47,25 @@ Window::Window(bool is_preview_window, QWidget* parent) : Widget(parent)
 
     set_name("window");
     set_proper_name("Window");
-    set_attribute_value("Default", "border_thickness", 15);
-    set_attribute_value("Default", "border_gradient_disabled", false);
-    set_attribute_value("Default", "corner_radius_tl", 10);
-    set_attribute_value("Default", "corner_radius_tr", 10);
-    set_attribute_value("Default", "corner_radius_bl", 10);
-    set_attribute_value("Default", "corner_radius_br", 10);
+    set_attribute_value("border_thickness", 15);
+    set_attribute_value("border_gradient_disabled", false);
+    set_attribute_value("corner_radius_tl", 10);
+    set_attribute_value("corner_radius_tr", 10);
+    set_attribute_value("corner_radius_bl", 10);
+    set_attribute_value("corner_radius_br", 10);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
     setMinimumSize(200, m_titlebar->height() + attributes()["border_thickness"].value().value<int>() * 2);
 	resize(1000, 700);
 
-    m_app_menu->set_attribute_value("Default", "background_disabled", true);
+    m_app_menu->set_attribute_value("background_disabled", true);
 
-    m_settings_menu->set_attribute_value("Default", "background_color", QColor("#ff5555"));
-    m_settings_menu->set_attribute_value("Default", "background_disabled", true);
+    m_settings_menu->set_attribute_value("background_color", QColor("#ff5555"));
+    m_settings_menu->set_attribute_value("background_disabled", true);
     m_settings_menu->hide();
 
-    m_customize_menu->set_attribute_value("Default", "background_disabled", true);
+    m_customize_menu->set_attribute_value("background_disabled", true);
     m_customize_menu->hide();
 
 	connect(m_customize_menu->apply_button(), &Button::clicked, this, &Window::apply_theme_changes);
@@ -64,9 +80,7 @@ Window::Window(bool is_preview_window, QWidget* parent) : Widget(parent)
 
 	if (!is_preview_window)
 	{
-		QDir themes_dir(layers_themes_dir());
-
-		for (const QString& file_path : themes_dir.entryList(QDir::Files))
+		for (const QString& file_path : m_app_themes_dir.entryList(QDir::Files))
 		{
 			Theme loaded_theme = load_theme(file_path);
 
@@ -207,7 +221,7 @@ void Window::change_current_theme_name(const QString& old_name, const QString& n
 
     apply_theme(m_themes[new_name]);
 
-	QFile old_theme_file(layers_themes_dir() + old_name.toLower());
+	QFile old_theme_file(m_app_themes_dir.absoluteFilePath(old_name.toLower()));
 
 	old_theme_file.remove();
 
@@ -327,27 +341,32 @@ void Window::init_attribute_widgets()
 
 Theme Window::load_theme(const QString& file_path)
 {
-	Theme loaded_theme;
+	QFile theme_file(m_app_themes_dir.absoluteFilePath(file_path));
 
-	QFile theme_file(layers_themes_dir() + file_path);
+	qDebug() << "Loading" << theme_file.fileName();
 
-	qDebug() << theme_file.fileName();
+	Theme loaded_theme = load_theme_2_1_0_a(theme_file);
 
-	if (theme_file.exists())
+	if (loaded_theme.m_data.count() == 0)
 	{
-		if (!theme_file.open(QIODevice::ReadOnly))
+		qDebug() << "Theme load failed. Trying 2.0.0a load..";
+
+		Theme_2_0_0_a loaded_theme_2_0_0_a = load_theme_2_0_0_a(theme_file);
+
+		if (loaded_theme_2_0_0_a.m_data.count() == 0)
 		{
-			qDebug() << "Could not read theme file";
+			qDebug() << "Theme load failed. The data must be corrupt.";
 		}
+		else
+		{
+			qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
+			
+			loaded_theme = update_theme_2_0_0_a_to_2_1_0_a(loaded_theme_2_0_0_a);
 
-		qDebug() << "Successfully read theme file";
+			qDebug() << "Updated theme from 2.0.0a to 2.1.0a.";
 
-		QDataStream in(&theme_file);
-		in.setVersion(QDataStream::Qt_5_13);
-
-		in >> loaded_theme;
-
-		theme_file.close();
+			save_theme(loaded_theme);
+		}
 	}
 
 	return loaded_theme;
@@ -632,7 +651,7 @@ void Window::paintEvent(QPaintEvent* event)
 
 void Window::save_theme(const Theme& theme)
 {
-	QFile theme_file(layers_themes_dir() + theme.name.toLower());
+	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name.toLower()));
 
 	if (!theme_file.open(QIODevice::WriteOnly))
 	{

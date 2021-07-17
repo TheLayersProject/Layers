@@ -40,10 +40,10 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
-	m_spacer_1->set_attribute_value("Default", "background_disabled", true);
+	m_spacer_1->set_attribute_value("background_disabled", true);
 
 	m_spacer_2->setFixedWidth(12);
-	m_spacer_2->set_attribute_value("Default", "background_disabled", true);
+	m_spacer_2->set_attribute_value("background_disabled", true);
 
 	m_control_separator->set_name("separator");
 	m_control_separator->set_proper_name("Separators");
@@ -61,7 +61,7 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 
 void Themes_Settings_Panel::init_attributes()
 {
-	set_attribute_value("Default", "background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 void Themes_Settings_Panel::init_child_themeable_reference_list()

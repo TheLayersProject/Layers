@@ -117,6 +117,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu_Label_Layer.cpp" />
     <ClCompile Include="Scroll_Area.cpp" />
+    <ClCompile Include="serialization.cpp" />
     <ClCompile Include="Settings_Menu.cpp" />
     <ClCompile Include="Settings_Sidebar.cpp" />
     <ClCompile Include="Settings_Tab.cpp" />

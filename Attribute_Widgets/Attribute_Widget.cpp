@@ -23,7 +23,7 @@ QList<QString>& Attribute_Widget::customize_states()
 
 void Attribute_Widget::enable_secondary_background_color(bool cond)
 {
-	set_attribute_value("Default", "using_secondary_background_color", cond);
+	set_attribute_value("using_secondary_background_color", cond);
 }
 
 bool Attribute_Widget::is_primary() const
@@ -48,14 +48,14 @@ void Attribute_Widget::set_primary(bool is_primary)
 
 void Attribute_Widget::init_attributes()
 {
-	set_attribute_value("Default", "background_color", QColor("#b2b2b2"));
-	set_attribute_value("Default", "corner_radius_tl", 10);
-	set_attribute_value("Default", "corner_radius_tr", 10);
-	set_attribute_value("Default", "corner_radius_bl", 10);
-	set_attribute_value("Default", "corner_radius_br", 10);
+	set_attribute_value("background_color", QColor("#b2b2b2"));
+	set_attribute_value("corner_radius_tl", 10);
+	set_attribute_value("corner_radius_tr", 10);
+	set_attribute_value("corner_radius_bl", 10);
+	set_attribute_value("corner_radius_br", 10);
 
-	add_attribute("Default", "secondary_background_color", QColor("#b2b2b2"));
-	add_attribute("Default", "using_secondary_background_color", false);
+	add_attribute("secondary_background_color", QColor("#b2b2b2"));
+	add_attribute("using_secondary_background_color", false);
 }
 
 void Attribute_Widget::paintEvent(QPaintEvent * event)
