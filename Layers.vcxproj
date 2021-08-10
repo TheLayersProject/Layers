@@ -91,6 +91,8 @@
   <ItemGroup>
     <ClCompile Include="App_Preferences_Settings_Panel.cpp" />
     <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="Stateless_Attribute.cpp" />
+    <ClCompile Include="Attribute_Set.cpp" />
     <ClCompile Include="Attribute_Sharing_Combo.cpp" />
     <ClCompile Include="Attribute_Widgets\Attribute_Widget.cpp" />
     <ClCompile Include="Attribute_Widgets\Attribute_Widget_Container.cpp" />
@@ -122,6 +124,7 @@
     <ClCompile Include="Settings_Sidebar.cpp" />
     <ClCompile Include="Settings_Tab.cpp" />
     <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="Stateful_Attribute.cpp" />
     <ClCompile Include="SVG_Widget.cpp" />
     <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Themeable.cpp" />

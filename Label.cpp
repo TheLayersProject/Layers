@@ -16,20 +16,20 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 
 void Label::init_attributes()
 {
-	add_attribute("background_color", QColor(Qt::white));
-	add_attribute("background_disabled", true);
-	add_attribute("color", QColor(Qt::black));
-	add_attribute("color_active", QColor(Qt::black));
-	add_attribute("color_hover", QColor(Qt::black));
-	add_attribute("outline_color", QColor(Qt::white));
-	add_attribute("outline_disabled", true);
+	add_stateless_attribute("background_color", QColor(Qt::white));
+	add_stateless_attribute("background_disabled", true);
+	add_stateless_attribute("color", QColor(Qt::black));
+	add_stateless_attribute("color_active", QColor(Qt::black));
+	add_stateless_attribute("color_hover", QColor(Qt::black));
+	add_stateless_attribute("outline_color", QColor(Qt::white));
+	add_stateless_attribute("outline_disabled", true);
 }
 
 void Label::init_attribute_widgets()
 {
 	if (m_customize_panel)
 	{
-		Color_Attribute_Widget* color_caw = new Color_Attribute_Widget("Color", m_attributes["color"], true);
+		Color_Attribute_Widget* color_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("color"), true);
 
 		m_customize_panel->add_attribute_widget(color_caw);
 	}
@@ -90,14 +90,14 @@ void Label::paintEvent(QPaintEvent* event)
 	QPainterPath path;
 	QPen pen;
 	QFont label_font = font();
-	QBrush fill_brush(attributes()["background_color"].value().value<QColor>());
+	QBrush fill_brush(m_attribute_set.attribute_value("background_color")->value<QColor>());
 	QBrush text_brush;
 
-	if (m_hovering) text_brush = QBrush(attributes()["color_hover"].value().value<QColor>());
-	else text_brush = QBrush(attributes()["color"].value().value<QColor>());
+	if (m_hovering) text_brush = QBrush(m_attribute_set.attribute_value("color_hover")->value<QColor>());
+	else text_brush = QBrush(m_attribute_set.attribute_value("color")->value<QColor>());
 
 	pen.setWidth(3);
-	pen.setColor(attributes()["outline_color"].value().value<QColor>());
+	pen.setColor(m_attribute_set.attribute_value("outline_color")->value<QColor>());
 
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
@@ -106,11 +106,11 @@ void Label::paintEvent(QPaintEvent* event)
 	painter.setFont(label_font);
 	painter.setPen(pen);
 
-	if (!attributes()["background_disabled"].value().value<bool>()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
+	if (!m_attribute_set.attribute_value("background_disabled")->value<bool>()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
 
 	path.addText(m_padding_left, m_padding_top + label_font.pointSizeF(), label_font, text()); // Adjust the position
 
-	if (!attributes()["outline_disabled"].value().value<bool>()) painter.strokePath(path, pen);
+	if (!m_attribute_set.attribute_value("outline_disabled")->value<bool>()) painter.strokePath(path, pen);
 
 	painter.fillPath(path, text_brush);
 	painter.end();

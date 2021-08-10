@@ -34,18 +34,19 @@ Menu_Label_Layer::Menu_Label_Layer(Menu* menu, QWidget* parent) :
 	m_text_label->set_padding(0, 8, 0, 0);
 
 	m_stretch_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_stretch_widget->set_attribute_value("background_disabled", true);
 
 	setup_layout();
 }
 
 void Menu_Label_Layer::init_attributes()
 {
-	set_attribute_value("background_color", QColor("#e6e6e6"));
-	set_attribute_value("corner_radius_tl", 10);
-	set_attribute_value("corner_radius_tr", 10);
-	set_attribute_value("corner_radius_bl", 10);
-	set_attribute_value("corner_radius_br", 10);
+	set_stateless_attribute_value("background_color", QColor("#e6e6e6"));
+	set_stateless_attribute_value("corner_radius_tl", 10);
+	set_stateless_attribute_value("corner_radius_tr", 10);
+	set_stateless_attribute_value("corner_radius_bl", 10);
+	set_stateless_attribute_value("corner_radius_br", 10);
+
+	m_stretch_widget->set_stateless_attribute_value("background_disabled", true);
 }
 
 void Menu_Label_Layer::init_child_themeable_reference_list()

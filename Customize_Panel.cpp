@@ -155,23 +155,23 @@ void Customize_Panel::add_element_button(Button* button)
 
 void Customize_Panel::init_attributes()
 {
-	set_attribute_value("background_disabled", true);
+	set_stateless_attribute_value("background_disabled", true);
 
-	m_show_all_button->set_attribute_value("background_color", QColor("#61ad50"));
-	m_show_all_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_all_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_all_button->set_attribute_value("corner_radius_tl", 5);
-	m_show_all_button->set_attribute_value("corner_radius_tr", 5);
-	m_show_all_button->set_attribute_value("corner_radius_bl", 5);
-	m_show_all_button->set_attribute_value("corner_radius_br", 5);
+	m_show_all_button->set_stateless_attribute_value("background_color", QColor("#61ad50"));
+	m_show_all_button->set_stateless_attribute_value("background_color_hover", QColor("#6fc65b"));
+	m_show_all_button->set_stateless_attribute_value("text_color", QColor("#f8f8f8"));
+	m_show_all_button->set_stateless_attribute_value("corner_radius_tl", 5);
+	m_show_all_button->set_stateless_attribute_value("corner_radius_tr", 5);
+	m_show_all_button->set_stateless_attribute_value("corner_radius_bl", 5);
+	m_show_all_button->set_stateless_attribute_value("corner_radius_br", 5);
 
-	m_show_primary_button->set_attribute_value("background_color", QColor("#61ad50"));
-	m_show_primary_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->set_attribute_value("corner_radius_tl", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_tr", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_bl", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_br", 5);
+	m_show_primary_button->set_stateless_attribute_value("background_color", QColor("#61ad50"));
+	m_show_primary_button->set_stateless_attribute_value("background_color_hover", QColor("#6fc65b"));
+	m_show_primary_button->set_stateless_attribute_value("text_color", QColor("#f8f8f8"));
+	m_show_primary_button->set_stateless_attribute_value("corner_radius_tl", 5);
+	m_show_primary_button->set_stateless_attribute_value("corner_radius_tr", 5);
+	m_show_primary_button->set_stateless_attribute_value("corner_radius_bl", 5);
+	m_show_primary_button->set_stateless_attribute_value("corner_radius_br", 5);
 }
 
 void Customize_Panel::init_child_themeable_reference_list()

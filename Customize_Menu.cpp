@@ -21,9 +21,9 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");
-	m_topbar->set_attribute_value("background_color", QColor(Qt::lightGray));
-	m_topbar->set_attribute_value("corner_radius_tr", 10);
-	m_topbar->set_attribute_value("corner_radius_br", 10);
+	m_topbar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
+	m_topbar->set_stateless_attribute_value("corner_radius_tr", 10);
+	m_topbar->set_stateless_attribute_value("corner_radius_br", 10);
 	m_topbar->set_ACW_primary("border_awc", false);
 	m_topbar->set_ACW_primary("hover_background_caw", false);
 	m_topbar->set_ACW_primary("outline_caw", false);
@@ -43,16 +43,16 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_sidebar->setMouseTracking(true);
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
-	m_sidebar->set_attribute_value("background_color", QColor(Qt::lightGray));
-	m_sidebar->share_attribute_with_themeable(m_sidebar->attributes()["background_color"], m_preview_widget->attributes()["corner_color"]);
+	m_sidebar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
+	m_sidebar->share_attribute_with_themeable(m_sidebar->attribute_set().stateless_attribute("background_color"), m_preview_widget->attribute_set().stateless_attribute("corner_color"));
 	m_sidebar->set_ACW_primary("border_awc", false);
 	m_sidebar->set_ACW_primary("hover_background_caw", false);
 	m_sidebar->set_ACW_primary("outline_caw", false);
 	m_sidebar->set_ACW_primary("corner_color_caw", false);
 	m_sidebar->set_ACW_primary("corner_radii_awc", false);
 
-	m_preview_widget->set_attribute_value("corner_radius_tl", 10);
-	m_preview_widget->set_attribute_value("corner_color_disabled", false);
+	m_preview_widget->set_stateless_attribute_value("corner_radius_tl", 10);
+	m_preview_widget->set_stateless_attribute_value("corner_color_disabled", false);
 
 	setup_layout();
 }
@@ -242,7 +242,7 @@ void Customize_Menu::setup_layout()
 	m_preview_layout->setSpacing(0);
 
 	m_preview_widget->setLayout(m_preview_layout);
-	m_preview_widget->set_attribute_value("background_disabled", true);
+	m_preview_widget->set_stateless_attribute_value("background_disabled", true);
 
 	m_preview_scroll_area->setWidget(m_preview_widget);
 

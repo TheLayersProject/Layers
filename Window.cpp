@@ -47,25 +47,25 @@ Window::Window(const QString& app_name, bool is_preview_window, QWidget* parent)
 
     set_name("window");
     set_proper_name("Window");
-    set_attribute_value("border_thickness", 15);
-    set_attribute_value("border_gradient_disabled", false);
-    set_attribute_value("corner_radius_tl", 10);
-    set_attribute_value("corner_radius_tr", 10);
-    set_attribute_value("corner_radius_bl", 10);
-    set_attribute_value("corner_radius_br", 10);
+    set_stateless_attribute_value("border_thickness", 15);
+    set_stateless_attribute_value("border_gradient_disabled", false);
+    set_stateless_attribute_value("corner_radius_tl", 10);
+    set_stateless_attribute_value("corner_radius_tr", 10);
+    set_stateless_attribute_value("corner_radius_bl", 10);
+    set_stateless_attribute_value("corner_radius_br", 10);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-    setMinimumSize(200, m_titlebar->height() + attributes()["border_thickness"].value().value<int>() * 2);
+    setMinimumSize(200, m_titlebar->height() + m_attribute_set.attribute_value("border_thickness")->value<int>() * 2);
 	resize(1000, 700);
 
-    m_app_menu->set_attribute_value("background_disabled", true);
+    m_app_menu->set_stateless_attribute_value("background_disabled", true);
 
-    m_settings_menu->set_attribute_value("background_color", QColor("#ff5555"));
-    m_settings_menu->set_attribute_value("background_disabled", true);
+    m_settings_menu->set_stateless_attribute_value("background_color", QColor("#ff5555"));
+    m_settings_menu->set_stateless_attribute_value("background_disabled", true);
     m_settings_menu->hide();
 
-    m_customize_menu->set_attribute_value("background_disabled", true);
+    m_customize_menu->set_stateless_attribute_value("background_disabled", true);
     m_customize_menu->hide();
 
 	connect(m_customize_menu->apply_button(), &Button::clicked, this, &Window::apply_theme_changes);
@@ -84,7 +84,7 @@ Window::Window(const QString& app_name, bool is_preview_window, QWidget* parent)
 		{
 			Theme loaded_theme = load_theme(file_path);
 
-			add_theme(loaded_theme.name, loaded_theme);
+			add_theme(loaded_theme.name(), loaded_theme);
 		}
 
 		if (m_themes.isEmpty())
@@ -121,15 +121,15 @@ void Window::apply_theme(Theme& theme)
 {
     Themeable::apply_theme(theme);
 
-	if (theme.built_in)
-		m_settings_menu->themes_settings_panel()->show_custom_theme_buttons(false);
-	else
+	if (theme.is_custom())
 		m_settings_menu->themes_settings_panel()->show_custom_theme_buttons();
+	else
+		m_settings_menu->themes_settings_panel()->show_custom_theme_buttons(false);
 
     if (m_customize_menu->preview_window())
     {
         m_customize_menu->preview_window()->apply_theme(theme);
-        m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name);
+        m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
     }
 
 	issue_update();
@@ -162,7 +162,7 @@ void Window::finalize()
 	m_customize_menu->preview_window()->customize_menu()->apply_button()->set_disabled();
 
 	for (Theme& theme : m_themes)
-		m_customize_menu->preview_window()->add_theme(theme.name, theme);
+		m_customize_menu->preview_window()->add_theme(theme.name(), theme);
 
 	//apply_theme(m_themes["Dark"]); // Sets initial theme
     m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item("Light"); // Also sets initial theme
@@ -181,7 +181,7 @@ void Window::update_theme_dependencies()
     if (m_maximized)
 		m_main_layout->setMargin(0);
     else
-		m_main_layout->setMargin(attributes()["border_thickness"].value().value<int>());
+		m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
 }
 
 void Window::set_window_title(const QString& title)
@@ -204,7 +204,7 @@ Titlebar* Window::titlebar() const
 
 void Window::apply_theme_changes()
 {
-	m_customize_menu->preview_window()->replace_all_attributes_in_theme(m_current_theme);
+	m_customize_menu->preview_window()->copy_attribute_values_to(m_current_theme);
 
 	apply_theme(*m_current_theme);
 
@@ -217,7 +217,7 @@ void Window::change_current_theme_name(const QString& old_name, const QString& n
 {
     m_themes.insert(new_name, m_themes.take(old_name));
 
-	m_themes[new_name].name = new_name;
+	m_themes[new_name].set_name(new_name);
 
     apply_theme(m_themes[new_name]);
 
@@ -230,10 +230,11 @@ void Window::change_current_theme_name(const QString& old_name, const QString& n
 
 void Window::create_theme(const QString& new_theme_name, const QString& copy_theme_name)
 {
-	add_theme(new_theme_name, Theme(m_themes[copy_theme_name]));
+	add_theme(new_theme_name, Theme(new_theme_name));
 
-	m_themes[new_theme_name].name = new_theme_name;
-	m_themes[new_theme_name].built_in = false;
+	Theme& new_theme = m_themes[new_theme_name];
+
+	new_theme.copy_attribute_sets_from(m_themes[copy_theme_name]);
 
 	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(new_theme_name);
 
@@ -311,7 +312,7 @@ void Window::minimize_clicked()
 
 void Window::new_theme_clicked()
 {
-	m_create_new_theme_dialog->set_current_start_theme_name(m_current_theme->name);
+	m_create_new_theme_dialog->set_current_start_theme_name(m_current_theme->name());
 
 	static_cast<Window*>(QApplication::activeWindow())->center_dialog(m_create_new_theme_dialog);
 
@@ -345,15 +346,15 @@ Theme Window::load_theme(const QString& file_path)
 
 	qDebug() << "Loading" << theme_file.fileName();
 
-	Theme loaded_theme = load_theme_2_1_0_a(theme_file);
+	Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(theme_file);
 
-	if (loaded_theme.m_data.count() == 0)
+	if (theme_and_load_status_combo_2_1_0_a.status != 0)
 	{
 		qDebug() << "Theme load failed. Trying 2.0.0a load..";
 
-		Theme_2_0_0_a loaded_theme_2_0_0_a = load_theme_2_0_0_a(theme_file);
+		Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(theme_file);
 
-		if (loaded_theme_2_0_0_a.m_data.count() == 0)
+		if (theme_and_load_status_combo_2_0_0_a.status != 0)
 		{
 			qDebug() << "Theme load failed. The data must be corrupt.";
 		}
@@ -361,15 +362,17 @@ Theme Window::load_theme(const QString& file_path)
 		{
 			qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
 			
-			loaded_theme = update_theme_2_0_0_a_to_2_1_0_a(loaded_theme_2_0_0_a);
+			Theme updated_theme = update_theme_2_0_0_a_to_2_1_0_a(theme_and_load_status_combo_2_0_0_a.theme);
 
 			qDebug() << "Updated theme from 2.0.0a to 2.1.0a.";
 
-			save_theme(loaded_theme);
+			save_theme(updated_theme);
+
+			return updated_theme;
 		}
 	}
 
-	return loaded_theme;
+	return theme_and_load_status_combo_2_1_0_a.theme;
 }
 
 bool Window::nativeEvent(const QByteArray& eventType, void* message, long* result)
@@ -384,7 +387,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, long* resul
         }
 
         *result = 0;
-        const LONG borderWidth = attributes()["border_thickness"].value().value<int>() * devicePixelRatio();;
+        const LONG borderWidth = m_attribute_set.attribute_value("border_thickness")->value<int>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -466,22 +469,22 @@ void Window::paintEvent(QPaintEvent* event)
 	{
 		// CREATE VARIABLES:
 
-		bool background_disabled = m_attributes["background_disabled"].value().value<bool>();
+		bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
 
-		int border_thickness = m_attributes["border_thickness"].value().value<int>();
+		int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
-		int margin_left = m_attributes["margin_left"].value().value<int>();
-		int margin_top = m_attributes["margin_top"].value().value<int>();
-		int margin_right = m_attributes["margin_right"].value().value<int>();
-		int margin_bottom = m_attributes["margin_bottom"].value().value<int>();
+		int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+		int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+		int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+		int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
 
-		int corner_radius_tl = m_attributes["corner_radius_tl"].value().value<int>();
-		int corner_radius_tr = m_attributes["corner_radius_tr"].value().value<int>();
-		int corner_radius_bl = m_attributes["corner_radius_bl"].value().value<int>();
-		int corner_radius_br = m_attributes["corner_radius_br"].value().value<int>();
+		int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
+		int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
+		int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
+		int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
 
 		int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 		int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -533,36 +536,36 @@ void Window::paintEvent(QPaintEvent* event)
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Corner Color
-		if (!m_attributes["corner_color_disabled"].value().value<bool>())
+		if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
 		{
-			painter.fillPath(corner_color_path, m_attributes["corner_color"].value().value<QColor>());
+			painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
 		}
 
 		// - Draw Border
 		if (border_thickness)
 		{
-			if (!m_attributes["border_gradient_disabled"].value().value<bool>())
+			if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
 			{
 				QLinearGradient gradient;
 
 				gradient.setStart(0, 0);
 				gradient.setFinalStop(width(), 0);
-				gradient.setStops(m_attributes["border_gradient_stops"].value().value<QGradientStops>());
+				gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
 
 				painter.fillPath(border_path, gradient);
 			}
-			else painter.fillPath(border_path, m_attributes["border_color"].value().value<QColor>());
+			else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
 		}
 
 		// - Draw Background
 		if (!background_disabled)
 		{
-			if (m_attributes["background_gradient_disabled"].value().value<bool>())
+			if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
 			{
-				if (!m_attributes["background_color_hover_disabled"].value().value<bool>() && m_attributes["using_background_color_hover"].value().value<bool>())
-					painter.fillPath(background_path, m_attributes["background_color_hover"].value().value<QColor>());
+				if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
 				else
-					painter.fillPath(background_path, m_attributes["background_color"].value().value<QColor>());
+					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
 			}
 			else
 			{
@@ -570,16 +573,16 @@ void Window::paintEvent(QPaintEvent* event)
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(m_attributes["background_gradient_stops"].value().value<QGradientStops>());
+				bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 		}
 
 		// - Draw Outline Color
-		if (!m_attributes["outline_color_disabled"].value().value<bool>())
+		if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
 		{
-			painter.strokePath(outline_color_path, QPen(m_attributes["outline_color"].value().value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
 		}
 
 		painter.end();
@@ -588,12 +591,12 @@ void Window::paintEvent(QPaintEvent* event)
 	{
 		// CREATE VARIABLES:
 
-		bool background_disabled = m_attributes["background_disabled"].value().value<bool>();
+		bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
 
-		int margin_left = m_attributes["margin_left"].value().value<int>();
-		int margin_top = m_attributes["margin_top"].value().value<int>();
-		int margin_right = m_attributes["margin_right"].value().value<int>();
-		int margin_bottom = m_attributes["margin_bottom"].value().value<int>();
+		int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+		int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+		int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+		int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
@@ -620,12 +623,12 @@ void Window::paintEvent(QPaintEvent* event)
 		// - Draw Background
 		if (!background_disabled)
 		{
-			if (m_attributes["background_gradient_disabled"].value().value<bool>())
+			if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
 			{
-				if (!m_attributes["background_color_hover_disabled"].value().value<bool>() && m_attributes["using_background_color_hover"].value().value<bool>())
-					painter.fillPath(background_path, m_attributes["background_color_hover"].value().value<QColor>());
+				if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
 				else
-					painter.fillPath(background_path, m_attributes["background_color"].value().value<QColor>());
+					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
 			}
 			else
 			{
@@ -633,25 +636,25 @@ void Window::paintEvent(QPaintEvent* event)
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(m_attributes["background_gradient_stops"].value().value<QGradientStops>());
+				bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 		}
 
 		// - Draw Outline Color
-		if (!m_attributes["outline_color_disabled"].value().value<bool>())
+		if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
 		{
-			painter.strokePath(outline_color_path, QPen(m_attributes["outline_color"].value().value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
 		}
 
 		painter.end();
 	}
 }
 
-void Window::save_theme(const Theme& theme)
+void Window::save_theme(Theme& theme)
 {
-	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name.toLower()));
+	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name().toLower()));
 
 	if (!theme_file.open(QIODevice::WriteOnly))
 	{
@@ -669,7 +672,7 @@ void Window::save_theme(const Theme& theme)
 
 void Window::setup_layout()
 {
-    m_main_layout->setMargin(attributes()["border_thickness"].value().value<int>());
+    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
     m_main_layout->setSpacing(0);
     m_main_layout->addWidget(m_titlebar);
     m_main_layout->addWidget(m_app_menu);

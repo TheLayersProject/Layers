@@ -32,11 +32,11 @@ SVG_Widget::SVG_Widget(const SVG_Widget& svg_w)
 
 void SVG_Widget::init_attributes()
 {
-	add_attribute("use_common_color", true);
-	add_attribute("use_common_hover_color", true);
+	add_stateless_attribute("use_common_color", true);
+	add_stateless_attribute("use_common_hover_color", true);
 
-	add_attribute("common_color", QColor(Qt::black));
-	add_attribute("common_hover_color", QColor(Qt::darkGray));
+	add_stateless_attribute("common_color", QColor(Qt::black));
+	add_stateless_attribute("common_hover_color", QColor(Qt::darkGray));
 
 	// Build attributes from elements
 	for (int i = 0; i < m_svg_elements.size(); i++)
@@ -45,7 +45,7 @@ void SVG_Widget::init_attributes()
 		{
 			QString l_element_id = element_id(m_svg_elements[i]);
 
-			if (!m_attributes.contains("#" + l_element_id + "/color"))
+			if (!m_attribute_set.contains("#" + l_element_id + "/color"))
 			{
 				// Get ID's Default Fill Color
 				int color_start_index = m_svg_elements[i].indexOf("fill=") + 6;
@@ -54,8 +54,8 @@ void SVG_Widget::init_attributes()
 
 				QString color = m_svg_elements[i].mid(color_start_index, color_length);
 
-				add_attribute("#" + l_element_id + "/color", QColor(color));
-				add_attribute("#" + l_element_id + "/hover_color", QColor(color));
+				add_stateless_attribute("#" + l_element_id + "/color", QColor(color));
+				add_stateless_attribute("#" + l_element_id + "/hover_color", QColor(color));
 			}
 		}
 	}
@@ -65,8 +65,8 @@ void SVG_Widget::init_attribute_widgets()
 {
 	if (m_customize_panel)
 	{
-		Color_Attribute_Widget* common_color_caw = new Color_Attribute_Widget("Common Color", m_attributes["common_color"], true);
-		Color_Attribute_Widget* common_hover_color_caw = new Color_Attribute_Widget("Common Hover Color", m_attributes["common_hover_color"], true);
+		Color_Attribute_Widget* common_color_caw = new Color_Attribute_Widget("Common Color", m_attribute_set.attribute("common_color"), true);
+		Color_Attribute_Widget* common_hover_color_caw = new Color_Attribute_Widget("Common Hover Color", m_attribute_set.attribute("common_hover_color"), true);
 
 		m_customize_panel->add_attribute_widget(common_color_caw);
 		m_customize_panel->add_attribute_widget(common_hover_color_caw);
@@ -110,24 +110,24 @@ void SVG_Widget::update_theme_dependencies()
 		{
 			if (m_hovering)
 			{
-				if (attributes()["use_common_hover_color"].value().value<bool>() && attributes().contains("common_hover_color"))
+				if (m_attribute_set.attribute_value("use_common_hover_color")->value<bool>() && m_attribute_set.contains("common_hover_color"))
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, attributes()["common_hover_color"].value().value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("common_hover_color")->value<QColor>().name());
 				}
-				else if (attributes().contains("#" + element_id(m_svg_elements[i]) + "/hover_color"))
+				else if (m_attribute_set.contains("#" + element_id(m_svg_elements[i]) + "/hover_color"))
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, attributes()["#" + element_id(m_svg_elements[i]) + "/hover_color"].value().value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("#" + element_id(m_svg_elements[i]) + "/hover_color")->value<QColor>().name());
 				}
 			}
 			else
 			{
-				if (attributes()["use_common_color"].value().value<bool>() && attributes().contains("common_color"))
+				if (m_attribute_set.attribute_value("use_common_color")->value<bool>() && m_attribute_set.contains("common_color"))
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, attributes()["common_color"].value().value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("common_color")->value<QColor>().name());
 				}
-				else if (attributes().contains("#" + element_id(m_svg_elements[i]) + "/color"))
+				else if (m_attribute_set.contains("#" + element_id(m_svg_elements[i]) + "/color"))
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, attributes()["#" + element_id(m_svg_elements[i]) + "/color"].value().value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("#" + element_id(m_svg_elements[i]) + "/color")->value<QColor>().name());
 				}
 			}
 		}

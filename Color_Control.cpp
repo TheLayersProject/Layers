@@ -14,11 +14,11 @@ void Color_Control::click()
 {
 	QColorDialog dlg;
 
-	dlg.setCurrentColor(attributes()["background_color"].value().value<QColor>());
+	dlg.setCurrentColor(m_attribute_set.attribute_value("background_color")->value<QColor>());
 
 	if (dlg.exec())
 	{
-		set_attribute_value("background_color", dlg.currentColor());
+		set_stateless_attribute_value("background_color", dlg.currentColor());
 
 		emit color_changed();
 
@@ -35,10 +35,10 @@ void Layers::Color_Control::disable_clicking(bool cond)
 
 void Color_Control::init_attributes()
 {
-    set_attribute_value("background_color", QColor(Qt::white));
-	add_attribute("corner_radius", 5);
-	add_attribute("outer_border_color", QColor("#2c2c2c"));
-	add_attribute("inner_border_color", QColor("#d6d6d6"));
+	set_stateless_attribute_value("background_color", QColor(Qt::white));
+	add_stateless_attribute("corner_radius", 5);
+	add_stateless_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_stateless_attribute("inner_border_color", QColor("#d6d6d6"));
 }
 
 bool Color_Control::eventFilter(QObject* object, QEvent* event)
@@ -75,14 +75,14 @@ void Color_Control::paintEvent(QPaintEvent* event)
     QPainterPath inner_border_path;
     QPainterPath background_path;
 
-    outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), attributes()["corner_radius"].value().value<int>(), attributes()["corner_radius"].value().value<int>());
-    inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), attributes()["corner_radius"].value().value<int>() - 1, attributes()["corner_radius"].value().value<int>() - 1);
-    background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), attributes()["corner_radius"].value().value<int>() - 1.5, attributes()["corner_radius"].value().value<int>() - 1.5);
+    outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), m_attribute_set.attribute_value("corner_radius")->value<int>(), m_attribute_set.attribute_value("corner_radius")->value<int>());
+    inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1);
+    background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5);
 
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.fillPath(outer_border_path, attributes()["outer_border_color"].value().value<QColor>());
-    painter.fillPath(inner_border_path, attributes()["inner_border_color"].value().value<QColor>());
-    painter.fillPath(background_path, attributes()["background_color"].value().value<QColor>());
+    painter.fillPath(outer_border_path, m_attribute_set.attribute_value("outer_border_color")->value<QColor>());
+    painter.fillPath(inner_border_path, m_attribute_set.attribute_value("inner_border_color")->value<QColor>());
+    painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
     painter.end();
 }

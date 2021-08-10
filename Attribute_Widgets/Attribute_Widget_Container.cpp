@@ -60,8 +60,8 @@ void Attribute_Widget_Container::add_attribute_widget(Attribute_Widget* attribut
 
 	if (m_customize_states.isEmpty())
 	{
-		if (attribute_widget->attribute() && attribute_widget->attribute()->is_stateful())
-			set_customize_states(attribute_widget->attribute()->states());
+		if (attribute_widget->stateful_attribute())
+			set_customize_states(attribute_widget->stateful_attribute()->states());
 	}
 }
 
@@ -84,7 +84,7 @@ void Attribute_Widget_Container::enable_secondary_background_color(bool cond)
 
 void Attribute_Widget_Container::init_attributes()
 {
-	set_attribute_value("border_thickness", 2);
+	set_stateless_attribute_value("border_thickness", 2);
 }
 
 void Attribute_Widget_Container::init_child_themeable_reference_list()

@@ -50,9 +50,6 @@
     <ClCompile Include="App_Preferences_Settings_Panel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Attribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Attribute_Sharing_Combo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,6 +147,18 @@
       <Filter>Source Files\Attribute_Widgets</Filter>
     </ClCompile>
     <ClCompile Include="serialization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stateful_Attribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Set.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stateless_Attribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

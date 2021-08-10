@@ -116,32 +116,32 @@ bool Toggle_Switch::eventFilter(QObject* object, QEvent* event)
 
 void Toggle_Switch::init_attributes()
 {
-	set_attribute_value("background_disabled", true);
+	set_stateless_attribute_value("background_disabled", true);
 
-	m_square->set_attribute_value("corner_radius_tl", 2);
-	m_square->set_attribute_value("corner_radius_tr", 2);
-	m_square->set_attribute_value("corner_radius_bl", 2);
-	m_square->set_attribute_value("corner_radius_br", 2);
+	m_square->set_stateless_attribute_value("corner_radius_tl", 2);
+	m_square->set_stateless_attribute_value("corner_radius_tr", 2);
+	m_square->set_stateless_attribute_value("corner_radius_bl", 2);
+	m_square->set_stateless_attribute_value("corner_radius_br", 2);
 
-	m_switch->set_attribute_value("border_thickness", 3);
-	m_switch->set_attribute_value("corner_radius_tl", 4);
-	m_switch->set_attribute_value("corner_radius_tr", 4);
-	m_switch->set_attribute_value("corner_radius_bl", 4);
-	m_switch->set_attribute_value("corner_radius_br", 4);
+	m_switch->set_stateless_attribute_value("border_thickness", 3);
+	m_switch->set_stateless_attribute_value("corner_radius_tl", 4);
+	m_switch->set_stateless_attribute_value("corner_radius_tr", 4);
+	m_switch->set_stateless_attribute_value("corner_radius_bl", 4);
+	m_switch->set_stateless_attribute_value("corner_radius_br", 4);
 
-	m_spacer->set_attribute_value("background_disabled", true);
+	m_spacer->set_stateless_attribute_value("background_disabled", true);
 
-	m_switch->make_attribute_stateful("background_color", {
+	m_switch->convert_attribute_to_stateful("background_color", {
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
 
-	m_switch->make_attribute_stateful("border_color", {
+	m_switch->convert_attribute_to_stateful("border_color", {
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
 
-	m_square->make_attribute_stateful("background_color", {
+	m_square->convert_attribute_to_stateful("background_color", {
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});

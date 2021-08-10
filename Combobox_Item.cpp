@@ -21,34 +21,29 @@ Combobox_Item::Combobox_Item(const QString& item_text, QWidget* parent) :
 
 void Combobox_Item::init_attributes()
 {
-	set_attribute_value("background_color_hover_disabled", false);
-
-	make_attribute_stateful("corner_radius_tl", {
-		{ "Single", 10 },
-		{ "Top", 10 },
-		{ "Middle", 0 },
-		{ "Bottom", 0 }
+	convert_attribute_to_stateful("corner_radius_tl", {
+			{ "Single", 10 },
+			{ "Top", 10 },
+			{ "Middle", 0 },
+			{ "Bottom", 0 }
 		});
-
-	make_attribute_stateful("corner_radius_tr", {
-		{ "Single", 10 },
-		{ "Top", 10 },
-		{ "Middle", 0 },
-		{ "Bottom", 0 }
+	convert_attribute_to_stateful("corner_radius_tr", {
+			{ "Single", 10 },
+			{ "Top", 10 },
+			{ "Middle", 0 },
+			{ "Bottom", 0 }
 		});
-
-	make_attribute_stateful("corner_radius_bl", {
-		{ "Single", 10 },
-		{ "Top", 0 },
-		{ "Middle", 0 },
-		{ "Bottom", 10 }
+	convert_attribute_to_stateful("corner_radius_bl", {
+			{ "Single", 10 },
+			{ "Top", 0 },
+			{ "Middle", 0 },
+			{ "Bottom", 10 }
 		});
-
-	make_attribute_stateful("corner_radius_br", {
-		{ "Single", 10 },
-		{ "Top", 0 },
-		{ "Middle", 0 },
-		{ "Bottom", 10 }
+	convert_attribute_to_stateful("corner_radius_br", {
+			{ "Single", 10 },
+			{ "Top", 0 },
+			{ "Middle", 0 },
+			{ "Bottom", 10 }
 		});
 }
 
@@ -58,21 +53,21 @@ void Combobox_Item::init_attribute_widgets()
 	{
 		Attribute_Widget_Container* border_awc = new Attribute_Widget_Container("Border", false);
 		Attribute_Widget_Container* corner_radii_awc = new Attribute_Widget_Container("Corner Radii", true);
-		Color_Attribute_Widget* background_caw = new Color_Attribute_Widget("Background", m_attributes["background_color"], m_attributes["background_disabled"], true);
-		Color_Attribute_Widget* hover_background_caw = new Color_Attribute_Widget("Hover Background", m_attributes["background_color_hover"], m_attributes["background_color_hover_disabled"], true);
-		Color_Attribute_Widget* outline_caw = new Color_Attribute_Widget("Outline", m_attributes["outline_color"], m_attributes["outline_color_disabled"], false);
-		Color_Attribute_Widget* corner_color_caw = new Color_Attribute_Widget("Corner Color", m_attributes["corner_color"], m_attributes["corner_color_disabled"], false);
-		Color_Attribute_Widget* border_caw = new Color_Attribute_Widget("Color", m_attributes["border_color"], true);
-		Gradient_Attribute_Widget* border_gaw = new Gradient_Attribute_Widget("Gradient", m_attributes["border_gradient_stops"], true);
-		Number_Attribute_Widget* border_thickness_naw = new Number_Attribute_Widget("Thickness", m_attributes["border_thickness"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_tl_naw = new Number_Attribute_Widget("Top-Left", m_attributes["corner_radius_tl"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_tr_naw = new Number_Attribute_Widget("Top-Right", m_attributes["corner_radius_tr"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_bl_naw = new Number_Attribute_Widget("Bottom-Left", m_attributes["corner_radius_bl"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_br_naw = new Number_Attribute_Widget("Bottom-Right", m_attributes["corner_radius_br"], new QIntValidator(0, 30), true);
+		Color_Attribute_Widget* background_caw = new Color_Attribute_Widget("Background", m_attribute_set.attribute("background_color"), m_attribute_set.attribute("background_disabled"), true);
+		Color_Attribute_Widget* hover_background_caw = new Color_Attribute_Widget("Hover Background", m_attribute_set.attribute("background_color_hover"), m_attribute_set.attribute("background_color_hover_disabled"), true);
+		Color_Attribute_Widget* outline_caw = new Color_Attribute_Widget("Outline", m_attribute_set.attribute("outline_color"), m_attribute_set.attribute("outline_color_disabled"), false);
+		Color_Attribute_Widget* corner_color_caw = new Color_Attribute_Widget("Corner Color", m_attribute_set.attribute("corner_color"), m_attribute_set.attribute("corner_color_disabled"), false);
+		Color_Attribute_Widget* border_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("border_color"), true);
+		Gradient_Attribute_Widget* border_gaw = new Gradient_Attribute_Widget("Gradient", m_attribute_set.attribute("border_gradient_stops"), true);
+		Number_Attribute_Widget* border_thickness_naw = new Number_Attribute_Widget("Thickness", m_attribute_set.attribute("border_thickness"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_tl_naw = new Number_Attribute_Widget("Top-Left", m_attribute_set.attribute("corner_radius_tl"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_tr_naw = new Number_Attribute_Widget("Top-Right", m_attribute_set.attribute("corner_radius_tr"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_bl_naw = new Number_Attribute_Widget("Bottom-Left", m_attribute_set.attribute("corner_radius_bl"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_br_naw = new Number_Attribute_Widget("Bottom-Right", m_attribute_set.attribute("corner_radius_br"), new QIntValidator(0, 30), true);
 		Switch_Attribute_Widget* border_color_saw = new Switch_Attribute_Widget(
 			"Solid", border_caw,
 			"Gradient", border_gaw,
-			m_attributes["border_gradient_disabled"], true);
+			m_attribute_set.stateless_attribute("border_gradient_disabled"), true);
 
 		border_caw->set_centered();
 		border_gaw->set_centered();
@@ -175,10 +170,10 @@ void Combobox_Item::setFixedSize(int w, int h)
 bool Combobox_Item::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::Enter)
-		set_attribute_value("using_background_color_hover", true, true);
+		set_stateless_attribute_value("using_background_color_hover", true, true);
 
 	else if (event->type() == QEvent::Leave)
-		set_attribute_value("using_background_color_hover", false, true);
+		set_stateless_attribute_value("using_background_color_hover", false, true);
 
 	return false;
 }

@@ -26,7 +26,7 @@
 
 namespace Layers
 {
-	class Attribute;
+	class Stateless_Attribute;
 	class Attribute_Sharing_Combo;
 	class Attribute_Widget;
 	class Color_Control;
@@ -88,64 +88,23 @@ namespace Layers
 	Theme build_blue_theme();
 
 	/*!
-		Provides structure for storing attribute values and handles attribute states.
+		Pure abstract base class for Layers attributes.
 
-		The Attribute class is a data structure used by Themes and Themeables to store
-		attribute values, their associated states, and the current state of the attribute.
+		Implementers of the Attribute class will need to define the value() function since
+		this class does not implement the representation of the attribute value(s).
 
-		Attributes can store different values mapped from different states. However,
-		attributes are not required to be stateful. In fact, most attributes do not
-		need states and only need to store a single value. Atttributes that only need
-		one value store the value under the 'Default' state.
+		The functions name(), parent_themeable(), and set_parent_themeable() are defined by
+		this class as they are not expected to be different between subclasses.
 	*/
 	class Attribute
 	{
 	public:
-		Attribute();
-		Attribute(const QString& name, QVariant value);
-		Attribute(const QString& name, const QString& state, QVariant value);
-		Attribute(const QString& name, QMap<QString, QVariant> state_value_map);
-
 		/*!
-			Add a state-value pair to the data structure.
+			Constructor for the Attribute base class.
 
-			Only works if the state does not already exist.
-
-			@param state to be added
-			@param value paired with the state
+			Subclasses are to call this constructor passing along an attribute name string.
 		*/
-		void add_state_and_value(const QString& state, QVariant value);
-
-		/*!
-			Copies the values of the incoming theme attribute reference.
-
-			@param theme_attribute reference to copy values from
-		*/
-		void apply_theme_attribute(Attribute& theme_attribute);
-
-		/*!
-			Checks if the provided state already exists in the data structure.
-
-			@param state to check
-			@returns True if state exists, false if not
-		*/
-		bool contains_state(const QString& state) const;
-
-		/*!
-			Checks if the attribute uses states (other than the 'Default' state)
-
-			@returns True if attribute uses states, false if not
-		*/
-		bool is_stateful() const;
-
-		/*!
-			Populates the data structure with provided state-value pairs.
-
-			Also marks the attribute as being stateful.
-
-			@param state_value_map Map of state-value pairs to add 
-		*/
-		void make_stateful(QMap<QString, QVariant> state_value_map);
+		Attribute(const QString& name);
 
 		/*!
 			Returns the name of the attribute.
@@ -172,6 +131,88 @@ namespace Layers
 		void set_parent_themeable(Themeable* parent_themeable);
 
 		/*!
+			Pure virtual function intended to return the attribute value in the form of a QVariant reference.
+
+			@returns Attribute value reference
+		*/
+		virtual QVariant& value() = 0;
+
+	protected:
+		QString m_name{ "" };
+
+		Themeable* m_parent_themeable{ nullptr };
+	};
+
+	/*!
+		Provides structure for storing attribute values.
+
+		The Attribute class provides the data structure used by Themes and Themeables to store
+		attribute values and attribute metadata, like the attribute's name.
+
+		An attribute value can be of any type supported by the QVariant class.
+
+		Attributes can either store a single value or multiple values associated with different
+		states. Attributes that are not associated with states and only store a single value store
+		that value as a QVariant. Stateful attributes store their values in a QMap associating 
+		QStrings with QVariants, the states and values.
+
+		Since the class representation uses two different mechanisms for storing values,
+		users of the Attribute class will need to use two different sets of functions depending on
+		whether or not the attribute is stateful.
+	*/
+	class Stateless_Attribute : public Attribute
+	{
+	public:
+		Stateless_Attribute();
+		Stateless_Attribute(const QString& name, QVariant value);
+
+		/*!
+			Sets the value.
+
+			@param value to set
+		*/
+		void set_value(QVariant value);
+
+		/*!
+			Returns the value of the attribute
+
+			@returns Attribute's value
+		*/
+		QVariant& value();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Stateless_Attribute& a)
+		{
+			stream << a.m_name;
+			stream << a.m_value;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Stateless_Attribute& a)
+		{
+			stream >> a.m_name;
+			stream >> a.m_value;
+			return stream;
+		}
+
+	private:
+		QVariant m_value{ QVariant() };
+	};
+
+	class Stateful_Attribute : public Attribute
+	{
+	public:
+		Stateful_Attribute();
+		Stateful_Attribute(const QString& name, QMap<QString, QVariant> state_value_map);
+
+		/*!
+			Checks if the provided state already exists in the data structure.
+
+			@param state to check
+			@returns True if state exists, false if not
+		*/
+		bool contains_state(const QString& state) const;
+
+		/*!
 			Sets the current state of the attribute.
 
 			@param state to mark as the current attribute state
@@ -188,12 +229,7 @@ namespace Layers
 		*/
 		void set_value(const QString& state, QVariant value);
 
-		/*!
-			Sets the value.
-
-			@param value to set
-		*/
-		void set_value(QVariant value);
+		void set_values(const QMap<QString, QVariant>& values);
 
 		/*!
 			Returns the current state of the attribute.
@@ -210,50 +246,94 @@ namespace Layers
 		QList<QString> states() const;
 
 		/*!
-			Returns the value paired with the current state.
-
-			@returns Attribute value of current state
-		*/
-		QVariant& value();
-
-		/*!
 			Returns the value paired with the provided state.
 
 			@returns Attribute value of the provided state
 		*/
-		QVariant& value(const QString& state);
+		QVariant* value(const QString& state);
 
-		bool m_is_stateful{ false };
+		/*!
+			Returns the value paired with the current state.
 
-		QString m_name;
-		QString m_state{ "" };
+			@returns Attribute value of the current state
+		*/
+		QVariant& value();
+
+		QMap<QString, QVariant>& values();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Stateful_Attribute& a)
+		{
+			stream << a.m_name;
+			stream << a.m_state;
+			stream << a.m_values;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Stateful_Attribute& a)
+		{
+			stream >> a.m_name;
+			stream >> a.m_state;
+			stream >> a.m_values;
+			return stream;
+		}
+
+	private:
+		QString m_state;
 
 		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
-
-		QVariant m_value{ QVariant() };
-
-		Themeable* m_parent_themeable{ nullptr };
 	};
 
-	inline QDataStream& operator <<(QDataStream& stream, const Attribute& a)
+	class Attribute_Set
 	{
-		stream << a.m_name;
-		stream << a.m_is_stateful;
-		stream << a.m_state;
-		stream << a.m_values;
-		stream << a.m_value;
-		return stream;
-	}
+	public:
+		void add_attribute(Stateless_Attribute attribute);
 
-	inline QDataStream& operator >>(QDataStream& stream, Attribute& a)
-	{
-		stream >> a.m_name;
-		stream >> a.m_is_stateful;
-		stream >> a.m_state;
-		stream >> a.m_values;
-		stream >> a.m_value;
-		return stream;
-	}
+		void add_attribute(Stateful_Attribute attribute);
+
+		Attribute* attribute(const QString& attribute_name);
+
+		QVariant* attribute_value(const QString& attribute_name);
+
+		bool contains(const QString& attribute_name);
+
+		bool contains_stateful_attribute(const QString& attribute_name);
+
+		bool contains_stateless_attribute(const QString& attribute_name);
+
+		void copy_values_from(Attribute_Set& other_attribute_set);
+
+		void remove_attribute(const QString& attribute_name);
+
+		void set_state(const QString& state);
+
+		Stateful_Attribute* stateful_attribute(const QString& attribute_name);
+
+		QMap<QString, Stateful_Attribute>& stateful_attributes();
+
+		Stateless_Attribute* stateless_attribute(const QString& attribute_name);
+
+		QMap<QString, Stateless_Attribute>& stateless_attributes();
+
+		QList<QString> states() const;
+
+		friend QDataStream& operator <<(QDataStream& stream, const Attribute_Set& as)
+		{
+			stream << as.m_stateful_attributes;
+			stream << as.m_stateless_attributes;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Attribute_Set& as)
+		{
+			stream >> as.m_stateful_attributes;
+			stream >> as.m_stateless_attributes;
+			return stream;
+		}
+
+	private:
+		QMap<QString, Stateful_Attribute> m_stateful_attributes{ QMap<QString, Stateful_Attribute>() };
+		QMap<QString, Stateless_Attribute> m_stateless_attributes{ QMap<QString, Stateless_Attribute>() };
+	};
 
 	/*!
 		Provides structure for Layers themes.
@@ -264,6 +344,14 @@ namespace Layers
 	class Theme
 	{
 	public:
+		Theme();
+		Theme(const QString& name, bool is_custom = true);
+
+		void add_stateful_attribute(
+			const QString& themeable_tag,
+			const QString& attribute_name,
+			QMap<QString, QVariant> state_value_map);
+
 		/*!
 			Add an attribute to the theme.
 
@@ -271,58 +359,57 @@ namespace Layers
 
 			@param themeable_tag of themeable associated with attribute
 		*/
-		void add_attribute(
+		void add_stateless_attribute(
 			const QString& themeable_tag,
 			const QString& attribute_name,
 			QVariant value);
 
-		//void add_attribute(
-		//	const QString& themeable_tag,
-		//	const QString& state,
-		//	const QString& attribute,
-		//	QVariant value);
+		// Recommend calling contains_attributes_for_tag() before calling this since this function
+		// does not check if it contains an attribute set for the given themeable tag.
+		Attribute_Set& attribute_set(const QString& themeable_tag);
 
-		void add_attribute(
-			const QString& themeable_tag,
-			const QString& attribute_name,
-			QMap<QString, QVariant> state_value_map);
+		bool contains_attributes_for_tag(const QString& themeable_tag);
 
-		bool contains(const QString& key);
+		// Only needs one version since attribute names should not exist in both stateless and stateful lists
+		bool contains_attribute(const QString& themeable_tag, const QString& attribute_name);
 
-		void replace_attributes(Themeable* themeable);
+		void copy_attribute_sets_from(Theme& theme);
 
-		QMap<QString, Attribute> operator[](const QString& key);
-		const QMap<QString, Attribute> operator[](const QString& key) const;
+		void copy_attribute_values_of(Themeable* themeable);
 
-		void set_attribute_value(
-			const QString& themeable_tag,
-			const QString& state,
-			const QString& attribute_name,
-			Attribute& attribute);
+		bool is_custom();
 
-		bool built_in{ false };
+		QString& name();
 
-		// Data
-		QHash<QString, QMap<QString, Attribute>> m_data{ QHash<QString, QMap<QString, Attribute>>() };
+		void set_name(const QString& new_name);
 
-		QString name;
+		Stateful_Attribute* stateful_attribute(const QString& themeable_tag, const QString& attribute_name);
+
+		Stateless_Attribute* stateless_attribute(const QString& themeable_tag, const QString& attribute_name);
+
+		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
+		{
+			stream << t.m_attribute_sets;
+			stream << t.m_is_custom;
+			stream << t.m_name;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Theme& t)
+		{
+			stream >> t.m_attribute_sets;
+			stream >> t.m_is_custom;
+			stream >> t.m_name;
+			return stream;
+		}
+
+	private:
+		bool m_is_custom{ true };
+
+		QHash<QString, Attribute_Set> m_attribute_sets{ QHash<QString, Attribute_Set>() };
+
+		QString m_name;
 	};
-
-	inline QDataStream& operator <<(QDataStream& stream, const Theme& t)
-	{
-		stream << t.name;
-		stream << t.built_in;
-		stream << t.m_data;
-		return stream;
-	}
-
-	inline QDataStream& operator >>(QDataStream& stream, Theme& t)
-	{
-		stream >> t.name;
-		stream >> t.built_in;
-		stream >> t.m_data;
-		return stream;
-	}
 
 	/*!
 		Provides compatibility and structure for the Layers theme system.
@@ -349,7 +436,9 @@ namespace Layers
 	public:
 		~Themeable();
 
-		void add_attribute(const QString& attribute, QVariant value);
+		void add_stateless_attribute(const QString& attribute_name, QVariant value);
+
+		void add_stateful_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		/*!
 			Adds a themeable to the child themeable references list.
@@ -403,13 +492,15 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		QMap<QString, Attribute>& attributes();
+		Attribute_Set& attribute_set();
 
 		QMap<QString, Attribute_Widget*>& attribute_widgets();
 
 		QList<Themeable*>& child_themeable_references();
 
-		void replace_all_attributes_in_theme(Theme* theme);
+		void convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
+
+		void copy_attribute_values_to(Theme* theme);
 
 		//void copy_all_attributes_to_theme(Theme& theme);
 
@@ -461,7 +552,7 @@ namespace Layers
 		*/
 		virtual void issue_update() = 0;
 
-		void make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
+		//void make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		/*!
 			Get the address of the proper name. Returns nullptr if no proper name has been set.
@@ -486,16 +577,16 @@ namespace Layers
 
 		void set_ACW_primary(const QString& ACW_name, bool is_primary);
 
-		void set_attribute_value(
+		void set_stateful_attribute_value(
+			const QString& state,
+			const QString& attribute_name,
+			QVariant value,
+			bool update = false); // IF-FAIL: Try setting to true?
+
+		void set_stateless_attribute_value(
 			const QString& attribute_name,
 			QVariant value,
 			bool update = false);
-
-		void set_attribute_value(
-			const QString& state,
-			const QString& attribute,
-			QVariant value,
-			bool update = false); // IF-FAIL: Try setting to true?
 
 		/*!
 			Sets a value for an attribute in an attribute set
@@ -556,7 +647,7 @@ namespace Layers
 		void share_all_attributes_with(T* themeable);
 
 		/*!
-			Establishes a sharing relationship with another themeable.
+			Establishes an attribute-value sharing relationship with another themeable.
 
 			@param from_state The state of the attribute set of the from_attribute
 			@param from_attribute The attribute to share with the to_themeable
@@ -573,8 +664,26 @@ namespace Layers
 		//);
 
 		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			Attribute& from_attribute, Attribute& to_attribute,
-			QString from_state = "", QString to_state = "",
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateful_Attribute* to_stateful_attribute, QString to_state,
+			bool obtain_attribute = false
+		);
+
+		Attribute_Sharing_Combo* share_attribute_with_themeable(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateless_Attribute* to_stateless_attribute,
+			bool obtain_attribute = false
+		);
+
+		Attribute_Sharing_Combo* share_attribute_with_themeable(
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateless_Attribute* to_stateless_attribute,
+			bool obtain_attribute = false
+		);
+
+		Attribute_Sharing_Combo* share_attribute_with_themeable(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateful_Attribute* to_stateful_attribute, QString to_state,
 			bool obtain_attribute = false
 		);
 
@@ -588,6 +697,14 @@ namespace Layers
 		void share_attributes();
 
 		QString state() const;
+
+		/*!
+			Get a reference to the attribute set of the given state.
+
+			@param state of the attribute set to be returned, 'default' by default
+			@returns Reference to attribute set of given state
+		*/
+		//QMap<QString, Stateful_Attribute>& stateful_attributes();
 
 		/*!
 			Gets a list of the states that are used to identify the caller's attribute sets.
@@ -666,9 +783,25 @@ namespace Layers
 		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = ""
 		//);
 
+		//void unshare_attribute_with_themeable(
+		//	Stateless_Attribute& from_attribute, Stateless_Attribute& to_attribute,
+		//	QString from_state = "", QString to_state = "");
+
 		void unshare_attribute_with_themeable(
-			Attribute& from_attribute, Attribute& to_attribute,
-			QString from_state = "", QString to_state = "");
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateful_Attribute* to_stateful_attribute, QString to_state);
+
+		void unshare_attribute_with_themeable(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateless_Attribute* to_stateless_attribute);
+
+		void unshare_attribute_with_themeable(
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateless_Attribute* to_stateless_attribute);
+
+		void unshare_attribute_with_themeable(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateful_Attribute* to_stateful_attribute, QString to_state);
 
 		/*!
 			Updates things that depend on the theme. Called by apply_theme().
@@ -733,8 +866,9 @@ namespace Layers
 		QString m_theme_tag{ "" };
 
 		QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
-		QMap<QString, Attribute> m_attributes{ QMap<QString, Attribute>() };
 		QMap<QString, Attribute_Widget*> m_attribute_widgets{ QMap<QString, Attribute_Widget*>() };
+		
+		Attribute_Set m_attribute_set{ Attribute_Set() };
 
 		QList<Themeable*> m_child_themeable_references;
 
@@ -755,14 +889,29 @@ namespace Layers
 	{
 	public:
 		Attribute_Sharing_Combo(
-			Attribute& from_attribute,
-			Attribute& to_attribute,
-			QString from_state = "",
-			QString to_state = "");
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateful_Attribute* to_stateful_attribute, QString to_state);
 
-		Attribute& from_attribute();
+		Attribute_Sharing_Combo(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateless_Attribute* to_stateless_attribute);
+
+		Attribute_Sharing_Combo(
+			Stateful_Attribute* from_stateful_attribute, QString from_state,
+			Stateless_Attribute* to_stateless_attribute);
+
+		Attribute_Sharing_Combo(
+			Stateless_Attribute* from_stateless_attribute,
+			Stateful_Attribute* to_stateful_attribute, QString to_state);
+
+		Stateful_Attribute* from_stateful_attribute();
+
+		Stateless_Attribute* from_stateless_attribute();
+
 		Themeable* from_themeable() const;
+
 		QString& from_state();
+
 		QString& from_attribute_name();
 
 		/*!
@@ -783,17 +932,25 @@ namespace Layers
 		*/
 		void share_attribute();
 
-		Attribute& to_attribute();
+		Stateful_Attribute* to_stateful_attribute();
+
+		Stateless_Attribute* to_stateless_attribute();
+
 		Themeable* to_themeable() const;
+
 		QString& to_state();
+
 		QString& to_attribute_name();
 
 	private:
-		Attribute& m_from_attribute;
-		Attribute& m_to_attribute;
+		Stateful_Attribute* m_from_stateful_attribute{ nullptr };
+		Stateful_Attribute* m_to_stateful_attribute{ nullptr };
 
-		QString m_from_state;
-		QString m_to_state;
+		Stateless_Attribute* m_from_stateless_attribute{ nullptr };
+		Stateless_Attribute* m_to_stateless_attribute{ nullptr };
+
+		QString m_from_state{ "" };
+		QString m_to_state{ "" };
 	};
 
 	class Scroll_Area : public QScrollArea
@@ -1015,7 +1172,7 @@ namespace Layers
 		Graphic_Widget(const QImage& image, QWidget* parent = 0);
 		Graphic_Widget(const Graphic_Widget& gw);
 
-		void make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
+		void convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		void set_hovering(bool cond = true);
 		void set_icon(Graphic_Widget* icon);
@@ -1038,8 +1195,6 @@ namespace Layers
 		Label(QWidget* parent = nullptr);
 		Label(const QString& text, QWidget* parent = 0);
 
-		void init_attributes();
-
 		void init_attribute_widgets();
 
 		void issue_update();
@@ -1054,6 +1209,7 @@ namespace Layers
 		void setText(const QString& text);
 
 	protected:
+		void init_attributes();
 		void paintEvent(QPaintEvent* event);
 
 		QPainter painter;
@@ -1171,10 +1327,6 @@ namespace Layers
 	public:
 		Combobox_Item(const QString& item_text, QWidget* parent = nullptr);
 
-		void init_attributes();
-		void init_attribute_widgets();
-		void init_child_themeable_reference_list();
-
 		QString item_text();
 
 		void replace_item_text(const QString& new_item_text);
@@ -1185,6 +1337,10 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_attributes();
+		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 	private:
 		Label* m_item_label;
@@ -1435,8 +1591,6 @@ namespace Layers
 	public:
 		Attribute_Widget(bool is_primary, QWidget* parent = nullptr);
 
-		Attribute* attribute() const;
-
 		QList<QString>& customize_states();
 
 		virtual void enable_secondary_background_color(bool cond = true);
@@ -1447,6 +1601,10 @@ namespace Layers
 
 		void set_primary(bool is_primary = true);
 
+		Stateful_Attribute* stateful_attribute() const;
+
+		Stateless_Attribute* stateless_attribute() const;
+
 		virtual void update_customizing_state(const QString& customizing_state);
 
 	protected:
@@ -1454,7 +1612,10 @@ namespace Layers
 
 		void paintEvent(QPaintEvent* event) override;
 
-		Attribute* m_attribute{ nullptr };
+		void store_attribute_pointer(Attribute* attribute);
+
+		Stateful_Attribute* m_stateful_attribute{ nullptr };
+		Stateless_Attribute* m_stateless_attribute{ nullptr };
 
 		QList<QString> m_customize_states{ QList<QString>() };
 
@@ -1499,8 +1660,8 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Color_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, bool is_primary, QWidget* parent = nullptr);
-		Color_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, Attribute& disabling_attribute, bool is_primary, QWidget* parent = nullptr);
+		Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
+		Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1533,7 +1694,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Gradient_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, bool is_primary, QWidget* parent = nullptr);
+		Gradient_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1560,7 +1721,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Number_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent = nullptr);
+		Number_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1599,6 +1760,7 @@ namespace Layers
 		Widget* m_right_stretch{ new Widget };
 	};
 
+	// Control attribute currently not setup to work with stateful attributes; Not sure if needed
 	class Switch_Attribute_Widget : public Attribute_Widget
 	{
 		Q_OBJECT
@@ -1607,14 +1769,14 @@ namespace Layers
 		Switch_Attribute_Widget(
 			const QString& first_label_text, Attribute_Widget* first_attribute_widget,
 			const QString& second_label_text, Attribute_Widget* second_attribute_widget,
-			Attribute& control_attribute, bool is_primary, QWidget* parent = nullptr);
+			Stateless_Attribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
 		void enable_secondary_background_color(bool cond = true);
 
 	private:
-		Attribute* m_control_attribute;
+		Stateless_Attribute* m_control_attribute;
 
 		Attribute_Widget* m_first_attribute_widget;
 		Attribute_Widget* m_second_attribute_widget;
@@ -2062,7 +2224,7 @@ namespace Layers
 
 		void paintEvent(QPaintEvent* event) override;
 
-		void save_theme(const Theme& theme);
+		void save_theme(Theme& theme);
 
 	private:
 		void setup_layout();
@@ -2096,19 +2258,16 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (Attribute& attribute : m_attributes)
-			{
-				if (attribute.is_stateful())
-				{
-					for (const QString& state : attribute.states())
-						share_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()], state, state);
-				}
-				else
-				{
-					share_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()]);
-				}
-			}
+			for (Stateless_Attribute& stateless_attribute : m_attribute_set.stateless_attributes())
+				share_attribute_with_themeable(
+					&stateless_attribute,
+					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
 
+			for (Stateful_Attribute& stateful_attribute : m_attribute_set.stateful_attributes())
+				for (const QString& state : stateful_attribute.states())
+					share_attribute_with_themeable(
+						&stateful_attribute, state,
+						themeable->attribute_set().stateful_attribute(stateful_attribute.name()), state);
 
 			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
 			{
@@ -2125,18 +2284,17 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (Attribute& attribute : m_attributes)
-			{
-				if (attribute.is_stateful())
-				{
-					for (const QString& state : attribute.states())
-						unshare_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()], state, state);
-				}
-				else
-				{
-					unshare_attribute_with_themeable(attribute, themeable->attributes()[attribute.name()]);
-				}
-			}
+			for (Stateless_Attribute& stateless_attribute : m_attribute_set.stateless_attributes())
+				unshare_attribute_with_themeable(
+					&stateless_attribute,
+					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
+
+			for (Stateful_Attribute& stateful_attribute : m_attribute_set.stateful_attributes())
+				for (const QString& state : stateful_attribute.states())
+					unshare_attribute_with_themeable(
+						&stateful_attribute, state,
+						themeable->attribute_set().stateful_attribute(stateful_attribute.name()), state);
+
 
 			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
 			{
@@ -2151,13 +2309,20 @@ namespace Layers
 
 // Serialization:
 
+// 2.0.0a
 namespace Layers
 {
-	// 2.0.0a
-
 	class Attribute_2_0_0_a
 	{
 	public:
+		friend QDataStream& operator >>(QDataStream& stream, Attribute_2_0_0_a& a)
+		{
+			stream >> a.m_name;
+			stream >> a.m_state;
+			stream >> a.m_values;
+			return stream;
+		}
+
 		bool m_is_stateful{ false };
 
 		QString m_name;
@@ -2166,17 +2331,17 @@ namespace Layers
 		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
 	};
 
-	inline QDataStream& operator >>(QDataStream& stream, Attribute_2_0_0_a& a)
-	{
-		stream >> a.m_name;
-		stream >> a.m_state;
-		stream >> a.m_values;
-		return stream;
-	}
-
 	class Theme_2_0_0_a
 	{
 	public:
+		friend QDataStream& operator >>(QDataStream& stream, Theme_2_0_0_a& t)
+		{
+			stream >> t.name;
+			stream >> t.built_in;
+			stream >> t.m_data;
+			return stream;
+		}
+
 		bool built_in{ false };
 
 		QHash<QString, QMap<QString, Attribute_2_0_0_a>> m_data{ QHash<QString, QMap<QString, Attribute_2_0_0_a>>() };
@@ -2184,21 +2349,25 @@ namespace Layers
 		QString name;
 	};
 
-	inline QDataStream& operator >>(QDataStream& stream, Theme_2_0_0_a& t)
+	struct Theme_And_Load_Status_Combo_2_0_0_a
 	{
-		stream >> t.name;
-		stream >> t.built_in;
-		stream >> t.m_data;
-		return stream;
-	}
+		Theme_2_0_0_a theme;
+		QDataStream::Status status;
+	};
 
-	Theme_2_0_0_a load_theme_2_0_0_a(QFile& file);
+	Theme_And_Load_Status_Combo_2_0_0_a load_theme_2_0_0_a(QFile& file);
+}
 
-	// 2.1.0a (Current)
+// 2.1.0a (Current)
+namespace Layers
+{
+	struct Theme_And_Load_Status_Combo_2_1_0_a
+	{
+		Theme theme;
+		QDataStream::Status status;
+	};
 
-	Theme load_theme_2_1_0_a(QFile& file);
-
-	// Theme update functions
+	Theme_And_Load_Status_Combo_2_1_0_a load_theme_2_1_0_a(QFile& file);
 
 	Theme update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme);
 }

@@ -14,11 +14,11 @@ void Gradient_Control::init_attributes()
 {
     QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 
-	add_attribute("corner_radius", 5);
-	add_attribute("outer_border_color", QColor("#2c2c2c"));
-	add_attribute("inner_border_color", QColor("#d6d6d6"));
+	add_stateless_attribute("corner_radius", 5);
+	add_stateless_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_stateless_attribute("inner_border_color", QColor("#d6d6d6"));
 
-    set_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+    set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
 }
 
 bool Gradient_Control::eventFilter(QObject* object, QEvent* event)
@@ -29,7 +29,7 @@ bool Gradient_Control::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			Gradient_Selection_Box gsb(attributes()["background_gradient_stops"].value().value<QGradientStops>());
+			Gradient_Selection_Box gsb(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 			if (m_current_theme) gsb.apply_theme(*m_current_theme);
 
@@ -37,7 +37,7 @@ bool Gradient_Control::eventFilter(QObject* object, QEvent* event)
 
 			if (gsb.exec())
 			{
-				set_attribute_value("background_gradient_stops", QVariant::fromValue(gsb.gradient_stops()));
+				set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(gsb.gradient_stops()));
 
 				emit gradient_changed();
 
@@ -57,18 +57,18 @@ void Gradient_Control::paintEvent(QPaintEvent* event)
 	QPainterPath background_path;
 	QLinearGradient background_gradient;
 
-	outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), attributes()["corner_radius"].value().value<int>(), attributes()["corner_radius"].value().value<int>());
-	inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), attributes()["corner_radius"].value().value<int>() - 1, attributes()["corner_radius"].value().value<int>() - 1);
-	background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), attributes()["corner_radius"].value().value<int>() - 1.5, attributes()["corner_radius"].value().value<int>() - 1.5);
+	outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), m_attribute_set.attribute_value("corner_radius")->value<int>(), m_attribute_set.attribute_value("corner_radius")->value<int>());
+	inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1);
+	background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5);
 
 	background_gradient.setStart(12, 12);
 	background_gradient.setFinalStop(33, 12);
-	background_gradient.setStops(attributes()["background_gradient_stops"].value().value<QGradientStops>());
+	background_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
-	painter.fillPath(outer_border_path, attributes()["outer_border_color"].value().value<QColor>());
-	painter.fillPath(inner_border_path, attributes()["inner_border_color"].value().value<QColor>());
+	painter.fillPath(outer_border_path, m_attribute_set.attribute_value("outer_border_color")->value<QColor>());
+	painter.fillPath(inner_border_path, m_attribute_set.attribute_value("inner_border_color")->value<QColor>());
 	painter.fillPath(background_path, background_gradient);
 	painter.end();
 }

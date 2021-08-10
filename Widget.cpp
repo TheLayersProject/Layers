@@ -15,29 +15,29 @@ void Widget::init_attributes()
     QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
     QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
 
-    add_attribute("background_color", QColor(Qt::white));
-    add_attribute("background_color_hover", QColor(Qt::white));
-    add_attribute("background_color_hover_disabled", true);
-    add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-    add_attribute("background_gradient_disabled", true);
-    add_attribute("using_background_color_hover", false);
-    add_attribute("background_disabled", false);
-    add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-    add_attribute("border_gradient_disabled", true);
-    add_attribute("border_color", QColor(Qt::black));
-    add_attribute("border_thickness", 0);
-    add_attribute("corner_radius_tl", 0);
-    add_attribute("corner_radius_tr", 0);
-    add_attribute("corner_radius_bl", 0);
-    add_attribute("corner_radius_br", 0);
-    add_attribute("margin_left", 0);
-    add_attribute("margin_top", 0);
-    add_attribute("margin_right", 0);
-    add_attribute("margin_bottom", 0);
-    add_attribute("corner_color_disabled", true);
-    add_attribute("corner_color", QColor(Qt::black));
-    add_attribute("outline_color_disabled", true);
-    add_attribute("outline_color", QColor(Qt::black));
+    add_stateless_attribute("background_color", QColor(Qt::white));
+    add_stateless_attribute("background_color_hover", QColor(Qt::white));
+    add_stateless_attribute("background_color_hover_disabled", true);
+    add_stateless_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+    add_stateless_attribute("background_gradient_disabled", true);
+    add_stateless_attribute("using_background_color_hover", false);
+    add_stateless_attribute("background_disabled", false);
+    add_stateless_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+    add_stateless_attribute("border_gradient_disabled", true);
+    add_stateless_attribute("border_color", QColor(Qt::black));
+    add_stateless_attribute("border_thickness", 0);
+    add_stateless_attribute("corner_radius_tl", 0);
+    add_stateless_attribute("corner_radius_tr", 0);
+    add_stateless_attribute("corner_radius_bl", 0);
+    add_stateless_attribute("corner_radius_br", 0);
+    add_stateless_attribute("margin_left", 0);
+    add_stateless_attribute("margin_top", 0);
+    add_stateless_attribute("margin_right", 0);
+    add_stateless_attribute("margin_bottom", 0);
+    add_stateless_attribute("corner_color_disabled", true);
+    add_stateless_attribute("corner_color", QColor(Qt::black));
+    add_stateless_attribute("outline_color_disabled", true);
+    add_stateless_attribute("outline_color", QColor(Qt::black));
 }
 
 void Widget::init_attribute_widgets()
@@ -46,21 +46,21 @@ void Widget::init_attribute_widgets()
 	{
 		Attribute_Widget_Container* border_awc = new Attribute_Widget_Container("Border", true);
 		Attribute_Widget_Container* corner_radii_awc = new Attribute_Widget_Container("Corner Radii", true);
-		Color_Attribute_Widget* background_caw = new Color_Attribute_Widget("Background", m_attributes["background_color"], m_attributes["background_disabled"], true);
-		Color_Attribute_Widget* hover_background_caw = new Color_Attribute_Widget("Hover Background", m_attributes["background_color_hover"], m_attributes["background_color_hover_disabled"], true);
-		Color_Attribute_Widget* outline_caw = new Color_Attribute_Widget("Outline", m_attributes["outline_color"], m_attributes["outline_color_disabled"], true);
-		Color_Attribute_Widget* corner_color_caw = new Color_Attribute_Widget("Corner Color", m_attributes["corner_color"], m_attributes["corner_color_disabled"], true);
-		Color_Attribute_Widget* border_caw = new Color_Attribute_Widget("Color", m_attributes["border_color"], true);
-		Gradient_Attribute_Widget* border_gaw = new Gradient_Attribute_Widget("Gradient", m_attributes["border_gradient_stops"], true);
-		Number_Attribute_Widget* border_thickness_naw = new Number_Attribute_Widget("Thickness", m_attributes["border_thickness"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_tl_naw = new Number_Attribute_Widget("Top-Left", m_attributes["corner_radius_tl"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_tr_naw = new Number_Attribute_Widget("Top-Right", m_attributes["corner_radius_tr"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_bl_naw = new Number_Attribute_Widget("Bottom-Left", m_attributes["corner_radius_bl"], new QIntValidator(0, 30), true);
-		Number_Attribute_Widget* corner_radius_br_naw = new Number_Attribute_Widget("Bottom-Right", m_attributes["corner_radius_br"], new QIntValidator(0, 30), true);
+		Color_Attribute_Widget* background_caw = new Color_Attribute_Widget("Background", m_attribute_set.attribute("background_color"), m_attribute_set.attribute("background_disabled"), true);
+		Color_Attribute_Widget* hover_background_caw = new Color_Attribute_Widget("Hover Background", m_attribute_set.attribute("background_color_hover"), m_attribute_set.attribute("background_color_hover_disabled"), true);
+		Color_Attribute_Widget* outline_caw = new Color_Attribute_Widget("Outline", m_attribute_set.attribute("outline_color"), m_attribute_set.attribute("outline_color_disabled"), true);
+		Color_Attribute_Widget* corner_color_caw = new Color_Attribute_Widget("Corner Color", m_attribute_set.attribute("corner_color"), m_attribute_set.attribute("corner_color_disabled"), true);
+		Color_Attribute_Widget* border_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("border_color"), true);
+		Gradient_Attribute_Widget* border_gaw = new Gradient_Attribute_Widget("Gradient", m_attribute_set.attribute("border_gradient_stops"), true);
+		Number_Attribute_Widget* border_thickness_naw = new Number_Attribute_Widget("Thickness", m_attribute_set.attribute("border_thickness"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_tl_naw = new Number_Attribute_Widget("Top-Left", m_attribute_set.attribute("corner_radius_tl"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_tr_naw = new Number_Attribute_Widget("Top-Right", m_attribute_set.attribute("corner_radius_tr"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_bl_naw = new Number_Attribute_Widget("Bottom-Left", m_attribute_set.attribute("corner_radius_bl"), new QIntValidator(0, 30), true);
+		Number_Attribute_Widget* corner_radius_br_naw = new Number_Attribute_Widget("Bottom-Right", m_attribute_set.attribute("corner_radius_br"), new QIntValidator(0, 30), true);
 		Switch_Attribute_Widget* border_color_saw = new Switch_Attribute_Widget(
 			"Solid", border_caw,
 			"Gradient", border_gaw,
-			m_attributes["border_gradient_disabled"], true);
+			m_attribute_set.stateless_attribute("border_gradient_disabled"), true);
 
 		border_caw->set_centered();
 		border_gaw->set_centered();
@@ -141,9 +141,9 @@ void Widget::update_theme_dependencies()
     if (layout())
     {
 		if (Vertical_Layout* vl = dynamic_cast<Vertical_Layout*>(layout()))
-			vl->set_border_margin(m_attributes["border_thickness"].value().value<int>());
+			vl->set_border_margin(m_attribute_set.stateless_attribute("border_thickness")->value().value<int>());
         else if (Horizontal_Layout* hl = dynamic_cast<Horizontal_Layout*>(layout()))
-            hl->set_border_margin(m_attributes["border_thickness"].value().value<int>());
+            hl->set_border_margin(m_attribute_set.stateless_attribute("border_thickness")->value().value<int>());
     }
 }
 
@@ -154,23 +154,23 @@ void Widget::set_margin(int margin)
 
 void Widget::set_margin(int left, int top, int right, int bottom)
 {
-    set_attribute_value("margin_left", left);
-    set_attribute_value("margin_top", top);
-    set_attribute_value("margin_right", right);
-    set_attribute_value("margin_bottom", bottom);
+    set_stateless_attribute_value("margin_left", left);
+    set_stateless_attribute_value("margin_top", top);
+    set_stateless_attribute_value("margin_right", right);
+    set_stateless_attribute_value("margin_bottom", bottom);
 }
 
 bool Widget::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::Enter)
     {
-        if (!m_attributes["background_color_hover_disabled"].value().value<bool>())
-            set_attribute_value(m_state, "using_background_color_hover", true, true);
+        if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>())
+            set_stateless_attribute_value("using_background_color_hover", true, true);
     }
     else if (event->type() == QEvent::Leave)
     {
-        if (!m_attributes["background_color_hover_disabled"].value().value<bool>())
-			set_attribute_value(m_state, "using_background_color_hover", false, true);
+        if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>())
+			set_stateless_attribute_value("using_background_color_hover", false, true);
     }
 
     return false;
@@ -180,22 +180,22 @@ void Widget::paintEvent(QPaintEvent* event)
 {
     // CREATE VARIABLES:
 
-    bool background_disabled = m_attributes["background_disabled"].value().value<bool>();
+    bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
 
-    int border_thickness = m_attributes["border_thickness"].value().value<int>();
+    int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
-    int margin_left = m_attributes["margin_left"].value().value<int>();
-    int margin_top = m_attributes["margin_top"].value().value<int>();
-    int margin_right = m_attributes["margin_right"].value().value<int>();
-    int margin_bottom = m_attributes["margin_bottom"].value().value<int>();
+    int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+    int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+    int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+    int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
 
     int draw_width = width() - margin_left - margin_right;
     int draw_height = height() - margin_top - margin_bottom;
 
-    int corner_radius_tl = m_attributes["corner_radius_tl"].value().value<int>();
-    int corner_radius_tr = m_attributes["corner_radius_tr"].value().value<int>();
-    int corner_radius_bl = m_attributes["corner_radius_bl"].value().value<int>();
-    int corner_radius_br = m_attributes["corner_radius_br"].value().value<int>();
+    int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
+    int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
+    int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
+    int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
 
     int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
     int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -247,36 +247,36 @@ void Widget::paintEvent(QPaintEvent* event)
     painter.setRenderHint(QPainter::Antialiasing);
 
 	// - Draw Corner Color
-	if (!m_attributes["corner_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
 	{
-		painter.fillPath(corner_color_path, m_attributes["corner_color"].value().value<QColor>());
+		painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
 	}
 
     // - Draw Border
     if (border_thickness)
     {
-        if (!m_attributes["border_gradient_disabled"].value().value<bool>())
+        if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
         {
             QLinearGradient gradient;
 
             gradient.setStart(0, 0);
             gradient.setFinalStop(width(), 0);
-            gradient.setStops(m_attributes["border_gradient_stops"].value().value<QGradientStops>());
+            gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
 
             painter.fillPath(border_path, gradient);
         }
-        else painter.fillPath(border_path, m_attributes["border_color"].value().value<QColor>());
+        else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
     }
 
     // - Draw Background
     if (!background_disabled)
     {
-		if (m_attributes["background_gradient_disabled"].value().value<bool>())
+		if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
 		{
-			if (!m_attributes["background_color_hover_disabled"].value().value<bool>() && m_attributes["using_background_color_hover"].value().value<bool>())
-				painter.fillPath(background_path, m_attributes["background_color_hover"].value().value<QColor>());
+			if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
 			else
-				painter.fillPath(background_path, m_attributes["background_color"].value().value<QColor>());
+				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
 		}
 		else
 		{
@@ -284,16 +284,16 @@ void Widget::paintEvent(QPaintEvent* event)
 
 			bg_gradient.setStart(0, 0);
 			bg_gradient.setFinalStop(width(), 0);
-			bg_gradient.setStops(m_attributes["background_gradient_stops"].value().value<QGradientStops>());
+			bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 			painter.fillPath(background_path, bg_gradient);
 		}
     }
 
 	// - Draw Outline Color
-	if (!m_attributes["outline_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
 	{
-		painter.strokePath(outline_color_path, QPen(m_attributes["outline_color"].value().value<QColor>()));
+		painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
 	}
 
     painter.end();

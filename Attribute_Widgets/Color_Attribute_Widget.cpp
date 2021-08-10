@@ -4,15 +4,15 @@ using Layers::Attribute;
 using Layers::Color_Attribute_Widget;
 using Layers::Theme;
 
-Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, bool is_primary, QWidget* parent) :
+Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, Attribute_Widget(is_primary, parent)
 {
 	init_child_themeable_reference_list();
 
-	m_attribute = &attribute;
+	store_attribute_pointer(attribute);
 
-	if (attribute.is_stateful())
-		set_customize_states(attribute.states());
+	if (m_stateful_attribute)
+		set_customize_states(m_stateful_attribute->states());
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -20,22 +20,23 @@ Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_te
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("background_disabled", true);
+	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("background_disabled", true);
+	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
 
 	// Setup Color Control
-	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+	if (m_stateful_attribute) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
 		m_color_control_asc = m_color_control->share_attribute_with_themeable(
-			m_color_control->attributes()["background_color"], attribute,
-			"", attribute.state(), true);
+			m_color_control->attribute_set().stateless_attribute("background_color"),
+			m_stateful_attribute, m_stateful_attribute->state(),
+			true);
 	else
 		m_color_control_asc = m_color_control->share_attribute_with_themeable(
-			m_color_control->attributes()["background_color"], attribute,
-			"", "", true);
-
+			m_color_control->attribute_set().stateless_attribute("background_color"),
+			m_stateless_attribute,
+			true);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -49,16 +50,16 @@ Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_te
 	setLayout(hbox);
 }
 
-Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, Attribute& disabling_attribute, bool is_primary, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, m_disabling_attribute{ &disabling_attribute },
+Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent) :
+	m_attribute_label{ new Label(attribute_label_text) }, m_disabling_attribute{ disabling_attribute },
 	m_disabled_attribute_toggle{ new Toggle_Switch }, Attribute_Widget(is_primary, parent)
 {
 	init_child_themeable_reference_list();
 
-	m_attribute = &attribute;
+	store_attribute_pointer(attribute);
 
-	if (attribute.is_stateful())
-		set_customize_states(attribute.states());
+	if (m_stateful_attribute)
+		set_customize_states(m_stateful_attribute->states());
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -66,24 +67,27 @@ Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_te
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("background_disabled", true);
+	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("background_disabled", true);
+	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
 
 	// Setup Disabling Attribute Toggle
 	m_disabled_attribute_toggle->set_name("toggle");
 
-	connect(m_disabled_attribute_toggle, &Toggle_Switch::toggled_event, [this] {
+	Stateful_Attribute* stateful_disabling_attribute = dynamic_cast<Stateful_Attribute*>(disabling_attribute);
+	Stateless_Attribute* stateless_disabling_attribute = dynamic_cast<Stateless_Attribute*>(disabling_attribute);
+
+	connect(m_disabled_attribute_toggle, &Toggle_Switch::toggled_event, [this, stateful_disabling_attribute, stateless_disabling_attribute] {
 		if (m_disabled_attribute_toggle->toggled())
 		{
 			m_color_control->show();
 
-			if (m_disabling_attribute->is_stateful())
-				m_disabling_attribute->set_value(m_disabling_attribute->state(), false);
+			if (stateful_disabling_attribute)
+				stateful_disabling_attribute->set_value(stateful_disabling_attribute->state(), false);
 			else
-				m_disabling_attribute->set_value(false);
+				stateless_disabling_attribute->set_value(false);
 
 			m_disabling_attribute->parent_themeable()->share_attributes();
 			m_disabling_attribute->parent_themeable()->issue_update();
@@ -92,10 +96,10 @@ Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_te
 		{
 			m_color_control->hide();
 
-			if (m_disabling_attribute->is_stateful())
-				m_disabling_attribute->set_value(m_disabling_attribute->state(), true);
+			if (stateful_disabling_attribute)
+				stateful_disabling_attribute->set_value(stateful_disabling_attribute->state(), true);
 			else
-				m_disabling_attribute->set_value(true);
+				stateless_disabling_attribute->set_value(true);
 
 			m_disabling_attribute->parent_themeable()->share_attributes();
 			m_disabling_attribute->parent_themeable()->issue_update();
@@ -109,14 +113,16 @@ Color_Attribute_Widget::Color_Attribute_Widget(const QString& attribute_label_te
 	else m_color_control->hide();
 
 	// Setup Color Control
-	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+	if (m_stateful_attribute) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
 		m_color_control_asc = m_color_control->share_attribute_with_themeable(
-			m_color_control->attributes()["background_color"], attribute,
-			"", attribute.state(), true);
+			m_color_control->attribute_set().stateless_attribute("background_color"), 
+			m_stateful_attribute, m_stateful_attribute->state(),
+			true);
 	else
 		m_color_control_asc = m_color_control->share_attribute_with_themeable(
-			m_color_control->attributes()["background_color"], attribute,
-			"", "", true);
+			m_color_control->attribute_set().stateless_attribute("background_color"), 
+			m_stateless_attribute,
+			true);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -168,10 +174,13 @@ void Color_Attribute_Widget::update_customizing_state(const QString& customizing
 {
 	if (m_customize_states.contains(customizing_state))
 	{
-		m_color_control->unshare_attribute_with_themeable(m_color_control->attributes()["background_color"], *m_attribute, "", m_color_control_asc->to_state());
+		m_color_control->unshare_attribute_with_themeable(
+			m_color_control->attribute_set().stateless_attribute("background_color"),
+			m_stateful_attribute, m_color_control_asc->to_state());
 		
 		m_color_control_asc = m_color_control->share_attribute_with_themeable(
-			m_color_control->attributes()["background_color"], *m_attribute,
-			"", customizing_state, true);
+			m_color_control->attribute_set().stateless_attribute("background_color"),
+			m_stateful_attribute, customizing_state,
+			true);
 	}
 }

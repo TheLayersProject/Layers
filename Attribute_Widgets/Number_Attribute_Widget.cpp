@@ -4,15 +4,15 @@ using Layers::Attribute;
 using Layers::Number_Attribute_Widget;
 using Layers::Theme;
 
-Number_Attribute_Widget::Number_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent) :
+Number_Attribute_Widget::Number_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, m_int_validator{ int_validator }, Attribute_Widget(is_primary, parent)
 {
 	init_child_themeable_reference_list();
 
-	m_attribute = &attribute;
+	store_attribute_pointer(attribute);
 
-	if (attribute.is_stateful())
-		set_customize_states(attribute.states());
+	if (m_stateful_attribute)
+		set_customize_states(m_stateful_attribute->states());
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -20,27 +20,29 @@ Number_Attribute_Widget::Number_Attribute_Widget(const QString& attribute_label_
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("background_disabled", true);
+	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("background_disabled", true);
+	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
 
 	// Setup Line Editor
 	m_line_editor->set_default_value("0");
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_name("line_editor");
-	m_line_editor->set_text(QString::number(attribute.value().value<int>()));
+	m_line_editor->set_text(QString::number(attribute->value().value<int>()));
 	m_line_editor->set_validator(m_int_validator);
 
-	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+	if (m_stateful_attribute) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
 		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
-			m_line_editor->attributes()["text"], attribute,
-			"", attribute.state(), true);
+			m_line_editor->attribute_set().stateless_attribute("text"),
+			m_stateful_attribute, m_stateful_attribute->state(),
+			true);
 	else
 		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
-			m_line_editor->attributes()["text"], attribute,
-			"", "", true);
+			m_line_editor->attribute_set().stateless_attribute("text"),
+			m_stateless_attribute,
+			true);
 
 	// Setup Unit Label
 	m_unit_label->set_name("label");
@@ -73,8 +75,13 @@ void Number_Attribute_Widget::enable_silder()
 	hbox2->setSpacing(0);
 	hbox2->addWidget(m_slider);
 
-	m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
-	m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
+	m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(
+		m_line_editor->attribute_set().stateless_attribute("text"),
+		m_slider->attribute_set().stateless_attribute("value"));
+
+	m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(
+		m_slider->attribute_set().stateless_attribute("value"),
+		m_line_editor->attribute_set().stateless_attribute("text"));
 
 	setFixedHeight(105);
 
@@ -101,22 +108,35 @@ void Number_Attribute_Widget::update_customizing_state(const QString& customizin
 {
 	if (m_customize_states.contains(customizing_state))
 	{
-		m_line_editor->unshare_attribute_with_themeable(m_line_editor->attributes()["text"], *m_attribute, "", m_line_editor_asc->to_state());
+		m_line_editor->unshare_attribute_with_themeable(
+			m_line_editor->attribute_set().stateless_attribute("text"),
+			m_stateful_attribute, m_line_editor_asc->to_state());
 
 		if (m_slider)
 		{
-			m_line_editor->unshare_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
-			m_slider->unshare_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
+			m_line_editor->unshare_attribute_with_themeable(
+				m_line_editor->attribute_set().stateless_attribute("text"),
+				m_slider->attribute_set().stateless_attribute("value"));
+
+			m_slider->unshare_attribute_with_themeable(
+				m_slider->attribute_set().stateless_attribute("value"),
+				m_line_editor->attribute_set().stateless_attribute("text"));
 		}
 
 		m_line_editor_asc = m_line_editor->share_attribute_with_themeable(
-			m_line_editor->attributes()["text"], *m_attribute,
-			"", customizing_state, true);
+			m_line_editor->attribute_set().stateless_attribute("text"),
+			m_stateful_attribute, customizing_state,
+			true);
 
 		if (m_slider)
 		{
-			m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(m_line_editor->attributes()["text"], m_slider->attributes()["value"]);
-			m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(m_slider->attributes()["value"], m_line_editor->attributes()["text"]);
+			m_line_editor_to_slider_asc = m_line_editor->share_attribute_with_themeable(
+				m_line_editor->attribute_set().stateless_attribute("text"),
+				m_slider->attribute_set().stateless_attribute("value"));
+
+			m_slider_to_line_editor_asc = m_slider->share_attribute_with_themeable(
+				m_slider->attribute_set().stateless_attribute("value"),
+				m_line_editor->attribute_set().stateless_attribute("text"));
 		}
 	}
 }

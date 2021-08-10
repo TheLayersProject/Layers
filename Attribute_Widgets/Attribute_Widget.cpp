@@ -2,6 +2,8 @@
 
 using Layers::Attribute;
 using Layers::Attribute_Widget;
+using Layers::Stateful_Attribute;
+using Layers::Stateless_Attribute;
 
 Attribute_Widget::Attribute_Widget(bool is_primary, QWidget* parent) :
 	m_is_primary{ is_primary }, Widget(parent)
@@ -12,10 +14,7 @@ Attribute_Widget::Attribute_Widget(bool is_primary, QWidget* parent) :
 	setFixedHeight(45);
 	if (!m_is_primary) hide();
 }
-Attribute* Attribute_Widget::attribute() const
-{
-	return m_attribute;
-}
+
 QList<QString>& Attribute_Widget::customize_states()
 {
 	return m_customize_states;
@@ -23,7 +22,7 @@ QList<QString>& Attribute_Widget::customize_states()
 
 void Attribute_Widget::enable_secondary_background_color(bool cond)
 {
-	set_attribute_value("using_secondary_background_color", cond);
+	set_stateless_attribute_value("using_secondary_background_color", cond);
 }
 
 bool Attribute_Widget::is_primary() const
@@ -46,38 +45,48 @@ void Attribute_Widget::set_primary(bool is_primary)
 	}
 }
 
+Stateful_Attribute* Attribute_Widget::stateful_attribute() const
+{
+	return m_stateful_attribute;
+}
+
+Stateless_Attribute* Attribute_Widget::stateless_attribute() const
+{
+	return m_stateless_attribute;
+}
+
 void Attribute_Widget::init_attributes()
 {
-	set_attribute_value("background_color", QColor("#b2b2b2"));
-	set_attribute_value("corner_radius_tl", 10);
-	set_attribute_value("corner_radius_tr", 10);
-	set_attribute_value("corner_radius_bl", 10);
-	set_attribute_value("corner_radius_br", 10);
+	set_stateless_attribute_value("background_color", QColor("#b2b2b2"));
+	set_stateless_attribute_value("corner_radius_tl", 10);
+	set_stateless_attribute_value("corner_radius_tr", 10);
+	set_stateless_attribute_value("corner_radius_bl", 10);
+	set_stateless_attribute_value("corner_radius_br", 10);
 
-	add_attribute("secondary_background_color", QColor("#b2b2b2"));
-	add_attribute("using_secondary_background_color", false);
+	add_stateless_attribute("secondary_background_color", QColor("#b2b2b2"));
+	add_stateless_attribute("using_secondary_background_color", false);
 }
 
 void Attribute_Widget::paintEvent(QPaintEvent * event)
 {
 	// CREATE VARIABLES:
 
-	bool background_disabled = m_attributes["background_disabled"].value().value<bool>();
+	bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
 
-	int border_thickness = m_attributes["border_thickness"].value().value<int>();
+	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
-	int margin_left = m_attributes["margin_left"].value().value<int>();
-	int margin_top = m_attributes["margin_top"].value().value<int>();
-	int margin_right = m_attributes["margin_right"].value().value<int>();
-	int margin_bottom = m_attributes["margin_bottom"].value().value<int>();
+	int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+	int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+	int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+	int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
 
 	int draw_width = width() - margin_left - margin_right;
 	int draw_height = height() - margin_top - margin_bottom;
 
-	int corner_radius_tl = m_attributes["corner_radius_tl"].value().value<int>();
-	int corner_radius_tr = m_attributes["corner_radius_tr"].value().value<int>();
-	int corner_radius_bl = m_attributes["corner_radius_bl"].value().value<int>();
-	int corner_radius_br = m_attributes["corner_radius_br"].value().value<int>();
+	int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
+	int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
+	int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
+	int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -129,40 +138,40 @@ void Attribute_Widget::paintEvent(QPaintEvent * event)
 	painter.setRenderHint(QPainter::Antialiasing);
 
 	// - Draw Corner Color
-	if (!m_attributes["corner_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
 	{
-		painter.fillPath(corner_color_path, m_attributes["corner_color"].value().value<QColor>());
+		painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
 	}
 
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (!m_attributes["border_gradient_disabled"].value().value<bool>())
+		if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
 		{
 			QLinearGradient gradient;
 
 			gradient.setStart(0, 0);
 			gradient.setFinalStop(width(), 0);
-			gradient.setStops(m_attributes["border_gradient_stops"].value().value<QGradientStops>());
+			gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
 
 			painter.fillPath(border_path, gradient);
 		}
-		else painter.fillPath(border_path, m_attributes["border_color"].value().value<QColor>());
+		else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
 	}
 
 	// - Draw Background
 	if (!background_disabled)
 	{
-		if (m_attributes["background_gradient_disabled"].value().value<bool>())
+		if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
 		{
-			if (!m_attributes["background_color_hover_disabled"].value().value<bool>() && m_attributes["using_background_color_hover"].value().value<bool>())
-				painter.fillPath(background_path, m_attributes["background_color_hover"].value().value<QColor>());
+			if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
 			else
 			{
-				if (m_attributes["using_secondary_background_color"].value().value<bool>())
-					painter.fillPath(background_path, m_attributes["secondary_background_color"].value().value<QColor>());
+				if (m_attribute_set.attribute_value("using_secondary_background_color")->value<bool>())
+					painter.fillPath(background_path, m_attribute_set.attribute_value("secondary_background_color")->value<QColor>());
 				else
-					painter.fillPath(background_path, m_attributes["background_color"].value().value<QColor>());
+					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
 			}
 		}
 		else
@@ -171,19 +180,25 @@ void Attribute_Widget::paintEvent(QPaintEvent * event)
 
 			bg_gradient.setStart(0, 0);
 			bg_gradient.setFinalStop(width(), 0);
-			bg_gradient.setStops(m_attributes["background_gradient_stops"].value().value<QGradientStops>());
+			bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 			painter.fillPath(background_path, bg_gradient);
 		}
 	}
 
 	// - Draw Outline Color
-	if (!m_attributes["outline_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
 	{
-		painter.strokePath(outline_color_path, QPen(m_attributes["outline_color"].value().value<QColor>()));
+		painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
 	}
 
 	painter.end();
+}
+
+void Attribute_Widget::store_attribute_pointer(Attribute* attribute)
+{
+	m_stateful_attribute = dynamic_cast<Stateful_Attribute*>(attribute);
+	m_stateless_attribute = dynamic_cast<Stateless_Attribute*>(attribute);
 }
 
 void Attribute_Widget::update_customizing_state(const QString& customizing_state)

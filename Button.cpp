@@ -158,7 +158,7 @@ void Button::resize()
 	int text_width = 0;
 	int content_height = 0;
 	int content_spacing = 0;
-	int border_thickness = attributes()["border_thickness"].value().value<int>();
+	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
 	main_layout->getContentsMargins(&margin_left, &margin_top, &margin_right, &margin_bottom);
 
@@ -195,7 +195,7 @@ void Button::resize()
 
 void Button::set_attribute_value(const QString& attribute, QVariant value)
 {
-	Themeable::set_attribute_value(attribute, value);
+	Themeable::set_stateless_attribute_value(attribute, value);
 
 	if (attribute == "border_thickness") resize();
 	if (attribute.startsWith("#") ||

@@ -40,15 +40,15 @@ void Gradient_Selection_Box::add_gradient_stop(double stop_val, QColor color)
 {
     Color_Control* color_control = new Color_Control(this);
     color_control->show();
-    color_control->set_attribute_value("background_color", color);
+    color_control->set_stateless_attribute_value("background_color", color);
 
     color_control->disable_clicking();
 
     connect(color_control, &Color_Control::color_changed, [this, color_control] {
-        if (color_control->attributes()["background_color"].value().value<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+        if (color_control->attribute_set().attribute_value("background_color")->value<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
         {
-            m_gradient_stops.replace(color_controls.indexOf(color_control), QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->attributes()["background_color"].value().value<QColor>()));
-            m_gradient_widget->set_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
+            m_gradient_stops.replace(color_controls.indexOf(color_control), QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->attribute_set().attribute_value("background_color")->value<QColor>()));
+            m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
         }
         });
 
@@ -82,39 +82,39 @@ void Gradient_Selection_Box::init_attributes()
 	QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 	QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
 
-	add_attribute("background_color", QColor(Qt::white));
-	add_attribute("background_color_hover", QColor(Qt::white));
-	add_attribute("background_color_hover_disabled", true);
-	add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-	add_attribute("background_gradient_disabled", true);
-	add_attribute("using_background_color_hover", false);
-	add_attribute("background_disabled", false);
-	add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	add_attribute("border_gradient_disabled", true);
-	add_attribute("border_color", QColor(Qt::black));
-	add_attribute("border_thickness", 10);
-	add_attribute("corner_radius_tl", 10);
-	add_attribute("corner_radius_tr", 10);
-	add_attribute("corner_radius_bl", 10);
-	add_attribute("corner_radius_br", 10);
-	add_attribute("margin_left", 0);
-	add_attribute("margin_top", 0);
-	add_attribute("margin_right", 0);
-	add_attribute("margin_bottom", 0);
-	add_attribute("corner_color_disabled", true);
-	add_attribute("corner_color", QColor(Qt::black));
-	add_attribute("outline_color_disabled", false);
-	add_attribute("outline_color", QColor(Qt::black));
+	add_stateless_attribute("background_color", QColor(Qt::white));
+	add_stateless_attribute("background_color_hover", QColor(Qt::white));
+	add_stateless_attribute("background_color_hover_disabled", true);
+	add_stateless_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+	add_stateless_attribute("background_gradient_disabled", true);
+	add_stateless_attribute("using_background_color_hover", false);
+	add_stateless_attribute("background_disabled", false);
+	add_stateless_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	add_stateless_attribute("border_gradient_disabled", true);
+	add_stateless_attribute("border_color", QColor(Qt::black));
+	add_stateless_attribute("border_thickness", 10);
+	add_stateless_attribute("corner_radius_tl", 10);
+	add_stateless_attribute("corner_radius_tr", 10);
+	add_stateless_attribute("corner_radius_bl", 10);
+	add_stateless_attribute("corner_radius_br", 10);
+	add_stateless_attribute("margin_left", 0);
+	add_stateless_attribute("margin_top", 0);
+	add_stateless_attribute("margin_right", 0);
+	add_stateless_attribute("margin_bottom", 0);
+	add_stateless_attribute("corner_color_disabled", true);
+	add_stateless_attribute("corner_color", QColor(Qt::black));
+	add_stateless_attribute("outline_color_disabled", false);
+	add_stateless_attribute("outline_color", QColor(Qt::black));
 
-    m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(attributes()["corner_radius_tl"].value().value<int>(), attributes()["border_thickness"].value().value<int>()));
-	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(attributes()["corner_radius_tr"].value().value<int>(), attributes()["border_thickness"].value().value<int>()));
+    m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 
-    m_gradient_widget->set_attribute_value("background_gradient_disabled", false);
-    m_gradient_widget->set_attribute_value("border_thickness", 1);
-    m_gradient_widget->set_attribute_value("corner_radius_tl", 8);
-    m_gradient_widget->set_attribute_value("corner_radius_tr", 8);
-    m_gradient_widget->set_attribute_value("corner_radius_bl", 8);
-    m_gradient_widget->set_attribute_value("corner_radius_br", 8);
+    m_gradient_widget->set_stateless_attribute_value("background_gradient_disabled", false);
+    m_gradient_widget->set_stateless_attribute_value("border_thickness", 1);
+    m_gradient_widget->set_stateless_attribute_value("corner_radius_tl", 8);
+    m_gradient_widget->set_stateless_attribute_value("corner_radius_tr", 8);
+    m_gradient_widget->set_stateless_attribute_value("corner_radius_bl", 8);
+    m_gradient_widget->set_stateless_attribute_value("corner_radius_br", 8);
 }
 
 void Gradient_Selection_Box::init_color_controls()
@@ -124,14 +124,14 @@ void Gradient_Selection_Box::init_color_controls()
         QGradientStop gradient_stop = m_gradient_stops.at(i);
 
         Color_Control* color_control = new Color_Control(this);
-        color_control->set_attribute_value("background_color", gradient_stop.second);
+        color_control->set_stateless_attribute_value("background_color", gradient_stop.second);
         if (i > 0 && i < m_gradient_stops.count() - 1) color_control->disable_clicking();
 
         connect(color_control, &Color_Control::color_changed, [this, color_control] {
-            if (color_control->attributes()["background_color"].value().value<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+            if (color_control->attribute_set().attribute_value("background_color")->value<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
             {
-                m_gradient_stops.replace(color_controls.indexOf(color_control), QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->attributes()["background_color"].value().value<QColor>()));
-                m_gradient_widget->set_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
+                m_gradient_stops.replace(color_controls.indexOf(color_control), QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->attribute_set().attribute_value("background_color")->value<QColor>()));
+                m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
             }
             });
 
@@ -148,7 +148,7 @@ void Gradient_Selection_Box::init_gradient_widget()
 {
     m_gradient_widget->setFixedSize(448, 176);
 
-    m_gradient_widget->set_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
+    m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
 }
 
 void Gradient_Selection_Box::init_child_themeable_reference_list()
@@ -202,18 +202,18 @@ void Gradient_Selection_Box::update_gradient()
     for (Color_Control* color_control : color_controls)
     {
         if (m_selected_color_control && m_selected_color_control->x() == color_control->x() && color_control != m_selected_color_control);
-        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->attributes()["background_color"].value().value<QColor>() });
+        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->attribute_set().attribute_value("background_color")->value<QColor>() });
     }
 
-    m_gradient_widget->set_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops), true);
+    m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops), true);
 }
 
 void Gradient_Selection_Box::update_theme_dependencies()
 {
-    m_main_layout->setMargin(attributes()["border_thickness"].value().value<int>());
+    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
 
-    m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(attributes()["corner_radius_tl"].value().value<int>(), attributes()["border_thickness"].value().value<int>()));
-	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(attributes()["corner_radius_tr"].value().value<int>(), attributes()["border_thickness"].value().value<int>()));
+    m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 }
 
 void Gradient_Selection_Box::click_control()
@@ -369,7 +369,7 @@ bool Gradient_Selection_Box::nativeEvent(const QByteArray& eventType, void* mess
         }
 
         *result = 0;
-        const LONG borderWidth = attributes()["border_thickness"].value().value<int>() * devicePixelRatio();;
+        const LONG borderWidth = m_attribute_set.attribute_value("border_thickness")->value<int>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -449,22 +449,22 @@ void Gradient_Selection_Box::paintEvent(QPaintEvent* event)
 {
 	// CREATE VARIABLES:
 
-	bool background_disabled = attributes()["background_disabled"].value().value<bool>();
+	bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
 
-	int border_thickness = attributes()["border_thickness"].value().value<int>();
+	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
-	int margin_left = attributes()["margin_left"].value().value<int>();
-	int margin_top = attributes()["margin_top"].value().value<int>();
-	int margin_right = attributes()["margin_right"].value().value<int>();
-	int margin_bottom = attributes()["margin_bottom"].value().value<int>();
+	int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+	int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+	int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+	int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
 
 	int draw_width = width() - margin_left - margin_right;
 	int draw_height = height() - margin_top - margin_bottom;
 
-	int corner_radius_tl = attributes()["corner_radius_tl"].value().value<int>();
-	int corner_radius_tr = attributes()["corner_radius_tr"].value().value<int>();
-	int corner_radius_bl = attributes()["corner_radius_bl"].value().value<int>();
-	int corner_radius_br = attributes()["corner_radius_br"].value().value<int>();
+	int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
+	int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
+	int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
+	int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -516,36 +516,36 @@ void Gradient_Selection_Box::paintEvent(QPaintEvent* event)
 	painter.setRenderHint(QPainter::Antialiasing);
 
 	// - Draw Corner Color
-	if (!attributes()["corner_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
 	{
-		painter.fillPath(corner_color_path, attributes()["corner_color"].value().value<QColor>());
+		painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
 	}
 
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (!attributes()["border_gradient_disabled"].value().value<bool>())
+		if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
 		{
 			QLinearGradient gradient;
 
 			gradient.setStart(0, 0);
 			gradient.setFinalStop(width(), 0);
-			gradient.setStops(attributes()["border_gradient_stops"].value().value<QGradientStops>());
+			gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
 
 			painter.fillPath(border_path, gradient);
 		}
-		else painter.fillPath(border_path, attributes()["border_color"].value().value<QColor>());
+		else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
 	}
 
 	// - Draw Background
 	if (!background_disabled)
 	{
-		if (attributes()["background_gradient_disabled"].value().value<bool>())
+		if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
 		{
-			if (!attributes()["background_color_hover_disabled"].value().value<bool>() && attributes()["using_background_color_hover"].value().value<bool>())
-				painter.fillPath(background_path, attributes()["background_color_hover"].value().value<QColor>());
+			if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
 			else
-				painter.fillPath(background_path, attributes()["background_color"].value().value<QColor>());
+				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
 		}
 		else
 		{
@@ -553,16 +553,16 @@ void Gradient_Selection_Box::paintEvent(QPaintEvent* event)
 
 			bg_gradient.setStart(0, 0);
 			bg_gradient.setFinalStop(width(), 0);
-			bg_gradient.setStops(attributes()["background_gradient_stops"].value().value<QGradientStops>());
+			bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
 			painter.fillPath(background_path, bg_gradient);
 		}
 	}
 
 	// - Draw Outline Color
-	if (!attributes()["outline_color_disabled"].value().value<bool>())
+	if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
 	{
-		painter.strokePath(outline_color_path, QPen(attributes()["outline_color"].value().value<QColor>()));
+		painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
 	}
 
 	painter.end();
@@ -582,7 +582,7 @@ void Gradient_Selection_Box::setup_layout()
     inner_layout->setAlignment(m_apply_button, Qt::AlignRight);
 
     // Main Layout
-    m_main_layout->setMargin(attributes()["border_thickness"].value().value<int>());
+    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
     m_main_layout->setSpacing(0);
     m_main_layout->addWidget(m_titlebar);
     m_main_layout->addLayout(inner_layout);

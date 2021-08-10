@@ -4,15 +4,15 @@ using Layers::Attribute;
 using Layers::Gradient_Attribute_Widget;
 using Layers::Theme;
 
-Gradient_Attribute_Widget::Gradient_Attribute_Widget(const QString& attribute_label_text, Attribute& attribute, bool is_primary, QWidget* parent) :
+Gradient_Attribute_Widget::Gradient_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, Attribute_Widget(is_primary, parent)
 {
 	init_child_themeable_reference_list();
 
-	m_attribute = &attribute;
+	store_attribute_pointer(attribute);
 
-	if (attribute.is_stateful())
-		set_customize_states(attribute.states());
+	if (m_stateful_attribute)
+		set_customize_states(m_stateful_attribute->states());
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -20,21 +20,23 @@ Gradient_Attribute_Widget::Gradient_Attribute_Widget(const QString& attribute_la
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_attribute_value("background_disabled", true);
+	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_attribute_value("background_disabled", true);
+	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
 
 	// Setup Color Control
-	if (attribute.is_stateful()) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
+	if (m_stateful_attribute) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
 		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
-			m_gradient_control->attributes()["background_gradient_stops"], attribute,
-			"", attribute.state(), true);
+			m_gradient_control->attribute_set().stateless_attribute("background_gradient_stops"),
+			m_stateful_attribute, m_stateful_attribute->state(),
+			true);
 	else
 		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
-			m_gradient_control->attributes()["background_gradient_stops"], attribute,
-			"", "", true);
+			m_gradient_control->attribute_set().stateless_attribute("background_gradient_stops"),
+			m_stateless_attribute,
+			true);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;

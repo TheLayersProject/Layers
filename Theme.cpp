@@ -1,68 +1,101 @@
 #include "Layers.h"
 
-using Layers::Attribute;
+using Layers::Attribute_Set;
+using Layers::Stateless_Attribute;
+using Layers::Stateful_Attribute;
 using Layers::Theme;
 using Layers::Themeable;
 
-void Theme::add_attribute(const QString& themeable_tag, const QString& attribute_name, QVariant value)
+Theme::Theme() :
+	m_name{ "" }, m_is_custom{ true }
 {
-	if (!m_data.contains(themeable_tag)) m_data[themeable_tag] = QMap<QString, Attribute>();
-
-	if (!m_data[themeable_tag].contains(attribute_name))
-		m_data[themeable_tag][attribute_name] = Attribute(attribute_name, value);
 }
 
-void Theme::add_attribute(const QString& themeable_tag, const QString& attribute_name, QMap<QString, QVariant> state_value_map)
+Theme::Theme(const QString& name, bool is_custom) :
+	m_name{ name }, m_is_custom{ is_custom }
 {
-	if (!m_data.contains(themeable_tag)) m_data[themeable_tag] = QMap<QString, Attribute>();
 
-	if (!m_data[themeable_tag].contains(attribute_name))
-	{
-		m_data[themeable_tag][attribute_name] = Attribute(attribute_name, state_value_map);
-	}
 }
 
-bool Theme::contains(const QString& key)
+void Theme::add_stateful_attribute(const QString& themeable_tag, const QString& attribute_name, QMap<QString, QVariant> state_value_map)
 {
-	return m_data.contains(key);
+	if (!m_attribute_sets.contains(themeable_tag))
+		m_attribute_sets[themeable_tag] = Attribute_Set();
+
+	Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
+
+	if (!attribute_set.contains(attribute_name))
+		attribute_set.add_attribute(Stateful_Attribute(attribute_name, state_value_map));
 }
 
-void Theme::replace_attributes(Themeable* themeable)
+void Theme::add_stateless_attribute(const QString& themeable_tag, const QString& attribute_name, QVariant value)
 {
-	for (Attribute& attribute : themeable->attributes())
-	{
-		if (m_data[themeable->theme_tag()].keys().contains(attribute.name()))
-		{
-			if (attribute.is_stateful())
-			{
-				for (const QString& state : attribute.states())
-					m_data[themeable->theme_tag()][attribute.name()].set_value(state, attribute.value(state));
-			}
-			else m_data[themeable->theme_tag()][attribute.name()].set_value(attribute.value());
-		}
-	}
+	if (!m_attribute_sets.contains(themeable_tag))
+		m_attribute_sets[themeable_tag] = Attribute_Set();
+
+	Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
+
+	if (!attribute_set.contains(attribute_name))
+		attribute_set.add_attribute(Stateless_Attribute(attribute_name, value));
 }
 
-QMap<QString, Attribute> Theme::operator[](const QString& key)
+Attribute_Set& Theme::attribute_set(const QString& themeable_tag)
 {
-	if (m_data.contains(key)) return m_data[key];
-
-	qDebug() << "Themeable tag \"" + key + "\" was not found in Theme";
-
-	return QMap<QString, Attribute>();
+	return m_attribute_sets[themeable_tag];
 }
 
-const QMap<QString, Attribute> Theme::operator[](const QString& key) const
+Stateless_Attribute* Theme::stateless_attribute(const QString& themeable_tag, const QString& attribute_name)
 {
-	if (m_data.contains(key)) return m_data[key];
+	Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
 
-	qDebug() << "Themeable tag \"" + key + "\" was not found in Theme";
+	if (attribute_set.contains(attribute_name))
+		return attribute_set.stateless_attribute(attribute_name);
 
-	return QMap<QString, Attribute>();
+	return nullptr;
 }
 
-void Theme::set_attribute_value(const QString& themeable_tag, const QString& state, const QString& attribute_name, Attribute& attribute)
+bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 {
-	if (m_data[themeable_tag].contains(attribute_name))
-		m_data[themeable_tag][attribute_name] = attribute;
+	return m_attribute_sets.contains(themeable_tag);
+}
+
+bool Theme::contains_attribute(const QString& themeable_tag, const QString& attribute_name)
+{
+	return m_attribute_sets[themeable_tag].contains(attribute_name);
+}
+
+void Theme::copy_attribute_sets_from(Theme& theme)
+{
+	m_attribute_sets = theme.m_attribute_sets;
+}
+
+void Theme::copy_attribute_values_of(Themeable* themeable)
+{
+	if (m_attribute_sets.contains(themeable->theme_tag()))
+		m_attribute_sets[themeable->theme_tag()].copy_values_from(themeable->attribute_set());
+}
+
+bool Theme::is_custom()
+{
+	return m_is_custom;
+}
+
+QString& Theme::name()
+{
+	return m_name;
+}
+
+void Theme::set_name(const QString& new_name)
+{
+	m_name = new_name;
+}
+
+Stateful_Attribute* Theme::stateful_attribute(const QString& themeable_tag, const QString& attribute_name)
+{
+	Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
+
+	if (attribute_set.contains(attribute_name))
+		return attribute_set.stateful_attribute(attribute_name);
+
+	return nullptr;
 }
