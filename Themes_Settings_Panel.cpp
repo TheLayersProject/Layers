@@ -120,7 +120,7 @@ void Themes_Settings_Panel::init_attribute_widgets()
 	m_attribute_widgets["hover_background_caw"]->set_primary(false);
 	m_attribute_widgets["outline_caw"]->set_primary(false);
 	m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	m_attribute_widgets["corner_radii_awc"]->set_primary(false);
+	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void Themes_Settings_Panel::setup_layout()

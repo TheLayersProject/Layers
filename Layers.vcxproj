@@ -91,6 +91,8 @@
   <ItemGroup>
     <ClCompile Include="App_Preferences_Settings_Panel.cpp" />
     <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="Attribute_Widgets\Corner_Radii_Attribute_Widget.cpp" />
+    <ClCompile Include="Mini_Slider.cpp" />
     <ClCompile Include="Stateless_Attribute.cpp" />
     <ClCompile Include="Attribute_Set.cpp" />
     <ClCompile Include="Attribute_Sharing_Combo.cpp" />

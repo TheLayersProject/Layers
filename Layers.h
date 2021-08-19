@@ -1367,9 +1367,6 @@ namespace Layers
 
 		void enable_alphabetization(bool cond = true);
 
-		void init_attributes();
-		void init_child_themeable_reference_list();
-
 		void set_current_item(const QString& item);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
@@ -1388,7 +1385,9 @@ namespace Layers
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
+		void init_attributes();
 		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 	private:
 		void setup_layout();
@@ -1455,9 +1454,6 @@ namespace Layers
 	public:
 		Slider(int range_start, int range_end, QWidget* parent = nullptr);
 
-		void init_attributes();
-		void init_child_themeable_reference_list();
-
 		int range_difference();
 
 		void update_handle_pos();
@@ -1465,6 +1461,9 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_attributes();
+		void init_child_themeable_reference_list();
 
 	private:
 		void setup_layout();
@@ -1474,6 +1473,40 @@ namespace Layers
 
 		int m_range_start{ 0 };
 		int m_range_end{ 99 };
+		int m_value_on_click{ 0 };
+
+		bool m_dragging_handle{ false };
+
+		QPoint m_mouse_click_position{ QPoint() };
+	};
+
+	class Mini_Slider : public Widget
+	{
+		Q_OBJECT
+
+	public:
+		Mini_Slider(int range_start, int range_end, QWidget* parent = nullptr);
+
+		int range_difference();
+
+		void update_handle_pos();
+		void update_theme_dependencies();
+
+	protected:
+		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_attributes();
+		void init_child_themeable_reference_list();
+
+	private:
+		void setup_layout();
+
+		Widget* m_bar{ new Widget };
+		Widget* m_handle{ new Widget(this) };
+
+		int m_range_start{ 0 };
+		int m_range_end{ 99 };
+		int m_mouse_move_scale{ 5 };
 		int m_value_on_click{ 0 };
 
 		bool m_dragging_handle{ false };
@@ -1620,6 +1653,7 @@ namespace Layers
 		QList<QString> m_customize_states{ QList<QString>() };
 
 	private:
+		//bool m_attribute_is_stateful{ false };
 		bool m_is_primary;
 	};
 
@@ -1634,12 +1668,13 @@ namespace Layers
 
 		void enable_secondary_background_color(bool cond = true);
 
-		void init_attributes();
-		void init_child_themeable_reference_list();
-
 		void set_customize_states(const QList<QString>& customize_states);
 
 		void update_customizing_state(const QString& customizing_state);
+
+	protected:
+		void init_attributes();
+		void init_child_themeable_reference_list();
 
 	private:
 		void setup_layout();
@@ -1653,6 +1688,45 @@ namespace Layers
 		QList<Attribute_Widget*> m_child_attribute_widgets{ QList<Attribute_Widget*>() };
 
 		QVBoxLayout* m_widgets_vbox{ new QVBoxLayout };
+	};
+
+	class Corner_Radii_Attribute_Widget : public Attribute_Widget_Container
+	{
+		Q_OBJECT
+
+	public:
+		Corner_Radii_Attribute_Widget(Themeable* themeable, bool is_primary, QWidget* parent = nullptr);
+
+		void apply_theme(Theme& theme);
+
+		void update_customizing_state(const QString& customizing_state);
+
+	protected:
+		void init_child_themeable_reference_list();
+
+	private:
+		void setup_layout();
+
+		Attribute_Sharing_Combo* m_tl_line_editor_asc{ nullptr };
+		Attribute_Sharing_Combo* m_tr_line_editor_asc{ nullptr };
+		Attribute_Sharing_Combo* m_bl_line_editor_asc{ nullptr };
+		Attribute_Sharing_Combo* m_br_line_editor_asc{ nullptr };
+
+		Attribute_Widget* m_attribute_widget;
+
+		Mini_Slider* m_tl_slider{ new Mini_Slider(0, 30) };
+		Mini_Slider* m_tr_slider{ new Mini_Slider(0, 30) };
+		Mini_Slider* m_bl_slider{ new Mini_Slider(0, 30) };
+		Mini_Slider* m_br_slider{ new Mini_Slider(0, 30) };
+
+		Line_Editor* m_tl_line_editor{ new Line_Editor };
+		Line_Editor* m_tr_line_editor{ new Line_Editor };
+		Line_Editor* m_bl_line_editor{ new Line_Editor };
+		Line_Editor* m_br_line_editor{ new Line_Editor };
+
+		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+
+		Widget* m_example_widget{ new Widget };
 	};
 
 	class Color_Attribute_Widget : public Attribute_Widget
@@ -1791,15 +1865,17 @@ namespace Layers
 	public:
 		Customize_Panel(Themeable* themeable, QWidget* parent = nullptr);
 
-		void add_attribute_widget(Attribute_Widget* attribute_widget);
+		void add_attribute_widget(Attribute_Widget* attribute_widget, bool put_in_stateful_layout = false);
 
 		void add_element_button(Button* button);
 
 		void update_attribute_widget_background_colors();
 
-	private:
+	protected:
 		void init_attributes();
 		void init_child_themeable_reference_list();
+
+	private:
 		void setup_layout();
 
 		bool m_showing_primary{ true };
@@ -1809,6 +1885,8 @@ namespace Layers
 		QVBoxLayout* m_attributes_layout{ new QVBoxLayout };
 		QVBoxLayout* m_elements_layout{ new QVBoxLayout };
 		QVBoxLayout* m_element_buttons_layout{ new QVBoxLayout };
+		QVBoxLayout* m_stateful_attributes_layout{ new QVBoxLayout };
+		QVBoxLayout* m_stateless_attributes_layout{ new QVBoxLayout };
 
 		Button* m_show_all_button{ new Button("Show All", true) };
 		Button* m_show_primary_button{ new Button("Show Primary", true) };
@@ -1817,9 +1895,13 @@ namespace Layers
 
 		Label* m_attributes_label{ new Label("Attributes:") };
 		Label* m_elements_label{ new Label("Elements:") };
-		Label* m_states_label{ new Label("State:") };
+		Label* m_stateful_attributes_label{ new Label("Stateful Attributes:") };
+		Label* m_stateless_attributes_label{ new Label("Stateless Attributes:") };
+		Label* m_state_label{ new Label("State:") };
 
-		QList<Attribute_Widget*> m_child_attribute_widgets{ QList<Attribute_Widget*>() };
+		QList<Attribute_Widget*> m_stateless_attribute_widgets{ QList<Attribute_Widget*>() };
+		QList<Attribute_Widget*> m_stateful_attribute_widgets{ QList<Attribute_Widget*>() };
+		QList<Attribute_Widget*> m_attribute_widgets{ QList<Attribute_Widget*>() };
 
 		Themeable* m_themeable;
 	};
@@ -1843,10 +1925,6 @@ namespace Layers
 	public:
 		Menu_Label_Layer(Menu* menu, QWidget* parent = nullptr);
 
-		void init_attributes();
-
-		void init_child_themeable_reference_list();
-
 		void shrink();
 		void expand();
 
@@ -1856,7 +1934,9 @@ namespace Layers
 		Label* text_label() const;
 
 	protected:
+		void init_attributes();
 		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 		void setup_layout();
 
@@ -1940,9 +2020,6 @@ namespace Layers
 	public:
 		Themes_Settings_Panel(QWidget* parent = nullptr);
 
-		void init_attributes();
-		void init_child_themeable_reference_list();
-
 		Button* customize_theme_button() const;
 
 		Button* new_theme_button() const;
@@ -1952,7 +2029,9 @@ namespace Layers
 		void show_custom_theme_buttons(bool cond = true);
 
 	protected:
+		void init_attributes();
 		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 	private:
 		void setup_layout();
@@ -1999,16 +2078,16 @@ namespace Layers
 		void expand();
 		void shrink();
 
-		void init_attributes();
-		void init_attribute_widgets();
-		void init_child_themeable_reference_list();
-
 		int recommended_minimum_width();
 
 		void set_disabled(bool cond = true);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_attributes();
+		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 		void resizeEvent(QResizeEvent* event);
 
@@ -2037,8 +2116,6 @@ namespace Layers
 
 		void add_settings_tab(Graphic_Widget* icon, const QString& label_text);
 
-		void init_child_themeable_reference_list();
-
 		int largest_tab_index() const;
 
 		int recommended_minimum_tab_width() const;
@@ -2047,6 +2124,8 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_child_themeable_reference_list();
 
 		void init_attribute_widgets();
 
@@ -2085,7 +2164,6 @@ namespace Layers
 		Button* apply_button() const;
 
 		void init_preview_window();
-		void init_child_themeable_reference_list();
 
 		void open_customize_panel(Customize_Panel* customize_panel);
 
@@ -2095,6 +2173,7 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 	private:
 		void setup_layout();
@@ -2131,8 +2210,6 @@ namespace Layers
 		void add_mll(Menu_Label_Layer* mll);
 		void remove_mlls_past(int index);
 
-		void init_child_themeable_reference_list();
-
 		bool is(QWidget* widget);
 
 		void set_window_title(const QString& title);
@@ -2145,6 +2222,7 @@ namespace Layers
 
 	protected:
 		void init_attribute_widgets();
+		void init_child_themeable_reference_list();
 
 		void resizeEvent(QResizeEvent* event);
 
@@ -2193,8 +2271,6 @@ namespace Layers
 
 		void finalize();
 
-		void init_child_themeable_reference_list();
-
 		void update_theme_dependencies();
 
 		void set_window_title(const QString& title);
@@ -2217,6 +2293,8 @@ namespace Layers
 
 	protected:
 		void init_attribute_widgets();
+
+		void init_child_themeable_reference_list();
 
 		Theme load_theme(const QString& file_path);
 

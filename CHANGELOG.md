@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Alpha Phase
 
 ### [Layers 2.1.0a] - Unreleased
+- "Default" and "Common" states are gone. Attributes are now created as stateful or stateless. This makes customization of themeables that use both types of attributes much clearer.
+- The corner radii attribute widget has been redesigned and takes up less space.
 - Layers applications will no longer store theme files in a universal 'Layers'/'Layers-alpha' folder in the user's app data directory. Instead, each individual application will store its own set of theme files in a folder named after the application.
-- 
+- Created a mechanism to update theme files
 
 ### [Layers 2.0.0a] - 2021-06-23
 - Layers has been fully rewritten.

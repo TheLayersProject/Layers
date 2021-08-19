@@ -23,9 +23,17 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	m_elements_label->set_font_size(17);
 	m_elements_label->set_padding(0, 8, 0, 0);
 
-	m_states_label->set_name("states_label");
-	m_states_label->set_font_size(17);
-	m_states_label->set_padding(0, 8, 0, 0);
+	m_stateful_attributes_label->set_name("stateful_attributes_label");
+	m_stateful_attributes_label->set_font_size(15);
+	m_stateful_attributes_label->set_padding(0, 7, 0, 0);
+
+	m_stateless_attributes_label->set_name("stateless_attributes_label");
+	m_stateless_attributes_label->set_font_size(15);
+	m_stateless_attributes_label->set_padding(0, 7, 0, 0);
+
+	m_state_label->set_name("states_label");
+	m_state_label->set_font_size(15);
+	m_state_label->set_padding(0, 8, 0, 0);
 
 	m_state_combobox->setFixedSize(190, 45);
 	m_state_combobox->set_name("state_combobox");
@@ -36,7 +44,7 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	}
 
 	connect(m_state_combobox, &Combobox::current_item_changed, [this] {
-		for (Attribute_Widget* attribute_widget : m_child_attribute_widgets)
+		for (Attribute_Widget* attribute_widget : m_stateful_attribute_widgets)
 		{
 			attribute_widget->update_customizing_state(m_state_combobox->current_item());
 
@@ -63,15 +71,14 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	connect(m_show_all_button, &Button::clicked, [this] {
 		m_showing_primary = false;
 
-		for (Attribute_Widget* attribute_widget : m_child_attribute_widgets)
+		for (Attribute_Widget* attribute_widget : m_stateful_attribute_widgets)
 		{
-			if (!m_state_combobox->items().isEmpty())
-			{
-				if (attribute_widget->customize_states().contains(m_state_combobox->current_item()))
-					attribute_widget->show();
-			}
-			else attribute_widget->show();
+			if (attribute_widget->customize_states().contains(m_state_combobox->current_item()))
+				attribute_widget->show();
 		}
+
+		for (Attribute_Widget* attribute_widget : m_stateless_attribute_widgets)
+			attribute_widget->show();
 
 		update_attribute_widget_background_colors();
 
@@ -88,15 +95,14 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	connect(m_show_primary_button, &Button::clicked, [this] {
 		m_showing_primary = true;
 
-		for (Attribute_Widget* attribute_widget : m_child_attribute_widgets)
+		for (Attribute_Widget* attribute_widget : m_stateful_attribute_widgets)
 		{
-			if (!m_state_combobox->items().isEmpty())
-			{
-				if (attribute_widget->customize_states().contains(m_state_combobox->current_item()) && !attribute_widget->is_primary())
-					attribute_widget->hide();
-			}
-			else if (!attribute_widget->is_primary()) attribute_widget->hide();
+			if (attribute_widget->customize_states().contains(m_state_combobox->current_item()) && !attribute_widget->is_primary())
+				attribute_widget->hide();
 		}
+
+		for (Attribute_Widget* attribute_widget : m_stateless_attribute_widgets)
+			if (!attribute_widget->is_primary()) attribute_widget->hide();
 
 		update_attribute_widget_background_colors();
 
@@ -126,18 +132,28 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	}
 }
 
-void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget)
+void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget, bool put_in_stateful_layout)
 {
-	m_child_attribute_widgets.append(attribute_widget);
 	add_child_themeable_reference(attribute_widget);
-	m_attributes_layout->addWidget(attribute_widget);
+	m_attribute_widgets.append(attribute_widget);
 
-	if (!m_state_combobox->items().isEmpty())
+	if (put_in_stateful_layout)
 	{
-		attribute_widget->update_customizing_state(m_state_combobox->current_item());
+		m_stateful_attribute_widgets.append(attribute_widget);
+		m_stateful_attributes_layout->addWidget(attribute_widget);
 
-		if (!attribute_widget->customize_states().contains(m_state_combobox->current_item()))
-			attribute_widget->hide();
+		if (!m_state_combobox->items().isEmpty())
+		{
+			attribute_widget->update_customizing_state(m_state_combobox->current_item());
+
+			if (!attribute_widget->customize_states().contains(m_state_combobox->current_item()))
+				attribute_widget->hide();
+		}
+	}
+	else
+	{
+		m_stateless_attribute_widgets.append(attribute_widget);
+		m_stateless_attributes_layout->addWidget(attribute_widget);
 	}
 }
 
@@ -176,8 +192,10 @@ void Customize_Panel::init_attributes()
 
 void Customize_Panel::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_states_label);
+	add_child_themeable_reference(m_state_label);
 	add_child_themeable_reference(m_state_combobox);
+	add_child_themeable_reference(m_stateful_attributes_label);
+	add_child_themeable_reference(m_stateless_attributes_label);
 	add_child_themeable_reference(m_attributes_label);
 	add_child_themeable_reference(m_elements_label);
 	add_child_themeable_reference(m_show_all_button);
@@ -190,7 +208,7 @@ void Customize_Panel::update_attribute_widget_background_colors()
 
 	if (m_showing_primary)
 	{
-		for (Attribute_Widget* attribute_widget : m_child_attribute_widgets)
+		for (Attribute_Widget* attribute_widget : m_attribute_widgets)
 		{
 			if (attribute_widget->is_primary())
 			{
@@ -205,7 +223,7 @@ void Customize_Panel::update_attribute_widget_background_colors()
 	}
 	else
 	{
-		for (Attribute_Widget* attribute_widget : m_child_attribute_widgets)
+		for (Attribute_Widget* attribute_widget : m_attribute_widgets)
 		{
 			if (is_even(counter))
 				attribute_widget->enable_secondary_background_color(false);
@@ -221,27 +239,57 @@ void Customize_Panel::setup_layout()
 {
 	// States Layout
 
-	m_states_layout->setContentsMargins(6, 0, 0, 12);
+	m_states_layout->setContentsMargins(6, 0, 0, 0);
 	m_states_layout->setSpacing(13);
-	m_states_layout->addWidget(m_states_label);
+	m_states_layout->addWidget(m_state_label);
 	m_states_layout->addWidget(m_state_combobox);
 	m_states_layout->addStretch();
 
+	// Stateful Attributes Layout
+
+	m_stateful_attributes_layout->setContentsMargins(0, 0, 0, 0);
+	m_stateful_attributes_layout->setSpacing(3);
+	m_stateful_attributes_layout->addWidget(m_stateful_attributes_label);
+	m_stateful_attributes_layout->addSpacing(8);
+	m_stateful_attributes_layout->addLayout(m_states_layout);
+	m_stateful_attributes_layout->addSpacing(15);
+	m_stateful_attributes_layout->setAlignment(m_stateful_attributes_label, Qt::AlignHCenter);
+
+	// Stateless Attributes Layout
+
+	m_stateless_attributes_layout->setContentsMargins(0, 0, 0, 0);
+	m_stateless_attributes_layout->setSpacing(3);
+	if (!m_state_combobox->items().isEmpty())
+	{
+		m_stateless_attributes_layout->addSpacing(8);
+		m_stateless_attributes_layout->addWidget(m_stateless_attributes_label);
+		m_stateless_attributes_layout->setAlignment(m_stateless_attributes_label, Qt::AlignHCenter);
+	}
+
+	// Attribute Layout HBox 1
+
+	QHBoxLayout* attribute_layout_hbox1 = new QHBoxLayout;
+
+	attribute_layout_hbox1->setContentsMargins(6, 0, 0, 0);
+	attribute_layout_hbox1->setSpacing(0);
+	attribute_layout_hbox1->addWidget(m_attributes_label);
+	attribute_layout_hbox1->addStretch();
+	attribute_layout_hbox1->addWidget(m_show_all_button);
+	attribute_layout_hbox1->addWidget(m_show_primary_button);
+	attribute_layout_hbox1->addStretch();
+
 	// Attributes Layout
 
-	QHBoxLayout* hbox1 = new QHBoxLayout;
-
-	hbox1->setContentsMargins(6, 0, 0, 8);
-	hbox1->setSpacing(0);
-	hbox1->addWidget(m_attributes_label);
-	hbox1->addStretch();
-	hbox1->addWidget(m_show_all_button);
-	hbox1->addWidget(m_show_primary_button);
-	hbox1->addStretch();
-
-	m_attributes_layout->setMargin(0);
+	m_attributes_layout->setContentsMargins(0, 0, 0, 0);
 	m_attributes_layout->setSpacing(3);
-	m_attributes_layout->addLayout(hbox1);
+	m_attributes_layout->addLayout(attribute_layout_hbox1);
+	if (m_state_combobox->items().isEmpty())
+	{
+		m_attributes_layout->addSpacing(8);
+	}
+	else m_attributes_layout->addLayout(m_stateful_attributes_layout);
+
+	m_attributes_layout->addLayout(m_stateless_attributes_layout);
 
 	// Elements Layout
 
@@ -267,7 +315,6 @@ void Customize_Panel::setup_layout()
 
 	main_layout->setContentsMargins(10, 17, 10, 18);
 	main_layout->setSpacing(0);
-	if (!m_state_combobox->items().isEmpty()) main_layout->addLayout(m_states_layout);
 	main_layout->addLayout(m_attributes_layout);
 	main_layout->addSpacing(24);
 	main_layout->addLayout(m_elements_layout);

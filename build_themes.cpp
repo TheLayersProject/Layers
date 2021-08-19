@@ -9,7 +9,7 @@ Theme Layers::build_blue_theme()
 	QGradientStops border_gradient_stops = { { 0.0, "#4571a2" },{ 1.0, "#001122" } };
 	QGradientStops default_gradient_stops = { { 0.0, Qt::black },{ 1.0, Qt::white } };
 
-	// Window Border
+	// Window
 	blue_theme.add_stateless_attribute("layers/window", "border_gradient_disabled", false);
 	blue_theme.add_stateless_attribute("layers/window", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
 	blue_theme.add_stateless_attribute("layers/window", "border_color", QColor("#4571A2"));
@@ -769,6 +769,12 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
 
+	// Customize Panel -> Stateful Attributes Label
+	blue_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor("#6aaaf7"));
+
+	// Customize Panel -> Stateless Attributes Label
+	blue_theme.add_stateless_attribute("layers/customize_panel/stateless_attributes_label", "color", QColor("#6aaaf7"));
+
 	// Customize Panel -> Attributes Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/attributes_label", "color", QColor("#6aaaf7"));
 
@@ -1136,6 +1142,62 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tr", 5);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_bl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#34557c"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tl", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tr", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_bl", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tl", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tr", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_bl", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Example Widget
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#274b73"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
 
 	// Customize Panel -> Element Button
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
@@ -2238,6 +2300,12 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
 
+	// Customize Panel -> Stateful Attributes Label
+	dark_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor("#e1e1e1"));
+
+	// Customize Panel -> Stateless Attributes Label
+	dark_theme.add_stateless_attribute("layers/customize_panel/stateless_attributes_label", "color", QColor("#e1e1e1"));
+
 	// Customize Panel -> Attributes Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/attributes_label", "color", QColor("#e1e1e1"));
 
@@ -2605,6 +2673,62 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor("#e1e1e1"));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tr", 5);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_bl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#7c7c7c"));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tl", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tr", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_bl", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#2e2e2e"));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tl", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tr", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_bl", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Example Widget
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#989898"));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
 
 	// Customize Panel -> Element Button
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
@@ -3705,6 +3829,12 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
 
+	// Customize Panel -> Stateful Attributes Label
+	light_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor(Qt::white));
+
+	// Customize Panel -> Stateless Attributes Label
+	light_theme.add_stateless_attribute("layers/customize_panel/stateless_attributes_label", "color", QColor(Qt::white));
+
 	// Customize Panel -> Attributes Label
 	light_theme.add_stateless_attribute("layers/customize_panel/attributes_label", "color", QColor(Qt::white));
 
@@ -4072,6 +4202,62 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tl", 5);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_tr", 5);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_bl", 5);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#7c7c7c"));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tl", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_tr", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_bl", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#2e2e2e"));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tl", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_tr", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_bl", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+
+	// Customize Panel -> Attribute Widget -> Example Widget
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#7c7c7c"));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
 
 	// Customize Panel -> Element Button
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
