@@ -2169,6 +2169,11 @@ namespace Layers
 
 		Window* preview_window() const;
 
+		int topbar_content_width(bool include_collapse_button);
+
+		// Temp function!
+		void update_arrow_graphic_background_colors();
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
@@ -2176,9 +2181,13 @@ namespace Layers
 		void init_child_themeable_reference_list();
 
 	private:
+		void adjust_collapsed_widget();
+		void collapse_text_buttons();
+		void decollapse_text_buttons();
 		void setup_layout();
 
 		Horizontal_Layout* m_main_layout = new Horizontal_Layout;
+		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
 		QVBoxLayout* m_sidebar_layout{ new QVBoxLayout };
 		QHBoxLayout* m_topbar_layout{ new QHBoxLayout };
 		QGridLayout* m_preview_layout{ new QGridLayout };
@@ -2194,10 +2203,15 @@ namespace Layers
 
 		QList<Customize_Panel*> m_customize_panels;
 		QList<Customize_Panel*> m_panel_stack;
-		QList<Button*> m_label_button_stack;
-		QList<Graphic_Widget*> m_arrow_graphic_stack;
+		QList<Button*> m_text_button_stack;
+		QList<Button*> m_topbar_text_buttons;
+		QList<Button*> m_collapsed_text_buttons;
+		QList<Graphic_Widget*> m_arrow_graphics;
 
 		Button* m_apply_button{ new Button("Apply", true) };
+		Button* m_collapsed_button{ new Button(new Graphic_Widget(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
+
+		Widget* m_collapsed_widget{ new Widget };
 	};
 
 	class Titlebar : public Widget

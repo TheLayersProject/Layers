@@ -17,6 +17,19 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	set_name("customize_menu");
 	set_proper_name("Customize Menu");
 
+	connect(m_collapsed_button, &Button::clicked, [this] {
+		if (!m_collapsed_widget->isVisible())
+		{
+			QPoint mapped_from_global = m_collapsed_button->mapToGlobal(QPoint(0, 0));
+			QPoint move_point = QPoint(mapped_from_global.x(), mapped_from_global.y() + m_collapsed_button->height());
+
+			m_collapsed_widget->move(move_point);
+			m_collapsed_widget->show();
+			m_collapsed_widget->setFocus();
+		}
+		else m_collapsed_widget->hide();
+	});
+
 	m_topbar->setFixedHeight(45);
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
@@ -37,6 +50,31 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_apply_button->set_ACW_primary("border_awc", false);
 	m_apply_button->set_ACW_primary("outline_caw", false);
 	m_apply_button->set_ACW_primary("corner_color_caw", false);
+
+	m_collapsed_button->setFixedWidth(50);
+	m_collapsed_button->disable_graphic_hover_color();
+	m_collapsed_button->set_stateless_attribute_value("background_disabled", false);
+	m_collapsed_button->set_stateless_attribute_value("corner_radius_tl", 5);
+	m_collapsed_button->set_stateless_attribute_value("corner_radius_tr", 5);
+	m_collapsed_button->set_stateless_attribute_value("corner_radius_bl", 5);
+	m_collapsed_button->set_stateless_attribute_value("corner_radius_br", 5);
+	m_collapsed_button->set_margin(0, 10, 0, 10);
+	m_collapsed_button->set_name("collapsed_button");
+	m_collapsed_button->set_proper_name("Collapsed Button");
+	m_collapsed_button->set_text_padding(3, 5, 0, 0);
+	m_collapsed_button->set_ACW_primary("border_awc", false);
+	m_collapsed_button->set_ACW_primary("outline_caw", false);
+	m_collapsed_button->set_ACW_primary("corner_color_caw", false);
+
+	m_collapsed_widget->installEventFilter(this);
+	m_collapsed_widget->setWindowFlags(Qt::FramelessWindowHint);
+	m_collapsed_widget->setAttribute(Qt::WA_TranslucentBackground);
+	m_collapsed_widget->setMouseTracking(true);
+	m_collapsed_widget->set_name("collapsed_widget");
+	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tl", 5);
+	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tr", 5);
+	m_collapsed_widget->set_stateless_attribute_value("corner_radius_bl", 5);
+	m_collapsed_widget->set_stateless_attribute_value("corner_radius_br", 5);
 
 	m_sidebar->installEventFilter(this);
 	m_sidebar->setFixedWidth(300);
@@ -79,6 +117,8 @@ void Customize_Menu::init_preview_window()
 
 	open_customize_panel(m_customize_panels.last());
 
+	//m_topbar_layout->insertWidget(1, m_collapsed_button);
+
 	m_sidebar_layout->addStretch();
 
 	m_preview_layout->addWidget(m_preview_window);
@@ -88,6 +128,8 @@ void Customize_Menu::init_child_themeable_reference_list()
 {
 	add_child_themeable_reference(m_sidebar);
 	add_child_themeable_reference(m_topbar);
+	m_topbar->add_child_themeable_reference(m_collapsed_button);
+	m_topbar->add_child_themeable_reference(m_collapsed_widget);
 	m_topbar->add_child_themeable_reference(m_apply_button);
 }
 
@@ -103,12 +145,20 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 			while (m_panel_stack.last() != customize_panel)
 			{
-				remove_child_themeable_reference(m_label_button_stack.last());
-				remove_child_themeable_reference(m_arrow_graphic_stack.last());
+				remove_child_themeable_reference(m_text_button_stack.last());
+				remove_child_themeable_reference(m_arrow_graphics.last());
+
+				for (Button* text_button : m_topbar_text_buttons)
+					if (text_button == m_text_button_stack.last())
+						m_topbar_text_buttons.removeOne(text_button);
+
+				for (Button* text_button : m_collapsed_text_buttons)
+					if (text_button == m_text_button_stack.last())
+						m_collapsed_text_buttons.removeOne(text_button);
 
 				m_panel_stack.removeLast();
-				m_label_button_stack.takeLast()->deleteLater();
-				m_arrow_graphic_stack.takeLast()->deleteLater();
+				m_text_button_stack.takeLast()->deleteLater();
+				m_arrow_graphics.takeLast()->deleteLater();
 			}
 
 			m_preview_window->add_child_themeable_reference(customize_panel);
@@ -117,7 +167,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 			customize_panel->show();
 
-			m_label_button_stack.last()->disable_text_hover_color();
+			m_text_button_stack.last()->disable_text_hover_color();
 		}
 	}
 	else
@@ -143,9 +193,10 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 			open_customize_panel(customize_panel);
 			});
 
-		if (!m_label_button_stack.isEmpty()) m_label_button_stack.last()->disable_text_hover_color(false);
+		if (!m_text_button_stack.isEmpty()) m_text_button_stack.last()->disable_text_hover_color(false);
 
-		m_label_button_stack.append(label_button);
+		m_text_button_stack.append(label_button);
+		m_topbar_text_buttons.append(label_button);
 
 		add_child_themeable_reference(label_button);
 
@@ -153,7 +204,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 		// Setup Arrow Graphic
 
-		if (m_label_button_stack.count() > 1)
+		if (m_text_button_stack.count() > 1)
 		{
 			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 			arrow_opacity->setOpacity(0.5);
@@ -162,7 +213,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 			arrow_graphic->setGraphicsEffect(arrow_opacity);
 			arrow_graphic->set_name("arrow_graphic");
 
-			m_arrow_graphic_stack.append(arrow_graphic);
+			m_arrow_graphics.append(arrow_graphic);
 
 			add_child_themeable_reference(arrow_graphic);
 
@@ -180,7 +231,12 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 		customize_panel->show();
 
 		m_panel_stack.append(customize_panel);
+
+		if (m_topbar->width() < topbar_content_width(true))
+			collapse_text_buttons();
 	}
+
+	update_arrow_graphic_background_colors(); // TEMP
 }
 
 Window* Customize_Menu::preview_window() const
@@ -188,12 +244,61 @@ Window* Customize_Menu::preview_window() const
 	return m_preview_window;
 }
 
+int Customize_Menu::topbar_content_width(bool include_collapse_button)
+{
+	int topbar_content_width = 0;
+
+	topbar_content_width += m_topbar_layout->contentsMargins().left() + m_topbar_layout->contentsMargins().right();
+
+	for (Button* text_button : m_topbar_text_buttons)
+		if (!m_collapsed_text_buttons.contains(text_button)) topbar_content_width += text_button->width();
+
+	for (Graphic_Widget* arrow_graphic : m_arrow_graphics)
+		topbar_content_width += arrow_graphic->width();
+
+	topbar_content_width += m_topbar_layout->spacing() * (m_topbar_layout->count() - 2);
+
+	topbar_content_width += m_apply_button->width();
+
+	if (include_collapse_button && !m_collapsed_text_buttons.isEmpty()) topbar_content_width += m_collapsed_button->width();
+
+	return topbar_content_width;
+}
+
+void Customize_Menu::update_arrow_graphic_background_colors()
+{
+	//for (int i = 0; i < m_arrow_graphics.count(); i++)
+	//{
+	//	m_arrow_graphics.at(i)->set_stateless_attribute_value("background_disabled", false);
+
+	//	if (i == 0) m_arrow_graphics.at(0)->set_stateless_attribute_value("background_color", QColor(Qt::red));
+	//	else if (i == 1) m_arrow_graphics.at(1)->set_stateless_attribute_value("background_color", QColor("#ed9a2f"));
+	//	else if (i == 2) m_arrow_graphics.at(2)->set_stateless_attribute_value("background_color", QColor(Qt::yellow));
+	//	else if (i == 3) m_arrow_graphics.at(3)->set_stateless_attribute_value("background_color", QColor(Qt::green));
+	//	else if (i == 4) m_arrow_graphics.at(4)->set_stateless_attribute_value("background_color", QColor("#2fdded"));
+	//	else if (i == 5) m_arrow_graphics.at(5)->set_stateless_attribute_value("background_color", QColor("#2f3ced"));
+	//	else if (i == 6) m_arrow_graphics.at(6)->set_stateless_attribute_value("background_color", QColor("#ca2fed"));
+	//}
+}
+
 bool Customize_Menu::eventFilter(QObject* object, QEvent* event)
 {
-	if (event->type() == QEvent::Resize)
+	if (object == m_collapsed_widget && event->type() == QEvent::FocusOut)
+	{
+		m_collapsed_widget->hide();
+
+		//update();
+	}
+
+	else if (event->type() == QEvent::Resize)
 	{
 		if (height() < m_sidebar->height()) m_sidebar_scroll_area->setFixedWidth(m_sidebar->width() + 17);
 		else m_sidebar_scroll_area->setFixedWidth(m_sidebar->width());
+
+		if (m_topbar->width() < topbar_content_width(true))
+			collapse_text_buttons();
+		else if (m_topbar->width() > topbar_content_width(true) && !m_collapsed_text_buttons.isEmpty())
+			decollapse_text_buttons();
 	}
 
 	if (object == this)
@@ -215,8 +320,122 @@ void Customize_Menu::init_attribute_widgets()
 	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
+void Customize_Menu::adjust_collapsed_widget()
+{
+	QMargins margins = m_collapsed_text_buttons_layout->contentsMargins();
+
+	int collapsed_widget_width = 0;
+	int collapsed_widget_height = 45 * m_collapsed_text_buttons.count();
+
+	for (Button* text_button : m_collapsed_text_buttons)
+		if (text_button->width() > collapsed_widget_width)
+			collapsed_widget_width = text_button->width();
+
+	collapsed_widget_width += margins.left() + margins.right();
+
+	m_collapsed_widget->setFixedSize(collapsed_widget_width, collapsed_widget_height);
+}
+
+void Customize_Menu::collapse_text_buttons()
+{
+	while (topbar_content_width(true) > m_topbar->width())
+	{
+		if (m_topbar_text_buttons.count() > 2)
+		{
+			if (m_collapsed_text_buttons.isEmpty())
+			{
+				m_topbar_layout->insertWidget(2, m_collapsed_button);
+				m_collapsed_button->show();
+			}
+			else
+			{
+				remove_child_themeable_reference(m_arrow_graphics.at(1));
+				m_arrow_graphics.takeAt(1)->deleteLater();
+			}
+
+			m_collapsed_text_buttons.append(m_topbar_text_buttons.takeAt(1));
+
+			m_collapsed_text_buttons_layout->addWidget(m_collapsed_text_buttons.last());
+
+			adjust_collapsed_widget();
+		}
+		else if (m_topbar_text_buttons.count() == 2) break;
+	}
+
+	update_arrow_graphic_background_colors(); // TEMP
+}
+
+void Customize_Menu::decollapse_text_buttons()
+{
+	int calculated_topbar_content_width = 0;
+
+	if (m_collapsed_text_buttons.count() == 1)
+	{
+		calculated_topbar_content_width += topbar_content_width(false);
+		//calculated_topbar_content_width += m_topbar_layout->spacing();
+	}
+	else
+	{
+		calculated_topbar_content_width += topbar_content_width(true);
+		calculated_topbar_content_width += m_topbar_layout->spacing() * 3;
+	}
+
+	calculated_topbar_content_width += m_collapsed_text_buttons.last()->width();
+
+	qDebug() << "-";
+	qDebug() << "Calculated topbar content width:" << calculated_topbar_content_width;
+	qDebug() << "Topbar width:" << m_topbar->width();
+	qDebug() << "-";
+
+	if (calculated_topbar_content_width < m_topbar->width())
+	{
+		Button* text_button = m_collapsed_text_buttons.last();
+
+		m_topbar_text_buttons.insert(1, m_collapsed_text_buttons.takeLast());
+
+		if (m_collapsed_text_buttons.isEmpty())
+		{
+			m_topbar_layout->removeWidget(m_collapsed_button);
+			m_collapsed_button->hide();
+
+			m_topbar_layout->insertWidget(2, text_button);
+		}
+		else
+		{
+			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
+			arrow_opacity->setOpacity(0.5);
+
+			Graphic_Widget* arrow_graphic = new Graphic_Widget(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
+			arrow_graphic->set_stateless_attribute_value("background_disabled", false); // TODO: TEMP, remove this
+			arrow_graphic->setGraphicsEffect(arrow_opacity);
+			arrow_graphic->set_name("arrow_graphic");
+
+			m_arrow_graphics.insert(2, arrow_graphic); // Was 1! Trying 0..
+
+			add_child_themeable_reference(arrow_graphic);
+
+			if (current_theme()) arrow_graphic->apply_theme(*current_theme());
+
+			m_topbar_layout->insertWidget(4, arrow_graphic);
+
+			m_topbar_layout->insertWidget(4, text_button);
+		}
+
+		adjust_collapsed_widget();
+	}
+
+	update_arrow_graphic_background_colors(); // TEMP
+}
+
 void Customize_Menu::setup_layout()
 {
+	// Collapsed Labels Widget
+
+	m_collapsed_text_buttons_layout->setContentsMargins(10, 0, 10, 0);
+	m_collapsed_text_buttons_layout->setSpacing(0);
+
+	m_collapsed_widget->setLayout(m_collapsed_text_buttons_layout);
+
 	// Topbar
 
 	m_topbar_layout->setContentsMargins(8, 0, 8, 0);

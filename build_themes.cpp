@@ -735,6 +735,38 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
 
+	// Customize Menu -> Topbar -> Collapsed Button
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover", QColor("#6fc65b"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tr", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_bl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+
+	// Customize Menu -> Topbar -> Collapsed Widget
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tr", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_bl", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
+
 	// Customize Menu -> Topbar -> Apply Button
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color_hover", QColor("#6fc65b"));
@@ -2266,6 +2298,38 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
 
+	// Customize Menu -> Topbar -> Collapsed Button
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor("#e1e1e1"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover", QColor("#6fc65b"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tr", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_bl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+
+	// Customize Menu -> Topbar -> Collapsed Widget
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#e1e1e1"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tr", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_bl", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
+
 	// Customize Menu -> Topbar -> Apply Button
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color_hover", QColor("#6fc65b"));
@@ -3794,6 +3858,38 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
+
+	// Customize Menu -> Topbar -> Collapsed Button
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover", QColor("#6fc65b"));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tl", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_tr", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_bl", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+
+	// Customize Menu -> Topbar -> Collapsed Widget
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tl", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_tr", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_bl", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
 
 	// Customize Menu -> Topbar -> Apply Button
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
