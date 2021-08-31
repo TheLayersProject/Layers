@@ -2169,10 +2169,9 @@ namespace Layers
 
 		Window* preview_window() const;
 
-		int topbar_content_width(bool include_collapse_button);
+		int calculated_topbar_content_width();
 
-		// Temp function!
-		void update_arrow_graphic_background_colors();
+		int topbar_content_width(bool include_collapse_button);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
@@ -2183,7 +2182,7 @@ namespace Layers
 	private:
 		void adjust_collapsed_widget();
 		void collapse_text_buttons();
-		void decollapse_text_buttons();
+		void expand_text_buttons();
 		void setup_layout();
 
 		Horizontal_Layout* m_main_layout = new Horizontal_Layout;
@@ -2207,6 +2206,8 @@ namespace Layers
 		QList<Button*> m_topbar_text_buttons;
 		QList<Button*> m_collapsed_text_buttons;
 		QList<Graphic_Widget*> m_arrow_graphics;
+
+		QSize* m_previous_size{ nullptr };
 
 		Button* m_apply_button{ new Button("Apply", true) };
 		Button* m_collapsed_button{ new Button(new Graphic_Widget(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
