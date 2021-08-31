@@ -171,11 +171,6 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 			m_text_button_stack.last()->disable_text_hover_color();
 
-			// TODO: Needs to check against calculated topbar content, like in expand_text_buttons() function
-
-			qDebug() << "Calculated Topbar Content Width:" << calculated_topbar_content_width();
-			qDebug() << "Topbar Width" << m_topbar->width();
-
 			while (calculated_topbar_content_width() < m_topbar->width() &&
 				!m_collapsed_text_buttons.isEmpty())
 			{

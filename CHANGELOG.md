@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - The corner radii attribute widget has been redesigned and takes up less space.
 - Layers applications will no longer store theme files in a universal 'Layers'/'Layers-alpha' folder in the user's app data directory. Instead, each individual application will store its own set of theme files in a folder named after the application.
 - Created a mechanism to update theme files
+- Created a mechanism to collapse text buttons in the Customize menu's topbar
 
 ### [Layers 2.0.0a] - 2021-06-23
 - Layers has been fully rewritten.
