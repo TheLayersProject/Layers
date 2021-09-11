@@ -16,7 +16,7 @@ It is recommended to clone a copy of the project repository to be able to use pr
 
 You may also download a .zip of the project [here](https://github.com/huntermalm/Layers/archive/main.zip).
 
-##### Layers development requires Qt 5.13.2.  Future Qt versions may work but have not been tested.
+##### Layers development requires Qt 6.  Other Qt versions may work but have not been tested.
 
 #### Documentation
 
@@ -34,7 +34,7 @@ Grab the latest version of Layers from the downloads below.  Follow the standard
 
 ## Download
 
-* [Layers-2.2.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.2.0a/Layers-2.2.0a.zip)
+* [Layers-2.2.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.2.0a/Layers-2.2.0a.zip) (2021-09-11)
 
 ## Authors
 
