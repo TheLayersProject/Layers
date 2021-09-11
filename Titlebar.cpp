@@ -183,7 +183,7 @@ void Titlebar::setup_layout()
     // Buttons Layout
     QHBoxLayout* buttons_layout = new QHBoxLayout;
 
-    buttons_layout->setMargin(0);
+    buttons_layout->setContentsMargins(0, 0, 0, 0);
     buttons_layout->setSpacing(0);
     buttons_layout->addWidget(m_settings_button);
     buttons_layout->addWidget(m_minimize_button);

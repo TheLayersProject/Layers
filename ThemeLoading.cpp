@@ -2,11 +2,9 @@
 
 using Layers::Theme_And_Load_Status_Combo_2_0_0_a;
 using Layers::Theme_And_Load_Status_Combo_2_1_0_a;
-using Layers::Theme_2_0_0_a;
-using Layers::Theme;
+using Layers::Theme_And_Load_Status_Combo_2_2_0_a;
 
 // 2.0.0a
-
 Theme_And_Load_Status_Combo_2_0_0_a Layers::load_theme_2_0_0_a(QFile& theme_file)
 {
 	Theme_2_0_0_a loaded_theme;
@@ -31,11 +29,10 @@ Theme_And_Load_Status_Combo_2_0_0_a Layers::load_theme_2_0_0_a(QFile& theme_file
 	return Theme_And_Load_Status_Combo_2_0_0_a{ loaded_theme, status };
 }
 
-// 2.1.0a (Current)
-
+// 2.1.0a
 Theme_And_Load_Status_Combo_2_1_0_a Layers::load_theme_2_1_0_a(QFile& theme_file)
 {
-	Theme loaded_theme("");
+	Theme_2_1_0_a loaded_theme;
 
 	QDataStream::Status status;
 
@@ -57,24 +54,27 @@ Theme_And_Load_Status_Combo_2_1_0_a Layers::load_theme_2_1_0_a(QFile& theme_file
 	return Theme_And_Load_Status_Combo_2_1_0_a{ loaded_theme, status };
 }
 
-// Theme update functions
-
-Theme Layers::update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme)
+// 2.2.0a (Current)
+Theme_And_Load_Status_Combo_2_2_0_a Layers::load_theme_2_2_0_a(QFile& theme_file)
 {
-	Theme new_theme(old_theme.name, !old_theme.built_in);
+	Theme loaded_theme("");
 
-	for (QString themeable_tag : old_theme.m_data.keys())
+	QDataStream::Status status;
+
+	if (theme_file.exists())
 	{
-		for (Attribute_2_0_0_a old_attribute : old_theme.m_data[themeable_tag])
-		{
-			if (old_attribute.m_values.count() == 1)
-				new_theme.add_stateless_attribute(themeable_tag, old_attribute.m_name, old_attribute.m_values.first());
-			else
-				new_theme.add_stateful_attribute(themeable_tag, old_attribute.m_name, old_attribute.m_values);
-		}
+		if (!theme_file.open(QIODevice::ReadOnly))
+			qDebug() << "Could not read theme file";
+
+		QDataStream in(&theme_file);
+		in.setVersion(QDataStream::Qt_6_1);
+
+		in >> loaded_theme;
+
+		status = in.status();
+
+		theme_file.close();
 	}
 
-	return new_theme;
+	return Theme_And_Load_Status_Combo_2_2_0_a{ loaded_theme, status };
 }
-
-

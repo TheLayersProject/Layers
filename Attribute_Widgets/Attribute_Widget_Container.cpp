@@ -41,7 +41,7 @@ Attribute_Widget_Container::Attribute_Widget_Container(const QString& label_text
 
 			setFixedHeight(45);
 
-			m_widgets_vbox->setMargin(0);
+			m_widgets_vbox->setContentsMargins(0, 0, 0, 0);
 
 			m_collapsed = true;
 		}
@@ -122,12 +122,12 @@ void Attribute_Widget_Container::setup_layout()
 	top_hbox->addWidget(m_collapse_button);
 	top_hbox->addStretch();
 
-	m_widgets_vbox->setMargin(0);
+	m_widgets_vbox->setContentsMargins(0, 0, 0, 0);
 	m_widgets_vbox->setSpacing(0);
 
 	QVBoxLayout* main_layout = new QVBoxLayout;
 
-	main_layout->setMargin(0);
+	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addLayout(top_hbox);
 	main_layout->addLayout(m_widgets_vbox);

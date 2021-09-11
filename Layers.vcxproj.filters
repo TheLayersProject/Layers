@@ -13,14 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Old">
+      <UniqueIdentifier>{72ac3fc5-1ea2-44c8-b557-333ff4f4bd87}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Attribute_Widgets">
       <UniqueIdentifier>{bdbe8024-7fb6-4805-8f00-cd9ad4eb511c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Old\2.1.0a">
+      <UniqueIdentifier>{2c01e461-9929-4abe-a383-9a50d26cab3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="Layers.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
     <QtMoc Include="Layers.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -146,7 +149,7 @@
     <ClCompile Include="Attribute_Widgets\Switch_Attribute_Widget.cpp">
       <Filter>Source Files\Attribute_Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="serialization.cpp">
+    <ClCompile Include="ThemeUpdating.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Stateful_Attribute.cpp">
@@ -167,5 +170,43 @@
     <ClCompile Include="Attribute_Widgets\Corner_Radii_Attribute_Widget.cpp">
       <Filter>Source Files\Attribute_Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="Update_Dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Download.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Old\2.1.0a\Attribute_Set_2_1_0_a.cpp">
+      <Filter>Source Files\Old\2.1.0a</Filter>
+    </ClCompile>
+    <ClCompile Include="Old\2.1.0a\Theme_2_1_0_a.cpp">
+      <Filter>Source Files\Old\2.1.0a</Filter>
+    </ClCompile>
+    <ClCompile Include="Old\2.1.0a\Attribute_2_1_0_a.cpp">
+      <Filter>Source Files\Old\2.1.0a</Filter>
+    </ClCompile>
+    <ClCompile Include="Old\2.1.0a\Stateless_Attribute_2_1_0_a.cpp">
+      <Filter>Source Files\Old\2.1.0a</Filter>
+    </ClCompile>
+    <ClCompile Include="ThemeLoading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Old\2.1.0a\Stateful_Attribute_2_1_0_a.cpp">
+      <Filter>Source Files\Old\2.1.0a</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="svgs\svgs.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="fonts\Roboto\roboto_font.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="themes\prebuilt_themes.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

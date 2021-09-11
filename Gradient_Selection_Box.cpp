@@ -210,7 +210,9 @@ void Gradient_Selection_Box::update_gradient()
 
 void Gradient_Selection_Box::update_theme_dependencies()
 {
-    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+    int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+    m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
     m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
@@ -262,7 +264,7 @@ bool Gradient_Selection_Box::eventFilter(QObject* object, QEvent* event)
                         m_selected_color_control->disable_clicking(false);
                     }
 
-                    color_controls.swap(color_controls.indexOf(color_control), color_controls.indexOf(m_selected_color_control));
+                    color_controls.swapItemsAt(color_controls.indexOf(color_control), color_controls.indexOf(m_selected_color_control));
                     color_controls.removeOne(color_control);
                     color_control->deleteLater();
                     break;
@@ -357,7 +359,7 @@ bool Gradient_Selection_Box::eventFilter(QObject* object, QEvent* event)
     return false;
 }
 
-bool Gradient_Selection_Box::nativeEvent(const QByteArray& eventType, void* message, long* result)
+bool Gradient_Selection_Box::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
     MSG* msg = static_cast<MSG*>(message);
 
@@ -582,7 +584,9 @@ void Gradient_Selection_Box::setup_layout()
     inner_layout->setAlignment(m_apply_button, Qt::AlignRight);
 
     // Main Layout
-    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+    int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+    m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);
     m_main_layout->addWidget(m_titlebar);
     m_main_layout->addLayout(inner_layout);

@@ -304,7 +304,7 @@ void Customize_Panel::setup_layout()
 	m_element_buttons_layout->setContentsMargins(27, 0, 0, 0);
 	m_element_buttons_layout->setSpacing(10);
 
-	m_elements_layout->setMargin(0);
+	m_elements_layout->setContentsMargins(0, 0, 0, 0);
 	m_elements_layout->setSpacing(15);
 	m_elements_layout->addLayout(hbox2);
 	m_elements_layout->addLayout(m_element_buttons_layout);

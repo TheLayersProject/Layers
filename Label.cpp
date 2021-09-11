@@ -102,13 +102,60 @@ void Label::paintEvent(QPaintEvent* event)
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 	painter.setRenderHint(QPainter::TextAntialiasing);
-	painter.setRenderHint(QPainter::HighQualityAntialiasing);
+	//painter.setRenderHint(QPainter::HighQualityAntialiasing);
 	painter.setFont(label_font);
 	painter.setPen(pen);
 
 	if (!m_attribute_set.attribute_value("background_disabled")->value<bool>()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
 
-	path.addText(m_padding_left, m_padding_top + label_font.pointSizeF(), label_font, text()); // Adjust the position
+	if (wordWrap())
+	{
+		qDebug() << "Painting with word wrap!";
+
+		QFontMetrics font_metrics(font());
+
+		QList<QString> draw_lines;
+
+		QList<QString> lines = text().split("\n");
+
+		for (QString& line : lines)
+		{
+			qDebug() << "Line:" << line;
+
+			int line_width = font_metrics.horizontalAdvance(line) + 2;
+
+			qDebug() << "Line Width:" << line_width;
+
+			if (line_width > width())
+			{
+				qDebug() << "\tLINE NEEDS TO BE SPLIT:";
+
+				while (line != "")
+				{
+					QString sub_line = line;
+
+					QList<QString> sub_line_words = sub_line.split(" ");
+
+					while (font_metrics.horizontalAdvance(sub_line) + 2 > width())
+					{
+						sub_line = sub_line.left(sub_line.count() - sub_line_words.takeLast().count() - 1);
+					}
+
+					draw_lines.append(sub_line);
+
+					line.remove(0, sub_line.count() + 1);
+				}
+			}
+			else draw_lines.append(line);
+		}
+
+		for (int i = 0; i < draw_lines.count(); i++)
+		{
+			path.addText(m_padding_left, m_padding_top + label_font.pointSizeF() + (font_metrics.height() * i), label_font, draw_lines[i]);
+		}
+	}
+	else
+		path.addText(m_padding_left, m_padding_top + label_font.pointSizeF(), label_font, text());
 
 	if (!m_attribute_set.attribute_value("outline_disabled")->value<bool>()) painter.strokePath(path, pen);
 

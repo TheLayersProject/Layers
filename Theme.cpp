@@ -17,6 +17,11 @@ Theme::Theme(const QString& name, bool is_custom) :
 
 }
 
+void Theme::add_attribute_set(const QString& themeable_tag, Attribute_Set attribute_set)
+{
+	m_attribute_sets[themeable_tag] = attribute_set;
+}
+
 void Theme::add_stateful_attribute(const QString& themeable_tag, const QString& attribute_name, QMap<QString, QVariant> state_value_map)
 {
 	if (!m_attribute_sets.contains(themeable_tag))
@@ -42,6 +47,11 @@ void Theme::add_stateless_attribute(const QString& themeable_tag, const QString&
 Attribute_Set& Theme::attribute_set(const QString& themeable_tag)
 {
 	return m_attribute_sets[themeable_tag];
+}
+
+QHash<QString, Attribute_Set>& Theme::attribute_sets()
+{
+	return m_attribute_sets;
 }
 
 Stateless_Attribute* Theme::stateless_attribute(const QString& themeable_tag, const QString& attribute_name)

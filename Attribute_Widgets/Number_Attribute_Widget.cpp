@@ -71,7 +71,7 @@ void Number_Attribute_Widget::enable_silder()
 
 	add_child_themeable_reference(m_slider);
 
-	hbox2->setMargin(0);
+	hbox2->setContentsMargins(0, 0, 0, 0);
 	hbox2->setSpacing(0);
 	hbox2->addWidget(m_slider);
 
@@ -152,7 +152,7 @@ void Number_Attribute_Widget::setup_layout()
 {
 	QHBoxLayout* hbox1 = new QHBoxLayout;
 
-	hbox1->setMargin(0);
+	hbox1->setContentsMargins(0, 0, 0, 0);
 	hbox1->setSpacing(0);
 	hbox1->addWidget(m_left_stretch);
 	hbox1->addWidget(m_attribute_label);

@@ -14,8 +14,14 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QList>
+#include <QMouseEvent>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QPainter>
+#include <QPainterPath>
+#include <QSaveFile>
 #include <QScrollArea>
+#include <QSettings>
 #include <QSvgWidget>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -26,19 +32,22 @@
 
 namespace Layers
 {
-	class Stateless_Attribute;
+	class Application;
 	class Attribute_Sharing_Combo;
 	class Attribute_Widget;
 	class Color_Control;
 	class Customize_Panel;
 	class Graphic_Widget;
 	class Label;
+	class Stateless_Attribute;
 	class Theme;
 	class Themeable;
 	class Titlebar;
 	class Widget;
 	class Window;
 }
+
+#define layersApp (static_cast<Layers::Application*>(qApp))
 
 namespace Layers
 {
@@ -347,6 +356,8 @@ namespace Layers
 		Theme();
 		Theme(const QString& name, bool is_custom = true);
 
+		void add_attribute_set(const QString& themeable_tag, Attribute_Set attribute_set);
+
 		void add_stateful_attribute(
 			const QString& themeable_tag,
 			const QString& attribute_name,
@@ -367,6 +378,8 @@ namespace Layers
 		// Recommend calling contains_attributes_for_tag() before calling this since this function
 		// does not check if it contains an attribute set for the given themeable tag.
 		Attribute_Set& attribute_set(const QString& themeable_tag);
+
+		QHash<QString, Attribute_Set>& attribute_sets();
 
 		bool contains_attributes_for_tag(const QString& themeable_tag);
 
@@ -1564,7 +1577,7 @@ namespace Layers
 		void init_attributes();
 		void init_child_themeable_reference_list();
 
-		bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
+		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
 
@@ -1988,7 +2001,7 @@ namespace Layers
 		void init_attributes();
 		void init_child_themeable_reference_list();
 
-		bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
+		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
 
@@ -2013,12 +2026,50 @@ namespace Layers
 		QPainter painter;
 	};
 
+	class Update_Dialog : public QDialog, public Themeable
+	{
+		Q_OBJECT
+
+	public:
+		Update_Dialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
+
+		void issue_update();
+
+		void update_theme_dependencies();
+
+	protected:
+		void init_attributes();
+		void init_child_themeable_reference_list();
+
+		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
+
+		void paintEvent(QPaintEvent* event) override;
+
+	private:
+		void init_titlebar();
+
+		void setup_layout();
+
+		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+
+		Widget* m_titlebar{ new Widget };
+
+		Button* m_remind_me_later_button{ new Button("Remind Me Later") };
+		Button* m_update_button{ new Button("Update") };
+
+		Label* m_message_label;
+
+		QPainter painter;
+	};
+
 	class Themes_Settings_Panel : public Widget
 	{
 		Q_OBJECT
 
 	public:
 		Themes_Settings_Panel(QWidget* parent = nullptr);
+
+		void apply_theme(Theme& theme);
 
 		Button* customize_theme_button() const;
 
@@ -2271,10 +2322,11 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Window(const QString& app_name, bool is_preview_window = false, QWidget* parent = nullptr);
+		Window(QWidget* parent = nullptr);
 
 		void add_menu(Menu* menu);
-		void add_theme(const QString& name, const Theme& theme);
+
+		Menu* app_menu() const;
 
 		void apply_theme(Theme& theme);
 
@@ -2286,6 +2338,8 @@ namespace Layers
 
 		void finalize();
 
+		void link_theme_name(const QString& name);
+
 		void update_theme_dependencies();
 
 		void set_window_title(const QString& title);
@@ -2295,9 +2349,6 @@ namespace Layers
 		Titlebar* titlebar() const;
 
 	public slots:
-		void apply_theme_changes();
-		void change_current_theme_name(const QString& old_name, const QString& new_name);
-		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
 		void customize_clicked();
 		void exit_clicked();
 		void maximize_clicked();
@@ -2311,13 +2362,9 @@ namespace Layers
 
 		void init_child_themeable_reference_list();
 
-		Theme load_theme(const QString& file_path);
-
-		bool nativeEvent(const QByteArray& eventType, void* message, long* result) override;
+		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
-
-		void save_theme(Theme& theme);
 
 	private:
 		void setup_layout();
@@ -2326,15 +2373,10 @@ namespace Layers
 
 		Create_New_Theme_Dialog* m_create_new_theme_dialog{ new Create_New_Theme_Dialog };
 
-		QMap<QString, Theme> m_themes;
-
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 		QList<Menu*> m_menus;
 		QList<Menu*> m_menu_stack;
-
-		QDir m_app_dir;
-		QDir m_app_themes_dir;
 
 		Titlebar* m_titlebar{ new Titlebar };
 
@@ -2344,6 +2386,85 @@ namespace Layers
 		Settings_Menu* m_settings_menu{ new Settings_Menu };
 
 		Customize_Menu* m_customize_menu{ new Customize_Menu };
+	};
+
+	class Downloader : public QObject
+	{
+		Q_OBJECT
+
+	public:
+		Downloader(QObject* parent = 0);
+
+		QNetworkReply* download(const QUrl& file_url, const QDir& directory);
+
+		QNetworkReply* download(const QUrl& file_url);
+
+	private:
+		QNetworkAccessManager m_network_manager;
+	};
+
+	class Application : public QApplication
+	{
+		Q_OBJECT
+
+	public:
+		Application(const QString& app_name, const QString& app_version, const QString& app_repo_path, int &argc, char **argv);
+
+		void add_child_themeable_reference(Themeable& themeable);
+
+		void apply_theme(Theme& theme);
+
+		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
+
+		Theme* current_theme() const;
+
+		void issue_update();
+
+		Theme load_theme(QFile& file);
+
+		void reapply_theme();
+
+		void save_theme(Theme& theme);
+
+		QSettings& settings();
+
+		QMap<QString, Theme>& themes();
+
+		bool update_available();
+
+		bool update_on_request();
+
+	public slots:
+		void rename_theme(const QString& old_name, const QString& new_name);
+
+	private:
+		void copy_missing_attributes_to(Theme& theme_missing_attributes);
+
+		void init_directories();
+		void init_fonts();
+		void init_themes();
+		void init_latest_version_tag();
+
+		Downloader m_downloader{ this };
+
+		QSettings m_settings;
+
+		QString m_github_api_repos_url_base{ "https://api.github.com/repos" };
+
+		QDir m_app_dir;
+		QDir m_app_themes_dir;
+
+		QList<Themeable*> m_child_themeable_references;
+
+		QMap<QString, Theme> m_themes;
+
+		QString* m_latest_version{ nullptr };
+		QString* m_repo_path{ nullptr };
+
+		QString m_name;
+		QString m_version;
+
+		Theme* m_current_theme{ nullptr };
 	};
 
 	template<typename T>
@@ -2400,9 +2521,7 @@ namespace Layers
 	}
 }
 
-// Serialization:
-
-// 2.0.0a
+// 2.0.0a Classes
 namespace Layers
 {
 	class Attribute_2_0_0_a
@@ -2441,28 +2560,195 @@ namespace Layers
 
 		QString name;
 	};
+}
 
+// 2.1.0a Classes
+namespace Layers
+{
+	class Attribute_2_1_0_a
+	{
+	public:
+		Attribute_2_1_0_a(const QString& name);
+
+		QString& name();
+
+	protected:
+		QString m_name{ "" };
+
+		Themeable* m_parent_themeable{ nullptr };
+	};
+
+	class Stateless_Attribute_2_1_0_a : public Attribute_2_1_0_a
+	{
+	public:
+		Stateless_Attribute_2_1_0_a();
+		Stateless_Attribute_2_1_0_a(const QString& name, QVariant value);
+
+		QVariant& value();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Stateless_Attribute_2_1_0_a& a)
+		{
+			stream << a.m_name;
+			stream << a.m_value;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Stateless_Attribute_2_1_0_a& a)
+		{
+			stream >> a.m_name;
+			stream >> a.m_value;
+			return stream;
+		}
+
+	private:
+		QVariant m_value{ QVariant() };
+	};
+
+	class Stateful_Attribute_2_1_0_a : public Attribute_2_1_0_a
+	{
+	public:
+		Stateful_Attribute_2_1_0_a();
+		Stateful_Attribute_2_1_0_a(const QString& name, QMap<QString, QVariant> state_value_map);
+
+		QMap<QString, QVariant>& values();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Stateful_Attribute_2_1_0_a& a)
+		{
+			stream << a.m_name;
+			stream << a.m_state;
+			stream << a.m_values;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Stateful_Attribute_2_1_0_a& a)
+		{
+			stream >> a.m_name;
+			stream >> a.m_state;
+			stream >> a.m_values;
+			return stream;
+		}
+
+	private:
+		QString m_state;
+
+		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
+	};
+
+	class Attribute_Set_2_1_0_a
+	{
+	public:
+		void add_attribute(Stateless_Attribute_2_1_0_a attribute);
+
+		void add_attribute(Stateful_Attribute_2_1_0_a attribute);
+
+		bool contains(const QString& attribute_name);
+
+		QMap<QString, Stateful_Attribute_2_1_0_a>& stateful_attributes();
+
+		QMap<QString, Stateless_Attribute_2_1_0_a>& stateless_attributes();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Attribute_Set_2_1_0_a& as)
+		{
+			stream << as.m_stateful_attributes;
+			stream << as.m_stateless_attributes;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Attribute_Set_2_1_0_a& as)
+		{
+			stream >> as.m_stateful_attributes;
+			stream >> as.m_stateless_attributes;
+			return stream;
+		}
+
+	private:
+		QMap<QString, Stateful_Attribute_2_1_0_a> m_stateful_attributes{ QMap<QString, Stateful_Attribute_2_1_0_a>() };
+		QMap<QString, Stateless_Attribute_2_1_0_a> m_stateless_attributes{ QMap<QString, Stateless_Attribute_2_1_0_a>() };
+	};
+
+	class Theme_2_1_0_a
+	{
+	public:
+		Theme_2_1_0_a();
+		Theme_2_1_0_a(const QString& name, bool is_custom = true);
+
+		void add_stateful_attribute(
+			const QString& themeable_tag,
+			const QString& attribute_name,
+			QMap<QString, QVariant> state_value_map);
+
+		void add_stateless_attribute(
+			const QString& themeable_tag,
+			const QString& attribute_name,
+			QVariant value);
+
+		QHash<QString, Attribute_Set_2_1_0_a>& attribute_sets();
+
+		bool is_custom();
+
+		QString& name();
+
+		friend QDataStream& operator <<(QDataStream& stream, const Theme_2_1_0_a& t)
+		{
+			stream << t.m_attribute_sets;
+			stream << t.m_is_custom;
+			stream << t.m_name;
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Theme_2_1_0_a& t)
+		{
+			stream >> t.m_attribute_sets;
+			stream >> t.m_is_custom;
+			stream >> t.m_name;
+			return stream;
+		}
+
+	private:
+		bool m_is_custom{ true };
+
+		QHash<QString, Attribute_Set_2_1_0_a> m_attribute_sets{ QHash<QString, Attribute_Set_2_1_0_a>() };
+
+		QString m_name;
+	};
+}
+
+// Theme Loading
+namespace Layers
+{
 	struct Theme_And_Load_Status_Combo_2_0_0_a
 	{
 		Theme_2_0_0_a theme;
 		QDataStream::Status status;
 	};
 
-	Theme_And_Load_Status_Combo_2_0_0_a load_theme_2_0_0_a(QFile& file);
-}
-
-// 2.1.0a (Current)
-namespace Layers
-{
 	struct Theme_And_Load_Status_Combo_2_1_0_a
+	{
+		Theme_2_1_0_a theme;
+		QDataStream::Status status;
+	};
+
+	struct Theme_And_Load_Status_Combo_2_2_0_a
 	{
 		Theme theme;
 		QDataStream::Status status;
 	};
 
+	Theme_And_Load_Status_Combo_2_0_0_a load_theme_2_0_0_a(QFile& file);
+
 	Theme_And_Load_Status_Combo_2_1_0_a load_theme_2_1_0_a(QFile& file);
 
-	Theme update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme);
+	Theme_And_Load_Status_Combo_2_2_0_a load_theme_2_2_0_a(QFile& file);
+}
+
+// Theme Updating
+namespace Layers
+{
+	// 2.0.0a -> 2.1.0a
+	Theme_2_1_0_a update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme);
+
+	// 2.1.0a -> 2.2.0a (Current)
+	Theme update_theme_2_1_0_a_to_2_2_0_a(Theme_2_1_0_a& old_theme);
 }
 
 #endif // LAYERS_H

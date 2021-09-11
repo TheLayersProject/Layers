@@ -7,39 +7,15 @@ using Layers::Theme;
 using Layers::Titlebar;
 using Layers::Window;
 
-Window::Window(const QString& app_name, bool is_preview_window, QWidget* parent) :
-	m_app_dir{ QDir(app_path(app_name)) }, m_app_themes_dir{ QDir(app_themes_path(app_name)) }, Widget(parent)
+Window::Window(QWidget* parent) : Widget(parent)
 {
-    Q_INIT_RESOURCE(Layers);
-
-	qRegisterMetaTypeStreamOperators<QGradientStops>("QGradientStops");
-
-	if (!m_app_dir.exists())
-	{
-		m_app_dir.mkdir(m_app_dir.absolutePath());
-		m_app_themes_dir.mkdir(m_app_themes_dir.absolutePath());
-
-		QDir deprecated_layers_dir(deprecated_layers_path());
-
-		// If the deprecated Layers path exists, move the theme files into the new themes directory and delete the deprecated directory
-		if (deprecated_layers_dir.exists())
-		{
-			QDir deprecated_themes_dir(deprecated_layers_themes_path());
-
-			for (const QString& file_name : deprecated_themes_dir.entryList(QDir::Files))
-				QDir().rename(deprecated_themes_dir.absoluteFilePath(file_name), m_app_themes_dir.absoluteFilePath(file_name));
-
-			deprecated_layers_dir.removeRecursively();
-		}
-	}
+	layersApp->add_child_themeable_reference(*this);
 
     connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
     connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
     connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
     connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
     connect(m_titlebar->exit_button(), &Button::clicked, this, &Window::exit_clicked);
-    connect(m_settings_menu->themes_settings_panel()->theme_combobox(), &Combobox::current_item_changed, [this] { apply_theme(m_themes[m_settings_menu->themes_settings_panel()->theme_combobox()->current_item()]); });
-    connect(m_settings_menu->themes_settings_panel()->theme_combobox(), SIGNAL(item_replaced(const QString&, const QString&)), this, SLOT(change_current_theme_name(const QString&, const QString&)));
     connect(m_settings_menu->themes_settings_panel()->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
 	connect(m_settings_menu->themes_settings_panel()->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
 
@@ -68,36 +44,16 @@ Window::Window(const QString& app_name, bool is_preview_window, QWidget* parent)
     m_customize_menu->set_stateless_attribute_value("background_disabled", true);
     m_customize_menu->hide();
 
-	connect(m_customize_menu->apply_button(), &Button::clicked, this, &Window::apply_theme_changes);
-
     add_menu(m_app_menu);
     add_menu(m_settings_menu);
     add_menu(m_customize_menu);
-
+	
     m_menu_stack.append(m_app_menu);
 
     setup_layout();
 
-	if (!is_preview_window)
-	{
-		for (const QString& file_path : m_app_themes_dir.entryList(QDir::Files))
-		{
-			Theme loaded_theme = load_theme(file_path);
-
-			add_theme(loaded_theme.name(), loaded_theme);
-		}
-
-		if (m_themes.isEmpty())
-		{
-			add_theme("Blue", build_blue_theme());
-			add_theme("Dark", build_dark_theme());
-			add_theme("Light", build_light_theme());
-
-			save_theme(m_themes["Blue"]);
-			save_theme(m_themes["Dark"]);
-			save_theme(m_themes["Light"]);
-		}
-	}
+	for (const QString& theme_name : layersApp->themes().keys())
+		link_theme_name(theme_name);
 
 	// Do this last:
 	assign_tag_prefixes();
@@ -108,10 +64,13 @@ void Window::add_menu(Menu* menu)
     m_menus.append(menu);
 }
 
-void Window::add_theme(const QString& name, const Theme& theme)
+Menu* Window::app_menu() const
 {
-    m_themes.insert(name, theme);
+	return m_app_menu;
+}
 
+void Window::link_theme_name(const QString& name)
+{
     m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
 	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
@@ -121,18 +80,13 @@ void Window::apply_theme(Theme& theme)
 {
     Themeable::apply_theme(theme);
 
-	if (theme.is_custom())
-		m_settings_menu->themes_settings_panel()->show_custom_theme_buttons();
-	else
-		m_settings_menu->themes_settings_panel()->show_custom_theme_buttons(false);
-
     if (m_customize_menu->preview_window())
     {
         m_customize_menu->preview_window()->apply_theme(theme);
         m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
     }
 
-	issue_update();
+	issue_update(); // Is this necessary?
 }
 
 void Window::assign_tag_prefixes()
@@ -159,13 +113,8 @@ void Window::finalize()
 {
     m_customize_menu->init_preview_window();
 
-	m_customize_menu->preview_window()->customize_menu()->apply_button()->set_disabled();
-
-	for (Theme& theme : m_themes)
-		m_customize_menu->preview_window()->add_theme(theme.name(), theme);
-
-	//apply_theme(m_themes["Dark"]); // Sets initial theme
-    m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item("Light"); // Also sets initial theme
+	apply_theme(*layersApp->current_theme()); // Sets initial theme
+    m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
 }
 
 void Window::init_child_themeable_reference_list()
@@ -178,10 +127,14 @@ void Window::init_child_themeable_reference_list()
 
 void Window::update_theme_dependencies()
 {
-    if (m_maximized)
-		m_main_layout->setMargin(0);
-    else
-		m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+	if (m_maximized)
+		m_main_layout->setContentsMargins(0, 0, 0, 0);
+	else
+	{
+		int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+		m_main_layout->setContentsMargins(margin, margin, margin, margin);
+	}
 }
 
 void Window::set_window_title(const QString& title)
@@ -200,45 +153,6 @@ Settings_Menu* Window::settings_menu() const
 Titlebar* Window::titlebar() const
 {
     return m_titlebar;
-}
-
-void Window::apply_theme_changes()
-{
-	m_customize_menu->preview_window()->copy_attribute_values_to(m_current_theme);
-
-	apply_theme(*m_current_theme);
-
-	save_theme(*m_current_theme);
-
-	update();
-}
-
-void Window::change_current_theme_name(const QString& old_name, const QString& new_name)
-{
-    m_themes.insert(new_name, m_themes.take(old_name));
-
-	m_themes[new_name].set_name(new_name);
-
-    apply_theme(m_themes[new_name]);
-
-	QFile old_theme_file(m_app_themes_dir.absoluteFilePath(old_name.toLower()));
-
-	old_theme_file.remove();
-
-	save_theme(m_themes[new_name]);
-}
-
-void Window::create_theme(const QString& new_theme_name, const QString& copy_theme_name)
-{
-	add_theme(new_theme_name, Theme(new_theme_name));
-
-	Theme& new_theme = m_themes[new_theme_name];
-
-	new_theme.copy_attribute_sets_from(m_themes[copy_theme_name]);
-
-	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(new_theme_name);
-
-	save_theme(m_themes[new_theme_name]);
 }
 
 void Window::open_menu(Menu* menu)
@@ -320,7 +234,11 @@ void Window::new_theme_clicked()
 
 	if (m_create_new_theme_dialog->exec())
 	{
-		create_theme(m_create_new_theme_dialog->new_theme_name(), m_create_new_theme_dialog->copy_theme_name());
+		layersApp->create_theme(m_create_new_theme_dialog->new_theme_name(), m_create_new_theme_dialog->copy_theme_name());
+
+		link_theme_name(m_create_new_theme_dialog->new_theme_name());
+
+		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_create_new_theme_dialog->new_theme_name());
 
 		m_create_new_theme_dialog->clear();
 	}
@@ -340,42 +258,7 @@ void Window::init_attribute_widgets()
 	m_attribute_widgets["corner_color_caw"]->set_primary(false);
 }
 
-Theme Window::load_theme(const QString& file_path)
-{
-	QFile theme_file(m_app_themes_dir.absoluteFilePath(file_path));
-
-	qDebug() << "Loading" << theme_file.fileName();
-
-	Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(theme_file);
-
-	if (theme_and_load_status_combo_2_1_0_a.status != 0)
-	{
-		qDebug() << "Theme load failed. Trying 2.0.0a load..";
-
-		Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(theme_file);
-
-		if (theme_and_load_status_combo_2_0_0_a.status != 0)
-		{
-			qDebug() << "Theme load failed. The data must be corrupt.";
-		}
-		else
-		{
-			qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
-			
-			Theme updated_theme = update_theme_2_0_0_a_to_2_1_0_a(theme_and_load_status_combo_2_0_0_a.theme);
-
-			qDebug() << "Updated theme from 2.0.0a to 2.1.0a.";
-
-			save_theme(updated_theme);
-
-			return updated_theme;
-		}
-	}
-
-	return theme_and_load_status_combo_2_1_0_a.theme;
-}
-
-bool Window::nativeEvent(const QByteArray& eventType, void* message, long* result)
+bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
     MSG* msg = static_cast<MSG*>(message);
 
@@ -652,27 +535,11 @@ void Window::paintEvent(QPaintEvent* event)
 	}
 }
 
-void Window::save_theme(Theme& theme)
-{
-	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name().toLower()));
-
-	if (!theme_file.open(QIODevice::WriteOnly))
-	{
-		qDebug() << "Could not create theme file";
-		return;
-	}
-
-	QDataStream out(&theme_file);
-	out.setVersion(QDataStream::Qt_5_13);
-
-	out << theme;
-
-	theme_file.close();
-}
-
 void Window::setup_layout()
 {
-    m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+    m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);
     m_main_layout->addWidget(m_titlebar);
     m_main_layout->addWidget(m_app_menu);

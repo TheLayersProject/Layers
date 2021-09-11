@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 
 ## Alpha Phase
 
+### [Layers 2.2.0a] - 2021-09-11
+- Migrated to Qt 6
+- Created a mechanism to update the application during start up
+- Application settings are now stored in the registry system.
+- The active theme selected by the user will now be applied automatically when the application is launched again.
+- Prebuilt themes are now stored within the program and not in the app's theme folder.
+- Fixed an issue with the theme file updating functionality that caused themes from old versions to be missing attribute sets and attributes for widgets created in later versions
+
 ### [Layers 2.1.0a] - 2021-09-01
 - "Default" and "Common" states are gone. Attributes are now created as stateful or stateless. This makes customization of themeables that use both types of attributes much clearer.
 - The corner radii attribute widget has been redesigned and takes up less space.
@@ -18,4 +26,4 @@ All notable changes to this project will be documented in this file.
 - Most buttons and controls have increased padding around their content and increased spacing between each other to improve touch experience
 - Widget attributes are now applied via paint events instead of invoking stylesheets
 - Pop-up boxes are now separate windows
-- Changed the alpha save directory to "C:/Users/{Your username}/AppData/Local/Layers-alpha"
+- Changed the alpha save directory to "C:/Users/{Your username}/AppData/Local/Layers-alpha" 

@@ -319,7 +319,7 @@ void Combobox::init_attribute_widgets()
 
 void Combobox::setup_layout()
 {
-    m_drop_down_layout->setMargin(0);
+    m_drop_down_layout->setContentsMargins(0, 0, 0, 0);
     m_drop_down_layout->setSpacing(0);
 
     m_drop_down->setLayout(m_drop_down_layout);

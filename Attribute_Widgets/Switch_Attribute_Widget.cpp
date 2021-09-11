@@ -18,7 +18,7 @@ Switch_Attribute_Widget::Switch_Attribute_Widget(
 
 	QHBoxLayout* hbox = new QHBoxLayout;
 
-	hbox->setMargin(0);
+	hbox->setContentsMargins(0, 0, 0, 0);
 	hbox->setSpacing(0);
 	hbox->addStretch();
 	hbox->addWidget(m_labeled_toggle_switch);

@@ -172,7 +172,7 @@ void Toggle_Switch::setup_layout()
 
 	m_switch->setLayout(switch_layout);
 
-	main_layout->setMargin(0);
+	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(10);
 
 	if (m_first_label && m_second_label)

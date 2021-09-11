@@ -129,7 +129,7 @@ void Slider::setup_layout()
 {
 	QVBoxLayout* main_layout = new QVBoxLayout;
 
-	main_layout->setMargin(0);
+	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addWidget(m_bar);
 

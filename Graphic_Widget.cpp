@@ -66,7 +66,7 @@ Graphic_Widget::Graphic_Widget(const Graphic_Widget& gw) : Widget()
 	else if (gw.m_bitmap_label)
 	{
 		m_bitmap_label = new QLabel(this);
-		m_bitmap_label->setPixmap(QPixmap(*gw.m_bitmap_label->pixmap()));
+		m_bitmap_label->setPixmap(QPixmap(gw.m_bitmap_label->pixmap()));
 		m_bitmap_label->setFixedSize(gw.m_bitmap_label->size());
 
 	}

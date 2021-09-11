@@ -51,6 +51,15 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_apply_button->set_ACW_primary("outline_caw", false);
 	m_apply_button->set_ACW_primary("corner_color_caw", false);
 
+	connect(m_apply_button, &Button::clicked, [this] {
+		if (m_preview_window)
+			m_preview_window->copy_attribute_values_to(m_current_theme);
+
+		layersApp->reapply_theme();
+		layersApp->save_theme(*m_current_theme);
+		layersApp->issue_update();
+	});
+
 	m_collapsed_button->hide();
 	m_collapsed_button->setFixedWidth(50);
 	m_collapsed_button->disable_graphic_hover_color();
@@ -103,10 +112,11 @@ Button* Customize_Menu::apply_button() const
 
 void Customize_Menu::init_preview_window()
 {
-	m_preview_window = new Window("", true);
+	m_preview_window = new Window;
 	m_preview_window->setMinimumSize(500, 400);
 	m_preview_window->setMaximumSize(800, 600);
 	m_preview_window->titlebar()->exit_button()->set_disabled();
+	m_preview_window->customize_menu()->apply_button()->set_disabled();
 	m_preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 
 	m_preview_window->initialize_and_acquire_panels(m_customize_panels);
@@ -471,7 +481,7 @@ void Customize_Menu::setup_layout()
 
 	// Sidebar
 
-	m_sidebar_layout->setMargin(0);
+	m_sidebar_layout->setContentsMargins(0, 0, 0, 0);
 	m_sidebar_layout->setSpacing(0);
 
 	m_sidebar->setLayout(m_sidebar_layout);
@@ -481,7 +491,7 @@ void Customize_Menu::setup_layout()
 
 	// Preview Widget and Layout
 
-	m_preview_layout->setMargin(32);
+	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
 
 	m_preview_widget->setLayout(m_preview_layout);
@@ -493,14 +503,14 @@ void Customize_Menu::setup_layout()
 
 	QVBoxLayout* main_vbox = new QVBoxLayout;
 
-	main_vbox->setMargin(0);
+	main_vbox->setContentsMargins(0, 0, 0, 0);
 	main_vbox->setSpacing(0);
 	main_vbox->addWidget(m_topbar);
 	main_vbox->addWidget(m_preview_scroll_area);
 
 	// Main Layout
 
-	m_main_layout->setMargin(0);
+	m_main_layout->setContentsMargins(0, 0, 0, 0);
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_sidebar_scroll_area);
 	m_main_layout->addLayout(main_vbox);

@@ -245,7 +245,7 @@ void Settings_Menu::setup_layout()
 {
 	// Sidebar
 
-	m_sidebar_layout->setMargin(0);
+	m_sidebar_layout->setContentsMargins(0, 0, 0, 0);
 	m_sidebar_layout->setSpacing(0);
 	m_sidebar_layout->addStretch();
 
@@ -255,7 +255,7 @@ void Settings_Menu::setup_layout()
 
 	Horizontal_Layout* main_layout = new Horizontal_Layout;
 
-	main_layout->setMargin(0);
+	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addWidget(m_sidebar);
 	main_layout->addWidget(m_app_preferences_settings_panel);

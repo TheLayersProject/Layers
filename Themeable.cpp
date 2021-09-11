@@ -308,7 +308,7 @@ QString& Themeable::theme_tag()
 			m_theme_tag += supplemental_prefix + "/";
 		}
 
-		m_theme_tag += m_name;
+		if (m_name) m_theme_tag += *m_name;
 	}
 
 	return m_theme_tag;

@@ -1563,6 +1563,124 @@ Theme Layers::build_blue_theme()
 	// Create New Theme Dialog -> Create Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
 
+	// Update Dialog
+	blue_theme.add_stateless_attribute("layers/update_dialog", "background_color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_color", QColor("#4571A2"));
+	blue_theme.add_stateless_attribute("layers/update_dialog", "border_thickness", 10);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tl", 10);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tr", 10);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_bl", 10);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+
+	// Update Dialog -> Titlebar
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#253859"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tl",
+		inner_radius(
+			blue_theme.stateless_attribute("layers/update_dialog", "corner_radius_tl")->value().value<int>(),
+			blue_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tr",
+		inner_radius(
+			blue_theme.stateless_attribute("layers/update_dialog", "corner_radius_tr")->value().value<int>(),
+			blue_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Window Title Label
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor(Qt::lightGray));
+
+	// Update Dialog -> Titlebar -> Exit Button
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_hover_color", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_color", QColor("#536c9a"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_hover_color", QColor("#E33034"));
+
+	// Update Dialog -> Message Label
+	blue_theme.add_stateless_attribute("layers/update_dialog/message_label", "color", QColor("#4571a2"));
+
+	// Update Dialog -> Remind Me Later Button
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color", QColor("#4571a2"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_disabled", false);
+	//blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tl", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tr", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_bl", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Remind Me Later Button -> Text Label
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#001122"));
+
+	// Update Dialog -> Update Button
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color", QColor("#61ad50"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover", QColor("#6fc65b"));
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_disabled", false);
+	//blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tl", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tr", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_bl", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Update Button -> Text Label
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));
+
 	return blue_theme;
 }
 
@@ -3121,6 +3239,122 @@ Theme Layers::build_dark_theme()
 
 	// Create New Theme Dialog -> Create Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
+
+	// Update Dialog
+	dark_theme.add_stateless_attribute("layers/update_dialog", "background_color", QColor("#2e2e2e"));
+	dark_theme.add_stateless_attribute("layers/update_dialog", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog", "border_color", QColor("#6a6a6a"));
+	dark_theme.add_stateless_attribute("layers/update_dialog", "border_thickness", 10);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tl", 10);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tr", 10);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_bl", 10);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+
+	// Update Dialog -> Titlebar
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#363636"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tl",
+		inner_radius(
+			dark_theme.stateless_attribute("layers/update_dialog", "corner_radius_tl")->value().value<int>(),
+			dark_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tr",
+		inner_radius(
+			dark_theme.stateless_attribute("layers/update_dialog", "corner_radius_tr")->value().value<int>(),
+			dark_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Window Title Label
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor("#e3e3e3"));
+
+	// Update Dialog -> Titlebar -> Exit Button
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_hover_color", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_color", QColor("#6a6a6a"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_hover_color", QColor("#E33034"));
+
+	// Update Dialog -> Message Label
+	dark_theme.add_stateless_attribute("layers/update_dialog/message_label", "color", QColor("#6a6a6a"));
+
+	// Update Dialog -> Remind Me Later Button
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color", QColor("#6a6a6a"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover", QColor("#989898"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_disabled", false);
+	//dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tl", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tr", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_bl", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Remind Me Later Button -> Text Label
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#2e2e2e"));
+
+	// Update Dialog -> Update Button
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color", QColor("#61ad50"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover", QColor("#6fc65b"));
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_disabled", false);
+	//dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tl", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tr", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_bl", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Update Button -> Text Label
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));
 
 	return dark_theme;
 }
@@ -4682,6 +4916,122 @@ Theme Layers::build_light_theme()
 
 	// Create New Theme Dialog -> Create Button -> Text Label
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
+
+	// Update Dialog
+	light_theme.add_stateless_attribute("layers/update_dialog", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/update_dialog", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog", "border_color", QColor(Qt::lightGray));
+	light_theme.add_stateless_attribute("layers/update_dialog", "border_thickness", 10);
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tl", 10);
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_tr", 10);
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_bl", 10);
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+
+	// Update Dialog -> Titlebar
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#e1e1e1"));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tl",
+		inner_radius(
+			light_theme.stateless_attribute("layers/update_dialog", "corner_radius_tl")->value().value<int>(),
+			light_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_tr",
+		inner_radius(
+			light_theme.stateless_attribute("layers/update_dialog", "corner_radius_tr")->value().value<int>(),
+			light_theme.stateless_attribute("layers/update_dialog", "border_thickness")->value().value<int>()));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Window Title Label
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor("#2e2e2e"));
+
+	// Update Dialog -> Titlebar -> Exit Button
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+
+	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_hover_color", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_color", QColor("#c5c5c5"));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "common_hover_color", QColor("#f25557"));
+
+	// Update Dialog -> Message Label
+	light_theme.add_stateless_attribute("layers/update_dialog/message_label", "color", QColor("#2e2e2e"));
+
+	// Update Dialog -> Remind Me Later Button
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color", QColor("#c0c0c0"));
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover", QColor("#e4e4e4"));
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_disabled", false);
+	//light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "background_color_hover_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tl", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_tr", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_bl", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Remind Me Later Button -> Text Label
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#2e2e2e"));
+
+	// Update Dialog -> Update Button
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color", QColor("#61ad50"));
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover", QColor("#6fc65b"));
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_disabled", false);
+	//light_theme.add_stateless_attribute("layers/update_dialog/update_button", "background_color_hover_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tl", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_tr", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_bl", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+
+	// Update Dialog -> Update Button -> Text Label
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));
 
 	return light_theme;
 }

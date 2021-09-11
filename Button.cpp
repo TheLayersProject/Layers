@@ -228,7 +228,7 @@ void Button::set_font_size(int size)
 
 void Button::set_padding(int padding)
 {
-	main_layout->setMargin(padding);
+	main_layout->setContentsMargins(padding, padding, padding, padding);
 
 	resize();
 }

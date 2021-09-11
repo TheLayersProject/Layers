@@ -2,6 +2,7 @@
 
 using Layers::Button;
 using Layers::Combobox;
+using Layers::Theme;
 using Layers::Themes_Settings_Panel;
 
 Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
@@ -21,6 +22,13 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 	m_theme_combobox->set_name("theme_combobox");
 	m_theme_combobox->set_proper_name("Theme Combobox");
 	m_theme_combobox->set_font_size(15);
+
+	connect(m_theme_combobox, SIGNAL(item_replaced(const QString&, const QString&)),
+		layersApp, SLOT(rename_theme(const QString&, const QString&)));
+
+	connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
+		layersApp->apply_theme(layersApp->themes()[m_theme_combobox->current_item()]);
+	});
 
 	m_new_theme_button->set_name("new_theme_button");
 	m_new_theme_button->set_proper_name("New Theme Button");
@@ -75,6 +83,16 @@ void Themes_Settings_Panel::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_delete_theme_button);
 	add_child_themeable_reference(m_theme_info_button);
 	add_child_themeable_reference(m_control_separator);
+}
+
+void Themes_Settings_Panel::apply_theme(Theme& theme)
+{
+	if (theme.is_custom())
+		show_custom_theme_buttons();
+	else
+		show_custom_theme_buttons(false);
+
+	Themeable::apply_theme(theme);
 }
 
 Button* Themes_Settings_Panel::customize_theme_button() const

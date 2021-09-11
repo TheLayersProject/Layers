@@ -107,7 +107,7 @@ void Menu_Label_Layer::init_attribute_widgets()
 
 void Menu_Label_Layer::setup_layout()
 {
-	main_layout->setMargin(0);
+	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addWidget(m_back_button);
 	main_layout->addWidget(m_icon_button);

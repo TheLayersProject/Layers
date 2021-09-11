@@ -38,7 +38,7 @@ Create_New_Theme_Dialog::Create_New_Theme_Dialog(QWidget* parent) : QDialog(pare
 
 		for (const QChar& character : m_theme_name_line_edit->text())
 		{
-			if (character != " ") has_char_other_than_space = true;
+			if (character != ' ') has_char_other_than_space = true;
 		}
 
 		if (!has_char_other_than_space)
@@ -105,7 +105,9 @@ void Create_New_Theme_Dialog::set_current_start_theme_name(const QString& theme_
 
 void Create_New_Theme_Dialog::update_theme_dependencies()
 {
-	m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
 	m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
@@ -166,7 +168,7 @@ void Create_New_Theme_Dialog::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_theme_name_line_edit);
 }
 
-bool Create_New_Theme_Dialog::nativeEvent(const QByteArray& eventType, void* message, long* result)
+bool Create_New_Theme_Dialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
 	MSG* msg = static_cast<MSG*>(message);
 
@@ -428,7 +430,9 @@ void Create_New_Theme_Dialog::setup_layout()
 	inner_layout->setAlignment(m_create_button, Qt::AlignRight);
 
 	// Main Layout
-	m_main_layout->setMargin(m_attribute_set.attribute_value("border_thickness")->value<int>());
+	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+
+	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addLayout(inner_layout);
