@@ -32,9 +32,9 @@ A list of project goals is still in progress.  Once it is completed, a link will
 
 Grab the latest version of Layers from the downloads below.  Follow the standard library linking process for your IDE.
 
-## Downloads
+## Download
 
-* [Layers-2.0.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.0.0a/Layers-2.0.0a.zip)
+* [Layers-2.2.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.2.0a/Layers-2.2.0a.zip)
 
 ## Authors
 
