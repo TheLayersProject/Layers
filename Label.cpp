@@ -44,10 +44,82 @@ void Label::resize()
 {
 	QFontMetrics font_metrics(font());
 
-	int text_width = font_metrics.horizontalAdvance(text()) + 2;
-	int text_height = font_metrics.height();
+	int unwrapped_width = m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
+	int unwrapped_height = m_padding_top + font_metrics.height() + m_padding_bottom;
 
-	setFixedSize(m_padding_left + text_width + m_padding_right, m_padding_top + text_height + m_padding_bottom);
+	if (unwrapped_width > m_available_width && wordWrap())
+	{
+		m_wrapping = true;
+
+		QLabel::setFixedWidth(m_available_width);
+
+		build_wrapped_lines();
+
+		int wrapped_height = m_padding_top + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
+
+		QLabel::setFixedHeight(wrapped_height);
+	}
+	else
+	{
+		m_wrapping = false;
+
+		QLabel::setFixedSize(unwrapped_width, unwrapped_height);
+	}
+}
+
+void Label::build_wrapped_lines()
+{
+	m_wrapped_lines.clear();
+
+	QFontMetrics font_metrics(font());
+
+	QList<QString> lines = text().split("\n");
+
+	for (QString& line : lines)
+	{
+		int line_width = font_metrics.horizontalAdvance(line) + 2;
+
+		if (line_width > width())
+		{
+			while (line != "")
+			{
+				QString sub_line = line;
+
+				QList<QString> sub_line_words = sub_line.split(" ");
+
+				while (font_metrics.horizontalAdvance(sub_line) + 2 > width() && !sub_line_words.isEmpty())
+				{
+					sub_line = sub_line.left(sub_line.count() - sub_line_words.takeLast().count() - 1);
+				}
+
+				m_wrapped_lines.append(sub_line);
+
+				line.remove(0, sub_line.count() + 1);
+			}
+		}
+		else m_wrapped_lines.append(line);
+	}
+}
+
+void Label::setMaximumWidth(int maxw)
+{
+	QLabel::setMaximumWidth(maxw);
+
+	resize();
+}
+
+void Label::setWordWrap(bool on)
+{
+	QLabel::setWordWrap(on);
+
+	resize();
+}
+
+void Label::set_available_width(int available_width)
+{
+	m_available_width = available_width;
+
+	resize();
 }
 
 void Label::set_font_size(int size)
@@ -78,6 +150,13 @@ void Label::set_padding(int left, int top, int right, int bottom)
 	resize();
 }
 
+int Label::width_unwrapped()
+{
+	QFontMetrics font_metrics(font());
+
+	return m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
+}
+
 void Label::setText(const QString& text)
 {
 	QLabel::setText(text);
@@ -102,56 +181,18 @@ void Label::paintEvent(QPaintEvent* event)
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 	painter.setRenderHint(QPainter::TextAntialiasing);
-	//painter.setRenderHint(QPainter::HighQualityAntialiasing);
 	painter.setFont(label_font);
 	painter.setPen(pen);
 
 	if (!m_attribute_set.attribute_value("background_disabled")->value<bool>()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
 
-	if (wordWrap())
+	if (wordWrap() && m_wrapping)
 	{
-		qDebug() << "Painting with word wrap!";
-
 		QFontMetrics font_metrics(font());
 
-		QList<QString> draw_lines;
-
-		QList<QString> lines = text().split("\n");
-
-		for (QString& line : lines)
+		for (int i = 0; i < m_wrapped_lines.count(); i++)
 		{
-			qDebug() << "Line:" << line;
-
-			int line_width = font_metrics.horizontalAdvance(line) + 2;
-
-			qDebug() << "Line Width:" << line_width;
-
-			if (line_width > width())
-			{
-				qDebug() << "\tLINE NEEDS TO BE SPLIT:";
-
-				while (line != "")
-				{
-					QString sub_line = line;
-
-					QList<QString> sub_line_words = sub_line.split(" ");
-
-					while (font_metrics.horizontalAdvance(sub_line) + 2 > width())
-					{
-						sub_line = sub_line.left(sub_line.count() - sub_line_words.takeLast().count() - 1);
-					}
-
-					draw_lines.append(sub_line);
-
-					line.remove(0, sub_line.count() + 1);
-				}
-			}
-			else draw_lines.append(line);
-		}
-
-		for (int i = 0; i < draw_lines.count(); i++)
-		{
-			path.addText(m_padding_left, m_padding_top + label_font.pointSizeF() + (font_metrics.height() * i), label_font, draw_lines[i]);
+			path.addText(m_padding_left, m_padding_top + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
 		}
 	}
 	else

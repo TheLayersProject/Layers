@@ -322,18 +322,18 @@ void Application::init_themes()
 			m_app_themes_dir.remove(file_name);
 
 	// Load prebuilt theme files
-	m_themes.insert("Blue", load_theme(QFile(":/themes/blue")));
-	m_themes.insert("Dark", load_theme(QFile(":/themes/dark")));
-	m_themes.insert("Light", load_theme(QFile(":/themes/light")));
+	//m_themes.insert("Blue", load_theme(QFile(":/themes/blue")));
+	//m_themes.insert("Dark", load_theme(QFile(":/themes/dark")));
+	//m_themes.insert("Light", load_theme(QFile(":/themes/light")));
 
 	// Build new theme files
-	//m_themes.insert("Blue", build_blue_theme());
-	//m_themes.insert("Dark", build_dark_theme());
-	//m_themes.insert("Light", build_light_theme());
+	m_themes.insert("Blue", build_blue_theme());
+	m_themes.insert("Dark", build_dark_theme());
+	m_themes.insert("Light", build_light_theme());
 
-	//save_theme(m_themes["Blue"]);
-	//save_theme(m_themes["Dark"]);
-	//save_theme(m_themes["Light"]);
+	save_theme(m_themes["Blue"]);
+	save_theme(m_themes["Dark"]);
+	save_theme(m_themes["Light"]);
 
 	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
 	{

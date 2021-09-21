@@ -232,7 +232,7 @@ void Window::new_theme_clicked()
 
 	m_create_new_theme_dialog->show();
 
-	if (m_create_new_theme_dialog->exec())
+	if (m_create_new_theme_dialog->exec() && !m_functionality_disabled)
 	{
 		layersApp->create_theme(m_create_new_theme_dialog->new_theme_name(), m_create_new_theme_dialog->copy_theme_name());
 

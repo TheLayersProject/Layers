@@ -114,7 +114,7 @@
     <ClCompile Include="App_Preferences_Settings_Panel.cpp" />
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="Attribute_Widgets\Corner_Radii_Attribute_Widget.cpp" />
-    <ClCompile Include="Download.cpp" />
+    <ClCompile Include="Downloader.cpp" />
     <ClCompile Include="Mini_Slider.cpp" />
     <ClCompile Include="Old\2.1.0a\Attribute_2_1_0_a.cpp" />
     <ClCompile Include="Old\2.1.0a\Attribute_Set_2_1_0_a.cpp" />

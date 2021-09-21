@@ -590,6 +590,8 @@ namespace Layers
 
 		void set_ACW_primary(const QString& ACW_name, bool is_primary);
 
+		void set_functionality_disabled(bool disabled = true);
+
 		void set_stateful_attribute_value(
 			const QString& state,
 			const QString& attribute_name,
@@ -864,6 +866,7 @@ namespace Layers
 		*/
 		virtual void init_child_themeable_reference_list();
 
+		bool m_functionality_disabled{ false };
 		bool m_tag_prefixes_assigned{ false };
 		bool m_shared_attributes{ false };
 		bool m_is_stateful{ false };
@@ -1191,6 +1194,8 @@ namespace Layers
 		void set_icon(Graphic_Widget* icon);
 		void set_size(QSize size);
 
+		SVG_Widget* svg() const;
+
 	protected:
 		void init_attribute_widgets();
 
@@ -1214,9 +1219,18 @@ namespace Layers
 
 		void resize();
 
+		void build_wrapped_lines();
+
+		void setMaximumWidth(int maxw);
+
+		void setWordWrap(bool on);
+
+		void set_available_width(int available_width);
 		void set_font_size(int size);
 		void set_hovering(bool cond = true);
 		void set_padding(int left, int top, int right, int bottom);
+
+		int width_unwrapped();
 
 	public slots:
 		void setText(const QString& text);
@@ -1225,9 +1239,14 @@ namespace Layers
 		void init_attributes();
 		void paintEvent(QPaintEvent* event);
 
+		QList<QString> m_wrapped_lines;
+
 		QPainter painter;
 
 		bool m_hovering{ false };
+		bool m_wrapping{ false };
+
+		int m_available_width{ 16777215 };
 
 		int m_padding_left{ 0 };
 		int m_padding_top{ 0 };
@@ -1286,14 +1305,19 @@ namespace Layers
 		Button(const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 		Button(Graphic_Widget* graphic_before, Graphic_Widget* graphic_after, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 
+		void adjust_height_and_label_width();
+
 		void disable_graphic_hover_color(bool cond = true);
 		void disable_text_hover_color(bool cond = true);
 
 		bool disabled() const;
 
+		Graphic_Widget* graphic() const;
+
 		void resize();
 
 		void set_attribute_value(const QString& attribute, QVariant value);
+		void set_available_width(int available_width);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
 		void set_padding(int padding);
@@ -1326,6 +1350,8 @@ namespace Layers
 
 		bool m_use_graphic_hover_color{ true };
 		bool m_use_text_hover_color{ true };
+
+		int m_available_width{ 16777215 };
 
 		Graphic_Widget* m_graphic{ nullptr };
 		Graphic_Widget* m_graphic_after{ nullptr };
@@ -1383,6 +1409,7 @@ namespace Layers
 		void set_current_item(const QString& item);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
+		void set_item_renaming_disabled(bool disable = true);
 		void setFixedSize(const QSize& s);
 		void setFixedSize(int w, int h);
 
@@ -1406,8 +1433,8 @@ namespace Layers
 		void setup_layout();
 
 		bool m_alphabetize{ false };
-
 		bool m_disabled{ false };
+		bool m_item_renaming_disabled{ true };
 
 		Combobox_Item* m_control_combobox_item{ new Combobox_Item("") };
 		Combobox_Item* m_current_combobox_item{ nullptr };
@@ -1464,10 +1491,13 @@ namespace Layers
 	{
 		Q_OBJECT
 
-	public:
-		Slider(int range_start, int range_end, QWidget* parent = nullptr);
+	signals:
+		void value_changed(int value);
 
-		int range_difference();
+	public:
+		Slider(int limit, QWidget* parent = nullptr);
+
+		void set_value(int value);
 
 		void update_handle_pos();
 		void update_theme_dependencies();
@@ -1484,8 +1514,7 @@ namespace Layers
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
 
-		int m_range_start{ 0 };
-		int m_range_end{ 99 };
+		int m_limit{ 99 };
 		int m_value_on_click{ 0 };
 
 		bool m_dragging_handle{ false };
@@ -1498,9 +1527,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Mini_Slider(int range_start, int range_end, QWidget* parent = nullptr);
-
-		int range_difference();
+		Mini_Slider(int limit, QWidget* parent = nullptr);
 
 		void update_handle_pos();
 		void update_theme_dependencies();
@@ -1517,8 +1544,7 @@ namespace Layers
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
 
-		int m_range_start{ 0 };
-		int m_range_end{ 99 };
+		int m_limit{ 99 };
 		int m_mouse_move_scale{ 5 };
 		int m_value_on_click{ 0 };
 
@@ -1727,10 +1753,10 @@ namespace Layers
 
 		Attribute_Widget* m_attribute_widget;
 
-		Mini_Slider* m_tl_slider{ new Mini_Slider(0, 30) };
-		Mini_Slider* m_tr_slider{ new Mini_Slider(0, 30) };
-		Mini_Slider* m_bl_slider{ new Mini_Slider(0, 30) };
-		Mini_Slider* m_br_slider{ new Mini_Slider(0, 30) };
+		Mini_Slider* m_tl_slider{ new Mini_Slider(30) };
+		Mini_Slider* m_tr_slider{ new Mini_Slider(30) };
+		Mini_Slider* m_bl_slider{ new Mini_Slider(30) };
+		Mini_Slider* m_br_slider{ new Mini_Slider(30) };
 
 		Line_Editor* m_tl_line_editor{ new Line_Editor };
 		Line_Editor* m_tr_line_editor{ new Line_Editor };
@@ -1878,9 +1904,11 @@ namespace Layers
 	public:
 		Customize_Panel(Themeable* themeable, QWidget* parent = nullptr);
 
-		void add_attribute_widget(Attribute_Widget* attribute_widget, bool put_in_stateful_layout = false);
+		void add_attribute_widget(Attribute_Widget* attribute_widget);
 
 		void add_element_button(Button* button);
+
+		void setup_layout();
 
 		void update_attribute_widget_background_colors();
 
@@ -1889,8 +1917,7 @@ namespace Layers
 		void init_child_themeable_reference_list();
 
 	private:
-		void setup_layout();
-
+		bool m_layout_setup{ false };
 		bool m_showing_primary{ true };
 
 		QHBoxLayout* m_states_layout{ new QHBoxLayout };

@@ -36,8 +36,7 @@ Update_Dialog::Update_Dialog(const QString& current_version_tag, const QString& 
 
 	m_message_label->set_name("message_label");
 	m_message_label->set_font_size(15);
-	m_message_label->setFixedWidth(475);
-	m_message_label->setFixedHeight(200); // Consider a way to get a recommended height from the label
+	m_message_label->set_available_width(475);
 	m_message_label->setWordWrap(true);
 
 	setup_layout();

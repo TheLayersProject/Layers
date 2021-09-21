@@ -55,6 +55,8 @@ Customize_Panel* Themeable::init_customize_panel()
 
 	init_attribute_widgets();
 
+	m_customize_panel->setup_layout();
+
 	m_customize_panel->update_attribute_widget_background_colors();
 	
 	return m_customize_panel;
@@ -136,6 +138,11 @@ void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
 		m_attribute_widgets[ACW_name]->set_primary(is_primary);
 	else
 		m_ACW_pre_init_primary_values[ACW_name] = is_primary;
+}
+
+void Themeable::set_functionality_disabled(bool disabled)
+{
+	m_functionality_disabled = disabled;
 }
 
 void Themeable::set_stateful_attribute_value(const QString& state, const QString& attribute_name, QVariant value, bool update)

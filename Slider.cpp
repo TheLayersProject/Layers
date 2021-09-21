@@ -2,8 +2,8 @@
 
 using Layers::Slider;
 
-Slider::Slider(int range_start, int range_end, QWidget* parent) :
-	m_range_start{ range_start }, m_range_end{ range_end },
+Slider::Slider(int limit, QWidget* parent) :
+	m_limit{ limit },
 	Widget(parent)
 {
 	init_attributes();
@@ -45,14 +45,18 @@ void Slider::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_handle);
 }
 
-int Slider::range_difference()
+void Slider::set_value(int value)
 {
-	return m_range_end - m_range_start;
+	set_stateless_attribute_value("value", value);
+	update_handle_pos();
+	share_attributes();
+
+	emit value_changed(value);
 }
 
 void Slider::update_handle_pos()
 {
-	double drag_increment = double(width() - m_handle->width()) / double(range_difference());
+	double drag_increment = double(width() - m_handle->width()) / double(m_limit);
 
 	m_handle->move(drag_increment * m_attribute_set.attribute_value("value")->value<int>(), m_handle->y());
 }
@@ -92,33 +96,27 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 
 		QPoint delta = mouse_event->pos() - m_mouse_click_position;
 
-		double drag_increment = double(m_bar->width() - m_handle->width()) / double(range_difference());
+		double drag_increment = double(m_bar->width() - m_handle->width()) / double(m_limit);
 
 		int new_value = m_value_on_click + int(delta.x() / drag_increment);
 
-		if (new_value < m_range_start)
+		if (new_value < 0)
 		{
-			if (m_attribute_set.attribute_value("value")->value<int>() != m_range_start)
+			if (m_attribute_set.attribute_value("value")->value<int>() != 0)
 			{
-				set_stateless_attribute_value("value", m_range_start);
-				update_handle_pos();
-				share_attributes();
+				set_value(0);
 			}
 		}
-		else if (new_value > m_range_end)
+		else if (new_value > m_limit)
 		{
-			if (m_attribute_set.attribute_value("value")->value<int>() != m_range_end)
+			if (m_attribute_set.attribute_value("value")->value<int>() != m_limit)
 			{
-				set_stateless_attribute_value("value", m_range_end);
-				update_handle_pos();
-				share_attributes();
+				set_value(m_limit);
 			}
 		}
 		else
 		{
-			set_stateless_attribute_value("value", new_value);
-			update_handle_pos();
-			share_attributes();
+			set_value(new_value);
 		}
 	}
 

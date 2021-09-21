@@ -170,6 +170,11 @@ void Combobox::set_font_size(int size)
 		combobox_item->set_font_size(size);
 }
 
+void Combobox::set_item_renaming_disabled(bool disable)
+{
+    m_item_renaming_disabled = disable;
+}
+
 void Combobox::setFixedSize(const QSize& s)
 {
     Widget::setFixedSize(s);
@@ -281,7 +286,7 @@ bool Combobox::eventFilter(QObject* object, QEvent* event)
             line_edit_return_pressed();
         }
     }
-    if (!m_disabled)
+    if (!m_disabled && !m_item_renaming_disabled)
     {
         if (event->type() == QEvent::MouseButtonDblClick)
         {

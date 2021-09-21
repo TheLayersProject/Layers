@@ -92,6 +92,11 @@ bool Button::disabled() const
 	return m_disabled;
 }
 
+Graphic_Widget* Button::graphic() const
+{
+	return m_graphic;
+}
+
 void Button::init()
 {
 	init_child_themeable_reference_list();
@@ -112,7 +117,11 @@ void Button::init()
 		m_graphic->set_proper_name("Graphic");
 	}
 
-	if (m_text_label) m_text_label->set_name("text_label");
+	if (m_text_label)
+	{
+		m_text_label->set_name("text_label");
+		m_text_label->setWordWrap(true);
+	}
 
 	if (m_graphic_after)
 	{
@@ -150,47 +159,58 @@ void Button::init_child_themeable_reference_list()
 
 void Button::resize()
 {
+	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int content_height = 0;
+	int graphic_width = 0;
+	int layout_spacing = 0;
 	int margin_left = 0;
 	int margin_top = 0;
 	int margin_right = 0;
 	int margin_bottom = 0;
-	int graphic_width = 0;
-	int text_width = 0;
-	int content_height = 0;
-	int content_spacing = 0;
-	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int text_label_width = 0;
 
 	main_layout->getContentsMargins(&margin_left, &margin_top, &margin_right, &margin_bottom);
 
+	if (m_graphic && m_text_label)
+	{
+		layout_spacing = main_layout->spacing();
+	}
+
 	if (m_graphic) graphic_width = m_graphic->width();
 
-	if (m_text_label) text_width = m_text_label->width();
+	if (m_text_label) text_label_width = m_text_label->width();
+
+	int calculated_width = border_thickness + margin_left + graphic_width + layout_spacing + text_label_width + margin_right + border_thickness;
+
+	if (calculated_width > m_available_width) calculated_width = m_available_width;
+
+	if (m_text_label)
+	{
+		int text_label_available_width = m_available_width - margin_left - margin_right;
+
+		if (m_graphic)
+			text_label_available_width -= graphic_width + layout_spacing;
+
+		if (text_label_available_width < 0) text_label_available_width = 0;
+
+		m_text_label->set_available_width(text_label_available_width);
+	}
 
 	if (m_graphic && m_text_label)
 	{
 		if (m_graphic->height() > m_text_label->height()) content_height = m_graphic->height();
 		else content_height = m_text_label->height();
-
-		content_spacing = main_layout->spacing();
 	}
 	else if (m_graphic) content_height = m_graphic->height();
 	else if (m_text_label) content_height = m_text_label->height();
 
-	setFixedWidth(border_thickness + margin_left + graphic_width + content_spacing + text_width + margin_right + border_thickness);
-	setFixedHeight(border_thickness + margin_top + content_height + margin_bottom + border_thickness);
+	int calculated_height = border_thickness + margin_top + content_height + margin_bottom + border_thickness;
 
-	if (width() < 45)
-	{
-		if (m_auto_touch_target_compliance) setFixedWidth(45);
-		else qDebug() << "WARNING: Button has a width (" + QString::number(width()) + ") "
-			"that is not in compliance with the recommended minimum touch target size of 45px.";
-	}
-	if (height() < 45)
-	{
-		if (m_auto_touch_target_compliance) setFixedHeight(45);
-		else qDebug() << "WARNING: Button has a height (" + QString::number(height()) + ") "
-			"that is not in compliance with the recommended minimum touch target size of 45px.";
-	}
+	if (calculated_width < 45 && m_auto_touch_target_compliance) calculated_width = 45;
+	if (calculated_height < 45 && m_auto_touch_target_compliance) calculated_height = 45;
+
+	setFixedWidth(calculated_width);
+	setFixedHeight(calculated_height);
 }
 
 void Button::set_attribute_value(const QString& attribute, QVariant value)
@@ -201,6 +221,13 @@ void Button::set_attribute_value(const QString& attribute, QVariant value)
 	if (attribute.startsWith("#") ||
 		attribute == "text_color" ||
 		attribute == "text_color_hover") share_attributes();
+}
+
+void Button::set_available_width(int available_width)
+{
+	m_available_width = available_width;
+
+	resize();
 }
 
 void Button::set_disabled(bool cond)
@@ -243,6 +270,8 @@ void Button::set_padding(int left, int top, int right, int bottom)
 void Button::set_text_padding(int left, int top, int right, int bottom)
 {
 	if (m_text_label) m_text_label->set_padding(left, top, right, bottom);
+
+	resize();
 }
 
 int Button::left_padding() const
@@ -301,7 +330,7 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			if (!m_disabled) emit clicked();
+			if (!m_disabled && !m_functionality_disabled) emit clicked();
 
 			if (m_graphic_after)
 			{

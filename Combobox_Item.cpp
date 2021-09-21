@@ -80,7 +80,7 @@ void Combobox_Item::init_attribute_widgets()
 		m_customize_panel->add_attribute_widget(outline_caw);
 		m_customize_panel->add_attribute_widget(corner_color_caw);
 		m_customize_panel->add_attribute_widget(border_awc);
-		m_customize_panel->add_attribute_widget(corner_radii_attribute_widget, true);
+		m_customize_panel->add_attribute_widget(corner_radii_attribute_widget);
 
 		// Add attribute widget references
 		m_attribute_widgets["border_awc"] = border_awc;

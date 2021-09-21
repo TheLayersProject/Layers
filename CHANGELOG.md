@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## Alpha Phase
 
+### [Layers 2.3.0a] - Unreleased
+- Collapsed text button widget is now a different color to prevent the text buttons from disappearing 
+- Fixed outline color and corner color customizations
+- Fixed App Preferences settings panel customizations
+- Fixed child widget stateful attributes being placed under the stateless label
+- Fixed some issues where the preview window had too much functionality enabled
+- Combobox items are no longer editable by default
+- Button text can word wrap now
+
 ### [Layers 2.2.0a] - 2021-09-11
 - Migrated to Qt 6
 - Created a mechanism to update the application during start up

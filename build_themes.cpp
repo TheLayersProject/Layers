@@ -23,6 +23,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/window", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/window", "border_thickness", 15);
 	blue_theme.add_stateless_attribute("layers/window", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/window", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/window", "corner_color", QColor(Qt::black));
 
 	// Titlebar
 	blue_theme.add_stateless_attribute("layers/titlebar", "background_color", QColor(Qt::white));
@@ -38,6 +40,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Window Title Label
 	blue_theme.add_stateless_attribute("layers/titlebar/window_title_label", "color", QColor(Qt::lightGray));
@@ -56,6 +60,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "background_color", QColor(Qt::white));
@@ -71,6 +77,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic/svg", "use_common_color", true);
@@ -92,6 +100,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "background_color", QColor(Qt::white));
@@ -107,6 +117,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic/svg", "use_common_color", true);
@@ -128,6 +140,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "background_color", QColor(Qt::white));
@@ -143,6 +157,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic/svg", "use_common_color", true);
@@ -164,6 +180,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -179,6 +197,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -200,6 +220,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "background_color", QColor(Qt::white));
@@ -215,6 +237,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "background_color", QColor(Qt::white));
@@ -230,6 +254,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic/svg", "use_common_color", true);
@@ -251,6 +277,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "background_color", QColor(Qt::white));
@@ -266,6 +294,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic/svg", "use_common_color", true);
@@ -289,6 +319,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "background_color", QColor("#4571a2"));
@@ -304,6 +336,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab
 	blue_theme.add_stateful_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "background_color", {
@@ -322,6 +356,7 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color", QColor(Qt::black));
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color", QColor("#001122"));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon
@@ -338,6 +373,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon/svg", "use_common_color", true);
@@ -371,6 +408,7 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color", QColor(Qt::black));
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color", QColor("#001122"));
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon
@@ -387,6 +425,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon/svg", "use_common_color", true);
@@ -402,6 +442,23 @@ Theme Layers::build_blue_theme()
 		{ "Selected", QColor("#4571a2") }
 		});
 
+	// Settings Menu -> App Preferences Settings Panel
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color", QColor(Qt::black));
+
 	// Settings Menu -> Themes Settings Panel
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_color", QColor(Qt::white));
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_disabled", true);
@@ -416,6 +473,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> "Theme" Label
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_label", "color", QColor("#4571a2"));
@@ -434,6 +493,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color", QColor(Qt::black));
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "line_edit_text_color", QColor("#001122")); // TODO: Change value?
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Current Item Label
@@ -453,6 +514,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "background_color", QColor("#274b73"));
@@ -489,6 +552,8 @@ Theme Layers::build_blue_theme()
 		});
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items -> Label
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item/label", "color", QColor("#001122"));
@@ -507,6 +572,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "background_color", QColor(Qt::white));
@@ -522,6 +589,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -537,6 +606,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic/svg", "use_common_color", true);
@@ -558,6 +629,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -573,6 +646,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic/svg", "use_common_color", true);
@@ -594,6 +669,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -609,6 +686,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic/svg", "use_common_color", true);
@@ -630,6 +709,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "background_color", QColor(Qt::white));
@@ -645,6 +726,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic/svg", "use_common_color", true);
@@ -665,6 +748,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_menu", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
 	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
@@ -680,6 +765,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
@@ -700,6 +787,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#001122"));
@@ -719,6 +808,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "background_color", QColor("#4571a2"));
@@ -734,6 +825,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Collapsed Button
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor("#6aaaf7"));
@@ -750,9 +843,33 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color", QColor(Qt::black));
+
+	// Customize Panel -> Topbar -> Collapsed Button -> Graphic
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color", QColor(Qt::black));
+
+	// Customize Panel -> Topbar -> Collapsed Button -> Graphic -> SVG
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_color", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_hover_color", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "common_color", QColor("#001122"));
 
 	// Customize Menu -> Topbar -> Collapsed Widget
-	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#274b73"));
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
@@ -766,6 +883,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
@@ -782,6 +901,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -800,6 +921,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Stateful Attributes Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor("#6aaaf7"));
@@ -831,6 +954,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "line_edit_text_color", QColor("#4571a2"));
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Current Item Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/current_item_label", "color", QColor("#4571a2"));
@@ -849,6 +974,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "background_color", QColor("#274b73"));
@@ -885,6 +1012,8 @@ Theme Layers::build_blue_theme()
 		});
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item -> Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item/label", "color", QColor("#001122"));
@@ -904,6 +1033,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show All Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_all_button/text_label", "color", QColor("#f8f8f8"));
@@ -923,6 +1054,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show Primary Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/customize_panel/show_primary_button/text_label", "color", QColor("#f8f8f8"));
@@ -942,6 +1075,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "background_color", QColor(Qt::white));
@@ -957,6 +1092,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "background_color", QColor(Qt::white));
@@ -972,6 +1109,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic/svg", "use_common_color", true);
@@ -993,6 +1132,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic After -> SVG
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after/svg", "use_common_color", true);
@@ -1018,6 +1159,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_radius_br", 5);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "background_color", QColor(Qt::white));
@@ -1033,6 +1176,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch
 	blue_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch", "background_color", {
@@ -1054,6 +1199,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_radius_br", 4);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch -> Square
 	blue_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "background_color", {
@@ -1072,6 +1219,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_radius_br", 2);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "background_color", QColor(Qt::white));
@@ -1087,6 +1236,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch
 	blue_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "background_color", {
@@ -1108,6 +1259,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_radius_br", 4);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch -> Square
 	blue_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "background_color", {
@@ -1126,6 +1279,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_radius_br", 2);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Text
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/text", "color", QColor("#001122"));
@@ -1144,6 +1299,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Bar
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "background_color", QColor("#34557c"));
@@ -1159,6 +1316,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_radius_br", 2);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Handle
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "background_color", QColor("#001122"));
@@ -1174,6 +1333,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor("#6aaaf7"));
@@ -1189,6 +1350,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#34557c"));
@@ -1204,6 +1367,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#001122"));
@@ -1219,6 +1384,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Example Widget
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#274b73"));
@@ -1230,6 +1397,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
@@ -1245,6 +1414,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "background_color", QColor(Qt::white));
@@ -1260,6 +1431,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic/svg", "use_common_color", true);
@@ -1287,6 +1460,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color_disabled", false);
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "background_color", QColor("#253859"));
@@ -1308,6 +1483,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Window Title Label
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/window_title_label", "color", QColor(Qt::lightGray));
@@ -1326,6 +1503,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -1341,6 +1520,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -1363,6 +1544,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Apply Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -1383,6 +1566,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color_disabled", false);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "background_color", QColor("#253859"));
@@ -1404,6 +1589,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Window Title Label
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/window_title_label", "color", QColor(Qt::lightGray));
@@ -1422,6 +1609,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -1437,6 +1626,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -1466,6 +1657,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_right", 8);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_top", 7);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_color", QColor(Qt::black));
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "text_color", QColor("#4571a2"));
 
 	// Create New Theme Dialog -> "Start as copy of" Label
@@ -1485,6 +1678,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color", QColor(Qt::black));
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "line_edit_text_color", QColor("#001122"));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Current Item Label
@@ -1504,6 +1699,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "background_color", QColor("#274b73"));
@@ -1540,6 +1737,8 @@ Theme Layers::build_blue_theme()
 		});
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items -> Label
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item/label", "color", QColor("#001122"));
@@ -1559,6 +1758,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Create Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
@@ -1579,6 +1780,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
 	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+	blue_theme.add_stateless_attribute("layers/update_dialog", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#253859"));
@@ -1600,6 +1803,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Window Title Label
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor(Qt::lightGray));
@@ -1618,6 +1823,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -1633,6 +1840,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	blue_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -1658,6 +1867,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Remind Me Later Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#001122"));
@@ -1677,6 +1888,8 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
 	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
 	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Update Button -> Text Label
 	blue_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));
@@ -1705,6 +1918,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/window", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/window", "border_thickness", 15);
 	dark_theme.add_stateless_attribute("layers/window", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/window", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/window", "corner_color", QColor(Qt::black));
 
 	// Titlebar
 	dark_theme.add_stateless_attribute("layers/titlebar", "background_color", QColor(Qt::white));
@@ -1720,6 +1935,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Label
 	dark_theme.add_stateless_attribute("layers/titlebar/window_title_label", "color", QColor("#e3e3e3"));
@@ -1738,6 +1955,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "background_color", QColor(Qt::white));
@@ -1753,6 +1972,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic/svg", "use_common_color", true);
@@ -1774,6 +1995,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "background_color", QColor(Qt::white));
@@ -1789,6 +2012,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic/svg", "use_common_color", true);
@@ -1810,6 +2035,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "background_color", QColor(Qt::white));
@@ -1825,6 +2052,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic/svg", "use_common_color", true);
@@ -1846,6 +2075,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -1861,6 +2092,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -1882,6 +2115,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "background_color", QColor(Qt::white));
@@ -1897,6 +2132,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "background_color", QColor(Qt::white));
@@ -1912,6 +2149,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic/svg", "use_common_color", true);
@@ -1933,6 +2172,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "background_color", QColor(Qt::white));
@@ -1948,6 +2189,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic/svg", "use_common_color", true);
@@ -1971,6 +2214,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "background_color", QColor("#6a6a6a"));
@@ -1986,6 +2231,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab
 	dark_theme.add_stateful_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "background_color", {
@@ -2004,6 +2251,7 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color", QColor(Qt::black));
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color", QColor("#2e2e2e"));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon
@@ -2020,6 +2268,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon/svg", "use_common_color", true);
@@ -2052,6 +2302,7 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color", QColor(Qt::black));
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color", QColor("#2e2e2e"));
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon
@@ -2068,6 +2319,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon/svg", "use_common_color", true);
@@ -2083,6 +2336,23 @@ Theme Layers::build_dark_theme()
 		{ "Selected", QColor("#6a6a6a") }
 		});
 
+	// Settings Menu -> App Preferences Settings Panel
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color", QColor(Qt::black));
+
 	// Settings Menu -> Themes Settings Panel
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_color", QColor(Qt::white));
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_disabled", true);
@@ -2097,6 +2367,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> "Theme" Label
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_label", "color", QColor("#6a6a6a"));
@@ -2115,6 +2387,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color", QColor(Qt::black));
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "line_edit_text_color", QColor("#2e2e2e"));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Current Item Label
@@ -2134,6 +2408,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "background_color", QColor("#959595"));
@@ -2170,6 +2446,8 @@ Theme Layers::build_dark_theme()
 		});
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items -> Label
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -2188,6 +2466,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "background_color", QColor(Qt::white));
@@ -2203,6 +2483,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -2218,6 +2500,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic/svg", "use_common_color", true);
@@ -2239,6 +2523,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -2254,6 +2540,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic/svg", "use_common_color", true);
@@ -2275,6 +2563,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -2290,6 +2580,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic/svg", "use_common_color", true);
@@ -2311,6 +2603,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "background_color", QColor(Qt::white));
@@ -2326,6 +2620,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic/svg", "use_common_color", true);
@@ -2346,6 +2642,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_menu", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
 	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
@@ -2361,6 +2659,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
@@ -2381,6 +2681,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#2e2e2e"));
@@ -2400,6 +2702,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "background_color", QColor("#6a6a6a"));
@@ -2415,6 +2719,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Collapsed Button
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor("#e1e1e1"));
@@ -2431,9 +2737,33 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color", QColor(Qt::black));
+
+	// Customize Menu -> Topbar -> Collapsed Button -> Graphic
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color", QColor(Qt::black));
+
+	// Customize Menu -> Topbar -> Collapsed Button -> Graphic -> SVG
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_color", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_hover_color", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "common_color", QColor("#2e2e2e"));
 
 	// Customize Menu -> Topbar -> Collapsed Widget
-	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#e1e1e1"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#959595"));
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
@@ -2447,6 +2777,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
@@ -2463,6 +2795,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -2481,6 +2815,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Stateful Attributes Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor("#e1e1e1"));
@@ -2512,6 +2848,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "line_edit_text_color", QColor("#6a6a6a"));
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Current Item Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/current_item_label", "color", QColor("#6a6a6a"));
@@ -2530,6 +2868,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "background_color", QColor("#959595"));
@@ -2566,6 +2906,8 @@ Theme Layers::build_dark_theme()
 		});
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item -> Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -2585,6 +2927,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show All Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_all_button/text_label", "color", QColor("#f8f8f8"));
@@ -2604,6 +2948,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show Primary Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/customize_panel/show_primary_button/text_label", "color", QColor("#f8f8f8"));
@@ -2623,6 +2969,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "background_color", QColor(Qt::white));
@@ -2638,6 +2986,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "background_color", QColor(Qt::white));
@@ -2653,6 +3003,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic/svg", "use_common_color", true);
@@ -2674,6 +3026,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic After -> SVG
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after/svg", "use_common_color", true);
@@ -2699,6 +3053,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_radius_br", 5);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "background_color", QColor(Qt::white));
@@ -2714,6 +3070,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch
 	dark_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch", "background_color", {
@@ -2735,6 +3093,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_radius_br", 4);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch -> Square
 	dark_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "background_color", {
@@ -2753,6 +3113,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_radius_br", 2);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "background_color", QColor(Qt::white));
@@ -2768,6 +3130,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch
 	dark_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "background_color", {
@@ -2789,6 +3153,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_radius_br", 4);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch -> Square
 	dark_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "background_color", {
@@ -2807,6 +3173,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_radius_br", 2);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Text
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/text", "color", QColor("#2e2e2e"));
@@ -2825,6 +3193,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Bar
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "background_color", QColor("#7c7c7c"));
@@ -2840,6 +3210,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_radius_br", 2);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Handle
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "background_color", QColor("#2e2e2e"));
@@ -2855,6 +3227,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor("#e1e1e1"));
@@ -2870,6 +3244,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#7c7c7c"));
@@ -2885,6 +3261,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#2e2e2e"));
@@ -2900,6 +3278,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Example Widget
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#989898"));
@@ -2911,6 +3291,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
@@ -2926,6 +3308,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "background_color", QColor(Qt::white));
@@ -2941,6 +3325,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic/svg", "use_common_color", true);
@@ -2966,6 +3352,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color_disabled", false);
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "background_color", QColor("#363636"));
@@ -2987,6 +3375,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Window Title Label
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/window_title_label", "color", QColor("#e3e3e3"));
@@ -3005,6 +3395,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -3020,6 +3412,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -3042,6 +3436,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Apply Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -3060,6 +3456,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color_disabled", false);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "background_color", QColor("#363636"));
@@ -3081,6 +3479,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Window Title Label
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/window_title_label", "color", QColor("#e3e3e3"));
@@ -3099,6 +3499,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -3114,6 +3516,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -3143,6 +3547,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_right", 8);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_top", 7);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_color", QColor(Qt::black));
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "text_color", QColor("#6a6a6a"));
 
 	// Create New Theme Dialog -> "Start as copy of" Label
@@ -3162,6 +3568,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color", QColor(Qt::black));
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "line_edit_text_color", QColor("#2e2e2e"));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Current Item Label
@@ -3181,6 +3589,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "background_color", QColor("#959595"));
@@ -3217,6 +3627,8 @@ Theme Layers::build_dark_theme()
 		});
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items -> Label
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -3236,6 +3648,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Create Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
@@ -3254,6 +3668,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
 	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+	dark_theme.add_stateless_attribute("layers/update_dialog", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#363636"));
@@ -3275,6 +3691,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Window Title Label
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor("#e3e3e3"));
@@ -3293,6 +3711,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -3308,6 +3728,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	dark_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -3333,6 +3755,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Remind Me Later Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#2e2e2e"));
@@ -3352,6 +3776,8 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
 	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
 	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Update Button -> Text Label
 	dark_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));
@@ -3380,6 +3806,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/window", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/window", "border_thickness", 15);
 	light_theme.add_stateless_attribute("layers/window", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/window", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/window", "corner_color", QColor(Qt::black));
 
 	// Titlebar
 	light_theme.add_stateless_attribute("layers/titlebar", "background_color", QColor(Qt::white));
@@ -3395,6 +3823,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Window Title Label
 	light_theme.add_stateless_attribute("layers/titlebar/window_title_label", "color", QColor("#2e2e2e"));
@@ -3413,6 +3843,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/settings_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/settings_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "background_color", QColor(Qt::white));
@@ -3428,6 +3860,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Settings Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/settings_button/graphic/svg", "use_common_color", true);
@@ -3449,6 +3883,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/minimize_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/minimize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "background_color", QColor(Qt::white));
@@ -3464,6 +3900,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Minimize Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/minimize_button/graphic/svg", "use_common_color", true);
@@ -3485,6 +3923,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/maximize_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/maximize_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "background_color", QColor(Qt::white));
@@ -3500,6 +3940,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Maximize Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/maximize_button/graphic/svg", "use_common_color", true);
@@ -3521,6 +3963,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -3536,6 +3980,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Exit Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -3557,6 +4003,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "background_color", QColor(Qt::white));
@@ -3572,6 +4020,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "background_color", QColor(Qt::white));
@@ -3587,6 +4037,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Back Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/back_button/graphic/svg", "use_common_color", true);
@@ -3608,6 +4060,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "background_color", QColor(Qt::white));
@@ -3623,6 +4077,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Titlebar -> Menu Label Layers -> Icon Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/titlebar/menu_label_layer/icon_button/graphic/svg", "use_common_color", true);
@@ -3646,6 +4102,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "background_color", QColor(Qt::lightGray));
@@ -3661,6 +4119,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab
 	light_theme.add_stateful_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "background_color", {
@@ -3679,6 +4139,7 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "outline_color", QColor(Qt::black));
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab", "corner_color", QColor("#2e2e2e"));
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon
@@ -3695,6 +4156,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/app_preferences_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 
 	// Settings Menu -> Sidebar -> App Preferences Settings Tab -> Icon -> SVG
@@ -3728,6 +4191,7 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "outline_color", QColor(Qt::black));
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab", "corner_color", QColor("#2e2e2e"));
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon
@@ -3744,6 +4208,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/sidebar/themes_settings_tab/icon", "corner_color", QColor(Qt::black));
 
 
 	// Settings Menu -> Sidebar -> Themes Settings Tab -> Icon -> SVG
@@ -3760,6 +4226,23 @@ Theme Layers::build_light_theme()
 		{ "Selected", QColor("#2e2e2e") }
 		});
 
+	// Settings Menu -> App Preferences Settings Panel
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/app_preferences_settings_panel", "corner_color", QColor(Qt::black));
+
 	// Settings Menu -> Themes Settings Panel
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_color", QColor(Qt::white));
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "background_disabled", true);
@@ -3774,6 +4257,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> "Theme" Label
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_label", "color", QColor("#2e2e2e"));
@@ -3792,6 +4277,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "corner_color", QColor(Qt::black));
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox", "line_edit_text_color", QColor("#5d5d5d"));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Current Item Label
@@ -3811,6 +4298,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "background_color", QColor("#d6d6d6"));
@@ -3847,6 +4336,8 @@ Theme Layers::build_light_theme()
 		});
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Combobox -> Drop Down -> Combobox Items -> Label
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -3865,6 +4356,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/separator", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "background_color", QColor(Qt::white));
@@ -3880,6 +4373,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -3895,6 +4390,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> New Theme Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/new_theme_button/graphic/svg", "use_common_color", true);
@@ -3916,6 +4413,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -3931,6 +4430,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Customize Theme Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/customize_theme_button/graphic/svg", "use_common_color", true);
@@ -3952,6 +4453,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "background_color", QColor(Qt::white));
@@ -3967,6 +4470,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Delete Theme Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/delete_theme_button/graphic/svg", "use_common_color", true);
@@ -3988,6 +4493,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "background_color", QColor(Qt::white));
@@ -4003,6 +4510,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Settings Menu -> Themes Settings Panel -> Theme Info Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/settings_menu/themes_settings_panel/theme_info_button/graphic/svg", "use_common_color", true);
@@ -4023,6 +4532,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_menu", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
 	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
@@ -4038,6 +4549,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
@@ -4058,6 +4571,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
 	light_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#2e2e2e"));
@@ -4077,6 +4592,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "background_color", QColor(Qt::lightGray));
@@ -4092,6 +4609,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Collapsed Button
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "background_color", QColor(Qt::white));
@@ -4108,9 +4627,33 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_radius_br", 5);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button", "corner_color", QColor(Qt::black));
+
+	// Customize Menu -> Topbar -> Collapsed Button -> Graphic
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic", "corner_color", QColor(Qt::black));
+
+	// Customize Menu -> Topbar -> Collapsed Button -> Graphic -> SVG
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_color", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "use_common_hover_color", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_button/graphic/svg", "common_color", QColor("#2e2e2e"));
 
 	// Customize Menu -> Topbar -> Collapsed Widget
-	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color", QColor("#d6d6d6"));
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover", QColor("#6fc65b"));
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_disabled", false);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "background_color_hover_disabled", true);
@@ -4124,6 +4667,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_radius_br", 5);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/collapsed_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "background_color", QColor("#61ad50"));
@@ -4140,6 +4685,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Topbar -> Apply Button -> Text Label
 	light_theme.add_stateless_attribute("layers/customize_menu/topbar/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -4158,6 +4705,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Stateful Attributes Label
 	light_theme.add_stateless_attribute("layers/customize_panel/stateful_attributes_label", "color", QColor(Qt::white));
@@ -4189,6 +4738,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "line_edit_text_color", QColor(Qt::gray));
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Current Item Label
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/current_item_label", "color", QColor(Qt::gray));
@@ -4207,6 +4758,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "background_color", QColor("#d6d6d6"));
@@ -4243,6 +4796,8 @@ Theme Layers::build_light_theme()
 		});
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> State Combobox -> Drop Down -> Combobox Item -> Label
 	light_theme.add_stateless_attribute("layers/customize_panel/state_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -4262,6 +4817,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show All Button -> Text Label
 	light_theme.add_stateless_attribute("layers/customize_panel/show_all_button/text_label", "color", QColor("#f8f8f8"));
@@ -4281,6 +4838,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Show Primary Button -> Text Label
 	light_theme.add_stateless_attribute("layers/customize_panel/show_primary_button/text_label", "color", QColor("#f8f8f8"));
@@ -4300,6 +4859,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "background_color", QColor(Qt::white));
@@ -4315,6 +4876,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "background_color", QColor(Qt::white));
@@ -4330,6 +4893,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic/svg", "use_common_color", true);
@@ -4351,6 +4916,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Collapse Button -> Graphic After -> SVG
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/collapse_button/graphic_after/svg", "use_common_color", true);
@@ -4376,6 +4943,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_radius_br", 5);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/line_editor", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "background_color", QColor(Qt::white));
@@ -4391,6 +4960,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch
 	light_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch", "background_color", {
@@ -4412,6 +4983,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_radius_br", 4);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Toggle -> Switch -> Square
 	light_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "background_color", {
@@ -4430,6 +5003,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_radius_br", 2);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "background_color", QColor(Qt::white));
@@ -4445,6 +5020,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch
 	light_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "background_color", {
@@ -4466,6 +5043,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_radius_br", 4);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Switch -> Square
 	light_theme.add_stateful_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "background_color", {
@@ -4484,6 +5063,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_radius_br", 2);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/switch/square", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Labeled Toggle -> Text
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/labeled_toggle/text", "color", QColor("#2e2e2e"));
@@ -4502,6 +5083,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Bar
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "background_color", QColor("#7c7c7c"));
@@ -4517,6 +5100,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_radius_br", 2);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Slider -> Handle
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "background_color", QColor("#2e2e2e"));
@@ -4532,6 +5117,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_radius_br", 3);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "background_color", QColor(Qt::white));
@@ -4547,6 +5134,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_radius_br", 5);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Bar
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "background_color", QColor("#7c7c7c"));
@@ -4562,6 +5151,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_radius_br", 2);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/bar", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Mini Slider -> Handle
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "background_color", QColor("#2e2e2e"));
@@ -4577,6 +5168,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_radius_br", 2);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/mini_slider/handle", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Attribute Widget -> Example Widget
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "background_color", QColor("#7c7c7c"));
@@ -4588,6 +5181,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "border_thickness", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/attribute_widget/example_widget", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "background_color", QColor(Qt::white));
@@ -4603,6 +5198,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/element_button", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "background_color", QColor(Qt::white));
@@ -4618,6 +5215,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Panel -> Element Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/customize_panel/element_button/graphic/svg", "use_common_color", true);
@@ -4643,6 +5242,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color_disabled", false);
+	light_theme.add_stateless_attribute("layers/gradient_selection_box", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/gradient_selection_box", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "background_color", QColor("#e1e1e1"));
@@ -4664,6 +5265,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Window Title Label
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/window_title_label", "color", QColor("#2e2e2e"));
@@ -4682,6 +5285,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -4697,6 +5302,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Titlebar -> Exit Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -4719,6 +5326,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button", "corner_color", QColor(Qt::black));
 
 	// Gradient Selection Box -> Apply Button -> Text Label
 	light_theme.add_stateless_attribute("layers/gradient_selection_box/apply_button/text_label", "color", QColor("#f8f8f8"));
@@ -4737,6 +5346,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color_disabled", false);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "background_color", QColor("#e1e1e1"));
@@ -4758,6 +5369,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Window Title Label
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/window_title_label", "color", QColor("#2e2e2e"));
@@ -4776,6 +5389,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -4791,6 +5406,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -4820,6 +5437,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_right", 8);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_top", 7);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_color", QColor(Qt::black));
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "text_color", QColor("#2e2e2e"));
 
 	// Create New Theme Dialog -> "Start as copy of" Label
@@ -4839,6 +5458,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "corner_color", QColor(Qt::black));
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox", "line_edit_text_color", QColor("#5d5d5d"));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Current Item Label
@@ -4858,6 +5479,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "background_color", QColor("#d6d6d6"));
@@ -4894,6 +5517,8 @@ Theme Layers::build_light_theme()
 		});
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Start Theme Combobox -> Drop Down -> Combobox Items -> Label
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/start_theme_combobox/drop_down/combobox_item/label", "color", QColor("#2e2e2e"));
@@ -4913,6 +5538,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button", "corner_color", QColor(Qt::black));
 
 	// Create New Theme Dialog -> Create Button -> Text Label
 	light_theme.add_stateless_attribute("layers/create_new_theme_dialog/create_button/text_label", "color", QColor("#f8f8f8"));
@@ -4931,6 +5558,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog", "corner_radius_br", 10);
 	light_theme.add_stateless_attribute("layers/update_dialog", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog", "outline_color_disabled", false);
+	light_theme.add_stateless_attribute("layers/update_dialog", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "background_color", QColor("#e1e1e1"));
@@ -4952,6 +5581,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Window Title Label
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/window_title_label", "color", QColor("#2e2e2e"));
@@ -4970,6 +5601,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "background_color", QColor(Qt::white));
@@ -4985,6 +5618,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_radius_br", 0);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Titlebar -> Exit Button -> Graphic -> SVG
 	light_theme.add_stateless_attribute("layers/update_dialog/titlebar/exit_button/graphic/svg", "use_common_color", true);
@@ -5010,6 +5645,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Remind Me Later Button -> Text Label
 	light_theme.add_stateless_attribute("layers/update_dialog/remind_me_later_button/text_label", "color", QColor("#2e2e2e"));
@@ -5029,6 +5666,8 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_radius_br", 7);
 	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color_disabled", true);
 	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/update_dialog/update_button", "corner_color", QColor(Qt::black));
 
 	// Update Dialog -> Update Button -> Text Label
 	light_theme.add_stateless_attribute("layers/update_dialog/update_button/text_label", "color", QColor("#f8f8f8"));

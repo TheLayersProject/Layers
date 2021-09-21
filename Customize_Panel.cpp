@@ -110,8 +110,6 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 		m_show_primary_button->hide();
 	});
 
-	setup_layout();
-
 	if (m_themeable->child_themeable_references().isEmpty()) m_elements_label->hide();
 	else
 	{
@@ -132,12 +130,12 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	}
 }
 
-void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget, bool put_in_stateful_layout)
+void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget)
 {
 	add_child_themeable_reference(attribute_widget);
 	m_attribute_widgets.append(attribute_widget);
 
-	if (put_in_stateful_layout)
+	if (attribute_widget->stateful_attribute())
 	{
 		m_stateful_attribute_widgets.append(attribute_widget);
 		m_stateful_attributes_layout->addWidget(attribute_widget);
@@ -159,6 +157,8 @@ void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget, b
 
 void Customize_Panel::add_element_button(Button* button)
 {
+	//button->setMaximumWidth(252);
+	button->set_available_width(252);
 	button->set_attribute_value("background_disabled", true);
 	button->set_font_size(16);
 	button->set_name("element_button");
@@ -237,89 +237,97 @@ void Customize_Panel::update_attribute_widget_background_colors()
 
 void Customize_Panel::setup_layout()
 {
-	// States Layout
-
-	m_states_layout->setContentsMargins(6, 0, 0, 0);
-	m_states_layout->setSpacing(13);
-	m_states_layout->addWidget(m_state_label);
-	m_states_layout->addWidget(m_state_combobox);
-	m_states_layout->addStretch();
-
-	// Stateful Attributes Layout
-
-	m_stateful_attributes_layout->setContentsMargins(0, 0, 0, 0);
-	m_stateful_attributes_layout->setSpacing(3);
-	m_stateful_attributes_layout->addWidget(m_stateful_attributes_label);
-	m_stateful_attributes_layout->addSpacing(8);
-	m_stateful_attributes_layout->addLayout(m_states_layout);
-	m_stateful_attributes_layout->addSpacing(15);
-	m_stateful_attributes_layout->setAlignment(m_stateful_attributes_label, Qt::AlignHCenter);
-
-	// Stateless Attributes Layout
-
-	m_stateless_attributes_layout->setContentsMargins(0, 0, 0, 0);
-	m_stateless_attributes_layout->setSpacing(3);
-	if (!m_state_combobox->items().isEmpty())
+	if (!m_layout_setup)
 	{
-		m_stateless_attributes_layout->addSpacing(8);
-		m_stateless_attributes_layout->addWidget(m_stateless_attributes_label);
-		m_stateless_attributes_layout->setAlignment(m_stateless_attributes_label, Qt::AlignHCenter);
+		// States Layout
+
+		m_states_layout->setContentsMargins(6, 0, 0, 0);
+		m_states_layout->setSpacing(13);
+		m_states_layout->addWidget(m_state_label);
+		m_states_layout->addWidget(m_state_combobox);
+		m_states_layout->addStretch();
+
+		// Stateful Attributes Layout
+
+		m_stateful_attributes_layout->setContentsMargins(0, 0, 0, 0);
+		m_stateful_attributes_layout->setSpacing(3);
+
+		// Stateless Attributes Layout
+
+		m_stateless_attributes_layout->setContentsMargins(0, 0, 0, 0);
+		m_stateless_attributes_layout->setSpacing(3);
+
+		// Attribute Layout HBox 1
+
+		QHBoxLayout* attributes_label_layout = new QHBoxLayout;
+
+		attributes_label_layout->setContentsMargins(6, 0, 0, 0);
+		attributes_label_layout->setSpacing(0);
+		attributes_label_layout->addWidget(m_attributes_label);
+		attributes_label_layout->addStretch();
+		attributes_label_layout->addWidget(m_show_all_button);
+		attributes_label_layout->addWidget(m_show_primary_button);
+		attributes_label_layout->addStretch();
+
+		// Attributes Layout
+
+		m_attributes_layout->setContentsMargins(0, 0, 0, 0);
+		m_attributes_layout->setSpacing(3);
+		m_attributes_layout->addLayout(attributes_label_layout);
+
+		if (!m_stateful_attribute_widgets.isEmpty())
+		{
+			m_attributes_layout->addWidget(m_stateful_attributes_label);
+			m_attributes_layout->addSpacing(8);
+			m_attributes_layout->addLayout(m_states_layout);
+			m_attributes_layout->addSpacing(15);
+			m_attributes_layout->addLayout(m_stateful_attributes_layout);
+			m_attributes_layout->setAlignment(m_stateful_attributes_label, Qt::AlignHCenter);
+
+			if (!m_stateless_attribute_widgets.isEmpty())
+			{
+				m_attributes_layout->addSpacing(8);
+				m_attributes_layout->addWidget(m_stateless_attributes_label);
+				m_attributes_layout->addSpacing(8);
+				m_attributes_layout->setAlignment(m_stateless_attributes_label, Qt::AlignHCenter);
+			}
+		}
+		else m_attributes_layout->addSpacing(8);
+
+		m_attributes_layout->addLayout(m_stateless_attributes_layout);
+
+		// Elements Layout
+
+		QHBoxLayout* hbox2 = new QHBoxLayout;
+
+		hbox2->setContentsMargins(6, 0, 0, 0);
+		hbox2->setSpacing(0);
+		hbox2->addWidget(m_elements_label);
+		hbox2->addStretch();
+		hbox2->activate();
+
+		m_element_buttons_layout->setContentsMargins(27, 0, 0, 0);
+		m_element_buttons_layout->setSpacing(10);
+
+		m_elements_layout->setContentsMargins(0, 0, 0, 0);
+		m_elements_layout->setSpacing(15);
+		m_elements_layout->addLayout(hbox2);
+		m_elements_layout->addLayout(m_element_buttons_layout);
+
+		// Main Layout
+
+		QVBoxLayout* main_layout = new QVBoxLayout;
+
+		main_layout->setContentsMargins(10, 17, 10, 18);
+		main_layout->setSpacing(0);
+		main_layout->addLayout(m_attributes_layout);
+		main_layout->addSpacing(24);
+		main_layout->addLayout(m_elements_layout);
+		main_layout->addStretch();
+		main_layout->activate();
+
+		setLayout(main_layout);
+
+		m_layout_setup = true;
 	}
-
-	// Attribute Layout HBox 1
-
-	QHBoxLayout* attribute_layout_hbox1 = new QHBoxLayout;
-
-	attribute_layout_hbox1->setContentsMargins(6, 0, 0, 0);
-	attribute_layout_hbox1->setSpacing(0);
-	attribute_layout_hbox1->addWidget(m_attributes_label);
-	attribute_layout_hbox1->addStretch();
-	attribute_layout_hbox1->addWidget(m_show_all_button);
-	attribute_layout_hbox1->addWidget(m_show_primary_button);
-	attribute_layout_hbox1->addStretch();
-
-	// Attributes Layout
-
-	m_attributes_layout->setContentsMargins(0, 0, 0, 0);
-	m_attributes_layout->setSpacing(3);
-	m_attributes_layout->addLayout(attribute_layout_hbox1);
-	if (m_state_combobox->items().isEmpty())
-	{
-		m_attributes_layout->addSpacing(8);
-	}
-	else m_attributes_layout->addLayout(m_stateful_attributes_layout);
-
-	m_attributes_layout->addLayout(m_stateless_attributes_layout);
-
-	// Elements Layout
-
-	QHBoxLayout* hbox2 = new QHBoxLayout;
-
-	hbox2->setContentsMargins(6, 0, 0, 0);
-	hbox2->setSpacing(0);
-	hbox2->addWidget(m_elements_label);
-	hbox2->addStretch();
-	hbox2->activate();
-
-	m_element_buttons_layout->setContentsMargins(27, 0, 0, 0);
-	m_element_buttons_layout->setSpacing(10);
-
-	m_elements_layout->setContentsMargins(0, 0, 0, 0);
-	m_elements_layout->setSpacing(15);
-	m_elements_layout->addLayout(hbox2);
-	m_elements_layout->addLayout(m_element_buttons_layout);
-
-	// Main Layout
-
-	QVBoxLayout* main_layout = new QVBoxLayout;
-
-	main_layout->setContentsMargins(10, 17, 10, 18);
-	main_layout->setSpacing(0);
-	main_layout->addLayout(m_attributes_layout);
-	main_layout->addSpacing(24);
-	main_layout->addLayout(m_elements_layout);
-	main_layout->addStretch();
-	main_layout->activate();
-
-	setLayout(main_layout);
 }

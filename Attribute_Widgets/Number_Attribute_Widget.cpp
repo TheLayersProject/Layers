@@ -65,7 +65,7 @@ void Number_Attribute_Widget::enable_silder()
 {
 	QHBoxLayout* hbox2 = new QHBoxLayout;
 
-	m_slider = new Slider(m_int_validator->bottom(), m_int_validator->top());
+	m_slider = new Slider(m_int_validator->top());
 
 	m_slider->set_name("slider");
 

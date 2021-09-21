@@ -1,6 +1,7 @@
 #include "Layers.h"
 
 using Layers::Graphic_Widget;
+using Layers::SVG_Widget;
 
 Graphic_Widget::Graphic_Widget(const QDir& img_seq_dir, QSize size, QWidget* parent) :
 	m_image_sequence_label{ new Image_Sequence_Label(img_seq_dir, size, this) }, Widget(parent)
@@ -117,6 +118,11 @@ void Graphic_Widget::set_size(QSize size)
 	if (m_image_sequence_label) m_image_sequence_label->setFixedSize(size);
 
 	setFixedSize(size);
+}
+
+SVG_Widget* Graphic_Widget::svg() const
+{
+	return m_svg_widget;
 }
 
 void Graphic_Widget::init_attribute_widgets()

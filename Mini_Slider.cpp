@@ -2,8 +2,8 @@
 
 using Layers::Mini_Slider;
 
-Mini_Slider::Mini_Slider(int range_start, int range_end, QWidget* parent) :
-	m_range_start{ range_start }, m_range_end{ range_end },
+Mini_Slider::Mini_Slider(int limit, QWidget* parent) :
+	m_limit{ limit },
 	Widget(parent)
 {
 	init_attributes();
@@ -56,15 +56,10 @@ void Mini_Slider::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_handle);
 }
 
-int Mini_Slider::range_difference()
-{
-	return m_range_end - m_range_start;
-}
-
 void Mini_Slider::update_handle_pos()
 {
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
-	double drag_increment = double(width() - m_handle->width() - 10) / double(range_difference());
+	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
 
 	m_handle->move(drag_increment * m_attribute_set.attribute_value("value")->value<int>() + 5, m_handle->y()); // 5 is left margin
 }
@@ -114,24 +109,24 @@ bool Mini_Slider::eventFilter(QObject* object, QEvent* event)
 
 		if (delta.x() % m_mouse_move_scale == 0)
 		{
-			double drag_increment = double(width() - m_handle->width() - 10) / double(range_difference()); //double(m_bar->width() - m_handle->width()) / double(range_difference());
+			double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit); //double(m_bar->width() - m_handle->width()) / double(range_difference());
 
 			int new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
 
-			if (new_value < m_range_start)
+			if (new_value < 0)
 			{
-				if (m_attribute_set.attribute_value("value")->value<int>() != m_range_start)
+				if (m_attribute_set.attribute_value("value")->value<int>() != 0)
 				{
-					set_stateless_attribute_value("value", m_range_start);
+					set_stateless_attribute_value("value", 0);
 					update_handle_pos();
 					share_attributes();
 				}
 			}
-			else if (new_value > m_range_end)
+			else if (new_value > m_limit)
 			{
-				if (m_attribute_set.attribute_value("value")->value<int>() != m_range_end)
+				if (m_attribute_set.attribute_value("value")->value<int>() != m_limit)
 				{
-					set_stateless_attribute_value("value", m_range_end);
+					set_stateless_attribute_value("value", m_limit);
 					update_handle_pos();
 					share_attributes();
 				}

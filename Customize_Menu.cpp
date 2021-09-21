@@ -71,7 +71,6 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_collapsed_button->set_margin(0, 10, 0, 10);
 	m_collapsed_button->set_name("collapsed_button");
 	m_collapsed_button->set_proper_name("Collapsed Button");
-	m_collapsed_button->set_text_padding(3, 5, 0, 0);
 	m_collapsed_button->set_ACW_primary("border_awc", false);
 	m_collapsed_button->set_ACW_primary("outline_caw", false);
 	m_collapsed_button->set_ACW_primary("corner_color_caw", false);
@@ -115,8 +114,9 @@ void Customize_Menu::init_preview_window()
 	m_preview_window = new Window;
 	m_preview_window->setMinimumSize(500, 400);
 	m_preview_window->setMaximumSize(800, 600);
-	m_preview_window->titlebar()->exit_button()->set_disabled();
-	m_preview_window->customize_menu()->apply_button()->set_disabled();
+	m_preview_window->set_functionality_disabled();
+	m_preview_window->titlebar()->exit_button()->set_functionality_disabled();
+	m_preview_window->customize_menu()->apply_button()->set_functionality_disabled();
 	m_preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 
 	m_preview_window->initialize_and_acquire_panels(m_customize_panels);

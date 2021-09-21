@@ -176,7 +176,7 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Download.cpp">
+    <ClCompile Include="Downloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Old\2.1.0a\Attribute_Set_2_1_0_a.cpp">

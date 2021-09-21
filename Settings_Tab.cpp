@@ -75,6 +75,7 @@ void Settings_Tab::init_attributes()
 		{ "Selected", QColor(Qt::white) }
 		});
 
+	m_tab_icon->svg()->set_stateless_attribute_value("use_common_hover_color", false);
 	m_tab_icon->convert_attribute_to_stateful("common_color", {
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
@@ -117,7 +118,7 @@ void Settings_Tab::init_attribute_widgets()
 		border_awc->add_attribute_widget(border_color_saw);
 		border_awc->add_attribute_widget(border_thickness_naw);
 
-		m_customize_panel->add_attribute_widget(background_caw, true);
+		m_customize_panel->add_attribute_widget(background_caw);
 		m_customize_panel->add_attribute_widget(hover_background_caw);
 		m_customize_panel->add_attribute_widget(outline_caw);
 		m_customize_panel->add_attribute_widget(corner_color_caw);

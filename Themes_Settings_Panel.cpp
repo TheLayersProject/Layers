@@ -19,6 +19,7 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 	m_theme_label->set_font_size(15);
 
 	m_theme_combobox->set_icon(new Graphic_Widget(":/svgs/combobox_icon.svg", QSize(21, 18)));
+	m_theme_combobox->set_item_renaming_disabled(false);
 	m_theme_combobox->set_name("theme_combobox");
 	m_theme_combobox->set_proper_name("Theme Combobox");
 	m_theme_combobox->set_font_size(15);
@@ -72,6 +73,8 @@ void Themes_Settings_Panel::init_attributes()
 	m_spacer_1->set_stateless_attribute_value("background_disabled", true);
 
 	m_spacer_2->set_stateless_attribute_value("background_disabled", true);
+
+	m_theme_info_button->graphic()->svg()->set_stateless_attribute_value("use_common_hover_color", false);
 }
 
 void Themes_Settings_Panel::init_child_themeable_reference_list()
