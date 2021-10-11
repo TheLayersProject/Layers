@@ -96,6 +96,13 @@ void Line_Editor::setFixedSize(int w, int h)
 	m_line_edit->setFixedSize(w, h);
 }
 
+void Line_Editor::setFixedWidth(int w)
+{
+    QWidget::setFixedWidth(w);
+
+    m_line_edit->setFixedWidth(w);
+}
+
 QString Line_Editor::text()
 {
 	return m_line_edit->text();

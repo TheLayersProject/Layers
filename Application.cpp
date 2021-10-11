@@ -10,24 +10,36 @@ using Layers::Application;
 using Layers::Theme;
 using Layers::Themeable;
 
-Application::Application(const QString& app_name, const QString& app_version, const QString& app_repo_path, int &argc, char **argv) :
-	m_app_dir{ QDir(app_path(app_name)) },
-	m_app_themes_dir{ QDir(app_themes_path(app_name)) },
-	m_settings{ QSettings(app_name, app_name)},
-	m_name{ app_name },
-	m_version{ app_version },
-	m_repo_path{ new QString(app_repo_path) },
+Application::Application(
+	int& argc, char** argv,
+	const QString& name,
+	QFile* icon_file,
+	Version* version,
+	GitHubRepo* github_repo) :
+	m_name{ name },
+	m_icon_file{ icon_file },
+	m_version{ version },
+	m_github_repo{ github_repo },
+	m_app_dir{ QDir(app_path(name)) },
+	m_app_themes_dir{ QDir(app_themes_path(name)) },
+	m_settings{ QSettings(name, name) },
 	QApplication(argc, argv)
 {
+	Q_INIT_RESOURCE(image_sequences);
+	Q_INIT_RESOURCE(prebuilt_themes);
 	Q_INIT_RESOURCE(roboto_font);
 	Q_INIT_RESOURCE(svgs);
-	Q_INIT_RESOURCE(prebuilt_themes);
 
 	qRegisterMetaType<QGradientStops>("QGradientStops");
 
-	QFile setup_file(m_app_dir.filePath(m_name + "-" + m_version + "-setup.exe"));
+	setAttribute(Qt::AA_EnableHighDpiScaling);
 
-	if (setup_file.exists()) setup_file.remove();
+	if (m_version)
+	{
+		QFile setup_file(m_app_dir.filePath(m_name + "-" + m_version->toString() + "-setup.exe"));
+
+		if (setup_file.exists()) setup_file.remove();
+	}
 
 	init_directories();
 	init_fonts();
@@ -69,6 +81,11 @@ Theme* Layers::Application::current_theme() const
 	return m_current_theme;
 }
 
+QFile* Application::icon_file()
+{
+	return m_icon_file;
+}
+
 void Application::issue_update()
 {
 	for (Themeable* themeable : m_child_themeable_references)
@@ -82,15 +99,15 @@ QMap<QString, Theme>& Application::themes()
 
 bool Application::update_available()
 {
-	if (m_latest_version)
-		return *m_latest_version != m_version;
+	if (m_latest_version && m_version)
+		return *m_latest_version != m_version->toString();
 	else
 		return false;
 }
 
 bool Application::update_on_request()
 {
-	Update_Dialog* update_dialog = new Update_Dialog(m_version, *m_latest_version);
+	Update_Dialog* update_dialog = new Update_Dialog(m_version->toString(), *m_latest_version);
 
 	update_dialog->assign_tag_prefixes();
 	update_dialog->apply_theme(*m_current_theme);
@@ -102,7 +119,7 @@ bool Application::update_on_request()
 			if (Window* child_window = static_cast<Window*>(child_themeable_reference))
 				child_window->hide();
 
-		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + *m_repo_path + "/releases");
+		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/releases");
 
 		QNetworkReply* repo_releases_json_download = m_downloader.download(repo_releases_json_download_url);
 
@@ -221,6 +238,11 @@ Theme Application::load_theme(QFile& file)
 	return theme_and_load_status_combo_2_2_0_a.theme;
 }
 
+QString& Application::name()
+{
+	return m_name;
+}
+
 void Application::reapply_theme()
 {
 	for (Themeable* themeable : m_child_themeable_references)
@@ -248,6 +270,14 @@ void Application::save_theme(Theme& theme)
 QSettings& Application::settings()
 {
 	return m_settings;
+}
+
+Theme* Application::theme(const QString& theme_name)
+{
+	if (m_themes.contains(theme_name))
+		return &m_themes[theme_name];
+
+	return nullptr;
 }
 
 void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
@@ -327,9 +357,9 @@ void Application::init_themes()
 	//m_themes.insert("Light", load_theme(QFile(":/themes/light")));
 
 	// Build new theme files
-	m_themes.insert("Blue", build_blue_theme());
-	m_themes.insert("Dark", build_dark_theme());
-	m_themes.insert("Light", build_light_theme());
+	m_themes.insert("Blue", build_layers_blue_theme());
+	m_themes.insert("Dark", build_layers_dark_theme());
+	m_themes.insert("Light", build_layers_light_theme());
 
 	save_theme(m_themes["Blue"]);
 	save_theme(m_themes["Dark"]);
@@ -350,19 +380,21 @@ void Application::init_themes()
 
 void Application::init_latest_version_tag()
 {
-	QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + *m_repo_path + "/tags");
-
-	QNetworkReply* repo_tags_json_download = m_downloader.download(repo_tags_json_download_url);
-
-	QEventLoop loop;
-	connect(repo_tags_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-	loop.exec();
-
-	if (repo_tags_json_download->error() == QNetworkReply::NoError)
+	if (m_github_repo)
 	{
-		QJsonDocument json_doc = QJsonDocument::fromJson(repo_tags_json_download->readAll());
+		QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/tags");
 
-		m_latest_version = new QString(json_doc.array().first().toObject()["name"].toString());
+		QNetworkReply* repo_tags_json_download = m_downloader.download(repo_tags_json_download_url);
+
+		QEventLoop loop;
+		connect(repo_tags_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+		loop.exec();
+
+		if (repo_tags_json_download->error() == QNetworkReply::NoError)
+		{
+			QJsonDocument json_doc = QJsonDocument::fromJson(repo_tags_json_download->readAll());
+
+			m_latest_version = new QString(json_doc.array().first().toObject()["name"].toString());
+		}
 	}
-	else m_latest_version = nullptr;
 }

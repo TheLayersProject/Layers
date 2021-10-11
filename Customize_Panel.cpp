@@ -38,6 +38,17 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 	m_state_combobox->setFixedSize(190, 45);
 	m_state_combobox->set_name("state_combobox");
 
+	m_show_all_button->set_name("show_all_button");
+	m_show_all_button->disable_text_hover_color();
+	m_show_all_button->set_margin(0, 7, 0, 7);
+	m_show_all_button->set_text_padding(3, 5, 0, 0);
+
+	m_show_primary_button->set_name("show_primary_button");
+	m_show_primary_button->disable_text_hover_color();
+	m_show_primary_button->set_margin(0, 7, 0, 7);
+	m_show_primary_button->set_text_padding(3, 5, 0, 0);
+	m_show_primary_button->hide();
+
 	for (const QString& state : m_themeable->states())
 	{
 		m_state_combobox->add_item(state);
@@ -63,11 +74,6 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 		}
 	});
 
-	m_show_all_button->set_name("show_all_button");
-	m_show_all_button->disable_text_hover_color();
-	m_show_all_button->set_margin(0, 7, 0, 7);
-	m_show_all_button->set_text_padding(3, 5, 0, 0);
-
 	connect(m_show_all_button, &Button::clicked, [this] {
 		m_showing_primary = false;
 
@@ -85,12 +91,6 @@ Customize_Panel::Customize_Panel(Themeable* themeable, QWidget* parent) :
 		m_show_all_button->hide();
 		m_show_primary_button->show();
 	});
-
-	m_show_primary_button->set_name("show_primary_button");
-	m_show_primary_button->disable_text_hover_color();
-	m_show_primary_button->set_margin(0, 7, 0, 7);
-	m_show_primary_button->set_text_padding(3, 5, 0, 0);
-	m_show_primary_button->hide();
 
 	connect(m_show_primary_button, &Button::clicked, [this] {
 		m_showing_primary = true;
@@ -155,9 +155,8 @@ void Customize_Panel::add_attribute_widget(Attribute_Widget* attribute_widget)
 	}
 }
 
-void Customize_Panel::add_element_button(Button* button)
+void Customize_Panel::add_element_button(Button* button, int index)
 {
-	//button->setMaximumWidth(252);
 	button->set_available_width(252);
 	button->set_attribute_value("background_disabled", true);
 	button->set_font_size(16);
@@ -166,7 +165,11 @@ void Customize_Panel::add_element_button(Button* button)
 
 	add_child_themeable_reference(button);
 
-	m_element_buttons_layout->addWidget(button);
+	if (m_current_theme)
+		button->apply_theme(*m_current_theme);
+
+	if (index == -1) m_element_buttons_layout->addWidget(button);
+	else m_element_buttons_layout->insertWidget(index, button);
 }
 
 void Customize_Panel::init_attributes()

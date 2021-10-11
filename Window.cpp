@@ -7,11 +7,25 @@ using Layers::Theme;
 using Layers::Titlebar;
 using Layers::Window;
 
-Window::Window(QWidget* parent) : Widget(parent)
+Window::Window(bool preview, QWidget* parent) :
+	m_preview{ preview }, Widget(parent)
 {
 	layersApp->add_child_themeable_reference(*this);
 
+	set_window_title(layersApp->name());
+	
+	if (layersApp->icon_file())
+	{
+		set_window_icon(Graphic(layersApp->icon_file()->fileName()));
+
+		setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
+	}
+
     connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
+	connect(m_titlebar, &Titlebar::window_icon_updated, [=]
+		{
+			connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
+		});
     connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
     connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
     connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
@@ -57,6 +71,14 @@ Window::Window(QWidget* parent) : Widget(parent)
 
 	// Do this last:
 	assign_tag_prefixes();
+
+	if (!preview)
+	{
+		m_customize_menu->init_preview_window();
+
+		apply_theme(*layersApp->current_theme()); // Sets initial theme
+		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
+	}
 }
 
 void Window::add_menu(Menu* menu)
@@ -74,6 +96,21 @@ void Window::link_theme_name(const QString& name)
     m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
 	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
+}
+
+void Window::set_main_widget(Widget* main_widget)
+{
+	m_main_widget = main_widget;
+
+	main_widget->set_is_app_themeable(true);
+	main_widget->apply_theme(*layersApp->current_theme());
+
+	add_child_themeable_reference(main_widget);
+
+	m_app_menu_layout->addWidget(main_widget);
+
+	//if (m_customize_menu->preview_window())
+	//	m_customize_menu->preview_window()->build_main_widget<T>();
 }
 
 void Window::apply_theme(Theme& theme)
@@ -135,6 +172,20 @@ void Window::update_theme_dependencies()
 
 		m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	}
+}
+
+//void Window::set_application_widget(Widget* application_widget)
+//{
+//	m_app_menu_layout->addWidget(application_widget);
+//	//m_app_menu_layout->setAlignment(application_widget, Qt::AlignCenter);
+//}
+
+void Window::set_window_icon(const Graphic& icon_graphic)
+{
+	m_titlebar->set_window_icon(icon_graphic);
+
+	if (m_customize_menu->preview_window())
+		m_customize_menu->preview_window()->set_window_icon(icon_graphic);
 }
 
 void Window::set_window_title(const QString& title)
@@ -537,6 +588,11 @@ void Window::paintEvent(QPaintEvent* event)
 
 void Window::setup_layout()
 {
+	m_app_menu_layout->setContentsMargins(0, 0, 0, 0);
+	m_app_menu_layout->setSpacing(0);
+
+	m_app_menu->setLayout(m_app_menu_layout);
+
 	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
     m_main_layout->setContentsMargins(margin, margin, margin, margin);

@@ -6,7 +6,7 @@ Settings_Sidebar::Settings_Sidebar(QWidget* parent) : Widget(parent)
 {
 	setFixedWidth(245);
 	setMouseTracking(true);
-	set_icon(new Graphic_Widget(":/svgs/sidebar_icon.svg", QSize(20, 20)));
+	set_icon(new Graphic(":/svgs/sidebar_icon.svg", QSize(20, 20)));
 	set_name("sidebar");
 	set_proper_name("Sidebar");
 	set_stateless_attribute_value("background_color", QColor(Qt::lightGray));

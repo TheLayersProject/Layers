@@ -89,7 +89,7 @@
     <ClCompile Include="Gradient_Selection_Box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic_Widget.cpp">
+    <ClCompile Include="Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Horizontal_Layout.cpp">
@@ -125,7 +125,7 @@
     <ClCompile Include="Slider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SVG_Widget.cpp">
+    <ClCompile Include="SVG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Theme.cpp">
@@ -197,6 +197,21 @@
     <ClCompile Include="Old\2.1.0a\Stateful_Attribute_2_1_0_a.cpp">
       <Filter>Source Files\Old\2.1.0a</Filter>
     </ClCompile>
+    <ClCompile Include="MenuBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GitHubRepo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSequence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -206,6 +221,9 @@
       <Filter>Resource Files</Filter>
     </QtRcc>
     <QtRcc Include="themes\prebuilt_themes.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="image-sequences\image_sequences.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>

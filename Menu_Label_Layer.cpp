@@ -6,7 +6,7 @@ using Layers::Menu;
 using Layers::Menu_Label_Layer;
 
 Menu_Label_Layer::Menu_Label_Layer(Menu* menu, QWidget* parent) :
-	m_icon_button{ new Button(new Graphic_Widget(*menu->icon), false) },
+	m_icon_button{ new Button(new Graphic(*menu->icon), false) },
 	m_text_label{ new Label(menu->name) },
 	Widget(parent)
 {
@@ -14,7 +14,7 @@ Menu_Label_Layer::Menu_Label_Layer(Menu* menu, QWidget* parent) :
 	init_child_themeable_reference_list();
 
 	set_name("menu_label_layer");
-	set_icon(new Graphic_Widget(":/svgs/mll_icon.svg", QSize(20, 6)));
+	set_icon(new Graphic(":/svgs/mll_icon.svg", QSize(20, 6)));
 
 	m_back_button->set_name("back_button");
 	m_back_button->set_proper_name("Back Button");

@@ -115,6 +115,9 @@
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="Attribute_Widgets\Corner_Radii_Attribute_Widget.cpp" />
     <ClCompile Include="Downloader.cpp" />
+    <ClCompile Include="GitHubRepo.cpp" />
+    <ClCompile Include="ImageSequence.cpp" />
+    <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="Mini_Slider.cpp" />
     <ClCompile Include="Old\2.1.0a\Attribute_2_1_0_a.cpp" />
     <ClCompile Include="Old\2.1.0a\Attribute_Set_2_1_0_a.cpp" />
@@ -141,7 +144,7 @@
     <ClCompile Include="directories.cpp" />
     <ClCompile Include="Gradient_Control.cpp" />
     <ClCompile Include="Gradient_Selection_Box.cpp" />
-    <ClCompile Include="Graphic_Widget.cpp" />
+    <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="Horizontal_Layout.cpp" />
     <ClCompile Include="Image_Sequence_Label.cpp" />
     <ClCompile Include="Label.cpp" />
@@ -149,13 +152,14 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Menu_Label_Layer.cpp" />
     <ClCompile Include="Scroll_Area.cpp" />
+    <ClCompile Include="TabBar.cpp" />
     <ClCompile Include="ThemeUpdating.cpp" />
     <ClCompile Include="Settings_Menu.cpp" />
     <ClCompile Include="Settings_Sidebar.cpp" />
     <ClCompile Include="Settings_Tab.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Stateful_Attribute.cpp" />
-    <ClCompile Include="SVG_Widget.cpp" />
+    <ClCompile Include="SVG.cpp" />
     <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Themeable.cpp" />
     <ClCompile Include="ThemeLoading.cpp" />
@@ -163,12 +167,14 @@
     <ClCompile Include="Titlebar.cpp" />
     <ClCompile Include="Toggle_Switch.cpp" />
     <ClCompile Include="Update_Dialog.cpp" />
+    <ClCompile Include="Version.cpp" />
     <ClCompile Include="Vertical_Layout.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
+    <QtRcc Include="image-sequences\image_sequences.qrc" />
     <QtRcc Include="svgs\svgs.qrc" />
     <QtRcc Include="themes\prebuilt_themes.qrc" />
   </ItemGroup>

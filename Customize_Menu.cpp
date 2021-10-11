@@ -6,14 +6,14 @@ using Layers::Customize_Panel;
 using Layers::Window;
 
 Customize_Menu::Customize_Menu(QWidget* parent) :
-	Menu("Customize", new Graphic_Widget(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
+	Menu("Customize", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
 	init_child_themeable_reference_list();
 
 	installEventFilter(this);
 	setMouseTracking(true);
 
-	set_icon(new Graphic_Widget(":/svgs/customize_theme.svg", QSize(20, 20)));
+	set_icon(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)));
 	set_name("customize_menu");
 	set_proper_name("Customize Menu");
 
@@ -25,10 +25,18 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 
 			m_collapsed_widget->move(move_point);
 			m_collapsed_widget->show();
+			m_collapsed_widget->reapply_theme();
+			//m_collapsed_widget->repaint();
 			m_collapsed_widget->setFocus();
 		}
 		else m_collapsed_widget->hide();
 	});
+
+	m_control_arrow_graphic->set_name("arrow_graphic");
+	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
+
+	m_control_text_button->set_name("text_button");
+	m_control_text_button->set_proper_name("Text Buttons");
 
 	m_topbar->setFixedHeight(45);
 	m_topbar->setMouseTracking(true);
@@ -80,6 +88,7 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 	m_collapsed_widget->setAttribute(Qt::WA_TranslucentBackground);
 	m_collapsed_widget->setMouseTracking(true);
 	m_collapsed_widget->set_name("collapsed_widget");
+	m_collapsed_widget->set_proper_name("Collapsed Text Buttons Dropdown Widget");
 	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tl", 5);
 	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tr", 5);
 	m_collapsed_widget->set_stateless_attribute_value("corner_radius_bl", 5);
@@ -109,18 +118,24 @@ Button* Customize_Menu::apply_button() const
 	return m_apply_button;
 }
 
+QList<Customize_Panel*>& Customize_Menu::customize_panels()
+{
+	return m_customize_panels;
+}
+
 void Customize_Menu::init_preview_window()
 {
-	m_preview_window = new Window;
+	m_preview_window = new Window(true);
 	m_preview_window->setMinimumSize(500, 400);
 	m_preview_window->setMaximumSize(800, 600);
 	m_preview_window->set_functionality_disabled();
 	m_preview_window->titlebar()->exit_button()->set_functionality_disabled();
 	m_preview_window->customize_menu()->apply_button()->set_functionality_disabled();
 	m_preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
-
+	
 	m_preview_window->initialize_and_acquire_panels(m_customize_panels);
 
+	// *** TODO: Functionalize the following code; Create as many functions as necessary
 	for (Customize_Panel* customize_panel : m_customize_panels)
 	{
 		m_sidebar_layout->addWidget(customize_panel);
@@ -131,15 +146,25 @@ void Customize_Menu::init_preview_window()
 	m_sidebar_layout->addStretch();
 
 	m_preview_layout->addWidget(m_preview_window);
+	// ***
+
+	// Setup Preview Window's Customize Menu's Preview Widget
+	//Widget* preview_window_customize_menu_preview_widget = new Widget;
+
+	//preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(m_preview_window->customize_menu()->customize_panels());
+
+
 }
 
 void Customize_Menu::init_child_themeable_reference_list()
 {
 	add_child_themeable_reference(m_sidebar);
 	add_child_themeable_reference(m_topbar);
+	m_topbar->add_child_themeable_reference(m_apply_button);
 	m_topbar->add_child_themeable_reference(m_collapsed_button);
 	m_topbar->add_child_themeable_reference(m_collapsed_widget);
-	m_topbar->add_child_themeable_reference(m_apply_button);
+	m_topbar->add_child_themeable_reference(m_control_arrow_graphic);
+	m_topbar->add_child_themeable_reference(m_control_text_button);
 }
 
 void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
@@ -155,6 +180,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 			while (m_panel_stack.last() != customize_panel)
 			{
 				remove_child_themeable_reference(m_text_button_stack.last());
+				m_control_text_button->unshare_all_attributes_with(m_text_button_stack.last());
 
 				for (Button* text_button : m_topbar_text_buttons)
 					if (text_button == m_text_button_stack.last())
@@ -169,6 +195,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 				if (!m_arrow_graphics.isEmpty())
 				{
 					remove_child_themeable_reference(m_arrow_graphics.last());
+					m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.last());
 					m_arrow_graphics.takeLast()->deleteLater();
 				}
 			}
@@ -199,26 +226,24 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 		// Setup Button
 
-		Button* label_button = new Button(*customize_panel->proper_name(), true);
-		label_button->disable_text_hover_color();
-		label_button->set_attribute_value("background_disabled", true);
-		label_button->set_font_size(14);
-		label_button->set_name("label_button");
-		label_button->set_padding(0, label_button->top_padding(), 0, label_button->bottom_padding());
-		label_button->set_text_padding(0, 4, 0, 0);
+		Button* text_button = new Button(*customize_panel->proper_name(), true);
+		text_button->disable_text_hover_color();
+		text_button->set_attribute_value("background_disabled", true);
+		text_button->set_font_size(14);
+		text_button->set_name("text_button");
+		text_button->set_padding(0, text_button->top_padding(), 0, text_button->bottom_padding());
+		text_button->set_text_padding(0, 4, 0, 0);
 
-		connect(label_button, &Button::clicked, [this, customize_panel] {
+		connect(text_button, &Button::clicked, [this, customize_panel] {
 			open_customize_panel(customize_panel);
 			});
 
 		if (!m_text_button_stack.isEmpty()) m_text_button_stack.last()->disable_text_hover_color(false);
 
-		m_text_button_stack.append(label_button);
-		m_topbar_text_buttons.append(label_button);
+		m_text_button_stack.append(text_button);
+		m_topbar_text_buttons.append(text_button);
 
-		add_child_themeable_reference(label_button);
-
-		if (current_theme()) label_button->apply_theme(*current_theme());
+		m_control_text_button->share_all_attributes_with(text_button);
 
 		// Setup Arrow Graphic
 
@@ -227,20 +252,18 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 			arrow_opacity->setOpacity(0.5);
 
-			Graphic_Widget* arrow_graphic = new Graphic_Widget(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
+			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
 			arrow_graphic->setGraphicsEffect(arrow_opacity);
 			arrow_graphic->set_name("arrow_graphic");
 
 			m_arrow_graphics.append(arrow_graphic);
 
-			add_child_themeable_reference(arrow_graphic);
-
-			if (current_theme()) arrow_graphic->apply_theme(*current_theme());
+			m_control_arrow_graphic->share_all_attributes_with(arrow_graphic);
 
 			m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, arrow_graphic);
 		}
 
-		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, label_button);
+		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
 
 		m_preview_window->add_child_themeable_reference(customize_panel);
 
@@ -289,7 +312,7 @@ int Customize_Menu::topbar_content_width(bool include_collapse_button)
 	for (Button* text_button : m_topbar_text_buttons)
 		topbar_content_width += text_button->width();
 
-	for (Graphic_Widget* arrow_graphic : m_arrow_graphics)
+	for (Graphic* arrow_graphic : m_arrow_graphics)
 		topbar_content_width += arrow_graphic->width();
 
 	topbar_content_width += m_topbar_layout->spacing() * (m_topbar_layout->count() - 2);
@@ -388,6 +411,7 @@ void Customize_Menu::collapse_text_buttons()
 			else
 			{
 				remove_child_themeable_reference(m_arrow_graphics.first());
+				m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.first());
 				m_arrow_graphics.takeFirst()->deleteLater();
 			}
 
@@ -440,16 +464,14 @@ void Customize_Menu::expand_text_buttons()
 			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 			arrow_opacity->setOpacity(0.5);
 
-			Graphic_Widget* arrow_graphic = new Graphic_Widget(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
+			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
 			arrow_graphic->set_stateless_attribute_value("background_disabled", false); // TODO: TEMP, remove this
 			arrow_graphic->setGraphicsEffect(arrow_opacity);
 			arrow_graphic->set_name("arrow_graphic");
 
 			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
 
-			add_child_themeable_reference(arrow_graphic);
-
-			if (current_theme()) arrow_graphic->apply_theme(*current_theme());
+			m_control_arrow_graphic->share_all_attributes_with(arrow_graphic);
 
 			m_topbar_layout->insertWidget(1, text_button);
 
@@ -486,6 +508,7 @@ void Customize_Menu::setup_layout()
 
 	m_sidebar->setLayout(m_sidebar_layout);
 
+	m_sidebar_scroll_area->set_stateless_attribute_value("background_disabled", true);
 	m_sidebar_scroll_area->setWidget(m_sidebar);
 	m_sidebar_scroll_area->setFixedWidth(m_sidebar->width());
 
@@ -494,9 +517,10 @@ void Customize_Menu::setup_layout()
 	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
 
-	m_preview_widget->setLayout(m_preview_layout);
 	m_preview_widget->set_stateless_attribute_value("background_disabled", true);
+	m_preview_widget->setLayout(m_preview_layout);
 
+	m_preview_scroll_area->set_stateless_attribute_value("background_disabled", true);
 	m_preview_scroll_area->setWidget(m_preview_widget);
 
 	// Main Vbox

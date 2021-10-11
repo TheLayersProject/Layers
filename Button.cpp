@@ -1,9 +1,9 @@
 #include "Layers.h"
 
-using Layers::Graphic_Widget;
+using Layers::Graphic;
 using Layers::Button;
 
-Button::Button(Graphic_Widget* graphic, const QString& text, bool auto_touch_target_compliance, QWidget* parent) :
+Button::Button(Graphic* graphic, const QString& text, bool auto_touch_target_compliance, QWidget* parent) :
 	m_graphic{ graphic }, m_text_label{ new Label(text) },
 	m_auto_touch_target_compliance{ auto_touch_target_compliance }, Widget(parent)
 {
@@ -16,7 +16,7 @@ Button::Button(Graphic_Widget* graphic, const QString& text, bool auto_touch_tar
 	set_attribute_value("background_color_hover_disabled", false);
 }
 
-Button::Button(Graphic_Widget* graphic, bool auto_touch_target_compliance, QWidget* parent) :
+Button::Button(Graphic* graphic, bool auto_touch_target_compliance, QWidget* parent) :
 	m_graphic{ graphic }, m_auto_touch_target_compliance{ auto_touch_target_compliance },
 	Widget(parent)
 {
@@ -50,7 +50,7 @@ Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* 
 	set_attribute_value("background_color_hover_disabled", false);
 }
 
-Button::Button(Graphic_Widget* graphic_before, Graphic_Widget* graphic_after, bool auto_touch_target_compliance, QWidget* parent) :
+Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance, QWidget* parent) :
 	m_graphic{ graphic_before }, m_graphic_after{ graphic_after }, m_auto_touch_target_compliance{ auto_touch_target_compliance },
 	Widget(parent)
 {
@@ -92,7 +92,7 @@ bool Button::disabled() const
 	return m_disabled;
 }
 
-Graphic_Widget* Button::graphic() const
+Graphic* Button::graphic() const
 {
 	return m_graphic;
 }
@@ -110,9 +110,9 @@ void Button::init()
 
 	if (m_graphic)
 	{
-		set_icon(new Graphic_Widget(*m_graphic));
+		set_icon(new Graphic(*m_graphic));
 
-		m_graphic->set_icon(new Graphic_Widget(*m_graphic));
+		m_graphic->set_icon(new Graphic(*m_graphic));
 		m_graphic->set_name("graphic");
 		m_graphic->set_proper_name("Graphic");
 	}
@@ -120,12 +120,14 @@ void Button::init()
 	if (m_text_label)
 	{
 		m_text_label->set_name("text_label");
+		m_text_label->set_proper_name("Text Label");
 		m_text_label->setWordWrap(true);
 	}
 
 	if (m_graphic_after)
 	{
 		m_graphic_after->set_name("graphic_after");
+		//m_graphic_after->set_proper_name("Graphic After");
 		m_graphic_after->hide();
 	}
 

@@ -27,7 +27,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);
     m_drop_down->setAttribute(Qt::WA_TranslucentBackground);
     m_drop_down->setMouseTracking(true);
-    m_drop_down->set_icon(new Graphic_Widget(":/svgs/drop_down_icon.svg", QSize(21, 18)));
+    m_drop_down->set_icon(new Graphic(":/svgs/drop_down_icon.svg", QSize(21, 18)));
     m_drop_down->set_name("drop_down");
     m_drop_down->set_proper_name("Drop Down");
 
@@ -173,6 +173,11 @@ void Combobox::set_font_size(int size)
 void Combobox::set_item_renaming_disabled(bool disable)
 {
     m_item_renaming_disabled = disable;
+}
+
+void Combobox::set_padding(int left, int top, int right, int bottom)
+{
+    m_current_item_label->set_padding(left, top, right, bottom);
 }
 
 void Combobox::setFixedSize(const QSize& s)

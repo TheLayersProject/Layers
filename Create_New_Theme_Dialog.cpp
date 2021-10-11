@@ -390,7 +390,7 @@ void Create_New_Theme_Dialog::init_titlebar()
 	window_title_label->set_padding(7, 8, 0, 0);
 	window_title_label->set_font_size(14);
 
-	Button* exit_button = new Button(new Graphic_Widget(":/svgs/exit.svg", QSize(20, 20)), true);
+	Button* exit_button = new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true);
 	connect(exit_button, &Button::clicked, [this] { done(QDialog::Rejected); });
 	exit_button->set_name("exit_button");
 

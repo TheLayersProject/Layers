@@ -2,12 +2,15 @@
 
 using Layers::Theme;
 
-Theme Layers::build_blue_theme()
+Theme Layers::build_layers_blue_theme()
 {
 	Theme blue_theme = Theme("Blue", false);
 
 	QGradientStops border_gradient_stops = { { 0.0, "#4571a2" },{ 1.0, "#001122" } };
 	QGradientStops default_gradient_stops = { { 0.0, Qt::black },{ 1.0, Qt::white } };
+
+	// TEST
+	//blue_theme.add_stateless_attribute("app/TilemapEditor/start_up_page", "background_color", QColor("#28405f"));
 
 	// Window
 	blue_theme.add_stateless_attribute("layers/window", "border_gradient_disabled", false);
@@ -752,47 +755,47 @@ Theme Layers::build_blue_theme()
 	blue_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color_hover_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_color", QColor(Qt::black));
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_thickness", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tl", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tr", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_bl", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_hover_color", false);
-	blue_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "common_color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_color", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_hover_color", false);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "common_color", QColor("#001122"));
 
 	// Customize Menu -> Label Button
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color", QColor(Qt::white));
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color_hover_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_color", QColor(Qt::black));
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_thickness", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tl", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tr", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_bl", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color", QColor(Qt::white));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color_hover_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_thickness", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tr", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_bl", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_br", 0);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color_disabled", true);
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color", QColor(Qt::black));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#001122"));
-	blue_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color_hover", QColor("#6aaaf7"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color", QColor("#001122"));
+	blue_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color_hover", QColor("#6aaaf7"));
 
 	// Customize Menu -> Sidebar
 	blue_theme.add_stateless_attribute("layers/customize_menu/sidebar", "background_color", QColor("#4571a2"));
@@ -1897,7 +1900,7 @@ Theme Layers::build_blue_theme()
 	return blue_theme;
 }
 
-Theme Layers::build_dark_theme()
+Theme Layers::build_layers_dark_theme()
 {
 	Theme dark_theme("Dark", false);
 
@@ -2646,47 +2649,47 @@ Theme Layers::build_dark_theme()
 	dark_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color_hover_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_color", QColor(Qt::black));
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_thickness", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tl", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tr", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_bl", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_hover_color", false);
-	dark_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "common_color", QColor("#2e2e2e"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_color", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_hover_color", false);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "common_color", QColor("#2e2e2e"));
 
 	// Customize Menu -> Label Button
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color", QColor(Qt::white));
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color_hover_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_color", QColor(Qt::black));
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_thickness", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tl", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tr", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_bl", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color", QColor(Qt::white));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color_hover_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_thickness", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tr", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_bl", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_br", 0);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color_disabled", true);
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color", QColor(Qt::black));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#2e2e2e"));
-	dark_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color_hover", QColor("#e1e1e1"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color", QColor("#2e2e2e"));
+	dark_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color_hover", QColor("#e1e1e1"));
 
 	// Customize Menu -> Sidebar
 	dark_theme.add_stateless_attribute("layers/customize_menu/sidebar", "background_color", QColor("#6a6a6a"));
@@ -3785,7 +3788,7 @@ Theme Layers::build_dark_theme()
 	return dark_theme;
 }
 
-Theme Layers::build_light_theme()
+Theme Layers::build_layers_light_theme()
 {
 	Theme light_theme("Light", false);
 
@@ -4536,47 +4539,47 @@ Theme Layers::build_light_theme()
 	light_theme.add_stateless_attribute("layers/customize_menu", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color", QColor(Qt::white));
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "background_color_hover_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_color", QColor(Qt::black));
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "border_thickness", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tl", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_tr", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_bl", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_radius_br", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "outline_color", QColor(Qt::black));
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic", "corner_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Arrow Graphic -> SVG
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_color", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "use_common_hover_color", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/arrow_graphic/svg", "common_color", QColor("#2e2e2e"));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_color", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "use_common_hover_color", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/arrow_graphic/svg", "common_color", QColor("#2e2e2e"));
 
 	// Customize Menu -> Label Button
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color", QColor(Qt::white));
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "background_color_hover_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_color", QColor(Qt::black));
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "border_thickness", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tl", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_tr", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_bl", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_radius_br", 0);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color_disabled", true);
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "outline_color", QColor(Qt::black));
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button", "corner_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "background_color_hover_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_gradient_stops", QVariant::fromValue(default_gradient_stops));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "border_thickness", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_tr", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_bl", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_radius_br", 0);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color_disabled", true);
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "outline_color", QColor(Qt::black));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button", "corner_color", QColor(Qt::black));
 
 	// Customize Menu -> Label Button -> Text Label
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color", QColor("#2e2e2e"));
-	light_theme.add_stateless_attribute("layers/customize_menu/label_button/text_label", "color_hover", QColor(Qt::white));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color", QColor("#2e2e2e"));
+	light_theme.add_stateless_attribute("layers/customize_menu/topbar/text_button/text_label", "color_hover", QColor(Qt::white));
 
 	// Customize Menu -> Sidebar
 	light_theme.add_stateless_attribute("layers/customize_menu/sidebar", "background_color", QColor(Qt::lightGray));

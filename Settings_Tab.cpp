@@ -1,9 +1,9 @@
 #include "Layers.h"
 
-using Layers::Graphic_Widget;
+using Layers::Graphic;
 using Layers::Settings_Tab;
 
-Settings_Tab::Settings_Tab(Graphic_Widget* icon, const QString& label_text, QWidget* parent) :
+Settings_Tab::Settings_Tab(Graphic* icon, const QString& label_text, QWidget* parent) :
 	m_tab_icon{ icon }, m_text_label { new Label(label_text) }, Widget(parent)
 {
 	init_child_themeable_reference_list();
@@ -15,12 +15,12 @@ Settings_Tab::Settings_Tab(Graphic_Widget* icon, const QString& label_text, QWid
     setMouseTracking(true);
 	setFixedHeight(60);
 
-    set_icon(new Graphic_Widget(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
+    set_icon(new Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
     set_name("settings_tab");
     set_proper_name(label_text + " Tab");
 
     m_tab_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_tab_icon->set_icon(new Graphic_Widget(*m_tab_icon));
+	m_tab_icon->set_icon(new Graphic(*m_tab_icon));
     m_tab_icon->set_name("icon");
 	m_tab_icon->set_proper_name("Icon");
 

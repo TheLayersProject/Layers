@@ -2,56 +2,68 @@
 
 using Layers::Image_Sequence_Label;
 
-Image_Sequence_Label::Image_Sequence_Label(QDir dir, QSize size, QWidget* parent) : QLabel(parent)
+Image_Sequence_Label::Image_Sequence_Label(ImageSequence image_sequence, QSize size, QWidget* parent) :
+	m_pixmaps{ image_sequence.to_pixmaps() }, QLabel(parent)
 {
-	QStringList image_filenames = dir.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files);
-
-	for (QString filename : image_filenames)
-	{
-		m_image_seq.append(new QPixmap(dir.filePath(filename)));
-	}
-
 	setFixedSize(size);
 
-	setPixmap(m_image_seq.value(m_frame_number++)->scaled(size));
+	setPixmap(m_pixmaps.value(m_frame_number++).scaled(size));
 
 	connect(&m_timer, SIGNAL(timeout()), this, SLOT(time_out()));
 
 	m_timer.start(16.6675);
 }
 
+//Image_Sequence_Label::Image_Sequence_Label(QDir dir, QSize size, QWidget* parent) : QLabel(parent)
+//{
+//	QStringList image_filenames = dir.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files);
+//
+//	for (QString filename : image_filenames)
+//	{
+//		m_image_seq.append(new QPixmap(dir.filePath(filename)));
+//	}
+//
+//	setFixedSize(size);
+//
+//	setPixmap(m_image_seq.value(m_frame_number++)->scaled(size));
+//
+//	connect(&m_timer, SIGNAL(timeout()), this, SLOT(time_out()));
+//
+//	m_timer.start(16.6675);
+//}
+
 Image_Sequence_Label::Image_Sequence_Label(const Image_Sequence_Label& isl)
 {
-	for (QPixmap* image : isl.m_image_seq)
+	for (QPixmap pixmap : isl.m_pixmaps)
 	{
-		m_image_seq.append(new QPixmap(*image));
+		m_pixmaps.append(QPixmap(pixmap));
 	}
 
 	setFixedSize(isl.size());
 
-	setPixmap(m_image_seq.value(m_frame_number++)->scaled(size()));
+	setPixmap(m_pixmaps.value(m_frame_number++).scaled(size()));
 
 	connect(&m_timer, SIGNAL(timeout()), this, SLOT(time_out()));
 
 	m_timer.start(16.6675);
 }
 
-Image_Sequence_Label::~Image_Sequence_Label()
-{
-	for (QPixmap* image : m_image_seq)
-	{
-		if (image) delete image;
-		image = nullptr;
-	}
-
-	m_image_seq.clear();
-}
+//Image_Sequence_Label::~Image_Sequence_Label()
+//{
+//	for (QPixmap image : m_image_seq)
+//	{
+//		if (image) delete image;
+//		image = nullptr;
+//	}
+//
+//	m_image_seq.clear();
+//}
 
 void Image_Sequence_Label::time_out()
 {
-	setPixmap(m_image_seq.value(m_frame_number++)->scaled(size()));
+	setPixmap(m_pixmaps.value(m_frame_number++).scaled(size()));
 
-	if (m_frame_number == m_image_seq.size()) m_frame_number = 0;
+	if (m_frame_number == m_pixmaps.size()) m_frame_number = 0;
 
 	m_timer.start(16.6675);
 }

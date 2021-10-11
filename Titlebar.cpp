@@ -12,7 +12,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 
     set_name("titlebar");
     set_proper_name("Titlebar");
-    set_icon(new Graphic_Widget(":/svgs/titlebar_icon.svg", QSize(20, 20)));
+    set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
 	set_stateless_attribute_value("background_disabled", true);
 
     filter_attribute("background_color_hover");
@@ -21,7 +21,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
     filter_attribute("border_thickness");
     filter_attribute("border_gradient_disabled");
 
-    m_window_icon->set_padding(0);
+    m_window_icon->set_padding(6, 0, 6, 0);
 
     m_window_title_label->set_name("window_title_label");
     m_window_title_label->set_padding(0, 7, 0, 0);
@@ -118,6 +118,24 @@ bool Titlebar::is(QWidget* widget)
     else if (mll_stack.count() && mll_stack.last() == widget) return true;
 
     return false;
+}
+
+void Titlebar::set_window_icon(const Graphic& icon_graphic)
+{
+    m_window_icon->deleteLater();
+
+    m_window_icon = new Button(new Graphic(icon_graphic));
+
+    //m_window_icon->set_stateless_attribute_value("background_disabled", false);
+
+    //m_window_icon->graphic()->set_stateless_attribute_value("background_disabled", false);
+    //m_window_icon->graphic()->set_stateless_attribute_value("background_color", QColor(Qt::blue));
+
+    m_window_icon->set_padding(6, 0, 6, 0);
+
+    main_layout->insertWidget(0, m_window_icon);
+
+    emit window_icon_updated();
 }
 
 void Titlebar::set_window_title(const QString & title)

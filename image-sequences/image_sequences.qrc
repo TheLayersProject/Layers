@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/image_sequences">
+        <file>layers_logo.imgseq</file>
+    </qresource>
+</RCC>

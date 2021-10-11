@@ -4,7 +4,7 @@ using Layers::App_Preferences_Settings_Panel;
 
 App_Preferences_Settings_Panel::App_Preferences_Settings_Panel(QWidget* parent) : Widget(parent)
 {
-	set_icon(new Graphic_Widget(":/svgs/panel_icon.svg", QSize(20, 20)));
+	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
 	set_name("app_preferences_settings_panel");
 	set_proper_name("App Preferences Panel");
 

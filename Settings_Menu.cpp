@@ -1,11 +1,11 @@
 #include "Layers.h"
 
-using Layers::Graphic_Widget;
+using Layers::Graphic;
 using Layers::Settings_Menu;
 using Layers::Themes_Settings_Panel;
 
 Settings_Menu::Settings_Menu(QWidget* parent) :
-	Menu("Settings", new Graphic_Widget(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
+	Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
 {
 	init_child_themeable_reference_list();
 
@@ -13,7 +13,7 @@ Settings_Menu::Settings_Menu(QWidget* parent) :
 
 	installEventFilter(this);
 
-	set_icon(new Graphic_Widget(":/svgs/settings_animated.svg", QSize(20, 20)));
+	set_icon(new Graphic(":/svgs/settings_animated.svg", QSize(20, 20)));
 	set_name("settings_menu");
 	set_proper_name("Settings Menu");
 
@@ -24,10 +24,10 @@ Settings_Menu::Settings_Menu(QWidget* parent) :
 
 	setup_layout();
 
-	add_settings_tab(new Graphic_Widget(":/svgs/app_preferences_icon.svg", QSize(25, 25)), "App Preferences");
+	add_settings_tab(new Graphic(":/svgs/app_preferences_icon.svg", QSize(25, 25)), "App Preferences");
 	m_settings_tabs.last()->set_name("app_preferences_settings_tab");
 	connect(m_settings_tabs.last(), &Settings_Tab::clicked, [this] { m_app_preferences_settings_panel->show(); m_themes_settings_panel->hide(); });
-	add_settings_tab(new Graphic_Widget(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
+	add_settings_tab(new Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
 	m_settings_tabs.last()->set_name("themes_settings_tab");
 	connect(m_settings_tabs.last(), &Settings_Tab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
 
@@ -36,7 +36,7 @@ Settings_Menu::Settings_Menu(QWidget* parent) :
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
 }
 
-void Settings_Menu::add_settings_tab(Graphic_Widget* icon, const QString& label_text)
+void Settings_Menu::add_settings_tab(Graphic* icon, const QString& label_text)
 {
 	Settings_Tab* settings_tab = new Settings_Tab(icon, label_text);
 

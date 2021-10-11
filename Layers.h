@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QList>
+#include <QMenuBar>
 #include <QMouseEvent>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -21,9 +22,12 @@
 #include <QPainterPath>
 #include <QSaveFile>
 #include <QScrollArea>
+#include <QScrollBar>
 #include <QSettings>
 #include <QSvgWidget>
+#include <QTabBar>
 #include <QTimer>
+#include <QVersionNumber>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -37,7 +41,7 @@ namespace Layers
 	class Attribute_Widget;
 	class Color_Control;
 	class Customize_Panel;
-	class Graphic_Widget;
+	class Graphic;
 	class Label;
 	class Stateless_Attribute;
 	class Theme;
@@ -92,9 +96,60 @@ namespace Layers
 	QString deprecated_layers_themes_path();
 	QString local_app_data_path();
 
-	Theme build_dark_theme();
-	Theme build_light_theme();
-	Theme build_blue_theme();
+	Theme build_layers_blue_theme();
+	Theme build_layers_dark_theme();
+	Theme build_layers_light_theme();
+
+	class ImageSequence
+	{
+	public:
+		ImageSequence(QDir dir);
+
+		ImageSequence(QFile file);
+
+		void save(QFile file);
+
+		QList<QPixmap> to_pixmaps() const;
+
+	private:
+		QList<QImage> m_images{ QList<QImage>() };
+	};
+
+	class Version
+	{
+	public:
+		Version(int major, int minor = 0, int patch = 0, QString phase = "");
+
+		Version(QString version_string);
+
+		Version();
+
+		QString toString();
+
+	private:
+		const QList<QString> m_acceptable_phases{ QList<QString>({
+			"alpha", "a", "beta", "b", "release-candidate", "rc" }) };
+
+		int m_major{ 0 };
+		int m_minor{ 0 };
+		int m_patch{ 0 };
+
+		QString m_phase{ "" };
+
+		QString m_separator_charactor{ "" };
+	};
+
+	class GitHubRepo
+	{
+	public:
+		GitHubRepo(const QString& repo_url);
+
+		QString toString() const;
+
+	private:
+		QString m_repo_name{ "" };
+		QString m_user_name{ "" };
+	};
 
 	/*!
 		Pure abstract base class for Layers attributes.
@@ -381,6 +436,8 @@ namespace Layers
 
 		QHash<QString, Attribute_Set>& attribute_sets();
 
+		void consume(Theme* theme);
+
 		bool contains_attributes_for_tag(const QString& themeable_tag);
 
 		// Only needs one version since attribute names should not exist in both stateless and stateful lists
@@ -543,7 +600,7 @@ namespace Layers
 
 			@returns Address of icon, or nullptr
 		*/
-		Graphic_Widget* icon() const;
+		Graphic* icon() const;
 
 		/*!
 			Initializes customize panels and adds them to the provided list.
@@ -590,6 +647,8 @@ namespace Layers
 
 		void set_ACW_primary(const QString& ACW_name, bool is_primary);
 
+		void set_is_app_themeable(bool is_app_themeable);
+
 		void set_functionality_disabled(bool disabled = true);
 
 		void set_stateful_attribute_value(
@@ -622,7 +681,7 @@ namespace Layers
 
 			@param icon for the themeable
 		*/
-		void set_icon(Graphic_Widget* icon);
+		void set_icon(Graphic* icon);
 
 		/*!
 			Sets the name of the themeable; replaces it if one already exists.
@@ -869,13 +928,13 @@ namespace Layers
 		bool m_functionality_disabled{ false };
 		bool m_tag_prefixes_assigned{ false };
 		bool m_shared_attributes{ false };
+		bool m_is_app_themeable{ false };
 		bool m_is_stateful{ false };
 
 		Customize_Panel* m_customize_panel{ nullptr };
 
-		Graphic_Widget* m_icon{ nullptr };
+		Graphic* m_icon{ nullptr };
 
-		QString* m_app_name{ nullptr };
 		QString* m_name{ nullptr };
 		QString* m_proper_name{ nullptr };
 		QString m_state{ "" };
@@ -967,14 +1026,6 @@ namespace Layers
 
 		QString m_from_state{ "" };
 		QString m_to_state{ "" };
-	};
-
-	class Scroll_Area : public QScrollArea
-	{
-		Q_OBJECT
-
-	public:
-		Scroll_Area(QWidget* parent = nullptr);
 	};
 
 	class Horizontal_Layout : public QHBoxLayout
@@ -1081,14 +1132,39 @@ namespace Layers
 		QPainter painter;
 	};
 
+	class Scroll_Area : public Widget
+	{
+		Q_OBJECT
+
+	public:
+		Scroll_Area(QWidget* parent = nullptr);
+
+		void issue_update();
+
+		void setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy policy);
+
+		void setVerticalScrollBarPolicy(Qt::ScrollBarPolicy policy);
+
+		void setWidget(QWidget* widget);
+
+	protected:
+		bool eventFilter(QObject* object, QEvent* event) override;
+
+		QScrollArea* m_scroll_area{ new QScrollArea(this) };
+
+		QScrollBar* m_horizontal_scrollbar{ new QScrollBar };
+		QScrollBar* m_vertical_scrollbar{ new QScrollBar };
+	};
+
 	class Image_Sequence_Label : public QLabel
 	{
 		Q_OBJECT
 
 	public:
-		Image_Sequence_Label(QDir dir, QSize size, QWidget* parent = nullptr);
+		//Image_Sequence_Label(QDir dir, QSize size, QWidget* parent = nullptr);
+		Image_Sequence_Label(ImageSequence image_sequence, QSize size, QWidget* parent = nullptr);
 		Image_Sequence_Label(const Image_Sequence_Label& isl);
-		~Image_Sequence_Label();
+		//~Image_Sequence_Label();
 
 	public slots:
 		void time_out();
@@ -1098,42 +1174,42 @@ namespace Layers
 
 		QTimer m_timer;
 
-		QList<QPixmap*> m_image_seq{ QList<QPixmap*>() };
+		QList<QPixmap> m_pixmaps{ QList<QPixmap>() };
 	};
 
 	/*!
-		The SVG_Widget class provides representation for SVG files in Layers.
+		The SVG class provides representation for SVG files in Layers.
 
-		An SVG_Widget loads an SVG file into a string. To make the SVG appear on the screen, the string is passed to
+		An SVG loads an SVG file into a string. To make the SVG appear on the screen, the string is passed to
 		QSvgWidget::load(). The load function can be called indefinitely. Therefore, changes can be made to the SVG string
 		and loaded again, allowing for theme application.
 
 		Manipulating the SVG string itself would be punishing. To make this easier, a list of SVG elements is built from
 		the string with build_svg_elements_list().
 
-		The SVG_Widget's constructors wait to call Themeable::init_themeable() until after the SVG elements list has been built.
-		This is because the SVG_Widget::init_attributes() function, which is called virtually by Themeable::init_themeable(),
+		The SVG's constructors wait to call Themeable::init_themeable() until after the SVG elements list has been built.
+		This is because the SVG::init_attributes() function, which is called virtually by Themeable::init_themeable(),
 		depends on the elements list.
 
-		When a theme is applied to the SVG_Widget, the attributes are updated to values provided in the applied theme, but
+		When a theme is applied to the SVG, the attributes are updated to values provided in the applied theme, but
 		the SVG string needs to be updated with the new attribute values and passed along to QSvgWidget::load() before the
-		appearance of the SVG_Widget updates. This class implements update_theme_dependencies() to ensure that this all
+		appearance of the SVG updates. This class implements update_theme_dependencies() to ensure that this all
 		happens after theme application.
 	*/
-	class SVG_Widget : public QSvgWidget, public Themeable
+	class SVG : public QSvgWidget, public Themeable
 	{
 		Q_OBJECT
 
 	public:
 		/*!
-			Constructs an SVG_Widget from an SVG file.
+			Constructs an SVG from an SVG file.
 		*/
-		SVG_Widget(QString file_path, QWidget* parent = nullptr);
+		SVG(QString file_path, QWidget* parent = nullptr);
 
 		/*!
-			Copy constructs an SVG_Widget from another SVG_Widget.
+			Copy constructs an SVG from another SVG.
 		*/
-		SVG_Widget(const SVG_Widget& svg_w);
+		SVG(const SVG& svg_w);
 
 		/*!
 			Rebuilds the SVG string from the SVG elements list.
@@ -1146,7 +1222,7 @@ namespace Layers
 			Updates things that depend on the theme.
 
 			SVG elements are updated with the newly applied theme's attribute values. Then, the SVG string is rebuilt
-			from those elements. And finally, the SVG string is passed to QSvgWidget::load() to update the SVG_Widget's
+			from those elements. And finally, the SVG string is passed to QSvgWidget::load() to update the SVG's
 			appearance.
 		*/
 		void update_theme_dependencies();
@@ -1167,6 +1243,8 @@ namespace Layers
 		void issue_update();
 
 	private:
+		void init_size();
+
 		void build_svg_elements_list();
 
 		QString element_id(const QString& element);
@@ -1175,33 +1253,40 @@ namespace Layers
 
 		QString m_svg_str{  };
 
-		QList<QString> m_svg_elements{  };
+		QStringList m_svg_elements{  };
 	};
 
-	class Graphic_Widget : public Widget
+	class Graphic : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Graphic_Widget(const QDir& img_seq_dir, QSize size, QWidget* parent = nullptr);
-		Graphic_Widget(const QString& filepath, QSize size, QWidget* parent = nullptr);
-		Graphic_Widget(const QImage& image, QWidget* parent = 0);
-		Graphic_Widget(const Graphic_Widget& gw);
+		Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent = nullptr);
+		Graphic(const QString& filepath, QSize size, QWidget* parent = nullptr);
+		Graphic(const QString& filepath, QWidget* parent = nullptr);
+		Graphic(const QImage& image, QWidget* parent = 0);
+		Graphic(const Graphic& gw);
 
 		void convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
+		QSize image_size();
+
 		void set_hovering(bool cond = true);
-		void set_icon(Graphic_Widget* icon);
+		void set_icon(Graphic* icon);
+		void set_pixmap(const QPixmap& pixmap);
 		void set_size(QSize size);
 
-		SVG_Widget* svg() const;
+		SVG* svg() const;
+
+		void update_theme_dependencies();
 
 	protected:
 		void init_attribute_widgets();
 
 	private:
+		QSize m_image_size{ QSize() };
 		QLabel* m_bitmap_label{ nullptr };
-		SVG_Widget* m_svg_widget{ nullptr };
+		SVG* m_svg_widget{ nullptr };
 		Image_Sequence_Label* m_image_sequence_label{ nullptr };
 	};
 
@@ -1221,6 +1306,8 @@ namespace Layers
 
 		void build_wrapped_lines();
 
+		void setFont(const QFont& f);
+
 		void setMaximumWidth(int maxw);
 
 		void setWordWrap(bool on);
@@ -1229,6 +1316,7 @@ namespace Layers
 		void set_font_size(int size);
 		void set_hovering(bool cond = true);
 		void set_padding(int left, int top, int right, int bottom);
+		void set_resize_disabled(bool disable = true);
 
 		int width_unwrapped();
 
@@ -1244,6 +1332,7 @@ namespace Layers
 		QPainter painter;
 
 		bool m_hovering{ false };
+		bool m_resize_disabled{ false };
 		bool m_wrapping{ false };
 
 		int m_available_width{ 16777215 };
@@ -1300,19 +1389,17 @@ namespace Layers
 		void clicked();
 
 	public:
-		Button(Graphic_Widget* graphic, const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-		Button(Graphic_Widget* graphic, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
+		Button(Graphic* graphic, const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
+		Button(Graphic* graphic, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 		Button(const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-		Button(Graphic_Widget* graphic_before, Graphic_Widget* graphic_after, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-
-		void adjust_height_and_label_width();
+		Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 
 		void disable_graphic_hover_color(bool cond = true);
 		void disable_text_hover_color(bool cond = true);
 
 		bool disabled() const;
 
-		Graphic_Widget* graphic() const;
+		Graphic* graphic() const;
 
 		void resize();
 
@@ -1353,8 +1440,8 @@ namespace Layers
 
 		int m_available_width{ 16777215 };
 
-		Graphic_Widget* m_graphic{ nullptr };
-		Graphic_Widget* m_graphic_after{ nullptr };
+		Graphic* m_graphic{ nullptr };
+		Graphic* m_graphic_after{ nullptr };
 
 		Label* m_text_label{ nullptr };
 	};
@@ -1410,6 +1497,7 @@ namespace Layers
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
 		void set_item_renaming_disabled(bool disable = true);
+		void set_padding(int left, int top, int right, int bottom);
 		void setFixedSize(const QSize& s);
 		void setFixedSize(int w, int h);
 
@@ -1471,6 +1559,8 @@ namespace Layers
 		void set_validator(const QValidator* validator);
 
 		void setFixedSize(int w, int h);
+
+		void setFixedWidth(int w);
 
 		QString text();
 
@@ -1551,6 +1641,55 @@ namespace Layers
 		bool m_dragging_handle{ false };
 
 		QPoint m_mouse_click_position{ QPoint() };
+	};
+
+	class MenuBar : public QMenuBar, public Themeable
+	{
+		Q_OBJECT
+
+	public:
+		MenuBar(QWidget* parent = 0);
+
+		// TODO: Make override other overloaded versions from the parent class
+		QMenu* addMenu(const QString& title);
+
+		void issue_update();
+
+		void update_theme_dependencies();
+
+	protected:
+		QString build_stylesheet();
+
+		void init_attributes();
+
+		//void paintEvent(QPaintEvent* event);
+
+	private:
+		QList<QMenu*> m_menus{ QList<QMenu*>() };
+	};
+
+	class TabBar : public QTabBar, public Themeable
+	{
+		Q_OBJECT
+
+	public:
+		TabBar(QWidget* parent = 0);
+
+		void SetCurrentTab(const QString& text);
+
+		bool ContainsTab(const QString& text);
+
+		void issue_update();
+
+		//void removeTab(int index);
+		void removeTab(const QString& text);
+
+		void update_theme_dependencies();
+
+	protected:
+		QString build_stylesheet();
+
+		void init_attributes();
 	};
 
 	class Color_Control : public Widget
@@ -1718,7 +1857,7 @@ namespace Layers
 	private:
 		void setup_layout();
 
-		Button* m_collapse_button{ new Button(new Graphic_Widget(":/svgs/collapse_arrow_right.svg", QSize(8, 12)), new Graphic_Widget(":/svgs/collapse_arrow_down.svg", QSize(12, 8)), true) };
+		Button* m_collapse_button{ new Button(new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)), new Graphic(":/svgs/collapse_arrow_down.svg", QSize(12, 8)), true) };
 
 		bool m_collapsed{ true };
 
@@ -1906,7 +2045,7 @@ namespace Layers
 
 		void add_attribute_widget(Attribute_Widget* attribute_widget);
 
-		void add_element_button(Button* button);
+		void add_element_button(Button* button, int index = -1);
 
 		void setup_layout();
 
@@ -1951,9 +2090,9 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Menu(const QString& menu_name, Graphic_Widget* menu_icon, QWidget* parent = nullptr);
+		Menu(const QString& menu_name, Graphic* menu_icon, QWidget* parent = nullptr);
 
-		Graphic_Widget* icon{ nullptr };
+		Graphic* icon{ nullptr };
 
 		QString name;
 	};
@@ -1983,7 +2122,7 @@ namespace Layers
 	private:
 		QHBoxLayout* main_layout = new QHBoxLayout;
 
-		Button* m_back_button{ new Button(new Graphic_Widget(":/svgs/back.svg", QSize(21, 18)), false) };
+		Button* m_back_button{ new Button(new Graphic(":/svgs/back.svg", QSize(21, 18)), false) };
 		Button* m_icon_button{ nullptr };
 
 		Label* m_text_label{ nullptr };
@@ -2008,7 +2147,6 @@ namespace Layers
 
 	public:
 		Create_New_Theme_Dialog(QWidget* parent = nullptr);
-
 
 		void add_theme_name_to_combobox(const QString& theme_name);
 
@@ -2118,10 +2256,10 @@ namespace Layers
 
 		Combobox* m_theme_combobox{ new Combobox };
 
-		Button* m_new_theme_button{ new Button(new Graphic_Widget(":/svgs/new_theme.svg", QSize(20, 20)), true) };
-		Button* m_customize_theme_button{ new Button(new Graphic_Widget(":/svgs/customize_theme.svg", QSize(20, 20)), true) };
-		Button* m_delete_theme_button{ new Button(new Graphic_Widget(":/svgs/delete_theme.svg", QSize(17, 20)), true) };
-		Button* m_theme_info_button{ new Button(new Graphic_Widget(":/svgs/info_theme.svg", QSize(20, 20)), true) };
+		Button* m_new_theme_button{ new Button(new Graphic(":/svgs/new_theme.svg", QSize(20, 20)), true) };
+		Button* m_customize_theme_button{ new Button(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)), true) };
+		Button* m_delete_theme_button{ new Button(new Graphic(":/svgs/delete_theme.svg", QSize(17, 20)), true) };
+		Button* m_theme_info_button{ new Button(new Graphic(":/svgs/info_theme.svg", QSize(20, 20)), true) };
 
 		Widget* m_control_separator{ new Widget };
 		Widget* m_separator_1{ new Widget };
@@ -2151,7 +2289,7 @@ namespace Layers
 		void over_minimum_width();
 
 	public:
-		Settings_Tab(Graphic_Widget* icon, const QString& label_text, QWidget* parent = nullptr);
+		Settings_Tab(Graphic* icon, const QString& label_text, QWidget* parent = nullptr);
 
 		void expand();
 		void shrink();
@@ -2178,7 +2316,7 @@ namespace Layers
 
 		Label* m_text_label;
 
-		Graphic_Widget* m_tab_icon;
+		Graphic* m_tab_icon;
 
 		Widget* m_spacer{ new Widget };
 		Widget* m_stretch_widget{ new Widget };
@@ -2192,7 +2330,7 @@ namespace Layers
 	public:
 		Settings_Menu(QWidget* parent = nullptr);
 
-		void add_settings_tab(Graphic_Widget* icon, const QString& label_text);
+		void add_settings_tab(Graphic* icon, const QString& label_text);
 
 		int largest_tab_index() const;
 
@@ -2241,6 +2379,8 @@ namespace Layers
 
 		Button* apply_button() const;
 
+		QList<Customize_Panel*>& customize_panels();
+
 		void init_preview_window();
 
 		void open_customize_panel(Customize_Panel* customize_panel);
@@ -2283,12 +2423,16 @@ namespace Layers
 		QList<Button*> m_text_button_stack;
 		QList<Button*> m_topbar_text_buttons;
 		QList<Button*> m_collapsed_text_buttons;
-		QList<Graphic_Widget*> m_arrow_graphics;
+		QList<Graphic*> m_arrow_graphics;
 
 		QSize* m_previous_size{ nullptr };
 
 		Button* m_apply_button{ new Button("Apply", true) };
-		Button* m_collapsed_button{ new Button(new Graphic_Widget(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
+		Button* m_collapsed_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
+
+		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
+
+		Button* m_control_text_button{ new Button("")};
 
 		Widget* m_collapsed_widget{ new Widget };
 	};
@@ -2297,6 +2441,9 @@ namespace Layers
 	{
 		Q_OBJECT
 
+	signals:
+		void window_icon_updated();
+
 	public:
 		Titlebar(QWidget* parent = nullptr);
 
@@ -2304,6 +2451,8 @@ namespace Layers
 		void remove_mlls_past(int index);
 
 		bool is(QWidget* widget);
+
+		void set_window_icon(const Graphic& icon_graphic);
 
 		void set_window_title(const QString& title);
 
@@ -2324,14 +2473,14 @@ namespace Layers
 	private:
 		QHBoxLayout* main_layout = new QHBoxLayout;
 
-		Button* m_window_icon{ new Button(new Graphic_Widget(QDir("./data/logo_animate"), QSize(35, 35)), true) };
+		Button* m_window_icon{ new Button(new Graphic(QFile(":/image_sequences/layers_logo.imgseq"), QSize(35, 35)), true) };
 
-		Label* m_window_title_label{ new Label("Layers - Demo") };
+		Label* m_window_title_label{ new Label("Window") };
 
-		Button* m_settings_button{ new Button(new Graphic_Widget(":/svgs/settings.svg", QSize(20, 20)), true) };
-		Button* m_minimize_button{ new Button(new Graphic_Widget(":/svgs/minimize.svg", QSize(20, 20)), true) };
-		Button* m_maximize_button{ new Button(new Graphic_Widget(":/svgs/maximize.svg", QSize(20, 20)), true) };
-		Button* m_exit_button{ new Button(new Graphic_Widget(":/svgs/exit.svg", QSize(20, 20)), true) };
+		Button* m_settings_button{ new Button(new Graphic(":/svgs/settings.svg", QSize(20, 20)), true) };
+		Button* m_minimize_button{ new Button(new Graphic(":/svgs/minimize.svg", QSize(20, 20)), true) };
+		Button* m_maximize_button{ new Button(new Graphic(":/svgs/maximize.svg", QSize(20, 20)), true) };
+		Button* m_exit_button{ new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true) };
 
 		Widget* m_buttons_container{ new Widget(this) };
 
@@ -2339,7 +2488,7 @@ namespace Layers
 
 		Menu_Label_Layer* m_base_mll{ nullptr };
 
-		Menu_Label_Layer* m_control_mll{ new Menu_Label_Layer(new Menu("Control Menu", new Graphic_Widget(":/svgs/icon_icon.svg", QSize(20, 20)))) };
+		Menu_Label_Layer* m_control_mll{ new Menu_Label_Layer(new Menu("Control Menu", new Graphic(":/svgs/icon_icon.svg", QSize(20, 20)))) };
 
 		Widget* m_stretch_widget{ new Widget };
 	};
@@ -2349,7 +2498,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Window(QWidget* parent = nullptr);
+		Window(bool preview = false, QWidget* parent = nullptr);
 
 		void add_menu(Menu* menu);
 
@@ -2359,6 +2508,9 @@ namespace Layers
 
 		void assign_tag_prefixes();
 
+		//template<typename T>
+		//void build_main_widget();
+
 		void center_dialog(QDialog* dialog);
 
 		Customize_Menu* customize_menu() const;
@@ -2367,13 +2519,17 @@ namespace Layers
 
 		void link_theme_name(const QString& name);
 
-		void update_theme_dependencies();
+		void set_main_widget(Widget* main_widget);
+
+		void set_window_icon(const Graphic& icon_graphic);
 
 		void set_window_title(const QString& title);
 
 		Settings_Menu* settings_menu() const;
 
 		Titlebar* titlebar() const;
+
+		void update_theme_dependencies();
 
 	public slots:
 		void customize_clicked();
@@ -2397,9 +2553,11 @@ namespace Layers
 		void setup_layout();
 
 		bool m_maximized{ false };
+		bool m_preview{ false };
 
 		Create_New_Theme_Dialog* m_create_new_theme_dialog{ new Create_New_Theme_Dialog };
 
+		QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 		QList<Menu*> m_menus;
@@ -2408,11 +2566,13 @@ namespace Layers
 		Titlebar* m_titlebar{ new Titlebar };
 
 		// TODO: Make Menu constructor that does not require an icon
-		Menu* m_app_menu{ new Menu("App", new Graphic_Widget(":/svgs/settings_animated.svg", QSize(24, 24))) };
+		Menu* m_app_menu{ new Menu("App", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24))) };
 
 		Settings_Menu* m_settings_menu{ new Settings_Menu };
 
 		Customize_Menu* m_customize_menu{ new Customize_Menu };
+
+		Widget* m_main_widget{ nullptr };
 	};
 
 	class Downloader : public QObject
@@ -2435,7 +2595,12 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Application(const QString& app_name, const QString& app_version, const QString& app_repo_path, int &argc, char **argv);
+		Application(
+			int& argc, char** argv,
+			const QString& name,
+			QFile* icon_file = nullptr,
+			Version* version = nullptr,
+			GitHubRepo* github_repo = nullptr);
 
 		void add_child_themeable_reference(Themeable& themeable);
 
@@ -2445,15 +2610,21 @@ namespace Layers
 
 		Theme* current_theme() const;
 
+		QFile* icon_file();
+
 		void issue_update();
 
 		Theme load_theme(QFile& file);
+
+		QString& name();
 
 		void reapply_theme();
 
 		void save_theme(Theme& theme);
 
 		QSettings& settings();
+
+		Theme* theme(const QString& theme_name);
 
 		QMap<QString, Theme>& themes();
 
@@ -2472,26 +2643,31 @@ namespace Layers
 		void init_themes();
 		void init_latest_version_tag();
 
-		Downloader m_downloader{ this };
-
-		QSettings m_settings;
-
-		QString m_github_api_repos_url_base{ "https://api.github.com/repos" };
-
 		QDir m_app_dir;
+
 		QDir m_app_themes_dir;
 
 		QList<Themeable*> m_child_themeable_references;
 
-		QMap<QString, Theme> m_themes;
+		Theme* m_current_theme{ nullptr };
+
+		Downloader m_downloader{ this };
+
+		QString m_github_api_repos_url_base{ "https://api.github.com/repos" };
+
+		GitHubRepo* m_github_repo{ nullptr };
+
+		QFile* m_icon_file{ nullptr };
 
 		QString* m_latest_version{ nullptr };
-		QString* m_repo_path{ nullptr };
 
 		QString m_name;
-		QString m_version;
 
-		Theme* m_current_theme{ nullptr };
+		QSettings m_settings;
+
+		QMap<QString, Theme> m_themes;
+
+		Version* m_version{ nullptr };
 	};
 
 	template<typename T>

@@ -4,7 +4,7 @@ using Layers::Attribute_Set;
 using Layers::Attribute_Sharing_Combo;
 using Layers::Attribute_Widget;
 using Layers::Customize_Panel;
-using Layers::Graphic_Widget;
+using Layers::Graphic;
 using Layers::Stateful_Attribute;
 using Layers::Stateless_Attribute;
 using Layers::Themeable;
@@ -13,11 +13,9 @@ using Layers::Theme;
 Themeable::~Themeable()
 {
 	if (m_name) delete m_name;
-	if (m_app_name) delete m_app_name;
 	if (m_proper_name) delete m_proper_name;
 
 	m_name = nullptr;
-	m_app_name = nullptr;
 	m_proper_name = nullptr;
 
 	while (!attribute_sharing_combos.isEmpty())
@@ -62,7 +60,7 @@ Customize_Panel* Themeable::init_customize_panel()
 	return m_customize_panel;
 }
 
-Graphic_Widget* Themeable::icon() const
+Graphic* Themeable::icon() const
 {
 	return m_icon;
 }
@@ -140,6 +138,14 @@ void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
 		m_ACW_pre_init_primary_values[ACW_name] = is_primary;
 }
 
+void Themeable::set_is_app_themeable(bool is_app_themeable)
+{
+	m_is_app_themeable = is_app_themeable;
+
+	for (Themeable* m_child_themeable : m_child_themeable_references)
+		m_child_themeable->set_is_app_themeable(is_app_themeable);
+}
+
 void Themeable::set_functionality_disabled(bool disabled)
 {
 	m_functionality_disabled = disabled;
@@ -155,7 +161,11 @@ void Themeable::set_stateful_attribute_value(const QString& state, const QString
 		{
 			stateful_attribute->set_value(state, value);
 
-			if (update) issue_update();
+			if (update)
+			{
+				update_theme_dependencies();
+				issue_update();
+			}
 		}
 	}
 }
@@ -166,7 +176,11 @@ void Themeable::set_stateless_attribute_value(const QString& attribute_name, QVa
 	{
 		m_attribute_set.stateless_attribute(attribute_name)->set_value(value);
 
-		if (update) issue_update();
+		if (update)
+		{
+			update_theme_dependencies();
+			issue_update();
+		}
 	}
 }
 
@@ -254,7 +268,7 @@ void Themeable::unfilter_attribute(const QString& attribute)
 	m_filtered_attributes.removeOne(attribute);
 }
 
-void Themeable::set_icon(Graphic_Widget* icon)
+void Themeable::set_icon(Graphic* icon)
 {
 	if (m_icon) m_icon->deleteLater();
 
@@ -301,9 +315,10 @@ QString& Themeable::theme_tag()
 {
 	if (m_theme_tag == "")
 	{
-		if (m_app_name)
+		if (m_is_app_themeable)
 		{
-			m_theme_tag += "app/" + *m_app_name + "/";
+			//m_theme_tag += "app/" + *m_app_name + "/";
+			m_theme_tag += "app/";
 		}
 		else
 		{

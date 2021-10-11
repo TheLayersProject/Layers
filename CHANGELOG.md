@@ -11,6 +11,12 @@ All notable changes to this project will be documented in this file.
 - Fixed some issues where the preview window had too much functionality enabled
 - Combobox items are no longer editable by default
 - Button text can word wrap now
+- Widgets of the Customize menu's topbar are now customizable
+- Reworked application initialization
+- New classes: GitHubRepo, MenuBar, TabBar, Version
+- Image sequences can now be saved and loaded as a single file
+- Reworked the ScrollArea class to make it themeable
+- Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes
 
 ### [Layers 2.2.0a] - 2021-09-11
 - Migrated to Qt 6

@@ -1,8 +1,8 @@
 #include "Layers.h"
 
-using Layers::SVG_Widget;
+using Layers::SVG;
 
-SVG_Widget::SVG_Widget(QString file_path, QWidget* parent) : QSvgWidget(parent)
+SVG::SVG(QString file_path, QWidget* parent) : QSvgWidget(parent)
 {
 	QFile file(file_path);
 
@@ -15,25 +15,30 @@ SVG_Widget::SVG_Widget(QString file_path, QWidget* parent) : QSvgWidget(parent)
 
 	build_svg_elements_list();
 
-	init_attributes(); // Necessary to call after m_svg_elements has been initialized
-
-	load(m_svg_str.toUtf8());
-}
-
-SVG_Widget::SVG_Widget(const SVG_Widget& svg_w)
-{
-	m_svg_str = svg_w.m_svg_str;
-	m_svg_elements = svg_w.m_svg_elements;
+	init_size();
 
 	init_attributes(); // Necessary to call after m_svg_elements has been initialized
 
 	load(m_svg_str.toUtf8());
 }
 
-void SVG_Widget::init_attributes()
+SVG::SVG(const SVG& svg)
 {
-	add_stateless_attribute("use_common_color", true);
-	add_stateless_attribute("use_common_hover_color", true);
+	m_svg_str = svg.m_svg_str;
+	m_svg_elements = svg.m_svg_elements;
+
+	setFixedSize(svg.size());
+
+	init_attributes(); // Necessary to call after m_svg_elements has been initialized
+
+	load(m_svg_str.toUtf8());
+}
+
+void SVG::init_attributes()
+{
+	// TODO: Think this should be false by default
+	add_stateless_attribute("use_common_color", false);
+	add_stateless_attribute("use_common_hover_color", false);
 
 	add_stateless_attribute("common_color", QColor(Qt::black));
 	add_stateless_attribute("common_hover_color", QColor(Qt::darkGray));
@@ -61,7 +66,7 @@ void SVG_Widget::init_attributes()
 	}
 }
 
-void SVG_Widget::init_attribute_widgets()
+void SVG::init_attribute_widgets()
 {
 	if (m_customize_panel)
 	{
@@ -81,12 +86,12 @@ void SVG_Widget::init_attribute_widgets()
 	}
 }
 
-void SVG_Widget::issue_update()
+void SVG::issue_update()
 {
 	update();
 }
 
-void SVG_Widget::rebuild_svg_str()
+void SVG::rebuild_svg_str()
 {
 	QString new_svg_str = "";
 
@@ -98,14 +103,14 @@ void SVG_Widget::rebuild_svg_str()
 	m_svg_str = new_svg_str;
 }
 
-void SVG_Widget::set_hovering(bool cond)
+void SVG::set_hovering(bool cond)
 {
 	m_hovering = cond;
 
 	update_theme_dependencies();
 }
 
-void SVG_Widget::update_theme_dependencies()
+void SVG::update_theme_dependencies()
 {
 	for (int i = 0; i < m_svg_elements.size(); i++)
 	{
@@ -141,7 +146,50 @@ void SVG_Widget::update_theme_dependencies()
 	load(m_svg_str.toUtf8());
 }
 
-void SVG_Widget::build_svg_elements_list()
+void SVG::init_size()
+{
+	QSize initial_size(1, 1);
+
+	QString svg_open_tag = m_svg_elements[0];
+
+	svg_open_tag = svg_open_tag.replace("\n", "");
+	svg_open_tag = svg_open_tag.replace("<", "");
+	svg_open_tag = svg_open_tag.replace(">", "");
+
+	QStringList svg_open_tag_parts = svg_open_tag.split(" ");
+
+	svg_open_tag_parts.removeOne("svg");
+
+	svg_open_tag_parts.removeAll("");
+
+	for (const QString& svg_open_tag_part : svg_open_tag_parts)
+	{
+		if (svg_open_tag_part.contains("width"))
+		{
+			QString width_string = svg_open_tag_part.split("=").last();
+
+			width_string.replace("\"", "");
+
+			width_string.chop(2);
+
+			initial_size.setWidth(width_string.toInt());
+		}
+		else if (svg_open_tag_part.contains("height"))
+		{
+			QString height_string = svg_open_tag_part.split("=").last();
+
+			height_string.replace("\"", "");
+
+			height_string.chop(2);
+
+			initial_size.setHeight(height_string.toInt());
+		}
+	}
+
+	setFixedSize(initial_size);
+}
+
+void SVG::build_svg_elements_list()
 {
 	QString temp_svg_str = QString(m_svg_str);
 
@@ -157,7 +205,7 @@ void SVG_Widget::build_svg_elements_list()
 	}
 }
 
-QString SVG_Widget::element_id(const QString& element)
+QString SVG::element_id(const QString& element)
 {
 	int id_start_index = element.indexOf("id=") + 4;
 	int id_end_index = element.indexOf("\"", id_start_index);

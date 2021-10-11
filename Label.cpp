@@ -6,7 +6,7 @@ Label::Label(QWidget* parent) : QLabel(parent)
 {
 	init_attributes();
 
-	set_icon(new Graphic_Widget(":/svgs/label_icon.svg", QSize(17, 6)) );
+	set_icon(new Graphic(":/svgs/label_icon.svg", QSize(17, 6)) );
 }
 
 Label::Label(const QString& text, QWidget* parent) : Label(parent)
@@ -31,7 +31,10 @@ void Label::init_attribute_widgets()
 	{
 		Color_Attribute_Widget* color_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("color"), true);
 
+		Color_Attribute_Widget* hover_color_caw = new Color_Attribute_Widget("Hover Color", m_attribute_set.attribute("color_hover"), true);
+
 		m_customize_panel->add_attribute_widget(color_caw);
+		m_customize_panel->add_attribute_widget(hover_color_caw);
 	}
 }
 
@@ -101,25 +104,32 @@ void Label::build_wrapped_lines()
 	}
 }
 
+void Label::setFont(const QFont& f)
+{
+	QLabel::setFont(f);
+
+	if (!m_resize_disabled) resize();
+}
+
 void Label::setMaximumWidth(int maxw)
 {
 	QLabel::setMaximumWidth(maxw);
 
-	resize();
+	if (!m_resize_disabled) resize();
 }
 
 void Label::setWordWrap(bool on)
 {
 	QLabel::setWordWrap(on);
 
-	resize();
+	if (!m_resize_disabled) resize();
 }
 
 void Label::set_available_width(int available_width)
 {
 	m_available_width = available_width;
 
-	resize();
+	if (!m_resize_disabled) resize();
 }
 
 void Label::set_font_size(int size)
@@ -130,7 +140,7 @@ void Label::set_font_size(int size)
 
 	setFont(f);
 
-	resize();
+	if (!m_resize_disabled) resize();
 }
 
 void Label::set_hovering(bool cond)
@@ -147,7 +157,12 @@ void Label::set_padding(int left, int top, int right, int bottom)
 	m_padding_right = right;
 	m_padding_bottom = bottom;
 
-	resize();
+	if (!m_resize_disabled) resize();
+}
+
+void Label::set_resize_disabled(bool disable)
+{
+	m_resize_disabled = disable;
 }
 
 int Label::width_unwrapped()
@@ -161,7 +176,7 @@ void Label::setText(const QString& text)
 {
 	QLabel::setText(text);
 
-	resize();
+	if (!m_resize_disabled) resize();
 }
 
 void Label::paintEvent(QPaintEvent* event)

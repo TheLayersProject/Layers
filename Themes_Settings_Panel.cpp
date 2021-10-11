@@ -10,7 +10,7 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 	init_child_themeable_reference_list();
 	init_attributes();
 
-	set_icon(new Graphic_Widget(":/svgs/panel_icon.svg", QSize(20, 20)));
+	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
 	set_name("themes_settings_panel");
 	set_proper_name("Themes Panel");
 
@@ -18,7 +18,7 @@ Themes_Settings_Panel::Themes_Settings_Panel(QWidget* parent) : Widget(parent)
 	m_theme_label->set_proper_name("\"Theme\" Label");
 	m_theme_label->set_font_size(15);
 
-	m_theme_combobox->set_icon(new Graphic_Widget(":/svgs/combobox_icon.svg", QSize(21, 18)));
+	m_theme_combobox->set_icon(new Graphic(":/svgs/combobox_icon.svg", QSize(21, 18)));
 	m_theme_combobox->set_item_renaming_disabled(false);
 	m_theme_combobox->set_name("theme_combobox");
 	m_theme_combobox->set_proper_name("Theme Combobox");
