@@ -29,9 +29,9 @@ void Label::init_attribute_widgets()
 {
 	if (m_customize_panel)
 	{
-		Color_Attribute_Widget* color_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("color"), true);
+		ColorAttributeWidget* color_caw = new ColorAttributeWidget("Color", m_attribute_set.attribute("color"), true);
 
-		Color_Attribute_Widget* hover_color_caw = new Color_Attribute_Widget("Hover Color", m_attribute_set.attribute("color_hover"), true);
+		ColorAttributeWidget* hover_color_caw = new ColorAttributeWidget("Hover Color", m_attribute_set.attribute("color_hover"), true);
 
 		m_customize_panel->add_attribute_widget(color_caw);
 		m_customize_panel->add_attribute_widget(hover_color_caw);

@@ -1,8 +1,8 @@
 #include "Layers.h"
 
-using Layers::Customize_Menu;
+using Layers::CustomizeMenu;
 using Layers::Menu;
-using Layers::Settings_Menu;
+using Layers::SettingsMenu;
 using Layers::Theme;
 using Layers::Titlebar;
 using Layers::Window;
@@ -141,7 +141,7 @@ void Window::center_dialog(QDialog* dialog)
     dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
 }
 
-Customize_Menu* Window::customize_menu() const
+CustomizeMenu* Window::customize_menu() const
 {
     return m_customize_menu;
 }
@@ -196,7 +196,7 @@ void Window::set_window_title(const QString& title)
 		m_customize_menu->preview_window()->set_window_title(title);
 }
 
-Settings_Menu* Window::settings_menu() const
+SettingsMenu* Window::settings_menu() const
 {
     return m_settings_menu;
 }
@@ -225,7 +225,7 @@ void Window::open_menu(Menu* menu)
     }
     else
     {
-        Menu_Label_Layer* mll = new Menu_Label_Layer(menu);
+        MenuLabelLayer* mll = new MenuLabelLayer(menu);
 
         Menu* previous_menu = m_menu_stack.last();
 

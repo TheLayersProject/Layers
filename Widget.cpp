@@ -44,16 +44,16 @@ void Widget::init_attribute_widgets()
 {
 	if (m_customize_panel)
 	{
-		Attribute_Widget_Container* border_awc = new Attribute_Widget_Container("Border", true);
-		Color_Attribute_Widget* background_caw = new Color_Attribute_Widget("Background", m_attribute_set.attribute("background_color"), m_attribute_set.attribute("background_disabled"), true);
-		Color_Attribute_Widget* hover_background_caw = new Color_Attribute_Widget("Hover Background", m_attribute_set.attribute("background_color_hover"), m_attribute_set.attribute("background_color_hover_disabled"), true);
-		Color_Attribute_Widget* outline_caw = new Color_Attribute_Widget("Outline", m_attribute_set.attribute("outline_color"), m_attribute_set.attribute("outline_color_disabled"), true);
-		Color_Attribute_Widget* corner_color_caw = new Color_Attribute_Widget("Corner Color", m_attribute_set.attribute("corner_color"), m_attribute_set.attribute("corner_color_disabled"), true);
-		Color_Attribute_Widget* border_caw = new Color_Attribute_Widget("Color", m_attribute_set.attribute("border_color"), true);
-		Corner_Radii_Attribute_Widget* corner_radii_attribute_widget = new Corner_Radii_Attribute_Widget(this, true);
-		Gradient_Attribute_Widget* border_gaw = new Gradient_Attribute_Widget("Gradient", m_attribute_set.attribute("border_gradient_stops"), true);
-		Number_Attribute_Widget* border_thickness_naw = new Number_Attribute_Widget("Thickness", m_attribute_set.attribute("border_thickness"), new QIntValidator(0, 30), true);
-		Switch_Attribute_Widget* border_color_saw = new Switch_Attribute_Widget(
+		AttributeWidgetContainer* border_awc = new AttributeWidgetContainer("Border", true);
+		ColorAttributeWidget* background_caw = new ColorAttributeWidget("Background", m_attribute_set.attribute("background_color"), m_attribute_set.attribute("background_disabled"), true);
+        ColorAttributeWidget* hover_background_caw = new ColorAttributeWidget("Hover Background", m_attribute_set.attribute("background_color_hover"), m_attribute_set.attribute("background_color_hover_disabled"), true);
+        ColorAttributeWidget* outline_caw = new ColorAttributeWidget("Outline", m_attribute_set.attribute("outline_color"), m_attribute_set.attribute("outline_color_disabled"), true);
+        ColorAttributeWidget* corner_color_caw = new ColorAttributeWidget("Corner Color", m_attribute_set.attribute("corner_color"), m_attribute_set.attribute("corner_color_disabled"), true);
+        ColorAttributeWidget* border_caw = new ColorAttributeWidget("Color", m_attribute_set.attribute("border_color"), true);
+		CornerRadiiAttributeWidget* corner_radii_attribute_widget = new CornerRadiiAttributeWidget(this, true);
+		GradientAttributeWidget* border_gaw = new GradientAttributeWidget("Gradient", m_attribute_set.attribute("border_gradient_stops"), true);
+		NumberAttributeWidget* border_thickness_naw = new NumberAttributeWidget("Thickness", m_attribute_set.attribute("border_thickness"), new QIntValidator(0, 30), true);
+		SwitchAttributeWidget* border_color_saw = new SwitchAttributeWidget(
 			"Solid", border_caw,
 			"Gradient", border_gaw,
 			m_attribute_set.stateless_attribute("border_gradient_disabled"), true);
@@ -111,9 +111,9 @@ void Widget::update_theme_dependencies()
 {
     if (layout())
     {
-		if (Vertical_Layout* vl = dynamic_cast<Vertical_Layout*>(layout()))
+		if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
 			vl->set_border_margin(m_attribute_set.stateless_attribute("border_thickness")->value().value<int>());
-        else if (Horizontal_Layout* hl = dynamic_cast<Horizontal_Layout*>(layout()))
+        else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
             hl->set_border_margin(m_attribute_set.stateless_attribute("border_thickness")->value().value<int>());
     }
 }

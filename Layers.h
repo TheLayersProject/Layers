@@ -37,13 +37,13 @@
 namespace Layers
 {
 	class Application;
-	class Attribute_Sharing_Combo;
-	class Attribute_Widget;
-	class Color_Control;
-	class Customize_Panel;
+	class AttributeSharingCombo;
+	class AttributeWidget;
+	class ColorControl;
+	class CustomizePanel;
 	class Graphic;
 	class Label;
-	class Stateless_Attribute;
+	class StatelessAttribute;
 	class Theme;
 	class Themeable;
 	class Titlebar;
@@ -224,11 +224,11 @@ namespace Layers
 		users of the Attribute class will need to use two different sets of functions depending on
 		whether or not the attribute is stateful.
 	*/
-	class Stateless_Attribute : public Attribute
+	class StatelessAttribute : public Attribute
 	{
 	public:
-		Stateless_Attribute();
-		Stateless_Attribute(const QString& name, QVariant value);
+		StatelessAttribute();
+		StatelessAttribute(const QString& name, QVariant value);
 
 		/*!
 			Sets the value.
@@ -244,14 +244,14 @@ namespace Layers
 		*/
 		QVariant& value();
 
-		friend QDataStream& operator <<(QDataStream& stream, const Stateless_Attribute& a)
+		friend QDataStream& operator <<(QDataStream& stream, const StatelessAttribute& a)
 		{
 			stream << a.m_name;
 			stream << a.m_value;
 			return stream;
 		}
 
-		friend QDataStream& operator >>(QDataStream& stream, Stateless_Attribute& a)
+		friend QDataStream& operator >>(QDataStream& stream, StatelessAttribute& a)
 		{
 			stream >> a.m_name;
 			stream >> a.m_value;
@@ -262,11 +262,11 @@ namespace Layers
 		QVariant m_value{ QVariant() };
 	};
 
-	class Stateful_Attribute : public Attribute
+	class StatefulAttribute : public Attribute
 	{
 	public:
-		Stateful_Attribute();
-		Stateful_Attribute(const QString& name, QMap<QString, QVariant> state_value_map);
+		StatefulAttribute();
+		StatefulAttribute(const QString& name, QMap<QString, QVariant> state_value_map);
 
 		/*!
 			Checks if the provided state already exists in the data structure.
@@ -325,7 +325,7 @@ namespace Layers
 
 		QMap<QString, QVariant>& values();
 
-		friend QDataStream& operator <<(QDataStream& stream, const Stateful_Attribute& a)
+		friend QDataStream& operator <<(QDataStream& stream, const StatefulAttribute& a)
 		{
 			stream << a.m_name;
 			stream << a.m_state;
@@ -333,7 +333,7 @@ namespace Layers
 			return stream;
 		}
 
-		friend QDataStream& operator >>(QDataStream& stream, Stateful_Attribute& a)
+		friend QDataStream& operator >>(QDataStream& stream, StatefulAttribute& a)
 		{
 			stream >> a.m_name;
 			stream >> a.m_state;
@@ -347,12 +347,12 @@ namespace Layers
 		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
 	};
 
-	class Attribute_Set
+	class AttributeSet
 	{
 	public:
-		void add_attribute(Stateless_Attribute attribute);
+		void add_attribute(StatelessAttribute attribute);
 
-		void add_attribute(Stateful_Attribute attribute);
+		void add_attribute(StatefulAttribute attribute);
 
 		Attribute* attribute(const QString& attribute_name);
 
@@ -364,30 +364,30 @@ namespace Layers
 
 		bool contains_stateless_attribute(const QString& attribute_name);
 
-		void copy_values_from(Attribute_Set& other_attribute_set);
+		void copy_values_from(AttributeSet& other_attribute_set);
 
 		void remove_attribute(const QString& attribute_name);
 
 		void set_state(const QString& state);
 
-		Stateful_Attribute* stateful_attribute(const QString& attribute_name);
+		StatefulAttribute* stateful_attribute(const QString& attribute_name);
 
-		QMap<QString, Stateful_Attribute>& stateful_attributes();
+		QMap<QString, StatefulAttribute>& stateful_attributes();
 
-		Stateless_Attribute* stateless_attribute(const QString& attribute_name);
+		StatelessAttribute* stateless_attribute(const QString& attribute_name);
 
-		QMap<QString, Stateless_Attribute>& stateless_attributes();
+		QMap<QString, StatelessAttribute>& stateless_attributes();
 
 		QList<QString> states() const;
 
-		friend QDataStream& operator <<(QDataStream& stream, const Attribute_Set& as)
+		friend QDataStream& operator <<(QDataStream& stream, const AttributeSet& as)
 		{
 			stream << as.m_stateful_attributes;
 			stream << as.m_stateless_attributes;
 			return stream;
 		}
 
-		friend QDataStream& operator >>(QDataStream& stream, Attribute_Set& as)
+		friend QDataStream& operator >>(QDataStream& stream, AttributeSet& as)
 		{
 			stream >> as.m_stateful_attributes;
 			stream >> as.m_stateless_attributes;
@@ -395,8 +395,8 @@ namespace Layers
 		}
 
 	private:
-		QMap<QString, Stateful_Attribute> m_stateful_attributes{ QMap<QString, Stateful_Attribute>() };
-		QMap<QString, Stateless_Attribute> m_stateless_attributes{ QMap<QString, Stateless_Attribute>() };
+		QMap<QString, StatefulAttribute> m_stateful_attributes{ QMap<QString, StatefulAttribute>() };
+		QMap<QString, StatelessAttribute> m_stateless_attributes{ QMap<QString, StatelessAttribute>() };
 	};
 
 	/*!
@@ -411,7 +411,7 @@ namespace Layers
 		Theme();
 		Theme(const QString& name, bool is_custom = true);
 
-		void add_attribute_set(const QString& themeable_tag, Attribute_Set attribute_set);
+		void add_attribute_set(const QString& themeable_tag, AttributeSet attribute_set);
 
 		void add_stateful_attribute(
 			const QString& themeable_tag,
@@ -432,9 +432,9 @@ namespace Layers
 
 		// Recommend calling contains_attributes_for_tag() before calling this since this function
 		// does not check if it contains an attribute set for the given themeable tag.
-		Attribute_Set& attribute_set(const QString& themeable_tag);
+		AttributeSet& attribute_set(const QString& themeable_tag);
 
-		QHash<QString, Attribute_Set>& attribute_sets();
+		QHash<QString, AttributeSet>& attribute_sets();
 
 		void consume(Theme&& theme);
 
@@ -453,9 +453,9 @@ namespace Layers
 
 		void set_name(const QString& new_name);
 
-		Stateful_Attribute* stateful_attribute(const QString& themeable_tag, const QString& attribute_name);
+		StatefulAttribute* stateful_attribute(const QString& themeable_tag, const QString& attribute_name);
 
-		Stateless_Attribute* stateless_attribute(const QString& themeable_tag, const QString& attribute_name);
+		StatelessAttribute* stateless_attribute(const QString& themeable_tag, const QString& attribute_name);
 
 		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
 		{
@@ -474,7 +474,7 @@ namespace Layers
 		}
 
 	private:
-		QHash<QString, Attribute_Set> m_attribute_sets{ QHash<QString, Attribute_Set>() };
+		QHash<QString, AttributeSet> m_attribute_sets{ QHash<QString, AttributeSet>() };
 
 		bool m_is_custom{ true };
 
@@ -562,9 +562,9 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		Attribute_Set& attribute_set();
+		AttributeSet& attribute_set();
 
-		QMap<QString, Attribute_Widget*>& attribute_widgets();
+		QMap<QString, AttributeWidget*>& attribute_widgets();
 
 		QList<Themeable*>& child_themeable_references();
 
@@ -586,7 +586,7 @@ namespace Layers
 
 			@returns Address of customize panel, or nullptr
 		*/
-		Customize_Panel* customize_panel() const;
+		CustomizePanel* customize_panel() const;
 
 		/*!
 			Adds the given attribute to an attribute filtration list.
@@ -610,7 +610,7 @@ namespace Layers
 
 			@param list to store initialized customize panels
 		*/
-		void initialize_and_acquire_panels(QList<Customize_Panel*>& list);
+		void initialize_and_acquire_panels(QList<CustomizePanel*>& list);
 
 		bool is_stateful() const;
 
@@ -731,33 +731,33 @@ namespace Layers
 			@param obtain_attribute Whether or not to obtain the value of the to_themeable, false by default
 			@returns the address of the new attribute sharing combo
 		*/
-		//Attribute_Sharing_Combo* share_attribute_with_themeable(
+		//AttributeSharingCombo* share_attribute_with_themeable(
 		//	const QString& from_state, const QString& from_attribute,
 		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = "",
 		//	bool obtain_attribute = false
 		//);
 
-		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateful_Attribute* to_stateful_attribute, QString to_state,
+		AttributeSharingCombo* share_attribute_with_themeable(
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatefulAttribute* to_stateful_attribute, QString to_state,
 			bool obtain_attribute = false
 		);
 
-		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateless_Attribute* to_stateless_attribute,
+		AttributeSharingCombo* share_attribute_with_themeable(
+			StatelessAttribute* from_stateless_attribute,
+			StatelessAttribute* to_stateless_attribute,
 			bool obtain_attribute = false
 		);
 
-		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateless_Attribute* to_stateless_attribute,
+		AttributeSharingCombo* share_attribute_with_themeable(
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatelessAttribute* to_stateless_attribute,
 			bool obtain_attribute = false
 		);
 
-		Attribute_Sharing_Combo* share_attribute_with_themeable(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateful_Attribute* to_stateful_attribute, QString to_state,
+		AttributeSharingCombo* share_attribute_with_themeable(
+			StatelessAttribute* from_stateless_attribute,
+			StatefulAttribute* to_stateful_attribute, QString to_state,
 			bool obtain_attribute = false
 		);
 
@@ -778,7 +778,7 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		//QMap<QString, Stateful_Attribute>& stateful_attributes();
+		//QMap<QString, StatefulAttribute>& stateful_attributes();
 
 		/*!
 			Gets a list of the states that are used to identify the caller's attribute sets.
@@ -798,7 +798,7 @@ namespace Layers
 			@param to_state
 			@param to_attribute
 		*/
-		Attribute_Sharing_Combo* take_attribute_sharing_combo(
+		AttributeSharingCombo* take_attribute_sharing_combo(
 			const QString& from_state, const QString& from_attribute,
 			Themeable* to_themeable, const QString& to_state, const QString& to_attribute
 		);
@@ -858,24 +858,24 @@ namespace Layers
 		//);
 
 		//void unshare_attribute_with_themeable(
-		//	Stateless_Attribute& from_attribute, Stateless_Attribute& to_attribute,
+		//	StatelessAttribute& from_attribute, StatelessAttribute& to_attribute,
 		//	QString from_state = "", QString to_state = "");
 
 		void unshare_attribute_with_themeable(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateful_Attribute* to_stateful_attribute, QString to_state);
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatefulAttribute* to_stateful_attribute, QString to_state);
 
 		void unshare_attribute_with_themeable(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateless_Attribute* to_stateless_attribute);
+			StatelessAttribute* from_stateless_attribute,
+			StatelessAttribute* to_stateless_attribute);
 
 		void unshare_attribute_with_themeable(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateless_Attribute* to_stateless_attribute);
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatelessAttribute* to_stateless_attribute);
 
 		void unshare_attribute_with_themeable(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateful_Attribute* to_stateful_attribute, QString to_state);
+			StatelessAttribute* from_stateless_attribute,
+			StatefulAttribute* to_stateful_attribute, QString to_state);
 
 		/*!
 			Updates things that depend on the theme. Called by apply_theme().
@@ -910,7 +910,7 @@ namespace Layers
 
 			@returns The initialized customize panel.
 		*/
-		Customize_Panel* init_customize_panel();
+		CustomizePanel* init_customize_panel();
 
 		/*!
 			Initializes the reference list to child themeables.
@@ -931,7 +931,7 @@ namespace Layers
 		bool m_is_app_themeable{ false };
 		bool m_is_stateful{ false };
 
-		Customize_Panel* m_customize_panel{ nullptr };
+		CustomizePanel* m_customize_panel{ nullptr };
 
 		Graphic* m_icon{ nullptr };
 
@@ -941,16 +941,16 @@ namespace Layers
 		QString m_theme_tag{ "" };
 
 		QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
-		QMap<QString, Attribute_Widget*> m_attribute_widgets{ QMap<QString, Attribute_Widget*>() };
+		QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
 		
-		Attribute_Set m_attribute_set{ Attribute_Set() };
+		AttributeSet m_attribute_set{ AttributeSet() };
 
 		QList<Themeable*> m_child_themeable_references;
 
 		QList<QString> m_filtered_attributes;
 		QList<QString> m_tag_prefixes;
 
-		QList<Attribute_Sharing_Combo*> attribute_sharing_combos;
+		QList<AttributeSharingCombo*> attribute_sharing_combos;
 
 		Theme* m_current_theme{ nullptr };
 	};
@@ -958,30 +958,30 @@ namespace Layers
 	/*!
 		Stores the themeable addresses, states, and attributes needed to establish an attribute sharing connection.
 
-		An Attribute_Sharing_Combo is created and stored when Themeable::share_attribute_with_themeable() is called
+		An AttributeSharingCombo is created and stored when Themeable::share_attribute_with_themeable() is called
 	*/
-	class Attribute_Sharing_Combo
+	class AttributeSharingCombo
 	{
 	public:
-		Attribute_Sharing_Combo(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateful_Attribute* to_stateful_attribute, QString to_state);
+		AttributeSharingCombo(
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatefulAttribute* to_stateful_attribute, QString to_state);
 
-		Attribute_Sharing_Combo(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateless_Attribute* to_stateless_attribute);
+		AttributeSharingCombo(
+			StatelessAttribute* from_stateless_attribute,
+			StatelessAttribute* to_stateless_attribute);
 
-		Attribute_Sharing_Combo(
-			Stateful_Attribute* from_stateful_attribute, QString from_state,
-			Stateless_Attribute* to_stateless_attribute);
+		AttributeSharingCombo(
+			StatefulAttribute* from_stateful_attribute, QString from_state,
+			StatelessAttribute* to_stateless_attribute);
 
-		Attribute_Sharing_Combo(
-			Stateless_Attribute* from_stateless_attribute,
-			Stateful_Attribute* to_stateful_attribute, QString to_state);
+		AttributeSharingCombo(
+			StatelessAttribute* from_stateless_attribute,
+			StatefulAttribute* to_stateful_attribute, QString to_state);
 
-		Stateful_Attribute* from_stateful_attribute();
+		StatefulAttribute* from_stateful_attribute();
 
-		Stateless_Attribute* from_stateless_attribute();
+		StatelessAttribute* from_stateless_attribute();
 
 		Themeable* from_themeable() const;
 
@@ -1007,9 +1007,9 @@ namespace Layers
 		*/
 		void share_attribute();
 
-		Stateful_Attribute* to_stateful_attribute();
+		StatefulAttribute* to_stateful_attribute();
 
-		Stateless_Attribute* to_stateless_attribute();
+		StatelessAttribute* to_stateless_attribute();
 
 		Themeable* to_themeable() const;
 
@@ -1018,20 +1018,20 @@ namespace Layers
 		QString& to_attribute_name();
 
 	private:
-		Stateful_Attribute* m_from_stateful_attribute{ nullptr };
-		Stateful_Attribute* m_to_stateful_attribute{ nullptr };
+		StatefulAttribute* m_from_stateful_attribute{ nullptr };
+		StatefulAttribute* m_to_stateful_attribute{ nullptr };
 
-		Stateless_Attribute* m_from_stateless_attribute{ nullptr };
-		Stateless_Attribute* m_to_stateless_attribute{ nullptr };
+		StatelessAttribute* m_from_stateless_attribute{ nullptr };
+		StatelessAttribute* m_to_stateless_attribute{ nullptr };
 
 		QString m_from_state{ "" };
 		QString m_to_state{ "" };
 	};
 
-	class Horizontal_Layout : public QHBoxLayout
+	class HorizontalLayout : public QHBoxLayout
 	{
 	public:
-		Horizontal_Layout(QWidget* parent = nullptr);
+		HorizontalLayout(QWidget* parent = nullptr);
 
 		void set_border_margin(int border_margin);
 		void setContentsMargins(int left, int top, int right, int bottom);
@@ -1046,10 +1046,10 @@ namespace Layers
 		int m_border_margin{ 0 };
 	};
 
-	class Vertical_Layout : public QVBoxLayout
+	class VerticalLayout : public QVBoxLayout
 	{
 	public:
-		Vertical_Layout(QWidget* parent = nullptr);
+		VerticalLayout(QWidget* parent = nullptr);
 
 		void set_border_margin(int border_margin);
 		void setContentsMargins(int left, int top, int right, int bottom);
@@ -1097,7 +1097,7 @@ namespace Layers
 			Updates anything that can't be changed with attributes.
 
 			As a Widget, this function updates the border margins of the layout if the layout happens to be
-			a Layers::Horizontal_Layout or Layers::Vertical_Layout.
+			a Layers::Horizontal_Layout or Layers::VerticalLayout.
 		*/
 		void update_theme_dependencies();
 
@@ -1132,12 +1132,12 @@ namespace Layers
 		QPainter painter;
 	};
 
-	class Scroll_Area : public Widget
+	class ScrollArea : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Scroll_Area(QWidget* parent = nullptr);
+		ScrollArea(QWidget* parent = nullptr);
 
 		void issue_update();
 
@@ -1156,15 +1156,15 @@ namespace Layers
 		QScrollBar* m_vertical_scrollbar{ new QScrollBar };
 	};
 
-	class Image_Sequence_Label : public QLabel
+	class ImageSequenceLabel : public QLabel
 	{
 		Q_OBJECT
 
 	public:
-		//Image_Sequence_Label(QDir dir, QSize size, QWidget* parent = nullptr);
-		Image_Sequence_Label(ImageSequence image_sequence, QSize size, QWidget* parent = nullptr);
-		Image_Sequence_Label(const Image_Sequence_Label& isl);
-		//~Image_Sequence_Label();
+		//ImageSequenceLabel(QDir dir, QSize size, QWidget* parent = nullptr);
+		ImageSequenceLabel(ImageSequence image_sequence, QSize size, QWidget* parent = nullptr);
+		ImageSequenceLabel(const ImageSequenceLabel& isl);
+		//~ImageSequenceLabel();
 
 	public slots:
 		void time_out();
@@ -1287,7 +1287,7 @@ namespace Layers
 		QSize m_image_size{ QSize() };
 		QLabel* m_bitmap_label{ nullptr };
 		SVG* m_svg_widget{ nullptr };
-		Image_Sequence_Label* m_image_sequence_label{ nullptr };
+		ImageSequenceLabel* m_image_sequence_label{ nullptr };
 	};
 
 	class Label : public QLabel, public Themeable
@@ -1343,7 +1343,7 @@ namespace Layers
 		int m_padding_bottom{ 0 };
 	};
 
-	class Toggle_Switch : public Widget
+	class ToggleSwitch : public Widget
 	{
 		Q_OBJECT
 
@@ -1351,8 +1351,8 @@ namespace Layers
 		void toggled_event();
 
 	public:
-		Toggle_Switch(QWidget* parent = nullptr);
-		Toggle_Switch(const QString& first_label_text, const QString& second_label_text, QWidget* parent = nullptr);
+		ToggleSwitch(QWidget* parent = nullptr);
+		ToggleSwitch(const QString& first_label_text, const QString& second_label_text, QWidget* parent = nullptr);
 
 		void set_toggled(bool toggled);
 
@@ -1446,12 +1446,12 @@ namespace Layers
 		Label* m_text_label{ nullptr };
 	};
 
-	class Combobox_Item : public Widget
+	class ComboboxItem : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Combobox_Item(const QString& item_text, QWidget* parent = nullptr);
+		ComboboxItem(const QString& item_text, QWidget* parent = nullptr);
 
 		QString item_text();
 
@@ -1524,21 +1524,21 @@ namespace Layers
 		bool m_disabled{ false };
 		bool m_item_renaming_disabled{ true };
 
-		Combobox_Item* m_control_combobox_item{ new Combobox_Item("") };
-		Combobox_Item* m_current_combobox_item{ nullptr };
+		ComboboxItem* m_control_combobox_item{ new ComboboxItem("") };
+		ComboboxItem* m_current_combobox_item{ nullptr };
 
 		Label* m_current_item_label{ new Label(this) };
 
 		QLineEdit* m_line_edit{ new QLineEdit(this) };
 
-		QList<Combobox_Item*> m_combobox_items;
+		QList<ComboboxItem*> m_combobox_items;
 
 		QVBoxLayout* m_drop_down_layout{ new QVBoxLayout };
 
 		Widget* m_drop_down{ new Widget };
 	};
 
-	class Line_Editor : public Widget
+	class LineEditor : public Widget
 	{
 		Q_OBJECT
 
@@ -1546,7 +1546,7 @@ namespace Layers
 		void text_edited(const QString &text);
 
 	public:
-		Line_Editor(QWidget* parent = nullptr);
+		LineEditor(QWidget* parent = nullptr);
 
 		void init_attributes();
 
@@ -1612,12 +1612,12 @@ namespace Layers
 		QPoint m_mouse_click_position{ QPoint() };
 	};
 
-	class Mini_Slider : public Widget
+	class MiniSlider : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Mini_Slider(int limit, QWidget* parent = nullptr);
+		MiniSlider(int limit, QWidget* parent = nullptr);
 
 		void update_handle_pos();
 		void update_theme_dependencies();
@@ -1692,7 +1692,7 @@ namespace Layers
 		void init_attributes();
 	};
 
-	class Color_Control : public Widget
+	class ColorControl : public Widget
 	{
 		Q_OBJECT
 
@@ -1700,7 +1700,7 @@ namespace Layers
 		void color_changed();
 
 	public:
-		Color_Control(QWidget* parent = nullptr);
+		ColorControl(QWidget* parent = nullptr);
 
 		void click();
 
@@ -1717,12 +1717,12 @@ namespace Layers
 		bool open_on_release{ false };
 	};
 
-	class Gradient_Selection_Box : public QDialog, public Themeable
+	class GradientSelectionBox : public QDialog, public Themeable
 	{
 		Q_OBJECT
 
 	public:
-		Gradient_Selection_Box(QGradientStops gradient_stops, QWidget* parent = nullptr);
+		GradientSelectionBox(QGradientStops gradient_stops, QWidget* parent = nullptr);
 
 		void add_gradient_stop(double stop_val, QColor color);
 
@@ -1760,12 +1760,12 @@ namespace Layers
 
 		QGradientStops m_gradient_stops{ { 0.0, Qt::white },{ 1.0, Qt::black } };
 
-		QList<Color_Control*> color_controls;
+		QList<ColorControl*> color_controls;
 
 		Button* m_apply_button{ new Button("Apply") };
 
-		Color_Control* m_selected_color_control{ nullptr };
-		Color_Control* m_clicking_color_control{ nullptr };
+		ColorControl* m_selected_color_control{ nullptr };
+		ColorControl* m_clicking_color_control{ nullptr };
 
 		QPoint m_selection_start_point;
 
@@ -1778,7 +1778,7 @@ namespace Layers
 		QPainter painter;
 	};
 
-	class Gradient_Control : public Widget
+	class GradientControl : public Widget
 	{
 		Q_OBJECT
 
@@ -1786,7 +1786,7 @@ namespace Layers
 		void gradient_changed();
 
 	public:
-		Gradient_Control(QWidget* parent = nullptr);
+		GradientControl(QWidget* parent = nullptr);
 
 		void init_attributes();
 
@@ -1795,12 +1795,12 @@ namespace Layers
 		void paintEvent(QPaintEvent* event);
 	};
 
-	class Attribute_Widget : public Widget
+	class AttributeWidget : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Attribute_Widget(bool is_primary, QWidget* parent = nullptr);
+		AttributeWidget(bool is_primary, QWidget* parent = nullptr);
 
 		QList<QString>& customize_states();
 
@@ -1812,9 +1812,9 @@ namespace Layers
 
 		void set_primary(bool is_primary = true);
 
-		Stateful_Attribute* stateful_attribute() const;
+		StatefulAttribute* stateful_attribute() const;
 
-		Stateless_Attribute* stateless_attribute() const;
+		StatelessAttribute* stateless_attribute() const;
 
 		virtual void update_customizing_state(const QString& customizing_state);
 
@@ -1825,8 +1825,8 @@ namespace Layers
 
 		void store_attribute_pointer(Attribute* attribute);
 
-		Stateful_Attribute* m_stateful_attribute{ nullptr };
-		Stateless_Attribute* m_stateless_attribute{ nullptr };
+		StatefulAttribute* m_stateful_attribute{ nullptr };
+		StatelessAttribute* m_stateless_attribute{ nullptr };
 
 		QList<QString> m_customize_states{ QList<QString>() };
 
@@ -1835,14 +1835,14 @@ namespace Layers
 		bool m_is_primary;
 	};
 
-	class Attribute_Widget_Container : public Attribute_Widget
+	class AttributeWidgetContainer : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		Attribute_Widget_Container(const QString& label_text, bool is_primary, QWidget* parent = nullptr);
+		AttributeWidgetContainer(const QString& label_text, bool is_primary, QWidget* parent = nullptr);
 
-		void add_attribute_widget(Attribute_Widget* attribute_widget);
+		void add_attribute_widget(AttributeWidget* attribute_widget);
 
 		void enable_secondary_background_color(bool cond = true);
 
@@ -1863,17 +1863,17 @@ namespace Layers
 
 		Label* m_label;
 
-		QList<Attribute_Widget*> m_child_attribute_widgets{ QList<Attribute_Widget*>() };
+		QList<AttributeWidget*> m_child_attribute_widgets{ QList<AttributeWidget*>() };
 
 		QVBoxLayout* m_widgets_vbox{ new QVBoxLayout };
 	};
 
-	class Corner_Radii_Attribute_Widget : public Attribute_Widget_Container
+	class CornerRadiiAttributeWidget : public AttributeWidgetContainer
 	{
 		Q_OBJECT
 
 	public:
-		Corner_Radii_Attribute_Widget(Themeable* themeable, bool is_primary, QWidget* parent = nullptr);
+		CornerRadiiAttributeWidget(Themeable* themeable, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1885,35 +1885,35 @@ namespace Layers
 	private:
 		void setup_layout();
 
-		Attribute_Sharing_Combo* m_tl_line_editor_asc{ nullptr };
-		Attribute_Sharing_Combo* m_tr_line_editor_asc{ nullptr };
-		Attribute_Sharing_Combo* m_bl_line_editor_asc{ nullptr };
-		Attribute_Sharing_Combo* m_br_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_tl_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_tr_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_bl_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_br_line_editor_asc{ nullptr };
 
-		Attribute_Widget* m_attribute_widget;
+		AttributeWidget* m_attribute_widget;
 
-		Mini_Slider* m_tl_slider{ new Mini_Slider(30) };
-		Mini_Slider* m_tr_slider{ new Mini_Slider(30) };
-		Mini_Slider* m_bl_slider{ new Mini_Slider(30) };
-		Mini_Slider* m_br_slider{ new Mini_Slider(30) };
+		MiniSlider* m_tl_slider{ new MiniSlider(30) };
+		MiniSlider* m_tr_slider{ new MiniSlider(30) };
+		MiniSlider* m_bl_slider{ new MiniSlider(30) };
+		MiniSlider* m_br_slider{ new MiniSlider(30) };
 
-		Line_Editor* m_tl_line_editor{ new Line_Editor };
-		Line_Editor* m_tr_line_editor{ new Line_Editor };
-		Line_Editor* m_bl_line_editor{ new Line_Editor };
-		Line_Editor* m_br_line_editor{ new Line_Editor };
+		LineEditor* m_tl_line_editor{ new LineEditor };
+		LineEditor* m_tr_line_editor{ new LineEditor };
+		LineEditor* m_bl_line_editor{ new LineEditor };
+		LineEditor* m_br_line_editor{ new LineEditor };
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 		Widget* m_example_widget{ new Widget };
 	};
 
-	class Color_Attribute_Widget : public Attribute_Widget
+	class ColorAttributeWidget : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
-		Color_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent = nullptr);
+		ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
+		ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1927,26 +1927,26 @@ namespace Layers
 	private:
 		Attribute* m_disabling_attribute{ nullptr };
 
-		Attribute_Sharing_Combo* m_color_control_asc{ nullptr };
+		AttributeSharingCombo* m_color_control_asc{ nullptr };
 
 		bool m_centered{ false };
 
-		Color_Control* m_color_control{ new Color_Control };
+		ColorControl* m_color_control{ new ColorControl };
 
 		Label* m_attribute_label;
 
-		Toggle_Switch* m_disabled_attribute_toggle{ nullptr };
+		ToggleSwitch* m_disabled_attribute_toggle{ nullptr };
 
 		Widget* m_left_stretch{ new Widget };
 		Widget* m_right_stretch{ new Widget };
 	};
 
-	class Gradient_Attribute_Widget : public Attribute_Widget
+	class GradientAttributeWidget : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		Gradient_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
+		GradientAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1956,11 +1956,11 @@ namespace Layers
 		void init_child_themeable_reference_list();
 
 	private:
-		Attribute_Sharing_Combo* m_gradient_control_asc{ nullptr };
+		AttributeSharingCombo* m_gradient_control_asc{ nullptr };
 
 		bool m_centered{ false };
 
-		Gradient_Control* m_gradient_control{ new Gradient_Control };
+		GradientControl* m_gradient_control{ new GradientControl };
 
 		Label* m_attribute_label;
 
@@ -1968,12 +1968,12 @@ namespace Layers
 		Widget* m_right_stretch{ new Widget };
 	};
 
-	class Number_Attribute_Widget : public Attribute_Widget
+	class NumberAttributeWidget : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		Number_Attribute_Widget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent = nullptr);
+		NumberAttributeWidget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -1991,16 +1991,16 @@ namespace Layers
 	private:
 		void setup_layout();
 
-		Attribute_Sharing_Combo* m_line_editor_asc{ nullptr };
-		Attribute_Sharing_Combo* m_line_editor_to_slider_asc{ nullptr };
-		Attribute_Sharing_Combo* m_slider_to_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_line_editor_asc{ nullptr };
+		AttributeSharingCombo* m_line_editor_to_slider_asc{ nullptr };
+		AttributeSharingCombo* m_slider_to_line_editor_asc{ nullptr };
 
 		bool m_centered{ false };
 
 		Label* m_attribute_label{ nullptr };
 		Label* m_unit_label{ new Label };
 
-		Line_Editor* m_line_editor{ new Line_Editor };
+		LineEditor* m_line_editor{ new LineEditor };
 
 		QIntValidator* m_int_validator{ nullptr };
 
@@ -2013,37 +2013,37 @@ namespace Layers
 	};
 
 	// Control attribute currently not setup to work with stateful attributes; Not sure if needed
-	class Switch_Attribute_Widget : public Attribute_Widget
+	class SwitchAttributeWidget : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		Switch_Attribute_Widget(
-			const QString& first_label_text, Attribute_Widget* first_attribute_widget,
-			const QString& second_label_text, Attribute_Widget* second_attribute_widget,
-			Stateless_Attribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
+		SwitchAttributeWidget(
+			const QString& first_label_text, AttributeWidget* first_attribute_widget,
+			const QString& second_label_text, AttributeWidget* second_attribute_widget,
+			StatelessAttribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
 		void enable_secondary_background_color(bool cond = true);
 
 	private:
-		Stateless_Attribute* m_control_attribute;
+		StatelessAttribute* m_control_attribute;
 
-		Attribute_Widget* m_first_attribute_widget;
-		Attribute_Widget* m_second_attribute_widget;
+		AttributeWidget* m_first_attribute_widget;
+		AttributeWidget* m_second_attribute_widget;
 
-		Toggle_Switch* m_labeled_toggle_switch;
+		ToggleSwitch* m_labeled_toggle_switch;
 	};
 
-	class Customize_Panel : public Widget
+	class CustomizePanel : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Customize_Panel(Themeable* themeable, QWidget* parent = nullptr);
+		CustomizePanel(Themeable* themeable, QWidget* parent = nullptr);
 
-		void add_attribute_widget(Attribute_Widget* attribute_widget);
+		void add_attribute_widget(AttributeWidget* attribute_widget);
 
 		void add_element_button(Button* button, int index = -1);
 
@@ -2078,9 +2078,9 @@ namespace Layers
 		Label* m_stateless_attributes_label{ new Label("Stateless Attributes:") };
 		Label* m_state_label{ new Label("State:") };
 
-		QList<Attribute_Widget*> m_stateless_attribute_widgets{ QList<Attribute_Widget*>() };
-		QList<Attribute_Widget*> m_stateful_attribute_widgets{ QList<Attribute_Widget*>() };
-		QList<Attribute_Widget*> m_attribute_widgets{ QList<Attribute_Widget*>() };
+		QList<AttributeWidget*> m_stateless_attribute_widgets{ QList<AttributeWidget*>() };
+		QList<AttributeWidget*> m_stateful_attribute_widgets{ QList<AttributeWidget*>() };
+		QList<AttributeWidget*> m_attribute_widgets{ QList<AttributeWidget*>() };
 
 		Themeable* m_themeable;
 	};
@@ -2097,12 +2097,12 @@ namespace Layers
 		QString name;
 	};
 
-	class Menu_Label_Layer : public Widget
+	class MenuLabelLayer : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Menu_Label_Layer(Menu* menu, QWidget* parent = nullptr);
+		MenuLabelLayer(Menu* menu, QWidget* parent = nullptr);
 
 		void shrink();
 		void expand();
@@ -2130,23 +2130,23 @@ namespace Layers
 		Widget* m_stretch_widget{ new Widget };
 	};
 
-	class App_Preferences_Settings_Panel : public Widget
+	class AppPreferencesSettingsPanel : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		App_Preferences_Settings_Panel(QWidget* parent = nullptr);
+		AppPreferencesSettingsPanel(QWidget* parent = nullptr);
 
 	protected:
 		void init_attribute_widgets();
 	};
 
-	class Create_New_Theme_Dialog : public QDialog, public Themeable
+	class CreateNewThemeDialog : public QDialog, public Themeable
 	{
 		Q_OBJECT
 
 	public:
-		Create_New_Theme_Dialog(QWidget* parent = nullptr);
+		CreateNewThemeDialog(QWidget* parent = nullptr);
 
 		void add_theme_name_to_combobox(const QString& theme_name);
 
@@ -2186,17 +2186,17 @@ namespace Layers
 		Label* m_name_label{ new Label("Name") };
 		Label* m_start_as_label{ new Label("Start as copy of") };
 
-		Line_Editor* m_theme_name_line_edit{ new Line_Editor };
+		LineEditor* m_theme_name_line_edit{ new LineEditor };
 
 		QPainter painter;
 	};
 
-	class Update_Dialog : public QDialog, public Themeable
+	class UpdateDialog : public QDialog, public Themeable
 	{
 		Q_OBJECT
 
 	public:
-		Update_Dialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
+		UpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
 
 		void issue_update();
 
@@ -2227,12 +2227,12 @@ namespace Layers
 		QPainter painter;
 	};
 
-	class Themes_Settings_Panel : public Widget
+	class ThemesSettingsPanel : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Themes_Settings_Panel(QWidget* parent = nullptr);
+		ThemesSettingsPanel(QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
@@ -2268,18 +2268,18 @@ namespace Layers
 		Widget* m_spacer_2{ new Widget };
 	};
 
-	class Settings_Sidebar : public Widget
+	class SettingsSidebar : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Settings_Sidebar(QWidget* parent = nullptr);
+		SettingsSidebar(QWidget* parent = nullptr);
 
 	protected:
 		void init_attribute_widgets();
 	};
 
-	class Settings_Tab : public Widget
+	class SettingsTab : public Widget
 	{
 		Q_OBJECT
 
@@ -2289,7 +2289,7 @@ namespace Layers
 		void over_minimum_width();
 
 	public:
-		Settings_Tab(Graphic* icon, const QString& label_text, QWidget* parent = nullptr);
+		SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent = nullptr);
 
 		void expand();
 		void shrink();
@@ -2323,12 +2323,12 @@ namespace Layers
 		Widget* m_stretch_widget2{ new Widget };
 	};
 
-	class Settings_Menu : public Menu
+	class SettingsMenu : public Menu
 	{
 		Q_OBJECT
 
 	public:
-		Settings_Menu(QWidget* parent = nullptr);
+		SettingsMenu(QWidget* parent = nullptr);
 
 		void add_settings_tab(Graphic* icon, const QString& label_text);
 
@@ -2336,7 +2336,7 @@ namespace Layers
 
 		int recommended_minimum_tab_width() const;
 
-		Themes_Settings_Panel* themes_settings_panel() const;
+		ThemesSettingsPanel* themes_settings_panel() const;
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
@@ -2357,33 +2357,33 @@ namespace Layers
 		bool m_hovering_over_divider{ false };
 		bool m_shrunk{ false };
 
-		Vertical_Layout* m_sidebar_layout = new Vertical_Layout;
+		VerticalLayout* m_sidebar_layout = new VerticalLayout;
 
-		QList<Settings_Tab*> m_settings_tabs;
+		QList<SettingsTab*> m_settings_tabs;
 
 		QPoint last_pos;
 
-		Settings_Sidebar* m_sidebar{ new Settings_Sidebar };
+		SettingsSidebar* m_sidebar{ new SettingsSidebar };
 
-		App_Preferences_Settings_Panel* m_app_preferences_settings_panel{ new App_Preferences_Settings_Panel };
+		AppPreferencesSettingsPanel* m_app_preferences_settings_panel{ new AppPreferencesSettingsPanel };
 
-		Themes_Settings_Panel* m_themes_settings_panel{ new Themes_Settings_Panel };
+		ThemesSettingsPanel* m_themes_settings_panel{ new ThemesSettingsPanel };
 	};
 
-	class Customize_Menu : public Menu
+	class CustomizeMenu : public Menu
 	{
 		Q_OBJECT
 
 	public:
-		Customize_Menu(QWidget* parent = nullptr);
+		CustomizeMenu(QWidget* parent = nullptr);
 
 		Button* apply_button() const;
 
-		QList<Customize_Panel*>& customize_panels();
+		QList<CustomizePanel*>& customize_panels();
 
 		void init_preview_window();
 
-		void open_customize_panel(Customize_Panel* customize_panel);
+		void open_customize_panel(CustomizePanel* customize_panel);
 
 		void populate_panel_layout();
 
@@ -2407,7 +2407,7 @@ namespace Layers
 		void expand_text_buttons();
 		void setup_layout();
 
-		Horizontal_Layout* m_main_layout = new Horizontal_Layout;
+		HorizontalLayout* m_main_layout = new HorizontalLayout;
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
 		QVBoxLayout* m_sidebar_layout{ new QVBoxLayout };
 		QHBoxLayout* m_topbar_layout{ new QHBoxLayout };
@@ -2417,13 +2417,13 @@ namespace Layers
 		Widget* m_topbar{ new Widget };
 		Widget* m_preview_widget = new Widget;
 
-		Scroll_Area* m_sidebar_scroll_area{ new Scroll_Area };
-		Scroll_Area* m_preview_scroll_area{ new Scroll_Area };
+		ScrollArea* m_sidebar_scroll_area{ new ScrollArea };
+		ScrollArea* m_preview_scroll_area{ new ScrollArea };
 
 		Window* m_preview_window{ nullptr };
 
-		QList<Customize_Panel*> m_customize_panels;
-		QList<Customize_Panel*> m_panel_stack;
+		QList<CustomizePanel*> m_customize_panels;
+		QList<CustomizePanel*> m_panel_stack;
 		QList<Button*> m_text_button_stack;
 		QList<Button*> m_topbar_text_buttons;
 		QList<Button*> m_collapsed_text_buttons;
@@ -2436,7 +2436,7 @@ namespace Layers
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
 
-		Customize_Panel* m_control_customize_panel{ nullptr };
+		CustomizePanel* m_control_customize_panel{ nullptr };
 
 		Button* m_control_text_button{ new Button("")};
 
@@ -2453,7 +2453,7 @@ namespace Layers
 	public:
 		Titlebar(QWidget* parent = nullptr);
 
-		void add_mll(Menu_Label_Layer* mll);
+		void add_mll(MenuLabelLayer* mll);
 		void remove_mlls_past(int index);
 
 		bool is(QWidget* widget);
@@ -2490,11 +2490,11 @@ namespace Layers
 
 		Widget* m_buttons_container{ new Widget(this) };
 
-		QList<Menu_Label_Layer*> mll_stack;
+		QList<MenuLabelLayer*> mll_stack;
 
-		Menu_Label_Layer* m_base_mll{ nullptr };
+		MenuLabelLayer* m_base_mll{ nullptr };
 
-		Menu_Label_Layer* m_control_mll{ new Menu_Label_Layer(new Menu("Control Menu", new Graphic(":/svgs/icon_icon.svg", QSize(20, 20)))) };
+		MenuLabelLayer* m_control_mll{ new MenuLabelLayer(new Menu("Control Menu", new Graphic(":/svgs/icon_icon.svg", QSize(20, 20)))) };
 
 		Widget* m_stretch_widget{ new Widget };
 	};
@@ -2519,7 +2519,7 @@ namespace Layers
 
 		void center_dialog(QDialog* dialog);
 
-		Customize_Menu* customize_menu() const;
+		CustomizeMenu* customize_menu() const;
 
 		void finalize();
 
@@ -2531,7 +2531,7 @@ namespace Layers
 
 		void set_window_title(const QString& title);
 
-		Settings_Menu* settings_menu() const;
+		SettingsMenu* settings_menu() const;
 
 		Titlebar* titlebar() const;
 
@@ -2561,7 +2561,7 @@ namespace Layers
 		bool m_maximized{ false };
 		bool m_preview{ false };
 
-		Create_New_Theme_Dialog* m_create_new_theme_dialog{ new Create_New_Theme_Dialog };
+		CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
 
 		QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
@@ -2574,9 +2574,9 @@ namespace Layers
 		// TODO: Make Menu constructor that does not require an icon
 		Menu* m_app_menu{ new Menu("App", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24))) };
 
-		Settings_Menu* m_settings_menu{ new Settings_Menu };
+		SettingsMenu* m_settings_menu{ new SettingsMenu };
 
-		Customize_Menu* m_customize_menu{ new Customize_Menu };
+		CustomizeMenu* m_customize_menu{ new CustomizeMenu };
 
 		Widget* m_main_widget{ nullptr };
 	};
@@ -2681,12 +2681,12 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (Stateless_Attribute& stateless_attribute : m_attribute_set.stateless_attributes())
+			for (StatelessAttribute& stateless_attribute : m_attribute_set.stateless_attributes())
 				share_attribute_with_themeable(
 					&stateless_attribute,
 					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
 
-			for (Stateful_Attribute& stateful_attribute : m_attribute_set.stateful_attributes())
+			for (StatefulAttribute& stateful_attribute : m_attribute_set.stateful_attributes())
 				for (const QString& state : stateful_attribute.states())
 					share_attribute_with_themeable(
 						&stateful_attribute, state,
@@ -2707,12 +2707,12 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (Stateless_Attribute& stateless_attribute : m_attribute_set.stateless_attributes())
+			for (StatelessAttribute& stateless_attribute : m_attribute_set.stateless_attributes())
 				unshare_attribute_with_themeable(
 					&stateless_attribute,
 					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
 
-			for (Stateful_Attribute& stateful_attribute : m_attribute_set.stateful_attributes())
+			for (StatefulAttribute& stateful_attribute : m_attribute_set.stateful_attributes())
 				for (const QString& state : stateful_attribute.states())
 					unshare_attribute_with_themeable(
 						&stateful_attribute, state,

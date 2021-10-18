@@ -1,7 +1,7 @@
 #include "Layers.h"
 
 using Layers::Button;
-using Layers::Menu_Label_Layer;
+using Layers::MenuLabelLayer;
 using Layers::Titlebar;
 
 Titlebar::Titlebar(QWidget* parent) : Widget(parent)
@@ -62,7 +62,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
     m_buttons_container->raise();
 }
 
-void Titlebar::add_mll(Menu_Label_Layer* mll)
+void Titlebar::add_mll(MenuLabelLayer* mll)
 {
     if (!mll_stack.count())
     {

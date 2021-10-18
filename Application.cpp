@@ -107,7 +107,7 @@ bool Application::update_available()
 
 bool Application::update_on_request()
 {
-	Update_Dialog* update_dialog = new Update_Dialog(m_version->toString(), *m_latest_version);
+	UpdateDialog* update_dialog = new UpdateDialog(m_version->toString(), *m_latest_version);
 
 	update_dialog->assign_tag_prefixes();
 	update_dialog->apply_theme(*m_current_theme);
@@ -290,11 +290,11 @@ void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
 			theme_missing_attributes.add_attribute_set(themeable_tag, light_theme.attribute_set(themeable_tag));
 		else
 		{
-			for (Stateless_Attribute& stateless_attribute : light_theme.attribute_sets()[themeable_tag].stateless_attributes())
+			for (StatelessAttribute& stateless_attribute : light_theme.attribute_sets()[themeable_tag].stateless_attributes())
 				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateless_attribute.name()))
 					theme_missing_attributes.add_stateless_attribute(themeable_tag, stateless_attribute.name(), stateless_attribute.value());
 
-			for (Stateful_Attribute& stateful_attribute : light_theme.attribute_sets()[themeable_tag].stateful_attributes())
+			for (StatefulAttribute& stateful_attribute : light_theme.attribute_sets()[themeable_tag].stateful_attributes())
 				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateful_attribute.name()))
 					theme_missing_attributes.add_stateful_attribute(themeable_tag, stateful_attribute.name(), stateful_attribute.values());
 		}

@@ -4,7 +4,7 @@ using Layers::Graphic;
 using Layers::SVG;
 
 Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent) :
-	m_image_sequence_label{ new Image_Sequence_Label(image_sequence, size, this) }, Widget(parent)
+	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size, this) }, Widget(parent)
 {
 	setFixedSize(size);
 
@@ -80,7 +80,7 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 {
 	if (gw.m_image_sequence_label)
 	{
-		m_image_sequence_label = new Image_Sequence_Label(*gw.m_image_sequence_label);
+		m_image_sequence_label = new ImageSequenceLabel(*gw.m_image_sequence_label);
 		m_image_sequence_label->setFixedSize(gw.m_image_sequence_label->size());
 		m_image_sequence_label->setParent(this);
 	}

@@ -32,16 +32,7 @@
     <ClCompile Include="Themeable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Themes_Settings_Panel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Titlebar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Toggle_Switch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertical_Layout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Widget.cpp">
@@ -50,76 +41,25 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App_Preferences_Settings_Panel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Sharing_Combo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="build_themes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Color_Control.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Combobox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Combobox_Item.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Create_New_Theme_Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Customize_Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Customize_Panel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="directories.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Gradient_Control.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Gradient_Selection_Box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Graphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Horizontal_Layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Image_Sequence_Label.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Label.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Line_Editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu_Label_Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scroll_Area.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Settings_Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Settings_Sidebar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Settings_Tab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Slider.cpp">
@@ -131,46 +71,10 @@
     <ClCompile Include="Theme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Attribute_Widget_Container.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Color_Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Gradient_Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Number_Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Switch_Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
     <ClCompile Include="ThemeUpdating.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Stateful_Attribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Set.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Attribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stateless_Attribute.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mini_Slider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Attribute_Widgets\Corner_Radii_Attribute_Widget.cpp">
-      <Filter>Source Files\Attribute_Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Update_Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
@@ -211,6 +115,102 @@
     </ClCompile>
     <ClCompile Include="ImageSequence.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatelessAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThemesSettingsPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToggleSwitch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppPreferencesSettingsPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeSharingCombo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboboxItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateNewThemeDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomizeMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomizePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GradientControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GradientSelectionBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSequenceLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuLabelLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollArea.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsSidebar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatefulAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\ColorAttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\CornerRadiiAttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\GradientAttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\NumberAttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\SwitchAttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\AttributeWidget.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute_Widgets\AttributeWidgetContainer.cpp">
+      <Filter>Source Files\Attribute_Widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

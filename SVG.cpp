@@ -72,14 +72,14 @@ void SVG::init_attribute_widgets()
 	{
 		if (m_attribute_set.attribute_value("use_common_color")->value<bool>())
 		{
-			Color_Attribute_Widget* common_color_caw = new Color_Attribute_Widget("Common Color", m_attribute_set.attribute("common_color"), true);
+			ColorAttributeWidget* common_color_caw = new ColorAttributeWidget("Common Color", m_attribute_set.attribute("common_color"), true);
 			m_customize_panel->add_attribute_widget(common_color_caw);
 			m_attribute_widgets["common_color_caw"] = common_color_caw;
 		}
 
 		if (m_attribute_set.attribute_value("use_common_hover_color")->value<bool>())
 		{
-			Color_Attribute_Widget* common_hover_color_caw = new Color_Attribute_Widget("Common Hover Color", m_attribute_set.attribute("common_hover_color"), true);
+			ColorAttributeWidget* common_hover_color_caw = new ColorAttributeWidget("Common Hover Color", m_attribute_set.attribute("common_hover_color"), true);
 			m_customize_panel->add_attribute_widget(common_hover_color_caw);
 			m_attribute_widgets["common_hover_color_caw"] = common_hover_color_caw;
 		}

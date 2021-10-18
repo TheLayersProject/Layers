@@ -42,10 +42,10 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
 
 void Combobox::add_item(const QString& item)
 {
-	for (Combobox_Item* cb_item : m_combobox_items)
+	for (ComboboxItem* cb_item : m_combobox_items)
 		if (cb_item->item_text() == item) return;
 
-	Combobox_Item* combobox_item = new Combobox_Item(item);
+	ComboboxItem* combobox_item = new ComboboxItem(item);
 
 	combobox_item->set_font_size(m_current_item_label->font().pointSize());
 	combobox_item->setFixedSize(size());
@@ -62,7 +62,7 @@ void Combobox::add_item(const QString& item)
     }
 	else
 	{
-		for (Combobox_Item* combobox_item : m_combobox_items)
+		for (ComboboxItem* combobox_item : m_combobox_items)
 		{
 			if (combobox_item == m_combobox_items.first())
 				combobox_item->set_state("Top");
@@ -89,7 +89,7 @@ void Combobox::alphabetize()
 	std::sort(sorted_items.begin(), sorted_items.end());
 
 	int i = 0;
-	for (Combobox_Item* cb_item : m_combobox_items)
+	for (ComboboxItem* cb_item : m_combobox_items)
 	{
 		cb_item->replace_item_text(sorted_items[i]);
 		i++;
@@ -149,7 +149,7 @@ void Combobox::set_current_item(const QString& item)
     {
         m_current_item_label->setText(item);
 
-		for (Combobox_Item* combobox_item : m_combobox_items)
+		for (ComboboxItem* combobox_item : m_combobox_items)
 			if (combobox_item->item_text() == item)
 				m_current_combobox_item = combobox_item;
 
@@ -166,7 +166,7 @@ void Combobox::set_font_size(int size)
 {
     m_current_item_label->set_font_size(size);
 
-    for (Combobox_Item* combobox_item : m_combobox_items)
+    for (ComboboxItem* combobox_item : m_combobox_items)
 		combobox_item->set_font_size(size);
 }
 
@@ -188,7 +188,7 @@ void Combobox::setFixedSize(const QSize& s)
 
     m_drop_down->setFixedWidth(s.width());
 
-	for (Combobox_Item* combobox_item : m_combobox_items)
+	for (ComboboxItem* combobox_item : m_combobox_items)
 		combobox_item->setFixedSize(s);
 
     m_current_item_label->move(width() * 0.09, height() / 2 - m_current_item_label->height() / 2);
@@ -210,7 +210,7 @@ QList<QString> Combobox::items()
 {
 	QList<QString> items;
 
-	for (Combobox_Item* combobox_item : m_combobox_items)
+	for (ComboboxItem* combobox_item : m_combobox_items)
 		items.append(combobox_item->item_text());
 
 	return items;
@@ -272,7 +272,7 @@ bool Combobox::eventFilter(QObject* object, QEvent* event)
 
             if (mouse_event->button() & Qt::LeftButton)
             {
-                for (Combobox_Item* combobox_item : m_combobox_items)
+                for (ComboboxItem* combobox_item : m_combobox_items)
                 {
                     if (combobox_item->geometry().contains(mouse_event->pos()))
                     {
