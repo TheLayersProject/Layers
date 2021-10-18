@@ -8,6 +8,12 @@ using Layers::Window;
 Customize_Menu::Customize_Menu(QWidget* parent) :
 	Menu("Customize", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
+	Widget* ccp_widget = new Widget;
+	ccp_widget->set_name("widget");
+	ccp_widget->set_proper_name("Widget");
+
+	m_control_customize_panel = new Customize_Panel(ccp_widget);
+
 	init_child_themeable_reference_list();
 
 	installEventFilter(this);
@@ -34,6 +40,8 @@ Customize_Menu::Customize_Menu(QWidget* parent) :
 
 	m_control_arrow_graphic->set_name("arrow_graphic");
 	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
+
+	m_control_customize_panel->set_proper_name("Customize Panels");
 
 	m_control_text_button->set_name("text_button");
 	m_control_text_button->set_proper_name("Text Buttons");
@@ -134,26 +142,19 @@ void Customize_Menu::init_preview_window()
 	m_preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 	
 	m_preview_window->initialize_and_acquire_panels(m_customize_panels);
-
-	// *** TODO: Functionalize the following code; Create as many functions as necessary
-	for (Customize_Panel* customize_panel : m_customize_panels)
-	{
-		m_sidebar_layout->addWidget(customize_panel);
-	}
-
+	populate_panel_layout();
 	open_customize_panel(m_customize_panels.last());
-
-	m_sidebar_layout->addStretch();
-
-	m_preview_layout->addWidget(m_preview_window);
-	// ***
+	set_preview_widget(m_preview_window);
 
 	// Setup Preview Window's Customize Menu's Preview Widget
-	//Widget* preview_window_customize_menu_preview_widget = new Widget;
+	Widget* preview_window_customize_menu_preview_widget = new Widget;
+	preview_window_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
+	preview_window_customize_menu_preview_widget->set_proper_name("Preview Widget");
 
-	//preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(m_preview_window->customize_menu()->customize_panels());
-
-
+	preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(m_preview_window->customize_menu()->customize_panels());
+	m_preview_window->customize_menu()->populate_panel_layout();
+	m_preview_window->customize_menu()->open_customize_panel(m_preview_window->customize_menu()->customize_panels().last());
+	m_preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
 }
 
 void Customize_Menu::init_child_themeable_reference_list()
@@ -165,6 +166,7 @@ void Customize_Menu::init_child_themeable_reference_list()
 	m_topbar->add_child_themeable_reference(m_collapsed_widget);
 	m_topbar->add_child_themeable_reference(m_control_arrow_graphic);
 	m_topbar->add_child_themeable_reference(m_control_text_button);
+	m_sidebar->add_child_themeable_reference(m_control_customize_panel);
 }
 
 void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
@@ -175,7 +177,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 		{
 			m_panel_stack.last()->hide();
 
-			m_preview_window->remove_child_themeable_reference(m_panel_stack.last());
+			m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
 
 			while (m_panel_stack.last() != customize_panel)
 			{
@@ -200,9 +202,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 				}
 			}
 
-			m_preview_window->add_child_themeable_reference(customize_panel);
-
-			if (current_theme()) customize_panel->apply_theme(*current_theme());
+			m_control_customize_panel->share_all_attributes_with(customize_panel);
 
 			customize_panel->show();
 
@@ -221,7 +221,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 		{
 			m_panel_stack.last()->hide();
 
-			m_preview_window->remove_child_themeable_reference(m_panel_stack.last());
+			m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
 		}
 
 		// Setup Button
@@ -265,9 +265,7 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 
 		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
 
-		m_preview_window->add_child_themeable_reference(customize_panel);
-
-		if (current_theme()) customize_panel->apply_theme(*current_theme());
+		m_control_customize_panel->share_all_attributes_with(customize_panel);
 
 		customize_panel->show();
 
@@ -276,6 +274,16 @@ void Customize_Menu::open_customize_panel(Customize_Panel* customize_panel)
 		if (m_topbar->width() < topbar_content_width(true))
 			collapse_text_buttons();
 	}
+}
+
+void Customize_Menu::populate_panel_layout()
+{
+	for (Customize_Panel* customize_panel : m_customize_panels)
+	{
+		m_sidebar_layout->addWidget(customize_panel);
+	}
+
+	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
 }
 
 Window* Customize_Menu::preview_window() const
@@ -301,6 +309,11 @@ int Customize_Menu::calculated_topbar_content_width()
 	if (!m_collapsed_text_buttons.isEmpty()) calculated_topbar_content_width += m_collapsed_text_buttons.last()->width();
 
 	return calculated_topbar_content_width;
+}
+
+void Customize_Menu::set_preview_widget(QWidget* widget)
+{
+	m_preview_layout->addWidget(widget);
 }
 
 int Customize_Menu::topbar_content_width(bool include_collapse_button)

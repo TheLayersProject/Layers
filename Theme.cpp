@@ -6,8 +6,7 @@ using Layers::Stateful_Attribute;
 using Layers::Theme;
 using Layers::Themeable;
 
-Theme::Theme() :
-	m_name{ "" }, m_is_custom{ true }
+Theme::Theme()
 {
 }
 
@@ -54,27 +53,22 @@ QHash<QString, Attribute_Set>& Theme::attribute_sets()
 	return m_attribute_sets;
 }
 
-void Theme::consume(Theme* theme)
+void Theme::consume(Theme&& theme)
 {
-	if (theme)
+	for (const QString& themeable_tag : theme.attribute_sets().keys())
 	{
-		for (const QString& themeable_tag : theme->attribute_sets().keys())
-		{
-			if (!m_attribute_sets.contains(themeable_tag))
-				m_attribute_sets[themeable_tag] = Attribute_Set();
+		if (!m_attribute_sets.contains(themeable_tag))
+			m_attribute_sets[themeable_tag] = Attribute_Set();
 
-			Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
+		Attribute_Set& attribute_set = m_attribute_sets[themeable_tag];
 
-			for (Stateless_Attribute& stateless_attribute : theme->attribute_sets()[themeable_tag].stateless_attributes())
-				if (!attribute_set.contains_stateless_attribute(stateless_attribute.name()))
-					attribute_set.add_attribute(stateless_attribute);
+		for (Stateless_Attribute& stateless_attribute : theme.attribute_sets()[themeable_tag].stateless_attributes())
+			if (!attribute_set.contains_stateless_attribute(stateless_attribute.name()))
+				attribute_set.add_attribute(stateless_attribute);
 
-			for (Stateful_Attribute& stateful_attribute : theme->attribute_sets()[themeable_tag].stateful_attributes())
-				if (!attribute_set.contains_stateful_attribute(stateful_attribute.name()))
-					attribute_set.add_attribute(stateful_attribute);
-		}
-
-		delete theme;
+		for (Stateful_Attribute& stateful_attribute : theme.attribute_sets()[themeable_tag].stateful_attributes())
+			if (!attribute_set.contains_stateful_attribute(stateful_attribute.name()))
+				attribute_set.add_attribute(stateful_attribute);
 	}
 }
 

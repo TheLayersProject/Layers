@@ -436,7 +436,7 @@ namespace Layers
 
 		QHash<QString, Attribute_Set>& attribute_sets();
 
-		void consume(Theme* theme);
+		void consume(Theme&& theme);
 
 		bool contains_attributes_for_tag(const QString& themeable_tag);
 
@@ -474,11 +474,11 @@ namespace Layers
 		}
 
 	private:
-		bool m_is_custom{ true };
-
 		QHash<QString, Attribute_Set> m_attribute_sets{ QHash<QString, Attribute_Set>() };
 
-		QString m_name;
+		bool m_is_custom{ true };
+
+		QString m_name{ "" };
 	};
 
 	/*!
@@ -2385,9 +2385,13 @@ namespace Layers
 
 		void open_customize_panel(Customize_Panel* customize_panel);
 
+		void populate_panel_layout();
+
 		Window* preview_window() const;
 
 		int calculated_topbar_content_width();
+
+		void set_preview_widget(QWidget* widget);
 
 		int topbar_content_width(bool include_collapse_button);
 
@@ -2431,6 +2435,8 @@ namespace Layers
 		Button* m_collapsed_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
+
+		Customize_Panel* m_control_customize_panel{ nullptr };
 
 		Button* m_control_text_button{ new Button("")};
 
@@ -2660,7 +2666,7 @@ namespace Layers
 		QFile* m_icon_file{ nullptr };
 
 		QString* m_latest_version{ nullptr };
-
+		
 		QString m_name;
 
 		QSettings m_settings;
