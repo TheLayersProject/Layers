@@ -1,4 +1,12 @@
-#include "../../Layers.h"
+#include "../../../include/CreateNewThemeDialog.h"
+#include "../../../include/Graphic.h"
+#include "../../../include/calculate.h"
+
+#include <Windows.h>
+#include <windowsx.h>
+
+#include <QApplication>
+#include <QPainterPath>
 
 using Layers::CreateNewThemeDialog;
 

@@ -1,4 +1,9 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/CustomizePanel.h"
+#include "../../../include/Combobox.h"
+
+#include <QEvent>
+#include <QIntValidator>
 
 using Layers::ComboboxItem;
 

@@ -1,4 +1,8 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/Button.h"
+#include "../../../include/Graphic.h"
+
+#include <QMouseEvent>
 
 using Layers::Graphic;
 using Layers::Button;

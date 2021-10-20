@@ -1,4 +1,10 @@
-#include "../../Layers.h"
+#include "../../../include/GradientControl.h"
+#include "../../../include/GradientSelectionDialog.h"
+#include "../../../include/Window.h"
+
+#include <QApplication>
+#include <QMouseEvent>
+#include <QPainterPath>
 
 using Layers::GradientControl;
 
@@ -29,15 +35,15 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			GradientSelectionBox gsb(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
+			GradientSelectionDialog gsd(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
 
-			if (m_current_theme) gsb.apply_theme(*m_current_theme);
+			if (m_current_theme) gsd.apply_theme(*m_current_theme);
 
-			static_cast<Window*>(QApplication::activeWindow())->center_dialog(&gsb);
+			static_cast<Window*>(QApplication::activeWindow())->center_dialog(&gsd);
 
-			if (gsb.exec())
+			if (gsd.exec())
 			{
-				set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(gsb.gradient_stops()));
+				set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(gsd.gradient_stops()));
 
 				emit gradient_changed();
 

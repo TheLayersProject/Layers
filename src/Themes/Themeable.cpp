@@ -1,4 +1,10 @@
-#include "../../Layers.h"
+#include "../../../include/Attributes.h"
+#include "../../../include/AttributeSharingCombo.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/CustomizePanel.h"
+#include "../../../include/Graphic.h"
+#include "../../../include/Theme.h"
+#include "../../../include/Themeable.h"
 
 using Layers::AttributeSet;
 using Layers::AttributeSharingCombo;

@@ -1,4 +1,4 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
 
 using Layers::StatelessAttribute;
 using Layers::SwitchAttributeWidget;

@@ -1,4 +1,5 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/Graphic.h"
 
 using Layers::Graphic;
 using Layers::SVG;

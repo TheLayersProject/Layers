@@ -1,4 +1,7 @@
-#include "../../../Layers.h"
+#include "../../../../include/AttributeWidgets.h"
+#include "../../../../include/SettingsMenu.h"
+
+#include <QMouseEvent>
 
 using Layers::Graphic;
 using Layers::SettingsMenu;

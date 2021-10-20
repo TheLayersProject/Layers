@@ -1,4 +1,13 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/Application.h"
+#include "../../include/calculate.h"
+#include "../../include/Window.h"
+
+#include <Windows.h>
+#include <windowsx.h>
+
+#include <QIcon>
+#include <QPainterPath>
 
 using Layers::CustomizeMenu;
 using Layers::Menu;
@@ -117,10 +126,10 @@ void Window::apply_theme(Theme& theme)
 {
     Themeable::apply_theme(theme);
 
-    if (m_customize_menu->preview_window())
+    if (m_customize_menu->preview_widget())
     {
-        m_customize_menu->preview_window()->apply_theme(theme);
-        m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
+        m_customize_menu->preview_widget()->apply_theme(theme);
+        //m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
     }
 
 	issue_update(); // Is this necessary?
@@ -184,16 +193,16 @@ void Window::set_window_icon(const Graphic& icon_graphic)
 {
 	m_titlebar->set_window_icon(icon_graphic);
 
-	if (m_customize_menu->preview_window())
-		m_customize_menu->preview_window()->set_window_icon(icon_graphic);
+	//if (m_customize_menu->preview_window())
+	//	m_customize_menu->preview_window()->set_window_icon(icon_graphic);
 }
 
 void Window::set_window_title(const QString& title)
 {
 	m_titlebar->set_window_title(title);
 
-	if (m_customize_menu->preview_window())
-		m_customize_menu->preview_window()->set_window_title(title);
+	//if (m_customize_menu->preview_window())
+	//	m_customize_menu->preview_window()->set_window_title(title);
 }
 
 SettingsMenu* Window::settings_menu() const

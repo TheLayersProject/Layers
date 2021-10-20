@@ -1,4 +1,8 @@
-#include "../Layers.h"
+#include "../../include/build_themes.h"
+#include "../../include/calculate.h"
+#include "../../include/Theme.h"
+
+#include <QGradientStops>
 
 using Layers::Theme;
 

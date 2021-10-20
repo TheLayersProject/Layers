@@ -1,4 +1,7 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/calculate.h"
+
+#include <QPainterPath>
 
 using Layers::Attribute;
 using Layers::AttributeWidget;

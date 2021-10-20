@@ -1,8 +1,17 @@
-#include "../../Layers.h"
+#include "../../../include/GradientSelectionDialog.h"
+#include "../../../include/Graphic.h"
+#include "../../../include/calculate.h"
 
-using Layers::GradientSelectionBox;
+#include <Windows.h>
+#include <windowsx.h>
 
-GradientSelectionBox::GradientSelectionBox(QGradientStops gradient_stops, QWidget* parent) : QDialog(parent)
+#include <QApplication>
+#include <QMouseEvent>
+#include <QPainterPath>
+
+using Layers::GradientSelectionDialog;
+
+GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, QWidget* parent) : QDialog(parent)
 {
 	init_child_themeable_reference_list();
 	init_attributes();
@@ -33,10 +42,10 @@ GradientSelectionBox::GradientSelectionBox(QGradientStops gradient_stops, QWidge
 
     m_single_click_timer.setSingleShot(true);
 
-    connect(&m_single_click_timer, &QTimer::timeout, this, &GradientSelectionBox::click_control);
+    connect(&m_single_click_timer, &QTimer::timeout, this, &GradientSelectionDialog::click_control);
 }
 
-void GradientSelectionBox::add_gradient_stop(double stop_val, QColor color)
+void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
 {
     ColorControl* color_control = new ColorControl(this);
     color_control->show();
@@ -72,12 +81,12 @@ void GradientSelectionBox::add_gradient_stop(double stop_val, QColor color)
     update_gradient();
 }
 
-QGradientStops GradientSelectionBox::gradient_stops() const
+QGradientStops GradientSelectionDialog::gradient_stops() const
 {
     return m_gradient_stops;
 }
 
-void GradientSelectionBox::init_attributes()
+void GradientSelectionDialog::init_attributes()
 {
 	QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 	QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
@@ -117,7 +126,7 @@ void GradientSelectionBox::init_attributes()
     m_gradient_widget->set_stateless_attribute_value("corner_radius_br", 8);
 }
 
-void GradientSelectionBox::init_color_controls()
+void GradientSelectionDialog::init_color_controls()
 {
     for (int i = 0; i < m_gradient_stops.count(); i++)
     {
@@ -144,20 +153,20 @@ void GradientSelectionBox::init_color_controls()
     }
 }
 
-void GradientSelectionBox::init_gradient_widget()
+void GradientSelectionDialog::init_gradient_widget()
 {
     m_gradient_widget->setFixedSize(448, 176);
 
     m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops));
 }
 
-void GradientSelectionBox::init_child_themeable_reference_list()
+void GradientSelectionDialog::init_child_themeable_reference_list()
 {
     add_child_themeable_reference(m_titlebar);
     add_child_themeable_reference(m_apply_button);
 }
 
-void GradientSelectionBox::init_titlebar()
+void GradientSelectionDialog::init_titlebar()
 {
     m_titlebar->setFixedHeight(45);
     m_titlebar->set_name("titlebar");
@@ -188,12 +197,12 @@ void GradientSelectionBox::init_titlebar()
     m_titlebar->setLayout(titlebar_layout);
 }
 
-void GradientSelectionBox::issue_update()
+void GradientSelectionDialog::issue_update()
 {
 	update();
 }
 
-void GradientSelectionBox::update_gradient()
+void GradientSelectionDialog::update_gradient()
 {
     m_gradient_stops = QGradientStops();
 
@@ -208,7 +217,7 @@ void GradientSelectionBox::update_gradient()
     m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops), true);
 }
 
-void GradientSelectionBox::update_theme_dependencies()
+void GradientSelectionDialog::update_theme_dependencies()
 {
     int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
 
@@ -218,14 +227,14 @@ void GradientSelectionBox::update_theme_dependencies()
 	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 }
 
-void GradientSelectionBox::click_control()
+void GradientSelectionDialog::click_control()
 {
     m_clicking_color_control->click();
 
     m_clicking_color_control = nullptr;
 }
 
-bool GradientSelectionBox::eventFilter(QObject* object, QEvent* event)
+bool GradientSelectionDialog::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::MouseButtonPress)
     {
@@ -359,7 +368,7 @@ bool GradientSelectionBox::eventFilter(QObject* object, QEvent* event)
     return false;
 }
 
-bool GradientSelectionBox::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
+bool GradientSelectionDialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
     MSG* msg = static_cast<MSG*>(message);
 
@@ -447,7 +456,7 @@ bool GradientSelectionBox::nativeEvent(const QByteArray& eventType, void* messag
     return false;
 }
 
-void GradientSelectionBox::paintEvent(QPaintEvent* event)
+void GradientSelectionDialog::paintEvent(QPaintEvent* event)
 {
 	// CREATE VARIABLES:
 
@@ -570,7 +579,7 @@ void GradientSelectionBox::paintEvent(QPaintEvent* event)
 	painter.end();
 }
 
-void GradientSelectionBox::setup_layout()
+void GradientSelectionDialog::setup_layout()
 {
     // Inner Layout
     QVBoxLayout* inner_layout = new QVBoxLayout;

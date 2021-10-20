@@ -1,4 +1,5 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/calculate.h"
 
 using Layers::AttributeWidgetContainer;
 

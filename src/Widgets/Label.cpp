@@ -1,4 +1,8 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/CustomizePanel.h"
+#include "../../include/Label.h"
+
+#include <QPainterPath>
 
 using Layers::Label;
 

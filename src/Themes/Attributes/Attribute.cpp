@@ -1,4 +1,5 @@
-#include "../../Layers.h"
+#include "../../../include/Attributes.h"
+#include "../../../include/Themeable.h"
 
 using Layers::Attribute;
 using Layers::Themeable;

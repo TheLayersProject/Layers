@@ -1,4 +1,8 @@
-#include "../../Layers.h"
+#include "../../../include/MiniSlider.h"
+
+#include <QApplication>
+#include <QMouseEvent>
+#include <QVBoxLayout>
 
 using Layers::MiniSlider;
 

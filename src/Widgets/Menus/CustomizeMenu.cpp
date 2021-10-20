@@ -1,8 +1,13 @@
-#include "../../Layers.h"
+#include "../../../include/Application.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/CustomizeMenu.h"
+#include "../../../include/CustomizePanel.h"
+#include "../../../include/Window.h"
 
 using Layers::Button;
 using Layers::CustomizeMenu;
 using Layers::CustomizePanel;
+using Layers::Widget;
 using Layers::Window;
 
 CustomizeMenu::CustomizeMenu(QWidget* parent) :
@@ -68,8 +73,8 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_apply_button->set_ACW_primary("corner_color_caw", false);
 
 	connect(m_apply_button, &Button::clicked, [this] {
-		if (m_preview_window)
-			m_preview_window->copy_attribute_values_to(m_current_theme);
+		if (m_preview_widget)
+			m_preview_widget->copy_attribute_values_to(m_current_theme);
 
 		layersApp->reapply_theme();
 		layersApp->save_theme(*m_current_theme);
@@ -108,15 +113,15 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
 	m_sidebar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-	m_sidebar->share_attribute_with_themeable(m_sidebar->attribute_set().stateless_attribute("background_color"), m_preview_widget->attribute_set().stateless_attribute("corner_color"));
+	m_sidebar->share_attribute_with_themeable(m_sidebar->attribute_set().stateless_attribute("background_color"), m_preview_frame->attribute_set().stateless_attribute("corner_color"));
 	m_sidebar->set_ACW_primary("border_awc", false);
 	m_sidebar->set_ACW_primary("hover_background_caw", false);
 	m_sidebar->set_ACW_primary("outline_caw", false);
 	m_sidebar->set_ACW_primary("corner_color_caw", false);
 	m_sidebar->set_ACW_primary("corner_radii_awc", false);
 
-	m_preview_widget->set_stateless_attribute_value("corner_radius_tl", 10);
-	m_preview_widget->set_stateless_attribute_value("corner_color_disabled", false);
+	m_preview_frame->set_stateless_attribute_value("corner_radius_tl", 10);
+	m_preview_frame->set_stateless_attribute_value("corner_color_disabled", false);
 
 	setup_layout();
 }
@@ -133,28 +138,28 @@ QList<CustomizePanel*>& CustomizeMenu::customize_panels()
 
 void CustomizeMenu::init_preview_window()
 {
-	m_preview_window = new Window(true);
-	m_preview_window->setMinimumSize(500, 400);
-	m_preview_window->setMaximumSize(800, 600);
-	m_preview_window->set_functionality_disabled();
-	m_preview_window->titlebar()->exit_button()->set_functionality_disabled();
-	m_preview_window->customize_menu()->apply_button()->set_functionality_disabled();
-	m_preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
+	Window* preview_window = new Window(true);
+	preview_window->setMinimumSize(500, 400);
+	preview_window->setMaximumSize(800, 600);
+	preview_window->set_functionality_disabled();
+	preview_window->titlebar()->exit_button()->set_functionality_disabled();
+	preview_window->customize_menu()->apply_button()->set_functionality_disabled();
+	preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 	
-	m_preview_window->initialize_and_acquire_panels(m_customize_panels);
+	preview_window->initialize_and_acquire_panels(m_customize_panels);
 	populate_panel_layout();
 	open_customize_panel(m_customize_panels.last());
-	set_preview_widget(m_preview_window);
+	set_preview_widget(preview_window);
 
 	// Setup Preview Window's Customize Menu's Preview Widget
 	Widget* preview_window_customize_menu_preview_widget = new Widget;
 	preview_window_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
 	preview_window_customize_menu_preview_widget->set_proper_name("Preview Widget");
 
-	preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(m_preview_window->customize_menu()->customize_panels());
-	m_preview_window->customize_menu()->populate_panel_layout();
-	m_preview_window->customize_menu()->open_customize_panel(m_preview_window->customize_menu()->customize_panels().last());
-	m_preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
+	preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(preview_window->customize_menu()->customize_panels());
+	preview_window->customize_menu()->populate_panel_layout();
+	preview_window->customize_menu()->open_customize_panel(preview_window->customize_menu()->customize_panels().last());
+	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
 }
 
 void CustomizeMenu::init_child_themeable_reference_list()
@@ -286,9 +291,9 @@ void CustomizeMenu::populate_panel_layout()
 	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
 }
 
-Window* CustomizeMenu::preview_window() const
+Widget* CustomizeMenu::preview_widget() const
 {
-	return m_preview_window;
+	return m_preview_widget;
 }
 
 int CustomizeMenu::calculated_topbar_content_width()
@@ -311,8 +316,9 @@ int CustomizeMenu::calculated_topbar_content_width()
 	return calculated_topbar_content_width;
 }
 
-void CustomizeMenu::set_preview_widget(QWidget* widget)
+void CustomizeMenu::set_preview_widget(Widget* widget)
 {
+	m_preview_widget = widget;
 	m_preview_layout->addWidget(widget);
 }
 
@@ -530,11 +536,11 @@ void CustomizeMenu::setup_layout()
 	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
 
-	m_preview_widget->set_stateless_attribute_value("background_disabled", true);
-	m_preview_widget->setLayout(m_preview_layout);
+	m_preview_frame->set_stateless_attribute_value("background_disabled", true);
+	m_preview_frame->setLayout(m_preview_layout);
 
 	m_preview_scroll_area->set_stateless_attribute_value("background_disabled", true);
-	m_preview_scroll_area->setWidget(m_preview_widget);
+	m_preview_scroll_area->setWidget(m_preview_frame);
 
 	// Main Vbox
 

@@ -1,4 +1,8 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/CustomizePanel.h"
+#include "../../include/SVG.h"
+
+#include <QFile>
 
 using Layers::SVG;
 

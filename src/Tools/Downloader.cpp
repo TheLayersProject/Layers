@@ -1,4 +1,7 @@
-#include "../Layers.h"
+#include "../../include/Downloader.h"
+
+#include <QDir>
+#include <QSaveFile>
 
 using Layers::Downloader;
 

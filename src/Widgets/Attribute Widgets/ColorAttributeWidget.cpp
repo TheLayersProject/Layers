@@ -1,4 +1,5 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeSharingCombo.h"
+#include "../../../include/AttributeWidgets.h"
 
 using Layers::Attribute;
 using Layers::ColorAttributeWidget;

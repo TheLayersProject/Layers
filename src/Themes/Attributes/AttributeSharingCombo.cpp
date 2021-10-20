@@ -1,4 +1,6 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeSharingCombo.h"
+#include "../../../include/Attributes.h"
+#include "../../../include/Themeable.h"
 
 using Layers::AttributeSharingCombo;
 using Layers::StatefulAttribute;

@@ -1,4 +1,9 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/CustomizePanel.h"
+#include "../../include/calculate.h"
+#include "../../include/Window.h"
+
+#include <QApplication>
 
 using Layers::AttributeWidget;
 using Layers::Button;

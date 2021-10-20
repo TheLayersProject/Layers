@@ -1,6 +1,16 @@
-#include "../Layers.h"
+#include "../../include/Application.h"
+#include "../../include/build_themes.h"
+#include "../../include/directories.h"
+#include "../../include/Downloader.h"
+#include "../../include/GitHubRepo.h"
+#include "../../include/theme_loading.h"
+#include "../../include/theme_updating.h"
+#include "../../include/Themeable.h"
+#include "../../include/UpdateDialog.h"
+#include "../../include/Version.h"
 
 #include <QFontDatabase>
+#include <QGradientStops>
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
@@ -23,6 +33,7 @@ Application::Application(
 	m_app_dir{ QDir(app_path(name)) },
 	m_app_themes_dir{ QDir(app_themes_path(name)) },
 	m_settings{ QSettings(name, name) },
+	m_downloader{ new Downloader(this) },
 	QApplication(argc, argv)
 {
 	Q_INIT_RESOURCE(image_sequences);
@@ -115,13 +126,13 @@ bool Application::update_on_request()
 
 	if (update_dialog->exec())
 	{
-		for (Themeable* child_themeable_reference : m_child_themeable_references)
-			if (Window* child_window = static_cast<Window*>(child_themeable_reference))
-				child_window->hide();
+		//for (Themeable* child_themeable_reference : m_child_themeable_references)
+		//	if (Window* child_window = static_cast<Window*>(child_themeable_reference))
+		//		child_window->hide();
 
 		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/releases");
 
-		QNetworkReply* repo_releases_json_download = m_downloader.download(repo_releases_json_download_url);
+		QNetworkReply* repo_releases_json_download = m_downloader->download(repo_releases_json_download_url);
 
 		QEventLoop loop;
 		connect(repo_releases_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
@@ -143,7 +154,7 @@ bool Application::update_on_request()
 
 					if (!QFile::exists(latest_version_download_url.fileName()))
 					{
-						QNetworkReply* update_download = m_downloader.download(latest_version_download_url, m_app_dir);
+						QNetworkReply* update_download = m_downloader->download(latest_version_download_url, m_app_dir);
 
 						QEventLoop loop;
 						connect(update_download, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -232,10 +243,10 @@ Theme Application::load_theme(QFile& file)
 
 		save_theme(updated_theme);
 
-		return updated_theme;
+		return std::move(updated_theme);
 	}
 
-	return theme_and_load_status_combo_2_2_0_a.theme;
+	return std::move(theme_and_load_status_combo_2_2_0_a.theme);
 }
 
 QString& Application::name()
@@ -384,7 +395,7 @@ void Application::init_latest_version_tag()
 	{
 		QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/tags");
 
-		QNetworkReply* repo_tags_json_download = m_downloader.download(repo_tags_json_download_url);
+		QNetworkReply* repo_tags_json_download = m_downloader->download(repo_tags_json_download_url);
 
 		QEventLoop loop;
 		connect(repo_tags_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);

@@ -1,4 +1,12 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/CustomizePanel.h"
+#include "../../include/Layouts.h"
+#include "../../include/calculate.h"
+#include "../../include/Widget.h"
+
+#include <QEvent>
+#include <QIntValidator>
+#include <QPainterPath>
 
 using Layers::Widget;
 

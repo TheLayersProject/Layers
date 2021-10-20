@@ -1,4 +1,6 @@
-#include "../../Layers.h"
+#include "../../../include/LineEditor.h"
+
+#include <QEvent>
 
 using Layers::LineEditor;
 using Layers::Theme;

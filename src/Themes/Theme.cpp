@@ -1,4 +1,5 @@
-#include "../../Layers.h"
+#include "../../../include/Theme.h"
+#include "../../../include/Themeable.h"
 
 using Layers::AttributeSet;
 using Layers::StatelessAttribute;

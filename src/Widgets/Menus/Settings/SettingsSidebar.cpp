@@ -1,4 +1,5 @@
-#include "../../../Layers.h"
+#include "../../../../include/AttributeWidgets.h"
+#include "../../../../include/SettingsMenu.h"
 
 using Layers::SettingsSidebar;
 

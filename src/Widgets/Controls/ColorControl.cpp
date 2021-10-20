@@ -1,4 +1,8 @@
-#include "../../Layers.h"
+#include "../../../include/ColorControl.h"
+
+#include <QColorDialog>
+#include <QMouseEvent>
+#include <QPainterPath>
 
 using Layers::ColorControl;
 

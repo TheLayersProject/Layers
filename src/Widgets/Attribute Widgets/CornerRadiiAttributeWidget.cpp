@@ -1,4 +1,7 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeSharingCombo.h"
+#include "../../../include/AttributeWidgets.h"
+
+#include <QIntValidator>
 
 using Layers::CornerRadiiAttributeWidget;
 using Layers::Theme;

@@ -1,8 +1,10 @@
-#include "../Layers.h"
+#include "../../include/ScrollArea.h"
+
+#include <QEvent>
 
 using Layers::ScrollArea;
 
-ScrollArea::ScrollArea(QWidget* parent) :	Widget(parent)
+ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 {
 	installEventFilter(this);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

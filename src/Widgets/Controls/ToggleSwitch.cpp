@@ -1,4 +1,8 @@
-#include "../../Layers.h"
+#include "../../../include/Label.h"
+#include "../../../include/ToggleSwitch.h"
+
+#include <QHBoxLayout>
+#include <QMouseEvent>
 
 using Layers::ToggleSwitch;
 

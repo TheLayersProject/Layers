@@ -1,4 +1,7 @@
-#include "../Layers.h"
+#include "../../include/ImageSequence.h"
+
+#include <QImage>
+#include <QPixmap>
 
 using Layers::ImageSequence;
 

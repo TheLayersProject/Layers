@@ -1,4 +1,7 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/Application.h"
+#include "../../include/Layouts.h"
+#include "../../include/SettingsPanels.h"
 
 using Layers::Button;
 using Layers::Combobox;

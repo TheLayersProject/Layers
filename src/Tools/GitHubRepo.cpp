@@ -1,4 +1,6 @@
-#include "../Layers.h"
+#include "../../include/GitHubRepo.h"
+
+#include <QList>
 
 using Layers::GitHubRepo;
 

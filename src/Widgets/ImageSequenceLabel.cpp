@@ -1,4 +1,4 @@
-#include "../Layers.h"
+#include "../../include/ImageSequenceLabel.h"
 
 using Layers::ImageSequenceLabel;
 

@@ -1,4 +1,8 @@
-#include "../../Layers.h"
+#include "../../../include/AttributeWidgets.h"
+#include "../../../include/Combobox.h"
+#include "../../../include/Graphic.h"
+
+#include <QMouseEvent>
 
 #include <algorithm>
 

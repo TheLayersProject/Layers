@@ -1,4 +1,9 @@
-#include "../../../Layers.h"
+#include "../../../../include/AttributeWidgets.h"
+#include "../../../../include/CustomizePanel.h"
+#include "../../../../include/SettingsMenu.h"
+
+#include <QIntValidator>
+#include <QMouseEvent>
 
 using Layers::Graphic;
 using Layers::SettingsTab;

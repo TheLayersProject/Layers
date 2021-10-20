@@ -1,4 +1,5 @@
-#include "../Layers.h"
+#include "../../include/AttributeWidgets.h"
+#include "../../include/MenuLabelLayer.h"
 
 using Layers::Button;
 using Layers::Label;

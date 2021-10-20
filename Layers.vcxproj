@@ -107,18 +107,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Application.cpp" />
-    <ClCompile Include="src\Core\Attributes\Attribute.cpp" />
-    <ClCompile Include="src\Core\Attributes\AttributeSet.cpp" />
-    <ClCompile Include="src\Core\Attributes\AttributeSharingCombo.cpp" />
-    <ClCompile Include="src\Core\Attributes\StatefulAttribute.cpp" />
-    <ClCompile Include="src\Core\Attributes\StatelessAttribute.cpp" />
-    <ClCompile Include="src\Core\build_themes.cpp" />
-    <ClCompile Include="src\Core\directories.cpp" />
-    <ClCompile Include="src\Core\Themes\Theme.cpp" />
-    <ClCompile Include="src\Core\Themes\Themeable.cpp" />
-    <ClCompile Include="src\Core\Themes\ThemeLoading.cpp" />
-    <ClCompile Include="src\Core\Themes\ThemeUpdating.cpp" />
+    <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\Application\directories.cpp" />
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp" />
     <ClCompile Include="src\Layouts\VerticalLayout.cpp" />
     <ClCompile Include="src\Old\2.1.0a\Attribute_2_1_0_a.cpp" />
@@ -126,6 +116,16 @@
     <ClCompile Include="src\Old\2.1.0a\Stateful_Attribute_2_1_0_a.cpp" />
     <ClCompile Include="src\Old\2.1.0a\Stateless_Attribute_2_1_0_a.cpp" />
     <ClCompile Include="src\Old\2.1.0a\Theme_2_1_0_a.cpp" />
+    <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
+    <ClCompile Include="src\Themes\Attributes\AttributeSet.cpp" />
+    <ClCompile Include="src\Themes\Attributes\AttributeSharingCombo.cpp" />
+    <ClCompile Include="src\Themes\Attributes\StatefulAttribute.cpp" />
+    <ClCompile Include="src\Themes\Attributes\StatelessAttribute.cpp" />
+    <ClCompile Include="src\Themes\build_themes.cpp" />
+    <ClCompile Include="src\Themes\Theme.cpp" />
+    <ClCompile Include="src\Themes\Themeable.cpp" />
+    <ClCompile Include="src\Themes\theme_loading.cpp" />
+    <ClCompile Include="src\Themes\theme_updating.cpp" />
     <ClCompile Include="src\Tools\Downloader.cpp" />
     <ClCompile Include="src\Tools\GitHubRepo.cpp" />
     <ClCompile Include="src\Tools\ImageSequence.cpp" />
@@ -176,7 +176,53 @@
     <QtRcc Include="themes\prebuilt_themes.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\Layers.h" />
+    <ClInclude Include="include\build_themes.h" />
+    <ClInclude Include="include\directories.h" />
+    <ClInclude Include="include\GitHubRepo.h" />
+    <ClInclude Include="include\Version.h" />
+    <QtMoc Include="include\Downloader.h" />
+    <ClInclude Include="include\calculate.h" />
+    <ClInclude Include="include\old.h" />
+    <ClInclude Include="include\theme_loading.h" />
+    <ClInclude Include="include\theme_updating.h" />
+    <QtMoc Include="include\Application.h" />
+    <ClInclude Include="include\Attributes.h" />
+    <ClInclude Include="include\AttributeSet.h" />
+    <ClInclude Include="include\AttributeSharingCombo.h" />
+    <QtMoc Include="include\Window.h" />
+    <QtMoc Include="include\UpdateDialog.h" />
+    <QtMoc Include="include\GradientSelectionDialog.h" />
+    <QtMoc Include="include\CreateNewThemeDialog.h" />
+    <QtMoc Include="include\Titlebar.h" />
+    <QtMoc Include="include\MenuLabelLayer.h" />
+    <QtMoc Include="include\TabBar.h" />
+    <QtMoc Include="include\MenuBar.h" />
+    <QtMoc Include="include\ToggleSwitch.h" />
+    <QtMoc Include="include\Slider.h" />
+    <QtMoc Include="include\MiniSlider.h" />
+    <QtMoc Include="include\GradientControl.h" />
+    <QtMoc Include="include\ColorControl.h" />
+    <QtMoc Include="include\AttributeWidgets.h" />
+    <QtMoc Include="include\ScrollArea.h" />
+    <QtMoc Include="include\CustomizeMenu.h" />
+    <QtMoc Include="include\CustomizePanel.h" />
+    <ClInclude Include="include\ImageSequence.h" />
+    <QtMoc Include="include\LineEditor.h" />
+    <QtMoc Include="include\SVG.h" />
+    <QtMoc Include="include\ImageSequenceLabel.h" />
+    <QtMoc Include="include\Graphic.h" />
+    <QtMoc Include="include\Combobox.h" />
+    <QtMoc Include="include\Label.h" />
+    <QtMoc Include="include\Button.h" />
+    <QtMoc Include="include\SettingsPanels.h" />
+    <QtMoc Include="include\Menu.h" />
+    <ClInclude Include="include\Theme.h" />
+    <ClInclude Include="include\Themeable.h" />
+    <QtMoc Include="include\SettingsMenu.h" />
+    <QtMoc Include="include\Widget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Layouts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
