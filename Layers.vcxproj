@@ -118,7 +118,6 @@
     <ClCompile Include="src\Old\2.1.0a\Theme_2_1_0_a.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeSet.cpp" />
-    <ClCompile Include="src\Themes\Attributes\AttributeSharingCombo.cpp" />
     <ClCompile Include="src\Themes\Attributes\StatefulAttribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\StatelessAttribute.cpp" />
     <ClCompile Include="src\Themes\build_themes.cpp" />
@@ -186,9 +185,8 @@
     <ClInclude Include="include\theme_loading.h" />
     <ClInclude Include="include\theme_updating.h" />
     <QtMoc Include="include\Application.h" />
-    <ClInclude Include="include\Attributes.h" />
+    <QtMoc Include="include\Attributes.h" />
     <ClInclude Include="include\AttributeSet.h" />
-    <ClInclude Include="include\AttributeSharingCombo.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />
     <QtMoc Include="include\GradientSelectionDialog.h" />

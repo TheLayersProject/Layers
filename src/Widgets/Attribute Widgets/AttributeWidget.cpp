@@ -18,11 +18,6 @@ AttributeWidget::AttributeWidget(bool is_primary, QWidget* parent) :
 	if (!m_is_primary) hide();
 }
 
-QList<QString>& AttributeWidget::customize_states()
-{
-	return m_customize_states;
-}
-
 void AttributeWidget::enable_secondary_background_color(bool cond)
 {
 	set_stateless_attribute_value("using_secondary_background_color", cond);
@@ -33,11 +28,6 @@ bool AttributeWidget::is_primary() const
 	return m_is_primary;
 }
 
-void AttributeWidget::set_customize_states(const QList<QString>& customize_states)
-{
-	m_customize_states = customize_states;
-}
-
 void AttributeWidget::set_primary(bool is_primary)
 {
 	if (m_is_primary != is_primary)
@@ -46,16 +36,6 @@ void AttributeWidget::set_primary(bool is_primary)
 
 		if (!m_is_primary) hide();
 	}
-}
-
-StatefulAttribute* AttributeWidget::stateful_attribute() const
-{
-	return m_stateful_attribute;
-}
-
-StatelessAttribute* AttributeWidget::stateless_attribute() const
-{
-	return m_stateless_attribute;
 }
 
 void AttributeWidget::init_attributes()
@@ -196,14 +176,4 @@ void AttributeWidget::paintEvent(QPaintEvent * event)
 	}
 
 	painter.end();
-}
-
-void AttributeWidget::store_attribute_pointer(Attribute* attribute)
-{
-	m_stateful_attribute = dynamic_cast<StatefulAttribute*>(attribute);
-	m_stateless_attribute = dynamic_cast<StatelessAttribute*>(attribute);
-}
-
-void AttributeWidget::update_customizing_state(const QString& customizing_state)
-{
 }

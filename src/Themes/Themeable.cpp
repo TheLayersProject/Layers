@@ -1,13 +1,12 @@
 #include "../../../include/Attributes.h"
-#include "../../../include/AttributeSharingCombo.h"
 #include "../../../include/AttributeWidgets.h"
 #include "../../../include/CustomizePanel.h"
 #include "../../../include/Graphic.h"
 #include "../../../include/Theme.h"
 #include "../../../include/Themeable.h"
 
+using Layers::Attribute;
 using Layers::AttributeSet;
-using Layers::AttributeSharingCombo;
 using Layers::AttributeWidget;
 using Layers::CustomizePanel;
 using Layers::Graphic;
@@ -23,19 +22,22 @@ Themeable::~Themeable()
 
 	m_name = nullptr;
 	m_proper_name = nullptr;
-
-	while (!attribute_sharing_combos.isEmpty())
-	{
-		delete attribute_sharing_combos.takeLast();
-	}
 }
 
 void Themeable::add_stateless_attribute(const QString& attribute_name, QVariant value)
 {
 	if (!m_attribute_set.contains(attribute_name))
 	{
-		m_attribute_set.add_attribute(StatelessAttribute(attribute_name, value));
-		m_attribute_set.stateless_attribute(attribute_name)->set_parent_themeable(this);
+		StatelessAttribute* stateless_attr = new StatelessAttribute(attribute_name, value);
+
+		m_attribute_set.add_stateless_attribute(stateless_attr);
+		//m_attribute_set.stateless_attribute(attribute_name)->set_parent_themeable(this);
+
+		stateless_attr->connect(stateless_attr, &Attribute::value_changed, [this]
+			{
+				update_theme_dependencies();
+				issue_update();
+			});
 	}
 }
 
@@ -43,9 +45,22 @@ void Themeable::add_stateful_attribute(const QString& attribute_name, QMap<QStri
 {
 	if (!m_attribute_set.contains(attribute_name))
 	{
-		m_attribute_set.add_attribute(StatefulAttribute(attribute_name, state_value_map));
-		m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
+		StatefulAttribute* stateful_attr = new StatefulAttribute(attribute_name, state_value_map);
+
+		m_attribute_set.add_stateful_attribute(stateful_attr);
+		//m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
+
+		stateful_attr->connect(stateful_attr, &Attribute::value_changed, [this]
+			{
+				update_theme_dependencies();
+				issue_update();
+			});
 	}
+}
+
+AttributeSet& Themeable::attribute_set()
+{
+	return m_attribute_set;
 }
 
 CustomizePanel* Themeable::customize_panel() const
@@ -99,11 +114,12 @@ void Themeable::apply_theme(Theme& theme)
 	{
 		if (theme.contains_attributes_for_tag(theme_tag()))
 		{
+			//qDebug() << theme_tag();
+
 			m_attribute_set.copy_values_from(theme.attribute_set(theme_tag()));
 
 			//m_attribute_set = theme.attribute_set(theme_tag());
 
-			share_attributes();
 			update_theme_dependencies();
 		}
 
@@ -136,6 +152,18 @@ void Themeable::remove_child_themeable_reference(Themeable* child_themeable)
 	child_themeable->unassign_prefixes();
 }
 
+void Themeable::replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute)
+{
+	if (m_attribute_set.replace_with_proxy(attribute_name, proxy_attribute))
+	{
+		proxy_attribute->connect(proxy_attribute, &Attribute::value_changed, [this]
+			{
+				update_theme_dependencies();
+				issue_update();
+			});
+	}
+}
+
 void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
 {
 	if (m_attribute_widgets.contains(ACW_name))
@@ -157,7 +185,7 @@ void Themeable::set_functionality_disabled(bool disabled)
 	m_functionality_disabled = disabled;
 }
 
-void Themeable::set_stateful_attribute_value(const QString& state, const QString& attribute_name, QVariant value, bool update)
+void Themeable::set_stateful_attribute_value(const QString& state, const QString& attribute_name, QVariant value) //, bool update)
 {
 	if (m_attribute_set.contains_stateful_attribute(attribute_name))
 	{
@@ -167,26 +195,26 @@ void Themeable::set_stateful_attribute_value(const QString& state, const QString
 		{
 			stateful_attribute->set_value(state, value);
 
-			if (update)
-			{
-				update_theme_dependencies();
-				issue_update();
-			}
+			//if (update)
+			//{
+			//	update_theme_dependencies();
+			//	issue_update();
+			//}
 		}
 	}
 }
 
-void Themeable::set_stateless_attribute_value(const QString& attribute_name, QVariant value, bool update)
+void Themeable::set_stateless_attribute_value(const QString& attribute_name, QVariant value) //, bool update)
 {
 	if (m_attribute_set.contains_stateless_attribute(attribute_name))
 	{
 		m_attribute_set.stateless_attribute(attribute_name)->set_value(value);
 
-		if (update)
-		{
-			update_theme_dependencies();
-			issue_update();
-		}
+		//if (update)
+		//{
+		//	update_theme_dependencies();
+		//	issue_update();
+		//}
 	}
 }
 
@@ -206,6 +234,11 @@ void Themeable::assign_tag_prefixes(QList<QString> parent_prefixes, const QStrin
 	m_tag_prefixes_assigned = true;
 }
 
+Attribute* Themeable::attribute(const QString& attribute_name)
+{
+	return m_attribute_set.attribute(attribute_name);
+}
+
 void Themeable::unassign_prefixes()
 {
 	m_tag_prefixes.clear();
@@ -216,11 +249,6 @@ void Themeable::unassign_prefixes()
 	{
 		child_themeable->unassign_prefixes();
 	}
-}
-
-AttributeSet& Layers::Themeable::attribute_set()
-{
-	return m_attribute_set;
 }
 
 QMap<QString, AttributeWidget*>& Themeable::attribute_widgets()
@@ -241,8 +269,8 @@ void Themeable::convert_attribute_to_stateful(const QString& attribute_name, QMa
 	{
 		m_attribute_set.remove_attribute(attribute_name);
 
-		m_attribute_set.add_attribute(StatefulAttribute(attribute_name, state_value_map));
-		m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
+		m_attribute_set.add_stateful_attribute(new StatefulAttribute(attribute_name, state_value_map));
+		//m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
 	}
 	else qDebug() << "WARNING: Failed to convert attribute to stateful: '" + attribute_name + "' not found in attribute set.";
 }
@@ -352,84 +380,6 @@ QList<QString> Themeable::states() const
 	return m_attribute_set.states();
 }
 
-AttributeSharingCombo* Themeable::take_attribute_sharing_combo(const QString& from_state, const QString& from_attribute, Themeable* to_themeable, const QString& to_state, const QString& to_attribute)
-{
-	for (int i = 0; i < attribute_sharing_combos.size(); i++)
-	{
-		if (attribute_sharing_combos.at(i)->from_themeable() == this &&
-			attribute_sharing_combos.at(i)->from_state() == from_state &&
-			attribute_sharing_combos.at(i)->from_attribute_name() == from_attribute &&
-			attribute_sharing_combos.at(i)->to_themeable() == to_themeable &&
-			attribute_sharing_combos.at(i)->to_state() == to_state &&
-			attribute_sharing_combos.at(i)->to_attribute_name() == to_attribute)
-		{
-			return attribute_sharing_combos.takeAt(i);
-		}
-	}
-
-	return nullptr;
-}
-
-void Themeable::unshare_attribute_with_themeable(
-	StatefulAttribute* from_stateful_attribute, QString from_state,
-	StatefulAttribute* to_stateful_attribute, QString to_state)
-{
-	for (int i = 0; i < attribute_sharing_combos.size(); i++)
-	{
-		if (attribute_sharing_combos.at(i)->from_stateful_attribute() == from_stateful_attribute &&
-			attribute_sharing_combos.at(i)->from_state() == from_state &&
-			attribute_sharing_combos.at(i)->to_stateful_attribute() == to_stateful_attribute &&
-			attribute_sharing_combos.at(i)->to_state() == to_state)
-		{
-			delete attribute_sharing_combos.takeAt(i);
-		}
-	}
-}
-
-void Themeable::unshare_attribute_with_themeable(
-	StatelessAttribute* from_stateless_attribute,
-	StatelessAttribute* to_stateless_attribute)
-{
-	for (int i = 0; i < attribute_sharing_combos.size(); i++)
-	{
-		if (attribute_sharing_combos.at(i)->from_stateless_attribute() == from_stateless_attribute &&
-			attribute_sharing_combos.at(i)->to_stateless_attribute() == to_stateless_attribute)
-		{
-			delete attribute_sharing_combos.takeAt(i);
-		}
-	}
-}
-
-void Themeable::unshare_attribute_with_themeable(
-	StatefulAttribute* from_stateful_attribute, QString from_state,
-	StatelessAttribute* to_stateless_attribute)
-{
-	for (int i = 0; i < attribute_sharing_combos.size(); i++)
-	{
-		if (attribute_sharing_combos.at(i)->from_stateful_attribute() == from_stateful_attribute &&
-			attribute_sharing_combos.at(i)->from_state() == from_state &&
-			attribute_sharing_combos.at(i)->to_stateless_attribute() == to_stateless_attribute)
-		{
-			delete attribute_sharing_combos.takeAt(i);
-		}
-	}
-}
-
-void Themeable::unshare_attribute_with_themeable(
-	StatelessAttribute* from_stateless_attribute,
-	StatefulAttribute* to_stateful_attribute, QString to_state)
-{
-	for (int i = 0; i < attribute_sharing_combos.size(); i++)
-	{
-		if (attribute_sharing_combos.at(i)->from_stateless_attribute() == from_stateless_attribute &&
-			attribute_sharing_combos.at(i)->to_stateful_attribute() == to_stateful_attribute &&
-			attribute_sharing_combos.at(i)->to_state() == to_state)
-		{
-			delete attribute_sharing_combos.takeAt(i);
-		}
-	}
-}
-
 void Themeable::update_theme_dependencies()
 {
 }
@@ -440,97 +390,6 @@ void Themeable::init_attributes()
 
 void Themeable::init_attribute_widgets()
 {
-}
-
-AttributeSharingCombo* Themeable::share_attribute_with_themeable(
-	StatefulAttribute* from_stateful_attribute, QString from_state,
-	StatefulAttribute* to_stateful_attribute, QString to_state,
-	bool obtain_attribute)
-{
-	AttributeSharingCombo* attribute_sharing_combo = new AttributeSharingCombo(
-		from_stateful_attribute, from_state, to_stateful_attribute, to_state);
-
-	attribute_sharing_combos.append(attribute_sharing_combo);
-
-	if (obtain_attribute)
-	{
-		attribute_sharing_combo->obtain_attribute(false);
-	}
-	else attribute_sharing_combo->share_attribute();
-
-	return attribute_sharing_combo;
-}
-
-AttributeSharingCombo* Themeable::share_attribute_with_themeable(
-	StatelessAttribute* from_stateless_attribute,
-	StatelessAttribute* to_stateless_attribute,
-	bool obtain_attribute)
-{
-	AttributeSharingCombo* attribute_sharing_combo = new AttributeSharingCombo(
-		from_stateless_attribute, to_stateless_attribute);
-
-	attribute_sharing_combos.append(attribute_sharing_combo);
-
-	if (obtain_attribute)
-	{
-		attribute_sharing_combo->obtain_attribute(false);
-	}
-	else attribute_sharing_combo->share_attribute();
-
-	return attribute_sharing_combo;
-}
-
-AttributeSharingCombo* Themeable::share_attribute_with_themeable(
-	StatefulAttribute* from_stateful_attribute, QString from_state,
-	StatelessAttribute* to_stateless_attribute,
-	bool obtain_attribute)
-{
-	AttributeSharingCombo* attribute_sharing_combo = new AttributeSharingCombo(
-		from_stateful_attribute, from_state, to_stateless_attribute);
-
-	attribute_sharing_combos.append(attribute_sharing_combo);
-
-	if (obtain_attribute)
-	{
-		attribute_sharing_combo->obtain_attribute(false);
-	}
-	else attribute_sharing_combo->share_attribute();
-
-	return attribute_sharing_combo;
-}
-
-AttributeSharingCombo* Themeable::share_attribute_with_themeable(
-	StatelessAttribute* from_stateless_attribute,
-	StatefulAttribute* to_stateful_attribute, QString to_state,
-	bool obtain_attribute)
-{
-	AttributeSharingCombo* attribute_sharing_combo = new AttributeSharingCombo(
-		from_stateless_attribute, to_stateful_attribute, to_state);
-
-	attribute_sharing_combos.append(attribute_sharing_combo);
-
-	if (obtain_attribute)
-	{
-		attribute_sharing_combo->obtain_attribute(false);
-	}
-	else attribute_sharing_combo->share_attribute();
-
-	return attribute_sharing_combo;
-}
-
-void Themeable::share_attributes()
-{
-	if (!m_shared_attributes)
-	{
-		m_shared_attributes = true;
-
-		for (AttributeSharingCombo* attribute_sharing_combo : attribute_sharing_combos)
-		{
-			attribute_sharing_combo->share_attribute();
-		}
-
-		m_shared_attributes = false;
-	}
 }
 
 QString Themeable::state() const

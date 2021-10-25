@@ -78,7 +78,10 @@ void Titlebar::add_mll(MenuLabelLayer* mll)
 
     m_buttons_container->raise();
 
-    m_control_mll->share_all_attributes_with(mll);
+    mll->replace_all_attributes_with(m_control_mll);
+
+    //m_control_mll->share_all_attributes_with(mll);
+    //m_control_mll->replace_all_attributes_with(mll);
 }
 
 void Titlebar::remove_mlls_past(int index)
@@ -87,7 +90,7 @@ void Titlebar::remove_mlls_past(int index)
     {
         remove_child_themeable_reference(mll_stack.last());
 
-        m_control_mll->unshare_all_attributes_with(mll_stack.last());
+        //m_control_mll->unshare_all_attributes_with(mll_stack.last());
 
         mll_stack.takeLast()->deleteLater();
     }

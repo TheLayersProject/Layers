@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 - Image sequences can now be saved and loaded as a single file
 - Reworked the ScrollArea class to make it themeable
 - Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes
+- The Attribute class now inherits QObject, enabling it to work with signals/slots
+- Attribute value change detection is now possible via the Attribute::value_changed signal
+- AttributeSets now support attribute proxies.  An attribute in the set can be replaced with a proxy attribute from another widget.
+- Between attribute value change detection and attribute proxies, there is no longer a need to support attribute sharing functionality. The AttributeSharingCombo class has been deprecated and removed.
+- Previously, when setting an attribute's value, it would just set the value without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
 
 ### [Layers 2.2.0a] - 2021-09-11
 - Migrated to Qt 6

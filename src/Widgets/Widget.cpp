@@ -144,12 +144,12 @@ bool Widget::eventFilter(QObject* object, QEvent* event)
     if (event->type() == QEvent::Enter)
     {
         if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>())
-            set_stateless_attribute_value("using_background_color_hover", true, true);
+            set_stateless_attribute_value("using_background_color_hover", true); //, true);
     }
     else if (event->type() == QEvent::Leave)
     {
         if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>())
-			set_stateless_attribute_value("using_background_color_hover", false, true);
+            set_stateless_attribute_value("using_background_color_hover", false); // , true);
     }
 
     return false;

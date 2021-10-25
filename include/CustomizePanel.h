@@ -18,6 +18,8 @@ namespace Layers
 
 		void add_element_button(Button* button, int index = -1);
 
+		void apply_theme(Theme&) override;
+
 		void setup_layout();
 
 		void update_attribute_widget_background_colors();

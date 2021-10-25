@@ -23,9 +23,12 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_current_item_label->set_proper_name("Current Item Label");
     m_current_item_label->set_padding(0, 7, 0, 0);
     m_current_item_label->set_name("current_item_label");
-    m_current_item_label->share_attribute_with_themeable(
-		m_current_item_label->attribute_set().stateless_attribute("color"),
-		m_attribute_set.stateless_attribute("line_edit_text_color"));
+
+    //m_current_item_label->share_attribute_with_themeable(
+		//m_current_item_label->attribute_set().stateless_attribute("color"),
+		//m_attribute_set.stateless_attribute("line_edit_text_color"));
+
+    replace_attribute_with_proxy("line_edit_text_color", m_current_item_label->attribute("color"));
 
     m_drop_down->installEventFilter(this);
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);
@@ -77,7 +80,7 @@ void Combobox::add_item(const QString& item)
 		}
 	}
 
-	m_control_combobox_item->share_all_attributes_with(combobox_item);
+    combobox_item->replace_all_attributes_with(m_control_combobox_item);
 
     m_drop_down_layout->addWidget(combobox_item);
 
@@ -125,12 +128,12 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
+    add_stateless_attribute("line_edit_text_color", QColor(Qt::black));
     set_stateless_attribute_value("corner_radius_tl", 10);
     set_stateless_attribute_value("corner_radius_tr", 10);
     set_stateless_attribute_value("corner_radius_bl", 10);
     set_stateless_attribute_value("corner_radius_br", 10);
     set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-    add_stateless_attribute("line_edit_text_color", QColor(Qt::black));
 
     m_drop_down->set_stateless_attribute_value("corner_radius_tl", 10);
     m_drop_down->set_stateless_attribute_value("corner_radius_tr", 10);

@@ -132,7 +132,7 @@ void Window::apply_theme(Theme& theme)
         //m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
     }
 
-	issue_update(); // Is this necessary?
+	issue_update(); // Is this necessary???????????????????????
 }
 
 void Window::assign_tag_prefixes()

@@ -5,8 +5,6 @@
 
 namespace Layers
 {
-	class Themeable;
-
 	/*!
 		Pure abstract base class for Layers attributes.
 
@@ -16,15 +14,20 @@ namespace Layers
 		The functions name(), parent_themeable(), and set_parent_themeable() are defined by
 		this class as they are not expected to be different between subclasses.
 	*/
-	class Attribute
+	class Attribute : public QObject
 	{
+		Q_OBJECT
+
+	signals:
+		void value_changed();
+
 	public:
 		/*!
 			Constructor for the Attribute base class.
 
 			Subclasses are to call this constructor passing along an attribute name string.
 		*/
-		Attribute(const QString& name);
+		Attribute(const QString& name, QObject* parent = 0);
 
 		/*!
 			Returns the name of the attribute.
@@ -32,23 +35,6 @@ namespace Layers
 			@returns Name of attribute
 		*/
 		QString& name();
-
-		/*!
-			Returns pointer to the parent themeable associated with the attribute.
-
-			Attributes stored in themes will not have associated parent themeables so
-			this function will return nullptr for those attributes.
-
-			@returns Pointer to associated parent themeable, if one exists
-		*/
-		Themeable* parent_themeable() const;
-
-		/*!
-			Stores the provided parent themeable pointer.
-
-			@param parent_themeable pointer to store
-		*/
-		void set_parent_themeable(Themeable* parent_themeable);
 
 		/*!
 			Pure virtual function intended to return the attribute value in the form of a QVariant reference.
@@ -59,8 +45,6 @@ namespace Layers
 
 	protected:
 		QString m_name{ "" };
-
-		Themeable* m_parent_themeable{ nullptr };
 	};
 
 	/*!
@@ -82,6 +66,8 @@ namespace Layers
 	*/
 	class StatelessAttribute : public Attribute
 	{
+		Q_OBJECT
+
 	public:
 		StatelessAttribute();
 		StatelessAttribute(const QString& name, QVariant value);
@@ -91,7 +77,7 @@ namespace Layers
 
 			@param value to set
 		*/
-		void set_value(QVariant value);
+		void set_value(QVariant value, bool block_emit = false);
 
 		/*!
 			Returns the value of the attribute
@@ -120,6 +106,8 @@ namespace Layers
 
 	class StatefulAttribute : public Attribute
 	{
+		Q_OBJECT
+
 	public:
 		StatefulAttribute();
 		StatefulAttribute(const QString& name, QMap<QString, QVariant> state_value_map);
@@ -147,9 +135,9 @@ namespace Layers
 			@param state to update value of
 			@param value pair with state
 		*/
-		void set_value(const QString& state, QVariant value);
+		void set_value(const QString& state, QVariant value, bool block_emit = false);
 
-		void set_values(const QMap<QString, QVariant>& values);
+		void set_values(const QMap<QString, QVariant>& values, bool block_emit = false);
 
 		/*!
 			Returns the current state of the attribute.

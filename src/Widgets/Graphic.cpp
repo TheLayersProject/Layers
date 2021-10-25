@@ -171,7 +171,11 @@ void Graphic::update_theme_dependencies()
 		border_thickness + m_image_size.height() + border_thickness);
 
 	if (m_bitmap_label) m_bitmap_label->move(border_thickness, border_thickness);
-	if (m_svg_widget) m_svg_widget->move(border_thickness, border_thickness);
+	if (m_svg_widget)
+	{
+		m_svg_widget->update_theme_dependencies();
+		m_svg_widget->move(border_thickness, border_thickness);
+	}
 	if (m_image_sequence_label) m_image_sequence_label->move(border_thickness, border_thickness);
 }
 

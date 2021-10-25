@@ -30,7 +30,7 @@ void Theme::add_stateful_attribute(const QString& themeable_tag, const QString& 
 	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
 
 	if (!attribute_set.contains(attribute_name))
-		attribute_set.add_attribute(StatefulAttribute(attribute_name, state_value_map));
+		attribute_set.add_stateful_attribute(new StatefulAttribute(attribute_name, state_value_map));
 }
 
 void Theme::add_stateless_attribute(const QString& themeable_tag, const QString& attribute_name, QVariant value)
@@ -41,7 +41,7 @@ void Theme::add_stateless_attribute(const QString& themeable_tag, const QString&
 	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
 
 	if (!attribute_set.contains(attribute_name))
-		attribute_set.add_attribute(StatelessAttribute(attribute_name, value));
+		attribute_set.add_stateless_attribute(new StatelessAttribute(attribute_name, value));
 }
 
 AttributeSet& Theme::attribute_set(const QString& themeable_tag)
@@ -63,13 +63,13 @@ void Theme::consume(Theme&& theme)
 
 		AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
 
-		for (StatelessAttribute& stateless_attribute : theme.attribute_sets()[themeable_tag].stateless_attributes())
-			if (!attribute_set.contains_stateless_attribute(stateless_attribute.name()))
-				attribute_set.add_attribute(stateless_attribute);
+		for (StatelessAttribute* stateless_attribute : theme.attribute_sets()[themeable_tag].stateless_attributes())
+			if (!attribute_set.contains_stateless_attribute(stateless_attribute->name()))
+				attribute_set.add_stateless_attribute(stateless_attribute);
 
-		for (StatefulAttribute& stateful_attribute : theme.attribute_sets()[themeable_tag].stateful_attributes())
-			if (!attribute_set.contains_stateful_attribute(stateful_attribute.name()))
-				attribute_set.add_attribute(stateful_attribute);
+		for (StatefulAttribute* stateful_attribute : theme.attribute_sets()[themeable_tag].stateful_attributes())
+			if (!attribute_set.contains_stateful_attribute(stateful_attribute->name()))
+				attribute_set.add_stateful_attribute(stateful_attribute);
 	}
 }
 

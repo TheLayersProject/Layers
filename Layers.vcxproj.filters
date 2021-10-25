@@ -207,9 +207,6 @@
     <ClCompile Include="src\Application\directories.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\Attributes\AttributeSharingCombo.cpp">
-      <Filter>Source Files\Themes\Attributes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Themes\Attributes\StatefulAttribute.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
@@ -343,18 +340,12 @@
     <QtMoc Include="include\Downloader.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\Attributes.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layouts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Themeable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Attributes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AttributeSharingCombo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Theme.h">
@@ -388,6 +379,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Themeable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

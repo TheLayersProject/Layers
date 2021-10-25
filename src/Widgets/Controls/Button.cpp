@@ -224,9 +224,6 @@ void Button::set_attribute_value(const QString& attribute, QVariant value)
 	Themeable::set_stateless_attribute_value(attribute, value);
 
 	if (attribute == "border_thickness") resize();
-	if (attribute.startsWith("#") ||
-		attribute == "text_color" ||
-		attribute == "text_color_hover") share_attributes();
 }
 
 void Button::set_available_width(int available_width)
@@ -326,6 +323,12 @@ int Button::bottom_padding() const
 	main_layout->getContentsMargins(&left_padding, &top_padding, &right_padding, &bottom_padding);
 
 	return bottom_padding;
+}
+
+void Button::update_theme_dependencies()
+{
+	if (m_graphic) m_graphic->update_theme_dependencies();
+	if (m_graphic_after) m_graphic_after->update_theme_dependencies();
 }
 
 bool Button::eventFilter(QObject* object, QEvent* event)

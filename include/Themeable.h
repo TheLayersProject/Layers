@@ -5,7 +5,6 @@
 
 namespace Layers
 {
-	class AttributeSharingCombo;
 	class AttributeWidget;
 	class CustomizePanel;
 	class Graphic;
@@ -52,16 +51,6 @@ namespace Layers
 		void add_child_themeable_reference(Themeable* child_themeable);
 
 		/*!
-			Adds a new state with a unique set of attributes.
-
-			This function works recursively to add a new state and attribute set to all of the themeables
-			in the caller's hierarchy. The new attribute set is created as a copy of the 'commmon' attribute set. (<-- CHANGE; NOT INTENT!)
-
-			@param state to be added with unique attribute set
-		*/
-		//virtual void add_state(const QString& state);
-
-		/*!
 			Applies the given theme to the caller and its children.
 
 			This function works recursively to apply the given theme to the caller and children in the
@@ -86,6 +75,8 @@ namespace Layers
 		*/
 		void assign_tag_prefixes(QList<QString> parent_prefixes = QList<QString>(), const QString& parent_name = "");
 
+		Attribute* attribute(const QString& attribute_name);
+
 		/*!
 			Get a reference to the attribute set of the given state.
 
@@ -101,8 +92,6 @@ namespace Layers
 		void convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		void copy_attribute_values_to(Theme* theme);
-
-		//void copy_all_attributes_to_theme(Theme& theme);
 
 		/*!
 			Gets the address of the currently applied theme. Returns nullptr if no theme has been applied.
@@ -152,8 +141,6 @@ namespace Layers
 		*/
 		virtual void issue_update() = 0;
 
-		//void make_attribute_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
-
 		/*!
 			Get the address of the proper name. Returns nullptr if no proper name has been set.
 
@@ -175,6 +162,8 @@ namespace Layers
 		*/
 		void remove_child_themeable_reference(Themeable* child_themeable);
 
+		void replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute);
+
 		void set_ACW_primary(const QString& ACW_name, bool is_primary);
 
 		void set_is_app_themeable(bool is_app_themeable);
@@ -184,13 +173,13 @@ namespace Layers
 		void set_stateful_attribute_value(
 			const QString& state,
 			const QString& attribute_name,
-			QVariant value,
-			bool update = false); // IF-FAIL: Try setting to true?
+			QVariant value); //,
+			//bool update = false); // IF-FAIL: Try setting to true?
 
 		void set_stateless_attribute_value(
 			const QString& attribute_name,
-			QVariant value,
-			bool update = false);
+			QVariant value); //,
+			//bool update = false);
 
 		/*!
 			Sets a value for an attribute in an attribute set
@@ -242,63 +231,8 @@ namespace Layers
 		*/
 		virtual void set_state(const QString& state);
 
-		/*!
-			Shares all attributes with another themeable.
-
-			This function only works if the themeable argument is the same type as the calling themeable.
-		*/
 		template<typename T>
-		void share_all_attributes_with(T* themeable);
-
-		/*!
-			Establishes an attribute-value sharing relationship with another themeable.
-
-			@param from_state The state of the attribute set of the from_attribute
-			@param from_attribute The attribute to share with the to_themeable
-			@param to_themeable The themeable to share the attribute with
-			@param to_state The state of the attribute set of the to_attribute
-			@param to_attribute The attribute of the to_themeable to store the incoming from_attribute value
-			@param obtain_attribute Whether or not to obtain the value of the to_themeable, false by default
-			@returns the address of the new attribute sharing combo
-		*/
-		//AttributeSharingCombo* share_attribute_with_themeable(
-		//	const QString& from_state, const QString& from_attribute,
-		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = "",
-		//	bool obtain_attribute = false
-		//);
-
-		AttributeSharingCombo* share_attribute_with_themeable(
-			StatefulAttribute* from_stateful_attribute, QString from_state,
-			StatefulAttribute* to_stateful_attribute, QString to_state,
-			bool obtain_attribute = false
-		);
-
-		AttributeSharingCombo* share_attribute_with_themeable(
-			StatelessAttribute* from_stateless_attribute,
-			StatelessAttribute* to_stateless_attribute,
-			bool obtain_attribute = false
-		);
-
-		AttributeSharingCombo* share_attribute_with_themeable(
-			StatefulAttribute* from_stateful_attribute, QString from_state,
-			StatelessAttribute* to_stateless_attribute,
-			bool obtain_attribute = false
-		);
-
-		AttributeSharingCombo* share_attribute_with_themeable(
-			StatelessAttribute* from_stateless_attribute,
-			StatefulAttribute* to_stateful_attribute, QString to_state,
-			bool obtain_attribute = false
-		);
-
-		/*!
-			Shares attributes with themeables according to established sharing relationships.
-
-			Attribute sharing relationships are established with share_attribute_with_themeable(). While the
-			from-attribute value is copied over at that time, changes to the from-attribute will not update to
-			the to-attribute until this function is called.
-		*/
-		void share_attributes();
+		void replace_all_attributes_with(T* themeable);
 
 		QString state() const;
 
@@ -316,22 +250,6 @@ namespace Layers
 			@returns List of states that identify attribute sets
 		*/
 		QList<QString> states() const;
-
-		/*!
-			Removes and returns the address of the attribute sharing combo that is formed with the given parameters.
-
-			The caller becomes responsible for the resource pointed to by the returned address!
-
-			@param from_state
-			@param from_attribute
-			@param to_themeable
-			@param to_state
-			@param to_attribute
-		*/
-		AttributeSharingCombo* take_attribute_sharing_combo(
-			const QString& from_state, const QString& from_attribute,
-			Themeable* to_themeable, const QString& to_state, const QString& to_attribute
-		);
 
 		/*!
 			Get the theme tag.
@@ -365,47 +283,6 @@ namespace Layers
 			@param attribute to stop filtering
 		*/
 		void unfilter_attribute(const QString& attribute);
-
-		/*!
-			Break all sharing relationships with another themeable.
-
-			This function only works if the themeable argument is the same type as the calling themeable.
-		*/
-		template<typename T>
-		void unshare_all_attributes_with(T* themeable);
-
-		/*!
-			Break a sharing relationship with another themeable
-
-			@param from_attribute - The attribute to unshare with the to_themeable
-			@param to_themeable - The themeable to unshare the attribute with
-			@param from_state - The state of the attribute set of the from_attribute
-			@param to_state - The state of the attribute set of the to_attribute
-		*/
-		//void unshare_attribute_with_themeable(
-		//	const QString& from_state, const QString& from_attribute,
-		//	Themeable* to_themeable, QString to_state = "", QString to_attribute = ""
-		//);
-
-		//void unshare_attribute_with_themeable(
-		//	StatelessAttribute& from_attribute, StatelessAttribute& to_attribute,
-		//	QString from_state = "", QString to_state = "");
-
-		void unshare_attribute_with_themeable(
-			StatefulAttribute* from_stateful_attribute, QString from_state,
-			StatefulAttribute* to_stateful_attribute, QString to_state);
-
-		void unshare_attribute_with_themeable(
-			StatelessAttribute* from_stateless_attribute,
-			StatelessAttribute* to_stateless_attribute);
-
-		void unshare_attribute_with_themeable(
-			StatefulAttribute* from_stateful_attribute, QString from_state,
-			StatelessAttribute* to_stateless_attribute);
-
-		void unshare_attribute_with_themeable(
-			StatelessAttribute* from_stateless_attribute,
-			StatefulAttribute* to_stateful_attribute, QString to_state);
 
 		/*!
 			Updates things that depend on the theme. Called by apply_theme().
@@ -480,61 +357,21 @@ namespace Layers
 		QList<QString> m_filtered_attributes;
 		QList<QString> m_tag_prefixes;
 
-		QList<AttributeSharingCombo*> attribute_sharing_combos;
-
 		Theme* m_current_theme{ nullptr };
 	};
 
 	template<typename T>
-	inline void Themeable::share_all_attributes_with(T* themeable)
+	inline void Themeable::replace_all_attributes_with(T* themeable)
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (StatelessAttribute& stateless_attribute : m_attribute_set.stateless_attributes())
-				share_attribute_with_themeable(
-					&stateless_attribute,
-					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
+			m_attribute_set.replace_all_with(themeable->attribute_set());
 
-			for (StatefulAttribute& stateful_attribute : m_attribute_set.stateful_attributes())
-				for (const QString& state : stateful_attribute.states())
-					share_attribute_with_themeable(
-						&stateful_attribute, state,
-						themeable->attribute_set().stateful_attribute(stateful_attribute.name()), state);
-
-			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
-			{
-				for (int i = 0; i < m_child_themeable_references.count(); i++)
-				{
-					m_child_themeable_references[i]->share_all_attributes_with(themeable->m_child_themeable_references[i]);
-				}
-			}
-		}
-	}
-
-	template<typename T>
-	inline void Themeable::unshare_all_attributes_with(T* themeable)
-	{
-		if (typeid(*this) == typeid(*themeable))
-		{
-			for (StatelessAttribute& stateless_attribute : m_attribute_set.stateless_attributes())
-				unshare_attribute_with_themeable(
-					&stateless_attribute,
-					themeable->attribute_set().stateless_attribute(stateless_attribute.name()));
-
-			for (StatefulAttribute& stateful_attribute : m_attribute_set.stateful_attributes())
-				for (const QString& state : stateful_attribute.states())
-					unshare_attribute_with_themeable(
-						&stateful_attribute, state,
-						themeable->attribute_set().stateful_attribute(stateful_attribute.name()), state);
-
-
-			if (m_child_themeable_references.count() == themeable->m_child_themeable_references.count())
-			{
-				for (int i = 0; i < m_child_themeable_references.count(); i++)
-				{
-					m_child_themeable_references[i]->unshare_all_attributes_with(themeable->m_child_themeable_references[i]);
-				}
-			}
+			for (Themeable* this_child_themeable : m_child_themeable_references)
+				if (this_child_themeable->m_name)
+					for (Themeable* child_themeable : themeable->m_child_themeable_references)
+						if (*child_themeable->m_name == *this_child_themeable->m_name)
+							this_child_themeable->replace_all_attributes_with(child_themeable);
 		}
 	}
 }

@@ -44,8 +44,7 @@ SwitchAttributeWidget::SwitchAttributeWidget(
 			m_second_attribute_widget->show();
 
 			m_control_attribute->set_value(false);
-			m_control_attribute->parent_themeable()->share_attributes();
-			m_control_attribute->parent_themeable()->issue_update();
+			//m_control_attribute->parent_themeable()->issue_update();
 		}
 		else
 		{
@@ -55,8 +54,7 @@ SwitchAttributeWidget::SwitchAttributeWidget(
 			m_second_attribute_widget->hide();
 
 			m_control_attribute->set_value(true);
-			m_control_attribute->parent_themeable()->share_attributes();
-			m_control_attribute->parent_themeable()->issue_update();
+			//m_control_attribute->parent_themeable()->issue_update();
 		}
 	});
 
@@ -67,8 +65,7 @@ SwitchAttributeWidget::SwitchAttributeWidget(
 		m_first_attribute_widget->hide();
 
 		m_control_attribute->set_value(false);
-		m_control_attribute->parent_themeable()->share_attributes();
-		m_control_attribute->parent_themeable()->issue_update();
+		//m_control_attribute->parent_themeable()->issue_update();
 	}
 	else
 	{
@@ -77,8 +74,7 @@ SwitchAttributeWidget::SwitchAttributeWidget(
 		m_second_attribute_widget->hide();
 
 		m_control_attribute->set_value(true);
-		m_control_attribute->parent_themeable()->share_attributes();
-		m_control_attribute->parent_themeable()->issue_update();
+		//m_control_attribute->parent_themeable()->issue_update();
 	}
 }
 

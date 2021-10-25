@@ -47,8 +47,10 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	m_theme_info_button->set_proper_name("Theme Info Button");
 	m_theme_info_button->disable_graphic_hover_color();
 
+	m_separator_1->replace_all_attributes_with(m_control_separator);
 	m_separator_1->setFixedSize(1, 30);
 
+	m_separator_2->replace_all_attributes_with(m_control_separator);
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
@@ -58,8 +60,6 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	m_control_separator->set_name("separator");
 	m_control_separator->set_proper_name("Separators");
 	m_control_separator->setFixedSize(1, 30);
-	m_control_separator->share_all_attributes_with(m_separator_1);
-	m_control_separator->share_all_attributes_with(m_separator_2);
 	m_control_separator->set_ACW_primary("border_awc", false);
 	m_control_separator->set_ACW_primary("hover_background_caw", false);
 	m_control_separator->set_ACW_primary("outline_caw", false);

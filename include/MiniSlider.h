@@ -12,8 +12,13 @@ namespace Layers
 	public:
 		MiniSlider(int limit, QWidget* parent = nullptr);
 
+		void set_attribute(Attribute* attribute);
+
 		void update_handle_pos();
 		void update_theme_dependencies();
+
+	public slots:
+		void set_current_editting_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
@@ -26,6 +31,14 @@ namespace Layers
 
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
+
+		StatefulAttribute* m_stateful_attribute{ nullptr };
+
+		StatelessAttribute* m_stateless_attribute{ nullptr };
+
+		QString m_current_editting_state{ "" };
+
+		QList<QString> m_attribute_states{ QList<QString>() };
 
 		int m_limit{ 99 };
 		int m_mouse_move_scale{ 5 };

@@ -59,11 +59,11 @@ void AttributeWidgetContainer::add_attribute_widget(AttributeWidget* attribute_w
 
 	if (m_collapsed) attribute_widget->hide();
 
-	if (m_customize_states.isEmpty())
-	{
-		if (attribute_widget->stateful_attribute())
-			set_customize_states(attribute_widget->stateful_attribute()->states());
-	}
+	//if (m_customize_states.isEmpty())
+	//{
+	//	if (attribute_widget->stateful_attribute())
+	//		set_customize_states(attribute_widget->stateful_attribute()->states());
+	//}
 }
 
 void AttributeWidgetContainer::enable_secondary_background_color(bool cond)
@@ -92,24 +92,6 @@ void AttributeWidgetContainer::init_child_themeable_reference_list()
 {
 	add_child_themeable_reference(m_label);
 	add_child_themeable_reference(m_collapse_button);
-}
-
-void AttributeWidgetContainer::set_customize_states(const QList<QString>& customize_states)
-{
-	m_customize_states = customize_states;
-
-	for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
-	{
-		attribute_widget->set_customize_states(customize_states);
-	}
-}
-
-void AttributeWidgetContainer::update_customizing_state(const QString& customizing_state)
-{
-	for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
-	{
-		attribute_widget->update_customizing_state(customizing_state);
-	}
 }
 
 void AttributeWidgetContainer::setup_layout()

@@ -24,17 +24,19 @@ MiniSlider::MiniSlider(int limit, QWidget* parent) :
 	m_handle->setFixedSize(5, 13);
 	m_handle->set_name("handle");
 
+	connect(m_attribute_set.stateless_attribute("value"), &Attribute::value_changed, [this] { update_handle_pos(); });
+
 	setup_layout();
 }
 
 void MiniSlider::init_attributes()
 {
+	add_stateless_attribute("value", 0);
 	set_stateless_attribute_value("background_disabled", false);
 	set_stateless_attribute_value("corner_radius_tl", 5); // Need to check these values
 	set_stateless_attribute_value("corner_radius_tr", 5);
 	set_stateless_attribute_value("corner_radius_bl", 5);
 	set_stateless_attribute_value("corner_radius_br", 5);
-	add_stateless_attribute("value", 0);
 
 	m_bar->set_stateless_attribute_value("corner_radius_tl", 2);
 	m_bar->set_stateless_attribute_value("corner_radius_tr", 2);
@@ -60,6 +62,41 @@ void MiniSlider::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_handle);
 }
 
+void MiniSlider::set_attribute(Attribute* attribute)
+{
+	m_stateful_attribute = dynamic_cast<StatefulAttribute*>(attribute);
+	m_stateless_attribute = dynamic_cast<StatelessAttribute*>(attribute);
+
+	if (m_stateless_attribute)
+	{
+		connect(m_stateless_attribute, &Attribute::value_changed, [this]
+			{
+				set_stateless_attribute_value("value", m_stateless_attribute->value());
+			});
+
+		connect(m_attribute_set.stateless_attribute("value"), &Attribute::value_changed, [this]
+			{
+				m_stateless_attribute->set_value(m_attribute_set.stateless_attribute("value")->value(), true);
+			});
+	}
+	else if (m_stateful_attribute)
+	{
+		m_attribute_states = m_stateful_attribute->states();
+
+		m_current_editting_state = m_attribute_states.first();
+
+		connect(m_stateful_attribute, &Attribute::value_changed, [this]
+			{
+				set_stateless_attribute_value("value", *m_stateful_attribute->value(m_current_editting_state));
+			});
+
+		connect(m_attribute_set.stateless_attribute("value"), &Attribute::value_changed, [this]
+			{
+				m_stateful_attribute->set_value(m_current_editting_state, m_attribute_set.stateless_attribute("value")->value(), true);
+			});
+	}
+}
+
 void MiniSlider::update_handle_pos()
 {
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
@@ -71,6 +108,18 @@ void MiniSlider::update_handle_pos()
 void MiniSlider::update_theme_dependencies()
 {
 	update_handle_pos();
+}
+
+void MiniSlider::set_current_editting_state(const QString& state)
+{
+	if (m_attribute_states.contains(state) && m_current_editting_state != state)
+	{
+		m_current_editting_state = state;
+
+		set_stateless_attribute_value("value", *m_stateful_attribute->value(m_current_editting_state));
+
+		//update_handle_pos();
+	}
 }
 
 bool MiniSlider::eventFilter(QObject* object, QEvent* event)
@@ -120,27 +169,15 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			if (new_value < 0)
 			{
 				if (m_attribute_set.attribute_value("value")->value<int>() != 0)
-				{
 					set_stateless_attribute_value("value", 0);
-					update_handle_pos();
-					share_attributes();
-				}
 			}
 			else if (new_value > m_limit)
 			{
 				if (m_attribute_set.attribute_value("value")->value<int>() != m_limit)
-				{
 					set_stateless_attribute_value("value", m_limit);
-					update_handle_pos();
-					share_attributes();
-				}
 			}
 			else
-			{
 				set_stateless_attribute_value("value", new_value);
-				update_handle_pos();
-				share_attributes();
-			}
 		}
 	}
 

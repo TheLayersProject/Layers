@@ -29,8 +29,8 @@ Slider::Slider(int limit, QWidget* parent) :
 
 void Slider::init_attributes()
 {
-	set_stateless_attribute_value("background_disabled", true);
 	add_stateless_attribute("value", 0);
+	set_stateless_attribute_value("background_disabled", true);
 
 	m_bar->set_stateless_attribute_value("corner_radius_tl", 2);
 	m_bar->set_stateless_attribute_value("corner_radius_tr", 2);
@@ -53,7 +53,6 @@ void Slider::set_value(int value)
 {
 	set_stateless_attribute_value("value", value);
 	update_handle_pos();
-	share_attributes();
 
 	emit value_changed(value);
 }

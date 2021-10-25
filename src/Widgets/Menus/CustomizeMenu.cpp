@@ -18,6 +18,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	ccp_widget->set_proper_name("Widget");
 
 	m_control_customize_panel = new CustomizePanel(ccp_widget);
+	m_control_customize_panel->set_proper_name("Customize Panels");
 
 	init_child_themeable_reference_list();
 
@@ -45,8 +46,6 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_control_arrow_graphic->set_name("arrow_graphic");
 	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
-
-	m_control_customize_panel->set_proper_name("Customize Panels");
 
 	m_control_text_button->set_name("text_button");
 	m_control_text_button->set_proper_name("Text Buttons");
@@ -113,13 +112,13 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
 	m_sidebar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-	m_sidebar->share_attribute_with_themeable(m_sidebar->attribute_set().stateless_attribute("background_color"), m_preview_frame->attribute_set().stateless_attribute("corner_color"));
 	m_sidebar->set_ACW_primary("border_awc", false);
 	m_sidebar->set_ACW_primary("hover_background_caw", false);
 	m_sidebar->set_ACW_primary("outline_caw", false);
 	m_sidebar->set_ACW_primary("corner_color_caw", false);
 	m_sidebar->set_ACW_primary("corner_radii_awc", false);
 
+	m_preview_frame->replace_attribute_with_proxy("corner_color", m_sidebar->attribute("background_color"));
 	m_preview_frame->set_stateless_attribute_value("corner_radius_tl", 10);
 	m_preview_frame->set_stateless_attribute_value("corner_color_disabled", false);
 
@@ -182,12 +181,12 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		{
 			m_panel_stack.last()->hide();
 
-			m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
+			//m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
 
 			while (m_panel_stack.last() != customize_panel)
 			{
 				remove_child_themeable_reference(m_text_button_stack.last());
-				m_control_text_button->unshare_all_attributes_with(m_text_button_stack.last());
+				//m_control_text_button->unshare_all_attributes_with(m_text_button_stack.last());
 
 				for (Button* text_button : m_topbar_text_buttons)
 					if (text_button == m_text_button_stack.last())
@@ -202,12 +201,12 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 				if (!m_arrow_graphics.isEmpty())
 				{
 					remove_child_themeable_reference(m_arrow_graphics.last());
-					m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.last());
+					//m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.last());
 					m_arrow_graphics.takeLast()->deleteLater();
 				}
 			}
 
-			m_control_customize_panel->share_all_attributes_with(customize_panel);
+			//customize_panel->replace_all_attributes_with(m_control_customize_panel);
 
 			customize_panel->show();
 
@@ -226,7 +225,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		{
 			m_panel_stack.last()->hide();
 
-			m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
+			//m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
 		}
 
 		// Setup Button
@@ -248,7 +247,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		m_text_button_stack.append(text_button);
 		m_topbar_text_buttons.append(text_button);
 
-		m_control_text_button->share_all_attributes_with(text_button);
+		//text_button->replace_all_attributes_with(m_control_text_button);
 
 		// Setup Arrow Graphic
 
@@ -263,14 +262,14 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 
 			m_arrow_graphics.append(arrow_graphic);
 
-			m_control_arrow_graphic->share_all_attributes_with(arrow_graphic);
+			//arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, arrow_graphic);
 		}
 
 		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
 
-		m_control_customize_panel->share_all_attributes_with(customize_panel);
+		//customize_panel->replace_all_attributes_with(m_control_customize_panel);
 
 		customize_panel->show();
 
@@ -430,7 +429,7 @@ void CustomizeMenu::collapse_text_buttons()
 			else
 			{
 				remove_child_themeable_reference(m_arrow_graphics.first());
-				m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.first());
+				//m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.first());
 				m_arrow_graphics.takeFirst()->deleteLater();
 			}
 
@@ -490,7 +489,7 @@ void CustomizeMenu::expand_text_buttons()
 
 			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
 
-			m_control_arrow_graphic->share_all_attributes_with(arrow_graphic);
+			//arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(1, text_button);
 

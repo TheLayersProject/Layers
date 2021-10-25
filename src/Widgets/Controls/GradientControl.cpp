@@ -27,6 +27,41 @@ void GradientControl::init_attributes()
     set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
 }
 
+void GradientControl::set_attribute(Attribute* attribute)
+{
+	m_stateful_attribute = dynamic_cast<StatefulAttribute*>(attribute);
+	m_stateless_attribute = dynamic_cast<StatelessAttribute*>(attribute);
+
+	if (m_stateless_attribute)
+	{
+		connect(m_stateless_attribute, &Attribute::value_changed, [this]
+			{
+				set_stateless_attribute_value("background_gradient_stops", m_stateless_attribute->value());
+			});
+	}
+	else if (m_stateful_attribute)
+	{
+		m_attribute_states = m_stateful_attribute->states();
+
+		m_current_editting_state = m_attribute_states.first();
+
+		connect(m_stateful_attribute, &Attribute::value_changed, [this]
+			{
+				set_stateless_attribute_value("background_gradient_stops", *m_stateful_attribute->value(m_current_editting_state));
+			});
+	}
+}
+
+void GradientControl::set_current_editting_state(const QString& state)
+{
+	if (m_attribute_states.contains(state) && m_current_editting_state != state)
+	{
+		m_current_editting_state = state;
+
+		set_stateless_attribute_value("background_gradient_stops", *m_stateful_attribute->value(m_current_editting_state));
+	}
+}
+
 bool GradientControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick)
@@ -35,21 +70,30 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			GradientSelectionDialog gsd(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
+			GradientSelectionDialog* gsd;
 
-			if (m_current_theme) gsd.apply_theme(*m_current_theme);
+			if (m_stateless_attribute)
+				gsd = new GradientSelectionDialog(m_attribute_set.stateless_attribute("background_gradient_stops")->value().value<QGradientStops>());
 
-			static_cast<Window*>(QApplication::activeWindow())->center_dialog(&gsd);
+			else if (m_stateful_attribute)
+				gsd = new GradientSelectionDialog(m_attribute_set.stateful_attribute("background_gradient_stops")->value(m_current_editting_state)->value<QGradientStops>());
 
-			if (gsd.exec())
+			if (m_current_theme) gsd->apply_theme(*m_current_theme);
+
+			static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
+
+			if (gsd->exec())
 			{
-				set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(gsd.gradient_stops()));
+				if (m_stateless_attribute)
+					m_stateless_attribute->set_value(QVariant::fromValue(gsd->gradient_stops()));
+
+				else if (m_stateful_attribute)
+					m_stateful_attribute->set_value(m_current_editting_state, QVariant::fromValue(gsd->gradient_stops()));
 
 				emit gradient_changed();
-
-				// Update widgets that is control shares its background with
-				share_attributes();
 			}
+
+			delete gsd;
 		}
 	}
 

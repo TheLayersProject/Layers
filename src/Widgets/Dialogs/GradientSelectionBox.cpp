@@ -214,7 +214,7 @@ void GradientSelectionDialog::update_gradient()
         else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->attribute_set().attribute_value("background_color")->value<QColor>() });
     }
 
-    m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops), true);
+    m_gradient_widget->set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(m_gradient_stops)); // , true);
 }
 
 void GradientSelectionDialog::update_theme_dependencies()

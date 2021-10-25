@@ -11,9 +11,16 @@ StatelessAttribute::StatelessAttribute(const QString& name, QVariant value) :
 {
 }
 
-void StatelessAttribute::set_value(QVariant value)
+void StatelessAttribute::set_value(QVariant value, bool block_emit)
 {
-	m_value = value;
+	if (m_value != value)
+	{
+		m_value = value;
+
+		emit value_changed();
+	}
+
+	//if (!block_emit) emit value_changed();
 }
 
 QVariant& StatelessAttribute::value()

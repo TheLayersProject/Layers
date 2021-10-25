@@ -301,13 +301,13 @@ void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
 			theme_missing_attributes.add_attribute_set(themeable_tag, light_theme.attribute_set(themeable_tag));
 		else
 		{
-			for (StatelessAttribute& stateless_attribute : light_theme.attribute_sets()[themeable_tag].stateless_attributes())
-				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateless_attribute.name()))
-					theme_missing_attributes.add_stateless_attribute(themeable_tag, stateless_attribute.name(), stateless_attribute.value());
+			for (StatelessAttribute* stateless_attribute : light_theme.attribute_sets()[themeable_tag].stateless_attributes())
+				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateless_attribute->name()))
+					theme_missing_attributes.add_stateless_attribute(themeable_tag, stateless_attribute->name(), stateless_attribute->value());
 
-			for (StatefulAttribute& stateful_attribute : light_theme.attribute_sets()[themeable_tag].stateful_attributes())
-				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateful_attribute.name()))
-					theme_missing_attributes.add_stateful_attribute(themeable_tag, stateful_attribute.name(), stateful_attribute.values());
+			for (StatefulAttribute* stateful_attribute : light_theme.attribute_sets()[themeable_tag].stateful_attributes())
+				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateful_attribute->name()))
+					theme_missing_attributes.add_stateful_attribute(themeable_tag, stateful_attribute->name(), stateful_attribute->values());
 		}
 	}
 }

@@ -59,34 +59,14 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 		m_state_combobox->add_item(state);
 	}
 
-	connect(m_state_combobox, &Combobox::current_item_changed, [this] {
-		for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
-		{
-			attribute_widget->update_customizing_state(m_state_combobox->current_item());
-
-			if (attribute_widget->customize_states().contains(m_state_combobox->current_item()))
-			{
-				if (!attribute_widget->isVisible())
-				{
-					if (!attribute_widget->is_primary() && m_show_all_button->isVisible());
-					else attribute_widget->show();
-				}
-			}
-			else
-			{
-				if (attribute_widget->isVisible()) attribute_widget->hide();
-			}
-		}
-	});
-
 	connect(m_show_all_button, &Button::clicked, [this] {
 		m_showing_primary = false;
 
-		for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
-		{
-			if (attribute_widget->customize_states().contains(m_state_combobox->current_item()))
-				attribute_widget->show();
-		}
+		//for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
+		//{
+		//	if (attribute_widget->customize_states().contains(m_state_combobox->current_item()))
+		//		attribute_widget->show();
+		//}
 
 		for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
 			attribute_widget->show();
@@ -100,11 +80,11 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	connect(m_show_primary_button, &Button::clicked, [this] {
 		m_showing_primary = true;
 
-		for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
-		{
-			if (attribute_widget->customize_states().contains(m_state_combobox->current_item()) && !attribute_widget->is_primary())
-				attribute_widget->hide();
-		}
+		//for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
+		//{
+		//	if (attribute_widget->customize_states().contains(m_state_combobox->current_item()) && !attribute_widget->is_primary())
+		//		attribute_widget->hide();
+		//}
 
 		for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
 			if (!attribute_widget->is_primary()) attribute_widget->hide();
@@ -145,12 +125,28 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 		m_stateful_attribute_widgets.append(attribute_widget);
 		m_stateful_attributes_layout->addWidget(attribute_widget);
 
-		if (!m_state_combobox->items().isEmpty())
-		{
-			attribute_widget->update_customizing_state(m_state_combobox->current_item());
+		if (ColorAttributeWidget* caw = dynamic_cast<ColorAttributeWidget*>(attribute_widget))
+			connect(
+				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+				caw->color_control(), SLOT(set_current_editting_state(const QString&)));
 
-			if (!attribute_widget->customize_states().contains(m_state_combobox->current_item()))
-				attribute_widget->hide();
+		else if (CornerRadiiAttributeWidget* craw = dynamic_cast<CornerRadiiAttributeWidget*>(attribute_widget))
+		{
+			connect(
+				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+				craw->tl_slider(), SLOT(set_current_editting_state(const QString&)));
+
+			connect(
+				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+				craw->tr_slider(), SLOT(set_current_editting_state(const QString&)));
+
+			connect(
+				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+				craw->bl_slider(), SLOT(set_current_editting_state(const QString&)));
+
+			connect(
+				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+				craw->br_slider(), SLOT(set_current_editting_state(const QString&)));
 		}
 	}
 	else
@@ -175,6 +171,10 @@ void CustomizePanel::add_element_button(Button* button, int index)
 
 	if (index == -1) m_element_buttons_layout->addWidget(button);
 	else m_element_buttons_layout->insertWidget(index, button);
+}
+
+void CustomizePanel::apply_theme(Theme&)
+{
 }
 
 void CustomizePanel::init_attributes()

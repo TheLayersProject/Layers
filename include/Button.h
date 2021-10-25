@@ -44,6 +44,8 @@ namespace Layers
 		int right_padding() const;
 		int bottom_padding() const;
 
+		void update_theme_dependencies() override;
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 

@@ -1,4 +1,3 @@
-#include "../../../include/AttributeSharingCombo.h"
 #include "../../../include/AttributeWidgets.h"
 
 using Layers::Attribute;
@@ -9,11 +8,6 @@ GradientAttributeWidget::GradientAttributeWidget(const QString& attribute_label_
 	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(is_primary, parent)
 {
 	init_child_themeable_reference_list();
-
-	store_attribute_pointer(attribute);
-
-	if (m_stateful_attribute)
-		set_customize_states(m_stateful_attribute->states());
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -28,16 +22,7 @@ GradientAttributeWidget::GradientAttributeWidget(const QString& attribute_label_
 	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
 
 	// Setup Color Control
-	if (m_stateful_attribute) // This shares to the attribute's current state; Not sure yet how this should behave with stateful attributes
-		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
-			m_gradient_control->attribute_set().stateless_attribute("background_gradient_stops"),
-			m_stateful_attribute, m_stateful_attribute->state(),
-			true);
-	else
-		m_gradient_control_asc = m_gradient_control->share_attribute_with_themeable(
-			m_gradient_control->attribute_set().stateless_attribute("background_gradient_stops"),
-			m_stateless_attribute,
-			true);
+	m_gradient_control->set_attribute(attribute);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -49,13 +34,6 @@ GradientAttributeWidget::GradientAttributeWidget(const QString& attribute_label_
 	hbox->addWidget(m_gradient_control);
 	hbox->addWidget(m_right_stretch);
 	setLayout(hbox);
-}
-
-void GradientAttributeWidget::apply_theme(Theme& theme)
-{
-	if (m_gradient_control_asc) m_gradient_control_asc->obtain_attribute();
-
-	Themeable::apply_theme(theme);
 }
 
 void GradientAttributeWidget::set_centered(bool centered)

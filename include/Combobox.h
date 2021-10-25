@@ -18,6 +18,8 @@ namespace Layers
 
 		QString item_text();
 
+		void issue_update() override;
+
 		void replace_item_text(const QString& new_item_text);
 
 		void set_font_size(int size);

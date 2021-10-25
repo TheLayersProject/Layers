@@ -117,6 +117,11 @@ QString ComboboxItem::item_text()
 	return m_item_text;
 }
 
+void ComboboxItem::issue_update()
+{
+	repaint();
+}
+
 void ComboboxItem::replace_item_text(const QString& new_item_text)
 {
 	m_item_text = new_item_text;
@@ -146,10 +151,10 @@ void ComboboxItem::setFixedSize(int w, int h)
 bool ComboboxItem::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::Enter)
-		set_stateless_attribute_value("using_background_color_hover", true, true);
+		set_stateless_attribute_value("using_background_color_hover", true); // , true);
 
 	else if (event->type() == QEvent::Leave)
-		set_stateless_attribute_value("using_background_color_hover", false, true);
+		set_stateless_attribute_value("using_background_color_hover", false); // , true);
 
 	return false;
 }

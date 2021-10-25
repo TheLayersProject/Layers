@@ -1,7 +1,7 @@
 #include "../../../include/Attributes.h"
 
 using Layers::StatefulAttribute;
-using Layers::Themeable;
+//using Layers::Themeable;
 
 StatefulAttribute::StatefulAttribute() :
 	m_state{ "" }, Attribute("")
@@ -25,15 +25,22 @@ void StatefulAttribute::set_state(const QString& state)
 	if (m_values.contains(state)) m_state = state;
 }
 
-void StatefulAttribute::set_value(const QString& state, QVariant value)
+void StatefulAttribute::set_value(const QString& state, QVariant value, bool block_emit)
 {
-	if (m_values.contains(state)) m_values[state] = value;
+	if (m_values.contains(state))
+	{
+		m_values[state] = value;
+
+		if (!block_emit) emit value_changed();
+	}
 	else qDebug() << "ERROR: Failed to set attribute value: State does not exist.";
 }
 
-void StatefulAttribute::set_values(const QMap<QString, QVariant>& values)
+void StatefulAttribute::set_values(const QMap<QString, QVariant>& values, bool block_emit)
 {
 	m_values = values;
+
+	if (!block_emit) emit value_changed();
 }
 
 QString StatefulAttribute::state() const

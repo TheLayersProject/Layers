@@ -21,6 +21,11 @@ namespace Layers
 
 		void init_attributes();
 
+		void set_attribute(Attribute* attribute);
+
+	public slots:
+		void set_current_editting_state(const QString& state);
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
 		void paintEvent(QPaintEvent* event);
@@ -28,6 +33,14 @@ namespace Layers
 	private:
 		bool clicking_disabled{ false };
 		bool open_on_release{ false };
+
+		StatefulAttribute* m_stateful_attribute{ nullptr };
+
+		StatelessAttribute* m_stateless_attribute{ nullptr };
+
+		QString m_current_editting_state{ "" };
+
+		QList<QString> m_attribute_states{ QList<QString>() };
 	};
 }
 
