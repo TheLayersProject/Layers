@@ -6,7 +6,7 @@ using Layers::ColorControl;
 using Layers::Theme;
 
 ColorAttributeWidget::ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(is_primary, parent)
+	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(parent)
 {
 	init_child_themeable_reference_list();
 
@@ -16,11 +16,11 @@ ColorAttributeWidget::ColorAttributeWidget(const QString& attribute_label_text, 
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Color Control
 	m_color_control->set_attribute(attribute);
@@ -39,7 +39,7 @@ ColorAttributeWidget::ColorAttributeWidget(const QString& attribute_label_text, 
 
 ColorAttributeWidget::ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, m_disabling_attribute{ disabling_attribute },
-	m_disabled_attribute_toggle{ new ToggleSwitch }, AttributeWidget(is_primary, parent)
+	m_disabled_attribute_toggle{ new ToggleSwitch }, AttributeWidget(parent)
 {
 	init_child_themeable_reference_list();
 
@@ -49,36 +49,29 @@ ColorAttributeWidget::ColorAttributeWidget(const QString& attribute_label_text, 
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Disabling Attribute Toggle
 	m_disabled_attribute_toggle->set_name("toggle");
 
-	StatefulAttribute* stateful_disabling_attribute = dynamic_cast<StatefulAttribute*>(disabling_attribute);
-	StatelessAttribute* stateless_disabling_attribute = dynamic_cast<StatelessAttribute*>(disabling_attribute);
-
-	connect(m_disabled_attribute_toggle, &ToggleSwitch::toggled_event, [this, stateful_disabling_attribute, stateless_disabling_attribute] {
+	connect(m_disabled_attribute_toggle, &ToggleSwitch::toggled_event, [this] {
 		if (m_disabled_attribute_toggle->toggled())
 		{
 			m_color_control->show();
 
-			if (stateful_disabling_attribute)
-				stateful_disabling_attribute->set_value(stateful_disabling_attribute->state(), false);
-			else
-				stateless_disabling_attribute->set_value(false);
+			if (m_disabling_attribute)
+				m_disabling_attribute->set_value(false);
 		}
 		else
 		{
 			m_color_control->hide();
 
-			if (stateful_disabling_attribute)
-				stateful_disabling_attribute->set_value(stateful_disabling_attribute->state(), true);
-			else
-				stateless_disabling_attribute->set_value(true);
+			if (m_disabling_attribute)
+				m_disabling_attribute->set_value(true);
 		}
 	});
 

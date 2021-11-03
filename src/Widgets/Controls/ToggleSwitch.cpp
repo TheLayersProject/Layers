@@ -120,20 +120,20 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 
-	m_square->set_stateless_attribute_value("corner_radius_tl", 2);
-	m_square->set_stateless_attribute_value("corner_radius_tr", 2);
-	m_square->set_stateless_attribute_value("corner_radius_bl", 2);
-	m_square->set_stateless_attribute_value("corner_radius_br", 2);
+	m_square->set_attribute_value("corner_radius_tl", 2);
+	m_square->set_attribute_value("corner_radius_tr", 2);
+	m_square->set_attribute_value("corner_radius_bl", 2);
+	m_square->set_attribute_value("corner_radius_br", 2);
 
-	m_switch->set_stateless_attribute_value("border_thickness", 3);
-	m_switch->set_stateless_attribute_value("corner_radius_tl", 4);
-	m_switch->set_stateless_attribute_value("corner_radius_tr", 4);
-	m_switch->set_stateless_attribute_value("corner_radius_bl", 4);
-	m_switch->set_stateless_attribute_value("corner_radius_br", 4);
+	m_switch->set_attribute_value("border_thickness", 3);
+	m_switch->set_attribute_value("corner_radius_tl", 4);
+	m_switch->set_attribute_value("corner_radius_tr", 4);
+	m_switch->set_attribute_value("corner_radius_bl", 4);
+	m_switch->set_attribute_value("corner_radius_br", 4);
 
-	m_spacer->set_stateless_attribute_value("background_disabled", true);
+	m_spacer->set_attribute_value("background_disabled", true);
 
 	m_switch->convert_attribute_to_stateful("background_color", {
 		{ "Untoggled", QColor(Qt::white) },

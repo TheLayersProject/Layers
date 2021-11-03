@@ -117,8 +117,8 @@ void CreateNewThemeDialog::update_theme_dependencies()
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
-	m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
-	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 }
 
 void CreateNewThemeDialog::init_attributes()
@@ -126,44 +126,44 @@ void CreateNewThemeDialog::init_attributes()
 	QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 	QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
 
-	add_stateless_attribute("background_color", QColor(Qt::white));
-	add_stateless_attribute("background_color_hover", QColor(Qt::white));
-	add_stateless_attribute("background_color_hover_disabled", true);
-	add_stateless_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-	add_stateless_attribute("background_gradient_disabled", true);
-	add_stateless_attribute("using_background_color_hover", false);
-	add_stateless_attribute("background_disabled", false);
-	add_stateless_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	add_stateless_attribute("border_gradient_disabled", true);
-	add_stateless_attribute("border_color", QColor(Qt::black));
-	add_stateless_attribute("border_thickness", 10);
-	add_stateless_attribute("corner_radius_tl", 10);
-	add_stateless_attribute("corner_radius_tr", 10);
-	add_stateless_attribute("corner_radius_bl", 10);
-	add_stateless_attribute("corner_radius_br", 10);
-	add_stateless_attribute("margin_left", 0);
-	add_stateless_attribute("margin_top", 0);
-	add_stateless_attribute("margin_right", 0);
-	add_stateless_attribute("margin_bottom", 0);
-	add_stateless_attribute("corner_color_disabled", true);
-	add_stateless_attribute("corner_color", QColor(Qt::black));
-	add_stateless_attribute("outline_color_disabled", false);
-	add_stateless_attribute("outline_color", QColor(Qt::black));
+	add_attribute("background_color", QColor(Qt::white));
+	add_attribute("background_color_hover", QColor(Qt::white));
+	add_attribute("background_color_hover_disabled", true);
+	add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+	add_attribute("background_gradient_disabled", true);
+	add_attribute("using_background_color_hover", false);
+	add_attribute("background_disabled", false);
+	add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	add_attribute("border_gradient_disabled", true);
+	add_attribute("border_color", QColor(Qt::black));
+	add_attribute("border_thickness", 10);
+	add_attribute("corner_radius_tl", 10);
+	add_attribute("corner_radius_tr", 10);
+	add_attribute("corner_radius_bl", 10);
+	add_attribute("corner_radius_br", 10);
+	add_attribute("margin_left", 0);
+	add_attribute("margin_top", 0);
+	add_attribute("margin_right", 0);
+	add_attribute("margin_bottom", 0);
+	add_attribute("corner_color_disabled", true);
+	add_attribute("corner_color", QColor(Qt::black));
+	add_attribute("outline_color_disabled", false);
+	add_attribute("outline_color", QColor(Qt::black));
 
-	m_titlebar->set_stateless_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
-	m_titlebar->set_stateless_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
 
-	m_start_theme_combobox->set_stateless_attribute_value("corner_radius_tl", 7);
-	m_start_theme_combobox->set_stateless_attribute_value("corner_radius_tr", 7);
-	m_start_theme_combobox->set_stateless_attribute_value("corner_radius_bl", 7);
-	m_start_theme_combobox->set_stateless_attribute_value("corner_radius_br", 7);
+	m_start_theme_combobox->set_attribute_value("corner_radius_tl", 7);
+	m_start_theme_combobox->set_attribute_value("corner_radius_tr", 7);
+	m_start_theme_combobox->set_attribute_value("corner_radius_bl", 7);
+	m_start_theme_combobox->set_attribute_value("corner_radius_br", 7);
 
-	m_theme_name_line_edit->set_stateless_attribute_value("border_thickness", 3);
-	m_theme_name_line_edit->set_stateless_attribute_value("corner_radius_tl", 7);
-	m_theme_name_line_edit->set_stateless_attribute_value("corner_radius_tr", 7);
-	m_theme_name_line_edit->set_stateless_attribute_value("corner_radius_bl", 7);
-	m_theme_name_line_edit->set_stateless_attribute_value("corner_radius_br", 7);
-	m_theme_name_line_edit->set_stateless_attribute_value("left_padding", 10);
+	m_theme_name_line_edit->set_attribute_value("border_thickness", 3);
+	m_theme_name_line_edit->set_attribute_value("corner_radius_tl", 7);
+	m_theme_name_line_edit->set_attribute_value("corner_radius_tr", 7);
+	m_theme_name_line_edit->set_attribute_value("corner_radius_bl", 7);
+	m_theme_name_line_edit->set_attribute_value("corner_radius_br", 7);
+	m_theme_name_line_edit->set_attribute_value("left_padding", 10);
 }
 
 void CreateNewThemeDialog::init_child_themeable_reference_list()

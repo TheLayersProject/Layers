@@ -7,11 +7,9 @@ using Layers::NumberAttributeWidget;
 using Layers::Theme;
 
 NumberAttributeWidget::NumberAttributeWidget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, m_int_validator{ int_validator }, AttributeWidget(is_primary, parent)
+	m_attribute_label{ new Label(attribute_label_text) }, m_int_validator{ int_validator }, AttributeWidget(parent)
 {
 	init_child_themeable_reference_list();
-
-	//store_attribute_pointer(attribute);
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -19,11 +17,11 @@ NumberAttributeWidget::NumberAttributeWidget(const QString& attribute_label_text
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Line Editor
 	m_line_editor->set_default_value("0");

@@ -7,16 +7,14 @@ using Layers::MiniSlider;
 using Layers::Theme;
 
 CornerRadiiAttributeWidget::CornerRadiiAttributeWidget(Themeable* themeable, bool is_primary, QWidget* parent) :
-	m_attribute_widget{ new AttributeWidget(is_primary) }, AttributeWidgetContainer("Corner Radii", is_primary, parent)
+	m_attribute_widget{ new AttributeWidget }, AttributeWidgetContainer("Corner Radii", is_primary, parent)
 {
 	init_child_themeable_reference_list();
-
-	//store_attribute_pointer(themeable->attribute("corner_radius_tl"));
 
 	add_attribute_widget(m_attribute_widget);
 
 	m_attribute_widget->setFixedSize(260, 177);
-	m_attribute_widget->set_stateless_attribute_value("background_disabled", true);
+	m_attribute_widget->set_attribute_value("background_disabled", true);
 
 	m_tl_line_editor->set_default_value("0");
 	m_tl_line_editor->set_font_size(13);

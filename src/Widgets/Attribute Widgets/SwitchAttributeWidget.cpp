@@ -1,16 +1,16 @@
 #include "../../../include/AttributeWidgets.h"
 
-using Layers::StatelessAttribute;
+using Layers::Attribute;
 using Layers::SwitchAttributeWidget;
 using Layers::Theme;
 
 SwitchAttributeWidget::SwitchAttributeWidget(
 	const QString& first_label_text, AttributeWidget* first_attribute_widget,
 	const QString& second_label_text, AttributeWidget* second_attribute_widget,
-	StatelessAttribute* control_attribute, bool is_primary, QWidget* parent) :
+	Attribute* control_attribute, bool is_primary, QWidget* parent) :
 	m_labeled_toggle_switch{ new ToggleSwitch(first_label_text, second_label_text) },
 	m_first_attribute_widget{ first_attribute_widget }, m_second_attribute_widget{ second_attribute_widget },
-	m_control_attribute{ control_attribute }, AttributeWidget(is_primary, parent)
+	m_control_attribute{ control_attribute }, AttributeWidget(parent)
 {
 	setFixedHeight(45 + first_attribute_widget->height());
 

@@ -116,10 +116,13 @@
     <ClCompile Include="src\Old\2.1.0a\Stateful_Attribute_2_1_0_a.cpp" />
     <ClCompile Include="src\Old\2.1.0a\Stateless_Attribute_2_1_0_a.cpp" />
     <ClCompile Include="src\Old\2.1.0a\Theme_2_1_0_a.cpp" />
+    <ClCompile Include="src\Old\2.2.0a\Attribute_2_2_0_a.cpp" />
+    <ClCompile Include="src\Old\2.2.0a\Attribute_Set_2_2_0_a.cpp" />
+    <ClCompile Include="src\Old\2.2.0a\Stateful_Attribute_2_2_0_a.cpp" />
+    <ClCompile Include="src\Old\2.2.0a\Stateless_Attribute_2_2_0_a.cpp" />
+    <ClCompile Include="src\Old\2.2.0a\Theme_2_2_0_a.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeSet.cpp" />
-    <ClCompile Include="src\Themes\Attributes\StatefulAttribute.cpp" />
-    <ClCompile Include="src\Themes\Attributes\StatelessAttribute.cpp" />
     <ClCompile Include="src\Themes\build_themes.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
@@ -185,7 +188,7 @@
     <ClInclude Include="include\theme_loading.h" />
     <ClInclude Include="include\theme_updating.h" />
     <QtMoc Include="include\Application.h" />
-    <QtMoc Include="include\Attributes.h" />
+    <QtMoc Include="include\Attribute.h" />
     <ClInclude Include="include\AttributeSet.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />

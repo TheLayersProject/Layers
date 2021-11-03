@@ -4,12 +4,12 @@ using Layers::Attribute_Set_2_1_0_a;
 using Layers::Stateless_Attribute_2_1_0_a;
 using Layers::Stateful_Attribute_2_1_0_a;
 
-void Attribute_Set_2_1_0_a::add_attribute(Stateless_Attribute_2_1_0_a attribute)
+void Attribute_Set_2_1_0_a::add_stateless_attribute(Stateless_Attribute_2_1_0_a attribute)
 {
 	m_stateless_attributes[attribute.name()] = attribute;
 }
 
-void Attribute_Set_2_1_0_a::add_attribute(Stateful_Attribute_2_1_0_a attribute)
+void Attribute_Set_2_1_0_a::add_stateful_attribute(Stateful_Attribute_2_1_0_a attribute)
 {
 	m_stateful_attributes[attribute.name()] = attribute;
 }

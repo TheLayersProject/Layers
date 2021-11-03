@@ -41,13 +41,13 @@ MenuLabelLayer::MenuLabelLayer(Menu* menu, QWidget* parent) :
 
 void MenuLabelLayer::init_attributes()
 {
-	set_stateless_attribute_value("background_color", QColor("#e6e6e6"));
-	set_stateless_attribute_value("corner_radius_tl", 10);
-	set_stateless_attribute_value("corner_radius_tr", 10);
-	set_stateless_attribute_value("corner_radius_bl", 10);
-	set_stateless_attribute_value("corner_radius_br", 10);
+	set_attribute_value("background_color", QColor("#e6e6e6"));
+	set_attribute_value("corner_radius_tl", 10);
+	set_attribute_value("corner_radius_tr", 10);
+	set_attribute_value("corner_radius_bl", 10);
+	set_attribute_value("corner_radius_br", 10);
 
-	m_stretch_widget->set_stateless_attribute_value("background_disabled", true);
+	m_stretch_widget->set_attribute_value("background_disabled", true);
 }
 
 void MenuLabelLayer::init_child_themeable_reference_list()
@@ -100,10 +100,10 @@ void MenuLabelLayer::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["border_awc"]->set_primary(false);
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["border_awc"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
 }
 
 void MenuLabelLayer::setup_layout()

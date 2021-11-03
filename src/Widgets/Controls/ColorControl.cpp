@@ -18,25 +18,27 @@ void ColorControl::click()
 {
 	QColorDialog dlg;
 
-	if (m_stateless_attribute)
-		dlg.setCurrentColor(m_stateless_attribute->value().value<QColor>());
-
-	else if (m_stateful_attribute)
-		dlg.setCurrentColor(m_stateful_attribute->value(m_current_editting_state)->value<QColor>());
-
+	if (m_attribute)
+	{
+		if (m_attribute->values().isEmpty())
+			dlg.setCurrentColor(m_attribute->value().value<QColor>());
+		else
+			dlg.setCurrentColor(m_attribute->value(m_current_editting_state)->value<QColor>());
+	}
 	else
 		dlg.setCurrentColor(m_attribute_set.attribute_value("background_color")->value<QColor>());
 
 	if (dlg.exec())
 	{
-		if (m_stateless_attribute)
-			m_stateless_attribute->set_value(dlg.currentColor());
-
-		else if (m_stateful_attribute)
-			m_stateful_attribute->set_value(m_current_editting_state, dlg.currentColor());
-
+		if (m_attribute)
+		{
+			if (m_attribute->values().isEmpty())
+				m_attribute->set_value(dlg.currentColor());
+			else
+				m_attribute->set_value(m_current_editting_state, dlg.currentColor());
+		}
 		else
-			set_stateless_attribute_value("background_color", dlg.currentColor());
+			set_attribute_value("background_color", dlg.currentColor());
 
 		emit color_changed();
 	}
@@ -51,35 +53,30 @@ void Layers::ColorControl::disable_clicking(bool cond)
 
 void ColorControl::init_attributes()
 {
-	set_stateless_attribute_value("background_color", QColor(Qt::white));
-	add_stateless_attribute("corner_radius", 5);
-	add_stateless_attribute("outer_border_color", QColor("#2c2c2c"));
-	add_stateless_attribute("inner_border_color", QColor("#d6d6d6"));
+	set_attribute_value("background_color", QColor(Qt::white));
+	add_attribute("corner_radius", 5);
+	add_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_attribute("inner_border_color", QColor("#d6d6d6"));
 }
 
 void ColorControl::set_attribute(Attribute* attribute)
 {
-	m_stateful_attribute = dynamic_cast<StatefulAttribute*>(attribute);
-	m_stateless_attribute = dynamic_cast<StatelessAttribute*>(attribute);
+	m_attribute = attribute;
 
-	if (m_stateless_attribute)
+	if (!m_attribute->states().isEmpty())
 	{
-		connect(m_stateless_attribute, &Attribute::value_changed, [this]
-			{
-				set_stateless_attribute_value("background_color", m_stateless_attribute->value());
-			});
-	}
-	else if (m_stateful_attribute)
-	{
-		m_attribute_states = m_stateful_attribute->states();
+		m_attribute_states = m_attribute->states();
 
 		m_current_editting_state = m_attribute_states.first();
-
-		connect(m_stateful_attribute, &Attribute::value_changed, [this]
-			{
-				set_stateless_attribute_value("background_color", *m_stateful_attribute->value(m_current_editting_state));
-			});
 	}
+
+	connect(m_attribute, &Attribute::value_changed, [this]
+		{
+			if (m_attribute->states().isEmpty())
+				set_attribute_value("background_color", m_attribute->value());
+			else
+				set_attribute_value("background_color", *m_attribute->value(m_current_editting_state));
+		});
 }
 
 void ColorControl::set_current_editting_state(const QString& state)
@@ -88,7 +85,7 @@ void ColorControl::set_current_editting_state(const QString& state)
 	{
 		m_current_editting_state = state;
 
-		set_stateless_attribute_value("background_color", *m_stateful_attribute->value(m_current_editting_state));
+		set_attribute_value("background_color", *m_attribute->value(m_current_editting_state));
 	}
 }
 

@@ -18,24 +18,25 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		AttributeWidget(bool is_primary, QWidget* parent = nullptr);
+		//AttributeWidget(Attribute* linked_attribute, QWidget* parent = nullptr);
+		AttributeWidget(QWidget* parent = nullptr);
 
 		virtual void enable_secondary_background_color(bool cond = true);
 
-		bool is_primary() const;
+		//Attribute* linked_attribute();
 
-		void set_primary(bool is_primary = true);
+		//bool is_primary() const;
+
+		//void set_primary(bool is_primary = true);
 
 	protected:
 		void init_attributes();
 
 		void paintEvent(QPaintEvent* event) override;
 
-		StatefulAttribute* m_stateful_attribute{ nullptr };
-		StatelessAttribute* m_stateless_attribute{ nullptr };
-
 	private:
-		bool m_is_primary;
+		Attribute* m_linked_attribute{ nullptr };
+		//bool m_is_primary;
 	};
 
 	class AttributeWidgetContainer : public AttributeWidget
@@ -200,14 +201,14 @@ namespace Layers
 		SwitchAttributeWidget(
 			const QString& first_label_text, AttributeWidget* first_attribute_widget,
 			const QString& second_label_text, AttributeWidget* second_attribute_widget,
-			StatelessAttribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
+			Attribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
 
 		void apply_theme(Theme& theme);
 
 		void enable_secondary_background_color(bool cond = true);
 
 	private:
-		StatelessAttribute* m_control_attribute;
+		Attribute* m_control_attribute;
 
 		AttributeWidget* m_first_attribute_widget;
 		AttributeWidget* m_second_attribute_widget;

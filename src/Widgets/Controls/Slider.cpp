@@ -29,18 +29,18 @@ Slider::Slider(int limit, QWidget* parent) :
 
 void Slider::init_attributes()
 {
-	add_stateless_attribute("value", 0);
-	set_stateless_attribute_value("background_disabled", true);
+	add_attribute("value", 0);
+	set_attribute_value("background_disabled", true);
 
-	m_bar->set_stateless_attribute_value("corner_radius_tl", 2);
-	m_bar->set_stateless_attribute_value("corner_radius_tr", 2);
-	m_bar->set_stateless_attribute_value("corner_radius_bl", 2);
-	m_bar->set_stateless_attribute_value("corner_radius_br", 2);
+	m_bar->set_attribute_value("corner_radius_tl", 2);
+	m_bar->set_attribute_value("corner_radius_tr", 2);
+	m_bar->set_attribute_value("corner_radius_bl", 2);
+	m_bar->set_attribute_value("corner_radius_br", 2);
 
-	m_handle->set_stateless_attribute_value("corner_radius_tl", 3);
-	m_handle->set_stateless_attribute_value("corner_radius_tr", 3);
-	m_handle->set_stateless_attribute_value("corner_radius_bl", 3);
-	m_handle->set_stateless_attribute_value("corner_radius_br", 3);
+	m_handle->set_attribute_value("corner_radius_tl", 3);
+	m_handle->set_attribute_value("corner_radius_tr", 3);
+	m_handle->set_attribute_value("corner_radius_bl", 3);
+	m_handle->set_attribute_value("corner_radius_br", 3);
 }
 
 void Slider::init_child_themeable_reference_list()
@@ -51,7 +51,7 @@ void Slider::init_child_themeable_reference_list()
 
 void Slider::set_value(int value)
 {
-	set_stateless_attribute_value("value", value);
+	set_attribute_value("value", value);
 	update_handle_pos();
 
 	emit value_changed(value);

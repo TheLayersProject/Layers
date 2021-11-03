@@ -54,22 +54,22 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");
-	m_topbar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-	m_topbar->set_stateless_attribute_value("corner_radius_tr", 10);
-	m_topbar->set_stateless_attribute_value("corner_radius_br", 10);
-	m_topbar->set_ACW_primary("border_awc", false);
-	m_topbar->set_ACW_primary("hover_background_caw", false);
-	m_topbar->set_ACW_primary("outline_caw", false);
-	m_topbar->set_ACW_primary("corner_color_caw", false);
+	m_topbar->set_attribute_value("background_color", QColor(Qt::lightGray));
+	m_topbar->set_attribute_value("corner_radius_tr", 10);
+	m_topbar->set_attribute_value("corner_radius_br", 10);
+	//m_topbar->set_ACW_primary("border_awc", false);
+	//m_topbar->set_ACW_primary("hover_background_caw", false);
+	//m_topbar->set_ACW_primary("outline_caw", false);
+	//m_topbar->set_ACW_primary("corner_color_caw", false);
 
 	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
 	m_apply_button->set_name("apply_button");
 	m_apply_button->set_proper_name("Apply Button");
 	m_apply_button->set_text_padding(3, 5, 0, 0);
-	m_apply_button->set_ACW_primary("border_awc", false);
-	m_apply_button->set_ACW_primary("outline_caw", false);
-	m_apply_button->set_ACW_primary("corner_color_caw", false);
+	//m_apply_button->set_ACW_primary("border_awc", false);
+	//m_apply_button->set_ACW_primary("outline_caw", false);
+	//m_apply_button->set_ACW_primary("corner_color_caw", false);
 
 	connect(m_apply_button, &Button::clicked, [this] {
 		if (m_preview_widget)
@@ -83,17 +83,17 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapsed_button->hide();
 	m_collapsed_button->setFixedWidth(50);
 	m_collapsed_button->disable_graphic_hover_color();
-	m_collapsed_button->set_stateless_attribute_value("background_disabled", false);
-	m_collapsed_button->set_stateless_attribute_value("corner_radius_tl", 5);
-	m_collapsed_button->set_stateless_attribute_value("corner_radius_tr", 5);
-	m_collapsed_button->set_stateless_attribute_value("corner_radius_bl", 5);
-	m_collapsed_button->set_stateless_attribute_value("corner_radius_br", 5);
+	m_collapsed_button->set_attribute_value("background_disabled", false);
+	m_collapsed_button->set_attribute_value("corner_radius_tl", 5);
+	m_collapsed_button->set_attribute_value("corner_radius_tr", 5);
+	m_collapsed_button->set_attribute_value("corner_radius_bl", 5);
+	m_collapsed_button->set_attribute_value("corner_radius_br", 5);
 	m_collapsed_button->set_margin(0, 10, 0, 10);
 	m_collapsed_button->set_name("collapsed_button");
 	m_collapsed_button->set_proper_name("Collapsed Button");
-	m_collapsed_button->set_ACW_primary("border_awc", false);
-	m_collapsed_button->set_ACW_primary("outline_caw", false);
-	m_collapsed_button->set_ACW_primary("corner_color_caw", false);
+	//m_collapsed_button->set_ACW_primary("border_awc", false);
+	//m_collapsed_button->set_ACW_primary("outline_caw", false);
+	//m_collapsed_button->set_ACW_primary("corner_color_caw", false);
 
 	m_collapsed_widget->installEventFilter(this);
 	m_collapsed_widget->setWindowFlags(Qt::FramelessWindowHint);
@@ -101,26 +101,26 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapsed_widget->setMouseTracking(true);
 	m_collapsed_widget->set_name("collapsed_widget");
 	m_collapsed_widget->set_proper_name("Collapsed Text Buttons Dropdown Widget");
-	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tl", 5);
-	m_collapsed_widget->set_stateless_attribute_value("corner_radius_tr", 5);
-	m_collapsed_widget->set_stateless_attribute_value("corner_radius_bl", 5);
-	m_collapsed_widget->set_stateless_attribute_value("corner_radius_br", 5);
+	m_collapsed_widget->set_attribute_value("corner_radius_tl", 5);
+	m_collapsed_widget->set_attribute_value("corner_radius_tr", 5);
+	m_collapsed_widget->set_attribute_value("corner_radius_bl", 5);
+	m_collapsed_widget->set_attribute_value("corner_radius_br", 5);
 
 	m_sidebar->installEventFilter(this);
 	m_sidebar->setFixedWidth(300);
 	m_sidebar->setMouseTracking(true);
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
-	m_sidebar->set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-	m_sidebar->set_ACW_primary("border_awc", false);
-	m_sidebar->set_ACW_primary("hover_background_caw", false);
-	m_sidebar->set_ACW_primary("outline_caw", false);
-	m_sidebar->set_ACW_primary("corner_color_caw", false);
-	m_sidebar->set_ACW_primary("corner_radii_awc", false);
+	m_sidebar->set_attribute_value("background_color", QColor(Qt::lightGray));
+	//m_sidebar->set_ACW_primary("border_awc", false);
+	//m_sidebar->set_ACW_primary("hover_background_caw", false);
+	//m_sidebar->set_ACW_primary("outline_caw", false);
+	//m_sidebar->set_ACW_primary("corner_color_caw", false);
+	//m_sidebar->set_ACW_primary("corner_radii_awc", false);
 
 	m_preview_frame->replace_attribute_with_proxy("corner_color", m_sidebar->attribute("background_color"));
-	m_preview_frame->set_stateless_attribute_value("corner_radius_tl", 10);
-	m_preview_frame->set_stateless_attribute_value("corner_color_disabled", false);
+	m_preview_frame->set_attribute_value("corner_radius_tl", 10);
+	m_preview_frame->set_attribute_value("corner_color_disabled", false);
 
 	setup_layout();
 }
@@ -393,11 +393,11 @@ void CustomizeMenu::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["border_awc"]->set_primary(false);
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
+	//m_attribute_widgets["border_awc"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void CustomizeMenu::adjust_collapsed_widget()
@@ -483,7 +483,7 @@ void CustomizeMenu::expand_text_buttons()
 			arrow_opacity->setOpacity(0.5);
 
 			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
-			arrow_graphic->set_stateless_attribute_value("background_disabled", false); // TODO: TEMP, remove this
+			//arrow_graphic->set_attribute_value("background_disabled", false); // TODO: TEMP, remove this
 			arrow_graphic->setGraphicsEffect(arrow_opacity);
 			arrow_graphic->set_name("arrow_graphic");
 
@@ -526,7 +526,7 @@ void CustomizeMenu::setup_layout()
 
 	m_sidebar->setLayout(m_sidebar_layout);
 
-	m_sidebar_scroll_area->set_stateless_attribute_value("background_disabled", true);
+	m_sidebar_scroll_area->set_attribute_value("background_disabled", true);
 	m_sidebar_scroll_area->setWidget(m_sidebar);
 	m_sidebar_scroll_area->setFixedWidth(m_sidebar->width());
 
@@ -535,10 +535,10 @@ void CustomizeMenu::setup_layout()
 	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
 
-	m_preview_frame->set_stateless_attribute_value("background_disabled", true);
+	m_preview_frame->set_attribute_value("background_disabled", true);
 	m_preview_frame->setLayout(m_preview_layout);
 
-	m_preview_scroll_area->set_stateless_attribute_value("background_disabled", true);
+	m_preview_scroll_area->set_attribute_value("background_disabled", true);
 	m_preview_scroll_area->setWidget(m_preview_frame);
 
 	// Main Vbox

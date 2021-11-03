@@ -68,7 +68,7 @@ void ComboboxItem::init_attribute_widgets()
 		SwitchAttributeWidget* border_color_saw = new SwitchAttributeWidget(
 			"Solid", border_caw,
 			"Gradient", border_gaw,
-			m_attribute_set.stateless_attribute("border_gradient_disabled"), true);
+			m_attribute_set.attribute("border_gradient_disabled"), true);
 
 		border_caw->set_centered();
 		border_gaw->set_centered();
@@ -151,10 +151,10 @@ void ComboboxItem::setFixedSize(int w, int h)
 bool ComboboxItem::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::Enter)
-		set_stateless_attribute_value("using_background_color_hover", true); // , true);
+		set_attribute_value("using_background_color_hover", true);
 
 	else if (event->type() == QEvent::Leave)
-		set_stateless_attribute_value("using_background_color_hover", false); // , true);
+		set_attribute_value("using_background_color_hover", false);
 
 	return false;
 }

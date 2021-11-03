@@ -34,9 +34,7 @@ namespace Layers
 		bool clicking_disabled{ false };
 		bool open_on_release{ false };
 
-		StatefulAttribute* m_stateful_attribute{ nullptr };
-
-		StatelessAttribute* m_stateless_attribute{ nullptr };
+		Attribute* m_attribute{ nullptr };
 
 		QString m_current_editting_state{ "" };
 

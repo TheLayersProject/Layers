@@ -60,24 +60,24 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	m_control_separator->set_name("separator");
 	m_control_separator->set_proper_name("Separators");
 	m_control_separator->setFixedSize(1, 30);
-	m_control_separator->set_ACW_primary("border_awc", false);
-	m_control_separator->set_ACW_primary("hover_background_caw", false);
-	m_control_separator->set_ACW_primary("outline_caw", false);
-	m_control_separator->set_ACW_primary("corner_color_caw", false);
-	m_control_separator->set_ACW_primary("corner_radii_awc", false);
+	//m_control_separator->set_ACW_primary("border_awc", false);
+	//m_control_separator->set_ACW_primary("hover_background_caw", false);
+	//m_control_separator->set_ACW_primary("outline_caw", false);
+	//m_control_separator->set_ACW_primary("corner_color_caw", false);
+	//m_control_separator->set_ACW_primary("corner_radii_awc", false);
 
 	setup_layout();
 }
 
 void ThemesSettingsPanel::init_attributes()
 {
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 
-	m_spacer_1->set_stateless_attribute_value("background_disabled", true);
+	m_spacer_1->set_attribute_value("background_disabled", true);
 
-	m_spacer_2->set_stateless_attribute_value("background_disabled", true);
+	m_spacer_2->set_attribute_value("background_disabled", true);
 
-	m_theme_info_button->graphic()->svg()->set_stateless_attribute_value("use_common_hover_color", false);
+	m_theme_info_button->graphic()->svg()->set_attribute_value("use_common_hover_color", false);
 }
 
 void ThemesSettingsPanel::init_child_themeable_reference_list()
@@ -140,11 +140,11 @@ void ThemesSettingsPanel::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["border_awc"]->set_primary(false);
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
+	//m_attribute_widgets["border_awc"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void ThemesSettingsPanel::setup_layout()

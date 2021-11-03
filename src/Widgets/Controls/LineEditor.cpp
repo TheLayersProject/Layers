@@ -19,7 +19,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
         if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
         else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
         {
-            set_stateless_attribute_value("text", m_line_edit->text());
+            set_attribute_value("text", m_line_edit->text());
         }
         else m_line_edit->setText(m_attribute_set.attribute_value("text")->value<QString>());
 
@@ -31,7 +31,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 
 void LineEditor::reconnect_text_attribute()
 {
-    connect(m_attribute_set.stateless_attribute("text"), &Attribute::value_changed, [this]
+    connect(m_attribute_set.attribute("text"), &Attribute::value_changed, [this]
         {
             QString new_text = m_attribute_set.attribute_value("text")->value<QString>();
 
@@ -41,53 +41,46 @@ void LineEditor::reconnect_text_attribute()
 
 void LineEditor::init_attributes()
 {
-    add_stateless_attribute("left_padding", 3);
-    add_stateless_attribute("text_color", QColor(Qt::black));
-    add_stateless_attribute("text", QString(""));
-    set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
-    set_stateless_attribute_value("corner_radius_tl", 5);
-    set_stateless_attribute_value("corner_radius_tr", 5);
-    set_stateless_attribute_value("corner_radius_bl", 5);
-    set_stateless_attribute_value("corner_radius_br", 5);
+    add_attribute("left_padding", 3);
+    add_attribute("text_color", QColor(Qt::black));
+    add_attribute("text", QString(""));
+    set_attribute_value("background_color", QColor(Qt::lightGray));
+    set_attribute_value("corner_radius_tl", 5);
+    set_attribute_value("corner_radius_tr", 5);
+    set_attribute_value("corner_radius_bl", 5);
+    set_attribute_value("corner_radius_br", 5);
 }
 
 void LineEditor::set_target_attribute(Attribute* target_attribute)
 {
-    m_stateful_attribute = dynamic_cast<StatefulAttribute*>(target_attribute);
-    m_stateless_attribute = dynamic_cast<StatelessAttribute*>(target_attribute);
+    m_attribute = target_attribute;
 
-    if (m_stateless_attribute)
+    if (!m_attribute->states().isEmpty())
     {
-        // When the linked stateless attribute's value changes, update the 'text' attribute
-        connect(m_stateless_attribute, &Attribute::value_changed, [this]
-            {
-                set_stateless_attribute_value("text", m_stateless_attribute->value());
-            });
-
-        // When the 'text' attribute's value changes, update the linked stateless attribute
-        connect(m_attribute_set.stateless_attribute("text"), &Attribute::value_changed, [this]
-            {
-                m_stateless_attribute->set_value(m_attribute_set.stateless_attribute("text")->value());
-            });
-    }
-    else if (m_stateful_attribute)
-    {
-        m_attribute_states = m_stateful_attribute->states();
+        m_attribute_states = m_attribute->states();
 
         m_current_editting_state = m_attribute_states.first();
-
-        // When the linked stateful attribute's value changes, update the 'text' attribute
-        connect(m_stateful_attribute, &Attribute::value_changed, [this]
-            {
-                set_stateless_attribute_value("text", *m_stateful_attribute->value(m_current_editting_state));
-            });
-
-        // When the 'text' attribute's value changes, update the linked stateful attribute
-        connect(m_attribute_set.stateless_attribute("text"), &Attribute::value_changed, [this]
-            {
-                m_stateful_attribute->set_value(m_current_editting_state, m_attribute_set.stateless_attribute("text")->value());
-            });
     }
+
+    // When the linked attribute's value changes, update the 'text' attribute
+    connect(m_attribute, &Attribute::value_changed, [this]
+        {
+            if (m_attribute->states().isEmpty())
+                set_attribute_value("text", m_attribute->value());
+
+            else
+                set_attribute_value("text", *m_attribute->value(m_current_editting_state));
+        });
+
+    // When the 'text' attribute's value changes, update the linked attribute
+    connect(m_attribute_set.attribute("text"), &Attribute::value_changed, [this]
+        {
+            if (m_attribute->states().isEmpty())
+                m_attribute->set_value(m_attribute_set.attribute("text")->value());
+
+            else
+                m_attribute->set_value(m_current_editting_state, m_attribute_set.attribute("text")->value());
+        });
 }
 
 void LineEditor::set_default_value(const QString& default_value)
@@ -131,7 +124,7 @@ void LineEditor::set_text(const QString& text)
 {
     m_line_edit->setText(text);
 
-    set_stateless_attribute_value("text", text);
+    set_attribute_value("text", text);
 }
 
 void LineEditor::set_validator(const QValidator* validator)

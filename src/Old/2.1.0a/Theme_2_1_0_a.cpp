@@ -21,7 +21,7 @@ void Theme_2_1_0_a::add_stateful_attribute(const QString& themeable_tag, const Q
 	Attribute_Set_2_1_0_a& attribute_set = m_attribute_sets[themeable_tag];
 
 	if (!attribute_set.contains(attribute_name))
-		attribute_set.add_attribute(Stateful_Attribute_2_1_0_a(attribute_name, state_value_map));
+		attribute_set.add_stateful_attribute(Stateful_Attribute_2_1_0_a(attribute_name, state_value_map));
 }
 
 void Theme_2_1_0_a::add_stateless_attribute(const QString& themeable_tag, const QString& attribute_name, QVariant value)
@@ -32,7 +32,7 @@ void Theme_2_1_0_a::add_stateless_attribute(const QString& themeable_tag, const 
 	Attribute_Set_2_1_0_a& attribute_set = m_attribute_sets[themeable_tag];
 
 	if (!attribute_set.contains(attribute_name))
-		attribute_set.add_attribute(Stateless_Attribute_2_1_0_a(attribute_name, value));
+		attribute_set.add_stateless_attribute(Stateless_Attribute_2_1_0_a(attribute_name, value));
 }
 
 QHash<QString, Attribute_Set_2_1_0_a>& Theme_2_1_0_a::attribute_sets()

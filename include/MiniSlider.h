@@ -32,9 +32,7 @@ namespace Layers
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
 
-		StatefulAttribute* m_stateful_attribute{ nullptr };
-
-		StatelessAttribute* m_stateless_attribute{ nullptr };
+		Attribute* m_attribute{ nullptr };
 
 		QString m_current_editting_state{ "" };
 

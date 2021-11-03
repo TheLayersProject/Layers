@@ -4,7 +4,7 @@
 using Layers::AttributeWidgetContainer;
 
 AttributeWidgetContainer::AttributeWidgetContainer(const QString& label_text, bool is_primary, QWidget* parent) :
-	m_label{ new Label(label_text) }, AttributeWidget(is_primary, parent)
+	m_label{ new Label(label_text) }, AttributeWidget(parent)
 {
 	init_child_themeable_reference_list();
 	init_attributes();
@@ -85,7 +85,7 @@ void AttributeWidgetContainer::enable_secondary_background_color(bool cond)
 
 void AttributeWidgetContainer::init_attributes()
 {
-	set_stateless_attribute_value("border_thickness", 2);
+	set_attribute_value("border_thickness", 2);
 }
 
 void AttributeWidgetContainer::init_child_themeable_reference_list()

@@ -5,49 +5,63 @@
 
 using Layers::Attribute;
 using Layers::AttributeWidget;
-using Layers::StatefulAttribute;
-using Layers::StatelessAttribute;
 
-AttributeWidget::AttributeWidget(bool is_primary, QWidget* parent) :
-	m_is_primary{ is_primary }, Widget(parent)
+//AttributeWidget::AttributeWidget(Attribute* linked_attribute, QWidget* parent) :
+//	m_linked_attribute{ linked_attribute }, Widget(parent)
+//{
+//	init_attributes();
+//
+//	set_name("attribute_widget");
+//	setFixedHeight(45);
+//
+//	//if (!m_is_primary) hide();
+//}
+
+AttributeWidget::AttributeWidget(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
 	set_name("attribute_widget");
 	setFixedHeight(45);
-	if (!m_is_primary) hide();
+
+	//if (!m_is_primary) hide();
 }
 
 void AttributeWidget::enable_secondary_background_color(bool cond)
 {
-	set_stateless_attribute_value("using_secondary_background_color", cond);
+	set_attribute_value("using_secondary_background_color", cond);
 }
 
-bool AttributeWidget::is_primary() const
-{
-	return m_is_primary;
-}
+//Attribute* AttributeWidget::linked_attribute()
+//{
+//	return m_linked_attribute;
+//}
 
-void AttributeWidget::set_primary(bool is_primary)
-{
-	if (m_is_primary != is_primary)
-	{
-		m_is_primary = is_primary;
-
-		if (!m_is_primary) hide();
-	}
-}
+//bool AttributeWidget::is_primary() const
+//{
+//	return m_is_primary;
+//}
+//
+//void AttributeWidget::set_primary(bool is_primary)
+//{
+//	if (m_is_primary != is_primary)
+//	{
+//		m_is_primary = is_primary;
+//
+//		if (!m_is_primary) hide();
+//	}
+//}
 
 void AttributeWidget::init_attributes()
 {
-	set_stateless_attribute_value("background_color", QColor("#b2b2b2"));
-	set_stateless_attribute_value("corner_radius_tl", 10);
-	set_stateless_attribute_value("corner_radius_tr", 10);
-	set_stateless_attribute_value("corner_radius_bl", 10);
-	set_stateless_attribute_value("corner_radius_br", 10);
+	set_attribute_value("background_color", QColor("#b2b2b2"));
+	set_attribute_value("corner_radius_tl", 10);
+	set_attribute_value("corner_radius_tr", 10);
+	set_attribute_value("corner_radius_bl", 10);
+	set_attribute_value("corner_radius_br", 10);
 
-	add_stateless_attribute("secondary_background_color", QColor("#b2b2b2"));
-	add_stateless_attribute("using_secondary_background_color", false);
+	add_attribute("secondary_background_color", QColor("#b2b2b2"));
+	add_attribute("using_secondary_background_color", false);
 }
 
 void AttributeWidget::paintEvent(QPaintEvent * event)

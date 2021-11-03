@@ -31,9 +31,7 @@ namespace Layers
 
 		QString m_current_editting_state{ "" };
 
-		StatefulAttribute* m_stateful_attribute{ nullptr };
-
-		StatelessAttribute* m_stateless_attribute{ nullptr };
+		Attribute* m_attribute{ nullptr };
 	};
 }
 

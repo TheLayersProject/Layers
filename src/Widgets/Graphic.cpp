@@ -9,7 +9,7 @@ Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* paren
 {
 	setFixedSize(size);
 
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
@@ -35,7 +35,7 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 
 	setFixedSize(size);
 
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
@@ -62,7 +62,7 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		add_child_themeable_reference(m_svg_widget);
 	}
 
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
@@ -74,7 +74,7 @@ Graphic::Graphic(const QImage& image, QWidget* parent) :
 
 	setFixedSize(m_image_size);
 
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 Graphic::Graphic(const Graphic& gw) : Widget()
@@ -114,7 +114,7 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 
 	setFixedSize(gw.size());
 
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 }
 
 void Graphic::convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
@@ -183,9 +183,9 @@ void Graphic::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["border_awc"]->set_primary(false);
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
+	//m_attribute_widgets["border_awc"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }

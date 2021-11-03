@@ -23,6 +23,12 @@ namespace Layers
 
 	struct Theme_And_Load_Status_Combo_2_2_0_a
 	{
+		Theme_2_2_0_a theme;
+		QDataStream::Status status;
+	};
+
+	struct Theme_And_Load_Status_Combo_2_3_0_a
+	{
 		Theme theme;
 		QDataStream::Status status;
 	};
@@ -32,6 +38,8 @@ namespace Layers
 	Theme_And_Load_Status_Combo_2_1_0_a load_theme_2_1_0_a(QFile& file);
 
 	Theme_And_Load_Status_Combo_2_2_0_a load_theme_2_2_0_a(QFile& file);
+
+	Theme_And_Load_Status_Combo_2_3_0_a load_theme_2_3_0_a(QFile& file);
 }
 
 #endif // THEME_LOADING_H

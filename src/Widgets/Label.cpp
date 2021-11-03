@@ -20,13 +20,13 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 
 void Label::init_attributes()
 {
-	add_stateless_attribute("background_color", QColor(Qt::white));
-	add_stateless_attribute("background_disabled", true);
-	add_stateless_attribute("color", QColor(Qt::black));
-	add_stateless_attribute("color_active", QColor(Qt::black));
-	add_stateless_attribute("color_hover", QColor(Qt::black));
-	add_stateless_attribute("outline_color", QColor(Qt::white));
-	add_stateless_attribute("outline_disabled", true);
+	add_attribute("background_color", QColor(Qt::white));
+	add_attribute("background_disabled", true);
+	add_attribute("color", QColor(Qt::black));
+	add_attribute("color_active", QColor(Qt::black));
+	add_attribute("color_hover", QColor(Qt::black));
+	add_attribute("outline_color", QColor(Qt::white));
+	add_attribute("outline_disabled", true);
 }
 
 void Label::init_attribute_widgets()

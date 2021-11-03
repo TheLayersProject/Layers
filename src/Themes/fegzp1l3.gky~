@@ -48,7 +48,7 @@ Attribute* Theme::attribute(const QString& themeable_tag, const QString& attribu
 	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
 
 	if (attribute_set.contains(attribute_name))
-		return attribute_set.attribute(attribute_name);
+		return attribute_set.stateless_attribute(attribute_name);
 
 	return nullptr;
 }
@@ -76,6 +76,16 @@ void Theme::consume(Theme&& theme)
 			if (!attribute_set.contains(attr->name()))
 				attribute_set.add_attribute(attr);
 	}
+}
+
+StatelessAttribute* Theme::stateless_attribute(const QString& themeable_tag, const QString& attribute_name)
+{
+	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
+
+	if (attribute_set.contains(attribute_name))
+		return attribute_set.stateless_attribute(attribute_name);
+
+	return nullptr;
 }
 
 bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
@@ -112,4 +122,14 @@ QString& Theme::name()
 void Theme::set_name(const QString& new_name)
 {
 	m_name = new_name;
+}
+
+StatefulAttribute* Theme::stateful_attribute(const QString& themeable_tag, const QString& attribute_name)
+{
+	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
+
+	if (attribute_set.contains(attribute_name))
+		return attribute_set.stateful_attribute(attribute_name);
+
+	return nullptr;
 }

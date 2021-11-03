@@ -1,4 +1,4 @@
-#include "../../../include/Attributes.h"
+#include "../../../include/Attribute.h"
 #include "../../../include/AttributeWidgets.h"
 #include "../../../include/CustomizePanel.h"
 #include "../../../include/Graphic.h"
@@ -10,8 +10,6 @@ using Layers::AttributeSet;
 using Layers::AttributeWidget;
 using Layers::CustomizePanel;
 using Layers::Graphic;
-using Layers::StatefulAttribute;
-using Layers::StatelessAttribute;
 using Layers::Themeable;
 using Layers::Theme;
 
@@ -24,16 +22,15 @@ Themeable::~Themeable()
 	m_proper_name = nullptr;
 }
 
-void Themeable::add_stateless_attribute(const QString& attribute_name, QVariant value)
+void Themeable::add_attribute(const QString& attribute_name, QVariant value)
 {
 	if (!m_attribute_set.contains(attribute_name))
 	{
-		StatelessAttribute* stateless_attr = new StatelessAttribute(attribute_name, value);
+		Attribute* attr = new Attribute(attribute_name, value);
 
-		m_attribute_set.add_stateless_attribute(stateless_attr);
-		//m_attribute_set.stateless_attribute(attribute_name)->set_parent_themeable(this);
+		m_attribute_set.add_attribute(attr);
 
-		stateless_attr->connect(stateless_attr, &Attribute::value_changed, [this]
+		attr->connect(attr, &Attribute::value_changed, [this]
 			{
 				update_theme_dependencies();
 				issue_update();
@@ -41,16 +38,15 @@ void Themeable::add_stateless_attribute(const QString& attribute_name, QVariant 
 	}
 }
 
-void Themeable::add_stateful_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
+void Themeable::add_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
 {
 	if (!m_attribute_set.contains(attribute_name))
 	{
-		StatefulAttribute* stateful_attr = new StatefulAttribute(attribute_name, state_value_map);
+		Attribute* attr = new Attribute(attribute_name, state_value_map);
 
-		m_attribute_set.add_stateful_attribute(stateful_attr);
-		//m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
+		m_attribute_set.add_attribute(attr);
 
-		stateful_attr->connect(stateful_attr, &Attribute::value_changed, [this]
+		attr->connect(attr, &Attribute::value_changed, [this]
 			{
 				update_theme_dependencies();
 				issue_update();
@@ -164,13 +160,13 @@ void Themeable::replace_attribute_with_proxy(const QString& attribute_name, Attr
 	}
 }
 
-void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
-{
-	if (m_attribute_widgets.contains(ACW_name))
-		m_attribute_widgets[ACW_name]->set_primary(is_primary);
-	else
-		m_ACW_pre_init_primary_values[ACW_name] = is_primary;
-}
+//void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
+//{
+//	if (m_attribute_widgets.contains(ACW_name))
+//		m_attribute_widgets[ACW_name]->set_primary(is_primary);
+//	else
+//		m_ACW_pre_init_primary_values[ACW_name] = is_primary;
+//}
 
 void Themeable::set_is_app_themeable(bool is_app_themeable)
 {
@@ -185,36 +181,22 @@ void Themeable::set_functionality_disabled(bool disabled)
 	m_functionality_disabled = disabled;
 }
 
-void Themeable::set_stateful_attribute_value(const QString& state, const QString& attribute_name, QVariant value) //, bool update)
+void Themeable::set_attribute_value(const QString& state, const QString& attribute_name, QVariant value)
 {
-	if (m_attribute_set.contains_stateful_attribute(attribute_name))
+	if (m_attribute_set.contains(attribute_name))
 	{
-		StatefulAttribute* stateful_attribute = m_attribute_set.stateful_attribute(attribute_name);
+		Attribute* attr = m_attribute_set.attribute(attribute_name);
 
-		if (stateful_attribute && stateful_attribute->contains_state(state))
-		{
-			stateful_attribute->set_value(state, value);
-
-			//if (update)
-			//{
-			//	update_theme_dependencies();
-			//	issue_update();
-			//}
-		}
+		if (attr->contains_state(state))
+			attr->set_value(state, value);
 	}
 }
 
-void Themeable::set_stateless_attribute_value(const QString& attribute_name, QVariant value) //, bool update)
+void Themeable::set_attribute_value(const QString& attribute_name, QVariant value)
 {
-	if (m_attribute_set.contains_stateless_attribute(attribute_name))
+	if (m_attribute_set.contains(attribute_name))
 	{
-		m_attribute_set.stateless_attribute(attribute_name)->set_value(value);
-
-		//if (update)
-		//{
-		//	update_theme_dependencies();
-		//	issue_update();
-		//}
+		m_attribute_set.attribute(attribute_name)->set_value(value);
 	}
 }
 
@@ -265,12 +247,11 @@ void Themeable::convert_attribute_to_stateful(const QString& attribute_name, QMa
 {
 	m_is_stateful = true;
 
-	if (m_attribute_set.contains_stateless_attribute(attribute_name))
+	if (m_attribute_set.contains(attribute_name))
 	{
 		m_attribute_set.remove_attribute(attribute_name);
 
-		m_attribute_set.add_stateful_attribute(new StatefulAttribute(attribute_name, state_value_map));
-		//m_attribute_set.stateful_attribute(attribute_name)->set_parent_themeable(this);
+		m_attribute_set.add_attribute(new Attribute(attribute_name, state_value_map));
 	}
 	else qDebug() << "WARNING: Failed to convert attribute to stateful: '" + attribute_name + "' not found in attribute set.";
 }

@@ -5,7 +5,7 @@ using Layers::GradientAttributeWidget;
 using Layers::Theme;
 
 GradientAttributeWidget::GradientAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(is_primary, parent)
+	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(parent)
 {
 	init_child_themeable_reference_list();
 
@@ -15,11 +15,11 @@ GradientAttributeWidget::GradientAttributeWidget(const QString& attribute_label_
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
 	// Setup Left Stretch
-	m_left_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_left_stretch->set_attribute_value("background_disabled", true);
 	m_left_stretch->hide();
 
 	// Setup Right Stretch
-	m_right_stretch->set_stateless_attribute_value("background_disabled", true);
+	m_right_stretch->set_attribute_value("background_disabled", true);
 
 	// Setup Color Control
 	m_gradient_control->set_attribute(attribute);

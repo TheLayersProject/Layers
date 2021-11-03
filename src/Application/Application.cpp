@@ -197,56 +197,67 @@ Theme Application::load_theme(QFile& file)
 {
 	qDebug() << "Loading" << file.fileName();
 
-	Theme_And_Load_Status_Combo_2_2_0_a theme_and_load_status_combo_2_2_0_a = load_theme_2_2_0_a(file);
+	Theme_And_Load_Status_Combo_2_3_0_a theme_and_load_status_combo_2_3_0_a = load_theme_2_3_0_a(file);
 
-	if (theme_and_load_status_combo_2_2_0_a.status != 0)
+	if (theme_and_load_status_combo_2_3_0_a.status != 0)
 	{
 		Theme updated_theme;
 
-		qDebug() << "Theme load failed. Trying 2.1.0a load..";
+		qDebug() << "Theme load failed. Trying 2.2.0a load..";
 
-		Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(file);
+		Theme_And_Load_Status_Combo_2_2_0_a theme_and_load_status_combo_2_2_0_a = load_theme_2_2_0_a(file);
 
-		if (theme_and_load_status_combo_2_1_0_a.status != 0)
+		if (theme_and_load_status_combo_2_2_0_a.status != 0)
 		{
-			qDebug() << "Theme load failed. Trying 2.0.0a load..";
+			qDebug() << "Theme load failed. Trying 2.1.0a load..";
 
-			Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(file);
+			Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(file);
 
-			if (theme_and_load_status_combo_2_0_0_a.status != 0)
+			if (theme_and_load_status_combo_2_1_0_a.status != 0)
 			{
-				qDebug() << "Theme load failed. The data must be corrupt.";
+				qDebug() << "Theme load failed. Trying 2.0.0a load..";
+
+				Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(file);
+
+				if (theme_and_load_status_combo_2_0_0_a.status != 0)
+				{
+					qDebug() << "Theme load failed. The data must be corrupt.";
+				}
+				else
+				{
+					qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
+
+					updated_theme =
+						update_theme_2_2_0_a_to_2_3_0_a(
+							update_theme_2_1_0_a_to_2_2_0_a(
+								update_theme_2_0_0_a_to_2_1_0_a(theme_and_load_status_combo_2_0_0_a.theme)
+							)
+						);
+
+					qDebug() << "Updated theme from 2.0.0a to 2.2.0a.";
+				}
 			}
 			else
 			{
-				qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
+				qDebug() << "Successfully loaded theme with 2.1.0a compatibility.";
 
 				updated_theme =
-					update_theme_2_1_0_a_to_2_2_0_a(
-						update_theme_2_0_0_a_to_2_1_0_a(theme_and_load_status_combo_2_0_0_a.theme)
+					update_theme_2_2_0_a_to_2_3_0_a(
+						update_theme_2_1_0_a_to_2_2_0_a(theme_and_load_status_combo_2_1_0_a.theme)
 					);
 
-				qDebug() << "Updated theme from 2.0.0a to 2.2.0a.";
+				qDebug() << "Updated theme from 2.1.0a to 2.2.0a.";
 			}
-		}
-		else
-		{
-			qDebug() << "Successfully loaded theme with 2.1.0a compatibility.";
-
-			updated_theme =
-				update_theme_2_1_0_a_to_2_2_0_a(theme_and_load_status_combo_2_1_0_a.theme);
-
-			qDebug() << "Updated theme from 2.1.0a to 2.2.0a.";
 		}
 
 		copy_missing_attributes_to(updated_theme);
 
 		save_theme(updated_theme);
 
-		return std::move(updated_theme);
+		return updated_theme;
 	}
 
-	return std::move(theme_and_load_status_combo_2_2_0_a.theme);
+	return theme_and_load_status_combo_2_3_0_a.theme;
 }
 
 QString& Application::name()
@@ -301,13 +312,9 @@ void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
 			theme_missing_attributes.add_attribute_set(themeable_tag, light_theme.attribute_set(themeable_tag));
 		else
 		{
-			for (StatelessAttribute* stateless_attribute : light_theme.attribute_sets()[themeable_tag].stateless_attributes())
-				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateless_attribute->name()))
-					theme_missing_attributes.add_stateless_attribute(themeable_tag, stateless_attribute->name(), stateless_attribute->value());
-
-			for (StatefulAttribute* stateful_attribute : light_theme.attribute_sets()[themeable_tag].stateful_attributes())
-				if (!theme_missing_attributes.contains_attribute(themeable_tag, stateful_attribute->name()))
-					theme_missing_attributes.add_stateful_attribute(themeable_tag, stateful_attribute->name(), stateful_attribute->values());
+			for (Attribute* attribute : light_theme.attribute_sets()[themeable_tag].attributes())
+				if (!theme_missing_attributes.contains_attribute(themeable_tag, attribute->name()))
+					theme_missing_attributes.add_attribute(themeable_tag, attribute->name(), attribute->value());
 		}
 	}
 }

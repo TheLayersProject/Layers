@@ -46,25 +46,25 @@ Window::Window(bool preview, QWidget* parent) :
 
     set_name("window");
     set_proper_name("Window");
-    set_stateless_attribute_value("border_thickness", 15);
-    set_stateless_attribute_value("border_gradient_disabled", false);
-    set_stateless_attribute_value("corner_radius_tl", 10);
-    set_stateless_attribute_value("corner_radius_tr", 10);
-    set_stateless_attribute_value("corner_radius_bl", 10);
-    set_stateless_attribute_value("corner_radius_br", 10);
+    set_attribute_value("border_thickness", 15);
+    set_attribute_value("border_gradient_disabled", false);
+    set_attribute_value("corner_radius_tl", 10);
+    set_attribute_value("corner_radius_tr", 10);
+    set_attribute_value("corner_radius_bl", 10);
+    set_attribute_value("corner_radius_br", 10);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
     setMinimumSize(200, m_titlebar->height() + m_attribute_set.attribute_value("border_thickness")->value<int>() * 2);
 	resize(1000, 700);
 
-    m_app_menu->set_stateless_attribute_value("background_disabled", true);
+    m_app_menu->set_attribute_value("background_disabled", true);
 
-    m_settings_menu->set_stateless_attribute_value("background_color", QColor("#ff5555"));
-    m_settings_menu->set_stateless_attribute_value("background_disabled", true);
+    m_settings_menu->set_attribute_value("background_color", QColor("#ff5555"));
+    m_settings_menu->set_attribute_value("background_disabled", true);
     m_settings_menu->hide();
 
-    m_customize_menu->set_stateless_attribute_value("background_disabled", true);
+    m_customize_menu->set_attribute_value("background_disabled", true);
     m_customize_menu->hide();
 
     add_menu(m_app_menu);
@@ -313,9 +313,9 @@ void Window::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
 }
 
 bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)

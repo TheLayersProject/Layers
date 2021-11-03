@@ -35,9 +35,9 @@ namespace Layers
 	public:
 		~Themeable();
 
-		void add_stateless_attribute(const QString& attribute_name, QVariant value);
+		void add_attribute(const QString& attribute_name, QVariant value);
 
-		void add_stateful_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
+		void add_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
 
 		/*!
 			Adds a themeable to the child themeable references list.
@@ -164,36 +164,20 @@ namespace Layers
 
 		void replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute);
 
-		void set_ACW_primary(const QString& ACW_name, bool is_primary);
+		//void set_ACW_primary(const QString& ACW_name, bool is_primary);
 
 		void set_is_app_themeable(bool is_app_themeable);
 
 		void set_functionality_disabled(bool disabled = true);
 
-		void set_stateful_attribute_value(
+		void set_attribute_value(
 			const QString& state,
 			const QString& attribute_name,
-			QVariant value); //,
-			//bool update = false); // IF-FAIL: Try setting to true?
+			QVariant value);
 
-		void set_stateless_attribute_value(
+		void set_attribute_value(
 			const QString& attribute_name,
-			QVariant value); //,
-			//bool update = false);
-
-		/*!
-			Sets a value for an attribute in an attribute set
-
-			Attribute sets are a mapping of states to sets of attributes.  The particular
-			attribute set that receives the new attribute value is defined by the state parameter.
-
-			This function calls issue_update() to ensure the new attribute value is visually represented.
-
-			@param attribute to set the value of
-			@param value to set the attribute to
-			@param state of the attribute set, 'default' by default
-		*/
-		//void set_attribute_value(const QString& attribute, QVariant value, const QString& state = "Default", bool update = true);
+			QVariant value);
 
 		/*!
 			Sets an icon for the themeable; replaces it if one already exists.

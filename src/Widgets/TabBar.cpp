@@ -68,8 +68,8 @@ QString TabBar::build_stylesheet()
 
 void TabBar::init_attributes()
 {
-	add_stateless_attribute("background_color", QColor(Qt::white));
-	add_stateless_attribute("border_color", QColor(Qt::black));
-	add_stateless_attribute("text_color", QColor(Qt::black));
-	add_stateless_attribute("selected_background_color", QColor("#F0F0F0"));
+	add_attribute("background_color", QColor(Qt::white));
+	add_attribute("border_color", QColor(Qt::black));
+	add_attribute("text_color", QColor(Qt::black));
+	add_attribute("selected_background_color", QColor("#F0F0F0"));
 }

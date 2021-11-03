@@ -25,8 +25,8 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_current_item_label->set_name("current_item_label");
 
     //m_current_item_label->share_attribute_with_themeable(
-		//m_current_item_label->attribute_set().stateless_attribute("color"),
-		//m_attribute_set.stateless_attribute("line_edit_text_color"));
+		//m_current_item_label->attribute_set().attribute("color"),
+		//m_attribute_set.attribute("line_edit_text_color"));
 
     replace_attribute_with_proxy("line_edit_text_color", m_current_item_label->attribute("color"));
 
@@ -128,18 +128,18 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
-    add_stateless_attribute("line_edit_text_color", QColor(Qt::black));
-    set_stateless_attribute_value("corner_radius_tl", 10);
-    set_stateless_attribute_value("corner_radius_tr", 10);
-    set_stateless_attribute_value("corner_radius_bl", 10);
-    set_stateless_attribute_value("corner_radius_br", 10);
-    set_stateless_attribute_value("background_color", QColor(Qt::lightGray));
+    add_attribute("line_edit_text_color", QColor(Qt::black));
+    set_attribute_value("corner_radius_tl", 10);
+    set_attribute_value("corner_radius_tr", 10);
+    set_attribute_value("corner_radius_bl", 10);
+    set_attribute_value("corner_radius_br", 10);
+    set_attribute_value("background_color", QColor(Qt::lightGray));
 
-    m_drop_down->set_stateless_attribute_value("corner_radius_tl", 10);
-    m_drop_down->set_stateless_attribute_value("corner_radius_tr", 10);
-    m_drop_down->set_stateless_attribute_value("corner_radius_bl", 10);
-    m_drop_down->set_stateless_attribute_value("corner_radius_br", 10);
-    m_drop_down->set_stateless_attribute_value("background_disabled", true);
+    m_drop_down->set_attribute_value("corner_radius_tl", 10);
+    m_drop_down->set_attribute_value("corner_radius_tr", 10);
+    m_drop_down->set_attribute_value("corner_radius_bl", 10);
+    m_drop_down->set_attribute_value("corner_radius_br", 10);
+    m_drop_down->set_attribute_value("background_disabled", true);
 }
 
 void Combobox::init_child_themeable_reference_list()
@@ -322,16 +322,16 @@ void Combobox::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	m_attribute_widgets["border_awc"]->set_primary(false);
-	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	m_attribute_widgets["outline_caw"]->set_primary(false);
-	m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//m_attribute_widgets["border_awc"]->set_primary(false);
+	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//m_attribute_widgets["outline_caw"]->set_primary(false);
+	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
 
-	m_drop_down->attribute_widgets()["border_awc"]->set_primary(false);
-	m_drop_down->attribute_widgets()["hover_background_caw"]->set_primary(false);
-	m_drop_down->attribute_widgets()["outline_caw"]->set_primary(false);
-	m_drop_down->attribute_widgets()["corner_color_caw"]->set_primary(false);
-	m_drop_down->attribute_widgets()["corner_radii_attribute_widget"]->set_primary(false);
+	//m_drop_down->attribute_widgets()["border_awc"]->set_primary(false);
+	//m_drop_down->attribute_widgets()["hover_background_caw"]->set_primary(false);
+	//m_drop_down->attribute_widgets()["outline_caw"]->set_primary(false);
+	//m_drop_down->attribute_widgets()["corner_color_caw"]->set_primary(false);
+	//m_drop_down->attribute_widgets()["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void Combobox::setup_layout()

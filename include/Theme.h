@@ -24,24 +24,19 @@ namespace Layers
 		Theme();
 		Theme(const QString& name, bool is_custom = true);
 
-		void add_attribute_set(const QString& themeable_tag, AttributeSet attribute_set);
+		void add_attribute(
+			const QString& themeable_tag,
+			const QString& attribute_name,
+			QVariant value);
 
-		void add_stateful_attribute(
+		void add_attribute(
 			const QString& themeable_tag,
 			const QString& attribute_name,
 			QMap<QString, QVariant> state_value_map);
 
-		/*!
-			Add an attribute to the theme.
+		void add_attribute_set(const QString& themeable_tag, AttributeSet attribute_set);
 
-			This implementation of this function adds an attribute with a single value.
-
-			@param themeable_tag of themeable associated with attribute
-		*/
-		void add_stateless_attribute(
-			const QString& themeable_tag,
-			const QString& attribute_name,
-			QVariant value);
+		Attribute* attribute(const QString& themeable_tag, const QString& attribute_name);
 
 		// Recommend calling contains_attributes_for_tag() before calling this since this function
 		// does not check if it contains an attribute set for the given themeable tag.
@@ -65,10 +60,6 @@ namespace Layers
 		QString& name();
 
 		void set_name(const QString& new_name);
-
-		StatefulAttribute* stateful_attribute(const QString& themeable_tag, const QString& attribute_name);
-
-		StatelessAttribute* stateless_attribute(const QString& themeable_tag, const QString& attribute_name);
 
 		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
 		{

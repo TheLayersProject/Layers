@@ -41,11 +41,11 @@ SVG::SVG(const SVG& svg)
 void SVG::init_attributes()
 {
 	// TODO: Think this should be false by default
-	add_stateless_attribute("use_common_color", false);
-	add_stateless_attribute("use_common_hover_color", false);
+	add_attribute("use_common_color", false);
+	add_attribute("use_common_hover_color", false);
 
-	add_stateless_attribute("common_color", QColor(Qt::black));
-	add_stateless_attribute("common_hover_color", QColor(Qt::darkGray));
+	add_attribute("common_color", QColor(Qt::black));
+	add_attribute("common_hover_color", QColor(Qt::darkGray));
 
 	// Build attributes from elements
 	for (int i = 0; i < m_svg_elements.size(); i++)
@@ -63,8 +63,8 @@ void SVG::init_attributes()
 
 				QString color = m_svg_elements[i].mid(color_start_index, color_length);
 
-				add_stateless_attribute("#" + l_element_id + "/color", QColor(color));
-				add_stateless_attribute("#" + l_element_id + "/hover_color", QColor(color));
+				add_attribute("#" + l_element_id + "/color", QColor(color));
+				add_attribute("#" + l_element_id + "/hover_color", QColor(color));
 			}
 		}
 	}

@@ -146,14 +146,14 @@ void Button::init_attribute_widgets()
 {
 	Widget::init_attribute_widgets();
 
-	if (m_graphic && !m_text_label)
-	{
-		m_attribute_widgets["border_awc"]->set_primary(false);
-		m_attribute_widgets["hover_background_caw"]->set_primary(false);
-		m_attribute_widgets["outline_caw"]->set_primary(false);
-		m_attribute_widgets["corner_color_caw"]->set_primary(false);
-		m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
-	}
+	//if (m_graphic && !m_text_label)
+	//{
+	//	m_attribute_widgets["border_awc"]->set_primary(false);
+	//	m_attribute_widgets["hover_background_caw"]->set_primary(false);
+	//	m_attribute_widgets["outline_caw"]->set_primary(false);
+	//	m_attribute_widgets["corner_color_caw"]->set_primary(false);
+	//	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
+	//}
 }
 
 void Button::init_child_themeable_reference_list()
@@ -219,9 +219,11 @@ void Button::resize()
 	setFixedHeight(calculated_height);
 }
 
+// TODO: This could be upheld via attribute value change detection.
+// Simply call resize() when the 'border_thickness' attribute is changed
 void Button::set_attribute_value(const QString& attribute, QVariant value)
 {
-	Themeable::set_stateless_attribute_value(attribute, value);
+	Themeable::set_attribute_value(attribute, value);
 
 	if (attribute == "border_thickness") resize();
 }

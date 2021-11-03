@@ -86,8 +86,8 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 		//		attribute_widget->hide();
 		//}
 
-		for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
-			if (!attribute_widget->is_primary()) attribute_widget->hide();
+		//for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
+		//	if (!attribute_widget->is_primary()) attribute_widget->hide();
 
 		update_attribute_widget_background_colors();
 
@@ -120,40 +120,49 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	add_child_themeable_reference(attribute_widget);
 	m_attribute_widgets.append(attribute_widget);
 
-	if (attribute_widget->stateful_attribute())
-	{
-		m_stateful_attribute_widgets.append(attribute_widget);
-		m_stateful_attributes_layout->addWidget(attribute_widget);
+	// TEMP
+	m_stateless_attribute_widgets.append(attribute_widget);
+	m_stateless_attributes_layout->addWidget(attribute_widget);
+	//
 
-		if (ColorAttributeWidget* caw = dynamic_cast<ColorAttributeWidget*>(attribute_widget))
-			connect(
-				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-				caw->color_control(), SLOT(set_current_editting_state(const QString&)));
 
-		else if (CornerRadiiAttributeWidget* craw = dynamic_cast<CornerRadiiAttributeWidget*>(attribute_widget))
-		{
-			connect(
-				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-				craw->tl_slider(), SLOT(set_current_editting_state(const QString&)));
+	// SHOULD ATTRIBUTE WIDGETS KNOW ASSOCIATED THEMEABLES?
+	
+	
+	//if (attribute_widget->attribute())
+	//{
+	//	m_stateful_attribute_widgets.append(attribute_widget);
+	//	m_stateful_attributes_layout->addWidget(attribute_widget);
 
-			connect(
-				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-				craw->tr_slider(), SLOT(set_current_editting_state(const QString&)));
+	//	if (ColorAttributeWidget* caw = dynamic_cast<ColorAttributeWidget*>(attribute_widget))
+	//		connect(
+	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+	//			caw->color_control(), SLOT(set_current_editting_state(const QString&)));
 
-			connect(
-				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-				craw->bl_slider(), SLOT(set_current_editting_state(const QString&)));
+	//	else if (CornerRadiiAttributeWidget* craw = dynamic_cast<CornerRadiiAttributeWidget*>(attribute_widget))
+	//	{
+	//		connect(
+	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+	//			craw->tl_slider(), SLOT(set_current_editting_state(const QString&)));
 
-			connect(
-				m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-				craw->br_slider(), SLOT(set_current_editting_state(const QString&)));
-		}
-	}
-	else
-	{
-		m_stateless_attribute_widgets.append(attribute_widget);
-		m_stateless_attributes_layout->addWidget(attribute_widget);
-	}
+	//		connect(
+	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+	//			craw->tr_slider(), SLOT(set_current_editting_state(const QString&)));
+
+	//		connect(
+	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+	//			craw->bl_slider(), SLOT(set_current_editting_state(const QString&)));
+
+	//		connect(
+	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
+	//			craw->br_slider(), SLOT(set_current_editting_state(const QString&)));
+	//	}
+	//}
+	//else
+	//{
+	//	m_stateless_attribute_widgets.append(attribute_widget);
+	//	m_stateless_attributes_layout->addWidget(attribute_widget);
+	//}
 }
 
 void CustomizePanel::add_element_button(Button* button, int index)
@@ -179,23 +188,23 @@ void CustomizePanel::apply_theme(Theme&)
 
 void CustomizePanel::init_attributes()
 {
-	set_stateless_attribute_value("background_disabled", true);
+	set_attribute_value("background_disabled", true);
 
-	m_show_all_button->set_stateless_attribute_value("background_color", QColor("#61ad50"));
-	m_show_all_button->set_stateless_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_all_button->set_stateless_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_all_button->set_stateless_attribute_value("corner_radius_tl", 5);
-	m_show_all_button->set_stateless_attribute_value("corner_radius_tr", 5);
-	m_show_all_button->set_stateless_attribute_value("corner_radius_bl", 5);
-	m_show_all_button->set_stateless_attribute_value("corner_radius_br", 5);
+	m_show_all_button->set_attribute_value("background_color", QColor("#61ad50"));
+	m_show_all_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
+	m_show_all_button->set_attribute_value("text_color", QColor("#f8f8f8"));
+	m_show_all_button->set_attribute_value("corner_radius_tl", 5);
+	m_show_all_button->set_attribute_value("corner_radius_tr", 5);
+	m_show_all_button->set_attribute_value("corner_radius_bl", 5);
+	m_show_all_button->set_attribute_value("corner_radius_br", 5);
 
-	m_show_primary_button->set_stateless_attribute_value("background_color", QColor("#61ad50"));
-	m_show_primary_button->set_stateless_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_primary_button->set_stateless_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->set_stateless_attribute_value("corner_radius_tl", 5);
-	m_show_primary_button->set_stateless_attribute_value("corner_radius_tr", 5);
-	m_show_primary_button->set_stateless_attribute_value("corner_radius_bl", 5);
-	m_show_primary_button->set_stateless_attribute_value("corner_radius_br", 5);
+	m_show_primary_button->set_attribute_value("background_color", QColor("#61ad50"));
+	m_show_primary_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
+	m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
+	m_show_primary_button->set_attribute_value("corner_radius_tl", 5);
+	m_show_primary_button->set_attribute_value("corner_radius_tr", 5);
+	m_show_primary_button->set_attribute_value("corner_radius_bl", 5);
+	m_show_primary_button->set_attribute_value("corner_radius_br", 5);
 }
 
 void CustomizePanel::init_child_themeable_reference_list()
@@ -218,15 +227,15 @@ void CustomizePanel::update_attribute_widget_background_colors()
 	{
 		for (AttributeWidget* attribute_widget : m_attribute_widgets)
 		{
-			if (attribute_widget->is_primary())
-			{
-				if (is_even(counter))
-					attribute_widget->enable_secondary_background_color(false);
-				else
-					attribute_widget->enable_secondary_background_color();
+			//if (attribute_widget->is_primary())
+			//{
+			if (is_even(counter))
+				attribute_widget->enable_secondary_background_color(false);
+			else
+				attribute_widget->enable_secondary_background_color();
 
-				counter++;
-			}
+			counter++;
+			//}
 		}
 	}
 	else

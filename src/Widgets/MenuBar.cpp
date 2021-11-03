@@ -54,8 +54,8 @@ void MenuBar::issue_update()
 
 void MenuBar::init_attributes()
 {
-	add_stateless_attribute("text_color", QColor(Qt::darkGray));
-	add_stateless_attribute("selected_text_color", QColor(Qt::lightGray));
+	add_attribute("text_color", QColor(Qt::darkGray));
+	add_attribute("selected_text_color", QColor(Qt::lightGray));
 }
 
 void MenuBar::update_theme_dependencies()

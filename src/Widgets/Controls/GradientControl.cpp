@@ -20,34 +20,34 @@ void GradientControl::init_attributes()
 {
     QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
 
-	add_stateless_attribute("corner_radius", 5);
-	add_stateless_attribute("outer_border_color", QColor("#2c2c2c"));
-	add_stateless_attribute("inner_border_color", QColor("#d6d6d6"));
+	add_attribute("corner_radius", 5);
+	add_attribute("outer_border_color", QColor("#2c2c2c"));
+	add_attribute("inner_border_color", QColor("#d6d6d6"));
 
-    set_stateless_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+    set_attribute_value("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
 }
 
 void GradientControl::set_attribute(Attribute* attribute)
 {
-	m_stateful_attribute = dynamic_cast<StatefulAttribute*>(attribute);
-	m_stateless_attribute = dynamic_cast<StatelessAttribute*>(attribute);
+	m_attribute = attribute;
 
-	if (m_stateless_attribute)
+	if (m_attribute)
 	{
-		connect(m_stateless_attribute, &Attribute::value_changed, [this]
-			{
-				set_stateless_attribute_value("background_gradient_stops", m_stateless_attribute->value());
-			});
-	}
-	else if (m_stateful_attribute)
-	{
-		m_attribute_states = m_stateful_attribute->states();
+		bool attr_is_stateful = !m_attribute->states().isEmpty();
 
-		m_current_editting_state = m_attribute_states.first();
+		if (attr_is_stateful)
+		{
+			m_attribute_states = m_attribute->states();
 
-		connect(m_stateful_attribute, &Attribute::value_changed, [this]
+			m_current_editting_state = m_attribute_states.first();
+		}
+
+		connect(m_attribute, &Attribute::value_changed, [this, attr_is_stateful]
 			{
-				set_stateless_attribute_value("background_gradient_stops", *m_stateful_attribute->value(m_current_editting_state));
+				if (!attr_is_stateful)
+					set_attribute_value("background_gradient_stops", m_attribute->value());
+				else
+					set_attribute_value("background_gradient_stops", *m_attribute->value(m_current_editting_state));
 			});
 	}
 }
@@ -58,7 +58,7 @@ void GradientControl::set_current_editting_state(const QString& state)
 	{
 		m_current_editting_state = state;
 
-		set_stateless_attribute_value("background_gradient_stops", *m_stateful_attribute->value(m_current_editting_state));
+		set_attribute_value("background_gradient_stops", *m_attribute->value(m_current_editting_state));
 	}
 }
 
@@ -72,11 +72,13 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 		{
 			GradientSelectionDialog* gsd;
 
-			if (m_stateless_attribute)
-				gsd = new GradientSelectionDialog(m_attribute_set.stateless_attribute("background_gradient_stops")->value().value<QGradientStops>());
+			bool attr_is_stateful = !m_attribute->states().isEmpty();
 
-			else if (m_stateful_attribute)
-				gsd = new GradientSelectionDialog(m_attribute_set.stateful_attribute("background_gradient_stops")->value(m_current_editting_state)->value<QGradientStops>());
+			if (attr_is_stateful)
+				gsd = new GradientSelectionDialog(m_attribute_set.attribute("background_gradient_stops")->value().value<QGradientStops>());
+
+			else
+				gsd = new GradientSelectionDialog(m_attribute_set.attribute("background_gradient_stops")->value(m_current_editting_state)->value<QGradientStops>());
 
 			if (m_current_theme) gsd->apply_theme(*m_current_theme);
 
@@ -84,11 +86,11 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			if (gsd->exec())
 			{
-				if (m_stateless_attribute)
-					m_stateless_attribute->set_value(QVariant::fromValue(gsd->gradient_stops()));
+				if (attr_is_stateful)
+					m_attribute->set_value(QVariant::fromValue(gsd->gradient_stops()));
 
-				else if (m_stateful_attribute)
-					m_stateful_attribute->set_value(m_current_editting_state, QVariant::fromValue(gsd->gradient_stops()));
+				else
+					m_attribute->set_value(m_current_editting_state, QVariant::fromValue(gsd->gradient_stops()));
 
 				emit gradient_changed();
 			}

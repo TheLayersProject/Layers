@@ -66,21 +66,22 @@ void SettingsTab::shrink()
 
 void SettingsTab::init_attributes()
 {
-	set_stateless_attribute_value("corner_radius_tl", 5);
-	set_stateless_attribute_value("corner_radius_bl", 5);
+	set_attribute_value("corner_radius_tl", 5);
+	set_attribute_value("corner_radius_bl", 5);
 
-	m_spacer->set_stateless_attribute_value("background_disabled", true);
+	m_spacer->set_attribute_value("background_disabled", true);
 
-	m_stretch_widget->set_stateless_attribute_value("background_disabled", true);
+	m_stretch_widget->set_attribute_value("background_disabled", true);
 
-	m_stretch_widget2->set_stateless_attribute_value("background_disabled", true);
+	m_stretch_widget2->set_attribute_value("background_disabled", true);
 
 	convert_attribute_to_stateful("background_color", {
 		{ "Unselected", QColor(Qt::lightGray) },
 		{ "Selected", QColor(Qt::white) }
 		});
 
-	m_tab_icon->svg()->set_stateless_attribute_value("use_common_hover_color", false);
+	m_tab_icon->svg()->set_attribute_value("use_common_hover_color", false);
+
 	m_tab_icon->convert_attribute_to_stateful("common_color", {
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
@@ -111,7 +112,7 @@ void SettingsTab::init_attribute_widgets()
 		SwitchAttributeWidget* border_color_saw = new SwitchAttributeWidget(
 			"Solid", border_caw,
 			"Gradient", border_gaw,
-			m_attribute_set.stateless_attribute("border_gradient_disabled"), true);
+			m_attribute_set.attribute("border_gradient_disabled"), true);
 
 		border_caw->set_centered();
 		border_gaw->set_centered();
