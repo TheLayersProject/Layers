@@ -1,6 +1,7 @@
 #ifndef CUSTOMIZEPANEL_H
 #define CUSTOMIZEPANEL_H
 
+#include "AttributeWidgets.h"
 #include "Button.h"
 #include "Combobox.h"
 #include "Label.h"
@@ -18,11 +19,15 @@ namespace Layers
 
 		void add_element_button(Button* button, int index = -1);
 
-		void apply_theme(Theme&) override;
+		void init_attribute_widgets();
+
+		void replace_all_attributes_with(CustomizePanel* cpanel);
+		void replace_all_aw_group_attrs_with(AWGroup* control_aw_group);
+		void replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw);
+		void replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw);
+		void replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
 
 		void setup_layout();
-
-		void update_attribute_widget_background_colors();
 
 	protected:
 		void init_attributes();
@@ -46,7 +51,7 @@ namespace Layers
 		Combobox* m_state_combobox{ new Combobox };
 
 		Label* m_attributes_label{ new Label("Attributes:") };
-		Label* m_elements_label{ new Label("Elements:") };
+		Label* m_widgets_label{ new Label("Widgets:") };
 		Label* m_stateful_attributes_label{ new Label("Stateful Attributes:") };
 		Label* m_stateless_attributes_label{ new Label("Stateless Attributes:") };
 		Label* m_state_label{ new Label("State:") };
@@ -54,6 +59,12 @@ namespace Layers
 		QList<AttributeWidget*> m_stateless_attribute_widgets{ QList<AttributeWidget*>() };
 		QList<AttributeWidget*> m_stateful_attribute_widgets{ QList<AttributeWidget*>() };
 		QList<AttributeWidget*> m_attribute_widgets{ QList<AttributeWidget*>() };
+
+		QList<AWGroup*> m_aw_groups{ QList<AWGroup*>() };
+		QList<FillAW*> m_fill_awidgets{ QList<FillAW*>() };
+		QList<NumberAW*> m_number_awidgets{ QList<NumberAW*>() };
+
+		CornerRadiiAW* m_corner_radii_aw{ nullptr };
 
 		Themeable* m_themeable;
 	};

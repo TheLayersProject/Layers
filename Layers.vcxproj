@@ -13,18 +13,18 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2AE6B067-F360-408F-8D48-E2FE94E14B7B}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
@@ -122,8 +122,8 @@
     <ClCompile Include="src\Old\2.2.0a\Stateless_Attribute_2_2_0_a.cpp" />
     <ClCompile Include="src\Old\2.2.0a\Theme_2_2_0_a.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
-    <ClCompile Include="src\Themes\Attributes\AttributeSet.cpp" />
-    <ClCompile Include="src\Themes\build_themes.cpp" />
+    <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
+    <ClCompile Include="src\Themes\build_themes2.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
     <ClCompile Include="src\Themes\theme_loading.cpp" />
@@ -134,16 +134,17 @@
     <ClCompile Include="src\Tools\Version.cpp" />
     <ClCompile Include="src\Widgets\AppPreferencesSettingsPanel.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidgetContainer.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\ColorAttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\CornerRadiiAttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\GradientAttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\NumberAttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Attribute Widgets\SwitchAttributeWidget.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\AWGroup.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\ColorAW.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\CornerRadiiAW.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\FillAW.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\GradientAW.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\NumberAW.cpp" />
     <ClCompile Include="src\Widgets\Controls\Button.cpp" />
     <ClCompile Include="src\Widgets\Controls\ColorControl.cpp" />
     <ClCompile Include="src\Widgets\Controls\Combobox.cpp" />
     <ClCompile Include="src\Widgets\Controls\ComboboxItem.cpp" />
+    <ClCompile Include="src\Widgets\Controls\FillControl.cpp" />
     <ClCompile Include="src\Widgets\Controls\GradientControl.cpp" />
     <ClCompile Include="src\Widgets\Controls\LineEditor.cpp" />
     <ClCompile Include="src\Widgets\Controls\MiniSlider.cpp" />
@@ -178,8 +179,11 @@
     <QtRcc Include="themes\prebuilt_themes.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AttributeLayout.h" />
+    <ClInclude Include="include\AttributeSetItem.h" />
     <ClInclude Include="include\build_themes.h" />
     <ClInclude Include="include\directories.h" />
+    <QtMoc Include="include\FillControl.h" />
     <ClInclude Include="include\GitHubRepo.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
@@ -189,7 +193,6 @@
     <ClInclude Include="include\theme_updating.h" />
     <QtMoc Include="include\Application.h" />
     <QtMoc Include="include\Attribute.h" />
-    <ClInclude Include="include\AttributeSet.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />
     <QtMoc Include="include\GradientSelectionDialog.h" />

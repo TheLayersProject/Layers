@@ -71,13 +71,13 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 
 void ThemesSettingsPanel::init_attributes()
 {
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 
-	m_spacer_1->set_attribute_value("background_disabled", true);
+	m_spacer_1->a_fill.set_disabled();
 
-	m_spacer_2->set_attribute_value("background_disabled", true);
+	m_spacer_2->a_fill.set_disabled();
 
-	m_theme_info_button->graphic()->svg()->set_attribute_value("use_common_hover_color", false);
+	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }
 
 void ThemesSettingsPanel::init_child_themeable_reference_list()
@@ -134,17 +134,6 @@ void ThemesSettingsPanel::show_custom_theme_buttons(bool cond)
 		m_spacer_1->hide();
 		m_spacer_2->hide();
 	}
-}
-
-void ThemesSettingsPanel::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void ThemesSettingsPanel::setup_layout()

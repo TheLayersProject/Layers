@@ -46,25 +46,26 @@ Window::Window(bool preview, QWidget* parent) :
 
     set_name("window");
     set_proper_name("Window");
-    set_attribute_value("border_thickness", 15);
-    set_attribute_value("border_gradient_disabled", false);
-    set_attribute_value("corner_radius_tl", 10);
-    set_attribute_value("corner_radius_tr", 10);
-    set_attribute_value("corner_radius_bl", 10);
-    set_attribute_value("corner_radius_br", 10);
+    a_border_thickness.set_value(15);
+	a_border_fill.set_value(
+		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
+    a_corner_radius_tl.set_value(10);
+    a_corner_radius_tr.set_value(10);
+    a_corner_radius_bl.set_value(10);
+    a_corner_radius_br.set_value(10);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-    setMinimumSize(200, m_titlebar->height() + m_attribute_set.attribute_value("border_thickness")->value<int>() * 2);
+    setMinimumSize(200, m_titlebar->height() + a_border_thickness.value<int>() * 2);
 	resize(1000, 700);
 
-    m_app_menu->set_attribute_value("background_disabled", true);
+    m_app_menu->a_fill.set_disabled();
 
-    m_settings_menu->set_attribute_value("background_color", QColor("#ff5555"));
-    m_settings_menu->set_attribute_value("background_disabled", true);
+    m_settings_menu->a_fill.set_value(QColor("#ff5555"));
+    m_settings_menu->a_fill.set_disabled();
     m_settings_menu->hide();
 
-    m_customize_menu->set_attribute_value("background_disabled", true);
+    m_customize_menu->a_fill.set_disabled();
     m_customize_menu->hide();
 
     add_menu(m_app_menu);
@@ -126,13 +127,14 @@ void Window::apply_theme(Theme& theme)
 {
     Themeable::apply_theme(theme);
 
+	// TODO: The following should be handled in the CustomizeMenu class
     if (m_customize_menu->preview_widget())
     {
         m_customize_menu->preview_widget()->apply_theme(theme);
         //m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
     }
 
-	issue_update(); // Is this necessary???????????????????????
+	//issue_update(); // Is this necessary???????????????????????
 }
 
 void Window::assign_tag_prefixes()
@@ -177,7 +179,7 @@ void Window::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+		int margin = a_border_thickness.value<int>();
 
 		m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	}
@@ -309,15 +311,6 @@ void Window::settings_clicked()
     open_menu(m_settings_menu);
 }
 
-void Window::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-}
-
 bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
     MSG* msg = static_cast<MSG*>(message);
@@ -330,7 +323,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
         }
 
         *result = 0;
-        const LONG borderWidth = m_attribute_set.attribute_value("border_thickness")->value<int>() * devicePixelRatio();;
+        const LONG borderWidth = a_border_thickness.value<int>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -412,22 +405,22 @@ void Window::paintEvent(QPaintEvent* event)
 	{
 		// CREATE VARIABLES:
 
-		bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
+		bool fill_disabled = a_fill.disabled();
 
-		int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+		int border_thickness = a_border_thickness.value<int>();
 
-		int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
-		int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
-		int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
-		int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
+		int margin_left = a_margin_left.value<int>();
+		int margin_top = a_margin_top.value<int>();
+		int margin_right = a_margin_right.value<int>();
+		int margin_bottom = a_margin_bottom.value<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
 
-		int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
-		int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
-		int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
-		int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
+		int corner_radius_tl = a_corner_radius_tl.value<int>();
+		int corner_radius_tr = a_corner_radius_tr.value<int>();
+		int corner_radius_bl = a_corner_radius_bl.value<int>();
+		int corner_radius_br = a_corner_radius_br.value<int>();
 
 		int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 		int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -479,53 +472,53 @@ void Window::paintEvent(QPaintEvent* event)
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Corner Color
-		if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
+		if (!a_corner_color.disabled())
 		{
-			painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
+			painter.fillPath(corner_color_path, a_corner_color.value<QColor>());
 		}
 
 		// - Draw Border
 		if (border_thickness)
 		{
-			if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
+			if (QString(a_border_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient gradient;
 
 				gradient.setStart(0, 0);
 				gradient.setFinalStop(width(), 0);
-				gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
+				gradient.setStops(a_border_fill.value<QGradientStops>());
 
 				painter.fillPath(border_path, gradient);
 			}
-			else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
+			else painter.fillPath(border_path, a_border_fill.value<QColor>());
 		}
 
 		// - Draw Background
-		if (!background_disabled)
+		if (!fill_disabled)
 		{
-			if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
-			{
-				if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
-					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
-				else
-					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
-			}
-			else
+			if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient bg_gradient;
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
+				bg_gradient.setStops(a_fill.value<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
+			}
+			else
+			{
+				if (m_hovering && !a_hover_fill.disabled())
+					painter.fillPath(background_path, a_hover_fill.value<QColor>());
+				else
+					painter.fillPath(background_path, a_fill.value<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
-		if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
+		if (!a_outline_color.disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
 		}
 
 		painter.end();
@@ -534,12 +527,12 @@ void Window::paintEvent(QPaintEvent* event)
 	{
 		// CREATE VARIABLES:
 
-		bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
+		bool fill_disabled = a_fill.disabled();
 
-		int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
-		int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
-		int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
-		int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
+		int margin_left = a_margin_left.value<int>();
+		int margin_top = a_margin_top.value<int>();
+		int margin_right = a_margin_right.value<int>();
+		int margin_bottom = a_margin_bottom.value<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
@@ -564,31 +557,31 @@ void Window::paintEvent(QPaintEvent* event)
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Background
-		if (!background_disabled)
+		if (!fill_disabled)
 		{
-			if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
-			{
-				if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
-					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
-				else
-					painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
-			}
-			else
+			if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient bg_gradient;
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
+				bg_gradient.setStops(a_fill.value<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
+			}
+			else
+			{
+				if (m_hovering && !a_hover_fill.disabled())
+					painter.fillPath(background_path, a_hover_fill.value<QColor>());
+				else
+					painter.fillPath(background_path, a_fill.value<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
-		if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
+		if (!a_outline_color.disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
 		}
 
 		painter.end();
@@ -602,7 +595,7 @@ void Window::setup_layout()
 
 	m_app_menu->setLayout(m_app_menu_layout);
 
-	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int margin = a_border_thickness.value<int>();
 
     m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);

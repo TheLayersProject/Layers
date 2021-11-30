@@ -53,12 +53,12 @@ QString TabBar::build_stylesheet()
 	// "; border: 1px solid " + m_attribute_set.attribute_value("border_color")->value<QColor>().name() + 
 
 	return
-		"QTabBar { color: " + m_attribute_set.attribute_value("text_color")->value<QColor>().name() + "; font: 12pt; }"
+		"QTabBar { color: " + a_text_color->value<QColor>().name() + "; font: 12pt; }"
 		//"QTabBar::tab { background: " + m_attribute_set.attribute_value("background_color")->value<QColor>().name() + "; }" // padding: 7px; padding-top: 2px; padding-bottom: 2px; border-bottom-color: none }"
 		//"QTabBar::tab:!selected { margin-top: 2px; }"
 		//"QTabBar::tab:!selected { background: " + m_attribute_set.attribute_value("background_color")->value<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		"QTabBar::tab:!selected { background:none; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		"QTabBar::tab:selected { background: " + m_attribute_set.attribute_value("selected_background_color")->value<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
+		"QTabBar::tab:selected { background: " + a_selected_fill_color->value<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		//"QTabBar::tab:first:selected { margin-left: 0; }"
 		//"QTabBar::tab:last { margin-right: 0; }"
 		"QTabBar::tab:only-one { margin: 0; }"
@@ -68,8 +68,8 @@ QString TabBar::build_stylesheet()
 
 void TabBar::init_attributes()
 {
-	add_attribute("background_color", QColor(Qt::white));
-	add_attribute("border_color", QColor(Qt::black));
-	add_attribute("text_color", QColor(Qt::black));
-	add_attribute("selected_background_color", QColor("#F0F0F0"));
+	//add_attribute("background_color", QColor(Qt::white));
+	//add_attribute("border_color", QColor(Qt::black));
+	//add_attribute("text_color", QColor(Qt::black));
+	//add_attribute("selected_background_color", QColor("#F0F0F0"));
 }

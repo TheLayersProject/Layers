@@ -29,9 +29,11 @@ namespace Layers
 
 		Graphic* graphic() const;
 
+		void replace_all_attributes_with(Button* button);
+
 		void resize();
 
-		void set_attribute_value(const QString& attribute, QVariant value);
+		//void set_attribute_value(const QString& attribute, QVariant value);
 		void set_available_width(int available_width);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
@@ -44,14 +46,13 @@ namespace Layers
 		int right_padding() const;
 		int bottom_padding() const;
 
-		void update_theme_dependencies() override;
+		//void update_theme_dependencies() override;
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init();
 		void init_attributes();
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 		void setup_layout();

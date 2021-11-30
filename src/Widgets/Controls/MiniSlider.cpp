@@ -18,42 +18,41 @@ MiniSlider::MiniSlider(int limit, QWidget* parent) :
 
 	m_bar->setFixedHeight(3);
 	m_bar->set_name("bar");
-	m_bar->set_margin(5, 0, 5, 0);
 
 	m_handle->move(5, 16);
 	m_handle->setFixedSize(5, 13);
 	m_handle->set_name("handle");
 
-	connect(m_attribute_set.attribute("value"), &Attribute::value_changed, [this] { update_handle_pos(); });
+	connect(&a_value, &Attribute::value_changed, [this] { update_handle_pos(); });
 
 	setup_layout();
 }
 
 void MiniSlider::init_attributes()
 {
-	add_attribute("value", 0);
-	set_attribute_value("background_disabled", false);
-	set_attribute_value("corner_radius_tl", 5); // Need to check these values
-	set_attribute_value("corner_radius_tr", 5);
-	set_attribute_value("corner_radius_bl", 5);
-	set_attribute_value("corner_radius_br", 5);
+	m_bar->set_margin(5, 0, 5, 0);
 
-	m_bar->set_attribute_value("corner_radius_tl", 2);
-	m_bar->set_attribute_value("corner_radius_tr", 2);
-	m_bar->set_attribute_value("corner_radius_bl", 2);
-	m_bar->set_attribute_value("corner_radius_br", 2);
+	a_corner_radius_tl.set_value(5);
+	a_corner_radius_tr.set_value(5);
+	a_corner_radius_bl.set_value(5);
+	a_corner_radius_br.set_value(5);
 
-	m_handle->set_attribute_value("corner_radius_tl", 2);
-	m_handle->set_attribute_value("corner_radius_tr", 2);
-	m_handle->set_attribute_value("corner_radius_bl", 2);
-	m_handle->set_attribute_value("corner_radius_br", 2);
+	m_bar->a_corner_radius_tl.set_value(2);
+	m_bar->a_corner_radius_tr.set_value(2);
+	m_bar->a_corner_radius_bl.set_value(2);
+	m_bar->a_corner_radius_br.set_value(2);
 
-	// TEMP!
-	set_attribute_value("background_color", QColor(Qt::lightGray));
+	m_handle->a_corner_radius_tl.set_value(2);
+	m_handle->a_corner_radius_tr.set_value(2);
+	m_handle->a_corner_radius_bl.set_value(2);
+	m_handle->a_corner_radius_br.set_value(2);
 
-	m_bar->set_attribute_value("background_color", QColor(Qt::blue));
+	// TODO: TEMP!
+	a_fill.set_value(QColor(Qt::lightGray));
 
-	m_handle->set_attribute_value("background_color", QColor(Qt::red));
+	m_bar->a_fill.set_value(QColor(Qt::blue));
+
+	m_handle->a_fill.set_value(QColor(Qt::red));
 }
 
 void MiniSlider::init_child_themeable_reference_list()
@@ -62,32 +61,12 @@ void MiniSlider::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_handle);
 }
 
-void MiniSlider::set_attribute(Attribute* attribute)
+void MiniSlider::replace_all_attributes_with(MiniSlider* mini_slider)
 {
-	m_attribute = attribute;
+	Widget::replace_all_attributes_with(mini_slider);
 
-	if (!m_attribute->states().isEmpty())
-	{
-		m_attribute_states = m_attribute->states();
-
-		m_current_editting_state = m_attribute_states.first();
-	}
-
-	connect(m_attribute, &Attribute::value_changed, [this]
-		{
-			if (m_attribute->states().isEmpty())
-				set_attribute_value("value", m_attribute->value());
-			else
-				set_attribute_value("value", *m_attribute->value(m_current_editting_state));
-		});
-
-	connect(m_attribute_set.attribute("value"), &Attribute::value_changed, [this]
-		{
-			if (m_attribute->states().isEmpty())
-				m_attribute->set_value(m_attribute_set.attribute("value")->value());
-			else
-				m_attribute->set_value(m_current_editting_state, m_attribute_set.attribute("value")->value());
-		});
+	if (m_bar) m_bar->replace_all_attributes_with(mini_slider->m_bar);
+	if (m_handle) m_handle->replace_all_attributes_with(mini_slider->m_handle);
 }
 
 void MiniSlider::update_handle_pos()
@@ -95,22 +74,12 @@ void MiniSlider::update_handle_pos()
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
 	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
 
-	m_handle->move(drag_increment * m_attribute_set.attribute_value("value")->value<int>() + 5, m_handle->y()); // 5 is left margin
+	m_handle->move(drag_increment * a_value.value<int>() + 5, m_handle->y()); // 5 is left margin
 }
 
 void MiniSlider::update_theme_dependencies()
 {
 	update_handle_pos();
-}
-
-void MiniSlider::set_current_editting_state(const QString& state)
-{
-	if (m_attribute_states.contains(state) && m_current_editting_state != state)
-	{
-		m_current_editting_state = state;
-
-		set_attribute_value("value", *m_attribute->value(m_current_editting_state));
-	}
 }
 
 bool MiniSlider::eventFilter(QObject* object, QEvent* event)
@@ -127,7 +96,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = m_attribute_set.attribute_value("value")->value<int>();
+			m_value_on_click = a_value.value<int>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease)
@@ -159,16 +128,16 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 
 			if (new_value < 0)
 			{
-				if (m_attribute_set.attribute_value("value")->value<int>() != 0)
-					set_attribute_value("value", 0);
+				if (a_value.value<int>() != 0)
+					a_value.set_value(0);
 			}
 			else if (new_value > m_limit)
 			{
-				if (m_attribute_set.attribute_value("value")->value<int>() != m_limit)
-					set_attribute_value("value", m_limit);
+				if (a_value.value<int>() != m_limit)
+					a_value.set_value(m_limit);
 			}
 			else
-				set_attribute_value("value", new_value);
+				a_value.set_value(new_value);
 		}
 	}
 

@@ -9,7 +9,7 @@ Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* paren
 {
 	setFixedSize(size);
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 }
 
 Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
@@ -35,7 +35,7 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 
 	setFixedSize(size);
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 }
 
 Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
@@ -62,7 +62,7 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		add_child_themeable_reference(m_svg_widget);
 	}
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
@@ -74,7 +74,7 @@ Graphic::Graphic(const QImage& image, QWidget* parent) :
 
 	setFixedSize(m_image_size);
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 }
 
 Graphic::Graphic(const Graphic& gw) : Widget()
@@ -101,30 +101,30 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
 
 		add_child_themeable_reference(m_svg_widget);
-
-		//filter_attribute("background_color");
-		//filter_attribute("border_color");
-		//filter_attribute("border_gradient_stops");
-		//filter_attribute("border_thickness");
-		//filter_attribute("corner_radius");
-		//filter_attribute("border_gradient_disabled");
 	}
 
 	m_image_size = gw.m_image_size;
 
 	setFixedSize(gw.size());
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 }
 
-void Graphic::convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
-{
-	if (m_svg_widget) m_svg_widget->convert_attribute_to_stateful(attribute_name, state_value_map);
-}
+//void Graphic::convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
+//{
+//	if (m_svg_widget) m_svg_widget->convert_attribute_to_stateful(attribute_name, state_value_map);
+//}
 
 QSize Layers::Graphic::image_size()
 {
 	return m_image_size;
+}
+
+void Graphic::replace_all_attributes_with(Graphic* graphic)
+{
+	Widget::replace_all_attributes_with(graphic);
+
+	if (m_svg_widget) m_svg_widget->replace_all_attributes_with(graphic->m_svg_widget);
 }
 
 void Graphic::set_hovering(bool cond)
@@ -162,30 +162,19 @@ SVG* Graphic::svg() const
 	return m_svg_widget;
 }
 
-void Graphic::update_theme_dependencies()
-{
-	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
-
-	setFixedSize(
-		border_thickness + m_image_size.width() + border_thickness,
-		border_thickness + m_image_size.height() + border_thickness);
-
-	if (m_bitmap_label) m_bitmap_label->move(border_thickness, border_thickness);
-	if (m_svg_widget)
-	{
-		m_svg_widget->update_theme_dependencies();
-		m_svg_widget->move(border_thickness, border_thickness);
-	}
-	if (m_image_sequence_label) m_image_sequence_label->move(border_thickness, border_thickness);
-}
-
-void Graphic::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
-}
+//void Graphic::update_theme_dependencies()
+//{
+//	int border_thickness = a_border_thickness.value<int>();
+//
+//	setFixedSize(
+//		border_thickness + m_image_size.width() + border_thickness,
+//		border_thickness + m_image_size.height() + border_thickness);
+//
+//	if (m_bitmap_label) m_bitmap_label->move(border_thickness, border_thickness);
+//	if (m_svg_widget)
+//	{
+//		m_svg_widget->update_theme_dependencies();
+//		m_svg_widget->move(border_thickness, border_thickness);
+//	}
+//	if (m_image_sequence_label) m_image_sequence_label->move(border_thickness, border_thickness);
+//}

@@ -1,7 +1,7 @@
 #ifndef THEMEABLE_H
 #define THEMEABLE_H
 
-#include "AttributeSet.h"
+#include "Attribute.h"
 
 namespace Layers
 {
@@ -35,10 +35,6 @@ namespace Layers
 	public:
 		~Themeable();
 
-		void add_attribute(const QString& attribute_name, QVariant value);
-
-		void add_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
-
 		/*!
 			Adds a themeable to the child themeable references list.
 
@@ -63,6 +59,8 @@ namespace Layers
 		*/
 		virtual void apply_theme(Theme& theme);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs);
+
 		/*!
 			Assigns tag prefixes from the parent and the parent's name.
 
@@ -75,23 +73,21 @@ namespace Layers
 		*/
 		void assign_tag_prefixes(QList<QString> parent_prefixes = QList<QString>(), const QString& parent_name = "");
 
-		Attribute* attribute(const QString& attribute_name);
-
 		/*!
 			Get a reference to the attribute set of the given state.
 
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		AttributeSet& attribute_set();
+		QMap<QString, Attribute*>& attributes();
 
-		QMap<QString, AttributeWidget*>& attribute_widgets();
+		QList<AttributeLayoutItem*>& attribute_layout();
+
+		//QMap<QString, AttributeWidget*>& attribute_widgets();
 
 		QList<Themeable*>& child_themeable_references();
 
-		void convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map);
-
-		void copy_attribute_values_to(Theme* theme);
+		//void copy_attribute_values_to(Theme* theme);
 
 		/*!
 			Gets the address of the currently applied theme. Returns nullptr if no theme has been applied.
@@ -106,13 +102,6 @@ namespace Layers
 			@returns Address of customize panel, or nullptr
 		*/
 		CustomizePanel* customize_panel() const;
-
-		/*!
-			Adds the given attribute to an attribute filtration list.
-
-			@param attribute to filter
-		*/
-		void filter_attribute(const QString& attribute);
 
 		/*!
 			Get the address of the themeable's icon. Returns nullptr if no icon exists.
@@ -139,7 +128,7 @@ namespace Layers
 			This is a pure virtual function that must be defined by other classes that inherit the
 			Themeable class. This function should be used to call the inheriting QWidget's update().
 		*/
-		virtual void issue_update() = 0;
+		//virtual void issue_update() = 0;
 
 		/*!
 			Get the address of the proper name. Returns nullptr if no proper name has been set.
@@ -162,22 +151,18 @@ namespace Layers
 		*/
 		void remove_child_themeable_reference(Themeable* child_themeable);
 
-		void replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute);
-
-		//void set_ACW_primary(const QString& ACW_name, bool is_primary);
-
 		void set_is_app_themeable(bool is_app_themeable);
 
 		void set_functionality_disabled(bool disabled = true);
 
-		void set_attribute_value(
-			const QString& state,
-			const QString& attribute_name,
-			QVariant value);
+		//void set_attribute_value(
+		//	const QString& state,
+		//	const QString& attribute_name,
+		//	QVariant value);
 
-		void set_attribute_value(
-			const QString& attribute_name,
-			QVariant value);
+		//void set_attribute_value(
+		//	const QString& attribute_name,
+		//	QVariant value);
 
 		/*!
 			Sets an icon for the themeable; replaces it if one already exists.
@@ -215,8 +200,8 @@ namespace Layers
 		*/
 		virtual void set_state(const QString& state);
 
-		template<typename T>
-		void replace_all_attributes_with(T* themeable);
+		//template<typename T>
+		//void replace_all_attributes_with(T* themeable);
 
 		QString state() const;
 
@@ -233,7 +218,7 @@ namespace Layers
 
 			@returns List of states that identify attribute sets
 		*/
-		QList<QString> states() const;
+		//QList<QString> states() const;
 
 		/*!
 			Get the theme tag.
@@ -251,7 +236,7 @@ namespace Layers
 
 			@returns Theme tag
 		*/
-		QString& theme_tag();
+		QString& tag();
 
 		/*!
 			Clears the tag prefix list
@@ -275,7 +260,7 @@ namespace Layers
 			to change when a theme gets applied that can't be changed through attributes. However, it
 			is not required to implement this function.
 		*/
-		virtual void update_theme_dependencies();
+		//virtual void update_theme_dependencies();
 
 	protected:
 		/*!
@@ -289,7 +274,7 @@ namespace Layers
 		*/
 		virtual void init_attributes();
 
-		virtual void init_attribute_widgets();
+		//virtual void init_attribute_widgets();
 
 		/*!
 			Initializes the customize panel.
@@ -329,12 +314,14 @@ namespace Layers
 		QString* m_name{ nullptr };
 		QString* m_proper_name{ nullptr };
 		QString m_state{ "" };
-		QString m_theme_tag{ "" };
+		QString m_tag{ "" };
 
-		QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
-		QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
+		//QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
+		//QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
 
-		AttributeSet m_attribute_set{ AttributeSet() };
+		QList<AttributeLayoutItem*> m_attribute_layout{ QList<AttributeLayoutItem*>() };
+
+		QMap<QString, Attribute*> m_attributes{ QMap<QString, Attribute*>() };
 
 		QList<Themeable*> m_child_themeable_references;
 
@@ -344,20 +331,21 @@ namespace Layers
 		Theme* m_current_theme{ nullptr };
 	};
 
-	template<typename T>
-	inline void Themeable::replace_all_attributes_with(T* themeable)
-	{
-		if (typeid(*this) == typeid(*themeable))
-		{
-			m_attribute_set.replace_all_with(themeable->attribute_set());
+	//template<typename T>
+	//inline void Themeable::replace_all_attributes_with(T* themeable)
+	//{
+	//	if (typeid(*this) == typeid(*themeable))
+	//	{
+	//		for (const QString& attr_tag : m_attributes.keys())
+	//			Attribute::replace(attributes()[attr_tag], themeable->attributes()[attr_tag]);
 
-			for (Themeable* this_child_themeable : m_child_themeable_references)
-				if (this_child_themeable->m_name)
-					for (Themeable* child_themeable : themeable->m_child_themeable_references)
-						if (*child_themeable->m_name == *this_child_themeable->m_name)
-							this_child_themeable->replace_all_attributes_with(child_themeable);
-		}
-	}
+	//		for (Themeable* this_child_themeable : m_child_themeable_references)
+	//			if (this_child_themeable->m_name)
+	//				for (Themeable* child_themeable : themeable->m_child_themeable_references)
+	//					if (*child_themeable->m_name == *this_child_themeable->m_name)
+	//						this_child_themeable->replace_all_attributes_with(child_themeable);
+	//	}
+	//}
 }
 
 #endif // THEMEABLE_H

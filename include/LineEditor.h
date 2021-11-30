@@ -17,17 +17,19 @@ namespace Layers
 	public:
 		LineEditor(QWidget* parent = nullptr);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+
 		void reconnect_text_attribute();
 
 		void init_attributes();
+
+		void replace_all_attributes_with(LineEditor* line_editor);
 
 		void set_default_value(const QString& default_value);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
 		void set_margin(int margin);
 		void set_margin(int left, int top, int right, int bottom);
-
-		void set_target_attribute(Attribute* target_attribute);
 
 		void set_text(const QString& text);
 		void set_validator(const QValidator* validator);
@@ -40,21 +42,19 @@ namespace Layers
 
 		void update_theme_dependencies();
 
+		Attribute a_left_padding{ Attribute("Left Padding", QVariant::fromValue(3)) };
+		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
+		Attribute a_text{ Attribute("Text", QString("")) };
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 	private:
-		QList<QString> m_attribute_states{ QList<QString>() };
-
-		QString m_current_editting_state{ "" };
-
 		QString* m_default_value{ nullptr };
 
 		bool m_disabled{ false };
 
 		QLineEdit* m_line_edit{ new QLineEdit(this) };
-
-		Attribute* m_attribute{ nullptr };
 	};
 }
 

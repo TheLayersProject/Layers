@@ -47,8 +47,14 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 
 	for (SettingsTab* st : m_settings_tabs)
 	{
-		connect(st, &SettingsTab::clicked, [settings_tab] { settings_tab->set_state("Unselected"); });
-		connect(settings_tab, &SettingsTab::clicked, [st] { st->set_state("Unselected"); });
+		connect(st, &SettingsTab::clicked, [settings_tab] {
+			settings_tab->set_state("Unselected");
+			settings_tab->update();
+			});
+		connect(settings_tab, &SettingsTab::clicked, [st] {
+			st->set_state("Unselected");
+			st->update();
+			});
 	}
 
 	m_settings_tabs.append(settings_tab);
@@ -205,17 +211,6 @@ bool SettingsMenu::eventFilter(QObject* object, QEvent* event)
 	Widget::eventFilter(object, event);
 
 	return false;
-}
-
-void SettingsMenu::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void SettingsMenu::shrink_tabs()

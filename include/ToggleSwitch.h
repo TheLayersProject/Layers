@@ -1,7 +1,8 @@
 #ifndef TOGGLESWITCH_H
 #define TOGGLESWITCH_H
 
-#include <QGraphicsOpacityEffect>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "Widget.h"
 
@@ -17,14 +18,26 @@ namespace Layers
 		void toggled_event();
 
 	public:
-		ToggleSwitch(QWidget* parent = nullptr);
-		ToggleSwitch(const QString& first_label_text, const QString& second_label_text, QWidget* parent = nullptr);
+		ToggleSwitch(bool vertical = false, QWidget* parent = nullptr);
+
+		void replace_all_attributes_with(ToggleSwitch* fill_aw);
+
+		void setFixedHeight(int h);
 
 		void set_toggled(bool toggled);
 
 		void toggle();
 
 		bool toggled() const;
+
+		void update_layout_margins();
+
+		void update_spacer_size();
+
+		Attribute a_padding_left{ Attribute("Left Padding", QVariant::fromValue(2))};
+		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(2)) };
+		Attribute a_padding_right{ Attribute("Right Padding", QVariant::fromValue(2)) };
+		Attribute a_padding_bottom{ Attribute("Bottom Padding", QVariant::fromValue(2)) };
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
@@ -36,15 +49,14 @@ namespace Layers
 	private:
 		void setup_layout();
 
-		Label* m_first_label{ nullptr };
-		Label* m_second_label{ nullptr };
+		QHBoxLayout* m_layout_h{ nullptr };
 
-		QGraphicsOpacityEffect* m_first_label_opacity{ new QGraphicsOpacityEffect };
-		QGraphicsOpacityEffect* m_second_label_opacity{ new QGraphicsOpacityEffect };
+		QVBoxLayout* m_layout_v{ nullptr };
 
 		Widget* m_spacer{ new Widget };
 		Widget* m_square{ new Widget };
-		Widget* m_switch{ new Widget };
+
+		bool m_vertical{ false };
 	};
 }
 

@@ -17,21 +17,26 @@ Theme Layers::build_layers_blue_theme()
 	//blue_theme.add_attribute("app/TilemapEditor/start_up_page", "background_color", QColor("#28405f"));
 
 	// Window
-	blue_theme.add_attribute("layers/window", "border_gradient_disabled", false);
-	blue_theme.add_attribute("layers/window", "border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	blue_theme.add_attribute("layers/window", "border_color", QColor("#4571A2"));
-	blue_theme.add_attribute("layers/window", "background_color", QColor("#001122"));
-	blue_theme.add_attribute("layers/window", "background_color_hover_disabled", true);
-	blue_theme.add_attribute("layers/window", "background_disabled", false);
-	blue_theme.add_attribute("layers/window", "corner_radius_tl", 10);
-	blue_theme.add_attribute("layers/window", "corner_radius_tr", 10);
-	blue_theme.add_attribute("layers/window", "corner_radius_bl", 10);
-	blue_theme.add_attribute("layers/window", "corner_radius_br", 10);
-	blue_theme.add_attribute("layers/window", "corner_color_disabled", true);
-	blue_theme.add_attribute("layers/window", "border_thickness", 15);
-	blue_theme.add_attribute("layers/window", "outline_color_disabled", true);
-	blue_theme.add_attribute("layers/window", "outline_color", QColor(Qt::black));
-	blue_theme.add_attribute("layers/window", "corner_color", QColor(Qt::black));
+	blue_theme.add_attributes("layers/window" {
+		{ "border_fill": Attribute("Border Fill", QVariant::fromValue(border_gradient_stops)) },
+		{ "border_thickness": Attribute("Border Thickness", 15) },
+		{ "corner_color": Attribute("Corner Color", QColor(Qt::black)) },
+		{ "corner_fill_disabled": Attribute("Corner Fill Disabled", true) },
+		{ "corner_radius_tl": Attribute("Top-Left Corner Radius", 10) },
+		{ "corner_radius_tr": Attribute("Top-Right Corner Radius", 10) },
+		{ "corner_radius_bl": Attribute("Bottom-Left Corner Radius", 10) },
+		{ "corner_radius_br": Attribute("Bottom-Right Corner Radius", 10) },
+		{ "fill": Attribute("Fill", QColor("#001122")) },
+		{ "fill_disabled": Attribute("Fill Disabled", false) },
+		{ "hover_fill": Attribute("Hover Fill", QColor(Qt::white)) },
+		{ "hover_fill_disabled": Attribute("Hover Fill Disabled", true) },
+		{ "margin_left": Attribute("Left Margin", 0) },
+		{ "margin_top": Attribute("Top Margin", 0) },
+		{ "margin_right": Attribute("Right Margin", 0) },
+		{ "margin_bottom": Attribute("Bottom Margin", 0) },
+		{ "outline_color": Attribute("Outline Color", QColor(Qt::black)) },
+		{ "outline_fill_disabled": Attribute("Outline Fill Disabled", true) }
+	});
 
 	// Titlebar
 	blue_theme.add_attribute("layers/titlebar", "background_color", QColor(Qt::white));

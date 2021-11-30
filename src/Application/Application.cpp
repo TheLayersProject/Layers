@@ -82,7 +82,7 @@ void Application::create_theme(const QString& new_theme_name, const QString& cop
 
 	Theme& new_theme = m_themes[new_theme_name];
 
-	new_theme.copy_attribute_sets_from(m_themes[copy_theme_name]);
+	new_theme.copy_from(m_themes[copy_theme_name]);
 
 	save_theme(m_themes[new_theme_name]);
 }
@@ -95,12 +95,6 @@ Theme* Layers::Application::current_theme() const
 QFile* Application::icon_file()
 {
 	return m_icon_file;
-}
-
-void Application::issue_update()
-{
-	for (Themeable* themeable : m_child_themeable_references)
-		themeable->issue_update();
 }
 
 QMap<QString, Theme>& Application::themes()
@@ -306,15 +300,16 @@ void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
 {
 	Theme& light_theme = m_themes["Light"];
 
-	for (const QString& themeable_tag : light_theme.attribute_sets().keys())
+	for (const QString& themeable_tag : light_theme.themeable_tags())
 	{
 		if (!theme_missing_attributes.contains_attributes_for_tag(themeable_tag))
-			theme_missing_attributes.add_attribute_set(themeable_tag, light_theme.attribute_set(themeable_tag));
+			theme_missing_attributes.add_attributes(themeable_tag, light_theme[themeable_tag]);
 		else
 		{
-			for (Attribute* attribute : light_theme.attribute_sets()[themeable_tag].attributes())
-				if (!theme_missing_attributes.contains_attribute(themeable_tag, attribute->name()))
-					theme_missing_attributes.add_attribute(themeable_tag, attribute->name(), attribute->value());
+			// TODO:
+			//for (Attribute* attribute : light_theme[themeable_tag])
+			//	if (!theme_missing_attributes.contains_attribute(themeable_tag, attribute->name()))
+			//		theme_missing_attributes.add_attribute(themeable_tag, attribute->name(), attribute->value());
 		}
 	}
 }
@@ -369,7 +364,7 @@ void Application::init_themes()
 		if (file_name == "blue" || file_name == "dark" || file_name == "light")
 			m_app_themes_dir.remove(file_name);
 
-	// Load prebuilt theme files
+	// Load prebuilt theme files (for Production)
 	//m_themes.insert("Blue", load_theme(QFile(":/themes/blue")));
 	//m_themes.insert("Dark", load_theme(QFile(":/themes/dark")));
 	//m_themes.insert("Light", load_theme(QFile(":/themes/light")));
@@ -383,12 +378,12 @@ void Application::init_themes()
 	save_theme(m_themes["Dark"]);
 	save_theme(m_themes["Light"]);
 
-	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
-	{
-		Theme loaded_theme = load_theme(QFile(m_app_themes_dir.absoluteFilePath(file_name)));
+	//for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
+	//{
+	//	Theme loaded_theme = load_theme(QFile(m_app_themes_dir.absoluteFilePath(file_name)));
 
-		m_themes.insert(loaded_theme.name(), loaded_theme);
-	}
+	//	m_themes.insert(loaded_theme.name(), loaded_theme);
+	//}
 
 	if (m_themes.contains(m_settings.value("themes/active_theme").value<QString>()))
 		apply_theme(m_themes[m_settings.value("themes/active_theme").value<QString>()]);

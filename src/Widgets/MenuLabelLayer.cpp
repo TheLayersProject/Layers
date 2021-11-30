@@ -19,8 +19,6 @@ MenuLabelLayer::MenuLabelLayer(Menu* menu, QWidget* parent) :
 
 	m_back_button->set_name("back_button");
 	m_back_button->set_proper_name("Back Button");
-	m_back_button->set_attribute_value("#arrow", QColor("#6d6d6d"));
-	m_back_button->set_attribute_value("#arrow_hover", QColor("#2b2b2b"));
 	m_back_button->set_padding(11, 13, 6, 14);
 
 	m_icon_button->set_name("icon_button");
@@ -41,13 +39,13 @@ MenuLabelLayer::MenuLabelLayer(Menu* menu, QWidget* parent) :
 
 void MenuLabelLayer::init_attributes()
 {
-	set_attribute_value("background_color", QColor("#e6e6e6"));
-	set_attribute_value("corner_radius_tl", 10);
-	set_attribute_value("corner_radius_tr", 10);
-	set_attribute_value("corner_radius_bl", 10);
-	set_attribute_value("corner_radius_br", 10);
+	a_fill.set_value(QColor("#e6e6e6"));
+	a_corner_radius_tl.set_value(10);
+	a_corner_radius_tr.set_value(10);
+	a_corner_radius_bl.set_value(10);
+	a_corner_radius_br.set_value(10);
 
-	m_stretch_widget->set_attribute_value("background_disabled", true);
+	m_stretch_widget->a_fill.set_disabled();
 }
 
 void MenuLabelLayer::init_child_themeable_reference_list()
@@ -55,6 +53,15 @@ void MenuLabelLayer::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_back_button);
 	add_child_themeable_reference(m_icon_button);
 	add_child_themeable_reference(m_text_label);
+}
+
+void MenuLabelLayer::replace_all_attributes_with(MenuLabelLayer* mll)
+{
+	Widget::replace_all_attributes_with(mll);
+
+	if (m_back_button) m_back_button->replace_all_attributes_with(mll->m_back_button);
+	if (m_icon_button) m_icon_button->replace_all_attributes_with(mll->m_icon_button);
+	if (m_text_label) m_text_label->replace_all_attributes_with(mll->m_text_label);
 }
 
 void MenuLabelLayer::shrink()
@@ -94,16 +101,6 @@ Button* MenuLabelLayer::icon_button() const
 Label* MenuLabelLayer::text_label() const
 {
 	return m_text_label;
-}
-
-void MenuLabelLayer::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
 }
 
 void MenuLabelLayer::setup_layout()

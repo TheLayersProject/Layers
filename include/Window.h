@@ -56,8 +56,6 @@ namespace Layers
 		void settings_clicked();
 
 	protected:
-		void init_attribute_widgets();
-
 		void init_child_themeable_reference_list();
 
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;

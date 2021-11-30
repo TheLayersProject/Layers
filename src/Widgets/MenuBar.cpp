@@ -54,8 +54,8 @@ void MenuBar::issue_update()
 
 void MenuBar::init_attributes()
 {
-	add_attribute("text_color", QColor(Qt::darkGray));
-	add_attribute("selected_text_color", QColor(Qt::lightGray));
+	//add_attribute("text_color", QColor(Qt::darkGray));
+	//add_attribute("selected_text_color", QColor(Qt::lightGray));
 }
 
 void MenuBar::update_theme_dependencies()
@@ -68,19 +68,19 @@ QString MenuBar::build_stylesheet()
 	return
 		"QMenuBar {"
 		"background: transparent;"
-		"color: " + m_attribute_set.attribute_value("text_color")->value<QColor>().name() + ";"
+		"color: " + a_text_color->value<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item {"
 		"spacing: 3px;"
 		"padding: 1px 4px;"
 		"background: transparent;"
-		"color: " + m_attribute_set.attribute_value("text_color")->value<QColor>().name() + ";"
+		"color: " + a_text_color->value<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:selected {"
 		"background: transparent;"
-		"color: " + m_attribute_set.attribute_value("selected_text_color")->value<QColor>().name() + ";"
+		"color: " + a_selected_text_color->value<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:pressed {"

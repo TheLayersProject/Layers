@@ -28,7 +28,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
 		//m_current_item_label->attribute_set().attribute("color"),
 		//m_attribute_set.attribute("line_edit_text_color"));
 
-    replace_attribute_with_proxy("line_edit_text_color", m_current_item_label->attribute("color"));
+    a_line_edit_text_color.get_values_from(m_current_item_label->a_text_color);
 
     m_drop_down->installEventFilter(this);
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);
@@ -39,7 +39,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_drop_down->set_proper_name("Drop Down");
 
     m_line_edit->installEventFilter(this);
-    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + m_attribute_set.attribute_value("line_edit_text_color")->value<QColor>().name() + "; }");
+    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + a_line_edit_text_color.value<QColor>().name() + "; }");
     m_line_edit->hide();
 
     setFixedSize(250, 60);
@@ -128,18 +128,19 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
-    add_attribute("line_edit_text_color", QColor(Qt::black));
-    set_attribute_value("corner_radius_tl", 10);
-    set_attribute_value("corner_radius_tr", 10);
-    set_attribute_value("corner_radius_bl", 10);
-    set_attribute_value("corner_radius_br", 10);
-    set_attribute_value("background_color", QColor(Qt::lightGray));
+    //add_attribute("line_edit_text_color", QColor(Qt::black));
 
-    m_drop_down->set_attribute_value("corner_radius_tl", 10);
-    m_drop_down->set_attribute_value("corner_radius_tr", 10);
-    m_drop_down->set_attribute_value("corner_radius_bl", 10);
-    m_drop_down->set_attribute_value("corner_radius_br", 10);
-    m_drop_down->set_attribute_value("background_disabled", true);
+    a_corner_radius_tl.set_value(10);
+    a_corner_radius_tr.set_value(10);
+    a_corner_radius_bl.set_value(10);
+    a_corner_radius_br.set_value(10);
+    a_fill.set_value(QColor(Qt::lightGray));
+
+    m_drop_down->a_corner_radius_tl.set_value(10);
+    m_drop_down->a_corner_radius_tr.set_value(10);
+    m_drop_down->a_corner_radius_bl.set_value(10);
+    m_drop_down->a_corner_radius_br.set_value(10);
+    m_drop_down->a_fill.set_disabled();
 }
 
 void Combobox::init_child_themeable_reference_list()
@@ -200,7 +201,9 @@ void Combobox::setFixedSize(const QSize& s)
 
     m_current_item_label->move(width() * 0.09, height() / 2 - m_current_item_label->height() / 2);
 
-    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + m_attribute_set.attribute_value("line_edit_text_color")->value<QColor>().name() + "; }");
+    m_line_edit->setStyleSheet(
+        "QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " +
+        a_line_edit_text_color.value<QColor>().name() + "; }");
 }
 
 void Combobox::setFixedSize(int w, int h)
@@ -225,7 +228,9 @@ QList<QString> Combobox::items()
 
 void Combobox::update_theme_dependencies()
 {
-    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + m_attribute_set.attribute_value("line_edit_text_color")->value<QColor>().name() + "; }");
+    m_line_edit->setStyleSheet(
+        "QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " +
+        a_line_edit_text_color.value<QColor>().name() + "; }");
 }
 
 void Combobox::line_edit_return_pressed()
@@ -316,22 +321,6 @@ bool Combobox::eventFilter(QObject* object, QEvent* event)
     }
 
     return false;
-}
-
-void Combobox::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-
-	//m_drop_down->attribute_widgets()["border_awc"]->set_primary(false);
-	//m_drop_down->attribute_widgets()["hover_background_caw"]->set_primary(false);
-	//m_drop_down->attribute_widgets()["outline_caw"]->set_primary(false);
-	//m_drop_down->attribute_widgets()["corner_color_caw"]->set_primary(false);
-	//m_drop_down->attribute_widgets()["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void Combobox::setup_layout()

@@ -23,12 +23,16 @@ namespace Layers
 
 		void set_attribute(Attribute* attribute);
 
+		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5)) };
+		//Attribute a_inner_border_color{ Attribute("Inner Border Color", QColor("#2c2c2c")) };
+		//Attribute a_outer_border_color{ Attribute("Outer Border Color", QColor("#d6d6d6")) };
+
 	public slots:
 		void set_current_editting_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
-		void paintEvent(QPaintEvent* event);
+		//void paintEvent(QPaintEvent* event);
 
 	private:
 		bool clicking_disabled{ false };

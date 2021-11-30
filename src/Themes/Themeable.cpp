@@ -6,8 +6,7 @@
 #include "../../../include/Themeable.h"
 
 using Layers::Attribute;
-using Layers::AttributeSet;
-using Layers::AttributeWidget;
+using Layers::AttributeLayoutItem;
 using Layers::CustomizePanel;
 using Layers::Graphic;
 using Layers::Themeable;
@@ -22,41 +21,14 @@ Themeable::~Themeable()
 	m_proper_name = nullptr;
 }
 
-void Themeable::add_attribute(const QString& attribute_name, QVariant value)
+QMap<QString, Attribute*>& Themeable::attributes()
 {
-	if (!m_attribute_set.contains(attribute_name))
-	{
-		Attribute* attr = new Attribute(attribute_name, value);
-
-		m_attribute_set.add_attribute(attr);
-
-		attr->connect(attr, &Attribute::value_changed, [this]
-			{
-				update_theme_dependencies();
-				issue_update();
-			});
-	}
+	return m_attributes;
 }
 
-void Themeable::add_attribute(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
+QList<AttributeLayoutItem*>& Themeable::attribute_layout()
 {
-	if (!m_attribute_set.contains(attribute_name))
-	{
-		Attribute* attr = new Attribute(attribute_name, state_value_map);
-
-		m_attribute_set.add_attribute(attr);
-
-		attr->connect(attr, &Attribute::value_changed, [this]
-			{
-				update_theme_dependencies();
-				issue_update();
-			});
-	}
-}
-
-AttributeSet& Themeable::attribute_set()
-{
-	return m_attribute_set;
+	return m_attribute_layout;
 }
 
 CustomizePanel* Themeable::customize_panel() const
@@ -68,11 +40,7 @@ CustomizePanel* Themeable::init_customize_panel()
 {
 	m_customize_panel = new CustomizePanel(this);
 
-	init_attribute_widgets();
-
 	m_customize_panel->setup_layout();
-
-	m_customize_panel->update_attribute_widget_background_colors();
 	
 	return m_customize_panel;
 }
@@ -90,7 +58,8 @@ void Themeable::initialize_and_acquire_panels(QList<CustomizePanel*>& list)
 {
 	for (Themeable* child_themeable : m_child_themeable_references)
 	{
-		if (child_themeable->proper_name()) child_themeable->initialize_and_acquire_panels(list); // TODO: Consider a Themeable::is_customizable() function so this is clearer
+		// TODO: Consider a Themeable::is_customizable() function so this is clearer
+		if (child_themeable->proper_name()) child_themeable->initialize_and_acquire_panels(list);
 	}
 
 	list.append(init_customize_panel());
@@ -108,20 +77,32 @@ void Themeable::apply_theme(Theme& theme)
 	if (!m_name) qDebug() << "Unable to apply theme.  You must apply a name to the widget first.";
 	else
 	{
-		if (theme.contains_attributes_for_tag(theme_tag()))
+		if (theme.contains_attributes_for_tag(tag()))
 		{
-			//qDebug() << theme_tag();
+			//if (tag() == "layers/customize_menu/sidebar/customize_panel/corner_radii_aw/line_editor")
+			//{
+			//	qDebug() << "Found CRAW Line Editor";
+			//}
 
-			m_attribute_set.copy_values_from(theme.attribute_set(theme_tag()));
+			apply_theme_attributes(theme[tag()]);
 
-			//m_attribute_set = theme.attribute_set(theme_tag());
+			QMap<QString, Attribute*>& theme_attrs = theme[tag()];
 
-			update_theme_dependencies();
+			//for (const QString& attr_tag : m_attributes.keys())
+			//{
+			//	m_attributes[attr_tag]->copy_values_from(theme_attrs[attr_tag]);
+			//}
+
+			//update_theme_dependencies();
 		}
 
 		for (Themeable* child_themeable : m_child_themeable_references)
 			child_themeable->apply_theme(theme);
 	}
+}
+
+void Themeable::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+{
 }
 
 void Themeable::reapply_theme()
@@ -148,24 +129,16 @@ void Themeable::remove_child_themeable_reference(Themeable* child_themeable)
 	child_themeable->unassign_prefixes();
 }
 
-void Themeable::replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute)
-{
-	if (m_attribute_set.replace_with_proxy(attribute_name, proxy_attribute))
-	{
-		proxy_attribute->connect(proxy_attribute, &Attribute::value_changed, [this]
-			{
-				update_theme_dependencies();
-				issue_update();
-			});
-	}
-}
-
-//void Themeable::set_ACW_primary(const QString& ACW_name, bool is_primary)
+//void Themeable::replace_attribute_with_proxy(const QString& attribute_name, Attribute* proxy_attribute)
 //{
-//	if (m_attribute_widgets.contains(ACW_name))
-//		m_attribute_widgets[ACW_name]->set_primary(is_primary);
-//	else
-//		m_ACW_pre_init_primary_values[ACW_name] = is_primary;
+//	if (m_attribute_set.replace_with_proxy(attribute_name, proxy_attribute))
+//	{
+//		proxy_attribute->connect(proxy_attribute, &Attribute::value_changed, [this]
+//			{
+//				update_theme_dependencies();
+//				issue_update();
+//			});
+//	}
 //}
 
 void Themeable::set_is_app_themeable(bool is_app_themeable)
@@ -179,25 +152,6 @@ void Themeable::set_is_app_themeable(bool is_app_themeable)
 void Themeable::set_functionality_disabled(bool disabled)
 {
 	m_functionality_disabled = disabled;
-}
-
-void Themeable::set_attribute_value(const QString& state, const QString& attribute_name, QVariant value)
-{
-	if (m_attribute_set.contains(attribute_name))
-	{
-		Attribute* attr = m_attribute_set.attribute(attribute_name);
-
-		if (attr->contains_state(state))
-			attr->set_value(state, value);
-	}
-}
-
-void Themeable::set_attribute_value(const QString& attribute_name, QVariant value)
-{
-	if (m_attribute_set.contains(attribute_name))
-	{
-		m_attribute_set.attribute(attribute_name)->set_value(value);
-	}
 }
 
 void Themeable::assign_tag_prefixes(QList<QString> parent_prefixes, const QString& parent_name)
@@ -216,11 +170,6 @@ void Themeable::assign_tag_prefixes(QList<QString> parent_prefixes, const QStrin
 	m_tag_prefixes_assigned = true;
 }
 
-Attribute* Themeable::attribute(const QString& attribute_name)
-{
-	return m_attribute_set.attribute(attribute_name);
-}
-
 void Themeable::unassign_prefixes()
 {
 	m_tag_prefixes.clear();
@@ -233,49 +182,30 @@ void Themeable::unassign_prefixes()
 	}
 }
 
-QMap<QString, AttributeWidget*>& Themeable::attribute_widgets()
-{
-	return m_attribute_widgets;
-}
+//QMap<QString, AttributeWidget*>& Themeable::attribute_widgets()
+//{
+//	return m_attribute_widgets;
+//}
 
 QList<Themeable*>& Themeable::child_themeable_references()
 {
 	return m_child_themeable_references;
 }
 
-void Themeable::convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
-{
-	m_is_stateful = true;
-
-	if (m_attribute_set.contains(attribute_name))
-	{
-		m_attribute_set.remove_attribute(attribute_name);
-
-		m_attribute_set.add_attribute(new Attribute(attribute_name, state_value_map));
-	}
-	else qDebug() << "WARNING: Failed to convert attribute to stateful: '" + attribute_name + "' not found in attribute set.";
-}
-
-void Themeable::copy_attribute_values_to(Theme* theme)
-{
-	if (theme->contains_attributes_for_tag(theme_tag()))
-	{
-		theme->copy_attribute_values_of(this);
-
-		for (Themeable* child_themeable : m_child_themeable_references)
-			child_themeable->copy_attribute_values_to(theme);
-	}
-}
+//void Themeable::copy_attribute_values_to(Theme* theme)
+//{
+//	if (theme->contains_attributes_for_tag(tag()))
+//	{
+//		theme->copy_attribute_values_of(this);
+//
+//		for (Themeable* child_themeable : m_child_themeable_references)
+//			child_themeable->copy_attribute_values_to(theme);
+//	}
+//}
 
 Theme* Themeable::current_theme()
 {
 	return m_current_theme;
-}
-
-void Themeable::filter_attribute(const QString& attribute)
-{
-	// TODO: Consider how filtration needs to work
-	m_filtered_attributes.append(attribute);
 }
 
 void Themeable::unfilter_attribute(const QString& attribute)
@@ -310,14 +240,15 @@ void Themeable::set_state(const QString& state)
 	{
 		m_state = state;
 
-		m_attribute_set.set_state(state);
+		for (Attribute* attr : m_attributes)
+			attr->set_state(state);
 
 		for (Themeable* child_themeable : m_child_themeable_references)
 			child_themeable->set_state(state);
 
-		update_theme_dependencies();
+		//update_theme_dependencies();
 
-		issue_update();
+		//issue_update();
 	}
 }
 
@@ -326,29 +257,29 @@ QString* Layers::Themeable::proper_name() const
 	return m_proper_name;
 }
 
-QString& Themeable::theme_tag()
+QString& Themeable::tag()
 {
-	if (m_theme_tag == "")
+	if (m_tag == "")
 	{
 		if (m_is_app_themeable)
 		{
-			//m_theme_tag += "app/" + *m_app_name + "/";
-			m_theme_tag += "app/";
+			//m_tag += "app/" + *m_app_name + "/";
+			m_tag += "app/";
 		}
 		else
 		{
-			m_theme_tag += "layers/";
+			m_tag += "layers/";
 		}
 
 		for (QString supplemental_prefix : m_tag_prefixes)
 		{
-			m_theme_tag += supplemental_prefix + "/";
+			m_tag += supplemental_prefix + "/";
 		}
 
-		if (m_name) m_theme_tag += *m_name;
+		if (m_name) m_tag += *m_name;
 	}
 
-	return m_theme_tag;
+	return m_tag;
 }
 
 //QMap<QString, StatefulAttribute>& Themeable::stateful_attributes()
@@ -356,22 +287,22 @@ QString& Themeable::theme_tag()
 //	return m_stateful_attributes;
 //}
 
-QList<QString> Themeable::states() const
-{
-	return m_attribute_set.states();
-}
+//QList<QString> Themeable::states() const
+//{
+//	return m_attribute_set.states();
+//}
 
-void Themeable::update_theme_dependencies()
-{
-}
+//void Themeable::update_theme_dependencies()
+//{
+//}
 
 void Themeable::init_attributes()
 {
 }
 
-void Themeable::init_attribute_widgets()
-{
-}
+//void Themeable::init_attribute_widgets()
+//{
+//}
 
 QString Themeable::state() const
 {

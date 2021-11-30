@@ -6,62 +6,37 @@
 
 using Layers::ToggleSwitch;
 
-ToggleSwitch::ToggleSwitch(QWidget* parent) : Widget(parent)
+ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
+	m_vertical{ vertical }, Widget(parent)
 {
 	init_child_themeable_reference_list();
 	init_attributes();
 
 	installEventFilter(this);
-
-	m_switch->set_name("switch");
-	m_switch->setFixedSize(45, 21);
-
-	m_spacer->setFixedWidth(25);
-	m_spacer->hide();
+	setFixedSize(45, 45);
+	set_name("toggle_switch");
 
 	m_square->set_name("square");
 	m_square->setFixedSize(11, 11);
 
-	setFixedSize(45, 45);
+	update_spacer_size();
+	m_spacer->hide();
 
 	setup_layout();
 }
 
-ToggleSwitch::ToggleSwitch(const QString& first_label_text, const QString& second_label_text, QWidget* parent) :
-	m_first_label{ new Label(first_label_text) },
-	m_second_label{ new Label(second_label_text) },
-	Widget(parent)
+void ToggleSwitch::replace_all_attributes_with(ToggleSwitch* tswitch)
 {
-	init_child_themeable_reference_list();
-	init_attributes();
+	Widget::replace_all_attributes_with(tswitch);
 
-	installEventFilter(this);
+	if (m_square) m_square->replace_all_attributes_with(tswitch->m_square);
+}
 
-	m_switch->set_name("switch");
-	m_switch->setFixedSize(45, 21);
+void ToggleSwitch::setFixedHeight(int h)
+{
+	Widget::setFixedHeight(h);
 
-	m_spacer->setFixedWidth(25);
-	m_spacer->hide();
-
-	m_square->set_name("square");
-	m_square->setFixedSize(11, 11);
-
-	m_first_label_opacity->setOpacity(1.0);
-	m_second_label_opacity->setOpacity(0.5);
-
-	m_first_label->set_name("text");
-	m_first_label->set_font_size(14);
-	m_first_label->set_padding(0, 10, 0, 0);
-	m_first_label->setGraphicsEffect(m_first_label_opacity);
-
-	m_second_label->set_name("text");
-	m_second_label->set_font_size(14);
-	m_second_label->set_padding(0, 10, 0, 0);
-	m_second_label->setGraphicsEffect(m_second_label_opacity);
-
-	setFixedSize(m_first_label->width() + 10 + m_switch->width() + 10 + m_second_label->width(), 45);
-
-	setup_layout();
+	update_spacer_size();
 }
 
 void ToggleSwitch::set_toggled(bool toggled)
@@ -79,27 +54,55 @@ void ToggleSwitch::toggle()
 		set_state("Toggled");
 
 		m_spacer->show();
-
-		m_first_label_opacity->setOpacity(0.5);
-		m_second_label_opacity->setOpacity(1.0);
 	}
 	else
 	{
 		set_state("Untoggled");
 
 		m_spacer->hide();
-
-		m_first_label_opacity->setOpacity(1.0);
-		m_second_label_opacity->setOpacity(0.5);
 	}
 
 	emit toggled_event();
+
+	update();
 }
 
 bool ToggleSwitch::toggled() const
 {
 	if (state() == "Toggled") return true;
 	else return false;
+}
+
+void ToggleSwitch::update_layout_margins()
+{
+	int b_thickness = a_border_thickness.value<int>();
+
+	if (m_layout_v)
+		m_layout_v->setContentsMargins(
+			0, a_margin_top.value<int>() + b_thickness + a_padding_top.value<int>(),
+			0, a_padding_bottom.value<int>() + b_thickness + a_margin_bottom.value<int>());
+	else if (m_layout_h)
+		m_layout_h->setContentsMargins(
+			a_margin_left.value<int>() + b_thickness + a_padding_left.value<int>(), 0,
+			a_padding_right.value<int>() + b_thickness + a_margin_right.value<int>(), 0);
+}
+
+void ToggleSwitch::update_spacer_size()
+{
+	int b_thickness = a_border_thickness.value<int>();
+
+	if (m_vertical)
+	{
+		m_spacer->setFixedSize(
+			0, height() - a_margin_top.value<int>() - b_thickness - a_padding_top.value<int>() - m_square->height() - a_padding_bottom.value<int>() - b_thickness - a_margin_bottom.value<int>()
+		);
+	}
+	else
+	{
+		m_spacer->setFixedSize(
+			width() - a_margin_left.value<int>() - b_thickness - a_padding_left.value<int>() - m_square->width() - a_padding_right.value<int>() - b_thickness - a_margin_right.value<int>(), 0
+		);
+	}
 }
 
 bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
@@ -120,75 +123,113 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	set_attribute_value("background_disabled", true);
-
-	m_square->set_attribute_value("corner_radius_tl", 2);
-	m_square->set_attribute_value("corner_radius_tr", 2);
-	m_square->set_attribute_value("corner_radius_bl", 2);
-	m_square->set_attribute_value("corner_radius_br", 2);
-
-	m_switch->set_attribute_value("border_thickness", 3);
-	m_switch->set_attribute_value("corner_radius_tl", 4);
-	m_switch->set_attribute_value("corner_radius_tr", 4);
-	m_switch->set_attribute_value("corner_radius_bl", 4);
-	m_switch->set_attribute_value("corner_radius_br", 4);
-
-	m_spacer->set_attribute_value("background_disabled", true);
-
-	m_switch->convert_attribute_to_stateful("background_color", {
+	a_border_fill.set_values({
+		{ "Untoggled", QColor(Qt::black) },
+		{ "Toggled", QColor("#6fc65b") }
+		});
+	a_border_thickness.set_value(3);
+	a_corner_radius_tl.set_value(4);
+	a_corner_radius_tr.set_value(4);
+	a_corner_radius_bl.set_value(4);
+	a_corner_radius_br.set_value(4);
+	a_fill.set_values({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
+	if (m_vertical)
+	{
+		a_margin_left.set_value(12);
+		a_margin_right.set_value(12);
+	}
+	else
+	{
+		a_margin_top.set_value(12);
+		a_margin_bottom.set_value(12);
+	}
 
-	m_switch->convert_attribute_to_stateful("border_color", {
+	m_square->a_corner_radius_tl.set_value(2);
+	m_square->a_corner_radius_tr.set_value(2);
+	m_square->a_corner_radius_bl.set_value(2);
+	m_square->a_corner_radius_br.set_value(2);
+	m_square->a_fill.set_values({
 		{ "Untoggled", QColor(Qt::black) },
-		{ "Toggled", QColor("#6fc65b") }
+		{ "Toggled", QColor(Qt::white) }
 		});
 
-	m_square->convert_attribute_to_stateful("background_color", {
-		{ "Untoggled", QColor(Qt::black) },
-		{ "Toggled", QColor("#6fc65b") }
-		});
+	//m_spacer->a_fill.set_disabled();
+	m_spacer->a_fill.set_value(QColor(Qt::blue));
 
 	// Set initial state
 	set_state("Untoggled");
+
+	connect(&a_margin_left, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_margin_top, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_margin_right, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_margin_bottom, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_padding_left, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_padding_top, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_padding_right, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
+
+	connect(&a_padding_bottom, &Attribute::value_changed, [this] {
+		update_layout_margins(); update_spacer_size();
+		});
 }
 
 void ToggleSwitch::init_child_themeable_reference_list()
 {
-	if (m_first_label) add_child_themeable_reference(m_first_label);
-	if (m_second_label) add_child_themeable_reference(m_second_label);
-
-	m_switch->add_child_themeable_reference(m_square);
-	add_child_themeable_reference(m_switch);
+	add_child_themeable_reference(m_square);
 }
 
 void ToggleSwitch::setup_layout()
 {
-	QHBoxLayout* main_layout = new QHBoxLayout;
-	QHBoxLayout* switch_layout = new QHBoxLayout;
-
-	switch_layout->setContentsMargins(5, 0, 5, 0);
-	switch_layout->setSpacing(0);
-	switch_layout->addWidget(m_spacer);
-	switch_layout->addWidget(m_square);
-	switch_layout->addStretch();
-
-	m_switch->setLayout(switch_layout);
-
-	main_layout->setContentsMargins(0, 0, 0, 0);
-	main_layout->setSpacing(10);
-
-	if (m_first_label && m_second_label)
+	if (m_vertical)
 	{
-		main_layout->addWidget(m_first_label);
-		main_layout->addWidget(m_switch);
-		main_layout->addWidget(m_second_label);
+		m_layout_v = new QVBoxLayout;
+
+		update_layout_margins();
+
+		m_layout_v->setSpacing(0);
+		m_layout_v->addWidget(m_spacer);
+		m_layout_v->addWidget(m_square);
+		m_layout_v->addStretch();
+		m_layout_v->setAlignment(m_spacer, Qt::AlignHCenter);
+		m_layout_v->setAlignment(m_square, Qt::AlignHCenter);
+
+		setLayout(m_layout_v);
 	}
 	else
 	{
-		main_layout->addWidget(m_switch);
-	}
+		m_layout_h = new QHBoxLayout;
 
-	setLayout(main_layout);
+		update_layout_margins();
+
+		m_layout_h->setSpacing(0);
+		m_layout_h->addWidget(m_spacer);
+		m_layout_h->addWidget(m_square);
+		m_layout_h->addStretch();
+		m_layout_h->setAlignment(m_spacer, Qt::AlignVCenter);
+		m_layout_h->setAlignment(m_square, Qt::AlignVCenter);
+
+		setLayout(m_layout_h);
+	}
 }

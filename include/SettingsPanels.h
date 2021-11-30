@@ -13,9 +13,6 @@ namespace Layers
 
 	public:
 		AppPreferencesSettingsPanel(QWidget* parent = nullptr);
-
-	protected:
-		void init_attribute_widgets();
 	};
 
 	class ThemesSettingsPanel : public Widget
@@ -37,7 +34,6 @@ namespace Layers
 
 	protected:
 		void init_attributes();
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 	private:

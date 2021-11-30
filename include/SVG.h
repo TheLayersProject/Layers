@@ -41,12 +41,18 @@ namespace Layers
 		*/
 		SVG(const SVG& svg_w);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+
 		/*!
 			Rebuilds the SVG string from the SVG elements list.
 		*/
 		void rebuild_svg_str();
 
+		void replace_all_attributes_with(SVG* svg);
+
 		void set_hovering(bool cond = true);
+
+		virtual void set_state(const QString& state) override;
 
 		/*!
 			Updates things that depend on the theme.
@@ -55,7 +61,12 @@ namespace Layers
 			from those elements. And finally, the SVG string is passed to QSvgWidget::load() to update the SVG's
 			appearance.
 		*/
-		void update_theme_dependencies();
+		void update();
+
+		Attribute a_common_color{ Attribute("Common Color", QColor(Qt::black)) };
+		Attribute a_common_hover_color{ Attribute("Common Hover Color", QColor(Qt::darkGray)) };
+		Attribute a_use_common_color{ Attribute("Use Common Color", QVariant::fromValue(false)) };
+		Attribute a_use_common_hover_color{ Attribute("Use Common Hover Color", QVariant::fromValue(false)) };
 
 	protected:
 		/*!
@@ -70,7 +81,7 @@ namespace Layers
 		/*!
 			Calls the QSvgWidget's update() function.
 		*/
-		void issue_update();
+		//void issue_update();
 
 	private:
 		void init_size();

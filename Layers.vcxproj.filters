@@ -60,22 +60,19 @@
     <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidget.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidgetContainer.cpp">
+    <ClCompile Include="src\Widgets\Attribute Widgets\AWGroup.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\ColorAttributeWidget.cpp">
+    <ClCompile Include="src\Widgets\Attribute Widgets\ColorAW.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\CornerRadiiAttributeWidget.cpp">
+    <ClCompile Include="src\Widgets\Attribute Widgets\CornerRadiiAW.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\GradientAttributeWidget.cpp">
+    <ClCompile Include="src\Widgets\Attribute Widgets\GradientAW.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\NumberAttributeWidget.cpp">
-      <Filter>Source Files\Widgets\Attribute Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Widgets\Attribute Widgets\SwitchAttributeWidget.cpp">
+    <ClCompile Include="src\Widgets\Attribute Widgets\NumberAW.cpp">
       <Filter>Source Files\Widgets\Attribute Widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp">
@@ -213,12 +210,6 @@
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\Attributes\AttributeSet.cpp">
-      <Filter>Source Files\Themes\Attributes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Themes\build_themes.cpp">
-      <Filter>Source Files\Themes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Themes\Theme.cpp">
       <Filter>Source Files\Themes</Filter>
     </ClCompile>
@@ -245,6 +236,18 @@
     </ClCompile>
     <ClCompile Include="src\Old\2.2.0a\Attribute_Set_2_2_0_a.cpp">
       <Filter>Source Files\Old\2.2.0a</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\build_themes2.cpp">
+      <Filter>Source Files\Themes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Controls\FillControl.cpp">
+      <Filter>Source Files\Widgets\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Attribute Widgets\FillAW.cpp">
+      <Filter>Source Files\Widgets\Attribute Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp">
+      <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,15 +358,15 @@
     <QtMoc Include="include\Attribute.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\FillControl.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layouts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Theme.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AttributeSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\ImageSequence.h">
@@ -394,6 +397,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Themeable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AttributeSetItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AttributeLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

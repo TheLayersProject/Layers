@@ -1,6 +1,9 @@
 #ifndef CUSTOMIZEMENU_H
 #define CUSTOMIZEMENU_H
 
+#include <QIntValidator>
+
+#include "AttributeWidgets.h"
 #include "Button.h"
 #include "Graphic.h"
 #include "Layouts.h"
@@ -37,7 +40,6 @@ namespace Layers
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 	private:
@@ -45,6 +47,11 @@ namespace Layers
 		void collapse_text_buttons();
 		void expand_text_buttons();
 		void setup_layout();
+
+		AWGroup* m_control_aw_group{ new AWGroup("") };
+		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new AttributeGroup("", QMap<QString, Attribute*>())) };
+		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
+		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0)), new QIntValidator) };
 
 		HorizontalLayout* m_main_layout{ new HorizontalLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };

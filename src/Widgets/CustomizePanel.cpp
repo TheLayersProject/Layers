@@ -1,9 +1,9 @@
-#include "../../include/AttributeWidgets.h"
 #include "../../include/CustomizePanel.h"
 #include "../../include/calculate.h"
 #include "../../include/Window.h"
 
 #include <QApplication>
+#include <QIntValidator>
 
 using Layers::AttributeWidget;
 using Layers::Button;
@@ -24,9 +24,9 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_attributes_label->set_font_size(17);
 	m_attributes_label->set_padding(0, 8, 0, 0);
 
-	m_elements_label->set_name("elements_label");
-	m_elements_label->set_font_size(17);
-	m_elements_label->set_padding(0, 8, 0, 0);
+	m_widgets_label->set_name("widgets_label");
+	m_widgets_label->set_font_size(17);
+	m_widgets_label->set_padding(0, 8, 0, 0);
 
 	m_stateful_attributes_label->set_name("stateful_attributes_label");
 	m_stateful_attributes_label->set_font_size(15);
@@ -54,10 +54,10 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_show_primary_button->set_text_padding(3, 5, 0, 0);
 	m_show_primary_button->hide();
 
-	for (const QString& state : m_themeable->states())
-	{
-		m_state_combobox->add_item(state);
-	}
+	//for (const QString& state : m_themeable->states())
+	//{
+	//	m_state_combobox->add_item(state);
+	//}
 
 	connect(m_show_all_button, &Button::clicked, [this] {
 		m_showing_primary = false;
@@ -71,7 +71,7 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 		for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
 			attribute_widget->show();
 
-		update_attribute_widget_background_colors();
+		//update_attribute_widget_background_colors();
 
 		m_show_all_button->hide();
 		m_show_primary_button->show();
@@ -89,13 +89,13 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 		//for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
 		//	if (!attribute_widget->is_primary()) attribute_widget->hide();
 
-		update_attribute_widget_background_colors();
+		//update_attribute_widget_background_colors();
 
 		m_show_all_button->show();
 		m_show_primary_button->hide();
 	});
 
-	if (m_themeable->child_themeable_references().isEmpty()) m_elements_label->hide();
+	if (m_themeable->child_themeable_references().isEmpty()) m_widgets_label->hide();
 	else
 	{
 		for (Themeable* child_themeable : m_themeable->child_themeable_references())
@@ -113,6 +113,8 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 			}
 		}
 	}
+
+	init_attribute_widgets();
 }
 
 void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
@@ -124,22 +126,18 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	m_stateless_attribute_widgets.append(attribute_widget);
 	m_stateless_attributes_layout->addWidget(attribute_widget);
 	//
-
-
-	// SHOULD ATTRIBUTE WIDGETS KNOW ASSOCIATED THEMEABLES?
-	
 	
 	//if (attribute_widget->attribute())
 	//{
 	//	m_stateful_attribute_widgets.append(attribute_widget);
 	//	m_stateful_attributes_layout->addWidget(attribute_widget);
 
-	//	if (ColorAttributeWidget* caw = dynamic_cast<ColorAttributeWidget*>(attribute_widget))
+	//	if (ColorAW* caw = dynamic_cast<ColorAW*>(attribute_widget))
 	//		connect(
 	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
 	//			caw->color_control(), SLOT(set_current_editting_state(const QString&)));
 
-	//	else if (CornerRadiiAttributeWidget* craw = dynamic_cast<CornerRadiiAttributeWidget*>(attribute_widget))
+	//	else if (CornerRadiiAW* craw = dynamic_cast<CornerRadiiAW*>(attribute_widget))
 	//	{
 	//		connect(
 	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
@@ -168,7 +166,7 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 void CustomizePanel::add_element_button(Button* button, int index)
 {
 	button->set_available_width(252);
-	button->set_attribute_value("background_disabled", true);
+	button->a_fill.set_disabled();
 	button->set_font_size(16);
 	button->set_name("element_button");
 	button->set_text_padding(0, 5, 0, 0);
@@ -182,29 +180,129 @@ void CustomizePanel::add_element_button(Button* button, int index)
 	else m_element_buttons_layout->insertWidget(index, button);
 }
 
-void CustomizePanel::apply_theme(Theme&)
+void CustomizePanel::init_attribute_widgets()
 {
+	for (AttributeLayoutItem* attr_layout_item : m_themeable->attribute_layout())
+	{
+		if (Attribute* attribute = dynamic_cast<Attribute*>(attr_layout_item))
+		{
+			if (attribute->name().contains("Fill"))
+			{
+				FillAW* fill_aw = new FillAW(attribute);
+
+				m_fill_awidgets.append(fill_aw);
+
+				//fill_aw->replace_all_attributes_with(m_control_fill_aw);
+
+				add_attribute_widget(fill_aw);
+			}
+			else if (attribute->name().contains("Color"))
+			{
+				add_attribute_widget(new ColorAW(attribute));
+			}
+			else if (
+				attribute->name().contains("Thickness") ||
+				attribute->name().contains("Margin"))
+			{
+				NumberAW* number_aw = new NumberAW(attribute, new QIntValidator(0, 30));
+
+				m_number_awidgets.append(number_aw);
+
+				//number_aw->replace_all_attributes_with(m_control_number_aw);
+
+				add_attribute_widget(number_aw);
+			}
+		}
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_layout_item))
+		{
+			if (attr_group->name() == "Corner Radii")
+			{
+				m_corner_radii_aw = new CornerRadiiAW(attr_group);
+
+				//corner_radii_aw->replace_all_attributes_with(m_control_corner_radii_aw);
+
+				add_attribute_widget(m_corner_radii_aw);
+			}
+			else
+			{
+				AWGroup* aw_group = new AWGroup(attr_group->name());
+
+				m_aw_groups.append(aw_group);
+
+				//aw_group->replace_all_attributes_with(m_control_aw_group);
+
+				for (Attribute* attribute : attr_group->attributes())
+				{
+					if (attribute->name().contains("Fill"))
+					{
+						FillAW* fill_aw = new FillAW(attribute);
+
+						m_fill_awidgets.append(fill_aw);
+
+						//fill_aw->replace_all_attributes_with(m_control_fill_aw);
+
+						aw_group->add_attribute_widget(fill_aw);
+					}
+					else if (attribute->name().contains("Color"))
+					{
+						aw_group->add_attribute_widget(new ColorAW(attribute));
+					}
+					else if (
+						attribute->name().contains("Thickness") ||
+						attribute->name().contains("Margin"))
+					{
+						NumberAW* number_aw = new NumberAW(attribute, new QIntValidator(0, 30));
+
+						m_number_awidgets.append(number_aw);
+
+						//number_aw->replace_all_attributes_with(m_control_number_aw);
+
+						aw_group->add_attribute_widget(number_aw);
+					}
+				}
+
+				add_attribute_widget(aw_group);
+			}
+		}
+	}
+}
+
+void CustomizePanel::replace_all_attributes_with(CustomizePanel* cpanel)
+{
+	Widget::replace_all_attributes_with(cpanel);
+
+	if (m_attributes_label) m_attributes_label->replace_all_attributes_with(cpanel->m_attributes_label);
+	if (m_widgets_label) m_widgets_label->replace_all_attributes_with(cpanel->m_widgets_label);
+	if (m_show_all_button) m_show_all_button->replace_all_attributes_with(cpanel->m_show_all_button);
+	if (m_show_primary_button) m_show_primary_button->replace_all_attributes_with(cpanel->m_show_primary_button);
+}
+
+void CustomizePanel::replace_all_aw_group_attrs_with(AWGroup* control_aw_group)
+{
+	for (AWGroup* aw_group : m_aw_groups)
+		aw_group->replace_all_attributes_with(control_aw_group);
 }
 
 void CustomizePanel::init_attributes()
 {
-	set_attribute_value("background_disabled", true);
+	// TODO: re-enable
+	a_fill.set_disabled();
 
-	m_show_all_button->set_attribute_value("background_color", QColor("#61ad50"));
-	m_show_all_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_all_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_all_button->set_attribute_value("corner_radius_tl", 5);
-	m_show_all_button->set_attribute_value("corner_radius_tr", 5);
-	m_show_all_button->set_attribute_value("corner_radius_bl", 5);
-	m_show_all_button->set_attribute_value("corner_radius_br", 5);
+	m_show_all_button->a_fill.set_value(QColor("#61ad50"));
+	m_show_all_button->a_hover_fill.set_value(QColor("#6fc65b"));
+	//m_show_all_button->a_text_color->set_value(QColor("#f8f8f8"));
+	m_show_all_button->a_corner_radius_tl.set_value(5);
+	m_show_all_button->a_corner_radius_tr.set_value(5);
+	m_show_all_button->a_corner_radius_bl.set_value(5);
+	m_show_all_button->a_corner_radius_br.set_value(5);
 
-	m_show_primary_button->set_attribute_value("background_color", QColor("#61ad50"));
-	m_show_primary_button->set_attribute_value("background_color_hover", QColor("#6fc65b"));
-	m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->set_attribute_value("corner_radius_tl", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_tr", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_bl", 5);
-	m_show_primary_button->set_attribute_value("corner_radius_br", 5);
+	m_show_primary_button->a_fill.set_value(QColor("#61ad50"));
+	m_show_primary_button->a_hover_fill.set_value(QColor("#6fc65b"));
+	//m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
+	m_show_primary_button->a_corner_radius_tl.set_value(5);
+	m_show_primary_button->a_corner_radius_tr.set_value(5);
+	m_show_primary_button->a_corner_radius_bl.set_value(5);
+	m_show_primary_button->a_corner_radius_br.set_value(5);
 }
 
 void CustomizePanel::init_child_themeable_reference_list()
@@ -214,42 +312,27 @@ void CustomizePanel::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_stateful_attributes_label);
 	add_child_themeable_reference(m_stateless_attributes_label);
 	add_child_themeable_reference(m_attributes_label);
-	add_child_themeable_reference(m_elements_label);
+	add_child_themeable_reference(m_widgets_label);
 	add_child_themeable_reference(m_show_all_button);
 	add_child_themeable_reference(m_show_primary_button);
 }
 
-void CustomizePanel::update_attribute_widget_background_colors()
+void CustomizePanel::replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw)
 {
-	int counter = 0;
+	for (FillAW* fill_aw : m_fill_awidgets)
+		fill_aw->replace_all_attributes_with(control_fill_aw);
+}
 
-	if (m_showing_primary)
-	{
-		for (AttributeWidget* attribute_widget : m_attribute_widgets)
-		{
-			//if (attribute_widget->is_primary())
-			//{
-			if (is_even(counter))
-				attribute_widget->enable_secondary_background_color(false);
-			else
-				attribute_widget->enable_secondary_background_color();
+void CustomizePanel::replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw)
+{
+	for (NumberAW* number_aw : m_number_awidgets)
+		number_aw->replace_all_attributes_with(control_number_aw);
+}
 
-			counter++;
-			//}
-		}
-	}
-	else
-	{
-		for (AttributeWidget* attribute_widget : m_attribute_widgets)
-		{
-			if (is_even(counter))
-				attribute_widget->enable_secondary_background_color(false);
-			else
-				attribute_widget->enable_secondary_background_color();
-
-			counter++;
-		}
-	}
+void CustomizePanel::replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
+{
+	if (m_corner_radii_aw)
+		m_corner_radii_aw->replace_all_attributes_with(control_corner_radii_aw);
 }
 
 void CustomizePanel::setup_layout()
@@ -319,7 +402,7 @@ void CustomizePanel::setup_layout()
 
 		hbox2->setContentsMargins(6, 0, 0, 0);
 		hbox2->setSpacing(0);
-		hbox2->addWidget(m_elements_label);
+		hbox2->addWidget(m_widgets_label);
 		hbox2->addStretch();
 		hbox2->activate();
 

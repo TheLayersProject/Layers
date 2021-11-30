@@ -20,25 +20,25 @@ void ColorControl::click()
 
 	if (m_attribute)
 	{
-		if (m_attribute->values().isEmpty())
-			dlg.setCurrentColor(m_attribute->value().value<QColor>());
+		if (!m_attribute->values())
+			dlg.setCurrentColor(m_attribute->value<QColor>());
 		else
-			dlg.setCurrentColor(m_attribute->value(m_current_editting_state)->value<QColor>());
+			dlg.setCurrentColor(*m_attribute->value<QColor>("m_current_editting_state"));
 	}
 	else
-		dlg.setCurrentColor(m_attribute_set.attribute_value("background_color")->value<QColor>());
+		dlg.setCurrentColor(a_fill.value<QColor>());
 
 	if (dlg.exec())
 	{
 		if (m_attribute)
 		{
-			if (m_attribute->values().isEmpty())
+			if (!m_attribute->values())
 				m_attribute->set_value(dlg.currentColor());
 			else
 				m_attribute->set_value(m_current_editting_state, dlg.currentColor());
 		}
 		else
-			set_attribute_value("background_color", dlg.currentColor());
+			a_fill.set_value(dlg.currentColor());
 
 		emit color_changed();
 	}
@@ -53,10 +53,21 @@ void Layers::ColorControl::disable_clicking(bool cond)
 
 void ColorControl::init_attributes()
 {
-	set_attribute_value("background_color", QColor(Qt::white));
-	add_attribute("corner_radius", 5);
-	add_attribute("outer_border_color", QColor("#2c2c2c"));
-	add_attribute("inner_border_color", QColor("#d6d6d6"));
+	a_border_fill.set_value(QColor("#D6D6D6"));
+	a_border_thickness.set_value(2);
+	a_corner_radius_tl.set_value(5);
+	a_corner_radius_tr.set_value(5);
+	a_corner_radius_bl.set_value(5);
+	a_corner_radius_br.set_value(5);
+	a_margin_left.set_value(10);
+	a_margin_top.set_value(10);
+	a_margin_right.set_value(10);
+	a_margin_bottom.set_value(10);
+	a_outline_color.set_disabled(false);
+
+	//add_attribute("corner_radius", 5);
+	//add_attribute("outer_border_color", QColor("#2c2c2c"));
+	//add_attribute("inner_border_color", QColor("#d6d6d6"));
 }
 
 void ColorControl::set_attribute(Attribute* attribute)
@@ -73,9 +84,9 @@ void ColorControl::set_attribute(Attribute* attribute)
 	connect(m_attribute, &Attribute::value_changed, [this]
 		{
 			if (m_attribute->states().isEmpty())
-				set_attribute_value("background_color", m_attribute->value());
+				a_fill.set_value(m_attribute->value<QColor>());
 			else
-				set_attribute_value("background_color", *m_attribute->value(m_current_editting_state));
+				a_fill.set_value(*m_attribute->value<QColor>(m_current_editting_state));
 		});
 }
 
@@ -85,7 +96,7 @@ void ColorControl::set_current_editting_state(const QString& state)
 	{
 		m_current_editting_state = state;
 
-		set_attribute_value("background_color", *m_attribute->value(m_current_editting_state));
+		a_fill.set_value(*m_attribute->value<QColor>(m_current_editting_state));
 	}
 }
 
@@ -117,20 +128,22 @@ bool ColorControl::eventFilter(QObject* object, QEvent* event)
     return false;
 }
 
-void ColorControl::paintEvent(QPaintEvent* event)
-{
-    QPainterPath outer_border_path;
-    QPainterPath inner_border_path;
-    QPainterPath background_path;
-
-    outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), m_attribute_set.attribute_value("corner_radius")->value<int>(), m_attribute_set.attribute_value("corner_radius")->value<int>());
-    inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1);
-    background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5, m_attribute_set.attribute_value("corner_radius")->value<int>() - 1.5);
-
-    painter.begin(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.fillPath(outer_border_path, m_attribute_set.attribute_value("outer_border_color")->value<QColor>());
-    painter.fillPath(inner_border_path, m_attribute_set.attribute_value("inner_border_color")->value<QColor>());
-    painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
-    painter.end();
-}
+//void ColorControl::paintEvent(QPaintEvent* event)
+//{
+//    QPainterPath outer_border_path;
+//    QPainterPath inner_border_path;
+//    QPainterPath background_path;
+//
+//	int corner_radii = a_corner_radii.value<int>();
+//
+//    outer_border_path.addRoundedRect(QRectF(10, 10, 25, 25), corner_radii, corner_radii);
+//    inner_border_path.addRoundedRect(QRectF(11, 11, 25 - 2, 25 - 2), corner_radii - 1, corner_radii - 1);
+//    background_path.addRoundedRect(QRectF(12, 12, 25 - 4, 25 - 4), corner_radii - 1.5, corner_radii - 1.5);
+//
+//    painter.begin(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.fillPath(outer_border_path, a_outer_border_color.value<QColor>());
+//    painter.fillPath(inner_border_path, a_inner_border_color.value<QColor>());
+//    painter.fillPath(background_path, a_fill.value<QColor>());
+//    painter.end();
+//}

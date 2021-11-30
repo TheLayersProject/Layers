@@ -14,7 +14,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
     set_name("titlebar");
     set_proper_name("Titlebar");
     set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 
     m_window_icon->set_padding(6, 0, 6, 0);
 
@@ -25,30 +25,30 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 
     m_settings_button->set_name("settings_button");
 	m_settings_button->set_proper_name("Settings Button");
-    m_settings_button->add_attribute("#gear", QColor(Qt::lightGray));
-    m_settings_button->add_attribute("#gear_hover", QColor(Qt::darkGray));
+    //m_settings_button->add_attribute("#gear", QColor(Qt::lightGray));
+    //m_settings_button->add_attribute("#gear_hover", QColor(Qt::darkGray));
 
     m_minimize_button->set_name("minimize_button");
 	m_minimize_button->set_proper_name("Minimize Button");
-    m_minimize_button->add_attribute("#bar", QColor(Qt::lightGray));
-    m_minimize_button->add_attribute("#bar_hover", QColor(Qt::darkGray));
+    //m_minimize_button->add_attribute("#bar", QColor(Qt::lightGray));
+    //m_minimize_button->add_attribute("#bar_hover", QColor(Qt::darkGray));
 
     m_maximize_button->set_name("maximize_button");
 	m_maximize_button->set_proper_name("Maximize Button");
-    m_maximize_button->add_attribute("#square_frame", QColor(Qt::lightGray));
-    m_maximize_button->add_attribute("#square_frame_hover", QColor(Qt::darkGray));
+    //m_maximize_button->add_attribute("#square_frame", QColor(Qt::lightGray));
+    //m_maximize_button->add_attribute("#square_frame_hover", QColor(Qt::darkGray));
 
     m_exit_button->set_name("exit_button");
 	m_exit_button->set_proper_name("Exit Button");
-    m_exit_button->add_attribute("#x", QColor(Qt::lightGray));
-    m_exit_button->add_attribute("#x_hover", QColor("#E33034"));
+    //m_exit_button->add_attribute("#x", QColor(Qt::lightGray));
+    //m_exit_button->add_attribute("#x_hover", QColor("#E33034"));
 
     m_buttons_container->setFixedHeight(height());
     m_buttons_container->setFixedWidth(m_settings_button->width() + m_minimize_button->width() + m_maximize_button->width() + m_exit_button->width());
-    m_buttons_container->set_attribute_value("background_disabled", true);
+    m_buttons_container->a_fill.set_disabled();
 
     m_stretch_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_stretch_widget->set_attribute_value("background_disabled", true);
+    m_stretch_widget->a_fill.set_disabled();
 
     m_control_mll->set_proper_name("Menu Label Layers");
 
@@ -73,16 +73,13 @@ void Titlebar::add_mll(MenuLabelLayer* mll)
     m_buttons_container->raise();
 
     mll->replace_all_attributes_with(m_control_mll);
-
-    //m_control_mll->share_all_attributes_with(mll);
-    //m_control_mll->replace_all_attributes_with(mll);
 }
 
 void Titlebar::remove_mlls_past(int index)
 {
     while (index + 1 <= mll_stack.count() - 1)
     {
-        remove_child_themeable_reference(mll_stack.last());
+        //remove_child_themeable_reference(mll_stack.last());
 
         //m_control_mll->unshare_all_attributes_with(mll_stack.last());
 
@@ -164,17 +161,6 @@ Button* Titlebar::maximize_button() const
 Button* Titlebar::exit_button() const
 {
     return m_exit_button;
-}
-
-void Titlebar::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//m_attribute_widgets["border_awc"]->set_primary(false);
-	//m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//m_attribute_widgets["outline_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	//m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
 }
 
 void Titlebar::resizeEvent(QResizeEvent* event)

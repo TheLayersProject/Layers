@@ -3,6 +3,7 @@
 
 #include <QMenuBar>
 
+#include "Attribute.h"
 #include "Themeable.h"
 
 namespace Layers
@@ -20,6 +21,9 @@ namespace Layers
 		void issue_update();
 
 		void update_theme_dependencies();
+
+		Attribute* a_text_color{ new Attribute("Text Color", QColor(Qt::gray)) };
+		Attribute* a_selected_text_color{ new Attribute("Selected Text Color", QColor(Qt::gray)) };
 
 	protected:
 		QString build_stylesheet();

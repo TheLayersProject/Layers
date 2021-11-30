@@ -15,6 +15,8 @@ namespace Layers
 	public:
 		MenuLabelLayer(Menu* menu, QWidget* parent = nullptr);
 
+		void replace_all_attributes_with(MenuLabelLayer* mll);
+
 		void shrink();
 		void expand();
 
@@ -25,7 +27,6 @@ namespace Layers
 
 	protected:
 		void init_attributes();
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 		void setup_layout();

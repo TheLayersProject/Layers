@@ -38,61 +38,27 @@ SVG::SVG(const SVG& svg)
 	load(m_svg_str.toUtf8());
 }
 
+void SVG::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+{
+	a_common_color.copy_values_from(*theme_attrs["common_color"]);
+	a_common_hover_color.copy_values_from(*theme_attrs["common_hover_color"]);
+	a_use_common_color.copy_values_from(*theme_attrs["use_common_color"]);
+	a_use_common_hover_color.copy_values_from(*theme_attrs["use_common_hover_color"]);
+}
+
 void SVG::init_attributes()
 {
-	// TODO: Think this should be false by default
-	add_attribute("use_common_color", false);
-	add_attribute("use_common_hover_color", false);
+	m_attributes.insert({
+		{ "common_color", &a_common_color },
+		{ "common_hover_color", &a_common_hover_color },
+		{ "use_common_color", &a_use_common_color },
+		{ "use_common_hover_color", &a_use_common_hover_color }
+		});
 
-	add_attribute("common_color", QColor(Qt::black));
-	add_attribute("common_hover_color", QColor(Qt::darkGray));
-
-	// Build attributes from elements
-	for (int i = 0; i < m_svg_elements.size(); i++)
-	{
-		if (m_svg_elements[i].startsWith("<path") && m_svg_elements[i].contains("id="))
-		{
-			QString l_element_id = element_id(m_svg_elements[i]);
-
-			if (!m_attribute_set.contains("#" + l_element_id + "/color"))
-			{
-				// Get ID's Default Fill Color
-				int color_start_index = m_svg_elements[i].indexOf("fill=") + 6;
-				int color_end_index = m_svg_elements[i].indexOf("\"", color_start_index);
-				int color_length = color_end_index - color_start_index;
-
-				QString color = m_svg_elements[i].mid(color_start_index, color_length);
-
-				add_attribute("#" + l_element_id + "/color", QColor(color));
-				add_attribute("#" + l_element_id + "/hover_color", QColor(color));
-			}
-		}
-	}
-}
-
-void SVG::init_attribute_widgets()
-{
-	if (m_customize_panel)
-	{
-		if (m_attribute_set.attribute_value("use_common_color")->value<bool>())
-		{
-			ColorAttributeWidget* common_color_caw = new ColorAttributeWidget("Common Color", m_attribute_set.attribute("common_color"), true);
-			m_customize_panel->add_attribute_widget(common_color_caw);
-			m_attribute_widgets["common_color_caw"] = common_color_caw;
-		}
-
-		if (m_attribute_set.attribute_value("use_common_hover_color")->value<bool>())
-		{
-			ColorAttributeWidget* common_hover_color_caw = new ColorAttributeWidget("Common Hover Color", m_attribute_set.attribute("common_hover_color"), true);
-			m_customize_panel->add_attribute_widget(common_hover_color_caw);
-			m_attribute_widgets["common_hover_color_caw"] = common_hover_color_caw;
-		}
-	}
-}
-
-void SVG::issue_update()
-{
-	update();
+	connect(&a_common_color, &Attribute::value_changed, [this] { update(); });
+	connect(&a_common_hover_color, &Attribute::value_changed, [this] { update(); });
+	connect(&a_use_common_color, &Attribute::value_changed, [this] { update(); });
+	connect(&a_use_common_hover_color, &Attribute::value_changed, [this] { update(); });
 }
 
 void SVG::rebuild_svg_str()
@@ -107,14 +73,29 @@ void SVG::rebuild_svg_str()
 	m_svg_str = new_svg_str;
 }
 
+void SVG::replace_all_attributes_with(SVG* svg)
+{
+	a_common_color.get_values_from(svg->a_common_color);
+	a_common_hover_color.get_values_from(svg->a_common_hover_color);
+	a_use_common_color.get_values_from(svg->a_use_common_color);
+	a_use_common_hover_color.get_values_from(svg->a_use_common_hover_color);
+}
+
 void SVG::set_hovering(bool cond)
 {
 	m_hovering = cond;
 
-	update_theme_dependencies();
+	update();
 }
 
-void SVG::update_theme_dependencies()
+void SVG::set_state(const QString& state)
+{
+	Themeable::set_state(state);
+
+	update();
+}
+
+void SVG::update()
 {
 	for (int i = 0; i < m_svg_elements.size(); i++)
 	{
@@ -122,24 +103,16 @@ void SVG::update_theme_dependencies()
 		{
 			if (m_hovering)
 			{
-				if (m_attribute_set.attribute_value("use_common_hover_color")->value<bool>() && m_attribute_set.contains("common_hover_color"))
+				if (a_use_common_hover_color.value<bool>())
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("common_hover_color")->value<QColor>().name());
-				}
-				else if (m_attribute_set.contains("#" + element_id(m_svg_elements[i]) + "/hover_color"))
-				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("#" + element_id(m_svg_elements[i]) + "/hover_color")->value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_hover_color.value<QColor>().name());
 				}
 			}
 			else
 			{
-				if (m_attribute_set.attribute_value("use_common_color")->value<bool>() && m_attribute_set.contains("common_color"))
+				if (a_use_common_color.value<bool>())
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("common_color")->value<QColor>().name());
-				}
-				else if (m_attribute_set.contains("#" + element_id(m_svg_elements[i]) + "/color"))
-				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_attribute_set.attribute_value("#" + element_id(m_svg_elements[i]) + "/color")->value<QColor>().name());
+					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_color.value<QColor>().name());
 				}
 			}
 		}

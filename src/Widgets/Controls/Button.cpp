@@ -13,11 +13,11 @@ Button::Button(Graphic* graphic, const QString& text, bool auto_touch_target_com
 {
 	init();
 	
-	set_attribute_value("corner_radius_tl", 7);
-	set_attribute_value("corner_radius_tr", 7);
-	set_attribute_value("corner_radius_bl", 7);
-	set_attribute_value("corner_radius_br", 7);
-	set_attribute_value("background_color_hover_disabled", false);
+	a_corner_radius_tl.set_value(7);
+	a_corner_radius_tr.set_value(7);
+	a_corner_radius_bl.set_value(7);
+	a_corner_radius_br.set_value(7);
+	a_hover_fill.set_disabled(false);
 }
 
 Button::Button(Graphic* graphic, bool auto_touch_target_compliance, QWidget* parent) :
@@ -26,7 +26,7 @@ Button::Button(Graphic* graphic, bool auto_touch_target_compliance, QWidget* par
 {
 	init();
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 
 	//filter_attribute("background_color");
 	//filter_attribute("background_color_hover");
@@ -47,11 +47,11 @@ Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* 
 {
 	init();
 
-	set_attribute_value("corner_radius_tl", 7);
-	set_attribute_value("corner_radius_tr", 7);
-	set_attribute_value("corner_radius_bl", 7);
-	set_attribute_value("corner_radius_br", 7);
-	set_attribute_value("background_color_hover_disabled", false);
+	a_corner_radius_tl.set_value(7);
+	a_corner_radius_tr.set_value(7);
+	a_corner_radius_bl.set_value(7);
+	a_corner_radius_br.set_value(7);
+	a_hover_fill.set_disabled(false);
 }
 
 Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance, QWidget* parent) :
@@ -60,20 +60,20 @@ Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_
 {
 	init();
 
-	set_attribute_value("background_disabled", true);
+	a_fill.set_disabled();
 
-	filter_attribute("background_color");
-	filter_attribute("background_color_hover");
-	filter_attribute("border_color");
-	filter_attribute("border_gradient_stops");
-	filter_attribute("border_thickness");
-	filter_attribute("corner_radius_tl");
-	filter_attribute("corner_radius_tr");
-	filter_attribute("corner_radius_bl");
-	filter_attribute("corner_radius_br");
-	filter_attribute("text_color");
-	filter_attribute("text_color_hover");
-	filter_attribute("border_gradient_disabled");
+	//filter_attribute("background_color");
+	//filter_attribute("background_color_hover");
+	//filter_attribute("border_color");
+	//filter_attribute("border_gradient_stops");
+	//filter_attribute("border_thickness");
+	//filter_attribute("corner_radius_tl");
+	//filter_attribute("corner_radius_tr");
+	//filter_attribute("corner_radius_bl");
+	//filter_attribute("corner_radius_br");
+	//filter_attribute("text_color");
+	//filter_attribute("text_color_hover");
+	//filter_attribute("border_gradient_disabled");
 }
 
 void Button::disable_graphic_hover_color(bool cond)
@@ -99,6 +99,13 @@ bool Button::disabled() const
 Graphic* Button::graphic() const
 {
 	return m_graphic;
+}
+
+void Button::replace_all_attributes_with(Button* button)
+{
+	Widget::replace_all_attributes_with(button);
+
+	if (m_graphic) m_graphic->replace_all_attributes_with(button->m_graphic);
 }
 
 void Button::init()
@@ -142,20 +149,6 @@ void Button::init_attributes()
 {
 }
 
-void Button::init_attribute_widgets()
-{
-	Widget::init_attribute_widgets();
-
-	//if (m_graphic && !m_text_label)
-	//{
-	//	m_attribute_widgets["border_awc"]->set_primary(false);
-	//	m_attribute_widgets["hover_background_caw"]->set_primary(false);
-	//	m_attribute_widgets["outline_caw"]->set_primary(false);
-	//	m_attribute_widgets["corner_color_caw"]->set_primary(false);
-	//	m_attribute_widgets["corner_radii_attribute_widget"]->set_primary(false);
-	//}
-}
-
 void Button::init_child_themeable_reference_list()
 {
 	if (m_graphic) add_child_themeable_reference(m_graphic);
@@ -165,7 +158,7 @@ void Button::init_child_themeable_reference_list()
 
 void Button::resize()
 {
-	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int border_thickness = a_border_thickness.value<int>();
 	int content_height = 0;
 	int graphic_width = 0;
 	int layout_spacing = 0;
@@ -221,12 +214,12 @@ void Button::resize()
 
 // TODO: This could be upheld via attribute value change detection.
 // Simply call resize() when the 'border_thickness' attribute is changed
-void Button::set_attribute_value(const QString& attribute, QVariant value)
-{
-	Themeable::set_attribute_value(attribute, value);
-
-	if (attribute == "border_thickness") resize();
-}
+//void Button::set_attribute_value(const QString& attribute, QVariant value)
+//{
+//	Themeable::set_attribute_value(attribute, value);
+//
+//	if (attribute == "border_thickness") resize();
+//}
 
 void Button::set_available_width(int available_width)
 {
@@ -241,12 +234,12 @@ void Button::set_disabled(bool cond)
 
 	if (m_disabled)
 	{
-		set_attribute_value("background_color_hover_disabled", true);
+		//set_attribute_value("background_color_hover_disabled", true);
 		if (m_button_opacity->opacity() != 0.25) m_button_opacity->setOpacity(0.25);
 	}
 	else if (!m_disabled)
 	{
-		set_attribute_value("background_color_hover_disabled", false);
+		//set_attribute_value("background_color_hover_disabled", false);
 		if (m_button_opacity->opacity() != 1.0) m_button_opacity->setOpacity(1.0);
 	}
 }
@@ -327,11 +320,11 @@ int Button::bottom_padding() const
 	return bottom_padding;
 }
 
-void Button::update_theme_dependencies()
-{
-	if (m_graphic) m_graphic->update_theme_dependencies();
-	if (m_graphic_after) m_graphic_after->update_theme_dependencies();
-}
+//void Button::update_theme_dependencies()
+//{
+//	if (m_graphic) m_graphic->update_theme_dependencies();
+//	if (m_graphic_after) m_graphic_after->update_theme_dependencies();
+//}
 
 bool Button::eventFilter(QObject* object, QEvent* event)
 {

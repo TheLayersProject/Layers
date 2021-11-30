@@ -19,18 +19,10 @@ namespace Layers
 
 		void set_attribute(Attribute* attribute);
 
-	public slots:
-		void set_current_editting_state(const QString& state);
-
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
-		void paintEvent(QPaintEvent* event);
 
 	private:
-		QList<QString> m_attribute_states{ QList<QString>() };
-
-		QString m_current_editting_state{ "" };
-
 		Attribute* m_attribute{ nullptr };
 	};
 }

@@ -4,11 +4,11 @@
 #include "Button.h"
 #include "ColorControl.h"
 #include "GradientControl.h"
+#include "FillControl.h"
 #include "Graphic.h"
 #include "Label.h"
 #include "LineEditor.h"
 #include "MiniSlider.h"
-#include "Slider.h"
 #include "ToggleSwitch.h"
 
 namespace Layers
@@ -18,40 +18,24 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		//AttributeWidget(Attribute* linked_attribute, QWidget* parent = nullptr);
 		AttributeWidget(QWidget* parent = nullptr);
-
-		virtual void enable_secondary_background_color(bool cond = true);
-
-		//Attribute* linked_attribute();
-
-		//bool is_primary() const;
-
-		//void set_primary(bool is_primary = true);
 
 	protected:
 		void init_attributes();
-
-		void paintEvent(QPaintEvent* event) override;
-
-	private:
-		Attribute* m_linked_attribute{ nullptr };
-		//bool m_is_primary;
 	};
 
-	class AttributeWidgetContainer : public AttributeWidget
+	class AWGroup : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		AttributeWidgetContainer(const QString& label_text, bool is_primary, QWidget* parent = nullptr);
+		AWGroup(const QString& label_text, QWidget* parent = nullptr);
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
-		void enable_secondary_background_color(bool cond = true);
+		void replace_all_attributes_with(AWGroup* aw_group);
 
 	protected:
-		void init_attributes();
 		void init_child_themeable_reference_list();
 
 	private:
@@ -61,19 +45,21 @@ namespace Layers
 
 		bool m_collapsed{ true };
 
-		Label* m_label;
+		Label* m_label{ nullptr };
 
 		QList<AttributeWidget*> m_child_attribute_widgets{ QList<AttributeWidget*>() };
 
 		QVBoxLayout* m_widgets_vbox{ new QVBoxLayout };
 	};
 
-	class CornerRadiiAttributeWidget : public AttributeWidgetContainer
+	class CornerRadiiAW : public AWGroup
 	{
 		Q_OBJECT
 
 	public:
-		CornerRadiiAttributeWidget(Themeable* themeable, bool is_primary, QWidget* parent = nullptr);
+		CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent = nullptr);
+
+		void replace_all_attributes_with(CornerRadiiAW* corner_radii_aw);
 
 		MiniSlider* tl_slider() const;
 		MiniSlider* tr_slider() const;
@@ -103,13 +89,12 @@ namespace Layers
 		Widget* m_example_widget{ new Widget };
 	};
 
-	class ColorAttributeWidget : public AttributeWidget
+	class ColorAW : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
-		ColorAttributeWidget(const QString& attribute_label_text, Attribute* attribute, Attribute* disabling_attribute, bool is_primary, QWidget* parent = nullptr);
+		ColorAW(Attribute* attribute, QWidget* parent = nullptr);
 
 		ColorControl* color_control() const;
 
@@ -119,26 +104,24 @@ namespace Layers
 		void init_child_themeable_reference_list();
 
 	private:
-		Attribute* m_disabling_attribute{ nullptr };
-
 		bool m_centered{ false };
 
 		ColorControl* m_color_control{ new ColorControl };
 
 		Label* m_attribute_label;
 
-		ToggleSwitch* m_disabled_attribute_toggle{ nullptr };
+		ToggleSwitch* m_disabled_toggle{ nullptr };
 
 		Widget* m_left_stretch{ new Widget };
 		Widget* m_right_stretch{ new Widget };
 	};
 
-	class GradientAttributeWidget : public AttributeWidget
+	class GradientAW : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		GradientAttributeWidget(const QString& attribute_label_text, Attribute* attribute, bool is_primary, QWidget* parent = nullptr);
+		GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent = nullptr);
 
 		void set_centered(bool centered = true);
 
@@ -156,14 +139,43 @@ namespace Layers
 		Widget* m_right_stretch{ new Widget };
 	};
 
-	class NumberAttributeWidget : public AttributeWidget
+	class FillAW : public AttributeWidget
 	{
 		Q_OBJECT
 
 	public:
-		NumberAttributeWidget(const QString& attribute_label_text, Attribute* attribute, QIntValidator* int_validator, bool is_primary, QWidget* parent = nullptr);
+		FillAW(Attribute* attribute, QWidget* parent = nullptr);
 
-		void enable_silder();
+		FillControl* fill_control() const;
+
+		void replace_all_attributes_with(FillAW* fill_aw);
+
+		void set_centered(bool centered = true);
+
+	protected:
+		void init_child_themeable_reference_list();
+
+	private:
+		bool m_centered{ false };
+
+		FillControl* m_fill_control{ new FillControl };
+
+		Label* m_attribute_label;
+
+		ToggleSwitch* m_disabled_toggle{ nullptr };
+
+		Widget* m_left_stretch{ new Widget };
+		Widget* m_right_stretch{ new Widget };
+	};
+
+	class NumberAW : public AttributeWidget
+	{
+		Q_OBJECT
+
+	public:
+		NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* parent = nullptr);
+
+		void replace_all_attributes_with(NumberAW* number_aw);
 
 		void set_centered(bool centered = true);
 
@@ -182,38 +194,12 @@ namespace Layers
 
 		LineEditor* m_line_editor{ new LineEditor };
 
-		QIntValidator* m_int_validator{ nullptr };
-
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		Slider* m_slider{ nullptr };
+		MiniSlider* m_slider{ nullptr };
 
 		Widget* m_left_stretch{ new Widget };
 		Widget* m_right_stretch{ new Widget };
-	};
-
-	// Control attribute currently not setup to work with stateful attributes; Not sure if needed
-	class SwitchAttributeWidget : public AttributeWidget
-	{
-		Q_OBJECT
-
-	public:
-		SwitchAttributeWidget(
-			const QString& first_label_text, AttributeWidget* first_attribute_widget,
-			const QString& second_label_text, AttributeWidget* second_attribute_widget,
-			Attribute* control_attribute, bool is_primary, QWidget* parent = nullptr);
-
-		void apply_theme(Theme& theme);
-
-		void enable_secondary_background_color(bool cond = true);
-
-	private:
-		Attribute* m_control_attribute;
-
-		AttributeWidget* m_first_attribute_widget;
-		AttributeWidget* m_second_attribute_widget;
-
-		ToggleSwitch* m_labeled_toggle_switch;
 	};
 }
 

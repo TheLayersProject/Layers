@@ -3,6 +3,7 @@
 
 #include <QTabBar>
 
+#include "Attribute.h"
 #include "Themeable.h"
 
 namespace Layers
@@ -24,6 +25,9 @@ namespace Layers
 		void removeTab(const QString& text);
 
 		void update_theme_dependencies();
+
+		Attribute* a_selected_fill_color{ new Attribute("Selected Fill Color", QColor("#F0F0F0")) };
+		Attribute* a_text_color{ new Attribute("Text Color", QColor(Qt::white)) };
 
 	protected:
 		QString build_stylesheet();

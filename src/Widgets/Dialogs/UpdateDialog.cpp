@@ -57,45 +57,45 @@ void UpdateDialog::issue_update()
 
 void UpdateDialog::update_theme_dependencies()
 {
-	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int margin = a_border_thickness.value<int>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
-	m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
-	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
+	m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
 }
 
 void UpdateDialog::init_attributes()
 {
-	QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
-	QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
+	//QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
+	//QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
+	
+	//add_attribute("background_color", QColor(Qt::white));
+	//add_attribute("background_color_hover", QColor(Qt::white));
+	//add_attribute("background_color_hover_disabled", true);
+	//add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
+	//add_attribute("background_gradient_disabled", true);
+	//add_attribute("using_background_color_hover", false);
+	//add_attribute("background_disabled", false);
+	//add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
+	//add_attribute("border_gradient_disabled", true);
+	//add_attribute("border_color", QColor(Qt::black));
+	//add_attribute("border_thickness", 10);
+	//add_attribute("corner_radius_tl", 10);
+	//add_attribute("corner_radius_tr", 10);
+	//add_attribute("corner_radius_bl", 10);
+	//add_attribute("corner_radius_br", 10);
+	//add_attribute("margin_left", 0);
+	//add_attribute("margin_top", 0);
+	//add_attribute("margin_right", 0);
+	//add_attribute("margin_bottom", 0);
+	//add_attribute("corner_color_disabled", true);
+	//add_attribute("corner_color", QColor(Qt::black));
+	//add_attribute("outline_color_disabled", false);
+	//add_attribute("outline_color", QColor(Qt::black));
 
-	add_attribute("background_color", QColor(Qt::white));
-	add_attribute("background_color_hover", QColor(Qt::white));
-	add_attribute("background_color_hover_disabled", true);
-	add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-	add_attribute("background_gradient_disabled", true);
-	add_attribute("using_background_color_hover", false);
-	add_attribute("background_disabled", false);
-	add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	add_attribute("border_gradient_disabled", true);
-	add_attribute("border_color", QColor(Qt::black));
-	add_attribute("border_thickness", 10);
-	add_attribute("corner_radius_tl", 10);
-	add_attribute("corner_radius_tr", 10);
-	add_attribute("corner_radius_bl", 10);
-	add_attribute("corner_radius_br", 10);
-	add_attribute("margin_left", 0);
-	add_attribute("margin_top", 0);
-	add_attribute("margin_right", 0);
-	add_attribute("margin_bottom", 0);
-	add_attribute("corner_color_disabled", true);
-	add_attribute("corner_color", QColor(Qt::black));
-	add_attribute("outline_color_disabled", false);
-	add_attribute("outline_color", QColor(Qt::black));
-
-	m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
-	m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+	m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
+	m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
 }
 
 void UpdateDialog::init_child_themeable_reference_list()
@@ -118,7 +118,7 @@ bool UpdateDialog::nativeEvent(const QByteArray& eventType, void* message, qintp
 		}
 
 		*result = 0;
-		const LONG borderWidth = m_attribute_set.attribute_value("border_thickness")->value<int>() * devicePixelRatio();;
+		const LONG borderWidth = a_border_thickness.value<int>() * devicePixelRatio();;
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -194,26 +194,149 @@ bool UpdateDialog::nativeEvent(const QByteArray& eventType, void* message, qintp
 	return false;
 }
 
-void UpdateDialog::paintEvent(QPaintEvent * event)
+//void UpdateDialog::paintEvent(QPaintEvent * event)
+//{
+//	// CREATE VARIABLES:
+//
+//	bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
+//
+//	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+//
+//	int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
+//	int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
+//	int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
+//	int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
+//
+//	int draw_width = width() - margin_left - margin_right;
+//	int draw_height = height() - margin_top - margin_bottom;
+//
+//	int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
+//	int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
+//	int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
+//	int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
+//
+//	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
+//	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
+//	int bl_background_radius = border_thickness ? inner_radius(corner_radius_bl, border_thickness) : corner_radius_bl;
+//	int br_background_radius = border_thickness ? inner_radius(corner_radius_br, border_thickness) : corner_radius_br;
+//
+//	// CREATE PATHS:
+//
+//	// - Create Border Path
+//	QPainterPath border_path;
+//	border_path.moveTo(margin_left, margin_top + corner_radius_tl);
+//	border_path.arcTo(QRect(margin_left, margin_top, corner_radius_tl * 2, corner_radius_tl * 2), 180, -90);
+//	border_path.lineTo(margin_left + draw_width - corner_radius_tr, margin_top);
+//	border_path.arcTo(QRect(margin_left + draw_width - corner_radius_tr * 2, margin_top, corner_radius_tr * 2, corner_radius_tr * 2), 90, -90);
+//	border_path.lineTo(margin_left + draw_width, margin_top + draw_height - corner_radius_br);
+//	border_path.arcTo(QRect(margin_left + draw_width - corner_radius_br * 2, margin_top + draw_height - corner_radius_br * 2, corner_radius_br * 2, corner_radius_br * 2), 0, -90);
+//	border_path.lineTo(margin_left + corner_radius_bl, margin_top + draw_height);
+//	border_path.arcTo(QRect(margin_left, margin_top + draw_height - corner_radius_bl * 2, corner_radius_bl * 2, corner_radius_bl * 2), -90, -90);
+//	border_path.lineTo(margin_left, margin_top + corner_radius_tl);
+//
+//	// - Create Background Path
+//	QPainterPath background_path;
+//	background_path.moveTo(margin_left + border_thickness, margin_top + border_thickness + tl_background_radius);
+//	background_path.arcTo(QRect(margin_left + border_thickness, margin_top + border_thickness, tl_background_radius * 2, tl_background_radius * 2), 180, -90);
+//	background_path.lineTo(margin_left + draw_width - tr_background_radius - border_thickness, margin_top + border_thickness);
+//	background_path.arcTo(QRect(margin_left + draw_width - tr_background_radius * 2 - border_thickness, margin_top + border_thickness, tr_background_radius * 2, tr_background_radius * 2), 90, -90);
+//	background_path.lineTo(margin_left + draw_width - border_thickness, margin_top + draw_height - br_background_radius - border_thickness);
+//	background_path.arcTo(QRect(margin_left + draw_width - br_background_radius * 2 - border_thickness, margin_top + draw_height - br_background_radius * 2 - border_thickness, br_background_radius * 2, br_background_radius * 2), 0, -90);
+//	background_path.lineTo(margin_left + border_thickness + bl_background_radius, margin_top + draw_height - border_thickness);
+//	background_path.arcTo(QRect(margin_left + border_thickness, margin_top + draw_height - bl_background_radius * 2 - border_thickness, bl_background_radius * 2, bl_background_radius * 2), -90, -90);
+//	background_path.lineTo(margin_left + border_thickness, margin_top + border_thickness + tl_background_radius);
+//
+//	border_path = border_path - background_path;
+//
+//	// - Create Corner Path
+//	QPainterPath corner_color_path;
+//	corner_color_path.addRect(0, 0, width(), height());
+//	corner_color_path = corner_color_path - background_path;
+//	corner_color_path = corner_color_path - border_path;
+//
+//	// - Create Outline Path
+//	QPainterPath outline_color_path;
+//	outline_color_path.addRect(0, 0, width(), height());
+//	outline_color_path = outline_color_path - corner_color_path;
+//
+//	// DRAW:
+//
+//	painter.begin(this);
+//	painter.setRenderHint(QPainter::Antialiasing);
+//
+//	// - Draw Corner Color
+//	if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
+//	{
+//		painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
+//	}
+//
+//	// - Draw Border
+//	if (border_thickness)
+//	{
+//		if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
+//		{
+//			QLinearGradient gradient;
+//
+//			gradient.setStart(0, 0);
+//			gradient.setFinalStop(width(), 0);
+//			gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
+//
+//			painter.fillPath(border_path, gradient);
+//		}
+//		else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
+//	}
+//
+//	// - Draw Background
+//	if (!background_disabled)
+//	{
+//		if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
+//		{
+//			if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
+//				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
+//			else
+//				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
+//		}
+//		else
+//		{
+//			QLinearGradient bg_gradient;
+//
+//			bg_gradient.setStart(0, 0);
+//			bg_gradient.setFinalStop(width(), 0);
+//			bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
+//
+//			painter.fillPath(background_path, bg_gradient);
+//		}
+//	}
+//
+//	// - Draw Outline Color
+//	if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
+//	{
+//		painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
+//	}
+//
+//	painter.end();
+//}
+
+void UpdateDialog::paintEvent(QPaintEvent* event)
 {
 	// CREATE VARIABLES:
 
-	bool background_disabled = m_attribute_set.attribute_value("background_disabled")->value<bool>();
+	bool fill_disabled = a_fill.disabled();
 
-	int border_thickness = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int border_thickness = a_border_thickness.value<int>();
 
-	int margin_left = m_attribute_set.attribute_value("margin_left")->value<int>();
-	int margin_top = m_attribute_set.attribute_value("margin_top")->value<int>();
-	int margin_right = m_attribute_set.attribute_value("margin_right")->value<int>();
-	int margin_bottom = m_attribute_set.attribute_value("margin_bottom")->value<int>();
+	int margin_left = a_margin_left.value<int>();
+	int margin_top = a_margin_top.value<int>();
+	int margin_right = a_margin_right.value<int>();
+	int margin_bottom = a_margin_bottom.value<int>();
 
 	int draw_width = width() - margin_left - margin_right;
 	int draw_height = height() - margin_top - margin_bottom;
 
-	int corner_radius_tl = m_attribute_set.attribute_value("corner_radius_tl")->value<int>();
-	int corner_radius_tr = m_attribute_set.attribute_value("corner_radius_tr")->value<int>();
-	int corner_radius_bl = m_attribute_set.attribute_value("corner_radius_bl")->value<int>();
-	int corner_radius_br = m_attribute_set.attribute_value("corner_radius_br")->value<int>();
+	int corner_radius_tl = a_corner_radius_tl.value<int>();
+	int corner_radius_tr = a_corner_radius_tr.value<int>();
+	int corner_radius_bl = a_corner_radius_bl.value<int>();
+	int corner_radius_br = a_corner_radius_br.value<int>();
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -265,53 +388,53 @@ void UpdateDialog::paintEvent(QPaintEvent * event)
 	painter.setRenderHint(QPainter::Antialiasing);
 
 	// - Draw Corner Color
-	if (!m_attribute_set.attribute_value("corner_color_disabled")->value<bool>())
+	if (!a_corner_color.disabled())
 	{
-		painter.fillPath(corner_color_path, m_attribute_set.attribute_value("corner_color")->value<QColor>());
+		painter.fillPath(corner_color_path, a_corner_color.value<QColor>());
 	}
 
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (!m_attribute_set.attribute_value("border_gradient_disabled")->value<bool>())
+		if (QString(a_border_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
-			QLinearGradient gradient;
+			QLinearGradient border_fill_gradient;
 
-			gradient.setStart(0, 0);
-			gradient.setFinalStop(width(), 0);
-			gradient.setStops(m_attribute_set.attribute_value("border_gradient_stops")->value<QGradientStops>());
+			border_fill_gradient.setStart(0, 0);
+			border_fill_gradient.setFinalStop(width(), 0);
+			border_fill_gradient.setStops(a_border_fill.value<QGradientStops>());
 
-			painter.fillPath(border_path, gradient);
+			painter.fillPath(border_path, border_fill_gradient);
 		}
-		else painter.fillPath(border_path, m_attribute_set.attribute_value("border_color")->value<QColor>());
+		else painter.fillPath(border_path, a_border_fill.value<QColor>());
 	}
 
 	// - Draw Background
-	if (!background_disabled)
+	if (!a_fill.disabled())
 	{
-		if (m_attribute_set.attribute_value("background_gradient_disabled")->value<bool>())
+		if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
-			if (!m_attribute_set.attribute_value("background_color_hover_disabled")->value<bool>() && m_attribute_set.attribute_value("using_background_color_hover")->value<bool>())
-				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color_hover")->value<QColor>());
-			else
-				painter.fillPath(background_path, m_attribute_set.attribute_value("background_color")->value<QColor>());
+			QLinearGradient fill_gradient;
+
+			fill_gradient.setStart(0, 0);
+			fill_gradient.setFinalStop(width(), 0);
+			fill_gradient.setStops(a_fill.value<QGradientStops>());
+
+			painter.fillPath(background_path, fill_gradient);
 		}
 		else
 		{
-			QLinearGradient bg_gradient;
-
-			bg_gradient.setStart(0, 0);
-			bg_gradient.setFinalStop(width(), 0);
-			bg_gradient.setStops(m_attribute_set.attribute_value("background_gradient_stops")->value<QGradientStops>());
-
-			painter.fillPath(background_path, bg_gradient);
+			if (m_hovering && !a_hover_fill.disabled())
+				painter.fillPath(background_path, a_hover_fill.value<QColor>());
+			else
+				painter.fillPath(background_path, a_fill.value<QColor>());
 		}
 	}
 
 	// - Draw Outline Color
-	if (!m_attribute_set.attribute_value("outline_color_disabled")->value<bool>())
+	if (!a_outline_color.disabled())
 	{
-		painter.strokePath(outline_color_path, QPen(m_attribute_set.attribute_value("outline_color")->value<QColor>()));
+		painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
 	}
 
 	painter.end();
@@ -369,7 +492,7 @@ void UpdateDialog::setup_layout()
 	inner_layout->setAlignment(m_message_label, Qt::AlignLeft);
 
 	// Main Layout
-	int margin = m_attribute_set.attribute_value("border_thickness")->value<int>();
+	int margin = a_border_thickness.value<int>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);

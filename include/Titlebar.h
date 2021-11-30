@@ -31,7 +31,6 @@ namespace Layers
 		Button* exit_button() const;
 
 	protected:
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 		void resizeEvent(QResizeEvent* event);

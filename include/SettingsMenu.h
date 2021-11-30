@@ -61,9 +61,6 @@ namespace Layers
 
 	public:
 		SettingsSidebar(QWidget* parent = nullptr);
-
-	protected:
-		void init_attribute_widgets();
 	};
 
 	class SettingsMenu : public Menu
@@ -85,8 +82,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_child_themeable_reference_list();
-
-		void init_attribute_widgets();
 
 	private slots:
 		void shrink_tabs();

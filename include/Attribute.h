@@ -1,10 +1,12 @@
-#ifndef ATTRIBUTES_H
-#define ATTRIBUTES_H
+#ifndef ATTRIBUTE_H
+#define ATTRIBUTE_H
 
 #include <QVariant>
 
 namespace Layers
 {
+	struct AttributeLayoutItem : public QObject {};
+
 	/*!
 		Pure abstract base class for Layers attributes.
 
@@ -14,7 +16,7 @@ namespace Layers
 		The functions name(), parent_themeable(), and set_parent_themeable() are defined by
 		this class as they are not expected to be different between subclasses.
 	*/
-	class Attribute : public QObject
+	class Attribute : public AttributeLayoutItem
 	{
 		Q_OBJECT
 
@@ -27,9 +29,10 @@ namespace Layers
 
 			Subclasses are to call this constructor passing along an attribute name string.
 		*/
-		Attribute(const QString& name, QObject* parent = 0);
-		Attribute(const QString& name, QVariant value, QObject* parent = 0);
-		Attribute(const QString& name, QMap<QString, QVariant> state_value_map, QObject* parent = 0);
+		Attribute(const QString& name, bool disabled = false);
+		Attribute(const QString& name, QVariant value, bool disabled = false);
+		Attribute(const QString& name, QMap<QString, QVariant> state_value_map, bool disabled = false);
+		~Attribute();
 
 		/*!
 			Checks if the provided state already exists in the data structure.
@@ -39,12 +42,20 @@ namespace Layers
 		*/
 		bool contains_state(const QString& state) const;
 
+		void copy_values_from(const Attribute& attr);
+
+		bool disabled() const;
+
 		/*!
 			Returns the name of the attribute.
 
 			@returns Name of attribute
 		*/
 		QString& name();
+
+		void get_values_from(Attribute& replacement_attr);
+
+		void set_disabled(bool disabled = true);
 
 		/*!
 			Sets the current state of the attribute.
@@ -86,49 +97,117 @@ namespace Layers
 		*/
 		QList<QString> states() const;
 
-		/*!
-			Pure virtual function intended to return the attribute value in the form of a QVariant reference.
+		const char* typeName() const;
 
-			@returns Attribute value reference
-		*/
-		QVariant& value();
+		template<typename T>
+		T value() const;
 
-		/*!
-			Returns the value paired with the provided state.
+		template<typename T>
+		T* value(const QString& state) const;
 
-			@returns Attribute value of the provided state
-		*/
-		QVariant* value(const QString& state);
-
-		QMap<QString, QVariant>& values();
+		QMap<QString, QVariant>* values();
 
 		friend QDataStream& operator <<(QDataStream& stream, const Attribute& a)
 		{
+			stream << *a.m_disabled;
 			stream << a.m_name;
 			stream << a.m_state;
-			stream << a.m_value;
-			stream << a.m_values;
+
+			if (a.m_value)
+			{
+				stream << false;
+				stream << *a.m_value;
+			}
+			else if (a.m_values)
+			{
+				stream << true;
+				stream << *a.m_values;
+			}
+
 			return stream;
 		}
 
 		friend QDataStream& operator >>(QDataStream& stream, Attribute& a)
 		{
+			stream >> *a.m_disabled;
 			stream >> a.m_name;
 			stream >> a.m_state;
-			stream >> a.m_value;
-			stream >> a.m_values;
+
+			bool is_stateful = false;
+
+			stream >> is_stateful;
+
+			if (!is_stateful)
+			{
+				a.m_value = new QVariant;
+
+				stream >> *a.m_value;
+			}
+			else
+			{
+				a.m_values = new QMap<QString, QVariant>;
+
+				stream >> *a.m_values;
+			}
+
 			return stream;
 		}
 
 	private:
+		Attribute* m_overriding_attr{ nullptr };
+
+		bool* m_disabled{ new bool(false) };
+
 		QString m_name{ "" };
 
 		QString m_state{ "" };
 
-		QVariant m_value{ QVariant() };
+		QMetaObject::Connection m_override_update_connection;
 
-		QMap<QString, QVariant> m_values{ QMap<QString, QVariant>() };
+		QVariant* m_value{ nullptr };
+
+		QMap<QString, QVariant>* m_values{ nullptr };
+	};
+
+	template<typename T>
+	inline T Attribute::value() const
+	{
+		if (m_value) return m_value->value<T>();
+		else
+		{
+			return (*m_values)[m_state].value<T>();
+		}
+	}
+
+	template<typename T>
+	inline T* Attribute::value(const QString& state) const
+	{
+		if (m_values)
+		{
+			if (m_values->contains(state)) return &(*m_values)[state].value<T>();
+			else
+				qDebug() << "WARNING: Failed to obtain attribute value: State does not exist.";
+		}
+		else
+			qDebug() << "WARNING: Failed to obtain attribute value: State provided but Attribute is not stateful.";
+
+		return nullptr;
+	}
+
+	class AttributeGroup : public AttributeLayoutItem
+	{
+	public:
+		AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes);
+
+		QMap<QString, Attribute*>& attributes();
+
+		QString name() const;
+
+	private:
+		QMap<QString, Attribute*> m_attributes;
+
+		QString m_name;
 	};
 }
 
-#endif // ATTRIBUTES_H
+#endif // ATTRIBUTE_H

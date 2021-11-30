@@ -17,6 +17,9 @@ namespace Layers
 	{
 		Q_OBJECT
 
+	signals:
+		void current_theme_changed();
+
 	public:
 		Application(
 			int& argc, char** argv,
@@ -34,8 +37,6 @@ namespace Layers
 		Theme* current_theme() const;
 
 		QFile* icon_file();
-
-		void issue_update();
 
 		Theme load_theme(QFile& file);
 
