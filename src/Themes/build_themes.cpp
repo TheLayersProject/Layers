@@ -1664,10 +1664,6 @@ Theme Layers::build_layers_blue_theme()
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_radius_br", 7);
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_color_disabled", true);
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "left_padding", 10);
-	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_bottom", 8);
-	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_left", 7);
-	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_right", 8);
-	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "margin_top", 7);
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color_disabled", true);
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "outline_color", QColor(Qt::black));
 	blue_theme.add_attribute("layers/create_new_theme_dialog/theme_name_line_edit", "corner_color", QColor(Qt::black));

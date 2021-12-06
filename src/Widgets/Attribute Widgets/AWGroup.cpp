@@ -10,10 +10,12 @@ AWGroup::AWGroup(const QString& label_text, QWidget* parent) :
 	init_attributes();
 
 	m_label->set_name("label");
+	m_label->set_proper_name("Label");
 	m_label->set_font_size(16);
 	m_label->set_padding(17, 7, 0, 0);
 
 	m_collapse_button->set_name("collapse_button");
+	m_collapse_button->set_proper_name("Collapse Button");
 
 	connect(m_collapse_button, &Button::clicked, [this] {
 		if (m_collapsed)
@@ -68,6 +70,7 @@ void AWGroup::replace_all_attributes_with(AWGroup* aw_group)
 {
 	Widget::replace_all_attributes_with(aw_group);
 
+	if (m_collapse_button) m_collapse_button->replace_all_attributes_with(aw_group->m_collapse_button);
 	if (m_label) m_label->replace_all_attributes_with(aw_group->m_label);
 }
 

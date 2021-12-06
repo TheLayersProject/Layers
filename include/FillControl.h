@@ -19,6 +19,10 @@ namespace Layers
 
 		void init_attributes();
 
+		void init_child_themeable_reference_list();
+
+		void replace_all_attributes_with(FillControl* fill_control);
+
 		void set_attribute(Attribute* attribute);
 
 	protected:

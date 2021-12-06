@@ -115,7 +115,7 @@ bool Application::update_on_request()
 	UpdateDialog* update_dialog = new UpdateDialog(m_version->toString(), *m_latest_version);
 
 	update_dialog->assign_tag_prefixes();
-	update_dialog->apply_theme(*m_current_theme);
+	if (m_current_theme) update_dialog->apply_theme(*m_current_theme);
 	update_dialog->show();
 
 	if (update_dialog->exec())

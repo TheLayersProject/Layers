@@ -152,7 +152,7 @@
     <ClCompile Include="src\Widgets\Controls\ToggleSwitch.cpp" />
     <ClCompile Include="src\Widgets\CustomizePanel.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp" />
-    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionBox.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\UpdateDialog.cpp" />
     <ClCompile Include="src\Widgets\Graphic.cpp" />
     <ClCompile Include="src\Widgets\ImageSequenceLabel.cpp" />
@@ -180,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AttributeLayout.h" />
-    <ClInclude Include="include\AttributeSetItem.h" />
     <ClInclude Include="include\build_themes.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />

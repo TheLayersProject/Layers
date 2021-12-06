@@ -13,6 +13,7 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
+	m_attribute_label->set_proper_name("Label");
 	m_attribute_label->set_font_size(14);
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
@@ -24,6 +25,8 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 	m_right_stretch->a_fill.set_disabled();
 
 	// Setup Disabling Attribute Toggle
+	m_disabled_toggle->set_proper_name("Disable Toggle");
+
 	connect(m_disabled_toggle, &ToggleSwitch::toggled_event, [this, attribute] {
 		if (m_disabled_toggle->toggled())
 		{
@@ -70,6 +73,7 @@ void FillAW::replace_all_attributes_with(FillAW* fill_aw)
 
 	if (m_attribute_label) m_attribute_label->replace_all_attributes_with(fill_aw->m_attribute_label);
 	if (m_disabled_toggle) m_disabled_toggle->replace_all_attributes_with(fill_aw->m_disabled_toggle);
+	if (m_fill_control) m_fill_control->replace_all_attributes_with(fill_aw->m_fill_control);
 }
 
 void FillAW::set_centered(bool centered)
@@ -87,4 +91,5 @@ void FillAW::init_child_themeable_reference_list()
 {
 	add_child_themeable_reference(m_attribute_label);
 	if (m_disabled_toggle) add_child_themeable_reference(m_disabled_toggle);
+	add_child_themeable_reference(m_fill_control);
 }

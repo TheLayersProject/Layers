@@ -11,11 +11,16 @@ using Layers::FillControl;
 FillControl::FillControl(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
+	init_child_themeable_reference_list();
 
 	installEventFilter(this);
 	setFixedSize(45, 45);
+	set_name("fill_control");
+	set_proper_name("Fill Control");
 
 	m_fill_type_toggle->setFixedHeight(76);
+	m_fill_type_toggle->set_name("vertical_toggle_switch");
+	m_fill_type_toggle->set_proper_name("Fill Type Toggle");
 
 	connect(m_fill_type_toggle, &ToggleSwitch::toggled_event, [this] {
 			if (m_fill_type_toggle->toggled())
@@ -51,6 +56,8 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	m_color_label->set_resize_disabled();
 	m_color_label->a_padding_top.set_value(13);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
+	m_color_label->set_name("color_label");
+	m_color_label->set_proper_name("Color Label");
 
 	m_gradient_control->setFixedHeight(38);
 
@@ -61,6 +68,8 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	m_gradient_label->set_resize_disabled();
 	m_gradient_label->a_padding_top.set_value(9);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
+	m_gradient_label->set_name("gradient_label");
+	m_gradient_label->set_proper_name("Gradient Label");
 
 	m_dialog->installEventFilter(this);
 	m_dialog->setAttribute(Qt::WA_TranslucentBackground);
@@ -101,6 +110,25 @@ void FillControl::init_attributes()
 	m_dialog->a_corner_radius_tr.set_value(4);
 	m_dialog->a_corner_radius_bl.set_value(4);
 	m_dialog->a_corner_radius_br.set_value(4);
+}
+
+void FillControl::init_child_themeable_reference_list()
+{
+	add_child_themeable_reference(m_dialog);
+
+	m_dialog->add_child_themeable_reference(m_fill_type_toggle);
+	m_dialog->add_child_themeable_reference(m_color_label);
+	m_dialog->add_child_themeable_reference(m_gradient_label);
+}
+
+void FillControl::replace_all_attributes_with(FillControl* fill_control)
+{
+	Widget::replace_all_attributes_with(fill_control);
+
+	if (m_dialog) m_dialog->replace_all_attributes_with(fill_control->m_dialog);
+	if (m_fill_type_toggle) m_fill_type_toggle->replace_all_attributes_with(fill_control->m_fill_type_toggle);
+	if (m_color_label) m_color_label->replace_all_attributes_with(fill_control->m_color_label);
+	if (m_gradient_label) m_gradient_label->replace_all_attributes_with(fill_control->m_gradient_label);
 }
 
 void FillControl::set_attribute(Attribute* attribute)

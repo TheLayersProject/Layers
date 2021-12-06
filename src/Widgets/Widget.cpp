@@ -55,6 +55,10 @@ void Widget::init_attributes()
     m_attribute_layout.append(&ag_margins);
     m_attribute_layout.append(&a_corner_color);
     m_attribute_layout.append(&a_outline_color);
+
+    connect(&a_border_thickness, &Attribute::value_changed, [this] {
+        update();
+        });
 }
 
 void Widget::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)

@@ -14,9 +14,9 @@ namespace Layers
 	public:
 		UpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
 
-		void issue_update();
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
 
-		void update_theme_dependencies();
+		void replace_all_attributes_with(UpdateDialog* dialog);
 
 		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };
 		Attribute a_border_thickness{ Attribute("Border Thickness", QVariant::fromValue(0)) };

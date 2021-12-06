@@ -21,7 +21,7 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
 	setAttribute(Qt::WA_TranslucentBackground);
     installEventFilter(this);
 
-    set_name("gradient_selection_box");
+    set_name("gradient_selection_dialog");
     
     m_gradient_stops = gradient_stops;
 
@@ -29,7 +29,7 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
     init_gradient_widget();
 
     m_apply_button->set_name("apply_button");
-    m_apply_button->set_padding(8, 6, 8, 6);
+    //m_apply_button->set_padding(8, 6, 8, 6);
     m_apply_button->set_text_padding(1, 3, 0, 0);
     m_apply_button->disable_text_hover_color();
     connect(m_apply_button, &Button::clicked, [this] { done(QDialog::Accepted); });
@@ -43,6 +43,18 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
     m_single_click_timer.setSingleShot(true);
 
     connect(&m_single_click_timer, &QTimer::timeout, this, &GradientSelectionDialog::click_control);
+
+    connect(&a_border_thickness, &Attribute::value_changed, [this] {
+        int margin = a_border_thickness.value<int>();
+
+        m_main_layout->setContentsMargins(margin, margin, margin, margin);
+
+        //a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
+        //a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
+
+        m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
+        m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
+        });
 }
 
 void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
@@ -84,6 +96,24 @@ void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
     update_gradient();
 }
 
+void GradientSelectionDialog::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+{
+    a_border_fill.copy_values_from(*theme_attrs["border_fill"]);
+    a_border_thickness.copy_values_from(*theme_attrs["border_thickness"]);
+    a_corner_color.copy_values_from(*theme_attrs["corner_color"]);
+    a_corner_radius_tl.copy_values_from(*theme_attrs["corner_radius_tl"]);
+    a_corner_radius_tr.copy_values_from(*theme_attrs["corner_radius_tr"]);
+    a_corner_radius_bl.copy_values_from(*theme_attrs["corner_radius_bl"]);
+    a_corner_radius_br.copy_values_from(*theme_attrs["corner_radius_br"]);
+    a_fill.copy_values_from(*theme_attrs["fill"]);
+    a_hover_fill.copy_values_from(*theme_attrs["hover_fill"]);
+    a_margin_left.copy_values_from(*theme_attrs["margin_left"]);
+    a_margin_top.copy_values_from(*theme_attrs["margin_top"]);
+    a_margin_right.copy_values_from(*theme_attrs["margin_right"]);
+    a_margin_bottom.copy_values_from(*theme_attrs["margin_bottom"]);
+    a_outline_color.copy_values_from(*theme_attrs["outline_color"]);
+}
+
 QGradientStops GradientSelectionDialog::gradient_stops() const
 {
     return m_gradient_stops;
@@ -91,41 +121,29 @@ QGradientStops GradientSelectionDialog::gradient_stops() const
 
 void GradientSelectionDialog::init_attributes()
 {
-	//QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
-	//QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
-    
-	//add_attribute("background_color", QColor(Qt::white));
-	//add_attribute("background_color_hover", QColor(Qt::white));
-	//add_attribute("background_color_hover_disabled", true);
-	//add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-	//add_attribute("background_gradient_disabled", true);
-	//add_attribute("using_background_color_hover", false);
-	//add_attribute("background_disabled", false);
-	//add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	//add_attribute("border_gradient_disabled", true);
-	//add_attribute("border_color", QColor(Qt::black));
-	//add_attribute("border_thickness", 10);
-	//add_attribute("corner_radius_tl", 10);
-	//add_attribute("corner_radius_tr", 10);
-	//add_attribute("corner_radius_bl", 10);
-	//add_attribute("corner_radius_br", 10);
-	//add_attribute("margin_left", 0);
-	//add_attribute("margin_top", 0);
-	//add_attribute("margin_right", 0);
-	//add_attribute("margin_bottom", 0);
-	//add_attribute("corner_color_disabled", true);
-	//add_attribute("corner_color", QColor(Qt::black));
-	//add_attribute("outline_color_disabled", false);
-	//add_attribute("outline_color", QColor(Qt::black));
-
-    //m_titlebar->set_attribute_value("corner_radius_tl", inner_radius(m_attribute_set.attribute_value("corner_radius_tl")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
-	//m_titlebar->set_attribute_value("corner_radius_tr", inner_radius(m_attribute_set.attribute_value("corner_radius_tr")->value<int>(), m_attribute_set.attribute_value("border_thickness")->value<int>()));
+    m_attributes.insert({
+        { "border_fill", &a_border_fill },
+        { "border_thickness", &a_border_thickness },
+        { "corner_color", &a_corner_color },
+        { "corner_radius_tl", &a_corner_radius_tl },
+        { "corner_radius_tr", &a_corner_radius_tr },
+        { "corner_radius_bl", &a_corner_radius_bl },
+        { "corner_radius_br", &a_corner_radius_br },
+        { "fill", &a_fill },
+        { "hover_fill", &a_hover_fill },
+        { "margin_left", &a_margin_left },
+        { "margin_top", &a_margin_top },
+        { "margin_right", &a_margin_right },
+        { "margin_bottom", &a_margin_bottom },
+        { "outline_color", &a_outline_color },
+        });
 
     m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
     m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
 
-    m_gradient_widget->a_fill.set_disabled(false);
-    m_gradient_widget->a_border_thickness.set_value(1);
+    //m_gradient_widget->a_fill.set_disabled(false);
+    m_gradient_widget->a_border_fill.set_value(QColor(Qt::black));
+    m_gradient_widget->a_border_thickness.set_value(2);
     m_gradient_widget->a_corner_radius_tl.set_value(8);
     m_gradient_widget->a_corner_radius_tr.set_value(8);
     m_gradient_widget->a_corner_radius_bl.set_value(8);
@@ -206,9 +224,22 @@ void GradientSelectionDialog::init_titlebar()
     m_titlebar->setLayout(titlebar_layout);
 }
 
-void GradientSelectionDialog::issue_update()
+void GradientSelectionDialog::replace_all_attributes_with(GradientSelectionDialog* dialog)
 {
-	update();
+    a_border_fill.get_values_from(dialog->a_border_fill);
+    a_border_thickness.get_values_from(dialog->a_border_thickness);
+    a_corner_color.get_values_from(dialog->a_corner_color);
+    a_corner_radius_tl.get_values_from(dialog->a_corner_radius_tl);
+    a_corner_radius_tr.get_values_from(dialog->a_corner_radius_tr);
+    a_corner_radius_bl.get_values_from(dialog->a_corner_radius_bl);
+    a_corner_radius_br.get_values_from(dialog->a_corner_radius_br);
+    a_fill.get_values_from(dialog->a_fill);
+    a_hover_fill.get_values_from(dialog->a_hover_fill);
+    a_margin_left.get_values_from(dialog->a_margin_left);
+    a_margin_top.get_values_from(dialog->a_margin_top);
+    a_margin_right.get_values_from(dialog->a_margin_right);
+    a_margin_bottom.get_values_from(dialog->a_margin_bottom);
+    a_outline_color.get_values_from(dialog->a_outline_color);
 }
 
 void GradientSelectionDialog::update_gradient()
@@ -224,16 +255,6 @@ void GradientSelectionDialog::update_gradient()
     }
 
     m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops)); // , true);
-}
-
-void GradientSelectionDialog::update_theme_dependencies()
-{
-    int margin = a_border_thickness.value<int>();
-
-    m_main_layout->setContentsMargins(margin, margin, margin, margin);
-
-    m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
-    m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
 }
 
 void GradientSelectionDialog::click_control()

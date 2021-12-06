@@ -27,19 +27,6 @@ Button::Button(Graphic* graphic, bool auto_touch_target_compliance, QWidget* par
 	init();
 
 	a_fill.set_disabled();
-
-	//filter_attribute("background_color");
-	//filter_attribute("background_color_hover");
-	//filter_attribute("border_color");
-	//filter_attribute("border_gradient_stops");
-	//filter_attribute("border_thickness");
-	//filter_attribute("corner_radius_tl");
-	//filter_attribute("corner_radius_tr");
-	//filter_attribute("corner_radius_bl");
-	//filter_attribute("corner_radius_br");
-	//filter_attribute("text_color");
-	//filter_attribute("text_color_hover");
-	//filter_attribute("border_gradient_disabled");
 }
 
 Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* parent) :
@@ -61,19 +48,6 @@ Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_
 	init();
 
 	a_fill.set_disabled();
-
-	//filter_attribute("background_color");
-	//filter_attribute("background_color_hover");
-	//filter_attribute("border_color");
-	//filter_attribute("border_gradient_stops");
-	//filter_attribute("border_thickness");
-	//filter_attribute("corner_radius_tl");
-	//filter_attribute("corner_radius_tr");
-	//filter_attribute("corner_radius_bl");
-	//filter_attribute("corner_radius_br");
-	//filter_attribute("text_color");
-	//filter_attribute("text_color_hover");
-	//filter_attribute("border_gradient_disabled");
 }
 
 void Button::disable_graphic_hover_color(bool cond)
@@ -106,6 +80,8 @@ void Button::replace_all_attributes_with(Button* button)
 	Widget::replace_all_attributes_with(button);
 
 	if (m_graphic) m_graphic->replace_all_attributes_with(button->m_graphic);
+	if (m_graphic_after) m_graphic_after->replace_all_attributes_with(button->m_graphic_after);
+	if (m_text_label) m_text_label->replace_all_attributes_with(button->m_text_label);
 }
 
 void Button::init()

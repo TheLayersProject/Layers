@@ -21,7 +21,7 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 void Label::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
 	a_fill.copy_values_from(*theme_attrs["fill"]);
-	a_text_hover_color.copy_values_from(*theme_attrs["hover_text_color"]);
+	a_text_hover_color.copy_values_from(*theme_attrs["text_hover_color"]);
 	a_outline_color.copy_values_from(*theme_attrs["outline_color"]);
 	a_text_color.copy_values_from(*theme_attrs["text_color"]);
 }
@@ -30,7 +30,7 @@ void Label::init_attributes()
 {
 	m_attributes.insert({
 		{ "fill", &a_fill },
-		{ "hover_text_color", &a_text_hover_color },
+		{ "text_hover_color", &a_text_hover_color },
 		{ "outline_color", &a_outline_color },
 		{ "text_color", &a_text_color }
 	});

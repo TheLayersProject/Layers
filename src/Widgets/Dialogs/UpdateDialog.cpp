@@ -47,52 +47,57 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	m_message_label->set_available_width(475);
 	m_message_label->setWordWrap(true);
 
+	connect(&a_border_thickness, &Attribute::value_changed, [this] {
+		int margin = a_border_thickness.value<int>();
+
+		m_main_layout->setContentsMargins(margin, margin, margin, margin);
+
+		m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
+		m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
+		});
+
 	setup_layout();
 }
 
-void UpdateDialog::issue_update()
+void UpdateDialog::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
-	update();
+	a_border_fill.copy_values_from(*theme_attrs["border_fill"]);
+	a_border_thickness.copy_values_from(*theme_attrs["border_thickness"]);
+	a_corner_color.copy_values_from(*theme_attrs["corner_color"]);
+	a_corner_radius_tl.copy_values_from(*theme_attrs["corner_radius_tl"]);
+	a_corner_radius_tr.copy_values_from(*theme_attrs["corner_radius_tr"]);
+	a_corner_radius_bl.copy_values_from(*theme_attrs["corner_radius_bl"]);
+	a_corner_radius_br.copy_values_from(*theme_attrs["corner_radius_br"]);
+	a_fill.copy_values_from(*theme_attrs["fill"]);
+	a_hover_fill.copy_values_from(*theme_attrs["hover_fill"]);
+	a_margin_left.copy_values_from(*theme_attrs["margin_left"]);
+	a_margin_top.copy_values_from(*theme_attrs["margin_top"]);
+	a_margin_right.copy_values_from(*theme_attrs["margin_right"]);
+	a_margin_bottom.copy_values_from(*theme_attrs["margin_bottom"]);
+	a_outline_color.copy_values_from(*theme_attrs["outline_color"]);
 }
 
-void UpdateDialog::update_theme_dependencies()
+void UpdateDialog::replace_all_attributes_with(UpdateDialog* dialog)
 {
-	int margin = a_border_thickness.value<int>();
-
-	m_main_layout->setContentsMargins(margin, margin, margin, margin);
-
-	m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
-	m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));
+	a_border_fill.get_values_from(dialog->a_border_fill);
+	a_border_thickness.get_values_from(dialog->a_border_thickness);
+	a_corner_color.get_values_from(dialog->a_corner_color);
+	a_corner_radius_tl.get_values_from(dialog->a_corner_radius_tl);
+	a_corner_radius_tr.get_values_from(dialog->a_corner_radius_tr);
+	a_corner_radius_bl.get_values_from(dialog->a_corner_radius_bl);
+	a_corner_radius_br.get_values_from(dialog->a_corner_radius_br);
+	a_fill.get_values_from(dialog->a_fill);
+	a_hover_fill.get_values_from(dialog->a_hover_fill);
+	a_margin_left.get_values_from(dialog->a_margin_left);
+	a_margin_top.get_values_from(dialog->a_margin_top);
+	a_margin_right.get_values_from(dialog->a_margin_right);
+	a_margin_bottom.get_values_from(dialog->a_margin_bottom);
+	a_outline_color.get_values_from(dialog->a_outline_color);
 }
 
 void UpdateDialog::init_attributes()
 {
-	//QGradientStops background_gradient_stops = { { 0.0, Qt::white },{ 1.0, Qt::black } };
-	//QGradientStops border_gradient_stops = { { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } };
-	
-	//add_attribute("background_color", QColor(Qt::white));
-	//add_attribute("background_color_hover", QColor(Qt::white));
-	//add_attribute("background_color_hover_disabled", true);
-	//add_attribute("background_gradient_stops", QVariant::fromValue(background_gradient_stops));
-	//add_attribute("background_gradient_disabled", true);
-	//add_attribute("using_background_color_hover", false);
-	//add_attribute("background_disabled", false);
-	//add_attribute("border_gradient_stops", QVariant::fromValue(border_gradient_stops));
-	//add_attribute("border_gradient_disabled", true);
-	//add_attribute("border_color", QColor(Qt::black));
-	//add_attribute("border_thickness", 10);
-	//add_attribute("corner_radius_tl", 10);
-	//add_attribute("corner_radius_tr", 10);
-	//add_attribute("corner_radius_bl", 10);
-	//add_attribute("corner_radius_br", 10);
-	//add_attribute("margin_left", 0);
-	//add_attribute("margin_top", 0);
-	//add_attribute("margin_right", 0);
-	//add_attribute("margin_bottom", 0);
-	//add_attribute("corner_color_disabled", true);
-	//add_attribute("corner_color", QColor(Qt::black));
-	//add_attribute("outline_color_disabled", false);
-	//add_attribute("outline_color", QColor(Qt::black));
+
 
 	m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.value<int>(), a_border_thickness.value<int>()));
 	m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.value<int>(), a_border_thickness.value<int>()));

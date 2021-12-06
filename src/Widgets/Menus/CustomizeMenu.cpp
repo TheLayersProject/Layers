@@ -20,6 +20,9 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_control_aw_group->set_name("aw_group");
 	m_control_aw_group->set_proper_name("Attribute Widget Group");
 
+	m_control_color_aw->set_name("color_aw");
+	m_control_color_aw->set_proper_name("Color Attribute Widget");
+
 	m_control_corner_radii_aw->set_name("corner_radii_aw");
 	m_control_corner_radii_aw->set_proper_name("Corner Radii Attribute Widget");
 
@@ -28,6 +31,9 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_control_number_aw->set_name("number_aw");
 	m_control_number_aw->set_proper_name("Number Attribute Widget");
+
+	m_control_widget_button->set_name("widget_button");
+	m_control_widget_button->set_proper_name("Widget Button");
 
 	m_control_customize_panel = new CustomizePanel(ccp_widget);
 	m_control_customize_panel->set_proper_name("Customize Panels");
@@ -41,19 +47,19 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	set_name("customize_menu");
 	set_proper_name("Customize Menu");
 
-	connect(m_collapsed_button, &Button::clicked, [this] {
-		if (!m_collapsed_widget->isVisible())
+	connect(m_collapse_menu_button, &Button::clicked, [this] {
+		if (!m_collapse_menu->isVisible())
 		{
-			QPoint mapped_from_global = m_collapsed_button->mapToGlobal(QPoint(0, 0));
-			QPoint move_point = QPoint(mapped_from_global.x(), mapped_from_global.y() + m_collapsed_button->height());
+			QPoint mapped_from_global = m_collapse_menu_button->mapToGlobal(QPoint(0, 0));
+			QPoint move_point = QPoint(mapped_from_global.x(), mapped_from_global.y() + m_collapse_menu_button->height());
 
-			m_collapsed_widget->move(move_point);
-			m_collapsed_widget->show();
-			m_collapsed_widget->reapply_theme();
-			//m_collapsed_widget->repaint();
-			m_collapsed_widget->setFocus();
+			m_collapse_menu->move(move_point);
+			m_collapse_menu->show();
+			m_collapse_menu->reapply_theme();
+			//m_collapse_menu->repaint();
+			m_collapse_menu->setFocus();
 		}
-		else m_collapsed_widget->hide();
+		else m_collapse_menu->hide();
 	});
 
 	m_control_arrow_graphic->set_name("arrow_graphic");
@@ -86,28 +92,28 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 		//layersApp->issue_update();
 	});
 
-	m_collapsed_button->hide();
-	m_collapsed_button->setFixedWidth(50);
-	m_collapsed_button->disable_graphic_hover_color();
-	m_collapsed_button->a_fill.set_value(false);
-	m_collapsed_button->a_corner_radius_tl.set_value(5);
-	m_collapsed_button->a_corner_radius_tr.set_value(5);
-	m_collapsed_button->a_corner_radius_bl.set_value(5);
-	m_collapsed_button->a_corner_radius_br.set_value(5);
-	m_collapsed_button->set_margin(0, 10, 0, 10);
-	m_collapsed_button->set_name("collapsed_button");
-	m_collapsed_button->set_proper_name("Collapsed Button");
+	m_collapse_menu_button->hide();
+	m_collapse_menu_button->setFixedWidth(50);
+	m_collapse_menu_button->disable_graphic_hover_color();
+	m_collapse_menu_button->a_fill.set_value(false);
+	m_collapse_menu_button->a_corner_radius_tl.set_value(5);
+	m_collapse_menu_button->a_corner_radius_tr.set_value(5);
+	m_collapse_menu_button->a_corner_radius_bl.set_value(5);
+	m_collapse_menu_button->a_corner_radius_br.set_value(5);
+	m_collapse_menu_button->set_margin(0, 10, 0, 10);
+	m_collapse_menu_button->set_name("collapse_menu_button");
+	m_collapse_menu_button->set_proper_name("Collapse Menu Button");
 
-	m_collapsed_widget->installEventFilter(this);
-	m_collapsed_widget->setWindowFlags(Qt::FramelessWindowHint);
-	m_collapsed_widget->setAttribute(Qt::WA_TranslucentBackground);
-	m_collapsed_widget->setMouseTracking(true);
-	m_collapsed_widget->set_name("collapsed_widget");
-	m_collapsed_widget->set_proper_name("Collapsed Text Buttons Dropdown Widget");
-	m_collapsed_widget->a_corner_radius_tl.set_value(5);
-	m_collapsed_widget->a_corner_radius_tr.set_value(5);
-	m_collapsed_widget->a_corner_radius_bl.set_value(5);
-	m_collapsed_widget->a_corner_radius_br.set_value(5);
+	m_collapse_menu->installEventFilter(this);
+	m_collapse_menu->setWindowFlags(Qt::FramelessWindowHint);
+	m_collapse_menu->setAttribute(Qt::WA_TranslucentBackground);
+	m_collapse_menu->setMouseTracking(true);
+	m_collapse_menu->set_name("collapse_menu");
+	m_collapse_menu->set_proper_name("Collapse Menu");
+	m_collapse_menu->a_corner_radius_tl.set_value(5);
+	m_collapse_menu->a_corner_radius_tr.set_value(5);
+	m_collapse_menu->a_corner_radius_bl.set_value(5);
+	m_collapse_menu->a_corner_radius_br.set_value(5);
 
 	m_sidebar->installEventFilter(this);
 	m_sidebar->setFixedWidth(300);
@@ -165,15 +171,17 @@ void CustomizeMenu::init_child_themeable_reference_list()
 	add_child_themeable_reference(m_sidebar);
 	add_child_themeable_reference(m_topbar);
 	m_topbar->add_child_themeable_reference(m_apply_button);
-	m_topbar->add_child_themeable_reference(m_collapsed_button);
-	m_topbar->add_child_themeable_reference(m_collapsed_widget);
+	m_topbar->add_child_themeable_reference(m_collapse_menu_button);
+	m_topbar->add_child_themeable_reference(m_collapse_menu);
 	m_topbar->add_child_themeable_reference(m_control_arrow_graphic);
 	m_topbar->add_child_themeable_reference(m_control_text_button);
 	m_sidebar->add_child_themeable_reference(m_control_customize_panel);
 	m_control_customize_panel->add_child_themeable_reference(m_control_aw_group);
+	m_control_customize_panel->add_child_themeable_reference(m_control_color_aw);
 	m_control_customize_panel->add_child_themeable_reference(m_control_corner_radii_aw);
 	m_control_customize_panel->add_child_themeable_reference(m_control_fill_aw);
 	m_control_customize_panel->add_child_themeable_reference(m_control_number_aw);
+	m_control_customize_panel->add_child_themeable_reference(m_control_widget_button);
 }
 
 void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
@@ -208,8 +216,6 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 					m_arrow_graphics.takeLast()->deleteLater();
 				}
 			}
-
-			//customize_panel->replace_all_attributes_with(m_control_customize_panel);
 
 			customize_panel->show();
 
@@ -250,7 +256,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		m_text_button_stack.append(text_button);
 		m_topbar_text_buttons.append(text_button);
 
-		//text_button->replace_all_attributes_with(m_control_text_button);
+		text_button->replace_all_attributes_with(m_control_text_button);
 
 		// Setup Arrow Graphic
 
@@ -265,14 +271,12 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 
 			m_arrow_graphics.append(arrow_graphic);
 
-			//arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
+			arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, arrow_graphic);
 		}
 
 		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
-
-		//customize_panel->replace_all_attributes_with(m_control_customize_panel);
 
 		customize_panel->show();
 
@@ -291,9 +295,11 @@ void CustomizeMenu::populate_panel_layout()
 
 		customize_panel->replace_all_attributes_with(m_control_customize_panel);
 		customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
+		customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
 		customize_panel->replace_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
 		customize_panel->replace_all_fill_awidgets_attrs_with(m_control_fill_aw);
 		customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
+		customize_panel->replace_all_widget_buttons_attrs_with(m_control_widget_button);
 	}
 
 	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
@@ -346,16 +352,16 @@ int CustomizeMenu::topbar_content_width(bool include_collapse_button)
 
 	topbar_content_width += m_apply_button->width();
 
-	if (include_collapse_button && !m_collapsed_text_buttons.isEmpty()) topbar_content_width += m_collapsed_button->width();
+	if (include_collapse_button && !m_collapsed_text_buttons.isEmpty()) topbar_content_width += m_collapse_menu_button->width();
 
 	return topbar_content_width;
 }
 
 bool CustomizeMenu::eventFilter(QObject* object, QEvent* event)
 {
-	if (object == m_collapsed_widget && event->type() == QEvent::FocusOut)
+	if (object == m_collapse_menu && event->type() == QEvent::FocusOut)
 	{
-		m_collapsed_widget->hide();
+		m_collapse_menu->hide();
 
 		//update();
 	}
@@ -411,7 +417,7 @@ void CustomizeMenu::adjust_collapsed_widget()
 
 	collapsed_widget_width += margins.left() + margins.right();
 
-	m_collapsed_widget->setFixedSize(collapsed_widget_width, collapsed_widget_height);
+	m_collapse_menu->setFixedSize(collapsed_widget_width, collapsed_widget_height);
 }
 
 void CustomizeMenu::collapse_text_buttons()
@@ -422,7 +428,7 @@ void CustomizeMenu::collapse_text_buttons()
 		{
 			if (m_collapsed_text_buttons.isEmpty())
 			{
-				m_collapsed_button->show();
+				m_collapse_menu_button->show();
 			}
 			else
 			{
@@ -471,7 +477,7 @@ void CustomizeMenu::expand_text_buttons()
 
 		if (m_collapsed_text_buttons.isEmpty())
 		{
-			m_collapsed_button->hide();
+			m_collapse_menu_button->hide();
 
 			m_topbar_layout->insertWidget(0, text_button);
 		}
@@ -505,13 +511,13 @@ void CustomizeMenu::setup_layout()
 	m_collapsed_text_buttons_layout->setContentsMargins(10, 0, 10, 0);
 	m_collapsed_text_buttons_layout->setSpacing(0);
 
-	m_collapsed_widget->setLayout(m_collapsed_text_buttons_layout);
+	m_collapse_menu->setLayout(m_collapsed_text_buttons_layout);
 
 	// Topbar
 
 	m_topbar_layout->setContentsMargins(8, 0, 8, 0);
 	m_topbar_layout->setSpacing(10);
-	m_topbar_layout->addWidget(m_collapsed_button);
+	m_topbar_layout->addWidget(m_collapse_menu_button);
 	m_topbar_layout->addStretch();
 	m_topbar_layout->addWidget(m_apply_button);
 

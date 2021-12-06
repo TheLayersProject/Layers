@@ -66,7 +66,6 @@ void Attribute::copy_values_from(const Attribute& attr)
 
 		m_disabled = attr.m_disabled;
 
-		// TODO: TESTING; HAVE NOT COMPLETELY CONSIDERED THIS:
 		emit value_changed();
 
 		//m_state = attr->m_state;

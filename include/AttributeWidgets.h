@@ -98,6 +98,8 @@ namespace Layers
 
 		ColorControl* color_control() const;
 
+		void replace_all_attributes_with(ColorAW* color_aw);
+
 		void set_centered(bool centered = true);
 
 	protected:

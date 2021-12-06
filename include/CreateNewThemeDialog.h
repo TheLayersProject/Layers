@@ -18,6 +18,8 @@ namespace Layers
 
 		void add_theme_name_to_combobox(const QString& theme_name);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+
 		void clear();
 
 		QString copy_theme_name();
@@ -26,9 +28,9 @@ namespace Layers
 
 		QString new_theme_name();
 
-		void set_current_start_theme_name(const QString& theme_name);
+		void replace_all_attributes_with(CreateNewThemeDialog* dialog);
 
-		void update_theme_dependencies();
+		void set_current_start_theme_name(const QString& theme_name);
 
 		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };
 		Attribute a_border_thickness{ Attribute("Border Thickness", QVariant::fromValue(0)) };
@@ -57,6 +59,25 @@ namespace Layers
 		void init_titlebar();
 
 		void setup_layout();
+
+		AttributeGroup ag_border{ AttributeGroup("Border", {
+			{ "border_fill", &a_border_fill },
+			{ "border_thickness", &a_border_thickness }
+			}) };
+
+		AttributeGroup ag_corner_radii{ AttributeGroup("Corner Radii", {
+			{ "corner_radius_tl", &a_corner_radius_tl },
+			{ "corner_radius_tr", &a_corner_radius_tr },
+			{ "corner_radius_bl", &a_corner_radius_bl },
+			{ "corner_radius_br", &a_corner_radius_br }
+			}) };
+
+		AttributeGroup ag_margins{ AttributeGroup("Margins", {
+			{ "margin_left", &a_margin_left },
+			{ "margin_top", &a_margin_top },
+			{ "margin_right", &a_margin_right },
+			{ "margin_bottom", &a_margin_bottom }
+			}) };
 
 		bool m_hovering{ false };
 

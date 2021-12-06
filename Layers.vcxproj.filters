@@ -165,7 +165,7 @@
     <ClCompile Include="src\Widgets\Menus\Settings\SettingsTab.cpp">
       <Filter>Source Files\Widgets\Menus\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionBox.cpp">
+    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionDialog.cpp">
       <Filter>Source Files\Widgets\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Dialogs\UpdateDialog.cpp">
@@ -397,9 +397,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Themeable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AttributeSetItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AttributeLayout.h">

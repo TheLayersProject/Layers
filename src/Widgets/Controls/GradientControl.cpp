@@ -1,3 +1,4 @@
+#include "../../../include/Application.h"
 #include "../../../include/GradientControl.h"
 #include "../../../include/GradientSelectionDialog.h"
 #include "../../../include/Window.h"
@@ -55,7 +56,8 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			gsd = new GradientSelectionDialog(a_fill.value<QGradientStops>());
 
-			if (m_current_theme) gsd->apply_theme(*m_current_theme);
+			//if (m_current_theme) gsd->apply_theme(*m_current_theme);
+			if (layersApp->current_theme()) gsd->apply_theme(*layersApp->current_theme());
 
 			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
 

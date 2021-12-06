@@ -13,6 +13,7 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
+	m_attribute_label->set_proper_name("Label");
 	m_attribute_label->set_font_size(14);
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
@@ -24,7 +25,7 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 	m_right_stretch->a_fill.set_disabled();
 
 	// Setup Disabling Attribute Toggle
-	m_disabled_toggle->set_name("toggle");
+	m_disabled_toggle->set_proper_name("Disable Toggle");
 
 	connect(m_disabled_toggle, &ToggleSwitch::toggled_event, [this, attribute] {
 		if (m_disabled_toggle->toggled())
@@ -64,6 +65,15 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 ColorControl* ColorAW::color_control() const
 {
 	return m_color_control;
+}
+
+void ColorAW::replace_all_attributes_with(ColorAW* color_aw)
+{
+	Widget::replace_all_attributes_with(color_aw);
+
+	if (m_attribute_label) m_attribute_label->replace_all_attributes_with(color_aw->m_attribute_label);
+	if (m_disabled_toggle) m_disabled_toggle->replace_all_attributes_with(color_aw->m_disabled_toggle);
+	//if (m_color_control) m_color_control->replace_all_attributes_with(color_aw->m_color_control);
 }
 
 void ColorAW::set_centered(bool centered)

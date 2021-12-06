@@ -15,6 +15,7 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
+	m_attribute_label->set_proper_name("Label");
 	m_attribute_label->set_font_size(14);
 	m_attribute_label->set_padding(0, 7, 0, 0);
 
@@ -29,12 +30,14 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	m_line_editor->set_default_value("0");
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_name("line_editor");
+	m_line_editor->set_proper_name("Line Editor");
 	m_line_editor->set_text(QString::number(attribute->value<int>()));
 	m_line_editor->set_validator(int_validator);
 	m_line_editor->a_text.get_values_from(*attribute);
 
 	// Setup Slider
 	m_slider->set_name("mini_slider");
+	m_slider->set_proper_name("Slider");
 	m_slider->a_value.get_values_from(m_line_editor->a_text);
 
 	// Setup Unit Label

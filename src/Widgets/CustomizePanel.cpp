@@ -21,10 +21,12 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	hide();
 
 	m_attributes_label->set_name("attributes_label");
+	m_attributes_label->set_proper_name("Attributes Label");
 	m_attributes_label->set_font_size(17);
 	m_attributes_label->set_padding(0, 8, 0, 0);
 
 	m_widgets_label->set_name("widgets_label");
+	m_widgets_label->set_proper_name("Widgets Label");
 	m_widgets_label->set_font_size(17);
 	m_widgets_label->set_padding(0, 8, 0, 0);
 
@@ -44,11 +46,13 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_state_combobox->set_name("state_combobox");
 
 	m_show_all_button->set_name("show_all_button");
+	m_show_all_button->set_proper_name("'Show All' Button");
 	m_show_all_button->disable_text_hover_color();
 	m_show_all_button->set_margin(0, 7, 0, 7);
 	m_show_all_button->set_text_padding(3, 5, 0, 0);
 
 	m_show_primary_button->set_name("show_primary_button");
+	m_show_primary_button->set_proper_name("'Show Primary' Button");
 	m_show_primary_button->disable_text_hover_color();
 	m_show_primary_button->set_margin(0, 7, 0, 7);
 	m_show_primary_button->set_text_padding(3, 5, 0, 0);
@@ -109,7 +113,7 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 					static_cast<Window*>(QApplication::activeWindow())->customize_menu()->open_customize_panel(child_themeable->customize_panel());
 				});
 
-				add_element_button(element_button);
+				add_widget_button(element_button);
 			}
 		}
 	}
@@ -163,15 +167,17 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	//}
 }
 
-void CustomizePanel::add_element_button(Button* button, int index)
+void CustomizePanel::add_widget_button(Button* button, int index)
 {
+	m_widget_buttons.append(button);
+
 	button->set_available_width(252);
 	button->a_fill.set_disabled();
 	button->set_font_size(16);
-	button->set_name("element_button");
+	//button->set_name("widget_button");
 	button->set_text_padding(0, 5, 0, 0);
 
-	add_child_themeable_reference(button);
+	//add_child_themeable_reference(button);
 
 	if (m_current_theme)
 		button->apply_theme(*m_current_theme);
@@ -198,7 +204,11 @@ void CustomizePanel::init_attribute_widgets()
 			}
 			else if (attribute->name().contains("Color"))
 			{
-				add_attribute_widget(new ColorAW(attribute));
+				ColorAW* color_aw = new ColorAW(attribute);
+
+				m_color_awidgets.append(color_aw);
+
+				add_attribute_widget(color_aw);
 			}
 			else if (
 				attribute->name().contains("Thickness") ||
@@ -245,7 +255,11 @@ void CustomizePanel::init_attribute_widgets()
 					}
 					else if (attribute->name().contains("Color"))
 					{
-						aw_group->add_attribute_widget(new ColorAW(attribute));
+						ColorAW* color_aw = new ColorAW(attribute);
+
+						m_color_awidgets.append(color_aw);
+
+						aw_group->add_attribute_widget(color_aw);
 					}
 					else if (
 						attribute->name().contains("Thickness") ||
@@ -281,6 +295,12 @@ void CustomizePanel::replace_all_aw_group_attrs_with(AWGroup* control_aw_group)
 {
 	for (AWGroup* aw_group : m_aw_groups)
 		aw_group->replace_all_attributes_with(control_aw_group);
+}
+
+void Layers::CustomizePanel::replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw)
+{
+	for (ColorAW* color_aw : m_color_awidgets)
+		color_aw->replace_all_attributes_with(control_color_aw);
 }
 
 void CustomizePanel::init_attributes()
@@ -327,6 +347,12 @@ void CustomizePanel::replace_all_number_awidgets_attrs_with(NumberAW* control_nu
 {
 	for (NumberAW* number_aw : m_number_awidgets)
 		number_aw->replace_all_attributes_with(control_number_aw);
+}
+
+void Layers::CustomizePanel::replace_all_widget_buttons_attrs_with(Button* control_widget_button)
+{
+	for (Button* widget_button : m_widget_buttons)
+		widget_button->replace_all_attributes_with(control_widget_button);
 }
 
 void CustomizePanel::replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)

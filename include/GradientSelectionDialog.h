@@ -18,12 +18,13 @@ namespace Layers
 
 		void add_gradient_stop(double stop_val, QColor color);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+
 		QGradientStops gradient_stops() const;
 
-		void issue_update();
+		void replace_all_attributes_with(GradientSelectionDialog* dialog);
 
 		void update_gradient();
-		void update_theme_dependencies();
 
 		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };
 		Attribute a_border_thickness{ Attribute("Border Thickness", QVariant::fromValue(0)) };

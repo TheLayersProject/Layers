@@ -19,24 +19,28 @@ CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
 	m_tl_line_editor->set_default_value("0");
 	m_tl_line_editor->set_font_size(13);
 	m_tl_line_editor->set_name("line_editor");
+	m_tl_line_editor->set_proper_name("TL Line Editor");
 	m_tl_line_editor->set_text("0");
 	m_tl_line_editor->set_validator(new QIntValidator(0, 30));
 
 	m_tr_line_editor->set_default_value("0");
 	m_tr_line_editor->set_font_size(13);
 	m_tr_line_editor->set_name("line_editor");
+	m_tr_line_editor->set_proper_name("TR Line Editor");
 	m_tr_line_editor->set_text("0");
 	m_tr_line_editor->set_validator(new QIntValidator(0, 30));
 
 	m_bl_line_editor->set_default_value("0");
 	m_bl_line_editor->set_font_size(13);
 	m_bl_line_editor->set_name("line_editor");
+	m_bl_line_editor->set_proper_name("BL Line Editor");
 	m_bl_line_editor->set_text("0");
 	m_bl_line_editor->set_validator(new QIntValidator(0, 30));
 
 	m_br_line_editor->set_default_value("0");
 	m_br_line_editor->set_font_size(13);
 	m_br_line_editor->set_name("line_editor");
+	m_br_line_editor->set_proper_name("BR Line Editor");
 	m_br_line_editor->set_text("0");
 	m_br_line_editor->set_validator(new QIntValidator(0, 30));
 
@@ -44,9 +48,14 @@ CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
 	m_tr_slider->set_name("mini_slider");
 	m_bl_slider->set_name("mini_slider");
 	m_br_slider->set_name("mini_slider");
+	m_tl_slider->set_proper_name("TL Slider");
+	m_tr_slider->set_proper_name("TR Slider");
+	m_bl_slider->set_proper_name("BL Slider");
+	m_br_slider->set_proper_name("BR Slider");
 
 	m_example_widget->setFixedSize(50, 50);
 	m_example_widget->set_name("example_widget");
+	m_example_widget->set_proper_name("Example Widget");
 
 	// Set sliders' to control themeable's corner radii attributes
 	if (corner_radii_ag->attributes().contains("corner_radius_tl"))

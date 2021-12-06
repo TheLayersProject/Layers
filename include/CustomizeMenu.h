@@ -49,9 +49,11 @@ namespace Layers
 		void setup_layout();
 
 		AWGroup* m_control_aw_group{ new AWGroup("") };
+		ColorAW* m_control_color_aw{ new ColorAW(new Attribute("", QColor())) };
 		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new AttributeGroup("", QMap<QString, Attribute*>())) };
 		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
 		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0)), new QIntValidator) };
+		Button* m_control_widget_button{ new Button(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
 
 		HorizontalLayout* m_main_layout{ new HorizontalLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
@@ -78,7 +80,7 @@ namespace Layers
 		QSize* m_previous_size{ nullptr };
 
 		Button* m_apply_button{ new Button("Apply", true) };
-		Button* m_collapsed_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
+		Button* m_collapse_menu_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
 
@@ -86,7 +88,7 @@ namespace Layers
 
 		Button* m_control_text_button{ new Button("") };
 
-		Widget* m_collapsed_widget{ new Widget };
+		Widget* m_collapse_menu{ new Widget };
 	};
 }
 

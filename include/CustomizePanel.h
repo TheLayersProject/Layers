@@ -17,14 +17,16 @@ namespace Layers
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
-		void add_element_button(Button* button, int index = -1);
+		void add_widget_button(Button* button, int index = -1);
 
 		void init_attribute_widgets();
 
 		void replace_all_attributes_with(CustomizePanel* cpanel);
 		void replace_all_aw_group_attrs_with(AWGroup* control_aw_group);
+		void replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw);
 		void replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw);
 		void replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw);
+		void replace_all_widget_buttons_attrs_with(Button* control_widget_button);
 		void replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
 
 		void setup_layout();
@@ -61,8 +63,10 @@ namespace Layers
 		QList<AttributeWidget*> m_attribute_widgets{ QList<AttributeWidget*>() };
 
 		QList<AWGroup*> m_aw_groups{ QList<AWGroup*>() };
+		QList<ColorAW*> m_color_awidgets{ QList<ColorAW*>() };
 		QList<FillAW*> m_fill_awidgets{ QList<FillAW*>() };
 		QList<NumberAW*> m_number_awidgets{ QList<NumberAW*>() };
+		QList<Button*> m_widget_buttons{ QList<Button*>() };
 
 		CornerRadiiAW* m_corner_radii_aw{ nullptr };
 
