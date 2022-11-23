@@ -21,10 +21,6 @@ namespace Layers
 
 		void reconnect_text_attribute();
 
-		void init_attributes();
-
-		void replace_all_attributes_with(LineEditor* line_editor);
-
 		void set_default_value(const QString& default_value);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
@@ -50,6 +46,8 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
+
+		void init_attributes();
 
 	private:
 		QString* m_default_value{ nullptr };

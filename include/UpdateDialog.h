@@ -17,8 +17,6 @@ namespace Layers
 
 		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
 
-		void replace_all_attributes_with(UpdateDialog* dialog);
-
 		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };
 		Attribute a_border_thickness{ Attribute("Border Thickness", QVariant::fromValue(0)) };
 		Attribute a_corner_color{ Attribute("Corner Color", QColor(Qt::gray), true) };

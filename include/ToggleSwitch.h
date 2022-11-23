@@ -20,8 +20,6 @@ namespace Layers
 	public:
 		ToggleSwitch(bool vertical = false, QWidget* parent = nullptr);
 
-		void replace_all_attributes_with(ToggleSwitch* fill_aw);
-
 		void setFixedHeight(int h);
 
 		void set_toggled(bool toggled);

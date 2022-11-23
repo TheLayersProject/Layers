@@ -70,14 +70,6 @@ void Label::resize()
 	}
 }
 
-void Label::replace_all_attributes_with(Label* label)
-{
-	a_fill.get_variant_from(label->a_fill);
-	a_outline_color.get_variant_from(label->a_outline_color);
-	a_text_color.get_variant_from(label->a_text_color);
-	a_text_hover_color.get_variant_from(label->a_text_hover_color);
-}
-
 void Label::build_wrapped_lines()
 {
 	m_wrapped_lines.clear();

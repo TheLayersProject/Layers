@@ -30,8 +30,6 @@ namespace Layers
 
 		Graphic* graphic() const;
 
-		void replace_all_attributes_with(Button* button);
-
 		void resize();
 
 		void set_available_width(int available_width);
@@ -50,7 +48,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init();
-		void init_attributes();
 		void init_child_themeable_reference_list();
 
 		void setup_layout();

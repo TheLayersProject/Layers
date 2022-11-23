@@ -117,16 +117,9 @@ Graphic::~Graphic()
 	if (m_image_sequence_label) m_image_sequence_label->deleteLater();
 }
 
-QSize Layers::Graphic::image_size()
+QSize Graphic::image_size()
 {
 	return m_image_size;
-}
-
-void Graphic::replace_all_attributes_with(Graphic* graphic)
-{
-	Widget::replace_all_attributes_with(graphic);
-
-	if (m_svg_widget) m_svg_widget->replace_all_attributes_with(graphic->m_svg_widget);
 }
 
 void Graphic::set_hovering(bool cond)

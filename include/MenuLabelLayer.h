@@ -15,8 +15,6 @@ namespace Layers
 	public:
 		MenuLabelLayer(Menu* menu, QWidget* parent = nullptr);
 
-		void replace_all_attributes_with(MenuLabelLayer* mll);
-
 		void shrink();
 		void expand();
 

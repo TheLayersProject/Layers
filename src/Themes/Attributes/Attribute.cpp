@@ -106,7 +106,7 @@ void Attribute::get_variant_from(Attribute& attribute)
 	// TODO: Likely need to store this connection and disconnect in destructor
 	connect(&attribute, &Attribute::variant_changed, [this, &attribute] {
 		get_variant_from(attribute);
-	});
+		});
 
 	if (attribute.m_variant)
 	{
@@ -139,6 +139,7 @@ void Attribute::get_variant_from(Attribute& attribute)
 	}
 
 	emit variant_changed();
+	emit value_changed();
 }
 
 //void Attribute::get_variant_from(Attribute& attribute)

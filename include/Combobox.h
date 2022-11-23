@@ -18,8 +18,6 @@ namespace Layers
 
 		QString item_text();
 
-		void replace_all_attributes_with(ComboboxItem* cb_item);
-
 		void replace_item_text(const QString& new_item_text);
 
 		void set_font_size(int size);
@@ -67,8 +65,6 @@ namespace Layers
 
 		QList<QString> items();
 
-		void replace_all_attributes_with(Combobox* combobox);
-
 		void update_theme_dependencies();
 
 		Attribute a_line_edit_text_color{ Attribute("Line Edit Text Color", QColor(Qt::black)) };
@@ -77,7 +73,7 @@ namespace Layers
 		void line_edit_return_pressed();
 
 	protected:
-		bool eventFilter(QObject* object, QEvent* event) override;
+		virtual bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
 		void init_child_themeable_reference_list();

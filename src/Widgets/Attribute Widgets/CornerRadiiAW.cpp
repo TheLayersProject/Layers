@@ -108,39 +108,12 @@ CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
 	m_example_widget->a_corner_radius_tr.get_variant_from(m_tr_slider->a_value);
 	m_example_widget->a_corner_radius_bl.get_variant_from(m_bl_slider->a_value);
 	m_example_widget->a_corner_radius_br.get_variant_from(m_br_slider->a_value);
+	m_example_widget->attributes().remove("corner_radius_tl");
+	m_example_widget->attributes().remove("corner_radius_tr");
+	m_example_widget->attributes().remove("corner_radius_bl");
+	m_example_widget->attributes().remove("corner_radius_br");
 
 	setup_layout();
-}
-
-void CornerRadiiAW::replace_all_attributes_with(CornerRadiiAW* corner_radii_aw)
-{
-	AWGroup::replace_all_attributes_with(corner_radii_aw);
-
-	/* Below is equivalent to replace_all_attributes_with(), except it leaves out
-	   the corner radii attributes since m_example_widget gets those values from
-	   the sliders. */
-	if (m_example_widget)
-	{
-		m_example_widget->a_border_fill.get_variant_from(corner_radii_aw->m_example_widget->a_border_fill);
-		m_example_widget->a_border_thickness.get_variant_from(corner_radii_aw->m_example_widget->a_border_thickness);
-		m_example_widget->a_corner_color.get_variant_from(corner_radii_aw->m_example_widget->a_corner_color);
-		m_example_widget->a_fill.get_variant_from(corner_radii_aw->m_example_widget->a_fill);
-		m_example_widget->a_hover_fill.get_variant_from(corner_radii_aw->m_example_widget->a_hover_fill);
-		m_example_widget->a_margin_left.get_variant_from(corner_radii_aw->m_example_widget->a_margin_left);
-		m_example_widget->a_margin_top.get_variant_from(corner_radii_aw->m_example_widget->a_margin_top);
-		m_example_widget->a_margin_right.get_variant_from(corner_radii_aw->m_example_widget->a_margin_right);
-		m_example_widget->a_margin_bottom.get_variant_from(corner_radii_aw->m_example_widget->a_margin_bottom);
-		m_example_widget->a_outline_color.get_variant_from(corner_radii_aw->m_example_widget->a_outline_color);
-	}
-
-	if (m_tl_line_editor) m_tl_line_editor->replace_all_attributes_with(corner_radii_aw->m_tl_line_editor);
-	if (m_tr_line_editor) m_tr_line_editor->replace_all_attributes_with(corner_radii_aw->m_tr_line_editor);
-	if (m_bl_line_editor) m_bl_line_editor->replace_all_attributes_with(corner_radii_aw->m_bl_line_editor);
-	if (m_br_line_editor) m_br_line_editor->replace_all_attributes_with(corner_radii_aw->m_br_line_editor);
-	if (m_tl_slider) m_tl_slider->replace_all_attributes_with(corner_radii_aw->m_tl_slider);
-	if (m_tr_slider) m_tr_slider->replace_all_attributes_with(corner_radii_aw->m_tr_slider);
-	if (m_bl_slider) m_bl_slider->replace_all_attributes_with(corner_radii_aw->m_bl_slider);
-	if (m_br_slider) m_br_slider->replace_all_attributes_with(corner_radii_aw->m_br_slider);
 }
 
 MiniSlider* CornerRadiiAW::tl_slider() const { return m_tl_slider; }

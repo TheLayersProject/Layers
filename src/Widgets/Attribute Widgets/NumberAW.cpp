@@ -50,15 +50,6 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	setup_layout();
 }
 
-void NumberAW::replace_all_attributes_with(NumberAW* number_aw)
-{
-	Widget::replace_all_attributes_with(number_aw);
-
-	if (m_attribute_label) m_attribute_label->replace_all_attributes_with(number_aw->m_attribute_label);
-	if (m_line_editor) m_line_editor->replace_all_attributes_with(number_aw->m_line_editor);
-	if (m_slider) m_slider->replace_all_attributes_with(number_aw->m_slider);
-}
-
 void NumberAW::set_centered(bool centered)
 {
 	if (m_centered != centered)
@@ -80,7 +71,7 @@ void NumberAW::init_child_themeable_reference_list()
 	store_child_themeable_pointer(m_attribute_label);
 	store_child_themeable_pointer(m_line_editor);
 	store_child_themeable_pointer(m_slider);
-	store_child_themeable_pointer(m_unit_label);
+	//store_child_themeable_pointer(m_unit_label);
 }
 
 void NumberAW::setup_layout()

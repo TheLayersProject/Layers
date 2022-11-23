@@ -21,8 +21,6 @@ namespace Layers
 
 		void resize();
 
-		void replace_all_attributes_with(Label* label);
-
 		void build_wrapped_lines();
 
 		void setFont(const QFont& f);

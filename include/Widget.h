@@ -24,8 +24,6 @@ namespace Layers
 		virtual void apply_theme_attributes(
 			QMap<QString, Attribute*>& theme_attrs) override;
 
-		void replace_all_attributes_with(Widget* widget);
-
 		/*!
 			Sets all margin attributes with one value.
 

@@ -66,14 +66,6 @@ void AWGroup::add_attribute_widget(AttributeWidget* attribute_widget)
 	if (m_collapsed) attribute_widget->hide();
 }
 
-void AWGroup::replace_all_attributes_with(AWGroup* aw_group)
-{
-	Widget::replace_all_attributes_with(aw_group);
-
-	if (m_collapse_button) m_collapse_button->replace_all_attributes_with(aw_group->m_collapse_button);
-	if (m_label) m_label->replace_all_attributes_with(aw_group->m_label);
-}
-
 void AWGroup::set_current_editting_state(const QString& state)
 {
 	for (AttributeWidget* attribute_widget : m_child_attribute_widgets)

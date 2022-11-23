@@ -21,7 +21,6 @@ namespace Layers
 
 		void init_attribute_widgets();
 
-		void replace_all_attributes_with(CustomizePanel* cpanel);
 		void replace_all_aw_group_attrs_with(AWGroup* control_aw_group);
 		void replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw);
 		void replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw);

@@ -220,15 +220,6 @@ QList<QString> Combobox::items()
 	return items;
 }
 
-void Combobox::replace_all_attributes_with(Combobox* combobox)
-{
-    Widget::replace_all_attributes_with(combobox);
-
-    m_current_item_label->replace_all_attributes_with(combobox->m_current_item_label);
-    m_drop_down->replace_all_attributes_with(combobox->m_drop_down);
-    m_control_combobox_item->replace_all_attributes_with(combobox->m_control_combobox_item);
-}
-
 void Combobox::update_theme_dependencies()
 {
     m_line_edit->setStyleSheet(

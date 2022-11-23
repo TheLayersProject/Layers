@@ -64,13 +64,6 @@ QString ComboboxItem::item_text()
 	return m_item_text;
 }
 
-void ComboboxItem::replace_all_attributes_with(ComboboxItem* cb_item)
-{
-	Widget::replace_all_attributes_with(cb_item);
-
-	m_item_label->replace_all_attributes_with(cb_item->m_item_label);
-}
-
 void ComboboxItem::replace_item_text(const QString& new_item_text)
 {
 	m_item_text = new_item_text;

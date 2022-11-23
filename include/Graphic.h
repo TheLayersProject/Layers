@@ -23,8 +23,6 @@ namespace Layers
 
 		QSize image_size();
 
-		void replace_all_attributes_with(Graphic* graphic);
-
 		void set_hovering(bool cond = true);
 		void set_icon(Graphic* icon);
 		void set_pixmap(const QPixmap& pixmap);

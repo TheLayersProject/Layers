@@ -34,7 +34,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_attribute_widgets();
 		void init_child_themeable_reference_list();
 
 		void resizeEvent(QResizeEvent* event);

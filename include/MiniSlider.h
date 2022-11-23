@@ -12,8 +12,6 @@ namespace Layers
 	public:
 		MiniSlider(int limit, QWidget* parent = nullptr);
 
-		void replace_all_attributes_with(MiniSlider* mini_slider);
-
 		void update_handle_pos();
 		void update_theme_dependencies();
 

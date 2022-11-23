@@ -20,8 +20,6 @@ namespace Layers
 
 		void disable_clicking(bool cond = true);
 
-		void init_attributes();
-
 		//void set_attribute(Attribute* attribute);
 
 		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5)) };
@@ -33,7 +31,8 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
-		//void paintEvent(QPaintEvent* event);
+
+		void init_attributes();
 
 	private:
 		bool clicking_disabled{ false };

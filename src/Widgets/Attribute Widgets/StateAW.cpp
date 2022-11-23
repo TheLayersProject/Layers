@@ -38,14 +38,6 @@ Combobox* StateAW::state_combobox() const
 	return m_state_combobox;
 }
 
-void StateAW::replace_all_attributes_with(StateAW* state_aw)
-{
-	Widget::replace_all_attributes_with(state_aw);
-
-	if (m_state_combobox) m_state_combobox->replace_all_attributes_with(state_aw->m_state_combobox);
-	if (m_label) m_label->replace_all_attributes_with(state_aw->m_label);
-}
-
 void StateAW::populate_state_combobox(const QList<QString>& states)
 {
 	for (const QString& state : states)

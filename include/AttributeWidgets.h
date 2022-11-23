@@ -39,8 +39,6 @@ namespace Layers
 
 		Combobox* state_combobox() const;
 
-		void replace_all_attributes_with(StateAW* state_aw);
-
 		void populate_state_combobox(const QList<QString>& states);
 
 	protected:
@@ -69,8 +67,6 @@ namespace Layers
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
-		void replace_all_attributes_with(AWGroup* aw_group);
-
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
 
@@ -97,8 +93,6 @@ namespace Layers
 
 	public:
 		CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent = nullptr);
-
-		void replace_all_attributes_with(CornerRadiiAW* corner_radii_aw);
 
 		MiniSlider* tl_slider() const;
 		MiniSlider* tr_slider() const;
@@ -139,8 +133,6 @@ namespace Layers
 		ColorAW(Attribute* attribute, QWidget* parent = nullptr);
 
 		ColorControl* color_control() const;
-
-		void replace_all_attributes_with(ColorAW* color_aw);
 
 		void set_centered(bool centered = true);
 
@@ -195,8 +187,6 @@ namespace Layers
 
 		FillControl* fill_control() const;
 
-		void replace_all_attributes_with(FillAW* fill_aw);
-
 		void set_centered(bool centered = true);
 
 	public slots:
@@ -224,8 +214,6 @@ namespace Layers
 
 	public:
 		NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* parent = nullptr);
-
-		void replace_all_attributes_with(NumberAW* number_aw);
 
 		void set_centered(bool centered = true);
 

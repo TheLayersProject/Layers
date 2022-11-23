@@ -19,6 +19,9 @@ GradientControl::GradientControl(QWidget* parent) : Widget(parent)
 
 void GradientControl::init_attributes()
 {
+	// Remove control attribute
+	m_attributes.remove("fill");
+
 	a_border_fill.set_value(QColor("#D6D6D6"));
 	a_border_thickness.set_value(2);
 	a_corner_radius_tl.set_value(5);

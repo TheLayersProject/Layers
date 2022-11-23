@@ -89,26 +89,6 @@ void Widget::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
     a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
 }
 
-void Widget::replace_all_attributes_with(Widget* widget)
-{
-    a_border_fill.get_variant_from(widget->a_border_fill);
-    a_border_thickness.get_variant_from(widget->a_border_thickness);
-    a_corner_color.get_variant_from(widget->a_corner_color);
-    a_corner_radius_tl.get_variant_from(widget->a_corner_radius_tl);
-    a_corner_radius_tr.get_variant_from(widget->a_corner_radius_tr);
-    a_corner_radius_bl.get_variant_from(widget->a_corner_radius_bl);
-    a_corner_radius_br.get_variant_from(widget->a_corner_radius_br);
-    a_fill.get_variant_from(widget->a_fill);
-    a_hover_fill.get_variant_from(widget->a_hover_fill);
-    a_margin_left.get_variant_from(widget->a_margin_left);
-    a_margin_top.get_variant_from(widget->a_margin_top);
-    a_margin_right.get_variant_from(widget->a_margin_right);
-    a_margin_bottom.get_variant_from(widget->a_margin_bottom);
-    a_outline_color.get_variant_from(widget->a_outline_color);
-
-    //update();
-}
-
 void Widget::set_margin(int margin)
 {
     set_margin(margin, margin, margin, margin);

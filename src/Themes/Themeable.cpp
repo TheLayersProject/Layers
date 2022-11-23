@@ -311,9 +311,9 @@ QList<QString> Themeable::states() const
 //{
 //}
 
-void Themeable::init_attributes()
-{
-}
+//void Themeable::init_attributes()
+//{
+//}
 
 //void Themeable::init_attribute_widgets()
 //{

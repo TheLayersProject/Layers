@@ -140,11 +140,13 @@ namespace Layers
 
 		bool disabled() const;
 
-		QString& name();
+		void get_variant_from(Attribute& attribute);
 
 		void init_state_variant_map(const QMap<QString, Variant>& state_variant_map);
 
 		bool is_stateful() const;
+
+		QString& name();
 
 		void set_disabled(bool disabled = true);
 
@@ -211,9 +213,6 @@ namespace Layers
 
 			return stream;
 		}
-
-	public slots:
-		void get_variant_from(Attribute& attribute);
 
 	private:
 		bool m_disabled{ false };

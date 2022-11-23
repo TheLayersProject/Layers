@@ -67,15 +67,6 @@ ColorControl* ColorAW::color_control() const
 	return m_color_control;
 }
 
-void ColorAW::replace_all_attributes_with(ColorAW* color_aw)
-{
-	Widget::replace_all_attributes_with(color_aw);
-
-	if (m_attribute_label) m_attribute_label->replace_all_attributes_with(color_aw->m_attribute_label);
-	if (m_disabled_toggle) m_disabled_toggle->replace_all_attributes_with(color_aw->m_disabled_toggle);
-	//if (m_color_control) m_color_control->replace_all_attributes_with(color_aw->m_color_control);
-}
-
 void ColorAW::set_centered(bool centered)
 {
 	if (m_centered != centered)

@@ -78,16 +78,6 @@ void SVG::rebuild_svg_str()
 	m_svg_str = new_svg_str;
 }
 
-void SVG::replace_all_attributes_with(SVG* svg)
-{
-	a_common_color.get_variant_from(svg->a_common_color);
-	a_common_hover_color.get_variant_from(svg->a_common_hover_color);
-	a_use_common_color.get_variant_from(svg->a_use_common_color);
-	a_use_common_hover_color.get_variant_from(svg->a_use_common_hover_color);
-
-	update();
-}
-
 void SVG::set_hovering(bool cond)
 {
 	m_hovering = cond;

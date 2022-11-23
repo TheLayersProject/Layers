@@ -259,16 +259,6 @@ void CustomizePanel::init_attribute_widgets()
 	}
 }
 
-void CustomizePanel::replace_all_attributes_with(CustomizePanel* cpanel)
-{
-	Widget::replace_all_attributes_with(cpanel);
-
-	if (m_attributes_label) m_attributes_label->replace_all_attributes_with(cpanel->m_attributes_label);
-	if (m_widgets_label) m_widgets_label->replace_all_attributes_with(cpanel->m_widgets_label);
-	if (m_show_all_button) m_show_all_button->replace_all_attributes_with(cpanel->m_show_all_button);
-	if (m_show_primary_button) m_show_primary_button->replace_all_attributes_with(cpanel->m_show_primary_button);
-}
-
 void CustomizePanel::replace_all_aw_group_attrs_with(AWGroup* control_aw_group)
 {
 	for (AWGroup* aw_group : m_aw_groups)

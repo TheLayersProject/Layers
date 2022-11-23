@@ -23,8 +23,6 @@ namespace Layers
 
 		QGradientStops gradient_stops() const;
 
-		void replace_all_attributes_with(GradientSelectionDialog* dialog);
-
 		void update_gradient();
 
 		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };

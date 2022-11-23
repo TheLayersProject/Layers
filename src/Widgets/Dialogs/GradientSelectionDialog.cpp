@@ -233,29 +233,6 @@ void GradientSelectionDialog::init_titlebar()
     m_titlebar->setLayout(titlebar_layout);
 }
 
-void GradientSelectionDialog::replace_all_attributes_with(GradientSelectionDialog* dialog)
-{
-    a_border_fill.get_variant_from(dialog->a_border_fill);
-    a_border_thickness.get_variant_from(dialog->a_border_thickness);
-    a_corner_color.get_variant_from(dialog->a_corner_color);
-    a_corner_radius_tl.get_variant_from(dialog->a_corner_radius_tl);
-    a_corner_radius_tr.get_variant_from(dialog->a_corner_radius_tr);
-    a_corner_radius_bl.get_variant_from(dialog->a_corner_radius_bl);
-    a_corner_radius_br.get_variant_from(dialog->a_corner_radius_br);
-    a_fill.get_variant_from(dialog->a_fill);
-    a_hover_fill.get_variant_from(dialog->a_hover_fill);
-    a_margin_left.get_variant_from(dialog->a_margin_left);
-    a_margin_top.get_variant_from(dialog->a_margin_top);
-    a_margin_right.get_variant_from(dialog->a_margin_right);
-    a_margin_bottom.get_variant_from(dialog->a_margin_bottom);
-    a_outline_color.get_variant_from(dialog->a_outline_color);
-
-    if (m_titlebar) m_titlebar->replace_all_attributes_with(dialog->m_titlebar);
-    if (m_apply_button) m_apply_button->replace_all_attributes_with(dialog->m_apply_button);
-    if (m_window_title_label) m_window_title_label->replace_all_attributes_with(dialog->m_window_title_label);
-    if (m_exit_button) m_exit_button->replace_all_attributes_with(dialog->m_exit_button);
-}
-
 void GradientSelectionDialog::update_gradient()
 {
     m_gradient_stops = QGradientStops();

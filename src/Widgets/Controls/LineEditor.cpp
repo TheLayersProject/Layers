@@ -71,15 +71,6 @@ void LineEditor::init_attributes()
         });
 }
 
-void LineEditor::replace_all_attributes_with(LineEditor* line_editor)
-{
-    Widget::replace_all_attributes_with(line_editor);
-
-    a_text_color.get_variant_from(line_editor->a_text_color);
-
-    update_theme_dependencies();
-}
-
 void LineEditor::set_default_value(const QString& default_value)
 {
     if (m_default_value) delete m_default_value;

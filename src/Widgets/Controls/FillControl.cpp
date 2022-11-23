@@ -95,6 +95,9 @@ FillControl::~FillControl()
 
 void FillControl::init_attributes()
 {
+	// Remove control attribute
+	m_attributes.remove("fill");
+
 	a_border_fill.set_value(QColor("#D6D6D6"));
 	a_border_thickness.set_value(2);
 	a_corner_radius_tl.set_value(5);
@@ -131,32 +134,12 @@ void FillControl::init_child_themeable_reference_list()
 	m_dialog->store_child_themeable_pointer(m_gradient_label);
 }
 
-void FillControl::replace_all_attributes_with(FillControl* fill_control)
-{
-	a_border_fill.get_variant_from(fill_control->a_border_fill);
-	a_border_thickness.get_variant_from(fill_control->a_border_thickness);
-	a_corner_color.get_variant_from(fill_control->a_corner_color);
-	a_corner_radius_tl.get_variant_from(fill_control->a_corner_radius_tl);
-	a_corner_radius_tr.get_variant_from(fill_control->a_corner_radius_tr);
-	a_corner_radius_bl.get_variant_from(fill_control->a_corner_radius_bl);
-	a_corner_radius_br.get_variant_from(fill_control->a_corner_radius_br);
-	a_hover_fill.get_variant_from(fill_control->a_hover_fill);
-	a_margin_left.get_variant_from(fill_control->a_margin_left);
-	a_margin_top.get_variant_from(fill_control->a_margin_top);
-	a_margin_right.get_variant_from(fill_control->a_margin_right);
-	a_margin_bottom.get_variant_from(fill_control->a_margin_bottom);
-	a_outline_color.get_variant_from(fill_control->a_outline_color);
-
-	if (m_dialog) m_dialog->replace_all_attributes_with(fill_control->m_dialog);
-	if (m_fill_type_toggle) m_fill_type_toggle->replace_all_attributes_with(fill_control->m_fill_type_toggle);
-	if (m_color_label) m_color_label->replace_all_attributes_with(fill_control->m_color_label);
-	if (m_gradient_label) m_gradient_label->replace_all_attributes_with(fill_control->m_gradient_label);
-}
-
 void FillControl::set_attribute(Attribute* attribute)
 {
 	a_fill.get_variant_from(*attribute);
+
 	m_gradient_control->a_fill.get_variant_from(*attribute);
+
 	m_color_control->a_fill.get_variant_from(*attribute);
 
 	if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))

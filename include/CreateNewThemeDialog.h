@@ -25,11 +25,7 @@ namespace Layers
 
 		QString copy_theme_name();
 
-		void issue_update();
-
 		QString new_theme_name();
-
-		void replace_all_attributes_with(CreateNewThemeDialog* dialog);
 
 		void set_current_start_theme_name(const QString& theme_name);
 

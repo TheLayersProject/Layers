@@ -153,6 +153,9 @@ namespace Layers
 		*/
 		void remove_child_themeable_reference(Themeable* child_themeable);
 
+		template<typename T>
+		void replace_all_attributes_with(T* themeable);
+
 		void set_is_app_themeable(bool is_app_themeable);
 
 		void set_functionality_disabled(bool disabled = true);
@@ -201,9 +204,6 @@ namespace Layers
 			@param state to set the themeable to
 		*/
 		virtual void set_state(const QString& state);
-
-		//template<typename T>
-		//void replace_all_attributes_with(T* themeable);
 
 		QString state() const;
 
@@ -267,7 +267,7 @@ namespace Layers
 
 			This function is called by init_themeable().
 		*/
-		virtual void init_attributes();
+		//void init_attributes();
 
 		//virtual void init_attribute_widgets();
 
@@ -326,21 +326,21 @@ namespace Layers
 		Theme* m_current_theme{ nullptr };
 	};
 
-	//template<typename T>
-	//inline void Themeable::replace_all_attributes_with(T* themeable)
-	//{
-	//	if (typeid(*this) == typeid(*themeable))
-	//	{
-	//		for (const QString& attr_tag : m_attributes.keys())
-	//			Attribute::replace(attributes()[attr_tag], themeable->attributes()[attr_tag]);
+	template<typename T>
+	inline void Themeable::replace_all_attributes_with(T* themeable)
+	{
+		if (typeid(*this) == typeid(*themeable))
+		{
+			for (const QString& attr_tag : m_attributes.keys())
+				attributes()[attr_tag]->get_variant_from(*themeable->attributes()[attr_tag]);
 
-	//		for (Themeable* this_child_themeable : m_child_themeables)
-	//			if (this_child_themeable->m_name)
-	//				for (Themeable* child_themeable : themeable->m_child_themeables)
-	//					if (*child_themeable->m_name == *this_child_themeable->m_name)
-	//						this_child_themeable->replace_all_attributes_with(child_themeable);
-	//	}
-	//}
+			for (Themeable* this_child_themeable : m_child_themeables)
+				if (this_child_themeable->m_name)
+					for (Themeable* child_themeable : themeable->m_child_themeables)
+						if (*child_themeable->m_name == *this_child_themeable->m_name)
+							this_child_themeable->replace_all_attributes_with(child_themeable);
+		}
+	}
 }
 
 #endif // THEMEABLE_H

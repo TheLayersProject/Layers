@@ -26,13 +26,6 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	setup_layout();
 }
 
-void ToggleSwitch::replace_all_attributes_with(ToggleSwitch* tswitch)
-{
-	Widget::replace_all_attributes_with(tswitch);
-
-	if (m_square) m_square->replace_all_attributes_with(tswitch->m_square);
-}
-
 void ToggleSwitch::setFixedHeight(int h)
 {
 	Widget::setFixedHeight(h);

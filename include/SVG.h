@@ -48,8 +48,6 @@ namespace Layers
 		*/
 		void rebuild_svg_str();
 
-		void replace_all_attributes_with(SVG* svg);
-
 		void set_hovering(bool cond = true);
 
 		virtual void set_state(const QString& state) override;

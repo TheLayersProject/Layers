@@ -67,15 +67,6 @@ FillControl* FillAW::fill_control() const
 	return m_fill_control;
 }
 
-void FillAW::replace_all_attributes_with(FillAW* fill_aw)
-{
-	Widget::replace_all_attributes_with(fill_aw);
-
-	if (m_attribute_label) m_attribute_label->replace_all_attributes_with(fill_aw->m_attribute_label);
-	if (m_disabled_toggle) m_disabled_toggle->replace_all_attributes_with(fill_aw->m_disabled_toggle);
-	if (m_fill_control) m_fill_control->replace_all_attributes_with(fill_aw->m_fill_control);
-}
-
 void FillAW::set_centered(bool centered)
 {
 	if (m_centered != centered)
@@ -90,8 +81,6 @@ void FillAW::set_centered(bool centered)
 void FillAW::set_current_editting_state(const QString& state)
 {
 	m_fill_control->set_current_editting_state(state);
-
-	//qDebug() << "FillAW::set_current_editting_state() called";
 }
 
 void FillAW::init_child_themeable_reference_list()

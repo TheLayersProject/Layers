@@ -15,8 +15,6 @@ namespace Layers
 	public:
 		GradientControl(QWidget* parent = nullptr);
 
-		void init_attributes();
-
 		//void set_attribute(Attribute* attribute);
 
 	public slots:
@@ -24,6 +22,8 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
+
+		void init_attributes();
 
 	//private:
 		//Attribute* m_attribute{ nullptr };

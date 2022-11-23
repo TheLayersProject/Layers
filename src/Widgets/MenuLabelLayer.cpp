@@ -55,15 +55,6 @@ void MenuLabelLayer::init_child_themeable_reference_list()
 	store_child_themeable_pointer(m_text_label);
 }
 
-void MenuLabelLayer::replace_all_attributes_with(MenuLabelLayer* mll)
-{
-	Widget::replace_all_attributes_with(mll);
-
-	if (m_back_button) m_back_button->replace_all_attributes_with(mll->m_back_button);
-	if (m_icon_button) m_icon_button->replace_all_attributes_with(mll->m_icon_button);
-	if (m_text_label) m_text_label->replace_all_attributes_with(mll->m_text_label);
-}
-
 void MenuLabelLayer::shrink()
 {
 	m_back_button->hide();

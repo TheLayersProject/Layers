@@ -63,14 +63,6 @@ void MiniSlider::init_child_themeable_reference_list()
 	store_child_themeable_pointer(m_handle);
 }
 
-void MiniSlider::replace_all_attributes_with(MiniSlider* mini_slider)
-{
-	Widget::replace_all_attributes_with(mini_slider);
-
-	if (m_bar) m_bar->replace_all_attributes_with(mini_slider->m_bar);
-	if (m_handle) m_handle->replace_all_attributes_with(mini_slider->m_handle);
-}
-
 void MiniSlider::update_handle_pos()
 {
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)

@@ -18,11 +18,7 @@ namespace Layers
 		FillControl(QWidget* parent = nullptr);
 		~FillControl();
 
-		void init_attributes();
-
 		void init_child_themeable_reference_list();
-
-		void replace_all_attributes_with(FillControl* fill_control);
 
 		void set_attribute(Attribute* attribute);
 
@@ -31,6 +27,8 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
+
+		void init_attributes();
 
 	private:
 		void setup_layout();

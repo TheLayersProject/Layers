@@ -82,15 +82,6 @@ Graphic* Button::graphic() const
 	return m_graphic;
 }
 
-void Button::replace_all_attributes_with(Button* button)
-{
-	Widget::replace_all_attributes_with(button);
-
-	if (m_graphic) m_graphic->replace_all_attributes_with(button->m_graphic);
-	if (m_graphic_after) m_graphic_after->replace_all_attributes_with(button->m_graphic_after);
-	if (m_text_label) m_text_label->replace_all_attributes_with(button->m_text_label);
-}
-
 void Button::init()
 {
 	init_child_themeable_reference_list();
@@ -126,10 +117,6 @@ void Button::init()
 	}
 
 	resize();
-}
-
-void Button::init_attributes()
-{
 }
 
 void Button::init_child_themeable_reference_list()
