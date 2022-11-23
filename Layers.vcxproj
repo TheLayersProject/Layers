@@ -123,7 +123,8 @@
     <ClCompile Include="src\Old\2.2.0a\Theme_2_2_0_a.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
-    <ClCompile Include="src\Themes\build_themes2.cpp" />
+    <ClCompile Include="src\Themes\Attributes\Variant.cpp" />
+    <ClCompile Include="src\Themes\build_themes.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
     <ClCompile Include="src\Themes\theme_loading.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="src\Widgets\Attribute Widgets\FillAW.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\GradientAW.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\NumberAW.cpp" />
+    <ClCompile Include="src\Widgets\Attribute Widgets\StateAW.cpp" />
     <ClCompile Include="src\Widgets\Controls\Button.cpp" />
     <ClCompile Include="src\Widgets\Controls\ColorControl.cpp" />
     <ClCompile Include="src\Widgets\Controls\Combobox.cpp" />
@@ -179,6 +181,7 @@
     <QtRcc Include="themes\prebuilt_themes.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="include\Attribute.h" />
     <ClInclude Include="include\AttributeLayout.h" />
     <ClInclude Include="include\build_themes.h" />
     <ClInclude Include="include\directories.h" />
@@ -191,7 +194,6 @@
     <ClInclude Include="include\theme_loading.h" />
     <ClInclude Include="include\theme_updating.h" />
     <QtMoc Include="include\Application.h" />
-    <QtMoc Include="include\Attribute.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />
     <QtMoc Include="include\GradientSelectionDialog.h" />

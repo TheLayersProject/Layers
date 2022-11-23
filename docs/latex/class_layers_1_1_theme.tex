@@ -1,32 +1,150 @@
 \hypertarget{class_layers_1_1_theme}{}\doxysection{Layers\+::Theme Class Reference}
 \label{class_layers_1_1_theme}\index{Layers::Theme@{Layers::Theme}}
+
+
+{\ttfamily \#include $<$Theme.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_a116b665ac34d88e054eb9238988217dc}\label{class_layers_1_1_theme_a116b665ac34d88e054eb9238988217dc}} 
-QList$<$ QString $>$ {\bfseries keys} () const
+\mbox{\Hypertarget{class_layers_1_1_theme_a326c3d56a15f88f1d1300405c1ebdb3d}\label{class_layers_1_1_theme_a326c3d56a15f88f1d1300405c1ebdb3d}} 
+{\bfseries Theme} (const QString \&\mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}, bool \mbox{\hyperlink{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}{is\+\_\+custom}}=true)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_aae58d23a2412bdf25dbe6d874bdaf8b6}\label{class_layers_1_1_theme_aae58d23a2412bdf25dbe6d874bdaf8b6}} 
-QVariant {\bfseries operator\mbox{[}$\,$\mbox{]}} (const QString \&key)
+void \mbox{\hyperlink{class_layers_1_1_theme_a9fa27ce0e8c6c05c37021503b879c508}{add\+\_\+attributes}} (const QString \&themeable\+\_\+tag, QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ attributes)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_a4c91107852920306b5ee79d9cf375bc8}\label{class_layers_1_1_theme_a4c91107852920306b5ee79d9cf375bc8}} 
-const QVariant {\bfseries operator\mbox{[}$\,$\mbox{]}} (const QString \&key) const
+bool \mbox{\hyperlink{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}{contains\+\_\+attributes\+\_\+for\+\_\+tag}} (const QString \&themeable\+\_\+tag)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_afefcb68bf15c4d635375bf86f2457eb2}\label{class_layers_1_1_theme_afefcb68bf15c4d635375bf86f2457eb2}} 
-void {\bfseries set\+\_\+value} (const QString \&setting, QVariant value)
+void \mbox{\hyperlink{class_layers_1_1_theme_a8c69b9685b8692e6f81187858ab45d53}{copy\+\_\+from}} (\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&theme)
+\item 
+bool \mbox{\hyperlink{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}{is\+\_\+custom}} ()
+\item 
+QString \& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_theme_a1068abe2505c991e7d0e7ca8310d7860}{set\+\_\+name}} (const QString \&new\+\_\+name)
+\item 
+QList$<$ QString $>$ \mbox{\hyperlink{class_layers_1_1_theme_ad210ebf66a5fd7f4e4356899108969b3}{themeable\+\_\+tags}} ()
+\item 
+QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& \mbox{\hyperlink{class_layers_1_1_theme_af343dbd6d1b5b95b5479ea759ed84493}{operator\mbox{[}$\,$\mbox{]}}} (const QString \&themeable\+\_\+tag)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_ad8bc40c01caaf42517b8f89299ac5301}\label{class_layers_1_1_theme_ad8bc40c01caaf42517b8f89299ac5301}} 
-QMap$<$ QString, QVariant $>$ {\bfseries settings}
+\mbox{\Hypertarget{class_layers_1_1_theme_aad42f66279e61c65c2481845365b2029}\label{class_layers_1_1_theme_aad42f66279e61c65c2481845365b2029}} 
+QData\+Stream \& {\bfseries operator$<$$<$} (QData\+Stream \&stream, const \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&t)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_theme_aeffe05eec91a1fe05ebb1318fd260f37}\label{class_layers_1_1_theme_aeffe05eec91a1fe05ebb1318fd260f37}} 
-QString {\bfseries name}
+\mbox{\Hypertarget{class_layers_1_1_theme_ab9a29631d7036b766771cc255a8f77a1}\label{class_layers_1_1_theme_ab9a29631d7036b766771cc255a8f77a1}} 
+QData\+Stream \& {\bfseries operator$>$$>$} (QData\+Stream \&stream, \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&t)
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides structure for Layers themes.
+
+Layers themes store sets of attributes associated with their themeable tags. When a theme is applied, themeables retrieve their attribute sets from the theme by passing along their tags. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_theme_a9fa27ce0e8c6c05c37021503b879c508}\label{class_layers_1_1_theme_a9fa27ce0e8c6c05c37021503b879c508}} 
+\index{Layers::Theme@{Layers::Theme}!add\_attributes@{add\_attributes}}
+\index{add\_attributes@{add\_attributes}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{add\_attributes()}{add\_attributes()}}
+{\footnotesize\ttfamily void Theme\+::add\+\_\+attributes (\begin{DoxyParamCaption}\item[{const QString \&}]{themeable\+\_\+tag,  }\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$}]{attributes }\end{DoxyParamCaption})}
+
+Adds a themeable tag paired with a set of attributes
+
+Does nothing if themeable tag already exists in the theme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em themeable\+\_\+tag} & of the themeable that the supplied attributes belong to \\
+\hline
+{\em attributes} & that belong to a themeable for this theme to store \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}\label{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}} 
+\index{Layers::Theme@{Layers::Theme}!contains\_attributes\_for\_tag@{contains\_attributes\_for\_tag}}
+\index{contains\_attributes\_for\_tag@{contains\_attributes\_for\_tag}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{contains\_attributes\_for\_tag()}{contains\_attributes\_for\_tag()}}
+{\footnotesize\ttfamily bool Theme\+::contains\+\_\+attributes\+\_\+for\+\_\+tag (\begin{DoxyParamCaption}\item[{const QString \&}]{themeable\+\_\+tag }\end{DoxyParamCaption})}
+
+Returns true if the theme contains any attributes for the given themeable tag; otherwise returns false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em themeable\+\_\+tag} & used to check whether the theme contains attributes for it \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if theme contains attributes for tag, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layers_1_1_theme_a8c69b9685b8692e6f81187858ab45d53}\label{class_layers_1_1_theme_a8c69b9685b8692e6f81187858ab45d53}} 
+\index{Layers::Theme@{Layers::Theme}!copy\_from@{copy\_from}}
+\index{copy\_from@{copy\_from}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{copy\_from()}{copy\_from()}}
+{\footnotesize\ttfamily void Theme\+::copy\+\_\+from (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&}]{theme }\end{DoxyParamCaption})}
+
+Copies the attribute sets of another theme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em theme} & to copy attribute sets from \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}\label{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}} 
+\index{Layers::Theme@{Layers::Theme}!is\_custom@{is\_custom}}
+\index{is\_custom@{is\_custom}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{is\_custom()}{is\_custom()}}
+{\footnotesize\ttfamily bool Theme\+::is\+\_\+custom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns true if the theme is a custom, user-\/created theme
+
+@retuns true if theme is custom, false otherwise \mbox{\Hypertarget{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}\label{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}} 
+\index{Layers::Theme@{Layers::Theme}!name@{name}}
+\index{name@{name}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily QString \& Theme\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a reference to the theme\textquotesingle{}s name
+
+@retuns Reference to theme\textquotesingle{}s name \mbox{\Hypertarget{class_layers_1_1_theme_af343dbd6d1b5b95b5479ea759ed84493}\label{class_layers_1_1_theme_af343dbd6d1b5b95b5479ea759ed84493}} 
+\index{Layers::Theme@{Layers::Theme}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& Theme\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const QString \&}]{themeable\+\_\+tag }\end{DoxyParamCaption})}
+
+Returns a reference to the attribute set of the themeable tag given in the subscript.
+
+This function does NOT check first whether the supplied themeable tag exists in the theme. For this reason, it is recommended to call \mbox{\hyperlink{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}{contains\+\_\+attributes\+\_\+for\+\_\+tag()}} first.
+
+\begin{DoxyReturn}{Returns}
+Reference to attribute set of themeable\+\_\+tag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layers_1_1_theme_a1068abe2505c991e7d0e7ca8310d7860}\label{class_layers_1_1_theme_a1068abe2505c991e7d0e7ca8310d7860}} 
+\index{Layers::Theme@{Layers::Theme}!set\_name@{set\_name}}
+\index{set\_name@{set\_name}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{set\_name()}{set\_name()}}
+{\footnotesize\ttfamily void Theme\+::set\+\_\+name (\begin{DoxyParamCaption}\item[{const QString \&}]{new\+\_\+name }\end{DoxyParamCaption})}
+
+Sets the theme\textquotesingle{}s name
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+name} & to set as the theme\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_theme_ad210ebf66a5fd7f4e4356899108969b3}\label{class_layers_1_1_theme_ad210ebf66a5fd7f4e4356899108969b3}} 
+\index{Layers::Theme@{Layers::Theme}!themeable\_tags@{themeable\_tags}}
+\index{themeable\_tags@{themeable\_tags}!Layers::Theme@{Layers::Theme}}
+\doxysubsubsection{\texorpdfstring{themeable\_tags()}{themeable\_tags()}}
+{\footnotesize\ttfamily QList$<$ QString $>$ Theme\+::themeable\+\_\+tags (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a list of all of the themeable tags contained in the theme
+
+\begin{DoxyReturn}{Returns}
+list of themeable tags that exist in the theme 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Layers\+RW.\+h\item 
-Theme.\+cpp\end{DoxyCompactItemize}
+include/Theme.\+h\item 
+src/\+Themes/Theme.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\hypertarget{class_layers_1_1_customize_menu}{}\doxysection{Layers\+::Customize\+Menu Class Reference}
+\label{class_layers_1_1_customize_menu}\index{Layers::CustomizeMenu@{Layers::CustomizeMenu}}
+Inheritance diagram for Layers\+::Customize\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_layers_1_1_customize_menu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a86d44536c6dbd8be7cd2eebd5b4de800}\label{class_layers_1_1_customize_menu_a86d44536c6dbd8be7cd2eebd5b4de800}} 
+{\bfseries Customize\+Menu} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a058347f2a95bf5b515f0295bef111d3e}\label{class_layers_1_1_customize_menu_a058347f2a95bf5b515f0295bef111d3e}} 
+\mbox{\hyperlink{class_layers_1_1_button}{Button}} $\ast$ {\bfseries apply\+\_\+button} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_abbba9961d8092757509150c72ea23ae0}\label{class_layers_1_1_customize_menu_abbba9961d8092757509150c72ea23ae0}} 
+void {\bfseries init\+\_\+preview\+\_\+window} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a810bb3a4a4778d9567bb97b6637d23b5}\label{class_layers_1_1_customize_menu_a810bb3a4a4778d9567bb97b6637d23b5}} 
+void {\bfseries open\+\_\+customize\+\_\+panel} (\mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$\mbox{\hyperlink{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}{customize\+\_\+panel}})
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a1f9aed59e607ff988853194b2724bbe9}\label{class_layers_1_1_customize_menu_a1f9aed59e607ff988853194b2724bbe9}} 
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$ {\bfseries preview\+\_\+widget} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a027d1fa1e0295805a747abb076502479}\label{class_layers_1_1_customize_menu_a027d1fa1e0295805a747abb076502479}} 
+int {\bfseries calculated\+\_\+topbar\+\_\+content\+\_\+width} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a4dd661a8c6c26a7ca410ae4b8905c27c}\label{class_layers_1_1_customize_menu_a4dd661a8c6c26a7ca410ae4b8905c27c}} 
+void {\bfseries set\+\_\+preview\+\_\+widget} (\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$widget)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a2d0c89ec93e6435782882aa8eecc3d0d}\label{class_layers_1_1_customize_menu_a2d0c89ec93e6435782882aa8eecc3d0d}} 
+int {\bfseries topbar\+\_\+content\+\_\+width} (bool include\+\_\+collapse\+\_\+button)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_ab73c931cc7b386d88ea0b5498b186172}\label{class_layers_1_1_customize_menu_ab73c931cc7b386d88ea0b5498b186172}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53dcbdde01}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53dcbdde01}\label{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53dcbdde01}} 
+\index{Layers::CustomizeMenu@{Layers::CustomizeMenu}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::CustomizeMenu@{Layers::CustomizeMenu}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Customize\+Menu\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Customize\+Menu.\+h\item 
+src/\+Widgets/\+Menus/Customize\+Menu.\+cpp\end{DoxyCompactItemize}

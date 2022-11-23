@@ -3,7 +3,6 @@
 
 #include "AttributeWidgets.h"
 #include "Button.h"
-#include "Combobox.h"
 #include "Label.h"
 
 namespace Layers
@@ -14,6 +13,7 @@ namespace Layers
 
 	public:
 		CustomizePanel(Themeable* themeable, QWidget* parent = nullptr);
+		~CustomizePanel();
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
@@ -26,46 +26,39 @@ namespace Layers
 		void replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw);
 		void replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw);
 		void replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw);
+		void replace_all_state_awidgets_attrs_with(StateAW* control_state_aw);
 		void replace_all_widget_buttons_attrs_with(Button* control_widget_button);
 		void replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
-
-		void setup_layout();
 
 	protected:
 		void init_attributes();
 		void init_child_themeable_reference_list();
 
 	private:
+		void setup_layout();
+
 		bool m_layout_setup{ false };
 		bool m_showing_primary{ true };
 
-		QHBoxLayout* m_states_layout{ new QHBoxLayout };
+		StateAW* m_state_aw{ nullptr };
 
 		QVBoxLayout* m_attributes_layout{ new QVBoxLayout };
-		QVBoxLayout* m_elements_layout{ new QVBoxLayout };
-		QVBoxLayout* m_element_buttons_layout{ new QVBoxLayout };
-		QVBoxLayout* m_stateful_attributes_layout{ new QVBoxLayout };
-		QVBoxLayout* m_stateless_attributes_layout{ new QVBoxLayout };
+		QVBoxLayout* m_widgets_layout{ new QVBoxLayout };
+		QVBoxLayout* m_widget_buttons_layout{ new QVBoxLayout };
 
 		Button* m_show_all_button{ new Button("Show All", true) };
 		Button* m_show_primary_button{ new Button("Show Primary", true) };
 
-		Combobox* m_state_combobox{ new Combobox };
-
 		Label* m_attributes_label{ new Label("Attributes:") };
 		Label* m_widgets_label{ new Label("Widgets:") };
-		Label* m_stateful_attributes_label{ new Label("Stateful Attributes:") };
-		Label* m_stateless_attributes_label{ new Label("Stateless Attributes:") };
-		Label* m_state_label{ new Label("State:") };
 
-		QList<AttributeWidget*> m_stateless_attribute_widgets{ QList<AttributeWidget*>() };
-		QList<AttributeWidget*> m_stateful_attribute_widgets{ QList<AttributeWidget*>() };
 		QList<AttributeWidget*> m_attribute_widgets{ QList<AttributeWidget*>() };
 
 		QList<AWGroup*> m_aw_groups{ QList<AWGroup*>() };
 		QList<ColorAW*> m_color_awidgets{ QList<ColorAW*>() };
 		QList<FillAW*> m_fill_awidgets{ QList<FillAW*>() };
 		QList<NumberAW*> m_number_awidgets{ QList<NumberAW*>() };
+		QList<StateAW*> m_state_awidgets{ QList<StateAW*>() };
 		QList<Button*> m_widget_buttons{ QList<Button*>() };
 
 		CornerRadiiAW* m_corner_radii_aw{ nullptr };

@@ -24,11 +24,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_current_item_label->set_padding(0, 7, 0, 0);
     m_current_item_label->set_name("current_item_label");
 
-    //m_current_item_label->share_attribute_with_themeable(
-		//m_current_item_label->attribute_set().attribute("color"),
-		//m_attribute_set.attribute("line_edit_text_color"));
-
-    a_line_edit_text_color.get_values_from(m_current_item_label->a_text_color);
+    a_line_edit_text_color.get_variant_from(m_current_item_label->a_text_color);
 
     m_drop_down->installEventFilter(this);
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);
@@ -39,7 +35,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_drop_down->set_proper_name("Drop Down");
 
     m_line_edit->installEventFilter(this);
-    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + a_line_edit_text_color.value<QColor>().name() + "; }");
+    m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + a_line_edit_text_color.as<QColor>().name() + "; }");
     m_line_edit->hide();
 
     setFixedSize(250, 60);
@@ -128,8 +124,6 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
-    //add_attribute("line_edit_text_color", QColor(Qt::black));
-
     a_corner_radius_tl.set_value(10);
     a_corner_radius_tr.set_value(10);
     a_corner_radius_bl.set_value(10);
@@ -145,10 +139,10 @@ void Combobox::init_attributes()
 
 void Combobox::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_current_item_label);
-    add_child_themeable_reference(m_drop_down);
+	store_child_themeable_pointer(m_current_item_label);
+    store_child_themeable_pointer(m_drop_down);
 
-	m_drop_down->add_child_themeable_reference(m_control_combobox_item);
+	m_drop_down->store_child_themeable_pointer(m_control_combobox_item);
 }
 
 void Combobox::set_current_item(const QString& item)
@@ -203,7 +197,7 @@ void Combobox::setFixedSize(const QSize& s)
 
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " +
-        a_line_edit_text_color.value<QColor>().name() + "; }");
+        a_line_edit_text_color.as<QColor>().name() + "; }");
 }
 
 void Combobox::setFixedSize(int w, int h)
@@ -226,11 +220,20 @@ QList<QString> Combobox::items()
 	return items;
 }
 
+void Combobox::replace_all_attributes_with(Combobox* combobox)
+{
+    Widget::replace_all_attributes_with(combobox);
+
+    m_current_item_label->replace_all_attributes_with(combobox->m_current_item_label);
+    m_drop_down->replace_all_attributes_with(combobox->m_drop_down);
+    m_control_combobox_item->replace_all_attributes_with(combobox->m_control_combobox_item);
+}
+
 void Combobox::update_theme_dependencies()
 {
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " +
-        a_line_edit_text_color.value<QColor>().name() + "; }");
+        a_line_edit_text_color.as<QColor>().name() + "; }");
 }
 
 void Combobox::line_edit_return_pressed()

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['paintevent_36',['paintEvent',['../class_layers_1_1_widget.html#ad9da6e86a017fc03e607effec4a87f16',1,'Layers::Widget']]],
-  ['proper_5fname_37',['proper_name',['../class_layers_1_1_themeable.html#aaf7bac3feceaf1fe625338dbff098189',1,'Layers::Themeable']]]
+  ['menu_0',['Menu',['../class_layers_1_1_menu.html',1,'Layers']]],
+  ['menubar_1',['MenuBar',['../class_layers_1_1_menu_bar.html',1,'Layers']]],
+  ['menulabellayer_2',['MenuLabelLayer',['../class_layers_1_1_menu_label_layer.html',1,'Layers']]],
+  ['minislider_3',['MiniSlider',['../class_layers_1_1_mini_slider.html',1,'Layers']]]
 ];

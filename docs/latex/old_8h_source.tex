@@ -1,0 +1,419 @@
+\hypertarget{old_8h_source}{}\doxysection{old.\+h}
+\label{old_8h_source}\index{include/old.h@{include/old.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef OLD\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define OLD\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDataStream>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QString>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QVariant>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers \{ \textcolor{keyword}{class }Themeable; \}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{comment}{// 2.0.0a Classes}}
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute__2__0__0__a}{Attribute\_2\_0\_0\_a}}}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_attribute__2__0__0__a}{Attribute\_2\_0\_0\_a}}\& a)}
+\DoxyCodeLine{17         \{}
+\DoxyCodeLine{18             stream >> a.m\_name;}
+\DoxyCodeLine{19             stream >> a.m\_state;}
+\DoxyCodeLine{20             stream >> a.m\_values;}
+\DoxyCodeLine{21             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{22         \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{bool} m\_is\_stateful\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         QString m\_name;}
+\DoxyCodeLine{27         QString m\_state;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         QMap<QString, QVariant> m\_values\{ QMap<QString, QVariant>() \};}
+\DoxyCodeLine{30     \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_theme__2__0__0__a}{Theme\_2\_0\_0\_a}}}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34     \textcolor{keyword}{public}:}
+\DoxyCodeLine{35         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_theme__2__0__0__a}{Theme\_2\_0\_0\_a}}\& t)}
+\DoxyCodeLine{36         \{}
+\DoxyCodeLine{37             stream >> t.name;}
+\DoxyCodeLine{38             stream >> t.built\_in;}
+\DoxyCodeLine{39             stream >> t.m\_data;}
+\DoxyCodeLine{40             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{41         \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \textcolor{keywordtype}{bool} built\_in\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         QHash<QString, QMap<QString, Attribute\_2\_0\_0\_a>> m\_data\{ QHash<QString, QMap<QString, Attribute\_2\_0\_0\_a>>() \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47         QString name;}
+\DoxyCodeLine{48     \};}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{// 2.1.0a Classes}}
+\DoxyCodeLine{52 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute__2__1__0__a}{Attribute\_2\_1\_0\_a}}}
+\DoxyCodeLine{55     \{}
+\DoxyCodeLine{56     \textcolor{keyword}{public}:}
+\DoxyCodeLine{57         \mbox{\hyperlink{class_layers_1_1_attribute__2__1__0__a}{Attribute\_2\_1\_0\_a}}(\textcolor{keyword}{const} QString\& name);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         QString\& name();}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{62         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* m\_parent\_themeable\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{65     \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute__2__1__0__a}{Attribute\_2\_1\_0\_a}}}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69     \textcolor{keyword}{public}:}
+\DoxyCodeLine{70         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}}();}
+\DoxyCodeLine{71         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}}(\textcolor{keyword}{const} QString\& name, QVariant value);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         QVariant\& value();}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}}\& a)}
+\DoxyCodeLine{76         \{}
+\DoxyCodeLine{77             stream << a.m\_name;}
+\DoxyCodeLine{78             stream << a.m\_value;}
+\DoxyCodeLine{79             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}}\& a)}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             stream >> a.m\_name;}
+\DoxyCodeLine{85             stream >> a.m\_value;}
+\DoxyCodeLine{86             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keyword}{private}:}
+\DoxyCodeLine{90         QVariant m\_value\{ QVariant() \};}
+\DoxyCodeLine{91     \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute__2__1__0__a}{Attribute\_2\_1\_0\_a}}}
+\DoxyCodeLine{94     \{}
+\DoxyCodeLine{95     \textcolor{keyword}{public}:}
+\DoxyCodeLine{96         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}}();}
+\DoxyCodeLine{97         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}}(\textcolor{keyword}{const} QString\& name, QMap<QString, QVariant> state\_value\_map);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         QMap<QString, QVariant>\& values();}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}}\& a)}
+\DoxyCodeLine{102         \{}
+\DoxyCodeLine{103             stream << a.m\_name;}
+\DoxyCodeLine{104             stream << a.m\_state;}
+\DoxyCodeLine{105             stream << a.m\_values;}
+\DoxyCodeLine{106             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}}\& a)}
+\DoxyCodeLine{110         \{}
+\DoxyCodeLine{111             stream >> a.m\_name;}
+\DoxyCodeLine{112             stream >> a.m\_state;}
+\DoxyCodeLine{113             stream >> a.m\_values;}
+\DoxyCodeLine{114             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{115         \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keyword}{private}:}
+\DoxyCodeLine{118         QString m\_state;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         QMap<QString, QVariant> m\_values\{ QMap<QString, QVariant>() \};}
+\DoxyCodeLine{121     \};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute___set__2__1__0__a}{Attribute\_Set\_2\_1\_0\_a}}}
+\DoxyCodeLine{124     \{}
+\DoxyCodeLine{125     \textcolor{keyword}{public}:}
+\DoxyCodeLine{126         \textcolor{keywordtype}{void} add\_stateless\_attribute(\mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__1__0__a}{Stateless\_Attribute\_2\_1\_0\_a}} attribute);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128         \textcolor{keywordtype}{void} add\_stateful\_attribute(\mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__1__0__a}{Stateful\_Attribute\_2\_1\_0\_a}} attribute);}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130         \textcolor{keywordtype}{bool} contains(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         QMap<QString, Stateful\_Attribute\_2\_1\_0\_a>\& stateful\_attributes();}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134         QMap<QString, Stateless\_Attribute\_2\_1\_0\_a>\& stateless\_attributes();}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_attribute___set__2__1__0__a}{Attribute\_Set\_2\_1\_0\_a}}\& as)}
+\DoxyCodeLine{137         \{}
+\DoxyCodeLine{138             stream << as.m\_stateful\_attributes;}
+\DoxyCodeLine{139             stream << as.m\_stateless\_attributes;}
+\DoxyCodeLine{140             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{141         \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_attribute___set__2__1__0__a}{Attribute\_Set\_2\_1\_0\_a}}\& as)}
+\DoxyCodeLine{144         \{}
+\DoxyCodeLine{145             stream >> as.m\_stateful\_attributes;}
+\DoxyCodeLine{146             stream >> as.m\_stateless\_attributes;}
+\DoxyCodeLine{147             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{148         \}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150     \textcolor{keyword}{private}:}
+\DoxyCodeLine{151         QMap<QString, Stateful\_Attribute\_2\_1\_0\_a> m\_stateful\_attributes\{ QMap<QString, Stateful\_Attribute\_2\_1\_0\_a>() \};}
+\DoxyCodeLine{152         QMap<QString, Stateless\_Attribute\_2\_1\_0\_a> m\_stateless\_attributes\{ QMap<QString, Stateless\_Attribute\_2\_1\_0\_a>() \};}
+\DoxyCodeLine{153     \};}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_theme__2__1__0__a}{Theme\_2\_1\_0\_a}}}
+\DoxyCodeLine{156     \{}
+\DoxyCodeLine{157     \textcolor{keyword}{public}:}
+\DoxyCodeLine{158         \mbox{\hyperlink{class_layers_1_1_theme__2__1__0__a}{Theme\_2\_1\_0\_a}}();}
+\DoxyCodeLine{159         \mbox{\hyperlink{class_layers_1_1_theme__2__1__0__a}{Theme\_2\_1\_0\_a}}(\textcolor{keyword}{const} QString\& name, \textcolor{keywordtype}{bool} is\_custom = \textcolor{keyword}{true});}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordtype}{void} add\_stateful\_attribute(}
+\DoxyCodeLine{162             \textcolor{keyword}{const} QString\& themeable\_tag,}
+\DoxyCodeLine{163             \textcolor{keyword}{const} QString\& attribute\_name,}
+\DoxyCodeLine{164             QMap<QString, QVariant> state\_value\_map);}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keywordtype}{void} add\_stateless\_attribute(}
+\DoxyCodeLine{167             \textcolor{keyword}{const} QString\& themeable\_tag,}
+\DoxyCodeLine{168             \textcolor{keyword}{const} QString\& attribute\_name,}
+\DoxyCodeLine{169             QVariant value);}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171         QHash<QString, Attribute\_Set\_2\_1\_0\_a>\& attribute\_sets();}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173         \textcolor{keywordtype}{bool} is\_custom();}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         QString\& name();}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_theme__2__1__0__a}{Theme\_2\_1\_0\_a}}\& t)}
+\DoxyCodeLine{178         \{}
+\DoxyCodeLine{179             stream << t.m\_attribute\_sets;}
+\DoxyCodeLine{180             stream << t.m\_is\_custom;}
+\DoxyCodeLine{181             stream << t.m\_name;}
+\DoxyCodeLine{182             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{183         \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_theme__2__1__0__a}{Theme\_2\_1\_0\_a}}\& t)}
+\DoxyCodeLine{186         \{}
+\DoxyCodeLine{187             stream >> t.m\_attribute\_sets;}
+\DoxyCodeLine{188             stream >> t.m\_is\_custom;}
+\DoxyCodeLine{189             stream >> t.m\_name;}
+\DoxyCodeLine{190             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{191         \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{keyword}{private}:}
+\DoxyCodeLine{194         \textcolor{keywordtype}{bool} m\_is\_custom\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         QHash<QString, Attribute\_Set\_2\_1\_0\_a> m\_attribute\_sets\{ QHash<QString, Attribute\_Set\_2\_1\_0\_a>() \};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198         QString m\_name;}
+\DoxyCodeLine{199     \};}
+\DoxyCodeLine{200 \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{comment}{// 2.2.0a Classes}}
+\DoxyCodeLine{203 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{204 \{}
+\DoxyCodeLine{205     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute__2__2__0__a}{Attribute\_2\_2\_0\_a}}}
+\DoxyCodeLine{206     \{}
+\DoxyCodeLine{207     \textcolor{keyword}{public}:}
+\DoxyCodeLine{208         \mbox{\hyperlink{class_layers_1_1_attribute__2__2__0__a}{Attribute\_2\_2\_0\_a}}(\textcolor{keyword}{const} QString\& name);}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210         QString\& name();}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212         \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* parent\_themeable() \textcolor{keyword}{const};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214         \textcolor{keywordtype}{void} set\_parent\_themeable(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* parent\_themeable);}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216         \textcolor{keyword}{virtual} QVariant\& value() = 0;}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{219         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221         \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* m\_parent\_themeable\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{222     \};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute__2__2__0__a}{Attribute\_2\_2\_0\_a}}}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226     \textcolor{keyword}{public}:}
+\DoxyCodeLine{227         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}();}
+\DoxyCodeLine{228         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}(\textcolor{keyword}{const} QString\& name, QVariant value);}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230         \textcolor{keywordtype}{void} set\_value(QVariant value);}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232         QVariant\& value();}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}\& a)}
+\DoxyCodeLine{235         \{}
+\DoxyCodeLine{236             stream << a.m\_name;}
+\DoxyCodeLine{237             stream << a.m\_value;}
+\DoxyCodeLine{238             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{239         \}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}\& a)}
+\DoxyCodeLine{242         \{}
+\DoxyCodeLine{243             stream >> a.m\_name;}
+\DoxyCodeLine{244             stream >> a.m\_value;}
+\DoxyCodeLine{245             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{246         \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{keyword}{private}:}
+\DoxyCodeLine{249         QVariant m\_value\{ QVariant() \};}
+\DoxyCodeLine{250     \};}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute__2__2__0__a}{Attribute\_2\_2\_0\_a}}}
+\DoxyCodeLine{253     \{}
+\DoxyCodeLine{254     \textcolor{keyword}{public}:}
+\DoxyCodeLine{255         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}();}
+\DoxyCodeLine{256         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}(\textcolor{keyword}{const} QString\& name, QMap<QString, QVariant> state\_value\_map);}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258         \textcolor{keywordtype}{bool} contains\_state(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260         \textcolor{keywordtype}{void} set\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262         \textcolor{keywordtype}{void} set\_value(\textcolor{keyword}{const} QString\& state, QVariant value);}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264         \textcolor{keywordtype}{void} set\_values(\textcolor{keyword}{const} QMap<QString, QVariant>\& values);}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         QString state() \textcolor{keyword}{const};}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268         QList<QString> states() \textcolor{keyword}{const};}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270         QVariant* value(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272         QVariant\& value();}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274         QMap<QString, QVariant>\& values();}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}\& a)}
+\DoxyCodeLine{277         \{}
+\DoxyCodeLine{278             stream << a.m\_name;}
+\DoxyCodeLine{279             stream << a.m\_state;}
+\DoxyCodeLine{280             stream << a.m\_values;}
+\DoxyCodeLine{281             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{282         \}}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}\& a)}
+\DoxyCodeLine{285         \{}
+\DoxyCodeLine{286             stream >> a.m\_name;}
+\DoxyCodeLine{287             stream >> a.m\_state;}
+\DoxyCodeLine{288             stream >> a.m\_values;}
+\DoxyCodeLine{289             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{290         \}}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     \textcolor{keyword}{private}:}
+\DoxyCodeLine{293         QString m\_state;}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295         QMap<QString, QVariant> m\_values\{ QMap<QString, QVariant>() \};}
+\DoxyCodeLine{296     \};}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}}}
+\DoxyCodeLine{299     \{}
+\DoxyCodeLine{300     \textcolor{keyword}{public}:}
+\DoxyCodeLine{301         \textcolor{keywordtype}{void} add\_stateless\_attribute(\mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}} attribute);}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303         \textcolor{keywordtype}{void} add\_stateful\_attribute(\mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}} attribute);}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305         \mbox{\hyperlink{class_layers_1_1_attribute__2__2__0__a}{Attribute\_2\_2\_0\_a}}* attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307         QVariant* attribute\_value(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309         \textcolor{keywordtype}{bool} contains(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311         \textcolor{keywordtype}{bool} contains\_stateful\_attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313         \textcolor{keywordtype}{bool} contains\_stateless\_attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315         \textcolor{keywordtype}{void} copy\_values\_from(\mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}}\& other\_attribute\_set);}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317         \textcolor{keywordtype}{void} remove\_attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319         \textcolor{keywordtype}{void} set\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}* stateful\_attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323         QMap<QString, Stateful\_Attribute\_2\_2\_0\_a>\& stateful\_attributes();}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}* stateless\_attribute(\textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327         QMap<QString, Stateless\_Attribute\_2\_2\_0\_a>\& stateless\_attributes();}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329         QList<QString> states() \textcolor{keyword}{const};}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}}\& as)}
+\DoxyCodeLine{332         \{}
+\DoxyCodeLine{333             stream << as.m\_stateful\_attributes;}
+\DoxyCodeLine{334             stream << as.m\_stateless\_attributes;}
+\DoxyCodeLine{335             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{336         \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}}\& as)}
+\DoxyCodeLine{339         \{}
+\DoxyCodeLine{340             stream >> as.m\_stateful\_attributes;}
+\DoxyCodeLine{341             stream >> as.m\_stateless\_attributes;}
+\DoxyCodeLine{342             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{343         \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345     \textcolor{keyword}{private}:}
+\DoxyCodeLine{346         QMap<QString, Stateful\_Attribute\_2\_2\_0\_a> m\_stateful\_attributes\{ QMap<QString, Stateful\_Attribute\_2\_2\_0\_a>() \};}
+\DoxyCodeLine{347         QMap<QString, Stateless\_Attribute\_2\_2\_0\_a> m\_stateless\_attributes\{ QMap<QString, Stateless\_Attribute\_2\_2\_0\_a>() \};}
+\DoxyCodeLine{348     \};}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}}
+\DoxyCodeLine{351     \{}
+\DoxyCodeLine{352     \textcolor{keyword}{public}:}
+\DoxyCodeLine{353         \mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}();}
+\DoxyCodeLine{354         \mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}(\textcolor{keyword}{const} QString\& name, \textcolor{keywordtype}{bool} is\_custom = \textcolor{keyword}{true});}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356         \textcolor{keywordtype}{void} add\_attribute\_set(\textcolor{keyword}{const} QString\& themeable\_tag, \mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}} attribute\_set);}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358         \textcolor{keywordtype}{void} add\_stateful\_attribute(}
+\DoxyCodeLine{359             \textcolor{keyword}{const} QString\& themeable\_tag,}
+\DoxyCodeLine{360             \textcolor{keyword}{const} QString\& attribute\_name,}
+\DoxyCodeLine{361             QMap<QString, QVariant> state\_value\_map);}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363         \textcolor{keywordtype}{void} add\_stateless\_attribute(}
+\DoxyCodeLine{364             \textcolor{keyword}{const} QString\& themeable\_tag,}
+\DoxyCodeLine{365             \textcolor{keyword}{const} QString\& attribute\_name,}
+\DoxyCodeLine{366             QVariant value);}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368         \mbox{\hyperlink{class_layers_1_1_attribute___set__2__2__0__a}{Attribute\_Set\_2\_2\_0\_a}}\& attribute\_set(\textcolor{keyword}{const} QString\& themeable\_tag);}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370         QHash<QString, Attribute\_Set\_2\_2\_0\_a>\& attribute\_sets();}
+\DoxyCodeLine{371 }
+\DoxyCodeLine{372         \textcolor{keywordtype}{bool} contains\_attributes\_for\_tag(\textcolor{keyword}{const} QString\& themeable\_tag);}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374         \textcolor{keywordtype}{bool} contains\_attribute(\textcolor{keyword}{const} QString\& themeable\_tag, \textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376         \textcolor{keywordtype}{void} copy\_attribute\_sets\_from(\mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}\& theme);}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{378         \textcolor{keywordtype}{bool} is\_custom();}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380         QString\& name();}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382         \textcolor{keywordtype}{void} set\_name(\textcolor{keyword}{const} QString\& new\_name);}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384         \mbox{\hyperlink{class_layers_1_1_stateful___attribute__2__2__0__a}{Stateful\_Attribute\_2\_2\_0\_a}}* stateful\_attribute(\textcolor{keyword}{const} QString\& themeable\_tag, \textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386         \mbox{\hyperlink{class_layers_1_1_stateless___attribute__2__2__0__a}{Stateless\_Attribute\_2\_2\_0\_a}}* stateless\_attribute(\textcolor{keyword}{const} QString\& themeable\_tag, \textcolor{keyword}{const} QString\& attribute\_name);}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}\& t)}
+\DoxyCodeLine{389         \{}
+\DoxyCodeLine{390             stream << t.m\_attribute\_sets;}
+\DoxyCodeLine{391             stream << t.m\_is\_custom;}
+\DoxyCodeLine{392             stream << t.m\_name;}
+\DoxyCodeLine{393             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{394         \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_theme__2__2__0__a}{Theme\_2\_2\_0\_a}}\& t)}
+\DoxyCodeLine{397         \{}
+\DoxyCodeLine{398             stream >> t.m\_attribute\_sets;}
+\DoxyCodeLine{399             stream >> t.m\_is\_custom;}
+\DoxyCodeLine{400             stream >> t.m\_name;}
+\DoxyCodeLine{401             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{402         \}}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404     \textcolor{keyword}{private}:}
+\DoxyCodeLine{405         \textcolor{keywordtype}{bool} m\_is\_custom\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407         QHash<QString, Attribute\_Set\_2\_2\_0\_a> m\_attribute\_sets\{ QHash<QString, Attribute\_Set\_2\_2\_0\_a>() \};}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409         QString m\_name;}
+\DoxyCodeLine{410     \};}
+\DoxyCodeLine{411 \}}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// OLD\_H}}
+
+\end{DoxyCode}

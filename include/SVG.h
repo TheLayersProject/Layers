@@ -76,13 +76,6 @@ namespace Layers
 		*/
 		void init_attributes();
 
-		void init_attribute_widgets();
-
-		/*!
-			Calls the QSvgWidget's update() function.
-		*/
-		//void issue_update();
-
 	private:
 		void init_size();
 

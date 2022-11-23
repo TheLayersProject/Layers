@@ -19,6 +19,7 @@
 using Layers::Application;
 using Layers::Theme;
 using Layers::Themeable;
+using Layers::Window;
 
 Application::Application(
 	int& argc, char** argv,
@@ -58,9 +59,9 @@ Application::Application(
 	init_latest_version_tag();
 }
 
-void Application::add_child_themeable_reference(Themeable& themeable)
+void Application::store_child_themeable_pointer(Themeable& themeable)
 {
-	m_child_themeable_references.append(&themeable);
+	m_child_themeables.append(&themeable);
 }
 
 void Application::apply_theme(Theme& theme)
@@ -69,7 +70,7 @@ void Application::apply_theme(Theme& theme)
 	{
 		m_current_theme = &theme;
 
-		for (Themeable* themeable : m_child_themeable_references)
+		for (Themeable* themeable : m_child_themeables)
 			themeable->apply_theme(theme);
 
 		m_settings.setValue("themes/active_theme", theme.name());
@@ -120,10 +121,6 @@ bool Application::update_on_request()
 
 	if (update_dialog->exec())
 	{
-		//for (Themeable* child_themeable_reference : m_child_themeable_references)
-		//	if (Window* child_window = static_cast<Window*>(child_themeable_reference))
-		//		child_window->hide();
-
 		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/releases");
 
 		QNetworkReply* repo_releases_json_download = m_downloader->download(repo_releases_json_download_url);
@@ -254,6 +251,16 @@ Theme Application::load_theme(QFile& file)
 	return theme_and_load_status_combo_2_3_0_a.theme;
 }
 
+Window* Application::main_window() const
+{
+	// TODO: Below is temporary and will not work right if the application supports multiple windows.
+	for (Themeable* themeable : m_child_themeables)
+		if (themeable->name() && *themeable->name() == "window")
+			return static_cast<Window*>(themeable);
+
+	return nullptr;
+}
+
 QString& Application::name()
 {
 	return m_name;
@@ -261,7 +268,7 @@ QString& Application::name()
 
 void Application::reapply_theme()
 {
-	for (Themeable* themeable : m_child_themeable_references)
+	for (Themeable* themeable : m_child_themeables)
 		themeable->apply_theme(*m_current_theme);
 }
 
@@ -374,16 +381,18 @@ void Application::init_themes()
 	m_themes.insert("Dark", build_layers_dark_theme());
 	m_themes.insert("Light", build_layers_light_theme());
 
-	save_theme(m_themes["Blue"]);
-	save_theme(m_themes["Dark"]);
-	save_theme(m_themes["Light"]);
+	//save_theme(m_themes["Blue"]);
+	//save_theme(m_themes["Dark"]);
+	//save_theme(m_themes["Light"]);
 
-	//for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
-	//{
-	//	Theme loaded_theme = load_theme(QFile(m_app_themes_dir.absoluteFilePath(file_name)));
+	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
+	{
+		QFile theme_file = QFile(m_app_themes_dir.absoluteFilePath(file_name));
 
-	//	m_themes.insert(loaded_theme.name(), loaded_theme);
-	//}
+		Theme loaded_theme = load_theme(theme_file);
+
+		m_themes.insert(loaded_theme.name(), loaded_theme);
+	}
 
 	if (m_themes.contains(m_settings.value("themes/active_theme").value<QString>()))
 		apply_theme(m_themes[m_settings.value("themes/active_theme").value<QString>()]);

@@ -1,0 +1,96 @@
+\hypertarget{class_layers_1_1_variant}{}\doxysection{Layers\+::Variant Class Reference}
+\label{class_layers_1_1_variant}\index{Layers::Variant@{Layers::Variant}}
+
+
+{\ttfamily \#include $<$Attribute.\+h$>$}
+
+Inheritance diagram for Layers\+::Variant\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_layers_1_1_variant}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_af8a886be0f96cf2218f3a9e0a0fb1a0b}\label{class_layers_1_1_variant_af8a886be0f96cf2218f3a9e0a0fb1a0b}} 
+void {\bfseries changed} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_a981609a8519c47e93398e19c61b662cc}\label{class_layers_1_1_variant_a981609a8519c47e93398e19c61b662cc}} 
+{\bfseries Variant} (int integer)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_ad29b9da79e2fd4e877eea5ed00db8754}\label{class_layers_1_1_variant_ad29b9da79e2fd4e877eea5ed00db8754}} 
+{\bfseries Variant} (QColor color)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_aa142b2022f9e317e9dfac325825a937b}\label{class_layers_1_1_variant_aa142b2022f9e317e9dfac325825a937b}} 
+{\bfseries Variant} (QVariant qvariant)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_a08a7fba959d06ef91f67d30938485030}\label{class_layers_1_1_variant_a08a7fba959d06ef91f67d30938485030}} 
+{\bfseries Variant} (const \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&variant)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_a0b270612b60746b0ac40cfaad4d004b7}\label{class_layers_1_1_variant_a0b270612b60746b0ac40cfaad4d004b7}} 
+void {\bfseries operator=} (const \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&variant)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_a23f8a5b57f63c63ea6a343cca35b50f9}\label{class_layers_1_1_variant_a23f8a5b57f63c63ea6a343cca35b50f9}} 
+void {\bfseries operator=} (const QVariant \&qvariant)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_a012e1542fe3eecb4bbe8a9ab8d2f4be3}\label{class_layers_1_1_variant_a012e1542fe3eecb4bbe8a9ab8d2f4be3}} 
+bool {\bfseries operator!=} (const QVariant \&qvariant)
+\item 
+const char $\ast$ \mbox{\hyperlink{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}{type\+Name}} () const
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_ac1334ee1d9f7accd2706651640d7fc06}\label{class_layers_1_1_variant_ac1334ee1d9f7accd2706651640d7fc06}} 
+QData\+Stream \& {\bfseries operator$<$$<$} (QData\+Stream \&stream, const \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&v)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_variant_ad082ab96ce92e54a46136f1c911b03ff}\label{class_layers_1_1_variant_ad082ab96ce92e54a46136f1c911b03ff}} 
+QData\+Stream \& {\bfseries operator$>$$>$} (QData\+Stream \&stream, \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&v)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides a variant type with signal/slot support
+
+The \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} class is designed by wrapping a QVariant and subclassing QObject to enable Qt signal/slot functionality.
+
+The purpose of having a variant type that can work with Qt\textquotesingle{}s signal/slot system is to enable simple value change detection. Any time the value of a \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\textquotesingle{}s wrapped QVariant is modified, the changed() signal gets emitted.
+
+Variants are to be used by Layers Attributes. Attributes will store pointers to Variants. When 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}\label{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}} 
+\index{Layers::Variant@{Layers::Variant}!typeName@{typeName}}
+\index{typeName@{typeName}!Layers::Variant@{Layers::Variant}}
+\doxysubsubsection{\texorpdfstring{typeName()}{typeName()}}
+{\footnotesize\ttfamily const char $\ast$ Variant\+::type\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the name of the type stored in the variant.
+
+\begin{DoxyReturn}{Returns}
+Type name of value stored in the variant 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}\label{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}} 
+\index{Layers::Variant@{Layers::Variant}!value@{value}}
+\index{value@{value}!Layers::Variant@{Layers::Variant}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T Layers\+::\+Variant\+::value\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the stored value converted to the template type T.
+
+\begin{DoxyReturn}{Returns}
+Value converted to the template type T 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Attribute.\+h\item 
+src/\+Themes/\+Attributes/Variant.\+cpp\end{DoxyCompactItemize}

@@ -1,7 +1,6 @@
 #include "../../../include/Theme.h"
 #include "../../../include/Themeable.h"
 
-//using Layers::AttributeSet;
 using Layers::Attribute;
 using Layers::Theme;
 using Layers::Themeable;
@@ -47,11 +46,22 @@ void Theme::copy_from(Theme& theme)
 	m_data = theme.m_data;
 }
 
-//void Theme::copy_attribute_values_of(Themeable* themeable)
-//{
-//	if (m_attribute_sets.contains(themeable->tag()))
-//		m_attribute_sets[themeable->tag()].copy_values_from(themeable->attribute_set());
-//}
+void Theme::copy_attribute_values_of(Themeable* themeable)
+{
+	if (m_data.contains(themeable->tag()))
+	{
+		QMap<QString, Attribute*>& themeable_data_in_theme = m_data[themeable->tag()];
+
+		for (const QString& attr_key : themeable_data_in_theme.keys())
+		{
+			if (themeable->attributes().contains(attr_key))
+			{
+				themeable_data_in_theme[attr_key]->copy_value_from(
+					*themeable->attributes()[attr_key]);
+			}
+		}
+	}
+}
 
 bool Theme::is_custom()
 {

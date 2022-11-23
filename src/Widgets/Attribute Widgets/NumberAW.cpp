@@ -31,14 +31,14 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_name("line_editor");
 	m_line_editor->set_proper_name("Line Editor");
-	m_line_editor->set_text(QString::number(attribute->value<int>()));
+	m_line_editor->set_text(QString::number(attribute->as<int>()));
 	m_line_editor->set_validator(int_validator);
-	m_line_editor->a_text.get_values_from(*attribute);
+	m_line_editor->a_text.get_variant_from(*attribute);
 
 	// Setup Slider
 	m_slider->set_name("mini_slider");
 	m_slider->set_proper_name("Slider");
-	m_slider->a_value.get_values_from(m_line_editor->a_text);
+	m_slider->a_value.get_variant_from(m_line_editor->a_text);
 
 	// Setup Unit Label
 	//m_unit_label->set_name("label");
@@ -77,10 +77,10 @@ void NumberAW::set_unit_label_text(const QString& unit_string)
 
 void NumberAW::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_attribute_label);
-	add_child_themeable_reference(m_line_editor);
-	add_child_themeable_reference(m_slider);
-	add_child_themeable_reference(m_unit_label);
+	store_child_themeable_pointer(m_attribute_label);
+	store_child_themeable_pointer(m_line_editor);
+	store_child_themeable_pointer(m_slider);
+	store_child_themeable_pointer(m_unit_label);
 }
 
 void NumberAW::setup_layout()

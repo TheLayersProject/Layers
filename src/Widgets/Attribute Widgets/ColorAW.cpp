@@ -46,7 +46,7 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 	else m_color_control->hide();
 
 	// Setup Color Control
-	m_color_control->set_attribute(attribute);
+	m_color_control->a_fill.get_variant_from(*attribute);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -87,8 +87,13 @@ void ColorAW::set_centered(bool centered)
 	}
 }
 
+void ColorAW::set_current_editting_state(const QString& state)
+{
+	m_color_control->set_current_editting_state(state);
+}
+
 void ColorAW::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_attribute_label);
-	if (m_disabled_toggle) add_child_themeable_reference(m_disabled_toggle);
+	store_child_themeable_pointer(m_attribute_label);
+	if (m_disabled_toggle) store_child_themeable_pointer(m_disabled_toggle);
 }

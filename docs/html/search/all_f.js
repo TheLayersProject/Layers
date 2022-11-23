@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['unassign_5fprefixes_67',['unassign_prefixes',['../class_layers_1_1_themeable.html#afe536c581c3299ddfc8c632f9b3b2e2e',1,'Layers::Themeable']]],
-  ['unfilter_5fattribute_68',['unfilter_attribute',['../class_layers_1_1_themeable.html#afa5252dc198c501b9d53f58c5915b13f',1,'Layers::Themeable']]],
-  ['unshare_5fall_5fattributes_5fwith_5fbutton_69',['unshare_all_attributes_with_button',['../class_layers_1_1_button.html#aabaeaf585e6fff7a020587444d3512ed',1,'Layers::Button']]],
-  ['unshare_5fall_5fattributes_5fwith_5felement_70',['unshare_all_attributes_with_element',['../class_layers_1_1_themeable.html#a55a480b7bfb94df725e7921475a1d383',1,'Layers::Themeable']]],
-  ['unshare_5fattribute_5fwith_5fthemeable_71',['unshare_attribute_with_themeable',['../class_layers_1_1_themeable.html#a56117bf122e1725ecc9cc417396b3c4d',1,'Layers::Themeable']]],
-  ['update_5ftheme_5fdependencies_72',['update_theme_dependencies',['../class_layers_1_1_themeable.html#ad51ea7b83f4df45e53880526839a8b46',1,'Layers::Themeable::update_theme_dependencies()'],['../class_layers_1_1_widget.html#a9fde9cfec1b6f76c644885bd230ce746',1,'Layers::Widget::update_theme_dependencies()'],['../class_layers_1_1_s_v_g___widget.html#a2b355b6d833de919c59340b75dc57941',1,'Layers::SVG_Widget::update_theme_dependencies()'],['../class_layers_1_1_combobox.html#afc82e71733028cbd4314cad925d43e9b',1,'Layers::Combobox::update_theme_dependencies()'],['../class_layers_1_1_line___editor.html#af25a9b7b7f1f0309d399a349647b92a9',1,'Layers::Line_Editor::update_theme_dependencies()'],['../class_layers_1_1_slider.html#a554aa9d75cdc35d373852ce5ce2f6ad1',1,'Layers::Slider::update_theme_dependencies()'],['../class_layers_1_1_gradient___selection___box.html#a239c5242db1ce64cb9ba4c3652258f68',1,'Layers::Gradient_Selection_Box::update_theme_dependencies()'],['../class_layers_1_1_window.html#aaefbfb4610945a5a93670f07a3ab1227',1,'Layers::Window::update_theme_dependencies()']]]
+  ['reapply_5ftheme_0',['reapply_theme',['../class_layers_1_1_application.html#acdc3dc779cf0b4dda262e8da98f8fb48',1,'Layers::Application::reapply_theme()'],['../class_layers_1_1_themeable.html#ae09fdb49f042a29a3fb09179c50e4fcf',1,'Layers::Themeable::reapply_theme()']]],
+  ['rebuild_5fsvg_5fstr_1',['rebuild_svg_str',['../class_layers_1_1_s_v_g.html#a687768f7d9fdbe86d940a40709693f30',1,'Layers::SVG']]],
+  ['remove_5fchild_5fthemeable_5freference_2',['remove_child_themeable_reference',['../class_layers_1_1_themeable.html#ae3916991fcd49e3024302744564a06be',1,'Layers::Themeable']]],
+  ['rename_5ftheme_3',['rename_theme',['../class_layers_1_1_application.html#ada4262c296f6b19102178cef322edcdd',1,'Layers::Application']]]
 ];

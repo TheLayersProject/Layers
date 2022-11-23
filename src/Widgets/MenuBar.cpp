@@ -68,19 +68,19 @@ QString MenuBar::build_stylesheet()
 	return
 		"QMenuBar {"
 		"background: transparent;"
-		"color: " + a_text_color->value<QColor>().name() + ";"
+		"color: " + a_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item {"
 		"spacing: 3px;"
 		"padding: 1px 4px;"
 		"background: transparent;"
-		"color: " + a_text_color->value<QColor>().name() + ";"
+		"color: " + a_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:selected {"
 		"background: transparent;"
-		"color: " + a_selected_text_color->value<QColor>().name() + ";"
+		"color: " + a_selected_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:pressed {"

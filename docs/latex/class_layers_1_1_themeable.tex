@@ -2,36 +2,41 @@
 \label{class_layers_1_1_themeable}\index{Layers::Themeable@{Layers::Themeable}}
 
 
-{\ttfamily \#include $<$Layers\+RW.\+h$>$}
+{\ttfamily \#include $<$Themeable.\+h$>$}
 
 Inheritance diagram for Layers\+::Themeable\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=8.784314cm]{class_layers_1_1_themeable}
+\includegraphics[height=9.000000cm]{class_layers_1_1_themeable}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference}} (\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$child\+\_\+themeable)
-\item 
-virtual void \mbox{\hyperlink{class_layers_1_1_themeable_a72d4c43af4c6badbb2a8552268fbc5cc}{add\+\_\+state}} (const QString \&state)
+void \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer}} (\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$child\+\_\+themeable)
 \item 
 virtual void \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme}} (\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&theme)
 \item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a279cb475197ea1aa86c81d715bf72db5}\label{class_layers_1_1_themeable_a279cb475197ea1aa86c81d715bf72db5}} 
+virtual void {\bfseries apply\+\_\+theme\+\_\+attributes} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&theme\+\_\+attrs)
+\item 
 void \mbox{\hyperlink{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}{assign\+\_\+tag\+\_\+prefixes}} (QList$<$ QString $>$ parent\+\_\+prefixes=QList$<$ QString $>$(), const QString \&parent\+\_\+name=\char`\"{}\char`\"{})
 \item 
-\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \& \mbox{\hyperlink{class_layers_1_1_themeable_a9f0d81f55b0d3296d83c31146bf668e9}{attributes}} (const QString \&state=\char`\"{}Default\char`\"{})
+QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& \mbox{\hyperlink{class_layers_1_1_themeable_ad96b1137b69af820211143715d3d80e4}{attributes}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a7e1e39362a6d709b279307ad4f2e982a}\label{class_layers_1_1_themeable_a7e1e39362a6d709b279307ad4f2e982a}} 
+QList$<$ \mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{Attribute\+Layout\+Item}} $\ast$ $>$ \& {\bfseries attribute\+\_\+layout} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a28ef1b44525f07dc9b029a08b5f9cbe5}\label{class_layers_1_1_themeable_a28ef1b44525f07dc9b029a08b5f9cbe5}} 
+QList$<$ \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$ $>$ \& {\bfseries child\+\_\+themeable\+\_\+references} ()
 \item 
 \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_a307575be91e7169a73fccfcb21b7dff8}{current\+\_\+theme}} ()
 \item 
-\mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_a9dbee1c9ce67221e7539c75a10229e09}{customize\+\_\+panel}} () const
+\mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}{customize\+\_\+panel}} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_ab2b653331f6e568f95597244674b00c3}{filter\+\_\+attribute}} (const QString \&attribute)
+\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}{icon}} () const
 \item 
-\mbox{\hyperlink{class_layers_1_1_graphic___widget}{Graphic\+\_\+\+Widget}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_aeb0b2c83e8ff4b87007152d79ab0b428}{icon}} () const
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_a35daa14dc1d5704cea48a3667f0f2b86}{initialize\+\_\+and\+\_\+acquire\+\_\+panels}} (QList$<$ \mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ $>$ \&list)
+bool \mbox{\hyperlink{class_layers_1_1_themeable_a693634b06c973c840a8b185b1bdc0224}{is\+\_\+stateful}} () const
 \item 
 QString $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_aaf7bac3feceaf1fe625338dbff098189}{proper\+\_\+name}} () const
 \item 
@@ -39,9 +44,13 @@ void \mbox{\hyperlink{class_layers_1_1_themeable_ae09fdb49f042a29a3fb09179c50e4f
 \item 
 void \mbox{\hyperlink{class_layers_1_1_themeable_ae3916991fcd49e3024302744564a06be}{remove\+\_\+child\+\_\+themeable\+\_\+reference}} (\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$child\+\_\+themeable)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value}} (const QString \&attribute, QVariant value, const QString \&state=\char`\"{}Default\char`\"{})
+\mbox{\Hypertarget{class_layers_1_1_themeable_a42c159745b63bc3dff06b6671c14fb7f}\label{class_layers_1_1_themeable_a42c159745b63bc3dff06b6671c14fb7f}} 
+void {\bfseries set\+\_\+is\+\_\+app\+\_\+themeable} (bool is\+\_\+app\+\_\+themeable)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_a81ea2463dadba26a4fb832073a53fd79}{set\+\_\+icon}} (\mbox{\hyperlink{class_layers_1_1_graphic___widget}{Graphic\+\_\+\+Widget}} $\ast$\mbox{\hyperlink{class_layers_1_1_themeable_aeb0b2c83e8ff4b87007152d79ab0b428}{icon}})
+\mbox{\Hypertarget{class_layers_1_1_themeable_a46d9b551cae051bf960712bb878f7b9f}\label{class_layers_1_1_themeable_a46d9b551cae051bf960712bb878f7b9f}} 
+void {\bfseries set\+\_\+functionality\+\_\+disabled} (bool disabled=true)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_themeable_a647a8657ead007473eafaa4ccb6cd4af}{set\+\_\+icon}} (\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$\mbox{\hyperlink{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}{icon}})
 \item 
 void \mbox{\hyperlink{class_layers_1_1_themeable_a78f9b10993fcef1557aeba1bc75e5c90}{set\+\_\+name}} (const QString \&name)
 \item 
@@ -49,48 +58,27 @@ void \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b86
 \item 
 virtual void \mbox{\hyperlink{class_layers_1_1_themeable_a93ad187cb208ad9ba7b196c05d8f8d29}{set\+\_\+state}} (const QString \&state)
 \item 
-{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_layers_1_1_themeable_a5fe020de8b24167f056984e4d7a88ce1}{share\+\_\+all\+\_\+attributes\+\_\+with}} (T $\ast$themeable)
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_ac3a27ba0db996852f59afb3f67b6fee5}{share\+\_\+attribute\+\_\+with\+\_\+themeable}} (const QString \&from\+\_\+state, const QString \&from\+\_\+attribute, \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$to\+\_\+themeable, QString to\+\_\+state=\char`\"{}\char`\"{}, QString to\+\_\+attribute=\char`\"{}\char`\"{}, bool obtain\+\_\+attribute=false)
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_a13ad3bb88b5c2c29d52ca5a75b2635c9}{share\+\_\+attributes}} ()
-\item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_af8587e47e984a294c08d133182e108d5}\label{class_layers_1_1_themeable_af8587e47e984a294c08d133182e108d5}} 
 QString {\bfseries state} () const
 \item 
-QList$<$ QString $>$ \mbox{\hyperlink{class_layers_1_1_themeable_a2e2b195bd5ba3639ca94db85e14949f4}{states}} () const
+QList$<$ QString $>$ \mbox{\hyperlink{class_layers_1_1_themeable_a080406efdd426b24c701a0dbcb419a70}{states}} () const
 \item 
-\mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_a6bac8b2b969528c049f2057aef457379}{take\+\_\+attribute\+\_\+sharing\+\_\+combo}} (const QString \&from\+\_\+state, const QString \&from\+\_\+attribute, \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$to\+\_\+themeable, const QString \&to\+\_\+state, const QString \&to\+\_\+attribute)
-\item 
-QString \mbox{\hyperlink{class_layers_1_1_themeable_a7da01368284627f6decf768b180f0318}{theme\+\_\+tag}} () const
+QString \& \mbox{\hyperlink{class_layers_1_1_themeable_a02ae7b73daf23e11541f5fe7ff3b4f29}{tag}} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_themeable_afe536c581c3299ddfc8c632f9b3b2e2e}{unassign\+\_\+prefixes}} ()
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_afa5252dc198c501b9d53f58c5915b13f}{unfilter\+\_\+attribute}} (const QString \&attribute)
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_a55a480b7bfb94df725e7921475a1d383}{unshare\+\_\+all\+\_\+attributes\+\_\+with\+\_\+element}} (\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$element)
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_a56117bf122e1725ecc9cc417396b3c4d}{unshare\+\_\+attribute\+\_\+with\+\_\+themeable}} (const QString \&from\+\_\+state, const QString \&from\+\_\+attribute, \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$to\+\_\+themeable, QString to\+\_\+state=\char`\"{}\char`\"{}, QString to\+\_\+attribute=\char`\"{}\char`\"{})
-\item 
-virtual void \mbox{\hyperlink{class_layers_1_1_themeable_ad51ea7b83f4df45e53880526839a8b46}{update\+\_\+theme\+\_\+dependencies}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_themeable_a3b15ca4301a58c901ab606aefb2b7f18}{init\+\_\+attributes}} ()=0
-\item 
-\mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ \mbox{\hyperlink{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}{init\+\_\+customize\+\_\+panel}} ()
+virtual void \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{init\+\_\+attributes}} ()
 \item 
 virtual void \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
-\item 
-void \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable}} ()
-\item 
-virtual void \mbox{\hyperlink{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}{issue\+\_\+update}} ()=0
-\item 
-virtual void \mbox{\hyperlink{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}{setup\+\_\+customize\+\_\+panel}} ()=0
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_ad8f790a6aa78dfc17c21779b5c09720f}\label{class_layers_1_1_themeable_ad8f790a6aa78dfc17c21779b5c09720f}} 
+bool {\bfseries m\+\_\+functionality\+\_\+disabled} \{ false \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a4ee71de7fdce0bbee5b74e616d2f0ddc}\label{class_layers_1_1_themeable_a4ee71de7fdce0bbee5b74e616d2f0ddc}} 
 bool {\bfseries m\+\_\+tag\+\_\+prefixes\+\_\+assigned} \{ false \}
@@ -98,14 +86,17 @@ bool {\bfseries m\+\_\+tag\+\_\+prefixes\+\_\+assigned} \{ false \}
 \mbox{\Hypertarget{class_layers_1_1_themeable_a1546f28adc972f1ddd74ad35d54c2895}\label{class_layers_1_1_themeable_a1546f28adc972f1ddd74ad35d54c2895}} 
 bool {\bfseries m\+\_\+shared\+\_\+attributes} \{ false \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a97317f3c936862db8dd775e304aec381}\label{class_layers_1_1_themeable_a97317f3c936862db8dd775e304aec381}} 
-\mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ {\bfseries m\+\_\+customize\+\_\+panel} \{ nullptr \}
+\mbox{\Hypertarget{class_layers_1_1_themeable_aee4549de7ad7c60482be6f01f0c13ed6}\label{class_layers_1_1_themeable_aee4549de7ad7c60482be6f01f0c13ed6}} 
+bool {\bfseries m\+\_\+is\+\_\+app\+\_\+themeable} \{ false \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a3c7511618aeaa839251c68df96aad999}\label{class_layers_1_1_themeable_a3c7511618aeaa839251c68df96aad999}} 
-\mbox{\hyperlink{class_layers_1_1_graphic___widget}{Graphic\+\_\+\+Widget}} $\ast$ {\bfseries m\+\_\+icon} \{ nullptr \}
+\mbox{\Hypertarget{class_layers_1_1_themeable_a3745a038a7ce3987fcc0ff946c2a1d28}\label{class_layers_1_1_themeable_a3745a038a7ce3987fcc0ff946c2a1d28}} 
+bool {\bfseries m\+\_\+is\+\_\+stateful} \{ false \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a1001bb5a265173516812583bc7bbbf07}\label{class_layers_1_1_themeable_a1001bb5a265173516812583bc7bbbf07}} 
-QString $\ast$ {\bfseries m\+\_\+app\+\_\+name} \{ nullptr \}
+\mbox{\Hypertarget{class_layers_1_1_themeable_a4526b072aeac603b42485444bdd22eb4}\label{class_layers_1_1_themeable_a4526b072aeac603b42485444bdd22eb4}} 
+\mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$ {\bfseries m\+\_\+customize\+\_\+panel} \{ nullptr \}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a38af5fa605f89bb49962f0ae9cb27c13}\label{class_layers_1_1_themeable_a38af5fa605f89bb49962f0ae9cb27c13}} 
+\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$ {\bfseries m\+\_\+icon} \{ nullptr \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a2c6b2a985f8f862a4b70fd023a9e4da7}\label{class_layers_1_1_themeable_a2c6b2a985f8f862a4b70fd023a9e4da7}} 
 QString $\ast$ {\bfseries m\+\_\+name} \{ nullptr \}
@@ -114,22 +105,25 @@ QString $\ast$ {\bfseries m\+\_\+name} \{ nullptr \}
 QString $\ast$ {\bfseries m\+\_\+proper\+\_\+name} \{ nullptr \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a68902e8c2a28d6941883877f40f30b45}\label{class_layers_1_1_themeable_a68902e8c2a28d6941883877f40f30b45}} 
-QString {\bfseries m\+\_\+state} \{ \char`\"{}Default\char`\"{} \}
+QString {\bfseries m\+\_\+state} \{ \char`\"{}\char`\"{} \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a0cf0af3d0e99436d5f84cac6d8a29f3b}\label{class_layers_1_1_themeable_a0cf0af3d0e99436d5f84cac6d8a29f3b}} 
-QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} $>$ {\bfseries m\+\_\+attributes} \{ \{ \char`\"{}Default\char`\"{}, Theme() \} \}
+\mbox{\Hypertarget{class_layers_1_1_themeable_ad23e25dbc5ecd2b817b19dcb9e876142}\label{class_layers_1_1_themeable_ad23e25dbc5ecd2b817b19dcb9e876142}} 
+QString {\bfseries m\+\_\+tag} \{ \char`\"{}\char`\"{} \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a47acff07450b3e999465b027184bc5ab}\label{class_layers_1_1_themeable_a47acff07450b3e999465b027184bc5ab}} 
-QList$<$ \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$ $>$ {\bfseries m\+\_\+child\+\_\+themeable\+\_\+references}
+\mbox{\Hypertarget{class_layers_1_1_themeable_ae9b9b6a355a4f5f1ed2833b1e25d59f7}\label{class_layers_1_1_themeable_ae9b9b6a355a4f5f1ed2833b1e25d59f7}} 
+QList$<$ \mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{Attribute\+Layout\+Item}} $\ast$ $>$ {\bfseries m\+\_\+attribute\+\_\+layout} \{ QList$<$\mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{Attribute\+Layout\+Item}}$\ast$$>$() \}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a3002ee44caa5d294bf4bf335d11f210f}\label{class_layers_1_1_themeable_a3002ee44caa5d294bf4bf335d11f210f}} 
+QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ {\bfseries m\+\_\+attributes} \{ QMap$<$QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}$\ast$$>$() \}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a8bf7a81dcbf2dae48648fef97837a6c3}\label{class_layers_1_1_themeable_a8bf7a81dcbf2dae48648fef97837a6c3}} 
+QList$<$ \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$ $>$ {\bfseries m\+\_\+child\+\_\+themeables}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_af8731329eef84584b6a3ffc52a570575}\label{class_layers_1_1_themeable_af8731329eef84584b6a3ffc52a570575}} 
 QList$<$ QString $>$ {\bfseries m\+\_\+filtered\+\_\+attributes}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_aee13df346a920175614a84311a277dab}\label{class_layers_1_1_themeable_aee13df346a920175614a84311a277dab}} 
 QList$<$ QString $>$ {\bfseries m\+\_\+tag\+\_\+prefixes}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_themeable_a463b2d30f3fff1aa4111a86e18e8706f}\label{class_layers_1_1_themeable_a463b2d30f3fff1aa4111a86e18e8706f}} 
-QList$<$ \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} $\ast$ $>$ {\bfseries attribute\+\_\+sharing\+\_\+combos}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a0d6af5e8c7e1bdc9a74c8dab67a58ab0}\label{class_layers_1_1_themeable_a0d6af5e8c7e1bdc9a74c8dab67a58ab0}} 
 \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} $\ast$ {\bfseries m\+\_\+current\+\_\+theme} \{ nullptr \}
@@ -143,45 +137,15 @@ The \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class is designed t
 
 Before a theme can be applied to a themeable, the themeable must have a name. This is because a name is the minimum requirement to construct the theme tag. To set a themeable\textquotesingle{}s name, use \mbox{\hyperlink{class_layers_1_1_themeable_a78f9b10993fcef1557aeba1bc75e5c90}{set\+\_\+name()}}.
 
-Themes are applied to themeables recursively through \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}. To do this, references to child themeables need to be stored. These references are stored through \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}}.
+Themes are applied to themeables recursively through \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}. To do this, references to child themeables need to be stored. These references are stored through \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}}.
 
 Before a themeable can be customized in a Layers application, two requirements must be fullfilled\+:
 \begin{DoxyEnumerate}
 \item A proper name must be defined with \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}
-\item Classes that implement \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} need to define \mbox{\hyperlink{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}{setup\+\_\+customize\+\_\+panel()}} 
+\item Classes that implement \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} need to define setup\+\_\+customize\+\_\+panel() 
 \end{DoxyEnumerate}
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}\label{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}} 
-\index{Layers::Themeable@{Layers::Themeable}!add\_child\_themeable\_reference@{add\_child\_themeable\_reference}}
-\index{add\_child\_themeable\_reference@{add\_child\_themeable\_reference}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{add\_child\_themeable\_reference()}{add\_child\_themeable\_reference()}}
-{\footnotesize\ttfamily void Themeable\+::add\+\_\+child\+\_\+themeable\+\_\+reference (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{child\+\_\+themeable }\end{DoxyParamCaption})}
-
-Adds a themeable to the child themeable references list.
-
-If the caller has already assigned tag prefixes, then the newly added themeable reference will have its prefixes assigned during this function. Otherwise, child themeables will have their prefixes assigned when the parent calls \mbox{\hyperlink{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}{assign\+\_\+tag\+\_\+prefixes()}}.
-
-
-\begin{DoxyParams}{Parameters}
-{\em child\+\_\+themeable} & to be added to the reference list \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a72d4c43af4c6badbb2a8552268fbc5cc}\label{class_layers_1_1_themeable_a72d4c43af4c6badbb2a8552268fbc5cc}} 
-\index{Layers::Themeable@{Layers::Themeable}!add\_state@{add\_state}}
-\index{add\_state@{add\_state}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{add\_state()}{add\_state()}}
-{\footnotesize\ttfamily void Themeable\+::add\+\_\+state (\begin{DoxyParamCaption}\item[{const QString \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Adds a new state with a unique set of attributes.
-
-This function works recursively to add a new state and attribute set to all of the themeables in the caller\textquotesingle{}s hierarchy. The new attribute set is created as a copy of the \textquotesingle{}Default\textquotesingle{} attribute set.
-
-
-\begin{DoxyParams}{Parameters}
-{\em state} & to be added with unique attribute set \\
-\hline
-\end{DoxyParams}
 \mbox{\Hypertarget{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}\label{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}} 
 \index{Layers::Themeable@{Layers::Themeable}!apply\_theme@{apply\_theme}}
 \index{apply\_theme@{apply\_theme}!Layers::Themeable@{Layers::Themeable}}
@@ -201,7 +165,7 @@ A name must be set with \mbox{\hyperlink{class_layers_1_1_themeable_a78f9b10993f
 \end{DoxyParams}
 
 
-Reimplemented in \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{Layers\+::\+Window}}, and \mbox{\hyperlink{class_layers_1_1_customize___panel_a584809f0d39e1a49d028699e52f6c111}{Layers\+::\+Customize\+\_\+\+Panel}}.
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_themes_settings_panel_aff2d260477fdc37d49d5ac1ec90b4801}{Layers\+::\+Themes\+Settings\+Panel}}, and \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{Layers\+::\+Window}}.
 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}\label{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}} 
 \index{Layers::Themeable@{Layers::Themeable}!assign\_tag\_prefixes@{assign\_tag\_prefixes}}
@@ -213,17 +177,17 @@ Assigns tag prefixes from the parent and the parent\textquotesingle{}s name.
 
 This function works recursively to assign tag prefixes to the caller and children in the caller\textquotesingle{}s hierarchy. Each themeable\textquotesingle{}s name gets added to the tag prefix list as this function gets called down the hierarchy.
 
-If no arguments are given, then assignment to the caller is skipped and the children have their prefixes assigned. However, the caller will still be marked as having its prefixes assigned. \mbox{\Hypertarget{class_layers_1_1_themeable_a9f0d81f55b0d3296d83c31146bf668e9}\label{class_layers_1_1_themeable_a9f0d81f55b0d3296d83c31146bf668e9}} 
+If no arguments are given, then assignment to the caller is skipped and the children have their prefixes assigned. However, the caller will still be marked as having its prefixes assigned. \mbox{\Hypertarget{class_layers_1_1_themeable_ad96b1137b69af820211143715d3d80e4}\label{class_layers_1_1_themeable_ad96b1137b69af820211143715d3d80e4}} 
 \index{Layers::Themeable@{Layers::Themeable}!attributes@{attributes}}
 \index{attributes@{attributes}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{attributes()}{attributes()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \& Themeable\+::attributes (\begin{DoxyParamCaption}\item[{const QString \&}]{state = {\ttfamily \char`\"{}Default\char`\"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& Themeable\+::attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Get a reference to the attribute set of the given state.
 
 
 \begin{DoxyParams}{Parameters}
-{\em state} & of the attribute set to be returned, \textquotesingle{}Default\textquotesingle{} by default \\
+{\em state} & of the attribute set to be returned, \textquotesingle{}default\textquotesingle{} by default \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -240,54 +204,45 @@ Gets the address of the currently applied theme. Returns nullptr if no theme has
 \begin{DoxyReturn}{Returns}
 Address of currently applied theme, or nullptr 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a9dbee1c9ce67221e7539c75a10229e09}\label{class_layers_1_1_themeable_a9dbee1c9ce67221e7539c75a10229e09}} 
+\mbox{\Hypertarget{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}\label{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}} 
 \index{Layers::Themeable@{Layers::Themeable}!customize\_panel@{customize\_panel}}
 \index{customize\_panel@{customize\_panel}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{customize\_panel()}{customize\_panel()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ Themeable\+::customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$ Themeable\+::customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Get the address of the themeable\textquotesingle{}s customize panel. Returns nullptr if the panel does not exist.
 
 \begin{DoxyReturn}{Returns}
 Address of customize panel, or nullptr 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_ab2b653331f6e568f95597244674b00c3}\label{class_layers_1_1_themeable_ab2b653331f6e568f95597244674b00c3}} 
-\index{Layers::Themeable@{Layers::Themeable}!filter\_attribute@{filter\_attribute}}
-\index{filter\_attribute@{filter\_attribute}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{filter\_attribute()}{filter\_attribute()}}
-{\footnotesize\ttfamily void Themeable\+::filter\+\_\+attribute (\begin{DoxyParamCaption}\item[{const QString \&}]{attribute }\end{DoxyParamCaption})}
-
-Adds the given attribute to an attribute filtration list.
-
-
-\begin{DoxyParams}{Parameters}
-{\em attribute} & to filter \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_aeb0b2c83e8ff4b87007152d79ab0b428}\label{class_layers_1_1_themeable_aeb0b2c83e8ff4b87007152d79ab0b428}} 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}\label{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}} 
 \index{Layers::Themeable@{Layers::Themeable}!icon@{icon}}
 \index{icon@{icon}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{icon()}{icon()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_graphic___widget}{Graphic\+\_\+\+Widget}} $\ast$ Themeable\+::icon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$ Themeable\+::icon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 Get the address of the themeable\textquotesingle{}s icon. Returns nullptr if no icon exists.
 
 \begin{DoxyReturn}{Returns}
 Address of icon, or nullptr 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a3b15ca4301a58c901ab606aefb2b7f18}\label{class_layers_1_1_themeable_a3b15ca4301a58c901ab606aefb2b7f18}} 
+\mbox{\Hypertarget{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}\label{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}} 
 \index{Layers::Themeable@{Layers::Themeable}!init\_attributes@{init\_attributes}}
 \index{init\_attributes@{init\_attributes}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily virtual void Layers\+::\+Themeable\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily void Themeable\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
 
 Initializes the attributes.
 
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}}.
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+This function is called by init\+\_\+themeable(). 
 
-Implemented in \mbox{\hyperlink{class_layers_1_1_settings___tab_aa7db5123c40b349e08def9f2ca482df4}{Layers\+::\+Settings\+\_\+\+Tab}}, \mbox{\hyperlink{class_layers_1_1_themes___settings___panel_a04ae7a54656a4693ecf412036517e372}{Layers\+::\+Themes\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_menu___label___layer_a7fc0ed2658c4633fe2710855333ca7b5}{Layers\+::\+Menu\+\_\+\+Label\+\_\+\+Layer}}, \mbox{\hyperlink{class_layers_1_1_customize___panel_ab3b42b5926615bb96dbd1eef8be57236}{Layers\+::\+Customize\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_gradient___control_a41ba2c946f8afaff8c25cac22789652b}{Layers\+::\+Gradient\+\_\+\+Control}}, \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a6dc13593d7a3daedb0aee5710b813e45}{Layers\+::\+Gradient\+\_\+\+Selection\+\_\+\+Box}}, \mbox{\hyperlink{class_layers_1_1_color___control_a0ac15e7e2689419e442435c6e41a8da6}{Layers\+::\+Color\+\_\+\+Control}}, \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_line___editor_a4861b99545d8f3ed0e7bde88f25c7ebb}{Layers\+::\+Line\+\_\+\+Editor}}, \mbox{\hyperlink{class_layers_1_1_combobox_abda7de15ee2d4c5264b6dee0f790593f}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}{Layers\+::\+Button}}, \mbox{\hyperlink{class_layers_1_1_toggle___switch_a31b4f9b31220396582ad2ab791c798af}{Layers\+::\+Toggle\+\_\+\+Switch}}, \mbox{\hyperlink{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}{Layers\+::\+Label}}, \mbox{\hyperlink{class_layers_1_1_s_v_g___widget_ab0fd5c3a7ae76d4a4cc89b85ad9773b1}{Layers\+::\+SVG\+\_\+\+Widget}}, and \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{Layers\+::\+Widget}}.
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}{Layers\+::\+Attribute\+Widget}}, \mbox{\hyperlink{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}{Layers\+::\+Button}}, \mbox{\hyperlink{class_layers_1_1_color_control_a76ba9d85bb087e2e23426d7af624e4b0}{Layers\+::\+Color\+Control}}, \mbox{\hyperlink{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}{Layers\+::\+Combobox\+Item}}, \mbox{\hyperlink{class_layers_1_1_combobox_abda7de15ee2d4c5264b6dee0f790593f}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}{Layers\+::\+Create\+New\+Theme\+Dialog}}, \mbox{\hyperlink{class_layers_1_1_customize_panel_adbf24db387bb2f8315ab95b2abc1d97e}{Layers\+::\+Customize\+Panel}}, \mbox{\hyperlink{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}{Layers\+::\+Fill\+Control}}, \mbox{\hyperlink{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}{Layers\+::\+Gradient\+Control}}, \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a55632fef220ab2d0064b5f0c416f1f42}{Layers\+::\+Gradient\+Selection\+Dialog}}, \mbox{\hyperlink{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}{Layers\+::\+Label}}, \mbox{\hyperlink{class_layers_1_1_line_editor_a57c5c9ee4a6577b84da5a9d998bc91b2}{Layers\+::\+Line\+Editor}}, \mbox{\hyperlink{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}{Layers\+::\+Menu\+Bar}}, \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}{Layers\+::\+Menu\+Label\+Layer}}, \mbox{\hyperlink{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}{Layers\+::\+Mini\+Slider}}, \mbox{\hyperlink{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}{Layers\+::\+Settings\+Tab}}, \mbox{\hyperlink{class_layers_1_1_themes_settings_panel_aab605a53aceeec7118d668d0f3f6046b}{Layers\+::\+Themes\+Settings\+Panel}}, \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_s_v_g_a51772ec69b6e9ba794914b69e9010d7e}{Layers\+::\+SVG}}, \mbox{\hyperlink{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}{Layers\+::\+Tab\+Bar}}, \mbox{\hyperlink{class_layers_1_1_toggle_switch_a7ffaab0c1a84bfb2a0e87af627a7e6a8}{Layers\+::\+Toggle\+Switch}}, \mbox{\hyperlink{class_layers_1_1_update_dialog_a691f5c91dd972454236f8691a8a5f3da}{Layers\+::\+Update\+Dialog}}, and \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{Layers\+::\+Widget}}.
 
 \mbox{\Hypertarget{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}\label{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}} 
 \index{Layers::Themeable@{Layers::Themeable}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
@@ -295,44 +250,30 @@ Implemented in \mbox{\hyperlink{class_layers_1_1_settings___tab_aa7db5123c40b349
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Themeable\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-Initializes the reference list to child themeables.
-
-A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
-
-Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
-
-This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
-
-Reimplemented in \mbox{\hyperlink{class_layers_1_1_window_abcae06c266c64194125b7670bad152e1}{Layers\+::\+Window}}, \mbox{\hyperlink{class_layers_1_1_titlebar_a4332cc5ba1ae6cabe97f154c485444c2}{Layers\+::\+Titlebar}}, \mbox{\hyperlink{class_layers_1_1_customize___menu_a369094d40b0bf37b4ef604e0427b3021}{Layers\+::\+Customize\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___menu_abe902feb0df5a0d83e5d584709cf7b16}{Layers\+::\+Settings\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___tab_a316e54da93fd9edcd3808a4fd25ea71c}{Layers\+::\+Settings\+\_\+\+Tab}}, \mbox{\hyperlink{class_layers_1_1_themes___settings___panel_a3f2251f897994b0ca9990c99b4832693}{Layers\+::\+Themes\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_menu___label___layer_aa0fb90e96d12526950049d18d2a54705}{Layers\+::\+Menu\+\_\+\+Label\+\_\+\+Layer}}, \mbox{\hyperlink{class_layers_1_1_customize___panel_a4f79f6cd45d491fa83161d4c5bd13b62}{Layers\+::\+Customize\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_adbca36db66a254f91607cf85ea52b232}{Layers\+::\+Gradient\+\_\+\+Selection\+\_\+\+Box}}, \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_combobox_a806b2c8aabf9612c20cb2508d8cef802}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}{Layers\+::\+Button}}, and \mbox{\hyperlink{class_layers_1_1_toggle___switch_acc6752d62f34fd225dc6e6d9a8b8b25e}{Layers\+::\+Toggle\+\_\+\+Switch}}.
-
-\mbox{\Hypertarget{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}\label{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}} 
-\index{Layers::Themeable@{Layers::Themeable}!init\_customize\_panel@{init\_customize\_panel}}
-\index{init\_customize\_panel@{init\_customize\_panel}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{init\_customize\_panel()}{init\_customize\_panel()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ Themeable\+::init\+\_\+customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
 Initializes the customize panel.
 
 A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
 
-This function is responsible for calling \mbox{\hyperlink{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}{setup\+\_\+customize\+\_\+panel()}}, which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
 
 \begin{DoxyReturn}{Returns}
-The initialized customize panel. 
+The initialized customize panel.
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}\label{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}} 
-\index{Layers::Themeable@{Layers::Themeable}!init\_themeable@{init\_themeable}}
-\index{init\_themeable@{init\_themeable}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{init\_themeable()}{init\_themeable()}}
-{\footnotesize\ttfamily void Themeable\+::init\+\_\+themeable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+Initializes the reference list to child themeables.
 
-Initializes the attributes and child themeable list.
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
 
-Call this function in the constructor of classes that implement \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}. \mbox{\Hypertarget{class_layers_1_1_themeable_a35daa14dc1d5704cea48a3667f0f2b86}\label{class_layers_1_1_themeable_a35daa14dc1d5704cea48a3667f0f2b86}} 
-\index{Layers::Themeable@{Layers::Themeable}!initialize\_and\_acquire\_panels@{initialize\_and\_acquire\_panels}}
-\index{initialize\_and\_acquire\_panels@{initialize\_and\_acquire\_panels}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{initialize\_and\_acquire\_panels()}{initialize\_and\_acquire\_panels()}}
-{\footnotesize\ttfamily void Themeable\+::initialize\+\_\+and\+\_\+acquire\+\_\+panels (\begin{DoxyParamCaption}\item[{QList$<$ \mbox{\hyperlink{class_layers_1_1_customize___panel}{Customize\+\_\+\+Panel}} $\ast$ $>$ \&}]{list }\end{DoxyParamCaption})}
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_state_a_w_a81a6af2ba5e3e70990a19f78827ad35f}{Layers\+::\+State\+AW}}, \mbox{\hyperlink{class_layers_1_1_a_w_group_ad22e6c2e3a6407874f8146739321b130}{Layers\+::\+AWGroup}}, \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w_ad25ac99608075877c7e64d0d6931de0f}{Layers\+::\+Corner\+Radii\+AW}}, \mbox{\hyperlink{class_layers_1_1_color_a_w_a15bbd953b14bf5aeda27c779d5658353}{Layers\+::\+Color\+AW}}, \mbox{\hyperlink{class_layers_1_1_gradient_a_w_a9bd39e79051cbc99026e11d2d8edd961}{Layers\+::\+Gradient\+AW}}, \mbox{\hyperlink{class_layers_1_1_fill_a_w_a5e7d1cf0ade89c79683943217d9ae42d}{Layers\+::\+Fill\+AW}}, \mbox{\hyperlink{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f01c6}{Layers\+::\+Number\+AW}}, \mbox{\hyperlink{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}{Layers\+::\+Button}}, \mbox{\hyperlink{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}{Layers\+::\+Combobox\+Item}}, \mbox{\hyperlink{class_layers_1_1_combobox_a806b2c8aabf9612c20cb2508d8cef802}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}{Layers\+::\+Create\+New\+Theme\+Dialog}}, \mbox{\hyperlink{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53dcbdde01}{Layers\+::\+Customize\+Menu}}, \mbox{\hyperlink{class_layers_1_1_customize_panel_ac55d3c41ab08b45a4c350dbdc4e4234f}{Layers\+::\+Customize\+Panel}}, \mbox{\hyperlink{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}{Layers\+::\+Fill\+Control}}, \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}{Layers\+::\+Gradient\+Selection\+Dialog}}, \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}{Layers\+::\+Menu\+Label\+Layer}}, \mbox{\hyperlink{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}{Layers\+::\+Mini\+Slider}}, \mbox{\hyperlink{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}{Layers\+::\+Settings\+Tab}}, \mbox{\hyperlink{class_layers_1_1_settings_menu_a53a028c52207f43352ea276850d647ca}{Layers\+::\+Settings\+Menu}}, \mbox{\hyperlink{class_layers_1_1_themes_settings_panel_a3394cf259e836fa1d8e980240857d20e}{Layers\+::\+Themes\+Settings\+Panel}}, \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_titlebar_a4332cc5ba1ae6cabe97f154c485444c2}{Layers\+::\+Titlebar}}, \mbox{\hyperlink{class_layers_1_1_toggle_switch_a9e84984f4c1cc739653aac02e9e6eb24}{Layers\+::\+Toggle\+Switch}}, \mbox{\hyperlink{class_layers_1_1_update_dialog_a3367d1e60b8983cb069da4890ea27cba}{Layers\+::\+Update\+Dialog}}, and \mbox{\hyperlink{class_layers_1_1_window_abcae06c266c64194125b7670bad152e1}{Layers\+::\+Window}}.
+
+\mbox{\Hypertarget{class_layers_1_1_themeable_a693634b06c973c840a8b185b1bdc0224}\label{class_layers_1_1_themeable_a693634b06c973c840a8b185b1bdc0224}} 
+\index{Layers::Themeable@{Layers::Themeable}!is\_stateful@{is\_stateful}}
+\index{is\_stateful@{is\_stateful}!Layers::Themeable@{Layers::Themeable}}
+\doxysubsubsection{\texorpdfstring{is\_stateful()}{is\_stateful()}}
+{\footnotesize\ttfamily bool Themeable\+::is\+\_\+stateful (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 Initializes customize panels and adds them to the provided list.
 
@@ -343,23 +284,15 @@ This function works recursively to initialize all of the customize panels in the
 {\em list} & to store initialized customize panels \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}\label{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}} 
-\index{Layers::Themeable@{Layers::Themeable}!issue\_update@{issue\_update}}
-\index{issue\_update@{issue\_update}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{issue\_update()}{issue\_update()}}
-{\footnotesize\ttfamily virtual void Layers\+::\+Themeable\+::issue\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
-
-Calls the inheriting QWidget\textquotesingle{}s update() function
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to call the inheriting QWidget\textquotesingle{}s update(). 
-
-Implemented in \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a57d55bfc461dd909abbae635eef57a81}{Layers\+::\+Gradient\+\_\+\+Selection\+\_\+\+Box}}, \mbox{\hyperlink{class_layers_1_1_label_ac672764b93a32d956c6573ae502c9437}{Layers\+::\+Label}}, \mbox{\hyperlink{class_layers_1_1_s_v_g___widget_a1304154faf429c4fda00792b4ec2fab3}{Layers\+::\+SVG\+\_\+\+Widget}}, and \mbox{\hyperlink{class_layers_1_1_widget_adb31975853723210fbc1cd4315baf643}{Layers\+::\+Widget}}.
-
 \mbox{\Hypertarget{class_layers_1_1_themeable_aaf7bac3feceaf1fe625338dbff098189}\label{class_layers_1_1_themeable_aaf7bac3feceaf1fe625338dbff098189}} 
 \index{Layers::Themeable@{Layers::Themeable}!proper\_name@{proper\_name}}
 \index{proper\_name@{proper\_name}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{proper\_name()}{proper\_name()}}
 {\footnotesize\ttfamily QString $\ast$ Layers\+::\+Themeable\+::proper\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Calls the inheriting QWidget\textquotesingle{}s update() function
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to call the inheriting QWidget\textquotesingle{}s update().
 
 Get the address of the proper name. Returns nullptr if no proper name has been set.
 
@@ -387,32 +320,11 @@ Removes the given child themeable from the references list and unassigns tag pre
 {\em child\+\_\+themeable} & to be removed from the reference list \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}\label{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}} 
-\index{Layers::Themeable@{Layers::Themeable}!set\_attribute\_value@{set\_attribute\_value}}
-\index{set\_attribute\_value@{set\_attribute\_value}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{set\_attribute\_value()}{set\_attribute\_value()}}
-{\footnotesize\ttfamily void Themeable\+::set\+\_\+attribute\+\_\+value (\begin{DoxyParamCaption}\item[{const QString \&}]{attribute,  }\item[{QVariant}]{value,  }\item[{const QString \&}]{state = {\ttfamily \char`\"{}Default\char`\"{}} }\end{DoxyParamCaption})}
-
-Sets a value for an attribute in an attribute set
-
-Attribute sets are a mapping of states to sets of attributes. The particular attribute set that receives the new attribute value is defined by the state parameter.
-
-This function calls \mbox{\hyperlink{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}{issue\+\_\+update()}} to ensure the new attribute value is visually represented.
-
-
-\begin{DoxyParams}{Parameters}
-{\em attribute} & to set the value of \\
-\hline
-{\em value} & to set the attribute to \\
-\hline
-{\em state} & of the attribute set, \textquotesingle{}Default\textquotesingle{} by default \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a81ea2463dadba26a4fb832073a53fd79}\label{class_layers_1_1_themeable_a81ea2463dadba26a4fb832073a53fd79}} 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a647a8657ead007473eafaa4ccb6cd4af}\label{class_layers_1_1_themeable_a647a8657ead007473eafaa4ccb6cd4af}} 
 \index{Layers::Themeable@{Layers::Themeable}!set\_icon@{set\_icon}}
 \index{set\_icon@{set\_icon}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{set\_icon()}{set\_icon()}}
-{\footnotesize\ttfamily void Themeable\+::set\+\_\+icon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_graphic___widget}{Graphic\+\_\+\+Widget}} $\ast$}]{icon }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Themeable\+::set\+\_\+icon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$}]{icon }\end{DoxyParamCaption})}
 
 Sets an icon for the themeable; replaces it if one already exists.
 
@@ -459,107 +371,58 @@ A themeable\textquotesingle{}s proper name is used to represent the themeable to
 
 Sets the current state of the themeable.
 
-This function calls \mbox{\hyperlink{class_layers_1_1_themeable_acfa33fd0444210af3b11cb7778098238}{issue\+\_\+update()}} to ensure the state change is visually represented.
+This function calls issue\+\_\+update() to ensure the state change is visually represented.
 
 
 \begin{DoxyParams}{Parameters}
 {\em state} & to set the themeable to \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}\label{class_layers_1_1_themeable_af6a5775f1f5ce743ee4cb5bf9ab51a7c}} 
-\index{Layers::Themeable@{Layers::Themeable}!setup\_customize\_panel@{setup\_customize\_panel}}
-\index{setup\_customize\_panel@{setup\_customize\_panel}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{setup\_customize\_panel()}{setup\_customize\_panel()}}
-{\footnotesize\ttfamily virtual void Layers\+::\+Themeable\+::setup\+\_\+customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
-
-Prepares the themeable\textquotesingle{}s customize panel with connections to the themeable\textquotesingle{}s attributes.
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. \mbox{\hyperlink{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}{init\+\_\+customize\+\_\+panel()}} is responsible for calling this function. 
-
-Implemented in \mbox{\hyperlink{class_layers_1_1_titlebar_aba13776288da7f17853285c1c46694a5}{Layers\+::\+Titlebar}}, \mbox{\hyperlink{class_layers_1_1_customize___menu_a32f9812105b1ddb174c35d8a2b07d998}{Layers\+::\+Customize\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___menu_ab731bdc166f22d5e335e133c24715ce2}{Layers\+::\+Settings\+\_\+\+Menu}}, \mbox{\hyperlink{class_layers_1_1_settings___tab_a597d73df158516add67840ed041176a5}{Layers\+::\+Settings\+\_\+\+Tab}}, \mbox{\hyperlink{class_layers_1_1_settings___sidebar_a0c56d70e4585d646a520ac04fe32c2b5}{Layers\+::\+Settings\+\_\+\+Sidebar}}, \mbox{\hyperlink{class_layers_1_1_themes___settings___panel_a41c76cebaf6383e851f9db4ba266250d}{Layers\+::\+Themes\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_app___preferences___settings___panel_ae879fcffbdfc18810ff73b212c69b4e6}{Layers\+::\+App\+\_\+\+Preferences\+\_\+\+Settings\+\_\+\+Panel}}, \mbox{\hyperlink{class_layers_1_1_menu___label___layer_a57cba0388bd8c4a77fef54488c86ba6e}{Layers\+::\+Menu\+\_\+\+Label\+\_\+\+Layer}}, \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_ae462285b0e1ebd5654e5b043e07c0090}{Layers\+::\+Gradient\+\_\+\+Selection\+\_\+\+Box}}, \mbox{\hyperlink{class_layers_1_1_label_ab1aafeeba5f9a1cbb8ee672c6a4e1b94}{Layers\+::\+Label}}, \mbox{\hyperlink{class_layers_1_1_s_v_g___widget_a3219e275d336c6799a5c6c66291326b1}{Layers\+::\+SVG\+\_\+\+Widget}}, and \mbox{\hyperlink{class_layers_1_1_widget_a1ee3c3d3a0874d617553299c6f8b64ab}{Layers\+::\+Widget}}.
-
-\mbox{\Hypertarget{class_layers_1_1_themeable_a5fe020de8b24167f056984e4d7a88ce1}\label{class_layers_1_1_themeable_a5fe020de8b24167f056984e4d7a88ce1}} 
-\index{Layers::Themeable@{Layers::Themeable}!share\_all\_attributes\_with@{share\_all\_attributes\_with}}
-\index{share\_all\_attributes\_with@{share\_all\_attributes\_with}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{share\_all\_attributes\_with()}{share\_all\_attributes\_with()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-void Layers\+::\+Themeable\+::share\+\_\+all\+\_\+attributes\+\_\+with (\begin{DoxyParamCaption}\item[{T $\ast$}]{themeable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Shares all attributes with another themeable.
-
-This function only works if the themeable argument is the same type as the calling themeable. \mbox{\Hypertarget{class_layers_1_1_themeable_ac3a27ba0db996852f59afb3f67b6fee5}\label{class_layers_1_1_themeable_ac3a27ba0db996852f59afb3f67b6fee5}} 
-\index{Layers::Themeable@{Layers::Themeable}!share\_attribute\_with\_themeable@{share\_attribute\_with\_themeable}}
-\index{share\_attribute\_with\_themeable@{share\_attribute\_with\_themeable}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{share\_attribute\_with\_themeable()}{share\_attribute\_with\_themeable()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} $\ast$ Themeable\+::share\+\_\+attribute\+\_\+with\+\_\+themeable (\begin{DoxyParamCaption}\item[{const QString \&}]{from\+\_\+state,  }\item[{const QString \&}]{from\+\_\+attribute,  }\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{to\+\_\+themeable,  }\item[{QString}]{to\+\_\+state = {\ttfamily \char`\"{}\char`\"{}},  }\item[{QString}]{to\+\_\+attribute = {\ttfamily \char`\"{}\char`\"{}},  }\item[{bool}]{obtain\+\_\+attribute = {\ttfamily false} }\end{DoxyParamCaption})}
-
-Establishes a sharing relationship with another themeable.
 
 
-\begin{DoxyParams}{Parameters}
-{\em from\+\_\+state} & The state of the attribute set of the from\+\_\+attribute \\
-\hline
-{\em from\+\_\+attribute} & The attribute to share with the to\+\_\+themeable \\
-\hline
-{\em to\+\_\+themeable} & The themeable to share the attribute with \\
-\hline
-{\em to\+\_\+state} & The state of the attribute set of the to\+\_\+attribute \\
-\hline
-{\em to\+\_\+attribute} & The attribute of the to\+\_\+themeable to store the incoming from\+\_\+attribute value \\
-\hline
-{\em obtain\+\_\+attribute} & Whether or not to obtain the value of the to\+\_\+themeable, false by default \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the address of the new attribute sharing combo 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a13ad3bb88b5c2c29d52ca5a75b2635c9}\label{class_layers_1_1_themeable_a13ad3bb88b5c2c29d52ca5a75b2635c9}} 
-\index{Layers::Themeable@{Layers::Themeable}!share\_attributes@{share\_attributes}}
-\index{share\_attributes@{share\_attributes}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{share\_attributes()}{share\_attributes()}}
-{\footnotesize\ttfamily void Themeable\+::share\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+Reimplemented in \mbox{\hyperlink{class_layers_1_1_s_v_g_a977c0aba8c4c7e82bb83299acaf34193}{Layers\+::\+SVG}}.
 
-Shares attributes with themeables according to established sharing relationships.
-
-Attribute sharing relationships are established with \mbox{\hyperlink{class_layers_1_1_themeable_ac3a27ba0db996852f59afb3f67b6fee5}{share\+\_\+attribute\+\_\+with\+\_\+themeable()}}. While the from-\/attribute value is copied over at that time, changes to the from-\/attribute will not update to the to-\/attribute until this function is called. \mbox{\Hypertarget{class_layers_1_1_themeable_a2e2b195bd5ba3639ca94db85e14949f4}\label{class_layers_1_1_themeable_a2e2b195bd5ba3639ca94db85e14949f4}} 
+\mbox{\Hypertarget{class_layers_1_1_themeable_a080406efdd426b24c701a0dbcb419a70}\label{class_layers_1_1_themeable_a080406efdd426b24c701a0dbcb419a70}} 
 \index{Layers::Themeable@{Layers::Themeable}!states@{states}}
 \index{states@{states}!Layers::Themeable@{Layers::Themeable}}
 \doxysubsubsection{\texorpdfstring{states()}{states()}}
-{\footnotesize\ttfamily QList$<$ QString $>$ Layers\+::\+Themeable\+::states (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily QList$<$ QString $>$ Themeable\+::states (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
+Get a reference to the attribute set of the given state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & of the attribute set to be returned, \textquotesingle{}default\textquotesingle{} by default \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to attribute set of given state
+\end{DoxyReturn}
 Gets a list of the states that are used to identify the caller\textquotesingle{}s attribute sets.
 
 \begin{DoxyReturn}{Returns}
 List of states that identify attribute sets 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a6bac8b2b969528c049f2057aef457379}\label{class_layers_1_1_themeable_a6bac8b2b969528c049f2057aef457379}} 
-\index{Layers::Themeable@{Layers::Themeable}!take\_attribute\_sharing\_combo@{take\_attribute\_sharing\_combo}}
-\index{take\_attribute\_sharing\_combo@{take\_attribute\_sharing\_combo}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{take\_attribute\_sharing\_combo()}{take\_attribute\_sharing\_combo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute___sharing___combo}{Attribute\+\_\+\+Sharing\+\_\+\+Combo}} $\ast$ Themeable\+::take\+\_\+attribute\+\_\+sharing\+\_\+combo (\begin{DoxyParamCaption}\item[{const QString \&}]{from\+\_\+state,  }\item[{const QString \&}]{from\+\_\+attribute,  }\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{to\+\_\+themeable,  }\item[{const QString \&}]{to\+\_\+state,  }\item[{const QString \&}]{to\+\_\+attribute }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}\label{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}} 
+\index{Layers::Themeable@{Layers::Themeable}!store\_child\_themeable\_pointer@{store\_child\_themeable\_pointer}}
+\index{store\_child\_themeable\_pointer@{store\_child\_themeable\_pointer}!Layers::Themeable@{Layers::Themeable}}
+\doxysubsubsection{\texorpdfstring{store\_child\_themeable\_pointer()}{store\_child\_themeable\_pointer()}}
+{\footnotesize\ttfamily void Themeable\+::store\+\_\+child\+\_\+themeable\+\_\+pointer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{child\+\_\+themeable }\end{DoxyParamCaption})}
 
-Removes and returns the address of the attribute sharing combo that is formed with the given parameters.
+Adds a themeable to the child themeable references list.
 
-The caller becomes responsible for the resource pointed to by the returned address!
+If the caller has already assigned tag prefixes, then the newly added themeable reference will have its prefixes assigned during this function. Otherwise, child themeables will have their prefixes assigned when the parent calls \mbox{\hyperlink{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}{assign\+\_\+tag\+\_\+prefixes()}}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em from\+\_\+state} & \\
-\hline
-{\em from\+\_\+attribute} & \\
-\hline
-{\em to\+\_\+themeable} & \\
-\hline
-{\em to\+\_\+state} & \\
-\hline
-{\em to\+\_\+attribute} & \\
+{\em child\+\_\+themeable} & to be added to the reference list \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a7da01368284627f6decf768b180f0318}\label{class_layers_1_1_themeable_a7da01368284627f6decf768b180f0318}} 
-\index{Layers::Themeable@{Layers::Themeable}!theme\_tag@{theme\_tag}}
-\index{theme\_tag@{theme\_tag}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{theme\_tag()}{theme\_tag()}}
-{\footnotesize\ttfamily QString Themeable\+::theme\+\_\+tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{class_layers_1_1_themeable_a02ae7b73daf23e11541f5fe7ff3b4f29}\label{class_layers_1_1_themeable_a02ae7b73daf23e11541f5fe7ff3b4f29}} 
+\index{Layers::Themeable@{Layers::Themeable}!tag@{tag}}
+\index{tag@{tag}!Layers::Themeable@{Layers::Themeable}}
+\doxysubsubsection{\texorpdfstring{tag()}{tag()}}
+{\footnotesize\ttfamily QString \& Themeable\+::tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Get the theme tag.
 
@@ -580,59 +443,9 @@ The last part of the tag is the themeable\textquotesingle{}s name.
 
 Clears the tag prefix list
 
-This function works recursively to clear the tag prefixes of the caller and children in the caller\textquotesingle{}s hierarchy. \mbox{\Hypertarget{class_layers_1_1_themeable_afa5252dc198c501b9d53f58c5915b13f}\label{class_layers_1_1_themeable_afa5252dc198c501b9d53f58c5915b13f}} 
-\index{Layers::Themeable@{Layers::Themeable}!unfilter\_attribute@{unfilter\_attribute}}
-\index{unfilter\_attribute@{unfilter\_attribute}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{unfilter\_attribute()}{unfilter\_attribute()}}
-{\footnotesize\ttfamily void Themeable\+::unfilter\+\_\+attribute (\begin{DoxyParamCaption}\item[{const QString \&}]{attribute }\end{DoxyParamCaption})}
-
-Removes the given attribute from the attribute filtration list.
-
-
-\begin{DoxyParams}{Parameters}
-{\em attribute} & to stop filtering \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_a55a480b7bfb94df725e7921475a1d383}\label{class_layers_1_1_themeable_a55a480b7bfb94df725e7921475a1d383}} 
-\index{Layers::Themeable@{Layers::Themeable}!unshare\_all\_attributes\_with\_element@{unshare\_all\_attributes\_with\_element}}
-\index{unshare\_all\_attributes\_with\_element@{unshare\_all\_attributes\_with\_element}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{unshare\_all\_attributes\_with\_element()}{unshare\_all\_attributes\_with\_element()}}
-{\footnotesize\ttfamily void Themeable\+::unshare\+\_\+all\+\_\+attributes\+\_\+with\+\_\+element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{element }\end{DoxyParamCaption})}
-
-TODOS \mbox{\Hypertarget{class_layers_1_1_themeable_a56117bf122e1725ecc9cc417396b3c4d}\label{class_layers_1_1_themeable_a56117bf122e1725ecc9cc417396b3c4d}} 
-\index{Layers::Themeable@{Layers::Themeable}!unshare\_attribute\_with\_themeable@{unshare\_attribute\_with\_themeable}}
-\index{unshare\_attribute\_with\_themeable@{unshare\_attribute\_with\_themeable}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{unshare\_attribute\_with\_themeable()}{unshare\_attribute\_with\_themeable()}}
-{\footnotesize\ttfamily void Themeable\+::unshare\+\_\+attribute\+\_\+with\+\_\+themeable (\begin{DoxyParamCaption}\item[{const QString \&}]{from\+\_\+state,  }\item[{const QString \&}]{from\+\_\+attribute,  }\item[{\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} $\ast$}]{to\+\_\+themeable,  }\item[{QString}]{to\+\_\+state = {\ttfamily \char`\"{}\char`\"{}},  }\item[{QString}]{to\+\_\+attribute = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
-
-Break a sharing relationship with another themeable
-
-
-\begin{DoxyParams}{Parameters}
-{\em from\+\_\+attribute} & -\/ The attribute to unshare with the to\+\_\+themeable \\
-\hline
-{\em to\+\_\+themeable} & -\/ The themeable to unshare the attribute with \\
-\hline
-{\em from\+\_\+state} & -\/ The state of the attribute set of the from\+\_\+attribute \\
-\hline
-{\em to\+\_\+state} & -\/ The state of the attribute set of the to\+\_\+attribute \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_themeable_ad51ea7b83f4df45e53880526839a8b46}\label{class_layers_1_1_themeable_ad51ea7b83f4df45e53880526839a8b46}} 
-\index{Layers::Themeable@{Layers::Themeable}!update\_theme\_dependencies@{update\_theme\_dependencies}}
-\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Themeable@{Layers::Themeable}}
-\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
-{\footnotesize\ttfamily void Themeable\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
-
-This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function. 
-
-Reimplemented in \mbox{\hyperlink{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}{Layers\+::\+Window}}, \mbox{\hyperlink{class_layers_1_1_gradient___selection___box_a239c5242db1ce64cb9ba4c3652258f68}{Layers\+::\+Gradient\+\_\+\+Selection\+\_\+\+Box}}, \mbox{\hyperlink{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}{Layers\+::\+Slider}}, \mbox{\hyperlink{class_layers_1_1_line___editor_af25a9b7b7f1f0309d399a349647b92a9}{Layers\+::\+Line\+\_\+\+Editor}}, \mbox{\hyperlink{class_layers_1_1_combobox_afc82e71733028cbd4314cad925d43e9b}{Layers\+::\+Combobox}}, \mbox{\hyperlink{class_layers_1_1_s_v_g___widget_a2b355b6d833de919c59340b75dc57941}{Layers\+::\+SVG\+\_\+\+Widget}}, and \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{Layers\+::\+Widget}}.
-
-
+This function works recursively to clear the tag prefixes of the caller and children in the caller\textquotesingle{}s hierarchy. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Layers\+RW.\+h\item 
-Themeable.\+cpp\end{DoxyCompactItemize}
+include/Themeable.\+h\item 
+src/\+Themes/Themeable.\+cpp\end{DoxyCompactItemize}

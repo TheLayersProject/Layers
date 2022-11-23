@@ -75,19 +75,19 @@ void SettingsTab::init_attributes()
 
 	m_stretch_widget2->a_fill.set_disabled();
 
-	a_fill.set_values({
+	a_fill.init_state_variant_map({
 		{ "Unselected", QColor(Qt::lightGray) },
 		{ "Selected", QColor(Qt::white) }
 		});
 
 	m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
 
-	m_tab_icon->svg()->a_common_color.set_values({
+	m_tab_icon->svg()->a_common_color.init_state_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
 
-	m_text_label->a_text_color.set_values({
+	m_text_label->a_text_color.init_state_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
@@ -145,17 +145,17 @@ void SettingsTab::init_attribute_widgets()
 	//	m_attribute_widgets["border_color_saw"] = border_color_saw;
 
 	//	// TODO: Consider an implicit way to get this done
-	//	m_customize_panel->add_child_themeable_reference(border_color_saw);
-	//	m_customize_panel->add_child_themeable_reference(border_caw);
-	//	m_customize_panel->add_child_themeable_reference(border_gaw);
-	//	m_customize_panel->add_child_themeable_reference(border_thickness_naw);
+	//	m_customize_panel->store_child_themeable_pointer(border_color_saw);
+	//	m_customize_panel->store_child_themeable_pointer(border_caw);
+	//	m_customize_panel->store_child_themeable_pointer(border_gaw);
+	//	m_customize_panel->store_child_themeable_pointer(border_thickness_naw);
 	//}
 }
 
 void SettingsTab::init_child_themeable_reference_list()
 {
-    add_child_themeable_reference(m_tab_icon);
-    add_child_themeable_reference(m_text_label);
+    store_child_themeable_pointer(m_tab_icon);
+    store_child_themeable_pointer(m_text_label);
 }
 
 int SettingsTab::recommended_minimum_width()

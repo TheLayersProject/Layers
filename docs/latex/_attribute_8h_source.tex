@@ -1,0 +1,211 @@
+\hypertarget{_attribute_8h_source}{}\doxysection{Attribute.\+h}
+\label{_attribute_8h_source}\index{include/Attribute.h@{include/Attribute.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ATTRIBUTE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ATTRIBUTE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QColor>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QVariant>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{22     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_variant}{Variant}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         Q\_OBJECT}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     signals:}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} changed();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keyword}{public}:}
+\DoxyCodeLine{30         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}();}
+\DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(\textcolor{keywordtype}{int} integer);}
+\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(QColor color);}
+\DoxyCodeLine{33         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(QVariant qvariant);}
+\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& variant);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& variant);}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} QVariant\& qvariant);}
+\DoxyCodeLine{38         \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} QVariant\& qvariant);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{45         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}{typeName}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{52         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{53         T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& v)}
+\DoxyCodeLine{56         \{}
+\DoxyCodeLine{57             stream << v.m\_qvariant;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& v)}
+\DoxyCodeLine{63         \{}
+\DoxyCodeLine{64             stream >> v.m\_qvariant;}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{67         \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keyword}{private}:}
+\DoxyCodeLine{70         QVariant m\_qvariant;}
+\DoxyCodeLine{71     \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{AttributeLayoutItem}} : \textcolor{keyword}{public} QObject \{\};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{87     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} : \textcolor{keyword}{public} \mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{AttributeLayoutItem}}}
+\DoxyCodeLine{88     \{}
+\DoxyCodeLine{89         Q\_OBJECT}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     signals:}
+\DoxyCodeLine{92         \textcolor{keywordtype}{void} value\_changed();}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keyword}{public}:}
+\DoxyCodeLine{95         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{keyword}{const} QString\& name, \textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{false});}
+\DoxyCodeLine{96         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{keyword}{const} QString\& name, QVariant qvariant, \textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{false});}
+\DoxyCodeLine{97         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{keyword}{const} QString\& name, QMap<QString, Variant> state\_variant\_map, \textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{false});}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{108         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{109         T \mbox{\hyperlink{class_layers_1_1_attribute_addb52431a3b44a3bbcf5c50ca97da877}{as}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{119         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{120         T \mbox{\hyperlink{class_layers_1_1_attribute_addb52431a3b44a3bbcf5c50ca97da877}{as}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{128         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_attribute_ad4c9c0ed45441034bc213301d7b4dc09}{contains\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{135         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_attribute_a947f71192325132113cf354c4dafe71d}{copy\_value\_from}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}\& attr);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         \textcolor{keywordtype}{bool} disabled() \textcolor{keyword}{const};}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139         QString\& name();}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{144         \textcolor{keywordtype}{void} get\_variant\_from(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}\& attribute);}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146         \textcolor{keywordtype}{bool} is\_stateful() \textcolor{keyword}{const};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{true});}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{keywordtype}{void} set\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \textcolor{keywordtype}{void} set\_state\_variant\_map(\textcolor{keyword}{const} QMap<QString, Variant>\& state\_variant\_map);}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         \textcolor{keywordtype}{void} set\_value(QVariant variant);}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156         \textcolor{keywordtype}{void} set\_value(\textcolor{keyword}{const} QString\& state, QVariant variant);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         QString state() \textcolor{keyword}{const};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160         QList<QString> states() \textcolor{keyword}{const};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* typeName() \textcolor{keyword}{const};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}\& a)}
+\DoxyCodeLine{165         \{}
+\DoxyCodeLine{166             stream << a.m\_disabled;}
+\DoxyCodeLine{167             stream << a.m\_name;}
+\DoxyCodeLine{168             stream << a.m\_state;}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170             \textcolor{keywordflow}{if} (a.m\_variant)}
+\DoxyCodeLine{171             \{}
+\DoxyCodeLine{172                 stream << \textcolor{keyword}{false};}
+\DoxyCodeLine{173                 stream << *a.m\_variant;}
+\DoxyCodeLine{174             \}}
+\DoxyCodeLine{175             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (a.m\_state\_variant\_map)}
+\DoxyCodeLine{176             \{}
+\DoxyCodeLine{177                 stream << \textcolor{keyword}{true};}
+\DoxyCodeLine{178                 stream << *a.m\_state\_variant\_map;}
+\DoxyCodeLine{179             \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{182         \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}\& a)}
+\DoxyCodeLine{185         \{}
+\DoxyCodeLine{186             stream >> a.m\_disabled;}
+\DoxyCodeLine{187             stream >> a.m\_name;}
+\DoxyCodeLine{188             stream >> a.m\_state;}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190             \textcolor{keywordtype}{bool} is\_stateful = \textcolor{keyword}{false};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192             stream >> is\_stateful;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194             \textcolor{keywordflow}{if} (!is\_stateful)}
+\DoxyCodeLine{195             \{}
+\DoxyCodeLine{196                 a.m\_variant = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198                 stream >> *a.m\_variant;}
+\DoxyCodeLine{199             \}}
+\DoxyCodeLine{200             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{201             \{}
+\DoxyCodeLine{202                 a.m\_state\_variant\_map = \textcolor{keyword}{new} QMap<QString, Variant>;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204                 stream >> *a.m\_state\_variant\_map;}
+\DoxyCodeLine{205             \}}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207             \textcolor{keywordflow}{return} stream;}
+\DoxyCodeLine{208         \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{keyword}{private}:}
+\DoxyCodeLine{211         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         \textcolor{keywordtype}{bool} m\_owns\_variant\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217         QString m\_state\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         QMap<QString, Variant>* m\_state\_variant\_map\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}* m\_variant\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{222     \};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} : \textcolor{keyword}{public} \mbox{\hyperlink{struct_layers_1_1_attribute_layout_item}{AttributeLayoutItem}}}
+\DoxyCodeLine{225     \{}
+\DoxyCodeLine{226     \textcolor{keyword}{public}:}
+\DoxyCodeLine{227         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{keyword}{const} QString\& name, \textcolor{keyword}{const} QMap<QString, Attribute*>\& attributes);}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229         QMap<QString, Attribute*>\& attributes();}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231         \textcolor{keywordtype}{bool} is\_stateful() \textcolor{keyword}{const};}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233         QString name() \textcolor{keyword}{const};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     \textcolor{keyword}{private}:}
+\DoxyCodeLine{236         QMap<QString, Attribute*> m\_attributes;}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238         QString m\_name;}
+\DoxyCodeLine{239     \};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{242     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_attribute_addb52431a3b44a3bbcf5c50ca97da877}{Attribute::as}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{243 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{244         \textcolor{keywordflow}{if} (m\_variant) \textcolor{keywordflow}{return} m\_variant-\/>\mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}}<T>();}
+\DoxyCodeLine{245         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{246         \{}
+\DoxyCodeLine{247             \textcolor{keywordflow}{return} (*m\_state\_variant\_map)[m\_state].value<T>();}
+\DoxyCodeLine{248         \}}
+\DoxyCodeLine{249     \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{252     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_attribute_addb52431a3b44a3bbcf5c50ca97da877}{Attribute::as}}(\textcolor{keyword}{const} QString\& state)\textcolor{keyword}{ const}}
+\DoxyCodeLine{253 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{254         \textcolor{keywordflow}{if} (m\_state\_variant\_map)}
+\DoxyCodeLine{255         \{}
+\DoxyCodeLine{256             \textcolor{keywordflow}{if} (m\_state\_variant\_map-\/>contains(state)) \textcolor{keywordflow}{return} (*m\_state\_variant\_map)[state].value<T>();}
+\DoxyCodeLine{257             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{258                 qDebug() << \textcolor{stringliteral}{"{}WARNING: Failed to obtain attribute value: State does not exist."{}};}
+\DoxyCodeLine{259         \}}
+\DoxyCodeLine{260         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{261             qDebug() << \textcolor{stringliteral}{"{}WARNING: Failed to obtain attribute value: State provided but Attribute is not stateful."{}};}
+\DoxyCodeLine{262     \}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{265     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{Variant::value}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{266 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{267         \textcolor{keywordflow}{return} m\_qvariant.value<T>();}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ATTRIBUTE\_H}}
+
+\end{DoxyCode}

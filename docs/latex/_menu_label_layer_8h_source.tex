@@ -1,0 +1,52 @@
+\hypertarget{_menu_label_layer_8h_source}{}\doxysection{Menu\+Label\+Layer.\+h}
+\label{_menu_label_layer_8h_source}\index{include/MenuLabelLayer.h@{include/MenuLabelLayer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MENULABELLAYER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MENULABELLAYER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Label.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Menu.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_menu_label_layer}{MenuLabelLayer}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_menu_label_layer}{MenuLabelLayer}}(\mbox{\hyperlink{class_layers_1_1_menu}{Menu}}* menu, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_menu_label_layer}{MenuLabelLayer}}* mll);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} shrink();}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} expand();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* back\_button() \textcolor{keyword}{const};}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* icon\_button() \textcolor{keyword}{const};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* text\_label() \textcolor{keyword}{const};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}{init\_attributes}}();}
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{private}:}
+\DoxyCodeLine{35         QHBoxLayout* main\_layout = \textcolor{keyword}{new} QHBoxLayout;}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_back\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/back.svg"{}}, QSize(21, 18)), \textcolor{keyword}{false}) \};}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_icon\_button\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_text\_label\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_stretch\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{43     \};}
+\DoxyCodeLine{44 \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MENULABELLAYER\_H}}
+
+\end{DoxyCode}

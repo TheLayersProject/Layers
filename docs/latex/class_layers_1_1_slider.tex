@@ -6,29 +6,42 @@ Inheritance diagram for Layers\+::Slider\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{class_layers_1_1_slider}
 \end{center}
 \end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_a92954f6de310b3cfe007217b9d1ce87c}\label{class_layers_1_1_slider_a92954f6de310b3cfe007217b9d1ce87c}} 
+void {\bfseries value\+\_\+changed} (int value)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_slider_a5109da88072a5d6c3dffaa80d6b148e0}\label{class_layers_1_1_slider_a5109da88072a5d6c3dffaa80d6b148e0}} 
-{\bfseries Slider} (int range\+\_\+start, int range\+\_\+end, QWidget $\ast$parent=nullptr)
+\mbox{\Hypertarget{class_layers_1_1_slider_ad187165851499841a846532db93af56b}\label{class_layers_1_1_slider_ad187165851499841a846532db93af56b}} 
+{\bfseries Slider} (int limit, QWidget $\ast$parent=nullptr)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{init\+\_\+attributes}} ()
-\item 
-void \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_slider_a948dae3a9d357a41d79a7fa85324ec51}\label{class_layers_1_1_slider_a948dae3a9d357a41d79a7fa85324ec51}} 
-int {\bfseries range\+\_\+difference} ()
+\mbox{\Hypertarget{class_layers_1_1_slider_a2046ab4e3b434ea622b6d96f64d08fff}\label{class_layers_1_1_slider_a2046ab4e3b434ea622b6d96f64d08fff}} 
+void {\bfseries set\+\_\+value} (int value)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_slider_afc800fad379ecaa214e5afe859d179c5}\label{class_layers_1_1_slider_afc800fad379ecaa214e5afe859d179c5}} 
 void {\bfseries update\+\_\+handle\+\_\+pos} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}{update\+\_\+theme\+\_\+dependencies}} ()
+\mbox{\Hypertarget{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}\label{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}} 
+void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_slider_a3f638b298b181a878fcdaf9838ca83e6}\label{class_layers_1_1_slider_a3f638b298b181a878fcdaf9838ca83e6}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+value} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Value\char`\"{}, QVariant\+::from\+Value(0)) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_slider_ae9df2df20b8b2baeaef93781db2b260d}\label{class_layers_1_1_slider_ae9df2df20b8b2baeaef93781db2b260d}} 
 bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{init\+\_\+attributes}} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -38,47 +51,48 @@ bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) overri
 \index{Layers::Slider@{Layers::Slider}!init\_attributes@{init\_attributes}}
 \index{init\_attributes@{init\_attributes}!Layers::Slider@{Layers::Slider}}
 \doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Slider\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Slider\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
-Initializes the widget\textquotesingle{}s attributes.
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
-This function uses calls to \mbox{\hyperlink{class_layers_1_1_themeable_af86bb780c8ce5f8ba6c21a2229cbab1e}{set\+\_\+attribute\+\_\+value()}} to define attributes.
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
 
-\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. 
+Initializes the attributes.
 
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{Layers\+::\+Widget}}.
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
 
 \mbox{\Hypertarget{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}\label{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}} 
 \index{Layers::Slider@{Layers::Slider}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Slider@{Layers::Slider}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Slider\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Slider\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
 Initializes the reference list to child themeables.
 
 A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
 
-Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
 
-This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+This function is called by init\+\_\+themeable(). 
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}\label{class_layers_1_1_slider_a554aa9d75cdc35d373852ce5ce2f6ad1}} 
-\index{Layers::Slider@{Layers::Slider}!update\_theme\_dependencies@{update\_theme\_dependencies}}
-\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Slider@{Layers::Slider}}
-\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
-{\footnotesize\ttfamily void Slider\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Updates anything that can\textquotesingle{}t be changed with attributes.
-
-As a \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}, this function updates the border margins of the layout if the layout happens to be a \mbox{\hyperlink{class_layers_1_1_horizontal___layout}{Layers\+::\+Horizontal\+\_\+\+Layout}} or \mbox{\hyperlink{class_layers_1_1_vertical___layout}{Layers\+::\+Vertical\+\_\+\+Layout}}. 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{Layers\+::\+Widget}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Layers\+RW.\+h\item 
-Slider.\+cpp\end{DoxyCompactItemize}
+include/Slider.\+h\item 
+src/\+Widgets/\+Controls/Slider.\+cpp\end{DoxyCompactItemize}

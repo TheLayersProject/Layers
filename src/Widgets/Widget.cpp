@@ -22,9 +22,9 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
         if (layout())
         {
             if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
-                vl->set_border_margin(a_border_thickness.value<int>());
+                vl->set_border_margin(a_border_thickness.as<int>());
             else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
-                hl->set_border_margin(a_border_thickness.value<int>());
+                hl->set_border_margin(a_border_thickness.as<int>());
         }
         });
 }
@@ -56,45 +56,57 @@ void Widget::init_attributes()
     m_attribute_layout.append(&a_corner_color);
     m_attribute_layout.append(&a_outline_color);
 
-    connect(&a_border_thickness, &Attribute::value_changed, [this] {
-        update();
-        });
+    connect(&a_border_thickness, &Attribute::value_changed, [this] { update(); });
+    connect(&a_corner_color, &Attribute::value_changed, [this] { update(); });
+    connect(&a_corner_radius_tl, &Attribute::value_changed, [this] { update(); });
+    connect(&a_corner_radius_tr, &Attribute::value_changed, [this] { update(); });
+    connect(&a_corner_radius_bl, &Attribute::value_changed, [this] { update(); });
+    connect(&a_corner_radius_br, &Attribute::value_changed, [this] { update(); });
+    connect(&a_fill, &Attribute::value_changed, [this] { update(); });
+    connect(&a_hover_fill, &Attribute::value_changed, [this] { update(); });
+    connect(&a_margin_left, &Attribute::value_changed, [this] { update(); });
+    connect(&a_margin_top, &Attribute::value_changed, [this] { update(); });
+    connect(&a_margin_right, &Attribute::value_changed, [this] { update(); });
+    connect(&a_margin_bottom, &Attribute::value_changed, [this] { update(); });
+    connect(&a_outline_color, &Attribute::value_changed, [this] { update(); });
 }
 
 void Widget::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
-    a_border_fill.copy_values_from(*theme_attrs["border_fill"]);
-    a_border_thickness.copy_values_from(*theme_attrs["border_thickness"]);
-    a_corner_color.copy_values_from(*theme_attrs["corner_color"]);
-    a_corner_radius_tl.copy_values_from(*theme_attrs["corner_radius_tl"]);
-    a_corner_radius_tr.copy_values_from(*theme_attrs["corner_radius_tr"]);
-    a_corner_radius_bl.copy_values_from(*theme_attrs["corner_radius_bl"]);
-    a_corner_radius_br.copy_values_from(*theme_attrs["corner_radius_br"]);
-    a_fill.copy_values_from(*theme_attrs["fill"]);
-    a_hover_fill.copy_values_from(*theme_attrs["hover_fill"]);
-    a_margin_left.copy_values_from(*theme_attrs["margin_left"]);
-    a_margin_top.copy_values_from(*theme_attrs["margin_top"]);
-    a_margin_right.copy_values_from(*theme_attrs["margin_right"]);
-    a_margin_bottom.copy_values_from(*theme_attrs["margin_bottom"]);
-    a_outline_color.copy_values_from(*theme_attrs["outline_color"]);
+    a_border_fill.copy_value_from(*theme_attrs["border_fill"]);
+    a_border_thickness.copy_value_from(*theme_attrs["border_thickness"]);
+    a_corner_color.copy_value_from(*theme_attrs["corner_color"]);
+    a_corner_radius_tl.copy_value_from(*theme_attrs["corner_radius_tl"]);
+    a_corner_radius_tr.copy_value_from(*theme_attrs["corner_radius_tr"]);
+    a_corner_radius_bl.copy_value_from(*theme_attrs["corner_radius_bl"]);
+    a_corner_radius_br.copy_value_from(*theme_attrs["corner_radius_br"]);
+    a_fill.copy_value_from(*theme_attrs["fill"]);
+    a_hover_fill.copy_value_from(*theme_attrs["hover_fill"]);
+    a_margin_left.copy_value_from(*theme_attrs["margin_left"]);
+    a_margin_top.copy_value_from(*theme_attrs["margin_top"]);
+    a_margin_right.copy_value_from(*theme_attrs["margin_right"]);
+    a_margin_bottom.copy_value_from(*theme_attrs["margin_bottom"]);
+    a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
 }
 
 void Widget::replace_all_attributes_with(Widget* widget)
 {
-    a_border_fill.get_values_from(widget->a_border_fill);
-    a_border_thickness.get_values_from(widget->a_border_thickness);
-    a_corner_color.get_values_from(widget->a_corner_color);
-    a_corner_radius_tl.get_values_from(widget->a_corner_radius_tl);
-    a_corner_radius_tr.get_values_from(widget->a_corner_radius_tr);
-    a_corner_radius_bl.get_values_from(widget->a_corner_radius_bl);
-    a_corner_radius_br.get_values_from(widget->a_corner_radius_br);
-    a_fill.get_values_from(widget->a_fill);
-    a_hover_fill.get_values_from(widget->a_hover_fill);
-    a_margin_left.get_values_from(widget->a_margin_left);
-    a_margin_top.get_values_from(widget->a_margin_top);
-    a_margin_right.get_values_from(widget->a_margin_right);
-    a_margin_bottom.get_values_from(widget->a_margin_bottom);
-    a_outline_color.get_values_from(widget->a_outline_color);
+    a_border_fill.get_variant_from(widget->a_border_fill);
+    a_border_thickness.get_variant_from(widget->a_border_thickness);
+    a_corner_color.get_variant_from(widget->a_corner_color);
+    a_corner_radius_tl.get_variant_from(widget->a_corner_radius_tl);
+    a_corner_radius_tr.get_variant_from(widget->a_corner_radius_tr);
+    a_corner_radius_bl.get_variant_from(widget->a_corner_radius_bl);
+    a_corner_radius_br.get_variant_from(widget->a_corner_radius_br);
+    a_fill.get_variant_from(widget->a_fill);
+    a_hover_fill.get_variant_from(widget->a_hover_fill);
+    a_margin_left.get_variant_from(widget->a_margin_left);
+    a_margin_top.get_variant_from(widget->a_margin_top);
+    a_margin_right.get_variant_from(widget->a_margin_right);
+    a_margin_bottom.get_variant_from(widget->a_margin_bottom);
+    a_outline_color.get_variant_from(widget->a_outline_color);
+
+    //update();
 }
 
 void Widget::set_margin(int margin)
@@ -112,8 +124,16 @@ void Widget::set_margin(int left, int top, int right, int bottom)
 
 bool Widget::eventFilter(QObject* object, QEvent* event)
 {
-    if (event->type() == QEvent::Enter) m_hovering = true;
-    else if (event->type() == QEvent::Leave) m_hovering = false;
+    if (event->type() == QEvent::Enter)
+    {
+        m_hovering = true;
+        update();
+    }
+    else if (event->type() == QEvent::Leave)
+    {
+        m_hovering = false;
+        update();
+    }
 
     return false;
 }
@@ -124,20 +144,20 @@ void Widget::paintEvent(QPaintEvent* event)
 
     bool fill_disabled = a_fill.disabled();
     
-    int border_thickness = a_border_thickness.value<int>();
+    int border_thickness = a_border_thickness.as<int>();
     
-    int margin_left = a_margin_left.value<int>();
-    int margin_top = a_margin_top.value<int>();
-    int margin_right = a_margin_right.value<int>();
-    int margin_bottom = a_margin_bottom.value<int>();
+    int margin_left = a_margin_left.as<int>();
+    int margin_top = a_margin_top.as<int>();
+    int margin_right = a_margin_right.as<int>();
+    int margin_bottom = a_margin_bottom.as<int>();
     
     int draw_width = width() - margin_left - margin_right;
     int draw_height = height() - margin_top - margin_bottom;
     
-    int corner_radius_tl = a_corner_radius_tl.value<int>();
-    int corner_radius_tr = a_corner_radius_tr.value<int>();
-    int corner_radius_bl = a_corner_radius_bl.value<int>();
-    int corner_radius_br = a_corner_radius_br.value<int>();
+    int corner_radius_tl = a_corner_radius_tl.as<int>();
+    int corner_radius_tr = a_corner_radius_tr.as<int>();
+    int corner_radius_bl = a_corner_radius_bl.as<int>();
+    int corner_radius_br = a_corner_radius_br.as<int>();
     
     int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
     int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -191,7 +211,7 @@ void Widget::paintEvent(QPaintEvent* event)
 	// - Draw Corner Color
 	if (!a_corner_color.disabled())
 	{
-		painter.fillPath(corner_color_path, a_corner_color.value<QColor>());
+		painter.fillPath(corner_color_path, a_corner_color.as<QColor>());
 	}
 
     // - Draw Border
@@ -203,11 +223,11 @@ void Widget::paintEvent(QPaintEvent* event)
 
             border_fill_gradient.setStart(0, 0);
             border_fill_gradient.setFinalStop(width(), 0);
-            border_fill_gradient.setStops(a_border_fill.value<QGradientStops>());
+            border_fill_gradient.setStops(a_border_fill.as<QGradientStops>());
 
             painter.fillPath(border_path, border_fill_gradient);
         }
-        else painter.fillPath(border_path, a_border_fill.value<QColor>());
+        else painter.fillPath(border_path, a_border_fill.as<QColor>());
     }
 
     // - Draw Background
@@ -219,23 +239,23 @@ void Widget::paintEvent(QPaintEvent* event)
 
             fill_gradient.setStart(0, 0);
             fill_gradient.setFinalStop(width(), 0);
-            fill_gradient.setStops(a_fill.value<QGradientStops>());
+            fill_gradient.setStops(a_fill.as<QGradientStops>());
 
             painter.fillPath(background_path, fill_gradient);
 		}
 		else
 		{
             if (m_hovering && !a_hover_fill.disabled())
-                painter.fillPath(background_path, a_hover_fill.value<QColor>());
+                painter.fillPath(background_path, a_hover_fill.as<QColor>());
             else
-                painter.fillPath(background_path, a_fill.value<QColor>());
+                painter.fillPath(background_path, a_fill.as<QColor>());
 		}
     }
 
 	// - Draw Outline Color
 	if (!a_outline_color.disabled())
 	{
-		painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
+		painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
 	}
 
     painter.end();

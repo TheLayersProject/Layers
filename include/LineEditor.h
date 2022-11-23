@@ -40,11 +40,13 @@ namespace Layers
 
 		QString text();
 
-		void update_theme_dependencies();
-
 		Attribute a_left_padding{ Attribute("Left Padding", QVariant::fromValue(3)) };
 		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
 		Attribute a_text{ Attribute("Text", QString("")) };
+
+	public slots:
+		void set_current_editting_state(const QString& state);
+		void update_theme_dependencies();
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

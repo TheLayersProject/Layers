@@ -1,382 +1,59 @@
 All notable changes to this project will be documented in this file.\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md1}{}\doxysection{Alpha Phase}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md1}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md2}{}\doxysubsection{\mbox{[}\+Layers 2.\+0.\+0a\mbox{]} -\/ 2020-\/\+XX-\/\+XX}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md2}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md3}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md3}
+\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md2}{}\doxysubsection{\mbox{[}\+Layers 2.\+3.\+0a\mbox{]} -\/ Unreleased}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md2}
 
 \begin{DoxyItemize}
-\item Rounded corner support
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md4}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md4}
+\item Collapsed text button widget is now a different color to prevent the text buttons from disappearing
+\item Fixed outline color and corner color customizations
+\item Fixed App Preferences settings panel customizations
+\item Fixed child widget stateful attributes being placed under the stateless label (!)
+\item Fixed some issues where the preview window had too much functionality enabled
+\item Combobox items are no longer editable by default
+\item Button text can word wrap now
+\item Widgets of the Customize menu\textquotesingle{}s topbar are now customizable
+\item Reworked application initialization
+\item New classes\+: Git\+Hub\+Repo, Menu\+Bar, Tab\+Bar, Version
+\item Image sequences can now be saved and loaded as a single file
+\item Reworked the Scroll\+Area class to make it themeable
+\item Created Theme\+::consume(theme) function for applications to add their widget\textquotesingle{}s theme values to the library\textquotesingle{}s default themes
+\item The Attribute class now inherits QObject, enabling it to work with signals/slots
+\item Attribute value change detection is now possible via the Attribute\+::value\+\_\+changed signal
+\item Attribute values are now stored as pointers. An attribute can be set to point to the values of another attribute.
+\item Between attribute value change detection and attribute value pointer replacement, there is no longer a need to support attribute sharing functionality via Attribute\+Sharing\+Combo. The Attribute\+Sharing\+Combo class has been deprecated and removed.
+\item Previously, when setting an attribute\textquotesingle{}s value, it would just set the value without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
+\item Created the Attribute\+Group and Attribute\+Layout classes to simplify the creation of Attribute\+Widgets and specify their organization in Customize\+Panels
+\item Renamed various Attribute\+Widget classes
+\item Created a Fill\+Control class that simplifies setting color/gradient values and toggling between them.
+\item The Number\+AW (formerly known as Number\+Attribute\+Widget) now utilizes a mini slider and takes up less space.
+\item Widget Attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced. The Attribute\+Set class has also been removed as a result.
+\item Removed issue\+\_\+update() since it doesn\textquotesingle{}t appear to be required anymore. This likely results in less paint\+Event() calls.
+\item Widgets can now be filled with gradients.
+\item Widget margins are now customizable.
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md3}{}\doxysubsection{\mbox{[}\+Layers 2.\+2.\+0a\mbox{]} -\/ 2021-\/09-\/11}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md3}
 
 \begin{DoxyItemize}
+\item Migrated to Qt 6
+\item Created a mechanism to update the application during start up
+\item Application settings are now stored in the registry system.
+\item The active theme selected by the user will now be applied automatically when the application is launched again.
+\item Prebuilt themes are now stored within the program and not in the app\textquotesingle{}s theme folder.
+\item Fixed an issue with the theme file updating functionality that caused themes from old versions to be missing attribute sets and attributes for widgets created in later versions
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md4}{}\doxysubsection{\mbox{[}\+Layers 2.\+1.\+0a\mbox{]} -\/ 2021-\/09-\/01}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md4}
+
+\begin{DoxyItemize}
+\item \char`\"{}\+Default\char`\"{} and \char`\"{}\+Common\char`\"{} states are gone. Attributes are now created as stateful or stateless. This makes customization of themeables that use both types of attributes much clearer.
+\item The corner radii attribute widget has been redesigned and takes up less space.
+\item Layers applications will no longer store theme files in a universal \textquotesingle{}Layers\textquotesingle{}/\textquotesingle{}Layers-\/alpha\textquotesingle{} folder in the user\textquotesingle{}s app data directory. Instead, each individual application will store its own set of theme files in a folder named after the application.
+\item Created a mechanism to update theme files. Themes created in 2.\+0.\+0a will get updated and continue to work in this version.
+\item Created a mechanism to collapse text buttons in the Customize menu\textquotesingle{}s topbar
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md5}{}\doxysubsection{\mbox{[}\+Layers 2.\+0.\+0a\mbox{]} -\/ 2021-\/06-\/23}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Layers has been fully rewritten.
+\item Theme swapping and customization application are now instant (This is expected to remain the case, but there is no guarantee)
+\item Reworked the Customize menu. Expanded customization for all widgets and improved widget hierarchy navigation
+\item Rounded corner support. Many widgets now use rounded corners by default
 \item Most buttons and controls have increased padding around their content and increased spacing between each other to improve touch experience
 \item Widget attributes are now applied via paint events instead of invoking stylesheets
-\item Many elements use rounded corners by default
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md5}{}\doxysubsection{\mbox{[}\+Layers 1.\+11.\+0a\mbox{]} -\/ 2020-\/04-\/20}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md5}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md6}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md6}
-
-\begin{DoxyItemize}
-\item Added an \char`\"{}\+Apply\char`\"{} button in the Customize menu that allows you to apply your customizations to the current theme of the main window.
-\item Added theme saving which occurs automatically when themes are created and when customizations have been applied to them
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md7}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md7}
-
-\begin{DoxyItemize}
-\item Changed New theme button to be graphic only, changed its graphic to be a plus symbol, and moved it to the left of the Theme combobox
-\item Moved the Customize button out of the Theme combobox and placed the button to the right of the combobox
-\item Changed Delete theme button to be graphic only and moved it to the right of the Customize button
-\item The New theme button works
-\item The Delete theme button works
-\item The New and Delete theme buttons are only enabled when a non-\/built-\/in theme is selected
-\item Editing the theme name is disabled for built-\/in themes
-\item Removed the \char`\"{}\+Save\char`\"{} and \char`\"{}\+Save As...\char`\"{} buttons from the Themes settings panel and will automatically save themes when they are created and when customizations have been applied
-\item Removed everything below the Theme combobox. Changing the theme name will now be done by double clicking on the Theme combobox where it will temporarily turn into a line edit.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md8}{}\doxysubsection{\mbox{[}\+Layers 1.\+10.\+3a\mbox{]} -\/ 2020-\/04-\/11}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md8}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md9}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md9}
-
-\begin{DoxyItemize}
-\item Checkboxes
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md10}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md10}
-
-\begin{DoxyItemize}
-\item Changed the Royal Blue and Purple theme\textquotesingle{}s darker color to be even darker for improved contrast
-\item Changed the Light theme\textquotesingle{}s text color in various places to be darker for improved contrast
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md11}{}\doxysubsection{\mbox{[}\+Layers 1.\+10.\+2a\mbox{]} -\/ 2020-\/04-\/06}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md11}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md12}{}\doxysubsubsection{Fixed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md12}
-
-\begin{DoxyItemize}
-\item Fixed issue where app menu element\textquotesingle{}s options panels weren\textquotesingle{}t being themed
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md13}{}\doxysubsection{\mbox{[}\+Layers 1.\+10.\+1a\mbox{]} -\/ 2020-\/04-\/05}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md13}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md14}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md14}
-
-\begin{DoxyItemize}
-\item Changed icons for the App Menu, Settings Menu, and Customize Menu element buttons within the Customize menu to match what their menus use in the Menu Label Layers.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md15}{}\doxysubsection{\mbox{[}\+Layers 1.\+10.\+0a\mbox{]} -\/ 2020-\/04-\/02}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md15}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md16}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md16}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Customize Menu -\/$>$ Background Color
-\item Customize Menu -\/$>$ Sidebar Color
-\item Customize Menu -\/$>$ Topbar Color
-\item Customize Menu -\/$>$ Topbar Labels -\/$>$ Text Color
-\item Customize Menu -\/$>$ Topbar Labels -\/$>$ Text Hover Color
-\item Customize Menu -\/$>$ Topbar Divider Arrows -\/$>$ Color
-\item Customize Menu -\/$>$ Large Labels -\/$>$ Color
-\item Customize Menu -\/$>$ Small Labels -\/$>$ Color
-\item Customize Menu -\/$>$ Line Edits -\/$>$ Background Color
-\item Customize Menu -\/$>$ Line Edits -\/$>$ Border Color
-\item Customize Menu -\/$>$ Line Edits -\/$>$ Text Color
-\item Customize Menu -\/$>$ Line Edits -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Customize Menu -\/$>$ Line Edits -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Customize Menu -\/$>$ Sliders -\/$>$ Groove Color
-\item Customize Menu -\/$>$ Sliders -\/$>$ Handle Color
-\item Customize Menu -\/$>$ Sliders -\/$>$ Handle Hover Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Inactive Background Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Active Background Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Inactive Border Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Active Border Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Inactive Square Color
-\item Customize Menu -\/$>$ Toggle Switches -\/$>$ Active Square Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Left Label -\/$>$ Text Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Left Label -\/$>$ Text Hover Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Inactive Background Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Active Background Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Inactive Border Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Active Border Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Inactive Square Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Toggle Switch -\/$>$ Active Square Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Right Label -\/$>$ Text Color
-\item Customize Menu -\/$>$ Labeled Toggle Switches -\/$>$ Right Label -\/$>$ Text Hover Color
-\item Customize Menu -\/$>$ Element Buttons -\/$>$ Graphic Color
-\item Customize Menu -\/$>$ Element Buttons -\/$>$ Graphic Hover Color
-\item Customize Menu -\/$>$ Element Buttons -\/$>$ Text Color
-\item Customize Menu -\/$>$ Element Buttons -\/$>$ Text Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Background Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Border Color\+: Solid vs Gradient Toggle
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Border Color\+: Solid Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Border Color\+: Gradient
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Border Thickness
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Titlebar Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Message Text Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Titlebar Label -\/$>$ Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Exit Button -\/$>$ Graphic Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Exit Button -\/$>$ Graphic Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Background Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Border Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Graphic Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Graphic Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Text Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Text Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ Yes Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Background Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Border Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Graphic Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Graphic Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Text Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Text Hover Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Popup Boxes -\/$>$ \char`\"{}\+Set as default\char`\"{} Message Box -\/$>$ No Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Background Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Border Color\+: Solid vs Gradient Toggle
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Border Color\+: Solid Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Border Color\+: Gradient
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Border Thickness
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Titlebar Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Titlebar Label -\/$>$ Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Exit Button -\/$>$ Graphic Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Exit Button -\/$>$ Graphic Hover Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Apply Button -\/$>$ Text Color
-\item Popup Boxes -\/$>$ Gradient Selection Box -\/$>$ Apply Button -\/$>$ Text Hover Color
-\end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md17}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md17}
-
-\begin{DoxyItemize}
-\item Changed the default border thickness of the \char`\"{}\+Set as default\char`\"{} Message Box and the Gradient Selection Box from 7px to 10px
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md18}{}\doxysubsubsection{Fixed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md18}
-
-\begin{DoxyItemize}
-\item Fixed small issue where certain element\textquotesingle{}s hover gradients were not theming properly
-\item Fixed over-\/generation issue that led to slowdowns and a major memory usage increase. This fix gave a huge performance boost.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md19}{}\doxysubsection{\mbox{[}\+Layers 1.\+9.\+0a\mbox{]} -\/ 2020-\/03-\/30}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md19}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md20}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md20}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Highlighted Item Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Highlighted Item Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Customize Button -\/$>$ Graphic Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Customize Button -\/$>$ Graphic Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ \char`\"{}\+Set as default\char`\"{} Button -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ \char`\"{}\+Set as default\char`\"{} Button -\/$>$ Text Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ \char`\"{}\+Default\char`\"{} Label -\/$>$ Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Theme Combobox -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Graphic Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Graphic Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Text Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ New Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Graphic Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Graphic Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Text Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Graphic Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Graphic Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Text Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Save as Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Graphic Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Graphic Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Text Hover Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Delete Button -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Separator -\/$>$ Gradient
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Name Line Edit -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Name Line Edit -\/$>$ Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Name Line Edit -\/$>$ Text Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Name Line Edit -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Name Line Edit -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Horizontal Scrollbar -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Horizontal Scrollbar -\/$>$ Handle Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Vertical Scrollbar -\/$>$ Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Vertical Scrollbar -\/$>$ Handle Color
-\end{DoxyItemize}
-\item Moving through the sidebar panels of the Customize menu now auto-\/navigates the preview window to ensure the user is viewing the elements they are manipulating
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md21}{}\doxysubsubsection{Fixed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md21}
-
-\begin{DoxyItemize}
-\item Small issue where a pile of small windows would appear then disappear during startup. This issue crept into the last update and didn\textquotesingle{}t exist in prior updates.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md22}{}\doxysubsection{\mbox{[}\+Layers 1.\+8.\+0a\mbox{]} -\/ 2020-\/03-\/28}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md22}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md23}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md23}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Active Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Graphic Label -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Graphic Label -\/$>$ Active Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Text Label -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Text Label -\/$>$ Active Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ App Preferences Settings Tab -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Active Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Graphic Label -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Graphic Label -\/$>$ Active Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Text Label -\/$>$ Inactive Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Text Label -\/$>$ Active Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Hover Gradient -\/$>$ Inner Color
-\item Settings Menu -\/$>$ Themes Settings Tab -\/$>$ Hover Gradient -\/$>$ Outer Color
-\item Settings Menu -\/$>$ App Preferences Settings Panel -\/$>$ Layers Version Label -\/$>$ Color
-\item Settings Menu -\/$>$ App Preferences Settings Panel -\/$>$ App Version Label -\/$>$ Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ \char`\"{}\+Use default\char`\"{} Label -\/$>$ Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Inactive Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Active Background Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Inactive Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Active Border Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Inactive Square Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Use Default Toggle Switch -\/$>$ Active Square Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ \char`\"{}\+Theme\char`\"{} Label -\/$>$ Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ \char`\"{}\+Theme Settings\char`\"{} Label -\/$>$ Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ \char`\"{}\+Name\char`\"{} Label -\/$>$ Color
-\end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md24}{}\doxysubsection{\mbox{[}\+Layers 1.\+7.\+0a\mbox{]} -\/ 2020-\/03-\/27}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md24}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md25}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md25}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Titlebar -\/$>$ Menu Label Layers -\/$>$ Color
-\item Titlebar -\/$>$ Menu Label Layers -\/$>$ Back Button -\/$>$ Color
-\item Titlebar -\/$>$ Menu Label Layers -\/$>$ Back Button -\/$>$ Hover Color
-\item Titlebar -\/$>$ Menu Label Layers -\/$>$ Icon Label -\/$>$ Color
-\item Titlebar -\/$>$ Menu Label Layers -\/$>$ Text Label -\/$>$ Color
-\item Titlebar -\/$>$ Settings Button -\/$>$ Color
-\item Titlebar -\/$>$ Settings Button -\/$>$ Hover Color
-\item Titlebar -\/$>$ Minimize Button -\/$>$ Color
-\item Titlebar -\/$>$ Minimize Button -\/$>$ Hover Color
-\item Titlebar -\/$>$ Maximize Button -\/$>$ Color
-\item Titlebar -\/$>$ Maximize Button -\/$>$ Hover Color
-\item Titlebar -\/$>$ Exit Button -\/$>$ Color
-\item Titlebar -\/$>$ Exit Button -\/$>$ Hover Color
-\end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md26}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md26}
-
-\begin{DoxyItemize}
-\item Color display widget now displays a default color picker when clicked. All line edits that were in place next to color displays have been removed in favor of using the color picker.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md27}{}\doxysubsection{\mbox{[}\+Layers 1.\+6.\+0a\mbox{]} -\/ 2020-\/03-\/25}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md27}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md28}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md28}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Titlebar -\/$>$ Window Title Label -\/$>$ Color
-\item Window Border -\/$>$ Thickness
-\end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md29}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md29}
-
-\begin{DoxyItemize}
-\item The window title label from bold to normal
-\item Default window size to 870x630
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md30}{}\doxysubsection{\mbox{[}\+Layers 1.\+5.\+0a\mbox{]} -\/ 2020-\/03-\/24}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md30}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md31}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md31}
-
-\begin{DoxyItemize}
-\item Version labels in Settings Menu -\/$>$ App Preferences
-\item New gradient selection box
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Window Border -\/$>$ Gradient
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Background Color
-\end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md32}{}\doxysubsection{\mbox{[}\+Layers 1.\+4.\+0a\mbox{]} -\/ 2020-\/03-\/22}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md32}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md33}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md33}
-
-\begin{DoxyItemize}
-\item More customizable attributes\+:
-\begin{DoxyItemize}
-\item Settings Menu -\/$>$ Sidebar Color
-\item Settings Menu -\/$>$ Themes Settings Panel -\/$>$ Background Color
-\item Window Border -\/$>$ Solid vs Gradient Toggle
-\item Window Border -\/$>$ Solid Color
-\end{DoxyItemize}
-\item Toggle switches with labels on each end, called labeled toggle switches
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md34}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md34}
-
-\begin{DoxyItemize}
-\item The light and dark themes now use a gradient for the window border by default
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md35}{}\doxysubsection{\mbox{[}\+Layers 1.\+3.\+0a\mbox{]} -\/ 2020-\/03-\/20}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md35}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md36}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md36}
-
-\begin{DoxyItemize}
-\item Copy operations to the main window and its child objects
-\item Began work on the Customize menu
-\begin{DoxyItemize}
-\item Created the skeleton for navigating the element hierarchy that displays the proper options on the Customize menu\textquotesingle{}s sidebar. As you go down the hierarchy from the \char`\"{}\+Window\char`\"{}, a set of labels are displayed above the preview window to inform the user specifically which element they are manipulating. These labels also act as buttons to allow the user to return to elements up the hierarchy.
-\item The first customizable attribute in this release is the Titlebar\textquotesingle{}s color. However, there is no structure yet to handle applying the theme changes to the main window, so there are no permanent changes.
-\end{DoxyItemize}
-\item Option to recursively disable primary functionality of the main window (intended for the Customize menu\textquotesingle{}s copy of the window)
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md37}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md37}
-
-\begin{DoxyItemize}
-\item Removed the \char`\"{}\+Window Border\char`\"{} button in the Themes settings panel in favor of a button with a Wrench icon located within the Themes combobox used to universally access the Customize menu
-\item Removed the temporary Square and Circle settings tabs/panels
-\item Stability improvements
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md38}{}\doxysubsection{\mbox{[}\+Layers 1.\+2.\+0a\mbox{]} -\/ 2020-\/02-\/23}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md38}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md39}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md39}
-
-\begin{DoxyItemize}
-\item A \char`\"{}\+Use default\char`\"{} toggle switch in the themes settings panel that will force the application to use the default theme from the layers\textquotesingle{} settings file. Changing the theme in the combobox will automatically toggle this switch off.
-\item Applications now watch the layers settings file for changes. This allows for the default theme to update on all apps when setting it in just one.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md40}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md40}
-
-\begin{DoxyItemize}
-\item Removed a large amount of free store allocations and created destructors for objects responsible for deleting their free store objects. This should increase performance and make memory leaks far less likely.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md41}{}\doxysubsection{\mbox{[}\+Layers 1.\+1.\+0a\mbox{]} -\/ 2020-\/02-\/16}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md41}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md42}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md42}
-
-\begin{DoxyItemize}
-\item Saving layers settings. The settings file is found in\+: \char`\"{}\+C\+:/\+Users/\{\+Your username\}/\+App\+Data/\+Local/\+Layers\char`\"{}
-\begin{DoxyItemize}
-\item Fow now, the only layers setting is the default theme setting
-\end{DoxyItemize}
-\item Saving application settings. The settings file is found in\+: \char`\"{}\+C\+:/\+Users/\{\+Your username\}/\+App\+Data/\+Local/\+Layers/\{\+Application Name\}\char`\"{}
-\begin{DoxyItemize}
-\item Now the theme you set for an application is reapplied when you relaunch the application.
-\end{DoxyItemize}
-\item New Message Box system
-\item \char`\"{}\+Set as default\char`\"{} button within the theme combobox. Clicking this will present a confirmation message box to set the default theme. New applications will use the default theme until the user changes that application\textquotesingle{}s theme manually using the theme combobox.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md43}{}\doxysubsubsection{Fixed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md43}
-
-\begin{DoxyItemize}
-\item Fixed font inconsistencies
-\item The text in the theme name line edit within the themes settings panel now updates to the theme name upon switching themes. Changing the text in the line edit, however, does not yet affect the themes.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md44}{}\doxysubsubsection{Changed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md44}
-
-\begin{DoxyItemize}
-\item Overhauled the theming system
-\begin{DoxyItemize}
-\item Most changes are structural and do not change the visual appearance of the widgets.
-\item Scrollbar theming is now working
-\end{DoxyItemize}
-\item Changed some colors in the Royal Blue and Purple themes
-\item Adjusted spacing of elements in Themes settings panel
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md45}{}\doxysubsection{\mbox{[}\+Layers 1.\+0.\+1a\mbox{]} -\/ 2019-\/12-\/21}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md45}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md46}{}\doxysubsubsection{Fixed}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md46}
-
-\begin{DoxyItemize}
-\item Fixed window moving with the cursor after doing a minimize and restore
-\item Fixed maximizing causing the normal window size to change
-\item Fixed an issue where you could click-\/drag on buttons on the titlebar and move the window
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md47}{}\doxysubsection{\mbox{[}\+Layers 1.\+0.\+0a\mbox{]} -\/ 2019-\/12-\/18}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md47}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md48}{}\doxysubsubsection{Added}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md48}
-
-\begin{DoxyItemize}
-\item This release serves as the first versioning tag for this software. It is labeled as x.\+x.\+xa because it is not feature-\/complete, so therefore it is considered in the alpha stage. The following points briefly cover the features currently implemented\+:
-\begin{DoxyItemize}
-\item A window-\/scaling border
-\item A theming system
-\item SVG support
-\item A menuing/sub-\/menuing system
-\item A menu navigation and labeling system
-\item A settings menu accessible via a titlebar icon 
-\end{DoxyItemize}
+\item Pop-\/up boxes are now separate windows
+\item Changed the alpha save directory to \char`\"{}\+C\+:/\+Users/\{\+Your username\}/\+App\+Data/\+Local/\+Layers-\/alpha\char`\"{} 
 \end{DoxyItemize}

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['reapply_5ftheme_38',['reapply_theme',['../class_layers_1_1_themeable.html#ae09fdb49f042a29a3fb09179c50e4fcf',1,'Layers::Themeable']]],
-  ['rebuild_5fsvg_5fstr_39',['rebuild_svg_str',['../class_layers_1_1_s_v_g___widget.html#a560f3a2613c40f9d1223863c1edfc6e7',1,'Layers::SVG_Widget']]],
-  ['remove_5fchild_5fthemeable_5freference_40',['remove_child_themeable_reference',['../class_layers_1_1_themeable.html#ae3916991fcd49e3024302744564a06be',1,'Layers::Themeable']]]
+  ['name_0',['name',['../class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b',1,'Layers::Application::name()'],['../class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc',1,'Layers::Theme::name()']]],
+  ['numberaw_1',['NumberAW',['../class_layers_1_1_number_a_w.html',1,'Layers']]]
 ];

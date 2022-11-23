@@ -50,15 +50,15 @@ void TabBar::update_theme_dependencies()
 
 QString TabBar::build_stylesheet()
 {
-	// "; border: 1px solid " + m_attribute_set.attribute_value("border_color")->value<QColor>().name() + 
+	// "; border: 1px solid " + m_attribute_set.attribute_value("border_color")->as<QColor>().name() + 
 
 	return
-		"QTabBar { color: " + a_text_color->value<QColor>().name() + "; font: 12pt; }"
-		//"QTabBar::tab { background: " + m_attribute_set.attribute_value("background_color")->value<QColor>().name() + "; }" // padding: 7px; padding-top: 2px; padding-bottom: 2px; border-bottom-color: none }"
+		"QTabBar { color: " + a_text_color->as<QColor>().name() + "; font: 12pt; }"
+		//"QTabBar::tab { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; }" // padding: 7px; padding-top: 2px; padding-bottom: 2px; border-bottom-color: none }"
 		//"QTabBar::tab:!selected { margin-top: 2px; }"
-		//"QTabBar::tab:!selected { background: " + m_attribute_set.attribute_value("background_color")->value<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
+		//"QTabBar::tab:!selected { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		"QTabBar::tab:!selected { background:none; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		"QTabBar::tab:selected { background: " + a_selected_fill_color->value<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
+		"QTabBar::tab:selected { background: " + a_selected_fill_color->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		//"QTabBar::tab:first:selected { margin-left: 0; }"
 		//"QTabBar::tab:last { margin-right: 0; }"
 		"QTabBar::tab:only-one { margin: 0; }"

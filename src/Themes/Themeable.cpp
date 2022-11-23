@@ -31,19 +31,23 @@ QList<AttributeLayoutItem*>& Themeable::attribute_layout()
 	return m_attribute_layout;
 }
 
-CustomizePanel* Themeable::customize_panel() const
+CustomizePanel* Themeable::customize_panel()
 {
-	return m_customize_panel;
+	CustomizePanel* panel = new CustomizePanel(this);
+
+	//panel->setup_layout();
+
+	return panel;
 }
 
-CustomizePanel* Themeable::init_customize_panel()
-{
-	m_customize_panel = new CustomizePanel(this);
-
-	m_customize_panel->setup_layout();
-	
-	return m_customize_panel;
-}
+//CustomizePanel* Themeable::init_customize_panel()
+//{
+//	m_customize_panel = new CustomizePanel(this);
+//
+//	m_customize_panel->setup_layout();
+//	
+//	return m_customize_panel;
+//}
 
 Graphic* Themeable::icon() const
 {
@@ -54,20 +58,24 @@ void Themeable::init_child_themeable_reference_list()
 {
 }
 
-void Themeable::initialize_and_acquire_panels(QList<CustomizePanel*>& list)
-{
-	for (Themeable* child_themeable : m_child_themeable_references)
-	{
-		// TODO: Consider a Themeable::is_customizable() function so this is clearer
-		if (child_themeable->proper_name()) child_themeable->initialize_and_acquire_panels(list);
-	}
-
-	list.append(init_customize_panel());
-}
+//void Themeable::initialize_and_acquire_panels(QList<CustomizePanel*>& list)
+//{
+//	for (Themeable* child_themeable : m_child_themeables)
+//	{
+//		// TODO: Consider a Themeable::is_customizable() function so this is clearer
+//		if (child_themeable->proper_name()) child_themeable->initialize_and_acquire_panels(list);
+//	}
+//
+//	list.append(init_customize_panel());
+//}
 
 bool Themeable::is_stateful() const
 {
-	return m_is_stateful;
+	for (Attribute* attribute : m_attributes)
+		if (attribute->is_stateful())
+			return true;
+
+	return false;
 }
 
 void Themeable::apply_theme(Theme& theme)
@@ -90,13 +98,13 @@ void Themeable::apply_theme(Theme& theme)
 
 			//for (const QString& attr_tag : m_attributes.keys())
 			//{
-			//	m_attributes[attr_tag]->copy_values_from(theme_attrs[attr_tag]);
+			//	m_attributes[attr_tag]->copy_value_from(theme_attrs[attr_tag]);
 			//}
 
 			//update_theme_dependencies();
 		}
 
-		for (Themeable* child_themeable : m_child_themeable_references)
+		for (Themeable* child_themeable : m_child_themeables)
 			child_themeable->apply_theme(theme);
 	}
 }
@@ -110,10 +118,10 @@ void Themeable::reapply_theme()
 	if (m_current_theme) apply_theme(*m_current_theme);
 }
 
-void Themeable::add_child_themeable_reference(Themeable* child_themeable)
+void Themeable::store_child_themeable_pointer(Themeable* child_themeable)
 {
 	// TODO: Consider a version of this function that can also name the child themeable
-	m_child_themeable_references.append(child_themeable);
+	m_child_themeables.append(child_themeable);
 
 	if (m_tag_prefixes_assigned)
 	{
@@ -124,7 +132,7 @@ void Themeable::add_child_themeable_reference(Themeable* child_themeable)
 
 void Themeable::remove_child_themeable_reference(Themeable* child_themeable)
 {
-	m_child_themeable_references.removeOne(child_themeable);
+	m_child_themeables.removeOne(child_themeable);
 
 	child_themeable->unassign_prefixes();
 }
@@ -145,7 +153,7 @@ void Themeable::set_is_app_themeable(bool is_app_themeable)
 {
 	m_is_app_themeable = is_app_themeable;
 
-	for (Themeable* m_child_themeable : m_child_themeable_references)
+	for (Themeable* m_child_themeable : m_child_themeables)
 		m_child_themeable->set_is_app_themeable(is_app_themeable);
 }
 
@@ -162,7 +170,7 @@ void Themeable::assign_tag_prefixes(QList<QString> parent_prefixes, const QStrin
 		m_tag_prefixes.append(parent_name);
 	}
 
-	for (Themeable* child_themeable : m_child_themeable_references)
+	for (Themeable* child_themeable : m_child_themeables)
 	{
 		child_themeable->assign_tag_prefixes(m_tag_prefixes, *m_name);
 	}
@@ -176,7 +184,7 @@ void Themeable::unassign_prefixes()
 
 	m_tag_prefixes_assigned = false;
 
-	for (Themeable* child_themeable : m_child_themeable_references)
+	for (Themeable* child_themeable : m_child_themeables)
 	{
 		child_themeable->unassign_prefixes();
 	}
@@ -189,28 +197,23 @@ void Themeable::unassign_prefixes()
 
 QList<Themeable*>& Themeable::child_themeable_references()
 {
-	return m_child_themeable_references;
+	return m_child_themeables;
 }
 
-//void Themeable::copy_attribute_values_to(Theme* theme)
-//{
-//	if (theme->contains_attributes_for_tag(tag()))
-//	{
-//		theme->copy_attribute_values_of(this);
-//
-//		for (Themeable* child_themeable : m_child_themeable_references)
-//			child_themeable->copy_attribute_values_to(theme);
-//	}
-//}
+void Themeable::copy_attribute_values_to(Theme* theme)
+{
+	if (theme->contains_attributes_for_tag(tag()))
+	{
+		theme->copy_attribute_values_of(this);
+
+		for (Themeable* child_themeable : m_child_themeables)
+			child_themeable->copy_attribute_values_to(theme);
+	}
+}
 
 Theme* Themeable::current_theme()
 {
 	return m_current_theme;
-}
-
-void Themeable::unfilter_attribute(const QString& attribute)
-{
-	m_filtered_attributes.removeOne(attribute);
 }
 
 void Themeable::set_icon(Graphic* icon)
@@ -243,13 +246,18 @@ void Themeable::set_state(const QString& state)
 		for (Attribute* attr : m_attributes)
 			attr->set_state(state);
 
-		for (Themeable* child_themeable : m_child_themeable_references)
+		for (Themeable* child_themeable : m_child_themeables)
 			child_themeable->set_state(state);
 
 		//update_theme_dependencies();
 
 		//issue_update();
 	}
+}
+
+QString* Themeable::name() const
+{
+	return m_name;
 }
 
 QString* Layers::Themeable::proper_name() const
@@ -287,10 +295,17 @@ QString& Themeable::tag()
 //	return m_stateful_attributes;
 //}
 
-//QList<QString> Themeable::states() const
-//{
-//	return m_attribute_set.states();
-//}
+QList<QString> Themeable::states() const
+{
+	QList<QString> states;
+
+	for (Attribute* attribute : m_attributes)
+		for (const QString& state : attribute->states())
+			if (!states.contains(state))
+				states.append(state);
+
+	return states;
+}
 
 //void Themeable::update_theme_dependencies()
 //{

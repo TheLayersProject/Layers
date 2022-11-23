@@ -1,0 +1,60 @@
+\hypertarget{_s_v_g_8h_source}{}\doxysection{SVG.\+h}
+\label{_s_v_g_8h_source}\index{include/SVG.h@{include/SVG.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SVG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SVG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QSvgWidget>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Themeable.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{29     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}} : \textcolor{keyword}{public} QSvgWidget, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31         Q\_OBJECT}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{public}:}
+\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_s_v_g_a13a38e7a797ef07ed2a4d54032a14f00}{SVG}}(QString file\_path, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_s_v_g_a13a38e7a797ef07ed2a4d54032a14f00}{SVG}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}}\& svg\_w);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{49         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}{rebuild\_svg\_str}}();}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}}* svg);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{keywordtype}{void} set\_hovering(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a977c0aba8c4c7e82bb83299acaf34193}{set\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{override};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{64         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_ab766cb209c1ef75ffe5f65a996072710}{update}}();}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Common Color"{}}, QColor(Qt::black)) \};}
+\DoxyCodeLine{67         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Common Hover Color"{}}, QColor(Qt::darkGray)) \};}
+\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Use Common Color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
+\DoxyCodeLine{69         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Use Common Hover Color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{77         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a51772ec69b6e9ba794914b69e9010d7e}{init\_attributes}}();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keyword}{private}:}
+\DoxyCodeLine{80         \textcolor{keywordtype}{void} init\_size();}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordtype}{void} build\_svg\_elements\_list();}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         QString element\_id(\textcolor{keyword}{const} QString\& element);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         QString m\_svg\_str\{  \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         QStringList m\_svg\_elements\{  \};}
+\DoxyCodeLine{91     \};}
+\DoxyCodeLine{92 \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SVG\_H}}
+
+\end{DoxyCode}

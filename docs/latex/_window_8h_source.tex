@@ -1,0 +1,98 @@
+\hypertarget{_window_8h_source}{}\doxysection{Window.\+h}
+\label{_window_8h_source}\index{include/Window.h@{include/Window.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef WINDOW\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define WINDOW\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}CreateNewThemeDialog.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}CustomizeMenu.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}SettingsMenu.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Titlebar.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_window}{Window}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_window}{Window}}(\textcolor{keywordtype}{bool} preview = \textcolor{keyword}{false}, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} add\_menu(\mbox{\hyperlink{class_layers_1_1_menu}{Menu}}* menu);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}* app\_menu() \textcolor{keyword}{const};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{apply\_theme}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} assign\_tag\_prefixes();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{comment}{//template<typename T>}}
+\DoxyCodeLine{27         \textcolor{comment}{//void build\_main\_widget();}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} center\_dialog(QDialog* dialog);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_customize_menu}{CustomizeMenu}}* customize\_menu() \textcolor{keyword}{const};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} finalize();}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} link\_theme\_name(\textcolor{keyword}{const} QString\& name);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} set\_main\_widget(\mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* main\_widget);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} set\_window\_icon(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}\& icon\_graphic);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{keywordtype}{void} set\_window\_title(\textcolor{keyword}{const} QString\& title);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}}* settings\_menu() \textcolor{keyword}{const};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_titlebar}{Titlebar}}* titlebar() \textcolor{keyword}{const};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{50         \textcolor{keywordtype}{void} customize\_clicked();}
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} exit\_clicked();}
+\DoxyCodeLine{52         \textcolor{keywordtype}{void} maximize\_clicked();}
+\DoxyCodeLine{53         \textcolor{keywordtype}{void} minimize\_clicked();}
+\DoxyCodeLine{54         \textcolor{keywordtype}{void} new\_theme\_clicked();}
+\DoxyCodeLine{55         \textcolor{keywordtype}{void} open\_menu(\mbox{\hyperlink{class_layers_1_1_menu}{Menu}}* menu);}
+\DoxyCodeLine{56         \textcolor{keywordtype}{void} settings\_clicked();}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{59         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_window_abcae06c266c64194125b7670bad152e1}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keyword}{private}:}
+\DoxyCodeLine{66         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{keywordtype}{bool} m\_maximized\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{69         \textcolor{keywordtype}{bool} m\_preview\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}}* m\_create\_new\_theme\_dialog\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}} \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         QVBoxLayout* m\_app\_menu\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{74         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         QList<Menu*> m\_menus;}
+\DoxyCodeLine{77         QList<Menu*> m\_menu\_stack;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \mbox{\hyperlink{class_layers_1_1_titlebar}{Titlebar}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_titlebar}{Titlebar}} \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \textcolor{comment}{// TODO: Make Menu constructor that does not require an icon}}
+\DoxyCodeLine{82         \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}* m\_app\_menu\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}(\textcolor{stringliteral}{"{}App"{}}, \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/settings\_animated.svg"{}}, QSize(24, 24))) \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}}* m\_settings\_menu\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}} \};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_customize_menu}{CustomizeMenu}}* m\_customize\_menu\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_customize_menu}{CustomizeMenu}} \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_main\_widget\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{89     \};}
+\DoxyCodeLine{90 \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// WINDOW\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,55 @@
+\hypertarget{_color_control_8h_source}{}\doxysection{Color\+Control.\+h}
+\label{_color_control_8h_source}\index{include/ColorControl.h@{include/ColorControl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef COLORCONTROL\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define COLORCONTROL\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Widget.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         Q\_OBJECT}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     signals:}
+\DoxyCodeLine{13         \textcolor{keywordtype}{void} color\_changed();}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} click();}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} disable\_clicking(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_color_control_a76ba9d85bb087e2e23426d7af624e4b0}{init\_attributes}}();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} set\_attribute(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{comment}{//Attribute a\_corner\_radii\{ Attribute("{}Corner Radii"{}, QVariant::fromValue(5)) \};}}
+\DoxyCodeLine{27         \textcolor{comment}{//Attribute a\_inner\_border\_color\{ Attribute("{}Inner Border Color"{}, QColor("{}\#2c2c2c"{})) \};}}
+\DoxyCodeLine{28         \textcolor{comment}{//Attribute a\_outer\_border\_color\{ Attribute("{}Outer Border Color"{}, QColor("{}\#d6d6d6"{})) \};}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
+\DoxyCodeLine{35         \textcolor{comment}{//void paintEvent(QPaintEvent* event);}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{private}:}
+\DoxyCodeLine{38         \textcolor{keywordtype}{bool} clicking\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{39         \textcolor{keywordtype}{bool} open\_on\_release\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* m\_attribute\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         QString m\_current\_editting\_state\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         QList<QString> m\_attribute\_states\{ QList<QString>() \};}
+\DoxyCodeLine{46     \};}
+\DoxyCodeLine{47 \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// COLORCONTROL\_H}}
+
+\end{DoxyCode}

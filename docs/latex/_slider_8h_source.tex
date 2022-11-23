@@ -1,0 +1,52 @@
+\hypertarget{_slider_8h_source}{}\doxysection{Slider.\+h}
+\label{_slider_8h_source}\index{include/Slider.h@{include/Slider.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SLIDER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SLIDER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Widget.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_slider}{Slider}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         Q\_OBJECT}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     signals:}
+\DoxyCodeLine{13         \textcolor{keywordtype}{void} value\_changed(\textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_slider}{Slider}}(\textcolor{keywordtype}{int} limit, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} set\_value(\textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} update\_handle\_pos();}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_value\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Value"{}}, QVariant::fromValue(0)) \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{26         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_slider_a1789e7e9b37d446687975f8f9037a301}{init\_attributes}}();}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_slider_ac6205a8b62ec2b3d08fe79d5d92e3b4a}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{private}:}
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_bar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_handle\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}(\textcolor{keyword}{this}) \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordtype}{int} m\_limit\{ 99 \};}
+\DoxyCodeLine{38         \textcolor{keywordtype}{int} m\_value\_on\_click\{ 0 \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \textcolor{keywordtype}{bool} m\_dragging\_handle\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         QPoint m\_mouse\_click\_position\{ QPoint() \};}
+\DoxyCodeLine{43     \};}
+\DoxyCodeLine{44 \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SLIDER\_H}}
+
+\end{DoxyCode}

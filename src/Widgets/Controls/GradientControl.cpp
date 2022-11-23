@@ -34,14 +34,9 @@ void GradientControl::init_attributes()
     a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 }
 
-void GradientControl::set_attribute(Attribute* attribute)
+void GradientControl::set_current_editting_state(const QString& state)
 {
-	m_attribute = attribute;
-
-	connect(m_attribute, &Attribute::value_changed, [this]
-		{
-			a_fill.copy_values_from(*m_attribute);
-		});
+	a_fill.set_state(state);
 }
 
 bool GradientControl::eventFilter(QObject* object, QEvent* event)
@@ -54,16 +49,24 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 		{
 			GradientSelectionDialog* gsd;
 
-			gsd = new GradientSelectionDialog(a_fill.value<QGradientStops>());
+			gsd = new GradientSelectionDialog(a_fill.as<QGradientStops>());
+			gsd->assign_tag_prefixes();
 
-			//if (m_current_theme) gsd->apply_theme(*m_current_theme);
-			if (layersApp->current_theme()) gsd->apply_theme(*layersApp->current_theme());
+			gsd->replace_all_attributes_with(
+				static_cast<Window*>(
+					layersApp->main_window()->customize_menu()->preview_widget()
+				)->control_gradient_selection_dialog()
+			);
+			
 
 			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
 
 			if (gsd->exec())
 			{
-				m_attribute->set_value(QVariant::fromValue(gsd->gradient_stops()));
+				if (a_fill.is_stateful())
+					a_fill.set_value(a_fill.state(), QVariant::fromValue(gsd->gradient_stops()));
+				else
+					a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
 
 				emit gradient_changed();
 			}

@@ -57,44 +57,73 @@ namespace Layers
 		Theme();
 		Theme(const QString& name, bool is_custom = true);
 
+		/*!
+			Adds a themeable tag paired with a set of attributes
+
+			Does nothing if themeable tag already exists in the theme.
+
+			@param themeable_tag of the themeable that the supplied attributes belong to
+			@param attributes that belong to a themeable for this theme to store
+		*/
 		void add_attributes(
 			const QString& themeable_tag,
 			QMap<QString, Attribute*> attributes);
 
-		//void add_attribute(
-		//	const QString& themeable_tag,
-		//	const QString& attribute_name,
-		//	QMap<QString, QVariant> state_value_map);
-
-		//void add_attribute_set(const QString& themeable_tag, AttributeSet attribute_set);
-
-		//Attribute* attribute(const QString& themeable_tag, const QString& attribute_name);
-
-		// Recommend calling contains_attributes_for_tag() before calling this since this function
-		// does not check if it contains an attribute set for the given themeable tag.
-		//QList<Attribute*>* attribute_set(const QString& themeable_tag);
-
-		//QHash<QString, QList<Attribute*>>& attribute_sets();
-
 		//void consume(Theme&& theme);
 
+		/*!
+			Returns true if the theme contains any attributes for the given themeable tag; otherwise returns false.
+
+			@param themeable_tag used to check whether the theme contains attributes for it
+			@returns True if theme contains attributes for tag, false otherwise
+		*/
 		bool contains_attributes_for_tag(const QString& themeable_tag);
 
-		// Only needs one version since attribute names should not exist in both stateless and stateful lists
-		//bool contains_attribute(const QString& themeable_tag, const QString& attribute_name);
+		/*!
+			Copies the attribute sets of another theme.
 
+			@param theme to copy attribute sets from
+		*/
 		void copy_from(Theme& theme);
 
-		//void copy_attribute_values_of(Themeable* themeable);
+		void copy_attribute_values_of(Themeable* themeable);
 
+		/*!
+			Returns true if the theme is a custom, user-created theme
+
+			@retuns true if theme is custom, false otherwise
+		*/
 		bool is_custom();
 
+		/*!
+			Returns a reference to the theme's name
+
+			@retuns Reference to theme's name
+		*/
 		QString& name();
 
+		/*!
+			Sets the theme's name
+
+			@param new_name to set as the theme's name
+		*/
 		void set_name(const QString& new_name);
 
+		/*!
+			Returns a list of all of the themeable tags contained in the theme
+
+			@returns list of themeable tags that exist in the theme
+		*/
 		QList<QString> themeable_tags();
 
+		/*!
+			Returns a reference to the attribute set of the themeable tag given in the subscript.
+
+			This function does NOT check first whether the supplied themeable tag exists in the
+			theme. For this reason, it is recommended to call contains_attributes_for_tag() first.
+
+			@returns Reference to attribute set of themeable_tag
+		*/
 		QMap<QString, Attribute*>& operator[](const QString& themeable_tag);
 
 		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
@@ -114,8 +143,6 @@ namespace Layers
 		}
 
 	private:
-		//QHash<QString, AttributeSet> m_attribute_sets{ QHash<QString, AttributeSet>() };
-
 		QHash<QString, QMap<QString, Attribute*>> m_data{ QHash<QString, QMap<QString, Attribute*>>() };
 
 		bool m_is_custom{ true };

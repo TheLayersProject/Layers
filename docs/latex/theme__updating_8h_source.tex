@@ -1,0 +1,25 @@
+\hypertarget{theme__updating_8h_source}{}\doxysection{theme\+\_\+updating.\+h}
+\label{theme__updating_8h_source}\index{include/theme\_updating.h@{include/theme\_updating.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef THEME\_UPDATING\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define THEME\_UPDATING\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}old.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Theme.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9     \textcolor{comment}{// 2.0.0a -\/> 2.1.0a}}
+\DoxyCodeLine{10     Theme\_2\_1\_0\_a update\_theme\_2\_0\_0\_a\_to\_2\_1\_0\_a(Theme\_2\_0\_0\_a old\_theme);}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{comment}{// 2.1.0a -\/> 2.2.0a}}
+\DoxyCodeLine{13     Theme\_2\_2\_0\_a update\_theme\_2\_1\_0\_a\_to\_2\_2\_0\_a(Theme\_2\_1\_0\_a old\_theme);}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{comment}{// 2.2.0a -\/> 2.3.0a (Current)}}
+\DoxyCodeLine{16     Theme update\_theme\_2\_2\_0\_a\_to\_2\_3\_0\_a(Theme\_2\_2\_0\_a old\_theme);}
+\DoxyCodeLine{17 \}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// THEME\_UPDATING\_H}}
+
+\end{DoxyCode}

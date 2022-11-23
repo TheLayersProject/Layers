@@ -1,0 +1,152 @@
+\hypertarget{_themeable_8h_source}{}\doxysection{Themeable.\+h}
+\label{_themeable_8h_source}\index{include/Themeable.h@{include/Themeable.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef THEMEABLE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define THEMEABLE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Attribute.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{class }AttributeWidget;}
+\DoxyCodeLine{9     \textcolor{keyword}{class }CustomizePanel;}
+\DoxyCodeLine{10     \textcolor{keyword}{class }Graphic;}
+\DoxyCodeLine{11     \textcolor{keyword}{class }Theme;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{33     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{34     \{}
+\DoxyCodeLine{35     \textcolor{keyword}{public}:}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_themeable}{\string~Themeable}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{47         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\_child\_themeable\_pointer}}(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* child\_themeable);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{60         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\_theme}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{74         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}{assign\_tag\_prefixes}}(QList<QString> parent\_prefixes = QList<QString>(), \textcolor{keyword}{const} QString\& parent\_name = \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{82         QMap<QString, Attribute*>\& \mbox{\hyperlink{class_layers_1_1_themeable_ad96b1137b69af820211143715d3d80e4}{attributes}}();}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         QList<AttributeLayoutItem*>\& attribute\_layout();}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{comment}{//QMap<QString, AttributeWidget*>\& attribute\_widgets();}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         QList<Themeable*>\& child\_themeable\_references();}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \textcolor{comment}{//void copy\_attribute\_values\_to(Theme* theme);}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{97         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}* \mbox{\hyperlink{class_layers_1_1_themeable_a307575be91e7169a73fccfcb21b7dff8}{current\_theme}}();}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{104         \mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}* \mbox{\hyperlink{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}{customize\_panel}}();}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{111         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* \mbox{\hyperlink{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}{icon}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{121         \textcolor{comment}{//void initialize\_and\_acquire\_panels(QList<CustomizePanel*>\& list);}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_themeable_a693634b06c973c840a8b185b1bdc0224}{is\_stateful}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{131         \textcolor{comment}{//virtual void issue\_update() = 0;}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{138         QString* \mbox{\hyperlink{class_layers_1_1_themeable_aaf7bac3feceaf1fe625338dbff098189}{proper\_name}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{145         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_ae09fdb49f042a29a3fb09179c50e4fcf}{reapply\_theme}}();}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{152         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_ae3916991fcd49e3024302744564a06be}{remove\_child\_themeable\_reference}}(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* child\_themeable);}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         \textcolor{keywordtype}{void} set\_is\_app\_themeable(\textcolor{keywordtype}{bool} is\_app\_themeable);}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156         \textcolor{keywordtype}{void} set\_functionality\_disabled(\textcolor{keywordtype}{bool} disabled = \textcolor{keyword}{true});}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \textcolor{comment}{//void set\_attribute\_value(}}
+\DoxyCodeLine{159         \textcolor{comment}{//  const QString\& state,}}
+\DoxyCodeLine{160         \textcolor{comment}{//  const QString\& attribute\_name,}}
+\DoxyCodeLine{161         \textcolor{comment}{//  QVariant value);}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163         \textcolor{comment}{//void set\_attribute\_value(}}
+\DoxyCodeLine{164         \textcolor{comment}{//  const QString\& attribute\_name,}}
+\DoxyCodeLine{165         \textcolor{comment}{//  QVariant value);}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{172         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a647a8657ead007473eafaa4ccb6cd4af}{set\_icon}}(\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* \mbox{\hyperlink{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}{icon}});}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{182         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a78f9b10993fcef1557aeba1bc75e5c90}{set\_name}}(\textcolor{keyword}{const} QString\& name);}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{192         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\_proper\_name}}(\textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_themeable_aaf7bac3feceaf1fe625338dbff098189}{proper\_name}});}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{201         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a93ad187cb208ad9ba7b196c05d8f8d29}{set\_state}}(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203         \textcolor{comment}{//template<typename T>}}
+\DoxyCodeLine{204         \textcolor{comment}{//void replace\_all\_attributes\_with(T* themeable);}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206         QString state() \textcolor{keyword}{const};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{214         \textcolor{comment}{//QMap<QString, StatefulAttribute>\& stateful\_attributes();}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{221         QList<QString> \mbox{\hyperlink{class_layers_1_1_themeable_a080406efdd426b24c701a0dbcb419a70}{states}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{239         QString\& \mbox{\hyperlink{class_layers_1_1_themeable_a02ae7b73daf23e11541f5fe7ff3b4f29}{tag}}();}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{247         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_afe536c581c3299ddfc8c632f9b3b2e2e}{unassign\_prefixes}}();}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{256         \textcolor{comment}{//virtual void update\_theme\_dependencies();}}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{268         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{init\_attributes}}();}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270         \textcolor{comment}{//virtual void init\_attribute\_widgets();}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{282         \textcolor{comment}{//CustomizePanel* init\_customize\_panel();}}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{295         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297         \textcolor{keywordtype}{bool} m\_functionality\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{298         \textcolor{keywordtype}{bool} m\_tag\_prefixes\_assigned\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{299         \textcolor{keywordtype}{bool} m\_shared\_attributes\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{300         \textcolor{keywordtype}{bool} m\_is\_app\_themeable\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{301         \textcolor{keywordtype}{bool} m\_is\_stateful\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303         \mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}* m\_customize\_panel\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_icon\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307         QString* m\_name\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{308         QString* m\_proper\_name\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{309         QString m\_state\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{310         QString m\_tag\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312         \textcolor{comment}{//QMap<QString, bool> m\_ACW\_pre\_init\_primary\_values\{ QMap<QString, bool>() \};}}
+\DoxyCodeLine{313         \textcolor{comment}{//QMap<QString, AttributeWidget*> m\_attribute\_widgets\{ QMap<QString, AttributeWidget*>() \};}}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315         QList<AttributeLayoutItem*> m\_attribute\_layout\{ QList<AttributeLayoutItem*>() \};}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317         QMap<QString, Attribute*> m\_attributes\{ QMap<QString, Attribute*>() \};}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319         QList<Themeable*> m\_child\_themeables;}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321         QList<QString> m\_filtered\_attributes;}
+\DoxyCodeLine{322         QList<QString> m\_tag\_prefixes;}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}* m\_current\_theme\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{325     \};}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327     \textcolor{comment}{//template<typename T>}}
+\DoxyCodeLine{328     \textcolor{comment}{//inline void Themeable::replace\_all\_attributes\_with(T* themeable)}}
+\DoxyCodeLine{329     \textcolor{comment}{//\{}}
+\DoxyCodeLine{330     \textcolor{comment}{//  if (typeid(*this) == typeid(*themeable))}}
+\DoxyCodeLine{331     \textcolor{comment}{//  \{}}
+\DoxyCodeLine{332     \textcolor{comment}{//      for (const QString\& attr\_tag : m\_attributes.keys())}}
+\DoxyCodeLine{333     \textcolor{comment}{//          Attribute::replace(attributes()[attr\_tag], themeable-\/>attributes()[attr\_tag]);}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{comment}{//      for (Themeable* this\_child\_themeable : m\_child\_themeables)}}
+\DoxyCodeLine{336     \textcolor{comment}{//          if (this\_child\_themeable-\/>m\_name)}}
+\DoxyCodeLine{337     \textcolor{comment}{//              for (Themeable* child\_themeable : themeable-\/>m\_child\_themeables)}}
+\DoxyCodeLine{338     \textcolor{comment}{//                  if (*child\_themeable-\/>m\_name == *this\_child\_themeable-\/>m\_name)}}
+\DoxyCodeLine{339     \textcolor{comment}{//                      this\_child\_themeable-\/>replace\_all\_attributes\_with(child\_themeable);}}
+\DoxyCodeLine{340     \textcolor{comment}{//  \}}}
+\DoxyCodeLine{341     \textcolor{comment}{//\}}}
+\DoxyCodeLine{342 \}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// THEMEABLE\_H}}
+
+\end{DoxyCode}

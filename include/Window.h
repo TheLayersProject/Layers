@@ -3,8 +3,10 @@
 
 #include "CreateNewThemeDialog.h"
 #include "CustomizeMenu.h"
+#include "GradientSelectionDialog.h"
 #include "SettingsMenu.h"
 #include "Titlebar.h"
+#include "UpdateDialog.h"
 
 namespace Layers
 {
@@ -27,6 +29,8 @@ namespace Layers
 		//void build_main_widget();
 
 		void center_dialog(QDialog* dialog);
+
+		GradientSelectionDialog* control_gradient_selection_dialog() const;
 
 		CustomizeMenu* customize_menu() const;
 
@@ -69,6 +73,10 @@ namespace Layers
 		bool m_preview{ false };
 
 		CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
+
+		GradientSelectionDialog* m_control_gradient_selection_dialog{ new GradientSelectionDialog(QGradientStops()) };
+
+		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "")};
 
 		QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };

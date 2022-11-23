@@ -1,0 +1,53 @@
+\hypertarget{class_layers_1_1_attribute_widget}{}\doxysection{Layers\+::Attribute\+Widget Class Reference}
+\label{class_layers_1_1_attribute_widget}\index{Layers::AttributeWidget@{Layers::AttributeWidget}}
+Inheritance diagram for Layers\+::Attribute\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.050109cm]{class_layers_1_1_attribute_widget}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_ac003406348c6377f3e07aa469c7ce7e0}\label{class_layers_1_1_attribute_widget_ac003406348c6377f3e07aa469c7ce7e0}} 
+virtual void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_ab3f4217daa4c17f2904f10897d133f94}\label{class_layers_1_1_attribute_widget_ab3f4217daa4c17f2904f10897d133f94}} 
+{\bfseries Attribute\+Widget} (QWidget $\ast$parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}{init\+\_\+attributes}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}\label{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}} 
+\index{Layers::AttributeWidget@{Layers::AttributeWidget}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::AttributeWidget@{Layers::AttributeWidget}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Attribute\+Widget\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Attribute\+Widgets.\+h\item 
+src/\+Widgets/\+Attribute Widgets/Attribute\+Widget.\+cpp\end{DoxyCompactItemize}

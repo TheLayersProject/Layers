@@ -5,7 +5,7 @@ using Layers::Theme_2_1_0_a;
 using Layers::Theme_2_2_0_a;
 using Layers::Theme;
 
-Theme_2_1_0_a Layers::update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme)
+Theme_2_1_0_a Layers::update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a old_theme)
 {
 	Theme_2_1_0_a new_theme(old_theme.name, !old_theme.built_in);
 
@@ -23,7 +23,7 @@ Theme_2_1_0_a Layers::update_theme_2_0_0_a_to_2_1_0_a(Theme_2_0_0_a& old_theme)
 	return new_theme;
 }
 
-Theme_2_2_0_a Layers::update_theme_2_1_0_a_to_2_2_0_a(Theme_2_1_0_a& old_theme)
+Theme_2_2_0_a Layers::update_theme_2_1_0_a_to_2_2_0_a(Theme_2_1_0_a old_theme)
 {
 	Theme_2_2_0_a new_theme(old_theme.name(), old_theme.is_custom());
 
@@ -39,7 +39,7 @@ Theme_2_2_0_a Layers::update_theme_2_1_0_a_to_2_2_0_a(Theme_2_1_0_a& old_theme)
 	return new_theme;
 }
 
-Theme Layers::update_theme_2_2_0_a_to_2_3_0_a(Theme_2_2_0_a& old_theme)
+Theme Layers::update_theme_2_2_0_a_to_2_3_0_a(Theme_2_2_0_a old_theme)
 {
 	return Theme();
 }

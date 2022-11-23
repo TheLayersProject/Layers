@@ -1,0 +1,32 @@
+\hypertarget{_downloader_8h_source}{}\doxysection{Downloader.\+h}
+\label{_downloader_8h_source}\index{include/Downloader.h@{include/Downloader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DOWNLOADER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DOWNLOADER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QFile>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QNetworkAccessManager>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QNetworkReply>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_downloader}{Downloader}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{11     \{}
+\DoxyCodeLine{12         Q\_OBJECT}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \textcolor{keyword}{public}:}
+\DoxyCodeLine{15         \mbox{\hyperlink{class_layers_1_1_downloader}{Downloader}}(QObject* parent = 0);}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17         QNetworkReply* download(\textcolor{keyword}{const} QUrl\& file\_url, \textcolor{keyword}{const} QDir\& directory);}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19         QNetworkReply* download(\textcolor{keyword}{const} QUrl\& file\_url);}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keyword}{private}:}
+\DoxyCodeLine{22         QNetworkAccessManager m\_network\_manager;}
+\DoxyCodeLine{23     \};}
+\DoxyCodeLine{24 \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DOWNLOADER\_H}}
+
+\end{DoxyCode}

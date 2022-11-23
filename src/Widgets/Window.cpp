@@ -10,6 +10,7 @@
 #include <QPainterPath>
 
 using Layers::CustomizeMenu;
+using Layers::GradientSelectionDialog;
 using Layers::Menu;
 using Layers::SettingsMenu;
 using Layers::Theme;
@@ -19,7 +20,7 @@ using Layers::Window;
 Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview }, Widget(parent)
 {
-	layersApp->add_child_themeable_reference(*this);
+	layersApp->store_child_themeable_pointer(*this);
 
 	set_window_title(layersApp->name());
 	
@@ -56,8 +57,14 @@ Window::Window(bool preview, QWidget* parent) :
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-    setMinimumSize(200, m_titlebar->height() + a_border_thickness.value<int>() * 2);
+    setMinimumSize(200, m_titlebar->height() + a_border_thickness.as<int>() * 2);
 	resize(1000, 700);
+
+	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
+
+	m_control_gradient_selection_dialog->set_proper_name("Gradient Selection Dialog");
+
+	m_control_update_dialog->set_proper_name("Update Dialog");
 
     m_app_menu->a_fill.set_disabled();
 
@@ -115,7 +122,7 @@ void Window::set_main_widget(Widget* main_widget)
 	main_widget->set_is_app_themeable(true);
 	main_widget->apply_theme(*layersApp->current_theme());
 
-	add_child_themeable_reference(main_widget);
+	store_child_themeable_pointer(main_widget);
 
 	m_app_menu_layout->addWidget(main_widget);
 
@@ -139,7 +146,7 @@ void Window::apply_theme(Theme& theme)
 
 void Window::assign_tag_prefixes()
 {
-    for (Themeable* themeable_child_element : m_child_themeable_references)
+    for (Themeable* themeable_child_element : m_child_themeables)
     {
         themeable_child_element->assign_tag_prefixes(m_tag_prefixes, "");
     }
@@ -150,6 +157,11 @@ void Window::assign_tag_prefixes()
 void Window::center_dialog(QDialog* dialog)
 {
     dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
+}
+
+GradientSelectionDialog* Window::control_gradient_selection_dialog() const
+{
+	return m_control_gradient_selection_dialog;
 }
 
 CustomizeMenu* Window::customize_menu() const
@@ -167,10 +179,12 @@ void Window::finalize()
 
 void Window::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_titlebar);
-	add_child_themeable_reference(m_settings_menu);
-	add_child_themeable_reference(m_customize_menu);
-    add_child_themeable_reference(m_create_new_theme_dialog);
+	store_child_themeable_pointer(m_titlebar);
+	store_child_themeable_pointer(m_settings_menu);
+	store_child_themeable_pointer(m_customize_menu);
+    store_child_themeable_pointer(m_create_new_theme_dialog);
+	store_child_themeable_pointer(m_control_gradient_selection_dialog);
+	store_child_themeable_pointer(m_control_update_dialog);
 }
 
 void Window::update_theme_dependencies()
@@ -179,7 +193,7 @@ void Window::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int margin = a_border_thickness.value<int>();
+		int margin = a_border_thickness.as<int>();
 
 		m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	}
@@ -323,7 +337,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
         }
 
         *result = 0;
-        const LONG borderWidth = a_border_thickness.value<int>() * devicePixelRatio();;
+        const LONG borderWidth = a_border_thickness.as<int>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -407,20 +421,20 @@ void Window::paintEvent(QPaintEvent* event)
 
 		bool fill_disabled = a_fill.disabled();
 
-		int border_thickness = a_border_thickness.value<int>();
+		int border_thickness = a_border_thickness.as<int>();
 
-		int margin_left = a_margin_left.value<int>();
-		int margin_top = a_margin_top.value<int>();
-		int margin_right = a_margin_right.value<int>();
-		int margin_bottom = a_margin_bottom.value<int>();
+		int margin_left = a_margin_left.as<int>();
+		int margin_top = a_margin_top.as<int>();
+		int margin_right = a_margin_right.as<int>();
+		int margin_bottom = a_margin_bottom.as<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
 
-		int corner_radius_tl = a_corner_radius_tl.value<int>();
-		int corner_radius_tr = a_corner_radius_tr.value<int>();
-		int corner_radius_bl = a_corner_radius_bl.value<int>();
-		int corner_radius_br = a_corner_radius_br.value<int>();
+		int corner_radius_tl = a_corner_radius_tl.as<int>();
+		int corner_radius_tr = a_corner_radius_tr.as<int>();
+		int corner_radius_bl = a_corner_radius_bl.as<int>();
+		int corner_radius_br = a_corner_radius_br.as<int>();
 
 		int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 		int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -474,7 +488,7 @@ void Window::paintEvent(QPaintEvent* event)
 		// - Draw Corner Color
 		if (!a_corner_color.disabled())
 		{
-			painter.fillPath(corner_color_path, a_corner_color.value<QColor>());
+			painter.fillPath(corner_color_path, a_corner_color.as<QColor>());
 		}
 
 		// - Draw Border
@@ -486,11 +500,11 @@ void Window::paintEvent(QPaintEvent* event)
 
 				gradient.setStart(0, 0);
 				gradient.setFinalStop(width(), 0);
-				gradient.setStops(a_border_fill.value<QGradientStops>());
+				gradient.setStops(a_border_fill.as<QGradientStops>());
 
 				painter.fillPath(border_path, gradient);
 			}
-			else painter.fillPath(border_path, a_border_fill.value<QColor>());
+			else painter.fillPath(border_path, a_border_fill.as<QColor>());
 		}
 
 		// - Draw Background
@@ -502,23 +516,23 @@ void Window::paintEvent(QPaintEvent* event)
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(a_fill.value<QGradientStops>());
+				bg_gradient.setStops(a_fill.as<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 			else
 			{
 				if (m_hovering && !a_hover_fill.disabled())
-					painter.fillPath(background_path, a_hover_fill.value<QColor>());
+					painter.fillPath(background_path, a_hover_fill.as<QColor>());
 				else
-					painter.fillPath(background_path, a_fill.value<QColor>());
+					painter.fillPath(background_path, a_fill.as<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
 		if (!a_outline_color.disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
 		}
 
 		painter.end();
@@ -529,10 +543,10 @@ void Window::paintEvent(QPaintEvent* event)
 
 		bool fill_disabled = a_fill.disabled();
 
-		int margin_left = a_margin_left.value<int>();
-		int margin_top = a_margin_top.value<int>();
-		int margin_right = a_margin_right.value<int>();
-		int margin_bottom = a_margin_bottom.value<int>();
+		int margin_left = a_margin_left.as<int>();
+		int margin_top = a_margin_top.as<int>();
+		int margin_right = a_margin_right.as<int>();
+		int margin_bottom = a_margin_bottom.as<int>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
@@ -565,23 +579,23 @@ void Window::paintEvent(QPaintEvent* event)
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(a_fill.value<QGradientStops>());
+				bg_gradient.setStops(a_fill.as<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 			else
 			{
 				if (m_hovering && !a_hover_fill.disabled())
-					painter.fillPath(background_path, a_hover_fill.value<QColor>());
+					painter.fillPath(background_path, a_hover_fill.as<QColor>());
 				else
-					painter.fillPath(background_path, a_fill.value<QColor>());
+					painter.fillPath(background_path, a_fill.as<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
 		if (!a_outline_color.disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(a_outline_color.value<QColor>()));
+			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
 		}
 
 		painter.end();
@@ -595,7 +609,7 @@ void Window::setup_layout()
 
 	m_app_menu->setLayout(m_app_menu_layout);
 
-	int margin = a_border_thickness.value<int>();
+	int margin = a_border_thickness.as<int>();
 
     m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);

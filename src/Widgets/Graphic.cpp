@@ -30,7 +30,7 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		m_svg_widget->set_proper_name("SVG");
 		m_svg_widget->setFixedSize(size);
 
-		add_child_themeable_reference(m_svg_widget);
+		store_child_themeable_pointer(m_svg_widget);
 	}
 
 	setFixedSize(size);
@@ -59,7 +59,7 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		setFixedSize(m_svg_widget->size());
 		//m_svg_widget->setFixedSize(size);
 
-		add_child_themeable_reference(m_svg_widget);
+		store_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
@@ -100,7 +100,7 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget->setParent(this);
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
 
-		add_child_themeable_reference(m_svg_widget);
+		store_child_themeable_pointer(m_svg_widget);
 	}
 
 	m_image_size = gw.m_image_size;
@@ -110,10 +110,12 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 	a_fill.set_disabled();
 }
 
-//void Graphic::convert_attribute_to_stateful(const QString& attribute_name, QMap<QString, QVariant> state_value_map)
-//{
-//	if (m_svg_widget) m_svg_widget->convert_attribute_to_stateful(attribute_name, state_value_map);
-//}
+Graphic::~Graphic()
+{
+	if (m_bitmap_label) m_bitmap_label->deleteLater();
+	if (m_svg_widget) m_svg_widget->deleteLater();
+	if (m_image_sequence_label) m_image_sequence_label->deleteLater();
+}
 
 QSize Layers::Graphic::image_size()
 {
@@ -164,7 +166,7 @@ SVG* Graphic::svg() const
 
 //void Graphic::update_theme_dependencies()
 //{
-//	int border_thickness = a_border_thickness.value<int>();
+//	int border_thickness = a_border_thickness.as<int>();
 //
 //	setFixedSize(
 //		border_thickness + m_image_size.width() + border_thickness,

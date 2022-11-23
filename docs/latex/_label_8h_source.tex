@@ -1,0 +1,78 @@
+\hypertarget{_label_8h_source}{}\doxysection{Label.\+h}
+\label{_label_8h_source}\index{include/Label.h@{include/Label.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef LABEL\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define LABEL\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QLabel>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QPainter>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Attribute.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Themeable.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_label}{Label}} : \textcolor{keyword}{public} QLabel, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         Q\_OBJECT}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keyword}{public}:}
+\DoxyCodeLine{17         \mbox{\hyperlink{class_layers_1_1_label}{Label}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{keyword}{const} QString\& text, QWidget* parent = 0);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} resize();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_label}{Label}}* label);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} build\_wrapped\_lines();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} setFont(\textcolor{keyword}{const} QFont\& f);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} setMaximumWidth(\textcolor{keywordtype}{int} maxw);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} setWordWrap(\textcolor{keywordtype}{bool} on);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} set\_available\_width(\textcolor{keywordtype}{int} available\_width);}
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} set\_hovering(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{38         \textcolor{keywordtype}{void} set\_resize\_disabled(\textcolor{keywordtype}{bool} disable = \textcolor{keyword}{true});}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \textcolor{keywordtype}{int} width\_unwrapped();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Fill"{}}, QColor(Qt::white), \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{43         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Outline Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{44         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Padding"{}}, QVariant::fromValue(0)) \};}
+\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Text Color"{}}, QColor(Qt::black)) \};}
+\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Text Hover Color"{}}, QColor(Qt::black), \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{49         \textcolor{keywordtype}{void} setText(\textcolor{keyword}{const} QString\& text);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{52         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}{init\_attributes}}();}
+\DoxyCodeLine{53         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         QList<QString> m\_wrapped\_lines;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         QPainter painter;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{60         \textcolor{keywordtype}{bool} m\_resize\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{61         \textcolor{keywordtype}{bool} m\_wrapping\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordtype}{int} m\_available\_width\{ 16777215 \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{keywordtype}{int} m\_padding\_left\{ 0 \};}
+\DoxyCodeLine{66         \textcolor{comment}{//int m\_padding\_top\{ 0 \};}}
+\DoxyCodeLine{67         \textcolor{keywordtype}{int} m\_padding\_right\{ 0 \};}
+\DoxyCodeLine{68         \textcolor{keywordtype}{int} m\_padding\_bottom\{ 0 \};}
+\DoxyCodeLine{69     \};}
+\DoxyCodeLine{70 \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// LABEL\_H}}
+
+\end{DoxyCode}

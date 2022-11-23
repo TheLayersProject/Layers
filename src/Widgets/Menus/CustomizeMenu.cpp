@@ -32,6 +32,9 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_control_number_aw->set_name("number_aw");
 	m_control_number_aw->set_proper_name("Number Attribute Widget");
 
+	m_control_state_aw->set_name("state_aw");
+	m_control_state_aw->set_proper_name("State Attribute Widget");
+
 	m_control_widget_button->set_name("widget_button");
 	m_control_widget_button->set_proper_name("Widget Button");
 
@@ -84,11 +87,11 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	connect(m_apply_button, &Button::clicked, [this] {
 		// TODO:
-		//if (m_preview_widget)
-		//	m_preview_widget->copy_attribute_values_to(m_current_theme);
+		if (m_preview_widget)
+			m_preview_widget->copy_attribute_values_to(m_current_theme);
 
-		//layersApp->reapply_theme();
-		//layersApp->save_theme(*m_current_theme);
+		layersApp->reapply_theme();
+		layersApp->save_theme(*m_current_theme);
 		//layersApp->issue_update();
 	});
 
@@ -122,7 +125,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_sidebar->set_proper_name("Sidebar");
 	m_sidebar->a_fill.set_value(QColor(Qt::lightGray));
 
-	m_preview_frame->a_corner_color.get_values_from(m_sidebar->a_fill);
+	m_preview_frame->a_corner_color.get_variant_from(m_sidebar->a_fill);
 
 	m_preview_frame->a_corner_radius_tl.set_value(10);
 	m_preview_frame->a_corner_color.set_disabled(false);
@@ -135,11 +138,6 @@ Button* CustomizeMenu::apply_button() const
 	return m_apply_button;
 }
 
-QList<CustomizePanel*>& CustomizeMenu::customize_panels()
-{
-	return m_customize_panels;
-}
-
 void CustomizeMenu::init_preview_window()
 {
 	Window* preview_window = new Window(true);
@@ -150,9 +148,7 @@ void CustomizeMenu::init_preview_window()
 	preview_window->customize_menu()->apply_button()->set_functionality_disabled();
 	preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 	
-	preview_window->initialize_and_acquire_panels(m_customize_panels);
-	populate_panel_layout();
-	open_customize_panel(m_customize_panels.last());
+	open_customize_panel(preview_window->customize_panel());
 	set_preview_widget(preview_window);
 	
 	// Setup Preview Window's Customize Menu's Preview Widget
@@ -160,28 +156,27 @@ void CustomizeMenu::init_preview_window()
 	preview_window_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
 	preview_window_customize_menu_preview_widget->set_proper_name("Preview Widget");
 	
-	preview_window_customize_menu_preview_widget->initialize_and_acquire_panels(preview_window->customize_menu()->customize_panels());
-	preview_window->customize_menu()->populate_panel_layout();
-	preview_window->customize_menu()->open_customize_panel(preview_window->customize_menu()->customize_panels().last());
+	preview_window->customize_menu()->open_customize_panel(preview_window_customize_menu_preview_widget->customize_panel());
 	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
 }
 
 void CustomizeMenu::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_sidebar);
-	add_child_themeable_reference(m_topbar);
-	m_topbar->add_child_themeable_reference(m_apply_button);
-	m_topbar->add_child_themeable_reference(m_collapse_menu_button);
-	m_topbar->add_child_themeable_reference(m_collapse_menu);
-	m_topbar->add_child_themeable_reference(m_control_arrow_graphic);
-	m_topbar->add_child_themeable_reference(m_control_text_button);
-	m_sidebar->add_child_themeable_reference(m_control_customize_panel);
-	m_control_customize_panel->add_child_themeable_reference(m_control_aw_group);
-	m_control_customize_panel->add_child_themeable_reference(m_control_color_aw);
-	m_control_customize_panel->add_child_themeable_reference(m_control_corner_radii_aw);
-	m_control_customize_panel->add_child_themeable_reference(m_control_fill_aw);
-	m_control_customize_panel->add_child_themeable_reference(m_control_number_aw);
-	m_control_customize_panel->add_child_themeable_reference(m_control_widget_button);
+	store_child_themeable_pointer(m_sidebar);
+	store_child_themeable_pointer(m_topbar);
+	m_topbar->store_child_themeable_pointer(m_apply_button);
+	m_topbar->store_child_themeable_pointer(m_collapse_menu_button);
+	m_topbar->store_child_themeable_pointer(m_collapse_menu);
+	m_topbar->store_child_themeable_pointer(m_control_arrow_graphic);
+	m_topbar->store_child_themeable_pointer(m_control_text_button);
+	m_sidebar->store_child_themeable_pointer(m_control_customize_panel);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_aw_group);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_color_aw);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_corner_radii_aw);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_fill_aw);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_number_aw);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_state_aw);
+	m_control_customize_panel->store_child_themeable_pointer(m_control_widget_button);
 }
 
 void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
@@ -190,14 +185,11 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 	{
 		if (m_panel_stack.last() != customize_panel)
 		{
-			m_panel_stack.last()->hide();
-
-			//m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
+			//m_panel_stack.last()->hide();
 
 			while (m_panel_stack.last() != customize_panel)
 			{
 				remove_child_themeable_reference(m_text_button_stack.last());
-				//m_control_text_button->unshare_all_attributes_with(m_text_button_stack.last());
 
 				for (Button* text_button : m_topbar_text_buttons)
 					if (text_button == m_text_button_stack.last())
@@ -207,12 +199,13 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 					if (text_button == m_text_button_stack.last())
 						m_collapsed_text_buttons.removeOne(text_button);
 
-				m_panel_stack.removeLast();
+				remove_child_themeable_reference(m_panel_stack.last());
+				m_panel_stack.takeLast()->deleteLater();
+
 				m_text_button_stack.takeLast()->deleteLater();
 				if (!m_arrow_graphics.isEmpty())
 				{
 					remove_child_themeable_reference(m_arrow_graphics.last());
-					//m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.last());
 					m_arrow_graphics.takeLast()->deleteLater();
 				}
 			}
@@ -234,8 +227,21 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		{
 			m_panel_stack.last()->hide();
 
-			//m_control_customize_panel->unshare_all_attributes_with(m_panel_stack.last());
+			//remove_child_themeable_reference(m_panel_stack.last());
+
+			//m_panel_stack.last()->deleteLater();
 		}
+
+		customize_panel->replace_all_attributes_with(m_control_customize_panel);
+		customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
+		customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
+		customize_panel->replace_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
+		customize_panel->replace_all_fill_awidgets_attrs_with(m_control_fill_aw);
+		customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
+		customize_panel->replace_all_state_awidgets_attrs_with(m_control_state_aw);
+		customize_panel->replace_all_widget_buttons_attrs_with(m_control_widget_button);
+
+		m_sidebar_layout->addWidget(customize_panel);
 
 		// Setup Button
 
@@ -287,23 +293,15 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 	}
 }
 
-void CustomizeMenu::populate_panel_layout()
-{
-	for (CustomizePanel* customize_panel : m_customize_panels)
-	{
-		m_sidebar_layout->addWidget(customize_panel);
-
-		customize_panel->replace_all_attributes_with(m_control_customize_panel);
-		customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
-		customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
-		customize_panel->replace_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
-		customize_panel->replace_all_fill_awidgets_attrs_with(m_control_fill_aw);
-		customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
-		customize_panel->replace_all_widget_buttons_attrs_with(m_control_widget_button);
-	}
-
-	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
-}
+//void CustomizeMenu::populate_panel_layout()
+//{
+//	for (CustomizePanel* customize_panel : m_customize_panels)
+//	{
+//		m_sidebar_layout->addWidget(customize_panel);
+//	}
+//
+//	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
+//}
 
 Widget* CustomizeMenu::preview_widget() const
 {
@@ -493,7 +491,7 @@ void CustomizeMenu::expand_text_buttons()
 
 			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
 
-			//arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
+			arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(1, text_button);
 

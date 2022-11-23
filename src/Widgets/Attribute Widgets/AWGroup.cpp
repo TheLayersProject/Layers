@@ -22,20 +22,20 @@ AWGroup::AWGroup(const QString& label_text, QWidget* parent) :
 		{
 			m_widgets_vbox->setContentsMargins(10, 0, 10, 10);
 
-			int new_height = 45;
+			//int new_height = 45;
 
 			for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
 			{
-				new_height += attribute_widget->height();
+				//new_height += attribute_widget->height();
 
 				attribute_widget->show();
 			}
 
-			new_height += (m_child_attribute_widgets.count() - 1) * m_widgets_vbox->spacing();
+			//new_height += (m_child_attribute_widgets.count() - 1) * m_widgets_vbox->spacing();
 
-			new_height += m_widgets_vbox->contentsMargins().bottom();
+			//new_height += m_widgets_vbox->contentsMargins().bottom();
 
-			setFixedHeight(new_height);
+			//setFixedHeight(new_height);
 
 			m_collapsed = false;
 		}
@@ -48,7 +48,7 @@ AWGroup::AWGroup(const QString& label_text, QWidget* parent) :
 				attribute_widget->hide();
 			}
 
-			setFixedHeight(45);
+			//setFixedHeight(45);
 
 			m_collapsed = true;
 		}
@@ -74,10 +74,16 @@ void AWGroup::replace_all_attributes_with(AWGroup* aw_group)
 	if (m_label) m_label->replace_all_attributes_with(aw_group->m_label);
 }
 
+void AWGroup::set_current_editting_state(const QString& state)
+{
+	for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
+		attribute_widget->set_current_editting_state(state);
+}
+
 void AWGroup::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_label);
-	add_child_themeable_reference(m_collapse_button);
+	store_child_themeable_pointer(m_label);
+	store_child_themeable_pointer(m_collapse_button);
 }
 
 void AWGroup::setup_layout()

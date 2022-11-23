@@ -207,9 +207,6 @@
     <ClCompile Include="src\Application\directories.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\Attributes\Attribute.cpp">
-      <Filter>Source Files\Themes\Attributes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Themes\Theme.cpp">
       <Filter>Source Files\Themes</Filter>
     </ClCompile>
@@ -237,9 +234,6 @@
     <ClCompile Include="src\Old\2.2.0a\Attribute_Set_2_2_0_a.cpp">
       <Filter>Source Files\Old\2.2.0a</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\build_themes2.cpp">
-      <Filter>Source Files\Themes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\Controls\FillControl.cpp">
       <Filter>Source Files\Widgets\Controls</Filter>
     </ClCompile>
@@ -248,6 +242,18 @@
     </ClCompile>
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Attribute Widgets\StateAW.cpp">
+      <Filter>Source Files\Widgets\Attribute Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\Attributes\Attribute.cpp">
+      <Filter>Source Files\Themes\Attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\Attributes\Variant.cpp">
+      <Filter>Source Files\Themes\Attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\build_themes.cpp">
+      <Filter>Source Files\Themes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,10 +361,10 @@
     <QtMoc Include="include\Downloader.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Attribute.h">
+    <QtMoc Include="include\FillControl.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\FillControl.h">
+    <QtMoc Include="include\Attribute.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

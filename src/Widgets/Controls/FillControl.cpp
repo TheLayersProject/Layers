@@ -23,28 +23,32 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	m_fill_type_toggle->set_proper_name("Fill Type Toggle");
 
 	connect(m_fill_type_toggle, &ToggleSwitch::toggled_event, [this] {
-			if (m_fill_type_toggle->toggled())
-			{
-				if (m_attribute)
-					m_attribute->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
-
-				m_gradient_label_opacity->setOpacity(1.0);
-				m_gradient_control->show();
-
-				m_color_label_opacity->setOpacity(0.25);
-				m_color_control->hide();
-			}
+		if (m_fill_type_toggle->toggled())
+		{
+			if (a_fill.is_stateful())
+				a_fill.set_value(a_fill.state(), QVariant::fromValue(QGradientStops({{0.0, Qt::white},{1.0, Qt::black}})));
 			else
-			{
-				if (m_attribute)
-					m_attribute->set_value(QColor(Qt::white));
+				a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 
-				m_color_label_opacity->setOpacity(1.0);
-				m_color_control->show();
+			m_gradient_label_opacity->setOpacity(1.0);
+			m_gradient_control->show();
 
-				m_gradient_label_opacity->setOpacity(0.25);
-				m_gradient_control->hide();
-			}
+			m_color_label_opacity->setOpacity(0.25);
+			m_color_control->hide();
+		}
+		else
+		{
+			if (a_fill.is_stateful())
+				a_fill.set_value(a_fill.state(), QVariant::fromValue(QColor(Qt::white)));
+			else
+				a_fill.set_value(QVariant::fromValue(QColor(Qt::white)));
+
+			m_color_label_opacity->setOpacity(1.0);
+			m_color_control->show();
+
+			m_gradient_label_opacity->setOpacity(0.25);
+			m_gradient_control->hide();
+		}
 		});
 
 	m_color_control->setFixedHeight(38);
@@ -83,6 +87,12 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	setup_layout();
 }
 
+FillControl::~FillControl()
+{
+	// TODO: Maybe the dialog should just be generated when it is needed
+	m_dialog->deleteLater();
+}
+
 void FillControl::init_attributes()
 {
 	a_border_fill.set_value(QColor("#D6D6D6"));
@@ -114,16 +124,28 @@ void FillControl::init_attributes()
 
 void FillControl::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_dialog);
+	store_child_themeable_pointer(m_dialog);
 
-	m_dialog->add_child_themeable_reference(m_fill_type_toggle);
-	m_dialog->add_child_themeable_reference(m_color_label);
-	m_dialog->add_child_themeable_reference(m_gradient_label);
+	m_dialog->store_child_themeable_pointer(m_fill_type_toggle);
+	m_dialog->store_child_themeable_pointer(m_color_label);
+	m_dialog->store_child_themeable_pointer(m_gradient_label);
 }
 
 void FillControl::replace_all_attributes_with(FillControl* fill_control)
 {
-	Widget::replace_all_attributes_with(fill_control);
+	a_border_fill.get_variant_from(fill_control->a_border_fill);
+	a_border_thickness.get_variant_from(fill_control->a_border_thickness);
+	a_corner_color.get_variant_from(fill_control->a_corner_color);
+	a_corner_radius_tl.get_variant_from(fill_control->a_corner_radius_tl);
+	a_corner_radius_tr.get_variant_from(fill_control->a_corner_radius_tr);
+	a_corner_radius_bl.get_variant_from(fill_control->a_corner_radius_bl);
+	a_corner_radius_br.get_variant_from(fill_control->a_corner_radius_br);
+	a_hover_fill.get_variant_from(fill_control->a_hover_fill);
+	a_margin_left.get_variant_from(fill_control->a_margin_left);
+	a_margin_top.get_variant_from(fill_control->a_margin_top);
+	a_margin_right.get_variant_from(fill_control->a_margin_right);
+	a_margin_bottom.get_variant_from(fill_control->a_margin_bottom);
+	a_outline_color.get_variant_from(fill_control->a_outline_color);
 
 	if (m_dialog) m_dialog->replace_all_attributes_with(fill_control->m_dialog);
 	if (m_fill_type_toggle) m_fill_type_toggle->replace_all_attributes_with(fill_control->m_fill_type_toggle);
@@ -133,25 +155,59 @@ void FillControl::replace_all_attributes_with(FillControl* fill_control)
 
 void FillControl::set_attribute(Attribute* attribute)
 {
-	m_attribute = attribute;
+	a_fill.get_variant_from(*attribute);
+	m_gradient_control->a_fill.get_variant_from(*attribute);
+	m_color_control->a_fill.get_variant_from(*attribute);
 
-	m_gradient_control->set_attribute(attribute);
-	m_color_control->set_attribute(attribute);
-
-	if (QString(m_attribute->typeName()) == QString("QList<std::pair<double,QColor>>"))
+	if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 	{
-		m_fill_type_toggle->toggle();
+		m_fill_type_toggle->toggle(false);
+
+		m_gradient_label_opacity->setOpacity(1.0);
+		m_gradient_control->show();
+
+		m_color_label_opacity->setOpacity(0.25);
+		m_color_control->hide();
 	}
-	else
+	else if (QString(a_fill.typeName()) == QString("QColor"))
 	{
+		m_color_label_opacity->setOpacity(1.0);
+		m_color_control->show();
+
 		m_gradient_label_opacity->setOpacity(0.25);
 		m_gradient_control->hide();
 	}
+}
 
-	connect(m_attribute, &Attribute::value_changed, [this]
-		{
-			a_fill.copy_values_from(*m_attribute);
-		});
+void FillControl::set_current_editting_state(const QString& state)
+{
+	a_fill.set_state(state);
+
+	m_color_control->set_current_editting_state(state);
+	m_gradient_control->set_current_editting_state(state);
+
+	if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>") &&
+		!m_fill_type_toggle->toggled())
+	{
+		m_fill_type_toggle->toggle(false);
+
+		m_gradient_label_opacity->setOpacity(1.0);
+		m_gradient_control->show();
+
+		m_color_label_opacity->setOpacity(0.25);
+		m_color_control->hide();
+	}
+	else if (QString(a_fill.typeName()) == QString("QColor") &&
+		m_fill_type_toggle->toggled())
+	{
+		m_fill_type_toggle->toggle(false);
+
+		m_color_label_opacity->setOpacity(1.0);
+		m_color_control->show();
+
+		m_gradient_label_opacity->setOpacity(0.25);
+		m_gradient_control->hide();
+	}
 }
 
 bool FillControl::eventFilter(QObject* object, QEvent* event)

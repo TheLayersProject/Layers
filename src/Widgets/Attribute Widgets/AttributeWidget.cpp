@@ -7,7 +7,10 @@ AttributeWidget::AttributeWidget(QWidget* parent) : Widget(parent)
 	init_attributes();
 
 	set_name("attribute_widget");
-	setFixedHeight(45);
+}
+
+void AttributeWidget::set_current_editting_state(const QString& state)
+{
 }
 
 void AttributeWidget::init_attributes()

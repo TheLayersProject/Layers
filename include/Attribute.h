@@ -1,20 +1,88 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
+#include <QColor>
 #include <QVariant>
 
 namespace Layers
 {
+	/*!
+		Provides a variant type with signal/slot support
+
+		The Variant class is designed by wrapping a QVariant and subclassing QObject to
+		enable Qt signal/slot functionality.
+		
+		The purpose of having a variant type that can work with Qt's signal/slot system is
+		to enable simple value change detection. Any time the value of a Variant's wrapped
+		QVariant is modified, the changed() signal gets emitted.
+
+		Variants are to be used by Layers Attributes. Attributes will store pointers to Variants.
+		When
+	*/
+	class Variant : public QObject
+	{
+		Q_OBJECT
+
+	signals:
+		void changed();
+
+	public:
+		Variant();
+		Variant(int integer);
+		Variant(QColor color);
+		Variant(QVariant qvariant);
+		Variant(const Variant& variant);
+
+		void operator=(const Variant& variant);
+		void operator=(const QVariant& qvariant);
+		bool operator!=(const QVariant& qvariant);
+
+		/*!
+			Returns the name of the type stored in the variant.
+
+			@returns Type name of value stored in the variant
+		*/
+		const char* typeName() const;
+
+		/*!
+			Returns the stored value converted to the template type T.
+
+			@returns Value converted to the template type T
+		*/
+		template<typename T>
+		T value() const;
+
+		friend QDataStream& operator <<(QDataStream& stream, const Variant& v)
+		{
+			stream << v.m_qvariant;
+
+			return stream;
+		}
+
+		friend QDataStream& operator >>(QDataStream& stream, Variant& v)
+		{
+			stream >> v.m_qvariant;
+
+			return stream;
+		}
+
+	private:
+		QVariant m_qvariant;
+	};
+
 	struct AttributeLayoutItem : public QObject {};
 
 	/*!
-		Pure abstract base class for Layers attributes.
+		Provides structure for attributes to be used by Themes and Themeables.
 
-		Implementers of the Attribute class will need to define the value() function since
-		this class does not implement the representation of the attribute value(s).
+		Attributes store pointers to Variants which store values used for painting Themeables and
+		supporting their appearance.
 
-		The functions name(), parent_themeable(), and set_parent_themeable() are defined by
-		this class as they are not expected to be different between subclasses.
+		A Themeable stores a set of Attribute pointers, and a Theme stores a collection of
+		Attribute pointer sets for many Themeables.
+		
+		An Attribute can either point to a single Variant or point to a map of QString-Variant pairs
+		where the QStrings are states.
 	*/
 	class Attribute : public AttributeLayoutItem
 	{
@@ -22,106 +90,97 @@ namespace Layers
 
 	signals:
 		void value_changed();
+		void variant_changed();
 
 	public:
-		/*!
-			Constructor for the Attribute base class.
-
-			Subclasses are to call this constructor passing along an attribute name string.
-		*/
 		Attribute(const QString& name, bool disabled = false);
-		Attribute(const QString& name, QVariant value, bool disabled = false);
-		Attribute(const QString& name, QMap<QString, QVariant> state_value_map, bool disabled = false);
+		Attribute(const QString& name, QVariant qvariant, bool disabled = false);
+		Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled = false);
 		~Attribute();
 
 		/*!
-			Checks if the provided state already exists in the data structure.
+			Returns the value stored in the Attribute's variant converted to the template type T.
 
-			@param state to check
-			@returns True if state exists, false if not
+			If the Attribute is stateful, then this function will return the value associated with the
+			current state. If the value associated with a specific state is desired, use the version
+			of as() that requires a state argument.
+
+			@returns Variant value converted to template type T
+		*/
+		template<typename T>
+		T as() const;
+
+		/*!
+			Returns the value of the variant associated with the supplied state, converted to the template type T.
+
+			This function will only work if the Attribute is stateful and only if the state supplied exists
+			in the state-variant map.
+
+			@returns Value of variant associated with state, converted to template type T
+		*/
+		template<typename T>
+		T as(const QString& state) const;
+
+		void clear_variant_if_owner();
+
+		/*!
+			Returns true if the given state exists in the state-variant map; otherwise returns false.
+
+			@param state to check whether it exists in the state-variant map
+			@returns True if state exists in map, false otherwise
 		*/
 		bool contains_state(const QString& state) const;
 
-		void copy_values_from(const Attribute& attr);
+		/*!
+			Copies the variant condition from another Attribute.
+
+			@param attr to copy 
+		*/
+		void copy_value_from(const Attribute& attr);
 
 		bool disabled() const;
 
-		/*!
-			Returns the name of the attribute.
-
-			@returns Name of attribute
-		*/
 		QString& name();
 
-		void get_values_from(Attribute& replacement_attr);
+		void init_state_variant_map(const QMap<QString, Variant>& state_variant_map);
+
+		bool is_stateful() const;
 
 		void set_disabled(bool disabled = true);
 
-		/*!
-			Sets the current state of the attribute.
-
-			@param state to mark as the current attribute state
-		*/
 		void set_state(const QString& state);
 
-		/*!
-			Sets the value.
+		void set_state_variant_map(QMap<QString, Variant>& state_variant_map);
 
-			@param value to set
-		*/
-		void set_value(QVariant value);
+		void set_value(QVariant variant);
 
-		/*!
-			Sets the value of the provided state.
+		void set_value(const QString& state, QVariant variant);
 
-			This function only works if the provided state already exists in the data structure.
+		void set_variant(Variant& variant);
 
-			@param state to update value of
-			@param value pair with state
-		*/
-		void set_value(const QString& state, QVariant value);
-
-		void set_values(const QMap<QString, QVariant>& values);
-
-		/*!
-			Returns the current state of the attribute.
-
-			@returns Current state of attribute
-		*/
 		QString state() const;
 
-		/*!
-			Returns list of all the attribute's states.
-
-			@returns List of attribute's states
-		*/
 		QList<QString> states() const;
 
 		const char* typeName() const;
 
-		template<typename T>
-		T value() const;
-
-		template<typename T>
-		T* value(const QString& state) const;
-
-		QMap<QString, QVariant>* values();
+		Variant* variant() const;
 
 		friend QDataStream& operator <<(QDataStream& stream, const Attribute& a)
 		{
-			stream << *a.m_disabled;
+			stream << a.m_disabled;
 			stream << a.m_name;
 			stream << a.m_state;
 
-			if (a.m_value)
+			if (a.m_variant)
 			{
 				stream << false;
-				stream << *a.m_value;
+				stream << *a.m_variant;
 			}
-			else if (a.m_values)
+			else if (a.m_state_variant_map)
 			{
 				stream << true;
-				stream << *a.m_values;
+				stream << *a.m_state_variant_map;
 			}
 
 			return stream;
@@ -129,7 +188,7 @@ namespace Layers
 
 		friend QDataStream& operator >>(QDataStream& stream, Attribute& a)
 		{
-			stream >> *a.m_disabled;
+			stream >> a.m_disabled;
 			stream >> a.m_name;
 			stream >> a.m_state;
 
@@ -139,60 +198,38 @@ namespace Layers
 
 			if (!is_stateful)
 			{
-				a.m_value = new QVariant;
+				a.m_variant = new Variant;
 
-				stream >> *a.m_value;
+				stream >> *a.m_variant;
 			}
 			else
 			{
-				a.m_values = new QMap<QString, QVariant>;
+				a.m_state_variant_map = new QMap<QString, Variant>;
 
-				stream >> *a.m_values;
+				stream >> *a.m_state_variant_map;
 			}
 
 			return stream;
 		}
 
-	private:
-		Attribute* m_overriding_attr{ nullptr };
+	public slots:
+		void get_variant_from(Attribute& attribute);
 
-		bool* m_disabled{ new bool(false) };
+	private:
+		bool m_disabled{ false };
+
+		bool m_owns_variant{ true };
+
+		QList<QMetaObject::Connection> variant_connections;
 
 		QString m_name{ "" };
 
 		QString m_state{ "" };
 
-		QMetaObject::Connection m_override_update_connection;
+		QMap<QString, Variant>* m_state_variant_map{ nullptr };
 
-		QVariant* m_value{ nullptr };
-
-		QMap<QString, QVariant>* m_values{ nullptr };
+		Variant* m_variant{ nullptr };
 	};
-
-	template<typename T>
-	inline T Attribute::value() const
-	{
-		if (m_value) return m_value->value<T>();
-		else
-		{
-			return (*m_values)[m_state].value<T>();
-		}
-	}
-
-	template<typename T>
-	inline T* Attribute::value(const QString& state) const
-	{
-		if (m_values)
-		{
-			if (m_values->contains(state)) return &(*m_values)[state].value<T>();
-			else
-				qDebug() << "WARNING: Failed to obtain attribute value: State does not exist.";
-		}
-		else
-			qDebug() << "WARNING: Failed to obtain attribute value: State provided but Attribute is not stateful.";
-
-		return nullptr;
-	}
 
 	class AttributeGroup : public AttributeLayoutItem
 	{
@@ -201,6 +238,8 @@ namespace Layers
 
 		QMap<QString, Attribute*>& attributes();
 
+		bool is_stateful() const;
+
 		QString name() const;
 
 	private:
@@ -208,6 +247,35 @@ namespace Layers
 
 		QString m_name;
 	};
+
+	template<typename T>
+	inline T Attribute::as() const
+	{
+		if (m_variant) return m_variant->value<T>();
+		else
+		{
+			return (*m_state_variant_map)[m_state].value<T>();
+		}
+	}
+
+	template<typename T>
+	inline T Attribute::as(const QString& state) const
+	{
+		if (m_state_variant_map)
+		{
+			if (m_state_variant_map->contains(state)) return (*m_state_variant_map)[state].value<T>();
+			else
+				qDebug() << "WARNING: Failed to obtain attribute value: State does not exist.";
+		}
+		else
+			qDebug() << "WARNING: Failed to obtain attribute value: State provided but Attribute is not stateful.";
+	}
+
+	template<typename T>
+	inline T Variant::value() const
+	{
+		return m_qvariant.value<T>();
+	}
 }
 
 #endif // ATTRIBUTE_H

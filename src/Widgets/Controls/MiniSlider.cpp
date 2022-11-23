@@ -18,10 +18,12 @@ MiniSlider::MiniSlider(int limit, QWidget* parent) :
 
 	m_bar->setFixedHeight(3);
 	m_bar->set_name("bar");
+	m_bar->set_proper_name("Bar");
 
 	m_handle->move(5, 16);
 	m_handle->setFixedSize(5, 13);
 	m_handle->set_name("handle");
+	m_handle->set_proper_name("Handle");
 
 	connect(&a_value, &Attribute::value_changed, [this] { update_handle_pos(); });
 
@@ -57,8 +59,8 @@ void MiniSlider::init_attributes()
 
 void MiniSlider::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_bar);
-	add_child_themeable_reference(m_handle);
+	store_child_themeable_pointer(m_bar);
+	store_child_themeable_pointer(m_handle);
 }
 
 void MiniSlider::replace_all_attributes_with(MiniSlider* mini_slider)
@@ -74,12 +76,21 @@ void MiniSlider::update_handle_pos()
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
 	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
 
-	m_handle->move(drag_increment * a_value.value<int>() + 5, m_handle->y()); // 5 is left margin
+	m_handle->move(drag_increment * a_value.as<int>() + 5, m_handle->y()); // 5 is left margin
 }
 
 void MiniSlider::update_theme_dependencies()
 {
 	update_handle_pos();
+}
+
+void MiniSlider::set_current_editting_state(const QString& state)
+{
+	a_value.set_state(state);
+
+	update_theme_dependencies();
+
+	// Might need to do more here or add state support is other functions in this document
 }
 
 bool MiniSlider::eventFilter(QObject* object, QEvent* event)
@@ -96,7 +107,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.value<int>();
+			m_value_on_click = a_value.as<int>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease)
@@ -128,16 +139,31 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 
 			if (new_value < 0)
 			{
-				if (a_value.value<int>() != 0)
-					a_value.set_value(0);
+				if (a_value.as<int>() != 0)
+				{
+					if (a_value.is_stateful())
+						a_value.set_value(a_value.state(), 0);
+					else
+						a_value.set_value(0);
+				}
 			}
 			else if (new_value > m_limit)
 			{
-				if (a_value.value<int>() != m_limit)
-					a_value.set_value(m_limit);
+				if (a_value.as<int>() != m_limit)
+				{
+					if (a_value.is_stateful())
+						a_value.set_value(a_value.state(), m_limit);
+					else
+						a_value.set_value(m_limit);
+				}
 			}
 			else
-				a_value.set_value(new_value);
+			{
+				if (a_value.is_stateful())
+					a_value.set_value(a_value.state(), new_value);
+				else
+					a_value.set_value(new_value);
+			}
 		}
 	}
 

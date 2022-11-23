@@ -1,0 +1,96 @@
+\hypertarget{_customize_menu_8h_source}{}\doxysection{Customize\+Menu.\+h}
+\label{_customize_menu_8h_source}\index{include/CustomizeMenu.h@{include/CustomizeMenu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CUSTOMIZEMENU\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CUSTOMIZEMENU\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QIntValidator>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}AttributeWidgets.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Layouts.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Menu.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}ScrollArea.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_customize_menu}{CustomizeMenu}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}}
+\DoxyCodeLine{16     \{}
+\DoxyCodeLine{17         Q\_OBJECT}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keyword}{public}:}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_layers_1_1_customize_menu}{CustomizeMenu}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* apply\_button() \textcolor{keyword}{const};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} init\_preview\_window();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} open\_customize\_panel(\mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}* \mbox{\hyperlink{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}{customize\_panel}});}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* preview\_widget() \textcolor{keyword}{const};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordtype}{int} calculated\_topbar\_content\_width();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} set\_preview\_widget(\mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* widget);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{int} topbar\_content\_width(\textcolor{keywordtype}{bool} include\_collapse\_button);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{37         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53dcbdde01}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{private}:}
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} adjust\_collapsed\_widget();}
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} collapse\_text\_buttons();}
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} expand\_text\_buttons();}
+\DoxyCodeLine{45         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47         \mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}* m\_control\_aw\_group\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}(\textcolor{stringliteral}{"{}"{}}) \};}
+\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}}* m\_control\_color\_aw\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}"{}}, QColor())) \};}
+\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}* m\_control\_corner\_radii\_aw\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}"{}}, QMap<QString, Attribute*>())) \};}
+\DoxyCodeLine{50         \mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}}* m\_control\_fill\_aw\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}"{}}, QColor())) \};}
+\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}}* m\_control\_number\_aw\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}"{}}, QVariant::fromValue(0)), \textcolor{keyword}{new} QIntValidator) \};}
+\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_control\_widget\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/settings\_animated.svg"{}}, QSize(24, 24)), QString(\textcolor{stringliteral}{"{}"{}})) \};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_horizontal_layout}{HorizontalLayout}}* m\_main\_layout\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_horizontal_layout}{HorizontalLayout}} \};}
+\DoxyCodeLine{55         QVBoxLayout* m\_collapsed\_text\_buttons\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{56         QVBoxLayout* m\_sidebar\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{57         QHBoxLayout* m\_topbar\_layout\{ \textcolor{keyword}{new} QHBoxLayout \};}
+\DoxyCodeLine{58         QGridLayout* m\_preview\_layout\{ \textcolor{keyword}{new} QGridLayout \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_sidebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{61         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_topbar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{62         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_preview\_frame = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}}* m\_sidebar\_scroll\_area\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}} \};}
+\DoxyCodeLine{65         \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}}* m\_preview\_scroll\_area\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}} \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_preview\_widget\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         QList<CustomizePanel*> m\_panel\_stack;}
+\DoxyCodeLine{70         QList<Button*> m\_text\_button\_stack;}
+\DoxyCodeLine{71         QList<Button*> m\_topbar\_text\_buttons;}
+\DoxyCodeLine{72         QList<Button*> m\_collapsed\_text\_buttons;}
+\DoxyCodeLine{73         QList<Graphic*> m\_arrow\_graphics;}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         QSize* m\_previous\_size\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_apply\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Apply"{}}, \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{78         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_collapse\_menu\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/ellipsis.svg"{}}, QSize(32, 8)), \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_control\_arrow\_graphic\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/collapse\_arrow\_right.svg"{}}, QSize(8, 12)) \};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}* m\_control\_customize\_panel\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_control\_text\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}"{}}) \};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_collapse\_menu\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{87     \};}
+\DoxyCodeLine{88 \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CUSTOMIZEMENU\_H}}
+
+\end{DoxyCode}

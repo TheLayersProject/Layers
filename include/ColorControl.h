@@ -14,6 +14,7 @@ namespace Layers
 
 	public:
 		ColorControl(QWidget* parent = nullptr);
+		~ColorControl();
 
 		void click();
 
@@ -21,7 +22,7 @@ namespace Layers
 
 		void init_attributes();
 
-		void set_attribute(Attribute* attribute);
+		//void set_attribute(Attribute* attribute);
 
 		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5)) };
 		//Attribute a_inner_border_color{ Attribute("Inner Border Color", QColor("#2c2c2c")) };
@@ -38,9 +39,7 @@ namespace Layers
 		bool clicking_disabled{ false };
 		bool open_on_release{ false };
 
-		Attribute* m_attribute{ nullptr };
-
-		QString m_current_editting_state{ "" };
+		QMetaObject::Connection attribute_connection;
 
 		QList<QString> m_attribute_states{ QList<QString>() };
 	};

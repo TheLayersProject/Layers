@@ -50,6 +50,13 @@ Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_
 	a_fill.set_disabled();
 }
 
+Button::~Button()
+{
+	if (m_graphic) m_graphic->deleteLater();
+	if (m_graphic_after) m_graphic_after->deleteLater();
+	if (m_text_label) m_text_label->deleteLater();
+}
+
 void Button::disable_graphic_hover_color(bool cond)
 {
 	if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
@@ -127,14 +134,14 @@ void Button::init_attributes()
 
 void Button::init_child_themeable_reference_list()
 {
-	if (m_graphic) add_child_themeable_reference(m_graphic);
-	if (m_graphic_after) add_child_themeable_reference(m_graphic_after);
-	if (m_text_label) add_child_themeable_reference(m_text_label);
+	if (m_graphic) store_child_themeable_pointer(m_graphic);
+	if (m_graphic_after) store_child_themeable_pointer(m_graphic_after);
+	if (m_text_label) store_child_themeable_pointer(m_text_label);
 }
 
 void Button::resize()
 {
-	int border_thickness = a_border_thickness.value<int>();
+	int border_thickness = a_border_thickness.as<int>();
 	int content_height = 0;
 	int graphic_width = 0;
 	int layout_spacing = 0;

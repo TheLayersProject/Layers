@@ -1,0 +1,106 @@
+\hypertarget{_application_8h_source}{}\doxysection{Application.\+h}
+\label{_application_8h_source}\index{include/Application.h@{include/Application.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef APPLICATION\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define APPLICATION\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QApplication>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QDir>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QSettings>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Theme.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }Downloader;}
+\DoxyCodeLine{13     \textcolor{keyword}{class }GitHubRepo;}
+\DoxyCodeLine{14     \textcolor{keyword}{class }Version;}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_application}{Application}} : \textcolor{keyword}{public} QApplication}
+\DoxyCodeLine{17     \{}
+\DoxyCodeLine{18         Q\_OBJECT}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     signals:}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} current\_theme\_changed();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keyword}{public}:}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_layers_1_1_application}{Application}}(}
+\DoxyCodeLine{25             \textcolor{keywordtype}{int}\& argc, \textcolor{keywordtype}{char}** argv,}
+\DoxyCodeLine{26             \textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_application_a1a05d51c92bf5c99d7f4dabb2159c82b}{name}},}
+\DoxyCodeLine{27             QFile* \mbox{\hyperlink{class_layers_1_1_application_ac6af7f4b42a30d09a48f1d11c36d49dd}{icon\_file}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{28             \mbox{\hyperlink{class_layers_1_1_version}{Version}}* version = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{29             \mbox{\hyperlink{class_layers_1_1_git_hub_repo}{GitHubRepo}}* github\_repo = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_aec2122193adf69854bc5e8734f55e111}{apply\_theme}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& \mbox{\hyperlink{class_layers_1_1_application_ae577216be3d14bb51fbe0b4aa608e1e1}{theme}});}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_a3add54089305ff64b4b99ebe659ac78f}{create\_theme}}(\textcolor{keyword}{const} QString\& new\_theme\_name, \textcolor{keyword}{const} QString\& copy\_theme\_name);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}* \mbox{\hyperlink{class_layers_1_1_application_a7134c3b35945b78b14f2a95a271a8c0b}{current\_theme}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{60         QFile* \mbox{\hyperlink{class_layers_1_1_application_ac6af7f4b42a30d09a48f1d11c36d49dd}{icon\_file}}();}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{74         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \mbox{\hyperlink{class_layers_1_1_application_a11be232598738dcfa8bbdf503d614180}{load\_theme}}(QFile\& file);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{81         QString\& \mbox{\hyperlink{class_layers_1_1_application_a1a05d51c92bf5c99d7f4dabb2159c82b}{name}}();}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{86         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_acdc3dc779cf0b4dda262e8da98f8fb48}{reapply\_theme}}();}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{97         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_a25c4b08add4fec47364a57944c07ad8b}{save\_theme}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& \mbox{\hyperlink{class_layers_1_1_application_ae577216be3d14bb51fbe0b4aa608e1e1}{theme}});}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{104         QSettings\& \mbox{\hyperlink{class_layers_1_1_application_a15b4a434172e92eaed272b7c933e359d}{settings}}();}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{113         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_a25c2e50517b55d988866b86653e6387f}{store\_child\_themeable\_pointer}}(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}\& themeable);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{121         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}* \mbox{\hyperlink{class_layers_1_1_application_ae577216be3d14bb51fbe0b4aa608e1e1}{theme}}(\textcolor{keyword}{const} QString\& theme\_name);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{130         QMap<QString, Theme>\& \mbox{\hyperlink{class_layers_1_1_application_aeaf66c86898f3e6aa918b8c4dec3c33d}{themes}}();}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{141         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_application_a8eb80ff6f004611dba5244db8fe3bcd1}{update\_available}}();}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{148         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_application_ab3d365347af365f8b703fd496fe40be7}{update\_on\_request}}();}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{157         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_application_ada4262c296f6b19102178cef322edcdd}{rename\_theme}}(\textcolor{keyword}{const} QString\& old\_name, \textcolor{keyword}{const} QString\& new\_name);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159     \textcolor{keyword}{private}:}
+\DoxyCodeLine{160         \textcolor{keywordtype}{void} copy\_missing\_attributes\_to(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme\_missing\_attributes);}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162         \textcolor{keywordtype}{void} init\_directories();}
+\DoxyCodeLine{163         \textcolor{keywordtype}{void} init\_fonts();}
+\DoxyCodeLine{164         \textcolor{keywordtype}{void} init\_themes();}
+\DoxyCodeLine{165         \textcolor{keywordtype}{void} init\_latest\_version\_tag();}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         QDir m\_app\_dir;}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169         QDir m\_app\_themes\_dir;}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171         QList<Themeable*> m\_child\_themeables;}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}* m\_current\_theme\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175         \mbox{\hyperlink{class_layers_1_1_downloader}{Downloader}}* m\_downloader\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177         QString m\_github\_api\_repos\_url\_base\{ \textcolor{stringliteral}{"{}https://api.github.com/repos"{}} \};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179         \mbox{\hyperlink{class_layers_1_1_git_hub_repo}{GitHubRepo}}* m\_github\_repo\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181         QFile* m\_icon\_file\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183         QString* m\_latest\_version\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185         QString m\_name;}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         QSettings m\_settings;}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189         QMap<QString, Theme> m\_themes;}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \mbox{\hyperlink{class_layers_1_1_version}{Version}}* m\_version\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{192     \};}
+\DoxyCodeLine{193 \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#define layersApp (static\_cast<Layers::Application*>(qApp))}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// APPLICATION\_H}}
+
+\end{DoxyCode}

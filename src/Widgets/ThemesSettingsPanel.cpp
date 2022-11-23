@@ -82,13 +82,13 @@ void ThemesSettingsPanel::init_attributes()
 
 void ThemesSettingsPanel::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_theme_label);
-	add_child_themeable_reference(m_theme_combobox);
-	add_child_themeable_reference(m_new_theme_button);
-	add_child_themeable_reference(m_customize_theme_button);
-	add_child_themeable_reference(m_delete_theme_button);
-	add_child_themeable_reference(m_theme_info_button);
-	add_child_themeable_reference(m_control_separator);
+	store_child_themeable_pointer(m_theme_label);
+	store_child_themeable_pointer(m_theme_combobox);
+	store_child_themeable_pointer(m_new_theme_button);
+	store_child_themeable_pointer(m_customize_theme_button);
+	store_child_themeable_pointer(m_delete_theme_button);
+	store_child_themeable_pointer(m_theme_info_button);
+	store_child_themeable_pointer(m_control_separator);
 }
 
 void ThemesSettingsPanel::apply_theme(Theme& theme)

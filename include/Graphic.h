@@ -19,6 +19,7 @@ namespace Layers
 		Graphic(const QString& filepath, QWidget* parent = nullptr);
 		Graphic(const QImage& image, QWidget* parent = 0);
 		Graphic(const Graphic& gw);
+		~Graphic();
 
 		QSize image_size();
 
@@ -30,8 +31,6 @@ namespace Layers
 		void set_size(QSize size);
 
 		SVG* svg() const;
-
-		//void update_theme_dependencies();
 
 	private:
 		QSize m_image_size{ QSize() };

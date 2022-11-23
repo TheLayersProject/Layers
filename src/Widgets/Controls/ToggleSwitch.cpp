@@ -17,6 +17,7 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	set_name("toggle_switch");
 
 	m_square->set_name("square");
+	m_square->set_proper_name("Square");
 	m_square->setFixedSize(11, 11);
 
 	update_spacer_size();
@@ -47,7 +48,7 @@ void ToggleSwitch::set_toggled(bool toggled)
 	}
 }
 
-void ToggleSwitch::toggle()
+void ToggleSwitch::toggle(bool emit_toggled_event)
 {
 	if (state() == "Untoggled")
 	{
@@ -62,7 +63,7 @@ void ToggleSwitch::toggle()
 		m_spacer->hide();
 	}
 
-	emit toggled_event();
+	if (emit_toggled_event) emit toggled_event();
 
 	update();
 }
@@ -75,32 +76,32 @@ bool ToggleSwitch::toggled() const
 
 void ToggleSwitch::update_layout_margins()
 {
-	int b_thickness = a_border_thickness.value<int>();
+	int b_thickness = a_border_thickness.as<int>();
 
 	if (m_layout_v)
 		m_layout_v->setContentsMargins(
-			0, a_margin_top.value<int>() + b_thickness + a_padding_top.value<int>(),
-			0, a_padding_bottom.value<int>() + b_thickness + a_margin_bottom.value<int>());
+			0, a_margin_top.as<int>() + b_thickness + a_padding_top.as<int>(),
+			0, a_padding_bottom.as<int>() + b_thickness + a_margin_bottom.as<int>());
 	else if (m_layout_h)
 		m_layout_h->setContentsMargins(
-			a_margin_left.value<int>() + b_thickness + a_padding_left.value<int>(), 0,
-			a_padding_right.value<int>() + b_thickness + a_margin_right.value<int>(), 0);
+			a_margin_left.as<int>() + b_thickness + a_padding_left.as<int>(), 0,
+			a_padding_right.as<int>() + b_thickness + a_margin_right.as<int>(), 0);
 }
 
 void ToggleSwitch::update_spacer_size()
 {
-	int b_thickness = a_border_thickness.value<int>();
+	int b_thickness = a_border_thickness.as<int>();
 
 	if (m_vertical)
 	{
 		m_spacer->setFixedSize(
-			0, height() - a_margin_top.value<int>() - b_thickness - a_padding_top.value<int>() - m_square->height() - a_padding_bottom.value<int>() - b_thickness - a_margin_bottom.value<int>()
+			0, height() - a_margin_top.as<int>() - b_thickness - a_padding_top.as<int>() - m_square->height() - a_padding_bottom.as<int>() - b_thickness - a_margin_bottom.as<int>()
 		);
 	}
 	else
 	{
 		m_spacer->setFixedSize(
-			width() - a_margin_left.value<int>() - b_thickness - a_padding_left.value<int>() - m_square->width() - a_padding_right.value<int>() - b_thickness - a_margin_right.value<int>(), 0
+			width() - a_margin_left.as<int>() - b_thickness - a_padding_left.as<int>() - m_square->width() - a_padding_right.as<int>() - b_thickness - a_margin_right.as<int>(), 0
 		);
 	}
 }
@@ -123,7 +124,7 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	a_border_fill.set_values({
+	a_border_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
@@ -132,7 +133,7 @@ void ToggleSwitch::init_attributes()
 	a_corner_radius_tr.set_value(4);
 	a_corner_radius_bl.set_value(4);
 	a_corner_radius_br.set_value(4);
-	a_fill.set_values({
+	a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
@@ -151,7 +152,7 @@ void ToggleSwitch::init_attributes()
 	m_square->a_corner_radius_tr.set_value(2);
 	m_square->a_corner_radius_bl.set_value(2);
 	m_square->a_corner_radius_br.set_value(2);
-	m_square->a_fill.set_values({
+	m_square->a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor(Qt::white) }
 		});
@@ -160,44 +161,44 @@ void ToggleSwitch::init_attributes()
 	m_spacer->a_fill.set_value(QColor(Qt::blue));
 
 	// Set initial state
-	set_state("Untoggled");
+	set_state("Untoggled");;
 
-	connect(&a_margin_left, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_margin_left, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_margin_top, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_margin_top, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_margin_right, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_margin_right, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_margin_bottom, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_margin_bottom, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_padding_left, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_padding_left, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_padding_top, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_padding_top, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_padding_right, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_padding_right, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 
-	connect(&a_padding_bottom, &Attribute::value_changed, [this] {
-		update_layout_margins(); update_spacer_size();
-		});
+	//connect(&a_padding_bottom, &Attribute::value_changed, [this] {
+	//	update_layout_margins(); update_spacer_size();
+	//	});
 }
 
 void ToggleSwitch::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_square);
+	store_child_themeable_pointer(m_square);
 }
 
 void ToggleSwitch::setup_layout()

@@ -1,0 +1,253 @@
+\hypertarget{_attribute_widgets_8h_source}{}\doxysection{Attribute\+Widgets.\+h}
+\label{_attribute_widgets_8h_source}\index{include/AttributeWidgets.h@{include/AttributeWidgets.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ATTRIBUTEWIDGET\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ATTRIBUTEWIDGET\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}ColorControl.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Combobox.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}GradientControl.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}FillControl.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Label.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}LineEditor.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}MiniSlider.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}ToggleSwitch.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{18     \{}
+\DoxyCodeLine{19         Q\_OBJECT}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keyword}{public}:}
+\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{25         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}{init\_attributes}}();}
+\DoxyCodeLine{29     \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_state_a_w}{StateAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{32     \{}
+\DoxyCodeLine{33         Q\_OBJECT}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keyword}{public}:}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_state_a_w}{StateAW}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \textcolor{keywordtype}{void} add\_attribute\_widget(\mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}* attribute\_widget);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}* state\_combobox() \textcolor{keyword}{const};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{comment}{//void replace\_all\_attributes\_with(AWGroup* aw\_group);}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} populate\_state\_combobox(\textcolor{keyword}{const} QList<QString>\& \mbox{\hyperlink{class_layers_1_1_themeable_a080406efdd426b24c701a0dbcb419a70}{states}});}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{47         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_state_a_w_a81a6af2ba5e3e70990a19f78827ad35f}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keyword}{private}:}
+\DoxyCodeLine{50         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}* m\_state\_combobox\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}} \};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}State"{}})\};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         QList<AttributeWidget*> m\_child\_attribute\_widgets\{ QList<AttributeWidget*>() \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         QVBoxLayout* m\_widgets\_vbox\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{61     \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65         Q\_OBJECT}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keyword}{public}:}
+\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}(\textcolor{keyword}{const} QString\& label\_text, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{keywordtype}{void} add\_attribute\_widget(\mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}* attribute\_widget);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}* aw\_group);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{75         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_a_w_group_ad22e6c2e3a6407874f8146739321b130}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keyword}{private}:}
+\DoxyCodeLine{78         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_collapse\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/collapse\_arrow\_right.svg"{}}, QSize(8, 12)), \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/collapse\_arrow\_down.svg"{}}, QSize(12, 8)), \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{keywordtype}{bool} m\_collapsed\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_label\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         QList<AttributeWidget*> m\_child\_attribute\_widgets\{ QList<AttributeWidget*>() \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         QVBoxLayout* m\_widgets\_vbox\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{89     \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{93         Q\_OBJECT}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{public}:}
+\DoxyCodeLine{96         \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}(\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}* corner\_radii\_ag, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}* corner\_radii\_aw);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* tl\_slider() \textcolor{keyword}{const};}
+\DoxyCodeLine{101         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* tr\_slider() \textcolor{keyword}{const};}
+\DoxyCodeLine{102         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* bl\_slider() \textcolor{keyword}{const};}
+\DoxyCodeLine{103         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* br\_slider() \textcolor{keyword}{const};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{106         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w_ad25ac99608075877c7e64d0d6931de0f}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{keyword}{private}:}
+\DoxyCodeLine{109         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111         \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}* m\_attribute\_widget;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* m\_tl\_slider\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}(30) \};}
+\DoxyCodeLine{114         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* m\_tr\_slider\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}(30) \};}
+\DoxyCodeLine{115         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* m\_bl\_slider\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}(30) \};}
+\DoxyCodeLine{116         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* m\_br\_slider\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}(30) \};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_tl\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{119         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_tr\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{120         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_bl\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{121         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_br\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_example\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{126     \};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{129     \{}
+\DoxyCodeLine{130         Q\_OBJECT}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \textcolor{keyword}{public}:}
+\DoxyCodeLine{133         \mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}}(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* color\_control() \textcolor{keyword}{const};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}}* color\_aw);}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139         \textcolor{keywordtype}{void} set\_centered(\textcolor{keywordtype}{bool} centered = \textcolor{keyword}{true});}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{142         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_color_a_w_a15bbd953b14bf5aeda27c779d5658353}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{keyword}{private}:}
+\DoxyCodeLine{145         \textcolor{keywordtype}{bool} m\_centered\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_color\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}} \};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_attribute\_label;}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151         \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}* m\_disabled\_toggle\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_left\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{154         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_right\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{155     \};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_gradient_a_w}{GradientAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{158     \{}
+\DoxyCodeLine{159         Q\_OBJECT}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{keyword}{public}:}
+\DoxyCodeLine{162         \mbox{\hyperlink{class_layers_1_1_gradient_a_w}{GradientAW}}(\textcolor{keyword}{const} QString\& attribute\_label\_text, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164         \textcolor{keywordtype}{void} set\_centered(\textcolor{keywordtype}{bool} centered = \textcolor{keyword}{true});}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{167         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_a_w_a9bd39e79051cbc99026e11d2d8edd961}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \textcolor{keyword}{private}:}
+\DoxyCodeLine{170         \textcolor{keywordtype}{bool} m\_centered\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172         \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}}* m\_gradient\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}} \};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_attribute\_label;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_left\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{177         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_right\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{178     \};}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{181     \{}
+\DoxyCodeLine{182         Q\_OBJECT}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{keyword}{public}:}
+\DoxyCodeLine{185         \mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}}(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187         \mbox{\hyperlink{class_layers_1_1_fill_control}{FillControl}}* fill\_control() \textcolor{keyword}{const};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}}* fill\_aw);}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keywordtype}{void} set\_centered(\textcolor{keywordtype}{bool} centered = \textcolor{keyword}{true});}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{194         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{override};}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{197         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_fill_a_w_a5e7d1cf0ade89c79683943217d9ae42d}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{keyword}{private}:}
+\DoxyCodeLine{200         \textcolor{keywordtype}{bool} m\_centered\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         \mbox{\hyperlink{class_layers_1_1_fill_control}{FillControl}}* m\_fill\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_fill_control}{FillControl}} \};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_attribute\_label;}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206         \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}* m\_disabled\_toggle\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_left\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{209         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_right\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{210     \};}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214         Q\_OBJECT}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{keyword}{public}:}
+\DoxyCodeLine{217         \mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}}(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute, QIntValidator* int\_validator, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}}* number\_aw);}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221         \textcolor{keywordtype}{void} set\_centered(\textcolor{keywordtype}{bool} centered = \textcolor{keyword}{true});}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         \textcolor{keywordtype}{void} set\_unit\_label\_text(\textcolor{keyword}{const} QString\& unit\_string);}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{226         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f01c6}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228     \textcolor{keyword}{private}:}
+\DoxyCodeLine{229         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231         \textcolor{keywordtype}{bool} m\_centered\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_attribute\_label\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{234         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_unit\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}} \};}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240         \mbox{\hyperlink{class_layers_1_1_mini_slider}{MiniSlider}}* m\_slider\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_left\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{243         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_right\_stretch\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{244     \};}
+\DoxyCodeLine{245 \}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ATTRIBUTEWIDGET\_H}}
+
+\end{DoxyCode}

@@ -3,6 +3,7 @@
 
 #include "Button.h"
 #include "ColorControl.h"
+#include "Combobox.h"
 #include "GradientControl.h"
 #include "FillControl.h"
 #include "Graphic.h"
@@ -20,8 +21,43 @@ namespace Layers
 	public:
 		AttributeWidget(QWidget* parent = nullptr);
 
+	public slots:
+		virtual void set_current_editting_state(const QString& state);
+
 	protected:
 		void init_attributes();
+	};
+
+	class StateAW : public AttributeWidget
+	{
+		Q_OBJECT
+
+	public:
+		StateAW(QWidget* parent = nullptr);
+
+		void add_attribute_widget(AttributeWidget* attribute_widget);
+
+		Combobox* state_combobox() const;
+
+		void replace_all_attributes_with(StateAW* state_aw);
+
+		void populate_state_combobox(const QList<QString>& states);
+
+	protected:
+		void init_child_themeable_reference_list();
+
+	private:
+		void setup_layout();
+
+		Combobox* m_state_combobox{ new Combobox };
+
+		Label* m_label{ new Label("State")};
+
+		QList<AttributeWidget*> m_child_attribute_widgets{ QList<AttributeWidget*>() };
+
+		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+
+		QVBoxLayout* m_widgets_vbox{ new QVBoxLayout };
 	};
 
 	class AWGroup : public AttributeWidget
@@ -34,6 +70,9 @@ namespace Layers
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
 		void replace_all_attributes_with(AWGroup* aw_group);
+
+	public slots:
+		virtual void set_current_editting_state(const QString& state) override;
 
 	protected:
 		void init_child_themeable_reference_list();
@@ -65,6 +104,9 @@ namespace Layers
 		MiniSlider* tr_slider() const;
 		MiniSlider* bl_slider() const;
 		MiniSlider* br_slider() const;
+
+	public slots:
+		void set_current_editting_state(const QString& state);
 
 	protected:
 		void init_child_themeable_reference_list();
@@ -101,6 +143,9 @@ namespace Layers
 		void replace_all_attributes_with(ColorAW* color_aw);
 
 		void set_centered(bool centered = true);
+
+	public slots:
+		void set_current_editting_state(const QString& state);
 
 	protected:
 		void init_child_themeable_reference_list();
@@ -153,6 +198,9 @@ namespace Layers
 		void replace_all_attributes_with(FillAW* fill_aw);
 
 		void set_centered(bool centered = true);
+
+	public slots:
+		virtual void set_current_editting_state(const QString& state) override;
 
 	protected:
 		void init_child_themeable_reference_list();

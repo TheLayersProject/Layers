@@ -9,12 +9,6 @@ Inheritance diagram for Layers\+::Window\+:\begin{figure}[H]
 \doxysubsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_a0ac33d44e97e026c2005e76f60a56923}\label{class_layers_1_1_window_a0ac33d44e97e026c2005e76f60a56923}} 
-void {\bfseries change\+\_\+current\+\_\+theme\+\_\+name} (const QString \&old\+\_\+name, const QString \&new\+\_\+name)
-\item 
-\mbox{\Hypertarget{class_layers_1_1_window_abbf539ab44b598962e85c614c9f3ae19}\label{class_layers_1_1_window_abbf539ab44b598962e85c614c9f3ae19}} 
-void {\bfseries open\+\_\+menu} (\mbox{\hyperlink{class_layers_1_1_menu}{Menu}} $\ast$menu)
-\item 
 \mbox{\Hypertarget{class_layers_1_1_window_ac6b01094b31b327d9c29544d7fbd839a}\label{class_layers_1_1_window_ac6b01094b31b327d9c29544d7fbd839a}} 
 void {\bfseries customize\+\_\+clicked} ()
 \item 
@@ -27,20 +21,26 @@ void {\bfseries maximize\+\_\+clicked} ()
 \mbox{\Hypertarget{class_layers_1_1_window_a3e6273ffcc150afb204489d2cdf6fe7c}\label{class_layers_1_1_window_a3e6273ffcc150afb204489d2cdf6fe7c}} 
 void {\bfseries minimize\+\_\+clicked} ()
 \item 
+\mbox{\Hypertarget{class_layers_1_1_window_a0783c339b76acd102632a7c8ced7a84d}\label{class_layers_1_1_window_a0783c339b76acd102632a7c8ced7a84d}} 
+void {\bfseries new\+\_\+theme\+\_\+clicked} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_abbf539ab44b598962e85c614c9f3ae19}\label{class_layers_1_1_window_abbf539ab44b598962e85c614c9f3ae19}} 
+void {\bfseries open\+\_\+menu} (\mbox{\hyperlink{class_layers_1_1_menu}{Menu}} $\ast$menu)
+\item 
 \mbox{\Hypertarget{class_layers_1_1_window_a8fd7199f76e8b96005c5d842ca3c47e2}\label{class_layers_1_1_window_a8fd7199f76e8b96005c5d842ca3c47e2}} 
 void {\bfseries settings\+\_\+clicked} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_a8c86e48ef3180201cc97cb928abd66ca}\label{class_layers_1_1_window_a8c86e48ef3180201cc97cb928abd66ca}} 
-{\bfseries Window} (QWidget $\ast$parent=nullptr)
+\mbox{\Hypertarget{class_layers_1_1_window_a6694f9abc3a45304626cb0898fca53f6}\label{class_layers_1_1_window_a6694f9abc3a45304626cb0898fca53f6}} 
+{\bfseries Window} (bool preview=false, QWidget $\ast$parent=nullptr)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_ab0e86f297081ee1ac44edbf0fdbcbec8}\label{class_layers_1_1_window_ab0e86f297081ee1ac44edbf0fdbcbec8}} 
 void {\bfseries add\+\_\+menu} (\mbox{\hyperlink{class_layers_1_1_menu}{Menu}} $\ast$menu)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_afcfee4ae812e821dfd9e2cd61bc2cbb5}\label{class_layers_1_1_window_afcfee4ae812e821dfd9e2cd61bc2cbb5}} 
-void {\bfseries add\+\_\+theme} (const QString \&name, const \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&theme)
+\mbox{\Hypertarget{class_layers_1_1_window_a920c4fb54b19e505fa9d5f4c933ea57e}\label{class_layers_1_1_window_a920c4fb54b19e505fa9d5f4c933ea57e}} 
+\mbox{\hyperlink{class_layers_1_1_menu}{Menu}} $\ast$ {\bfseries app\+\_\+menu} () const
 \item 
 void \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{apply\+\_\+theme}} (\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&theme)
 \item 
@@ -50,30 +50,43 @@ void {\bfseries assign\+\_\+tag\+\_\+prefixes} ()
 \mbox{\Hypertarget{class_layers_1_1_window_aa18f6816956dce89e5593aa864311987}\label{class_layers_1_1_window_aa18f6816956dce89e5593aa864311987}} 
 void {\bfseries center\+\_\+dialog} (QDialog $\ast$dialog)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_ab220b7d2227e17725a013fbc9d2cc9fc}\label{class_layers_1_1_window_ab220b7d2227e17725a013fbc9d2cc9fc}} 
-\mbox{\hyperlink{class_layers_1_1_customize___menu}{Customize\+\_\+\+Menu}} $\ast$ {\bfseries customize\+\_\+menu} () const
+\mbox{\Hypertarget{class_layers_1_1_window_a14543d8ac6d8fe635fa4d02f5558739c}\label{class_layers_1_1_window_a14543d8ac6d8fe635fa4d02f5558739c}} 
+\mbox{\hyperlink{class_layers_1_1_customize_menu}{Customize\+Menu}} $\ast$ {\bfseries customize\+\_\+menu} () const
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a51178169cf342467fa9f3f5a14566723}\label{class_layers_1_1_window_a51178169cf342467fa9f3f5a14566723}} 
 void {\bfseries finalize} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_window_abcae06c266c64194125b7670bad152e1}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\mbox{\Hypertarget{class_layers_1_1_window_a57134cc08a04e7d4036d5cf9170871c6}\label{class_layers_1_1_window_a57134cc08a04e7d4036d5cf9170871c6}} 
+void {\bfseries link\+\_\+theme\+\_\+name} (const QString \&name)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}{update\+\_\+theme\+\_\+dependencies}} ()
+\mbox{\Hypertarget{class_layers_1_1_window_a369f042b04613bb206c0939df0a1de51}\label{class_layers_1_1_window_a369f042b04613bb206c0939df0a1de51}} 
+void {\bfseries set\+\_\+main\+\_\+widget} (\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$main\+\_\+widget)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_a905ec12e06c5e76e315f03498bd6fcc3}\label{class_layers_1_1_window_a905ec12e06c5e76e315f03498bd6fcc3}} 
+void {\bfseries set\+\_\+window\+\_\+icon} (const \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} \&icon\+\_\+graphic)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a325de3cb537293c56dbd2e1df030a4a7}\label{class_layers_1_1_window_a325de3cb537293c56dbd2e1df030a4a7}} 
 void {\bfseries set\+\_\+window\+\_\+title} (const QString \&title)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_a9bb7b827ae80167e734a56fb646954a9}\label{class_layers_1_1_window_a9bb7b827ae80167e734a56fb646954a9}} 
-\mbox{\hyperlink{class_layers_1_1_settings___menu}{Settings\+\_\+\+Menu}} $\ast$ {\bfseries settings\+\_\+menu} () const
+\mbox{\Hypertarget{class_layers_1_1_window_ac2dfbb3c5dec0e98581b1f5726683f27}\label{class_layers_1_1_window_ac2dfbb3c5dec0e98581b1f5726683f27}} 
+\mbox{\hyperlink{class_layers_1_1_settings_menu}{Settings\+Menu}} $\ast$ {\bfseries settings\+\_\+menu} () const
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a2a3770e6cc600dcdd3ba0fec9ee4903d}\label{class_layers_1_1_window_a2a3770e6cc600dcdd3ba0fec9ee4903d}} 
 \mbox{\hyperlink{class_layers_1_1_titlebar}{Titlebar}} $\ast$ {\bfseries titlebar} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}\label{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}} 
+void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_window_ab50caf4e222d128068b6beb052048899}\label{class_layers_1_1_window_ab50caf4e222d128068b6beb052048899}} 
-bool {\bfseries native\+Event} (const QByte\+Array \&event\+Type, void $\ast$message, long $\ast$result) override
+void \mbox{\hyperlink{class_layers_1_1_window_abcae06c266c64194125b7670bad152e1}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_abe6432e9bbae79dd9642371ab8cd83f3}\label{class_layers_1_1_window_abe6432e9bbae79dd9642371ab8cd83f3}} 
+bool {\bfseries native\+Event} (const QByte\+Array \&event\+Type, void $\ast$message, qintptr $\ast$result) override
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_af93c09420cea4cead21340215ee02a09}\label{class_layers_1_1_window_af93c09420cea4cead21340215ee02a09}} 
+void {\bfseries paint\+Event} (QPaint\+Event $\ast$event) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -104,33 +117,30 @@ Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658
 \index{Layers::Window@{Layers::Window}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Window@{Layers::Window}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Window\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Window\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
 Initializes the reference list to child themeables.
 
 A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{apply\+\_\+theme()}} function to work recursively.
 
-Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
 
-This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+This function is called by init\+\_\+themeable(). 
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}\label{class_layers_1_1_window_aaefbfb4610945a5a93670f07a3ab1227}} 
-\index{Layers::Window@{Layers::Window}!update\_theme\_dependencies@{update\_theme\_dependencies}}
-\index{update\_theme\_dependencies@{update\_theme\_dependencies}!Layers::Window@{Layers::Window}}
-\doxysubsubsection{\texorpdfstring{update\_theme\_dependencies()}{update\_theme\_dependencies()}}
-{\footnotesize\ttfamily void Window\+::update\+\_\+theme\+\_\+dependencies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Updates anything that can\textquotesingle{}t be changed with attributes.
-
-As a \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}, this function updates the border margins of the layout if the layout happens to be a \mbox{\hyperlink{class_layers_1_1_horizontal___layout}{Layers\+::\+Horizontal\+\_\+\+Layout}} or \mbox{\hyperlink{class_layers_1_1_vertical___layout}{Layers\+::\+Vertical\+\_\+\+Layout}}. 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_a9fde9cfec1b6f76c644885bd230ce746}{Layers\+::\+Widget}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Layers\+RW.\+h\item 
-Window.\+cpp\end{DoxyCompactItemize}
+include/Window.\+h\item 
+src/\+Widgets/Window.\+cpp\end{DoxyCompactItemize}

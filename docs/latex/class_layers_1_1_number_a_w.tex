@@ -1,0 +1,63 @@
+\hypertarget{class_layers_1_1_number_a_w}{}\doxysection{Layers\+::Number\+AW Class Reference}
+\label{class_layers_1_1_number_a_w}\index{Layers::NumberAW@{Layers::NumberAW}}
+Inheritance diagram for Layers\+::Number\+AW\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_layers_1_1_number_a_w}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_number_a_w_afd1d893d393fac0332e61b4f3e2f1cb7}\label{class_layers_1_1_number_a_w_afd1d893d393fac0332e61b4f3e2f1cb7}} 
+{\bfseries Number\+AW} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$attribute, QInt\+Validator $\ast$int\+\_\+validator, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_number_a_w_aed0770dd878f7347801af47ba2cafaec}\label{class_layers_1_1_number_a_w_aed0770dd878f7347801af47ba2cafaec}} 
+void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_number_a_w}{Number\+AW}} $\ast$number\+\_\+aw)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_number_a_w_aca408687c48ca4aec7ca23b263fad81a}\label{class_layers_1_1_number_a_w_aca408687c48ca4aec7ca23b263fad81a}} 
+void {\bfseries set\+\_\+centered} (bool centered=true)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_number_a_w_ad2802e3199ecca7b38bf29d0523cab05}\label{class_layers_1_1_number_a_w_ad2802e3199ecca7b38bf29d0523cab05}} 
+void {\bfseries set\+\_\+unit\+\_\+label\+\_\+text} (const QString \&unit\+\_\+string)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f01c6}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f01c6}\label{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f01c6}} 
+\index{Layers::NumberAW@{Layers::NumberAW}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::NumberAW@{Layers::NumberAW}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Number\+AW\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Attribute\+Widgets.\+h\item 
+src/\+Widgets/\+Attribute Widgets/Number\+AW.\+cpp\end{DoxyCompactItemize}

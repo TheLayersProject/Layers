@@ -1,0 +1,74 @@
+\hypertarget{_customize_panel_8h_source}{}\doxysection{Customize\+Panel.\+h}
+\label{_customize_panel_8h_source}\index{include/CustomizePanel.h@{include/CustomizePanel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CUSTOMIZEPANEL\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CUSTOMIZEPANEL\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}AttributeWidgets.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Label.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{11     \{}
+\DoxyCodeLine{12         Q\_OBJECT}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14     \textcolor{keyword}{public}:}
+\DoxyCodeLine{15         \mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* themeable, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_customize_panel}{\string~CustomizePanel}}();}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} add\_attribute\_widget(\mbox{\hyperlink{class_layers_1_1_attribute_widget}{AttributeWidget}}* attribute\_widget);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} add\_widget\_button(\mbox{\hyperlink{class_layers_1_1_button}{Button}}* button, \textcolor{keywordtype}{int} index = -\/1);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} init\_attribute\_widgets();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_customize_panel}{CustomizePanel}}* cpanel);}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} replace\_all\_aw\_group\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}}* control\_aw\_group);}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} replace\_all\_color\_awidgets\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_color_a_w}{ColorAW}}* control\_color\_aw);}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} replace\_all\_fill\_awidgets\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_fill_a_w}{FillAW}}* control\_fill\_aw);}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} replace\_all\_number\_awidgets\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_number_a_w}{NumberAW}}* control\_number\_aw);}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} replace\_all\_widget\_buttons\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_button}{Button}}* control\_widget\_button);}
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} replace\_corner\_radii\_aw\_attrs\_with(\mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}* control\_corner\_radii\_aw);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_customize_panel_adbf24db387bb2f8315ab95b2abc1d97e}{init\_attributes}}();}
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_customize_panel_ac55d3c41ab08b45a4c350dbdc4e4234f}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keyword}{private}:}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{bool} m\_layout\_setup\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{40         \textcolor{keywordtype}{bool} m\_showing\_primary\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_state_a_w}{StateAW}}* m\_state\_aw\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         QVBoxLayout* m\_attributes\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{45         QVBoxLayout* m\_widgets\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{46         QVBoxLayout* m\_widget\_buttons\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_show\_all\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Show All"{}}, \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_show\_primary\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Show Primary"{}}, \textcolor{keyword}{true}) \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_attributes\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Attributes:"{}}) \};}
+\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_widgets\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Widgets:"{}}) \};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         QList<AttributeWidget*> m\_attribute\_widgets\{ QList<AttributeWidget*>() \};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         QList<AWGroup*> m\_aw\_groups\{ QList<AWGroup*>() \};}
+\DoxyCodeLine{57         QList<ColorAW*> m\_color\_awidgets\{ QList<ColorAW*>() \};}
+\DoxyCodeLine{58         QList<FillAW*> m\_fill\_awidgets\{ QList<FillAW*>() \};}
+\DoxyCodeLine{59         QList<NumberAW*> m\_number\_awidgets\{ QList<NumberAW*>() \};}
+\DoxyCodeLine{60         QList<Button*> m\_widget\_buttons\{ QList<Button*>() \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{CornerRadiiAW}}* m\_corner\_radii\_aw\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* m\_themeable;}
+\DoxyCodeLine{65     \};}
+\DoxyCodeLine{66 \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CUSTOMIZEPANEL\_H}}
+
+\end{DoxyCode}

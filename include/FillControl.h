@@ -16,6 +16,7 @@ namespace Layers
 
 	public:
 		FillControl(QWidget* parent = nullptr);
+		~FillControl();
 
 		void init_attributes();
 
@@ -25,21 +26,20 @@ namespace Layers
 
 		void set_attribute(Attribute* attribute);
 
+	public slots:
+		void set_current_editting_state(const QString& state);
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
 
 	private:
 		void setup_layout();
 
-		Attribute* m_attribute{ nullptr };
-
 		ColorControl* m_color_control{ new ColorControl };
 
 		Label* m_color_label{ new Label("Color") };
 
 		QGraphicsOpacityEffect* m_color_label_opacity{ new QGraphicsOpacityEffect };
-
-		QString m_current_editting_state{ "" };
 
 		Widget* m_dialog{ new Widget };
 

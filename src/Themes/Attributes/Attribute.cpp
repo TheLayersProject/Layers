@@ -1,167 +1,250 @@
 #include "../../../include/Attribute.h"
 
 using Layers::Attribute;
+using Layers::Variant;
 
 Attribute::Attribute(const QString& name, bool disabled) :
-	m_name{ name }, m_disabled{ new bool(disabled) }, AttributeLayoutItem() { }
+	m_name{ name }, m_disabled{ disabled }, AttributeLayoutItem() { }
 
-Attribute::Attribute(const QString& name, QVariant value, bool disabled) :
-	m_name{ name }, m_value{ new QVariant(value) }, m_disabled{ new bool(disabled) }, AttributeLayoutItem() { }
+Attribute::Attribute(const QString& name, QVariant qvariant, bool disabled) :
+	m_name{ name }, m_variant{ new Variant(qvariant) }, m_disabled{ disabled }, AttributeLayoutItem()
+{
+	variant_connections.append(
+		connect(m_variant, &Variant::changed, [this] { emit value_changed(); })
+	);
+}
 
-Attribute::Attribute(const QString& name, QMap<QString, QVariant> state_value_map, bool disabled) :
-	m_name{ name }, m_state{ state_value_map.firstKey() },
-	m_values{ new QMap<QString, QVariant>(state_value_map)}, m_disabled{ new bool(disabled) }, AttributeLayoutItem() { }
+Attribute::Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled) :
+	m_name{ name },
+	m_state_variant_map{ new QMap<QString, Variant>(state_variant_map) }, m_disabled{ disabled }, AttributeLayoutItem()
+{
+	for (const QString& state : m_state_variant_map->keys())
+		variant_connections.append(
+			connect(&(*m_state_variant_map)[state], &Variant::changed, [this] {
+				emit value_changed();
+			})
+		);
+}
 
 Attribute::~Attribute()
 {
-	if (m_overriding_attr)
-		disconnect(m_override_update_connection);
+	for (QMetaObject::Connection variant_connection : variant_connections)
+		disconnect(variant_connection);
+}
+
+void Layers::Attribute::clear_variant_if_owner()
+{
+	if (m_owns_variant)
+	{
+		m_owns_variant = false;
+
+		if (m_variant)
+		{
+			delete m_variant;
+			m_variant = nullptr;
+		}
+		else if (m_state_variant_map)
+		{
+			delete m_state_variant_map;
+			m_state_variant_map = nullptr;
+		}
+	}
 }
 
 bool Attribute::contains_state(const QString& state) const
 {
-	if (m_values) return m_values->contains(state);
-
-	return false;
+	return m_state_variant_map->contains(state);
 }
 
-void Attribute::copy_values_from(const Attribute& attr)
+void Attribute::copy_value_from(const Attribute& attr)
 {
-	// NOTE: Will want to keep track of whether the value(s) belong to this Attribute
-	// or point to another Attribute's value(s). If this Attribute doesn't own the value(s),
-	// then you will not want to delete them.
-
-	if (!m_overriding_attr)
+	if (attr.m_variant)
 	{
-		if (attr.m_value)
+		if (m_state_variant_map)
 		{
-			if (m_values)
-			{
-				delete m_values;
+			delete m_state_variant_map;
 
-				m_values = nullptr;
+			m_state_variant_map = nullptr;
 
-				m_value = new QVariant(*attr.m_value);
-			}
-			else
-				m_value->setValue(*attr.m_value);
+			m_variant = new Variant(*attr.m_variant);
+		}
+		else
+			*m_variant = *attr.m_variant; //m_variant->setValue(*attr.m_variant);
+	}
+	else
+	{
+		if (m_variant)
+		{
+			delete m_variant;
+
+			m_variant = nullptr;
+
+			m_state_variant_map = new QMap<QString, Variant>(*attr.m_state_variant_map);
 		}
 		else
 		{
-			if (m_value)
-			{
-				delete m_value;
+			m_state_variant_map->clear();
 
-				m_value = nullptr;
-
-				m_values = new QMap<QString, QVariant>(*attr.m_values);
-			}
-			else
-			{
-				m_values->clear();
-
-				m_values->insert(*attr.m_values);
-			}
+			m_state_variant_map->insert(*attr.m_state_variant_map);
 		}
-
-		m_disabled = attr.m_disabled;
-
-		emit value_changed();
-
-		//m_state = attr->m_state;
-		// Should current state of attr also be copied?
 	}
+
+	m_disabled = attr.m_disabled;
+	
+	emit value_changed();
 }
 
 bool Attribute::disabled() const
-{   
-	return *m_disabled;
+{
+	return m_disabled;
 }
 
 QString& Attribute::name() { return m_name; }
 
-void Attribute::get_values_from(Attribute& replacement_attr)
+void Attribute::get_variant_from(Attribute& attribute)
 {
-	// Need to check if the replacement_attr itself is using an overriding_attr.
-	// If so, you will not want to delete the m_value(s) pointer
+	// TODO: Likely need to store this connection and disconnect in destructor
+	connect(&attribute, &Attribute::variant_changed, [this, &attribute] {
+		get_variant_from(attribute);
+	});
 
-	// TODO: Look into this. You put this check here to prevent the CornerRadiiAW's example_widget
-	// from getting the values from the sliders, and then turning around and getting the values from 
-	// the replace_all_attributes_with() call. This might cause other things to not work as expected.
-	if (!m_overriding_attr)
+	if (attribute.m_variant)
 	{
-		m_overriding_attr = &replacement_attr;
+		set_variant(*attribute.m_variant);
 
-		if (m_overriding_attr->m_value)
-		{
-			if (m_value) delete m_value;
-			else {
-				delete m_values;
-				m_values = nullptr;
-			}
+		for (QMetaObject::Connection variant_connection : variant_connections)
+			disconnect(variant_connection);
 
-			m_value = m_overriding_attr->m_value;
-		}
-		else
-		{
-			if (m_value) {
-				delete m_value;
-				m_value = nullptr;
-			}
-			else delete m_values;
+		variant_connections.clear();
 
-			m_values = m_overriding_attr->m_values;
-		}
-
-		delete m_disabled;
-		m_disabled = m_overriding_attr->m_disabled;
-
-		emit value_changed();
-
-		m_override_update_connection = connect(m_overriding_attr, &Attribute::value_changed, [this]
-			{
-				if (m_overriding_attr->m_value)
-					m_value = m_overriding_attr->m_value;
-				else
-					m_values = m_overriding_attr->m_values;
-
-				m_disabled = m_overriding_attr->m_disabled;
-
-				emit value_changed();
-			});
+		variant_connections.append(
+			connect(m_variant, &Variant::changed, [this] { emit value_changed(); })
+		);
 	}
+	else if (attribute.m_state_variant_map)
+	{
+		set_state_variant_map(*attribute.m_state_variant_map);
+
+		for (QMetaObject::Connection variant_connection : variant_connections)
+			disconnect(variant_connection);
+
+		variant_connections.clear();
+
+		for (const QString& state : m_state_variant_map->keys())
+			variant_connections.append(
+				connect(&(*m_state_variant_map)[state], &Variant::changed, [this] {
+					emit value_changed();
+					})
+			);
+	}
+
+	emit variant_changed();
+}
+
+//void Attribute::get_variant_from(Attribute& attribute)
+//{
+//	if (attribute.m_variant)
+//	{
+//		set_variant(*attribute.m_variant);
+//
+//		for (QMetaObject::Connection variant_connection : variant_connections)
+//			disconnect(variant_connection);
+//
+//		variant_connections.clear();
+//
+//		variant_connections.append(
+//			connect(m_variant, &Variant::changed, [this] { emit value_changed(); })
+//		);
+//	}
+//	else if (attribute.m_state_variant_map)
+//	{
+//		set_state_variant_map(*attribute.m_state_variant_map);
+//
+//		for (QMetaObject::Connection variant_connection : variant_connections)
+//			disconnect(variant_connection);
+//
+//		variant_connections.clear();
+//
+//		for (const QString& state : m_state_variant_map->keys())
+//			variant_connections.append(
+//				connect(&(*m_state_variant_map)[state], &Variant::changed, [this] {
+//					emit value_changed();
+//					})
+//			);
+//	}
+//}
+
+void Attribute::init_state_variant_map(const QMap<QString, Variant>& state_variant_map)
+{
+	if (m_variant)
+	{
+		delete m_variant;
+		m_variant = nullptr;
+	}
+
+	if (m_state_variant_map) m_state_variant_map->clear();
+	else m_state_variant_map = new QMap<QString, Variant>();
+
+	m_state_variant_map->insert(state_variant_map);
+}
+
+bool Attribute::is_stateful() const
+{
+	if (m_state_variant_map)
+		return !m_state_variant_map->isEmpty();
+
+	return false;
 }
 
 void Attribute::set_disabled(bool disabled)
 {
-	m_disabled = new bool(disabled);
+	//m_disabled = new bool(disabled);
+	m_disabled = disabled;
+
+	emit value_changed();
 }
 
 void Attribute::set_state(const QString& state)
 {
-	if (contains_state(state)) m_state = state;
+	m_state = state;
 }
 
-void Attribute::set_value(QVariant value)
+void Attribute::set_state_variant_map(QMap<QString, Variant>& state_variant_map)
 {
-	if (m_value && *m_value != value)
-	{
-		*m_value = value;
+	// TODO: Should this function check if the incoming 'values' map has the same values as 'm_values'?
+	// Also, should it emit value_changed?
 
+	clear_variant_if_owner();
+
+	m_state_variant_map = &state_variant_map;
+
+	if (!m_state_variant_map->keys().contains(m_state))
+		m_state = m_state_variant_map->firstKey();
+}
+
+void Attribute::set_value(QVariant qvariant)
+{
+	/* Should this function still work with stateful attributes and just change
+	   the variant associated with the current state? */
+
+	if (m_variant && *m_variant != qvariant)
+	{
+		*m_variant = qvariant;
+		
 		emit value_changed();
 	}
 }
 
-void Attribute::set_value(const QString& state, QVariant value)
+void Attribute::set_value(const QString& state, QVariant variant)
 {
-	if (m_values)
+	if (m_state_variant_map)
 	{
-		if (m_values->contains(state))
+		if (m_state_variant_map->contains(state))
 		{
-			if ((*m_values)[state] != value)
+			if ((*m_state_variant_map)[state] != variant)
 			{
-				(*m_values)[state] = value;
-
+				(*m_state_variant_map)[state] = variant;
+		
 				emit value_changed();
 			}
 		}
@@ -170,22 +253,13 @@ void Attribute::set_value(const QString& state, QVariant value)
 	else qDebug() << "WARNING: Failed to set attribute value: State provided but Attribute is not stateful.";
 }
 
-void Attribute::set_values(const QMap<QString, QVariant>& values)
+void Attribute::set_variant(Variant& variant)
 {
-	// TODO: Should this function check if the incoming 'values' map has the same values as 'm_values'?
-	// Also, should it emit value_changed?
+	clear_variant_if_owner();
 
-	if (m_value)
-	{
-		delete m_value;
+	m_state = "";
 
-		m_value = nullptr;
-	}
-	if (m_values) delete m_values;
-
-	m_values = new QMap<QString, QVariant>(values);
-
-	m_state = m_values->firstKey();
+	m_variant = &variant;
 }
 
 QString Attribute::state() const
@@ -195,21 +269,21 @@ QString Attribute::state() const
 
 QList<QString> Attribute::states() const
 {
-	if (m_values) return m_values->keys();
+	if (m_state_variant_map)
+		return m_state_variant_map->keys();
 
 	return QList<QString>();
 }
 
 const char* Attribute::typeName() const
 {
-	if (m_values) return (*m_values)[m_state].typeName();
+	if (m_state_variant_map)
+		return (*m_state_variant_map)[m_state].typeName();
 	else
-	{
-		return m_value->typeName();
-	}
+		return m_variant->typeName();
 }
 
-QMap<QString, QVariant>* Attribute::values()
+Variant* Attribute::variant() const
 {
-	return m_values;
+	return m_variant;
 }

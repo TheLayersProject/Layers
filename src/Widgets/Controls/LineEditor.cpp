@@ -15,15 +15,18 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
     m_line_edit->installEventFilter(this);
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; padding-left: " +
-        QString::number(a_left_padding.value<int>() + a_margin_left.value<int>()) + "px; padding-bottom: 1px; }");
+        QString::number(a_left_padding.as<int>() + a_margin_left.as<int>()) + "px; padding-bottom: 1px; }");
 
     connect(m_line_edit, &QLineEdit::textEdited, [this] {
         if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
         else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
         {
-            a_text.set_value(m_line_edit->text());
+            if (a_text.is_stateful())
+                a_text.set_value(a_text.state(), m_line_edit->text());
+            else
+                a_text.set_value(m_line_edit->text());
         }
-        else m_line_edit->setText(a_text.value<QString>());
+        else m_line_edit->setText(a_text.as<QString>());
 
 		emit text_edited(m_line_edit->text());
         });
@@ -35,16 +38,18 @@ void LineEditor::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
     Widget::apply_theme_attributes(theme_attrs);
 
-    a_text_color.copy_values_from(*theme_attrs["text_color"]);
+    a_text_color.copy_value_from(*theme_attrs["text_color"]);
 }
 
 void LineEditor::reconnect_text_attribute()
 {
     connect(&a_text, &Attribute::value_changed, [this]
         {
-            QString new_text = a_text.value<QString>();
+            update_theme_dependencies();
 
-            if (m_line_edit->text() != new_text) m_line_edit->setText(new_text);
+            //QString new_text = a_text.as<QString>();
+
+            //if (m_line_edit->text() != new_text) m_line_edit->setText(new_text);
         });
 }
 
@@ -70,7 +75,9 @@ void LineEditor::replace_all_attributes_with(LineEditor* line_editor)
 {
     Widget::replace_all_attributes_with(line_editor);
 
-    a_text_color.get_values_from(line_editor->a_text_color);
+    a_text_color.get_variant_from(line_editor->a_text_color);
+
+    update_theme_dependencies();
 }
 
 void LineEditor::set_default_value(const QString& default_value)
@@ -114,7 +121,10 @@ void LineEditor::set_text(const QString& text)
 {
     m_line_edit->setText(text);
 
-    a_text.set_value(text);
+    if (a_text.is_stateful())
+        a_text.set_value(a_text.state(), text);
+    else
+        a_text.set_value(text);
 }
 
 void LineEditor::set_validator(const QValidator* validator)
@@ -144,11 +154,18 @@ QString LineEditor::text()
 void LineEditor::update_theme_dependencies()
 {
     m_line_edit->setStyleSheet(
-        "QLineEdit { border: none; background: transparent; color: " + a_text_color.value<QColor>().name() + "; padding-left: " +
-        QString::number(a_left_padding.value<int>() + a_margin_left.value<int>()) + "px; padding-bottom: 2px; }");   
+        "QLineEdit { border: none; background: transparent; color: " + a_text_color.as<QColor>().name() + "; padding-left: " +
+        QString::number(a_left_padding.as<int>() + a_margin_left.as<int>()) + "px; padding-bottom: 2px; }");
 
-	if (m_line_edit->text() != a_text.value<QString>())
-		m_line_edit->setText(a_text.value<QString>());
+	if (m_line_edit->text() != a_text.as<QString>())
+		m_line_edit->setText(a_text.as<QString>());
+}
+
+void LineEditor::set_current_editting_state(const QString& state)
+{
+    a_text.set_state(state);
+
+    update_theme_dependencies();
 }
 
 bool LineEditor::eventFilter(QObject* object, QEvent* event)

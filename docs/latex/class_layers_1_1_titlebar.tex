@@ -6,24 +6,29 @@ Inheritance diagram for Layers\+::Titlebar\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{class_layers_1_1_titlebar}
 \end{center}
 \end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_titlebar_afec3119c354b0e09e8ac1b4850fb3836}\label{class_layers_1_1_titlebar_afec3119c354b0e09e8ac1b4850fb3836}} 
+void {\bfseries window\+\_\+icon\+\_\+updated} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_titlebar_a5df11b810ce128778db3808f16989e27}\label{class_layers_1_1_titlebar_a5df11b810ce128778db3808f16989e27}} 
 {\bfseries Titlebar} (QWidget $\ast$parent=nullptr)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_titlebar_ab4d81092207e9cd00e800e8cc1a3a020}\label{class_layers_1_1_titlebar_ab4d81092207e9cd00e800e8cc1a3a020}} 
-void {\bfseries add\+\_\+mll} (\mbox{\hyperlink{class_layers_1_1_menu___label___layer}{Menu\+\_\+\+Label\+\_\+\+Layer}} $\ast$mll)
+\mbox{\Hypertarget{class_layers_1_1_titlebar_a4856ee025a7a6a696d91e094e02fd899}\label{class_layers_1_1_titlebar_a4856ee025a7a6a696d91e094e02fd899}} 
+void {\bfseries add\+\_\+mll} (\mbox{\hyperlink{class_layers_1_1_menu_label_layer}{Menu\+Label\+Layer}} $\ast$mll)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_titlebar_a8cf07b55a03129583f9a7f9bf9ec6b3d}\label{class_layers_1_1_titlebar_a8cf07b55a03129583f9a7f9bf9ec6b3d}} 
 void {\bfseries remove\+\_\+mlls\+\_\+past} (int index)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_titlebar_a4332cc5ba1ae6cabe97f154c485444c2}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
-\item 
 \mbox{\Hypertarget{class_layers_1_1_titlebar_a7cfe00e6ced6c04af0a5eccc0b11ec02}\label{class_layers_1_1_titlebar_a7cfe00e6ced6c04af0a5eccc0b11ec02}} 
 bool {\bfseries is} (QWidget $\ast$widget)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_titlebar_aba13776288da7f17853285c1c46694a5}{setup\+\_\+customize\+\_\+panel}} ()
+\mbox{\Hypertarget{class_layers_1_1_titlebar_afb92ce77ec2229d184f0e1851c5212ce}\label{class_layers_1_1_titlebar_afb92ce77ec2229d184f0e1851c5212ce}} 
+void {\bfseries set\+\_\+window\+\_\+icon} (const \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} \&icon\+\_\+graphic)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_titlebar_ad37a518eea219d509969d053d2183a50}\label{class_layers_1_1_titlebar_ad37a518eea219d509969d053d2183a50}} 
 void {\bfseries set\+\_\+window\+\_\+title} (const QString \&title)
@@ -46,6 +51,8 @@ void {\bfseries set\+\_\+window\+\_\+title} (const QString \&title)
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{class_layers_1_1_titlebar_a4332cc5ba1ae6cabe97f154c485444c2}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\item 
 \mbox{\Hypertarget{class_layers_1_1_titlebar_a7432d1828758b708b1ebaf6b2b740979}\label{class_layers_1_1_titlebar_a7432d1828758b708b1ebaf6b2b740979}} 
 void {\bfseries resize\+Event} (QResize\+Event $\ast$event)
 \item 
@@ -60,33 +67,30 @@ void {\bfseries setup\+\_\+layout} ()
 \index{Layers::Titlebar@{Layers::Titlebar}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Titlebar@{Layers::Titlebar}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Titlebar\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Titlebar\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
 Initializes the reference list to child themeables.
 
 A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
 
-Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ab23083741e63ca400bb9860b83609840}{add\+\_\+child\+\_\+themeable\+\_\+reference()}} to populate the reference list.
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
 
-This function is called by \mbox{\hyperlink{class_layers_1_1_themeable_afdae3d404debc794625aa2f633ec23bc}{init\+\_\+themeable()}}. 
+This function is called by init\+\_\+themeable(). 
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_titlebar_aba13776288da7f17853285c1c46694a5}\label{class_layers_1_1_titlebar_aba13776288da7f17853285c1c46694a5}} 
-\index{Layers::Titlebar@{Layers::Titlebar}!setup\_customize\_panel@{setup\_customize\_panel}}
-\index{setup\_customize\_panel@{setup\_customize\_panel}!Layers::Titlebar@{Layers::Titlebar}}
-\doxysubsubsection{\texorpdfstring{setup\_customize\_panel()}{setup\_customize\_panel()}}
-{\footnotesize\ttfamily void Titlebar\+::setup\+\_\+customize\+\_\+panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Prepares the widget\textquotesingle{}s customize panel with connections to the widget\textquotesingle{}s attributes.
-
-\mbox{\hyperlink{class_layers_1_1_themeable_a30f774274e3ed0ba733c9b0b8d460482}{Themeable\+::init\+\_\+customize\+\_\+panel()}} is responsible for calling this function. 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_widget_a1ee3c3d3a0874d617553299c6f8b64ab}{Layers\+::\+Widget}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Layers\+RW.\+h\item 
-Titlebar.\+cpp\end{DoxyCompactItemize}
+include/Titlebar.\+h\item 
+src/\+Widgets/Titlebar.\+cpp\end{DoxyCompactItemize}

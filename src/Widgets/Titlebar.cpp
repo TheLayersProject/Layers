@@ -79,10 +79,6 @@ void Titlebar::remove_mlls_past(int index)
 {
     while (index + 1 <= mll_stack.count() - 1)
     {
-        //remove_child_themeable_reference(mll_stack.last());
-
-        //m_control_mll->unshare_all_attributes_with(mll_stack.last());
-
         mll_stack.takeLast()->deleteLater();
     }
 
@@ -99,12 +95,12 @@ void Titlebar::remove_mlls_past(int index)
 
 void Titlebar::init_child_themeable_reference_list()
 {
-    add_child_themeable_reference(m_window_title_label);
-    add_child_themeable_reference(m_control_mll);
-    add_child_themeable_reference(m_settings_button);
-    add_child_themeable_reference(m_minimize_button);
-    add_child_themeable_reference(m_maximize_button);
-    add_child_themeable_reference(m_exit_button);
+    store_child_themeable_pointer(m_window_title_label);
+    store_child_themeable_pointer(m_control_mll);
+    store_child_themeable_pointer(m_settings_button);
+    store_child_themeable_pointer(m_minimize_button);
+    store_child_themeable_pointer(m_maximize_button);
+    store_child_themeable_pointer(m_exit_button);
 }
 
 bool Titlebar::is(QWidget* widget)

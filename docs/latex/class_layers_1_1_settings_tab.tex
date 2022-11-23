@@ -1,0 +1,107 @@
+\hypertarget{class_layers_1_1_settings_tab}{}\doxysection{Layers\+::Settings\+Tab Class Reference}
+\label{class_layers_1_1_settings_tab}\index{Layers::SettingsTab@{Layers::SettingsTab}}
+Inheritance diagram for Layers\+::Settings\+Tab\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_layers_1_1_settings_tab}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a8f8602eaa404b3ca6383d514ab07425f}\label{class_layers_1_1_settings_tab_a8f8602eaa404b3ca6383d514ab07425f}} 
+void {\bfseries clicked} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a2e2fc50070fd5677101ed6222b0c20ae}\label{class_layers_1_1_settings_tab_a2e2fc50070fd5677101ed6222b0c20ae}} 
+void {\bfseries under\+\_\+minimum\+\_\+width} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ad3524d60d3d1a07abfeab0a549a43978}\label{class_layers_1_1_settings_tab_ad3524d60d3d1a07abfeab0a549a43978}} 
+void {\bfseries over\+\_\+minimum\+\_\+width} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_aeaa34bb3c975d0a5f66f768807a2229c}\label{class_layers_1_1_settings_tab_aeaa34bb3c975d0a5f66f768807a2229c}} 
+{\bfseries Settings\+Tab} (\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$\mbox{\hyperlink{class_layers_1_1_themeable_a44348cb0e739908c52bf6d640215c1f4}{icon}}, const QString \&label\+\_\+text, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a6f65bf8f0046f074c2abd1b0bf3576a7}\label{class_layers_1_1_settings_tab_a6f65bf8f0046f074c2abd1b0bf3576a7}} 
+void {\bfseries expand} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ac78c23fc9b09070d4a2de80ae1ce01c9}\label{class_layers_1_1_settings_tab_ac78c23fc9b09070d4a2de80ae1ce01c9}} 
+void {\bfseries shrink} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a7a6434ff1531af1bfac60bee1a570a85}\label{class_layers_1_1_settings_tab_a7a6434ff1531af1bfac60bee1a570a85}} 
+int {\bfseries recommended\+\_\+minimum\+\_\+width} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a2cc36edd4d39b275f947f1d628206719}\label{class_layers_1_1_settings_tab_a2cc36edd4d39b275f947f1d628206719}} 
+void {\bfseries set\+\_\+disabled} (bool cond=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_af5afc4dd1f3e107f6603f720a5d31792}\label{class_layers_1_1_settings_tab_af5afc4dd1f3e107f6603f720a5d31792}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}{init\+\_\+attributes}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_a3be84b75c9a4c4eabbbd84ced5e5629d}\label{class_layers_1_1_settings_tab_a3be84b75c9a4c4eabbbd84ced5e5629d}} 
+void {\bfseries init\+\_\+attribute\+\_\+widgets} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_af308279aeea1dfca22fb715deb357a28}\label{class_layers_1_1_settings_tab_af308279aeea1dfca22fb715deb357a28}} 
+void {\bfseries resize\+Event} (QResize\+Event $\ast$event)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}\label{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}} 
+\index{Layers::SettingsTab@{Layers::SettingsTab}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::SettingsTab@{Layers::SettingsTab}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Settings\+Tab\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
+
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}\label{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}} 
+\index{Layers::SettingsTab@{Layers::SettingsTab}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::SettingsTab@{Layers::SettingsTab}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Settings\+Tab\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Settings\+Menu.\+h\item 
+src/\+Widgets/\+Menus/\+Settings/Settings\+Tab.\+cpp\end{DoxyCompactItemize}

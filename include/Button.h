@@ -21,6 +21,7 @@ namespace Layers
 		Button(Graphic* graphic, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 		Button(const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
 		Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
+		~Button();
 
 		void disable_graphic_hover_color(bool cond = true);
 		void disable_text_hover_color(bool cond = true);
@@ -33,7 +34,6 @@ namespace Layers
 
 		void resize();
 
-		//void set_attribute_value(const QString& attribute, QVariant value);
 		void set_available_width(int available_width);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
@@ -45,8 +45,6 @@ namespace Layers
 		int top_padding() const;
 		int right_padding() const;
 		int bottom_padding() const;
-
-		//void update_theme_dependencies() override;
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

@@ -17,13 +17,16 @@ namespace Layers
 
 		void init_attributes();
 
-		void set_attribute(Attribute* attribute);
+		//void set_attribute(Attribute* attribute);
+
+	public slots:
+		void set_current_editting_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
 
-	private:
-		Attribute* m_attribute{ nullptr };
+	//private:
+		//Attribute* m_attribute{ nullptr };
 	};
 }
 

@@ -20,10 +20,10 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 
 void Label::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
-	a_fill.copy_values_from(*theme_attrs["fill"]);
-	a_text_hover_color.copy_values_from(*theme_attrs["text_hover_color"]);
-	a_outline_color.copy_values_from(*theme_attrs["outline_color"]);
-	a_text_color.copy_values_from(*theme_attrs["text_color"]);
+	a_fill.copy_value_from(*theme_attrs["fill"]);
+	a_text_hover_color.copy_value_from(*theme_attrs["text_hover_color"]);
+	a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
+	a_text_color.copy_value_from(*theme_attrs["text_color"]);
 }
 
 void Label::init_attributes()
@@ -34,6 +34,8 @@ void Label::init_attributes()
 		{ "outline_color", &a_outline_color },
 		{ "text_color", &a_text_color }
 	});
+
+	// TODO: Probably need to connect Attribute::value_changed to Label::update
 
 	m_attribute_layout.append(&a_text_color);
 	m_attribute_layout.append(&a_text_hover_color);
@@ -46,7 +48,7 @@ void Label::resize()
 	QFontMetrics font_metrics(font());
 
 	int unwrapped_width = m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
-	int unwrapped_height = a_padding_top.value<int>() + font_metrics.height() + m_padding_bottom;
+	int unwrapped_height = a_padding_top.as<int>() + font_metrics.height() + m_padding_bottom;
 
 	if (unwrapped_width > m_available_width && wordWrap())
 	{
@@ -56,7 +58,7 @@ void Label::resize()
 
 		build_wrapped_lines();
 
-		int wrapped_height = a_padding_top.value<int>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
+		int wrapped_height = a_padding_top.as<int>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
 
 		QLabel::setFixedHeight(wrapped_height);
 	}
@@ -70,10 +72,10 @@ void Label::resize()
 
 void Label::replace_all_attributes_with(Label* label)
 {
-	a_fill.get_values_from(label->a_fill);
-	a_outline_color.get_values_from(label->a_outline_color);
-	a_text_color.get_values_from(label->a_text_color);
-	a_text_hover_color.get_values_from(label->a_text_hover_color);
+	a_fill.get_variant_from(label->a_fill);
+	a_outline_color.get_variant_from(label->a_outline_color);
+	a_text_color.get_variant_from(label->a_text_color);
+	a_text_hover_color.get_variant_from(label->a_text_hover_color);
 }
 
 void Label::build_wrapped_lines()
@@ -190,14 +192,14 @@ void Label::paintEvent(QPaintEvent* event)
 	QPainterPath path;
 	QPen pen;
 	QFont label_font = font();
-	QBrush fill_brush(a_fill.value<QColor>());
+	QBrush fill_brush(a_fill.as<QColor>());
 	QBrush text_brush;
 
-	if (m_hovering) text_brush = QBrush(a_text_hover_color.value<QColor>());
-	else text_brush = QBrush(a_text_color.value<QColor>());
+	if (m_hovering) text_brush = QBrush(a_text_hover_color.as<QColor>());
+	else text_brush = QBrush(a_text_color.as<QColor>());
 
 	pen.setWidth(3);
-	pen.setColor(a_outline_color.value<QColor>());
+	pen.setColor(a_outline_color.as<QColor>());
 
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
@@ -213,11 +215,11 @@ void Label::paintEvent(QPaintEvent* event)
 
 		for (int i = 0; i < m_wrapped_lines.count(); i++)
 		{
-			path.addText(m_padding_left, a_padding_top.value<int>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
+			path.addText(m_padding_left, a_padding_top.as<int>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
 		}
 	}
 	else
-		path.addText(m_padding_left, a_padding_top.value<int>() + label_font.pointSizeF(), label_font, text());
+		path.addText(m_padding_left, a_padding_top.as<int>() + label_font.pointSizeF(), label_font, text());
 
 	if (!a_outline_color.disabled()) painter.strokePath(path, pen);
 

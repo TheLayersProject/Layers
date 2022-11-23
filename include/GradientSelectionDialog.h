@@ -6,6 +6,7 @@
 
 #include "Button.h"
 #include "ColorControl.h"
+#include "Graphic.h"
 
 namespace Layers
 {
@@ -54,6 +55,25 @@ namespace Layers
 
 		void paintEvent(QPaintEvent* event) override;
 
+		AttributeGroup ag_border{ AttributeGroup("Border", {
+			{ "border_fill", &a_border_fill },
+			{ "border_thickness", &a_border_thickness }
+			}) };
+
+		AttributeGroup ag_corner_radii{ AttributeGroup("Corner Radii", {
+			{ "corner_radius_tl", &a_corner_radius_tl },
+			{ "corner_radius_tr", &a_corner_radius_tr },
+			{ "corner_radius_bl", &a_corner_radius_bl },
+			{ "corner_radius_br", &a_corner_radius_br }
+			}) };
+
+		AttributeGroup ag_margins{ AttributeGroup("Margins", {
+			{ "margin_left", &a_margin_left },
+			{ "margin_top", &a_margin_top },
+			{ "margin_right", &a_margin_right },
+			{ "margin_bottom", &a_margin_bottom }
+			}) };
+
 	private:
 		void init_color_controls();
 		void init_gradient_widget();
@@ -67,6 +87,10 @@ namespace Layers
 
 		Widget* m_gradient_widget{ new Widget };
 		Widget* m_titlebar{ new Widget };
+
+		Label* m_window_title_label = new Label("Gradient Selection Box");
+
+		Button* m_exit_button = new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true);
 
 		QGradientStops m_gradient_stops{ { 0.0, Qt::white },{ 1.0, Qt::black } };
 

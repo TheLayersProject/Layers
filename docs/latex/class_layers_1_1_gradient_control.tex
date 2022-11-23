@@ -1,0 +1,59 @@
+\hypertarget{class_layers_1_1_gradient_control}{}\doxysection{Layers\+::Gradient\+Control Class Reference}
+\label{class_layers_1_1_gradient_control}\index{Layers::GradientControl@{Layers::GradientControl}}
+Inheritance diagram for Layers\+::Gradient\+Control\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_layers_1_1_gradient_control}
+\end{center}
+\end{figure}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient_control_ae55e3c98a9a9c6d9a7531043d976d6e2}\label{class_layers_1_1_gradient_control_ae55e3c98a9a9c6d9a7531043d976d6e2}} 
+void {\bfseries gradient\+\_\+changed} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient_control_afdd2c6ce3d8623013c21226d37d14b9d}\label{class_layers_1_1_gradient_control_afdd2c6ce3d8623013c21226d37d14b9d}} 
+{\bfseries Gradient\+Control} (QWidget $\ast$parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}{init\+\_\+attributes}} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient_control_ab2012fcfe9fe50e97f9761d8e225eeca}\label{class_layers_1_1_gradient_control_ab2012fcfe9fe50e97f9761d8e225eeca}} 
+void {\bfseries set\+\_\+attribute} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$attribute)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient_control_a16dccf14272108d557c878aae602e36a}\label{class_layers_1_1_gradient_control_a16dccf14272108d557c878aae602e36a}} 
+bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}\label{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}} 
+\index{Layers::GradientControl@{Layers::GradientControl}!init\_attributes@{init\_attributes}}
+\index{init\_attributes@{init\_attributes}!Layers::GradientControl@{Layers::GradientControl}}
+\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
+{\footnotesize\ttfamily void Gradient\+Control\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Gradient\+Control.\+h\item 
+src/\+Widgets/\+Controls/Gradient\+Control.\+cpp\end{DoxyCompactItemize}

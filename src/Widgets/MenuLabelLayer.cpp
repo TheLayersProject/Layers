@@ -50,9 +50,9 @@ void MenuLabelLayer::init_attributes()
 
 void MenuLabelLayer::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_back_button);
-	add_child_themeable_reference(m_icon_button);
-	add_child_themeable_reference(m_text_label);
+	store_child_themeable_pointer(m_back_button);
+	store_child_themeable_pointer(m_icon_button);
+	store_child_themeable_pointer(m_text_label);
 }
 
 void MenuLabelLayer::replace_all_attributes_with(MenuLabelLayer* mll)

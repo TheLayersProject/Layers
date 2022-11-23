@@ -14,6 +14,15 @@ QMap<QString, Attribute*>& AttributeGroup::attributes()
 	return m_attributes;
 }
 
+bool AttributeGroup::is_stateful() const
+{
+	for (Attribute* attribute : m_attributes)
+		if (attribute->is_stateful())
+			return true;
+
+	return false;
+}
+
 QString AttributeGroup::name() const
 {
 	return m_name;

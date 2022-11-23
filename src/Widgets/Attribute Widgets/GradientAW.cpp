@@ -22,7 +22,7 @@ GradientAW::GradientAW(const QString& attribute_label_text, Attribute* attribute
 	m_right_stretch->a_fill.set_disabled();
 
 	// Setup Color Control
-	m_gradient_control->set_attribute(attribute);
+	m_gradient_control->a_fill.get_variant_from(*attribute);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -49,6 +49,6 @@ void GradientAW::set_centered(bool centered)
 
 void GradientAW::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_attribute_label);
-	add_child_themeable_reference(m_gradient_control);
+	store_child_themeable_pointer(m_attribute_label);
+	store_child_themeable_pointer(m_gradient_control);
 }

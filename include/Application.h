@@ -6,6 +6,7 @@
 #include <QSettings>
 
 #include "Theme.h"
+#include "Window.h"
 
 namespace Layers
 {
@@ -28,35 +29,134 @@ namespace Layers
 			Version* version = nullptr,
 			GitHubRepo* github_repo = nullptr);
 
-		void add_child_themeable_reference(Themeable& themeable);
+		/*!
+			Applies a theme across the entire application.
 
+			@param theme to apply
+		*/
 		void apply_theme(Theme& theme);
 
+		/*!
+			Creates a new theme.
+
+			@param new_theme_name - Name to give the new theme
+			@param copy_theme_name - Name of the app theme to copy and use as the basis for the new theme
+		*/
 		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
 
+		/*!
+			Returns a pointer to the current theme applied to the application.
+
+			@returns pointer to current application theme
+		*/
 		Theme* current_theme() const;
 
+		/*!
+			Returns a pointer to a QFile of the application icon.
+
+			If no icon was supplied during initialization, nullptr is returned.
+
+			@returns pointer to QFile of app icon, nullptr if none exists
+		*/
 		QFile* icon_file();
 
+		/*!
+			Loads and returns a theme from the supplied file.
+
+			This function first attempts to load the theme as a latest version theme. If that fails,
+			it will attempt to load the file under older version conditions until a successful load.
+			Once the particular version is found and loaded, it is updated to the latest version.
+
+			This function is updated with each new version of Layers.
+
+			@param file to load theme from
+			@returns theme loaded from file
+		*/
 		Theme load_theme(QFile& file);
 
+		Window* main_window() const;
+
+		/*!
+			Returns the name of the application.
+
+			@returns application name
+		*/
 		QString& name();
 
+		/*!
+			Reapplies the theme that is already set.
+		*/
 		void reapply_theme();
 
+		/*!
+			Saves a theme to a file.
+
+			The file is saved to 'C:/Users/{Your username}/AppData/Local/{Application name}/Themes'.
+			
+			The theme name, lowercased, is used as the filename.
+
+			@param theme to save
+		*/
 		void save_theme(Theme& theme);
 
+		/*!
+			Returns the application's settings.
+
+			@returns Settings of the application
+		*/
 		QSettings& settings();
 
+		/*!
+			Stores a pointer to the provided themeable.
+
+			The child themeable pointers are used to apply themes to child themeables.
+
+			@param themeable to store a pointer to
+		*/
+		void store_child_themeable_pointer(Themeable& themeable);
+
+		/*!
+			Returns a pointer to the application theme with the provided name.
+
+			@param theme_name - Name of the theme to be returned
+			@returns pointer to theme
+		*/
 		Theme* theme(const QString& theme_name);
 
+		/*!
+			Returns a reference to a QMap containing the application's themes.
+
+			The QMap pairs QStrings to Themes, where the QString is the name of the associated theme.
+
+			@returns QMap reference to the app's themes
+		*/
 		QMap<QString, Theme>& themes();
 
+		/*!
+			Returns true if an application update is available. 
+
+			This function compares the current version tag of the application (supplied during initialization)
+			with the latest known version tag found on the application's GitHub repo (also supplied during initialization). 
+			If they do not match, true is returned.
+
+			@returns true if update is available, false otherwise
+		*/
 		bool update_available();
 
+		/*!
+			Prompts the user and asks if they'd like to update. Updates application if they choose to.
+
+			@returns true if user chooses to update, false otherwise
+		*/
 		bool update_on_request();
 
 	public slots:
+		/*!
+			Renames a theme with the provided new name.
+
+			@param old_name - Name of the theme to rename
+			@param new_name - New name to give to theme
+		*/
 		void rename_theme(const QString& old_name, const QString& new_name);
 
 	private:
@@ -71,7 +171,7 @@ namespace Layers
 
 		QDir m_app_themes_dir;
 
-		QList<Themeable*> m_child_themeable_references;
+		QList<Themeable*> m_child_themeables;
 
 		Theme* m_current_theme{ nullptr };
 

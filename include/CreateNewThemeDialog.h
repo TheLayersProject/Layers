@@ -5,6 +5,7 @@
 
 #include "Button.h"
 #include "Combobox.h"
+#include "Graphic.h"
 #include "LineEditor.h"
 
 namespace Layers
@@ -84,6 +85,10 @@ namespace Layers
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 		Widget* m_titlebar{ new Widget };
+
+		Label* m_window_title_label = new Label("Create New Theme");
+
+		Button* m_exit_button = new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true);
 
 		Button* m_create_button{ new Button("Create") };
 

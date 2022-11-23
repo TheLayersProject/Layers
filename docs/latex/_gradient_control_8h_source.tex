@@ -1,0 +1,36 @@
+\hypertarget{_gradient_control_8h_source}{}\doxysection{Gradient\+Control.\+h}
+\label{_gradient_control_8h_source}\index{include/GradientControl.h@{include/GradientControl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef GRADIENTCONTROL\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define GRADIENTCONTROL\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Widget.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         Q\_OBJECT}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     signals:}
+\DoxyCodeLine{13         \textcolor{keywordtype}{void} gradient\_changed();}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}{init\_attributes}}();}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} set\_attribute(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{23         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{private}:}
+\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* m\_attribute\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{27     \};}
+\DoxyCodeLine{28 \}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GRADIENTCONTROL\_H}}
+
+\end{DoxyCode}

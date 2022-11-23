@@ -27,9 +27,12 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 
 	setup_layout();
 
+	// Add 'App Preferences' Settings Tab
 	add_settings_tab(new Graphic(":/svgs/app_preferences_icon.svg", QSize(25, 25)), "App Preferences");
 	m_settings_tabs.last()->set_name("app_preferences_settings_tab");
 	connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->show(); m_themes_settings_panel->hide(); });
+	
+	// Add 'Themes' Settings Tab
 	add_settings_tab(new Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
 	m_settings_tabs.last()->set_name("themes_settings_tab");
 	connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
@@ -43,7 +46,7 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 {
 	SettingsTab* settings_tab = new SettingsTab(icon, label_text);
 
-	m_sidebar->add_child_themeable_reference(settings_tab);
+	m_sidebar->store_child_themeable_pointer(settings_tab);
 
 	for (SettingsTab* st : m_settings_tabs)
 	{
@@ -66,9 +69,9 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 
 void SettingsMenu::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_sidebar);
-	add_child_themeable_reference(m_app_preferences_settings_panel);
-	add_child_themeable_reference(m_themes_settings_panel);
+	store_child_themeable_pointer(m_sidebar);
+	store_child_themeable_pointer(m_app_preferences_settings_panel);
+	store_child_themeable_pointer(m_themes_settings_panel);
 }
 
 int SettingsMenu::largest_tab_index() const

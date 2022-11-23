@@ -26,7 +26,7 @@ namespace Layers
 
 		void set_toggled(bool toggled);
 
-		void toggle();
+		void toggle(bool emit_toggled_event = true);
 
 		bool toggled() const;
 

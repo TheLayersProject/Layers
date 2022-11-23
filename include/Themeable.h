@@ -23,7 +23,7 @@ namespace Layers
 
 		Themes are applied to themeables recursively through apply_theme(). To do this,
 		references to child themeables need to be stored. These references are stored
-		through add_child_themeable_reference().
+		through store_child_themeable_pointer().
 
 		Before a themeable can be customized in a Layers application, two requirements
 		must be fullfilled:
@@ -44,7 +44,7 @@ namespace Layers
 
 			@param child_themeable to be added to the reference list
 		*/
-		void add_child_themeable_reference(Themeable* child_themeable);
+		void store_child_themeable_pointer(Themeable* child_themeable);
 
 		/*!
 			Applies the given theme to the caller and its children.
@@ -87,7 +87,7 @@ namespace Layers
 
 		QList<Themeable*>& child_themeable_references();
 
-		//void copy_attribute_values_to(Theme* theme);
+		void copy_attribute_values_to(Theme* theme);
 
 		/*!
 			Gets the address of the currently applied theme. Returns nullptr if no theme has been applied.
@@ -101,7 +101,7 @@ namespace Layers
 
 			@returns Address of customize panel, or nullptr
 		*/
-		CustomizePanel* customize_panel() const;
+		CustomizePanel* customize_panel();
 
 		/*!
 			Get the address of the themeable's icon. Returns nullptr if no icon exists.
@@ -118,7 +118,7 @@ namespace Layers
 
 			@param list to store initialized customize panels
 		*/
-		void initialize_and_acquire_panels(QList<CustomizePanel*>& list);
+		//void initialize_and_acquire_panels(QList<CustomizePanel*>& list);
 
 		bool is_stateful() const;
 
@@ -129,6 +129,8 @@ namespace Layers
 			Themeable class. This function should be used to call the inheriting QWidget's update().
 		*/
 		//virtual void issue_update() = 0;
+
+		QString* name() const;
 
 		/*!
 			Get the address of the proper name. Returns nullptr if no proper name has been set.
@@ -218,7 +220,7 @@ namespace Layers
 
 			@returns List of states that identify attribute sets
 		*/
-		//QList<QString> states() const;
+		QList<QString> states() const;
 
 		/*!
 			Get the theme tag.
@@ -245,13 +247,6 @@ namespace Layers
 			caller's hierarchy.
 		*/
 		void unassign_prefixes();
-
-		/*!
-			Removes the given attribute from the attribute filtration list.
-
-			@param attribute to stop filtering
-		*/
-		void unfilter_attribute(const QString& attribute);
 
 		/*!
 			Updates things that depend on the theme. Called by apply_theme().
@@ -286,7 +281,7 @@ namespace Layers
 
 			@returns The initialized customize panel.
 		*/
-		CustomizePanel* init_customize_panel();
+		//CustomizePanel* init_customize_panel();
 
 		/*!
 			Initializes the reference list to child themeables.
@@ -295,7 +290,7 @@ namespace Layers
 			to work recursively.
 
 			Classes that inherit the Themeable class should define this function and use
-			add_child_themeable_reference() to populate the reference list.
+			store_child_themeable_pointer() to populate the reference list.
 
 			This function is called by init_themeable().
 		*/
@@ -323,7 +318,7 @@ namespace Layers
 
 		QMap<QString, Attribute*> m_attributes{ QMap<QString, Attribute*>() };
 
-		QList<Themeable*> m_child_themeable_references;
+		QList<Themeable*> m_child_themeables;
 
 		QList<QString> m_filtered_attributes;
 		QList<QString> m_tag_prefixes;
@@ -339,9 +334,9 @@ namespace Layers
 	//		for (const QString& attr_tag : m_attributes.keys())
 	//			Attribute::replace(attributes()[attr_tag], themeable->attributes()[attr_tag]);
 
-	//		for (Themeable* this_child_themeable : m_child_themeable_references)
+	//		for (Themeable* this_child_themeable : m_child_themeables)
 	//			if (this_child_themeable->m_name)
-	//				for (Themeable* child_themeable : themeable->m_child_themeable_references)
+	//				for (Themeable* child_themeable : themeable->m_child_themeables)
 	//					if (*child_themeable->m_name == *this_child_themeable->m_name)
 	//						this_child_themeable->replace_all_attributes_with(child_themeable);
 	//	}

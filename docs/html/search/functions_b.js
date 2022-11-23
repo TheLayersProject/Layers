@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['unassign_5fprefixes_146',['unassign_prefixes',['../class_layers_1_1_themeable.html#afe536c581c3299ddfc8c632f9b3b2e2e',1,'Layers::Themeable']]],
-  ['unfilter_5fattribute_147',['unfilter_attribute',['../class_layers_1_1_themeable.html#afa5252dc198c501b9d53f58c5915b13f',1,'Layers::Themeable']]],
-  ['unshare_5fall_5fattributes_5fwith_5fbutton_148',['unshare_all_attributes_with_button',['../class_layers_1_1_button.html#aabaeaf585e6fff7a020587444d3512ed',1,'Layers::Button']]],
-  ['unshare_5fall_5fattributes_5fwith_5felement_149',['unshare_all_attributes_with_element',['../class_layers_1_1_themeable.html#a55a480b7bfb94df725e7921475a1d383',1,'Layers::Themeable']]],
-  ['unshare_5fattribute_5fwith_5fthemeable_150',['unshare_attribute_with_themeable',['../class_layers_1_1_themeable.html#a56117bf122e1725ecc9cc417396b3c4d',1,'Layers::Themeable']]],
-  ['update_5ftheme_5fdependencies_151',['update_theme_dependencies',['../class_layers_1_1_themeable.html#ad51ea7b83f4df45e53880526839a8b46',1,'Layers::Themeable::update_theme_dependencies()'],['../class_layers_1_1_widget.html#a9fde9cfec1b6f76c644885bd230ce746',1,'Layers::Widget::update_theme_dependencies()'],['../class_layers_1_1_s_v_g___widget.html#a2b355b6d833de919c59340b75dc57941',1,'Layers::SVG_Widget::update_theme_dependencies()'],['../class_layers_1_1_combobox.html#afc82e71733028cbd4314cad925d43e9b',1,'Layers::Combobox::update_theme_dependencies()'],['../class_layers_1_1_line___editor.html#af25a9b7b7f1f0309d399a349647b92a9',1,'Layers::Line_Editor::update_theme_dependencies()'],['../class_layers_1_1_slider.html#a554aa9d75cdc35d373852ce5ce2f6ad1',1,'Layers::Slider::update_theme_dependencies()'],['../class_layers_1_1_gradient___selection___box.html#a239c5242db1ce64cb9ba4c3652258f68',1,'Layers::Gradient_Selection_Box::update_theme_dependencies()'],['../class_layers_1_1_window.html#aaefbfb4610945a5a93670f07a3ab1227',1,'Layers::Window::update_theme_dependencies()']]]
+  ['unassign_5fprefixes_0',['unassign_prefixes',['../class_layers_1_1_themeable.html#afe536c581c3299ddfc8c632f9b3b2e2e',1,'Layers::Themeable']]],
+  ['update_1',['update',['../class_layers_1_1_s_v_g.html#ab766cb209c1ef75ffe5f65a996072710',1,'Layers::SVG']]],
+  ['update_5favailable_2',['update_available',['../class_layers_1_1_application.html#a8eb80ff6f004611dba5244db8fe3bcd1',1,'Layers::Application']]],
+  ['update_5fon_5frequest_3',['update_on_request',['../class_layers_1_1_application.html#ab3d365347af365f8b703fd496fe40be7',1,'Layers::Application']]]
 ];

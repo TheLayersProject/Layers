@@ -61,8 +61,8 @@ void Slider::init_attributes()
 
 void Slider::init_child_themeable_reference_list()
 {
-	add_child_themeable_reference(m_bar);
-	add_child_themeable_reference(m_handle);
+	store_child_themeable_pointer(m_bar);
+	store_child_themeable_pointer(m_handle);
 }
 
 void Slider::set_value(int value)
@@ -77,7 +77,7 @@ void Slider::update_handle_pos()
 {
 	double drag_increment = double(width() - m_handle->width()) / double(m_limit);
 
-	m_handle->move(drag_increment * a_value.value<int>(), m_handle->y());
+	m_handle->move(drag_increment * a_value.as<int>(), m_handle->y());
 }
 
 void Slider::update_theme_dependencies()
@@ -96,7 +96,7 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.value<int>();
+			m_value_on_click = a_value.as<int>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease && m_handle->underMouse())
@@ -121,14 +121,14 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 
 		if (new_value < 0)
 		{
-			if (a_value.value<int>() != 0)
+			if (a_value.as<int>() != 0)
 			{
 				set_value(0);
 			}
 		}
 		else if (new_value > m_limit)
 		{
-			if (a_value.value<int>() != m_limit)
+			if (a_value.as<int>() != m_limit)
 			{
 				set_value(m_limit);
 			}

@@ -21,13 +21,9 @@ namespace Layers
 
 		Button* apply_button() const;
 
-		QList<CustomizePanel*>& customize_panels();
-
 		void init_preview_window();
 
 		void open_customize_panel(CustomizePanel* customize_panel);
-
-		void populate_panel_layout();
 
 		Widget* preview_widget() const;
 
@@ -53,6 +49,7 @@ namespace Layers
 		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new AttributeGroup("", QMap<QString, Attribute*>())) };
 		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
 		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0)), new QIntValidator) };
+		StateAW* m_control_state_aw{ new StateAW };
 		Button* m_control_widget_button{ new Button(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
 
 		HorizontalLayout* m_main_layout{ new HorizontalLayout };
@@ -70,7 +67,6 @@ namespace Layers
 
 		Widget* m_preview_widget{ nullptr };
 
-		QList<CustomizePanel*> m_customize_panels;
 		QList<CustomizePanel*> m_panel_stack;
 		QList<Button*> m_text_button_stack;
 		QList<Button*> m_topbar_text_buttons;
