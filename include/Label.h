@@ -32,14 +32,14 @@ namespace Layers
 		void set_available_width(int available_width);
 		void set_font_size(int size);
 		void set_hovering(bool cond = true);
-		void set_padding(int left, int top, int right, int bottom);
+		void set_padding(double left, double top, double right, double bottom);
 		void set_resize_disabled(bool disable = true);
 
 		int width_unwrapped();
 
 		Attribute a_fill{ Attribute("Fill", QColor(Qt::white), true) };
 		Attribute a_outline_color{ Attribute("Outline Color", QColor(Qt::gray), true) };
-		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(0)) };
+		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(0.0)) };
 		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
 		Attribute a_text_hover_color{ Attribute("Text Hover Color", QColor(Qt::black), true) };
 

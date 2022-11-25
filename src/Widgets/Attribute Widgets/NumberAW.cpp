@@ -31,7 +31,7 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_name("line_editor");
 	m_line_editor->set_proper_name("Line Editor");
-	m_line_editor->set_text(QString::number(attribute->as<int>()));
+	m_line_editor->set_text(QString::number(attribute->as<double>()));
 	m_line_editor->set_validator(int_validator);
 	m_line_editor->a_text.get_variant_from(*attribute);
 

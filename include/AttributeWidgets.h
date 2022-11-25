@@ -110,10 +110,10 @@ namespace Layers
 
 		AttributeWidget* m_attribute_widget;
 
-		MiniSlider* m_tl_slider{ new MiniSlider(30) };
-		MiniSlider* m_tr_slider{ new MiniSlider(30) };
-		MiniSlider* m_bl_slider{ new MiniSlider(30) };
-		MiniSlider* m_br_slider{ new MiniSlider(30) };
+		MiniSlider* m_tl_slider{ new MiniSlider(30.0) };
+		MiniSlider* m_tr_slider{ new MiniSlider(30.0) };
+		MiniSlider* m_bl_slider{ new MiniSlider(30.0) };
+		MiniSlider* m_br_slider{ new MiniSlider(30.0) };
 
 		LineEditor* m_tl_line_editor{ new LineEditor };
 		LineEditor* m_tr_line_editor{ new LineEditor };

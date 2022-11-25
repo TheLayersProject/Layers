@@ -29,7 +29,7 @@ namespace Layers
 
 			@param margin
 		*/
-		void set_margin(int margin);
+		void set_margin(double margin);
 
 		/*!
 			Sets the margin attributes individually.
@@ -39,7 +39,7 @@ namespace Layers
 			@param right margin
 			@param bottom margin
 		*/
-		void set_margin(int left, int top, int right, int bottom);
+		void set_margin(double left, double top, double right, double bottom);
 
 		Attribute a_border_fill {Attribute(
 			"Border Fill",
@@ -48,7 +48,7 @@ namespace Layers
 
 		Attribute a_border_thickness {Attribute(
 			"Border Thickness",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_corner_color {Attribute(
@@ -59,22 +59,22 @@ namespace Layers
 
 		Attribute a_corner_radius_tl {Attribute(
 			"Top-Left Corner Radius",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_corner_radius_tr {Attribute(
 			"Top-Right Corner Radius",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_corner_radius_bl {Attribute(
 			"Bottom-Left Corner Radius",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_corner_radius_br {Attribute(
 			"Bottom-Right Corner Radius",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_fill {Attribute(
@@ -90,22 +90,22 @@ namespace Layers
 
 		Attribute a_margin_left {Attribute(
 			"Left Margin",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_margin_top {Attribute(
 			"Top Margin",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_margin_right {Attribute(
 			"Right Margin",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_margin_bottom {Attribute(
 			"Bottom Margin",
-			QVariant::fromValue(0)
+			QVariant::fromValue(0.0)
 			) };
 
 		Attribute a_outline_color {Attribute(

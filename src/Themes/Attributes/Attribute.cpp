@@ -279,9 +279,129 @@ QList<QString> Attribute::states() const
 const char* Attribute::typeName() const
 {
 	if (m_state_variant_map)
+		/* TODO: A stateful attribute can have variants with different value
+		   types. But this function only returns one typename, so there's a
+		   chance it will not work properly. */
 		return (*m_state_variant_map)[m_state].typeName();
 	else
 		return m_variant->typeName();
+}
+
+QJsonObject Attribute::to_json_object()
+{
+	QJsonObject json_object;
+
+	json_object.insert("name", m_name);
+	if (m_disabled) json_object.insert("disabled", m_disabled);
+
+	if (is_stateful())
+	{
+		QJsonObject value_json_object;
+
+		QJsonObject state_value_pairs_json_object;
+
+		for (const QString& state : m_state_variant_map->keys())
+		{
+			QJsonValue insert_value;
+
+			Variant& variant = (*m_state_variant_map)[state];
+
+			if (QString(variant.typeName()) == "bool")
+				insert_value = QJsonValue(variant.value<bool>());
+
+			else if (QString(variant.typeName()) == "double")
+				insert_value = QJsonValue(variant.value<double>());
+
+			else if (QString(variant.typeName()) == "QColor")
+			{
+				QColor color = variant.value<QColor>();
+
+				if (color.alpha() == 255)
+					insert_value = QJsonValue(variant.value<QColor>().name());
+				else
+					insert_value = QJsonValue(variant.value<QColor>().name(QColor::HexArgb));
+			}
+
+			else if (QString(variant.typeName()) == "QList<std::pair<double,QColor>>")
+			{
+				QJsonObject gradient_wrapper_json_object;
+
+				QJsonObject gradient_json_object;
+
+				QGradientStops gradient_stops = variant.value<QGradientStops>();
+
+				int stop_counter = 1;
+
+				for (const QGradientStop& gradient_stop : gradient_stops)
+				{
+					QJsonObject gradient_stop_json_object;
+
+					gradient_stop_json_object.insert("point", gradient_stop.first);
+					gradient_stop_json_object.insert("color", gradient_stop.second.name());
+
+					gradient_json_object.insert(QString("stop-") + QString::number(stop_counter++), gradient_stop_json_object);
+				}
+
+				gradient_wrapper_json_object.insert("gradient", gradient_json_object);
+
+				insert_value = gradient_wrapper_json_object;
+			}
+
+			state_value_pairs_json_object.insert(state, insert_value);
+		}
+
+		value_json_object.insert("state_value_pairs", state_value_pairs_json_object);
+
+		json_object.insert("value", value_json_object);
+	}
+	else
+	{
+		QJsonValue insert_value;
+
+		if (QString(m_variant->typeName()) == "bool")
+			insert_value = QJsonValue(m_variant->value<bool>());
+
+		else if (QString(m_variant->typeName()) == "double")
+			insert_value = QJsonValue(m_variant->value<double>());
+
+		else if (QString(m_variant->typeName()) == "QColor")
+		{
+			QColor color = m_variant->value<QColor>();
+
+			if (color.alpha() == 255)
+				insert_value = QJsonValue(m_variant->value<QColor>().name());
+			else
+				insert_value = QJsonValue(m_variant->value<QColor>().name(QColor::HexArgb));
+		}
+		else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
+		{
+			QJsonObject gradient_wrapper_json_object;
+
+			QJsonObject gradient_json_object;
+
+			QGradientStops gradient_stops = m_variant->value<QGradientStops>();
+
+			int stop_counter = 1;
+
+			for (const QGradientStop& gradient_stop : gradient_stops)
+			{
+				QJsonObject gradient_stop_json_object;
+
+				gradient_stop_json_object.insert("point", gradient_stop.first);
+				gradient_stop_json_object.insert("color", gradient_stop.second.name());
+
+				gradient_json_object.insert(QString("stop-") + QString::number(stop_counter++), gradient_stop_json_object);
+			}
+
+			gradient_wrapper_json_object.insert("gradient", gradient_json_object);
+
+			insert_value = gradient_wrapper_json_object;
+		}
+
+		json_object.insert("value", insert_value);
+	}
+
+	return json_object;
 }
 
 Variant* Attribute::variant() const

@@ -72,7 +72,7 @@ namespace Layers
 			@param file to load theme from
 			@returns theme loaded from file
 		*/
-		Theme load_theme(QFile& file);
+		Theme load_theme(const QString& file_name);
 
 		Window* main_window() const;
 

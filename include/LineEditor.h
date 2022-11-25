@@ -36,7 +36,7 @@ namespace Layers
 
 		QString text();
 
-		Attribute a_left_padding{ Attribute("Left Padding", QVariant::fromValue(3)) };
+		Attribute a_left_padding{ Attribute("Left Padding", QVariant::fromValue(3.0)) };
 		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
 		Attribute a_text{ Attribute("Text", QString("")) };
 

@@ -14,6 +14,9 @@ All notable changes to this project will be documented in this file.
         ○ Widget attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced.
     - Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes (TODO: NEED TO CHECK THIS AGAIN!)
     - Removed issue_update() since widgets can connect update() to Attribute::value_changed.
+    - Saving and loading now uses JSON formatting.
+    - Changed Variant->ints to Variant->doubles. This change was made due to JSON formatting not differentiating between int and double types
+    - The theme building functions have been removed. Changes to the prebuilt themes are made directly in their JSON files.
     - Previously, all CustomizePanels were initialized and acquired when the application was launched. This resulted in a large amount of memory being used which was unnecessary because the user only interacts with a single CustomizePanel at a time. Now, CustomizePanels are generated during runtime as the user navigates the widget hierarchy.
     - Renamed various AttributeWidget classes
     - Created the AttributeGroup and AttributeLayout classes to simplify the creation of AttributeWidgets and specify their organization in CustomizePanels

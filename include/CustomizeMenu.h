@@ -48,7 +48,7 @@ namespace Layers
 		ColorAW* m_control_color_aw{ new ColorAW(new Attribute("", QColor())) };
 		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new AttributeGroup("", QMap<QString, Attribute*>())) };
 		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
-		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0)), new QIntValidator) };
+		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0.0)), new QIntValidator) };
 		StateAW* m_control_state_aw{ new StateAW };
 		Button* m_control_widget_button{ new Button(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
 

@@ -15,7 +15,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
     m_line_edit->installEventFilter(this);
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; padding-left: " +
-        QString::number(a_left_padding.as<int>() + a_margin_left.as<int>()) + "px; padding-bottom: 1px; }");
+        QString::number(a_left_padding.as<double>() + a_margin_left.as<double>()) + "px; padding-bottom: 1px; }");
 
     connect(m_line_edit, &QLineEdit::textEdited, [this] {
         if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
@@ -59,10 +59,10 @@ void LineEditor::init_attributes()
         { "text_color", &a_text_color }
         });
 
-    a_corner_radius_tl.set_value(5);
-    a_corner_radius_tr.set_value(5);
-    a_corner_radius_bl.set_value(5);
-    a_corner_radius_br.set_value(5);
+    a_corner_radius_tl.set_value(5.0);
+    a_corner_radius_tr.set_value(5.0);
+    a_corner_radius_bl.set_value(5.0);
+    a_corner_radius_br.set_value(5.0);
     a_fill.set_value(QColor(Qt::lightGray));
 
     connect(&a_text_color, &Attribute::value_changed, [this] {
@@ -146,7 +146,7 @@ void LineEditor::update_theme_dependencies()
 {
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; color: " + a_text_color.as<QColor>().name() + "; padding-left: " +
-        QString::number(a_left_padding.as<int>() + a_margin_left.as<int>()) + "px; padding-bottom: 2px; }");
+        QString::number(a_left_padding.as<double>() + a_margin_left.as<double>()) + "px; padding-bottom: 2px; }");
 
 	if (m_line_edit->text() != a_text.as<QString>())
 		m_line_edit->setText(a_text.as<QString>());

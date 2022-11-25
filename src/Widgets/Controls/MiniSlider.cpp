@@ -6,7 +6,7 @@
 
 using Layers::MiniSlider;
 
-MiniSlider::MiniSlider(int limit, QWidget* parent) :
+MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	m_limit{ limit },
 	Widget(parent)
 {
@@ -34,20 +34,20 @@ void MiniSlider::init_attributes()
 {
 	m_bar->set_margin(5, 0, 5, 0);
 
-	a_corner_radius_tl.set_value(5);
-	a_corner_radius_tr.set_value(5);
-	a_corner_radius_bl.set_value(5);
-	a_corner_radius_br.set_value(5);
+	a_corner_radius_tl.set_value(5.0);
+	a_corner_radius_tr.set_value(5.0);
+	a_corner_radius_bl.set_value(5.0);
+	a_corner_radius_br.set_value(5.0);
 
-	m_bar->a_corner_radius_tl.set_value(2);
-	m_bar->a_corner_radius_tr.set_value(2);
-	m_bar->a_corner_radius_bl.set_value(2);
-	m_bar->a_corner_radius_br.set_value(2);
+	m_bar->a_corner_radius_tl.set_value(2.0);
+	m_bar->a_corner_radius_tr.set_value(2.0);
+	m_bar->a_corner_radius_bl.set_value(2.0);
+	m_bar->a_corner_radius_br.set_value(2.0);
 
-	m_handle->a_corner_radius_tl.set_value(2);
-	m_handle->a_corner_radius_tr.set_value(2);
-	m_handle->a_corner_radius_bl.set_value(2);
-	m_handle->a_corner_radius_br.set_value(2);
+	m_handle->a_corner_radius_tl.set_value(2.0);
+	m_handle->a_corner_radius_tr.set_value(2.0);
+	m_handle->a_corner_radius_bl.set_value(2.0);
+	m_handle->a_corner_radius_br.set_value(2.0);
 
 	// TODO: TEMP!
 	a_fill.set_value(QColor(Qt::lightGray));
@@ -68,7 +68,7 @@ void MiniSlider::update_handle_pos()
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
 	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
 
-	m_handle->move(drag_increment * a_value.as<int>() + 5, m_handle->y()); // 5 is left margin
+	m_handle->move(drag_increment * a_value.as<double>() + 5, m_handle->y()); // 5 is left margin
 }
 
 void MiniSlider::update_theme_dependencies()
@@ -99,7 +99,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.as<int>();
+			m_value_on_click = a_value.as<double>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease)
@@ -127,21 +127,21 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 		{
 			double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit); //double(m_bar->width() - m_handle->width()) / double(range_difference());
 
-			int new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
+			double new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
 
-			if (new_value < 0)
+			if (new_value < 0.0)
 			{
-				if (a_value.as<int>() != 0)
+				if (a_value.as<double>() != 0.0)
 				{
 					if (a_value.is_stateful())
-						a_value.set_value(a_value.state(), 0);
+						a_value.set_value(a_value.state(), 0.0);
 					else
-						a_value.set_value(0);
+						a_value.set_value(0.0);
 				}
 			}
 			else if (new_value > m_limit)
 			{
-				if (a_value.as<int>() != m_limit)
+				if (a_value.as<double>() != m_limit)
 				{
 					if (a_value.is_stateful())
 						a_value.set_value(a_value.state(), m_limit);

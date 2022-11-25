@@ -58,7 +58,7 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	m_color_label->set_font_size(14);
 	m_color_label->setFixedHeight(38);
 	m_color_label->set_resize_disabled();
-	m_color_label->a_padding_top.set_value(13);
+	m_color_label->a_padding_top.set_value(13.0);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
 	m_color_label->set_name("color_label");
 	m_color_label->set_proper_name("Color Label");
@@ -70,7 +70,7 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	m_gradient_label->set_font_size(14);
 	m_gradient_label->setFixedHeight(38);
 	m_gradient_label->set_resize_disabled();
-	m_gradient_label->a_padding_top.set_value(9);
+	m_gradient_label->a_padding_top.set_value(9.0);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
 	m_gradient_label->set_name("gradient_label");
 	m_gradient_label->set_proper_name("Gradient Label");
@@ -99,30 +99,30 @@ void FillControl::init_attributes()
 	m_attributes.remove("fill");
 
 	a_border_fill.set_value(QColor("#D6D6D6"));
-	a_border_thickness.set_value(2);
-	a_corner_radius_tl.set_value(5);
-	a_corner_radius_tr.set_value(5);
-	a_corner_radius_bl.set_value(5);
-	a_corner_radius_br.set_value(5);
-	a_margin_left.set_value(10);
-	a_margin_top.set_value(10);
-	a_margin_right.set_value(10);
-	a_margin_bottom.set_value(10);
+	a_border_thickness.set_value(2.0);
+	a_corner_radius_tl.set_value(5.0);
+	a_corner_radius_tr.set_value(5.0);
+	a_corner_radius_bl.set_value(5.0);
+	a_corner_radius_br.set_value(5.0);
+	a_margin_left.set_value(10.0);
+	a_margin_top.set_value(10.0);
+	a_margin_right.set_value(10.0);
+	a_margin_bottom.set_value(10.0);
 	a_outline_color.set_disabled(false);
 
-	m_color_control->a_margin_top.set_value(9);
-	m_color_control->a_margin_bottom.set_value(4);
+	m_color_control->a_margin_top.set_value(9.0);
+	m_color_control->a_margin_bottom.set_value(4.0);
 
-	m_gradient_control->a_margin_top.set_value(4);
-	m_gradient_control->a_margin_bottom.set_value(9);
+	m_gradient_control->a_margin_top.set_value(4.0);
+	m_gradient_control->a_margin_bottom.set_value(9.0);
 
-	m_fill_type_toggle->a_margin_top.set_value(12);
-	m_fill_type_toggle->a_margin_bottom.set_value(12);
+	m_fill_type_toggle->a_margin_top.set_value(12.0);
+	m_fill_type_toggle->a_margin_bottom.set_value(12.0);
 
-	m_dialog->a_corner_radius_tl.set_value(4);
-	m_dialog->a_corner_radius_tr.set_value(4);
-	m_dialog->a_corner_radius_bl.set_value(4);
-	m_dialog->a_corner_radius_br.set_value(4);
+	m_dialog->a_corner_radius_tl.set_value(4.0);
+	m_dialog->a_corner_radius_tr.set_value(4.0);
+	m_dialog->a_corner_radius_bl.set_value(4.0);
+	m_dialog->a_corner_radius_br.set_value(4.0);
 }
 
 void FillControl::init_child_themeable_reference_list()

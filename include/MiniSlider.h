@@ -10,12 +10,12 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		MiniSlider(int limit, QWidget* parent = nullptr);
+		MiniSlider(double limit, QWidget* parent = nullptr);
 
 		void update_handle_pos();
 		void update_theme_dependencies();
 
-		Attribute a_value{ Attribute("Value", QVariant::fromValue(0)) };
+		Attribute a_value{ Attribute("Value", QVariant::fromValue(0.0)) };
 
 	public slots:
 		void set_current_editting_state(const QString& state);
@@ -32,7 +32,8 @@ namespace Layers
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
 
-		int m_limit{ 99 };
+		double m_limit{ 99.0 };
+
 		int m_mouse_move_scale{ 5 };
 		int m_value_on_click{ 0 };
 

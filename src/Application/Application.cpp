@@ -184,11 +184,11 @@ void Application::rename_theme(const QString& old_name, const QString& new_name)
 	}
 }
 
-Theme Application::load_theme(QFile& file)
+Theme Application::load_theme(const QString& file_name)
 {
-	qDebug() << "Loading" << file.fileName();
+	qDebug() << "Loading" << file_name;
 
-	Theme_And_Load_Status_Combo_2_3_0_a theme_and_load_status_combo_2_3_0_a = load_theme_2_3_0_a(file);
+	Theme_And_Load_Status_Combo_2_3_0_a theme_and_load_status_combo_2_3_0_a = load_theme_2_3_0_a(file_name);
 
 	if (theme_and_load_status_combo_2_3_0_a.status != 0)
 	{
@@ -196,19 +196,19 @@ Theme Application::load_theme(QFile& file)
 
 		qDebug() << "Theme load failed. Trying 2.2.0a load..";
 
-		Theme_And_Load_Status_Combo_2_2_0_a theme_and_load_status_combo_2_2_0_a = load_theme_2_2_0_a(file);
+		Theme_And_Load_Status_Combo_2_2_0_a theme_and_load_status_combo_2_2_0_a = load_theme_2_2_0_a(file_name);
 
 		if (theme_and_load_status_combo_2_2_0_a.status != 0)
 		{
 			qDebug() << "Theme load failed. Trying 2.1.0a load..";
 
-			Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(file);
+			Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(file_name);
 
 			if (theme_and_load_status_combo_2_1_0_a.status != 0)
 			{
 				qDebug() << "Theme load failed. Trying 2.0.0a load..";
 
-				Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(file);
+				Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(file_name);
 
 				if (theme_and_load_status_combo_2_0_0_a.status != 0)
 				{
@@ -274,7 +274,7 @@ void Application::reapply_theme()
 
 void Application::save_theme(Theme& theme)
 {
-	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name().toLower()));
+	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name().toLower() + ".json"));
 
 	if (!theme_file.open(QIODevice::WriteOnly))
 	{
@@ -282,10 +282,12 @@ void Application::save_theme(Theme& theme)
 		return;
 	}
 
-	QDataStream out(&theme_file);
-	out.setVersion(QDataStream::Qt_6_1);
+	theme_file.write(theme.to_json_document().toJson());
 
-	out << theme;
+	//QDataStream out(&theme_file);
+	//out.setVersion(QDataStream::Qt_6_1);
+
+	//out << theme;
 
 	theme_file.close();
 }
@@ -371,25 +373,14 @@ void Application::init_themes()
 		if (file_name == "blue" || file_name == "dark" || file_name == "light")
 			m_app_themes_dir.remove(file_name);
 
-	// Load prebuilt theme files (for Production)
-	//m_themes.insert("Blue", load_theme(QFile(":/themes/blue")));
-	//m_themes.insert("Dark", load_theme(QFile(":/themes/dark")));
-	//m_themes.insert("Light", load_theme(QFile(":/themes/light")));
-
-	// Build new theme files
-	m_themes.insert("Blue", build_layers_blue_theme());
-	m_themes.insert("Dark", build_layers_dark_theme());
-	m_themes.insert("Light", build_layers_light_theme());
-
-	//save_theme(m_themes["Blue"]);
-	//save_theme(m_themes["Dark"]);
-	//save_theme(m_themes["Light"]);
+	// Load prebuilt theme files
+	m_themes.insert("Blue", load_theme(":/themes/blue.json"));
+	m_themes.insert("Dark", load_theme(":/themes/dark.json"));
+	m_themes.insert("Light", load_theme(":/themes/light.json"));
 
 	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
 	{
-		QFile theme_file = QFile(m_app_themes_dir.absoluteFilePath(file_name));
-
-		Theme loaded_theme = load_theme(theme_file);
+		Theme loaded_theme = load_theme(m_app_themes_dir.absoluteFilePath(file_name));
 
 		m_themes.insert(loaded_theme.name(), loaded_theme);
 	}

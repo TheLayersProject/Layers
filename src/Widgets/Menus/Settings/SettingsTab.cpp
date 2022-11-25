@@ -66,8 +66,8 @@ void SettingsTab::shrink()
 
 void SettingsTab::init_attributes()
 {
-    a_corner_radius_tl.set_value(5);
-	a_corner_radius_bl.set_value(5);
+    a_corner_radius_tl.set_value(5.0);
+	a_corner_radius_bl.set_value(5.0);
 
 	m_spacer->a_fill.set_disabled();
 

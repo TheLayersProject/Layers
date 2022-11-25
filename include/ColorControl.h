@@ -22,7 +22,7 @@ namespace Layers
 
 		//void set_attribute(Attribute* attribute);
 
-		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5)) };
+		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5.0)) };
 		//Attribute a_inner_border_color{ Attribute("Inner Border Color", QColor("#2c2c2c")) };
 		//Attribute a_outer_border_color{ Attribute("Outer Border Color", QColor("#d6d6d6")) };
 

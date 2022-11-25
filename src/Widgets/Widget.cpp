@@ -22,9 +22,9 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
         if (layout())
         {
             if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
-                vl->set_border_margin(a_border_thickness.as<int>());
+                vl->set_border_margin(a_border_thickness.as<double>());
             else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
-                hl->set_border_margin(a_border_thickness.as<int>());
+                hl->set_border_margin(a_border_thickness.as<double>());
         }
         });
 }
@@ -89,12 +89,12 @@ void Widget::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
     a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
 }
 
-void Widget::set_margin(int margin)
+void Widget::set_margin(double margin)
 {
     set_margin(margin, margin, margin, margin);
 }
 
-void Widget::set_margin(int left, int top, int right, int bottom)
+void Widget::set_margin(double left, double top, double right, double bottom)
 {
     a_margin_left.set_value(left);
     a_margin_top.set_value(top);
@@ -124,20 +124,20 @@ void Widget::paintEvent(QPaintEvent* event)
 
     bool fill_disabled = a_fill.disabled();
     
-    int border_thickness = a_border_thickness.as<int>();
+    int border_thickness = a_border_thickness.as<double>();
     
-    int margin_left = a_margin_left.as<int>();
-    int margin_top = a_margin_top.as<int>();
-    int margin_right = a_margin_right.as<int>();
-    int margin_bottom = a_margin_bottom.as<int>();
+    int margin_left = a_margin_left.as<double>();
+    int margin_top = a_margin_top.as<double>();
+    int margin_right = a_margin_right.as<double>();
+    int margin_bottom = a_margin_bottom.as<double>();
     
     int draw_width = width() - margin_left - margin_right;
     int draw_height = height() - margin_top - margin_bottom;
     
-    int corner_radius_tl = a_corner_radius_tl.as<int>();
-    int corner_radius_tr = a_corner_radius_tr.as<int>();
-    int corner_radius_bl = a_corner_radius_bl.as<int>();
-    int corner_radius_br = a_corner_radius_br.as<int>();
+    int corner_radius_tl = a_corner_radius_tl.as<double>();
+    int corner_radius_tr = a_corner_radius_tr.as<double>();
+    int corner_radius_bl = a_corner_radius_bl.as<double>();
+    int corner_radius_br = a_corner_radius_br.as<double>();
     
     int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
     int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;

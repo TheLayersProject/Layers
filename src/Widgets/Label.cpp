@@ -48,7 +48,7 @@ void Label::resize()
 	QFontMetrics font_metrics(font());
 
 	int unwrapped_width = m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
-	int unwrapped_height = a_padding_top.as<int>() + font_metrics.height() + m_padding_bottom;
+	int unwrapped_height = a_padding_top.as<double>() + font_metrics.height() + m_padding_bottom;
 
 	if (unwrapped_width > m_available_width && wordWrap())
 	{
@@ -58,7 +58,7 @@ void Label::resize()
 
 		build_wrapped_lines();
 
-		int wrapped_height = a_padding_top.as<int>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
+		int wrapped_height = a_padding_top.as<double>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
 
 		QLabel::setFixedHeight(wrapped_height);
 	}
@@ -150,7 +150,7 @@ void Label::set_hovering(bool cond)
 	update();
 }
 
-void Label::set_padding(int left, int top, int right, int bottom)
+void Label::set_padding(double left, double top, double right, double bottom)
 {
 	m_padding_left = left;
 	a_padding_top.set_value(top);
@@ -207,11 +207,11 @@ void Label::paintEvent(QPaintEvent* event)
 
 		for (int i = 0; i < m_wrapped_lines.count(); i++)
 		{
-			path.addText(m_padding_left, a_padding_top.as<int>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
+			path.addText(m_padding_left, a_padding_top.as<double>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
 		}
 	}
 	else
-		path.addText(m_padding_left, a_padding_top.as<int>() + label_font.pointSizeF(), label_font, text());
+		path.addText(m_padding_left, a_padding_top.as<double>() + label_font.pointSizeF(), label_font, text());
 
 	if (!a_outline_color.disabled()) painter.strokePath(path, pen);
 

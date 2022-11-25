@@ -69,32 +69,32 @@ bool ToggleSwitch::toggled() const
 
 void ToggleSwitch::update_layout_margins()
 {
-	int b_thickness = a_border_thickness.as<int>();
+	int b_thickness = a_border_thickness.as<double>();
 
 	if (m_layout_v)
 		m_layout_v->setContentsMargins(
-			0, a_margin_top.as<int>() + b_thickness + a_padding_top.as<int>(),
-			0, a_padding_bottom.as<int>() + b_thickness + a_margin_bottom.as<int>());
+			0, a_margin_top.as<double>() + b_thickness + a_padding_top.as<double>(),
+			0, a_padding_bottom.as<double>() + b_thickness + a_margin_bottom.as<double>());
 	else if (m_layout_h)
 		m_layout_h->setContentsMargins(
-			a_margin_left.as<int>() + b_thickness + a_padding_left.as<int>(), 0,
-			a_padding_right.as<int>() + b_thickness + a_margin_right.as<int>(), 0);
+			a_margin_left.as<double>() + b_thickness + a_padding_left.as<double>(), 0,
+			a_padding_right.as<double>() + b_thickness + a_margin_right.as<double>(), 0);
 }
 
 void ToggleSwitch::update_spacer_size()
 {
-	int b_thickness = a_border_thickness.as<int>();
+	int b_thickness = a_border_thickness.as<double>();
 
 	if (m_vertical)
 	{
 		m_spacer->setFixedSize(
-			0, height() - a_margin_top.as<int>() - b_thickness - a_padding_top.as<int>() - m_square->height() - a_padding_bottom.as<int>() - b_thickness - a_margin_bottom.as<int>()
+			0, height() - a_margin_top.as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - a_margin_bottom.as<double>()
 		);
 	}
 	else
 	{
 		m_spacer->setFixedSize(
-			width() - a_margin_left.as<int>() - b_thickness - a_padding_left.as<int>() - m_square->width() - a_padding_right.as<int>() - b_thickness - a_margin_right.as<int>(), 0
+			width() - a_margin_left.as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - a_margin_right.as<double>(), 0
 		);
 	}
 }
@@ -121,30 +121,30 @@ void ToggleSwitch::init_attributes()
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
-	a_border_thickness.set_value(3);
-	a_corner_radius_tl.set_value(4);
-	a_corner_radius_tr.set_value(4);
-	a_corner_radius_bl.set_value(4);
-	a_corner_radius_br.set_value(4);
+	a_border_thickness.set_value(3.0);
+	a_corner_radius_tl.set_value(4.0);
+	a_corner_radius_tr.set_value(4.0);
+	a_corner_radius_bl.set_value(4.0);
+	a_corner_radius_br.set_value(4.0);
 	a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
 	if (m_vertical)
 	{
-		a_margin_left.set_value(12);
-		a_margin_right.set_value(12);
+		a_margin_left.set_value(12.0);
+		a_margin_right.set_value(12.0);
 	}
 	else
 	{
-		a_margin_top.set_value(12);
-		a_margin_bottom.set_value(12);
+		a_margin_top.set_value(12.0);
+		a_margin_bottom.set_value(12.0);
 	}
 
-	m_square->a_corner_radius_tl.set_value(2);
-	m_square->a_corner_radius_tr.set_value(2);
-	m_square->a_corner_radius_bl.set_value(2);
-	m_square->a_corner_radius_br.set_value(2);
+	m_square->a_corner_radius_tl.set_value(2.0);
+	m_square->a_corner_radius_tr.set_value(2.0);
+	m_square->a_corner_radius_bl.set_value(2.0);
+	m_square->a_corner_radius_br.set_value(2.0);
 	m_square->a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor(Qt::white) }

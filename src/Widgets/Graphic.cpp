@@ -159,7 +159,7 @@ SVG* Graphic::svg() const
 
 //void Graphic::update_theme_dependencies()
 //{
-//	int border_thickness = a_border_thickness.as<int>();
+//	int border_thickness = a_border_thickness.as<double>();
 //
 //	setFixedSize(
 //		border_thickness + m_image_size.width() + border_thickness,

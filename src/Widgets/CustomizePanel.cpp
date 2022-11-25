@@ -279,18 +279,18 @@ void CustomizePanel::init_attributes()
 	m_show_all_button->a_fill.set_value(QColor("#61ad50"));
 	m_show_all_button->a_hover_fill.set_value(QColor("#6fc65b"));
 	//m_show_all_button->a_text_color->set_value(QColor("#f8f8f8"));
-	m_show_all_button->a_corner_radius_tl.set_value(5);
-	m_show_all_button->a_corner_radius_tr.set_value(5);
-	m_show_all_button->a_corner_radius_bl.set_value(5);
-	m_show_all_button->a_corner_radius_br.set_value(5);
+	m_show_all_button->a_corner_radius_tl.set_value(5.0);
+	m_show_all_button->a_corner_radius_tr.set_value(5.0);
+	m_show_all_button->a_corner_radius_bl.set_value(5.0);
+	m_show_all_button->a_corner_radius_br.set_value(5.0);
 
 	m_show_primary_button->a_fill.set_value(QColor("#61ad50"));
 	m_show_primary_button->a_hover_fill.set_value(QColor("#6fc65b"));
 	//m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->a_corner_radius_tl.set_value(5);
-	m_show_primary_button->a_corner_radius_tr.set_value(5);
-	m_show_primary_button->a_corner_radius_bl.set_value(5);
-	m_show_primary_button->a_corner_radius_br.set_value(5);
+	m_show_primary_button->a_corner_radius_tl.set_value(5.0);
+	m_show_primary_button->a_corner_radius_tr.set_value(5.0);
+	m_show_primary_button->a_corner_radius_bl.set_value(5.0);
+	m_show_primary_button->a_corner_radius_br.set_value(5.0);
 }
 
 void CustomizePanel::init_child_themeable_reference_list()

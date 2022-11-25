@@ -15,12 +15,12 @@ namespace Layers
 	public:
 		Slider(int limit, QWidget* parent = nullptr);
 
-		void set_value(int value);
+		void set_value(double value);
 
 		void update_handle_pos();
 		void update_theme_dependencies();
 
-		Attribute a_value{ Attribute("Value", QVariant::fromValue(0)) };
+		Attribute a_value{ Attribute("Value", QVariant::fromValue(0.0)) };
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

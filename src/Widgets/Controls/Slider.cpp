@@ -33,20 +33,20 @@ void Slider::init_attributes()
 
 	//a_fill.set_disabled();
 
-	a_corner_radius_tl.set_value(10); // Need to check these values
-	a_corner_radius_tr.set_value(10);
-	a_corner_radius_bl.set_value(10);
-	a_corner_radius_br.set_value(10);
+	a_corner_radius_tl.set_value(10.0); // Need to check these values
+	a_corner_radius_tr.set_value(10.0);
+	a_corner_radius_bl.set_value(10.0);
+	a_corner_radius_br.set_value(10.0);
 
-	m_bar->a_corner_radius_tl.set_value(2);
-	m_bar->a_corner_radius_tr.set_value(2);
-	m_bar->a_corner_radius_bl.set_value(2);
-	m_bar->a_corner_radius_br.set_value(2);
+	m_bar->a_corner_radius_tl.set_value(2.0);
+	m_bar->a_corner_radius_tr.set_value(2.0);
+	m_bar->a_corner_radius_bl.set_value(2.0);
+	m_bar->a_corner_radius_br.set_value(2.0);
 
-	m_handle->a_corner_radius_tl.set_value(3);
-	m_handle->a_corner_radius_tr.set_value(3);
-	m_handle->a_corner_radius_bl.set_value(3);
-	m_handle->a_corner_radius_br.set_value(3);
+	m_handle->a_corner_radius_tl.set_value(3.0);
+	m_handle->a_corner_radius_tr.set_value(3.0);
+	m_handle->a_corner_radius_bl.set_value(3.0);
+	m_handle->a_corner_radius_br.set_value(3.0);
 
 	//m_bar->set_attribute_value("corner_radius_tl", 2);
 	//m_bar->set_attribute_value("corner_radius_tr", 2);
@@ -65,7 +65,7 @@ void Slider::init_child_themeable_reference_list()
 	store_child_themeable_pointer(m_handle);
 }
 
-void Slider::set_value(int value)
+void Slider::set_value(double value)
 {
 	a_value.set_value(value);
 	update_handle_pos();
@@ -77,7 +77,7 @@ void Slider::update_handle_pos()
 {
 	double drag_increment = double(width() - m_handle->width()) / double(m_limit);
 
-	m_handle->move(drag_increment * a_value.as<int>(), m_handle->y());
+	m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
 }
 
 void Slider::update_theme_dependencies()
@@ -96,7 +96,7 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.as<int>();
+			m_value_on_click = a_value.as<double>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease && m_handle->underMouse())
@@ -121,14 +121,14 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 
 		if (new_value < 0)
 		{
-			if (a_value.as<int>() != 0)
+			if (a_value.as<double>() != 0)
 			{
 				set_value(0);
 			}
 		}
 		else if (new_value > m_limit)
 		{
-			if (a_value.as<int>() != m_limit)
+			if (a_value.as<double>() != m_limit)
 			{
 				set_value(m_limit);
 			}

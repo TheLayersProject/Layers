@@ -2,6 +2,8 @@
 #define ATTRIBUTE_H
 
 #include <QColor>
+#include <QGradient>
+#include <QJsonObject>
 #include <QVariant>
 
 namespace Layers
@@ -28,7 +30,7 @@ namespace Layers
 
 	public:
 		Variant();
-		Variant(int integer);
+		Variant(double d);
 		Variant(QColor color);
 		Variant(QVariant qvariant);
 		Variant(const Variant& variant);
@@ -165,6 +167,8 @@ namespace Layers
 		QList<QString> states() const;
 
 		const char* typeName() const;
+
+		QJsonObject to_json_object();
 
 		Variant* variant() const;
 

@@ -3,6 +3,7 @@
 
 #include <QDataStream>
 #include <QHash>
+#include <QJsonDocument>
 #include <QString>
 
 #include "Attribute.h"
@@ -56,6 +57,7 @@ namespace Layers
 	public:
 		Theme();
 		Theme(const QString& name, bool is_custom = true);
+		Theme(const QJsonDocument& json_document);
 
 		/*!
 			Adds a themeable tag paired with a set of attributes
@@ -91,14 +93,14 @@ namespace Layers
 		/*!
 			Returns true if the theme is a custom, user-created theme
 
-			@retuns true if theme is custom, false otherwise
+			@returns true if theme is custom, false otherwise
 		*/
 		bool is_custom();
 
 		/*!
 			Returns a reference to the theme's name
 
-			@retuns Reference to theme's name
+			@returns Reference to theme's name
 		*/
 		QString& name();
 
@@ -115,6 +117,8 @@ namespace Layers
 			@returns list of themeable tags that exist in the theme
 		*/
 		QList<QString> themeable_tags();
+
+		QJsonDocument to_json_document();
 
 		/*!
 			Returns a reference to the attribute set of the themeable tag given in the subscript.

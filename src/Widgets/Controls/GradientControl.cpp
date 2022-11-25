@@ -23,15 +23,15 @@ void GradientControl::init_attributes()
 	m_attributes.remove("fill");
 
 	a_border_fill.set_value(QColor("#D6D6D6"));
-	a_border_thickness.set_value(2);
-	a_corner_radius_tl.set_value(5);
-	a_corner_radius_tr.set_value(5);
-	a_corner_radius_bl.set_value(5);
-	a_corner_radius_br.set_value(5);
-	a_margin_left.set_value(10);
-	a_margin_top.set_value(10);
-	a_margin_right.set_value(10);
-	a_margin_bottom.set_value(10);
+	a_border_thickness.set_value(2.0);
+	a_corner_radius_tl.set_value(5.0);
+	a_corner_radius_tr.set_value(5.0);
+	a_corner_radius_bl.set_value(5.0);
+	a_corner_radius_br.set_value(5.0);
+	a_margin_left.set_value(10.0);
+	a_margin_top.set_value(10.0);
+	a_margin_right.set_value(10.0);
+	a_margin_bottom.set_value(10.0);
 	a_outline_color.set_disabled(false);
 
     a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));

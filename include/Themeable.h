@@ -332,7 +332,7 @@ namespace Layers
 		if (typeid(*this) == typeid(*themeable))
 		{
 			for (const QString& attr_tag : m_attributes.keys())
-				attributes()[attr_tag]->get_variant_from(*themeable->attributes()[attr_tag]);
+				m_attributes[attr_tag]->get_variant_from(*themeable->m_attributes[attr_tag]);
 
 			for (Themeable* this_child_themeable : m_child_themeables)
 				if (this_child_themeable->m_name)

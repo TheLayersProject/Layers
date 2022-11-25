@@ -5,8 +5,8 @@ using Layers::Variant;
 Variant::Variant() :
 	m_qvariant{ QVariant() } { }
 
-Variant::Variant(int integer) :
-	m_qvariant{ QVariant(integer) } { }
+Variant::Variant(double d) :
+	m_qvariant{ QVariant(d) } { }
 
 Variant::Variant(QColor color) :
 	m_qvariant{ QVariant(color) } { }

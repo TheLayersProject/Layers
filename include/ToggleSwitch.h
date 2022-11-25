@@ -32,10 +32,10 @@ namespace Layers
 
 		void update_spacer_size();
 
-		Attribute a_padding_left{ Attribute("Left Padding", QVariant::fromValue(2))};
-		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(2)) };
-		Attribute a_padding_right{ Attribute("Right Padding", QVariant::fromValue(2)) };
-		Attribute a_padding_bottom{ Attribute("Bottom Padding", QVariant::fromValue(2)) };
+		Attribute a_padding_left{ Attribute("Left Padding", QVariant::fromValue(2.0))};
+		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(2.0)) };
+		Attribute a_padding_right{ Attribute("Right Padding", QVariant::fromValue(2.0)) };
+		Attribute a_padding_bottom{ Attribute("Bottom Padding", QVariant::fromValue(2.0)) };
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

@@ -45,15 +45,15 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
     connect(&m_single_click_timer, &QTimer::timeout, this, &GradientSelectionDialog::click_control);
 
     connect(&a_border_thickness, &Attribute::value_changed, [this] {
-        int margin = a_border_thickness.as<int>();
+        int margin = a_border_thickness.as<double>();
 
         m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
-        //a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<int>(), a_border_thickness.as<int>()));
-        //a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<int>(), a_border_thickness.as<int>()));
+        //a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
+        //a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
 
-        m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<int>(), a_border_thickness.as<int>()));
-        m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<int>(), a_border_thickness.as<int>()));
+        m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
+        m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
         });
 }
 
@@ -146,16 +146,16 @@ void GradientSelectionDialog::init_attributes()
     m_attribute_layout.append(&a_corner_color);
     m_attribute_layout.append(&a_outline_color);
 
-    m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<int>(), a_border_thickness.as<int>()));
-    m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<int>(), a_border_thickness.as<int>()));
+    m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
+    m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
 
     //m_gradient_widget->a_fill.set_disabled(false);
     m_gradient_widget->a_border_fill.set_value(QColor(Qt::black));
-    m_gradient_widget->a_border_thickness.set_value(2);
-    m_gradient_widget->a_corner_radius_tl.set_value(8);
-    m_gradient_widget->a_corner_radius_tr.set_value(8);
-    m_gradient_widget->a_corner_radius_bl.set_value(8);
-    m_gradient_widget->a_corner_radius_br.set_value(8);
+    m_gradient_widget->a_border_thickness.set_value(2.0);
+    m_gradient_widget->a_corner_radius_tl.set_value(8.0);
+    m_gradient_widget->a_corner_radius_tr.set_value(8.0);
+    m_gradient_widget->a_corner_radius_bl.set_value(8.0);
+    m_gradient_widget->a_corner_radius_br.set_value(8.0);
 }
 
 void GradientSelectionDialog::init_color_controls()
@@ -401,7 +401,7 @@ bool GradientSelectionDialog::nativeEvent(const QByteArray& eventType, void* mes
         }
 
         *result = 0;
-        const LONG borderWidth = a_border_thickness.as<int>() * devicePixelRatio();;
+        const LONG borderWidth = a_border_thickness.as<double>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -606,20 +606,20 @@ void GradientSelectionDialog::paintEvent(QPaintEvent* event)
 
     bool fill_disabled = a_fill.disabled();
 
-    int border_thickness = a_border_thickness.as<int>();
+    int border_thickness = a_border_thickness.as<double>();
 
-    int margin_left = a_margin_left.as<int>();
-    int margin_top = a_margin_top.as<int>();
-    int margin_right = a_margin_right.as<int>();
-    int margin_bottom = a_margin_bottom.as<int>();
+    int margin_left = a_margin_left.as<double>();
+    int margin_top = a_margin_top.as<double>();
+    int margin_right = a_margin_right.as<double>();
+    int margin_bottom = a_margin_bottom.as<double>();
 
     int draw_width = width() - margin_left - margin_right;
     int draw_height = height() - margin_top - margin_bottom;
 
-    int corner_radius_tl = a_corner_radius_tl.as<int>();
-    int corner_radius_tr = a_corner_radius_tr.as<int>();
-    int corner_radius_bl = a_corner_radius_bl.as<int>();
-    int corner_radius_br = a_corner_radius_br.as<int>();
+    int corner_radius_tl = a_corner_radius_tl.as<double>();
+    int corner_radius_tr = a_corner_radius_tr.as<double>();
+    int corner_radius_bl = a_corner_radius_bl.as<double>();
+    int corner_radius_br = a_corner_radius_br.as<double>();
 
     int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
     int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -737,7 +737,7 @@ void GradientSelectionDialog::setup_layout()
     inner_layout->setAlignment(m_apply_button, Qt::AlignRight);
 
     // Main Layout
-    int margin = a_border_thickness.as<int>();
+    int margin = a_border_thickness.as<double>();
 
     m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);

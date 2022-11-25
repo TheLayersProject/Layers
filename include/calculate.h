@@ -5,7 +5,7 @@
 
 namespace Layers
 {
-	inline int round(double d)
+	inline double round(double d)
 	{
 		return floor(d + 0.5);
 	}
@@ -17,7 +17,7 @@ namespace Layers
 		return true;
 	}
 
-	inline int inner_radius(int outer_radius, int thickness)
+	inline double inner_radius(int outer_radius, int thickness)
 	{
 		double border_lower_bound = 3;
 		double border_range = 27;
@@ -33,7 +33,7 @@ namespace Layers
 
 		double slope = ((1 - border_percent) * slope_range) + slope_lower_bound;
 
-		int value = round(slope * double(outer_radius) + y_int);
+		double value = round(slope * double(outer_radius) + y_int);
 
 		if (value < 0) value = 0;
 
