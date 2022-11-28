@@ -106,7 +106,7 @@ CustomizePanel::~CustomizePanel()
 
 void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 {
-	store_child_themeable_pointer(attribute_widget);
+	//store_child_themeable_pointer(attribute_widget);
 	m_attribute_widgets.append(attribute_widget);
 
 	// TEMP

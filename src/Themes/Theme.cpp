@@ -155,20 +155,50 @@ void Theme::add_attributes(const QString& themeable_tag, QMap<QString, Attribute
 		m_data[themeable_tag] = attributes;
 }
 
-//void Theme::consume(Theme&& theme)
-//{
-//	for (const QString& themeable_tag : theme.attribute_sets().keys())
-//	{
-//		if (!m_attribute_sets.contains(themeable_tag))
-//			m_attribute_sets[themeable_tag] = AttributeSet();
-//
-//		AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
-//
-//		for (Attribute* attr : theme.attribute_sets()[themeable_tag].attributes())
-//			if (!attribute_set.contains(attr->name()))
-//				attribute_set.add_attribute(attr);
-//	}
-//}
+void Theme::clear()
+{
+	for (const QString& themeable_tag : m_data.keys())
+	{
+		for (Attribute* attr : m_data[themeable_tag])
+		{
+			delete attr;
+
+			attr = nullptr;
+		}
+	}
+
+	m_data.clear();
+}
+
+void Theme::consume(Theme&& theme)
+{
+	m_data.insert(theme.m_data);
+
+	//for (const QString& themeable_tag : theme.m_data.keys())
+	//{
+	//	//if (!m_data.contains(themeable_tag))
+	//	
+	//	m_data[themeable_tag] = theme.m_data[themeable_tag];
+
+	//	//AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
+
+	//	//for (Attribute* attr : theme.attribute_sets()[themeable_tag].attributes())
+	//	//	if (!attribute_set.contains(attr->name()))
+	//	//		attribute_set.add_attribute(attr);
+	//}
+
+	//for (const QString& themeable_tag : theme.attribute_sets().keys())
+	//{
+	//	if (!m_attribute_sets.contains(themeable_tag))
+	//		m_attribute_sets[themeable_tag] = AttributeSet();
+
+	//	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
+
+	//	for (Attribute* attr : theme.attribute_sets()[themeable_tag].attributes())
+	//		if (!attribute_set.contains(attr->name()))
+	//			attribute_set.add_attribute(attr);
+	//}
+}
 
 bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 {
@@ -177,7 +207,18 @@ bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 
 void Theme::copy_from(Theme& theme)
 {
-	m_data = theme.m_data;
+	clear();
+
+	for (const QString& themeable_tag : theme.m_data.keys())
+	{
+		QMap<QString, Attribute*>& themeable_data_in_theme =
+			m_data[themeable_tag] = QMap<QString, Attribute*>();
+
+		for (const QString& attr_key : theme.m_data[themeable_tag].keys())
+		{
+			themeable_data_in_theme[attr_key] = new Attribute(*theme.m_data[themeable_tag][attr_key]);
+		}
+	}
 }
 
 void Theme::copy_attribute_values_of(Themeable* themeable)
@@ -194,6 +235,18 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 					*themeable->attributes()[attr_key]);
 			}
 		}
+	}
+	else
+	{
+		QMap<QString, Attribute*> new_attributes;
+
+		for (const QString& attr_key : themeable->attributes().keys())
+		{
+			if (themeable->attributes()[attr_key]->owns_variant())
+				new_attributes[attr_key] = new Attribute(*themeable->attributes()[attr_key]);
+		}
+
+		m_data[themeable->tag()] = new_attributes;
 	}
 }
 

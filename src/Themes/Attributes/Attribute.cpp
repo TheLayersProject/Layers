@@ -26,6 +26,33 @@ Attribute::Attribute(const QString& name, QMap<QString, Variant> state_variant_m
 		);
 }
 
+Attribute::Attribute(const Attribute& a)
+{
+	if (a.m_variant)
+	{
+		m_variant = new Variant(*a.m_variant);
+
+		variant_connections.append(
+			connect(m_variant, &Variant::changed, [this] { emit value_changed(); })
+		);
+	}
+	else
+	{
+		m_state_variant_map = new QMap<QString, Variant>();
+
+		m_state_variant_map->insert(*a.m_state_variant_map);
+
+		for (const QString& state : m_state_variant_map->keys())
+			variant_connections.append(
+				connect(&(*m_state_variant_map)[state], &Variant::changed, [this] {
+					emit value_changed();
+					})
+			);
+	}
+
+	m_disabled = a.m_disabled;
+}
+
 Attribute::~Attribute()
 {
 	for (QMetaObject::Connection variant_connection : variant_connections)
@@ -100,6 +127,11 @@ bool Attribute::disabled() const
 }
 
 QString& Attribute::name() { return m_name; }
+
+bool Attribute::owns_variant() const
+{
+	return m_owns_variant;
+}
 
 void Attribute::get_variant_from(Attribute& attribute)
 {
@@ -228,9 +260,29 @@ void Attribute::set_value(QVariant qvariant)
 	/* Should this function still work with stateful attributes and just change
 	   the variant associated with the current state? */
 
+	/* NOTE: qvariant is explicitly converted to the type that this Attribute
+	   already stores. This is necessary because the initial type of an Attribute
+	   needs to be maintained. */
+
 	if (m_variant && *m_variant != qvariant)
 	{
-		*m_variant = qvariant;
+		if (m_variant->typeName() == qvariant.typeName())
+			*m_variant = qvariant;
+
+		else if (QString(m_variant->typeName()) == "bool")
+			*m_variant = QVariant::fromValue(qvariant.value<bool>());
+
+		else if (QString(m_variant->typeName()) == "double")
+			*m_variant = QVariant::fromValue(qvariant.value<double>());
+
+		else if (QString(m_variant->typeName()) == "QColor")
+			*m_variant = QVariant::fromValue(qvariant.value<QColor>());
+
+		else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
+			*m_variant = QVariant::fromValue(qvariant.value<QGradientStops>());
+
+		else if (QString(m_variant->typeName()) == "QString")
+			*m_variant = QVariant::fromValue(qvariant.value<QString>());
 		
 		emit value_changed();
 	}

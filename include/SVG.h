@@ -81,6 +81,8 @@ namespace Layers
 
 		QString element_id(const QString& element);
 
+		bool m_theming_blocked{ false };
+
 		bool m_hovering{ false };
 
 		QString m_svg_str{  };

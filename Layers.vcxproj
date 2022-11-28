@@ -124,7 +124,6 @@
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
     <ClCompile Include="src\Themes\Attributes\Variant.cpp" />
-    <ClCompile Include="src\Themes\build_themes.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
     <ClCompile Include="src\Themes\theme_loading.cpp" />

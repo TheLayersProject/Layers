@@ -25,8 +25,8 @@ namespace Layers
 
 		void assign_tag_prefixes();
 
-		//template<typename T>
-		//void build_main_widget();
+		template<typename T>
+		void build_main_widget();
 
 		void center_dialog(QDialog* dialog);
 
@@ -95,6 +95,29 @@ namespace Layers
 
 		Widget* m_main_widget{ nullptr };
 	};
+
+	template<typename T>
+	inline void Window::build_main_widget()
+	{
+		m_main_widget = new T;
+
+		//m_main_widget->set_icon(new Graphic(layersApp->icon_file()->fileName()));
+		m_main_widget->set_is_app_themeable(true);
+		//m_main_widget->apply_theme(*layersApp->current_theme());
+		m_main_widget->apply_theme(*m_current_theme);
+
+		store_child_themeable_pointer(m_main_widget);
+
+		m_app_menu_layout->addWidget(m_main_widget);
+
+		if (m_customize_menu->preview_widget())
+		{
+			Window* preview_window = dynamic_cast<Window*>(m_customize_menu->preview_widget());
+
+			if (preview_window)
+				preview_window->build_main_widget<T>();
+		}
+	}
 }
 
 #endif // WINDOW_H

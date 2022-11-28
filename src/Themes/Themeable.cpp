@@ -202,13 +202,13 @@ QList<Themeable*>& Themeable::child_themeable_references()
 
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
-	if (theme->contains_attributes_for_tag(tag()))
-	{
-		theme->copy_attribute_values_of(this);
+	//if (theme->contains_attributes_for_tag(tag()))
+	//{
+	theme->copy_attribute_values_of(this);
 
-		for (Themeable* child_themeable : m_child_themeables)
-			child_themeable->copy_attribute_values_to(theme);
-	}
+	for (Themeable* child_themeable : m_child_themeables)
+		child_themeable->copy_attribute_values_to(theme);
+	//}
 }
 
 Theme* Themeable::current_theme()

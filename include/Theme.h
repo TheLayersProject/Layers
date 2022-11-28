@@ -71,7 +71,9 @@ namespace Layers
 			const QString& themeable_tag,
 			QMap<QString, Attribute*> attributes);
 
-		//void consume(Theme&& theme);
+		void clear();
+
+		void consume(Theme&& theme);
 
 		/*!
 			Returns true if the theme contains any attributes for the given themeable tag; otherwise returns false.

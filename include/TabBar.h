@@ -15,19 +15,19 @@ namespace Layers
 	public:
 		TabBar(QWidget* parent = 0);
 
+		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+
 		void SetCurrentTab(const QString& text);
 
 		bool ContainsTab(const QString& text);
-
-		void issue_update();
 
 		//void removeTab(int index);
 		void removeTab(const QString& text);
 
 		void update_theme_dependencies();
 
-		Attribute* a_selected_fill_color{ new Attribute("Selected Fill Color", QColor("#F0F0F0")) };
-		Attribute* a_text_color{ new Attribute("Text Color", QColor(Qt::white)) };
+		Attribute a_selected_fill_color{ Attribute("Selected Fill Color", QColor(Qt::gray)) };
+		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::white)) };
 
 	protected:
 		QString build_stylesheet();

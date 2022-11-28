@@ -37,7 +37,7 @@ MenuBar::MenuBar(QWidget* parent) : QMenuBar(parent)
 
     //setPalette(pal);
 
-
+    update_theme_dependencies();
 }
 
 QMenu* MenuBar::addMenu(const QString& title)
@@ -47,20 +47,36 @@ QMenu* MenuBar::addMenu(const QString& title)
     return m_menus.last();
 }
 
-void MenuBar::issue_update()
+void MenuBar::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
 {
-	update();
+    a_text_color.copy_value_from(*theme_attrs["text_color"]);
+    a_selected_text_color.copy_value_from(*theme_attrs["selected_text_color"]);
 }
+
+//void MenuBar::issue_update()
+//{
+//	update();
+//}
 
 void MenuBar::init_attributes()
 {
-	//add_attribute("text_color", QColor(Qt::darkGray));
-	//add_attribute("selected_text_color", QColor(Qt::lightGray));
+    m_attributes.insert({
+        { "text_color", &a_text_color },
+        { "selected_text_color", &a_selected_text_color }
+        });
+
+    m_attribute_layout.append(&a_text_color);
+    m_attribute_layout.append(&a_selected_text_color);
+
+    connect(&a_text_color, &Attribute::value_changed, [this] { update_theme_dependencies(); });
+    connect(&a_selected_text_color, &Attribute::value_changed, [this] { update_theme_dependencies(); });
 }
 
 void MenuBar::update_theme_dependencies()
 {
 	setStyleSheet(build_stylesheet());
+
+    //update();
 }
 
 QString MenuBar::build_stylesheet()
@@ -68,19 +84,19 @@ QString MenuBar::build_stylesheet()
 	return
 		"QMenuBar {"
 		"background: transparent;"
-		"color: " + a_text_color->as<QColor>().name() + ";"
+		"color: " + a_text_color.as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item {"
 		"spacing: 3px;"
 		"padding: 1px 4px;"
 		"background: transparent;"
-		"color: " + a_text_color->as<QColor>().name() + ";"
+		"color: " + a_text_color.as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:selected {"
 		"background: transparent;"
-		"color: " + a_selected_text_color->as<QColor>().name() + ";"
+		"color: " + a_selected_text_color.as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:pressed {"

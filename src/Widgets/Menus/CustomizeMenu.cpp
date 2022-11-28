@@ -148,7 +148,7 @@ void CustomizeMenu::init_preview_window()
 	preview_window->customize_menu()->apply_button()->set_functionality_disabled();
 	preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
 	
-	open_customize_panel(preview_window->customize_panel());
+	//open_customize_panel(preview_window->customize_panel());
 	set_preview_widget(preview_window);
 	
 	// Setup Preview Window's Customize Menu's Preview Widget
@@ -156,7 +156,7 @@ void CustomizeMenu::init_preview_window()
 	preview_window_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
 	preview_window_customize_menu_preview_widget->set_proper_name("Preview Widget");
 	
-	preview_window->customize_menu()->open_customize_panel(preview_window_customize_menu_preview_widget->customize_panel());
+	//preview_window->customize_menu()->open_customize_panel(preview_window_customize_menu_preview_widget->customize_panel());
 	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
 }
 
@@ -291,6 +291,11 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		if (m_topbar->width() < topbar_content_width(true))
 			collapse_text_buttons();
 	}
+}
+
+QList<CustomizePanel*>& CustomizeMenu::panels()
+{
+	return m_panel_stack;
 }
 
 //void CustomizeMenu::populate_panel_layout()

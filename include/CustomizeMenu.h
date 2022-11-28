@@ -25,6 +25,8 @@ namespace Layers
 
 		void open_customize_panel(CustomizePanel* customize_panel);
 
+		QList<CustomizePanel*>& panels();
+
 		Widget* preview_widget() const;
 
 		int calculated_topbar_content_width();

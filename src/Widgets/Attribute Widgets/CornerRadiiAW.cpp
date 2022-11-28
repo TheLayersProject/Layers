@@ -144,7 +144,7 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 
 void CornerRadiiAW::init_child_themeable_reference_list()
 {
-	store_child_themeable_pointer(m_attribute_widget);
+	//store_child_themeable_pointer(m_attribute_widget);
 	store_child_themeable_pointer(m_tl_line_editor);
 	store_child_themeable_pointer(m_tr_line_editor);
 	store_child_themeable_pointer(m_bl_line_editor);

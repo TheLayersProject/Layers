@@ -17,11 +17,15 @@ SVG::SVG(QString file_path, QWidget* parent) : QSvgWidget(parent)
 		file.close();
 	}
 
+	if (m_svg_str.contains("BLOCK_THEMING"))
+		m_theming_blocked = true;
+
 	build_svg_elements_list();
 
 	init_size();
 
-	init_attributes(); // Necessary to call after m_svg_elements has been initialized
+	if (!m_theming_blocked)
+		init_attributes(); // Necessary to call after m_svg_elements has been initialized
 
 	load(m_svg_str.toUtf8());
 }
@@ -31,9 +35,19 @@ SVG::SVG(const SVG& svg)
 	m_svg_str = svg.m_svg_str;
 	m_svg_elements = svg.m_svg_elements;
 
+	m_theming_blocked = svg.m_theming_blocked;
+
 	setFixedSize(svg.size());
 
-	init_attributes(); // Necessary to call after m_svg_elements has been initialized
+	if (!m_theming_blocked)
+	{
+		init_attributes(); // Necessary to call after m_svg_elements has been initialized
+
+		a_common_color.copy_value_from(svg.a_common_color);
+		a_common_hover_color.copy_value_from(svg.a_common_hover_color);
+		a_use_common_color.copy_value_from(svg.a_use_common_color);
+		a_use_common_hover_color.copy_value_from(svg.a_use_common_hover_color);
+	}
 
 	load(m_svg_str.toUtf8());
 }
@@ -70,7 +84,7 @@ void SVG::rebuild_svg_str()
 {
 	QString new_svg_str = "";
 
-	for (QString tag : m_svg_elements)
+	for (const QString& tag : m_svg_elements)
 	{
 		new_svg_str += tag;
 	}
@@ -94,32 +108,35 @@ void SVG::set_state(const QString& state)
 
 void SVG::update()
 {
-	for (int i = 0; i < m_svg_elements.size(); i++)
+	if (!m_theming_blocked)
 	{
-		if (m_svg_elements[i].startsWith("<path") && m_svg_elements[i].contains("id="))
+		for (int i = 0; i < m_svg_elements.size(); i++)
 		{
-			if (m_hovering)
+			if (m_svg_elements[i].startsWith("<path") && m_svg_elements[i].contains("id="))
 			{
-				if (a_use_common_hover_color.as<bool>())
+				if (m_hovering)
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_hover_color.as<QColor>().name());
+					if (a_use_common_hover_color.as<bool>())
+					{
+						m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_hover_color.as<QColor>().name());
+					}
 				}
-			}
-			else
-			{
-				if (a_use_common_color.as<bool>())
+				else
 				{
-					m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_color.as<QColor>().name());
+					if (a_use_common_color.as<bool>())
+					{
+						m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_color.as<QColor>().name());
+					}
 				}
 			}
 		}
+
+		rebuild_svg_str();
+
+		load(m_svg_str.toUtf8());
+
+		//QSvgWidget::update();
 	}
-
-	rebuild_svg_str();
-
-	load(m_svg_str.toUtf8());
-
-	//QSvgWidget::update();
 }
 
 void SVG::init_size()

@@ -270,7 +270,10 @@ void Window::open_menu(Menu* menu)
 
 void Window::customize_clicked()
 {
-    open_menu(m_customize_menu);
+	if (m_customize_menu->panels().isEmpty())
+		m_customize_menu->open_customize_panel(m_customize_menu->preview_widget()->customize_panel());
+    
+	open_menu(m_customize_menu);
 }
 
 void Window::exit_clicked()

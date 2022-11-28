@@ -98,6 +98,7 @@ namespace Layers
 		Attribute(const QString& name, bool disabled = false);
 		Attribute(const QString& name, QVariant qvariant, bool disabled = false);
 		Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled = false);
+		Attribute(const Attribute& a);
 		~Attribute();
 
 		/*!
@@ -149,6 +150,8 @@ namespace Layers
 		bool is_stateful() const;
 
 		QString& name();
+
+		bool owns_variant() const;
 
 		void set_disabled(bool disabled = true);
 

@@ -3081,6 +3081,338 @@
                 "value": "#f8f8f8"
             }
         },
+        "layers/customize_menu/sidebar/customize_panel/state_aw": {
+            "border_fill": {
+                "name": "",
+                "value": "#000000"
+            },
+            "border_thickness": {
+                "name": "",
+                "value": 0
+            },
+            "corner_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            },
+            "corner_radius_bl": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_br": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_tl": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_tr": {
+                "name": "",
+                "value": 10
+            },
+            "fill": {
+                "name": "",
+                "value": "#1a000000"
+            },
+            "hover_fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "margin_bottom": {
+                "name": "",
+                "value": 0
+            },
+            "margin_left": {
+                "name": "",
+                "value": 0
+            },
+            "margin_right": {
+                "name": "",
+                "value": 0
+            },
+            "margin_top": {
+                "name": "",
+                "value": 0
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/label": {
+            "fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#a0a0a4"
+            },
+            "text_color": {
+                "name": "",
+                "value": "#001122"
+            },
+            "text_hover_color": {
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox": {
+            "border_fill": {
+                "name": "",
+                "value": "#000000"
+            },
+            "border_thickness": {
+                "name": "",
+                "value": 0
+            },
+            "corner_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            },
+            "corner_radius_bl": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_br": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_tl": {
+                "name": "",
+                "value": 10
+            },
+            "corner_radius_tr": {
+                "name": "",
+                "value": 10
+            },
+            "fill": {
+                "name": "",
+                "value": "#001122"
+            },
+            "hover_fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "margin_bottom": {
+                "name": "",
+                "value": 0
+            },
+            "margin_left": {
+                "name": "",
+                "value": 0
+            },
+            "margin_right": {
+                "name": "",
+                "value": 0
+            },
+            "margin_top": {
+                "name": "",
+                "value": 0
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/current_item_label": {
+            "fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#a0a0a4"
+            },
+            "text_color": {
+                "name": "",
+                "value": "#4571a2"
+            },
+            "text_hover_color": {
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down": {
+            "border_fill": {
+                "name": "",
+                "value": "#000000"
+            },
+            "border_thickness": {
+                "name": "",
+                "value": 0
+            },
+            "corner_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            },
+            "corner_radius_bl": {
+                "name": "",
+                "value": 0
+            },
+            "corner_radius_br": {
+                "name": "",
+                "value": 0
+            },
+            "corner_radius_tl": {
+                "name": "",
+                "value": 0
+            },
+            "corner_radius_tr": {
+                "name": "",
+                "value": 0
+            },
+            "fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "hover_fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "margin_bottom": {
+                "name": "",
+                "value": 0
+            },
+            "margin_left": {
+                "name": "",
+                "value": 0
+            },
+            "margin_right": {
+                "name": "",
+                "value": 0
+            },
+            "margin_top": {
+                "name": "",
+                "value": 0
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item": {
+            "border_fill": {
+                "name": "",
+                "value": "#000000"
+            },
+            "border_thickness": {
+                "name": "",
+                "value": 0
+            },
+            "corner_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            },
+            "corner_radius_bl": {
+                "name": "",
+                "value": {
+                    "state_value_pairs": {
+                        "Bottom": 10,
+                        "Middle": 0,
+                        "Single": 10,
+                        "Top": 0
+                    }
+                }
+            },
+            "corner_radius_br": {
+                "name": "",
+                "value": {
+                    "state_value_pairs": {
+                        "Bottom": 10,
+                        "Middle": 0,
+                        "Single": 10,
+                        "Top": 0
+                    }
+                }
+            },
+            "corner_radius_tl": {
+                "name": "",
+                "value": {
+                    "state_value_pairs": {
+                        "Bottom": 0,
+                        "Middle": 0,
+                        "Single": 10,
+                        "Top": 10
+                    }
+                }
+            },
+            "corner_radius_tr": {
+                "name": "",
+                "value": {
+                    "state_value_pairs": {
+                        "Bottom": 0,
+                        "Middle": 0,
+                        "Single": 10,
+                        "Top": 10
+                    }
+                }
+            },
+            "fill": {
+                "name": "",
+                "value": "#001122"
+            },
+            "hover_fill": {
+                "name": "",
+                "value": "#1d3954"
+            },
+            "margin_bottom": {
+                "name": "",
+                "value": 0
+            },
+            "margin_left": {
+                "name": "",
+                "value": 0
+            },
+            "margin_right": {
+                "name": "",
+                "value": 0
+            },
+            "margin_top": {
+                "name": "",
+                "value": 0
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item/label": {
+            "fill": {
+                "disabled": true,
+                "name": "",
+                "value": "#ffffff"
+            },
+            "outline_color": {
+                "disabled": true,
+                "name": "",
+                "value": "#a0a0a4"
+            },
+            "text_color": {
+                "name": "",
+                "value": "#5082bb"
+            },
+            "text_hover_color": {
+                "name": "",
+                "value": "#000000"
+            }
+        },
         "layers/customize_menu/sidebar/customize_panel/widget_button": {
             "border_fill": {
                 "name": "Border Fill",
