@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Old">
-      <UniqueIdentifier>{72ac3fc5-1ea2-44c8-b557-333ff4f4bd87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Old\2.1.0a">
-      <UniqueIdentifier>{2c01e461-9929-4abe-a383-9a50d26cab3e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Layouts">
       <UniqueIdentifier>{36ef7c63-18c2-4f59-b90f-8daebf622ba2}</UniqueIdentifier>
     </Filter>
@@ -52,9 +46,6 @@
     <Filter Include="Source Files\Themes\Attributes">
       <UniqueIdentifier>{74890593-a59b-4085-af24-6a0437117844}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Old\2.2.0a">
-      <UniqueIdentifier>{cb369c59-8193-42e4-bd44-407cbe7a0514}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidget.cpp">
@@ -80,21 +71,6 @@
     </ClCompile>
     <ClCompile Include="src\Layouts\VerticalLayout.cpp">
       <Filter>Source Files\Layouts</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.1.0a\Attribute_2_1_0_a.cpp">
-      <Filter>Source Files\Old\2.1.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.1.0a\Attribute_Set_2_1_0_a.cpp">
-      <Filter>Source Files\Old\2.1.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.1.0a\Stateful_Attribute_2_1_0_a.cpp">
-      <Filter>Source Files\Old\2.1.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.1.0a\Stateless_Attribute_2_1_0_a.cpp">
-      <Filter>Source Files\Old\2.1.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.1.0a\Theme_2_1_0_a.cpp">
-      <Filter>Source Files\Old\2.1.0a</Filter>
     </ClCompile>
     <ClCompile Include="src\Tools\GitHubRepo.cpp">
       <Filter>Source Files\Tools</Filter>
@@ -215,24 +191,6 @@
     </ClCompile>
     <ClCompile Include="src\Themes\theme_loading.cpp">
       <Filter>Source Files\Themes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Themes\theme_updating.cpp">
-      <Filter>Source Files\Themes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.2.0a\Stateful_Attribute_2_2_0_a.cpp">
-      <Filter>Source Files\Old\2.2.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.2.0a\Stateless_Attribute_2_2_0_a.cpp">
-      <Filter>Source Files\Old\2.2.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.2.0a\Theme_2_2_0_a.cpp">
-      <Filter>Source Files\Old\2.2.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.2.0a\Attribute_2_2_0_a.cpp">
-      <Filter>Source Files\Old\2.2.0a</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Old\2.2.0a\Attribute_Set_2_2_0_a.cpp">
-      <Filter>Source Files\Old\2.2.0a</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Controls\FillControl.cpp">
       <Filter>Source Files\Widgets\Controls</Filter>
@@ -384,13 +342,7 @@
     <ClInclude Include="include\directories.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\old.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\theme_loading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\theme_updating.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\GitHubRepo.h">

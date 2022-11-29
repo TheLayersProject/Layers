@@ -149,7 +149,7 @@ void GradientSelectionDialog::init_attributes()
     m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
     m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
 
-    //m_gradient_widget->a_fill.set_disabled(false);
+    m_gradient_widget->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
     m_gradient_widget->a_border_fill.set_value(QColor(Qt::black));
     m_gradient_widget->a_border_thickness.set_value(2.0);
     m_gradient_widget->a_corner_radius_tl.set_value(8.0);

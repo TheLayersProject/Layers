@@ -134,7 +134,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 				if (a_value.as<double>() != 0.0)
 				{
 					if (a_value.is_stateful())
-						a_value.set_value(a_value.state(), 0.0);
+						a_value.set_value(a_value.state(), QVariant::fromValue(0.0));
 					else
 						a_value.set_value(0.0);
 				}
@@ -144,7 +144,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 				if (a_value.as<double>() != m_limit)
 				{
 					if (a_value.is_stateful())
-						a_value.set_value(a_value.state(), m_limit);
+						a_value.set_value(a_value.state(), QVariant::fromValue(m_limit));
 					else
 						a_value.set_value(m_limit);
 				}
@@ -152,7 +152,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			else
 			{
 				if (a_value.is_stateful())
-					a_value.set_value(a_value.state(), new_value);
+					a_value.set_value(a_value.state(), QVariant::fromValue(new_value));
 				else
 					a_value.set_value(new_value);
 			}

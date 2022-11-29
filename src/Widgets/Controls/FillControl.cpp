@@ -28,7 +28,7 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 			if (a_fill.is_stateful())
 				a_fill.set_value(a_fill.state(), QVariant::fromValue(QGradientStops({{0.0, Qt::white},{1.0, Qt::black}})));
 			else
-				a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+				a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
 
 			m_gradient_label_opacity->setOpacity(1.0);
 			m_gradient_control->show();
@@ -41,7 +41,7 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 			if (a_fill.is_stateful())
 				a_fill.set_value(a_fill.state(), QVariant::fromValue(QColor(Qt::white)));
 			else
-				a_fill.set_value(QVariant::fromValue(QColor(Qt::white)));
+				a_fill.set_value(QVariant::fromValue(QColor(Qt::white)), false);
 
 			m_color_label_opacity->setOpacity(1.0);
 			m_color_control->show();

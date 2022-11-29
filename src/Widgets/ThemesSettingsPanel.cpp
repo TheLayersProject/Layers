@@ -93,7 +93,7 @@ void ThemesSettingsPanel::init_child_themeable_reference_list()
 
 void ThemesSettingsPanel::apply_theme(Theme& theme)
 {
-	if (theme.is_custom())
+	if (theme.editable())
 		show_custom_theme_buttons();
 	else
 		show_custom_theme_buttons(false);

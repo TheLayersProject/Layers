@@ -255,7 +255,7 @@ void Attribute::set_state_variant_map(QMap<QString, Variant>& state_variant_map)
 		m_state = m_state_variant_map->firstKey();
 }
 
-void Attribute::set_value(QVariant qvariant)
+void Attribute::set_value(QVariant qvariant, bool retain_type)
 {
 	/* Should this function still work with stateful attributes and just change
 	   the variant associated with the current state? */
@@ -268,21 +268,27 @@ void Attribute::set_value(QVariant qvariant)
 	{
 		if (m_variant->typeName() == qvariant.typeName())
 			*m_variant = qvariant;
+		else
+		{
+			if (retain_type)
+			{
+				if (QString(m_variant->typeName()) == "bool")
+					*m_variant = QVariant::fromValue(qvariant.value<bool>());
 
-		else if (QString(m_variant->typeName()) == "bool")
-			*m_variant = QVariant::fromValue(qvariant.value<bool>());
+				else if (QString(m_variant->typeName()) == "double")
+					*m_variant = QVariant::fromValue(qvariant.value<double>());
 
-		else if (QString(m_variant->typeName()) == "double")
-			*m_variant = QVariant::fromValue(qvariant.value<double>());
+				else if (QString(m_variant->typeName()) == "QColor")
+					*m_variant = QVariant::fromValue(qvariant.value<QColor>());
 
-		else if (QString(m_variant->typeName()) == "QColor")
-			*m_variant = QVariant::fromValue(qvariant.value<QColor>());
+				else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
+					*m_variant = QVariant::fromValue(qvariant.value<QGradientStops>());
 
-		else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
-			*m_variant = QVariant::fromValue(qvariant.value<QGradientStops>());
-
-		else if (QString(m_variant->typeName()) == "QString")
-			*m_variant = QVariant::fromValue(qvariant.value<QString>());
+				else if (QString(m_variant->typeName()) == "QString")
+					*m_variant = QVariant::fromValue(qvariant.value<QString>());
+			}
+			else *m_variant = qvariant;
+		}
 		
 		emit value_changed();
 	}

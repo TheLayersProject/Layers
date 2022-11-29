@@ -3083,244 +3083,244 @@
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw": {
             "border_fill": {
-                "name": "",
+                "name": "Border Fill",
                 "value": "#000000"
             },
             "border_thickness": {
-                "name": "",
+                "name": "Border Thickness",
                 "value": 0
             },
             "corner_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Corner Color",
                 "value": "#000000"
             },
             "corner_radius_bl": {
-                "name": "",
+                "name": "Bottom-Left Corner Radius",
                 "value": 10
             },
             "corner_radius_br": {
-                "name": "",
+                "name": "Bottom-Right Corner Radius",
                 "value": 10
             },
             "corner_radius_tl": {
-                "name": "",
+                "name": "Top-Left Corner Radius",
                 "value": 10
             },
             "corner_radius_tr": {
-                "name": "",
+                "name": "Top-Right Corner Radius",
                 "value": 10
             },
             "fill": {
-                "name": "",
+                "name": "Fill",
                 "value": "#1a000000"
             },
             "hover_fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Hover Fill",
                 "value": "#ffffff"
             },
             "margin_bottom": {
-                "name": "",
+                "name": "Bottom Margin",
                 "value": 0
             },
             "margin_left": {
-                "name": "",
+                "name": "Left Margin",
                 "value": 0
             },
             "margin_right": {
-                "name": "",
+                "name": "Right Margin",
                 "value": 0
             },
             "margin_top": {
-                "name": "",
+                "name": "Top Margin",
                 "value": 0
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#000000"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/label": {
             "fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Fill",
                 "value": "#ffffff"
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#a0a0a4"
             },
             "text_color": {
-                "name": "",
-                "value": "#001122"
+                "name": "Text Color",
+                "value": "#2e2e2e"
             },
             "text_hover_color": {
-                "name": "",
-                "value": "#000000"
+                "name": "Text Hover Color",
+                "value": "#2e2e2e"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox": {
             "border_fill": {
-                "name": "",
+                "name": "Border Fill",
                 "value": "#000000"
             },
             "border_thickness": {
-                "name": "",
+                "name": "Border Thickness",
                 "value": 0
             },
             "corner_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Corner Color",
                 "value": "#000000"
             },
             "corner_radius_bl": {
-                "name": "",
+                "name": "Bottom-Left Corner Radius",
                 "value": 10
             },
             "corner_radius_br": {
-                "name": "",
+                "name": "Bottom-Right Corner Radius",
                 "value": 10
             },
             "corner_radius_tl": {
-                "name": "",
+                "name": "Top-Left Corner Radius",
                 "value": 10
             },
             "corner_radius_tr": {
-                "name": "",
+                "name": "Top-Right Corner Radius",
                 "value": 10
             },
             "fill": {
-                "name": "",
-                "value": "#001122"
+                "name": "Fill",
+                "value": "#2e2e2e"
             },
             "hover_fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Hover Fill",
                 "value": "#ffffff"
             },
             "margin_bottom": {
-                "name": "",
+                "name": "Bottom Margin",
                 "value": 0
             },
             "margin_left": {
-                "name": "",
+                "name": "Left Margin",
                 "value": 0
             },
             "margin_right": {
-                "name": "",
+                "name": "Right Margin",
                 "value": 0
             },
             "margin_top": {
-                "name": "",
+                "name": "Top Margin",
                 "value": 0
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#000000"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/current_item_label": {
             "fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Fill",
                 "value": "#ffffff"
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#a0a0a4"
             },
             "text_color": {
-                "name": "",
-                "value": "#4571a2"
+                "name": "Text Color",
+                "value": "#6a6a6a"
             },
             "text_hover_color": {
-                "name": "",
-                "value": "#000000"
+                "name": "Text Hover Color",
+                "value": "#6a6a6a"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down": {
             "border_fill": {
-                "name": "",
+                "name": "Border Fill",
                 "value": "#000000"
             },
             "border_thickness": {
-                "name": "",
+                "name": "Border Thickness",
                 "value": 0
             },
             "corner_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Corner Color",
                 "value": "#000000"
             },
             "corner_radius_bl": {
-                "name": "",
+                "name": "Bottom-Left Corner Radius",
                 "value": 0
             },
             "corner_radius_br": {
-                "name": "",
+                "name": "Bottom-Right Corner Radius",
                 "value": 0
             },
             "corner_radius_tl": {
-                "name": "",
+                "name": "Top-Left Corner Radius",
                 "value": 0
             },
             "corner_radius_tr": {
-                "name": "",
+                "name": "Top-Right Corner Radius",
                 "value": 0
             },
             "fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Fill",
                 "value": "#ffffff"
             },
             "hover_fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Hover Fill",
                 "value": "#ffffff"
             },
             "margin_bottom": {
-                "name": "",
+                "name": "Bottom Margin",
                 "value": 0
             },
             "margin_left": {
-                "name": "",
+                "name": "Left Margin",
                 "value": 0
             },
             "margin_right": {
-                "name": "",
+                "name": "Right Margin",
                 "value": 0
             },
             "margin_top": {
-                "name": "",
+                "name": "Top Margin",
                 "value": 0
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#000000"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item": {
             "border_fill": {
-                "name": "",
+                "name": "Border Fill",
                 "value": "#000000"
             },
             "border_thickness": {
-                "name": "",
+                "name": "Border Thickness",
                 "value": 0
             },
             "corner_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Corner Color",
                 "value": "#000000"
             },
             "corner_radius_bl": {
-                "name": "",
+                "name": "Bottom-Left Corner Radius",
                 "value": {
                     "state_value_pairs": {
                         "Bottom": 10,
@@ -3331,7 +3331,7 @@
                 }
             },
             "corner_radius_br": {
-                "name": "",
+                "name": "Bottom-Right Corner Radius",
                 "value": {
                     "state_value_pairs": {
                         "Bottom": 10,
@@ -3342,7 +3342,7 @@
                 }
             },
             "corner_radius_tl": {
-                "name": "",
+                "name": "Top-Left Corner Radius",
                 "value": {
                     "state_value_pairs": {
                         "Bottom": 0,
@@ -3353,7 +3353,7 @@
                 }
             },
             "corner_radius_tr": {
-                "name": "",
+                "name": "Top-Right Corner Radius",
                 "value": {
                     "state_value_pairs": {
                         "Bottom": 0,
@@ -3364,53 +3364,53 @@
                 }
             },
             "fill": {
-                "name": "",
-                "value": "#001122"
+                "name": "Fill",
+                "value": "#2e2e2e"
             },
             "hover_fill": {
-                "name": "",
-                "value": "#1d3954"
+                "name": "Hover Fill",
+                "value": "#979797"
             },
             "margin_bottom": {
-                "name": "",
+                "name": "Bottom Margin",
                 "value": 0
             },
             "margin_left": {
-                "name": "",
+                "name": "Left Margin",
                 "value": 0
             },
             "margin_right": {
-                "name": "",
+                "name": "Right Margin",
                 "value": 0
             },
             "margin_top": {
-                "name": "",
+                "name": "Top Margin",
                 "value": 0
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#000000"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item/label": {
             "fill": {
                 "disabled": true,
-                "name": "",
+                "name": "Fill",
                 "value": "#ffffff"
             },
             "outline_color": {
                 "disabled": true,
-                "name": "",
+                "name": "Outline Color",
                 "value": "#a0a0a4"
             },
             "text_color": {
-                "name": "",
-                "value": "#5082bb"
+                "name": "Text Color",
+                "value": "#f0f0f0"
             },
             "text_hover_color": {
-                "name": "",
-                "value": "#000000"
+                "name": "Text Hover Color",
+                "value": "#f0f0f0"
             }
         },
         "layers/customize_menu/sidebar/customize_panel/widget_button": {
@@ -7542,5 +7542,6 @@
             }
         }
     },
+    "editable": false,
     "name": "Dark"
 }

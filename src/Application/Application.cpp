@@ -4,7 +4,6 @@
 #include "../../include/Downloader.h"
 #include "../../include/GitHubRepo.h"
 #include "../../include/theme_loading.h"
-#include "../../include/theme_updating.h"
 #include "../../include/Themeable.h"
 #include "../../include/UpdateDialog.h"
 #include "../../include/Version.h"
@@ -188,67 +187,9 @@ Theme Application::load_theme(const QString& file_name)
 {
 	qDebug() << "Loading" << file_name;
 
-	Theme_And_Load_Status_Combo_2_3_0_a theme_and_load_status_combo_2_3_0_a = load_theme_2_3_0_a(file_name);
+	Theme theme = load_theme_1(file_name);
 
-	if (theme_and_load_status_combo_2_3_0_a.status != 0)
-	{
-		Theme updated_theme;
-
-		qDebug() << "Theme load failed. Trying 2.2.0a load..";
-
-		Theme_And_Load_Status_Combo_2_2_0_a theme_and_load_status_combo_2_2_0_a = load_theme_2_2_0_a(file_name);
-
-		if (theme_and_load_status_combo_2_2_0_a.status != 0)
-		{
-			qDebug() << "Theme load failed. Trying 2.1.0a load..";
-
-			Theme_And_Load_Status_Combo_2_1_0_a theme_and_load_status_combo_2_1_0_a = load_theme_2_1_0_a(file_name);
-
-			if (theme_and_load_status_combo_2_1_0_a.status != 0)
-			{
-				qDebug() << "Theme load failed. Trying 2.0.0a load..";
-
-				Theme_And_Load_Status_Combo_2_0_0_a theme_and_load_status_combo_2_0_0_a = load_theme_2_0_0_a(file_name);
-
-				if (theme_and_load_status_combo_2_0_0_a.status != 0)
-				{
-					qDebug() << "Theme load failed. The data must be corrupt.";
-				}
-				else
-				{
-					qDebug() << "Successfully loaded theme with 2.0.0a compatibility.";
-
-					updated_theme =
-						update_theme_2_2_0_a_to_2_3_0_a(
-							update_theme_2_1_0_a_to_2_2_0_a(
-								update_theme_2_0_0_a_to_2_1_0_a(theme_and_load_status_combo_2_0_0_a.theme)
-							)
-						);
-
-					qDebug() << "Updated theme from 2.0.0a to 2.2.0a.";
-				}
-			}
-			else
-			{
-				qDebug() << "Successfully loaded theme with 2.1.0a compatibility.";
-
-				updated_theme =
-					update_theme_2_2_0_a_to_2_3_0_a(
-						update_theme_2_1_0_a_to_2_2_0_a(theme_and_load_status_combo_2_1_0_a.theme)
-					);
-
-				qDebug() << "Updated theme from 2.1.0a to 2.2.0a.";
-			}
-		}
-
-		copy_missing_attributes_to(updated_theme);
-
-		save_theme(updated_theme);
-
-		return updated_theme;
-	}
-
-	return theme_and_load_status_combo_2_3_0_a.theme;
+	return theme;
 }
 
 Window* Application::main_window() const
@@ -303,24 +244,6 @@ Theme* Application::theme(const QString& theme_name)
 		return &m_themes[theme_name];
 
 	return nullptr;
-}
-
-void Application::copy_missing_attributes_to(Theme& theme_missing_attributes)
-{
-	Theme& light_theme = m_themes["Light"];
-
-	for (const QString& themeable_tag : light_theme.themeable_tags())
-	{
-		if (!theme_missing_attributes.contains_attributes_for_tag(themeable_tag))
-			theme_missing_attributes.add_attributes(themeable_tag, light_theme[themeable_tag]);
-		else
-		{
-			// TODO:
-			//for (Attribute* attribute : light_theme[themeable_tag])
-			//	if (!theme_missing_attributes.contains_attribute(themeable_tag, attribute->name()))
-			//		theme_missing_attributes.add_attribute(themeable_tag, attribute->name(), attribute->value());
-		}
-	}
 }
 
 void Application::init_directories()

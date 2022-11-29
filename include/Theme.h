@@ -56,7 +56,7 @@ namespace Layers
 	{
 	public:
 		Theme();
-		Theme(const QString& name, bool is_custom = true);
+		Theme(const QString& name, bool editable = true);
 		Theme(const QJsonDocument& json_document);
 
 		/*!
@@ -97,7 +97,7 @@ namespace Layers
 
 			@returns true if theme is custom, false otherwise
 		*/
-		bool is_custom();
+		bool editable();
 
 		/*!
 			Returns a reference to the theme's name
@@ -135,7 +135,7 @@ namespace Layers
 		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
 		{
 			stream << t.m_data;
-			stream << t.m_is_custom;
+			stream << t.m_editable;
 			stream << t.m_name;
 			return stream;
 		}
@@ -143,7 +143,7 @@ namespace Layers
 		friend QDataStream& operator >>(QDataStream& stream, Theme& t)
 		{
 			stream >> t.m_data;
-			stream >> t.m_is_custom;
+			stream >> t.m_editable;
 			stream >> t.m_name;
 			return stream;
 		}
@@ -151,7 +151,7 @@ namespace Layers
 	private:
 		QHash<QString, QMap<QString, Attribute*>> m_data{ QHash<QString, QMap<QString, Attribute*>>() };
 
-		bool m_is_custom{ true };
+		bool m_editable{ true };
 
 		QString m_name{ "" };
 	};

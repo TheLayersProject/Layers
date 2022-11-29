@@ -7542,5 +7542,6 @@
             }
         }
     },
+    "editable": false,
     "name": "Blue"
 }

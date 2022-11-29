@@ -132,6 +132,7 @@ void ToggleSwitch::init_attributes()
 		});
 	if (m_vertical)
 	{
+		a_margin_top.set_value(12.0);
 		a_margin_left.set_value(12.0);
 		a_margin_right.set_value(12.0);
 	}

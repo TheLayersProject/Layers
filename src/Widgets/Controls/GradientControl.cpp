@@ -34,7 +34,7 @@ void GradientControl::init_attributes()
 	a_margin_bottom.set_value(10.0);
 	a_outline_color.set_disabled(false);
 
-    a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+    a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
 }
 
 void GradientControl::set_current_editting_state(const QString& state)

@@ -159,7 +159,7 @@ namespace Layers
 
 		void set_state_variant_map(QMap<QString, Variant>& state_variant_map);
 
-		void set_value(QVariant variant);
+		void set_value(QVariant variant, bool retain_type = true);
 
 		void set_value(const QString& state, QVariant variant);
 

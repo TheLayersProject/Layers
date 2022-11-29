@@ -160,8 +160,6 @@ namespace Layers
 		void rename_theme(const QString& old_name, const QString& new_name);
 
 	private:
-		void copy_missing_attributes_to(Theme& theme_missing_attributes);
-
 		void init_directories();
 		void init_fonts();
 		void init_themes();

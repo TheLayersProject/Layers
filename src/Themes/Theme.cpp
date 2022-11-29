@@ -11,8 +11,8 @@ Theme::Theme()
 {
 }
 
-Theme::Theme(const QString& name, bool is_custom) :
-	m_name{ name }, m_is_custom{ is_custom }
+Theme::Theme(const QString& name, bool editable) :
+	m_name{ name }, m_editable{ editable }
 {
 
 }
@@ -22,6 +22,9 @@ Theme::Theme(const QJsonDocument& json_document)
 	QJsonObject json_object = json_document.object();
 
 	m_name = json_object.value("name").toString();
+
+	if (json_object.contains("editable"))
+		m_editable = json_object.value("editable").toBool();
 
 	QJsonObject data_object = json_object.value("data").toObject();
 
@@ -250,9 +253,9 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 	}
 }
 
-bool Theme::is_custom()
+bool Theme::editable()
 {
-	return m_is_custom;
+	return m_editable;
 }
 
 QString& Theme::name()
