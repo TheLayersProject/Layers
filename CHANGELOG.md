@@ -3,16 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## Alpha Phase
 
-### 2.3.0a (Unreleased)
+### 3.0.0a (November 29, 2022)
     - The Attribute class now inherits QObject to provide signal/slot functionality.
     - Created a Variant class that wraps a QVariant and inherits QObject to provide signal/slot functionality.
         ○ Attributes store Variants which are made to be replaceable. An Attribute can replace its Variant with another Attribute's Variant. If either Attribute makes a change to the Variant, both Attributes get updated.
         ○ When Variants update, it emits Variant::changed, and the Attributes linked to them emit the Attribute::value_changed signal. This mechanism is referred to as attribute value change detection, and it replaces the AttributeSharingCombo. The AttributeSharingCombo class has been deprecated and removed.
-    - Previously, when setting an attribute's value, the value would be set without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection. (TODO: NEED TO CHECK THIS AGAIN!)
+    - Previously, when setting an attribute's value, the value would be set without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
     - The AttributeSet class has been removed.
         ○ Slightly different data structures are now used for storing attributes between Themes and Themeables.
         ○ Widget attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced.
-    - Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes (TODO: NEED TO CHECK THIS AGAIN!)
+    - Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes
     - Removed issue_update() since widgets can connect update() to Attribute::value_changed.
     - Saving and loading now uses JSON formatting.
     - Changed Variant->ints to Variant->doubles. This change was made due to JSON formatting not differentiating between int and double types
