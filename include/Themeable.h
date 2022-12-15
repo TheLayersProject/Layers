@@ -59,7 +59,7 @@ namespace Layers
 		*/
 		virtual void apply_theme(Theme& theme);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs);
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs);
 
 		/*!
 			Assigns tag prefixes from the parent and the parent's name.
@@ -79,9 +79,9 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		QMap<QString, Attribute*>& attributes();
+		QMap<QString, AttributeType*>& attributes();
 
-		QList<AttributeLayoutItem*>& attribute_layout();
+		QList<AttributeType*>& attribute_layout();
 
 		//QMap<QString, AttributeWidget*>& attribute_widgets();
 
@@ -314,9 +314,9 @@ namespace Layers
 		//QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
 		//QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
 
-		QList<AttributeLayoutItem*> m_attribute_layout{ QList<AttributeLayoutItem*>() };
+		QList<AttributeType*> m_attribute_layout{ QList<AttributeType*>() };
 
-		QMap<QString, Attribute*> m_attributes{ QMap<QString, Attribute*>() };
+		QMap<QString, AttributeType*> m_attributes{ QMap<QString, AttributeType*>() };
 
 		QList<Themeable*> m_child_themeables;
 
@@ -331,8 +331,13 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (const QString& attr_tag : m_attributes.keys())
-				m_attributes[attr_tag]->get_variant_from(*themeable->m_attributes[attr_tag]);
+			for (const QString& attr_type_key : m_attributes.keys())
+			{
+				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[attr_type_key]))
+					attr->get_variant_from(*dynamic_cast<Attribute*>(themeable->m_attributes[attr_type_key]));
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[attr_type_key]))
+					attr_group->get_variant_from(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[attr_type_key]));
+			}
 
 			for (Themeable* this_child_themeable : m_child_themeables)
 				if (this_child_themeable->m_name)

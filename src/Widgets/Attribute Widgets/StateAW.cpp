@@ -4,7 +4,7 @@
 using Layers::Combobox;
 using Layers::StateAW;
 
-StateAW::StateAW(QWidget* parent) : AttributeWidget(parent)
+StateAW::StateAW(QWidget* parent) : AttributeWidget(nullptr, parent)
 {
 	init_child_themeable_reference_list();
 	init_attributes();

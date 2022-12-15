@@ -17,7 +17,7 @@ namespace Layers
 		Label(QWidget* parent = nullptr);
 		Label(const QString& text, QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
 
 		void resize();
 
@@ -37,11 +37,11 @@ namespace Layers
 
 		int width_unwrapped();
 
-		Attribute a_fill{ Attribute("Fill", QColor(Qt::white), true) };
-		Attribute a_outline_color{ Attribute("Outline Color", QColor(Qt::gray), true) };
-		Attribute a_padding_top{ Attribute("Top Padding", QVariant::fromValue(0.0)) };
-		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
-		Attribute a_text_hover_color{ Attribute("Text Hover Color", QColor(Qt::black), true) };
+		Attribute a_fill{ Attribute("fill", QColor(Qt::white), true) };
+		Attribute a_outline_color{ Attribute("outline_color", QColor(Qt::gray), true) };
+		Attribute a_padding_top{ Attribute("top_padding", QVariant::fromValue(0.0)) };
+		Attribute a_text_color{ Attribute("text_color", QColor(Qt::black)) };
+		Attribute a_text_hover_color{ Attribute("text_hover_color", QColor(Qt::black), true) };
 
 	public slots:
 		void setText(const QString& text);

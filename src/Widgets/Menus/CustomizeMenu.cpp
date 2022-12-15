@@ -76,8 +76,8 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");
 	m_topbar->a_fill.set_value(QColor(Qt::lightGray));
-	m_topbar->a_corner_radius_tr.set_value(10.0);
-	m_topbar->a_corner_radius_br.set_value(10.0);
+	m_topbar->corner_radii.top_right.set_value(10.0);
+	m_topbar->corner_radii.bottom_right.set_value(10.0);
 
 	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
@@ -99,10 +99,10 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapse_menu_button->setFixedWidth(50);
 	m_collapse_menu_button->disable_graphic_hover_color();
 	m_collapse_menu_button->a_fill.set_value(false);
-	m_collapse_menu_button->a_corner_radius_tl.set_value(5.0);
-	m_collapse_menu_button->a_corner_radius_tr.set_value(5.0);
-	m_collapse_menu_button->a_corner_radius_bl.set_value(5.0);
-	m_collapse_menu_button->a_corner_radius_br.set_value(5.0);
+	m_collapse_menu_button->corner_radii.top_left.set_value(5.0);
+	m_collapse_menu_button->corner_radii.top_right.set_value(5.0);
+	m_collapse_menu_button->corner_radii.bottom_left.set_value(5.0);
+	m_collapse_menu_button->corner_radii.bottom_right.set_value(5.0);
 	m_collapse_menu_button->set_margin(0, 10, 0, 10);
 	m_collapse_menu_button->set_name("collapse_menu_button");
 	m_collapse_menu_button->set_proper_name("Collapse Menu Button");
@@ -113,10 +113,10 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapse_menu->setMouseTracking(true);
 	m_collapse_menu->set_name("collapse_menu");
 	m_collapse_menu->set_proper_name("Collapse Menu");
-	m_collapse_menu->a_corner_radius_tl.set_value(5.0);
-	m_collapse_menu->a_corner_radius_tr.set_value(5.0);
-	m_collapse_menu->a_corner_radius_bl.set_value(5.0);
-	m_collapse_menu->a_corner_radius_br.set_value(5.0);
+	m_collapse_menu->corner_radii.top_left.set_value(5.0);
+	m_collapse_menu->corner_radii.top_right.set_value(5.0);
+	m_collapse_menu->corner_radii.bottom_left.set_value(5.0);
+	m_collapse_menu->corner_radii.bottom_right.set_value(5.0);
 
 	m_sidebar->installEventFilter(this);
 	m_sidebar->setFixedWidth(300);
@@ -127,7 +127,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_preview_frame->a_corner_color.get_variant_from(m_sidebar->a_fill);
 
-	m_preview_frame->a_corner_radius_tl.set_value(10.0);
+	m_preview_frame->corner_radii.top_left.set_value(10.0);
 	m_preview_frame->a_corner_color.set_disabled(false);
 
 	setup_layout();

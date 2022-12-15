@@ -44,17 +44,17 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_show_primary_button->hide();
 
 	connect(m_show_all_button, &Button::clicked, [this] {
-		m_showing_primary = false;
+		//m_showing_primary = false;
 
-		//for (AttributeWidget* attribute_widget : m_attribute_widgets)
-		//	attribute_widget->show();
+		for (AttributeWidget* attribute_widget : m_attribute_widgets)
+			attribute_widget->show();
 
 		m_show_all_button->hide();
 		m_show_primary_button->show();
 	});
 
 	connect(m_show_primary_button, &Button::clicked, [this] {
-		m_showing_primary = true;
+		//m_showing_primary = true;
 
 		//for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
 		//{
@@ -64,6 +64,10 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 
 		//for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
 		//	if (!attribute_widget->is_primary()) attribute_widget->hide();
+
+		for (AttributeWidget* aw : m_attribute_widgets)
+			if (aw->disabled())
+				aw->hide();
 
 		m_show_all_button->show();
 		m_show_primary_button->hide();
@@ -179,29 +183,47 @@ void CustomizePanel::init_attribute_widgets()
 		add_attribute_widget(m_state_aw);
 	}
 
-	for (AttributeLayoutItem* attr_layout_item : m_themeable->attribute_layout())
+	for (AttributeType* attr_layout_item : m_themeable->attribute_layout())
 	{
 		if (Attribute* attribute = dynamic_cast<Attribute*>(attr_layout_item))
 		{
 			AttributeWidget* aw = nullptr;
 
-			if (attribute->name().contains("Fill"))
-			{
-				aw  = new FillAW(attribute);
-				m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
-			}
-			else if (attribute->name().contains("Color"))
-			{
-				aw = new ColorAW(attribute);
-				m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
-			}
-			else if (
-				attribute->name().contains("Thickness") ||
-				attribute->name().contains("Margin"))
+			//if (attribute->name().contains("Fill"))
+			//{
+			//	aw  = new FillAW(attribute);
+			//	m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
+			//}
+			//else if (attribute->name().contains("Color"))
+			//{
+			//	aw = new ColorAW(attribute);
+			//	m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
+			//}
+			//else if (
+			//	attribute->name().contains("Thickness") ||
+			//	attribute->name().contains("Margin"))
+			//{
+			//	aw = new NumberAW(attribute, new QIntValidator(0, 30));
+			//	m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
+			//}
+
+			if (QString(attribute->typeName()) == "double")
 			{
 				aw = new NumberAW(attribute, new QIntValidator(0, 30));
 				m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
 			}
+			else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
+				// TEMP: For now, we will assume all use FillControl
+				QString(attribute->typeName()) == "QColor" ||
+				QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
+				)
+			{
+				aw = new FillAW(attribute);
+				m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
+			}
+
+			if (attribute->disabled())
+				aw->hide();
 
 			if (attribute->is_stateful())
 			{
@@ -212,48 +234,88 @@ void CustomizePanel::init_attribute_widgets()
 				//	aw, SLOT(set_current_editting_state(const QString&)));
 			}
 			else add_attribute_widget(aw);
+
+			connect(aw, &AttributeWidget::widget_disabled, [this, aw] {
+				if (m_show_all_button->isVisible())
+					aw->hide();
+				});
 		}
 		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_layout_item))
 		{
-			if (attr_group->name() == "Corner Radii")
+			if (attr_group->name() == "corner_radii")
 			{
-				m_corner_radii_aw = new CornerRadiiAW(attr_group);
+				m_corner_radii_aw = new CornerRadiiAW(dynamic_cast<CornerRadiiAttributes*>(attr_group));
+
+				if (attr_group->disabled())
+					m_corner_radii_aw->hide();
 
 				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(m_corner_radii_aw);
 				else add_attribute_widget(m_corner_radii_aw);
+
+				connect(m_corner_radii_aw, &AttributeWidget::widget_disabled, [this] {
+					if (m_show_all_button->isVisible())
+						m_corner_radii_aw->hide();
+					});
 			}
 			else
 			{
-				AWGroup* aw_group = new AWGroup(attr_group->name());
+				/* TODO: Now that AWGroup requires the attr_group data,
+				   it could initialize its own AttributeWidgets */
+				AWGroup* aw_group = new AWGroup(attr_group);
 				m_aw_groups.append(aw_group);
+
+				bool hide_aw_group = true;
 
 				for (Attribute* attribute : attr_group->attributes())
 				{
 					AttributeWidget* aw = nullptr;
 
-					if (attribute->name().contains("Fill"))
-					{
-						aw = new FillAW(attribute);
-						m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
-					}
-					else if (attribute->name().contains("Color"))
-					{
-						aw = new ColorAW(attribute);
-						m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
-					}
-					else if (
-						attribute->name().contains("Thickness") ||
-						attribute->name().contains("Margin"))
+					//if (attribute->name().contains("Fill"))
+					//{
+					//	aw = new FillAW(attribute);
+					//	m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
+					//}
+					//else if (attribute->name().contains("Color"))
+					//{
+					//	aw = new ColorAW(attribute);
+					//	m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
+					//}
+					//else if (
+					//	attribute->name().contains("Thickness") ||
+					//	attribute->name().contains("Margin"))
+					//{
+					//	aw = new NumberAW(attribute, new QIntValidator(0, 30));
+					//	m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
+					//}
+
+					if (QString(attribute->typeName()) == "double")
 					{
 						aw = new NumberAW(attribute, new QIntValidator(0, 30));
 						m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
+					}
+					else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
+						// TEMP: For now, we will assume all use FillControl
+						QString(attribute->typeName()) == "QColor" ||
+						QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
+						)
+					{
+						aw = new FillAW(attribute);
+						m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
 					}
 
 					aw_group->add_attribute_widget(aw);
 				}
 
+				if (attr_group->disabled())
+					aw_group->hide();
+
 				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(aw_group);
 				else add_attribute_widget(aw_group);
+
+				connect(aw_group, &AttributeWidget::widget_disabled, [this, aw_group] {
+					if (m_show_all_button->isVisible())
+						aw_group->hide();
+					});
 			}
 		}
 	}
@@ -279,18 +341,18 @@ void CustomizePanel::init_attributes()
 	m_show_all_button->a_fill.set_value(QColor("#61ad50"));
 	m_show_all_button->a_hover_fill.set_value(QColor("#6fc65b"));
 	//m_show_all_button->a_text_color->set_value(QColor("#f8f8f8"));
-	m_show_all_button->a_corner_radius_tl.set_value(5.0);
-	m_show_all_button->a_corner_radius_tr.set_value(5.0);
-	m_show_all_button->a_corner_radius_bl.set_value(5.0);
-	m_show_all_button->a_corner_radius_br.set_value(5.0);
+	m_show_all_button->corner_radii.top_left.set_value(5.0);
+	m_show_all_button->corner_radii.top_right.set_value(5.0);
+	m_show_all_button->corner_radii.bottom_left.set_value(5.0);
+	m_show_all_button->corner_radii.bottom_right.set_value(5.0);
 
 	m_show_primary_button->a_fill.set_value(QColor("#61ad50"));
 	m_show_primary_button->a_hover_fill.set_value(QColor("#6fc65b"));
 	//m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->a_corner_radius_tl.set_value(5.0);
-	m_show_primary_button->a_corner_radius_tr.set_value(5.0);
-	m_show_primary_button->a_corner_radius_bl.set_value(5.0);
-	m_show_primary_button->a_corner_radius_br.set_value(5.0);
+	m_show_primary_button->corner_radii.top_left.set_value(5.0);
+	m_show_primary_button->corner_radii.top_right.set_value(5.0);
+	m_show_primary_button->corner_radii.bottom_left.set_value(5.0);
+	m_show_primary_button->corner_radii.bottom_right.set_value(5.0);
 }
 
 void CustomizePanel::init_child_themeable_reference_list()

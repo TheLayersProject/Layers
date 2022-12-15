@@ -18,14 +18,29 @@ namespace Layers
 	{
 		Q_OBJECT
 
+	signals:
+		void widget_disabled();
+
 	public:
-		AttributeWidget(QWidget* parent = nullptr);
+		AttributeWidget(AttributeType* attr_type = nullptr, QWidget* parent = nullptr);
+
+		ToggleSwitch* disable_toggle() const;
+
+		bool disabled() const;
+
+		Widget* toggle_label_separator() const;
 
 	public slots:
 		virtual void set_current_editting_state(const QString& state);
 
 	protected:
 		void init_attributes();
+
+		AttributeType* m_attribute_type;
+
+		ToggleSwitch* m_disabled_toggle{ new ToggleSwitch };
+
+		Widget* m_toggle_label_separator{ new Widget };
 	};
 
 	class StateAW : public AttributeWidget
@@ -63,9 +78,13 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		AWGroup(const QString& label_text, QWidget* parent = nullptr);
+		AWGroup(AttributeGroup* attr_group, QWidget* parent = nullptr);
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
+
+		void set_collapsed(bool collapsed = true);
+
+		//virtual bool disabled() const;
 
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
@@ -92,7 +111,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent = nullptr);
+		CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget* parent = nullptr);
 
 		MiniSlider* tl_slider() const;
 		MiniSlider* tr_slider() const;
@@ -149,8 +168,6 @@ namespace Layers
 
 		Label* m_attribute_label;
 
-		ToggleSwitch* m_disabled_toggle{ nullptr };
-
 		Widget* m_left_stretch{ new Widget };
 		Widget* m_right_stretch{ new Widget };
 	};
@@ -187,7 +204,7 @@ namespace Layers
 
 		FillControl* fill_control() const;
 
-		void set_centered(bool centered = true);
+		//void set_centered(bool centered = true);
 
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
@@ -201,8 +218,6 @@ namespace Layers
 		FillControl* m_fill_control{ new FillControl };
 
 		Label* m_attribute_label;
-
-		ToggleSwitch* m_disabled_toggle{ nullptr };
 
 		Widget* m_left_stretch{ new Widget };
 		Widget* m_right_stretch{ new Widget };

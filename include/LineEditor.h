@@ -17,7 +17,7 @@ namespace Layers
 	public:
 		LineEditor(QWidget* parent = nullptr);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
 
 		void reconnect_text_attribute();
 
@@ -36,9 +36,9 @@ namespace Layers
 
 		QString text();
 
-		Attribute a_left_padding{ Attribute("Left Padding", QVariant::fromValue(3.0)) };
-		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::black)) };
-		Attribute a_text{ Attribute("Text", QString("")) };
+		Attribute a_left_padding{ Attribute("left_padding", QVariant::fromValue(3.0)) };
+		Attribute a_text_color{ Attribute("text_color", QColor(Qt::black)) };
+		Attribute a_text{ Attribute("text", QString("")) };
 
 	public slots:
 		void set_current_editting_state(const QString& state);

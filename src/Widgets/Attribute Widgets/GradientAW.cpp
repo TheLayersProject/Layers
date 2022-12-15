@@ -5,9 +5,11 @@ using Layers::GradientAW;
 using Layers::Theme;
 
 GradientAW::GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(parent)
+	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(attribute, parent)
 {
 	init_child_themeable_reference_list();
+
+	//m_attribute = attribute;
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");

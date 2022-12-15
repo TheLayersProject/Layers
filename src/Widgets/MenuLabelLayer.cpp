@@ -40,10 +40,10 @@ MenuLabelLayer::MenuLabelLayer(Menu* menu, QWidget* parent) :
 void MenuLabelLayer::init_attributes()
 {
 	a_fill.set_value(QColor("#e6e6e6"));
-	a_corner_radius_tl.set_value(10.0);
-	a_corner_radius_tr.set_value(10.0);
-	a_corner_radius_bl.set_value(10.0);
-	a_corner_radius_br.set_value(10.0);
+	corner_radii.top_left.set_value(10.0);
+	corner_radii.top_right.set_value(10.0);
+	corner_radii.bottom_left.set_value(10.0);
+	corner_radii.bottom_right.set_value(10.0);
 
 	m_stretch_widget->a_fill.set_disabled();
 }

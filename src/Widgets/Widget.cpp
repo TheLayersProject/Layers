@@ -18,13 +18,13 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
     installEventFilter(this);
     setFocusPolicy(Qt::ClickFocus);
 
-    connect(&a_border_thickness, &Attribute::value_changed, [this] {
+    connect(&border.thickness, &AttributeType::value_changed, [this] {
         if (layout())
         {
             if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
-                vl->set_border_margin(a_border_thickness.as<double>());
+                vl->set_border_margin(border.thickness.as<double>());
             else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
-                hl->set_border_margin(a_border_thickness.as<double>());
+                hl->set_border_margin(border.thickness.as<double>());
         }
         });
 }
@@ -32,61 +32,50 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
 void Widget::init_attributes()
 {
     m_attributes.insert({
-        { "border_fill", &a_border_fill },
-        { "border_thickness", &a_border_thickness },
+        { "border", &border },
         { "corner_color", &a_corner_color },
-        { "corner_radius_tl", &a_corner_radius_tl },
-        { "corner_radius_tr", &a_corner_radius_tr },
-        { "corner_radius_bl", &a_corner_radius_bl },
-        { "corner_radius_br", &a_corner_radius_br },
+        { "corner_radii", &corner_radii },
         { "fill", &a_fill },
         { "hover_fill", &a_hover_fill },
-        { "margin_left", &a_margin_left },
-        { "margin_top", &a_margin_top },
-        { "margin_right", &a_margin_right },
-        { "margin_bottom", &a_margin_bottom },
+        { "margins", &margins },
         { "outline_color", &a_outline_color },
     });
 
     m_attribute_layout.append(&a_fill);
     m_attribute_layout.append(&a_hover_fill);
-    m_attribute_layout.append(&ag_border);
-    m_attribute_layout.append(&ag_corner_radii);
-    m_attribute_layout.append(&ag_margins);
+    m_attribute_layout.append(&border);
+    m_attribute_layout.append(&corner_radii);
+    m_attribute_layout.append(&margins);
     m_attribute_layout.append(&a_corner_color);
     m_attribute_layout.append(&a_outline_color);
 
-    connect(&a_border_thickness, &Attribute::value_changed, [this] { update(); });
-    connect(&a_corner_color, &Attribute::value_changed, [this] { update(); });
-    connect(&a_corner_radius_tl, &Attribute::value_changed, [this] { update(); });
-    connect(&a_corner_radius_tr, &Attribute::value_changed, [this] { update(); });
-    connect(&a_corner_radius_bl, &Attribute::value_changed, [this] { update(); });
-    connect(&a_corner_radius_br, &Attribute::value_changed, [this] { update(); });
-    connect(&a_fill, &Attribute::value_changed, [this] { update(); });
-    connect(&a_hover_fill, &Attribute::value_changed, [this] { update(); });
-    connect(&a_margin_left, &Attribute::value_changed, [this] { update(); });
-    connect(&a_margin_top, &Attribute::value_changed, [this] { update(); });
-    connect(&a_margin_right, &Attribute::value_changed, [this] { update(); });
-    connect(&a_margin_bottom, &Attribute::value_changed, [this] { update(); });
-    connect(&a_outline_color, &Attribute::value_changed, [this] { update(); });
+    connect(&border, &AttributeType::value_changed, [this] { update(); });
+    connect(&border.thickness, &AttributeType::value_changed, [this] { update(); });
+    connect(&a_corner_color, &AttributeType::value_changed, [this] { update(); });
+    connect(&corner_radii, &AttributeType::value_changed, [this] { update(); });
+    connect(&corner_radii.top_left, &AttributeType::value_changed, [this] { update(); });
+    connect(&corner_radii.top_right, &AttributeType::value_changed, [this] { update(); });
+    connect(&corner_radii.bottom_left, &AttributeType::value_changed, [this] { update(); });
+    connect(&corner_radii.bottom_right, &AttributeType::value_changed, [this] { update(); });
+    connect(&a_fill, &AttributeType::value_changed, [this] { update(); });
+    connect(&a_hover_fill, &AttributeType::value_changed, [this] { update(); });
+    connect(&margins.left, &AttributeType::value_changed, [this] { update(); });
+    connect(&margins, &AttributeType::value_changed, [this] { update(); });
+    connect(&margins.top, &AttributeType::value_changed, [this] { update(); });
+    connect(&margins.right, &AttributeType::value_changed, [this] { update(); });
+    connect(&margins.bottom, &AttributeType::value_changed, [this] { update(); });
+    connect(&a_outline_color, &AttributeType::value_changed, [this] { update(); });
 }
 
-void Widget::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void Widget::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-    a_border_fill.copy_value_from(*theme_attrs["border_fill"]);
-    a_border_thickness.copy_value_from(*theme_attrs["border_thickness"]);
-    a_corner_color.copy_value_from(*theme_attrs["corner_color"]);
-    a_corner_radius_tl.copy_value_from(*theme_attrs["corner_radius_tl"]);
-    a_corner_radius_tr.copy_value_from(*theme_attrs["corner_radius_tr"]);
-    a_corner_radius_bl.copy_value_from(*theme_attrs["corner_radius_bl"]);
-    a_corner_radius_br.copy_value_from(*theme_attrs["corner_radius_br"]);
-    a_fill.copy_value_from(*theme_attrs["fill"]);
-    a_hover_fill.copy_value_from(*theme_attrs["hover_fill"]);
-    a_margin_left.copy_value_from(*theme_attrs["margin_left"]);
-    a_margin_top.copy_value_from(*theme_attrs["margin_top"]);
-    a_margin_right.copy_value_from(*theme_attrs["margin_right"]);
-    a_margin_bottom.copy_value_from(*theme_attrs["margin_bottom"]);
-    a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
+    border.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
+    a_corner_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));
+    corner_radii.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
+    a_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
+    a_hover_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["hover_fill"]));
+    margins.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["margins"]));
+    a_outline_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
 }
 
 void Widget::set_margin(double margin)
@@ -96,10 +85,10 @@ void Widget::set_margin(double margin)
 
 void Widget::set_margin(double left, double top, double right, double bottom)
 {
-    a_margin_left.set_value(left);
-    a_margin_top.set_value(top);
-    a_margin_right.set_value(right);
-    a_margin_bottom.set_value(bottom);
+    margins.left.set_value(left);
+    margins.top.set_value(top);
+    margins.right.set_value(right);
+    margins.bottom.set_value(bottom);
 }
 
 bool Widget::eventFilter(QObject* object, QEvent* event)
@@ -124,20 +113,25 @@ void Widget::paintEvent(QPaintEvent* event)
 
     bool fill_disabled = a_fill.disabled();
     
-    int border_thickness = a_border_thickness.as<double>();
+    int border_thickness = (!border.disabled()) ?
+        border.thickness.as<double>() : 0;
     
-    int margin_left = a_margin_left.as<double>();
-    int margin_top = a_margin_top.as<double>();
-    int margin_right = a_margin_right.as<double>();
-    int margin_bottom = a_margin_bottom.as<double>();
+    int margin_left = margins.left.as<double>();
+    int margin_top = margins.top.as<double>();
+    int margin_right = margins.right.as<double>();
+    int margin_bottom = margins.bottom.as<double>();
     
     int draw_width = width() - margin_left - margin_right;
     int draw_height = height() - margin_top - margin_bottom;
     
-    int corner_radius_tl = a_corner_radius_tl.as<double>();
-    int corner_radius_tr = a_corner_radius_tr.as<double>();
-    int corner_radius_bl = a_corner_radius_bl.as<double>();
-    int corner_radius_br = a_corner_radius_br.as<double>();
+    int corner_radius_tl = (!corner_radii.disabled()) ?
+        corner_radii.top_left.as<double>() : 0;
+    int corner_radius_tr = (!corner_radii.disabled()) ?
+        corner_radii.top_right.as<double>() : 0;
+    int corner_radius_bl = (!corner_radii.disabled()) ?
+        corner_radii.bottom_left.as<double>() : 0;
+    int corner_radius_br = (!corner_radii.disabled()) ?
+        corner_radii.bottom_right.as<double>() : 0;
     
     int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
     int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -197,17 +191,17 @@ void Widget::paintEvent(QPaintEvent* event)
     // - Draw Border
     if (border_thickness)
     {
-        if (QString(a_border_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+        if (QString(border.fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
         {
             QLinearGradient border_fill_gradient;
 
             border_fill_gradient.setStart(0, 0);
             border_fill_gradient.setFinalStop(width(), 0);
-            border_fill_gradient.setStops(a_border_fill.as<QGradientStops>());
+            border_fill_gradient.setStops(border.fill.as<QGradientStops>());
 
             painter.fillPath(border_path, border_fill_gradient);
         }
-        else painter.fillPath(border_path, a_border_fill.as<QColor>());
+        else painter.fillPath(border_path, border.fill.as<QColor>());
     }
 
     // - Draw Background

@@ -5,7 +5,7 @@
 //
 //namespace Layers
 //{
-//	class AttributeLayoutItem
+//	class AttributeType
 //	{
 //	public:
 //

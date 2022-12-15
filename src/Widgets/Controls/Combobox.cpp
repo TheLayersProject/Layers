@@ -124,16 +124,16 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
-    a_corner_radius_tl.set_value(10.0);
-    a_corner_radius_tr.set_value(10.0);
-    a_corner_radius_bl.set_value(10.0);
-    a_corner_radius_br.set_value(10.0);
+    corner_radii.top_left.set_value(10.0);
+    corner_radii.top_right.set_value(10.0);
+    corner_radii.bottom_left.set_value(10.0);
+    corner_radii.bottom_right.set_value(10.0);
     a_fill.set_value(QColor(Qt::lightGray));
 
-    m_drop_down->a_corner_radius_tl.set_value(10.0);
-    m_drop_down->a_corner_radius_tr.set_value(10.0);
-    m_drop_down->a_corner_radius_bl.set_value(10.0);
-    m_drop_down->a_corner_radius_br.set_value(10.0);
+    m_drop_down->corner_radii.top_left.set_value(10.0);
+    m_drop_down->corner_radii.top_right.set_value(10.0);
+    m_drop_down->corner_radii.bottom_left.set_value(10.0);
+    m_drop_down->corner_radii.bottom_right.set_value(10.0);
     m_drop_down->a_fill.set_disabled();
 }
 

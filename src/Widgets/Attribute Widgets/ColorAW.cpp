@@ -6,10 +6,12 @@ using Layers::ColorControl;
 using Layers::Theme;
 
 ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
-	m_attribute_label{ new Label(attribute->name()) },
-	m_disabled_toggle{ new ToggleSwitch }, AttributeWidget(parent)
+	m_attribute_label{ new Label(attribute->capitalized_name()) },
+	AttributeWidget(attribute, parent)
 {
 	init_child_themeable_reference_list();
+
+	//m_attribute = attribute;
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -23,9 +25,6 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 
 	// Setup Right Stretch
 	m_right_stretch->a_fill.set_disabled();
-
-	// Setup Disabling Attribute Toggle
-	m_disabled_toggle->set_proper_name("Disable Toggle");
 
 	connect(m_disabled_toggle, &ToggleSwitch::toggled_event, [this, attribute] {
 		if (m_disabled_toggle->toggled())

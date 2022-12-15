@@ -7,11 +7,13 @@ using Layers::NumberAW;
 using Layers::Theme;
 
 NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* parent) :
-	m_attribute_label{ new Label(attribute->name()) },
+	m_attribute_label{ new Label(attribute->capitalized_name()) },
 	m_slider{ new MiniSlider(int_validator->top()) },
-	AttributeWidget(parent)
+	AttributeWidget(attribute, parent)
 {
 	init_child_themeable_reference_list();
+
+	//m_attribute = attribute;
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");

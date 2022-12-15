@@ -15,7 +15,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
     m_line_edit->installEventFilter(this);
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; padding-left: " +
-        QString::number(a_left_padding.as<double>() + a_margin_left.as<double>()) + "px; padding-bottom: 1px; }");
+        QString::number(a_left_padding.as<double>() + margins.left.as<double>()) + "px; padding-bottom: 1px; }");
 
     connect(m_line_edit, &QLineEdit::textEdited, [this] {
         if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
@@ -34,16 +34,16 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
     reconnect_text_attribute();
 }
 
-void LineEditor::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void LineEditor::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
     Widget::apply_theme_attributes(theme_attrs);
 
-    a_text_color.copy_value_from(*theme_attrs["text_color"]);
+    a_text_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
 }
 
 void LineEditor::reconnect_text_attribute()
 {
-    connect(&a_text, &Attribute::value_changed, [this]
+    connect(&a_text, &AttributeType::value_changed, [this]
         {
             update_theme_dependencies();
 
@@ -59,13 +59,13 @@ void LineEditor::init_attributes()
         { "text_color", &a_text_color }
         });
 
-    a_corner_radius_tl.set_value(5.0);
-    a_corner_radius_tr.set_value(5.0);
-    a_corner_radius_bl.set_value(5.0);
-    a_corner_radius_br.set_value(5.0);
+    corner_radii.top_left.set_value(5.0);
+    corner_radii.top_right.set_value(5.0);
+    corner_radii.bottom_left.set_value(5.0);
+    corner_radii.bottom_right.set_value(5.0);
     a_fill.set_value(QColor(Qt::lightGray));
 
-    connect(&a_text_color, &Attribute::value_changed, [this] {
+    connect(&a_text_color, &AttributeType::value_changed, [this] {
         update_theme_dependencies();
         m_line_edit->update();
         });
@@ -146,7 +146,7 @@ void LineEditor::update_theme_dependencies()
 {
     m_line_edit->setStyleSheet(
         "QLineEdit { border: none; background: transparent; color: " + a_text_color.as<QColor>().name() + "; padding-left: " +
-        QString::number(a_left_padding.as<double>() + a_margin_left.as<double>()) + "px; padding-bottom: 2px; }");
+        QString::number(a_left_padding.as<double>() + margins.left.as<double>()) + "px; padding-bottom: 2px; }");
 
 	if (m_line_edit->text() != a_text.as<QString>())
 		m_line_edit->setText(a_text.as<QString>());

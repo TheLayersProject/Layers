@@ -18,12 +18,12 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 	setText(text);
 }
 
-void Label::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void Label::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_fill.copy_value_from(*theme_attrs["fill"]);
-	a_text_hover_color.copy_value_from(*theme_attrs["text_hover_color"]);
-	a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
-	a_text_color.copy_value_from(*theme_attrs["text_color"]);
+	a_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
+	a_text_hover_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["text_hover_color"]));
+	a_outline_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
+	a_text_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
 }
 
 void Label::init_attributes()

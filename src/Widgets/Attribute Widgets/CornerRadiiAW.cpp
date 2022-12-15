@@ -6,8 +6,9 @@ using Layers::CornerRadiiAW;
 using Layers::MiniSlider;
 using Layers::Theme;
 
-CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
-	m_attribute_widget{ new AttributeWidget }, AWGroup("Corner Radii", parent)
+CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget* parent) :
+	m_attribute_widget{ new AttributeWidget },
+	AWGroup(linked_corner_radii, parent)
 {
 	init_child_themeable_reference_list();
 
@@ -56,36 +57,16 @@ CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
 	m_example_widget->set_name("example_widget");
 	m_example_widget->set_proper_name("Example Widget");
 
-	// Set sliders' to control themeable's corner radii attributes
-	//if (corner_radii_ag->attributes().contains("corner_radius_tl"))
-	//	m_tl_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_tl"]);
-	//if (corner_radii_ag->attributes().contains("corner_radius_tr"))
-	//	m_tr_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_tr"]);
-	//if (corner_radii_ag->attributes().contains("corner_radius_bl"))
-	//	m_bl_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_bl"]);
-	//if (corner_radii_ag->attributes().contains("corner_radius_br"))
-	//	m_br_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_br"]);
+	// Replace sliders' a_value attributes with linked_corner_radii attributes
+	m_tl_slider->a_value.get_variant_from(linked_corner_radii->top_left);
+	m_tr_slider->a_value.get_variant_from(linked_corner_radii->top_right);
+	m_bl_slider->a_value.get_variant_from(linked_corner_radii->bottom_left);
+	m_br_slider->a_value.get_variant_from(linked_corner_radii->bottom_right);
 
-	if (corner_radii_ag->attributes().contains("corner_radius_tl"))
-	{
-		m_tl_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_tl"]);
-		m_tl_slider->update_theme_dependencies();
-	}
-	if (corner_radii_ag->attributes().contains("corner_radius_tr"))
-	{
-		m_tr_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_tr"]);
-		m_tr_slider->update_theme_dependencies();
-	}
-	if (corner_radii_ag->attributes().contains("corner_radius_bl"))
-	{
-		m_bl_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_bl"]);
-		m_bl_slider->update_theme_dependencies();
-	}
-	if (corner_radii_ag->attributes().contains("corner_radius_br"))
-	{
-		m_br_slider->a_value.get_variant_from(*corner_radii_ag->attributes()["corner_radius_br"]);
-		m_br_slider->update_theme_dependencies();
-	}
+	m_tl_slider->update_theme_dependencies();
+	m_tr_slider->update_theme_dependencies();
+	m_bl_slider->update_theme_dependencies();
+	m_br_slider->update_theme_dependencies();
 
 	// Replace line editors' a_text attributes with sliders' a_value attributes
 	m_tl_line_editor->a_text.get_variant_from(m_tl_slider->a_value);
@@ -93,21 +74,16 @@ CornerRadiiAW::CornerRadiiAW(AttributeGroup* corner_radii_ag, QWidget* parent) :
 	m_bl_line_editor->a_text.get_variant_from(m_bl_slider->a_value);
 	m_br_line_editor->a_text.get_variant_from(m_br_slider->a_value);
 
-	//connect(m_tl_line_editor, &LineEditor::update_theme_dependencies, [this]
-	//	{
-	//		m_tl_line_editor->update_theme_dependencies();
-	//	});
-
 	m_tl_line_editor->update_theme_dependencies();
 	m_tr_line_editor->update_theme_dependencies();
 	m_bl_line_editor->update_theme_dependencies();
 	m_br_line_editor->update_theme_dependencies();
 
 	// Replace example widget's corner radii attributes with sliders' 'value' attributes
-	m_example_widget->a_corner_radius_tl.get_variant_from(m_tl_slider->a_value);
-	m_example_widget->a_corner_radius_tr.get_variant_from(m_tr_slider->a_value);
-	m_example_widget->a_corner_radius_bl.get_variant_from(m_bl_slider->a_value);
-	m_example_widget->a_corner_radius_br.get_variant_from(m_br_slider->a_value);
+	m_example_widget->corner_radii.top_left.get_variant_from(m_tl_slider->a_value);
+	m_example_widget->corner_radii.top_right.get_variant_from(m_tr_slider->a_value);
+	m_example_widget->corner_radii.bottom_left.get_variant_from(m_bl_slider->a_value);
+	m_example_widget->corner_radii.bottom_right.get_variant_from(m_br_slider->a_value);
 	m_example_widget->attributes().remove("corner_radius_tl");
 	m_example_widget->attributes().remove("corner_radius_tr");
 	m_example_widget->attributes().remove("corner_radius_bl");
@@ -131,10 +107,10 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 	m_bl_slider->set_current_editting_state(state);
 	m_br_slider->set_current_editting_state(state);
 
-	m_example_widget->a_corner_radius_tl.set_state(state);
-	m_example_widget->a_corner_radius_tr.set_state(state);
-	m_example_widget->a_corner_radius_bl.set_state(state);
-	m_example_widget->a_corner_radius_br.set_state(state);
+	m_example_widget->corner_radii.top_left.set_state(state);
+	m_example_widget->corner_radii.top_right.set_state(state);
+	m_example_widget->corner_radii.bottom_left.set_state(state);
+	m_example_widget->corner_radii.bottom_right.set_state(state);
 
 	m_tl_line_editor->set_current_editting_state(state);
 	m_tr_line_editor->set_current_editting_state(state);

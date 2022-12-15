@@ -48,16 +48,16 @@ void ColorControl::init_attributes()
 	// Remove control attribute
 	m_attributes.remove("fill");
 
-	a_border_fill.set_value(QColor("#D6D6D6"));
-	a_border_thickness.set_value(2.0);
-	a_corner_radius_tl.set_value(5.0);
-	a_corner_radius_tr.set_value(5.0);
-	a_corner_radius_bl.set_value(5.0);
-	a_corner_radius_br.set_value(5.0);
-	a_margin_left.set_value(10.0);
-	a_margin_top.set_value(10.0);
-	a_margin_right.set_value(10.0);
-	a_margin_bottom.set_value(10.0);
+	border.fill.set_value(QColor("#D6D6D6"));
+	border.thickness.set_value(2.0);
+	corner_radii.top_left.set_value(5.0);
+	corner_radii.top_right.set_value(5.0);
+	corner_radii.bottom_left.set_value(5.0);
+	corner_radii.bottom_right.set_value(5.0);
+	margins.left.set_value(10.0);
+	margins.top.set_value(10.0);
+	margins.right.set_value(10.0);
+	margins.bottom.set_value(10.0);
 	a_outline_color.set_disabled(false);
 }
 

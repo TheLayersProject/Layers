@@ -19,26 +19,40 @@ namespace Layers
 
 		void add_gradient_stop(double stop_val, QColor color);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
 
 		QGradientStops gradient_stops() const;
 
 		void update_gradient();
 
-		Attribute a_border_fill{ Attribute("Border Fill", QColor(Qt::gray)) };
-		Attribute a_border_thickness{ Attribute("Border Thickness", QVariant::fromValue(0.0)) };
-		Attribute a_corner_color{ Attribute("Corner Color", QColor(Qt::gray), true) };
-		Attribute a_corner_radius_tl{ Attribute("Top-Left Corner Radius", QVariant::fromValue(0.0)) };
-		Attribute a_corner_radius_tr{ Attribute("Top-Right Corner Radius", QVariant::fromValue(0.0)) };
-		Attribute a_corner_radius_bl{ Attribute("Bottom-Left Corner Radius", QVariant::fromValue(0.0)) };
-		Attribute a_corner_radius_br{ Attribute("Bottom-Right Corner Radius", QVariant::fromValue(0.0)) };
-		Attribute a_fill{ Attribute("Fill", QColor(Qt::white)) };
-		Attribute a_hover_fill{ Attribute("Hover Fill", QColor(Qt::lightGray), true) };
-		Attribute a_margin_left{ Attribute("Left Margin", QVariant::fromValue(0.0)) };
-		Attribute a_margin_top{ Attribute("Top Margin", QVariant::fromValue(0.0)) };
-		Attribute a_margin_right{ Attribute("Right Margin", QVariant::fromValue(0.0)) };
-		Attribute a_margin_bottom{ Attribute("Bottom Margin", QVariant::fromValue(0.0)) };
-		Attribute a_outline_color{ Attribute("Outline Color", QColor(Qt::gray), true) };
+		BorderAttributes border;
+
+		CornerRadiiAttributes corner_radii;
+
+		MarginsAttributes margins;
+
+		Attribute a_corner_color{ Attribute(
+			"corner_color",
+			QColor(Qt::gray),
+			true
+			) };
+
+		Attribute a_fill{ Attribute(
+			"fill",
+			QColor(Qt::white)
+			) };
+
+		Attribute a_hover_fill{ Attribute(
+			"hover_fill",
+			QColor(Qt::lightGray),
+			true
+			) };
+
+		Attribute a_outline_color{ Attribute(
+			"outline_color",
+			QColor(Qt::gray),
+			true
+			) };
 
 	public slots:
 		void click_control();
@@ -52,25 +66,6 @@ namespace Layers
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
-
-		AttributeGroup ag_border{ AttributeGroup("Border", {
-			{ "border_fill", &a_border_fill },
-			{ "border_thickness", &a_border_thickness }
-			}) };
-
-		AttributeGroup ag_corner_radii{ AttributeGroup("Corner Radii", {
-			{ "corner_radius_tl", &a_corner_radius_tl },
-			{ "corner_radius_tr", &a_corner_radius_tr },
-			{ "corner_radius_bl", &a_corner_radius_bl },
-			{ "corner_radius_br", &a_corner_radius_br }
-			}) };
-
-		AttributeGroup ag_margins{ AttributeGroup("Margins", {
-			{ "margin_left", &a_margin_left },
-			{ "margin_top", &a_margin_top },
-			{ "margin_right", &a_margin_right },
-			{ "margin_bottom", &a_margin_bottom }
-			}) };
 
 	private:
 		void init_color_controls();

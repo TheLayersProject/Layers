@@ -67,7 +67,7 @@ namespace Layers
 
 		void update_theme_dependencies();
 
-		Attribute a_line_edit_text_color{ Attribute("Line Edit Text Color", QColor(Qt::black)) };
+		Attribute a_line_edit_text_color{ Attribute("line_edit_text_color", QColor(Qt::black)) };
 
 	public slots:
 		void line_edit_return_pressed();

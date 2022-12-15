@@ -52,12 +52,12 @@ SVG::SVG(const SVG& svg)
 	load(m_svg_str.toUtf8());
 }
 
-void SVG::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void SVG::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_common_color.copy_value_from(*theme_attrs["common_color"]);
-	a_common_hover_color.copy_value_from(*theme_attrs["common_hover_color"]);
-	a_use_common_color.copy_value_from(*theme_attrs["use_common_color"]);
-	a_use_common_hover_color.copy_value_from(*theme_attrs["use_common_hover_color"]);
+	a_common_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["common_color"]));
+	a_common_hover_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["common_hover_color"]));
+	a_use_common_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["use_common_color"]));
+	a_use_common_hover_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["use_common_hover_color"]));
 }
 
 void SVG::init_attributes()
@@ -69,10 +69,10 @@ void SVG::init_attributes()
 		{ "use_common_hover_color", &a_use_common_hover_color }
 		});
 
-	connect(&a_common_color, &Attribute::value_changed, [this] { update(); });
-	connect(&a_common_hover_color, &Attribute::value_changed, [this] { update(); });
-	connect(&a_use_common_color, &Attribute::value_changed, [this] { update(); });
-	connect(&a_use_common_hover_color, &Attribute::value_changed, [this] { update(); });
+	connect(&a_common_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_common_hover_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_use_common_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_use_common_hover_color, &AttributeType::value_changed, [this] { update(); });
 
 	m_attribute_layout.append(&a_common_color);
 	m_attribute_layout.append(&a_common_hover_color);

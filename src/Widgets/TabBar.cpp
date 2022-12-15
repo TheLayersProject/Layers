@@ -11,10 +11,10 @@ TabBar::TabBar(QWidget* parent) : QTabBar(parent)
 	update_theme_dependencies();
 }
 
-void TabBar::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void TabBar::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_selected_fill_color.copy_value_from(*theme_attrs["selected_fill_color"]);
-	a_text_color.copy_value_from(*theme_attrs["text_color"]);
+	a_selected_fill_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["selected_fill_color"]));
+	a_text_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
 }
 
 void TabBar::SetCurrentTab(const QString& text)
@@ -79,8 +79,8 @@ void TabBar::init_attributes()
 	m_attribute_layout.append(&a_selected_fill_color);
 	m_attribute_layout.append(&a_text_color);
 
-	connect(&a_selected_fill_color, &Attribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(&a_text_color, &Attribute::value_changed, [this] { update_theme_dependencies(); });
+	connect(&a_selected_fill_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
+	connect(&a_text_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
 
 	//add_attribute("background_color", QColor(Qt::white));
 	//add_attribute("border_color", QColor(Qt::black));

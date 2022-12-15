@@ -72,7 +72,29 @@ namespace Layers
 		QVariant m_qvariant;
 	};
 
-	struct AttributeLayoutItem : public QObject {};
+	class AttributeType : public QObject
+	{
+		Q_OBJECT
+
+	signals:
+		void value_changed();
+
+	public:
+		AttributeType(const QString& name, bool disabled);
+
+		QString capitalized_name();
+
+		bool disabled() const;
+
+		QString& name();
+
+		virtual void set_disabled(bool disabled = true);
+
+	protected:
+		bool m_disabled{ false };
+
+		QString m_name{ "" };
+	};
 
 	/*!
 		Provides structure for attributes to be used by Themes and Themeables.
@@ -86,12 +108,12 @@ namespace Layers
 		An Attribute can either point to a single Variant or point to a map of QString-Variant pairs
 		where the QStrings are states.
 	*/
-	class Attribute : public AttributeLayoutItem
+	class Attribute : public AttributeType
 	{
 		Q_OBJECT
 
 	signals:
-		void value_changed();
+		//void value_changed();
 		void variant_changed();
 
 	public:
@@ -141,19 +163,15 @@ namespace Layers
 		*/
 		void copy_value_from(const Attribute& attr);
 
-		bool disabled() const;
-
 		void get_variant_from(Attribute& attribute);
 
 		void init_state_variant_map(const QMap<QString, Variant>& state_variant_map);
 
 		bool is_stateful() const;
 
-		QString& name();
-
 		bool owns_variant() const;
 
-		void set_disabled(bool disabled = true);
+		//virtual void set_disabled(bool disabled = true) override;
 
 		void set_state(const QString& state);
 
@@ -222,13 +240,9 @@ namespace Layers
 		}
 
 	private:
-		bool m_disabled{ false };
-
 		bool m_owns_variant{ true };
 
 		QList<QMetaObject::Connection> variant_connections;
-
-		QString m_name{ "" };
 
 		QString m_state{ "" };
 
@@ -237,21 +251,107 @@ namespace Layers
 		Variant* m_variant{ nullptr };
 	};
 
-	class AttributeGroup : public AttributeLayoutItem
+	class AttributeGroup : public AttributeType
 	{
+		Q_OBJECT
+
 	public:
-		AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes);
+		AttributeGroup();
+		AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled = false);
+		AttributeGroup(const AttributeGroup& ag);
 
 		QMap<QString, Attribute*>& attributes();
+
+		void copy_from(const AttributeGroup& ag);
+
+		void get_variant_from(AttributeGroup& attr_group);
 
 		bool is_stateful() const;
 
 		QString name() const;
 
+		//virtual void set_disabled(bool disabled = true) override;
+
+		void set_state(const QString& state);
+
+		QJsonObject to_json_object();
+
 	private:
 		QMap<QString, Attribute*> m_attributes;
+	};
 
-		QString m_name;
+	class BorderAttributes : public AttributeGroup
+	{
+		Q_OBJECT
+
+	public:
+		BorderAttributes();
+
+		Attribute fill{ Attribute(
+			"fill",
+			QColor(Qt::gray)
+			) };
+
+		Attribute thickness{ Attribute(
+			"thickness",
+			QVariant::fromValue(0.0)
+			) };
+	};
+
+	class CornerRadiiAttributes : public AttributeGroup
+	{
+		Q_OBJECT
+
+	public:
+		CornerRadiiAttributes();
+
+		Attribute bottom_left{ Attribute(
+			"bottom_left",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute bottom_right{ Attribute(
+			"bottom_right",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute top_left{ Attribute(
+			"top_left",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute top_right{ Attribute(
+			"top_right",
+			QVariant::fromValue(0.0)
+			) };
+	};
+
+	class MarginsAttributes : public AttributeGroup
+	{
+		Q_OBJECT
+
+	public:
+		MarginsAttributes();
+
+		Attribute left{ Attribute(
+			"left",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute top{ Attribute(
+			"top",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute right{ Attribute(
+			"right",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute bottom{ Attribute(
+			"bottom",
+			QVariant::fromValue(0.0)
+			) };
 	};
 
 	template<typename T>

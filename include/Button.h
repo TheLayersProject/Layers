@@ -39,6 +39,8 @@ namespace Layers
 		void set_padding(int left, int top, int right, int bottom);
 		void set_text_padding(int left, int top, int right, int bottom);
 
+		void toggle_graphics();
+
 		int left_padding() const;
 		int top_padding() const;
 		int right_padding() const;

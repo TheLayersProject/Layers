@@ -25,7 +25,7 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	m_handle->set_name("handle");
 	m_handle->set_proper_name("Handle");
 
-	connect(&a_value, &Attribute::value_changed, [this] { update_handle_pos(); });
+	connect(&a_value, &AttributeType::value_changed, [this] { update_handle_pos(); });
 
 	setup_layout();
 }
@@ -34,20 +34,20 @@ void MiniSlider::init_attributes()
 {
 	m_bar->set_margin(5, 0, 5, 0);
 
-	a_corner_radius_tl.set_value(5.0);
-	a_corner_radius_tr.set_value(5.0);
-	a_corner_radius_bl.set_value(5.0);
-	a_corner_radius_br.set_value(5.0);
+	corner_radii.top_left.set_value(5.0);
+	corner_radii.top_right.set_value(5.0);
+	corner_radii.bottom_left.set_value(5.0);
+	corner_radii.bottom_right.set_value(5.0);
 
-	m_bar->a_corner_radius_tl.set_value(2.0);
-	m_bar->a_corner_radius_tr.set_value(2.0);
-	m_bar->a_corner_radius_bl.set_value(2.0);
-	m_bar->a_corner_radius_br.set_value(2.0);
+	m_bar->corner_radii.top_left.set_value(2.0);
+	m_bar->corner_radii.top_right.set_value(2.0);
+	m_bar->corner_radii.bottom_left.set_value(2.0);
+	m_bar->corner_radii.bottom_right.set_value(2.0);
 
-	m_handle->a_corner_radius_tl.set_value(2.0);
-	m_handle->a_corner_radius_tr.set_value(2.0);
-	m_handle->a_corner_radius_bl.set_value(2.0);
-	m_handle->a_corner_radius_br.set_value(2.0);
+	m_handle->corner_radii.top_left.set_value(2.0);
+	m_handle->corner_radii.top_right.set_value(2.0);
+	m_handle->corner_radii.bottom_left.set_value(2.0);
+	m_handle->corner_radii.bottom_right.set_value(2.0);
 
 	// TODO: TEMP!
 	a_fill.set_value(QColor(Qt::lightGray));

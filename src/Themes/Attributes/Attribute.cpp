@@ -4,10 +4,10 @@ using Layers::Attribute;
 using Layers::Variant;
 
 Attribute::Attribute(const QString& name, bool disabled) :
-	m_name{ name }, m_disabled{ disabled }, AttributeLayoutItem() { }
+	AttributeType(name, disabled) { }
 
 Attribute::Attribute(const QString& name, QVariant qvariant, bool disabled) :
-	m_name{ name }, m_variant{ new Variant(qvariant) }, m_disabled{ disabled }, AttributeLayoutItem()
+	m_variant{ new Variant(qvariant) },AttributeType(name, disabled)
 {
 	variant_connections.append(
 		connect(m_variant, &Variant::changed, [this] { emit value_changed(); })
@@ -15,8 +15,8 @@ Attribute::Attribute(const QString& name, QVariant qvariant, bool disabled) :
 }
 
 Attribute::Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled) :
-	m_name{ name },
-	m_state_variant_map{ new QMap<QString, Variant>(state_variant_map) }, m_disabled{ disabled }, AttributeLayoutItem()
+	m_state_variant_map{ new QMap<QString, Variant>(state_variant_map) },
+	AttributeType(name, disabled)
 {
 	for (const QString& state : m_state_variant_map->keys())
 		variant_connections.append(
@@ -26,7 +26,7 @@ Attribute::Attribute(const QString& name, QMap<QString, Variant> state_variant_m
 		);
 }
 
-Attribute::Attribute(const Attribute& a)
+Attribute::Attribute(const Attribute& a) : AttributeType(a.m_name, a.m_disabled)
 {
 	if (a.m_variant)
 	{
@@ -49,8 +49,6 @@ Attribute::Attribute(const Attribute& a)
 					})
 			);
 	}
-
-	m_disabled = a.m_disabled;
 }
 
 Attribute::~Attribute()
@@ -120,13 +118,6 @@ void Attribute::copy_value_from(const Attribute& attr)
 	
 	emit value_changed();
 }
-
-bool Attribute::disabled() const
-{
-	return m_disabled;
-}
-
-QString& Attribute::name() { return m_name; }
 
 bool Attribute::owns_variant() const
 {
@@ -229,13 +220,12 @@ bool Attribute::is_stateful() const
 	return false;
 }
 
-void Attribute::set_disabled(bool disabled)
-{
-	//m_disabled = new bool(disabled);
-	m_disabled = disabled;
-
-	emit value_changed();
-}
+//void Attribute::set_disabled(bool disabled)
+//{
+//	AttributeType::set_disabled(disabled);
+//
+//	emit value_changed();
+//}
 
 void Attribute::set_state(const QString& state)
 {
@@ -349,8 +339,8 @@ QJsonObject Attribute::to_json_object()
 {
 	QJsonObject json_object;
 
-	json_object.insert("name", m_name);
-	if (m_disabled) json_object.insert("disabled", m_disabled);
+	if (m_disabled)
+		json_object.insert("disabled", m_disabled);
 
 	if (is_stateful())
 	{

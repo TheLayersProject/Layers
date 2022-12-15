@@ -20,7 +20,7 @@ namespace Layers
 		void update_handle_pos();
 		void update_theme_dependencies();
 
-		Attribute a_value{ Attribute("Value", QVariant::fromValue(0.0)) };
+		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

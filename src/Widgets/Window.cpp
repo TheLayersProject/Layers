@@ -47,17 +47,17 @@ Window::Window(bool preview, QWidget* parent) :
 
     set_name("window");
     set_proper_name("Window");
-    a_border_thickness.set_value(15.0);
-	a_border_fill.set_value(
+    border.thickness.set_value(15.0);
+	border.fill.set_value(
 		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
-    a_corner_radius_tl.set_value(10.0);
-    a_corner_radius_tr.set_value(10.0);
-    a_corner_radius_bl.set_value(10.0);
-    a_corner_radius_br.set_value(10.0);
+    corner_radii.top_left.set_value(10.0);
+    corner_radii.top_right.set_value(10.0);
+    corner_radii.bottom_left.set_value(10.0);
+    corner_radii.bottom_right.set_value(10.0);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-    setMinimumSize(200, m_titlebar->height() + a_border_thickness.as<double>() * 2);
+    setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
 	resize(1000, 700);
 
 	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
@@ -193,7 +193,7 @@ void Window::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int margin = a_border_thickness.as<double>();
+		int margin = border.thickness.as<double>();
 
 		m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	}
@@ -340,7 +340,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
         }
 
         *result = 0;
-        const LONG borderWidth = a_border_thickness.as<double>() * devicePixelRatio();;
+        const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
         RECT winrect;
         GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -424,20 +424,25 @@ void Window::paintEvent(QPaintEvent* event)
 
 		bool fill_disabled = a_fill.disabled();
 
-		int border_thickness = a_border_thickness.as<double>();
+		int border_thickness = (!border.disabled()) ?
+			border.thickness.as<double>() : 0;
 
-		int margin_left = a_margin_left.as<double>();
-		int margin_top = a_margin_top.as<double>();
-		int margin_right = a_margin_right.as<double>();
-		int margin_bottom = a_margin_bottom.as<double>();
+		int margin_left = margins.left.as<double>();
+		int margin_top = margins.top.as<double>();
+		int margin_right = margins.right.as<double>();
+		int margin_bottom = margins.bottom.as<double>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
 
-		int corner_radius_tl = a_corner_radius_tl.as<double>();
-		int corner_radius_tr = a_corner_radius_tr.as<double>();
-		int corner_radius_bl = a_corner_radius_bl.as<double>();
-		int corner_radius_br = a_corner_radius_br.as<double>();
+		int corner_radius_tl = (!corner_radii.disabled()) ?
+			corner_radii.top_left.as<double>() : 0;
+		int corner_radius_tr = (!corner_radii.disabled()) ?
+			corner_radii.top_right.as<double>() : 0;
+		int corner_radius_bl = (!corner_radii.disabled()) ?
+			corner_radii.bottom_left.as<double>() : 0;
+		int corner_radius_br = (!corner_radii.disabled()) ?
+			corner_radii.bottom_right.as<double>() : 0;
 
 		int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 		int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -497,17 +502,17 @@ void Window::paintEvent(QPaintEvent* event)
 		// - Draw Border
 		if (border_thickness)
 		{
-			if (QString(a_border_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+			if (QString(border.fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient gradient;
 
 				gradient.setStart(0, 0);
 				gradient.setFinalStop(width(), 0);
-				gradient.setStops(a_border_fill.as<QGradientStops>());
+				gradient.setStops(border.fill.as<QGradientStops>());
 
 				painter.fillPath(border_path, gradient);
 			}
-			else painter.fillPath(border_path, a_border_fill.as<QColor>());
+			else painter.fillPath(border_path, border.fill.as<QColor>());
 		}
 
 		// - Draw Background
@@ -546,10 +551,10 @@ void Window::paintEvent(QPaintEvent* event)
 
 		bool fill_disabled = a_fill.disabled();
 
-		int margin_left = a_margin_left.as<double>();
-		int margin_top = a_margin_top.as<double>();
-		int margin_right = a_margin_right.as<double>();
-		int margin_bottom = a_margin_bottom.as<double>();
+		int margin_left = margins.left.as<double>();
+		int margin_top = margins.top.as<double>();
+		int margin_right = margins.right.as<double>();
+		int margin_bottom = margins.bottom.as<double>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
@@ -612,7 +617,7 @@ void Window::setup_layout()
 
 	m_app_menu->setLayout(m_app_menu_layout);
 
-	int margin = a_border_thickness.as<double>();
+	int margin = border.thickness.as<double>();
 
     m_main_layout->setContentsMargins(margin, margin, margin, margin);
     m_main_layout->setSpacing(0);

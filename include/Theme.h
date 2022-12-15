@@ -13,38 +13,40 @@ namespace Layers
 	class Attribute;
 	class Themeable;
 
-	inline QDataStream& operator <<(QDataStream& stream, const QMap<QString, Attribute*>& attr_map)
-	{
-		stream << attr_map.count();
+	// NOTE: Below has not been updated to support AttributeType
+	//inline QDataStream& operator <<(QDataStream& stream, const QMap<QString, Attribute*>& attr_map)
+	//{
+	//	stream << attr_map.count();
 
-		for (const QString& attr_tag : attr_map.keys())
-		{
-			stream << attr_tag;
-			stream << *attr_map[attr_tag];
-		}
-		
-		return stream;
-	}
+	//	for (const QString& attr_tag : attr_map.keys())
+	//	{
+	//		stream << attr_tag;
+	//		stream << *attr_map[attr_tag];
+	//	}
+	//	
+	//	return stream;
+	//}
 
-	inline QDataStream& operator >>(QDataStream& stream, QMap<QString, Attribute*>& attr_map)
-	{
-		qsizetype attr_count;
-		
-		stream >> attr_count;
-		
-		for (int i = 0; i < attr_count; i++)
-		{
-			QString attr_tag = "";
-			Attribute* attr = new Attribute("");
-			
-			stream >> attr_tag;
-			stream >> *attr;
-		
-			attr_map[attr_tag] = attr;
-		}
-		
-		return stream;
-	}
+	// NOTE: Below has not been updated to support AttributeType
+	//inline QDataStream& operator >>(QDataStream& stream, QMap<QString, Attribute*>& attr_map)
+	//{
+	//	qsizetype attr_count;
+	//	
+	//	stream >> attr_count;
+	//	
+	//	for (int i = 0; i < attr_count; i++)
+	//	{
+	//		QString attr_tag = "";
+	//		Attribute* attr = new Attribute("");
+	//		
+	//		stream >> attr_tag;
+	//		stream >> *attr;
+	//	
+	//		attr_map[attr_tag] = attr;
+	//	}
+	//	
+	//	return stream;
+	//}
 
 	/*!
 		Provides structure for Layers themes.
@@ -67,9 +69,9 @@ namespace Layers
 			@param themeable_tag of the themeable that the supplied attributes belong to
 			@param attributes that belong to a themeable for this theme to store
 		*/
-		void add_attributes(
-			const QString& themeable_tag,
-			QMap<QString, Attribute*> attributes);
+		//void add_attributes(
+		//	const QString& themeable_tag,
+		//	QMap<QString, Attribute*> attributes);
 
 		void clear();
 
@@ -98,6 +100,8 @@ namespace Layers
 			@returns true if theme is custom, false otherwise
 		*/
 		bool editable();
+
+		Attribute* init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value);
 
 		/*!
 			Returns a reference to the theme's name
@@ -130,26 +134,26 @@ namespace Layers
 
 			@returns Reference to attribute set of themeable_tag
 		*/
-		QMap<QString, Attribute*>& operator[](const QString& themeable_tag);
+		QMap<QString, AttributeType*>& operator[](const QString& themeable_tag);
 
-		friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
-		{
-			stream << t.m_data;
-			stream << t.m_editable;
-			stream << t.m_name;
-			return stream;
-		}
+		//friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
+		//{
+		//	stream << t.m_data;
+		//	stream << t.m_editable;
+		//	stream << t.m_name;
+		//	return stream;
+		//}
 
-		friend QDataStream& operator >>(QDataStream& stream, Theme& t)
-		{
-			stream >> t.m_data;
-			stream >> t.m_editable;
-			stream >> t.m_name;
-			return stream;
-		}
+		//friend QDataStream& operator >>(QDataStream& stream, Theme& t)
+		//{
+		//	stream >> t.m_data;
+		//	stream >> t.m_editable;
+		//	stream >> t.m_name;
+		//	return stream;
+		//}
 
 	private:
-		QHash<QString, QMap<QString, Attribute*>> m_data{ QHash<QString, QMap<QString, Attribute*>>() };
+		QHash<QString, QMap<QString, AttributeType*>> m_data{ QHash<QString, QMap<QString, AttributeType*>>() };
 
 		bool m_editable{ true };
 

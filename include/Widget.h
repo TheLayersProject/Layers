@@ -9,6 +9,8 @@
 
 namespace Layers
 {
+	
+
 	/*!
 		The Widget class wraps a QWidget with a Themeable to give QWidgets compatibility with the Layers theme
 		system. The Layers Widget class overrides the QWidget's paintEvent() and uses the attributes provided
@@ -22,7 +24,7 @@ namespace Layers
 		Widget(QWidget* parent = nullptr);
 
 		virtual void apply_theme_attributes(
-			QMap<QString, Attribute*>& theme_attrs) override;
+			QMap<QString, AttributeType*>& theme_attrs) override;
 
 		/*!
 			Sets all margin attributes with one value.
@@ -41,75 +43,31 @@ namespace Layers
 		*/
 		void set_margin(double left, double top, double right, double bottom);
 
-		Attribute a_border_fill {Attribute(
-			"Border Fill",
-			QColor(Qt::gray)
-			) };
+		BorderAttributes border;
 
-		Attribute a_border_thickness {Attribute(
-			"Border Thickness",
-			QVariant::fromValue(0.0)
-			) };
+		CornerRadiiAttributes corner_radii;
 
-		Attribute a_corner_color {Attribute(
-			"Corner Color",
+		MarginsAttributes margins;
+
+		Attribute a_corner_color{ Attribute(
+			"corner_color",
 			QColor(Qt::gray),
 			true
 			) };
 
-		Attribute a_corner_radius_tl {Attribute(
-			"Top-Left Corner Radius",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_corner_radius_tr {Attribute(
-			"Top-Right Corner Radius",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_corner_radius_bl {Attribute(
-			"Bottom-Left Corner Radius",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_corner_radius_br {Attribute(
-			"Bottom-Right Corner Radius",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_fill {Attribute(
-			"Fill",
+		Attribute a_fill{ Attribute(
+			"fill",
 			QColor(Qt::white)
 			) };
 
-		Attribute a_hover_fill {Attribute(
-			"Hover Fill",
+		Attribute a_hover_fill{ Attribute(
+			"hover_fill",
 			QColor(Qt::lightGray),
 			true
 			) };
 
-		Attribute a_margin_left {Attribute(
-			"Left Margin",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_margin_top {Attribute(
-			"Top Margin",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_margin_right {Attribute(
-			"Right Margin",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_margin_bottom {Attribute(
-			"Bottom Margin",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute a_outline_color {Attribute(
-			"Outline Color",
+		Attribute a_outline_color{ Attribute(
+			"outline_color",
 			QColor(Qt::gray),
 			true
 			) };
@@ -134,25 +92,6 @@ namespace Layers
 			Paints the widget with values obtained from the widget's attributes.
 		*/
 		void paintEvent(QPaintEvent* event) override;
-
-		AttributeGroup ag_border{ AttributeGroup("Border", {
-			{ "border_fill", &a_border_fill },
-			{ "border_thickness", &a_border_thickness }
-			}) };
-
-		AttributeGroup ag_corner_radii{ AttributeGroup("Corner Radii", {
-			{ "corner_radius_tl", &a_corner_radius_tl },
-			{ "corner_radius_tr", &a_corner_radius_tr },
-			{ "corner_radius_bl", &a_corner_radius_bl },
-			{ "corner_radius_br", &a_corner_radius_br }
-			}) };
-
-		AttributeGroup ag_margins{ AttributeGroup("Margins", {
-			{ "margin_left", &a_margin_left },
-			{ "margin_top", &a_margin_top },
-			{ "margin_right", &a_margin_right },
-			{ "margin_bottom", &a_margin_bottom }
-			}) };
 
 		bool m_hovering{ false };
 

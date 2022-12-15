@@ -13,10 +13,10 @@ Button::Button(Graphic* graphic, const QString& text, bool auto_touch_target_com
 {
 	init();
 	
-	a_corner_radius_tl.set_value(7.0);
-	a_corner_radius_tr.set_value(7.0);
-	a_corner_radius_bl.set_value(7.0);
-	a_corner_radius_br.set_value(7.0);
+	corner_radii.top_left.set_value(7.0);
+	corner_radii.top_right.set_value(7.0);
+	corner_radii.bottom_left.set_value(7.0);
+	corner_radii.bottom_right.set_value(7.0);
 	a_hover_fill.set_disabled(false);
 }
 
@@ -34,10 +34,10 @@ Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* 
 {
 	init();
 
-	a_corner_radius_tl.set_value(7.0);
-	a_corner_radius_tr.set_value(7.0);
-	a_corner_radius_bl.set_value(7.0);
-	a_corner_radius_br.set_value(7.0);
+	corner_radii.top_left.set_value(7.0);
+	corner_radii.top_right.set_value(7.0);
+	corner_radii.bottom_left.set_value(7.0);
+	corner_radii.bottom_right.set_value(7.0);
 	a_hover_fill.set_disabled(false);
 }
 
@@ -128,7 +128,7 @@ void Button::init_child_themeable_reference_list()
 
 void Button::resize()
 {
-	int border_thickness = a_border_thickness.as<double>();
+	int border_thickness = border.thickness.as<double>();
 	int content_height = 0;
 	int graphic_width = 0;
 	int layout_spacing = 0;
@@ -242,6 +242,23 @@ void Button::set_text_padding(int left, int top, int right, int bottom)
 	resize();
 }
 
+void Button::toggle_graphics()
+{
+	if (m_graphic_after)
+	{
+		if (m_graphic->isVisible())
+		{
+			m_graphic->hide();
+			m_graphic_after->show();
+		}
+		else
+		{
+			m_graphic->show();
+			m_graphic_after->hide();
+		}
+	}
+}
+
 int Button::left_padding() const
 {
 	int left_padding;
@@ -306,19 +323,7 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 		{
 			if (!m_disabled && !m_functionality_disabled) emit clicked();
 
-			if (m_graphic_after)
-			{
-				if (m_graphic->isVisible())
-				{
-					m_graphic->hide();
-					m_graphic_after->show();
-				}
-				else
-				{
-					m_graphic->show();
-					m_graphic_after->hide();
-				}
-			}
+			toggle_graphics();
 		}
 	}
 	else if (event->type() == QEvent::Enter)

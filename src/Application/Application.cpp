@@ -292,12 +292,11 @@ void Application::init_fonts()
 
 void Application::init_themes()
 {
-	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
-		if (file_name == "blue" || file_name == "dark" || file_name == "light")
-			m_app_themes_dir.remove(file_name);
+	/* TODO: Might need to handle case where theme files labeled "dark" or "light"
+	   appear in the custom themes directory. */
 
 	// Load prebuilt theme files
-	m_themes.insert("Blue", load_theme(":/themes/blue.json"));
+	//m_themes.insert("Blue", load_theme(":/themes/blue.json"));
 	m_themes.insert("Dark", load_theme(":/themes/dark.json"));
 	m_themes.insert("Light", load_theme(":/themes/light.json"));
 

@@ -78,16 +78,16 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) : QDialog(parent)
 	m_start_theme_combobox->setFixedSize(250, 50);
 	m_start_theme_combobox->set_font_size(15);
 
-	connect(&a_border_thickness, &Attribute::value_changed, [this] {
-		int margin = a_border_thickness.as<double>();
+	connect(&border.thickness, &AttributeType::value_changed, [this] {
+		int margin = border.thickness.as<double>();
 
 		m_main_layout->setContentsMargins(margin, margin, margin, margin);
 
-		//a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
-		//a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
+		//corner_radii.top_left.set_value(inner_radius(corner_radii.top_left.as<double>(), a_border_thickness.as<double>()));
+		//corner_radii.top_right.set_value(inner_radius(corner_radii.top_right.as<double>(), a_border_thickness.as<double>()));
 
-		m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
-		m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
+		m_titlebar->corner_radii.top_left.set_value(inner_radius(corner_radii.top_left.as<double>(), border.thickness.as<double>()));
+		m_titlebar->corner_radii.top_right.set_value(inner_radius(corner_radii.top_right.as<double>(), border.thickness.as<double>()));
 		});
 
 	setup_layout();
@@ -103,22 +103,15 @@ void CreateNewThemeDialog::add_theme_name_to_combobox(const QString& theme_name)
 	m_start_theme_combobox->add_item(theme_name);
 }
 
-void CreateNewThemeDialog::apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs)
+void CreateNewThemeDialog::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_border_fill.copy_value_from(*theme_attrs["border_fill"]);
-	a_border_thickness.copy_value_from(*theme_attrs["border_thickness"]);
-	a_corner_color.copy_value_from(*theme_attrs["corner_color"]);
-	a_corner_radius_tl.copy_value_from(*theme_attrs["corner_radius_tl"]);
-	a_corner_radius_tr.copy_value_from(*theme_attrs["corner_radius_tr"]);
-	a_corner_radius_bl.copy_value_from(*theme_attrs["corner_radius_bl"]);
-	a_corner_radius_br.copy_value_from(*theme_attrs["corner_radius_br"]);
-	a_fill.copy_value_from(*theme_attrs["fill"]);
-	a_hover_fill.copy_value_from(*theme_attrs["hover_fill"]);
-	a_margin_left.copy_value_from(*theme_attrs["margin_left"]);
-	a_margin_top.copy_value_from(*theme_attrs["margin_top"]);
-	a_margin_right.copy_value_from(*theme_attrs["margin_right"]);
-	a_margin_bottom.copy_value_from(*theme_attrs["margin_bottom"]);
-	a_outline_color.copy_value_from(*theme_attrs["outline_color"]);
+	border.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
+	a_corner_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));
+	corner_radii.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
+	a_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
+	a_hover_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["hover_fill"]));
+	margins.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["margins"]));
+	a_outline_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
 }
 
 void CreateNewThemeDialog::clear()
@@ -142,43 +135,36 @@ void CreateNewThemeDialog::set_current_start_theme_name(const QString& theme_nam
 void CreateNewThemeDialog::init_attributes()
 {
 	m_attributes.insert({
-		{ "border_fill", &a_border_fill },
-		{ "border_thickness", &a_border_thickness },
+		{ "border", &border },
 		{ "corner_color", &a_corner_color },
-		{ "corner_radius_tl", &a_corner_radius_tl },
-		{ "corner_radius_tr", &a_corner_radius_tr },
-		{ "corner_radius_bl", &a_corner_radius_bl },
-		{ "corner_radius_br", &a_corner_radius_br },
+		{ "corner_radii", &corner_radii },
 		{ "fill", &a_fill },
 		{ "hover_fill", &a_hover_fill },
-		{ "margin_left", &a_margin_left },
-		{ "margin_top", &a_margin_top },
-		{ "margin_right", &a_margin_right },
-		{ "margin_bottom", &a_margin_bottom },
+		{ "margins", &margins },
 		{ "outline_color", &a_outline_color },
 		});
 
 	m_attribute_layout.append(&a_fill);
 	m_attribute_layout.append(&a_hover_fill);
-	m_attribute_layout.append(&ag_border);
-	m_attribute_layout.append(&ag_corner_radii);
-	m_attribute_layout.append(&ag_margins);
+	m_attribute_layout.append(&border);
+	m_attribute_layout.append(&corner_radii);
+	m_attribute_layout.append(&margins);
 	m_attribute_layout.append(&a_corner_color);
 	m_attribute_layout.append(&a_outline_color);
 
-	m_titlebar->a_corner_radius_tl.set_value(inner_radius(a_corner_radius_tl.as<double>(), a_border_thickness.as<double>()));
-	m_titlebar->a_corner_radius_tr.set_value(inner_radius(a_corner_radius_tr.as<double>(), a_border_thickness.as<double>()));
+	m_titlebar->corner_radii.top_left.set_value(inner_radius(corner_radii.top_left.as<double>(), border.thickness.as<double>()));
+	m_titlebar->corner_radii.top_right.set_value(inner_radius(corner_radii.top_right.as<double>(), border.thickness.as<double>()));
 
-	m_start_theme_combobox->a_corner_radius_tl.set_value(7.0);
-	m_start_theme_combobox->a_corner_radius_tr.set_value(7.0);
-	m_start_theme_combobox->a_corner_radius_bl.set_value(7.0);
-	m_start_theme_combobox->a_corner_radius_br.set_value(7.0);
+	m_start_theme_combobox->corner_radii.top_left.set_value(7.0);
+	m_start_theme_combobox->corner_radii.top_right.set_value(7.0);
+	m_start_theme_combobox->corner_radii.bottom_left.set_value(7.0);
+	m_start_theme_combobox->corner_radii.bottom_right.set_value(7.0);
 
-	m_theme_name_line_edit->a_border_thickness.set_value(3.0);
-	m_theme_name_line_edit->a_corner_radius_tl.set_value(7.0);
-	m_theme_name_line_edit->a_corner_radius_tr.set_value(7.0);
-	m_theme_name_line_edit->a_corner_radius_bl.set_value(7.0);
-	m_theme_name_line_edit->a_corner_radius_br.set_value(7.0);
+	m_theme_name_line_edit->border.thickness.set_value(3.0);
+	m_theme_name_line_edit->corner_radii.top_left.set_value(7.0);
+	m_theme_name_line_edit->corner_radii.top_right.set_value(7.0);
+	m_theme_name_line_edit->corner_radii.bottom_left.set_value(7.0);
+	m_theme_name_line_edit->corner_radii.bottom_right.set_value(7.0);
 	m_theme_name_line_edit->a_left_padding.set_value(10.0);
 }
 
@@ -204,7 +190,7 @@ bool CreateNewThemeDialog::nativeEvent(const QByteArray& eventType, void* messag
 		}
 
 		*result = 0;
-		const LONG borderWidth = a_border_thickness.as<double>() * devicePixelRatio();;
+		const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -286,20 +272,20 @@ void CreateNewThemeDialog::paintEvent(QPaintEvent* event)
 
 	bool fill_disabled = a_fill.disabled();
 
-	int border_thickness = a_border_thickness.as<double>();
+	int border_thickness = border.thickness.as<double>();
 
-	int margin_left = a_margin_left.as<double>();
-	int margin_top = a_margin_top.as<double>();
-	int margin_right = a_margin_right.as<double>();
-	int margin_bottom = a_margin_bottom.as<double>();
+	int margin_left = margins.left.as<double>();
+	int margin_top = margins.top.as<double>();
+	int margin_right = margins.right.as<double>();
+	int margin_bottom = margins.bottom.as<double>();
 
 	int draw_width = width() - margin_left - margin_right;
 	int draw_height = height() - margin_top - margin_bottom;
 
-	int corner_radius_tl = a_corner_radius_tl.as<double>();
-	int corner_radius_tr = a_corner_radius_tr.as<double>();
-	int corner_radius_bl = a_corner_radius_bl.as<double>();
-	int corner_radius_br = a_corner_radius_br.as<double>();
+	int corner_radius_tl = corner_radii.top_left.as<double>();
+	int corner_radius_tr = corner_radii.top_right.as<double>();
+	int corner_radius_bl = corner_radii.bottom_left.as<double>();
+	int corner_radius_br = corner_radii.bottom_right.as<double>();
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -359,17 +345,17 @@ void CreateNewThemeDialog::paintEvent(QPaintEvent* event)
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (QString(a_border_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+		if (QString(border.fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
 			QLinearGradient border_fill_gradient;
 
 			border_fill_gradient.setStart(0, 0);
 			border_fill_gradient.setFinalStop(width(), 0);
-			border_fill_gradient.setStops(a_border_fill.as<QGradientStops>());
+			border_fill_gradient.setStops(border.fill.as<QGradientStops>());
 
 			painter.fillPath(border_path, border_fill_gradient);
 		}
-		else painter.fillPath(border_path, a_border_fill.as<QColor>());
+		else painter.fillPath(border_path, border.fill.as<QColor>());
 	}
 
 	// - Draw Background
@@ -455,7 +441,7 @@ void CreateNewThemeDialog::setup_layout()
 	inner_layout->setAlignment(m_create_button, Qt::AlignRight);
 
 	// Main Layout
-	int margin = a_border_thickness.as<double>();
+	int margin = border.thickness.as<double>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);

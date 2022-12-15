@@ -69,32 +69,32 @@ bool ToggleSwitch::toggled() const
 
 void ToggleSwitch::update_layout_margins()
 {
-	int b_thickness = a_border_thickness.as<double>();
+	int b_thickness = border.thickness.as<double>();
 
 	if (m_layout_v)
 		m_layout_v->setContentsMargins(
-			0, a_margin_top.as<double>() + b_thickness + a_padding_top.as<double>(),
-			0, a_padding_bottom.as<double>() + b_thickness + a_margin_bottom.as<double>());
+			0, margins.top.as<double>() + b_thickness + a_padding_top.as<double>(),
+			0, a_padding_bottom.as<double>() + b_thickness + margins.bottom.as<double>());
 	else if (m_layout_h)
 		m_layout_h->setContentsMargins(
-			a_margin_left.as<double>() + b_thickness + a_padding_left.as<double>(), 0,
-			a_padding_right.as<double>() + b_thickness + a_margin_right.as<double>(), 0);
+			margins.left.as<double>() + b_thickness + a_padding_left.as<double>(), 0,
+			a_padding_right.as<double>() + b_thickness + margins.right.as<double>(), 0);
 }
 
 void ToggleSwitch::update_spacer_size()
 {
-	int b_thickness = a_border_thickness.as<double>();
+	int b_thickness = border.thickness.as<double>();
 
 	if (m_vertical)
 	{
 		m_spacer->setFixedSize(
-			0, height() - a_margin_top.as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - a_margin_bottom.as<double>()
+			0, height() - margins.top.as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - margins.bottom.as<double>()
 		);
 	}
 	else
 	{
 		m_spacer->setFixedSize(
-			width() - a_margin_left.as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - a_margin_right.as<double>(), 0
+			width() - margins.left.as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - margins.right.as<double>(), 0
 		);
 	}
 }
@@ -117,35 +117,35 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	a_border_fill.init_state_variant_map({
+	border.fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
-	a_border_thickness.set_value(3.0);
-	a_corner_radius_tl.set_value(4.0);
-	a_corner_radius_tr.set_value(4.0);
-	a_corner_radius_bl.set_value(4.0);
-	a_corner_radius_br.set_value(4.0);
+	border.thickness.set_value(3.0);
+	corner_radii.top_left.set_value(4.0);
+	corner_radii.top_right.set_value(4.0);
+	corner_radii.bottom_left.set_value(4.0);
+	corner_radii.bottom_right.set_value(4.0);
 	a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
 	if (m_vertical)
 	{
-		a_margin_top.set_value(12.0);
-		a_margin_left.set_value(12.0);
-		a_margin_right.set_value(12.0);
+		margins.top.set_value(12.0);
+		margins.left.set_value(12.0);
+		margins.right.set_value(12.0);
 	}
 	else
 	{
-		a_margin_top.set_value(12.0);
-		a_margin_bottom.set_value(12.0);
+		margins.top.set_value(12.0);
+		margins.bottom.set_value(12.0);
 	}
 
-	m_square->a_corner_radius_tl.set_value(2.0);
-	m_square->a_corner_radius_tr.set_value(2.0);
-	m_square->a_corner_radius_bl.set_value(2.0);
-	m_square->a_corner_radius_br.set_value(2.0);
+	m_square->corner_radii.top_left.set_value(2.0);
+	m_square->corner_radii.top_right.set_value(2.0);
+	m_square->corner_radii.bottom_left.set_value(2.0);
+	m_square->corner_radii.bottom_right.set_value(2.0);
 	m_square->a_fill.init_state_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor(Qt::white) }
@@ -157,35 +157,35 @@ void ToggleSwitch::init_attributes()
 	// Set initial state
 	set_state("Untoggled");;
 
-	//connect(&a_margin_left, &Attribute::value_changed, [this] {
+	//connect(&a_margin_left, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_top, &Attribute::value_changed, [this] {
+	//connect(&a_margin_top, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_right, &Attribute::value_changed, [this] {
+	//connect(&a_margin_right, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_bottom, &Attribute::value_changed, [this] {
+	//connect(&a_margin_bottom, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_left, &Attribute::value_changed, [this] {
+	//connect(&a_padding_left, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_top, &Attribute::value_changed, [this] {
+	//connect(&a_padding_top, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_right, &Attribute::value_changed, [this] {
+	//connect(&a_padding_right, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_bottom, &Attribute::value_changed, [this] {
+	//connect(&a_padding_bottom, &AttributeType::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 }

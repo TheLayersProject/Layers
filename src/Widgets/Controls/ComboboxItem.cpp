@@ -23,28 +23,28 @@ ComboboxItem::ComboboxItem(const QString& item_text, QWidget* parent) :
 
 void ComboboxItem::init_attributes()
 {
-	a_corner_radius_tl.init_state_variant_map({
+	corner_radii.top_left.init_state_variant_map({
 			{ "Single", 10 },
 			{ "Top", 10 },
 			{ "Middle", 0 },
 			{ "Bottom", 0 }
 		});
 
-	a_corner_radius_tr.init_state_variant_map({
+	corner_radii.top_right.init_state_variant_map({
 			{ "Single", 10 },
 			{ "Top", 10 },
 			{ "Middle", 0 },
 			{ "Bottom", 0 }
 		});
 
-	a_corner_radius_bl.init_state_variant_map({
+	corner_radii.bottom_left.init_state_variant_map({
 			{ "Single", 10 },
 			{ "Top", 0 },
 			{ "Middle", 0 },
 			{ "Bottom", 10 }
 		});
 
-	a_corner_radius_br.init_state_variant_map({
+	corner_radii.bottom_right.init_state_variant_map({
 			{ "Single", 10 },
 			{ "Top", 0 },
 			{ "Middle", 0 },

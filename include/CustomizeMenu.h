@@ -46,9 +46,9 @@ namespace Layers
 		void expand_text_buttons();
 		void setup_layout();
 
-		AWGroup* m_control_aw_group{ new AWGroup("") };
+		AWGroup* m_control_aw_group{ new AWGroup(new AttributeGroup) };
 		ColorAW* m_control_color_aw{ new ColorAW(new Attribute("", QColor())) };
-		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new AttributeGroup("", QMap<QString, Attribute*>())) };
+		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new CornerRadiiAttributes) };
 		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
 		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0.0)), new QIntValidator) };
 		StateAW* m_control_state_aw{ new StateAW };

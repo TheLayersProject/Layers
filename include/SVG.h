@@ -41,7 +41,7 @@ namespace Layers
 		*/
 		SVG(const SVG& svg_w);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
 
 		/*!
 			Rebuilds the SVG string from the SVG elements list.
@@ -61,10 +61,10 @@ namespace Layers
 		*/
 		void update();
 
-		Attribute a_common_color{ Attribute("Common Color", QColor(Qt::black)) };
-		Attribute a_common_hover_color{ Attribute("Common Hover Color", QColor(Qt::darkGray)) };
-		Attribute a_use_common_color{ Attribute("Use Common Color", QVariant::fromValue(false)) };
-		Attribute a_use_common_hover_color{ Attribute("Use Common Hover Color", QVariant::fromValue(false)) };
+		Attribute a_common_color{ Attribute("common_color", QColor(Qt::black)) };
+		Attribute a_common_hover_color{ Attribute("common_hover_color", QColor(Qt::darkGray)) };
+		Attribute a_use_common_color{ Attribute("use_common_color", QVariant::fromValue(false)) };
+		Attribute a_use_common_hover_color{ Attribute("use_common_hover_color", QVariant::fromValue(false)) };
 
 	protected:
 		/*!

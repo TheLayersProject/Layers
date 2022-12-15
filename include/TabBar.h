@@ -15,7 +15,7 @@ namespace Layers
 	public:
 		TabBar(QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, Attribute*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
 
 		void SetCurrentTab(const QString& text);
 
@@ -26,8 +26,8 @@ namespace Layers
 
 		void update_theme_dependencies();
 
-		Attribute a_selected_fill_color{ Attribute("Selected Fill Color", QColor(Qt::gray)) };
-		Attribute a_text_color{ Attribute("Text Color", QColor(Qt::white)) };
+		Attribute a_selected_fill_color{ Attribute("selected_fill_color", QColor(Qt::gray)) };
+		Attribute a_text_color{ Attribute("text_color", QColor(Qt::white)) };
 
 	protected:
 		QString build_stylesheet();
