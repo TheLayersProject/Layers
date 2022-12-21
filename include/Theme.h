@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QJsonDocument>
 #include <QString>
+#include <QUuid>
 
 #include "Attribute.h"
 
@@ -48,6 +49,11 @@ namespace Layers
 	//	return stream;
 	//}
 
+	enum class ThemeDataType
+	{
+		All, Application, Layers
+	};
+
 	/*!
 		Provides structure for Layers themes.
 
@@ -59,7 +65,7 @@ namespace Layers
 	public:
 		Theme();
 		Theme(const QString& name, bool editable = true);
-		Theme(const QJsonDocument& json_document);
+		Theme(const QJsonDocument& json_document, QUuid* uuid = nullptr);
 
 		/*!
 			Adds a themeable tag paired with a set of attributes
@@ -101,6 +107,8 @@ namespace Layers
 		*/
 		bool editable();
 
+		QString identifier();
+
 		Attribute* init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value);
 
 		/*!
@@ -124,7 +132,7 @@ namespace Layers
 		*/
 		QList<QString> themeable_tags();
 
-		QJsonDocument to_json_document();
+		QJsonDocument to_json_document(ThemeDataType data_type = ThemeDataType::All);
 
 		/*!
 			Returns a reference to the attribute set of the themeable tag given in the subscript.
@@ -158,6 +166,8 @@ namespace Layers
 		bool m_editable{ true };
 
 		QString m_name{ "" };
+
+		QUuid* m_uuid{ nullptr };
 	};
 }
 

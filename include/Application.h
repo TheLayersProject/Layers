@@ -4,7 +4,8 @@
 #include <QApplication>
 #include <QDir>
 #include <QSettings>
-
+#include <QUuid>
+#include "directories.h"
 #include "Theme.h"
 #include "Window.h"
 
@@ -25,9 +26,12 @@ namespace Layers
 		Application(
 			int& argc, char** argv,
 			const QString& name,
+			const QUuid& uuid,
 			QFile* icon_file = nullptr,
 			Version* version = nullptr,
 			GitHubRepo* github_repo = nullptr);
+
+		QString app_identifier();
 
 		/*!
 			Applies a theme across the entire application.
@@ -169,6 +173,10 @@ namespace Layers
 
 		QDir m_app_themes_dir;
 
+		QDir m_layers_dir{ QDir(layers_path()) };
+
+		QDir m_layers_themes_dir{ QDir(layers_themes_path()) };
+
 		QList<Themeable*> m_child_themeables;
 
 		Theme* m_current_theme{ nullptr };
@@ -185,9 +193,13 @@ namespace Layers
 
 		QString m_name;
 
+		QString m_name_underscored;
+
 		QSettings m_settings;
 
 		QMap<QString, Theme> m_themes;
+
+		QUuid m_uuid;
 
 		Version* m_version{ nullptr };
 	};

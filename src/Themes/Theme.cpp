@@ -18,7 +18,8 @@ Theme::Theme(const QString& name, bool editable) :
 
 }
 
-Theme::Theme(const QJsonDocument& json_document)
+Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
+	m_uuid{ uuid }
 {
 	QJsonObject json_object = json_document.object();
 
@@ -195,6 +196,11 @@ bool Theme::editable()
 	return m_editable;
 }
 
+QString Theme::identifier()
+{
+	return m_name + "_" + m_uuid->toString(QUuid::WithoutBraces);
+}
+
 Attribute* Theme::init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value)
 {
 	if (attr_value.isObject())
@@ -305,7 +311,7 @@ QList<QString> Theme::themeable_tags()
 	return m_data.keys();
 }
 
-QJsonDocument Theme::to_json_document()
+QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 {
 	QJsonDocument json_document;
 
@@ -317,6 +323,12 @@ QJsonDocument Theme::to_json_document()
 
 	for (const QString& themeable_tag : m_data.keys())
 	{
+		if (
+			(data_type == ThemeDataType::Application && themeable_tag.startsWith("layers/")) ||
+			(data_type == ThemeDataType::Layers && !themeable_tag.startsWith("layers/"))
+			)
+				continue;
+
 		QMap<QString, AttributeType*>& themeable_data_in_theme = m_data[themeable_tag];
 
 		QJsonObject themeable_json_object;
