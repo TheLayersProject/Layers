@@ -1,6 +1,5 @@
 #include "../../include/Application.h"
 #include "../../include/build_themes.h"
-#include "../../include/directories.h"
 #include "../../include/Downloader.h"
 #include "../../include/GitHubRepo.h"
 #include "../../include/theme_loading.h"
@@ -23,10 +22,12 @@ using Layers::Window;
 Application::Application(
 	int& argc, char** argv,
 	const QString& name,
+	const QUuid& uuid,
 	QFile* icon_file,
 	Version* version,
 	GitHubRepo* github_repo) :
 	m_name{ name },
+	m_uuid{ uuid },
 	m_icon_file{ icon_file },
 	m_version{ version },
 	m_github_repo{ github_repo },
@@ -52,10 +53,21 @@ Application::Application(
 		if (setup_file.exists()) setup_file.remove();
 	}
 
+	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
+	for (int i = 0; i < name_parts.size(); i++)
+		name_parts[i].replace(0, 1, name_parts[i][0].toLower());
+
+	m_name_underscored = name_parts.join("_");
+
 	init_directories();
 	init_fonts();
 	init_themes();
 	init_latest_version_tag();
+}
+
+QString Application::app_identifier()
+{
+	return m_name_underscored + "_" + m_uuid.toString(QUuid::WithoutBraces);
 }
 
 void Application::store_child_themeable_pointer(Themeable& themeable)
@@ -187,7 +199,7 @@ Theme Application::load_theme(const QString& file_name)
 {
 	qDebug() << "Loading" << file_name;
 
-	Theme theme = load_theme_1(file_name);
+	Theme theme = load_theme_1(file_name, app_identifier());
 
 	return theme;
 }
@@ -215,22 +227,37 @@ void Application::reapply_theme()
 
 void Application::save_theme(Theme& theme)
 {
-	QFile theme_file(m_app_themes_dir.absoluteFilePath(theme.name().toLower() + ".json"));
+	QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
 
-	if (!theme_file.open(QIODevice::WriteOnly))
+	QDir theme_dir(T1_themes_dir.absoluteFilePath(theme.identifier() + "\\"));
+
+	if (!theme_dir.exists())
+		theme_dir.mkdir(theme_dir.absolutePath());
+
+	QFile layers_theme_file(theme_dir.absoluteFilePath("layers.json"));
+
+	if (!layers_theme_file.open(QIODevice::WriteOnly))
 	{
 		qDebug() << "Could not create theme file";
 		return;
 	}
 
-	theme_file.write(theme.to_json_document().toJson());
+	layers_theme_file.write(theme.to_json_document(ThemeDataType::Layers).toJson());
+	layers_theme_file.close();
 
-	//QDataStream out(&theme_file);
-	//out.setVersion(QDataStream::Qt_6_1);
+	if (app_identifier() != "layers_demo_f97aae7f-2076-4918-93ce-19321584f675")
+	{
+		QFile app_theme_file(theme_dir.absoluteFilePath(app_identifier() + ".json"));
 
-	//out << theme;
+		if (!app_theme_file.open(QIODevice::WriteOnly))
+		{
+			qDebug() << "Could not create theme file";
+			return;
+		}
 
-	theme_file.close();
+		app_theme_file.write(theme.to_json_document(ThemeDataType::Application).toJson());
+		app_theme_file.close();
+	}
 }
 
 QSettings& Application::settings()
@@ -248,23 +275,29 @@ Theme* Application::theme(const QString& theme_name)
 
 void Application::init_directories()
 {
+	if (!m_layers_dir.exists())
+	{
+		m_layers_dir.mkdir(m_layers_dir.absolutePath());
+		m_layers_themes_dir.mkdir(m_layers_themes_dir.absolutePath());
+	}
+
 	if (!m_app_dir.exists())
 	{
 		m_app_dir.mkdir(m_app_dir.absolutePath());
 		m_app_themes_dir.mkdir(m_app_themes_dir.absolutePath());
 
-		QDir deprecated_layers_dir(deprecated_layers_path());
+		//m_layers_dir(deprecated_layers_path());
 
 		// If the deprecated Layers path exists, move the theme files into the new themes directory and delete the deprecated directory
-		if (deprecated_layers_dir.exists())
-		{
-			QDir deprecated_themes_dir(deprecated_layers_themes_path());
+		//if (deprecated_layers_dir.exists())
+		//{
+		//	QDir deprecated_themes_dir(deprecated_layers_themes_path());
 
-			for (const QString& file_name : deprecated_themes_dir.entryList(QDir::Files))
-				QDir().rename(deprecated_themes_dir.absoluteFilePath(file_name), m_app_themes_dir.absoluteFilePath(file_name));
+		//	for (const QString& file_name : deprecated_themes_dir.entryList(QDir::Files))
+		//		QDir().rename(deprecated_themes_dir.absoluteFilePath(file_name), m_app_themes_dir.absoluteFilePath(file_name));
 
-			deprecated_layers_dir.removeRecursively();
-		}
+		//	deprecated_layers_dir.removeRecursively();
+		//}
 	}
 }
 
@@ -300,11 +333,21 @@ void Application::init_themes()
 	m_themes.insert("Dark", load_theme(":/themes/dark.json"));
 	m_themes.insert("Light", load_theme(":/themes/light.json"));
 
-	for (const QString& file_name : m_app_themes_dir.entryList(QDir::Files))
-	{
-		Theme loaded_theme = load_theme(m_app_themes_dir.absoluteFilePath(file_name));
+	QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
 
-		m_themes.insert(loaded_theme.name(), loaded_theme);
+	for (const QString& file_name : T1_themes_dir.entryList(QDir::NoDotAndDotDot|QDir::AllEntries))
+	{
+		QString theme_dir_path = T1_themes_dir.absoluteFilePath(file_name);
+
+		if (app_identifier() == "layers_demo_f97aae7f-2076-4918-93ce-19321584f675" ||
+			QFile(
+				QDir(theme_dir_path).filePath(app_identifier() + ".json")
+			).exists())
+		{
+			Theme loaded_theme = load_theme(theme_dir_path);
+
+			m_themes.insert(loaded_theme.name(), loaded_theme);
+		}
 	}
 
 	if (m_themes.contains(m_settings.value("themes/active_theme").value<QString>()))

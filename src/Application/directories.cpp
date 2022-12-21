@@ -10,14 +10,14 @@ QString Layers::app_themes_path(const QString& app_name)
 	return QString(app_path(app_name) + "Themes\\");
 }
 
-QString Layers::deprecated_layers_path()
+QString Layers::layers_path()
 {
-	return QString(local_app_data_path() + "Layers-alpha\\"); // Alpha
+	return QString(local_app_data_path() + "Layers\\");
 }
 
-QString Layers::deprecated_layers_themes_path()
+QString Layers::layers_themes_path()
 {
-	return QString(deprecated_layers_path() + "Themes\\");
+	return QString(layers_path() + "Themes\\");
 }
 
 QString Layers::local_app_data_path()
