@@ -285,7 +285,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		BorderAttributes();
+		BorderAttributes(const QString& name = "border");
 
 		Attribute fill{ Attribute(
 			"fill",
@@ -303,7 +303,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		CornerRadiiAttributes();
+		CornerRadiiAttributes(const QString& name = "corner_radii");
 
 		Attribute bottom_left{ Attribute(
 			"bottom_left",
@@ -331,7 +331,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		MarginsAttributes();
+		MarginsAttributes(const QString& name = "margins");
 
 		Attribute left{ Attribute(
 			"left",

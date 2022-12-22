@@ -710,6 +710,135 @@
                 "value": "#000000"
             }
         },
+        "layers/customize_menu/preview_scroll_area": {
+            "border": {
+                "disabled": true,
+                "fill": {
+                    "value": "#a0a0a4"
+                },
+                "thickness": {
+                    "value": 0
+                }
+            },
+            "corner_color": {
+                "disabled": true,
+                "value": "#a0a0a4"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 0
+                },
+                "disabled": true,
+                "top_left": {
+                    "value": 0
+                },
+                "top_right": {
+                    "value": 0
+                }
+            },
+            "fill": {
+                "disabled": true,
+                "value": "#ffffff"
+            },
+            "hover_fill": {
+                "disabled": true,
+                "value": "#c0c0c0"
+            },
+            "margins": {
+                "bottom": {
+                    "value": 0
+                },
+                "disabled": true,
+                "left": {
+                    "value": 0
+                },
+                "right": {
+                    "value": 0
+                },
+                "top": {
+                    "value": 0
+                }
+            },
+            "outline_color": {
+                "disabled": true,
+                "value": "#a0a0a4"
+            }
+        },
+        "layers/customize_menu/preview_scroll_area/horizontal_scrollbar": {
+            "background_color": {
+                "value": "#2e2e2e"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 10
+                },
+                "top_left": {
+                    "value": 0
+                },
+                "top_right": {
+                    "value": 0
+                }
+            },
+            "handle_color": {
+                "value": "#989898"
+            },
+            "handle_corner_radii": {
+                "bottom_left": {
+                    "value": 5
+                },
+                "bottom_right": {
+                    "value": 5
+                },
+                "top_left": {
+                    "value": 5
+                },
+                "top_right": {
+                    "value": 5
+                }
+            }
+        },
+        "layers/customize_menu/preview_scroll_area/vertical_scrollbar": {
+            "background_color": {
+                "value": "#2e2e2e"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 10
+                },
+                "top_left": {
+                    "value": 0
+                },
+                "top_right": {
+                    "value": 0
+                }
+            },
+            "handle_color": {
+                "value": "#989898"
+            },
+            "handle_corner_radii": {
+                "bottom_left": {
+                    "value": 5
+                },
+                "bottom_right": {
+                    "value": 5
+                },
+                "top_left": {
+                    "value": 5
+                },
+                "top_right": {
+                    "value": 5
+                }
+            }
+        },
         "layers/customize_menu/sidebar": {
             "border": {
                 "disabled": true,
@@ -729,7 +858,7 @@
                     "value": 4
                 },
                 "bottom_right": {
-                    "value": 10
+                    "value": 0
                 },
                 "top_left": {
                     "value": 10
@@ -3444,6 +3573,78 @@
             "text_hover_color": {
                 "disabled": true,
                 "value": "#000000"
+            }
+        },
+        "layers/customize_menu/sidebar/horizontal_scrollbar": {
+            "background_color": {
+                "value": "#a0a0a4"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 10
+                },
+                "top_left": {
+                    "value": 0
+                },
+                "top_right": {
+                    "value": 0
+                }
+            },
+            "handle_color": {
+                "value": "#ffffff"
+            },
+            "handle_corner_radii": {
+                "bottom_left": {
+                    "value": 5
+                },
+                "bottom_right": {
+                    "value": 5
+                },
+                "top_left": {
+                    "value": 5
+                },
+                "top_right": {
+                    "value": 5
+                }
+            }
+        },
+        "layers/customize_menu/sidebar/vertical_scrollbar": {
+            "background_color": {
+                "value": "#6a6a6a"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 0
+                },
+                "top_left": {
+                    "value": 0
+                },
+                "top_right": {
+                    "value": 0
+                }
+            },
+            "handle_color": {
+                "value": "#989898"
+            },
+            "handle_corner_radii": {
+                "bottom_left": {
+                    "value": 5
+                },
+                "bottom_right": {
+                    "value": 5
+                },
+                "top_left": {
+                    "value": 5
+                },
+                "top_right": {
+                    "value": 5
+                }
             }
         },
         "layers/customize_menu/topbar": {

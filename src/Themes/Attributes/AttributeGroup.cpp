@@ -72,8 +72,8 @@ QJsonObject AttributeGroup::to_json_object()
 	return json_object;
 }
 
-BorderAttributes::BorderAttributes() : 
-	AttributeGroup("border",
+BorderAttributes::BorderAttributes(const QString& name) :
+	AttributeGroup(name,
 		QMap<QString, Attribute*>({
 			{ "fill", &fill },
 			{ "thickness", &thickness }
@@ -83,8 +83,8 @@ BorderAttributes::BorderAttributes() :
 
 }
 
-CornerRadiiAttributes::CornerRadiiAttributes() : 
-	AttributeGroup("corner_radii",
+CornerRadiiAttributes::CornerRadiiAttributes(const QString& name) :
+	AttributeGroup(name,
 		QMap<QString, Attribute*>({
 			{ "bottom_left", &bottom_left },
 			{ "bottom_right", &bottom_right },
@@ -95,8 +95,8 @@ CornerRadiiAttributes::CornerRadiiAttributes() :
 {
 }
 
-MarginsAttributes::MarginsAttributes() :
-	AttributeGroup("margins",
+MarginsAttributes::MarginsAttributes(const QString& name) :
+	AttributeGroup(name,
 		QMap<QString, Attribute*>({
 			{ "bottom", &bottom },
 			{ "left", &left },

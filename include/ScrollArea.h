@@ -2,8 +2,9 @@
 #define SCROLLAREA_H
 
 #include <QScrollArea>
-#include <QScrollBar>
+//#include <QScrollBar>
 
+#include "ScrollBar.h"
 #include "Widget.h"
 
 namespace Layers
@@ -15,7 +16,7 @@ namespace Layers
 	public:
 		ScrollArea(QWidget* parent = nullptr);
 
-		void issue_update();
+		ScrollBar* horizontal_scrollbar() const;
 
 		void setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy policy);
 
@@ -23,13 +24,17 @@ namespace Layers
 
 		void setWidget(QWidget* widget);
 
+		ScrollBar* vertical_scrollbar() const;
+
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
+		void init_child_themeable_reference_list();
+
 		QScrollArea* m_scroll_area{ new QScrollArea(this) };
 
-		QScrollBar* m_horizontal_scrollbar{ new QScrollBar };
-		QScrollBar* m_vertical_scrollbar{ new QScrollBar };
+		ScrollBar* m_horizontal_scrollbar{ new ScrollBar };
+		ScrollBar* m_vertical_scrollbar{ new ScrollBar };
 	};
 }
 

@@ -242,19 +242,20 @@ void CustomizePanel::init_attribute_widgets()
 		}
 		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_layout_item))
 		{
-			if (attr_group->name() == "corner_radii")
+			if (attr_group->name().endsWith("corner_radii"))
 			{
-				m_corner_radii_aw = new CornerRadiiAW(dynamic_cast<CornerRadiiAttributes*>(attr_group));
+				CornerRadiiAW* corner_radii_aw = new CornerRadiiAW(dynamic_cast<CornerRadiiAttributes*>(attr_group));
+				m_corner_radii_awidgets.append(corner_radii_aw);
 
 				if (attr_group->disabled())
-					m_corner_radii_aw->hide();
+					corner_radii_aw->hide();
 
-				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(m_corner_radii_aw);
-				else add_attribute_widget(m_corner_radii_aw);
+				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(corner_radii_aw);
+				else add_attribute_widget(corner_radii_aw);
 
-				connect(m_corner_radii_aw, &AttributeWidget::widget_disabled, [this] {
+				connect(corner_radii_aw, &AttributeWidget::widget_disabled, [this, corner_radii_aw] {
 					if (m_show_all_button->isVisible())
-						m_corner_radii_aw->hide();
+						corner_radii_aw->hide();
 					});
 			}
 			else
@@ -391,10 +392,10 @@ void CustomizePanel::replace_all_widget_buttons_attrs_with(Button* control_widge
 		widget_button->replace_all_attributes_with(control_widget_button);
 }
 
-void CustomizePanel::replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
+void CustomizePanel::replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
 {
-	if (m_corner_radii_aw)
-		m_corner_radii_aw->replace_all_attributes_with(control_corner_radii_aw);
+	for (CornerRadiiAW* corner_radii_aw : m_corner_radii_awidgets)
+		corner_radii_aw->replace_all_attributes_with(control_corner_radii_aw);
 }
 
 void CustomizePanel::setup_layout()
