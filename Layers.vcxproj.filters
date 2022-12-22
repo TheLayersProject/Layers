@@ -213,6 +213,9 @@
     <ClCompile Include="AttributeType.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
+    <ClCompile Include="include\ScrollBar.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -323,6 +326,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Attribute.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\ScrollBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

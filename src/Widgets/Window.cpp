@@ -58,7 +58,7 @@ Window::Window(bool preview, QWidget* parent) :
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
     setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
-	resize(1000, 700);
+	resize(1200, 800);
 
 	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
 

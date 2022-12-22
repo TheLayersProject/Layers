@@ -118,17 +118,23 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapse_menu->corner_radii.bottom_left.set_value(5.0);
 	m_collapse_menu->corner_radii.bottom_right.set_value(5.0);
 
-	m_sidebar->installEventFilter(this);
-	m_sidebar->setFixedWidth(300);
-	m_sidebar->setMouseTracking(true);
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
 	m_sidebar->a_fill.set_value(QColor(Qt::lightGray));
+
+	m_sidebar_widget->installEventFilter(this);
+	m_sidebar_widget->setFixedWidth(300);
+	m_sidebar_widget->setMouseTracking(true);
+	m_sidebar_widget->a_fill.set_disabled();
 
 	m_preview_frame->a_corner_color.get_variant_from(m_sidebar->a_fill);
 
 	m_preview_frame->corner_radii.top_left.set_value(10.0);
 	m_preview_frame->a_corner_color.set_disabled(false);
+
+	m_preview_scroll_area->set_name("preview_scroll_area");
+	m_preview_scroll_area->set_proper_name("Preview Scroll Area");
+	m_preview_scroll_area->a_fill.set_disabled();
 
 	setup_layout();
 }
@@ -162,6 +168,7 @@ void CustomizeMenu::init_preview_window()
 
 void CustomizeMenu::init_child_themeable_reference_list()
 {
+	store_child_themeable_pointer(m_preview_scroll_area);
 	store_child_themeable_pointer(m_sidebar);
 	store_child_themeable_pointer(m_topbar);
 	m_topbar->store_child_themeable_pointer(m_apply_button);
@@ -170,6 +177,8 @@ void CustomizeMenu::init_child_themeable_reference_list()
 	m_topbar->store_child_themeable_pointer(m_control_arrow_graphic);
 	m_topbar->store_child_themeable_pointer(m_control_text_button);
 	m_sidebar->store_child_themeable_pointer(m_control_customize_panel);
+	//m_sidebar_widget->store_child_themeable_pointer(m_sidebar->horizontal_scrollbar());
+	//m_sidebar_widget->store_child_themeable_pointer(m_sidebar->vertical_scrollbar());
 	m_control_customize_panel->store_child_themeable_pointer(m_control_aw_group);
 	m_control_customize_panel->store_child_themeable_pointer(m_control_color_aw);
 	m_control_customize_panel->store_child_themeable_pointer(m_control_corner_radii_aw);
@@ -235,7 +244,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		customize_panel->replace_all_attributes_with(m_control_customize_panel);
 		customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
 		customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
-		customize_panel->replace_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
+		customize_panel->replace_all_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
 		customize_panel->replace_all_fill_awidgets_attrs_with(m_control_fill_aw);
 		customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
 		customize_panel->replace_all_state_awidgets_attrs_with(m_control_state_aw);
@@ -371,8 +380,8 @@ bool CustomizeMenu::eventFilter(QObject* object, QEvent* event)
 
 	else if (event->type() == QEvent::Resize)
 	{
-		if (height() < m_sidebar->height()) m_sidebar_scroll_area->setFixedWidth(m_sidebar->width() + 17);
-		else m_sidebar_scroll_area->setFixedWidth(m_sidebar->width());
+		if (height() < m_sidebar_widget->height()) m_sidebar->setFixedWidth(m_sidebar_widget->width() + 45); // 45 is sidebar width
+		else m_sidebar->setFixedWidth(m_sidebar_widget->width());
 
 		if (m_previous_size)
 		{
@@ -531,11 +540,10 @@ void CustomizeMenu::setup_layout()
 	m_sidebar_layout->setContentsMargins(0, 0, 0, 0);
 	m_sidebar_layout->setSpacing(0);
 
-	m_sidebar->setLayout(m_sidebar_layout);
+	m_sidebar_widget->setLayout(m_sidebar_layout);
 
-	m_sidebar_scroll_area->a_fill.set_disabled();
-	m_sidebar_scroll_area->setWidget(m_sidebar);
-	m_sidebar_scroll_area->setFixedWidth(m_sidebar->width());
+	m_sidebar->setWidget(m_sidebar_widget);
+	m_sidebar->setFixedWidth(m_sidebar_widget->width());
 
 	// Preview Widget and Layout
 
@@ -545,7 +553,6 @@ void CustomizeMenu::setup_layout()
 	m_preview_frame->a_fill.set_disabled();
 	m_preview_frame->setLayout(m_preview_layout);
 
-	m_preview_scroll_area->a_fill.set_disabled();
 	m_preview_scroll_area->setWidget(m_preview_frame);
 
 	// Main Vbox
@@ -561,7 +568,7 @@ void CustomizeMenu::setup_layout()
 
 	m_main_layout->setContentsMargins(0, 0, 0, 0);
 	m_main_layout->setSpacing(0);
-	m_main_layout->addWidget(m_sidebar_scroll_area);
+	m_main_layout->addWidget(m_sidebar);
 	m_main_layout->addLayout(main_vbox);
 	//m_main_layout->addStretch();
 

@@ -108,6 +108,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttributeType.cpp" />
+    <ClCompile Include="include\ScrollBar.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Application\directories.cpp" />
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
     <ClInclude Include="include\GitHubRepo.h" />
+    <QtMoc Include="include\ScrollBar.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />

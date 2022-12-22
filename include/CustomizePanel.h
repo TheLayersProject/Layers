@@ -27,7 +27,7 @@ namespace Layers
 		void replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw);
 		void replace_all_state_awidgets_attrs_with(StateAW* control_state_aw);
 		void replace_all_widget_buttons_attrs_with(Button* control_widget_button);
-		void replace_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
+		void replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
 
 	protected:
 		void init_attributes();
@@ -55,12 +55,11 @@ namespace Layers
 
 		QList<AWGroup*> m_aw_groups{ QList<AWGroup*>() };
 		QList<ColorAW*> m_color_awidgets{ QList<ColorAW*>() };
+		QList<CornerRadiiAW*> m_corner_radii_awidgets{ QList<CornerRadiiAW*>() };
 		QList<FillAW*> m_fill_awidgets{ QList<FillAW*>() };
 		QList<NumberAW*> m_number_awidgets{ QList<NumberAW*>() };
 		QList<StateAW*> m_state_awidgets{ QList<StateAW*>() };
 		QList<Button*> m_widget_buttons{ QList<Button*>() };
-
-		CornerRadiiAW* m_corner_radii_aw{ nullptr };
 
 		Themeable* m_themeable;
 	};

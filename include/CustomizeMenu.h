@@ -60,11 +60,11 @@ namespace Layers
 		QHBoxLayout* m_topbar_layout{ new QHBoxLayout };
 		QGridLayout* m_preview_layout{ new QGridLayout };
 
-		Widget* m_sidebar{ new Widget };
+		Widget* m_sidebar_widget{ new Widget };
 		Widget* m_topbar{ new Widget };
 		Widget* m_preview_frame = new Widget;
 
-		ScrollArea* m_sidebar_scroll_area{ new ScrollArea };
+		ScrollArea* m_sidebar{ new ScrollArea };
 		ScrollArea* m_preview_scroll_area{ new ScrollArea };
 
 		Widget* m_preview_widget{ nullptr };

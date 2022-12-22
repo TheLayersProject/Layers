@@ -13,9 +13,8 @@ Theme::Theme()
 }
 
 Theme::Theme(const QString& name, bool editable) :
-	m_name{ name }, m_editable{ editable }
+	m_name{ name }, m_editable{ editable }, m_uuid{ new QUuid(QUuid::createUuid().toString()) }
 {
-
 }
 
 Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
@@ -177,17 +176,24 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 	else
 	{
 		/* TODO: Temporarily disabling this code which copys themeable data to the theme
-		   even if the theme doesn't already contain attribute for the themeable. This will
+		   even if the theme doesn't already contain attributes for the themeable. This will
 		   need to be re-enabled! */ 
-		//QMap<QString, AttributeType*> new_attributes;
+		QMap<QString, AttributeType*> new_themeable_data_for_theme;
 
-		//for (const QString& attr_type_key : themeable->attributes().keys())
-		//{
-		//	if (themeable->attributes()[attr_key]->owns_variant())
-		//		new_attributes[attr_key] = new Attribute(*themeable->attributes()[attr_key]);
-		//}
+		for (const QString& attr_type_key : themeable->attributes().keys())
+		{
+			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[attr_type_key]))
+			{
+				if (attr->owns_variant())
+					new_themeable_data_for_theme[attr_type_key] = new Attribute(*attr);
+			}
+			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[attr_type_key]))
+			{
+				new_themeable_data_for_theme[attr_type_key] = new AttributeGroup(*attr_group);
+			}
+		}
 
-		//m_data[themeable->tag()] = new_attributes;
+		m_data[themeable->tag()] = new_themeable_data_for_theme;
 	}
 }
 
