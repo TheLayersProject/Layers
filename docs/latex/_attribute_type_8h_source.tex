@@ -1,0 +1,43 @@
+\hypertarget{_attribute_type_8h_source}{}\doxysection{Attribute\+Type.\+h}
+\label{_attribute_type_8h_source}\index{include/AttributeType.h@{include/AttributeType.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ATTRIBUTETYPE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ATTRIBUTETYPE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_attribute_type}{AttributeType}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         Q\_OBJECT}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     signals:}
+\DoxyCodeLine{17         \textcolor{keywordtype}{void} value\_changed();}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keyword}{public}:}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_layers_1_1_attribute_type}{AttributeType}}(\textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_attribute_type_aca369bb6f7315498d4bf25b9b5966bdb}{name}}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_attribute_type_aa42b1dd86ed46b66aaa669672d577e49}{disabled}});}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{27         QString \mbox{\hyperlink{class_layers_1_1_attribute_type_a3cc423b5c9a6dad8575a19e3877f4c71}{capitalized\_name}}();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_attribute_type_aa42b1dd86ed46b66aaa669672d577e49}{disabled}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{46         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_attribute_type_a5b6670e412de3ad4845a01027cb63fdc}{is\_stateful}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{53         QString \mbox{\hyperlink{class_layers_1_1_attribute_type_aca369bb6f7315498d4bf25b9b5966bdb}{name}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{60         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_attribute_type_acbe8ab87d1e82fcdb4235467018ae2f2}{set\_disabled}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_attribute_type_aa42b1dd86ed46b66aaa669672d577e49}{disabled}} = \textcolor{keyword}{true});}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{73         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_attribute_type_aa90b9f76e825c34de17049c4bb0253b4}{set\_state}}(\textcolor{keyword}{const} QString\& state) = 0;}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{76         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{79     \};}
+\DoxyCodeLine{80 \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ATTRIBUTETYPE\_H}}
+
+\end{DoxyCode}

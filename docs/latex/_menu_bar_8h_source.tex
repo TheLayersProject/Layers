@@ -22,25 +22,30 @@
 \DoxyCodeLine{18         \textcolor{comment}{// TODO: Make override other overloaded versions from the parent class}}
 \DoxyCodeLine{19         QMenu* addMenu(\textcolor{keyword}{const} QString\& title);}
 \DoxyCodeLine{20 }
-\DoxyCodeLine{21         \textcolor{keywordtype}{void} issue\_update();}
+\DoxyCodeLine{21         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
 \DoxyCodeLine{22 }
-\DoxyCodeLine{23         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{23         \textcolor{comment}{//void issue\_update();}}
 \DoxyCodeLine{24 }
-\DoxyCodeLine{25         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* a\_text\_color\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Text Color"{}}, QColor(Qt::gray)) \};}
-\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* a\_selected\_text\_color\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Selected Text Color"{}}, QColor(Qt::gray)) \};}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{28     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{29         QString build\_stylesheet();}
-\DoxyCodeLine{30 }
-\DoxyCodeLine{31         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}{init\_attributes}}();}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}text\_color"{}}, QColor(Qt::gray)) \};}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_selected\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}selected\_text\_color"{}}, QColor(Qt::lightGray)) \};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{comment}{//Attribute a\_text\_color\{ Attribute("{}Text Color"{}, QColor(Qt::red)) \};}}
+\DoxyCodeLine{31         \textcolor{comment}{//Attribute a\_selected\_text\_color\{ Attribute("{}Selected Text Color"{}, QColor(Qt::blue)) \};}}
 \DoxyCodeLine{32 }
-\DoxyCodeLine{33         \textcolor{comment}{//void paintEvent(QPaintEvent* event);}}
-\DoxyCodeLine{34 }
-\DoxyCodeLine{35     \textcolor{keyword}{private}:}
-\DoxyCodeLine{36         QList<QMenu*> m\_menus\{ QList<QMenu*>() \};}
-\DoxyCodeLine{37     \};}
-\DoxyCodeLine{38 \}}
+\DoxyCodeLine{33     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34         QString build\_stylesheet();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \textcolor{comment}{//void paintEvent(QPaintEvent* event);}}
 \DoxyCodeLine{39 }
-\DoxyCodeLine{40 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MENUBAR\_H}}
+\DoxyCodeLine{40     \textcolor{keyword}{private}:}
+\DoxyCodeLine{41         QList<QMenu*> m\_menus\{ QList<QMenu*>() \};}
+\DoxyCodeLine{42     \};}
+\DoxyCodeLine{43 \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MENUBAR\_H}}
 
 \end{DoxyCode}

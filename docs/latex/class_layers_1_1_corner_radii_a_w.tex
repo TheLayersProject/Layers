@@ -6,14 +6,17 @@ Inheritance diagram for Layers\+::Corner\+Radii\+AW\+:\begin{figure}[H]
 \includegraphics[height=5.000000cm]{class_layers_1_1_corner_radii_a_w}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_corner_radii_a_w_ac4b74967566ff83009c46a8b887d6852}\label{class_layers_1_1_corner_radii_a_w_ac4b74967566ff83009c46a8b887d6852}} 
+void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_corner_radii_a_w_a696658478f2c65d8dc49616c37552563}\label{class_layers_1_1_corner_radii_a_w_a696658478f2c65d8dc49616c37552563}} 
-{\bfseries Corner\+Radii\+AW} (\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} $\ast$corner\+\_\+radii\+\_\+ag, QWidget $\ast$parent=nullptr)
-\item 
-\mbox{\Hypertarget{class_layers_1_1_corner_radii_a_w_a630482000aa3c567658a880ef324112a}\label{class_layers_1_1_corner_radii_a_w_a630482000aa3c567658a880ef324112a}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_corner_radii_a_w}{Corner\+Radii\+AW}} $\ast$corner\+\_\+radii\+\_\+aw)
+\mbox{\Hypertarget{class_layers_1_1_corner_radii_a_w_a933de36dab5df4c33e5952f818a4af38}\label{class_layers_1_1_corner_radii_a_w_a933de36dab5df4c33e5952f818a4af38}} 
+{\bfseries Corner\+Radii\+AW} (\mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{Corner\+Radii\+Attributes}} $\ast$linked\+\_\+corner\+\_\+radii, QWidget $\ast$parent=nullptr)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_corner_radii_a_w_a2eee25172799f70824f1885383c4b68f}\label{class_layers_1_1_corner_radii_a_w_a2eee25172799f70824f1885383c4b68f}} 
 \mbox{\hyperlink{class_layers_1_1_mini_slider}{Mini\+Slider}} $\ast$ {\bfseries tl\+\_\+slider} () const
@@ -41,6 +44,16 @@ void \mbox{\hyperlink{class_layers_1_1_corner_radii_a_w_ad25ac99608075877c7e64d0
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::CornerRadiiAW@{Layers::CornerRadiiAW}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Corner\+Radii\+AW\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

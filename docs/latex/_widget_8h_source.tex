@@ -13,68 +13,64 @@
 \DoxyCodeLine{9 }
 \DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
 \DoxyCodeLine{11 \{}
-\DoxyCodeLine{17     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} : \textcolor{keyword}{public} QWidget, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
-\DoxyCodeLine{18     \{}
-\DoxyCodeLine{19         Q\_OBJECT}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21     \textcolor{keyword}{public}:}
-\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}(QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{12     }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{19     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} : \textcolor{keyword}{public} QWidget, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{20     \{}
+\DoxyCodeLine{21         Q\_OBJECT}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keyword}{public}:}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}(QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{25 }
-\DoxyCodeLine{26         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* widget);}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{33         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}{set\_margin}}(\textcolor{keywordtype}{int} margin);}
-\DoxyCodeLine{34 }
-\DoxyCodeLine{43         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}{set\_margin}}(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Fill"{}}, QColor(Qt::gray)) \};}
-\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_thickness\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Thickness"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{47         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Corner Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tr\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{50         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_bl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_br\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Fill"{}}, QColor(Qt::white)) \};}
-\DoxyCodeLine{53         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Hover Fill"{}}, QColor(Qt::lightGray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_left\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{55         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{56         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_right\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Right Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{57         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_bottom\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{58         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Outline Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{59 }
-\DoxyCodeLine{60     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{64         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}{eventFilter}}(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{65 }
-\DoxyCodeLine{74         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{init\_attributes}}();}
-\DoxyCodeLine{75 }
-\DoxyCodeLine{79         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paintEvent}}(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{26         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(}
+\DoxyCodeLine{27             QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}{set\_margin}}(\textcolor{keywordtype}{double} margin);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}{set\_margin}}(\textcolor{keywordtype}{double} left, \textcolor{keywordtype}{double} top, \textcolor{keywordtype}{double} right, \textcolor{keywordtype}{double} bottom);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_border_attributes}{BorderAttributes}} border;}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} corner\_radii;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \mbox{\hyperlink{class_layers_1_1_margins_attributes}{MarginsAttributes}} margins;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{53             \textcolor{stringliteral}{"{}corner\_color"{}},}
+\DoxyCodeLine{54             QColor(Qt::gray),}
+\DoxyCodeLine{55             \textcolor{keyword}{true}}
+\DoxyCodeLine{56             ) \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{59             \textcolor{stringliteral}{"{}fill"{}},}
+\DoxyCodeLine{60             QColor(Qt::white)}
+\DoxyCodeLine{61             ) \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{64             \textcolor{stringliteral}{"{}hover\_fill"{}},}
+\DoxyCodeLine{65             QColor(Qt::lightGray),}
+\DoxyCodeLine{66             \textcolor{keyword}{true}}
+\DoxyCodeLine{67             ) \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{70             \textcolor{stringliteral}{"{}outline\_color"{}},}
+\DoxyCodeLine{71             QColor(Qt::gray),}
+\DoxyCodeLine{72             \textcolor{keyword}{true}}
+\DoxyCodeLine{73             ) \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{79         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}{eventFilter}}(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
 \DoxyCodeLine{80 }
-\DoxyCodeLine{81         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_border\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Border"{}}, \{}
-\DoxyCodeLine{82             \{ \textcolor{stringliteral}{"{}border\_fill"{}}, \&a\_border\_fill \},}
-\DoxyCodeLine{83             \{ \textcolor{stringliteral}{"{}border\_thickness"{}}, \&a\_border\_thickness \}}
-\DoxyCodeLine{84             \}) \};}
-\DoxyCodeLine{85 }
-\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_corner\_radii\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Corner Radii"{}}, \{}
-\DoxyCodeLine{87             \{ \textcolor{stringliteral}{"{}corner\_radius\_tl"{}}, \&a\_corner\_radius\_tl \},}
-\DoxyCodeLine{88             \{ \textcolor{stringliteral}{"{}corner\_radius\_tr"{}}, \&a\_corner\_radius\_tr \},}
-\DoxyCodeLine{89             \{ \textcolor{stringliteral}{"{}corner\_radius\_bl"{}}, \&a\_corner\_radius\_bl \},}
-\DoxyCodeLine{90             \{ \textcolor{stringliteral}{"{}corner\_radius\_br"{}}, \&a\_corner\_radius\_br \}}
-\DoxyCodeLine{91             \}) \};}
-\DoxyCodeLine{92 }
-\DoxyCodeLine{93         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_margins\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Margins"{}}, \{}
-\DoxyCodeLine{94             \{ \textcolor{stringliteral}{"{}margin\_left"{}}, \&a\_margin\_left \},}
-\DoxyCodeLine{95             \{ \textcolor{stringliteral}{"{}margin\_top"{}}, \&a\_margin\_top \},}
-\DoxyCodeLine{96             \{ \textcolor{stringliteral}{"{}margin\_right"{}}, \&a\_margin\_right \},}
-\DoxyCodeLine{97             \{ \textcolor{stringliteral}{"{}margin\_bottom"{}}, \&a\_margin\_bottom \}}
-\DoxyCodeLine{98             \}) \};}
-\DoxyCodeLine{99 }
-\DoxyCodeLine{100         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{89         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}{init\_attributes}}();}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{94         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paintEvent}}(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98         QPainter painter;}
+\DoxyCodeLine{99     \};}
+\DoxyCodeLine{100 \}}
 \DoxyCodeLine{101 }
-\DoxyCodeLine{102         QPainter painter;}
-\DoxyCodeLine{103     \};}
-\DoxyCodeLine{104 \}}
-\DoxyCodeLine{105 }
-\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// WIDGET\_H  }}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// WIDGET\_H  }}
 
 \end{DoxyCode}

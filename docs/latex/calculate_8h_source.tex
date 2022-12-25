@@ -9,7 +9,7 @@
 \DoxyCodeLine{5 }
 \DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
 \DoxyCodeLine{7 \{}
-\DoxyCodeLine{8     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} round(\textcolor{keywordtype}{double} d)}
+\DoxyCodeLine{8     \textcolor{keyword}{inline} \textcolor{keywordtype}{double} round(\textcolor{keywordtype}{double} d)}
 \DoxyCodeLine{9     \{}
 \DoxyCodeLine{10         \textcolor{keywordflow}{return} floor(d + 0.5);}
 \DoxyCodeLine{11     \}}
@@ -21,7 +21,7 @@
 \DoxyCodeLine{17         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{18     \}}
 \DoxyCodeLine{19 }
-\DoxyCodeLine{20     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} inner\_radius(\textcolor{keywordtype}{int} outer\_radius, \textcolor{keywordtype}{int} thickness)}
+\DoxyCodeLine{20     \textcolor{keyword}{inline} \textcolor{keywordtype}{double} inner\_radius(\textcolor{keywordtype}{int} outer\_radius, \textcolor{keywordtype}{int} thickness)}
 \DoxyCodeLine{21     \{}
 \DoxyCodeLine{22         \textcolor{keywordtype}{double} border\_lower\_bound = 3;}
 \DoxyCodeLine{23         \textcolor{keywordtype}{double} border\_range = 27;}
@@ -37,7 +37,7 @@
 \DoxyCodeLine{33 }
 \DoxyCodeLine{34         \textcolor{keywordtype}{double} slope = ((1 -\/ border\_percent) * slope\_range) + slope\_lower\_bound;}
 \DoxyCodeLine{35 }
-\DoxyCodeLine{36         \textcolor{keywordtype}{int} value = round(slope * \textcolor{keywordtype}{double}(outer\_radius) + y\_int);}
+\DoxyCodeLine{36         \textcolor{keywordtype}{double} value = round(slope * \textcolor{keywordtype}{double}(outer\_radius) + y\_int);}
 \DoxyCodeLine{37 }
 \DoxyCodeLine{38         \textcolor{keywordflow}{if} (value < 0) value = 0;}
 \DoxyCodeLine{39 }

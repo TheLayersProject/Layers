@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -92,121 +92,135 @@ $(document).ready(function(){initNavTree('_application_8h_source.html',''); init
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;QApplication&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;QDir&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;QSettings&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Theme.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>Layers</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">class </span>Downloader;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">class </span>GitHubRepo;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">class </span>Version;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_layers_1_1_application.html">   16</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_application.html">Application</a> : <span class="keyword">public</span> QApplication</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        Q_OBJECT</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    signals:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">void</span> current_theme_changed();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_class" href="class_layers_1_1_application.html">Application</a>(</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keywordtype">int</span>&amp; argc, <span class="keywordtype">char</span>** argv,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">name</a>,</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            QFile* <a class="code hl_function" href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">icon_file</a> = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <a class="code hl_class" href="class_layers_1_1_version.html">Version</a>* version = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <a class="code hl_class" href="class_layers_1_1_git_hub_repo.html">GitHubRepo</a>* github_repo = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#aec2122193adf69854bc5e8734f55e111">apply_theme</a>(<a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>&amp; <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a3add54089305ff64b4b99ebe659ac78f">create_theme</a>(<span class="keyword">const</span> QString&amp; new_theme_name, <span class="keyword">const</span> QString&amp; copy_theme_name);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* <a class="code hl_function" href="class_layers_1_1_application.html#a7134c3b35945b78b14f2a95a271a8c0b">current_theme</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        QFile* <a class="code hl_function" href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">icon_file</a>();</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a> <a class="code hl_function" href="class_layers_1_1_application.html#a11be232598738dcfa8bbdf503d614180">load_theme</a>(QFile&amp; file);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        QString&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">name</a>();</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;QUuid&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;directories.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;Theme.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;Window.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>Layers</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">class </span>Downloader;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">class </span>GitHubRepo;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">class </span>Version;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_layers_1_1_application.html">   18</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_application.html">Application</a> : <span class="keyword">public</span> QApplication</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        Q_OBJECT</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    signals:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordtype">void</span> current_theme_changed();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_class" href="class_layers_1_1_application.html">Application</a>(</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordtype">int</span>&amp; argc, <span class="keywordtype">char</span>** argv,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">name</a>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keyword">const</span> QUuid&amp; uuid,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            QFile* <a class="code hl_function" href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">icon_file</a> = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <a class="code hl_class" href="class_layers_1_1_version.html">Version</a>* version = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <a class="code hl_class" href="class_layers_1_1_git_hub_repo.html">GitHubRepo</a>* github_repo = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        QString app_identifier();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#aec2122193adf69854bc5e8734f55e111">apply_theme</a>(<a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>&amp; <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a3add54089305ff64b4b99ebe659ac78f">create_theme</a>(<span class="keyword">const</span> QString&amp; new_theme_name, <span class="keyword">const</span> QString&amp; copy_theme_name);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* <a class="code hl_function" href="class_layers_1_1_application.html#a7134c3b35945b78b14f2a95a271a8c0b">current_theme</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        QFile* <a class="code hl_function" href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">icon_file</a>();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a> <a class="code hl_function" href="class_layers_1_1_application.html#a29c1e937bf2eea9a63073b3411bfd205">load_theme</a>(<span class="keyword">const</span> QString&amp; file_name);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_class" href="class_layers_1_1_window.html">Window</a>* main_window() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#acdc3dc779cf0b4dda262e8da98f8fb48">reapply_theme</a>();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a25c4b08add4fec47364a57944c07ad8b">save_theme</a>(<a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>&amp; <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        QSettings&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a15b4a434172e92eaed272b7c933e359d">settings</a>();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        QString&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">name</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#acdc3dc779cf0b4dda262e8da98f8fb48">reapply_theme</a>();</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a25c4b08add4fec47364a57944c07ad8b">save_theme</a>(<a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>&amp; <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>);</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a25c2e50517b55d988866b86653e6387f">store_child_themeable_pointer</a>(<a class="code hl_class" href="class_layers_1_1_themeable.html">Themeable</a>&amp; themeable);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>(<span class="keyword">const</span> QString&amp; theme_name);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        QMap&lt;QString, Theme&gt;&amp; <a class="code hl_function" href="class_layers_1_1_application.html#aeaf66c86898f3e6aa918b8c4dec3c33d">themes</a>();</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_application.html#a8eb80ff6f004611dba5244db8fe3bcd1">update_available</a>();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_application.html#ab3d365347af365f8b703fd496fe40be7">update_on_request</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        QSettings&amp; <a class="code hl_function" href="class_layers_1_1_application.html#a15b4a434172e92eaed272b7c933e359d">settings</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_application.html#a25c2e50517b55d988866b86653e6387f">store_child_themeable_pointer</a>(<a class="code hl_class" href="class_layers_1_1_themeable.html">Themeable</a>&amp; themeable);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* <a class="code hl_function" href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">theme</a>(<span class="keyword">const</span> QString&amp; theme_name);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        QMap&lt;QString, Theme&gt;&amp; <a class="code hl_function" href="class_layers_1_1_application.html#aeaf66c86898f3e6aa918b8c4dec3c33d">themes</a>();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_application.html#a8eb80ff6f004611dba5244db8fe3bcd1">update_available</a>();</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">public</span> slots:</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="class_layers_1_1_application.html#ada4262c296f6b19102178cef322edcdd">rename_theme</a>(<span class="keyword">const</span> QString&amp; old_name, <span class="keyword">const</span> QString&amp; new_name);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordtype">void</span> copy_missing_attributes_to(<a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>&amp; theme_missing_attributes);</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordtype">void</span> init_directories();</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        <span class="keywordtype">void</span> init_fonts();</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordtype">void</span> init_themes();</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordtype">void</span> init_latest_version_tag();</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        QDir m_app_dir;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        QDir m_app_themes_dir;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        QList&lt;Themeable*&gt; m_child_themeables;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* m_current_theme{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_class" href="class_layers_1_1_downloader.html">Downloader</a>* m_downloader{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        QString m_github_api_repos_url_base{ <span class="stringliteral">&quot;https://api.github.com/repos&quot;</span> };</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <a class="code hl_class" href="class_layers_1_1_git_hub_repo.html">GitHubRepo</a>* m_github_repo{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        QFile* m_icon_file{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        QString* m_latest_version{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        QString m_name;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        QSettings m_settings;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        QMap&lt;QString, Theme&gt; m_themes;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <a class="code hl_class" href="class_layers_1_1_version.html">Version</a>* m_version{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    };</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="preprocessor">#define layersApp (static_cast&lt;Layers::Application*&gt;(qApp))</span></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="preprocessor">#endif </span><span class="comment">// APPLICATION_H</span></div>
-<div class="ttc" id="aclass_layers_1_1_application_html"><div class="ttname"><a href="class_layers_1_1_application.html">Layers::Application</a></div><div class="ttdef"><b>Definition:</b> Application.h:17</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a11be232598738dcfa8bbdf503d614180"><div class="ttname"><a href="class_layers_1_1_application.html#a11be232598738dcfa8bbdf503d614180">Layers::Application::load_theme</a></div><div class="ttdeci">Theme load_theme(QFile &amp;file)</div><div class="ttdef"><b>Definition:</b> Application.cpp:186</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a15b4a434172e92eaed272b7c933e359d"><div class="ttname"><a href="class_layers_1_1_application.html#a15b4a434172e92eaed272b7c933e359d">Layers::Application::settings</a></div><div class="ttdeci">QSettings &amp; settings()</div><div class="ttdef"><b>Definition:</b> Application.cpp:282</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a1a05d51c92bf5c99d7f4dabb2159c82b"><div class="ttname"><a href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">Layers::Application::name</a></div><div class="ttdeci">QString &amp; name()</div><div class="ttdef"><b>Definition:</b> Application.cpp:253</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a25c2e50517b55d988866b86653e6387f"><div class="ttname"><a href="class_layers_1_1_application.html#a25c2e50517b55d988866b86653e6387f">Layers::Application::store_child_themeable_pointer</a></div><div class="ttdeci">void store_child_themeable_pointer(Themeable &amp;themeable)</div><div class="ttdef"><b>Definition:</b> Application.cpp:61</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a25c4b08add4fec47364a57944c07ad8b"><div class="ttname"><a href="class_layers_1_1_application.html#a25c4b08add4fec47364a57944c07ad8b">Layers::Application::save_theme</a></div><div class="ttdeci">void save_theme(Theme &amp;theme)</div><div class="ttdef"><b>Definition:</b> Application.cpp:264</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a3add54089305ff64b4b99ebe659ac78f"><div class="ttname"><a href="class_layers_1_1_application.html#a3add54089305ff64b4b99ebe659ac78f">Layers::Application::create_theme</a></div><div class="ttdeci">void create_theme(const QString &amp;new_theme_name, const QString &amp;copy_theme_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:79</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a7134c3b35945b78b14f2a95a271a8c0b"><div class="ttname"><a href="class_layers_1_1_application.html#a7134c3b35945b78b14f2a95a271a8c0b">Layers::Application::current_theme</a></div><div class="ttdeci">Theme * current_theme() const</div><div class="ttdef"><b>Definition:</b> Application.cpp:90</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_a8eb80ff6f004611dba5244db8fe3bcd1"><div class="ttname"><a href="class_layers_1_1_application.html#a8eb80ff6f004611dba5244db8fe3bcd1">Layers::Application::update_available</a></div><div class="ttdeci">bool update_available()</div><div class="ttdef"><b>Definition:</b> Application.cpp:105</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_ab3d365347af365f8b703fd496fe40be7"><div class="ttname"><a href="class_layers_1_1_application.html#ab3d365347af365f8b703fd496fe40be7">Layers::Application::update_on_request</a></div><div class="ttdeci">bool update_on_request()</div><div class="ttdef"><b>Definition:</b> Application.cpp:113</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_ac6af7f4b42a30d09a48f1d11c36d49dd"><div class="ttname"><a href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">Layers::Application::icon_file</a></div><div class="ttdeci">QFile * icon_file()</div><div class="ttdef"><b>Definition:</b> Application.cpp:95</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_acdc3dc779cf0b4dda262e8da98f8fb48"><div class="ttname"><a href="class_layers_1_1_application.html#acdc3dc779cf0b4dda262e8da98f8fb48">Layers::Application::reapply_theme</a></div><div class="ttdeci">void reapply_theme()</div><div class="ttdef"><b>Definition:</b> Application.cpp:258</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_ada4262c296f6b19102178cef322edcdd"><div class="ttname"><a href="class_layers_1_1_application.html#ada4262c296f6b19102178cef322edcdd">Layers::Application::rename_theme</a></div><div class="ttdeci">void rename_theme(const QString &amp;old_name, const QString &amp;new_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:168</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_ae577216be3d14bb51fbe0b4aa608e1e1"><div class="ttname"><a href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">Layers::Application::theme</a></div><div class="ttdeci">Theme * theme(const QString &amp;theme_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:287</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_aeaf66c86898f3e6aa918b8c4dec3c33d"><div class="ttname"><a href="class_layers_1_1_application.html#aeaf66c86898f3e6aa918b8c4dec3c33d">Layers::Application::themes</a></div><div class="ttdeci">QMap&lt; QString, Theme &gt; &amp; themes()</div><div class="ttdef"><b>Definition:</b> Application.cpp:100</div></div>
-<div class="ttc" id="aclass_layers_1_1_application_html_aec2122193adf69854bc5e8734f55e111"><div class="ttname"><a href="class_layers_1_1_application.html#aec2122193adf69854bc5e8734f55e111">Layers::Application::apply_theme</a></div><div class="ttdeci">void apply_theme(Theme &amp;theme)</div><div class="ttdef"><b>Definition:</b> Application.cpp:66</div></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_application.html#ab3d365347af365f8b703fd496fe40be7">update_on_request</a>();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">public</span> slots:</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="class_layers_1_1_application.html#ada4262c296f6b19102178cef322edcdd">rename_theme</a>(<span class="keyword">const</span> QString&amp; old_name, <span class="keyword">const</span> QString&amp; new_name);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keywordtype">void</span> init_directories();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordtype">void</span> init_fonts();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordtype">void</span> init_themes();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordtype">void</span> init_latest_version_tag();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        QDir m_app_dir;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        QDir m_app_themes_dir;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        QDir m_layers_dir{ QDir(layers_path()) };</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        QDir m_layers_themes_dir{ QDir(layers_themes_path()) };</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        QList&lt;Themeable*&gt; m_child_themeables;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <a class="code hl_class" href="class_layers_1_1_theme.html">Theme</a>* m_current_theme{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <a class="code hl_class" href="class_layers_1_1_downloader.html">Downloader</a>* m_downloader{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        QString m_github_api_repos_url_base{ <span class="stringliteral">&quot;https://api.github.com/repos&quot;</span> };</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <a class="code hl_class" href="class_layers_1_1_git_hub_repo.html">GitHubRepo</a>* m_github_repo{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        QFile* m_icon_file{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        QString* m_latest_version{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        QString m_name;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        QString m_name_underscored;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        QSettings m_settings;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        QMap&lt;QString, Theme&gt; m_themes;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        QUuid m_uuid;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_class" href="class_layers_1_1_version.html">Version</a>* m_version{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    };</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>}</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="preprocessor">#define layersApp (static_cast&lt;Layers::Application*&gt;(qApp))</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="preprocessor">#endif </span><span class="comment">// APPLICATION_H</span></div>
+<div class="ttc" id="aclass_layers_1_1_application_html"><div class="ttname"><a href="class_layers_1_1_application.html">Layers::Application</a></div><div class="ttdef"><b>Definition:</b> Application.h:19</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a15b4a434172e92eaed272b7c933e359d"><div class="ttname"><a href="class_layers_1_1_application.html#a15b4a434172e92eaed272b7c933e359d">Layers::Application::settings</a></div><div class="ttdeci">QSettings &amp; settings()</div><div class="ttdef"><b>Definition:</b> Application.cpp:263</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a1a05d51c92bf5c99d7f4dabb2159c82b"><div class="ttname"><a href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">Layers::Application::name</a></div><div class="ttdeci">QString &amp; name()</div><div class="ttdef"><b>Definition:</b> Application.cpp:217</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a25c2e50517b55d988866b86653e6387f"><div class="ttname"><a href="class_layers_1_1_application.html#a25c2e50517b55d988866b86653e6387f">Layers::Application::store_child_themeable_pointer</a></div><div class="ttdeci">void store_child_themeable_pointer(Themeable &amp;themeable)</div><div class="ttdef"><b>Definition:</b> Application.cpp:73</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a25c4b08add4fec47364a57944c07ad8b"><div class="ttname"><a href="class_layers_1_1_application.html#a25c4b08add4fec47364a57944c07ad8b">Layers::Application::save_theme</a></div><div class="ttdeci">void save_theme(Theme &amp;theme)</div><div class="ttdef"><b>Definition:</b> Application.cpp:228</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a29c1e937bf2eea9a63073b3411bfd205"><div class="ttname"><a href="class_layers_1_1_application.html#a29c1e937bf2eea9a63073b3411bfd205">Layers::Application::load_theme</a></div><div class="ttdeci">Theme load_theme(const QString &amp;file_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:198</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a3add54089305ff64b4b99ebe659ac78f"><div class="ttname"><a href="class_layers_1_1_application.html#a3add54089305ff64b4b99ebe659ac78f">Layers::Application::create_theme</a></div><div class="ttdeci">void create_theme(const QString &amp;new_theme_name, const QString &amp;copy_theme_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:91</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a7134c3b35945b78b14f2a95a271a8c0b"><div class="ttname"><a href="class_layers_1_1_application.html#a7134c3b35945b78b14f2a95a271a8c0b">Layers::Application::current_theme</a></div><div class="ttdeci">Theme * current_theme() const</div><div class="ttdef"><b>Definition:</b> Application.cpp:102</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_a8eb80ff6f004611dba5244db8fe3bcd1"><div class="ttname"><a href="class_layers_1_1_application.html#a8eb80ff6f004611dba5244db8fe3bcd1">Layers::Application::update_available</a></div><div class="ttdeci">bool update_available()</div><div class="ttdef"><b>Definition:</b> Application.cpp:117</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_ab3d365347af365f8b703fd496fe40be7"><div class="ttname"><a href="class_layers_1_1_application.html#ab3d365347af365f8b703fd496fe40be7">Layers::Application::update_on_request</a></div><div class="ttdeci">bool update_on_request()</div><div class="ttdef"><b>Definition:</b> Application.cpp:125</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_ac6af7f4b42a30d09a48f1d11c36d49dd"><div class="ttname"><a href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">Layers::Application::icon_file</a></div><div class="ttdeci">QFile * icon_file()</div><div class="ttdef"><b>Definition:</b> Application.cpp:107</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_acdc3dc779cf0b4dda262e8da98f8fb48"><div class="ttname"><a href="class_layers_1_1_application.html#acdc3dc779cf0b4dda262e8da98f8fb48">Layers::Application::reapply_theme</a></div><div class="ttdeci">void reapply_theme()</div><div class="ttdef"><b>Definition:</b> Application.cpp:222</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_ada4262c296f6b19102178cef322edcdd"><div class="ttname"><a href="class_layers_1_1_application.html#ada4262c296f6b19102178cef322edcdd">Layers::Application::rename_theme</a></div><div class="ttdeci">void rename_theme(const QString &amp;old_name, const QString &amp;new_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:180</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_ae577216be3d14bb51fbe0b4aa608e1e1"><div class="ttname"><a href="class_layers_1_1_application.html#ae577216be3d14bb51fbe0b4aa608e1e1">Layers::Application::theme</a></div><div class="ttdeci">Theme * theme(const QString &amp;theme_name)</div><div class="ttdef"><b>Definition:</b> Application.cpp:268</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_aeaf66c86898f3e6aa918b8c4dec3c33d"><div class="ttname"><a href="class_layers_1_1_application.html#aeaf66c86898f3e6aa918b8c4dec3c33d">Layers::Application::themes</a></div><div class="ttdeci">QMap&lt; QString, Theme &gt; &amp; themes()</div><div class="ttdef"><b>Definition:</b> Application.cpp:112</div></div>
+<div class="ttc" id="aclass_layers_1_1_application_html_aec2122193adf69854bc5e8734f55e111"><div class="ttname"><a href="class_layers_1_1_application.html#aec2122193adf69854bc5e8734f55e111">Layers::Application::apply_theme</a></div><div class="ttdeci">void apply_theme(Theme &amp;theme)</div><div class="ttdef"><b>Definition:</b> Application.cpp:78</div></div>
 <div class="ttc" id="aclass_layers_1_1_downloader_html"><div class="ttname"><a href="class_layers_1_1_downloader.html">Layers::Downloader</a></div><div class="ttdef"><b>Definition:</b> Downloader.h:11</div></div>
 <div class="ttc" id="aclass_layers_1_1_git_hub_repo_html"><div class="ttname"><a href="class_layers_1_1_git_hub_repo.html">Layers::GitHubRepo</a></div><div class="ttdef"><b>Definition:</b> GitHubRepo.h:9</div></div>
-<div class="ttc" id="aclass_layers_1_1_theme_html"><div class="ttname"><a href="class_layers_1_1_theme.html">Layers::Theme</a></div><div class="ttdef"><b>Definition:</b> Theme.h:55</div></div>
+<div class="ttc" id="aclass_layers_1_1_theme_html"><div class="ttname"><a href="class_layers_1_1_theme.html">Layers::Theme</a></div><div class="ttdef"><b>Definition:</b> Theme.h:64</div></div>
 <div class="ttc" id="aclass_layers_1_1_themeable_html"><div class="ttname"><a href="class_layers_1_1_themeable.html">Layers::Themeable</a></div><div class="ttdef"><b>Definition:</b> Themeable.h:34</div></div>
 <div class="ttc" id="aclass_layers_1_1_version_html"><div class="ttname"><a href="class_layers_1_1_version.html">Layers::Version</a></div><div class="ttdef"><b>Definition:</b> Version.h:10</div></div>
+<div class="ttc" id="aclass_layers_1_1_window_html"><div class="ttname"><a href="class_layers_1_1_window.html">Layers::Window</a></div><div class="ttdef"><b>Definition:</b> Window.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,29 +1,132 @@
 \hypertarget{class_layers_1_1_attribute_group}{}\doxysection{Layers\+::Attribute\+Group Class Reference}
 \label{class_layers_1_1_attribute_group}\index{Layers::AttributeGroup@{Layers::AttributeGroup}}
+
+
+{\ttfamily \#include $<$Attribute\+Group.\+h$>$}
+
 Inheritance diagram for Layers\+::Attribute\+Group\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{class_layers_1_1_attribute_group}
+\includegraphics[height=4.000000cm]{class_layers_1_1_attribute_group}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_attribute_group_acdc27d750845a0926966ef8917b0b96c}\label{class_layers_1_1_attribute_group_acdc27d750845a0926966ef8917b0b96c}} 
-{\bfseries Attribute\+Group} (const QString \&name, const QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&attributes)
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_af657c71c7616b1c6384e3f644544ba10}\label{class_layers_1_1_attribute_group_af657c71c7616b1c6384e3f644544ba10}} 
+{\bfseries Attribute\+Group} (const QString \&\mbox{\hyperlink{class_layers_1_1_attribute_type_aca369bb6f7315498d4bf25b9b5966bdb}{name}}, const QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&\mbox{\hyperlink{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}{attributes}}, bool \mbox{\hyperlink{class_layers_1_1_attribute_type_aa42b1dd86ed46b66aaa669672d577e49}{disabled}}=false)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}\label{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}} 
-QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& {\bfseries attributes} ()
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_af8cb97b7ed3a668bdf8ff322625b9230}\label{class_layers_1_1_attribute_group_af8cb97b7ed3a668bdf8ff322625b9230}} 
+{\bfseries Attribute\+Group} (const \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \&ag)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_attribute_group_a116d656de648b1797286702ab3116d8b}\label{class_layers_1_1_attribute_group_a116d656de648b1797286702ab3116d8b}} 
-bool {\bfseries is\+\_\+stateful} () const
+QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& \mbox{\hyperlink{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}{attributes}} ()
 \item 
-\mbox{\Hypertarget{class_layers_1_1_attribute_group_ab321c2c9003965e194921975f8b1161d}\label{class_layers_1_1_attribute_group_ab321c2c9003965e194921975f8b1161d}} 
-QString {\bfseries name} () const
+void \mbox{\hyperlink{class_layers_1_1_attribute_group_acf2cab6f431f7a42dfd492675e8ef368}{copy}} (const \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \&ag)
+\item 
+void \mbox{\hyperlink{class_layers_1_1_attribute_group_a7cb90853ab70573a0618f7966e530456}{get\+\_\+data\+\_\+from}} (\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \&attr\+\_\+group)
+\item 
+virtual bool \mbox{\hyperlink{class_layers_1_1_attribute_group_aafc07d62c60beac2c5d95ce41a677678}{is\+\_\+stateful}} () const override
+\item 
+virtual void \mbox{\hyperlink{class_layers_1_1_attribute_group_a087944ae1222b63060b95484529319f2}{set\+\_\+state}} (const QString \&state) override
+\item 
+QJson\+Object \mbox{\hyperlink{class_layers_1_1_attribute_group_a4955789c24b6e44536e12b4389f2dbd4}{to\+\_\+json\+\_\+object}} ()
 \end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Implements a container used to define a group of Attributes.
+
+The Attributes are stored in a QMap of QString-\/\+Attribute$\ast$ pairs where the QString matches the name of the associated \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}.
+
+A group of Attributes is stateful if a single \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} in the group is stateful. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}\label{class_layers_1_1_attribute_group_a1d9487eb5d284ef335f5ea2bc12928a0}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!attributes@{attributes}}
+\index{attributes@{attributes}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{attributes()}{attributes()}}
+{\footnotesize\ttfamily QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \& Attribute\+Group\+::attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a reference to the map of Attributes contained in the group.
+
+\begin{DoxyReturn}{Returns}
+Reference to map of Attributes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_acf2cab6f431f7a42dfd492675e8ef368}\label{class_layers_1_1_attribute_group_acf2cab6f431f7a42dfd492675e8ef368}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!copy@{copy}}
+\index{copy@{copy}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void Attribute\+Group\+::copy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \&}]{ag }\end{DoxyParamCaption})}
+
+Copies the supplied \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em ag} & -\/ \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} to copy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_a7cb90853ab70573a0618f7966e530456}\label{class_layers_1_1_attribute_group_a7cb90853ab70573a0618f7966e530456}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!get\_data\_from@{get\_data\_from}}
+\index{get\_data\_from@{get\_data\_from}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{get\_data\_from()}{get\_data\_from()}}
+{\footnotesize\ttfamily void Attribute\+Group\+::get\+\_\+data\+\_\+from (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \&}]{attr\+\_\+group }\end{DoxyParamCaption})}
+
+Calls \mbox{\hyperlink{class_layers_1_1_attribute_a71009df30061fc4a7a68bd22be06d3d1}{Attribute\+::get\+\_\+data\+\_\+from()}} on all group Attributes, passing the corresponding Attributes of attr\+\_\+group matched by the \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} names.
+
+
+\begin{DoxyParams}{Parameters}
+{\em attr\+\_\+group} & -\/ Group of Attributes to obtain \mbox{\hyperlink{class_layers_1_1_data}{Data}} pointers of \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_aafc07d62c60beac2c5d95ce41a677678}\label{class_layers_1_1_attribute_group_aafc07d62c60beac2c5d95ce41a677678}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!is\_stateful@{is\_stateful}}
+\index{is\_stateful@{is\_stateful}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{is\_stateful()}{is\_stateful()}}
+{\footnotesize\ttfamily bool Attribute\+Group\+::is\+\_\+stateful (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns true if stateful, otherwise, returns false.
+
+This function calls \mbox{\hyperlink{class_layers_1_1_attribute_a45c9a0eda0fcc1c2056389ba8e2cb4e9}{Attribute\+::is\+\_\+stateful()}} on all the Attributes in the group. If any of them are stateful, the group is considered stateful as well.
+
+\begin{DoxyReturn}{Returns}
+True if stateful, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_layers_1_1_attribute_type_a5b6670e412de3ad4845a01027cb63fdc}{Layers\+::\+Attribute\+Type}}.
+
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_a087944ae1222b63060b95484529319f2}\label{class_layers_1_1_attribute_group_a087944ae1222b63060b95484529319f2}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!set\_state@{set\_state}}
+\index{set\_state@{set\_state}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{set\_state()}{set\_state()}}
+{\footnotesize\ttfamily void Attribute\+Group\+::set\+\_\+state (\begin{DoxyParamCaption}\item[{const QString \&}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Sets the active state of all the Attributes in the group.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & -\/ QString representing new active state \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_layers_1_1_attribute_type_aa90b9f76e825c34de17049c4bb0253b4}{Layers\+::\+Attribute\+Type}}.
+
+\mbox{\Hypertarget{class_layers_1_1_attribute_group_a4955789c24b6e44536e12b4389f2dbd4}\label{class_layers_1_1_attribute_group_a4955789c24b6e44536e12b4389f2dbd4}} 
+\index{Layers::AttributeGroup@{Layers::AttributeGroup}!to\_json\_object@{to\_json\_object}}
+\index{to\_json\_object@{to\_json\_object}!Layers::AttributeGroup@{Layers::AttributeGroup}}
+\doxysubsubsection{\texorpdfstring{to\_json\_object()}{to\_json\_object()}}
+{\footnotesize\ttfamily QJson\+Object Attribute\+Group\+::to\+\_\+json\+\_\+object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} converted to a QJson\+Object.
+
+\begin{DoxyReturn}{Returns}
+QJson\+Object pertaining to the \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/Attribute.\+h\item 
+include/Attribute\+Group.\+h\item 
 src/\+Themes/\+Attributes/Attribute\+Group.\+cpp\end{DoxyCompactItemize}

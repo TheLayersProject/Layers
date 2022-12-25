@@ -19,18 +19,21 @@
 \DoxyCodeLine{15     \textcolor{keyword}{public}:}
 \DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}}(QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{17 }
-\DoxyCodeLine{18         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_control_ad2416f169666be2c8113ff16b955fc8f}{init\_attributes}}();}
+\DoxyCodeLine{18         \textcolor{comment}{//void set\_attribute(Attribute* attribute);}}
 \DoxyCodeLine{19 }
-\DoxyCodeLine{20         \textcolor{keywordtype}{void} set\_attribute(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute);}
-\DoxyCodeLine{21 }
-\DoxyCodeLine{22     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{23         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25     \textcolor{keyword}{private}:}
-\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* m\_attribute\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{27     \};}
-\DoxyCodeLine{28 \}}
-\DoxyCodeLine{29 }
-\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GRADIENTCONTROL\_H}}
+\DoxyCodeLine{20     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{24         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{comment}{//private:}}
+\DoxyCodeLine{29         \textcolor{comment}{//Attribute* m\_attribute\{ nullptr \};}}
+\DoxyCodeLine{30     \};}
+\DoxyCodeLine{31 \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GRADIENTCONTROL\_H}}
 
 \end{DoxyCode}

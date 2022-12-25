@@ -16,59 +16,31 @@ Inheritance diagram for Layers\+::Widget\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}\label{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}} 
 {\bfseries Widget} (QWidget $\ast$parent=nullptr)
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_widget_ab17a9aca0de452533042e3ecf27d6ed8}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&theme\+\_\+attrs) override
+virtual void \mbox{\hyperlink{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a3fb65c93371460bbfe9b6c79b029a159}\label{class_layers_1_1_widget_a3fb65c93371460bbfe9b6c79b029a159}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$widget)
+void \mbox{\hyperlink{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}{set\+\_\+margin}} (double margin)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}{set\+\_\+margin}} (int margin)
-\item 
-void \mbox{\hyperlink{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}{set\+\_\+margin}} (int left, int top, int right, int bottom)
+void \mbox{\hyperlink{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}{set\+\_\+margin}} (double left, double top, double right, double bottom)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a5108c3f7c6e6d33b3b2a399a4640634d}\label{class_layers_1_1_widget_a5108c3f7c6e6d33b3b2a399a4640634d}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+border\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Border Fill\char`\"{}, QColor(Qt\+::gray)) \}
+\mbox{\Hypertarget{class_layers_1_1_widget_acb516cac43bbc27740d9a4d9fc5a128b}\label{class_layers_1_1_widget_acb516cac43bbc27740d9a4d9fc5a128b}} 
+\mbox{\hyperlink{class_layers_1_1_border_attributes}{Border\+Attributes}} {\bfseries border}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a008b5d722091effa179ddadd14cf4b80}\label{class_layers_1_1_widget_a008b5d722091effa179ddadd14cf4b80}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+border\+\_\+thickness} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Border Thickness\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\Hypertarget{class_layers_1_1_widget_ae9247066c8da6448a40f0f654d3b1709}\label{class_layers_1_1_widget_ae9247066c8da6448a40f0f654d3b1709}} 
+\mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{Corner\+Radii\+Attributes}} {\bfseries corner\+\_\+radii}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}\label{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Corner Color\char`\"{}, QColor(Qt\+::gray), true) \}
+\mbox{\Hypertarget{class_layers_1_1_widget_a8cb0c3071a568244c921551eb5f1fb9a}\label{class_layers_1_1_widget_a8cb0c3071a568244c921551eb5f1fb9a}} 
+\mbox{\hyperlink{class_layers_1_1_margins_attributes}{Margins\+Attributes}} {\bfseries margins}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_af9921832e5fa6948c578f7aba3cd53d2}\label{class_layers_1_1_widget_af9921832e5fa6948c578f7aba3cd53d2}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+tl} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top-\/Left Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}{a\+\_\+corner\+\_\+color}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a4d4cb70de37f530bbc8190b1af9a8051}\label{class_layers_1_1_widget_a4d4cb70de37f530bbc8190b1af9a8051}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+tr} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top-\/Right Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}{a\+\_\+fill}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_ac5cf9bb7f5577464f606cac0b1a90137}\label{class_layers_1_1_widget_ac5cf9bb7f5577464f606cac0b1a90137}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+bl} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom-\/Left Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}{a\+\_\+hover\+\_\+fill}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_widget_ab38fb48516e20de145ea2d8c359a0c7e}\label{class_layers_1_1_widget_ab38fb48516e20de145ea2d8c359a0c7e}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+br} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom-\/Right Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}\label{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Fill\char`\"{}, QColor(Qt\+::white)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}\label{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+hover\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Hover Fill\char`\"{}, QColor(Qt\+::light\+Gray), true) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a1e30fed2f87ee46a0db2abe392028ef8}\label{class_layers_1_1_widget_a1e30fed2f87ee46a0db2abe392028ef8}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+left} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Left Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a02a12e53900b68ecf0a3b86f4621df64}\label{class_layers_1_1_widget_a02a12e53900b68ecf0a3b86f4621df64}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+top} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a342d439fca8cb9fed421d517bf1b4ee3}\label{class_layers_1_1_widget_a342d439fca8cb9fed421d517bf1b4ee3}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+right} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Right Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a435511f41799eab2d2361efee4dad8b8}\label{class_layers_1_1_widget_a435511f41799eab2d2361efee4dad8b8}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+bottom} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}\label{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+outline\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Outline Color\char`\"{}, QColor(Qt\+::gray), true) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}{a\+\_\+outline\+\_\+color}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -82,12 +54,6 @@ void \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \mbox{\hyperlink{class_layers_1_1_widget_ab8f637ba6309c4ce47ad45c55924a473}{ag\+\_\+border}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \mbox{\hyperlink{class_layers_1_1_widget_a011c8c0cb29c2daa0656aaf57f73b0c6}{ag\+\_\+corner\+\_\+radii}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} \mbox{\hyperlink{class_layers_1_1_widget_a5df8889294f14fc673113b6552aa4941}{ag\+\_\+margins}}
-\item 
 \mbox{\Hypertarget{class_layers_1_1_widget_a4bae24de59ffad9d277471876f90ecea}\label{class_layers_1_1_widget_a4bae24de59ffad9d277471876f90ecea}} 
 bool {\bfseries m\+\_\+hovering} \{ false \}
 \item 
@@ -100,11 +66,11 @@ QPainter {\bfseries painter}
 The \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class wraps a QWidget with a \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} to give QWidgets compatibility with the Layers theme system. The Layers \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class overrides the QWidget\textquotesingle{}s \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paint\+Event()}} and uses the attributes provided by the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle the widget\textquotesingle{}s appearance. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_widget_ab17a9aca0de452533042e3ecf27d6ed8}\label{class_layers_1_1_widget_ab17a9aca0de452533042e3ecf27d6ed8}} 
+\mbox{\Hypertarget{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}\label{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}} 
 \index{Layers::Widget@{Layers::Widget}!apply\_theme\_attributes@{apply\_theme\_attributes}}
 \index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::Widget@{Layers::Widget}}
 \doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void Widget\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Widget\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -120,27 +86,23 @@ Overrides the QWidget\+::event\+Filter() to handle widget hover coloring \mbox{\
 \index{Layers::Widget@{Layers::Widget}!init\_attributes@{init\_attributes}}
 \index{init\_attributes@{init\_attributes}!Layers::Widget@{Layers::Widget}}
 \doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Widget\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Widget\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 Initializes the widget\textquotesingle{}s attributes.
 
 This function uses calls to set\+\_\+attribute\+\_\+value() to define attributes.
 
-\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}\label{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}} 
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} attributes include background color/gradient, corner radii, margins, outline color, and other varius numerical values, colors, and booleans. \mbox{\Hypertarget{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}\label{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}} 
 \index{Layers::Widget@{Layers::Widget}!paintEvent@{paintEvent}}
 \index{paintEvent@{paintEvent}!Layers::Widget@{Layers::Widget}}
 \doxysubsubsection{\texorpdfstring{paintEvent()}{paintEvent()}}
 {\footnotesize\ttfamily void Widget\+::paint\+Event (\begin{DoxyParamCaption}\item[{QPaint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
 
-Paints the widget with values obtained from the widget\textquotesingle{}s attributes. \mbox{\Hypertarget{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}\label{class_layers_1_1_widget_a8d9c14f31e6020d9aa5c51b6516a2651}} 
+Paints the widget with values obtained from the widget\textquotesingle{}s attributes. \mbox{\Hypertarget{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}\label{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}} 
 \index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
 \index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
 \doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{int}]{left,  }\item[{int}]{top,  }\item[{int}]{right,  }\item[{int}]{bottom }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{double}]{left,  }\item[{double}]{top,  }\item[{double}]{right,  }\item[{double}]{bottom }\end{DoxyParamCaption})}
 
 Sets the margin attributes individually.
 
@@ -155,11 +117,11 @@ Sets the margin attributes individually.
 {\em bottom} & margin \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}\label{class_layers_1_1_widget_a2fb631b479c44d7ceed63ea00d738c28}} 
+\mbox{\Hypertarget{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}\label{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}} 
 \index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
 \index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
 \doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{int}]{margin }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{double}]{margin }\end{DoxyParamCaption})}
 
 Sets all margin attributes with one value.
 
@@ -171,50 +133,63 @@ Sets all margin attributes with one value.
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_layers_1_1_widget_ab8f637ba6309c4ce47ad45c55924a473}\label{class_layers_1_1_widget_ab8f637ba6309c4ce47ad45c55924a473}} 
-\index{Layers::Widget@{Layers::Widget}!ag\_border@{ag\_border}}
-\index{ag\_border@{ag\_border}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{ag\_border}{ag\_border}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} Layers\+::\+Widget\+::ag\+\_\+border\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\Hypertarget{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}\label{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}} 
+\index{Layers::Widget@{Layers::Widget}!a\_corner\_color@{a\_corner\_color}}
+\index{a\_corner\_color@{a\_corner\_color}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{a\_corner\_color}{a\_corner\_color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+corner\+\_\+color}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{ AttributeGroup(\textcolor{stringliteral}{"{}Border"{}}, \{}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}border\_fill"{}}, \&a\_border\_fill \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}border\_thickness"{}}, \&a\_border\_thickness \}}
-\DoxyCodeLine{            \}) \}}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}corner\_color"{}},}
+\DoxyCodeLine{            QColor(Qt::gray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_widget_a011c8c0cb29c2daa0656aaf57f73b0c6}\label{class_layers_1_1_widget_a011c8c0cb29c2daa0656aaf57f73b0c6}} 
-\index{Layers::Widget@{Layers::Widget}!ag\_corner\_radii@{ag\_corner\_radii}}
-\index{ag\_corner\_radii@{ag\_corner\_radii}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{ag\_corner\_radii}{ag\_corner\_radii}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} Layers\+::\+Widget\+::ag\+\_\+corner\+\_\+radii\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\Hypertarget{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}\label{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}} 
+\index{Layers::Widget@{Layers::Widget}!a\_fill@{a\_fill}}
+\index{a\_fill@{a\_fill}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{a\_fill}{a\_fill}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+fill}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{ AttributeGroup(\textcolor{stringliteral}{"{}Corner Radii"{}}, \{}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}corner\_radius\_tl"{}}, \&a\_corner\_radius\_tl \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}corner\_radius\_tr"{}}, \&a\_corner\_radius\_tr \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}corner\_radius\_bl"{}}, \&a\_corner\_radius\_bl \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}corner\_radius\_br"{}}, \&a\_corner\_radius\_br \}}
-\DoxyCodeLine{            \}) \}}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}fill"{}},}
+\DoxyCodeLine{            QColor(Qt::white)}
+\DoxyCodeLine{            ) \}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_widget_a5df8889294f14fc673113b6552aa4941}\label{class_layers_1_1_widget_a5df8889294f14fc673113b6552aa4941}} 
-\index{Layers::Widget@{Layers::Widget}!ag\_margins@{ag\_margins}}
-\index{ag\_margins@{ag\_margins}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{ag\_margins}{ag\_margins}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} Layers\+::\+Widget\+::ag\+\_\+margins\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\Hypertarget{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}\label{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}} 
+\index{Layers::Widget@{Layers::Widget}!a\_hover\_fill@{a\_hover\_fill}}
+\index{a\_hover\_fill@{a\_hover\_fill}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{a\_hover\_fill}{a\_hover\_fill}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+hover\+\_\+fill}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{ AttributeGroup(\textcolor{stringliteral}{"{}Margins"{}}, \{}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}margin\_left"{}}, \&a\_margin\_left \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}margin\_top"{}}, \&a\_margin\_top \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}margin\_right"{}}, \&a\_margin\_right \},}
-\DoxyCodeLine{            \{ \textcolor{stringliteral}{"{}margin\_bottom"{}}, \&a\_margin\_bottom \}}
-\DoxyCodeLine{            \}) \}}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}hover\_fill"{}},}
+\DoxyCodeLine{            QColor(Qt::lightGray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}\label{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}} 
+\index{Layers::Widget@{Layers::Widget}!a\_outline\_color@{a\_outline\_color}}
+\index{a\_outline\_color@{a\_outline\_color}!Layers::Widget@{Layers::Widget}}
+\doxysubsubsection{\texorpdfstring{a\_outline\_color}{a\_outline\_color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+outline\+\_\+color}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}outline\_color"{}},}
+\DoxyCodeLine{            QColor(Qt::gray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
 
 \end{DoxyCode}
 

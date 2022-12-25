@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -89,18 +89,22 @@ $(document).ready(function(){initNavTree('class_layers_1_1_theme.html',''); init
 
 <p>This is the complete list of members for <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#a9fa27ce0e8c6c05c37021503b879c508">add_attributes</a>(const QString &amp;themeable_tag, QMap&lt; QString, Attribute * &gt; attributes)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#ad8a1de957d507456ab57c4831b708b2d">contains_attributes_for_tag</a>(const QString &amp;themeable_tag)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#a8c69b9685b8692e6f81187858ab45d53">copy_from</a>(Theme &amp;theme)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#af62594bf509f7095cee18b58d945eadd">is_custom</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#aa5be99a9b54e7d9c03f0f19affd22b6b">clear</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>consume</b>(Theme &amp;&amp;theme) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#ad8a1de957d507456ab57c4831b708b2d">contains_attributes_for_tag</a>(const QString &amp;themeable_tag)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#adfc8d73bd896904fc54b595ffaff9944">copy</a>(Theme &amp;theme)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>copy_attribute_values_of</b>(Themeable *themeable) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#a08e1177704ac8f2812caf4842460a74f">editable</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>identifier</b>() (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>init_attribute</b>(const QString &amp;name, bool disabled, const QJsonValue &amp;attr_value) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">name</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>operator&lt;&lt;</b> (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator&gt;&gt;</b> (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#af343dbd6d1b5b95b5479ea759ed84493">operator[]</a>(const QString &amp;themeable_tag)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#aafb5f7396ffb18db4e720818a9270f0f">operator[]</a>(const QString &amp;themeable_tag)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#a1068abe2505c991e7d0e7ca8310d7860">set_name</a>(const QString &amp;new_name)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Theme</b>() (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Theme</b>(const QString &amp;name, bool is_custom=true) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#ad210ebf66a5fd7f4e4356899108969b3">themeable_tags</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Theme</b>(const QString &amp;name, bool editable=true) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Theme</b>(const QJsonDocument &amp;json_document, QUuid *uuid=nullptr) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_layers_1_1_theme.html#ad210ebf66a5fd7f4e4356899108969b3">themeable_tags</a>()</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>to_json_document</b>(ThemeDataType data_type=ThemeDataType::All) (defined in <a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a>)</td><td class="entry"><a class="el" href="class_layers_1_1_theme.html">Layers::Theme</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -43,10 +43,10 @@ SVG::SVG(const SVG& svg)
 	{
 		init_attributes(); // Necessary to call after m_svg_elements has been initialized
 
-		a_common_color.copy_value_from(svg.a_common_color);
-		a_common_hover_color.copy_value_from(svg.a_common_hover_color);
-		a_use_common_color.copy_value_from(svg.a_use_common_color);
-		a_use_common_hover_color.copy_value_from(svg.a_use_common_hover_color);
+		a_common_color.copy(svg.a_common_color);
+		a_common_hover_color.copy(svg.a_common_hover_color);
+		a_use_common_color.copy(svg.a_use_common_color);
+		a_use_common_hover_color.copy(svg.a_use_common_hover_color);
 	}
 
 	load(m_svg_str.toUtf8());
@@ -54,10 +54,10 @@ SVG::SVG(const SVG& svg)
 
 void SVG::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_common_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["common_color"]));
-	a_common_hover_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["common_hover_color"]));
-	a_use_common_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["use_common_color"]));
-	a_use_common_hover_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["use_common_hover_color"]));
+	a_common_color.copy(*dynamic_cast<Attribute*>(theme_attrs["common_color"]));
+	a_common_hover_color.copy(*dynamic_cast<Attribute*>(theme_attrs["common_hover_color"]));
+	a_use_common_color.copy(*dynamic_cast<Attribute*>(theme_attrs["use_common_color"]));
+	a_use_common_hover_color.copy(*dynamic_cast<Attribute*>(theme_attrs["use_common_hover_color"]));
 }
 
 void SVG::init_attributes()

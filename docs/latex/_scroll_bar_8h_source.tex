@@ -1,0 +1,42 @@
+\hypertarget{_scroll_bar_8h_source}{}\doxysection{Scroll\+Bar.\+h}
+\label{_scroll_bar_8h_source}\index{include/ScrollBar.h@{include/ScrollBar.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SCROLLBAR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SCROLLBAR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QScrollBar>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Attribute.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Themeable.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}} : \textcolor{keyword}{public} QScrollBar, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}}(QWidget* parent = 0);}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_background\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}background\_color"{}}, QColor(Qt::gray)) \};}
+\DoxyCodeLine{23         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_handle\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}handle\_color"{}}, QColor(Qt::white)) \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} corner\_radii;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} handle\_corner\_radii\{ \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}}(\textcolor{stringliteral}{"{}handle\_corner\_radii"{}}) \};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{30         QString build\_stylesheet();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{33     \};}
+\DoxyCodeLine{34 \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SCROLLBAR\_H}}
+
+\end{DoxyCode}

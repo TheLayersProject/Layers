@@ -7,101 +7,121 @@
 \DoxyCodeLine{3 }
 \DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDataStream>}}
 \DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QHash>}}
-\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QString>}}
-\DoxyCodeLine{7 }
-\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Attribute.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QJsonDocument>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QString>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QUuid>}}
 \DoxyCodeLine{9 }
-\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
-\DoxyCodeLine{11 \{}
-\DoxyCodeLine{12     \textcolor{keyword}{class }Attribute;}
-\DoxyCodeLine{13     \textcolor{keyword}{class }Themeable;}
-\DoxyCodeLine{14 }
-\DoxyCodeLine{15     \textcolor{keyword}{inline} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} QMap<QString, Attribute*>\& attr\_map)}
-\DoxyCodeLine{16     \{}
-\DoxyCodeLine{17         stream << attr\_map.count();}
-\DoxyCodeLine{18 }
-\DoxyCodeLine{19         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} QString\& attr\_tag : attr\_map.keys())}
-\DoxyCodeLine{20         \{}
-\DoxyCodeLine{21             stream << attr\_tag;}
-\DoxyCodeLine{22             stream << *attr\_map[attr\_tag];}
-\DoxyCodeLine{23         \}}
-\DoxyCodeLine{24         }
-\DoxyCodeLine{25         \textcolor{keywordflow}{return} stream;}
-\DoxyCodeLine{26     \}}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{28     \textcolor{keyword}{inline} QDataStream\& operator >>(QDataStream\& stream, QMap<QString, Attribute*>\& attr\_map)}
-\DoxyCodeLine{29     \{}
-\DoxyCodeLine{30         qsizetype attr\_count;}
-\DoxyCodeLine{31         }
-\DoxyCodeLine{32         stream >> attr\_count;}
-\DoxyCodeLine{33         }
-\DoxyCodeLine{34         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < attr\_count; i++)}
-\DoxyCodeLine{35         \{}
-\DoxyCodeLine{36             QString attr\_tag = \textcolor{stringliteral}{"{}"{}};}
-\DoxyCodeLine{37             Attribute* attr = \textcolor{keyword}{new} Attribute(\textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{38             }
-\DoxyCodeLine{39             stream >> attr\_tag;}
-\DoxyCodeLine{40             stream >> *attr;}
-\DoxyCodeLine{41         }
-\DoxyCodeLine{42             attr\_map[attr\_tag] = attr;}
-\DoxyCodeLine{43         \}}
-\DoxyCodeLine{44         }
-\DoxyCodeLine{45         \textcolor{keywordflow}{return} stream;}
-\DoxyCodeLine{46     \}}
-\DoxyCodeLine{47 }
-\DoxyCodeLine{54     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}}
-\DoxyCodeLine{55     \{}
-\DoxyCodeLine{56     \textcolor{keyword}{public}:}
-\DoxyCodeLine{57         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}();}
-\DoxyCodeLine{58         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}(\textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}{is\_custom}} = \textcolor{keyword}{true});}
-\DoxyCodeLine{59 }
-\DoxyCodeLine{68         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_a9fa27ce0e8c6c05c37021503b879c508}{add\_attributes}}(}
-\DoxyCodeLine{69             \textcolor{keyword}{const} QString\& themeable\_tag,}
-\DoxyCodeLine{70             QMap<QString, Attribute*> attributes);}
-\DoxyCodeLine{71 }
-\DoxyCodeLine{72         \textcolor{comment}{//void consume(Theme\&\& theme);}}
-\DoxyCodeLine{73 }
-\DoxyCodeLine{80         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}{contains\_attributes\_for\_tag}}(\textcolor{keyword}{const} QString\& themeable\_tag);}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Attribute.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14     \textcolor{keyword}{class }Attribute;}
+\DoxyCodeLine{15     \textcolor{keyword}{class }Themeable;}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{comment}{// NOTE: Below has not been updated to support AttributeType}}
+\DoxyCodeLine{18     \textcolor{comment}{//inline QDataStream\& operator <<(QDataStream\& stream, const QMap<QString, Attribute*>\& attr\_map)}}
+\DoxyCodeLine{19     \textcolor{comment}{//\{}}
+\DoxyCodeLine{20     \textcolor{comment}{//  stream << attr\_map.count();}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{comment}{//  for (const QString\& attr\_tag : attr\_map.keys())}}
+\DoxyCodeLine{23     \textcolor{comment}{//  \{}}
+\DoxyCodeLine{24     \textcolor{comment}{//      stream << attr\_tag;}}
+\DoxyCodeLine{25     \textcolor{comment}{//      stream << *attr\_map[attr\_tag];}}
+\DoxyCodeLine{26     \textcolor{comment}{//  \}}}
+\DoxyCodeLine{27     \textcolor{comment}{//  }}
+\DoxyCodeLine{28     \textcolor{comment}{//  return stream;}}
+\DoxyCodeLine{29     \textcolor{comment}{//\}}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{comment}{// NOTE: Below has not been updated to support AttributeType}}
+\DoxyCodeLine{32     \textcolor{comment}{//inline QDataStream\& operator >>(QDataStream\& stream, QMap<QString, Attribute*>\& attr\_map)}}
+\DoxyCodeLine{33     \textcolor{comment}{//\{}}
+\DoxyCodeLine{34     \textcolor{comment}{//  qsizetype attr\_count;}}
+\DoxyCodeLine{35     \textcolor{comment}{//  }}
+\DoxyCodeLine{36     \textcolor{comment}{//  stream >> attr\_count;}}
+\DoxyCodeLine{37     \textcolor{comment}{//  }}
+\DoxyCodeLine{38     \textcolor{comment}{//  for (int i = 0; i < attr\_count; i++)}}
+\DoxyCodeLine{39     \textcolor{comment}{//  \{}}
+\DoxyCodeLine{40     \textcolor{comment}{//      QString attr\_tag = "{}"{};}}
+\DoxyCodeLine{41     \textcolor{comment}{//      Attribute* attr = new Attribute("{}"{});}}
+\DoxyCodeLine{42     \textcolor{comment}{//      }}
+\DoxyCodeLine{43     \textcolor{comment}{//      stream >> attr\_tag;}}
+\DoxyCodeLine{44     \textcolor{comment}{//      stream >> *attr;}}
+\DoxyCodeLine{45     \textcolor{comment}{//  }}
+\DoxyCodeLine{46     \textcolor{comment}{//      attr\_map[attr\_tag] = attr;}}
+\DoxyCodeLine{47     \textcolor{comment}{//  \}}}
+\DoxyCodeLine{48     \textcolor{comment}{//  }}
+\DoxyCodeLine{49     \textcolor{comment}{//  return stream;}}
+\DoxyCodeLine{50     \textcolor{comment}{//\}}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keyword}{enum class} ThemeDataType}
+\DoxyCodeLine{53     \{}
+\DoxyCodeLine{54         All, Application, Layers}
+\DoxyCodeLine{55     \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{63     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}}
+\DoxyCodeLine{64     \{}
+\DoxyCodeLine{65     \textcolor{keyword}{public}:}
+\DoxyCodeLine{66         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}();}
+\DoxyCodeLine{67         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}(\textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_a08e1177704ac8f2812caf4842460a74f}{editable}} = \textcolor{keyword}{true});}
+\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}(\textcolor{keyword}{const} QJsonDocument\& json\_document, QUuid* uuid = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{78         \textcolor{comment}{//void add\_attributes(}}
+\DoxyCodeLine{79         \textcolor{comment}{//  const QString\& themeable\_tag,}}
+\DoxyCodeLine{80         \textcolor{comment}{//  QMap<QString, Attribute*> attributes);}}
 \DoxyCodeLine{81 }
-\DoxyCodeLine{87         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_a8c69b9685b8692e6f81187858ab45d53}{copy\_from}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme);}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{89         \textcolor{comment}{//void copy\_attribute\_values\_of(Themeable* themeable);}}
-\DoxyCodeLine{90 }
-\DoxyCodeLine{96         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_af62594bf509f7095cee18b58d945eadd}{is\_custom}}();}
-\DoxyCodeLine{97 }
-\DoxyCodeLine{103         QString\& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}();}
-\DoxyCodeLine{104 }
-\DoxyCodeLine{110         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_a1068abe2505c991e7d0e7ca8310d7860}{set\_name}}(\textcolor{keyword}{const} QString\& new\_name);}
+\DoxyCodeLine{82         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_aa5be99a9b54e7d9c03f0f19affd22b6b}{clear}}();}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keywordtype}{void} consume(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\&\& theme);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{92         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_ad8a1de957d507456ab57c4831b708b2d}{contains\_attributes\_for\_tag}}(\textcolor{keyword}{const} QString\& themeable\_tag);}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{99         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_adfc8d73bd896904fc54b595ffaff9944}{copy}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \textcolor{keywordtype}{void} copy\_attribute\_values\_of(\mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}* themeable);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{108         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_theme_a08e1177704ac8f2812caf4842460a74f}{editable}}();}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         QString identifier();}
 \DoxyCodeLine{111 }
-\DoxyCodeLine{117         QList<QString> \mbox{\hyperlink{class_layers_1_1_theme_ad210ebf66a5fd7f4e4356899108969b3}{themeable\_tags}}();}
-\DoxyCodeLine{118 }
-\DoxyCodeLine{127         QMap<QString, Attribute*>\& \mbox{\hyperlink{class_layers_1_1_theme_af343dbd6d1b5b95b5479ea759ed84493}{operator[]}}(\textcolor{keyword}{const} QString\& themeable\_tag);}
-\DoxyCodeLine{128 }
-\DoxyCodeLine{129         \textcolor{keyword}{friend} QDataStream\& operator <<(QDataStream\& stream, \textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& t)}
-\DoxyCodeLine{130         \{}
-\DoxyCodeLine{131             stream << t.m\_data;}
-\DoxyCodeLine{132             stream << t.m\_is\_custom;}
-\DoxyCodeLine{133             stream << t.m\_name;}
-\DoxyCodeLine{134             \textcolor{keywordflow}{return} stream;}
-\DoxyCodeLine{135         \}}
+\DoxyCodeLine{112         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* init\_attribute(\textcolor{keyword}{const} QString\& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}, \textcolor{keywordtype}{bool} disabled, \textcolor{keyword}{const} QJsonValue\& attr\_value);}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{119         QString\& \mbox{\hyperlink{class_layers_1_1_theme_a514aef4479c615a71aefc5d64c1f53dc}{name}}();}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{126         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_theme_a1068abe2505c991e7d0e7ca8310d7860}{set\_name}}(\textcolor{keyword}{const} QString\& new\_name);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{133         QList<QString> \mbox{\hyperlink{class_layers_1_1_theme_ad210ebf66a5fd7f4e4356899108969b3}{themeable\_tags}}();}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         QJsonDocument to\_json\_document(ThemeDataType data\_type = ThemeDataType::All);}
 \DoxyCodeLine{136 }
-\DoxyCodeLine{137         \textcolor{keyword}{friend} QDataStream\& operator >>(QDataStream\& stream, \mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& t)}
-\DoxyCodeLine{138         \{}
-\DoxyCodeLine{139             stream >> t.m\_data;}
-\DoxyCodeLine{140             stream >> t.m\_is\_custom;}
-\DoxyCodeLine{141             stream >> t.m\_name;}
-\DoxyCodeLine{142             \textcolor{keywordflow}{return} stream;}
-\DoxyCodeLine{143         \}}
-\DoxyCodeLine{144 }
-\DoxyCodeLine{145     \textcolor{keyword}{private}:}
-\DoxyCodeLine{146         QHash<QString, QMap<QString, Attribute*>> m\_data\{ QHash<QString, QMap<QString, Attribute*>>() \};}
-\DoxyCodeLine{147 }
-\DoxyCodeLine{148         \textcolor{keywordtype}{bool} m\_is\_custom\{ \textcolor{keyword}{true} \};}
-\DoxyCodeLine{149 }
-\DoxyCodeLine{150         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
-\DoxyCodeLine{151     \};}
-\DoxyCodeLine{152 \}}
-\DoxyCodeLine{153 }
-\DoxyCodeLine{154 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// THEME\_H}}
+\DoxyCodeLine{145         QMap<QString, AttributeType*>\& \mbox{\hyperlink{class_layers_1_1_theme_aafb5f7396ffb18db4e720818a9270f0f}{operator[]}}(\textcolor{keyword}{const} QString\& themeable\_tag);}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147         \textcolor{comment}{//friend QDataStream\& operator <<(QDataStream\& stream, const Theme\& t)}}
+\DoxyCodeLine{148         \textcolor{comment}{//\{}}
+\DoxyCodeLine{149         \textcolor{comment}{//  stream << t.m\_data;}}
+\DoxyCodeLine{150         \textcolor{comment}{//  stream << t.m\_editable;}}
+\DoxyCodeLine{151         \textcolor{comment}{//  stream << t.m\_name;}}
+\DoxyCodeLine{152         \textcolor{comment}{//  return stream;}}
+\DoxyCodeLine{153         \textcolor{comment}{//\}}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155         \textcolor{comment}{//friend QDataStream\& operator >>(QDataStream\& stream, Theme\& t)}}
+\DoxyCodeLine{156         \textcolor{comment}{//\{}}
+\DoxyCodeLine{157         \textcolor{comment}{//  stream >> t.m\_data;}}
+\DoxyCodeLine{158         \textcolor{comment}{//  stream >> t.m\_editable;}}
+\DoxyCodeLine{159         \textcolor{comment}{//  stream >> t.m\_name;}}
+\DoxyCodeLine{160         \textcolor{comment}{//  return stream;}}
+\DoxyCodeLine{161         \textcolor{comment}{//\}}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keyword}{private}:}
+\DoxyCodeLine{164         QHash<QString, QMap<QString, AttributeType*>> m\_data\{ QHash<QString, QMap<QString, AttributeType*>>() \};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166         \textcolor{keywordtype}{bool} m\_editable\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168         QString m\_name\{ \textcolor{stringliteral}{"{}"{}} \};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170         QUuid* m\_uuid\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{171     \};}
+\DoxyCodeLine{172 \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// THEME\_H}}
 
 \end{DoxyCode}

@@ -2,7 +2,7 @@
 \label{class_layers_1_1_variant}\index{Layers::Variant@{Layers::Variant}}
 
 
-{\ttfamily \#include $<$Attribute.\+h$>$}
+{\ttfamily \#include $<$Variant.\+h$>$}
 
 Inheritance diagram for Layers\+::Variant\+:\begin{figure}[H]
 \begin{center}
@@ -19,8 +19,8 @@ void {\bfseries changed} ()
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_variant_a981609a8519c47e93398e19c61b662cc}\label{class_layers_1_1_variant_a981609a8519c47e93398e19c61b662cc}} 
-{\bfseries Variant} (int integer)
+\mbox{\Hypertarget{class_layers_1_1_variant_a031eb01aef8fe828b81c0fea3cb20628}\label{class_layers_1_1_variant_a031eb01aef8fe828b81c0fea3cb20628}} 
+{\bfseries Variant} (double d)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_variant_ad29b9da79e2fd4e877eea5ed00db8754}\label{class_layers_1_1_variant_ad29b9da79e2fd4e877eea5ed00db8754}} 
 {\bfseries Variant} (QColor color)
@@ -44,25 +44,14 @@ const char $\ast$ \mbox{\hyperlink{class_layers_1_1_variant_a7f84dc931d79751e27f
 \item 
 {\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}} () const
 \end{DoxyCompactItemize}
-\doxysubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_variant_ac1334ee1d9f7accd2706651640d7fc06}\label{class_layers_1_1_variant_ac1334ee1d9f7accd2706651640d7fc06}} 
-QData\+Stream \& {\bfseries operator$<$$<$} (QData\+Stream \&stream, const \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&v)
-\item 
-\mbox{\Hypertarget{class_layers_1_1_variant_ad082ab96ce92e54a46136f1c911b03ff}\label{class_layers_1_1_variant_ad082ab96ce92e54a46136f1c911b03ff}} 
-QData\+Stream \& {\bfseries operator$>$$>$} (QData\+Stream \&stream, \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} \&v)
-\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Provides a variant type with signal/slot support
+\mbox{\hyperlink{class_layers_1_1_variant}{Variant}} type with signal/slot support
 
-The \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} class is designed by wrapping a QVariant and subclassing QObject to enable Qt signal/slot functionality.
+The \mbox{\hyperlink{class_layers_1_1_variant}{Variant}} class is a QObject that wraps a QVariant to enable Qt signal/slot functionality.
 
-The purpose of having a variant type that can work with Qt\textquotesingle{}s signal/slot system is to enable simple value change detection. Any time the value of a \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\textquotesingle{}s wrapped QVariant is modified, the changed() signal gets emitted.
-
-Variants are to be used by Layers Attributes. Attributes will store pointers to Variants. When 
+The purpose of having a variant type with signal/slot support is to enable value change detection. Any time the QVariant is modified, the changed() signal gets emitted. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}\label{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}} 
@@ -92,5 +81,5 @@ Value converted to the template type T
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/Attribute.\+h\item 
+include/Variant.\+h\item 
 src/\+Themes/\+Attributes/Variant.\+cpp\end{DoxyCompactItemize}

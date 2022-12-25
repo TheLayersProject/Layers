@@ -39,9 +39,6 @@ bool {\bfseries disabled} () const
 \mbox{\Hypertarget{class_layers_1_1_button_a204ac24cdda997a7ea7f3aadaccd834d}\label{class_layers_1_1_button_a204ac24cdda997a7ea7f3aadaccd834d}} 
 \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}} $\ast$ {\bfseries graphic} () const
 \item 
-\mbox{\Hypertarget{class_layers_1_1_button_a3cd65b2dc913209a03731cbe853a8658}\label{class_layers_1_1_button_a3cd65b2dc913209a03731cbe853a8658}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_button}{Button}} $\ast$button)
-\item 
 \mbox{\Hypertarget{class_layers_1_1_button_a795bc2ad2d79ef3f4779ca42cac69fb7}\label{class_layers_1_1_button_a795bc2ad2d79ef3f4779ca42cac69fb7}} 
 void {\bfseries resize} ()
 \item 
@@ -62,6 +59,9 @@ void {\bfseries set\+\_\+padding} (int left, int top, int right, int bottom)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_button_a4d37303c5020470cd85b0da59ae7848f}\label{class_layers_1_1_button_a4d37303c5020470cd85b0da59ae7848f}} 
 void {\bfseries set\+\_\+text\+\_\+padding} (int left, int top, int right, int bottom)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_button_ac14c21e6caf3d3f905abfa2391ac9a38}\label{class_layers_1_1_button_ac14c21e6caf3d3f905abfa2391ac9a38}} 
+void {\bfseries toggle\+\_\+graphics} ()
 \item 
 \mbox{\Hypertarget{class_layers_1_1_button_a1f5a31d6803744e79244f12658ddc7b5}\label{class_layers_1_1_button_a1f5a31d6803744e79244f12658ddc7b5}} 
 int {\bfseries left\+\_\+padding} () const
@@ -84,8 +84,6 @@ bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) overri
 \mbox{\Hypertarget{class_layers_1_1_button_a3bcee333474dfe20a2f30cc0b4f9dbba}\label{class_layers_1_1_button_a3bcee333474dfe20a2f30cc0b4f9dbba}} 
 void {\bfseries init} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}{init\+\_\+attributes}} ()
-\item 
 void \mbox{\hyperlink{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \item 
 \mbox{\Hypertarget{class_layers_1_1_button_ac8880e1195ce863144794c1e55d57756}\label{class_layers_1_1_button_ac8880e1195ce863144794c1e55d57756}} 
@@ -95,11 +93,11 @@ void {\bfseries setup\+\_\+layout} ()
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}\label{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}} 
-\index{Layers::Button@{Layers::Button}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::Button@{Layers::Button}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Button\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}\label{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}} 
+\index{Layers::Button@{Layers::Button}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Button@{Layers::Button}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Button\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -109,15 +107,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}\label{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}} 
-\index{Layers::Button@{Layers::Button}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Button@{Layers::Button}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Button\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

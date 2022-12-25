@@ -12,8 +12,8 @@ Inheritance diagram for Layers\+::Scroll\+Area\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_scroll_area_abdde1f8f7ade2bd9e41e26a3c8016bf9}\label{class_layers_1_1_scroll_area_abdde1f8f7ade2bd9e41e26a3c8016bf9}} 
 {\bfseries Scroll\+Area} (QWidget $\ast$parent=nullptr)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_scroll_area_a19a595be409fc1ffc688db6437cce1d5}\label{class_layers_1_1_scroll_area_a19a595be409fc1ffc688db6437cce1d5}} 
-void {\bfseries issue\+\_\+update} ()
+\mbox{\Hypertarget{class_layers_1_1_scroll_area_aa319a693a5abaf15261cabbbc0f6fdc2}\label{class_layers_1_1_scroll_area_aa319a693a5abaf15261cabbbc0f6fdc2}} 
+\mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} $\ast$ {\bfseries horizontal\+\_\+scrollbar} () const
 \item 
 \mbox{\Hypertarget{class_layers_1_1_scroll_area_a281dc818174417684892bdc6d093241f}\label{class_layers_1_1_scroll_area_a281dc818174417684892bdc6d093241f}} 
 void {\bfseries set\+Horizontal\+Scroll\+Bar\+Policy} (Qt\+::\+Scroll\+Bar\+Policy policy)
@@ -23,12 +23,17 @@ void {\bfseries set\+Vertical\+Scroll\+Bar\+Policy} (Qt\+::\+Scroll\+Bar\+Policy
 \item 
 \mbox{\Hypertarget{class_layers_1_1_scroll_area_a98dd662add62cbb35b9569fe44ee3cf1}\label{class_layers_1_1_scroll_area_a98dd662add62cbb35b9569fe44ee3cf1}} 
 void {\bfseries set\+Widget} (QWidget $\ast$widget)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_scroll_area_a03fcfbff23402183983a8e76ed81a030}\label{class_layers_1_1_scroll_area_a03fcfbff23402183983a8e76ed81a030}} 
+\mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} $\ast$ {\bfseries vertical\+\_\+scrollbar} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_scroll_area_afa4789e6045df839f1b52477df81339f}\label{class_layers_1_1_scroll_area_afa4789e6045df839f1b52477df81339f}} 
 bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
+\item 
+void \mbox{\hyperlink{class_layers_1_1_scroll_area_a33f193a637988fc4acb5c06d2a772263}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -36,13 +41,51 @@ bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) overri
 \mbox{\Hypertarget{class_layers_1_1_scroll_area_a5522db34b1f590da8418ae18909f6b01}\label{class_layers_1_1_scroll_area_a5522db34b1f590da8418ae18909f6b01}} 
 QScroll\+Area $\ast$ {\bfseries m\+\_\+scroll\+\_\+area} \{ new QScroll\+Area(this) \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_scroll_area_a7fc009313273c32c0e560b6841b278f5}\label{class_layers_1_1_scroll_area_a7fc009313273c32c0e560b6841b278f5}} 
-QScroll\+Bar $\ast$ {\bfseries m\+\_\+horizontal\+\_\+scrollbar} \{ new QScroll\+Bar \}
+\mbox{\Hypertarget{class_layers_1_1_scroll_area_ac39c20bbff389cbea622715a7e2cc137}\label{class_layers_1_1_scroll_area_ac39c20bbff389cbea622715a7e2cc137}} 
+\mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} $\ast$ {\bfseries m\+\_\+horizontal\+\_\+scrollbar} \{ new \mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_scroll_area_a751303bdbec282367ce71bb6c664521d}\label{class_layers_1_1_scroll_area_a751303bdbec282367ce71bb6c664521d}} 
-QScroll\+Bar $\ast$ {\bfseries m\+\_\+vertical\+\_\+scrollbar} \{ new QScroll\+Bar \}
+\mbox{\Hypertarget{class_layers_1_1_scroll_area_a952de8cb62edda38c2d11e09e7f15de2}\label{class_layers_1_1_scroll_area_a952de8cb62edda38c2d11e09e7f15de2}} 
+\mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} $\ast$ {\bfseries m\+\_\+vertical\+\_\+scrollbar} \{ new \mbox{\hyperlink{class_layers_1_1_scroll_bar}{Scroll\+Bar}} \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_scroll_area_a33f193a637988fc4acb5c06d2a772263}\label{class_layers_1_1_scroll_area_a33f193a637988fc4acb5c06d2a772263}} 
+\index{Layers::ScrollArea@{Layers::ScrollArea}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::ScrollArea@{Layers::ScrollArea}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Scroll\+Area\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
+
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

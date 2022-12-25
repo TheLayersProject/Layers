@@ -6,14 +6,17 @@ Inheritance diagram for Layers\+::Mini\+Slider\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{class_layers_1_1_mini_slider}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_mini_slider_a33bd89ed3c1521676ca108383bbdf17c}\label{class_layers_1_1_mini_slider_a33bd89ed3c1521676ca108383bbdf17c}} 
+void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_mini_slider_a6bdc039296e5d9d74ebbc2cf77b16190}\label{class_layers_1_1_mini_slider_a6bdc039296e5d9d74ebbc2cf77b16190}} 
-{\bfseries Mini\+Slider} (int limit, QWidget $\ast$parent=nullptr)
-\item 
-\mbox{\Hypertarget{class_layers_1_1_mini_slider_a53e1c5fabfa5bd74c718e2c98b48f065}\label{class_layers_1_1_mini_slider_a53e1c5fabfa5bd74c718e2c98b48f065}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_mini_slider}{Mini\+Slider}} $\ast$mini\+\_\+slider)
+\mbox{\Hypertarget{class_layers_1_1_mini_slider_ab476a0f237f488e648f2bfe3117e7053}\label{class_layers_1_1_mini_slider_ab476a0f237f488e648f2bfe3117e7053}} 
+{\bfseries Mini\+Slider} (double limit, QWidget $\ast$parent=nullptr)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_mini_slider_a60db9b216a0267300c35c1746a7f41b4}\label{class_layers_1_1_mini_slider_a60db9b216a0267300c35c1746a7f41b4}} 
 void {\bfseries update\+\_\+handle\+\_\+pos} ()
@@ -25,7 +28,7 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_mini_slider_a1ea7c683047122d5eb6aa5b4e01956bc}\label{class_layers_1_1_mini_slider_a1ea7c683047122d5eb6aa5b4e01956bc}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+value} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Value\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+value} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}value\char`\"{}, QVariant\+::from\+Value(0.\+0)) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -33,7 +36,8 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \mbox{\Hypertarget{class_layers_1_1_mini_slider_a08f57fba35c26d1cfa7da20f3780ce7a}\label{class_layers_1_1_mini_slider_a08f57fba35c26d1cfa7da20f3780ce7a}} 
 bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
 \item 
-void \mbox{\hyperlink{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}\label{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \end{DoxyCompactItemize}
@@ -41,11 +45,11 @@ void \mbox{\hyperlink{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba37
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}\label{class_layers_1_1_mini_slider_a3c1d6027ac9e0234d128867ccf21b96c}} 
-\index{Layers::MiniSlider@{Layers::MiniSlider}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::MiniSlider@{Layers::MiniSlider}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Mini\+Slider\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}\label{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}} 
+\index{Layers::MiniSlider@{Layers::MiniSlider}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::MiniSlider@{Layers::MiniSlider}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Mini\+Slider\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -55,15 +59,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}\label{class_layers_1_1_mini_slider_a4911a65406c7023aa01a0a7dba376a8d}} 
-\index{Layers::MiniSlider@{Layers::MiniSlider}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::MiniSlider@{Layers::MiniSlider}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Mini\+Slider\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

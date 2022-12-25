@@ -107,14 +107,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AttributeType.cpp" />
     <ClCompile Include="include\ScrollBar.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Application\directories.cpp" />
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp" />
     <ClCompile Include="src\Layouts\VerticalLayout.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
+    <ClCompile Include="src\Themes\Attributes\Data.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
+    <ClCompile Include="src\Themes\Attributes\AttributeType.cpp" />
     <ClCompile Include="src\Themes\Attributes\Variant.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
@@ -172,12 +173,16 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Attribute.h" />
+    <QtMoc Include="include\Data.h" />
+    <QtMoc Include="include\AttributeGroup.h" />
     <ClInclude Include="include\AttributeLayout.h" />
+    <QtMoc Include="include\AttributeType.h" />
     <ClInclude Include="include\build_themes.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
     <ClInclude Include="include\GitHubRepo.h" />
     <QtMoc Include="include\ScrollBar.h" />
+    <QtMoc Include="include\Variant.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />

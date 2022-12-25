@@ -12,39 +12,46 @@ Inheritance diagram for Layers\+::Attribute\+Widget\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_attribute_widget_ac003406348c6377f3e07aa469c7ce7e0}\label{class_layers_1_1_attribute_widget_ac003406348c6377f3e07aa469c7ce7e0}} 
 virtual void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
 \end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a07e7b7a7f812f808e664adad3c78321f}\label{class_layers_1_1_attribute_widget_a07e7b7a7f812f808e664adad3c78321f}} 
+void {\bfseries widget\+\_\+disabled} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_attribute_widget_ab3f4217daa4c17f2904f10897d133f94}\label{class_layers_1_1_attribute_widget_ab3f4217daa4c17f2904f10897d133f94}} 
-{\bfseries Attribute\+Widget} (QWidget $\ast$parent=nullptr)
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a1e3b31b35bff3aa10385c301781c06ad}\label{class_layers_1_1_attribute_widget_a1e3b31b35bff3aa10385c301781c06ad}} 
+{\bfseries Attribute\+Widget} (\mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$attr\+\_\+type=nullptr, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a78fdf86351e624e6bbfacb9c63d999f6}\label{class_layers_1_1_attribute_widget_a78fdf86351e624e6bbfacb9c63d999f6}} 
+\mbox{\hyperlink{class_layers_1_1_toggle_switch}{Toggle\+Switch}} $\ast$ {\bfseries disable\+\_\+toggle} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_ad3b8857b05dc65b2913e5e35e9a43657}\label{class_layers_1_1_attribute_widget_ad3b8857b05dc65b2913e5e35e9a43657}} 
+bool {\bfseries disabled} () const
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a5d2a631caa48a1aadc3c4b1f455426e0}\label{class_layers_1_1_attribute_widget_a5d2a631caa48a1aadc3c4b1f455426e0}} 
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$ {\bfseries toggle\+\_\+label\+\_\+separator} () const
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}\label{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}} 
+void {\bfseries init\+\_\+attributes} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a92dbaaab877f7cc6016684f0bef94503}\label{class_layers_1_1_attribute_widget_a92dbaaab877f7cc6016684f0bef94503}} 
+\mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ {\bfseries m\+\_\+attribute\+\_\+type}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_ac7edd087c8784f448afd136c08752189}\label{class_layers_1_1_attribute_widget_ac7edd087c8784f448afd136c08752189}} 
+\mbox{\hyperlink{class_layers_1_1_toggle_switch}{Toggle\+Switch}} $\ast$ {\bfseries m\+\_\+disabled\+\_\+toggle} \{ new \mbox{\hyperlink{class_layers_1_1_toggle_switch}{Toggle\+Switch}} \}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_attribute_widget_a847fb0b996bc938549ed56cf7e35b9db}\label{class_layers_1_1_attribute_widget_a847fb0b996bc938549ed56cf7e35b9db}} 
+\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$ {\bfseries m\+\_\+toggle\+\_\+label\+\_\+separator} \{ new \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}\label{class_layers_1_1_attribute_widget_aae6f9c48010545be42ef473674e389a7}} 
-\index{Layers::AttributeWidget@{Layers::AttributeWidget}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::AttributeWidget@{Layers::AttributeWidget}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Attribute\+Widget\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
-
-Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
-
-This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
-
-Initializes the attributes.
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
-
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

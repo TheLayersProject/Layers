@@ -27,10 +27,10 @@ var NAVTREE =
   [ "Layers", "index.html", [
     [ "Changelog", "md__c_h_a_n_g_e_l_o_g.html", [
       [ "Alpha Phase", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md1", [
-        [ "[Layers 2.3.0a] - Unreleased", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
-        [ "[Layers 2.2.0a] - 2021-09-11", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
-        [ "[Layers 2.1.0a] - 2021-09-01", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
-        [ "[Layers 2.0.0a] - 2021-06-23", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ]
+        [ "3.0.0a (November 29, 2022)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
+        [ "2.2.0a (September 11, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
+        [ "2.1.0a (September 1, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
+        [ "2.0.0a (June 23, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ]
       ] ]
     ] ],
     [ "<img src=\"https://github.com/huntermalm/Layers/blob/main/svgs/layers_logo_w_text.svg?raw=true\" alt=\"layers_logo\" width=\"500\"/>", "md__r_e_a_d_m_e.html", [
@@ -58,7 +58,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_application_8h_source.html"
+"_application_8h_source.html",
+"md__r_e_a_d_m_e.html#autotoc_md7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

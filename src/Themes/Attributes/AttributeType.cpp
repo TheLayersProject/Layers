@@ -21,7 +21,7 @@ bool AttributeType::disabled() const
 	return m_disabled;
 }
 
-QString& AttributeType::name() { return m_name; }
+QString AttributeType::name() { return m_name; }
 
 void AttributeType::set_disabled(bool disabled)
 {

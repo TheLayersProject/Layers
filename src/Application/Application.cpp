@@ -94,7 +94,7 @@ void Application::create_theme(const QString& new_theme_name, const QString& cop
 
 	Theme& new_theme = m_themes[new_theme_name];
 
-	new_theme.copy_from(m_themes[copy_theme_name]);
+	new_theme.copy(m_themes[copy_theme_name]);
 
 	save_theme(m_themes[new_theme_name]);
 }

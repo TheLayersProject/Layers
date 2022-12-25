@@ -47,8 +47,14 @@ void \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}
 \mbox{\Hypertarget{class_layers_1_1_window_a20f0df7fb817f0917f1c8562229acf6a}\label{class_layers_1_1_window_a20f0df7fb817f0917f1c8562229acf6a}} 
 void {\bfseries assign\+\_\+tag\+\_\+prefixes} ()
 \item 
+\mbox{\Hypertarget{class_layers_1_1_window_ab16d3faa5972c03c7d67b07871ff25e1}\label{class_layers_1_1_window_ab16d3faa5972c03c7d67b07871ff25e1}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries build\+\_\+main\+\_\+widget} ()
+\item 
 \mbox{\Hypertarget{class_layers_1_1_window_aa18f6816956dce89e5593aa864311987}\label{class_layers_1_1_window_aa18f6816956dce89e5593aa864311987}} 
 void {\bfseries center\+\_\+dialog} (QDialog $\ast$dialog)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_window_abbd55c9a971b88460ee2a2550c1232b0}\label{class_layers_1_1_window_abbd55c9a971b88460ee2a2550c1232b0}} 
+\mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{Gradient\+Selection\+Dialog}} $\ast$ {\bfseries control\+\_\+gradient\+\_\+selection\+\_\+dialog} () const
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a14543d8ac6d8fe635fa4d02f5558739c}\label{class_layers_1_1_window_a14543d8ac6d8fe635fa4d02f5558739c}} 
 \mbox{\hyperlink{class_layers_1_1_customize_menu}{Customize\+Menu}} $\ast$ {\bfseries customize\+\_\+menu} () const
@@ -57,7 +63,7 @@ void {\bfseries center\+\_\+dialog} (QDialog $\ast$dialog)
 void {\bfseries finalize} ()
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a57134cc08a04e7d4036d5cf9170871c6}\label{class_layers_1_1_window_a57134cc08a04e7d4036d5cf9170871c6}} 
-void {\bfseries link\+\_\+theme\+\_\+name} (const QString \&name)
+void {\bfseries link\+\_\+theme\+\_\+name} (const QString \&\mbox{\hyperlink{class_layers_1_1_themeable_a69b5ef077cdbb52074fcc68db129c093}{name}})
 \item 
 \mbox{\Hypertarget{class_layers_1_1_window_a369f042b04613bb206c0939df0a1de51}\label{class_layers_1_1_window_a369f042b04613bb206c0939df0a1de51}} 
 void {\bfseries set\+\_\+main\+\_\+widget} (\mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$main\+\_\+widget)
@@ -118,6 +124,16 @@ Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::Window@{Layers::Window}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Window\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_window_a5a0badc67b976fa520d51550429362c2}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

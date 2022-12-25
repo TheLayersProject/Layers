@@ -1,0 +1,50 @@
+\hypertarget{_variant_8h_source}{}\doxysection{Variant.\+h}
+\label{_variant_8h_source}\index{include/Variant.h@{include/Variant.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef VARIANT\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define VARIANT\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QColor>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QGradient>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QVariant>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{18     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_variant}{Variant}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20         Q\_OBJECT}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     signals:}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} changed();}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{public}:}
+\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}();}
+\DoxyCodeLine{27         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(\textcolor{keywordtype}{double} d);}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(QColor color);}
+\DoxyCodeLine{29         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(QVariant qvariant);}
+\DoxyCodeLine{30         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& variant);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}\& variant);}
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} operator=(\textcolor{keyword}{const} QVariant\& qvariant);}
+\DoxyCodeLine{34         \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} QVariant\& qvariant);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{41         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_layers_1_1_variant_a7f84dc931d79751e27fc181fa843971d}{typeName}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{48         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{49         T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keyword}{private}:}
+\DoxyCodeLine{52         QVariant m\_qvariant;}
+\DoxyCodeLine{53     \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{56     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{Variant::value}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{57 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} m\_qvariant.value<T>();}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// VARIANT\_H}}
+
+\end{DoxyCode}

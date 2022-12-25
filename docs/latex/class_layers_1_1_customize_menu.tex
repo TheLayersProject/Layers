@@ -21,6 +21,9 @@ void {\bfseries init\+\_\+preview\+\_\+window} ()
 \mbox{\Hypertarget{class_layers_1_1_customize_menu_a810bb3a4a4778d9567bb97b6637d23b5}\label{class_layers_1_1_customize_menu_a810bb3a4a4778d9567bb97b6637d23b5}} 
 void {\bfseries open\+\_\+customize\+\_\+panel} (\mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$\mbox{\hyperlink{class_layers_1_1_themeable_ac69a4f7e207dadce226ccd58efe7bdc5}{customize\+\_\+panel}})
 \item 
+\mbox{\Hypertarget{class_layers_1_1_customize_menu_a02f22db5f277f089e93402e814b09ed1}\label{class_layers_1_1_customize_menu_a02f22db5f277f089e93402e814b09ed1}} 
+QList$<$ \mbox{\hyperlink{class_layers_1_1_customize_panel}{Customize\+Panel}} $\ast$ $>$ \& {\bfseries panels} ()
+\item 
 \mbox{\Hypertarget{class_layers_1_1_customize_menu_a1f9aed59e607ff988853194b2724bbe9}\label{class_layers_1_1_customize_menu_a1f9aed59e607ff988853194b2724bbe9}} 
 \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} $\ast$ {\bfseries preview\+\_\+widget} () const
 \item 
@@ -50,6 +53,16 @@ void \mbox{\hyperlink{class_layers_1_1_customize_menu_ac1e79c91ace636e046f82a53d
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::CustomizeMenu@{Layers::CustomizeMenu}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Customize\+Menu\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

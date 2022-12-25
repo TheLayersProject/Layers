@@ -12,9 +12,6 @@ Inheritance diagram for Layers\+::Number\+AW\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_number_a_w_afd1d893d393fac0332e61b4f3e2f1cb7}\label{class_layers_1_1_number_a_w_afd1d893d393fac0332e61b4f3e2f1cb7}} 
 {\bfseries Number\+AW} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$attribute, QInt\+Validator $\ast$int\+\_\+validator, QWidget $\ast$parent=nullptr)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_number_a_w_aed0770dd878f7347801af47ba2cafaec}\label{class_layers_1_1_number_a_w_aed0770dd878f7347801af47ba2cafaec}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_number_a_w}{Number\+AW}} $\ast$number\+\_\+aw)
-\item 
 \mbox{\Hypertarget{class_layers_1_1_number_a_w_aca408687c48ca4aec7ca23b263fad81a}\label{class_layers_1_1_number_a_w_aca408687c48ca4aec7ca23b263fad81a}} 
 void {\bfseries set\+\_\+centered} (bool centered=true)
 \item 
@@ -35,6 +32,16 @@ void \mbox{\hyperlink{class_layers_1_1_number_a_w_a85701a2652511ceb7a7ed2283c8f0
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::NumberAW@{Layers::NumberAW}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Number\+AW\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

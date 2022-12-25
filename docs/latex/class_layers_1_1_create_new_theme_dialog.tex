@@ -15,7 +15,7 @@ Inheritance diagram for Layers\+::Create\+New\+Theme\+Dialog\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a473179c81a5463a7885536e39328034e}\label{class_layers_1_1_create_new_theme_dialog_a473179c81a5463a7885536e39328034e}} 
 void {\bfseries add\+\_\+theme\+\_\+name\+\_\+to\+\_\+combobox} (const QString \&theme\+\_\+name)
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a2a720926dc74e3b1d0dbf1464e880761}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&theme\+\_\+attrs) override
+virtual void \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a8081defedb5ae47d232eb14715ff961f}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
 \item 
 \mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ac8b7760321a78eb5a8e19bf41765e8ca}\label{class_layers_1_1_create_new_theme_dialog_ac8b7760321a78eb5a8e19bf41765e8ca}} 
 void {\bfseries clear} ()
@@ -23,14 +23,8 @@ void {\bfseries clear} ()
 \mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a5aaf318bb0fc1127aac919cb24ea188f}\label{class_layers_1_1_create_new_theme_dialog_a5aaf318bb0fc1127aac919cb24ea188f}} 
 QString {\bfseries copy\+\_\+theme\+\_\+name} ()
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ac38af6815c1174c68e9538aebabd3b9c}\label{class_layers_1_1_create_new_theme_dialog_ac38af6815c1174c68e9538aebabd3b9c}} 
-void {\bfseries issue\+\_\+update} ()
-\item 
 \mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a67aaece917917a06c356eef22c878fd5}\label{class_layers_1_1_create_new_theme_dialog_a67aaece917917a06c356eef22c878fd5}} 
 QString {\bfseries new\+\_\+theme\+\_\+name} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a984561246bc319c80c30ee42efa258e4}\label{class_layers_1_1_create_new_theme_dialog_a984561246bc319c80c30ee42efa258e4}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{Create\+New\+Theme\+Dialog}} $\ast$dialog)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a1147e543bf5512af097562f6e4df1216}\label{class_layers_1_1_create_new_theme_dialog_a1147e543bf5512af097562f6e4df1216}} 
 void {\bfseries set\+\_\+current\+\_\+start\+\_\+theme\+\_\+name} (const QString \&theme\+\_\+name)
@@ -38,52 +32,28 @@ void {\bfseries set\+\_\+current\+\_\+start\+\_\+theme\+\_\+name} (const QString
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ac93913ee417d2e653ac7bfa3135aa112}\label{class_layers_1_1_create_new_theme_dialog_ac93913ee417d2e653ac7bfa3135aa112}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+border\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Border Fill\char`\"{}, QColor(Qt\+::gray)) \}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_acb47677c0087162ec62f26381a278dfb}\label{class_layers_1_1_create_new_theme_dialog_acb47677c0087162ec62f26381a278dfb}} 
+\mbox{\hyperlink{class_layers_1_1_border_attributes}{Border\+Attributes}} {\bfseries border}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a00307a7268ca18a2fe4a16eb20eeac6c}\label{class_layers_1_1_create_new_theme_dialog_a00307a7268ca18a2fe4a16eb20eeac6c}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+border\+\_\+thickness} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Border Thickness\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a330404a1489a350bfa316eb49193fc67}\label{class_layers_1_1_create_new_theme_dialog_a330404a1489a350bfa316eb49193fc67}} 
+\mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{Corner\+Radii\+Attributes}} {\bfseries corner\+\_\+radii}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a7dbc2a978db27e61778340296ba04766}\label{class_layers_1_1_create_new_theme_dialog_a7dbc2a978db27e61778340296ba04766}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Corner Color\char`\"{}, QColor(Qt\+::gray), true) \}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a08cc9c2508f961770dbe10439161fcbc}\label{class_layers_1_1_create_new_theme_dialog_a08cc9c2508f961770dbe10439161fcbc}} 
+\mbox{\hyperlink{class_layers_1_1_margins_attributes}{Margins\+Attributes}} {\bfseries margins}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ae6d6e3419ccc8c33c7be50cf01c63b19}\label{class_layers_1_1_create_new_theme_dialog_ae6d6e3419ccc8c33c7be50cf01c63b19}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+tl} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top-\/Left Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a7dbc2a978db27e61778340296ba04766}{a\+\_\+corner\+\_\+color}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a70bec7bf8cef27d1ff1c41bdeaa8cf99}\label{class_layers_1_1_create_new_theme_dialog_a70bec7bf8cef27d1ff1c41bdeaa8cf99}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+tr} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top-\/Right Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_abdc554face8cf22efba7a21189f5a02e}{a\+\_\+fill}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a0102d1fc2b8b9d1d9dc5d38dc69ab6a1}\label{class_layers_1_1_create_new_theme_dialog_a0102d1fc2b8b9d1d9dc5d38dc69ab6a1}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+bl} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom-\/Left Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_aed5af29124090e8b9bb4f12cf76c8215}{a\+\_\+hover\+\_\+fill}}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a264a2b43787cea117962b6cc1f82db84}\label{class_layers_1_1_create_new_theme_dialog_a264a2b43787cea117962b6cc1f82db84}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+corner\+\_\+radius\+\_\+br} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom-\/Right Corner Radius\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_abdc554face8cf22efba7a21189f5a02e}\label{class_layers_1_1_create_new_theme_dialog_abdc554face8cf22efba7a21189f5a02e}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Fill\char`\"{}, QColor(Qt\+::white)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_aed5af29124090e8b9bb4f12cf76c8215}\label{class_layers_1_1_create_new_theme_dialog_aed5af29124090e8b9bb4f12cf76c8215}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+hover\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Hover Fill\char`\"{}, QColor(Qt\+::light\+Gray), true) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a0cad7da43073fd527cc807a81e382b70}\label{class_layers_1_1_create_new_theme_dialog_a0cad7da43073fd527cc807a81e382b70}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+left} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Left Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a271005b5937d00b26f52ecb6c6f1c2cf}\label{class_layers_1_1_create_new_theme_dialog_a271005b5937d00b26f52ecb6c6f1c2cf}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+top} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_aae680ed1fd59f4c37a44c9f73f4c8d4e}\label{class_layers_1_1_create_new_theme_dialog_aae680ed1fd59f4c37a44c9f73f4c8d4e}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+right} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Right Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a481192992e355a1efcefad859397785e}\label{class_layers_1_1_create_new_theme_dialog_a481192992e355a1efcefad859397785e}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+margin\+\_\+bottom} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Bottom Margin\char`\"{}, QVariant\+::from\+Value(0)) \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a3d19b5bf122e1301578b27814c21f3ea}\label{class_layers_1_1_create_new_theme_dialog_a3d19b5bf122e1301578b27814c21f3ea}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+outline\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Outline Color\char`\"{}, QColor(Qt\+::gray), true) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a3d19b5bf122e1301578b27814c21f3ea}{a\+\_\+outline\+\_\+color}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}\label{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \item 
@@ -97,21 +67,21 @@ void {\bfseries paint\+Event} (QPaint\+Event $\ast$event) override
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a2a720926dc74e3b1d0dbf1464e880761}\label{class_layers_1_1_create_new_theme_dialog_a2a720926dc74e3b1d0dbf1464e880761}} 
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a8081defedb5ae47d232eb14715ff961f}\label{class_layers_1_1_create_new_theme_dialog_a8081defedb5ae47d232eb14715ff961f}} 
 \index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!apply\_theme\_attributes@{apply\_theme\_attributes}}
 \index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
 \doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void Create\+New\+Theme\+Dialog\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Create\+New\+Theme\+Dialog\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
 
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}\label{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}} 
-\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Create\+New\+Theme\+Dialog\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}\label{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}} 
+\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Create\+New\+Theme\+Dialog\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -121,15 +91,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}\label{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}} 
-\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Create\+New\+Theme\+Dialog\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 
@@ -150,6 +112,68 @@ This function is called by init\+\_\+themeable().
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
 
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a7dbc2a978db27e61778340296ba04766}\label{class_layers_1_1_create_new_theme_dialog_a7dbc2a978db27e61778340296ba04766}} 
+\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!a\_corner\_color@{a\_corner\_color}}
+\index{a\_corner\_color@{a\_corner\_color}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
+\doxysubsubsection{\texorpdfstring{a\_corner\_color}{a\_corner\_color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Create\+New\+Theme\+Dialog\+::a\+\_\+corner\+\_\+color}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}corner\_color"{}},}
+\DoxyCodeLine{            QColor(Qt::gray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_abdc554face8cf22efba7a21189f5a02e}\label{class_layers_1_1_create_new_theme_dialog_abdc554face8cf22efba7a21189f5a02e}} 
+\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!a\_fill@{a\_fill}}
+\index{a\_fill@{a\_fill}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
+\doxysubsubsection{\texorpdfstring{a\_fill}{a\_fill}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Create\+New\+Theme\+Dialog\+::a\+\_\+fill}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}fill"{}},}
+\DoxyCodeLine{            QColor(Qt::white)}
+\DoxyCodeLine{            ) \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_aed5af29124090e8b9bb4f12cf76c8215}\label{class_layers_1_1_create_new_theme_dialog_aed5af29124090e8b9bb4f12cf76c8215}} 
+\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!a\_hover\_fill@{a\_hover\_fill}}
+\index{a\_hover\_fill@{a\_hover\_fill}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
+\doxysubsubsection{\texorpdfstring{a\_hover\_fill}{a\_hover\_fill}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Create\+New\+Theme\+Dialog\+::a\+\_\+hover\+\_\+fill}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}hover\_fill"{}},}
+\DoxyCodeLine{            QColor(Qt::lightGray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_layers_1_1_create_new_theme_dialog_a3d19b5bf122e1301578b27814c21f3ea}\label{class_layers_1_1_create_new_theme_dialog_a3d19b5bf122e1301578b27814c21f3ea}} 
+\index{Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}!a\_outline\_color@{a\_outline\_color}}
+\index{a\_outline\_color@{a\_outline\_color}!Layers::CreateNewThemeDialog@{Layers::CreateNewThemeDialog}}
+\doxysubsubsection{\texorpdfstring{a\_outline\_color}{a\_outline\_color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Create\+New\+Theme\+Dialog\+::a\+\_\+outline\+\_\+color}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ Attribute(}
+\DoxyCodeLine{            \textcolor{stringliteral}{"{}outline\_color"{}},}
+\DoxyCodeLine{            QColor(Qt::gray),}
+\DoxyCodeLine{            \textcolor{keyword}{true}}
+\DoxyCodeLine{            ) \}}
+
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

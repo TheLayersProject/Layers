@@ -10,89 +10,106 @@
 \DoxyCodeLine{6 }
 \DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
 \DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}ColorControl.h"{}}}
-\DoxyCodeLine{9 }
-\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
-\DoxyCodeLine{11 \{}
-\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{GradientSelectionDialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
-\DoxyCodeLine{13     \{}
-\DoxyCodeLine{14         Q\_OBJECT}
-\DoxyCodeLine{15 }
-\DoxyCodeLine{16     \textcolor{keyword}{public}:}
-\DoxyCodeLine{17         \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{GradientSelectionDialog}}(QGradientStops gradient\_stops, QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{18 }
-\DoxyCodeLine{19         \textcolor{keywordtype}{void} add\_gradient\_stop(\textcolor{keywordtype}{double} stop\_val, QColor color);}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
-\DoxyCodeLine{22 }
-\DoxyCodeLine{23         QGradientStops gradient\_stops() \textcolor{keyword}{const};}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{GradientSelectionDialog}}* dialog);}
-\DoxyCodeLine{26 }
-\DoxyCodeLine{27         \textcolor{keywordtype}{void} update\_gradient();}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Fill"{}}, QColor(Qt::gray)) \};}
-\DoxyCodeLine{30         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_thickness\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Thickness"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Corner Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{33         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tr\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_bl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_br\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Fill"{}}, QColor(Qt::white)) \};}
-\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Hover Fill"{}}, QColor(Qt::lightGray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_left\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{39         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_right\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Right Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{41         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_bottom\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Outline Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{43 }
-\DoxyCodeLine{44     \textcolor{keyword}{public} slots:}
-\DoxyCodeLine{45         \textcolor{keywordtype}{void} click\_control();}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{48         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{49 }
-\DoxyCodeLine{50         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a55632fef220ab2d0064b5f0c416f1f42}{init\_attributes}}();}
-\DoxyCodeLine{51         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
-\DoxyCodeLine{54 }
-\DoxyCodeLine{55         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{GradientSelectionDialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{15         Q\_OBJECT}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{keyword}{public}:}
+\DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog}{GradientSelectionDialog}}(QGradientStops gradient\_stops, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} add\_gradient\_stop(\textcolor{keywordtype}{double} stop\_val, QColor color);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         QGradientStops gradient\_stops() \textcolor{keyword}{const};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} update\_gradient();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \mbox{\hyperlink{class_layers_1_1_border_attributes}{BorderAttributes}} border;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} corner\_radii;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_margins_attributes}{MarginsAttributes}} margins;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{35             \textcolor{stringliteral}{"{}corner\_color"{}},}
+\DoxyCodeLine{36             QColor(Qt::gray),}
+\DoxyCodeLine{37             \textcolor{keyword}{true}}
+\DoxyCodeLine{38             ) \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{41             \textcolor{stringliteral}{"{}fill"{}},}
+\DoxyCodeLine{42             QColor(Qt::white)}
+\DoxyCodeLine{43             ) \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{46             \textcolor{stringliteral}{"{}hover\_fill"{}},}
+\DoxyCodeLine{47             QColor(Qt::lightGray),}
+\DoxyCodeLine{48             \textcolor{keyword}{true}}
+\DoxyCodeLine{49             ) \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{52             \textcolor{stringliteral}{"{}outline\_color"{}},}
+\DoxyCodeLine{53             QColor(Qt::gray),}
+\DoxyCodeLine{54             \textcolor{keyword}{true}}
+\DoxyCodeLine{55             ) \};}
 \DoxyCodeLine{56 }
-\DoxyCodeLine{57     \textcolor{keyword}{private}:}
-\DoxyCodeLine{58         \textcolor{keywordtype}{void} init\_color\_controls();}
-\DoxyCodeLine{59         \textcolor{keywordtype}{void} init\_gradient\_widget();}
-\DoxyCodeLine{60         \textcolor{keywordtype}{void} init\_titlebar();}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{62         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{63 }
-\DoxyCodeLine{64         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{57     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{58         \textcolor{keywordtype}{void} click\_control();}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{61         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{64         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}{init\_child\_themeable\_reference\_list}}();}
 \DoxyCodeLine{65 }
-\DoxyCodeLine{66         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{66         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
 \DoxyCodeLine{67 }
-\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_gradient\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{69         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{70 }
-\DoxyCodeLine{71         QGradientStops m\_gradient\_stops\{ \{ 0.0, Qt::white \},\{ 1.0, Qt::black \} \};}
-\DoxyCodeLine{72 }
-\DoxyCodeLine{73         QList<ColorControl*> color\_controls;}
+\DoxyCodeLine{68         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{private}:}
+\DoxyCodeLine{71         \textcolor{keywordtype}{void} init\_color\_controls();}
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} init\_gradient\_widget();}
+\DoxyCodeLine{73         \textcolor{keywordtype}{void} init\_titlebar();}
 \DoxyCodeLine{74 }
-\DoxyCodeLine{75         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_apply\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Apply"{}}) \};}
+\DoxyCodeLine{75         \textcolor{keywordtype}{void} setup\_layout();}
 \DoxyCodeLine{76 }
-\DoxyCodeLine{77         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_selected\_color\_control\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{78         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_clicking\_color\_control\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{79 }
-\DoxyCodeLine{80         QPoint m\_selection\_start\_point;}
-\DoxyCodeLine{81 }
-\DoxyCodeLine{82         \textcolor{keywordtype}{int} m\_selected\_control\_start\_x\{ 0 \};}
+\DoxyCodeLine{77         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_gradient\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{82         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
 \DoxyCodeLine{83 }
-\DoxyCodeLine{84         QTimer m\_single\_click\_timer;}
+\DoxyCodeLine{84         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_window\_title\_label = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Gradient Selection Box"{}});}
 \DoxyCodeLine{85 }
-\DoxyCodeLine{86         \textcolor{keywordtype}{bool} m\_moved\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_exit\_button = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/exit.svg"{}}, QSize(20, 20)), \textcolor{keyword}{true});}
 \DoxyCodeLine{87 }
-\DoxyCodeLine{88         QPainter painter;}
-\DoxyCodeLine{89     \};}
-\DoxyCodeLine{90 \}}
+\DoxyCodeLine{88         QGradientStops m\_gradient\_stops\{ \{ 0.0, Qt::white \},\{ 1.0, Qt::black \} \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         QList<ColorControl*> color\_controls;}
 \DoxyCodeLine{91 }
-\DoxyCodeLine{92 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GRADIENTSELECTIONDIALOG\_H}}
+\DoxyCodeLine{92         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_apply\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Apply"{}}) \};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_selected\_color\_control\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{95         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_clicking\_color\_control\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         QPoint m\_selection\_start\_point;}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         \textcolor{keywordtype}{int} m\_selected\_control\_start\_x\{ 0 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         QTimer m\_single\_click\_timer;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \textcolor{keywordtype}{bool} m\_moved\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         QPainter painter;}
+\DoxyCodeLine{106     \};}
+\DoxyCodeLine{107 \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GRADIENTSELECTIONDIALOG\_H}}
 
 \end{DoxyCode}

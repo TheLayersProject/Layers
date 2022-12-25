@@ -12,14 +12,13 @@ Inheritance diagram for Layers\+::Tab\+Bar\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_tab_bar_ad91da41e8bfec9cf184f36b49ba4bf6b}\label{class_layers_1_1_tab_bar_ad91da41e8bfec9cf184f36b49ba4bf6b}} 
 {\bfseries Tab\+Bar} (QWidget $\ast$parent=0)
 \item 
+virtual void \mbox{\hyperlink{class_layers_1_1_tab_bar_a6ec56dd8ce02adb961fff5042ec80938}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
+\item 
 \mbox{\Hypertarget{class_layers_1_1_tab_bar_a902615209967a70d4fda2d42bac557a8}\label{class_layers_1_1_tab_bar_a902615209967a70d4fda2d42bac557a8}} 
 void {\bfseries Set\+Current\+Tab} (const QString \&text)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_tab_bar_afae0a215b586faf1026436ba3048239b}\label{class_layers_1_1_tab_bar_afae0a215b586faf1026436ba3048239b}} 
 bool {\bfseries Contains\+Tab} (const QString \&text)
-\item 
-\mbox{\Hypertarget{class_layers_1_1_tab_bar_a2472aa4484119a59c07d357ba408dc16}\label{class_layers_1_1_tab_bar_a2472aa4484119a59c07d357ba408dc16}} 
-void {\bfseries issue\+\_\+update} ()
 \item 
 \mbox{\Hypertarget{class_layers_1_1_tab_bar_aff9b0695554b180758bbcc51a9847d62}\label{class_layers_1_1_tab_bar_aff9b0695554b180758bbcc51a9847d62}} 
 void {\bfseries remove\+Tab} (const QString \&text)
@@ -30,11 +29,11 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_tab_bar_ae53d05ca812191aaa480b38f9c9e2c4d}\label{class_layers_1_1_tab_bar_ae53d05ca812191aaa480b38f9c9e2c4d}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ {\bfseries a\+\_\+selected\+\_\+fill\+\_\+color} \{ new \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Selected Fill Color\char`\"{}, QColor(\char`\"{}\#F0\+F0\+F0\char`\"{})) \}
+\mbox{\Hypertarget{class_layers_1_1_tab_bar_a39b9a6168d2873f301cd6dc01bded2e1}\label{class_layers_1_1_tab_bar_a39b9a6168d2873f301cd6dc01bded2e1}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+selected\+\_\+fill\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}selected\+\_\+fill\+\_\+color\char`\"{}, QColor(Qt\+::gray)) \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_tab_bar_acab052c64070428693a88465b958f331}\label{class_layers_1_1_tab_bar_acab052c64070428693a88465b958f331}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ {\bfseries a\+\_\+text\+\_\+color} \{ new \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Text Color\char`\"{}, QColor(Qt\+::white)) \}
+\mbox{\Hypertarget{class_layers_1_1_tab_bar_ad98a71b2ed684e92264e88572cb19d0e}\label{class_layers_1_1_tab_bar_ad98a71b2ed684e92264e88572cb19d0e}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}text\+\_\+color\char`\"{}, QColor(Qt\+::white)) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -42,29 +41,22 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \mbox{\Hypertarget{class_layers_1_1_tab_bar_a213a79403ba05fb4642d21e226baac2f}\label{class_layers_1_1_tab_bar_a213a79403ba05fb4642d21e226baac2f}} 
 QString {\bfseries build\+\_\+stylesheet} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}\label{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}} 
+void {\bfseries init\+\_\+attributes} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}\label{class_layers_1_1_tab_bar_a00d91d164cb4902e0729bd2d7b1fe60a}} 
-\index{Layers::TabBar@{Layers::TabBar}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::TabBar@{Layers::TabBar}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Tab\+Bar\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_tab_bar_a6ec56dd8ce02adb961fff5042ec80938}\label{class_layers_1_1_tab_bar_a6ec56dd8ce02adb961fff5042ec80938}} 
+\index{Layers::TabBar@{Layers::TabBar}!apply\_theme\_attributes@{apply\_theme\_attributes}}
+\index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::TabBar@{Layers::TabBar}}
+\doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
+{\footnotesize\ttfamily void Tab\+Bar\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
-Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
-This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
 
-Initializes the attributes.
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
-
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
 
 
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_5b_5d_0',['operator[]',['../class_layers_1_1_theme.html#af343dbd6d1b5b95b5479ea759ed84493',1,'Layers::Theme']]]
+  ['load_5ftheme_0',['load_theme',['../class_layers_1_1_application.html#a29c1e937bf2eea9a63073b3411bfd205',1,'Layers::Application']]]
 ];

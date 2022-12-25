@@ -22,42 +22,39 @@
 \DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_fill_control}{FillControl}}(QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{19         \mbox{\hyperlink{class_layers_1_1_fill_control}{\string~FillControl}}();}
 \DoxyCodeLine{20 }
-\DoxyCodeLine{21         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}{init\_attributes}}();}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}{init\_child\_themeable\_reference\_list}}();}
 \DoxyCodeLine{22 }
-\DoxyCodeLine{23         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} set\_attribute(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute);}
 \DoxyCodeLine{24 }
-\DoxyCodeLine{25         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_fill_control}{FillControl}}* fill\_control);}
-\DoxyCodeLine{26 }
-\DoxyCodeLine{27         \textcolor{keywordtype}{void} set\_attribute(\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attribute);}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{30         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
-\DoxyCodeLine{31 }
-\DoxyCodeLine{32     \textcolor{keyword}{private}:}
-\DoxyCodeLine{33         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{34 }
-\DoxyCodeLine{35         \textcolor{comment}{//Attribute* m\_attribute\{ nullptr \};}}
-\DoxyCodeLine{36 }
-\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_color\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}} \};}
-\DoxyCodeLine{38 }
-\DoxyCodeLine{39         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_color\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Color"{}}) \};}
-\DoxyCodeLine{40 }
-\DoxyCodeLine{41         QGraphicsOpacityEffect* m\_color\_label\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{43         QString m\_current\_editting\_state\{ \textcolor{stringliteral}{"{}"{}} \};}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_dialog\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47         \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}* m\_fill\_type\_toggle\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}(\textcolor{keyword}{true})\};}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}}* m\_gradient\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}} \};}
-\DoxyCodeLine{50 }
-\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_gradient\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Gradient"{}}) \};}
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53         QGraphicsOpacityEffect* m\_gradient\_label\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
-\DoxyCodeLine{54     \};}
-\DoxyCodeLine{55 \}}
-\DoxyCodeLine{56 }
-\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FILLCONTROL\_H}}
+\DoxyCodeLine{25     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{29         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{private}:}
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}}* m\_color\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_color_control}{ColorControl}} \};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_color\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Color"{}}) \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         QGraphicsOpacityEffect* m\_color\_label\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_dialog\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}* m\_fill\_type\_toggle\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}(\textcolor{keyword}{true})\};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}}* m\_gradient\_control\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_gradient_control}{GradientControl}} \};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_gradient\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Gradient"{}}) \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         QGraphicsOpacityEffect* m\_gradient\_label\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
+\DoxyCodeLine{51     \};}
+\DoxyCodeLine{52 \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FILLCONTROL\_H}}
 
 \end{DoxyCode}

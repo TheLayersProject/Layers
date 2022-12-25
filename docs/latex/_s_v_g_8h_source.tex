@@ -20,32 +20,32 @@
 \DoxyCodeLine{38 }
 \DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_s_v_g_a13a38e7a797ef07ed2a4d54032a14f00}{SVG}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}}\& svg\_w);}
 \DoxyCodeLine{43 }
-\DoxyCodeLine{44         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{44         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
 \DoxyCodeLine{45 }
 \DoxyCodeLine{49         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}{rebuild\_svg\_str}}();}
 \DoxyCodeLine{50 }
-\DoxyCodeLine{51         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}}* svg);}
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} set\_hovering(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
 \DoxyCodeLine{52 }
-\DoxyCodeLine{53         \textcolor{keywordtype}{void} set\_hovering(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{53         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a977c0aba8c4c7e82bb83299acaf34193}{set\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{override};}
 \DoxyCodeLine{54 }
-\DoxyCodeLine{55         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a977c0aba8c4c7e82bb83299acaf34193}{set\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{override};}
-\DoxyCodeLine{56 }
-\DoxyCodeLine{64         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_ab766cb209c1ef75ffe5f65a996072710}{update}}();}
-\DoxyCodeLine{65 }
-\DoxyCodeLine{66         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Common Color"{}}, QColor(Qt::black)) \};}
-\DoxyCodeLine{67         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Common Hover Color"{}}, QColor(Qt::darkGray)) \};}
-\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Use Common Color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
-\DoxyCodeLine{69         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Use Common Hover Color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
-\DoxyCodeLine{70 }
-\DoxyCodeLine{71     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{77         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a51772ec69b6e9ba794914b69e9010d7e}{init\_attributes}}();}
-\DoxyCodeLine{78 }
-\DoxyCodeLine{79     \textcolor{keyword}{private}:}
-\DoxyCodeLine{80         \textcolor{keywordtype}{void} init\_size();}
+\DoxyCodeLine{62         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_ab766cb209c1ef75ffe5f65a996072710}{update}}();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}common\_color"{}}, QColor(Qt::black)) \};}
+\DoxyCodeLine{65         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}common\_hover\_color"{}}, QColor(Qt::darkGray)) \};}
+\DoxyCodeLine{66         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}use\_common\_color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
+\DoxyCodeLine{67         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_use\_common\_hover\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}use\_common\_hover\_color"{}}, QVariant::fromValue(\textcolor{keyword}{false})) \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{75         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_s_v_g_a51772ec69b6e9ba794914b69e9010d7e}{init\_attributes}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keyword}{private}:}
+\DoxyCodeLine{78         \textcolor{keywordtype}{void} init\_size();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keywordtype}{void} build\_svg\_elements\_list();}
 \DoxyCodeLine{81 }
-\DoxyCodeLine{82         \textcolor{keywordtype}{void} build\_svg\_elements\_list();}
+\DoxyCodeLine{82         QString element\_id(\textcolor{keyword}{const} QString\& element);}
 \DoxyCodeLine{83 }
-\DoxyCodeLine{84         QString element\_id(\textcolor{keyword}{const} QString\& element);}
+\DoxyCodeLine{84         \textcolor{keywordtype}{bool} m\_theming\_blocked\{ \textcolor{keyword}{false} \};}
 \DoxyCodeLine{85 }
 \DoxyCodeLine{86         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
 \DoxyCodeLine{87 }
