@@ -21,37 +21,37 @@
 \DoxyCodeLine{17     \textcolor{keyword}{public}:}
 \DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}(QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{19 }
-\DoxyCodeLine{20         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{20         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
 \DoxyCodeLine{21 }
 \DoxyCodeLine{22         \textcolor{keywordtype}{void} reconnect\_text\_attribute();}
 \DoxyCodeLine{23 }
-\DoxyCodeLine{24         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_line_editor_a57c5c9ee4a6577b84da5a9d998bc91b2}{init\_attributes}}();}
-\DoxyCodeLine{25 }
-\DoxyCodeLine{26         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* line\_editor);}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{28         \textcolor{keywordtype}{void} set\_default\_value(\textcolor{keyword}{const} QString\& default\_value);}
-\DoxyCodeLine{29         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
-\DoxyCodeLine{30         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
-\DoxyCodeLine{31         \textcolor{keywordtype}{void} set\_margin(\textcolor{keywordtype}{int} margin);}
-\DoxyCodeLine{32         \textcolor{keywordtype}{void} set\_margin(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
-\DoxyCodeLine{33 }
-\DoxyCodeLine{34         \textcolor{keywordtype}{void} set\_text(\textcolor{keyword}{const} QString\& text);}
-\DoxyCodeLine{35         \textcolor{keywordtype}{void} set\_validator(\textcolor{keyword}{const} QValidator* validator);}
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} set\_default\_value(\textcolor{keyword}{const} QString\& default\_value);}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} set\_margin(\textcolor{keywordtype}{int} margin);}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} set\_margin(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} set\_text(\textcolor{keyword}{const} QString\& text);}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} set\_validator(\textcolor{keyword}{const} QValidator* validator);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} setFixedWidth(\textcolor{keywordtype}{int} w);}
 \DoxyCodeLine{36 }
-\DoxyCodeLine{37         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{37         QString text();}
 \DoxyCodeLine{38 }
-\DoxyCodeLine{39         \textcolor{keywordtype}{void} setFixedWidth(\textcolor{keywordtype}{int} w);}
-\DoxyCodeLine{40 }
-\DoxyCodeLine{41         QString text();}
+\DoxyCodeLine{39         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_left\_padding\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}left\_padding"{}}, QVariant::fromValue(3.0)) \};}
+\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}text\_color"{}}, QColor(Qt::black)) \};}
+\DoxyCodeLine{41         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}text"{}}, QString(\textcolor{stringliteral}{"{}"{}})) \};}
 \DoxyCodeLine{42 }
-\DoxyCodeLine{43         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_left\_padding\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Padding"{}}, QVariant::fromValue(3)) \};}
-\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Text Color"{}}, QColor(Qt::black)) \};}
-\DoxyCodeLine{47         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_text\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Text"{}}, QString(\textcolor{stringliteral}{"{}"{}})) \};}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{50         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{43     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} set\_current\_editting\_state(\textcolor{keyword}{const} QString\& state);}
+\DoxyCodeLine{45         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{48         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \textcolor{keywordtype}{void} init\_attributes();}
 \DoxyCodeLine{51 }
 \DoxyCodeLine{52     \textcolor{keyword}{private}:}
 \DoxyCodeLine{53         QString* m\_default\_value\{ \textcolor{keyword}{nullptr} \};}

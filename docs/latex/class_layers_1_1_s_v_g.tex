@@ -17,12 +17,9 @@ Inheritance diagram for Layers\+::SVG\+:\begin{figure}[H]
 \item 
 \mbox{\hyperlink{class_layers_1_1_s_v_g_a70f6168de8600ed846b737a2c5903d9e}{SVG}} (const \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}} \&svg\+\_\+w)
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_s_v_g_aea40da5a3ef1be543498e13ab35bc15a}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&theme\+\_\+attrs) override
+virtual void \mbox{\hyperlink{class_layers_1_1_s_v_g_a81876d9d44115c19151b33c7bd18f1df}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
 \item 
 void \mbox{\hyperlink{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}{rebuild\+\_\+svg\+\_\+str}} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_s_v_g_ad5595127f82fa79d9c5cf3ba12384b8c}\label{class_layers_1_1_s_v_g_ad5595127f82fa79d9c5cf3ba12384b8c}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}} $\ast$svg)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_s_v_g_acb7423269aaedf80ec5290d52ed6444f}\label{class_layers_1_1_s_v_g_acb7423269aaedf80ec5290d52ed6444f}} 
 void {\bfseries set\+\_\+hovering} (bool cond=true)
@@ -35,16 +32,16 @@ void \mbox{\hyperlink{class_layers_1_1_s_v_g_ab766cb209c1ef75ffe5f65a996072710}{
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_s_v_g_aaf33ec5cc21bce2ac12fa46bf730d931}\label{class_layers_1_1_s_v_g_aaf33ec5cc21bce2ac12fa46bf730d931}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+common\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Common Color\char`\"{}, QColor(Qt\+::black)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+common\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}common\+\_\+color\char`\"{}, QColor(Qt\+::black)) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_s_v_g_a8008130787e4ea835a1d895d3f5b6040}\label{class_layers_1_1_s_v_g_a8008130787e4ea835a1d895d3f5b6040}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+common\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Common Hover Color\char`\"{}, QColor(Qt\+::dark\+Gray)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+common\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}common\+\_\+hover\+\_\+color\char`\"{}, QColor(Qt\+::dark\+Gray)) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_s_v_g_a736edb8ebff648b61663c7f94167b65b}\label{class_layers_1_1_s_v_g_a736edb8ebff648b61663c7f94167b65b}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+use\+\_\+common\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Use Common Color\char`\"{}, QVariant\+::from\+Value(false)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+use\+\_\+common\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}use\+\_\+common\+\_\+color\char`\"{}, QVariant\+::from\+Value(false)) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_s_v_g_a1f2fadbff013f567551aa49c1d174206}\label{class_layers_1_1_s_v_g_a1f2fadbff013f567551aa49c1d174206}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+use\+\_\+common\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Use Common Hover Color\char`\"{}, QVariant\+::from\+Value(false)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+use\+\_\+common\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}use\+\_\+common\+\_\+hover\+\_\+color\char`\"{}, QVariant\+::from\+Value(false)) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -81,11 +78,11 @@ Constructs an \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}} from an \mbox{\hype
 Copy constructs an \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}} from another \mbox{\hyperlink{class_layers_1_1_s_v_g}{SVG}}. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_s_v_g_aea40da5a3ef1be543498e13ab35bc15a}\label{class_layers_1_1_s_v_g_aea40da5a3ef1be543498e13ab35bc15a}} 
+\mbox{\Hypertarget{class_layers_1_1_s_v_g_a81876d9d44115c19151b33c7bd18f1df}\label{class_layers_1_1_s_v_g_a81876d9d44115c19151b33c7bd18f1df}} 
 \index{Layers::SVG@{Layers::SVG}!apply\_theme\_attributes@{apply\_theme\_attributes}}
 \index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::SVG@{Layers::SVG}}
 \doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void SVG\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void SVG\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -95,15 +92,11 @@ Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Them
 \index{Layers::SVG@{Layers::SVG}!init\_attributes@{init\_attributes}}
 \index{init\_attributes@{init\_attributes}!Layers::SVG@{Layers::SVG}}
 \doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void SVG\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void SVG\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 Initializes the attributes.
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}\label{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}} 
+This function is called by init\+\_\+themeable(). \mbox{\Hypertarget{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}\label{class_layers_1_1_s_v_g_a687768f7d9fdbe86d940a40709693f30}} 
 \index{Layers::SVG@{Layers::SVG}!rebuild\_svg\_str@{rebuild\_svg\_str}}
 \index{rebuild\_svg\_str@{rebuild\_svg\_str}!Layers::SVG@{Layers::SVG}}
 \doxysubsubsection{\texorpdfstring{rebuild\_svg\_str()}{rebuild\_svg\_str()}}

@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -85,7 +85,6 @@ $(document).ready(function(){initNavTree('class_layers_1_1_theme.html',''); init
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="class_layers_1_1_theme-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Layers::Theme Class Reference</div></div>
 </div><!--header-->
@@ -95,61 +94,59 @@ $(document).ready(function(){initNavTree('class_layers_1_1_theme.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a326c3d56a15f88f1d1300405c1ebdb3d"><td class="memItemLeft" align="right" valign="top"><a id="a326c3d56a15f88f1d1300405c1ebdb3d" name="a326c3d56a15f88f1d1300405c1ebdb3d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Theme</b> (const QString &amp;<a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">name</a>, bool <a class="el" href="class_layers_1_1_theme.html#af62594bf509f7095cee18b58d945eadd">is_custom</a>=true)</td></tr>
-<tr class="separator:a326c3d56a15f88f1d1300405c1ebdb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fa27ce0e8c6c05c37021503b879c508"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#a9fa27ce0e8c6c05c37021503b879c508">add_attributes</a> (const QString &amp;themeable_tag, QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; attributes)</td></tr>
-<tr class="separator:a9fa27ce0e8c6c05c37021503b879c508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a498b145502ab390e822c4bbe80ad0"><td class="memItemLeft" align="right" valign="top"><a id="a54a498b145502ab390e822c4bbe80ad0" name="a54a498b145502ab390e822c4bbe80ad0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Theme</b> (const QString &amp;<a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">name</a>, bool <a class="el" href="class_layers_1_1_theme.html#a08e1177704ac8f2812caf4842460a74f">editable</a>=true)</td></tr>
+<tr class="separator:a54a498b145502ab390e822c4bbe80ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a53ebb86f3db1122df8b0bff68cbe87"><td class="memItemLeft" align="right" valign="top"><a id="a3a53ebb86f3db1122df8b0bff68cbe87" name="a3a53ebb86f3db1122df8b0bff68cbe87"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Theme</b> (const QJsonDocument &amp;json_document, QUuid *uuid=nullptr)</td></tr>
+<tr class="separator:a3a53ebb86f3db1122df8b0bff68cbe87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5be99a9b54e7d9c03f0f19affd22b6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#aa5be99a9b54e7d9c03f0f19affd22b6b">clear</a> ()</td></tr>
+<tr class="separator:aa5be99a9b54e7d9c03f0f19affd22b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a906dc964053fee6862caf7a8322a7263"><td class="memItemLeft" align="right" valign="top"><a id="a906dc964053fee6862caf7a8322a7263" name="a906dc964053fee6862caf7a8322a7263"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>consume</b> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;&amp;theme)</td></tr>
+<tr class="separator:a906dc964053fee6862caf7a8322a7263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8a1de957d507456ab57c4831b708b2d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#ad8a1de957d507456ab57c4831b708b2d">contains_attributes_for_tag</a> (const QString &amp;themeable_tag)</td></tr>
 <tr class="separator:ad8a1de957d507456ab57c4831b708b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c69b9685b8692e6f81187858ab45d53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#a8c69b9685b8692e6f81187858ab45d53">copy_from</a> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;theme)</td></tr>
-<tr class="separator:a8c69b9685b8692e6f81187858ab45d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af62594bf509f7095cee18b58d945eadd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#af62594bf509f7095cee18b58d945eadd">is_custom</a> ()</td></tr>
-<tr class="separator:af62594bf509f7095cee18b58d945eadd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfc8d73bd896904fc54b595ffaff9944"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#adfc8d73bd896904fc54b595ffaff9944">copy</a> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;theme)</td></tr>
+<tr class="separator:adfc8d73bd896904fc54b595ffaff9944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e265ca3c2338557840b977d2946cfa"><td class="memItemLeft" align="right" valign="top"><a id="a06e265ca3c2338557840b977d2946cfa" name="a06e265ca3c2338557840b977d2946cfa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copy_attribute_values_of</b> (<a class="el" href="class_layers_1_1_themeable.html">Themeable</a> *themeable)</td></tr>
+<tr class="separator:a06e265ca3c2338557840b977d2946cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e1177704ac8f2812caf4842460a74f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#a08e1177704ac8f2812caf4842460a74f">editable</a> ()</td></tr>
+<tr class="separator:a08e1177704ac8f2812caf4842460a74f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58be0cbad5f2045e2e8e4df133be0dee"><td class="memItemLeft" align="right" valign="top"><a id="a58be0cbad5f2045e2e8e4df133be0dee" name="a58be0cbad5f2045e2e8e4df133be0dee"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>identifier</b> ()</td></tr>
+<tr class="separator:a58be0cbad5f2045e2e8e4df133be0dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae8d538d1ed2cab15c6632edf81aa95"><td class="memItemLeft" align="right" valign="top"><a id="aeae8d538d1ed2cab15c6632edf81aa95" name="aeae8d538d1ed2cab15c6632edf81aa95"></a>
+<a class="el" href="class_layers_1_1_attribute.html">Attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>init_attribute</b> (const QString &amp;<a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">name</a>, bool disabled, const QJsonValue &amp;attr_value)</td></tr>
+<tr class="separator:aeae8d538d1ed2cab15c6632edf81aa95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a514aef4479c615a71aefc5d64c1f53dc"><td class="memItemLeft" align="right" valign="top">QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">name</a> ()</td></tr>
 <tr class="separator:a514aef4479c615a71aefc5d64c1f53dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1068abe2505c991e7d0e7ca8310d7860"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#a1068abe2505c991e7d0e7ca8310d7860">set_name</a> (const QString &amp;new_name)</td></tr>
 <tr class="separator:a1068abe2505c991e7d0e7ca8310d7860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad210ebf66a5fd7f4e4356899108969b3"><td class="memItemLeft" align="right" valign="top">QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#ad210ebf66a5fd7f4e4356899108969b3">themeable_tags</a> ()</td></tr>
 <tr class="separator:ad210ebf66a5fd7f4e4356899108969b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af343dbd6d1b5b95b5479ea759ed84493"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#af343dbd6d1b5b95b5479ea759ed84493">operator[]</a> (const QString &amp;themeable_tag)</td></tr>
-<tr class="separator:af343dbd6d1b5b95b5479ea759ed84493"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:aad42f66279e61c65c2481845365b2029"><td class="memItemLeft" align="right" valign="top"><a id="aad42f66279e61c65c2481845365b2029" name="aad42f66279e61c65c2481845365b2029"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (QDataStream &amp;stream, const <a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;t)</td></tr>
-<tr class="separator:aad42f66279e61c65c2481845365b2029"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9a29631d7036b766771cc255a8f77a1"><td class="memItemLeft" align="right" valign="top"><a id="ab9a29631d7036b766771cc255a8f77a1" name="ab9a29631d7036b766771cc255a8f77a1"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;&gt;</b> (QDataStream &amp;stream, <a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;t)</td></tr>
-<tr class="separator:ab9a29631d7036b766771cc255a8f77a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735e58b1952572b12d705775399f6d83"><td class="memItemLeft" align="right" valign="top"><a id="a735e58b1952572b12d705775399f6d83" name="a735e58b1952572b12d705775399f6d83"></a>
+QJsonDocument&#160;</td><td class="memItemRight" valign="bottom"><b>to_json_document</b> (ThemeDataType data_type=ThemeDataType::All)</td></tr>
+<tr class="separator:a735e58b1952572b12d705775399f6d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb5f7396ffb18db4e720818a9270f0f"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_theme.html#aafb5f7396ffb18db4e720818a9270f0f">operator[]</a> (const QString &amp;themeable_tag)</td></tr>
+<tr class="separator:aafb5f7396ffb18db4e720818a9270f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Provides structure for Layers themes.</p>
 <p >Layers themes store sets of attributes associated with their themeable tags. When a theme is applied, themeables retrieve their attribute sets from the theme by passing along their tags. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9fa27ce0e8c6c05c37021503b879c508" name="a9fa27ce0e8c6c05c37021503b879c508"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fa27ce0e8c6c05c37021503b879c508">&#9670;&nbsp;</a></span>add_attributes()</h2>
+<a id="aa5be99a9b54e7d9c03f0f19affd22b6b" name="aa5be99a9b54e7d9c03f0f19affd22b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5be99a9b54e7d9c03f0f19affd22b6b">&#9670;&nbsp;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Theme::add_attributes </td>
+          <td class="memname">void Theme::clear </td>
           <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>themeable_tag</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt;&#160;</td>
-          <td class="paramname"><em>attributes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -191,14 +188,14 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 
 </div>
 </div>
-<a id="a8c69b9685b8692e6f81187858ab45d53" name="a8c69b9685b8692e6f81187858ab45d53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c69b9685b8692e6f81187858ab45d53">&#9670;&nbsp;</a></span>copy_from()</h2>
+<a id="adfc8d73bd896904fc54b595ffaff9944" name="adfc8d73bd896904fc54b595ffaff9944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc8d73bd896904fc54b595ffaff9944">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Theme::copy_from </td>
+          <td class="memname">void Theme::copy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;&#160;</td>
           <td class="paramname"><em>theme</em></td><td>)</td>
@@ -216,14 +213,14 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 
 </div>
 </div>
-<a id="af62594bf509f7095cee18b58d945eadd" name="af62594bf509f7095cee18b58d945eadd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af62594bf509f7095cee18b58d945eadd">&#9670;&nbsp;</a></span>is_custom()</h2>
+<a id="a08e1177704ac8f2812caf4842460a74f" name="a08e1177704ac8f2812caf4842460a74f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e1177704ac8f2812caf4842460a74f">&#9670;&nbsp;</a></span>editable()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Theme::is_custom </td>
+          <td class="memname">bool Theme::editable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -231,7 +228,7 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
       </table>
 </div><div class="memdoc">
 <p >Returns true if the theme is a custom, user-created theme</p>
-<p >@retuns true if theme is custom, false otherwise </p>
+<dl class="section return"><dt>Returns</dt><dd>true if theme is custom, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -250,18 +247,18 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
       </table>
 </div><div class="memdoc">
 <p >Returns a reference to the theme's name</p>
-<p >@retuns Reference to theme's name </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to theme's name </dd></dl>
 
 </div>
 </div>
-<a id="af343dbd6d1b5b95b5479ea759ed84493" name="af343dbd6d1b5b95b5479ea759ed84493"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af343dbd6d1b5b95b5479ea759ed84493">&#9670;&nbsp;</a></span>operator[]()</h2>
+<a id="aafb5f7396ffb18db4e720818a9270f0f" name="aafb5f7396ffb18db4e720818a9270f0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb5f7396ffb18db4e720818a9270f0f">&#9670;&nbsp;</a></span>operator[]()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; &amp; Theme::operator[] </td>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp; Theme::operator[] </td>
           <td>(</td>
           <td class="paramtype">const QString &amp;&#160;</td>
           <td class="paramname"><em>themeable_tag</em></td><td>)</td>

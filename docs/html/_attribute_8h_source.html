@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -89,217 +89,110 @@ $(document).ready(function(){initNavTree('_attribute_8h_source.html',''); initRe
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ATTRIBUTE_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ATTRIBUTE_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;QColor&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;QVariant&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;AttributeType.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Data.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>Layers</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_layers_1_1_variant.html">   22</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        Q_OBJECT</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    signals:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordtype">void</span> changed();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>(<span class="keywordtype">int</span> integer);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>(QColor color);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>(QVariant qvariant);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>&amp; variant);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>&amp; variant);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> QVariant&amp; qvariant);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> QVariant&amp; qvariant);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_layers_1_1_variant.html#a7f84dc931d79751e27fc181fa843971d">typeName</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        T <a class="code hl_function" href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">value</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keyword">friend</span> QDataStream&amp; operator &lt;&lt;(QDataStream&amp; stream, <span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>&amp; v)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            stream &lt;&lt; v.m_qvariant;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">return</span> stream;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">friend</span> QDataStream&amp; operator &gt;&gt;(QDataStream&amp; stream, <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>&amp; v)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            stream &gt;&gt; v.m_qvariant;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html">   16</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_layers_1_1_attribute_type.html">AttributeType</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        Q_OBJECT</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    signals:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">void</span> ownership_changed();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, QVariant qvariant, <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, QMap&lt;QString, Variant&gt; state_variant_map, <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; a);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">~Attribute</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#ad67b372e97392b344f03b3d39a73897a">clear_data_if_owner</a>();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">contains_state</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">return</span> stream;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        QVariant m_qvariant;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    };</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a8df3262a2acb70a2d8ff733cf42f7516">copy</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; attr);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="struct_layers_1_1_attribute_layout_item.html">   73</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a> : <span class="keyword">public</span> QObject {};</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html">   87</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a> : <span class="keyword">public</span> <a class="code hl_struct" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        Q_OBJECT</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    signals:</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> value_changed();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a4c75470b727527f86a78038fa2c165f5">establish_data_connection</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a71009df30061fc4a7a68bd22be06d3d1">get_data_from</a>(<a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; attribute);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; name, <span class="keywordtype">bool</span> disabled = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; name, QVariant qvariant, <span class="keywordtype">bool</span> disabled = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>(<span class="keyword">const</span> QString&amp; name, QMap&lt;QString, Variant&gt; state_variant_map, <span class="keywordtype">bool</span> disabled = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as</a>(<span class="keyword">const</span> QString&amp; state) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">contains_state</a>(<span class="keyword">const</span> QString&amp; state) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a947f71192325132113cf354c4dafe71d">copy_value_from</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; attr);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#ab362514cf7c06fcb4b3c9b360d11d0bd">init_state_variant_map</a>(<span class="keyword">const</span> QMap&lt;QString, Variant&gt;&amp; state_variant_map);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a45c9a0eda0fcc1c2056389ba8e2cb4e9">is_stateful</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a43c93ed2a011b4007148c2c91f641a01">owns_data</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a4e5d144820ee5791880044152f2281c0">set_state</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a4df6d32c26b33b03bd39b39e5a535880">set_value</a>(QVariant qvariant, <span class="keywordtype">bool</span> retain_type = <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordtype">bool</span> disabled() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        QString&amp; name();</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordtype">void</span> get_variant_from(<a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; attribute);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordtype">bool</span> is_stateful() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="class_layers_1_1_attribute.html#a4df6d32c26b33b03bd39b39e5a535880">set_value</a>(<span class="keyword">const</span> QString&amp; <a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>, QVariant qvariant);</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordtype">void</span> set_disabled(<span class="keywordtype">bool</span> disabled = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keywordtype">void</span> set_state(<span class="keyword">const</span> QString&amp; state);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordtype">void</span> set_state_variant_map(<span class="keyword">const</span> QMap&lt;QString, Variant&gt;&amp; state_variant_map);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordtype">void</span> set_value(QVariant variant);</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordtype">void</span> set_value(<span class="keyword">const</span> QString&amp; state, QVariant variant);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        QString state() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        QList&lt;QString&gt; states() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* typeName() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        QString <a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        QList&lt;QString&gt; <a class="code hl_function" href="class_layers_1_1_attribute.html#afa8c1c028fce08ddc42adc39ae30a76f">states</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <span class="keyword">friend</span> QDataStream&amp; operator &lt;&lt;(QDataStream&amp; stream, <span class="keyword">const</span> <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; a)</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        {</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            stream &lt;&lt; a.m_disabled;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            stream &lt;&lt; a.m_name;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            stream &lt;&lt; a.m_state;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            <span class="keywordflow">if</span> (a.m_variant)</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                stream &lt;&lt; <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                stream &lt;&lt; *a.m_variant;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (a.m_state_variant_map)</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            {</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                stream &lt;&lt; <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                stream &lt;&lt; *a.m_state_variant_map;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            }</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">return</span> stream;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        }</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keyword">friend</span> QDataStream&amp; operator &gt;&gt;(QDataStream&amp; stream, <a class="code hl_class" href="class_layers_1_1_attribute.html">Attribute</a>&amp; a)</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        {</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            stream &gt;&gt; a.m_disabled;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            stream &gt;&gt; a.m_name;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            stream &gt;&gt; a.m_state;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        QJsonObject <a class="code hl_function" href="class_layers_1_1_attribute.html#acb6e545317b9ab91295ac009e8392178">to_json_object</a>();</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_layers_1_1_attribute.html#aa90347c70e6f577ff9c8e8caaa40b42e">typeName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <a class="code hl_class" href="class_layers_1_1_data.html">Data</a>* m_data{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        QMetaObject::Connection m_data_connection;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordtype">bool</span> m_owns_data{ <span class="keyword">true</span> };</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        QString m_state{ <span class="stringliteral">&quot;&quot;</span> };</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    };</div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordtype">bool</span> is_stateful = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            stream &gt;&gt; is_stateful;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">if</span> (!is_stateful)</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                a.m_variant = <span class="keyword">new</span> <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                stream &gt;&gt; *a.m_variant;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                a.m_state_variant_map = <span class="keyword">new</span> QMap&lt;QString, Variant&gt;;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                stream &gt;&gt; *a.m_state_variant_map;</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            }</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            <span class="keywordflow">return</span> stream;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        }</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordtype">bool</span> m_disabled{ <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keywordtype">bool</span> m_owns_variant{ <span class="keyword">true</span> };</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        QString m_name{ <span class="stringliteral">&quot;&quot;</span> };</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        QString m_state{ <span class="stringliteral">&quot;&quot;</span> };</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        QMap&lt;QString, Variant&gt;* m_state_variant_map{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        <a class="code hl_class" href="class_layers_1_1_variant.html">Variant</a>* m_variant{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    };</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute_group.html">  224</a></span>    <span class="keyword">class </span><a class="code hl_class" href="class_layers_1_1_attribute_group.html">AttributeGroup</a> : <span class="keyword">public</span> <a class="code hl_struct" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a></div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    {</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <a class="code hl_class" href="class_layers_1_1_attribute_group.html">AttributeGroup</a>(<span class="keyword">const</span> QString&amp; name, <span class="keyword">const</span> QMap&lt;QString, Attribute*&gt;&amp; attributes);</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        QMap&lt;QString, Attribute*&gt;&amp; attributes();</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordtype">bool</span> is_stateful() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        QString name() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        QMap&lt;QString, Attribute*&gt; m_attributes;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        QString m_name;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    };</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">  242</a></span>    <span class="keyword">inline</span> T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Attribute::as</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <span class="keywordflow">if</span> (m_variant) <span class="keywordflow">return</span> m_variant-&gt;<a class="code hl_function" href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">value</a>&lt;T&gt;();</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        {</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="keywordflow">return</span> (*m_state_variant_map)[m_state].value&lt;T&gt;();</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        }</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html#a46c4e10d87ca1bf562621f8a409af9b4">  252</a></span>    <span class="keyword">inline</span> T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Attribute::as</a>(<span class="keyword">const</span> QString&amp; state)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordflow">if</span> (m_state_variant_map)</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        {</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">if</span> (m_state_variant_map-&gt;contains(state)) <span class="keywordflow">return</span> (*m_state_variant_map)[state].value&lt;T&gt;();</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                qDebug() &lt;&lt; <span class="stringliteral">&quot;WARNING: Failed to obtain attribute value: State does not exist.&quot;</span>;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        }</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            qDebug() &lt;&lt; <span class="stringliteral">&quot;WARNING: Failed to obtain attribute value: State provided but Attribute is not stateful.&quot;</span>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">  265</a></span>    <span class="keyword">inline</span> T <a class="code hl_function" href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">Variant::value</a>()<span class="keyword"> const</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        <span class="keywordflow">return</span> m_qvariant.value&lt;T&gt;();</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    }</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>}</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="preprocessor">#endif </span><span class="comment">// ATTRIBUTE_H</span></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_group_html"><div class="ttname"><a href="class_layers_1_1_attribute_group.html">Layers::AttributeGroup</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:225</div></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:88</div></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html_a947f71192325132113cf354c4dafe71d"><div class="ttname"><a href="class_layers_1_1_attribute.html#a947f71192325132113cf354c4dafe71d">Layers::Attribute::copy_value_from</a></div><div class="ttdeci">void copy_value_from(const Attribute &amp;attr)</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:26</div></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html_ad4c9c0ed45441034bc213301d7b4dc09"><div class="ttname"><a href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">Layers::Attribute::contains_state</a></div><div class="ttdeci">bool contains_state(const QString &amp;state) const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:21</div></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html_addb52431a3b44a3bbcf5c50ca97da877"><div class="ttname"><a href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Layers::Attribute::as</a></div><div class="ttdeci">T as() const</div><div class="ttdef"><b>Definition:</b> Attribute.h:242</div></div>
-<div class="ttc" id="aclass_layers_1_1_variant_html"><div class="ttname"><a href="class_layers_1_1_variant.html">Layers::Variant</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:23</div></div>
-<div class="ttc" id="aclass_layers_1_1_variant_html_a11c7e10660e96844369b90e47dfb8a2e"><div class="ttname"><a href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">Layers::Variant::value</a></div><div class="ttdeci">T value() const</div><div class="ttdef"><b>Definition:</b> Attribute.h:265</div></div>
-<div class="ttc" id="aclass_layers_1_1_variant_html_a7f84dc931d79751e27fc181fa843971d"><div class="ttname"><a href="class_layers_1_1_variant.html#a7f84dc931d79751e27fc181fa843971d">Layers::Variant::typeName</a></div><div class="ttdeci">const char * typeName() const</div><div class="ttdef"><b>Definition:</b> Variant.cpp:38</div></div>
-<div class="ttc" id="astruct_layers_1_1_attribute_layout_item_html"><div class="ttname"><a href="struct_layers_1_1_attribute_layout_item.html">Layers::AttributeLayoutItem</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:73</div></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">  191</a></span>    <span class="keyword">inline</span> T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Attribute::as</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">if</span> (m_data-&gt;<a class="code hl_function" href="class_layers_1_1_data.html#a8e4dccaaa27526db929256dee8768f68">is_stateful</a>())</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">return</span> m_data-&gt;<a class="code hl_function" href="class_layers_1_1_data.html#a95db8542e2df42f59bb3db20252d5201">as</a>&lt;T&gt;(m_state);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">return</span> m_data-&gt;<a class="code hl_function" href="class_layers_1_1_data.html#a95db8542e2df42f59bb3db20252d5201">as</a>&lt;T&gt;();</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="class_layers_1_1_attribute.html#a46c4e10d87ca1bf562621f8a409af9b4">  200</a></span>    <span class="keyword">inline</span> T <a class="code hl_function" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Attribute::as</a>(<span class="keyword">const</span> QString&amp; state)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">return</span> m_data-&gt;<a class="code hl_function" href="class_layers_1_1_data.html#a95db8542e2df42f59bb3db20252d5201">as</a>&lt;T&gt;(<a class="code hl_function" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    }</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>}</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="preprocessor">#endif </span><span class="comment">// ATTRIBUTE_H</span></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:17</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a43c93ed2a011b4007148c2c91f641a01"><div class="ttname"><a href="class_layers_1_1_attribute.html#a43c93ed2a011b4007148c2c91f641a01">Layers::Attribute::owns_data</a></div><div class="ttdeci">bool owns_data() const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:97</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a45c9a0eda0fcc1c2056389ba8e2cb4e9"><div class="ttname"><a href="class_layers_1_1_attribute.html#a45c9a0eda0fcc1c2056389ba8e2cb4e9">Layers::Attribute::is_stateful</a></div><div class="ttdeci">virtual bool is_stateful() const override</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:92</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a4c75470b727527f86a78038fa2c165f5"><div class="ttname"><a href="class_layers_1_1_attribute.html#a4c75470b727527f86a78038fa2c165f5">Layers::Attribute::establish_data_connection</a></div><div class="ttdeci">void establish_data_connection()</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:57</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a4df6d32c26b33b03bd39b39e5a535880"><div class="ttname"><a href="class_layers_1_1_attribute.html#a4df6d32c26b33b03bd39b39e5a535880">Layers::Attribute::set_value</a></div><div class="ttdeci">void set_value(QVariant qvariant, bool retain_type=true)</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:107</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a4e5d144820ee5791880044152f2281c0"><div class="ttname"><a href="class_layers_1_1_attribute.html#a4e5d144820ee5791880044152f2281c0">Layers::Attribute::set_state</a></div><div class="ttdeci">virtual void set_state(const QString &amp;state) override</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:102</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a69d6089128f307d526e5c3395a7518c8"><div class="ttname"><a href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">Layers::Attribute::state</a></div><div class="ttdeci">QString state() const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:117</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a71009df30061fc4a7a68bd22be06d3d1"><div class="ttname"><a href="class_layers_1_1_attribute.html#a71009df30061fc4a7a68bd22be06d3d1">Layers::Attribute::get_data_from</a></div><div class="ttdeci">void get_data_from(Attribute &amp;attribute)</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:65</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_a8df3262a2acb70a2d8ff733cf42f7516"><div class="ttname"><a href="class_layers_1_1_attribute.html#a8df3262a2acb70a2d8ff733cf42f7516">Layers::Attribute::copy</a></div><div class="ttdeci">void copy(const Attribute &amp;attr)</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:48</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_aa90347c70e6f577ff9c8e8caaa40b42e"><div class="ttname"><a href="class_layers_1_1_attribute.html#aa90347c70e6f577ff9c8e8caaa40b42e">Layers::Attribute::typeName</a></div><div class="ttdeci">const char * typeName() const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:127</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_ab362514cf7c06fcb4b3c9b360d11d0bd"><div class="ttname"><a href="class_layers_1_1_attribute.html#ab362514cf7c06fcb4b3c9b360d11d0bd">Layers::Attribute::init_state_variant_map</a></div><div class="ttdeci">void init_state_variant_map(const QMap&lt; QString, Variant &gt; &amp;state_variant_map)</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:87</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_acb6e545317b9ab91295ac009e8392178"><div class="ttname"><a href="class_layers_1_1_attribute.html#acb6e545317b9ab91295ac009e8392178">Layers::Attribute::to_json_object</a></div><div class="ttdeci">QJsonObject to_json_object()</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:132</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_ad4c9c0ed45441034bc213301d7b4dc09"><div class="ttname"><a href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">Layers::Attribute::contains_state</a></div><div class="ttdeci">bool contains_state(const QString &amp;state) const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:43</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_ad67b372e97392b344f03b3d39a73897a"><div class="ttname"><a href="class_layers_1_1_attribute.html#ad67b372e97392b344f03b3d39a73897a">Layers::Attribute::clear_data_if_owner</a></div><div class="ttdeci">void clear_data_if_owner()</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:33</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_addb52431a3b44a3bbcf5c50ca97da877"><div class="ttname"><a href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Layers::Attribute::as</a></div><div class="ttdeci">T as() const</div><div class="ttdef"><b>Definition:</b> Attribute.h:191</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html_afa8c1c028fce08ddc42adc39ae30a76f"><div class="ttname"><a href="class_layers_1_1_attribute.html#afa8c1c028fce08ddc42adc39ae30a76f">Layers::Attribute::states</a></div><div class="ttdeci">QList&lt; QString &gt; states() const</div><div class="ttdef"><b>Definition:</b> Attribute.cpp:122</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_type_html"><div class="ttname"><a href="class_layers_1_1_attribute_type.html">Layers::AttributeType</a></div><div class="ttdef"><b>Definition:</b> AttributeType.h:13</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_type_html_aa42b1dd86ed46b66aaa669672d577e49"><div class="ttname"><a href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">Layers::AttributeType::disabled</a></div><div class="ttdeci">bool disabled() const</div><div class="ttdef"><b>Definition:</b> AttributeType.cpp:19</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_type_html_aca369bb6f7315498d4bf25b9b5966bdb"><div class="ttname"><a href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">Layers::AttributeType::name</a></div><div class="ttdeci">QString name()</div><div class="ttdef"><b>Definition:</b> AttributeType.cpp:24</div></div>
+<div class="ttc" id="aclass_layers_1_1_data_html"><div class="ttname"><a href="class_layers_1_1_data.html">Layers::Data</a></div><div class="ttdef"><b>Definition:</b> Data.h:26</div></div>
+<div class="ttc" id="aclass_layers_1_1_data_html_a8e4dccaaa27526db929256dee8768f68"><div class="ttname"><a href="class_layers_1_1_data.html#a8e4dccaaa27526db929256dee8768f68">Layers::Data::is_stateful</a></div><div class="ttdeci">bool is_stateful() const</div><div class="ttdef"><b>Definition:</b> Data.cpp:98</div></div>
+<div class="ttc" id="aclass_layers_1_1_data_html_a95db8542e2df42f59bb3db20252d5201"><div class="ttname"><a href="class_layers_1_1_data.html#a95db8542e2df42f59bb3db20252d5201">Layers::Data::as</a></div><div class="ttdeci">T as() const</div><div class="ttdef"><b>Definition:</b> Data.h:144</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

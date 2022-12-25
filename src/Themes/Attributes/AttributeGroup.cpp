@@ -1,4 +1,4 @@
-#include "../../../include/Attribute.h"
+#include "../../../include/AttributeGroup.h"
 
 using Layers::Attribute;
 using Layers::AttributeGroup;
@@ -25,18 +25,18 @@ QMap<QString, Attribute*>& AttributeGroup::attributes()
 	return m_attributes;
 }
 
-void AttributeGroup::copy_from(const AttributeGroup& ag)
+void AttributeGroup::copy(const AttributeGroup& ag)
 {
 	for (const QString& attr_key : m_attributes.keys())
-		m_attributes[attr_key]->copy_value_from(*ag.m_attributes[attr_key]);
+		m_attributes[attr_key]->copy(*ag.m_attributes[attr_key]);
 
 	m_disabled = ag.m_disabled;
 }
 
-void AttributeGroup::get_variant_from(AttributeGroup& attr_group)
+void AttributeGroup::get_data_from(AttributeGroup& attr_group)
 {
 	for (const QString& attr_key : m_attributes.keys())
-		m_attributes[attr_key]->get_variant_from(*attr_group.m_attributes[attr_key]);
+		m_attributes[attr_key]->get_data_from(*attr_group.m_attributes[attr_key]);
 }
 
 bool AttributeGroup::is_stateful() const
@@ -46,11 +46,6 @@ bool AttributeGroup::is_stateful() const
 			return true;
 
 	return false;
-}
-
-QString AttributeGroup::name() const
-{
-	return m_name;
 }
 
 void AttributeGroup::set_state(const QString& state)

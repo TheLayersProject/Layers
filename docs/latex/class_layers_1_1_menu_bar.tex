@@ -15,8 +15,7 @@ Inheritance diagram for Layers\+::Menu\+Bar\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_menu_bar_a479a59ff28e92c58bfc4a25bb11f650b}\label{class_layers_1_1_menu_bar_a479a59ff28e92c58bfc4a25bb11f650b}} 
 QMenu $\ast$ {\bfseries add\+Menu} (const QString \&title)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_menu_bar_ad5bea426079df8ef5adba2ab1d1b1b5c}\label{class_layers_1_1_menu_bar_ad5bea426079df8ef5adba2ab1d1b1b5c}} 
-void {\bfseries issue\+\_\+update} ()
+virtual void \mbox{\hyperlink{class_layers_1_1_menu_bar_a366f313fc307c7887e238910d502cef7}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
 \item 
 \mbox{\Hypertarget{class_layers_1_1_menu_bar_a6f4ccdab4487b6a63b6f66edb7fca852}\label{class_layers_1_1_menu_bar_a6f4ccdab4487b6a63b6f66edb7fca852}} 
 void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
@@ -24,11 +23,11 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_menu_bar_adac46e5bca7186baaa4316529bd638d3}\label{class_layers_1_1_menu_bar_adac46e5bca7186baaa4316529bd638d3}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ {\bfseries a\+\_\+text\+\_\+color} \{ new \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Text Color\char`\"{}, QColor(Qt\+::gray)) \}
+\mbox{\Hypertarget{class_layers_1_1_menu_bar_aa10650a5507de7d38eade6dd502ddaa5}\label{class_layers_1_1_menu_bar_aa10650a5507de7d38eade6dd502ddaa5}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}text\+\_\+color\char`\"{}, QColor(Qt\+::gray)) \}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_menu_bar_a04a8543266e1f44e67af508b31b05ffe}\label{class_layers_1_1_menu_bar_a04a8543266e1f44e67af508b31b05ffe}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ {\bfseries a\+\_\+selected\+\_\+text\+\_\+color} \{ new \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Selected Text Color\char`\"{}, QColor(Qt\+::gray)) \}
+\mbox{\Hypertarget{class_layers_1_1_menu_bar_ae3817f7bfdd4789fc4d8ce41cde41f03}\label{class_layers_1_1_menu_bar_ae3817f7bfdd4789fc4d8ce41cde41f03}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+selected\+\_\+text\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}selected\+\_\+text\+\_\+color\char`\"{}, QColor(Qt\+::light\+Gray)) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -36,29 +35,22 @@ void {\bfseries update\+\_\+theme\+\_\+dependencies} ()
 \mbox{\Hypertarget{class_layers_1_1_menu_bar_a4f70aa2b85b0f187e2013869e63ffa9d}\label{class_layers_1_1_menu_bar_a4f70aa2b85b0f187e2013869e63ffa9d}} 
 QString {\bfseries build\+\_\+stylesheet} ()
 \item 
-void \mbox{\hyperlink{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}\label{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}} 
+void {\bfseries init\+\_\+attributes} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}\label{class_layers_1_1_menu_bar_a476cef97d90702bec76d7bb3569b290b}} 
-\index{Layers::MenuBar@{Layers::MenuBar}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::MenuBar@{Layers::MenuBar}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Menu\+Bar\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_menu_bar_a366f313fc307c7887e238910d502cef7}\label{class_layers_1_1_menu_bar_a366f313fc307c7887e238910d502cef7}} 
+\index{Layers::MenuBar@{Layers::MenuBar}!apply\_theme\_attributes@{apply\_theme\_attributes}}
+\index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::MenuBar@{Layers::MenuBar}}
+\doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
+{\footnotesize\ttfamily void Menu\+Bar\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
-Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
-This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
 
-Initializes the attributes.
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
-
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
 
 
 

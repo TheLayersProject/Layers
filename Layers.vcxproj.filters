@@ -210,11 +210,14 @@
     <ClCompile Include="src\Themes\Attributes\Variant.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
-    <ClCompile Include="AttributeType.cpp">
-      <Filter>Source Files\Themes\Attributes</Filter>
-    </ClCompile>
     <ClCompile Include="include\ScrollBar.cpp">
       <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\Attributes\AttributeType.cpp">
+      <Filter>Source Files\Themes\Attributes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\Attributes\Data.cpp">
+      <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +332,18 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ScrollBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Variant.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Data.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\AttributeType.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\AttributeGroup.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

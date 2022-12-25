@@ -1,16 +1,5 @@
 var hierarchy =
 [
-    [ "Layers::Attribute_2_0_0_a", "class_layers_1_1_attribute__2__0__0__a.html", null ],
-    [ "Layers::Attribute_2_1_0_a", "class_layers_1_1_attribute__2__1__0__a.html", [
-      [ "Layers::Stateful_Attribute_2_1_0_a", "class_layers_1_1_stateful___attribute__2__1__0__a.html", null ],
-      [ "Layers::Stateless_Attribute_2_1_0_a", "class_layers_1_1_stateless___attribute__2__1__0__a.html", null ]
-    ] ],
-    [ "Layers::Attribute_2_2_0_a", "class_layers_1_1_attribute__2__2__0__a.html", [
-      [ "Layers::Stateful_Attribute_2_2_0_a", "class_layers_1_1_stateful___attribute__2__2__0__a.html", null ],
-      [ "Layers::Stateless_Attribute_2_2_0_a", "class_layers_1_1_stateless___attribute__2__2__0__a.html", null ]
-    ] ],
-    [ "Layers::Attribute_Set_2_1_0_a", "class_layers_1_1_attribute___set__2__1__0__a.html", null ],
-    [ "Layers::Attribute_Set_2_2_0_a", "class_layers_1_1_attribute___set__2__2__0__a.html", null ],
     [ "Layers::AttributeSet", "class_layers_1_1_attribute_set.html", null ],
     [ "Layers::GitHubRepo", "class_layers_1_1_git_hub_repo.html", null ],
     [ "Layers::ImageSequence", "class_layers_1_1_image_sequence.html", null ],
@@ -33,12 +22,20 @@ var hierarchy =
       [ "Layers::MenuBar", "class_layers_1_1_menu_bar.html", null ]
     ] ],
     [ "QObject", null, [
-      [ "Layers::AttributeLayoutItem", "struct_layers_1_1_attribute_layout_item.html", [
+      [ "Layers::AttributeType", "class_layers_1_1_attribute_type.html", [
         [ "Layers::Attribute", "class_layers_1_1_attribute.html", null ],
-        [ "Layers::AttributeGroup", "class_layers_1_1_attribute_group.html", null ]
+        [ "Layers::AttributeGroup", "class_layers_1_1_attribute_group.html", [
+          [ "Layers::BorderAttributes", "class_layers_1_1_border_attributes.html", null ],
+          [ "Layers::CornerRadiiAttributes", "class_layers_1_1_corner_radii_attributes.html", null ],
+          [ "Layers::MarginsAttributes", "class_layers_1_1_margins_attributes.html", null ]
+        ] ]
       ] ],
+      [ "Layers::Data", "class_layers_1_1_data.html", null ],
       [ "Layers::Downloader", "class_layers_1_1_downloader.html", null ],
       [ "Layers::Variant", "class_layers_1_1_variant.html", null ]
+    ] ],
+    [ "QScrollBar", null, [
+      [ "Layers::ScrollBar", "class_layers_1_1_scroll_bar.html", null ]
     ] ],
     [ "QSvgWidget", null, [
       [ "Layers::SVG", "class_layers_1_1_s_v_g.html", null ]
@@ -88,19 +85,13 @@ var hierarchy =
       ] ]
     ] ],
     [ "Layers::Theme", "class_layers_1_1_theme.html", null ],
-    [ "Layers::Theme_2_0_0_a", "class_layers_1_1_theme__2__0__0__a.html", null ],
-    [ "Layers::Theme_2_1_0_a", "class_layers_1_1_theme__2__1__0__a.html", null ],
-    [ "Layers::Theme_2_2_0_a", "class_layers_1_1_theme__2__2__0__a.html", null ],
-    [ "Layers::Theme_And_Load_Status_Combo_2_0_0_a", "struct_layers_1_1_theme___and___load___status___combo__2__0__0__a.html", null ],
-    [ "Layers::Theme_And_Load_Status_Combo_2_1_0_a", "struct_layers_1_1_theme___and___load___status___combo__2__1__0__a.html", null ],
-    [ "Layers::Theme_And_Load_Status_Combo_2_2_0_a", "struct_layers_1_1_theme___and___load___status___combo__2__2__0__a.html", null ],
-    [ "Layers::Theme_And_Load_Status_Combo_2_3_0_a", "struct_layers_1_1_theme___and___load___status___combo__2__3__0__a.html", null ],
     [ "Layers::Themeable", "class_layers_1_1_themeable.html", [
       [ "Layers::CreateNewThemeDialog", "class_layers_1_1_create_new_theme_dialog.html", null ],
       [ "Layers::GradientSelectionDialog", "class_layers_1_1_gradient_selection_dialog.html", null ],
       [ "Layers::Label", "class_layers_1_1_label.html", null ],
       [ "Layers::MenuBar", "class_layers_1_1_menu_bar.html", null ],
       [ "Layers::SVG", "class_layers_1_1_s_v_g.html", null ],
+      [ "Layers::ScrollBar", "class_layers_1_1_scroll_bar.html", null ],
       [ "Layers::TabBar", "class_layers_1_1_tab_bar.html", null ],
       [ "Layers::UpdateDialog", "class_layers_1_1_update_dialog.html", null ],
       [ "Layers::Widget", "class_layers_1_1_widget.html", null ]

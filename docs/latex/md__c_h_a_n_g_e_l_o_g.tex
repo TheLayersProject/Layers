@@ -1,34 +1,32 @@
 All notable changes to this project will be documented in this file.\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md1}{}\doxysection{Alpha Phase}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md1}
-\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md2}{}\doxysubsection{\mbox{[}\+Layers 2.\+3.\+0a\mbox{]} -\/ Unreleased}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md2}
+\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md2}{}\doxysubsection{3.\+0.\+0a (\+November 29, 2022)}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md2}
 
 \begin{DoxyItemize}
+\item The Attribute class now inherits QObject to provide signal/slot functionality.
+\item Created a Variant class that wraps a QVariant and inherits QObject to provide signal/slot functionality. ○ Attributes store Variants which are made to be replaceable. An Attribute can replace its Variant with another Attribute\textquotesingle{}s Variant. If either Attribute makes a change to the Variant, both Attributes get updated. ○ When Variants update, it emits Variant\+::changed, and the Attributes linked to them emit the Attribute\+::value\+\_\+changed signal. This mechanism is referred to as attribute value change detection, and it replaces the Attribute\+Sharing\+Combo. The Attribute\+Sharing\+Combo class has been deprecated and removed.
+\item Previously, when setting an attribute\textquotesingle{}s value, the value would be set without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
+\item The Attribute\+Set class has been removed. ○ Slightly different data structures are now used for storing attributes between Themes and Themeables. ○ Widget attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced.
+\item Created Theme\+::consume(theme) function for applications to add their widget\textquotesingle{}s theme values to the library\textquotesingle{}s default themes
+\item Removed issue\+\_\+update() since widgets can connect update() to Attribute\+::value\+\_\+changed.
+\item Saving and loading now uses JSON formatting.
+\item Changed Variant-\/\texorpdfstring{$>$}{>}ints to Variant-\/\texorpdfstring{$>$}{>}doubles. This change was made due to JSON formatting not differentiating between int and double types
+\item The theme building functions have been removed. Changes to the prebuilt themes are made directly in their JSON files.
+\item Previously, all Customize\+Panels were initialized and acquired when the application was launched. This resulted in a large amount of memory being used which was unnecessary because the user only interacts with a single Customize\+Panel at a time. Now, Customize\+Panels are generated during runtime as the user navigates the widget hierarchy.
+\item Renamed various Attribute\+Widget classes
+\item Created the Attribute\+Group and Attribute\+Layout classes to simplify the creation of Attribute\+Widgets and specify their organization in Customize\+Panels
+\item Created a Fill\+Control class that simplifies setting color/gradient values and toggling between them.
+\item Created the State\+AW (State Attribute Widget) class which provides an improved interface for customizing stateful attributes.
+\item The Number\+AW (formerly known as Number\+Attribute\+Widget) now utilizes a mini slider and takes up less space.
+\item More widgets are customizable\+: ○ Widgets of the Customize menu\textquotesingle{}s topbar ○ Dialogs ○ Scroll\+Areas ○ Fixed App Preferences settings panel customizations
+\item More widget attributes are customizable\+: ○ Widget margins ○ Widgets can now be filled with gradients. ○ Fixed outline color and corner color customizations
 \item Collapsed text button widget is now a different color to prevent the text buttons from disappearing
-\item Fixed outline color and corner color customizations
-\item Fixed App Preferences settings panel customizations
-\item Fixed child widget stateful attributes being placed under the stateless label (!)
+\item Reworked application initialization ○ A Git\+Hub\+Repo class has been created to clarify that the string argument representing a Git\+Hub repo provided for app initialization is a Git\+Hub repo. ○ A Version class has been created to clarify that the string argument representing the app version provided for app initialization is a Version.
+\item Created new widget classes, Menu\+Bar and Tab\+Bar.
+\item Image sequences can now be saved and loaded as a single file
 \item Fixed some issues where the preview window had too much functionality enabled
 \item Combobox items are no longer editable by default
 \item Button text can word wrap now
-\item Widgets of the Customize menu\textquotesingle{}s topbar are now customizable
-\item Reworked application initialization
-\item New classes\+: Git\+Hub\+Repo, Menu\+Bar, Tab\+Bar, Version
-\item Image sequences can now be saved and loaded as a single file
-\item Reworked the Scroll\+Area class to make it themeable
-\item Created Theme\+::consume(theme) function for applications to add their widget\textquotesingle{}s theme values to the library\textquotesingle{}s default themes
-\item The Attribute class now inherits QObject, enabling it to work with signals/slots
-\item Attribute value change detection is now possible via the Attribute\+::value\+\_\+changed signal
-\item Attribute values are now stored as pointers. An attribute can be set to point to the values of another attribute.
-\item Between attribute value change detection and attribute value pointer replacement, there is no longer a need to support attribute sharing functionality via Attribute\+Sharing\+Combo. The Attribute\+Sharing\+Combo class has been deprecated and removed.
-\item Previously, when setting an attribute\textquotesingle{}s value, it would just set the value without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
-\item Created the Attribute\+Group and Attribute\+Layout classes to simplify the creation of Attribute\+Widgets and specify their organization in Customize\+Panels
-\item Renamed various Attribute\+Widget classes
-\item Created a Fill\+Control class that simplifies setting color/gradient values and toggling between them.
-\item The Number\+AW (formerly known as Number\+Attribute\+Widget) now utilizes a mini slider and takes up less space.
-\item Widget Attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced. The Attribute\+Set class has also been removed as a result.
-\item Removed issue\+\_\+update() since it doesn\textquotesingle{}t appear to be required anymore. This likely results in less paint\+Event() calls.
-\item Widgets can now be filled with gradients.
-\item Widget margins are now customizable.
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md3}{}\doxysubsection{\mbox{[}\+Layers 2.\+2.\+0a\mbox{]} -\/ 2021-\/09-\/11}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md3}
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md3}{}\doxysubsection{2.\+2.\+0a (\+September 11, 2021)}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md3}
 
 \begin{DoxyItemize}
 \item Migrated to Qt 6
@@ -37,7 +35,7 @@ All notable changes to this project will be documented in this file.\hypertarget
 \item The active theme selected by the user will now be applied automatically when the application is launched again.
 \item Prebuilt themes are now stored within the program and not in the app\textquotesingle{}s theme folder.
 \item Fixed an issue with the theme file updating functionality that caused themes from old versions to be missing attribute sets and attributes for widgets created in later versions
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md4}{}\doxysubsection{\mbox{[}\+Layers 2.\+1.\+0a\mbox{]} -\/ 2021-\/09-\/01}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md4}
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md4}{}\doxysubsection{2.\+1.\+0a (\+September 1, 2021)}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md4}
 
 \begin{DoxyItemize}
 \item \char`\"{}\+Default\char`\"{} and \char`\"{}\+Common\char`\"{} states are gone. Attributes are now created as stateful or stateless. This makes customization of themeables that use both types of attributes much clearer.
@@ -45,7 +43,7 @@ All notable changes to this project will be documented in this file.\hypertarget
 \item Layers applications will no longer store theme files in a universal \textquotesingle{}Layers\textquotesingle{}/\textquotesingle{}Layers-\/alpha\textquotesingle{} folder in the user\textquotesingle{}s app data directory. Instead, each individual application will store its own set of theme files in a folder named after the application.
 \item Created a mechanism to update theme files. Themes created in 2.\+0.\+0a will get updated and continue to work in this version.
 \item Created a mechanism to collapse text buttons in the Customize menu\textquotesingle{}s topbar
-\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md5}{}\doxysubsection{\mbox{[}\+Layers 2.\+0.\+0a\mbox{]} -\/ 2021-\/06-\/23}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md5}
+\end{DoxyItemize}\hypertarget{md__c_h_a_n_g_e_l_o_g_autotoc_md5}{}\doxysubsection{2.\+0.\+0a (\+June 23, 2021)}\label{md__c_h_a_n_g_e_l_o_g_autotoc_md5}
 
 \begin{DoxyItemize}
 \item Layers has been fully rewritten.

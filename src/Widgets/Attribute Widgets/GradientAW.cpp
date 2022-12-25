@@ -24,7 +24,7 @@ GradientAW::GradientAW(const QString& attribute_label_text, Attribute* attribute
 	m_right_stretch->a_fill.set_disabled();
 
 	// Setup Color Control
-	m_gradient_control->a_fill.get_variant_from(*attribute);
+	m_gradient_control->a_fill.get_data_from(*attribute);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;

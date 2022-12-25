@@ -9,99 +9,95 @@
 \DoxyCodeLine{5 }
 \DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
 \DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Combobox.h"{}}}
-\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}LineEditor.h"{}}}
-\DoxyCodeLine{9 }
-\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
-\DoxyCodeLine{11 \{}
-\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
-\DoxyCodeLine{13     \{}
-\DoxyCodeLine{14         Q\_OBJECT}
-\DoxyCodeLine{15 }
-\DoxyCodeLine{16     \textcolor{keyword}{public}:}
-\DoxyCodeLine{17         \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}}(QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{18 }
-\DoxyCodeLine{19         \textcolor{keywordtype}{void} add\_theme\_name\_to\_combobox(\textcolor{keyword}{const} QString\& theme\_name);}
-\DoxyCodeLine{20 }
-\DoxyCodeLine{21         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Attribute*>\& theme\_attrs) \textcolor{keyword}{override};}
-\DoxyCodeLine{22 }
-\DoxyCodeLine{23         \textcolor{keywordtype}{void} clear();}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25         QString copy\_theme\_name();}
-\DoxyCodeLine{26 }
-\DoxyCodeLine{27         \textcolor{keywordtype}{void} issue\_update();}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29         QString new\_theme\_name();}
-\DoxyCodeLine{30 }
-\DoxyCodeLine{31         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}}* dialog);}
-\DoxyCodeLine{32 }
-\DoxyCodeLine{33         \textcolor{keywordtype}{void} set\_current\_start\_theme\_name(\textcolor{keyword}{const} QString\& theme\_name);}
-\DoxyCodeLine{34 }
-\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Fill"{}}, QColor(Qt::gray)) \};}
-\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_border\_thickness\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Border Thickness"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Corner Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{39         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_tr\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_bl\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Left Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{41         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_radius\_br\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom-\/Right Corner Radius"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{42         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Fill"{}}, QColor(Qt::white)) \};}
-\DoxyCodeLine{43         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Hover Fill"{}}, QColor(Qt::lightGray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{44         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_left\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_right\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Right Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{47         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_margin\_bottom\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom Margin"{}}, QVariant::fromValue(0)) \};}
-\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Outline Color"{}}, QColor(Qt::gray), \textcolor{keyword}{true}) \};}
-\DoxyCodeLine{49 }
-\DoxyCodeLine{50     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{51         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_a099613e95bbf47c7acab360b8d6279c3}{init\_attributes}}();}
-\DoxyCodeLine{52         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
-\DoxyCodeLine{55 }
-\DoxyCodeLine{56         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58     \textcolor{keyword}{private}:}
-\DoxyCodeLine{59         \textcolor{keywordtype}{void} init\_titlebar();}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}LineEditor.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{15         Q\_OBJECT}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{keyword}{public}:}
+\DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog}{CreateNewThemeDialog}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} add\_theme\_name\_to\_combobox(\textcolor{keyword}{const} QString\& theme\_name);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} clear();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         QString copy\_theme\_name();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         QString new\_theme\_name();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} set\_current\_start\_theme\_name(\textcolor{keyword}{const} QString\& theme\_name);}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_border_attributes}{BorderAttributes}} border;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} corner\_radii;}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_margins_attributes}{MarginsAttributes}} margins;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{39             \textcolor{stringliteral}{"{}corner\_color"{}},}
+\DoxyCodeLine{40             QColor(Qt::gray),}
+\DoxyCodeLine{41             \textcolor{keyword}{true}}
+\DoxyCodeLine{42             ) \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{45             \textcolor{stringliteral}{"{}fill"{}},}
+\DoxyCodeLine{46             QColor(Qt::white)}
+\DoxyCodeLine{47             ) \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{50             \textcolor{stringliteral}{"{}hover\_fill"{}},}
+\DoxyCodeLine{51             QColor(Qt::lightGray),}
+\DoxyCodeLine{52             \textcolor{keyword}{true}}
+\DoxyCodeLine{53             ) \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
+\DoxyCodeLine{56             \textcolor{stringliteral}{"{}outline\_color"{}},}
+\DoxyCodeLine{57             QColor(Qt::gray),}
+\DoxyCodeLine{58             \textcolor{keyword}{true}}
+\DoxyCodeLine{59             ) \};}
 \DoxyCodeLine{60 }
-\DoxyCodeLine{61         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{62 }
-\DoxyCodeLine{63         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_border\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Border"{}}, \{}
-\DoxyCodeLine{64             \{ \textcolor{stringliteral}{"{}border\_fill"{}}, \&a\_border\_fill \},}
-\DoxyCodeLine{65             \{ \textcolor{stringliteral}{"{}border\_thickness"{}}, \&a\_border\_thickness \}}
-\DoxyCodeLine{66             \}) \};}
-\DoxyCodeLine{67 }
-\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_corner\_radii\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Corner Radii"{}}, \{}
-\DoxyCodeLine{69             \{ \textcolor{stringliteral}{"{}corner\_radius\_tl"{}}, \&a\_corner\_radius\_tl \},}
-\DoxyCodeLine{70             \{ \textcolor{stringliteral}{"{}corner\_radius\_tr"{}}, \&a\_corner\_radius\_tr \},}
-\DoxyCodeLine{71             \{ \textcolor{stringliteral}{"{}corner\_radius\_bl"{}}, \&a\_corner\_radius\_bl \},}
-\DoxyCodeLine{72             \{ \textcolor{stringliteral}{"{}corner\_radius\_br"{}}, \&a\_corner\_radius\_br \}}
-\DoxyCodeLine{73             \}) \};}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{75         \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}} ag\_margins\{ \mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}(\textcolor{stringliteral}{"{}Margins"{}}, \{}
-\DoxyCodeLine{76             \{ \textcolor{stringliteral}{"{}margin\_left"{}}, \&a\_margin\_left \},}
-\DoxyCodeLine{77             \{ \textcolor{stringliteral}{"{}margin\_top"{}}, \&a\_margin\_top \},}
-\DoxyCodeLine{78             \{ \textcolor{stringliteral}{"{}margin\_right"{}}, \&a\_margin\_right \},}
-\DoxyCodeLine{79             \{ \textcolor{stringliteral}{"{}margin\_bottom"{}}, \&a\_margin\_bottom \}}
-\DoxyCodeLine{80             \}) \};}
+\DoxyCodeLine{61     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{62         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{63         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_create_new_theme_dialog_ae72e91068da1cab6cfcc35a7fb743e27}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keyword}{private}:}
+\DoxyCodeLine{70         \textcolor{keywordtype}{void} init\_titlebar();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_window\_title\_label = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Create New Theme"{}});}
 \DoxyCodeLine{81 }
-\DoxyCodeLine{82         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{82         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_exit\_button = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/exit.svg"{}}, QSize(20, 20)), \textcolor{keyword}{true});}
 \DoxyCodeLine{83 }
-\DoxyCodeLine{84         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{84         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_create\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Create"{}}) \};}
 \DoxyCodeLine{85 }
-\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{86         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}* m\_start\_theme\_combobox\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}} \};}
 \DoxyCodeLine{87 }
-\DoxyCodeLine{88         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_create\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Create"{}}) \};}
-\DoxyCodeLine{89 }
-\DoxyCodeLine{90         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}* m\_start\_theme\_combobox\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}} \};}
-\DoxyCodeLine{91 }
-\DoxyCodeLine{92         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_name\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Name"{}}) \};}
-\DoxyCodeLine{93         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_start\_as\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Start as copy of"{}}) \};}
-\DoxyCodeLine{94 }
-\DoxyCodeLine{95         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_theme\_name\_line\_edit\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{88         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_name\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Name"{}}) \};}
+\DoxyCodeLine{89         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_start\_as\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Start as copy of"{}}) \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_theme\_name\_line\_edit\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         QPainter painter;}
+\DoxyCodeLine{94     \};}
+\DoxyCodeLine{95 \}}
 \DoxyCodeLine{96 }
-\DoxyCodeLine{97         QPainter painter;}
-\DoxyCodeLine{98     \};}
-\DoxyCodeLine{99 \}}
-\DoxyCodeLine{100 }
-\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CREATENEWTHEMEDIALOG\_H}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CREATENEWTHEMEDIALOG\_H}}
 
 \end{DoxyCode}

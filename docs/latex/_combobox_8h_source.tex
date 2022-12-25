@@ -22,90 +22,88 @@
 \DoxyCodeLine{18 }
 \DoxyCodeLine{19         QString item\_text();}
 \DoxyCodeLine{20 }
-\DoxyCodeLine{21         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}* cb\_item);}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} replace\_item\_text(\textcolor{keyword}{const} QString\& new\_item\_text);}
 \DoxyCodeLine{22 }
-\DoxyCodeLine{23         \textcolor{keywordtype}{void} replace\_item\_text(\textcolor{keyword}{const} QString\& new\_item\_text);}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
-\DoxyCodeLine{26         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keyword}{const} QSize\& s);}
-\DoxyCodeLine{27         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{30         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}{init\_attributes}}();}
-\DoxyCodeLine{31         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{32 }
-\DoxyCodeLine{33     \textcolor{keyword}{private}:}
-\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_item\_label;}
-\DoxyCodeLine{35 }
-\DoxyCodeLine{36         QString m\_item\_text;}
-\DoxyCodeLine{37     \};}
-\DoxyCodeLine{38 }
-\DoxyCodeLine{39     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
-\DoxyCodeLine{40     \{}
-\DoxyCodeLine{41         Q\_OBJECT}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{43     signals:}
-\DoxyCodeLine{44         \textcolor{keywordtype}{void} current\_item\_changed(\textcolor{keyword}{const} QString\& current\_item);}
-\DoxyCodeLine{45         \textcolor{keywordtype}{void} item\_replaced(\textcolor{keyword}{const} QString\& old\_item, \textcolor{keyword}{const} QString\& new\_item);}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47     \textcolor{keyword}{public}:}
-\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keyword}{const} QSize\& s);}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{private}:}
+\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_item\_label;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         QString m\_item\_text;}
+\DoxyCodeLine{35     \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         Q\_OBJECT}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     signals:}
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} current\_item\_changed(\textcolor{keyword}{const} QString\& current\_item);}
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} item\_replaced(\textcolor{keyword}{const} QString\& old\_item, \textcolor{keyword}{const} QString\& new\_item);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keyword}{public}:}
+\DoxyCodeLine{46         \mbox{\hyperlink{class_layers_1_1_combobox}{Combobox}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         \textcolor{keywordtype}{void} add\_item(\textcolor{keyword}{const} QString\& item);}
 \DoxyCodeLine{49 }
-\DoxyCodeLine{50         \textcolor{keywordtype}{void} add\_item(\textcolor{keyword}{const} QString\& item);}
+\DoxyCodeLine{50         \textcolor{keywordtype}{void} alphabetize();}
 \DoxyCodeLine{51 }
-\DoxyCodeLine{52         \textcolor{keywordtype}{void} alphabetize();}
+\DoxyCodeLine{52         \textcolor{keywordtype}{void} edit\_current\_item();}
 \DoxyCodeLine{53 }
-\DoxyCodeLine{54         \textcolor{keywordtype}{void} edit\_current\_item();}
+\DoxyCodeLine{54         \textcolor{keywordtype}{void} enable\_alphabetization(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
 \DoxyCodeLine{55 }
-\DoxyCodeLine{56         \textcolor{keywordtype}{void} enable\_alphabetization(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58         \textcolor{keywordtype}{void} set\_current\_item(\textcolor{keyword}{const} QString\& item);}
-\DoxyCodeLine{59         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
-\DoxyCodeLine{60         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
-\DoxyCodeLine{61         \textcolor{keywordtype}{void} set\_item\_renaming\_disabled(\textcolor{keywordtype}{bool} disable = \textcolor{keyword}{true});}
-\DoxyCodeLine{62         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
-\DoxyCodeLine{63         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keyword}{const} QSize\& s);}
-\DoxyCodeLine{64         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{56         \textcolor{keywordtype}{void} set\_current\_item(\textcolor{keyword}{const} QString\& item);}
+\DoxyCodeLine{57         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{58         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{59         \textcolor{keywordtype}{void} set\_item\_renaming\_disabled(\textcolor{keywordtype}{bool} disable = \textcolor{keyword}{true});}
+\DoxyCodeLine{60         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{61         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keyword}{const} QSize\& s);}
+\DoxyCodeLine{62         \textcolor{keywordtype}{void} setFixedSize(\textcolor{keywordtype}{int} w, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         QString current\_item() \textcolor{keyword}{const};}
 \DoxyCodeLine{65 }
-\DoxyCodeLine{66         QString current\_item() \textcolor{keyword}{const};}
+\DoxyCodeLine{66         QList<QString> items();}
 \DoxyCodeLine{67 }
-\DoxyCodeLine{68         QList<QString> items();}
+\DoxyCodeLine{68         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
 \DoxyCodeLine{69 }
-\DoxyCodeLine{70         \textcolor{keywordtype}{void} update\_theme\_dependencies();}
+\DoxyCodeLine{70         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_line\_edit\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}line\_edit\_text\_color"{}}, QColor(Qt::black)) \};}
 \DoxyCodeLine{71 }
-\DoxyCodeLine{72         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_line\_edit\_text\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Line Edit Text Color"{}}, QColor(Qt::black)) \};}
-\DoxyCodeLine{73 }
-\DoxyCodeLine{74     \textcolor{keyword}{public} slots:}
-\DoxyCodeLine{75         \textcolor{keywordtype}{void} line\_edit\_return\_pressed();}
-\DoxyCodeLine{76 }
-\DoxyCodeLine{77     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{78         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{79 }
-\DoxyCodeLine{80         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_abda7de15ee2d4c5264b6dee0f790593f}{init\_attributes}}();}
-\DoxyCodeLine{81         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_a806b2c8aabf9612c20cb2508d8cef802}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{82 }
-\DoxyCodeLine{83     \textcolor{keyword}{private}:}
-\DoxyCodeLine{84         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{85 }
-\DoxyCodeLine{86         \textcolor{keywordtype}{bool} m\_alphabetize\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{87         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{88         \textcolor{keywordtype}{bool} m\_item\_renaming\_disabled\{ \textcolor{keyword}{true} \};}
-\DoxyCodeLine{89 }
-\DoxyCodeLine{90         \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}* m\_control\_combobox\_item\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}(\textcolor{stringliteral}{"{}"{}}) \};}
-\DoxyCodeLine{91         \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}* m\_current\_combobox\_item\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{72     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{73         \textcolor{keywordtype}{void} line\_edit\_return\_pressed();}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{76         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{79         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_combobox_a806b2c8aabf9612c20cb2508d8cef802}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{keyword}{private}:}
+\DoxyCodeLine{82         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \textcolor{keywordtype}{bool} m\_alphabetize\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{85         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{86         \textcolor{keywordtype}{bool} m\_item\_renaming\_disabled\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}* m\_control\_combobox\_item\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}(\textcolor{stringliteral}{"{}"{}}) \};}
+\DoxyCodeLine{89         \mbox{\hyperlink{class_layers_1_1_combobox_item}{ComboboxItem}}* m\_current\_combobox\_item\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_current\_item\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{keyword}{this}) \};}
 \DoxyCodeLine{92 }
-\DoxyCodeLine{93         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_current\_item\_label\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{keyword}{this}) \};}
+\DoxyCodeLine{93         QLineEdit* m\_line\_edit\{ \textcolor{keyword}{new} QLineEdit(\textcolor{keyword}{this}) \};}
 \DoxyCodeLine{94 }
-\DoxyCodeLine{95         QLineEdit* m\_line\_edit\{ \textcolor{keyword}{new} QLineEdit(\textcolor{keyword}{this}) \};}
+\DoxyCodeLine{95         QList<ComboboxItem*> m\_combobox\_items;}
 \DoxyCodeLine{96 }
-\DoxyCodeLine{97         QList<ComboboxItem*> m\_combobox\_items;}
+\DoxyCodeLine{97         QVBoxLayout* m\_drop\_down\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
 \DoxyCodeLine{98 }
-\DoxyCodeLine{99         QVBoxLayout* m\_drop\_down\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
-\DoxyCodeLine{100 }
-\DoxyCodeLine{101         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_drop\_down\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{102     \};}
-\DoxyCodeLine{103 \}}
-\DoxyCodeLine{104 }
-\DoxyCodeLine{105 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// COMBOBOX\_H}}
+\DoxyCodeLine{99         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_drop\_down\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{100     \};}
+\DoxyCodeLine{101 \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// COMBOBOX\_H}}
 
 \end{DoxyCode}

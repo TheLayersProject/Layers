@@ -24,46 +24,44 @@
 \DoxyCodeLine{20     \textcolor{keyword}{public}:}
 \DoxyCodeLine{21         \mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}(\textcolor{keywordtype}{bool} vertical = \textcolor{keyword}{false}, QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{22 }
-\DoxyCodeLine{23         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_toggle_switch}{ToggleSwitch}}* fill\_aw);}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} setFixedHeight(\textcolor{keywordtype}{int} h);}
 \DoxyCodeLine{24 }
-\DoxyCodeLine{25         \textcolor{keywordtype}{void} setFixedHeight(\textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} set\_toggled(\textcolor{keywordtype}{bool} toggled);}
 \DoxyCodeLine{26 }
-\DoxyCodeLine{27         \textcolor{keywordtype}{void} set\_toggled(\textcolor{keywordtype}{bool} toggled);}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} toggle(\textcolor{keywordtype}{bool} emit\_toggled\_event = \textcolor{keyword}{true});}
 \DoxyCodeLine{28 }
-\DoxyCodeLine{29         \textcolor{keywordtype}{void} toggle();}
+\DoxyCodeLine{29         \textcolor{keywordtype}{bool} toggled() \textcolor{keyword}{const};}
 \DoxyCodeLine{30 }
-\DoxyCodeLine{31         \textcolor{keywordtype}{bool} toggled() \textcolor{keyword}{const};}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} update\_layout\_margins();}
 \DoxyCodeLine{32 }
-\DoxyCodeLine{33         \textcolor{keywordtype}{void} update\_layout\_margins();}
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} update\_spacer\_size();}
 \DoxyCodeLine{34 }
-\DoxyCodeLine{35         \textcolor{keywordtype}{void} update\_spacer\_size();}
-\DoxyCodeLine{36 }
-\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_left\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Padding"{}}, QVariant::fromValue(2))\};}
-\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Padding"{}}, QVariant::fromValue(2)) \};}
-\DoxyCodeLine{39         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_right\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Right Padding"{}}, QVariant::fromValue(2)) \};}
-\DoxyCodeLine{40         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_bottom\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom Padding"{}}, QVariant::fromValue(2)) \};}
-\DoxyCodeLine{41 }
-\DoxyCodeLine{42     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{43         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_left\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Left Padding"{}}, QVariant::fromValue(2.0)) \};}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_top\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Top Padding"{}}, QVariant::fromValue(2.0)) \};}
+\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_right\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Right Padding"{}}, QVariant::fromValue(2.0)) \};}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_padding\_bottom\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}Bottom Padding"{}}, QVariant::fromValue(2.0)) \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{41         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} init\_attributes();}
 \DoxyCodeLine{44 }
-\DoxyCodeLine{45         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_toggle_switch_a7ffaab0c1a84bfb2a0e87af627a7e6a8}{init\_attributes}}();}
+\DoxyCodeLine{45         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_toggle_switch_a9e84984f4c1cc739653aac02e9e6eb24}{init\_child\_themeable\_reference\_list}}();}
 \DoxyCodeLine{46 }
-\DoxyCodeLine{47         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_toggle_switch_a9e84984f4c1cc739653aac02e9e6eb24}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49     \textcolor{keyword}{private}:}
-\DoxyCodeLine{50         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{47     \textcolor{keyword}{private}:}
+\DoxyCodeLine{48         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         QHBoxLayout* m\_layout\_h\{ \textcolor{keyword}{nullptr} \};}
 \DoxyCodeLine{51 }
-\DoxyCodeLine{52         QHBoxLayout* m\_layout\_h\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{52         QVBoxLayout* m\_layout\_v\{ \textcolor{keyword}{nullptr} \};}
 \DoxyCodeLine{53 }
-\DoxyCodeLine{54         QVBoxLayout* m\_layout\_v\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{55 }
-\DoxyCodeLine{56         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_spacer\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{57         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_square\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{58 }
-\DoxyCodeLine{59         \textcolor{keywordtype}{bool} m\_vertical\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{60     \};}
-\DoxyCodeLine{61 \}}
-\DoxyCodeLine{62 }
-\DoxyCodeLine{63 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// TOGGLESWITCH\_H}}
+\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_spacer\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{55         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_square\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{keywordtype}{bool} m\_vertical\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{58     \};}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// TOGGLESWITCH\_H}}
 
 \end{DoxyCode}

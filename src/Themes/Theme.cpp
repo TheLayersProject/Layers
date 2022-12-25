@@ -137,7 +137,7 @@ bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 	return m_data.contains(themeable_tag);
 }
 
-void Theme::copy_from(Theme& theme)
+void Theme::copy(Theme& theme)
 {
 	clear();
 
@@ -167,9 +167,9 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 			if (themeable->attributes().contains(attr_type_key))
 			{
 				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[attr_type_key]))
-					dynamic_cast<Attribute*>(themeable_data_in_theme[attr_type_key])->copy_value_from(*attr);
+					dynamic_cast<Attribute*>(themeable_data_in_theme[attr_type_key])->copy(*attr);
 				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[attr_type_key]))
-					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[attr_type_key])->copy_from(*attr_group);
+					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[attr_type_key])->copy(*attr_group);
 			}
 		}
 	}
@@ -184,7 +184,7 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 		{
 			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[attr_type_key]))
 			{
-				if (attr->owns_variant())
+				if (attr->owns_data())
 					new_themeable_data_for_theme[attr_type_key] = new Attribute(*attr);
 			}
 			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[attr_type_key]))

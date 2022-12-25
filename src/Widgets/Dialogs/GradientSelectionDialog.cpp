@@ -98,13 +98,13 @@ void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
 
 void GradientSelectionDialog::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-    border.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
-    a_corner_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));
-    corner_radii.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
-    a_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
-    a_hover_fill.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["hover_fill"]));
-    margins.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["margins"]));
-    a_outline_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
+    border.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
+    a_corner_color.copy(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));
+    corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
+    a_fill.copy(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
+    a_hover_fill.copy(*dynamic_cast<Attribute*>(theme_attrs["hover_fill"]));
+    margins.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["margins"]));
+    a_outline_color.copy(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
 }
 
 QGradientStops GradientSelectionDialog::gradient_stops() const

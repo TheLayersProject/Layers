@@ -20,8 +20,11 @@ void {\bfseries current\+\_\+theme\+\_\+changed} ()
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_application_a0871cc476feecd8d6102bad44aa8d9fd}\label{class_layers_1_1_application_a0871cc476feecd8d6102bad44aa8d9fd}} 
-{\bfseries Application} (int \&argc, char $\ast$$\ast$argv, const QString \&\mbox{\hyperlink{class_layers_1_1_application_a1a05d51c92bf5c99d7f4dabb2159c82b}{name}}, QFile $\ast$\mbox{\hyperlink{class_layers_1_1_application_ac6af7f4b42a30d09a48f1d11c36d49dd}{icon\+\_\+file}}=nullptr, \mbox{\hyperlink{class_layers_1_1_version}{Version}} $\ast$version=nullptr, \mbox{\hyperlink{class_layers_1_1_git_hub_repo}{Git\+Hub\+Repo}} $\ast$github\+\_\+repo=nullptr)
+\mbox{\Hypertarget{class_layers_1_1_application_ae9a38bd3acb61c21661cc56c8e7918cc}\label{class_layers_1_1_application_ae9a38bd3acb61c21661cc56c8e7918cc}} 
+{\bfseries Application} (int \&argc, char $\ast$$\ast$argv, const QString \&\mbox{\hyperlink{class_layers_1_1_application_a1a05d51c92bf5c99d7f4dabb2159c82b}{name}}, const QUuid \&uuid, QFile $\ast$\mbox{\hyperlink{class_layers_1_1_application_ac6af7f4b42a30d09a48f1d11c36d49dd}{icon\+\_\+file}}=nullptr, \mbox{\hyperlink{class_layers_1_1_version}{Version}} $\ast$version=nullptr, \mbox{\hyperlink{class_layers_1_1_git_hub_repo}{Git\+Hub\+Repo}} $\ast$github\+\_\+repo=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_application_a632aaeaceb1410672fb5bb82d1f656ca}\label{class_layers_1_1_application_a632aaeaceb1410672fb5bb82d1f656ca}} 
+QString {\bfseries app\+\_\+identifier} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_application_aec2122193adf69854bc5e8734f55e111}{apply\+\_\+theme}} (\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \&\mbox{\hyperlink{class_layers_1_1_application_ae577216be3d14bb51fbe0b4aa608e1e1}{theme}})
 \item 
@@ -31,7 +34,10 @@ void \mbox{\hyperlink{class_layers_1_1_application_a3add54089305ff64b4b99ebe659a
 \item 
 QFile $\ast$ \mbox{\hyperlink{class_layers_1_1_application_ac6af7f4b42a30d09a48f1d11c36d49dd}{icon\+\_\+file}} ()
 \item 
-\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \mbox{\hyperlink{class_layers_1_1_application_a11be232598738dcfa8bbdf503d614180}{load\+\_\+theme}} (QFile \&file)
+\mbox{\hyperlink{class_layers_1_1_theme}{Theme}} \mbox{\hyperlink{class_layers_1_1_application_a29c1e937bf2eea9a63073b3411bfd205}{load\+\_\+theme}} (const QString \&file\+\_\+name)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_application_a529815ee5f7933c3cedb8331b40ff717}\label{class_layers_1_1_application_a529815ee5f7933c3cedb8331b40ff717}} 
+\mbox{\hyperlink{class_layers_1_1_window}{Window}} $\ast$ {\bfseries main\+\_\+window} () const
 \item 
 QString \& \mbox{\hyperlink{class_layers_1_1_application_a1a05d51c92bf5c99d7f4dabb2159c82b}{name}} ()
 \item 
@@ -106,11 +112,11 @@ If no icon was supplied during initialization, nullptr is returned.
 \begin{DoxyReturn}{Returns}
 pointer to QFile of app icon, nullptr if none exists 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_layers_1_1_application_a11be232598738dcfa8bbdf503d614180}\label{class_layers_1_1_application_a11be232598738dcfa8bbdf503d614180}} 
+\mbox{\Hypertarget{class_layers_1_1_application_a29c1e937bf2eea9a63073b3411bfd205}\label{class_layers_1_1_application_a29c1e937bf2eea9a63073b3411bfd205}} 
 \index{Layers::Application@{Layers::Application}!load\_theme@{load\_theme}}
 \index{load\_theme@{load\_theme}!Layers::Application@{Layers::Application}}
 \doxysubsubsection{\texorpdfstring{load\_theme()}{load\_theme()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} Application\+::load\+\_\+theme (\begin{DoxyParamCaption}\item[{QFile \&}]{file }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_theme}{Theme}} Application\+::load\+\_\+theme (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+\_\+name }\end{DoxyParamCaption})}
 
 Loads and returns a theme from the supplied file.
 

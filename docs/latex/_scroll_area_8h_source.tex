@@ -6,37 +6,42 @@
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#define SCROLLAREA\_H}}
 \DoxyCodeLine{3 }
 \DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QScrollArea>}}
-\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QScrollBar>}}
+\DoxyCodeLine{5 \textcolor{comment}{//\#include <QScrollBar>}}
 \DoxyCodeLine{6 }
-\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Widget.h"{}}}
-\DoxyCodeLine{8 }
-\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
-\DoxyCodeLine{10 \{}
-\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
-\DoxyCodeLine{12     \{}
-\DoxyCodeLine{13         Q\_OBJECT}
-\DoxyCodeLine{14 }
-\DoxyCodeLine{15     \textcolor{keyword}{public}:}
-\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}}(QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{17 }
-\DoxyCodeLine{18         \textcolor{keywordtype}{void} issue\_update();}
-\DoxyCodeLine{19 }
-\DoxyCodeLine{20         \textcolor{keywordtype}{void} setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy policy);}
-\DoxyCodeLine{21 }
-\DoxyCodeLine{22         \textcolor{keywordtype}{void} setVerticalScrollBarPolicy(Qt::ScrollBarPolicy policy);}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24         \textcolor{keywordtype}{void} setWidget(QWidget* widget);}
-\DoxyCodeLine{25 }
-\DoxyCodeLine{26     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{27         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}ScrollBar.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Widget.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         Q\_OBJECT}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keyword}{public}:}
+\DoxyCodeLine{17         \mbox{\hyperlink{class_layers_1_1_scroll_area}{ScrollArea}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19         \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}}* horizontal\_scrollbar() \textcolor{keyword}{const};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy policy);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} setVerticalScrollBarPolicy(Qt::ScrollBarPolicy policy);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} setWidget(QWidget* widget);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}}* vertical\_scrollbar() \textcolor{keyword}{const};}
 \DoxyCodeLine{28 }
-\DoxyCodeLine{29         QScrollArea* m\_scroll\_area\{ \textcolor{keyword}{new} QScrollArea(\textcolor{keyword}{this}) \};}
-\DoxyCodeLine{30 }
-\DoxyCodeLine{31         QScrollBar* m\_horizontal\_scrollbar\{ \textcolor{keyword}{new} QScrollBar \};}
-\DoxyCodeLine{32         QScrollBar* m\_vertical\_scrollbar\{ \textcolor{keyword}{new} QScrollBar \};}
-\DoxyCodeLine{33     \};}
-\DoxyCodeLine{34 \}}
+\DoxyCodeLine{29     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{30         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_scroll_area_a33f193a637988fc4acb5c06d2a772263}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         QScrollArea* m\_scroll\_area\{ \textcolor{keyword}{new} QScrollArea(\textcolor{keyword}{this}) \};}
 \DoxyCodeLine{35 }
-\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SCROLLAREA\_H}}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}}* m\_horizontal\_scrollbar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}} \};}
+\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}}* m\_vertical\_scrollbar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_scroll_bar}{ScrollBar}} \};}
+\DoxyCodeLine{38     \};}
+\DoxyCodeLine{39 \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SCROLLAREA\_H}}
 
 \end{DoxyCode}

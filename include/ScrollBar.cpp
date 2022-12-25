@@ -19,10 +19,10 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 
 void ScrollBar::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_background_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["background_color"]));
-	corner_radii.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
-	handle_corner_radii.copy_from(*dynamic_cast<AttributeGroup*>(theme_attrs["handle_corner_radii"]));
-	a_handle_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["handle_color"]));
+	a_background_color.copy(*dynamic_cast<Attribute*>(theme_attrs["background_color"]));
+	corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
+	handle_corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["handle_corner_radii"]));
+	a_handle_color.copy(*dynamic_cast<Attribute*>(theme_attrs["handle_color"]));
 }
 
 void ScrollBar::update_theme_dependencies()

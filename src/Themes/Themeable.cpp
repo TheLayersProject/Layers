@@ -107,7 +107,7 @@ void Themeable::apply_theme(Theme& theme)
 
 			//for (const QString& attr_tag : m_attributes.keys())
 			//{
-			//	m_attributes[attr_tag]->copy_value_from(theme_attrs[attr_tag]);
+			//	m_attributes[attr_tag]->copy(theme_attrs[attr_tag]);
 			//}
 
 			//update_theme_dependencies();

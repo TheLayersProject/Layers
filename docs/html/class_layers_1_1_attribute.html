@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_layers_1_1_attribute.html',''); 
   <div class="summary">
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="class_layers_1_1_attribute-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Layers::Attribute Class Reference</div></div>
 </div><!--header-->
@@ -99,88 +98,100 @@ Inheritance diagram for Layers::Attribute:</div>
  <div class="center">
   <img src="class_layers_1_1_attribute.png" usemap="#Layers::Attribute_map" alt=""/>
   <map id="Layers::Attribute_map" name="Layers::Attribute_map">
-<area href="struct_layers_1_1_attribute_layout_item.html" alt="Layers::AttributeLayoutItem" shape="rect" coords="0,56,164,80"/>
+<area href="class_layers_1_1_attribute_type.html" alt="Layers::AttributeType" shape="rect" coords="0,56,132,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:a17cb1aba1c54d7585dff407705ee995c"><td class="memItemLeft" align="right" valign="top"><a id="a17cb1aba1c54d7585dff407705ee995c" name="a17cb1aba1c54d7585dff407705ee995c"></a>
+<tr class="memitem:a7b548fa04ea519dc419000270aca7703"><td class="memItemLeft" align="right" valign="top"><a id="a7b548fa04ea519dc419000270aca7703" name="a7b548fa04ea519dc419000270aca7703"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ownership_changed</b> ()</td></tr>
+<tr class="separator:a7b548fa04ea519dc419000270aca7703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header signals_class_layers_1_1_attribute_type"><td colspan="2" onclick="javascript:toggleInherit('signals_class_layers_1_1_attribute_type')"><img src="closed.png" alt="-"/>&#160;Signals inherited from <a class="el" href="class_layers_1_1_attribute_type.html">Layers::AttributeType</a></td></tr>
+<tr class="memitem:afdee555649be6836842a7ca3c73ebec9 inherit signals_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top"><a id="afdee555649be6836842a7ca3c73ebec9" name="afdee555649be6836842a7ca3c73ebec9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>value_changed</b> ()</td></tr>
-<tr class="separator:a17cb1aba1c54d7585dff407705ee995c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:afdee555649be6836842a7ca3c73ebec9 inherit signals_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7081995e153c42181a75ab6cf7b6cb92"><td class="memItemLeft" align="right" valign="top"><a id="a7081995e153c42181a75ab6cf7b6cb92" name="a7081995e153c42181a75ab6cf7b6cb92"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;name, bool disabled=false)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;<a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, bool <a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a>=false)</td></tr>
 <tr class="separator:a7081995e153c42181a75ab6cf7b6cb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e6650b57d9043442e255f897dcf0dae"><td class="memItemLeft" align="right" valign="top"><a id="a3e6650b57d9043442e255f897dcf0dae" name="a3e6650b57d9043442e255f897dcf0dae"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;name, QVariant qvariant, bool disabled=false)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;<a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, QVariant qvariant, bool <a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a>=false)</td></tr>
 <tr class="separator:a3e6650b57d9043442e255f897dcf0dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9598d1267d273916be23d33c9bf7898c"><td class="memItemLeft" align="right" valign="top"><a id="a9598d1267d273916be23d33c9bf7898c" name="a9598d1267d273916be23d33c9bf7898c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;name, QMap&lt; QString, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &gt; state_variant_map, bool disabled=false)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const QString &amp;<a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, QMap&lt; QString, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &gt; state_variant_map, bool <a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a>=false)</td></tr>
 <tr class="separator:a9598d1267d273916be23d33c9bf7898c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca912ec438af7f63c2ac1f5c37dafbaa"><td class="memItemLeft" align="right" valign="top"><a id="aca912ec438af7f63c2ac1f5c37dafbaa" name="aca912ec438af7f63c2ac1f5c37dafbaa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Attribute</b> (const <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;a)</td></tr>
+<tr class="separator:aca912ec438af7f63c2ac1f5c37dafbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb52431a3b44a3bbcf5c50ca97da877"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:addb52431a3b44a3bbcf5c50ca97da877"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as</a> () const</td></tr>
 <tr class="separator:addb52431a3b44a3bbcf5c50ca97da877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46c4e10d87ca1bf562621f8a409af9b4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a46c4e10d87ca1bf562621f8a409af9b4"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a46c4e10d87ca1bf562621f8a409af9b4">as</a> (const QString &amp;state) const</td></tr>
+<tr class="memitem:a46c4e10d87ca1bf562621f8a409af9b4"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a46c4e10d87ca1bf562621f8a409af9b4">as</a> (const QString &amp;<a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) const</td></tr>
 <tr class="separator:a46c4e10d87ca1bf562621f8a409af9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4c9c0ed45441034bc213301d7b4dc09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">contains_state</a> (const QString &amp;state) const</td></tr>
+<tr class="memitem:ad67b372e97392b344f03b3d39a73897a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#ad67b372e97392b344f03b3d39a73897a">clear_data_if_owner</a> ()</td></tr>
+<tr class="separator:ad67b372e97392b344f03b3d39a73897a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c9c0ed45441034bc213301d7b4dc09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">contains_state</a> (const QString &amp;<a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) const</td></tr>
 <tr class="separator:ad4c9c0ed45441034bc213301d7b4dc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a947f71192325132113cf354c4dafe71d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a947f71192325132113cf354c4dafe71d">copy_value_from</a> (const <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;attr)</td></tr>
-<tr class="separator:a947f71192325132113cf354c4dafe71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a815ba031785a1ccd3109362079e82007"><td class="memItemLeft" align="right" valign="top"><a id="a815ba031785a1ccd3109362079e82007" name="a815ba031785a1ccd3109362079e82007"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>disabled</b> () const</td></tr>
-<tr class="separator:a815ba031785a1ccd3109362079e82007"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0551116960014934a70539e1ccde7dc"><td class="memItemLeft" align="right" valign="top"><a id="ae0551116960014934a70539e1ccde7dc" name="ae0551116960014934a70539e1ccde7dc"></a>
-QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> ()</td></tr>
-<tr class="separator:ae0551116960014934a70539e1ccde7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4527cd3e179e6df31419459c3bc7a473"><td class="memItemLeft" align="right" valign="top"><a id="a4527cd3e179e6df31419459c3bc7a473" name="a4527cd3e179e6df31419459c3bc7a473"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>get_variant_from</b> (<a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;attribute)</td></tr>
-<tr class="separator:a4527cd3e179e6df31419459c3bc7a473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34f383ce6a6ddc6c7e9d4ea286269ce5"><td class="memItemLeft" align="right" valign="top"><a id="a34f383ce6a6ddc6c7e9d4ea286269ce5" name="a34f383ce6a6ddc6c7e9d4ea286269ce5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_stateful</b> () const</td></tr>
-<tr class="separator:a34f383ce6a6ddc6c7e9d4ea286269ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19670e337bb0a1dcbf9436b9e9d47875"><td class="memItemLeft" align="right" valign="top"><a id="a19670e337bb0a1dcbf9436b9e9d47875" name="a19670e337bb0a1dcbf9436b9e9d47875"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_disabled</b> (bool disabled=true)</td></tr>
-<tr class="separator:a19670e337bb0a1dcbf9436b9e9d47875"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdd49be25dd233d1defe99a6e2c13ec6"><td class="memItemLeft" align="right" valign="top"><a id="afdd49be25dd233d1defe99a6e2c13ec6" name="afdd49be25dd233d1defe99a6e2c13ec6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_state</b> (const QString &amp;state)</td></tr>
-<tr class="separator:afdd49be25dd233d1defe99a6e2c13ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6405ca3c4b989b46f0d4577553966439"><td class="memItemLeft" align="right" valign="top"><a id="a6405ca3c4b989b46f0d4577553966439" name="a6405ca3c4b989b46f0d4577553966439"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_state_variant_map</b> (const QMap&lt; QString, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &gt; &amp;state_variant_map)</td></tr>
-<tr class="separator:a6405ca3c4b989b46f0d4577553966439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28ad83d4ab2a39d9b8aaa9d4bbcf212d"><td class="memItemLeft" align="right" valign="top"><a id="a28ad83d4ab2a39d9b8aaa9d4bbcf212d" name="a28ad83d4ab2a39d9b8aaa9d4bbcf212d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_value</b> (QVariant variant)</td></tr>
-<tr class="separator:a28ad83d4ab2a39d9b8aaa9d4bbcf212d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eb28e785e96dfcf4548cfba37f06d92"><td class="memItemLeft" align="right" valign="top"><a id="a8eb28e785e96dfcf4548cfba37f06d92" name="a8eb28e785e96dfcf4548cfba37f06d92"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_value</b> (const QString &amp;state, QVariant variant)</td></tr>
-<tr class="separator:a8eb28e785e96dfcf4548cfba37f06d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69d6089128f307d526e5c3395a7518c8"><td class="memItemLeft" align="right" valign="top"><a id="a69d6089128f307d526e5c3395a7518c8" name="a69d6089128f307d526e5c3395a7518c8"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> () const</td></tr>
+<tr class="memitem:a8df3262a2acb70a2d8ff733cf42f7516"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a8df3262a2acb70a2d8ff733cf42f7516">copy</a> (const <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;attr)</td></tr>
+<tr class="separator:a8df3262a2acb70a2d8ff733cf42f7516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c75470b727527f86a78038fa2c165f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a4c75470b727527f86a78038fa2c165f5">establish_data_connection</a> ()</td></tr>
+<tr class="separator:a4c75470b727527f86a78038fa2c165f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71009df30061fc4a7a68bd22be06d3d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a71009df30061fc4a7a68bd22be06d3d1">get_data_from</a> (<a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;attribute)</td></tr>
+<tr class="separator:a71009df30061fc4a7a68bd22be06d3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab362514cf7c06fcb4b3c9b360d11d0bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#ab362514cf7c06fcb4b3c9b360d11d0bd">init_state_variant_map</a> (const QMap&lt; QString, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &gt; &amp;state_variant_map)</td></tr>
+<tr class="separator:ab362514cf7c06fcb4b3c9b360d11d0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c9a0eda0fcc1c2056389ba8e2cb4e9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a45c9a0eda0fcc1c2056389ba8e2cb4e9">is_stateful</a> () const override</td></tr>
+<tr class="separator:a45c9a0eda0fcc1c2056389ba8e2cb4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c93ed2a011b4007148c2c91f641a01"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a43c93ed2a011b4007148c2c91f641a01">owns_data</a> () const</td></tr>
+<tr class="separator:a43c93ed2a011b4007148c2c91f641a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5d144820ee5791880044152f2281c0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a4e5d144820ee5791880044152f2281c0">set_state</a> (const QString &amp;<a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>) override</td></tr>
+<tr class="separator:a4e5d144820ee5791880044152f2281c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df6d32c26b33b03bd39b39e5a535880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a4df6d32c26b33b03bd39b39e5a535880">set_value</a> (QVariant qvariant, bool retain_type=true)</td></tr>
+<tr class="separator:a4df6d32c26b33b03bd39b39e5a535880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9ad6481e63a523320f9c32471dfea27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#ad9ad6481e63a523320f9c32471dfea27">set_value</a> (const QString &amp;<a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a>, QVariant qvariant)</td></tr>
+<tr class="separator:ad9ad6481e63a523320f9c32471dfea27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d6089128f307d526e5c3395a7518c8"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">state</a> () const</td></tr>
 <tr class="separator:a69d6089128f307d526e5c3395a7518c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa8c1c028fce08ddc42adc39ae30a76f"><td class="memItemLeft" align="right" valign="top"><a id="afa8c1c028fce08ddc42adc39ae30a76f" name="afa8c1c028fce08ddc42adc39ae30a76f"></a>
-QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>states</b> () const</td></tr>
+<tr class="memitem:afa8c1c028fce08ddc42adc39ae30a76f"><td class="memItemLeft" align="right" valign="top">QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#afa8c1c028fce08ddc42adc39ae30a76f">states</a> () const</td></tr>
 <tr class="separator:afa8c1c028fce08ddc42adc39ae30a76f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa90347c70e6f577ff9c8e8caaa40b42e"><td class="memItemLeft" align="right" valign="top"><a id="aa90347c70e6f577ff9c8e8caaa40b42e" name="aa90347c70e6f577ff9c8e8caaa40b42e"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>typeName</b> () const</td></tr>
+<tr class="memitem:acb6e545317b9ab91295ac009e8392178"><td class="memItemLeft" align="right" valign="top">QJsonObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#acb6e545317b9ab91295ac009e8392178">to_json_object</a> ()</td></tr>
+<tr class="separator:acb6e545317b9ab91295ac009e8392178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90347c70e6f577ff9c8e8caaa40b42e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute.html#aa90347c70e6f577ff9c8e8caaa40b42e">typeName</a> () const</td></tr>
 <tr class="separator:aa90347c70e6f577ff9c8e8caaa40b42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_layers_1_1_attribute_type"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_layers_1_1_attribute_type')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_layers_1_1_attribute_type.html">Layers::AttributeType</a></td></tr>
+<tr class="memitem:a08ce0ad255045a4f191b14f0fff981db inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top"><a id="a08ce0ad255045a4f191b14f0fff981db" name="a08ce0ad255045a4f191b14f0fff981db"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AttributeType</b> (const QString &amp;<a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a>, bool <a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a>)</td></tr>
+<tr class="separator:a08ce0ad255045a4f191b14f0fff981db inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc423b5c9a6dad8575a19e3877f4c71 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#a3cc423b5c9a6dad8575a19e3877f4c71">capitalized_name</a> ()</td></tr>
+<tr class="separator:a3cc423b5c9a6dad8575a19e3877f4c71 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42b1dd86ed46b66aaa669672d577e49 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a> () const</td></tr>
+<tr class="separator:aa42b1dd86ed46b66aaa669672d577e49 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6670e412de3ad4845a01027cb63fdc inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#a5b6670e412de3ad4845a01027cb63fdc">is_stateful</a> () const =0</td></tr>
+<tr class="separator:a5b6670e412de3ad4845a01027cb63fdc inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca369bb6f7315498d4bf25b9b5966bdb inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">name</a> ()</td></tr>
+<tr class="separator:aca369bb6f7315498d4bf25b9b5966bdb inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe8ab87d1e82fcdb4235467018ae2f2 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#acbe8ab87d1e82fcdb4235467018ae2f2">set_disabled</a> (bool <a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">disabled</a>=true)</td></tr>
+<tr class="separator:acbe8ab87d1e82fcdb4235467018ae2f2 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90b9f76e825c34de17049c4bb0253b4 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_attribute_type.html#aa90b9f76e825c34de17049c4bb0253b4">set_state</a> (const QString &amp;state)=0</td></tr>
+<tr class="separator:aa90b9f76e825c34de17049c4bb0253b4 inherit pub_methods_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a330b221a5f2f6193fd01962804f5e56c"><td class="memItemLeft" align="right" valign="top"><a id="a330b221a5f2f6193fd01962804f5e56c" name="a330b221a5f2f6193fd01962804f5e56c"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (QDataStream &amp;stream, const <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;a)</td></tr>
-<tr class="separator:a330b221a5f2f6193fd01962804f5e56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6f0091dcc0f2c0a83194e879e0d5950"><td class="memItemLeft" align="right" valign="top"><a id="ae6f0091dcc0f2c0a83194e879e0d5950" name="ae6f0091dcc0f2c0a83194e879e0d5950"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;&gt;</b> (QDataStream &amp;stream, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;a)</td></tr>
-<tr class="separator:ae6f0091dcc0f2c0a83194e879e0d5950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_layers_1_1_attribute_type"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_layers_1_1_attribute_type')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_layers_1_1_attribute_type.html">Layers::AttributeType</a></td></tr>
+<tr class="memitem:a817babe13f9203f6bcf07d71f8117d4e inherit pro_attribs_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top"><a id="a817babe13f9203f6bcf07d71f8117d4e" name="a817babe13f9203f6bcf07d71f8117d4e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_disabled</b> { false }</td></tr>
+<tr class="separator:a817babe13f9203f6bcf07d71f8117d4e inherit pro_attribs_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9274dfda86fb26078ab9f0d3e841531e inherit pro_attribs_class_layers_1_1_attribute_type"><td class="memItemLeft" align="right" valign="top"><a id="a9274dfda86fb26078ab9f0d3e841531e" name="a9274dfda86fb26078ab9f0d3e841531e"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_name</b> { &quot;&quot; }</td></tr>
+<tr class="separator:a9274dfda86fb26078ab9f0d3e841531e inherit pro_attribs_class_layers_1_1_attribute_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Provides structure for attributes to be used by Themes and Themeables.</p>
-<p >Attributes store pointers to Variants which store values used for painting Themeables and supporting their appearance.</p>
-<p >A <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> stores a set of <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> pointers, and a <a class="el" href="class_layers_1_1_theme.html">Theme</a> stores a collection of <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> pointer sets for many Themeables.</p>
-<p >An <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> can either point to a single <a class="el" href="class_layers_1_1_variant.html">Variant</a> or point to a map of QString-Variant pairs where the QStrings are states. </p>
+<div class="textblock"><p ><a class="el" href="class_layers_1_1_attribute.html">Attribute</a> implementation used throughout Layers by <a class="el" href="class_layers_1_1_attribute_group.html">AttributeGroup</a>, <a class="el" href="class_layers_1_1_theme.html">Theme</a>, and <a class="el" href="class_layers_1_1_themeable.html">Themeable</a>.</p>
+<p >An <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> stores a pointer to a <a class="el" href="class_layers_1_1_data.html">Data</a> object which is used for drawing Themeables. At first, an <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> inializes <a class="el" href="class_layers_1_1_data.html">Data</a> and <em>owns</em> it. However, through <a class="el" href="class_layers_1_1_attribute.html#a71009df30061fc4a7a68bd22be06d3d1">get_data_from()</a>, an <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> can be made to point to <a class="el" href="class_layers_1_1_data.html">Data</a> from another <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="addb52431a3b44a3bbcf5c50ca97da877" name="addb52431a3b44a3bbcf5c50ca97da877"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#addb52431a3b44a3bbcf5c50ca97da877">&#9670;&nbsp;</a></span>as() <span class="overload">[1/2]</span></h2>
@@ -203,9 +214,9 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Returns the value stored in the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>'s variant converted to the template type T.</p>
-<p >If the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is stateful, then this function will return the value associated with the current state. If the value associated with a specific state is desired, use the version of <a class="el" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as()</a> that requires a state argument.</p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_layers_1_1_variant.html">Variant</a> value converted to template type T </dd></dl>
+<p >Returns <a class="el" href="class_layers_1_1_data.html">Data</a> value converted to the template type T.</p>
+<p >If the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is stateful, the value associated with the current state is returned. If the value associated with a specific state is desired, use the version of <a class="el" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">as()</a> that requires a state argument.</p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_layers_1_1_data.html">Data</a> value converted to template type T </dd></dl>
 
 </div>
 </div>
@@ -234,9 +245,27 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Returns the value of the variant associated with the supplied state, converted to the template type T.</p>
-<p >This function will only work if the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is stateful and only if the state supplied exists in the state-variant map.</p>
-<dl class="section return"><dt>Returns</dt><dd>Value of variant associated with state, converted to template type T </dd></dl>
+<p >Returns <a class="el" href="class_layers_1_1_data.html">Data</a> value associated with the supplied state, converted to the template type T.</p>
+<p >This function will work only if the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is stateful and only if the state supplied exists in the state-variant map.</p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_layers_1_1_data.html">Data</a> value associated with state, converted to template type T </dd></dl>
+
+</div>
+</div>
+<a id="ad67b372e97392b344f03b3d39a73897a" name="ad67b372e97392b344f03b3d39a73897a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad67b372e97392b344f03b3d39a73897a">&#9670;&nbsp;</a></span>clear_data_if_owner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Layers::Attribute::clear_data_if_owner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Deletes the <a class="el" href="class_layers_1_1_data.html">Data</a> if the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is the owner. </p>
 
 </div>
 </div>
@@ -255,25 +284,25 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Returns true if the given state exists in the state-variant map; otherwise returns false.</p>
+<p >Returns true if state exists in the <a class="el" href="class_layers_1_1_data.html">Data</a>, otherwise, returns false.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>to check whether it exists in the state-variant map </td></tr>
+    <tr><td class="paramname">state</td><td>- State to check whether it exists in the <a class="el" href="class_layers_1_1_data.html">Data</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if state exists in map, false otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if state exists in <a class="el" href="class_layers_1_1_data.html">Data</a>, false otherwise </dd></dl>
 
 </div>
 </div>
-<a id="a947f71192325132113cf354c4dafe71d" name="a947f71192325132113cf354c4dafe71d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a947f71192325132113cf354c4dafe71d">&#9670;&nbsp;</a></span>copy_value_from()</h2>
+<a id="a8df3262a2acb70a2d8ff733cf42f7516" name="a8df3262a2acb70a2d8ff733cf42f7516"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8df3262a2acb70a2d8ff733cf42f7516">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Attribute::copy_value_from </td>
+          <td class="memname">void Attribute::copy </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;&#160;</td>
           <td class="paramname"><em>attr</em></td><td>)</td>
@@ -281,13 +310,322 @@ template&lt;typename T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Copies the variant condition from another <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>.</p>
+<p >Copies the supplied <a class="el" href="class_layers_1_1_attribute.html">Attribute</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">attr</td><td>to copy </td></tr>
+    <tr><td class="paramname">attr</td><td>- <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> to copy </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4c75470b727527f86a78038fa2c165f5" name="a4c75470b727527f86a78038fa2c165f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c75470b727527f86a78038fa2c165f5">&#9670;&nbsp;</a></span>establish_data_connection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::establish_data_connection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Connects the <a class="el" href="class_layers_1_1_data.html">Data</a> changed signal to emit value_changed().</p>
+<p >The previous connection is disconnected. </p>
+
+</div>
+</div>
+<a id="a71009df30061fc4a7a68bd22be06d3d1" name="a71009df30061fc4a7a68bd22be06d3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71009df30061fc4a7a68bd22be06d3d1">&#9670;&nbsp;</a></span>get_data_from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::get_data_from </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a> &amp;&#160;</td>
+          <td class="paramname"><em>attribute</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Makes this <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> to point to the <a class="el" href="class_layers_1_1_data.html">Data</a> of another <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>.</p>
+<p >If the caller <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> owns its <a class="el" href="class_layers_1_1_data.html">Data</a>, the <a class="el" href="class_layers_1_1_data.html">Data</a> is deleted before the pointer is changed.</p>
+<p >Establishes a new data connection and emits both ownership_changed() and value_changed().</p>
+<p >Another connection is established so that if the attribute supplied changes its ownership, this function gets called again so the caller <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> can get a pointer to the new <a class="el" href="class_layers_1_1_data.html">Data</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attribute</td><td>- <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> to obtain the <a class="el" href="class_layers_1_1_data.html">Data</a> pointer of </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab362514cf7c06fcb4b3c9b360d11d0bd" name="ab362514cf7c06fcb4b3c9b360d11d0bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab362514cf7c06fcb4b3c9b360d11d0bd">&#9670;&nbsp;</a></span>init_state_variant_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::init_state_variant_map </td>
+          <td>(</td>
+          <td class="paramtype">const QMap&lt; QString, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>state_variant_map</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Converts to stateful <a class="el" href="class_layers_1_1_data.html">Data</a> initialized with the supplied map.</p>
+<p >This function simply calls <a class="el" href="class_layers_1_1_data.html#aba004dde3e58fea08d7554410a6500fe">Data::init_state_variant_map()</a> and passes the state_variant_map.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state_variant_map</td><td>- Map to initialize the <a class="el" href="class_layers_1_1_data.html">Data</a> with </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a45c9a0eda0fcc1c2056389ba8e2cb4e9" name="a45c9a0eda0fcc1c2056389ba8e2cb4e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c9a0eda0fcc1c2056389ba8e2cb4e9">&#9670;&nbsp;</a></span>is_stateful()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Attribute::is_stateful </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Returns true if stateful, otherwise, returns false.</p>
+<p >This function simply calls <a class="el" href="class_layers_1_1_data.html#a8e4dccaaa27526db929256dee8768f68">Data::is_stateful()</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if stateful, false otherwise </dd></dl>
+
+<p>Implements <a class="el" href="class_layers_1_1_attribute_type.html#a5b6670e412de3ad4845a01027cb63fdc">Layers::AttributeType</a>.</p>
+
+</div>
+</div>
+<a id="a43c93ed2a011b4007148c2c91f641a01" name="a43c93ed2a011b4007148c2c91f641a01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43c93ed2a011b4007148c2c91f641a01">&#9670;&nbsp;</a></span>owns_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Attribute::owns_data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns true if <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> owns the <a class="el" href="class_layers_1_1_data.html">Data</a> object being pointed to, otherwise, returns false.</p>
+<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="class_layers_1_1_data.html">Data</a> object is owned by <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a4e5d144820ee5791880044152f2281c0" name="a4e5d144820ee5791880044152f2281c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5d144820ee5791880044152f2281c0">&#9670;&nbsp;</a></span>set_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::set_state </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Sets the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>'s active state.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>- QString representing new active state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_layers_1_1_attribute_type.html#aa90b9f76e825c34de17049c4bb0253b4">Layers::AttributeType</a>.</p>
+
+</div>
+</div>
+<a id="ad9ad6481e63a523320f9c32471dfea27" name="ad9ad6481e63a523320f9c32471dfea27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ad6481e63a523320f9c32471dfea27">&#9670;&nbsp;</a></span>set_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::set_value </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QVariant&#160;</td>
+          <td class="paramname"><em>qvariant</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Set the <a class="el" href="class_layers_1_1_data.html">Data</a> value associated with state.</p>
+<p >This function simply calls <a class="el" href="class_layers_1_1_data.html#a09151718594ab891937cdbb722c8f259">Data::set_value()</a> and passes state and qvariant. It only works with Attributes that are stateful.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>- State associated with value </td></tr>
+    <tr><td class="paramname">qvariant</td><td>- QVariant containing the value being set </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4df6d32c26b33b03bd39b39e5a535880" name="a4df6d32c26b33b03bd39b39e5a535880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df6d32c26b33b03bd39b39e5a535880">&#9670;&nbsp;</a></span>set_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Attribute::set_value </td>
+          <td>(</td>
+          <td class="paramtype">QVariant&#160;</td>
+          <td class="paramname"><em>qvariant</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>retain_type</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Set the value of the <a class="el" href="class_layers_1_1_data.html">Data</a>.</p>
+<p >This function simply calls <a class="el" href="class_layers_1_1_data.html#a09151718594ab891937cdbb722c8f259">Data::set_value()</a> and passes qvariant and retain_type. It only works with Attributes that are not stateful.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qvariant</td><td>- QVariant containing the value being set </td></tr>
+    <tr><td class="paramname">retain_type</td><td>- Whether to protect the value type from change, true by default </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a69d6089128f307d526e5c3395a7518c8" name="a69d6089128f307d526e5c3395a7518c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d6089128f307d526e5c3395a7518c8">&#9670;&nbsp;</a></span>state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString Attribute::state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns the active state of the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Active state represented as a QString </dd></dl>
+
+</div>
+</div>
+<a id="afa8c1c028fce08ddc42adc39ae30a76f" name="afa8c1c028fce08ddc42adc39ae30a76f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa8c1c028fce08ddc42adc39ae30a76f">&#9670;&nbsp;</a></span>states()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QList&lt; QString &gt; Attribute::states </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns a list of QStrings representing the available states.</p>
+<p >If the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> is not stateful, then an empty list will be returned.</p>
+<dl class="section return"><dt>Returns</dt><dd>QString list where QStrings represent the states </dd></dl>
+
+</div>
+</div>
+<a id="acb6e545317b9ab91295ac009e8392178" name="acb6e545317b9ab91295ac009e8392178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb6e545317b9ab91295ac009e8392178">&#9670;&nbsp;</a></span>to_json_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QJsonObject Attribute::to_json_object </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> converted to a QJsonObject.</p>
+<dl class="section return"><dt>Returns</dt><dd>QJsonObject pertaining to the <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> </dd></dl>
+
+</div>
+</div>
+<a id="aa90347c70e6f577ff9c8e8caaa40b42e" name="aa90347c70e6f577ff9c8e8caaa40b42e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa90347c70e6f577ff9c8e8caaa40b42e">&#9670;&nbsp;</a></span>typeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Attribute::typeName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Returns the name of the value's type.</p>
+<p >This function simply calls <a class="el" href="class_layers_1_1_data.html#a7761821aa1de5b8f6125d62f2c13e29d">Data::typeName()</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Name of value's type </dd></dl>
 
 </div>
 </div>

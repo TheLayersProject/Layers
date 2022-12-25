@@ -12,9 +12,6 @@ Inheritance diagram for Layers\+::Menu\+Label\+Layer\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_menu_label_layer_a3eeeff0dd0bca45733c19d4ced80ba77}\label{class_layers_1_1_menu_label_layer_a3eeeff0dd0bca45733c19d4ced80ba77}} 
 {\bfseries Menu\+Label\+Layer} (\mbox{\hyperlink{class_layers_1_1_menu}{Menu}} $\ast$menu, QWidget $\ast$parent=nullptr)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_menu_label_layer_a2a53a9bbfa415b9602e817b1f5a3d4b2}\label{class_layers_1_1_menu_label_layer_a2a53a9bbfa415b9602e817b1f5a3d4b2}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_menu_label_layer}{Menu\+Label\+Layer}} $\ast$mll)
-\item 
 \mbox{\Hypertarget{class_layers_1_1_menu_label_layer_a93e96c17a6dce0306e978011ce407223}\label{class_layers_1_1_menu_label_layer_a93e96c17a6dce0306e978011ce407223}} 
 void {\bfseries shrink} ()
 \item 
@@ -33,7 +30,8 @@ void {\bfseries expand} ()
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}\label{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \item 
@@ -44,11 +42,11 @@ void {\bfseries setup\+\_\+layout} ()
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}\label{class_layers_1_1_menu_label_layer_ab0828667b45c6f4ddd05d8cc2b90e7b2}} 
-\index{Layers::MenuLabelLayer@{Layers::MenuLabelLayer}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::MenuLabelLayer@{Layers::MenuLabelLayer}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Menu\+Label\+Layer\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}\label{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}} 
+\index{Layers::MenuLabelLayer@{Layers::MenuLabelLayer}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::MenuLabelLayer@{Layers::MenuLabelLayer}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Menu\+Label\+Layer\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -58,15 +56,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}\label{class_layers_1_1_menu_label_layer_ad363b095bc0fefd0b3a0856d807d99c1}} 
-\index{Layers::MenuLabelLayer@{Layers::MenuLabelLayer}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::MenuLabelLayer@{Layers::MenuLabelLayer}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Menu\+Label\+Layer\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

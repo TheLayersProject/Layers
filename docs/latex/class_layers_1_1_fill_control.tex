@@ -6,18 +6,19 @@ Inheritance diagram for Layers\+::Fill\+Control\+:\begin{figure}[H]
 \includegraphics[height=3.000000cm]{class_layers_1_1_fill_control}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_fill_control_af3c4ce7498586120443fb6ec52dbf3d7}\label{class_layers_1_1_fill_control_af3c4ce7498586120443fb6ec52dbf3d7}} 
+void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_fill_control_a3081d3d2b41101f0c2d4902a6f0cc116}\label{class_layers_1_1_fill_control_a3081d3d2b41101f0c2d4902a6f0cc116}} 
 {\bfseries Fill\+Control} (QWidget $\ast$parent=nullptr)
 \item 
-void \mbox{\hyperlink{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}{init\+\_\+attributes}} ()
-\item 
 void \mbox{\hyperlink{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_fill_control_a747b96544e27a82bb6acf6b6781379f6}\label{class_layers_1_1_fill_control_a747b96544e27a82bb6acf6b6781379f6}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_fill_control}{Fill\+Control}} $\ast$fill\+\_\+control)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_fill_control_ae91b0a2ee19daf73f03e6f9922e8b7c6}\label{class_layers_1_1_fill_control_ae91b0a2ee19daf73f03e6f9922e8b7c6}} 
 void {\bfseries set\+\_\+attribute} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$attribute)
@@ -27,16 +28,19 @@ void {\bfseries set\+\_\+attribute} (\mbox{\hyperlink{class_layers_1_1_attribute
 \item 
 \mbox{\Hypertarget{class_layers_1_1_fill_control_a5ae40cc96139cb06d0d7a9bb1873ce0d}\label{class_layers_1_1_fill_control_a5ae40cc96139cb06d0d7a9bb1873ce0d}} 
 bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}\label{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}} 
+void {\bfseries init\+\_\+attributes} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}\label{class_layers_1_1_fill_control_ab80ab03a70313463948789808f90cd49}} 
-\index{Layers::FillControl@{Layers::FillControl}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::FillControl@{Layers::FillControl}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Fill\+Control\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}\label{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}} 
+\index{Layers::FillControl@{Layers::FillControl}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::FillControl@{Layers::FillControl}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Fill\+Control\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -46,15 +50,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}\label{class_layers_1_1_fill_control_aa48ecaf3585180865ddf46584f58516f}} 
-\index{Layers::FillControl@{Layers::FillControl}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::FillControl@{Layers::FillControl}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Fill\+Control\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

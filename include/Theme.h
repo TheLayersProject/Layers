@@ -96,7 +96,7 @@ namespace Layers
 
 			@param theme to copy attribute sets from
 		*/
-		void copy_from(Theme& theme);
+		void copy(Theme& theme);
 
 		void copy_attribute_values_of(Themeable* themeable);
 

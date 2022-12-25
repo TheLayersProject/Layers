@@ -6,17 +6,23 @@ Inheritance diagram for Layers\+::AWGroup\+:\begin{figure}[H]
 \includegraphics[height=5.000000cm]{class_layers_1_1_a_w_group}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_a_w_group_ad75c3a5bd027a80f1abfdf9af7bffad7}\label{class_layers_1_1_a_w_group_ad75c3a5bd027a80f1abfdf9af7bffad7}} 
+virtual void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state) override
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_layers_1_1_a_w_group_ac96f5229fba54e50d1d623a17b0481a4}\label{class_layers_1_1_a_w_group_ac96f5229fba54e50d1d623a17b0481a4}} 
-{\bfseries AWGroup} (const QString \&label\+\_\+text, QWidget $\ast$parent=nullptr)
+\mbox{\Hypertarget{class_layers_1_1_a_w_group_a27ac2e97a9dfab4e9921f20da8e2ed17}\label{class_layers_1_1_a_w_group_a27ac2e97a9dfab4e9921f20da8e2ed17}} 
+{\bfseries AWGroup} (\mbox{\hyperlink{class_layers_1_1_attribute_group}{Attribute\+Group}} $\ast$attr\+\_\+group, QWidget $\ast$parent=nullptr)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_a_w_group_aad2d4a9218fcb6339108bfc2f1939e88}\label{class_layers_1_1_a_w_group_aad2d4a9218fcb6339108bfc2f1939e88}} 
 void {\bfseries add\+\_\+attribute\+\_\+widget} (\mbox{\hyperlink{class_layers_1_1_attribute_widget}{Attribute\+Widget}} $\ast$attribute\+\_\+widget)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_a_w_group_ad365a50ade441443f8bce7a0b35414cf}\label{class_layers_1_1_a_w_group_ad365a50ade441443f8bce7a0b35414cf}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_a_w_group}{AWGroup}} $\ast$aw\+\_\+group)
+\mbox{\Hypertarget{class_layers_1_1_a_w_group_a29fcb320b9970b02e1bf7cc0886eec21}\label{class_layers_1_1_a_w_group_a29fcb320b9970b02e1bf7cc0886eec21}} 
+void {\bfseries set\+\_\+collapsed} (bool collapsed=true)
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -32,6 +38,16 @@ void \mbox{\hyperlink{class_layers_1_1_a_w_group_ad22e6c2e3a6407874f8146739321b1
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::AWGroup@{Layers::AWGroup}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void AWGroup\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

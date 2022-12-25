@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -104,9 +104,10 @@ Inheritance diagram for Layers::Themeable:</div>
 <area href="class_layers_1_1_label.html" alt="Layers::Label" shape="rect" coords="203,168,396,192"/>
 <area href="class_layers_1_1_menu_bar.html" alt="Layers::MenuBar" shape="rect" coords="203,224,396,248"/>
 <area href="class_layers_1_1_s_v_g.html" alt="Layers::SVG" shape="rect" coords="203,280,396,304"/>
-<area href="class_layers_1_1_tab_bar.html" alt="Layers::TabBar" shape="rect" coords="203,336,396,360"/>
-<area href="class_layers_1_1_update_dialog.html" alt="Layers::UpdateDialog" shape="rect" coords="203,392,396,416"/>
-<area href="class_layers_1_1_widget.html" alt="Layers::Widget" shape="rect" coords="203,448,396,472"/>
+<area href="class_layers_1_1_scroll_bar.html" alt="Layers::ScrollBar" shape="rect" coords="203,336,396,360"/>
+<area href="class_layers_1_1_tab_bar.html" alt="Layers::TabBar" shape="rect" coords="203,392,396,416"/>
+<area href="class_layers_1_1_update_dialog.html" alt="Layers::UpdateDialog" shape="rect" coords="203,448,396,472"/>
+<area href="class_layers_1_1_widget.html" alt="Layers::Widget" shape="rect" coords="203,504,396,528"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -116,19 +117,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad89c09e860d259ab5752df92a989cd02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cf931b355c0d658d5c913af8e49edb6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6">apply_theme</a> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;theme)</td></tr>
 <tr class="separator:a1cf931b355c0d658d5c913af8e49edb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a279cb475197ea1aa86c81d715bf72db5"><td class="memItemLeft" align="right" valign="top"><a id="a279cb475197ea1aa86c81d715bf72db5" name="a279cb475197ea1aa86c81d715bf72db5"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>apply_theme_attributes</b> (QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; &amp;theme_attrs)</td></tr>
-<tr class="separator:a279cb475197ea1aa86c81d715bf72db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac41fff46aef6013184721ba044a96d9"><td class="memItemLeft" align="right" valign="top"><a id="aac41fff46aef6013184721ba044a96d9" name="aac41fff46aef6013184721ba044a96d9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>apply_theme_attributes</b> (QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;theme_attrs)</td></tr>
+<tr class="separator:aac41fff46aef6013184721ba044a96d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72bbd5ac1f2e4ebb4e1b0bf63b157076"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a72bbd5ac1f2e4ebb4e1b0bf63b157076">assign_tag_prefixes</a> (QList&lt; QString &gt; parent_prefixes=QList&lt; QString &gt;(), const QString &amp;parent_name=&quot;&quot;)</td></tr>
 <tr class="separator:a72bbd5ac1f2e4ebb4e1b0bf63b157076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad96b1137b69af820211143715d3d80e4"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ad96b1137b69af820211143715d3d80e4">attributes</a> ()</td></tr>
-<tr class="separator:ad96b1137b69af820211143715d3d80e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1e39362a6d709b279307ad4f2e982a"><td class="memItemLeft" align="right" valign="top"><a id="a7e1e39362a6d709b279307ad4f2e982a" name="a7e1e39362a6d709b279307ad4f2e982a"></a>
-QList&lt; <a class="el" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_layout</b> ()</td></tr>
-<tr class="separator:a7e1e39362a6d709b279307ad4f2e982a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf35e8431ab9d29c0c24bed4d8cd229"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#aaaf35e8431ab9d29c0c24bed4d8cd229">attributes</a> ()</td></tr>
+<tr class="separator:aaaf35e8431ab9d29c0c24bed4d8cd229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273e0041a0be54fc143e3dd0733d7af9"><td class="memItemLeft" align="right" valign="top"><a id="a273e0041a0be54fc143e3dd0733d7af9" name="a273e0041a0be54fc143e3dd0733d7af9"></a>
+QList&lt; <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_layout</b> ()</td></tr>
+<tr class="separator:a273e0041a0be54fc143e3dd0733d7af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28ef1b44525f07dc9b029a08b5f9cbe5"><td class="memItemLeft" align="right" valign="top"><a id="a28ef1b44525f07dc9b029a08b5f9cbe5" name="a28ef1b44525f07dc9b029a08b5f9cbe5"></a>
 QList&lt; <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>child_themeable_references</b> ()</td></tr>
 <tr class="separator:a28ef1b44525f07dc9b029a08b5f9cbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f64f910d7c79a514dd298f3b2a2bb3d"><td class="memItemLeft" align="right" valign="top"><a id="a4f64f910d7c79a514dd298f3b2a2bb3d" name="a4f64f910d7c79a514dd298f3b2a2bb3d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>copy_attribute_values_to</b> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> *theme)</td></tr>
+<tr class="separator:a4f64f910d7c79a514dd298f3b2a2bb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307575be91e7169a73fccfcb21b7dff8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_theme.html">Theme</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a307575be91e7169a73fccfcb21b7dff8">current_theme</a> ()</td></tr>
 <tr class="separator:a307575be91e7169a73fccfcb21b7dff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac69a4f7e207dadce226ccd58efe7bdc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_customize_panel.html">CustomizePanel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ac69a4f7e207dadce226ccd58efe7bdc5">customize_panel</a> ()</td></tr>
@@ -137,12 +141,18 @@ QList&lt; <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> * &
 <tr class="separator:a44348cb0e739908c52bf6d640215c1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a693634b06c973c840a8b185b1bdc0224"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a693634b06c973c840a8b185b1bdc0224">is_stateful</a> () const</td></tr>
 <tr class="separator:a693634b06c973c840a8b185b1bdc0224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69b5ef077cdbb52074fcc68db129c093"><td class="memItemLeft" align="right" valign="top">QString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a69b5ef077cdbb52074fcc68db129c093">name</a> () const</td></tr>
+<tr class="separator:a69b5ef077cdbb52074fcc68db129c093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf7bac3feceaf1fe625338dbff098189"><td class="memItemLeft" align="right" valign="top">QString *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#aaf7bac3feceaf1fe625338dbff098189">proper_name</a> () const</td></tr>
 <tr class="separator:aaf7bac3feceaf1fe625338dbff098189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09fdb49f042a29a3fb09179c50e4fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ae09fdb49f042a29a3fb09179c50e4fcf">reapply_theme</a> ()</td></tr>
 <tr class="separator:ae09fdb49f042a29a3fb09179c50e4fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3916991fcd49e3024302744564a06be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ae3916991fcd49e3024302744564a06be">remove_child_themeable_reference</a> (<a class="el" href="class_layers_1_1_themeable.html">Themeable</a> *child_themeable)</td></tr>
 <tr class="separator:ae3916991fcd49e3024302744564a06be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a768843b5373d29290c9bfafe3386e504"><td class="memTemplParams" colspan="2"><a id="a768843b5373d29290c9bfafe3386e504" name="a768843b5373d29290c9bfafe3386e504"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a768843b5373d29290c9bfafe3386e504"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>replace_all_attributes_with</b> (T *themeable)</td></tr>
+<tr class="separator:a768843b5373d29290c9bfafe3386e504"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42c159745b63bc3dff06b6671c14fb7f"><td class="memItemLeft" align="right" valign="top"><a id="a42c159745b63bc3dff06b6671c14fb7f" name="a42c159745b63bc3dff06b6671c14fb7f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set_is_app_themeable</b> (bool is_app_themeable)</td></tr>
 <tr class="separator:a42c159745b63bc3dff06b6671c14fb7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,7 +161,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>set_functionality_dis
 <tr class="separator:a46d9b551cae051bf960712bb878f7b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647a8657ead007473eafaa4ccb6cd4af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a647a8657ead007473eafaa4ccb6cd4af">set_icon</a> (<a class="el" href="class_layers_1_1_graphic.html">Graphic</a> *<a class="el" href="class_layers_1_1_themeable.html#a44348cb0e739908c52bf6d640215c1f4">icon</a>)</td></tr>
 <tr class="separator:a647a8657ead007473eafaa4ccb6cd4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78f9b10993fcef1557aeba1bc75e5c90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a78f9b10993fcef1557aeba1bc75e5c90">set_name</a> (const QString &amp;name)</td></tr>
+<tr class="memitem:a78f9b10993fcef1557aeba1bc75e5c90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a78f9b10993fcef1557aeba1bc75e5c90">set_name</a> (const QString &amp;<a class="el" href="class_layers_1_1_themeable.html#a69b5ef077cdbb52074fcc68db129c093">name</a>)</td></tr>
 <tr class="separator:a78f9b10993fcef1557aeba1bc75e5c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00802c07a93a1eefdbcf74a5c04b863b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a00802c07a93a1eefdbcf74a5c04b863b">set_proper_name</a> (const QString &amp;<a class="el" href="class_layers_1_1_themeable.html#aaf7bac3feceaf1fe625338dbff098189">proper_name</a>)</td></tr>
 <tr class="separator:a00802c07a93a1eefdbcf74a5c04b863b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,8 +179,6 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> () const
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ab0d5b874755ebf036c8137f4ea28b5ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ab0d5b874755ebf036c8137f4ea28b5ab">init_attributes</a> ()</td></tr>
-<tr class="separator:ab0d5b874755ebf036c8137f4ea28b5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85caf98f853b46cb62b72a29f32c3227"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a85caf98f853b46cb62b72a29f32c3227">init_child_themeable_reference_list</a> ()</td></tr>
 <tr class="separator:a85caf98f853b46cb62b72a29f32c3227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -209,12 +217,12 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_state</b> { &quo
 <tr class="memitem:ad23e25dbc5ecd2b817b19dcb9e876142"><td class="memItemLeft" align="right" valign="top"><a id="ad23e25dbc5ecd2b817b19dcb9e876142" name="ad23e25dbc5ecd2b817b19dcb9e876142"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_tag</b> { &quot;&quot; }</td></tr>
 <tr class="separator:ad23e25dbc5ecd2b817b19dcb9e876142"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9b9b6a355a4f5f1ed2833b1e25d59f7"><td class="memItemLeft" align="right" valign="top"><a id="ae9b9b6a355a4f5f1ed2833b1e25d59f7" name="ae9b9b6a355a4f5f1ed2833b1e25d59f7"></a>
-QList&lt; <a class="el" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attribute_layout</b> { QList&lt;<a class="el" href="struct_layers_1_1_attribute_layout_item.html">AttributeLayoutItem</a>*&gt;() }</td></tr>
-<tr class="separator:ae9b9b6a355a4f5f1ed2833b1e25d59f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3002ee44caa5d294bf4bf335d11f210f"><td class="memItemLeft" align="right" valign="top"><a id="a3002ee44caa5d294bf4bf335d11f210f" name="a3002ee44caa5d294bf4bf335d11f210f"></a>
-QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attributes</b> { QMap&lt;QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a>*&gt;() }</td></tr>
-<tr class="separator:a3002ee44caa5d294bf4bf335d11f210f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4774c7269cf3fda80b60a22579b232c"><td class="memItemLeft" align="right" valign="top"><a id="af4774c7269cf3fda80b60a22579b232c" name="af4774c7269cf3fda80b60a22579b232c"></a>
+QList&lt; <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attribute_layout</b> { QList&lt;<a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a>*&gt;() }</td></tr>
+<tr class="separator:af4774c7269cf3fda80b60a22579b232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc8292c6f571aa5b6870581131a0b2fb"><td class="memItemLeft" align="right" valign="top"><a id="afc8292c6f571aa5b6870581131a0b2fb" name="afc8292c6f571aa5b6870581131a0b2fb"></a>
+QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attributes</b> { QMap&lt;QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a>*&gt;() }</td></tr>
+<tr class="separator:afc8292c6f571aa5b6870581131a0b2fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf7a81dcbf2dae48648fef97837a6c3"><td class="memItemLeft" align="right" valign="top"><a id="a8bf7a81dcbf2dae48648fef97837a6c3" name="a8bf7a81dcbf2dae48648fef97837a6c3"></a>
 QList&lt; <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_child_themeables</b></td></tr>
 <tr class="separator:a8bf7a81dcbf2dae48648fef97837a6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -306,14 +314,14 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
 
 </div>
 </div>
-<a id="ad96b1137b69af820211143715d3d80e4" name="ad96b1137b69af820211143715d3d80e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad96b1137b69af820211143715d3d80e4">&#9670;&nbsp;</a></span>attributes()</h2>
+<a id="aaaf35e8431ab9d29c0c24bed4d8cd229" name="aaaf35e8431ab9d29c0c24bed4d8cd229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf35e8431ab9d29c0c24bed4d8cd229">&#9670;&nbsp;</a></span>attributes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute.html">Attribute</a> * &gt; &amp; Themeable::attributes </td>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp; Themeable::attributes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -388,38 +396,6 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
 
 </div>
 </div>
-<a id="ab0d5b874755ebf036c8137f4ea28b5ab" name="ab0d5b874755ebf036c8137f4ea28b5ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0d5b874755ebf036c8137f4ea28b5ab">&#9670;&nbsp;</a></span>init_attributes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Themeable::init_attributes </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >Updates things that depend on the theme. Called by <a class="el" href="class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6">apply_theme()</a>.</p>
-<p >This function can be defined by implementers of the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class to handle anything they want to change when a theme gets applied that can't be changed through attributes. However, it is not required to implement this function.</p>
-<p >Initializes the attributes.</p>
-<p >This is a pure virtual function that must be defined by other classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class. This function should be used to define a themeable's attributes with calls to set_attribute_value().</p>
-<p >This function is called by init_themeable(). </p>
-
-<p>Reimplemented in <a class="el" href="class_layers_1_1_attribute_widget.html#aae6f9c48010545be42ef473674e389a7">Layers::AttributeWidget</a>, <a class="el" href="class_layers_1_1_button.html#abd83373d30fe4f4ae0623afd61eb2de0">Layers::Button</a>, <a class="el" href="class_layers_1_1_color_control.html#a76ba9d85bb087e2e23426d7af624e4b0">Layers::ColorControl</a>, <a class="el" href="class_layers_1_1_combobox_item.html#ae5d1172faa0020c53c47c877d6bb222d">Layers::ComboboxItem</a>, <a class="el" href="class_layers_1_1_combobox.html#abda7de15ee2d4c5264b6dee0f790593f">Layers::Combobox</a>, <a class="el" href="class_layers_1_1_create_new_theme_dialog.html#a099613e95bbf47c7acab360b8d6279c3">Layers::CreateNewThemeDialog</a>, <a class="el" href="class_layers_1_1_customize_panel.html#adbf24db387bb2f8315ab95b2abc1d97e">Layers::CustomizePanel</a>, <a class="el" href="class_layers_1_1_fill_control.html#ab80ab03a70313463948789808f90cd49">Layers::FillControl</a>, <a class="el" href="class_layers_1_1_gradient_control.html#ad2416f169666be2c8113ff16b955fc8f">Layers::GradientControl</a>, <a class="el" href="class_layers_1_1_gradient_selection_dialog.html#a55632fef220ab2d0064b5f0c416f1f42">Layers::GradientSelectionDialog</a>, <a class="el" href="class_layers_1_1_label.html#addd21a0f1f36be719b477adf3406f07d">Layers::Label</a>, <a class="el" href="class_layers_1_1_line_editor.html#a57c5c9ee4a6577b84da5a9d998bc91b2">Layers::LineEditor</a>, <a class="el" href="class_layers_1_1_menu_bar.html#a476cef97d90702bec76d7bb3569b290b">Layers::MenuBar</a>, <a class="el" href="class_layers_1_1_menu_label_layer.html#ab0828667b45c6f4ddd05d8cc2b90e7b2">Layers::MenuLabelLayer</a>, <a class="el" href="class_layers_1_1_mini_slider.html#a3c1d6027ac9e0234d128867ccf21b96c">Layers::MiniSlider</a>, <a class="el" href="class_layers_1_1_settings_tab.html#ae3c354e1db71adaa616b5c0c6a240fcd">Layers::SettingsTab</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#aab605a53aceeec7118d668d0f3f6046b">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_slider.html#a1789e7e9b37d446687975f8f9037a301">Layers::Slider</a>, <a class="el" href="class_layers_1_1_s_v_g.html#a51772ec69b6e9ba794914b69e9010d7e">Layers::SVG</a>, <a class="el" href="class_layers_1_1_tab_bar.html#a00d91d164cb4902e0729bd2d7b1fe60a">Layers::TabBar</a>, <a class="el" href="class_layers_1_1_toggle_switch.html#a7ffaab0c1a84bfb2a0e87af627a7e6a8">Layers::ToggleSwitch</a>, <a class="el" href="class_layers_1_1_update_dialog.html#a691f5c91dd972454236f8691a8a5f3da">Layers::UpdateDialog</a>, and <a class="el" href="class_layers_1_1_widget.html#acf1e13fb2beddd23f6c87e2486df259d">Layers::Widget</a>.</p>
-
-</div>
-</div>
 <a id="a85caf98f853b46cb62b72a29f32c3227" name="a85caf98f853b46cb62b72a29f32c3227"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85caf98f853b46cb62b72a29f32c3227">&#9670;&nbsp;</a></span>init_child_themeable_reference_list()</h2>
 
@@ -442,6 +418,11 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Updates things that depend on the theme. Called by <a class="el" href="class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6">apply_theme()</a>.</p>
+<p >This function can be defined by implementers of the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class to handle anything they want to change when a theme gets applied that can't be changed through attributes. However, it is not required to implement this function.</p>
+<p >Initializes the attributes.</p>
+<p >This is a pure virtual function that must be defined by other classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class. This function should be used to define a themeable's attributes with calls to set_attribute_value().</p>
+<p >This function is called by init_themeable().</p>
 <p >Initializes the customize panel.</p>
 <p >A themeable MUST have a proper name to initialize a customize panel. Set one using <a class="el" href="class_layers_1_1_themeable.html#a00802c07a93a1eefdbcf74a5c04b863b">set_proper_name()</a>.</p>
 <p >This function is responsible for calling setup_customize_panel(), which is a pure virtual function that must be defined by other classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class.</p>
@@ -451,7 +432,7 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
 <p >Classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class should define this function and use <a class="el" href="class_layers_1_1_themeable.html#ad89c09e860d259ab5752df92a989cd02">store_child_themeable_pointer()</a> to populate the reference list.</p>
 <p >This function is called by init_themeable(). </p>
 
-<p>Reimplemented in <a class="el" href="class_layers_1_1_state_a_w.html#a81a6af2ba5e3e70990a19f78827ad35f">Layers::StateAW</a>, <a class="el" href="class_layers_1_1_a_w_group.html#ad22e6c2e3a6407874f8146739321b130">Layers::AWGroup</a>, <a class="el" href="class_layers_1_1_corner_radii_a_w.html#ad25ac99608075877c7e64d0d6931de0f">Layers::CornerRadiiAW</a>, <a class="el" href="class_layers_1_1_color_a_w.html#a15bbd953b14bf5aeda27c779d5658353">Layers::ColorAW</a>, <a class="el" href="class_layers_1_1_gradient_a_w.html#a9bd39e79051cbc99026e11d2d8edd961">Layers::GradientAW</a>, <a class="el" href="class_layers_1_1_fill_a_w.html#a5e7d1cf0ade89c79683943217d9ae42d">Layers::FillAW</a>, <a class="el" href="class_layers_1_1_number_a_w.html#a85701a2652511ceb7a7ed2283c8f01c6">Layers::NumberAW</a>, <a class="el" href="class_layers_1_1_button.html#abd3b17b04c959e2d9608e48f5062943b">Layers::Button</a>, <a class="el" href="class_layers_1_1_combobox_item.html#a1fa64015e3814edc5eb8a6805e3f16b2">Layers::ComboboxItem</a>, <a class="el" href="class_layers_1_1_combobox.html#a806b2c8aabf9612c20cb2508d8cef802">Layers::Combobox</a>, <a class="el" href="class_layers_1_1_create_new_theme_dialog.html#ae72e91068da1cab6cfcc35a7fb743e27">Layers::CreateNewThemeDialog</a>, <a class="el" href="class_layers_1_1_customize_menu.html#ac1e79c91ace636e046f82a53dcbdde01">Layers::CustomizeMenu</a>, <a class="el" href="class_layers_1_1_customize_panel.html#ac55d3c41ab08b45a4c350dbdc4e4234f">Layers::CustomizePanel</a>, <a class="el" href="class_layers_1_1_fill_control.html#aa48ecaf3585180865ddf46584f58516f">Layers::FillControl</a>, <a class="el" href="class_layers_1_1_gradient_selection_dialog.html#a3ac018e15cc8827dd22f1bea902d01ca">Layers::GradientSelectionDialog</a>, <a class="el" href="class_layers_1_1_menu_label_layer.html#ad363b095bc0fefd0b3a0856d807d99c1">Layers::MenuLabelLayer</a>, <a class="el" href="class_layers_1_1_mini_slider.html#a4911a65406c7023aa01a0a7dba376a8d">Layers::MiniSlider</a>, <a class="el" href="class_layers_1_1_settings_tab.html#ac99e19c5454756d4d84efc161942b26d">Layers::SettingsTab</a>, <a class="el" href="class_layers_1_1_settings_menu.html#a53a028c52207f43352ea276850d647ca">Layers::SettingsMenu</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#a3394cf259e836fa1d8e980240857d20e">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_slider.html#ac6205a8b62ec2b3d08fe79d5d92e3b4a">Layers::Slider</a>, <a class="el" href="class_layers_1_1_titlebar.html#a4332cc5ba1ae6cabe97f154c485444c2">Layers::Titlebar</a>, <a class="el" href="class_layers_1_1_toggle_switch.html#a9e84984f4c1cc739653aac02e9e6eb24">Layers::ToggleSwitch</a>, <a class="el" href="class_layers_1_1_update_dialog.html#a3367d1e60b8983cb069da4890ea27cba">Layers::UpdateDialog</a>, and <a class="el" href="class_layers_1_1_window.html#abcae06c266c64194125b7670bad152e1">Layers::Window</a>.</p>
+<p>Reimplemented in <a class="el" href="class_layers_1_1_state_a_w.html#a81a6af2ba5e3e70990a19f78827ad35f">Layers::StateAW</a>, <a class="el" href="class_layers_1_1_a_w_group.html#ad22e6c2e3a6407874f8146739321b130">Layers::AWGroup</a>, <a class="el" href="class_layers_1_1_corner_radii_a_w.html#ad25ac99608075877c7e64d0d6931de0f">Layers::CornerRadiiAW</a>, <a class="el" href="class_layers_1_1_color_a_w.html#a15bbd953b14bf5aeda27c779d5658353">Layers::ColorAW</a>, <a class="el" href="class_layers_1_1_gradient_a_w.html#a9bd39e79051cbc99026e11d2d8edd961">Layers::GradientAW</a>, <a class="el" href="class_layers_1_1_fill_a_w.html#a5e7d1cf0ade89c79683943217d9ae42d">Layers::FillAW</a>, <a class="el" href="class_layers_1_1_number_a_w.html#a85701a2652511ceb7a7ed2283c8f01c6">Layers::NumberAW</a>, <a class="el" href="class_layers_1_1_button.html#abd3b17b04c959e2d9608e48f5062943b">Layers::Button</a>, <a class="el" href="class_layers_1_1_combobox_item.html#a1fa64015e3814edc5eb8a6805e3f16b2">Layers::ComboboxItem</a>, <a class="el" href="class_layers_1_1_combobox.html#a806b2c8aabf9612c20cb2508d8cef802">Layers::Combobox</a>, <a class="el" href="class_layers_1_1_create_new_theme_dialog.html#ae72e91068da1cab6cfcc35a7fb743e27">Layers::CreateNewThemeDialog</a>, <a class="el" href="class_layers_1_1_customize_menu.html#ac1e79c91ace636e046f82a53dcbdde01">Layers::CustomizeMenu</a>, <a class="el" href="class_layers_1_1_customize_panel.html#ac55d3c41ab08b45a4c350dbdc4e4234f">Layers::CustomizePanel</a>, <a class="el" href="class_layers_1_1_fill_control.html#aa48ecaf3585180865ddf46584f58516f">Layers::FillControl</a>, <a class="el" href="class_layers_1_1_gradient_selection_dialog.html#a3ac018e15cc8827dd22f1bea902d01ca">Layers::GradientSelectionDialog</a>, <a class="el" href="class_layers_1_1_menu_label_layer.html#ad363b095bc0fefd0b3a0856d807d99c1">Layers::MenuLabelLayer</a>, <a class="el" href="class_layers_1_1_mini_slider.html#a4911a65406c7023aa01a0a7dba376a8d">Layers::MiniSlider</a>, <a class="el" href="class_layers_1_1_scroll_area.html#a33f193a637988fc4acb5c06d2a772263">Layers::ScrollArea</a>, <a class="el" href="class_layers_1_1_settings_tab.html#ac99e19c5454756d4d84efc161942b26d">Layers::SettingsTab</a>, <a class="el" href="class_layers_1_1_settings_menu.html#a53a028c52207f43352ea276850d647ca">Layers::SettingsMenu</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#a3394cf259e836fa1d8e980240857d20e">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_slider.html#ac6205a8b62ec2b3d08fe79d5d92e3b4a">Layers::Slider</a>, <a class="el" href="class_layers_1_1_titlebar.html#a4332cc5ba1ae6cabe97f154c485444c2">Layers::Titlebar</a>, <a class="el" href="class_layers_1_1_toggle_switch.html#a9e84984f4c1cc739653aac02e9e6eb24">Layers::ToggleSwitch</a>, <a class="el" href="class_layers_1_1_update_dialog.html#a3367d1e60b8983cb069da4890ea27cba">Layers::UpdateDialog</a>, and <a class="el" href="class_layers_1_1_window.html#abcae06c266c64194125b7670bad152e1">Layers::Window</a>.</p>
 
 </div>
 </div>
@@ -480,6 +461,25 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
 
 </div>
 </div>
+<a id="a69b5ef077cdbb52074fcc68db129c093" name="a69b5ef077cdbb52074fcc68db129c093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69b5ef077cdbb52074fcc68db129c093">&#9670;&nbsp;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString * Themeable::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Calls the inheriting QWidget's update() function</p>
+<p >This is a pure virtual function that must be defined by other classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class. This function should be used to call the inheriting QWidget's update(). </p>
+
+</div>
+</div>
 <a id="aaf7bac3feceaf1fe625338dbff098189" name="aaf7bac3feceaf1fe625338dbff098189"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf7bac3feceaf1fe625338dbff098189">&#9670;&nbsp;</a></span>proper_name()</h2>
 
@@ -494,8 +494,6 @@ QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_t
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Calls the inheriting QWidget's update() function</p>
-<p >This is a pure virtual function that must be defined by other classes that inherit the <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> class. This function should be used to call the inheriting QWidget's update().</p>
 <p >Get the address of the proper name. Returns nullptr if no proper name has been set.</p>
 <dl class="section return"><dt>Returns</dt><dd>Address of proper name, or nullptr </dd></dl>
 

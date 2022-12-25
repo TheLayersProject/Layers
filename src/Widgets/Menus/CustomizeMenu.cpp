@@ -127,7 +127,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_sidebar_widget->setMouseTracking(true);
 	m_sidebar_widget->a_fill.set_disabled();
 
-	m_preview_frame->a_corner_color.get_variant_from(m_sidebar->a_fill);
+	m_preview_frame->a_corner_color.get_data_from(m_sidebar->a_fill);
 
 	m_preview_frame->corner_radii.top_left.set_value(10.0);
 	m_preview_frame->a_corner_color.set_disabled(false);

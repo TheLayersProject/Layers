@@ -1,7 +1,7 @@
 #ifndef THEMEABLE_H
 #define THEMEABLE_H
 
-#include "Attribute.h"
+#include "AttributeGroup.h"
 
 namespace Layers
 {
@@ -334,9 +334,9 @@ namespace Layers
 			for (const QString& attr_type_key : m_attributes.keys())
 			{
 				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[attr_type_key]))
-					attr->get_variant_from(*dynamic_cast<Attribute*>(themeable->m_attributes[attr_type_key]));
+					attr->get_data_from(*dynamic_cast<Attribute*>(themeable->m_attributes[attr_type_key]));
 				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[attr_type_key]))
-					attr_group->get_variant_from(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[attr_type_key]));
+					attr_group->get_data_from(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[attr_type_key]));
 			}
 
 			for (Themeable* this_child_themeable : m_child_themeables)

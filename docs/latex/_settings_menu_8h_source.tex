@@ -37,82 +37,81 @@
 \DoxyCodeLine{33     \textcolor{keyword}{protected}:}
 \DoxyCodeLine{34         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
 \DoxyCodeLine{35 }
-\DoxyCodeLine{36         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}{init\_attributes}}();}
-\DoxyCodeLine{37         \textcolor{keywordtype}{void} init\_attribute\_widgets();}
-\DoxyCodeLine{38         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{39 }
-\DoxyCodeLine{40         \textcolor{keywordtype}{void} resizeEvent(QResizeEvent* event);}
-\DoxyCodeLine{41 }
-\DoxyCodeLine{42     \textcolor{keyword}{private}:}
-\DoxyCodeLine{43         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45         QHBoxLayout* main\_layout\{ \textcolor{keyword}{new} QHBoxLayout \};}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_text\_label;}
-\DoxyCodeLine{50 }
-\DoxyCodeLine{51         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_tab\_icon;}
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_spacer\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_stretch\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{55         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_stretch\_widget2\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{56     \};}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
-\DoxyCodeLine{59     \{}
-\DoxyCodeLine{60         Q\_OBJECT}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{62     \textcolor{keyword}{public}:}
-\DoxyCodeLine{63         \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}}(QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{64     \};}
-\DoxyCodeLine{65 }
-\DoxyCodeLine{66     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}}
-\DoxyCodeLine{67     \{}
-\DoxyCodeLine{68         Q\_OBJECT}
-\DoxyCodeLine{69 }
-\DoxyCodeLine{70     \textcolor{keyword}{public}:}
-\DoxyCodeLine{71         \mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}}(QWidget* parent = \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{72 }
-\DoxyCodeLine{73         \textcolor{keywordtype}{void} add\_settings\_tab(\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* icon, \textcolor{keyword}{const} QString\& label\_text);}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{75         \textcolor{keywordtype}{int} largest\_tab\_index() \textcolor{keyword}{const};}
-\DoxyCodeLine{76 }
-\DoxyCodeLine{77         \textcolor{keywordtype}{int} recommended\_minimum\_tab\_width() \textcolor{keyword}{const};}
-\DoxyCodeLine{78 }
-\DoxyCodeLine{79         \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}}* themes\_settings\_panel() \textcolor{keyword}{const};}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{81     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{82         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{83 }
-\DoxyCodeLine{84         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_settings_menu_a53a028c52207f43352ea276850d647ca}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{85 }
-\DoxyCodeLine{86     \textcolor{keyword}{private} slots:}
-\DoxyCodeLine{87         \textcolor{keywordtype}{void} shrink\_tabs();}
-\DoxyCodeLine{88         \textcolor{keywordtype}{void} expand\_tabs();}
-\DoxyCodeLine{89 }
-\DoxyCodeLine{90     \textcolor{keyword}{private}:}
-\DoxyCodeLine{91         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{92 }
-\DoxyCodeLine{93         \textcolor{keywordtype}{bool} m\_dragging\_sidebar\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{94         \textcolor{keywordtype}{bool} m\_frozen\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{95         \textcolor{keywordtype}{bool} m\_hovering\_over\_divider\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{96         \textcolor{keywordtype}{bool} m\_shrunk\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{97 }
-\DoxyCodeLine{98         \mbox{\hyperlink{class_layers_1_1_vertical_layout}{VerticalLayout}}* m\_sidebar\_layout = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_vertical_layout}{VerticalLayout}};}
-\DoxyCodeLine{99 }
-\DoxyCodeLine{100         QList<SettingsTab*> m\_settings\_tabs;}
-\DoxyCodeLine{101 }
-\DoxyCodeLine{102         QPoint last\_pos;}
-\DoxyCodeLine{103 }
-\DoxyCodeLine{104         \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}}* m\_sidebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}} \};}
-\DoxyCodeLine{105 }
-\DoxyCodeLine{106         \mbox{\hyperlink{class_layers_1_1_app_preferences_settings_panel}{AppPreferencesSettingsPanel}}* m\_app\_preferences\_settings\_panel\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_app_preferences_settings_panel}{AppPreferencesSettingsPanel}} \};}
-\DoxyCodeLine{107 }
-\DoxyCodeLine{108         \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}}* m\_themes\_settings\_panel\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}} \};}
-\DoxyCodeLine{109     \};}
-\DoxyCodeLine{110 \}}
-\DoxyCodeLine{111 }
-\DoxyCodeLine{112 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SETTINGSMENU\_H}}
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} resizeEvent(QResizeEvent* event);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keyword}{private}:}
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         QHBoxLayout* main\_layout\{ \textcolor{keyword}{new} QHBoxLayout \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_text\_label;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_tab\_icon;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_spacer\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{53         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_stretch\_widget\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{54         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_stretch\_widget2\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{55     \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         Q\_OBJECT}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keyword}{public}:}
+\DoxyCodeLine{62         \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{63     \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_menu}{Menu}}}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         Q\_OBJECT}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keyword}{public}:}
+\DoxyCodeLine{70         \mbox{\hyperlink{class_layers_1_1_settings_menu}{SettingsMenu}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} add\_settings\_tab(\mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* icon, \textcolor{keyword}{const} QString\& label\_text);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordtype}{int} largest\_tab\_index() \textcolor{keyword}{const};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         \textcolor{keywordtype}{int} recommended\_minimum\_tab\_width() \textcolor{keyword}{const};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}}* themes\_settings\_panel() \textcolor{keyword}{const};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{81         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_settings_menu_a53a028c52207f43352ea276850d647ca}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{86         \textcolor{keywordtype}{void} shrink\_tabs();}
+\DoxyCodeLine{87         \textcolor{keywordtype}{void} expand\_tabs();}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keyword}{private}:}
+\DoxyCodeLine{90         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92         \textcolor{keywordtype}{bool} m\_dragging\_sidebar\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{93         \textcolor{keywordtype}{bool} m\_frozen\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{94         \textcolor{keywordtype}{bool} m\_hovering\_over\_divider\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{95         \textcolor{keywordtype}{bool} m\_shrunk\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \mbox{\hyperlink{class_layers_1_1_vertical_layout}{VerticalLayout}}* m\_sidebar\_layout = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_vertical_layout}{VerticalLayout}};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         QList<SettingsTab*> m\_settings\_tabs;}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         QPoint last\_pos;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}}* m\_sidebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_settings_sidebar}{SettingsSidebar}} \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \mbox{\hyperlink{class_layers_1_1_app_preferences_settings_panel}{AppPreferencesSettingsPanel}}* m\_app\_preferences\_settings\_panel\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_app_preferences_settings_panel}{AppPreferencesSettingsPanel}} \};}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107         \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}}* m\_themes\_settings\_panel\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_themes_settings_panel}{ThemesSettingsPanel}} \};}
+\DoxyCodeLine{108     \};}
+\DoxyCodeLine{109 \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SETTINGSMENU\_H}}
 
 \end{DoxyCode}

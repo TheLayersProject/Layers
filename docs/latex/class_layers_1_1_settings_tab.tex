@@ -42,10 +42,8 @@ void {\bfseries set\+\_\+disabled} (bool cond=true)
 \mbox{\Hypertarget{class_layers_1_1_settings_tab_af5afc4dd1f3e107f6603f720a5d31792}\label{class_layers_1_1_settings_tab_af5afc4dd1f3e107f6603f720a5d31792}} 
 bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) override
 \item 
-void \mbox{\hyperlink{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}{init\+\_\+attributes}} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_settings_tab_a3be84b75c9a4c4eabbbd84ced5e5629d}\label{class_layers_1_1_settings_tab_a3be84b75c9a4c4eabbbd84ced5e5629d}} 
-void {\bfseries init\+\_\+attribute\+\_\+widgets} ()
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}\label{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \item 
@@ -56,11 +54,11 @@ void {\bfseries resize\+Event} (QResize\+Event $\ast$event)
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}\label{class_layers_1_1_settings_tab_ae3c354e1db71adaa616b5c0c6a240fcd}} 
-\index{Layers::SettingsTab@{Layers::SettingsTab}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::SettingsTab@{Layers::SettingsTab}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Settings\+Tab\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}\label{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}} 
+\index{Layers::SettingsTab@{Layers::SettingsTab}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::SettingsTab@{Layers::SettingsTab}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Settings\+Tab\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -70,15 +68,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}\label{class_layers_1_1_settings_tab_ac99e19c5454756d4d84efc161942b26d}} 
-\index{Layers::SettingsTab@{Layers::SettingsTab}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::SettingsTab@{Layers::SettingsTab}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Settings\+Tab\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

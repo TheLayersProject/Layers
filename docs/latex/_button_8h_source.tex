@@ -34,16 +34,16 @@
 \DoxyCodeLine{30 }
 \DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* graphic() \textcolor{keyword}{const};}
 \DoxyCodeLine{32 }
-\DoxyCodeLine{33         \textcolor{keywordtype}{void} replace\_all\_attributes\_with(\mbox{\hyperlink{class_layers_1_1_button}{Button}}* button);}
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} resize();}
 \DoxyCodeLine{34 }
-\DoxyCodeLine{35         \textcolor{keywordtype}{void} resize();}
-\DoxyCodeLine{36 }
-\DoxyCodeLine{37         \textcolor{keywordtype}{void} set\_available\_width(\textcolor{keywordtype}{int} available\_width);}
-\DoxyCodeLine{38         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
-\DoxyCodeLine{39         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
-\DoxyCodeLine{40         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} padding);}
-\DoxyCodeLine{41         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
-\DoxyCodeLine{42         \textcolor{keywordtype}{void} set\_text\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} set\_available\_width(\textcolor{keywordtype}{int} available\_width);}
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} set\_disabled(\textcolor{keywordtype}{bool} cond = \textcolor{keyword}{true});}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} set\_font\_size(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{38         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} padding);}
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} set\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} set\_text\_padding(\textcolor{keywordtype}{int} left, \textcolor{keywordtype}{int} top, \textcolor{keywordtype}{int} right, \textcolor{keywordtype}{int} bottom);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} toggle\_graphics();}
 \DoxyCodeLine{43 }
 \DoxyCodeLine{44         \textcolor{keywordtype}{int} left\_padding() \textcolor{keyword}{const};}
 \DoxyCodeLine{45         \textcolor{keywordtype}{int} top\_padding() \textcolor{keyword}{const};}
@@ -54,32 +54,31 @@
 \DoxyCodeLine{50         \textcolor{keywordtype}{bool} eventFilter(QObject* \textcolor{keywordtype}{object}, QEvent* event) \textcolor{keyword}{override};}
 \DoxyCodeLine{51 }
 \DoxyCodeLine{52         \textcolor{keywordtype}{void} init();}
-\DoxyCodeLine{53         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_button_abd83373d30fe4f4ae0623afd61eb2de0}{init\_attributes}}();}
-\DoxyCodeLine{54         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{55 }
-\DoxyCodeLine{56         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58     \textcolor{keyword}{private}:}
-\DoxyCodeLine{59         QHBoxLayout* main\_layout\{ \textcolor{keyword}{new} QHBoxLayout \};}
-\DoxyCodeLine{60 }
-\DoxyCodeLine{61         QGraphicsOpacityEffect* m\_button\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
-\DoxyCodeLine{62 }
-\DoxyCodeLine{63         \textcolor{keywordtype}{bool} m\_auto\_touch\_target\_compliance\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{64 }
-\DoxyCodeLine{65         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{66 }
-\DoxyCodeLine{67         \textcolor{keywordtype}{bool} m\_use\_graphic\_hover\_color\{ \textcolor{keyword}{true} \};}
-\DoxyCodeLine{68         \textcolor{keywordtype}{bool} m\_use\_text\_hover\_color\{ \textcolor{keyword}{true} \};}
-\DoxyCodeLine{69 }
-\DoxyCodeLine{70         \textcolor{keywordtype}{int} m\_available\_width\{ 16777215 \};}
-\DoxyCodeLine{71 }
-\DoxyCodeLine{72         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_graphic\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{73         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_graphic\_after\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{75         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_text\_label\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{76     \};}
-\DoxyCodeLine{77 \}}
-\DoxyCodeLine{78 }
-\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// BUTTON\_H}}
+\DoxyCodeLine{53         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_button_abd3b17b04c959e2d9608e48f5062943b}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keyword}{private}:}
+\DoxyCodeLine{58         QHBoxLayout* main\_layout\{ \textcolor{keyword}{new} QHBoxLayout \};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         QGraphicsOpacityEffect* m\_button\_opacity\{ \textcolor{keyword}{new} QGraphicsOpacityEffect \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \textcolor{keywordtype}{bool} m\_auto\_touch\_target\_compliance\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \textcolor{keywordtype}{bool} m\_disabled\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \textcolor{keywordtype}{bool} m\_use\_graphic\_hover\_color\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{67         \textcolor{keywordtype}{bool} m\_use\_text\_hover\_color\{ \textcolor{keyword}{true} \};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{keywordtype}{int} m\_available\_width\{ 16777215 \};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_graphic\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{72         \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}* m\_graphic\_after\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_text\_label\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{75     \};}
+\DoxyCodeLine{76 \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// BUTTON\_H}}
 
 \end{DoxyCode}

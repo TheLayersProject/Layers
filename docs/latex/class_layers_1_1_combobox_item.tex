@@ -15,9 +15,6 @@ Inheritance diagram for Layers\+::Combobox\+Item\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_layers_1_1_combobox_item_a75234dea808bfd335164456eadedeea8}\label{class_layers_1_1_combobox_item_a75234dea808bfd335164456eadedeea8}} 
 QString {\bfseries item\+\_\+text} ()
 \item 
-\mbox{\Hypertarget{class_layers_1_1_combobox_item_a8a6e297fa75ff000af0c8917dffd6e38}\label{class_layers_1_1_combobox_item_a8a6e297fa75ff000af0c8917dffd6e38}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_combobox_item}{Combobox\+Item}} $\ast$cb\+\_\+item)
-\item 
 \mbox{\Hypertarget{class_layers_1_1_combobox_item_a56afeb10609624e11351454e188e1e7c}\label{class_layers_1_1_combobox_item_a56afeb10609624e11351454e188e1e7c}} 
 void {\bfseries replace\+\_\+item\+\_\+text} (const QString \&new\+\_\+item\+\_\+text)
 \item 
@@ -33,7 +30,8 @@ void {\bfseries set\+Fixed\+Size} (int w, int h)
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}\label{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
 \end{DoxyCompactItemize}
@@ -41,11 +39,11 @@ void \mbox{\hyperlink{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}\label{class_layers_1_1_combobox_item_ae5d1172faa0020c53c47c877d6bb222d}} 
-\index{Layers::ComboboxItem@{Layers::ComboboxItem}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::ComboboxItem@{Layers::ComboboxItem}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Combobox\+Item\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}\label{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}} 
+\index{Layers::ComboboxItem@{Layers::ComboboxItem}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::ComboboxItem@{Layers::ComboboxItem}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Combobox\+Item\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
 
@@ -55,15 +53,7 @@ Initializes the attributes.
 
 This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
 
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}\label{class_layers_1_1_combobox_item_a1fa64015e3814edc5eb8a6805e3f16b2}} 
-\index{Layers::ComboboxItem@{Layers::ComboboxItem}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
-\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::ComboboxItem@{Layers::ComboboxItem}}
-\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
-{\footnotesize\ttfamily void Combobox\+Item\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

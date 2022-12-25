@@ -6,6 +6,12 @@ Inheritance diagram for Layers\+::Color\+AW\+:\begin{figure}[H]
 \includegraphics[height=4.000000cm]{class_layers_1_1_color_a_w}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_color_a_w_a4b75850248b7476356786c5fa51ce03c}\label{class_layers_1_1_color_a_w_a4b75850248b7476356786c5fa51ce03c}} 
+void {\bfseries set\+\_\+current\+\_\+editting\+\_\+state} (const QString \&state)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -14,9 +20,6 @@ Inheritance diagram for Layers\+::Color\+AW\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{class_layers_1_1_color_a_w_aa4a68c4a18cbf210b7c270bbbbf3bb39}\label{class_layers_1_1_color_a_w_aa4a68c4a18cbf210b7c270bbbbf3bb39}} 
 \mbox{\hyperlink{class_layers_1_1_color_control}{Color\+Control}} $\ast$ {\bfseries color\+\_\+control} () const
-\item 
-\mbox{\Hypertarget{class_layers_1_1_color_a_w_ac638db8862028533f93b7aac70e54503}\label{class_layers_1_1_color_a_w_ac638db8862028533f93b7aac70e54503}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_color_a_w}{Color\+AW}} $\ast$color\+\_\+aw)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_color_a_w_a3365083bb3dd7cfbb84fbe1be782a16a}\label{class_layers_1_1_color_a_w_a3365083bb3dd7cfbb84fbe1be782a16a}} 
 void {\bfseries set\+\_\+centered} (bool centered=true)
@@ -35,6 +38,16 @@ void \mbox{\hyperlink{class_layers_1_1_color_a_w_a15bbd953b14bf5aeda27c779d56583
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::ColorAW@{Layers::ColorAW}}
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Color\+AW\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
 
 Initializes the customize panel.
 

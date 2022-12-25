@@ -21,13 +21,10 @@ void {\bfseries set\+Text} (const QString \&text)
 \mbox{\Hypertarget{class_layers_1_1_label_a24fbd6634f58ecd6c2f6db26dea484db}\label{class_layers_1_1_label_a24fbd6634f58ecd6c2f6db26dea484db}} 
 {\bfseries Label} (const QString \&text, QWidget $\ast$parent=0)
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_label_a017c3e7438177d85ef0ef205008d1262}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&theme\+\_\+attrs) override
+virtual void \mbox{\hyperlink{class_layers_1_1_label_a8986b67e22956853488e21a3a9185990}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a3ea4b396c308130e241dc3159c607137}\label{class_layers_1_1_label_a3ea4b396c308130e241dc3159c607137}} 
 void {\bfseries resize} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_label_a9a534c0fd25229519c4743fbb35535d0}\label{class_layers_1_1_label_a9a534c0fd25229519c4743fbb35535d0}} 
-void {\bfseries replace\+\_\+all\+\_\+attributes\+\_\+with} (\mbox{\hyperlink{class_layers_1_1_label}{Label}} $\ast$label)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a68e3c8dc069a6cef8dc7dc309cdeefed}\label{class_layers_1_1_label_a68e3c8dc069a6cef8dc7dc309cdeefed}} 
 void {\bfseries build\+\_\+wrapped\+\_\+lines} ()
@@ -50,8 +47,8 @@ void {\bfseries set\+\_\+font\+\_\+size} (int size)
 \mbox{\Hypertarget{class_layers_1_1_label_acf629aca2a2050831f1ffe931b7614d6}\label{class_layers_1_1_label_acf629aca2a2050831f1ffe931b7614d6}} 
 void {\bfseries set\+\_\+hovering} (bool cond=true)
 \item 
-\mbox{\Hypertarget{class_layers_1_1_label_a6117130f6caaff94234a24438ca06426}\label{class_layers_1_1_label_a6117130f6caaff94234a24438ca06426}} 
-void {\bfseries set\+\_\+padding} (int left, int top, int right, int bottom)
+\mbox{\Hypertarget{class_layers_1_1_label_a5345d657307addb3ac994564ec95de04}\label{class_layers_1_1_label_a5345d657307addb3ac994564ec95de04}} 
+void {\bfseries set\+\_\+padding} (double left, double top, double right, double bottom)
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a9d373499ce5e506a483013013bf5be5f}\label{class_layers_1_1_label_a9d373499ce5e506a483013013bf5be5f}} 
 void {\bfseries set\+\_\+resize\+\_\+disabled} (bool disable=true)
@@ -63,24 +60,25 @@ int {\bfseries width\+\_\+unwrapped} ()
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a17108805a80037f1a43dc92197c14158}\label{class_layers_1_1_label_a17108805a80037f1a43dc92197c14158}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Fill\char`\"{}, QColor(Qt\+::white), true) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+fill} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}fill\char`\"{}, QColor(Qt\+::white), true) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a419b40b6401374d364294e16a68423c8}\label{class_layers_1_1_label_a419b40b6401374d364294e16a68423c8}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+outline\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Outline Color\char`\"{}, QColor(Qt\+::gray), true) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+outline\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}outline\+\_\+color\char`\"{}, QColor(Qt\+::gray), true) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_aa9cab689cb456e073e5609c3a15c63d9}\label{class_layers_1_1_label_aa9cab689cb456e073e5609c3a15c63d9}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+padding\+\_\+top} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Top Padding\char`\"{}, QVariant\+::from\+Value(0)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+padding\+\_\+top} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}top\+\_\+padding\char`\"{}, QVariant\+::from\+Value(0.\+0)) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_ac2c2aee419d60d2af4bba92ea823fc21}\label{class_layers_1_1_label_ac2c2aee419d60d2af4bba92ea823fc21}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Text Color\char`\"{}, QColor(Qt\+::black)) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}text\+\_\+color\char`\"{}, QColor(Qt\+::black)) \}
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_a972903176e8d24eaa2fb2c18160e23ca}\label{class_layers_1_1_label_a972903176e8d24eaa2fb2c18160e23ca}} 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}Text Hover Color\char`\"{}, QColor(Qt\+::black), true) \}
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries a\+\_\+text\+\_\+hover\+\_\+color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}text\+\_\+hover\+\_\+color\char`\"{}, QColor(Qt\+::black), true) \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}{init\+\_\+attributes}} ()
+\mbox{\Hypertarget{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}\label{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}} 
+void {\bfseries init\+\_\+attributes} ()
 \item 
 \mbox{\Hypertarget{class_layers_1_1_label_ad5a0a2f3b700ff549ec19f03991d50c9}\label{class_layers_1_1_label_ad5a0a2f3b700ff549ec19f03991d50c9}} 
 void {\bfseries paint\+Event} (QPaint\+Event $\ast$event)
@@ -118,33 +116,15 @@ int {\bfseries m\+\_\+padding\+\_\+bottom} \{ 0 \}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_label_a017c3e7438177d85ef0ef205008d1262}\label{class_layers_1_1_label_a017c3e7438177d85ef0ef205008d1262}} 
+\mbox{\Hypertarget{class_layers_1_1_label_a8986b67e22956853488e21a3a9185990}\label{class_layers_1_1_label_a8986b67e22956853488e21a3a9185990}} 
 \index{Layers::Label@{Layers::Label}!apply\_theme\_attributes@{apply\_theme\_attributes}}
 \index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::Label@{Layers::Label}}
 \doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void Label\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Label\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
 Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
-
-\mbox{\Hypertarget{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}\label{class_layers_1_1_label_addd21a0f1f36be719b477adf3406f07d}} 
-\index{Layers::Label@{Layers::Label}!init\_attributes@{init\_attributes}}
-\index{init\_attributes@{init\_attributes}!Layers::Label@{Layers::Label}}
-\doxysubsubsection{\texorpdfstring{init\_attributes()}{init\_attributes()}}
-{\footnotesize\ttfamily void Label\+::init\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
-
-Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
-
-This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
-
-Initializes the attributes.
-
-This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
-
-This function is called by init\+\_\+themeable(). 
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_ab0d5b874755ebf036c8137f4ea28b5ab}{Layers\+::\+Themeable}}.
 
 
 

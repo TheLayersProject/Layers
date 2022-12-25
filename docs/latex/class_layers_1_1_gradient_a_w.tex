@@ -30,6 +30,16 @@ void \mbox{\hyperlink{class_layers_1_1_gradient_a_w_a9bd39e79051cbc99026e11d2d8e
 \doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
 {\footnotesize\ttfamily void Gradient\+AW\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
+
 Initializes the customize panel.
 
 A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.

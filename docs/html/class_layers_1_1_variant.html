@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;2.3.0a</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
    </div>
    <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
   </td>
@@ -86,13 +86,12 @@ $(document).ready(function(){initNavTree('class_layers_1_1_variant.html',''); in
   <div class="summary">
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="class_layers_1_1_variant-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Layers::Variant Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_attribute_8h_source.html">Attribute.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_variant_8h_source.html">Variant.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Layers::Variant:</div>
 <div class="dyncontent">
@@ -108,9 +107,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>changed</b> ()</td></
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a981609a8519c47e93398e19c61b662cc"><td class="memItemLeft" align="right" valign="top"><a id="a981609a8519c47e93398e19c61b662cc" name="a981609a8519c47e93398e19c61b662cc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Variant</b> (int integer)</td></tr>
-<tr class="separator:a981609a8519c47e93398e19c61b662cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a031eb01aef8fe828b81c0fea3cb20628"><td class="memItemLeft" align="right" valign="top"><a id="a031eb01aef8fe828b81c0fea3cb20628" name="a031eb01aef8fe828b81c0fea3cb20628"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Variant</b> (double d)</td></tr>
+<tr class="separator:a031eb01aef8fe828b81c0fea3cb20628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad29b9da79e2fd4e877eea5ed00db8754"><td class="memItemLeft" align="right" valign="top"><a id="ad29b9da79e2fd4e877eea5ed00db8754" name="ad29b9da79e2fd4e877eea5ed00db8754"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Variant</b> (QColor color)</td></tr>
 <tr class="separator:ad29b9da79e2fd4e877eea5ed00db8754"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,21 +133,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (const
 <tr class="memitem:a11c7e10660e96844369b90e47dfb8a2e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a11c7e10660e96844369b90e47dfb8a2e"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_layers_1_1_variant.html#a11c7e10660e96844369b90e47dfb8a2e">value</a> () const</td></tr>
 <tr class="separator:a11c7e10660e96844369b90e47dfb8a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:ac1334ee1d9f7accd2706651640d7fc06"><td class="memItemLeft" align="right" valign="top"><a id="ac1334ee1d9f7accd2706651640d7fc06" name="ac1334ee1d9f7accd2706651640d7fc06"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (QDataStream &amp;stream, const <a class="el" href="class_layers_1_1_variant.html">Variant</a> &amp;v)</td></tr>
-<tr class="separator:ac1334ee1d9f7accd2706651640d7fc06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad082ab96ce92e54a46136f1c911b03ff"><td class="memItemLeft" align="right" valign="top"><a id="ad082ab96ce92e54a46136f1c911b03ff" name="ad082ab96ce92e54a46136f1c911b03ff"></a>
-QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;&gt;</b> (QDataStream &amp;stream, <a class="el" href="class_layers_1_1_variant.html">Variant</a> &amp;v)</td></tr>
-<tr class="separator:ad082ab96ce92e54a46136f1c911b03ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Provides a variant type with signal/slot support</p>
-<p >The <a class="el" href="class_layers_1_1_variant.html">Variant</a> class is designed by wrapping a QVariant and subclassing QObject to enable Qt signal/slot functionality.</p>
-<p >The purpose of having a variant type that can work with Qt's signal/slot system is to enable simple value change detection. Any time the value of a <a class="el" href="class_layers_1_1_variant.html">Variant</a>'s wrapped QVariant is modified, the changed() signal gets emitted.</p>
-<p >Variants are to be used by Layers Attributes. Attributes will store pointers to Variants. When </p>
+<div class="textblock"><p ><a class="el" href="class_layers_1_1_variant.html">Variant</a> type with signal/slot support</p>
+<p >The <a class="el" href="class_layers_1_1_variant.html">Variant</a> class is a QObject that wraps a QVariant to enable Qt signal/slot functionality.</p>
+<p >The purpose of having a variant type with signal/slot support is to enable value change detection. Any time the QVariant is modified, the changed() signal gets emitted. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7f84dc931d79751e27fc181fa843971d" name="a7f84dc931d79751e27fc181fa843971d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f84dc931d79751e27fc181fa843971d">&#9670;&nbsp;</a></span>typeName()</h2>
@@ -196,7 +185,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="_attribute_8h_source.html">Attribute.h</a></li>
+<li>include/<a class="el" href="_variant_8h_source.html">Variant.h</a></li>
 <li>src/Themes/Attributes/Variant.cpp</li>
 </ul>
 </div><!-- contents -->

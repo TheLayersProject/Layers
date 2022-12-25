@@ -13,8 +13,8 @@ TabBar::TabBar(QWidget* parent) : QTabBar(parent)
 
 void TabBar::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
 {
-	a_selected_fill_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["selected_fill_color"]));
-	a_text_color.copy_value_from(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
+	a_selected_fill_color.copy(*dynamic_cast<Attribute*>(theme_attrs["selected_fill_color"]));
+	a_text_color.copy(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
 }
 
 void TabBar::SetCurrentTab(const QString& text)
