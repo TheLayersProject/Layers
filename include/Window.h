@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "ColorDialog.h"
 #include "CreateNewThemeDialog.h"
 #include "CustomizeMenu.h"
 #include "GradientSelectionDialog.h"
@@ -29,6 +30,8 @@ namespace Layers
 		void build_main_widget();
 
 		void center_dialog(QDialog* dialog);
+
+		ColorDialog* control_color_dialog() const;
 
 		GradientSelectionDialog* control_gradient_selection_dialog() const;
 
@@ -73,6 +76,8 @@ namespace Layers
 		bool m_preview{ false };
 
 		CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
+
+		ColorDialog* m_control_color_dialog{ new ColorDialog };
 
 		GradientSelectionDialog* m_control_gradient_selection_dialog{ new GradientSelectionDialog(QGradientStops()) };
 

@@ -9,6 +9,7 @@
 #include <QIcon>
 #include <QPainterPath>
 
+using Layers::ColorDialog;
 using Layers::CustomizeMenu;
 using Layers::GradientSelectionDialog;
 using Layers::Menu;
@@ -61,6 +62,8 @@ Window::Window(bool preview, QWidget* parent) :
 	resize(1200, 800);
 
 	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
+
+	m_control_color_dialog->set_proper_name("Color Dialog");
 
 	m_control_gradient_selection_dialog->set_proper_name("Gradient Selection Dialog");
 
@@ -159,6 +162,11 @@ void Window::center_dialog(QDialog* dialog)
     dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
 }
 
+ColorDialog* Window::control_color_dialog() const
+{
+	return m_control_color_dialog;
+}
+
 GradientSelectionDialog* Window::control_gradient_selection_dialog() const
 {
 	return m_control_gradient_selection_dialog;
@@ -183,6 +191,7 @@ void Window::init_child_themeable_reference_list()
 	store_child_themeable_pointer(m_settings_menu);
 	store_child_themeable_pointer(m_customize_menu);
     store_child_themeable_pointer(m_create_new_theme_dialog);
+	store_child_themeable_pointer(m_control_color_dialog);
 	store_child_themeable_pointer(m_control_gradient_selection_dialog);
 	store_child_themeable_pointer(m_control_update_dialog);
 }

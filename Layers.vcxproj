@@ -107,7 +107,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\ScrollBar.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Application\directories.cpp" />
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp" />
@@ -146,6 +145,7 @@
     <ClCompile Include="src\Widgets\Controls\Slider.cpp" />
     <ClCompile Include="src\Widgets\Controls\ToggleSwitch.cpp" />
     <ClCompile Include="src\Widgets\CustomizePanel.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\GradientSelectionDialog.cpp" />
@@ -161,6 +161,7 @@
     <ClCompile Include="src\Widgets\Menus\Settings\SettingsSidebar.cpp" />
     <ClCompile Include="src\Widgets\Menus\Settings\SettingsTab.cpp" />
     <ClCompile Include="src\Widgets\ScrollArea.cpp" />
+    <ClCompile Include="src\Widgets\ScrollBar.cpp" />
     <ClCompile Include="src\Widgets\SVG.cpp" />
     <ClCompile Include="src\Widgets\TabBar.cpp" />
     <ClCompile Include="src\Widgets\ThemesSettingsPanel.cpp" />
@@ -182,6 +183,7 @@
     <QtMoc Include="include\AttributeType.h" />
     <ClInclude Include="include\build_themes.h" />
     <QtMoc Include="include\Dialog.h" />
+    <QtMoc Include="include\ColorDialog.h" />
     <QtMoc Include="include\ColorPlane.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />

@@ -210,9 +210,6 @@
     <ClCompile Include="src\Themes\Attributes\Variant.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
-    <ClCompile Include="include\ScrollBar.cpp">
-      <Filter>Source Files\Widgets</Filter>
-    </ClCompile>
     <ClCompile Include="src\Themes\Attributes\AttributeType.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
@@ -226,6 +223,12 @@
       <Filter>Source Files\Themes</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\ColorPlane.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp">
+      <Filter>Source Files\Widgets\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\ScrollBar.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
   </ItemGroup>
@@ -356,6 +359,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Dialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\ColorDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ColorPlane.h">
