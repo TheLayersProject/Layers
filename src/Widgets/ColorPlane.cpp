@@ -288,7 +288,7 @@ void ColorPlane::init_attributes()
 
     color.setup_widget_update_connection(this);
 
-    m_cursor->a_fill.get_data_from(color);
+    m_cursor->a_fill.entangle_with(color);
 	m_cursor->a_outline_color.set_disabled(false);
 	m_cursor->a_outline_color.set_value(QColor(Qt::black));
 	m_cursor->corner_radii.top_left.set_value(2.0);
