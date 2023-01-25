@@ -490,7 +490,7 @@ void Window::paintEvent(QPaintEvent* event)
 
 		// DRAW:
 
-		painter.begin(this);
+		QPainter painter(this);
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Corner Color
@@ -542,8 +542,6 @@ void Window::paintEvent(QPaintEvent* event)
 		{
 			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
 		}
-
-		painter.end();
 	}
 	else
 	{
@@ -575,7 +573,7 @@ void Window::paintEvent(QPaintEvent* event)
 
 		// DRAW:
 
-		painter.begin(this);
+		QPainter painter(this);
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Background
@@ -605,8 +603,6 @@ void Window::paintEvent(QPaintEvent* event)
 		{
 			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
 		}
-
-		painter.end();
 	}
 }
 

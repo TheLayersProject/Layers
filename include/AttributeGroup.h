@@ -29,12 +29,16 @@ namespace Layers
 		*/
 		QMap<QString, Attribute*>& attributes();
 
+		QMap<QString, Attribute*>::iterator begin();
+
 		/*!
 			Copies the supplied AttributeGroup
 
 			@param ag - AttributeGroup to copy
 		*/
 		void copy(const AttributeGroup& ag);
+
+		QMap<QString, Attribute*>::iterator end();
 
 		/*!
 			Calls Attribute::get_data_from() on all group Attributes, passing the corresponding
@@ -60,6 +64,8 @@ namespace Layers
 			@param state - QString representing new active state
 		*/
 		virtual void set_state(const QString& state) override;
+
+		virtual void setup_widget_update_connection(QWidget* widget) override;
 
 		/*!
 			Returns AttributeGroup converted to a QJsonObject.

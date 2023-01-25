@@ -1,76 +1,23 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QPainter>
 #include <QWidget>
 
-#include "Attribute.h"
-#include "Themeable.h"
+#include "ThemeableBox.h"
 
 namespace Layers
 {
-	
-
 	/*!
 		The Widget class wraps a QWidget with a Themeable to give QWidgets compatibility with the Layers theme
 		system. The Layers Widget class overrides the QWidget's paintEvent() and uses the attributes provided
 		by the Themeable class to handle the widget's appearance.
 	*/
-	class Widget : public QWidget, public Themeable
+	class Widget : public QWidget, public ThemeableBox
 	{
 		Q_OBJECT
 
 	public:
 		Widget(QWidget* parent = nullptr);
-
-		virtual void apply_theme_attributes(
-			QMap<QString, AttributeType*>& theme_attrs) override;
-
-		/*!
-			Sets all margin attributes with one value.
-
-			@param margin
-		*/
-		void set_margin(double margin);
-
-		/*!
-			Sets the margin attributes individually.
-
-			@param left margin
-			@param top margin
-			@param right margin
-			@param bottom margin
-		*/
-		void set_margin(double left, double top, double right, double bottom);
-
-		BorderAttributes border;
-
-		CornerRadiiAttributes corner_radii;
-
-		MarginsAttributes margins;
-
-		Attribute a_corner_color{ Attribute(
-			"corner_color",
-			QColor(Qt::gray),
-			true
-			) };
-
-		Attribute a_fill{ Attribute(
-			"fill",
-			QColor(Qt::white)
-			) };
-
-		Attribute a_hover_fill{ Attribute(
-			"hover_fill",
-			QColor(Qt::lightGray),
-			true
-			) };
-
-		Attribute a_outline_color{ Attribute(
-			"outline_color",
-			QColor(Qt::gray),
-			true
-			) };
 
 	protected:
 		/*!
@@ -92,10 +39,6 @@ namespace Layers
 			Paints the widget with values obtained from the widget's attributes.
 		*/
 		void paintEvent(QPaintEvent* event) override;
-
-		bool m_hovering{ false };
-
-		QPainter painter;
 	};
 }
 

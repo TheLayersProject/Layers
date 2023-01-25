@@ -25,12 +25,22 @@ QMap<QString, Attribute*>& AttributeGroup::attributes()
 	return m_attributes;
 }
 
+QMap<QString, Attribute*>::iterator AttributeGroup::begin()
+{
+	return m_attributes.begin();
+}
+
 void AttributeGroup::copy(const AttributeGroup& ag)
 {
 	for (const QString& attr_key : m_attributes.keys())
 		m_attributes[attr_key]->copy(*ag.m_attributes[attr_key]);
 
 	m_disabled = ag.m_disabled;
+}
+
+QMap<QString, Attribute*>::iterator AttributeGroup::end()
+{
+	return m_attributes.end();
 }
 
 void AttributeGroup::get_data_from(AttributeGroup& attr_group)
@@ -52,6 +62,14 @@ void AttributeGroup::set_state(const QString& state)
 {
 	for (Attribute* attr : m_attributes)
 		attr->set_state(state);
+}
+
+void AttributeGroup::setup_widget_update_connection(QWidget* widget)
+{
+	connect(this, &AttributeType::value_changed, [widget] { widget->update(); });
+
+	for (Attribute* attr : m_attributes)
+		attr->setup_widget_update_connection(widget);
 }
 
 QJsonObject AttributeGroup::to_json_object()
