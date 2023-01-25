@@ -145,6 +145,8 @@ namespace Layers
 		*/
 		void set_value(const QString& state, QVariant qvariant);
 
+		virtual void setup_widget_update_connection(QWidget* widget) override;
+
 		/*!
 			Returns the active state of the Attribute.
 

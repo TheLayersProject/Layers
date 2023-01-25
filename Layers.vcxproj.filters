@@ -219,6 +219,12 @@
     <ClCompile Include="src\Themes\Attributes\Data.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp">
+      <Filter>Source Files\Widgets\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Themes\ThemeableBox.cpp">
+      <Filter>Source Files\Themes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -346,6 +352,9 @@
     <QtMoc Include="include\AttributeGroup.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\Dialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layouts.h">
@@ -379,6 +388,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AttributeLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ThemeableBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -114,6 +114,11 @@ void Attribute::set_value(const QString& state, QVariant qvariant)
 	m_data->set_value(state, qvariant);
 }
 
+void Attribute::setup_widget_update_connection(QWidget* widget)
+{
+	connect(this, &AttributeType::value_changed, [widget] { widget->update(); });
+}
+
 QString Attribute::state() const
 {
 	return m_state;

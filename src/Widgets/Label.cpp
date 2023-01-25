@@ -35,12 +35,13 @@ void Label::init_attributes()
 		{ "text_color", &a_text_color }
 	});
 
-	// TODO: Probably need to connect Attribute::value_changed to Label::update
-
 	m_attribute_layout.append(&a_text_color);
 	m_attribute_layout.append(&a_text_hover_color);
 	m_attribute_layout.append(&a_outline_color);
 	m_attribute_layout.append(&a_fill);
+
+	for (AttributeType* attr_type : m_attributes)
+		attr_type->setup_widget_update_connection(this);
 }
 
 void Label::resize()

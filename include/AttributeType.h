@@ -2,6 +2,7 @@
 #define ATTRIBUTETYPE_H
 
 #include <QObject>
+#include <QWidget>
 
 namespace Layers
 {
@@ -71,6 +72,8 @@ namespace Layers
 			@param state - QString representing state being set
 		*/
 		virtual void set_state(const QString& state) = 0;
+
+		virtual void setup_widget_update_connection(QWidget* widget) = 0;
 
 	protected:
 		bool m_disabled{ false };

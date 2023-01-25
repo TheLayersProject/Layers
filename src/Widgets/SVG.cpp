@@ -25,7 +25,8 @@ SVG::SVG(QString file_path, QWidget* parent) : QSvgWidget(parent)
 	init_size();
 
 	if (!m_theming_blocked)
-		init_attributes(); // Necessary to call after m_svg_elements has been initialized
+		// Call init_attributes() AFTER m_svg_elements has been initialized
+		init_attributes();
 
 	load(m_svg_str.toUtf8());
 }
@@ -41,12 +42,16 @@ SVG::SVG(const SVG& svg)
 
 	if (!m_theming_blocked)
 	{
-		init_attributes(); // Necessary to call after m_svg_elements has been initialized
-
 		a_common_color.copy(svg.a_common_color);
 		a_common_hover_color.copy(svg.a_common_hover_color);
 		a_use_common_color.copy(svg.a_use_common_color);
 		a_use_common_hover_color.copy(svg.a_use_common_hover_color);
+
+		/*!
+			Call init_attributes() AFTER m_svg_elements and attributes
+			have been copied
+		*/
+		init_attributes();
 	}
 
 	load(m_svg_str.toUtf8());
@@ -69,15 +74,18 @@ void SVG::init_attributes()
 		{ "use_common_hover_color", &a_use_common_hover_color }
 		});
 
-	connect(&a_common_color, &AttributeType::value_changed, [this] { update(); });
-	connect(&a_common_hover_color, &AttributeType::value_changed, [this] { update(); });
-	connect(&a_use_common_color, &AttributeType::value_changed, [this] { update(); });
-	connect(&a_use_common_hover_color, &AttributeType::value_changed, [this] { update(); });
-
 	m_attribute_layout.append(&a_common_color);
 	m_attribute_layout.append(&a_common_hover_color);
 	//m_attribute_layout.append(&a_use_common_color);
 	//m_attribute_layout.append(&a_use_common_hover_color);
+
+	//for (AttributeType* attr_type : m_attributes)
+	//	attr_type->setup_widget_update_connection(this);
+
+	connect(&a_common_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_common_hover_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_use_common_color, &AttributeType::value_changed, [this] { update(); });
+	connect(&a_use_common_hover_color, &AttributeType::value_changed, [this] { update(); });
 }
 
 void SVG::rebuild_svg_str()
