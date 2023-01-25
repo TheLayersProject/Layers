@@ -134,6 +134,7 @@
     <ClCompile Include="src\Widgets\Attribute Widgets\GradientAW.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\NumberAW.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\StateAW.cpp" />
+    <ClCompile Include="src\Widgets\ColorPlane.cpp" />
     <ClCompile Include="src\Widgets\Controls\Button.cpp" />
     <ClCompile Include="src\Widgets\Controls\ColorControl.cpp" />
     <ClCompile Include="src\Widgets\Controls\Combobox.cpp" />
@@ -181,6 +182,7 @@
     <QtMoc Include="include\AttributeType.h" />
     <ClInclude Include="include\build_themes.h" />
     <QtMoc Include="include\Dialog.h" />
+    <QtMoc Include="include\ColorPlane.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
     <ClInclude Include="include\GitHubRepo.h" />

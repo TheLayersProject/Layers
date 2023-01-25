@@ -225,6 +225,9 @@
     <ClCompile Include="src\Themes\ThemeableBox.cpp">
       <Filter>Source Files\Themes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\ColorPlane.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -353,6 +356,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Dialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\ColorPlane.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
