@@ -18,15 +18,20 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
         QString::number(a_left_padding.as<double>() + margins.left.as<double>()) + "px; padding-bottom: 1px; }");
 
     connect(m_line_edit, &QLineEdit::textEdited, [this] {
-        if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
-        else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
-        {
-            if (a_text.is_stateful())
-                a_text.set_value(a_text.state(), m_line_edit->text());
-            else
-                a_text.set_value(m_line_edit->text());
-        }
-        else m_line_edit->setText(a_text.as<QString>());
+  //      if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
+  //      else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
+  //      {
+  //          if (a_text.is_stateful())
+  //              a_text.set_value(a_text.state(), m_line_edit->text());
+  //          else
+  //              a_text.set_value(m_line_edit->text());
+  //      }
+  //      else m_line_edit->setText(a_text.as<QString>());
+
+        if (a_text.is_stateful())
+            a_text.set_value(a_text.state(), m_line_edit->text());
+        else
+            a_text.set_value(m_line_edit->text());
 
 		emit text_edited(m_line_edit->text());
         });

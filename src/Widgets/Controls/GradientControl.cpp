@@ -50,16 +50,13 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			GradientSelectionDialog* gsd;
+			GradientSelectionDialog* gsd =
+				new GradientSelectionDialog(a_fill.as<QGradientStops>());
 
-			gsd = new GradientSelectionDialog(a_fill.as<QGradientStops>());
 			gsd->assign_tag_prefixes();
 
 			gsd->replace_all_attributes_with(
-				static_cast<Window*>(
-					layersApp->main_window()->customize_menu()->preview_widget()
-				)->control_gradient_selection_dialog()
-			);
+				layersApp->main_window()->control_gradient_selection_dialog());
 			
 
 			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
