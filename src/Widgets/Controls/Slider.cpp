@@ -6,57 +6,45 @@
 
 using Layers::Slider;
 
-Slider::Slider(int limit, QWidget* parent) :
-	m_limit{ limit },
-	Widget(parent)
+Slider::Slider(QWidget* parent) :
+	m_is_ratio_slider{ true }, Widget(parent)
 {
-	init_attributes();
-	init_child_themeable_reference_list();
+	init();
+}
 
-	installEventFilter(this);
-	setFixedSize(244, 45);
+Slider::Slider(int limit, QWidget* parent) :
+	m_is_ratio_slider{ false }, m_limit{ limit }, Widget(parent)
+{
+	init();
+}
 
-	m_bar->setFixedHeight(5);
-	m_bar->set_name("bar");
-	m_bar->set_margin(23, 0, 23, 0);
+void Slider::set_limit(int limit)
+{
+	m_limit = limit;
 
-	m_handle->setFixedSize(45, 45);
-	m_handle->set_name("handle");
-	m_handle->set_margin(15, 5, 15, 5);
-
-	setup_layout();
+	update_handle_pos();
 }
 
 void Slider::init_attributes()
 {
-	//add_attribute("value", 0);
-
-	//a_fill.set_disabled();
+	connect(&a_value, &AttributeType::value_changed, [this] { update_handle_pos(); });
 
 	corner_radii.top_left.set_value(10.0); // Need to check these values
 	corner_radii.top_right.set_value(10.0);
 	corner_radii.bottom_left.set_value(10.0);
 	corner_radii.bottom_right.set_value(10.0);
 
+	m_bar->a_fill.set_value(QColor(Qt::lightGray));
 	m_bar->corner_radii.top_left.set_value(2.0);
 	m_bar->corner_radii.top_right.set_value(2.0);
 	m_bar->corner_radii.bottom_left.set_value(2.0);
 	m_bar->corner_radii.bottom_right.set_value(2.0);
 
+	m_handle->a_fill.set_value(QColor(Qt::darkGray));
 	m_handle->corner_radii.top_left.set_value(3.0);
 	m_handle->corner_radii.top_right.set_value(3.0);
 	m_handle->corner_radii.bottom_left.set_value(3.0);
 	m_handle->corner_radii.bottom_right.set_value(3.0);
-
-	//m_bar->set_attribute_value("corner_radius_tl", 2);
-	//m_bar->set_attribute_value("corner_radius_tr", 2);
-	//m_bar->set_attribute_value("corner_radius_bl", 2);
-	//m_bar->set_attribute_value("corner_radius_br", 2);
-	
-	//m_handle->set_attribute_value("corner_radius_tl", 3);
-	//m_handle->set_attribute_value("corner_radius_tr", 3);
-	//m_handle->set_attribute_value("corner_radius_bl", 3);
-	//m_handle->set_attribute_value("corner_radius_br", 3);
 }
 
 void Slider::init_child_themeable_reference_list()
@@ -67,22 +55,31 @@ void Slider::init_child_themeable_reference_list()
 
 void Slider::set_value(double value)
 {
-	a_value.set_value(value);
-	update_handle_pos();
+	a_value.set_value(QVariant::fromValue(value));
 
 	emit value_changed(value);
 }
 
 void Slider::update_handle_pos()
 {
-	double drag_increment = double(width() - m_handle->width()) / double(m_limit);
+	//qDebug() << "Updating Handle Pos!";
 
-	m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
-}
+	if (m_is_ratio_slider)
+	{
+		float range = float(width() - m_handle->width());
 
-void Slider::update_theme_dependencies()
-{
-	update_handle_pos();
+		float ratio = 1 / range;
+
+		//qDebug() << "Slider Value as double: " + QString::number(a_value.as<double>());
+
+		m_handle->move(a_value.as<double>() / ratio, m_handle->y());
+	}
+	else
+	{
+		double drag_increment = double(width() - m_handle->width()) / double(m_limit);
+
+		m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
+	}
 }
 
 bool Slider::eventFilter(QObject* object, QEvent* event)
@@ -115,31 +112,82 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 
 		QPoint delta = mouse_event->pos() - m_mouse_click_position;
 
-		double drag_increment = double(m_bar->width() - m_handle->width()) / double(m_limit);
-
-		int new_value = m_value_on_click + int(delta.x() / drag_increment);
-
-		if (new_value < 0)
+		if (m_is_ratio_slider)
 		{
-			if (a_value.as<double>() != 0)
+			float range = float(width() - m_handle->width());
+
+			float ratio = 1 / range;
+
+			double new_value = float(m_value_on_click) + (float(delta.x()) * ratio);
+
+			qDebug() << "New Value: " + QString::number(new_value);
+
+			if (new_value < 0.0)
 			{
-				set_value(0);
+				if (a_value.as<double>() != 0)
+				{
+					set_value(0.0);
+				}
 			}
-		}
-		else if (new_value > m_limit)
-		{
-			if (a_value.as<double>() != m_limit)
+			else if (new_value > 1.0)
 			{
-				set_value(m_limit);
+				if (a_value.as<double>() != 1.0)
+				{
+					set_value(1.0);
+				}
+			}
+			else
+			{
+				set_value(new_value);
 			}
 		}
 		else
 		{
-			set_value(new_value);
+			double drag_increment = double(m_bar->width() - m_handle->width()) / double(m_limit);
+
+			int new_value = m_value_on_click + int(delta.x() / drag_increment);
+
+			if (new_value < 0)
+			{
+				if (a_value.as<double>() != 0)
+				{
+					set_value(0);
+				}
+			}
+			else if (new_value > m_limit)
+			{
+				if (a_value.as<double>() != m_limit)
+				{
+					set_value(m_limit);
+				}
+			}
+			else
+			{
+				set_value(new_value);
+			}
 		}
 	}
 
 	return false;
+}
+
+void Slider::init()
+{
+	init_attributes();
+	init_child_themeable_reference_list();
+
+	installEventFilter(this);
+	setFixedSize(244, 45);
+
+	m_bar->setFixedHeight(5);
+	m_bar->set_name("bar");
+	m_bar->set_margin(23, 0, 23, 0);
+
+	m_handle->setFixedSize(45, 45);
+	m_handle->set_name("handle");
+	m_handle->set_margin(15, 5, 15, 5);
+
+	setup_layout();
 }
 
 void Slider::setup_layout()

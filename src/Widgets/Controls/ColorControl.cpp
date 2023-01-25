@@ -1,4 +1,7 @@
+#include "../../../include/Application.h"
 #include "../../../include/ColorControl.h"
+#include "../../../include/GradientControl.h"
+#include "../../../include/Window.h"
 
 #include <QColorDialog>
 #include <QMouseEvent>
@@ -21,16 +24,20 @@ ColorControl::~ColorControl()
 
 void ColorControl::click()
 {
-	QColorDialog dlg;
+	ColorDialog* color_dialog = new ColorDialog();
+	color_dialog->assign_tag_prefixes();
 
-	dlg.setCurrentColor(a_fill.as<QColor>());
+	color_dialog->replace_all_attributes_with(
+		layersApp->main_window()->control_color_dialog());
 
-	if (dlg.exec())
+	color_dialog->color.set_value(a_fill.as<QColor>());
+
+	if (color_dialog->exec())
 	{
 		if (a_fill.is_stateful())
-			a_fill.set_value(a_fill.state(), dlg.currentColor());
+			a_fill.set_value(a_fill.state(), color_dialog->color.as<QColor>());
 		else
-			a_fill.set_value(dlg.currentColor());
+			a_fill.set_value(color_dialog->color.as<QColor>());
 
 		emit color_changed();
 	}
