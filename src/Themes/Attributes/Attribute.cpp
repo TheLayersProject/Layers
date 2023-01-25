@@ -62,11 +62,11 @@ void Attribute::establish_data_connection()
 	);
 }
 
-void Attribute::get_data_from(Attribute& attribute)
+void Attribute::entangle_with(Attribute& attribute)
 {
 	// TODO: Likely need to store this connection and disconnect in destructor
 	connect(&attribute, &Attribute::ownership_changed, [this, &attribute] {
-		get_data_from(attribute);
+		entangle_with(attribute);
 		});
 
 	clear_data_if_owner();

@@ -43,10 +43,10 @@ QMap<QString, Attribute*>::iterator AttributeGroup::end()
 	return m_attributes.end();
 }
 
-void AttributeGroup::get_data_from(AttributeGroup& attr_group)
+void AttributeGroup::entangle_with(AttributeGroup& attr_group)
 {
 	for (const QString& attr_key : m_attributes.keys())
-		m_attributes[attr_key]->get_data_from(*attr_group.m_attributes[attr_key]);
+		m_attributes[attr_key]->entangle_with(*attr_group.m_attributes[attr_key]);
 }
 
 bool AttributeGroup::is_stateful() const

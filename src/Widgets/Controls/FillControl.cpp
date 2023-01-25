@@ -136,11 +136,11 @@ void FillControl::init_child_themeable_reference_list()
 
 void FillControl::set_attribute(Attribute* attribute)
 {
-	a_fill.get_data_from(*attribute);
+	a_fill.entangle_with(*attribute);
 
-	m_gradient_control->a_fill.get_data_from(*attribute);
+	m_gradient_control->a_fill.entangle_with(*attribute);
 
-	m_color_control->a_fill.get_data_from(*attribute);
+	m_color_control->a_fill.entangle_with(*attribute);
 
 	if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
 	{

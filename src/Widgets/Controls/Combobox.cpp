@@ -24,7 +24,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_current_item_label->set_padding(0, 7, 0, 0);
     m_current_item_label->set_name("current_item_label");
 
-    a_line_edit_text_color.get_data_from(m_current_item_label->a_text_color);
+    a_line_edit_text_color.entangle_with(m_current_item_label->a_text_color);
 
     m_drop_down->installEventFilter(this);
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);

@@ -45,7 +45,7 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 	else m_color_control->hide();
 
 	// Setup Color Control
-	m_color_control->a_fill.get_data_from(*attribute);
+	m_color_control->a_fill.entangle_with(*attribute);
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;

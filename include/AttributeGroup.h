@@ -41,12 +41,12 @@ namespace Layers
 		QMap<QString, Attribute*>::iterator end();
 
 		/*!
-			Calls Attribute::get_data_from() on all group Attributes, passing the corresponding
+			Calls Attribute::entangle_with() on all group Attributes, passing the corresponding
 			Attributes of attr_group matched by the Attribute names.
 
 			@param attr_group - Group of Attributes to obtain Data pointers of
 		*/
-		void get_data_from(AttributeGroup& attr_group);
+		void entangle_with(AttributeGroup& attr_group);
 
 		/*!
 			Returns true if stateful, otherwise, returns false.

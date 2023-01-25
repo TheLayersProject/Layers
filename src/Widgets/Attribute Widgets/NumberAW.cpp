@@ -35,12 +35,12 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	m_line_editor->set_proper_name("Line Editor");
 	m_line_editor->set_text(QString::number(attribute->as<double>()));
 	m_line_editor->set_validator(int_validator);
-	m_line_editor->a_text.get_data_from(*attribute);
+	m_line_editor->a_text.entangle_with(*attribute);
 
 	// Setup Slider
 	m_slider->set_name("mini_slider");
 	m_slider->set_proper_name("Slider");
-	m_slider->a_value.get_data_from(m_line_editor->a_text);
+	m_slider->a_value.entangle_with(m_line_editor->a_text);
 
 	// Setup Unit Label
 	//m_unit_label->set_name("label");

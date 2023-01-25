@@ -10,7 +10,7 @@ namespace Layers
 		Attribute implementation used throughout Layers by AttributeGroup, Theme, and Themeable.
 
 		An Attribute stores a pointer to a Data object which is used for drawing Themeables. At first,
-		an Attribute inializes Data and *owns* it. However, through get_data_from(), an Attribute can
+		an Attribute inializes Data and *owns* it. However, through entangle_with(), an Attribute can
 		be made to point to Data from another Attribute.
 	*/
 	class Attribute : public AttributeType
@@ -89,7 +89,7 @@ namespace Layers
 
 			@param attribute - Attribute to obtain the Data pointer of
 		*/
-		void get_data_from(Attribute& attribute);
+		void entangle_with(Attribute& attribute);
 
 		/*!
 			Converts to stateful Data initialized with the supplied map.
