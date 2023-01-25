@@ -48,3 +48,10 @@ CMakeLists.txt.user*
 x64/
 debug/
 release/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
