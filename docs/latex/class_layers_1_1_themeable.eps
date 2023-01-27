@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 497.512451
+%%BoundingBox: 0 0 500 237.416901
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.005000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.106000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 10 def
-/cols 2 def
+/rows 25 def
+/cols 9 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -174,15 +174,40 @@
 boxfont setfont
 1 boundaspect scale
 (Layers::Themeable) cw
-(Layers::CreateNewThemeDialog) cw
-(Layers::GradientSelectionDialog) cw
 (Layers::Label) cw
 (Layers::MenuBar) cw
 (Layers::SVG) cw
 (Layers::ScrollBar) cw
 (Layers::TabBar) cw
-(Layers::UpdateDialog) cw
+(Layers::ThemeableBox) cw
+(Layers::Dialog) cw
 (Layers::Widget) cw
+(Layers::ColorDialog) cw
+(Layers::CreateNewThemeDialog) cw
+(Layers::GradientSelectionDialog) cw
+(Layers::UpdateDialog) cw
+(Layers::AppPreferencesSettingsPanel) cw
+(Layers::AttributeWidget) cw
+(Layers::Button) cw
+(Layers::ColorControl) cw
+(Layers::Combobox) cw
+(Layers::ComboboxItem) cw
+(Layers::CustomizePanel) cw
+(Layers::FillControl) cw
+(Layers::GradientControl) cw
+(Layers::Graphic) cw
+(Layers::LineEditor) cw
+(Layers::Menu) cw
+(Layers::MenuLabelLayer) cw
+(Layers::MiniSlider) cw
+(Layers::ScrollArea) cw
+(Layers::SettingsSidebar) cw
+(Layers::SettingsTab) cw
+(Layers::Slider) cw
+(Layers::ThemesSettingsPanel) cw
+(Layers::Titlebar) cw
+(Layers::ToggleSwitch) cw
+(Layers::Window) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -194,39 +219,127 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (Layers::Themeable) 0.000000 9.000000 box
- (Layers::CreateNewThemeDialog) 1.000000 8.000000 box
- (Layers::GradientSelectionDialog) 1.000000 7.000000 box
- (Layers::Label) 1.000000 6.000000 box
- (Layers::MenuBar) 1.000000 5.000000 box
- (Layers::SVG) 1.000000 4.000000 box
- (Layers::ScrollBar) 1.000000 3.000000 box
- (Layers::TabBar) 1.000000 2.000000 box
- (Layers::UpdateDialog) 1.000000 1.000000 box
- (Layers::Widget) 1.000000 0.000000 box
-1.000000 0.000000 mark
+ (Layers::Themeable) 2.500000 24.000000 box
+ (Layers::Label) 0.000000 23.000000 box
+ (Layers::MenuBar) 1.000000 23.000000 box
+ (Layers::SVG) 2.000000 23.000000 box
+ (Layers::ScrollBar) 3.000000 23.000000 box
+ (Layers::TabBar) 4.000000 23.000000 box
+ (Layers::ThemeableBox) 5.500000 23.000000 box
+ (Layers::Dialog) 4.500000 22.000000 box
+ (Layers::Widget) 6.500000 22.000000 box
+ (Layers::ColorDialog) 5.500000 21.000000 box
+ (Layers::CreateNewThemeDialog) 5.500000 20.000000 box
+ (Layers::GradientSelectionDialog) 5.500000 19.000000 box
+ (Layers::UpdateDialog) 5.500000 18.000000 box
+ (Layers::AppPreferencesSettingsPanel) 7.500000 21.000000 box
+ (Layers::AttributeWidget) 7.500000 20.000000 box
+7.500000 20.000000 mark
+ (Layers::Button) 7.500000 19.000000 box
+ (Layers::ColorControl) 7.500000 18.000000 box
+ (Layers::Combobox) 7.500000 17.000000 box
+ (Layers::ComboboxItem) 7.500000 16.000000 box
+ (Layers::CustomizePanel) 7.500000 15.000000 box
+ (Layers::FillControl) 7.500000 14.000000 box
+ (Layers::GradientControl) 7.500000 13.000000 box
+ (Layers::Graphic) 7.500000 12.000000 box
+ (Layers::LineEditor) 7.500000 11.000000 box
+ (Layers::Menu) 7.500000 10.000000 box
+7.500000 10.000000 mark
+ (Layers::MenuLabelLayer) 7.500000 9.000000 box
+ (Layers::MiniSlider) 7.500000 8.000000 box
+ (Layers::ScrollArea) 7.500000 7.000000 box
+ (Layers::SettingsSidebar) 7.500000 6.000000 box
+ (Layers::SettingsTab) 7.500000 5.000000 box
+ (Layers::Slider) 7.500000 4.000000 box
+ (Layers::ThemesSettingsPanel) 7.500000 3.000000 box
+ (Layers::Titlebar) 7.500000 2.000000 box
+ (Layers::ToggleSwitch) 7.500000 1.000000 box
+ (Layers::Window) 7.500000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 0.000000 8.250000 out
+1 2.500000 23.250000 out
 solid
-0 0.000000 8.500000 hedge
+0.000000 5.500000 24.000000 conn
 solid
-0 0.000000 7.500000 hedge
+0 0.000000 23.750000 in
 solid
-0 0.000000 6.500000 hedge
+0 1.000000 23.750000 in
 solid
-0 0.000000 5.500000 hedge
+0 2.000000 23.750000 in
 solid
-0 0.000000 4.500000 hedge
+0 3.000000 23.750000 in
 solid
-0 0.000000 3.500000 hedge
+0 4.000000 23.750000 in
 solid
-0 0.000000 2.500000 hedge
+0 5.500000 23.750000 in
 solid
-0 0.000000 1.500000 hedge
+1 5.500000 22.250000 out
 solid
-0 0.000000 0.500000 hedge
+4.500000 6.500000 23.000000 conn
 solid
-0.000000 9.000000 0.500000 vedge
+0 4.500000 22.750000 in
+solid
+1 4.500000 21.250000 out
+solid
+0 6.500000 22.750000 in
+solid
+1 6.500000 21.250000 out
+solid
+0 4.500000 21.500000 hedge
+solid
+0 4.500000 20.500000 hedge
+solid
+0 4.500000 19.500000 hedge
+solid
+0 4.500000 18.500000 hedge
+solid
+4.500000 22.000000 18.500000 vedge
+solid
+0 6.500000 21.500000 hedge
+solid
+0 6.500000 20.500000 hedge
+solid
+0 6.500000 19.500000 hedge
+solid
+0 6.500000 18.500000 hedge
+solid
+0 6.500000 17.500000 hedge
+solid
+0 6.500000 16.500000 hedge
+solid
+0 6.500000 15.500000 hedge
+solid
+0 6.500000 14.500000 hedge
+solid
+0 6.500000 13.500000 hedge
+solid
+0 6.500000 12.500000 hedge
+solid
+0 6.500000 11.500000 hedge
+solid
+0 6.500000 10.500000 hedge
+solid
+0 6.500000 9.500000 hedge
+solid
+0 6.500000 8.500000 hedge
+solid
+0 6.500000 7.500000 hedge
+solid
+0 6.500000 6.500000 hedge
+solid
+0 6.500000 5.500000 hedge
+solid
+0 6.500000 4.500000 hedge
+solid
+0 6.500000 3.500000 hedge
+solid
+0 6.500000 2.500000 hedge
+solid
+0 6.500000 1.500000 hedge
+solid
+0 6.500000 0.500000 hedge
+solid
+6.500000 22.000000 0.500000 vedge

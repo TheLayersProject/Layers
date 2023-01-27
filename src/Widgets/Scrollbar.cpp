@@ -17,7 +17,7 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 	//	setFixedHeight(45);
 }
 
-void ScrollBar::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
+void ScrollBar::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
 {
 	a_background_color.copy(*dynamic_cast<Attribute*>(theme_attrs["background_color"]));
 	corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
@@ -143,16 +143,16 @@ void ScrollBar::init_attributes()
 	m_attribute_layout.append(&a_handle_color);
 	m_attribute_layout.append(&handle_corner_radii);
 
-	connect(&a_background_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.top_left, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.top_right, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.bottom_left, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.bottom_right, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.top_left, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.top_right, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.bottom_left, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.bottom_right, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-	connect(&a_handle_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
+	connect(&a_background_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&corner_radii.top_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&corner_radii.top_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&corner_radii.bottom_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&corner_radii.bottom_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&handle_corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&handle_corner_radii.top_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&handle_corner_radii.top_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&handle_corner_radii.bottom_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&handle_corner_radii.bottom_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(&a_handle_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 }

@@ -4,21 +4,21 @@ using Layers::Attribute;
 using Layers::Variant;
 
 Attribute::Attribute(const QString& name, bool disabled) :
-	AttributeType(name, disabled) { }
+	Entity(name, disabled) { }
 
 Attribute::Attribute(const QString& name, QVariant qvariant, bool disabled) :
-	m_data{ new Data(qvariant) }, AttributeType(name, disabled)
+	m_data{ new Data(qvariant) }, Entity(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled) :
-	m_data{ new Data(state_variant_map) }, AttributeType(name, disabled)
+Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled) :
+	m_data{ new Data(variant_map) }, Entity(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const Attribute& a) : AttributeType(a.m_name, a.m_disabled)
+Attribute::Attribute(const Attribute& a) : Entity(a.m_name, a.m_disabled)
 {
 	m_data = new Data(*a.m_data);
 
@@ -28,16 +28,6 @@ Attribute::Attribute(const Attribute& a) : AttributeType(a.m_name, a.m_disabled)
 Attribute::~Attribute()
 {
 	disconnect(m_data_connection);
-}
-
-void Layers::Attribute::clear_data_if_owner()
-{
-	if (m_owns_data)
-	{
-		m_owns_data = false;
-
-		delete m_data;
-	}
 }
 
 bool Attribute::contains_state(const QString& state) const
@@ -65,11 +55,16 @@ void Attribute::establish_data_connection()
 void Attribute::entangle_with(Attribute& attribute)
 {
 	// TODO: Likely need to store this connection and disconnect in destructor
-	connect(&attribute, &Attribute::ownership_changed, [this, &attribute] {
+	connect(&attribute, &Attribute::entangled, [this, &attribute] {
 		entangle_with(attribute);
 		});
 
-	clear_data_if_owner();
+	if (!m_is_entangled)
+	{
+		m_is_entangled = true;
+
+		delete m_data;
+	}
 
 	m_data = attribute.m_data;
 
@@ -80,23 +75,23 @@ void Attribute::entangle_with(Attribute& attribute)
 
 	establish_data_connection();
 
-	emit ownership_changed();
+	emit entangled();
 	emit value_changed();
 }
 
-void Attribute::init_state_variant_map(const QMap<QString, Variant>& state_variant_map)
+void Attribute::init_variant_map(const VariantMap& variant_map)
 {
-	m_data->init_state_variant_map(state_variant_map);
+	m_data->init_variant_map(variant_map);
+}
+
+bool Attribute::is_entangled() const
+{
+	return m_is_entangled;
 }
 
 bool Attribute::is_stateful() const
 {
 	return m_data->is_stateful();
-}
-
-bool Attribute::owns_data() const
-{
-	return m_owns_data;
 }
 
 void Attribute::set_state(const QString& state)
@@ -116,7 +111,7 @@ void Attribute::set_value(const QString& state, QVariant qvariant)
 
 void Attribute::setup_widget_update_connection(QWidget* widget)
 {
-	connect(this, &AttributeType::value_changed, [widget] { widget->update(); });
+	connect(this, &Entity::value_changed, [widget] { widget->update(); });
 }
 
 QString Attribute::state() const
@@ -124,7 +119,7 @@ QString Attribute::state() const
 	return m_state;
 }
 
-QList<QString> Attribute::states() const
+QStringList Attribute::states() const
 {
 	return m_data->states();
 }

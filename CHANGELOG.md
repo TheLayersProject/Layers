@@ -3,15 +3,29 @@ All notable changes to this project will be documented in this file.
 
 ## Alpha Phase
 
+### 3.1.0a (Unreleased)
+    - Implemented the AttributeType class which now serves as the abstract parent class of Attribute and AttributeGroup.
+    - Added AttributeType::setup_widget_update_connection() which simplifies connecting attribute value change to the QWidget::update() function
+    - Attribute groups are now recognized by themes
+    - Attribute groups are now disableable
+    - All top-level attribute widgets now have a disable toggle switch. The disable toggle switch has been realigned to the top-left corner of attribute widgets.
+    - Capitalized attribute names are now derived
+    - Implemented the Data class which either stores a single variant or multiple state-variant pairs
+    - Implemented the ThemeableBox class which generalizes functionality that was shared between the Widget class and the various dialog classes.
+    - Implemented the Dialog class which further generalizes the dialog sub-classes
+    - Implemented a ScrollBar class that is themeable and customizable
+    - Themes are now stored in the AppData/Local/Layers directory which has been reinstated to aid multiple app support for themes.
+    - Implemented theme directories and app/theme UUIDs
+
 ### 3.0.0a (November 29, 2022)
     - The Attribute class now inherits QObject to provide signal/slot functionality.
     - Created a Variant class that wraps a QVariant and inherits QObject to provide signal/slot functionality.
-        ○ Attributes store Variants which are made to be replaceable. An Attribute can replace its Variant with another Attribute's Variant. If either Attribute makes a change to the Variant, both Attributes get updated.
-        ○ When Variants update, it emits Variant::changed, and the Attributes linked to them emit the Attribute::value_changed signal. This mechanism is referred to as attribute value change detection, and it replaces the AttributeSharingCombo. The AttributeSharingCombo class has been deprecated and removed.
+        > Attributes store Variants which are made to be replaceable. An Attribute can replace its Variant with another Attribute's Variant. If either Attribute makes a change to the Variant, both Attributes get updated.
+        > When Variants update, it emits Variant::changed, and the Attributes linked to them emit the Attribute::value_changed signal. This mechanism is referred to as attribute value change detection, and it replaces the AttributeSharingCombo. The AttributeSharingCombo class has been deprecated and removed.
     - Previously, when setting an attribute's value, the value would be set without checking if the attribute already had that value. Now it performs that check, resulting in a performance boost and better protection.
     - The AttributeSet class has been removed.
-        ○ Slightly different data structures are now used for storing attributes between Themes and Themeables.
-        ○ Widget attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced.
+        > Slightly different data structures are now used for storing attributes between Themes and Themeables.
+        > Widget attributes are now initialized as public member variables, removing the need to iterate each time an Attribute needs to be referenced.
     - Created Theme::consume(theme) function for applications to add their widget's theme values to the library's default themes
     - Removed issue_update() since widgets can connect update() to Attribute::value_changed.
     - Saving and loading now uses JSON formatting.
@@ -24,18 +38,18 @@ All notable changes to this project will be documented in this file.
     - Created the StateAW (State Attribute Widget) class which provides an improved interface for customizing stateful attributes.
     - The NumberAW (formerly known as NumberAttributeWidget) now utilizes a mini slider and takes up less space.
     - More widgets are customizable:
-        ○ Widgets of the Customize menu's topbar
-        ○ Dialogs
-        ○ ScrollAreas
-        ○ Fixed App Preferences settings panel customizations
+        > Widgets of the Customize menu's topbar
+        > Dialogs
+        > ScrollAreas
+        > Fixed App Preferences settings panel customizations
     - More widget attributes are customizable:
-        ○ Widget margins
-        ○ Widgets can now be filled with gradients.
-        ○ Fixed outline color and corner color customizations
+        > Widget margins
+        > Widgets can now be filled with gradients.
+        > Fixed outline color and corner color customizations
     - Collapsed text button widget is now a different color to prevent the text buttons from disappearing 
     - Reworked application initialization
-        ○ A GitHubRepo class has been created to clarify that the string argument representing a GitHub repo provided for app initialization is a GitHub repo.
-        ○ A Version class has been created to clarify that the string argument representing the app version provided for app initialization is a Version.
+        > A GitHubRepo class has been created to clarify that the string argument representing a GitHub repo provided for app initialization is a GitHub repo.
+        > A Version class has been created to clarify that the string argument representing the app version provided for app initialization is a Version.
     - Created new widget classes, MenuBar and TabBar.
     - Image sequences can now be saved and loaded as a single file
     - Fixed some issues where the preview window had too much functionality enabled

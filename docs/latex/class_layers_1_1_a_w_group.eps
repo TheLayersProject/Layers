@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 326.797394
+%%BoundingBox: 0 0 500 392.156860
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.530000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.275000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 5 def
+/rows 6 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -177,6 +177,7 @@ boxfont setfont
 (Layers::AttributeWidget) cw
 (Layers::Widget) cw
 (QWidget) cw
+(Layers::ThemeableBox) cw
 (Layers::Themeable) cw
 (Layers::CornerRadiiAW) cw
 /boxwidth boxwidth marginwidth 2 mul add def
@@ -194,7 +195,8 @@ boundx scalefactor div boundy scalefactor div scale
  (Layers::AttributeWidget) 0.500000 2.000000 box
  (Layers::Widget) 0.500000 3.000000 box
  (QWidget) 0.000000 4.000000 box
- (Layers::Themeable) 1.000000 4.000000 box
+ (Layers::ThemeableBox) 1.000000 4.000000 box
+ (Layers::Themeable) 1.000000 5.000000 box
  (Layers::CornerRadiiAW) 0.500000 0.000000 box
 
 % ----- relations -----
@@ -215,6 +217,10 @@ solid
 1 0.000000 4.000000 in
 solid
 1 1.000000 4.000000 in
+solid
+0 1.000000 4.000000 out
+solid
+1 1.000000 5.000000 in
 solid
 1 0.500000 0.250000 out
 solid

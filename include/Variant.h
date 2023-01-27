@@ -10,10 +10,12 @@ namespace Layers
 	/*!
 		Variant type with signal/slot support
 
-		The Variant class is a QObject that wraps a QVariant to enable Qt signal/slot functionality.
+		The Variant class is a QObject that wraps a QVariant to enable Qt
+		signal/slot functionality.
 
-		The purpose of having a variant type with signal/slot support is to enable value change detection.
-		Any time the QVariant is modified, the changed() signal gets emitted.
+		The purpose of having a variant type with signal/slot support is to
+		enable value change detection. Any time the QVariant is modified, the
+		changed() signal gets emitted.
 	*/
 	class Variant : public QObject
 	{
@@ -57,6 +59,9 @@ namespace Layers
 	{
 		return m_qvariant.value<T>();
 	}
+
+	using VariantMap = QMap<QString, Variant>;
+
 }
 
 #endif // VARIANT_H

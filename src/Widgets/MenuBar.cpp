@@ -47,7 +47,7 @@ QMenu* MenuBar::addMenu(const QString& title)
     return m_menus.last();
 }
 
-void MenuBar::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
+void MenuBar::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
 {
     a_text_color.copy(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
     a_selected_text_color.copy(*dynamic_cast<Attribute*>(theme_attrs["selected_text_color"]));
@@ -68,8 +68,8 @@ void MenuBar::init_attributes()
     m_attribute_layout.append(&a_text_color);
     m_attribute_layout.append(&a_selected_text_color);
 
-    connect(&a_text_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
-    connect(&a_selected_text_color, &AttributeType::value_changed, [this] { update_theme_dependencies(); });
+    connect(&a_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+    connect(&a_selected_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 }
 
 void MenuBar::update_theme_dependencies()

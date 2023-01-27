@@ -18,7 +18,7 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
     installEventFilter(this);
     setFocusPolicy(Qt::ClickFocus);
 
-    connect(&border.thickness, &AttributeType::value_changed, [this] {
+    connect(&border.thickness, &Entity::value_changed, [this] {
         if (layout())
         {
             if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
@@ -33,8 +33,8 @@ void Widget::init_attributes()
 {
     ThemeableBox::init_attributes();
 
-    for (AttributeType* attr_type : m_attributes)
-        attr_type->setup_widget_update_connection(this);
+    for (Entity* entity : m_attributes)
+        entity->setup_widget_update_connection(this);
 }
 
 bool Widget::eventFilter(QObject* object, QEvent* event)

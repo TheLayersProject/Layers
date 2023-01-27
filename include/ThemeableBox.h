@@ -15,7 +15,7 @@ namespace Layers
 	{
 	public:
 		virtual void apply_theme_attributes(
-			QMap<QString, AttributeType*>& theme_attrs) override;
+			QMap<QString, Entity*>& theme_attrs) override;
 
 		/*!
 			Sets all margin attributes with one value.

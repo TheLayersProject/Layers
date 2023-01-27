@@ -9,10 +9,10 @@ Data::Data(QVariant qvariant) :
 	connect(m_variant, &Variant::changed, [this] { emit changed(); });
 }
 
-Data::Data(QMap<QString, Variant> state_variant_map) :
-	m_state_variant_map{ new QMap<QString, Variant>(state_variant_map) }
+Data::Data(VariantMap variant_map) :
+	m_variant_map{ new VariantMap(variant_map) }
 {
-	for (const Variant& variant : *m_state_variant_map)
+	for (const Variant& variant : *m_variant_map)
 		connect(&variant, &Variant::changed, [this] { emit changed(); });
 }
 
@@ -21,8 +21,8 @@ Data::Data(const Data& d)
 	if (d.m_variant)
 		m_variant = new Variant(*d.m_variant);
 	else
-		m_state_variant_map =
-			new QMap<QString, Variant>(*d.m_state_variant_map);
+		m_variant_map =
+			new VariantMap(*d.m_variant_map);
 }
 
 Data::~Data()
@@ -32,17 +32,17 @@ Data::~Data()
 		delete m_variant;
 		m_variant = nullptr;
 	}
-	else if (m_state_variant_map)
+	else if (m_variant_map)
 	{
-		delete m_state_variant_map;
-		m_state_variant_map = nullptr;
+		delete m_variant_map;
+		m_variant_map = nullptr;
 	}
 }
 
 bool Data::contains_state(const QString& state) const
 {
-	if (m_state_variant_map)
-		return m_state_variant_map->contains(state);
+	if (m_variant_map)
+		return m_variant_map->contains(state);
 
 	return false;
 }
@@ -51,11 +51,11 @@ void Data::copy(const Data& data)
 {
 	if (data.m_variant)
 	{
-		if (m_state_variant_map)
+		if (m_variant_map)
 		{
-			delete m_state_variant_map;
+			delete m_variant_map;
 
-			m_state_variant_map = nullptr;
+			m_variant_map = nullptr;
 
 			m_variant = new Variant(*data.m_variant);
 		}
@@ -70,18 +70,18 @@ void Data::copy(const Data& data)
 
 			m_variant = nullptr;
 
-			m_state_variant_map = new QMap<QString, Variant>(*data.m_state_variant_map);
+			m_variant_map = new VariantMap(*data.m_variant_map);
 		}
 		else
 		{
-			m_state_variant_map->clear();
+			m_variant_map->clear();
 
-			m_state_variant_map->insert(*data.m_state_variant_map);
+			m_variant_map->insert(*data.m_variant_map);
 		}
 	}
 }
 
-void Data::init_state_variant_map(const QMap<QString, Variant>& state_variant_map)
+void Data::init_variant_map(const VariantMap& variant_map)
 {
 	if (m_variant)
 	{
@@ -89,16 +89,16 @@ void Data::init_state_variant_map(const QMap<QString, Variant>& state_variant_ma
 		m_variant = nullptr;
 	}
 
-	if (m_state_variant_map) m_state_variant_map->clear();
-	else m_state_variant_map = new QMap<QString, Variant>();
+	if (m_variant_map) m_variant_map->clear();
+	else m_variant_map = new VariantMap();
 
-	m_state_variant_map->insert(state_variant_map);
+	m_variant_map->insert(variant_map);
 }
 
 bool Data::is_stateful() const
 {
-	if (m_state_variant_map)
-		return !m_state_variant_map->isEmpty();
+	if (m_variant_map)
+		return !m_variant_map->isEmpty();
 
 	return false;
 }
@@ -142,13 +142,13 @@ void Data::set_value(QVariant qvariant, bool retain_type)
 
 void Data::set_value(const QString& state, QVariant qvariant)
 {
-	if (m_state_variant_map)
+	if (m_variant_map)
 	{
-		if (m_state_variant_map->contains(state))
+		if (m_variant_map->contains(state))
 		{
-			if ((*m_state_variant_map)[state] != qvariant)
+			if ((*m_variant_map)[state] != qvariant)
 			{
-				(*m_state_variant_map)[state] = qvariant;
+				(*m_variant_map)[state] = qvariant;
 			}
 		}
 		else qDebug() << "WARNING: Failed to set attribute value: State does not exist.";
@@ -156,12 +156,12 @@ void Data::set_value(const QString& state, QVariant qvariant)
 	else qDebug() << "WARNING: Failed to set attribute value: State provided but Attribute is not stateful.";
 }
 
-QList<QString> Data::states() const
+QStringList Data::states() const
 {
-	if (m_state_variant_map)
-		return m_state_variant_map->keys();
+	if (m_variant_map)
+		return m_variant_map->keys();
 
-	return QList<QString>();
+	return QStringList();
 }
 
 QJsonObject Data::to_json_object()
@@ -174,11 +174,11 @@ QJsonObject Data::to_json_object()
 
 		QJsonObject state_value_pairs_json_object;
 
-		for (const QString& state : m_state_variant_map->keys())
+		for (const QString& state : m_variant_map->keys())
 		{
 			QJsonValue insert_value;
 
-			Variant& variant = (*m_state_variant_map)[state];
+			Variant& variant = (*m_variant_map)[state];
 
 			if (QString(variant.typeName()) == "bool")
 				insert_value = QJsonValue(variant.value<bool>());
@@ -280,11 +280,11 @@ QJsonObject Data::to_json_object()
 
 const char* Data::typeName() const
 {
-	if (m_state_variant_map)
+	if (m_variant_map)
 		/* NOTE: Stateful Data could have Variants with different value
 		   types. But this function only returns one typename, so there's a
 		   chance it will not work properly. */
-		return (*m_state_variant_map)[m_state_variant_map->firstKey()].typeName();
+		return (*m_variant_map)[m_variant_map->firstKey()].typeName();
 	else
 		return m_variant->typeName();
 }

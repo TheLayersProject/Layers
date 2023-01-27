@@ -27,7 +27,7 @@ void Slider::set_limit(int limit)
 
 void Slider::init_attributes()
 {
-	connect(&a_value, &AttributeType::value_changed, [this] { update_handle_pos(); });
+	connect(&a_value, &Entity::value_changed, [this] { update_handle_pos(); });
 
 	corner_radii.top_left.set_value(10.0); // Need to check these values
 	corner_radii.top_right.set_value(10.0);

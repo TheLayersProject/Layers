@@ -27,19 +27,20 @@ var NAVTREE =
   [ "Layers", "index.html", [
     [ "Changelog", "md__c_h_a_n_g_e_l_o_g.html", [
       [ "Alpha Phase", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md1", [
-        [ "3.0.0a (November 29, 2022)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
-        [ "2.2.0a (September 11, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
-        [ "2.1.0a (September 1, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
-        [ "2.0.0a (June 23, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ]
+        [ "3.1.0a (Unreleased)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
+        [ "3.0.0a (November 29, 2022)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
+        [ "2.2.0a (September 11, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
+        [ "2.1.0a (September 1, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ],
+        [ "2.0.0a (June 23, 2021)", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md6", null ]
       ] ]
     ] ],
     [ "<img src=\"https://github.com/huntermalm/Layers/blob/main/svgs/layers_logo_w_text.svg?raw=true\" alt=\"layers_logo\" width=\"500\"/>", "md__r_e_a_d_m_e.html", [
-      [ "Demo", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "Development and Testing", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "Download", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-      [ "Authors", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md15", null ]
+      [ "Demo", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Development and Testing", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "Download", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+      [ "Authors", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -59,7 +60,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_application_8h_source.html",
-"md__r_e_a_d_m_e.html#autotoc_md7"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

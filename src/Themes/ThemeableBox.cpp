@@ -1,8 +1,4 @@
-//#include "../../include/AttributeWidgets.h"
-//#include "../../include/CustomizePanel.h"
-//#include "../../include/Layouts.h"
 #include "../../include/calculate.h"
-//#include "../../include/Theme.h"
 #include "../../include/ThemeableBox.h"
 
 #include <QEvent>
@@ -30,11 +26,11 @@ void ThemeableBox::init_attributes()
     m_attribute_layout.append(&a_corner_color);
     m_attribute_layout.append(&a_outline_color);
 
-    //for (AttributeType* attr_type : m_attributes)
-    //    attr_type->setup_widget_update_connection(this);
+    //for (Entity* entity : m_attributes)
+    //    entity->setup_widget_update_connection(this);
 }
 
-void ThemeableBox::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
+void ThemeableBox::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
 {
     border.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
     a_corner_color.copy(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));

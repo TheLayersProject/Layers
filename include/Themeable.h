@@ -59,7 +59,7 @@ namespace Layers
 		*/
 		virtual void apply_theme(Theme& theme);
 
-		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs);
+		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs);
 
 		/*!
 			Assigns tag prefixes from the parent and the parent's name.
@@ -79,9 +79,9 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		QMap<QString, AttributeType*>& attributes();
+		QMap<QString, Entity*>& attributes();
 
-		QList<AttributeType*>& attribute_layout();
+		QList<Entity*>& attribute_layout();
 
 		//QMap<QString, AttributeWidget*>& attribute_widgets();
 
@@ -314,9 +314,9 @@ namespace Layers
 		//QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
 		//QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
 
-		QList<AttributeType*> m_attribute_layout{ QList<AttributeType*>() };
+		QList<Entity*> m_attribute_layout{ QList<Entity*>() };
 
-		QMap<QString, AttributeType*> m_attributes{ QMap<QString, AttributeType*>() };
+		QMap<QString, Entity*> m_attributes{ QMap<QString, Entity*>() };
 
 		QList<Themeable*> m_child_themeables;
 
@@ -331,12 +331,12 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (const QString& attr_type_key : m_attributes.keys())
+			for (const QString& entity_key : m_attributes.keys())
 			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[attr_type_key]))
-					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_attributes[attr_type_key]));
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[attr_type_key]))
-					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[attr_type_key]));
+				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[entity_key]))
+					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_attributes[entity_key]));
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[entity_key]))
+					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[entity_key]));
 			}
 
 			for (Themeable* this_child_themeable : m_child_themeables)

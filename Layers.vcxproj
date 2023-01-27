@@ -114,7 +114,7 @@
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\Data.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
-    <ClCompile Include="src\Themes\Attributes\AttributeType.cpp" />
+    <ClCompile Include="src\Themes\Attributes\Entity.cpp" />
     <ClCompile Include="src\Themes\Attributes\Variant.cpp" />
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
@@ -180,7 +180,7 @@
     <QtMoc Include="include\Data.h" />
     <QtMoc Include="include\AttributeGroup.h" />
     <ClInclude Include="include\AttributeLayout.h" />
-    <QtMoc Include="include\AttributeType.h" />
+    <QtMoc Include="include\Entity.h" />
     <ClInclude Include="include\build_themes.h" />
     <QtMoc Include="include\Dialog.h" />
     <QtMoc Include="include\ColorDialog.h" />

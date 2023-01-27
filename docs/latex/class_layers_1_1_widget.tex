@@ -15,32 +15,6 @@ Inheritance diagram for Layers\+::Widget\+:\begin{figure}[H]
 \item 
 \mbox{\Hypertarget{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}\label{class_layers_1_1_widget_ace1aa23652eb4425355a81760b39fd37}} 
 {\bfseries Widget} (QWidget $\ast$parent=nullptr)
-\item 
-virtual void \mbox{\hyperlink{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
-\item 
-void \mbox{\hyperlink{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}{set\+\_\+margin}} (double margin)
-\item 
-void \mbox{\hyperlink{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}{set\+\_\+margin}} (double left, double top, double right, double bottom)
-\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_acb516cac43bbc27740d9a4d9fc5a128b}\label{class_layers_1_1_widget_acb516cac43bbc27740d9a4d9fc5a128b}} 
-\mbox{\hyperlink{class_layers_1_1_border_attributes}{Border\+Attributes}} {\bfseries border}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_ae9247066c8da6448a40f0f654d3b1709}\label{class_layers_1_1_widget_ae9247066c8da6448a40f0f654d3b1709}} 
-\mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{Corner\+Radii\+Attributes}} {\bfseries corner\+\_\+radii}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a8cb0c3071a568244c921551eb5f1fb9a}\label{class_layers_1_1_widget_a8cb0c3071a568244c921551eb5f1fb9a}} 
-\mbox{\hyperlink{class_layers_1_1_margins_attributes}{Margins\+Attributes}} {\bfseries margins}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}{a\+\_\+corner\+\_\+color}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}{a\+\_\+fill}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}{a\+\_\+hover\+\_\+fill}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}{a\+\_\+outline\+\_\+color}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -51,31 +25,13 @@ void \mbox{\hyperlink{class_layers_1_1_widget_acf1e13fb2beddd23f6c87e2486df259d}
 \item 
 void \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paint\+Event}} (QPaint\+Event $\ast$event) override
 \end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a4bae24de59ffad9d277471876f90ecea}\label{class_layers_1_1_widget_a4bae24de59ffad9d277471876f90ecea}} 
-bool {\bfseries m\+\_\+hovering} \{ false \}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_widget_a66dc4695cd3b275e243b4ac29c301748}\label{class_layers_1_1_widget_a66dc4695cd3b275e243b4ac29c301748}} 
-QPainter {\bfseries painter}
-\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 The \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class wraps a QWidget with a \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} to give QWidgets compatibility with the Layers theme system. The Layers \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} class overrides the QWidget\textquotesingle{}s \mbox{\hyperlink{class_layers_1_1_widget_ad9da6e86a017fc03e607effec4a87f16}{paint\+Event()}} and uses the attributes provided by the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle the widget\textquotesingle{}s appearance. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}\label{class_layers_1_1_widget_a77ff9464ad2728574e19a86de871e1b4}} 
-\index{Layers::Widget@{Layers::Widget}!apply\_theme\_attributes@{apply\_theme\_attributes}}
-\index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void Widget\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
-
 \mbox{\Hypertarget{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}\label{class_layers_1_1_widget_a9eaeeb3eaa6ac82b8d1e76e469e5d093}} 
 \index{Layers::Widget@{Layers::Widget}!eventFilter@{eventFilter}}
 \index{eventFilter@{eventFilter}!Layers::Widget@{Layers::Widget}}
@@ -98,101 +54,7 @@ This function uses calls to set\+\_\+attribute\+\_\+value() to define attributes
 \doxysubsubsection{\texorpdfstring{paintEvent()}{paintEvent()}}
 {\footnotesize\ttfamily void Widget\+::paint\+Event (\begin{DoxyParamCaption}\item[{QPaint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
 
-Paints the widget with values obtained from the widget\textquotesingle{}s attributes. \mbox{\Hypertarget{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}\label{class_layers_1_1_widget_a3355f676a3176190389bab29396528f2}} 
-\index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
-\index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{double}]{left,  }\item[{double}]{top,  }\item[{double}]{right,  }\item[{double}]{bottom }\end{DoxyParamCaption})}
-
-Sets the margin attributes individually.
-
-
-\begin{DoxyParams}{Parameters}
-{\em left} & margin \\
-\hline
-{\em top} & margin \\
-\hline
-{\em right} & margin \\
-\hline
-{\em bottom} & margin \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}\label{class_layers_1_1_widget_a9dc660f84562bc902bf407e02a7f4dca}} 
-\index{Layers::Widget@{Layers::Widget}!set\_margin@{set\_margin}}
-\index{set\_margin@{set\_margin}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{set\_margin()}{set\_margin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Widget\+::set\+\_\+margin (\begin{DoxyParamCaption}\item[{double}]{margin }\end{DoxyParamCaption})}
-
-Sets all margin attributes with one value.
-
-
-\begin{DoxyParams}{Parameters}
-{\em margin} & \\
-\hline
-\end{DoxyParams}
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}\label{class_layers_1_1_widget_a0f33c1b3e38bba50062e9268e9962e0b}} 
-\index{Layers::Widget@{Layers::Widget}!a\_corner\_color@{a\_corner\_color}}
-\index{a\_corner\_color@{a\_corner\_color}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{a\_corner\_color}{a\_corner\_color}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+corner\+\_\+color}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}corner\_color"{}},}
-\DoxyCodeLine{            QColor(Qt::gray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}\label{class_layers_1_1_widget_ab73fb14a045f66a85e1a4de3cf198038}} 
-\index{Layers::Widget@{Layers::Widget}!a\_fill@{a\_fill}}
-\index{a\_fill@{a\_fill}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{a\_fill}{a\_fill}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+fill}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}fill"{}},}
-\DoxyCodeLine{            QColor(Qt::white)}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}\label{class_layers_1_1_widget_a226274613e842bc0b469e4ffdb677cc6}} 
-\index{Layers::Widget@{Layers::Widget}!a\_hover\_fill@{a\_hover\_fill}}
-\index{a\_hover\_fill@{a\_hover\_fill}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{a\_hover\_fill}{a\_hover\_fill}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+hover\+\_\+fill}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}hover\_fill"{}},}
-\DoxyCodeLine{            QColor(Qt::lightGray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}\label{class_layers_1_1_widget_a67899fa2df88f455001db5276d83eb52}} 
-\index{Layers::Widget@{Layers::Widget}!a\_outline\_color@{a\_outline\_color}}
-\index{a\_outline\_color@{a\_outline\_color}!Layers::Widget@{Layers::Widget}}
-\doxysubsubsection{\texorpdfstring{a\_outline\_color}{a\_outline\_color}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Widget\+::a\+\_\+outline\+\_\+color}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}outline\_color"{}},}
-\DoxyCodeLine{            QColor(Qt::gray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-
+Paints the widget with values obtained from the widget\textquotesingle{}s attributes. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

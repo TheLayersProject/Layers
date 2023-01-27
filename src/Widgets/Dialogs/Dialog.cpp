@@ -77,13 +77,13 @@ void Dialog::init_attributes()
     update_content_margins();
     update_titlebar();
 
-    connect(&border.thickness, &AttributeType::value_changed, [this] {
+    connect(&border.thickness, &Entity::value_changed, [this] {
         update_content_margins();
         update_titlebar();
         });
 
     for (Attribute* margin : margins)
-        connect(margin, &AttributeType::value_changed, this, &Dialog::update_content_margins);
+        connect(margin, &Entity::value_changed, this, &Dialog::update_content_margins);
 }
 
 void Dialog::init_child_themeable_reference_list()

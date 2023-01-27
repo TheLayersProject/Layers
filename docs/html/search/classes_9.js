@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['marginsattributes_0',['MarginsAttributes',['../class_layers_1_1_margins_attributes.html',1,'Layers']]],
-  ['menu_1',['Menu',['../class_layers_1_1_menu.html',1,'Layers']]],
-  ['menubar_2',['MenuBar',['../class_layers_1_1_menu_bar.html',1,'Layers']]],
-  ['menulabellayer_3',['MenuLabelLayer',['../class_layers_1_1_menu_label_layer.html',1,'Layers']]],
-  ['minislider_4',['MiniSlider',['../class_layers_1_1_mini_slider.html',1,'Layers']]]
+  ['label_0',['Label',['../class_layers_1_1_label.html',1,'Layers']]],
+  ['lineeditor_1',['LineEditor',['../class_layers_1_1_line_editor.html',1,'Layers']]]
 ];

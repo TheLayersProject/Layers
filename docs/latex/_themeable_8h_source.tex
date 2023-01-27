@@ -23,13 +23,13 @@
 \DoxyCodeLine{48 }
 \DoxyCodeLine{60         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\_theme}}(\mbox{\hyperlink{class_layers_1_1_theme}{Theme}}\& theme);}
 \DoxyCodeLine{61 }
-\DoxyCodeLine{62         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs);}
+\DoxyCodeLine{62         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, Entity*>\& theme\_attrs);}
 \DoxyCodeLine{63 }
 \DoxyCodeLine{74         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_themeable_a72bbd5ac1f2e4ebb4e1b0bf63b157076}{assign\_tag\_prefixes}}(QList<QString> parent\_prefixes = QList<QString>(), \textcolor{keyword}{const} QString\& parent\_name = \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{75 }
-\DoxyCodeLine{82         QMap<QString, AttributeType*>\& \mbox{\hyperlink{class_layers_1_1_themeable_aaaf35e8431ab9d29c0c24bed4d8cd229}{attributes}}();}
+\DoxyCodeLine{82         QMap<QString, Entity*>\& \mbox{\hyperlink{class_layers_1_1_themeable_af5ceb1e528ea1389ccac1430fc778128}{attributes}}();}
 \DoxyCodeLine{83 }
-\DoxyCodeLine{84         QList<AttributeType*>\& attribute\_layout();}
+\DoxyCodeLine{84         QList<Entity*>\& attribute\_layout();}
 \DoxyCodeLine{85 }
 \DoxyCodeLine{86         \textcolor{comment}{//QMap<QString, AttributeWidget*>\& attribute\_widgets();}}
 \DoxyCodeLine{87 }
@@ -120,9 +120,9 @@
 \DoxyCodeLine{314         \textcolor{comment}{//QMap<QString, bool> m\_ACW\_pre\_init\_primary\_values\{ QMap<QString, bool>() \};}}
 \DoxyCodeLine{315         \textcolor{comment}{//QMap<QString, AttributeWidget*> m\_attribute\_widgets\{ QMap<QString, AttributeWidget*>() \};}}
 \DoxyCodeLine{316 }
-\DoxyCodeLine{317         QList<AttributeType*> m\_attribute\_layout\{ QList<AttributeType*>() \};}
+\DoxyCodeLine{317         QList<Entity*> m\_attribute\_layout\{ QList<Entity*>() \};}
 \DoxyCodeLine{318 }
-\DoxyCodeLine{319         QMap<QString, AttributeType*> m\_attributes\{ QMap<QString, AttributeType*>() \};}
+\DoxyCodeLine{319         QMap<QString, Entity*> m\_attributes\{ QMap<QString, Entity*>() \};}
 \DoxyCodeLine{320 }
 \DoxyCodeLine{321         QList<Themeable*> m\_child\_themeables;}
 \DoxyCodeLine{322 }
@@ -137,12 +137,12 @@
 \DoxyCodeLine{331     \{}
 \DoxyCodeLine{332         \textcolor{keywordflow}{if} (\textcolor{keyword}{typeid}(*\textcolor{keyword}{this}) == \textcolor{keyword}{typeid}(*themeable))}
 \DoxyCodeLine{333         \{}
-\DoxyCodeLine{334             \textcolor{keywordflow}{for} (\textcolor{keyword}{const} QString\& attr\_type\_key : m\_attributes.keys())}
+\DoxyCodeLine{334             \textcolor{keywordflow}{for} (\textcolor{keyword}{const} QString\& entity\_key : m\_attributes.keys())}
 \DoxyCodeLine{335             \{}
-\DoxyCodeLine{336                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attr = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}*\textcolor{keyword}{>}(m\_attributes[attr\_type\_key]))}
-\DoxyCodeLine{337                     attr-\/>get\_data\_from(*\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}*\textcolor{keyword}{>}(themeable-\/>m\_attributes[attr\_type\_key]));}
-\DoxyCodeLine{338                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}* attr\_group = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}*\textcolor{keyword}{>}(m\_attributes[attr\_type\_key]))}
-\DoxyCodeLine{339                     attr\_group-\/>get\_data\_from(*\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}*\textcolor{keyword}{>}(themeable-\/>m\_attributes[attr\_type\_key]));}
+\DoxyCodeLine{336                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}* attr = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}*\textcolor{keyword}{>}(m\_attributes[entity\_key]))}
+\DoxyCodeLine{337                     attr-\/>entangle\_with(*\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}*\textcolor{keyword}{>}(themeable-\/>m\_attributes[entity\_key]));}
+\DoxyCodeLine{338                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}* attr\_group = \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}*\textcolor{keyword}{>}(m\_attributes[entity\_key]))}
+\DoxyCodeLine{339                     attr\_group-\/>entangle\_with(*\textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{class_layers_1_1_attribute_group}{AttributeGroup}}*\textcolor{keyword}{>}(themeable-\/>m\_attributes[entity\_key]));}
 \DoxyCodeLine{340             \}}
 \DoxyCodeLine{341 }
 \DoxyCodeLine{342             \textcolor{keywordflow}{for} (Themeable* this\_child\_themeable : m\_child\_themeables)}

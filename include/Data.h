@@ -8,19 +8,15 @@
 namespace Layers
 {
 	/*!
-		Data type
+		Data type which represents either a single Variant or multiple Variants
 
-		A Data object is a QObject that stores a pointer to either a single Variant
-		or a QMap of QString-Variant pairs where the QString represents the state
-		associated with the Variant.
+		A Data object is a QObject that stores a pointer to either a single
+		Variant or a QVariantMap where QString represents the state of the
+		Variant.
 
-		Data storing a pointer to a state-Variant map is stateful, whereas Data storing
-		a pointer to a single Variant is not stateful. This can be referred to as the
-		Data's statefulness.
-
-		The term 'value' is sometimes used synonymously with Variant, although, technically
-		the value is stored in a QVariant stored within the Variant. For example, the
-		set_value() function takes a QVariant argument intended to represent the value being set.
+		Data associated with multiple Variants is stateful, whereas Data
+		associated with a single Variant is not stateful. This is referred to
+		as the Data's statehood or statefulness.
 	*/
 	class Data : public QObject
 	{
@@ -31,57 +27,50 @@ namespace Layers
 
 	public:
 		Data(QVariant qvariant);
-		Data(QMap<QString, Variant> state_variant_map);
+		Data(VariantMap variant_map);
 		Data(const Data& d);
 		~Data();
 
 		/*!
-			Returns the value stored in the single Variant converted to the template type T
-
-			This function must only be used with Data objects that are not stateful.
-
-			@returns Variant value converted to template type T
-		*/
-		template<typename T>
-		T as() const;
-
-		/*!
-			Returns the value stored in the Variant associated with the supplied state,
+			Returns value of the Variant associated with the supplied state,
 			converted to the template type T.
 
-			This function must only be used with Data objects that are stateful.
+			Ignore the state parameter when calling this with Data that is not
+			stateful.
 
-			@returns Value of Variant associated with state, converted to template type T
+			@param state - State, if any, associated with Variant
+			@returns Value of Variant associated with state, converted to
+			template type T
 		*/
 		template<typename T>
-		T as(const QString& state) const;
+		T as(const QString& state = "") const;
 
 		/*!
-			Returns true if state exists in the state-variant map, otherwise, returns false.
+			Returns true if state exists in variant map
 
-			@param state - State to check whether it exists in the state-variant map
-			@returns True if state exists in map, false otherwise
+			@param state - State that might exist in variant map
+			@returns True if state exists in variant map, false otherwise
 		*/
 		bool contains_state(const QString& state) const;
 
 		/*!
 			Copies the supplied Data object.
 
-			If the statefulness between the data objects is the same, then the values are
-			simply copied over. If it is not the same, the statefulness of the caller Data
-			is converted to the statefulness of the supplied Data before the values are copied.
+			If the statehood of the data objects is different, then the caller
+			is converted to match the statehood of the supplied Data before the
+			values are copied.
 		*/
 		void copy(const Data& data);
 
 		/*!
 			Converts to stateful Data initialized with the supplied map.
 
-			@param state_variant_map - Map to initialize the Data with
+			@param variant_map - Variant map to initialize the Data with
 		*/
-		void init_state_variant_map(const QMap<QString, Variant>& state_variant_map);
+		void init_variant_map(const VariantMap& variant_map);
 
 		/*!
-			Returns true if stateful, otherwise, returns false.
+			Returns true if the Data is stateful, otherwise, returns false.
 
 			@returns True if stateful, false otherwise
 		*/
@@ -90,17 +79,19 @@ namespace Layers
 		/*!
 			Set the value of the stored Variant.
 
-			This function will only work with Data objects that are not stateful.
+			<b>Only works with Data objects that are not stateful!</b>
 
 			@param qvariant - QVariant containing the value being set
-			@param retain_type - Whether to protect the value type from change, true by default
+			@param retain_type - Whether to protect the value type from change,
+			true by default
 		*/
 		void set_value(QVariant qvariant, bool retain_type = true);
 
 		/*!
-			Set the value of the stored Variant associated with state.
+			Set the value of the stored Variant associated with the supplied
+			state.
 
-			This function will only work with Data objects that are stateful.
+			<b>Only works with Data objects that are stateful!</b>
 
 			@param state - State associated with value
 			@param qvariant - QVariant containing the value being set
@@ -108,48 +99,47 @@ namespace Layers
 		void set_value(const QString& state, QVariant qvariant);
 
 		/*!
-			Returns a list of QStrings representing the available states.
+			Returns a QStringList of the available states.
 
-			If the Data is not stateful, then an empty list will be returned.
+			If the Data is not stateful, an empty list will be returned.
 
-			@returns QString list where QStrings represent the states
+			@returns QStringList where QStrings represent the states
 		*/
-		QList<QString> states() const;
+		QStringList states() const;
 
 		/*!
-			Returns Data converted to a QJsonObject.
+			Returns Data represented as a QJsonObject.
 
-			@returns QJsonObject pertaining to the Data
+			@returns QJsonObject representing the Data
 		*/
 		QJsonObject to_json_object();
 
 		/*!
 			Returns the name of the type stored in the Data.
 
-			If the Data is not stateful, the type name of the single Variant is returned.
-			If it is stateful, then the type name of the Variant associated with the first
-			key state of the state-Variant map is returned.
+			If the Data is not stateful, the type name of the single Variant is
+			returned.
+			
+			If it is stateful, then the type name of the Variant associated
+			with the first key state of the Variant map is returned.
 
 			@returns Name of type stored within the Data
 		*/
 		const char* typeName() const;
 
 	private:
-		QMap<QString, Variant>* m_state_variant_map{ nullptr };
-
 		Variant* m_variant{ nullptr };
-	};
 
-	template<typename T>
-	inline T Data::as() const
-	{
-		return m_variant->value<T>();
-	}
+		VariantMap* m_variant_map{ nullptr };
+	};
 
 	template<typename T>
 	inline T Data::as(const QString& state) const
 	{
-		return (*m_state_variant_map)[state].value<T>();
+		if (state == "")
+			return m_variant->value<T>();
+		else
+			return (*m_variant_map)[state].value<T>();
 	}
 }
 

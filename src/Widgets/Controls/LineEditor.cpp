@@ -39,7 +39,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
     reconnect_text_attribute();
 }
 
-void LineEditor::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
+void LineEditor::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
 {
     Widget::apply_theme_attributes(theme_attrs);
 
@@ -48,7 +48,7 @@ void LineEditor::apply_theme_attributes(QMap<QString, AttributeType*>& theme_att
 
 void LineEditor::reconnect_text_attribute()
 {
-    connect(&a_text, &AttributeType::value_changed, [this]
+    connect(&a_text, &Entity::value_changed, [this]
         {
             update_theme_dependencies();
 
@@ -70,7 +70,7 @@ void LineEditor::init_attributes()
     corner_radii.bottom_right.set_value(5.0);
     a_fill.set_value(QColor(Qt::lightGray));
 
-    connect(&a_text_color, &AttributeType::value_changed, [this] {
+    connect(&a_text_color, &Entity::value_changed, [this] {
         update_theme_dependencies();
         m_line_edit->update();
         });

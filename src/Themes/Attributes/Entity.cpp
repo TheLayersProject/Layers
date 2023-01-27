@@ -1,11 +1,11 @@
-#include "../../../include/Attribute.h"
+#include "../../../include/Entity.h"
 
-using Layers::AttributeType;
+using Layers::Entity;
 
-AttributeType::AttributeType(const QString& name, bool disabled) :
+Entity::Entity(const QString& name, bool disabled) :
 	m_name{ name }, m_disabled{ disabled } {}
 
-QString AttributeType::capitalized_name()
+QString Entity::capitalized_name()
 {
 	QString name = m_name;
 
@@ -16,14 +16,14 @@ QString AttributeType::capitalized_name()
 	return name_parts.join(" ");
 }
 
-bool AttributeType::disabled() const
+bool Entity::disabled() const
 {
 	return m_disabled;
 }
 
-QString AttributeType::name() { return m_name; }
+QString Entity::name() { return m_name; }
 
-void AttributeType::set_disabled(bool disabled)
+void Entity::set_disabled(bool disabled)
 {
 	m_disabled = disabled;
 

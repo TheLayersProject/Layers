@@ -3,7 +3,7 @@
 Inheritance diagram for Layers\+::Gradient\+Selection\+Dialog\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{class_layers_1_1_gradient_selection_dialog}
+\includegraphics[height=4.000000cm]{class_layers_1_1_gradient_selection_dialog}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Slots}
@@ -11,6 +11,9 @@ Inheritance diagram for Layers\+::Gradient\+Selection\+Dialog\+:\begin{figure}[H
 \item 
 \mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_aa1ecdf91cec1f033db2ed48a4cdeef27}\label{class_layers_1_1_gradient_selection_dialog_aa1ecdf91cec1f033db2ed48a4cdeef27}} 
 void {\bfseries click\+\_\+control} ()
+\item 
+\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a5810857ed76263dacae738b9e8a33244}\label{class_layers_1_1_gradient_selection_dialog_a5810857ed76263dacae738b9e8a33244}} 
+void {\bfseries update\+\_\+color\+\_\+control\+\_\+positions} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -21,33 +24,11 @@ void {\bfseries click\+\_\+control} ()
 \mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a6e32ce9b11981fdc16a8fc1d11722512}\label{class_layers_1_1_gradient_selection_dialog_a6e32ce9b11981fdc16a8fc1d11722512}} 
 void {\bfseries add\+\_\+gradient\+\_\+stop} (double stop\+\_\+val, QColor color)
 \item 
-virtual void \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_ace29a5c6059041bd4daa724f22293405}{apply\+\_\+theme\+\_\+attributes}} (QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&theme\+\_\+attrs) override
-\item 
 \mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a77dff75fe8721a1faf1971e57f2fe655}\label{class_layers_1_1_gradient_selection_dialog_a77dff75fe8721a1faf1971e57f2fe655}} 
 QGradient\+Stops {\bfseries gradient\+\_\+stops} () const
 \item 
 \mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a9438b101bce0b344c8c55848299d956a}\label{class_layers_1_1_gradient_selection_dialog_a9438b101bce0b344c8c55848299d956a}} 
 void {\bfseries update\+\_\+gradient} ()
-\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a5770d263b5bfaf79cf4c1186b8436712}\label{class_layers_1_1_gradient_selection_dialog_a5770d263b5bfaf79cf4c1186b8436712}} 
-\mbox{\hyperlink{class_layers_1_1_border_attributes}{Border\+Attributes}} {\bfseries border}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_aa2272752862d257bdbc20542d7d7c819}\label{class_layers_1_1_gradient_selection_dialog_aa2272752862d257bdbc20542d7d7c819}} 
-\mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{Corner\+Radii\+Attributes}} {\bfseries corner\+\_\+radii}
-\item 
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a77f985d26235a07346fb1d972853024b}\label{class_layers_1_1_gradient_selection_dialog_a77f985d26235a07346fb1d972853024b}} 
-\mbox{\hyperlink{class_layers_1_1_margins_attributes}{Margins\+Attributes}} {\bfseries margins}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a35909406173b62e4ad060748bcf32651}{a\+\_\+corner\+\_\+color}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a8137005fb624c0ea6ab8e3fbd6c88ea9}{a\+\_\+fill}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_ab5ddeacb1b2234dc2ecfffabc796d5e5}{a\+\_\+hover\+\_\+fill}}
-\item 
-\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a955bf7a3aecb084d136c045e8950866e}{a\+\_\+outline\+\_\+color}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -59,27 +40,11 @@ bool {\bfseries event\+Filter} (QObject $\ast$object, QEvent $\ast$event) overri
 void {\bfseries init\+\_\+attributes} ()
 \item 
 void \mbox{\hyperlink{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
-\item 
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a6d90d68c26a9651f6e4bc6705197fc9e}\label{class_layers_1_1_gradient_selection_dialog_a6d90d68c26a9651f6e4bc6705197fc9e}} 
-bool {\bfseries native\+Event} (const QByte\+Array \&event\+Type, void $\ast$message, qintptr $\ast$result) override
-\item 
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a226723153ef8027f8c59cc920a8b155a}\label{class_layers_1_1_gradient_selection_dialog_a226723153ef8027f8c59cc920a8b155a}} 
-void {\bfseries paint\+Event} (QPaint\+Event $\ast$event) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_ace29a5c6059041bd4daa724f22293405}\label{class_layers_1_1_gradient_selection_dialog_ace29a5c6059041bd4daa724f22293405}} 
-\index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!apply\_theme\_attributes@{apply\_theme\_attributes}}
-\index{apply\_theme\_attributes@{apply\_theme\_attributes}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
-\doxysubsubsection{\texorpdfstring{apply\_theme\_attributes()}{apply\_theme\_attributes()}}
-{\footnotesize\ttfamily void Gradient\+Selection\+Dialog\+::apply\+\_\+theme\+\_\+attributes (\begin{DoxyParamCaption}\item[{QMap$<$ QString, \mbox{\hyperlink{class_layers_1_1_attribute_type}{Attribute\+Type}} $\ast$ $>$ \&}]{theme\+\_\+attrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable}{Layers\+::\+Themeable}}.
-
 \mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}\label{class_layers_1_1_gradient_selection_dialog_a3ac018e15cc8827dd22f1bea902d01ca}} 
 \index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
 \index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
@@ -113,70 +78,8 @@ Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}
 
 This function is called by init\+\_\+themeable(). 
 
-Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_dialog_a2567397e2e5f8cd8c2a3f30e0db8e237}{Layers\+::\+Dialog}}.
 
-
-
-\doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a35909406173b62e4ad060748bcf32651}\label{class_layers_1_1_gradient_selection_dialog_a35909406173b62e4ad060748bcf32651}} 
-\index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!a\_corner\_color@{a\_corner\_color}}
-\index{a\_corner\_color@{a\_corner\_color}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
-\doxysubsubsection{\texorpdfstring{a\_corner\_color}{a\_corner\_color}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Gradient\+Selection\+Dialog\+::a\+\_\+corner\+\_\+color}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}corner\_color"{}},}
-\DoxyCodeLine{            QColor(Qt::gray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a8137005fb624c0ea6ab8e3fbd6c88ea9}\label{class_layers_1_1_gradient_selection_dialog_a8137005fb624c0ea6ab8e3fbd6c88ea9}} 
-\index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!a\_fill@{a\_fill}}
-\index{a\_fill@{a\_fill}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
-\doxysubsubsection{\texorpdfstring{a\_fill}{a\_fill}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Gradient\+Selection\+Dialog\+::a\+\_\+fill}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}fill"{}},}
-\DoxyCodeLine{            QColor(Qt::white)}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_ab5ddeacb1b2234dc2ecfffabc796d5e5}\label{class_layers_1_1_gradient_selection_dialog_ab5ddeacb1b2234dc2ecfffabc796d5e5}} 
-\index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!a\_hover\_fill@{a\_hover\_fill}}
-\index{a\_hover\_fill@{a\_hover\_fill}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
-\doxysubsubsection{\texorpdfstring{a\_hover\_fill}{a\_hover\_fill}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Gradient\+Selection\+Dialog\+::a\+\_\+hover\+\_\+fill}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}hover\_fill"{}},}
-\DoxyCodeLine{            QColor(Qt::lightGray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{class_layers_1_1_gradient_selection_dialog_a955bf7a3aecb084d136c045e8950866e}\label{class_layers_1_1_gradient_selection_dialog_a955bf7a3aecb084d136c045e8950866e}} 
-\index{Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}!a\_outline\_color@{a\_outline\_color}}
-\index{a\_outline\_color@{a\_outline\_color}!Layers::GradientSelectionDialog@{Layers::GradientSelectionDialog}}
-\doxysubsubsection{\texorpdfstring{a\_outline\_color}{a\_outline\_color}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} Layers\+::\+Gradient\+Selection\+Dialog\+::a\+\_\+outline\+\_\+color}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\{ Attribute(}
-\DoxyCodeLine{            \textcolor{stringliteral}{"{}outline\_color"{}},}
-\DoxyCodeLine{            QColor(Qt::gray),}
-\DoxyCodeLine{            \textcolor{keyword}{true}}
-\DoxyCodeLine{            ) \}}
-
-\end{DoxyCode}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

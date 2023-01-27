@@ -5,83 +5,30 @@
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef UPDATEDIALOG\_H}}
 \DoxyCodeLine{2 \textcolor{preprocessor}{\#define UPDATEDIALOG\_H}}
 \DoxyCodeLine{3 }
-\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}Dialog.h"{}}}
 \DoxyCodeLine{5 }
-\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
-\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
-\DoxyCodeLine{8 }
-\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
-\DoxyCodeLine{10 \{}
-\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_update_dialog}{UpdateDialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}}}
-\DoxyCodeLine{12     \{}
-\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{6 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_update_dialog}{UpdateDialog}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_dialog}{Dialog}}}
+\DoxyCodeLine{9     \{}
+\DoxyCodeLine{10         Q\_OBJECT}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{keyword}{public}:}
+\DoxyCodeLine{13         \mbox{\hyperlink{class_layers_1_1_update_dialog}{UpdateDialog}}(\textcolor{keyword}{const} QString\& current\_version\_tag, \textcolor{keyword}{const} QString\& latest\_version\_tag, QWidget* parent = \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{14 }
-\DoxyCodeLine{15     \textcolor{keyword}{public}:}
-\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_update_dialog}{UpdateDialog}}(\textcolor{keyword}{const} QString\& current\_version\_tag, \textcolor{keyword}{const} QString\& latest\_version\_tag, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{15     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{16         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_update_dialog_a3367d1e60b8983cb069da4890ea27cba}{init\_child\_themeable\_reference\_list}}();}
 \DoxyCodeLine{17 }
-\DoxyCodeLine{18         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} apply\_theme\_attributes(QMap<QString, AttributeType*>\& theme\_attrs) \textcolor{keyword}{override};}
-\DoxyCodeLine{19 }
-\DoxyCodeLine{20         \mbox{\hyperlink{class_layers_1_1_border_attributes}{BorderAttributes}} border;}
-\DoxyCodeLine{21 }
-\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_corner_radii_attributes}{CornerRadiiAttributes}} corner\_radii;}
+\DoxyCodeLine{18     \textcolor{keyword}{private}:}
+\DoxyCodeLine{19         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_remind\_me\_later\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Remind Me Later"{}}) \};}
+\DoxyCodeLine{22         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_update\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Update"{}}) \};}
 \DoxyCodeLine{23 }
-\DoxyCodeLine{24         \mbox{\hyperlink{class_layers_1_1_margins_attributes}{MarginsAttributes}} margins;}
-\DoxyCodeLine{25 }
-\DoxyCodeLine{26         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_corner\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
-\DoxyCodeLine{27             \textcolor{stringliteral}{"{}corner\_color"{}},}
-\DoxyCodeLine{28             QColor(Qt::gray),}
-\DoxyCodeLine{29             \textcolor{keyword}{true}}
-\DoxyCodeLine{30             ) \};}
-\DoxyCodeLine{31 }
-\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
-\DoxyCodeLine{33             \textcolor{stringliteral}{"{}fill"{}},}
-\DoxyCodeLine{34             QColor(Qt::white)}
-\DoxyCodeLine{35             ) \};}
-\DoxyCodeLine{36 }
-\DoxyCodeLine{37         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_hover\_fill\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
-\DoxyCodeLine{38             \textcolor{stringliteral}{"{}hover\_fill"{}},}
-\DoxyCodeLine{39             QColor(Qt::lightGray),}
-\DoxyCodeLine{40             \textcolor{keyword}{true}}
-\DoxyCodeLine{41             ) \};}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{43         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} a\_outline\_color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(}
-\DoxyCodeLine{44             \textcolor{stringliteral}{"{}outline\_color"{}},}
-\DoxyCodeLine{45             QColor(Qt::gray),}
-\DoxyCodeLine{46             \textcolor{keyword}{true}}
-\DoxyCodeLine{47             ) \};}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49     \textcolor{keyword}{protected}:}
-\DoxyCodeLine{50         \textcolor{keywordtype}{void} init\_attributes();}
-\DoxyCodeLine{51         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_update_dialog_a3367d1e60b8983cb069da4890ea27cba}{init\_child\_themeable\_reference\_list}}();}
-\DoxyCodeLine{52 }
-\DoxyCodeLine{53         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
-\DoxyCodeLine{54 }
-\DoxyCodeLine{55         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
-\DoxyCodeLine{56 }
-\DoxyCodeLine{57     \textcolor{keyword}{private}:}
-\DoxyCodeLine{58         \textcolor{keywordtype}{void} init\_titlebar();}
-\DoxyCodeLine{59 }
-\DoxyCodeLine{60         \textcolor{keywordtype}{void} setup\_layout();}
-\DoxyCodeLine{61 }
-\DoxyCodeLine{62         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
-\DoxyCodeLine{63 }
-\DoxyCodeLine{64         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
-\DoxyCodeLine{65 }
-\DoxyCodeLine{66         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
-\DoxyCodeLine{67 }
-\DoxyCodeLine{68         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_window\_title\_label = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_label}{Label}}(\textcolor{stringliteral}{"{}Update Available"{}});}
-\DoxyCodeLine{69 }
-\DoxyCodeLine{70         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_exit\_button = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/exit.svg"{}}, QSize(20, 20)), \textcolor{keyword}{true});}
-\DoxyCodeLine{71 }
-\DoxyCodeLine{72         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_remind\_me\_later\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Remind Me Later"{}}) \};}
-\DoxyCodeLine{73         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_update\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Update"{}}) \};}
-\DoxyCodeLine{74 }
-\DoxyCodeLine{75         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_message\_label;}
-\DoxyCodeLine{76 }
-\DoxyCodeLine{77         QPainter painter;}
-\DoxyCodeLine{78     \};}
-\DoxyCodeLine{79 \}}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// UPDATEDIALOG\_H}}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_message\_label;}
+\DoxyCodeLine{25     \};}
+\DoxyCodeLine{26 \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// UPDATEDIALOG\_H}}
 
 \end{DoxyCode}

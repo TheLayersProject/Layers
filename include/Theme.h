@@ -14,7 +14,7 @@ namespace Layers
 	class Attribute;
 	class Themeable;
 
-	// NOTE: Below has not been updated to support AttributeType
+	// NOTE: Below has not been updated to support Entity
 	//inline QDataStream& operator <<(QDataStream& stream, const QMap<QString, Attribute*>& attr_map)
 	//{
 	//	stream << attr_map.count();
@@ -28,7 +28,7 @@ namespace Layers
 	//	return stream;
 	//}
 
-	// NOTE: Below has not been updated to support AttributeType
+	// NOTE: Below has not been updated to support Entity
 	//inline QDataStream& operator >>(QDataStream& stream, QMap<QString, Attribute*>& attr_map)
 	//{
 	//	qsizetype attr_count;
@@ -142,7 +142,7 @@ namespace Layers
 
 			@returns Reference to attribute set of themeable_tag
 		*/
-		QMap<QString, AttributeType*>& operator[](const QString& themeable_tag);
+		QMap<QString, Entity*>& operator[](const QString& themeable_tag);
 
 		//friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
 		//{
@@ -161,7 +161,7 @@ namespace Layers
 		//}
 
 	private:
-		QHash<QString, QMap<QString, AttributeType*>> m_data{ QHash<QString, QMap<QString, AttributeType*>>() };
+		QHash<QString, QMap<QString, Entity*>> m_data{ QHash<QString, QMap<QString, Entity*>>() };
 
 		bool m_editable{ true };
 

@@ -1,0 +1,351 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Changelog}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Alpha Phase}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}3.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0a (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Unreleased)}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}3.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0a (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}November 29, 2022)}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0a (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}September 11, 2021)}{3}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}1.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0a (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}September 1, 2021)}{3}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}2.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}0a (\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}June 23, 2021)}{3}{subsection.1.1.5}%
+\contentsline {chapter}{\numberline {2}$<$img src=\char `\"{}https\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}://github.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}com/huntermalm/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layers/blob/main/svgs/layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}logo\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}w\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}text.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}svg?raw=true\char `\"{} alt=\char `\"{}layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}logo\char `\"{} width=\char `\"{}500\char `\"{}/$>$}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Demo}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Development and Testing}{5}{section.2.2}%
+\contentsline {paragraph}{\numberline {2.2.0.0.1}Layers development requires Qt 6. Other Qt versions may work but have not been tested.}{5}{paragraph.2.2.0.0.1}%
+\contentsline {subsubsection}{\numberline {2.2.0.1}Documentation}{5}{subsubsection.2.2.0.1}%
+\contentsline {subsubsection}{\numberline {2.2.0.2}Project Goals}{6}{subsubsection.2.2.0.2}%
+\contentsline {section}{\numberline {2.3}Installation}{6}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Download}{6}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Authors}{6}{section.2.5}%
+\contentsline {section}{\numberline {2.6}License}{6}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{7}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Index}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Class List}{9}{section.4.1}%
+\contentsline {chapter}{\numberline {5}File Index}{11}{chapter.5}%
+\contentsline {section}{\numberline {5.1}File List}{11}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Class Documentation}{13}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Application Class Reference}{13}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Member Function Documentation}{14}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.1}apply\_theme()}{14}{subsubsection.6.1.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.2}create\_theme()}{14}{subsubsection.6.1.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.1.3}current\_theme()}{14}{subsubsection.6.1.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.1.4}icon\_file()}{15}{subsubsection.6.1.1.4}%
+\contentsline {subsubsection}{\numberline {6.1.1.5}load\_theme()}{15}{subsubsection.6.1.1.5}%
+\contentsline {subsubsection}{\numberline {6.1.1.6}name()}{15}{subsubsection.6.1.1.6}%
+\contentsline {subsubsection}{\numberline {6.1.1.7}reapply\_theme()}{16}{subsubsection.6.1.1.7}%
+\contentsline {subsubsection}{\numberline {6.1.1.8}rename\_theme}{16}{subsubsection.6.1.1.8}%
+\contentsline {subsubsection}{\numberline {6.1.1.9}save\_theme()}{16}{subsubsection.6.1.1.9}%
+\contentsline {subsubsection}{\numberline {6.1.1.10}settings()}{16}{subsubsection.6.1.1.10}%
+\contentsline {subsubsection}{\numberline {6.1.1.11}store\_child\_themeable\_pointer()}{17}{subsubsection.6.1.1.11}%
+\contentsline {subsubsection}{\numberline {6.1.1.12}theme()}{17}{subsubsection.6.1.1.12}%
+\contentsline {subsubsection}{\numberline {6.1.1.13}themes()}{17}{subsubsection.6.1.1.13}%
+\contentsline {subsubsection}{\numberline {6.1.1.14}update\_available()}{18}{subsubsection.6.1.1.14}%
+\contentsline {subsubsection}{\numberline {6.1.1.15}update\_on\_request()}{18}{subsubsection.6.1.1.15}%
+\contentsline {section}{\numberline {6.2}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::App\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Preferences\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Panel Class Reference}{18}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Attribute Class Reference}{19}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Detailed Description}{20}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Member Function Documentation}{20}{subsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.2.1}as()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{20}{subsubsection.6.3.2.1}%
+\contentsline {subsubsection}{\numberline {6.3.2.2}as()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{20}{subsubsection.6.3.2.2}%
+\contentsline {subsubsection}{\numberline {6.3.2.3}clear\_data\_if\_owner()}{20}{subsubsection.6.3.2.3}%
+\contentsline {subsubsection}{\numberline {6.3.2.4}contains\_state()}{20}{subsubsection.6.3.2.4}%
+\contentsline {subsubsection}{\numberline {6.3.2.5}copy()}{21}{subsubsection.6.3.2.5}%
+\contentsline {subsubsection}{\numberline {6.3.2.6}entangle\_with()}{21}{subsubsection.6.3.2.6}%
+\contentsline {subsubsection}{\numberline {6.3.2.7}establish\_data\_connection()}{21}{subsubsection.6.3.2.7}%
+\contentsline {subsubsection}{\numberline {6.3.2.8}init\_variant\_map()}{22}{subsubsection.6.3.2.8}%
+\contentsline {subsubsection}{\numberline {6.3.2.9}is\_stateful()}{22}{subsubsection.6.3.2.9}%
+\contentsline {subsubsection}{\numberline {6.3.2.10}owns\_data()}{22}{subsubsection.6.3.2.10}%
+\contentsline {subsubsection}{\numberline {6.3.2.11}set\_state()}{22}{subsubsection.6.3.2.11}%
+\contentsline {subsubsection}{\numberline {6.3.2.12}set\_value()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{23}{subsubsection.6.3.2.12}%
+\contentsline {subsubsection}{\numberline {6.3.2.13}set\_value()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{23}{subsubsection.6.3.2.13}%
+\contentsline {subsubsection}{\numberline {6.3.2.14}setup\_widget\_update\_connection()}{23}{subsubsection.6.3.2.14}%
+\contentsline {subsubsection}{\numberline {6.3.2.15}state()}{24}{subsubsection.6.3.2.15}%
+\contentsline {subsubsection}{\numberline {6.3.2.16}states()}{24}{subsubsection.6.3.2.16}%
+\contentsline {subsubsection}{\numberline {6.3.2.17}to\_json\_object()}{24}{subsubsection.6.3.2.17}%
+\contentsline {subsubsection}{\numberline {6.3.2.18}typeName()}{25}{subsubsection.6.3.2.18}%
+\contentsline {section}{\numberline {6.4}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Group Class Reference}{25}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Detailed Description}{26}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Member Function Documentation}{26}{subsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.2.1}attributes()}{26}{subsubsection.6.4.2.1}%
+\contentsline {subsubsection}{\numberline {6.4.2.2}copy()}{26}{subsubsection.6.4.2.2}%
+\contentsline {subsubsection}{\numberline {6.4.2.3}entangle\_with()}{26}{subsubsection.6.4.2.3}%
+\contentsline {subsubsection}{\numberline {6.4.2.4}is\_stateful()}{27}{subsubsection.6.4.2.4}%
+\contentsline {subsubsection}{\numberline {6.4.2.5}set\_state()}{27}{subsubsection.6.4.2.5}%
+\contentsline {subsubsection}{\numberline {6.4.2.6}setup\_widget\_update\_connection()}{27}{subsubsection.6.4.2.6}%
+\contentsline {subsubsection}{\numberline {6.4.2.7}to\_json\_object()}{28}{subsubsection.6.4.2.7}%
+\contentsline {section}{\numberline {6.5}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set Class Reference}{28}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Type Class Reference}{28}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{29}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Member Function Documentation}{29}{subsection.6.6.2}%
+\contentsline {subsubsection}{\numberline {6.6.2.1}capitalized\_name()}{29}{subsubsection.6.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.6.2.2}disabled()}{29}{subsubsection.6.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.6.2.3}is\_stateful()}{30}{subsubsection.6.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.6.2.4}name()}{30}{subsubsection.6.6.2.4}%
+\contentsline {subsubsection}{\numberline {6.6.2.5}set\_disabled()}{30}{subsubsection.6.6.2.5}%
+\contentsline {subsubsection}{\numberline {6.6.2.6}set\_state()}{30}{subsubsection.6.6.2.6}%
+\contentsline {section}{\numberline {6.7}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Widget Class Reference}{31}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::AWGroup Class Reference}{32}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Member Function Documentation}{33}{subsection.6.8.1}%
+\contentsline {subsubsection}{\numberline {6.8.1.1}init\_child\_themeable\_reference\_list()}{33}{subsubsection.6.8.1.1}%
+\contentsline {section}{\numberline {6.9}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Border\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Attributes Class Reference}{34}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}Member Data Documentation}{34}{subsection.6.9.1}%
+\contentsline {subsubsection}{\numberline {6.9.1.1}fill}{34}{subsubsection.6.9.1.1}%
+\contentsline {subsubsection}{\numberline {6.9.1.2}thickness}{34}{subsubsection.6.9.1.2}%
+\contentsline {section}{\numberline {6.10}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Button Class Reference}{35}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}Member Function Documentation}{36}{subsection.6.10.1}%
+\contentsline {subsubsection}{\numberline {6.10.1.1}init\_child\_themeable\_reference\_list()}{36}{subsubsection.6.10.1.1}%
+\contentsline {section}{\numberline {6.11}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{37}{section.6.11}%
+\contentsline {subsection}{\numberline {6.11.1}Member Function Documentation}{37}{subsection.6.11.1}%
+\contentsline {subsubsection}{\numberline {6.11.1.1}init\_child\_themeable\_reference\_list()}{38}{subsubsection.6.11.1.1}%
+\contentsline {section}{\numberline {6.12}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control Class Reference}{38}{section.6.12}%
+\contentsline {section}{\numberline {6.13}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog Class Reference}{39}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Member Function Documentation}{40}{subsection.6.13.1}%
+\contentsline {subsubsection}{\numberline {6.13.1.1}init\_child\_themeable\_reference\_list()}{40}{subsubsection.6.13.1.1}%
+\contentsline {section}{\numberline {6.14}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Plane Class Reference}{41}{section.6.14}%
+\contentsline {section}{\numberline {6.15}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Combobox Class Reference}{42}{section.6.15}%
+\contentsline {subsection}{\numberline {6.15.1}Member Function Documentation}{43}{subsection.6.15.1}%
+\contentsline {subsubsection}{\numberline {6.15.1.1}init\_child\_themeable\_reference\_list()}{43}{subsubsection.6.15.1.1}%
+\contentsline {section}{\numberline {6.16}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Combobox\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Item Class Reference}{44}{section.6.16}%
+\contentsline {subsection}{\numberline {6.16.1}Member Function Documentation}{44}{subsection.6.16.1}%
+\contentsline {subsubsection}{\numberline {6.16.1.1}init\_child\_themeable\_reference\_list()}{44}{subsubsection.6.16.1.1}%
+\contentsline {section}{\numberline {6.17}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Corner\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Radii\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Attributes Class Reference}{45}{section.6.17}%
+\contentsline {subsection}{\numberline {6.17.1}Member Data Documentation}{45}{subsection.6.17.1}%
+\contentsline {subsubsection}{\numberline {6.17.1.1}bottom\_left}{46}{subsubsection.6.17.1.1}%
+\contentsline {subsubsection}{\numberline {6.17.1.2}bottom\_right}{46}{subsubsection.6.17.1.2}%
+\contentsline {subsubsection}{\numberline {6.17.1.3}top\_left}{46}{subsubsection.6.17.1.3}%
+\contentsline {subsubsection}{\numberline {6.17.1.4}top\_right}{46}{subsubsection.6.17.1.4}%
+\contentsline {section}{\numberline {6.18}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Corner\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Radii\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{47}{section.6.18}%
+\contentsline {subsection}{\numberline {6.18.1}Member Function Documentation}{47}{subsection.6.18.1}%
+\contentsline {subsubsection}{\numberline {6.18.1.1}init\_child\_themeable\_reference\_list()}{48}{subsubsection.6.18.1.1}%
+\contentsline {section}{\numberline {6.19}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Create\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}New\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Theme\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog Class Reference}{48}{section.6.19}%
+\contentsline {subsection}{\numberline {6.19.1}Member Function Documentation}{49}{subsection.6.19.1}%
+\contentsline {subsubsection}{\numberline {6.19.1.1}init\_child\_themeable\_reference\_list()}{49}{subsubsection.6.19.1.1}%
+\contentsline {section}{\numberline {6.20}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Customize\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu Class Reference}{50}{section.6.20}%
+\contentsline {subsection}{\numberline {6.20.1}Member Function Documentation}{50}{subsection.6.20.1}%
+\contentsline {subsubsection}{\numberline {6.20.1.1}init\_child\_themeable\_reference\_list()}{51}{subsubsection.6.20.1.1}%
+\contentsline {section}{\numberline {6.21}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Customize\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Panel Class Reference}{51}{section.6.21}%
+\contentsline {subsection}{\numberline {6.21.1}Member Function Documentation}{52}{subsection.6.21.1}%
+\contentsline {subsubsection}{\numberline {6.21.1.1}init\_child\_themeable\_reference\_list()}{52}{subsubsection.6.21.1.1}%
+\contentsline {section}{\numberline {6.22}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Data Class Reference}{53}{section.6.22}%
+\contentsline {subsection}{\numberline {6.22.1}Detailed Description}{53}{subsection.6.22.1}%
+\contentsline {subsection}{\numberline {6.22.2}Member Function Documentation}{53}{subsection.6.22.2}%
+\contentsline {subsubsection}{\numberline {6.22.2.1}as()}{54}{subsubsection.6.22.2.1}%
+\contentsline {subsubsection}{\numberline {6.22.2.2}contains\_state()}{54}{subsubsection.6.22.2.2}%
+\contentsline {subsubsection}{\numberline {6.22.2.3}copy()}{54}{subsubsection.6.22.2.3}%
+\contentsline {subsubsection}{\numberline {6.22.2.4}init\_variant\_map()}{54}{subsubsection.6.22.2.4}%
+\contentsline {subsubsection}{\numberline {6.22.2.5}is\_stateful()}{55}{subsubsection.6.22.2.5}%
+\contentsline {subsubsection}{\numberline {6.22.2.6}set\_value()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{55}{subsubsection.6.22.2.6}%
+\contentsline {subsubsection}{\numberline {6.22.2.7}set\_value()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{55}{subsubsection.6.22.2.7}%
+\contentsline {subsubsection}{\numberline {6.22.2.8}states()}{56}{subsubsection.6.22.2.8}%
+\contentsline {subsubsection}{\numberline {6.22.2.9}to\_json\_object()}{56}{subsubsection.6.22.2.9}%
+\contentsline {subsubsection}{\numberline {6.22.2.10}typeName()}{56}{subsubsection.6.22.2.10}%
+\contentsline {section}{\numberline {6.23}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Dialog Class Reference}{57}{section.6.23}%
+\contentsline {subsection}{\numberline {6.23.1}Member Function Documentation}{57}{subsection.6.23.1}%
+\contentsline {subsubsection}{\numberline {6.23.1.1}init\_child\_themeable\_reference\_list()}{58}{subsubsection.6.23.1.1}%
+\contentsline {section}{\numberline {6.24}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Downloader Class Reference}{58}{section.6.24}%
+\contentsline {section}{\numberline {6.25}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Fill\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{59}{section.6.25}%
+\contentsline {subsection}{\numberline {6.25.1}Member Function Documentation}{59}{subsection.6.25.1}%
+\contentsline {subsubsection}{\numberline {6.25.1.1}init\_child\_themeable\_reference\_list()}{60}{subsubsection.6.25.1.1}%
+\contentsline {section}{\numberline {6.26}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Fill\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control Class Reference}{60}{section.6.26}%
+\contentsline {subsection}{\numberline {6.26.1}Member Function Documentation}{61}{subsection.6.26.1}%
+\contentsline {subsubsection}{\numberline {6.26.1.1}init\_child\_themeable\_reference\_list()}{61}{subsubsection.6.26.1.1}%
+\contentsline {section}{\numberline {6.27}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Git\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hub\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repo Class Reference}{62}{section.6.27}%
+\contentsline {section}{\numberline {6.28}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Gradient\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{62}{section.6.28}%
+\contentsline {subsection}{\numberline {6.28.1}Member Function Documentation}{62}{subsection.6.28.1}%
+\contentsline {subsubsection}{\numberline {6.28.1.1}init\_child\_themeable\_reference\_list()}{63}{subsubsection.6.28.1.1}%
+\contentsline {section}{\numberline {6.29}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Gradient\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control Class Reference}{63}{section.6.29}%
+\contentsline {section}{\numberline {6.30}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Gradient\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selection\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog Class Reference}{64}{section.6.30}%
+\contentsline {subsection}{\numberline {6.30.1}Member Function Documentation}{65}{subsection.6.30.1}%
+\contentsline {subsubsection}{\numberline {6.30.1.1}init\_child\_themeable\_reference\_list()}{65}{subsubsection.6.30.1.1}%
+\contentsline {section}{\numberline {6.31}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Graphic Class Reference}{66}{section.6.31}%
+\contentsline {section}{\numberline {6.32}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Horizontal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layout Class Reference}{66}{section.6.32}%
+\contentsline {section}{\numberline {6.33}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sequence Class Reference}{67}{section.6.33}%
+\contentsline {section}{\numberline {6.34}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sequence\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Label Class Reference}{67}{section.6.34}%
+\contentsline {section}{\numberline {6.35}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Label Class Reference}{68}{section.6.35}%
+\contentsline {subsection}{\numberline {6.35.1}Member Function Documentation}{69}{subsection.6.35.1}%
+\contentsline {subsubsection}{\numberline {6.35.1.1}apply\_theme\_attributes()}{69}{subsubsection.6.35.1.1}%
+\contentsline {section}{\numberline {6.36}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Line\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Editor Class Reference}{69}{section.6.36}%
+\contentsline {subsection}{\numberline {6.36.1}Member Function Documentation}{70}{subsection.6.36.1}%
+\contentsline {subsubsection}{\numberline {6.36.1.1}apply\_theme\_attributes()}{71}{subsubsection.6.36.1.1}%
+\contentsline {section}{\numberline {6.37}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Margins\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Attributes Class Reference}{71}{section.6.37}%
+\contentsline {subsection}{\numberline {6.37.1}Member Data Documentation}{71}{subsection.6.37.1}%
+\contentsline {subsubsection}{\numberline {6.37.1.1}bottom}{72}{subsubsection.6.37.1.1}%
+\contentsline {subsubsection}{\numberline {6.37.1.2}left}{72}{subsubsection.6.37.1.2}%
+\contentsline {subsubsection}{\numberline {6.37.1.3}right}{72}{subsubsection.6.37.1.3}%
+\contentsline {subsubsection}{\numberline {6.37.1.4}top}{72}{subsubsection.6.37.1.4}%
+\contentsline {section}{\numberline {6.38}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Menu Class Reference}{73}{section.6.38}%
+\contentsline {section}{\numberline {6.39}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar Class Reference}{73}{section.6.39}%
+\contentsline {subsection}{\numberline {6.39.1}Member Function Documentation}{74}{subsection.6.39.1}%
+\contentsline {subsubsection}{\numberline {6.39.1.1}apply\_theme\_attributes()}{74}{subsubsection.6.39.1.1}%
+\contentsline {section}{\numberline {6.40}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Label\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layer Class Reference}{74}{section.6.40}%
+\contentsline {subsection}{\numberline {6.40.1}Member Function Documentation}{75}{subsection.6.40.1}%
+\contentsline {subsubsection}{\numberline {6.40.1.1}init\_child\_themeable\_reference\_list()}{75}{subsubsection.6.40.1.1}%
+\contentsline {section}{\numberline {6.41}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Mini\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Slider Class Reference}{76}{section.6.41}%
+\contentsline {subsection}{\numberline {6.41.1}Member Function Documentation}{76}{subsection.6.41.1}%
+\contentsline {subsubsection}{\numberline {6.41.1.1}init\_child\_themeable\_reference\_list()}{77}{subsubsection.6.41.1.1}%
+\contentsline {section}{\numberline {6.42}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Number\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{77}{section.6.42}%
+\contentsline {subsection}{\numberline {6.42.1}Member Function Documentation}{78}{subsection.6.42.1}%
+\contentsline {subsubsection}{\numberline {6.42.1.1}init\_child\_themeable\_reference\_list()}{78}{subsubsection.6.42.1.1}%
+\contentsline {section}{\numberline {6.43}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Scroll\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Area Class Reference}{79}{section.6.43}%
+\contentsline {subsection}{\numberline {6.43.1}Member Function Documentation}{79}{subsection.6.43.1}%
+\contentsline {subsubsection}{\numberline {6.43.1.1}init\_child\_themeable\_reference\_list()}{80}{subsubsection.6.43.1.1}%
+\contentsline {section}{\numberline {6.44}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Scroll\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar Class Reference}{80}{section.6.44}%
+\contentsline {subsection}{\numberline {6.44.1}Member Function Documentation}{81}{subsection.6.44.1}%
+\contentsline {subsubsection}{\numberline {6.44.1.1}apply\_theme\_attributes()}{81}{subsubsection.6.44.1.1}%
+\contentsline {section}{\numberline {6.45}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu Class Reference}{81}{section.6.45}%
+\contentsline {subsection}{\numberline {6.45.1}Member Function Documentation}{82}{subsection.6.45.1}%
+\contentsline {subsubsection}{\numberline {6.45.1.1}init\_child\_themeable\_reference\_list()}{82}{subsubsection.6.45.1.1}%
+\contentsline {section}{\numberline {6.46}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sidebar Class Reference}{83}{section.6.46}%
+\contentsline {section}{\numberline {6.47}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tab Class Reference}{83}{section.6.47}%
+\contentsline {subsection}{\numberline {6.47.1}Member Function Documentation}{84}{subsection.6.47.1}%
+\contentsline {subsubsection}{\numberline {6.47.1.1}init\_child\_themeable\_reference\_list()}{84}{subsubsection.6.47.1.1}%
+\contentsline {section}{\numberline {6.48}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Slider Class Reference}{85}{section.6.48}%
+\contentsline {subsection}{\numberline {6.48.1}Member Function Documentation}{85}{subsection.6.48.1}%
+\contentsline {subsubsection}{\numberline {6.48.1.1}init\_child\_themeable\_reference\_list()}{86}{subsubsection.6.48.1.1}%
+\contentsline {section}{\numberline {6.49}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}AW Class Reference}{86}{section.6.49}%
+\contentsline {subsection}{\numberline {6.49.1}Member Function Documentation}{87}{subsection.6.49.1}%
+\contentsline {subsubsection}{\numberline {6.49.1.1}init\_child\_themeable\_reference\_list()}{87}{subsubsection.6.49.1.1}%
+\contentsline {section}{\numberline {6.50}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::SVG Class Reference}{88}{section.6.50}%
+\contentsline {subsection}{\numberline {6.50.1}Detailed Description}{88}{subsection.6.50.1}%
+\contentsline {subsection}{\numberline {6.50.2}Constructor \& Destructor Documentation}{89}{subsection.6.50.2}%
+\contentsline {subsubsection}{\numberline {6.50.2.1}SVG()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{89}{subsubsection.6.50.2.1}%
+\contentsline {subsubsection}{\numberline {6.50.2.2}SVG()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{89}{subsubsection.6.50.2.2}%
+\contentsline {subsection}{\numberline {6.50.3}Member Function Documentation}{89}{subsection.6.50.3}%
+\contentsline {subsubsection}{\numberline {6.50.3.1}apply\_theme\_attributes()}{89}{subsubsection.6.50.3.1}%
+\contentsline {subsubsection}{\numberline {6.50.3.2}init\_attributes()}{89}{subsubsection.6.50.3.2}%
+\contentsline {subsubsection}{\numberline {6.50.3.3}rebuild\_svg\_str()}{89}{subsubsection.6.50.3.3}%
+\contentsline {subsubsection}{\numberline {6.50.3.4}set\_state()}{89}{subsubsection.6.50.3.4}%
+\contentsline {subsubsection}{\numberline {6.50.3.5}update()}{90}{subsubsection.6.50.3.5}%
+\contentsline {section}{\numberline {6.51}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Tab\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar Class Reference}{90}{section.6.51}%
+\contentsline {subsection}{\numberline {6.51.1}Member Function Documentation}{91}{subsection.6.51.1}%
+\contentsline {subsubsection}{\numberline {6.51.1.1}apply\_theme\_attributes()}{91}{subsubsection.6.51.1.1}%
+\contentsline {section}{\numberline {6.52}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Theme Class Reference}{91}{section.6.52}%
+\contentsline {subsection}{\numberline {6.52.1}Detailed Description}{92}{subsection.6.52.1}%
+\contentsline {subsection}{\numberline {6.52.2}Member Function Documentation}{92}{subsection.6.52.2}%
+\contentsline {subsubsection}{\numberline {6.52.2.1}clear()}{92}{subsubsection.6.52.2.1}%
+\contentsline {subsubsection}{\numberline {6.52.2.2}contains\_attributes\_for\_tag()}{92}{subsubsection.6.52.2.2}%
+\contentsline {subsubsection}{\numberline {6.52.2.3}copy()}{92}{subsubsection.6.52.2.3}%
+\contentsline {subsubsection}{\numberline {6.52.2.4}editable()}{93}{subsubsection.6.52.2.4}%
+\contentsline {subsubsection}{\numberline {6.52.2.5}name()}{93}{subsubsection.6.52.2.5}%
+\contentsline {subsubsection}{\numberline {6.52.2.6}operator[]()}{93}{subsubsection.6.52.2.6}%
+\contentsline {subsubsection}{\numberline {6.52.2.7}set\_name()}{93}{subsubsection.6.52.2.7}%
+\contentsline {subsubsection}{\numberline {6.52.2.8}themeable\_tags()}{94}{subsubsection.6.52.2.8}%
+\contentsline {section}{\numberline {6.53}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Themeable Class Reference}{94}{section.6.53}%
+\contentsline {subsection}{\numberline {6.53.1}Detailed Description}{96}{subsection.6.53.1}%
+\contentsline {subsection}{\numberline {6.53.2}Member Function Documentation}{96}{subsection.6.53.2}%
+\contentsline {subsubsection}{\numberline {6.53.2.1}apply\_theme()}{96}{subsubsection.6.53.2.1}%
+\contentsline {subsubsection}{\numberline {6.53.2.2}assign\_tag\_prefixes()}{96}{subsubsection.6.53.2.2}%
+\contentsline {subsubsection}{\numberline {6.53.2.3}attributes()}{97}{subsubsection.6.53.2.3}%
+\contentsline {subsubsection}{\numberline {6.53.2.4}current\_theme()}{97}{subsubsection.6.53.2.4}%
+\contentsline {subsubsection}{\numberline {6.53.2.5}customize\_panel()}{97}{subsubsection.6.53.2.5}%
+\contentsline {subsubsection}{\numberline {6.53.2.6}icon()}{98}{subsubsection.6.53.2.6}%
+\contentsline {subsubsection}{\numberline {6.53.2.7}init\_child\_themeable\_reference\_list()}{98}{subsubsection.6.53.2.7}%
+\contentsline {subsubsection}{\numberline {6.53.2.8}is\_stateful()}{98}{subsubsection.6.53.2.8}%
+\contentsline {subsubsection}{\numberline {6.53.2.9}name()}{99}{subsubsection.6.53.2.9}%
+\contentsline {subsubsection}{\numberline {6.53.2.10}proper\_name()}{99}{subsubsection.6.53.2.10}%
+\contentsline {subsubsection}{\numberline {6.53.2.11}reapply\_theme()}{99}{subsubsection.6.53.2.11}%
+\contentsline {subsubsection}{\numberline {6.53.2.12}remove\_child\_themeable\_reference()}{99}{subsubsection.6.53.2.12}%
+\contentsline {subsubsection}{\numberline {6.53.2.13}set\_icon()}{100}{subsubsection.6.53.2.13}%
+\contentsline {subsubsection}{\numberline {6.53.2.14}set\_name()}{100}{subsubsection.6.53.2.14}%
+\contentsline {subsubsection}{\numberline {6.53.2.15}set\_proper\_name()}{100}{subsubsection.6.53.2.15}%
+\contentsline {subsubsection}{\numberline {6.53.2.16}set\_state()}{100}{subsubsection.6.53.2.16}%
+\contentsline {subsubsection}{\numberline {6.53.2.17}states()}{101}{subsubsection.6.53.2.17}%
+\contentsline {subsubsection}{\numberline {6.53.2.18}store\_child\_themeable\_pointer()}{101}{subsubsection.6.53.2.18}%
+\contentsline {subsubsection}{\numberline {6.53.2.19}tag()}{102}{subsubsection.6.53.2.19}%
+\contentsline {subsubsection}{\numberline {6.53.2.20}unassign\_prefixes()}{102}{subsubsection.6.53.2.20}%
+\contentsline {section}{\numberline {6.54}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Themeable\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Box Class Reference}{103}{section.6.54}%
+\contentsline {subsection}{\numberline {6.54.1}Member Function Documentation}{104}{subsection.6.54.1}%
+\contentsline {subsubsection}{\numberline {6.54.1.1}apply\_theme\_attributes()}{104}{subsubsection.6.54.1.1}%
+\contentsline {subsubsection}{\numberline {6.54.1.2}init\_attributes()}{104}{subsubsection.6.54.1.2}%
+\contentsline {subsubsection}{\numberline {6.54.1.3}paint()}{104}{subsubsection.6.54.1.3}%
+\contentsline {subsubsection}{\numberline {6.54.1.4}set\_margin()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{104}{subsubsection.6.54.1.4}%
+\contentsline {subsubsection}{\numberline {6.54.1.5}set\_margin()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{105}{subsubsection.6.54.1.5}%
+\contentsline {subsection}{\numberline {6.54.2}Member Data Documentation}{105}{subsection.6.54.2}%
+\contentsline {subsubsection}{\numberline {6.54.2.1}a\_corner\_color}{105}{subsubsection.6.54.2.1}%
+\contentsline {subsubsection}{\numberline {6.54.2.2}a\_fill}{105}{subsubsection.6.54.2.2}%
+\contentsline {subsubsection}{\numberline {6.54.2.3}a\_hover\_fill}{106}{subsubsection.6.54.2.3}%
+\contentsline {subsubsection}{\numberline {6.54.2.4}a\_outline\_color}{106}{subsubsection.6.54.2.4}%
+\contentsline {section}{\numberline {6.55}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Themes\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Panel Class Reference}{106}{section.6.55}%
+\contentsline {subsection}{\numberline {6.55.1}Member Function Documentation}{107}{subsection.6.55.1}%
+\contentsline {subsubsection}{\numberline {6.55.1.1}apply\_theme()}{107}{subsubsection.6.55.1.1}%
+\contentsline {subsubsection}{\numberline {6.55.1.2}init\_child\_themeable\_reference\_list()}{107}{subsubsection.6.55.1.2}%
+\contentsline {section}{\numberline {6.56}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Titlebar Class Reference}{108}{section.6.56}%
+\contentsline {subsection}{\numberline {6.56.1}Member Function Documentation}{109}{subsection.6.56.1}%
+\contentsline {subsubsection}{\numberline {6.56.1.1}init\_child\_themeable\_reference\_list()}{109}{subsubsection.6.56.1.1}%
+\contentsline {section}{\numberline {6.57}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Toggle\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Switch Class Reference}{110}{section.6.57}%
+\contentsline {subsection}{\numberline {6.57.1}Member Function Documentation}{110}{subsection.6.57.1}%
+\contentsline {subsubsection}{\numberline {6.57.1.1}init\_child\_themeable\_reference\_list()}{111}{subsubsection.6.57.1.1}%
+\contentsline {section}{\numberline {6.58}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Update\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog Class Reference}{111}{section.6.58}%
+\contentsline {subsection}{\numberline {6.58.1}Member Function Documentation}{112}{subsection.6.58.1}%
+\contentsline {subsubsection}{\numberline {6.58.1.1}init\_child\_themeable\_reference\_list()}{112}{subsubsection.6.58.1.1}%
+\contentsline {section}{\numberline {6.59}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Variant Class Reference}{113}{section.6.59}%
+\contentsline {subsection}{\numberline {6.59.1}Detailed Description}{113}{subsection.6.59.1}%
+\contentsline {subsection}{\numberline {6.59.2}Member Function Documentation}{113}{subsection.6.59.2}%
+\contentsline {subsubsection}{\numberline {6.59.2.1}typeName()}{113}{subsubsection.6.59.2.1}%
+\contentsline {subsubsection}{\numberline {6.59.2.2}value()}{114}{subsubsection.6.59.2.2}%
+\contentsline {section}{\numberline {6.60}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Version Class Reference}{114}{section.6.60}%
+\contentsline {section}{\numberline {6.61}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Vertical\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layout Class Reference}{114}{section.6.61}%
+\contentsline {section}{\numberline {6.62}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Widget Class Reference}{115}{section.6.62}%
+\contentsline {subsection}{\numberline {6.62.1}Detailed Description}{116}{subsection.6.62.1}%
+\contentsline {subsection}{\numberline {6.62.2}Member Function Documentation}{116}{subsection.6.62.2}%
+\contentsline {subsubsection}{\numberline {6.62.2.1}eventFilter()}{116}{subsubsection.6.62.2.1}%
+\contentsline {subsubsection}{\numberline {6.62.2.2}init\_attributes()}{116}{subsubsection.6.62.2.2}%
+\contentsline {subsubsection}{\numberline {6.62.2.3}paintEvent()}{116}{subsubsection.6.62.2.3}%
+\contentsline {section}{\numberline {6.63}Layers\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Window Class Reference}{117}{section.6.63}%
+\contentsline {subsection}{\numberline {6.63.1}Member Function Documentation}{118}{subsection.6.63.1}%
+\contentsline {subsubsection}{\numberline {6.63.1.1}apply\_theme()}{118}{subsubsection.6.63.1.1}%
+\contentsline {subsubsection}{\numberline {6.63.1.2}init\_child\_themeable\_reference\_list()}{118}{subsubsection.6.63.1.2}%
+\contentsline {chapter}{\numberline {7}File Documentation}{121}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Application.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{121}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Attribute.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{122}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Group.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{123}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layout.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{125}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{125}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Type.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{126}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Attribute\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Widgets.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{126}{section.7.7}%
+\contentsline {section}{\numberline {7.8}build\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}themes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{129}{section.7.8}%
+\contentsline {section}{\numberline {7.9}Button.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{130}{section.7.9}%
+\contentsline {section}{\numberline {7.10}calculate.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{131}{section.7.10}%
+\contentsline {section}{\numberline {7.11}Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{131}{section.7.11}%
+\contentsline {section}{\numberline {7.12}Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{132}{section.7.12}%
+\contentsline {section}{\numberline {7.13}Color\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Plane.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{132}{section.7.13}%
+\contentsline {section}{\numberline {7.14}Combobox.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{133}{section.7.14}%
+\contentsline {section}{\numberline {7.15}Create\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}New\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Theme\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{135}{section.7.15}%
+\contentsline {section}{\numberline {7.16}Customize\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{135}{section.7.16}%
+\contentsline {section}{\numberline {7.17}Customize\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Panel.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{136}{section.7.17}%
+\contentsline {section}{\numberline {7.18}Data.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{137}{section.7.18}%
+\contentsline {section}{\numberline {7.19}Dialog.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{138}{section.7.19}%
+\contentsline {section}{\numberline {7.20}directories.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{139}{section.7.20}%
+\contentsline {section}{\numberline {7.21}Downloader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{139}{section.7.21}%
+\contentsline {section}{\numberline {7.22}Fill\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{139}{section.7.22}%
+\contentsline {section}{\numberline {7.23}Git\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hub\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Repo.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{140}{section.7.23}%
+\contentsline {section}{\numberline {7.24}Gradient\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Control.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{140}{section.7.24}%
+\contentsline {section}{\numberline {7.25}Gradient\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Selection\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{141}{section.7.25}%
+\contentsline {section}{\numberline {7.26}Graphic.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{142}{section.7.26}%
+\contentsline {section}{\numberline {7.27}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sequence.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{142}{section.7.27}%
+\contentsline {section}{\numberline {7.28}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sequence\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Label.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{143}{section.7.28}%
+\contentsline {section}{\numberline {7.29}Label.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{143}{section.7.29}%
+\contentsline {section}{\numberline {7.30}Layouts.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{144}{section.7.30}%
+\contentsline {section}{\numberline {7.31}Line\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Editor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{144}{section.7.31}%
+\contentsline {section}{\numberline {7.32}Menu.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{145}{section.7.32}%
+\contentsline {section}{\numberline {7.33}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{146}{section.7.33}%
+\contentsline {section}{\numberline {7.34}Menu\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Label\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Layer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{146}{section.7.34}%
+\contentsline {section}{\numberline {7.35}Mini\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Slider.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{147}{section.7.35}%
+\contentsline {section}{\numberline {7.36}Scroll\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Area.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{147}{section.7.36}%
+\contentsline {section}{\numberline {7.37}Scroll\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{148}{section.7.37}%
+\contentsline {section}{\numberline {7.38}Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{148}{section.7.38}%
+\contentsline {section}{\numberline {7.39}Settings\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Panels.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{150}{section.7.39}%
+\contentsline {section}{\numberline {7.40}Slider.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{151}{section.7.40}%
+\contentsline {section}{\numberline {7.41}SVG.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{151}{section.7.41}%
+\contentsline {section}{\numberline {7.42}Tab\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{152}{section.7.42}%
+\contentsline {section}{\numberline {7.43}Theme.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{152}{section.7.43}%
+\contentsline {section}{\numberline {7.44}theme\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}loading.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{154}{section.7.44}%
+\contentsline {section}{\numberline {7.45}Themeable.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{154}{section.7.45}%
+\contentsline {section}{\numberline {7.46}Themeable\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Box.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{156}{section.7.46}%
+\contentsline {section}{\numberline {7.47}Titlebar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{157}{section.7.47}%
+\contentsline {section}{\numberline {7.48}Toggle\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Switch.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{158}{section.7.48}%
+\contentsline {section}{\numberline {7.49}Update\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dialog.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{158}{section.7.49}%
+\contentsline {section}{\numberline {7.50}Variant.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{159}{section.7.50}%
+\contentsline {section}{\numberline {7.51}Version.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{159}{section.7.51}%
+\contentsline {section}{\numberline {7.52}Widget.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{160}{section.7.52}%
+\contentsline {section}{\numberline {7.53}Window.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{160}{section.7.53}%
+\contentsline {chapter}{Index}{163}{section*.272}%

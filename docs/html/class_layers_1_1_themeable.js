@@ -2,7 +2,7 @@ var class_layers_1_1_themeable =
 [
     [ "apply_theme", "class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6", null ],
     [ "assign_tag_prefixes", "class_layers_1_1_themeable.html#a72bbd5ac1f2e4ebb4e1b0bf63b157076", null ],
-    [ "attributes", "class_layers_1_1_themeable.html#aaaf35e8431ab9d29c0c24bed4d8cd229", null ],
+    [ "attributes", "class_layers_1_1_themeable.html#af5ceb1e528ea1389ccac1430fc778128", null ],
     [ "current_theme", "class_layers_1_1_themeable.html#a307575be91e7169a73fccfcb21b7dff8", null ],
     [ "customize_panel", "class_layers_1_1_themeable.html#ac69a4f7e207dadce226ccd58efe7bdc5", null ],
     [ "icon", "class_layers_1_1_themeable.html#a44348cb0e739908c52bf6d640215c1f4", null ],

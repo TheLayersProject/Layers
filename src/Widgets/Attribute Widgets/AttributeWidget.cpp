@@ -4,8 +4,8 @@ using Layers::AttributeWidget;
 using Layers::ToggleSwitch;
 using Layers::Widget;
 
-AttributeWidget::AttributeWidget(AttributeType* attr_type, QWidget* parent) :
-	m_attribute_type{ attr_type }, Widget(parent)
+AttributeWidget::AttributeWidget(Entity* entity, QWidget* parent) :
+	m_entity{ entity }, Widget(parent)
 {
 	init_attributes();
 
@@ -25,8 +25,8 @@ ToggleSwitch* AttributeWidget::disable_toggle() const
 
 bool AttributeWidget::disabled() const
 {
-	if (m_attribute_type)
-		return m_attribute_type->disabled();
+	if (m_entity)
+		return m_entity->disabled();
 
 	return false;
 }

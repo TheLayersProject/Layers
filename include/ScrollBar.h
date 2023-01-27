@@ -15,7 +15,7 @@ namespace Layers
 	public:
 		ScrollBar(QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
 
 		void update_theme_dependencies();
 

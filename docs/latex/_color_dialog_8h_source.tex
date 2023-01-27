@@ -1,0 +1,45 @@
+\hypertarget{_color_dialog_8h_source}{}\doxysection{Color\+Dialog.\+h}
+\label{_color_dialog_8h_source}\index{include/ColorDialog.h@{include/ColorDialog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef COLORDIALOG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define COLORDIALOG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}ColorPlane.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}Dialog.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}LineEditor.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Slider.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_color_dialog}{ColorDialog}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_dialog}{Dialog}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_color_dialog}{ColorDialog}}(QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} color\{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\textcolor{stringliteral}{"{}color"{}}, QColor()) \};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{keywordtype}{void} update\_color\_name\_line\_editor();}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_color_dialog_afe56984b5910728a87438f97b506b00d}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keyword}{private}:}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_apply\_button\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{stringliteral}{"{}Apply"{}}) \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}}* m\_color\_name\_line\_editor\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_line_editor}{LineEditor}} \};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         \mbox{\hyperlink{class_layers_1_1_color_plane}{ColorPlane}}* m\_color\_plane\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_color_plane}{ColorPlane}} \};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_slider}{Slider}}* m\_z\_slider\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_slider}{Slider}}(359) \};}
+\DoxyCodeLine{36     \};}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// COLORDIALOG\_H}}
+
+\end{DoxyCode}

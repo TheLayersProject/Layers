@@ -7,9 +7,12 @@ var hierarchy =
       [ "Layers::Application", "class_layers_1_1_application.html", null ]
     ] ],
     [ "QDialog", null, [
-      [ "Layers::CreateNewThemeDialog", "class_layers_1_1_create_new_theme_dialog.html", null ],
-      [ "Layers::GradientSelectionDialog", "class_layers_1_1_gradient_selection_dialog.html", null ],
-      [ "Layers::UpdateDialog", "class_layers_1_1_update_dialog.html", null ]
+      [ "Layers::Dialog", "class_layers_1_1_dialog.html", [
+        [ "Layers::ColorDialog", "class_layers_1_1_color_dialog.html", null ],
+        [ "Layers::CreateNewThemeDialog", "class_layers_1_1_create_new_theme_dialog.html", null ],
+        [ "Layers::GradientSelectionDialog", "class_layers_1_1_gradient_selection_dialog.html", null ],
+        [ "Layers::UpdateDialog", "class_layers_1_1_update_dialog.html", null ]
+      ] ]
     ] ],
     [ "QHBoxLayout", null, [
       [ "Layers::HorizontalLayout", "class_layers_1_1_horizontal_layout.html", null ]
@@ -22,7 +25,9 @@ var hierarchy =
       [ "Layers::MenuBar", "class_layers_1_1_menu_bar.html", null ]
     ] ],
     [ "QObject", null, [
-      [ "Layers::AttributeType", "class_layers_1_1_attribute_type.html", [
+      [ "Layers::Data", "class_layers_1_1_data.html", null ],
+      [ "Layers::Downloader", "class_layers_1_1_downloader.html", null ],
+      [ "Layers::Entity", "class_layers_1_1_entity.html", [
         [ "Layers::Attribute", "class_layers_1_1_attribute.html", null ],
         [ "Layers::AttributeGroup", "class_layers_1_1_attribute_group.html", [
           [ "Layers::BorderAttributes", "class_layers_1_1_border_attributes.html", null ],
@@ -30,8 +35,6 @@ var hierarchy =
           [ "Layers::MarginsAttributes", "class_layers_1_1_margins_attributes.html", null ]
         ] ]
       ] ],
-      [ "Layers::Data", "class_layers_1_1_data.html", null ],
-      [ "Layers::Downloader", "class_layers_1_1_downloader.html", null ],
       [ "Layers::Variant", "class_layers_1_1_variant.html", null ]
     ] ],
     [ "QScrollBar", null, [
@@ -47,6 +50,7 @@ var hierarchy =
       [ "Layers::VerticalLayout", "class_layers_1_1_vertical_layout.html", null ]
     ] ],
     [ "QWidget", null, [
+      [ "Layers::ColorPlane", "class_layers_1_1_color_plane.html", null ],
       [ "Layers::Widget", "class_layers_1_1_widget.html", [
         [ "Layers::AppPreferencesSettingsPanel", "class_layers_1_1_app_preferences_settings_panel.html", null ],
         [ "Layers::AttributeWidget", "class_layers_1_1_attribute_widget.html", [
@@ -86,15 +90,15 @@ var hierarchy =
     ] ],
     [ "Layers::Theme", "class_layers_1_1_theme.html", null ],
     [ "Layers::Themeable", "class_layers_1_1_themeable.html", [
-      [ "Layers::CreateNewThemeDialog", "class_layers_1_1_create_new_theme_dialog.html", null ],
-      [ "Layers::GradientSelectionDialog", "class_layers_1_1_gradient_selection_dialog.html", null ],
       [ "Layers::Label", "class_layers_1_1_label.html", null ],
       [ "Layers::MenuBar", "class_layers_1_1_menu_bar.html", null ],
       [ "Layers::SVG", "class_layers_1_1_s_v_g.html", null ],
       [ "Layers::ScrollBar", "class_layers_1_1_scroll_bar.html", null ],
       [ "Layers::TabBar", "class_layers_1_1_tab_bar.html", null ],
-      [ "Layers::UpdateDialog", "class_layers_1_1_update_dialog.html", null ],
-      [ "Layers::Widget", "class_layers_1_1_widget.html", null ]
+      [ "Layers::ThemeableBox", "class_layers_1_1_themeable_box.html", [
+        [ "Layers::Dialog", "class_layers_1_1_dialog.html", null ],
+        [ "Layers::Widget", "class_layers_1_1_widget.html", null ]
+      ] ]
     ] ],
     [ "Layers::Version", "class_layers_1_1_version.html", null ]
 ];

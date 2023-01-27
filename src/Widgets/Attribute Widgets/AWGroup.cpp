@@ -35,7 +35,7 @@ AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
 				m_collapse_button->toggle_graphics();
 			}
 
-			m_attribute_type->set_disabled(false);
+			m_entity->set_disabled(false);
 		}
 		else
 		{
@@ -47,13 +47,13 @@ AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
 				m_collapse_button->toggle_graphics();
 			}
 
-			m_attribute_type->set_disabled();
+			m_entity->set_disabled();
 
 			emit widget_disabled();
 		}
 		});
 
-	if (!m_attribute_type->disabled())
+	if (!m_entity->disabled())
 		m_disabled_toggle->toggle(false);
 	else
 		m_collapse_button->hide();

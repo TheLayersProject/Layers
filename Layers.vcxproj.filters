@@ -210,7 +210,7 @@
     <ClCompile Include="src\Themes\Attributes\Variant.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\Attributes\AttributeType.cpp">
+    <ClCompile Include="src\Themes\Attributes\Entity.cpp">
       <Filter>Source Files\Themes\Attributes</Filter>
     </ClCompile>
     <ClCompile Include="src\Themes\Attributes\Data.cpp">
@@ -352,7 +352,7 @@
     <QtMoc Include="include\Data.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\AttributeType.h">
+    <QtMoc Include="include\Entity.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\AttributeGroup.h">

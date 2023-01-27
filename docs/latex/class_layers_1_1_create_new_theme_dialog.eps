@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 99.502487
+%%BoundingBox: 0 0 500 199.004974
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 5.025000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.512500 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 2 def
+/rows 4 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -174,7 +174,9 @@
 boxfont setfont
 1 boundaspect scale
 (Layers::CreateNewThemeDialog) cw
+(Layers::Dialog) cw
 (QDialog) cw
+(Layers::ThemeableBox) cw
 (Layers::Themeable) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -188,16 +190,26 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- classes -----
 
  (Layers::CreateNewThemeDialog) 0.500000 0.000000 box
- (QDialog) 0.000000 1.000000 box
- (Layers::Themeable) 1.000000 1.000000 box
+ (Layers::Dialog) 0.500000 1.000000 box
+ (QDialog) 0.000000 2.000000 box
+ (Layers::ThemeableBox) 1.000000 2.000000 box
+ (Layers::Themeable) 1.000000 3.000000 box
 
 % ----- relations -----
 
 solid
 0 0.500000 0.000000 out
 solid
-0.000000 1.000000 1.000000 conn
+1 0.500000 1.000000 in
 solid
-1 0.000000 1.000000 in
+0 0.500000 1.000000 out
 solid
-1 1.000000 1.000000 in
+0.000000 1.000000 2.000000 conn
+solid
+1 0.000000 2.000000 in
+solid
+1 1.000000 2.000000 in
+solid
+0 1.000000 2.000000 out
+solid
+1 1.000000 3.000000 in

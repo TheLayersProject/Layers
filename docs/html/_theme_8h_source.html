@@ -24,10 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="layers_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0a</span>
    </div>
-   <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
+   <div id="projectbrief">Application template library with a focus on themes and customization</div>
   </td>
  </tr>
  </tbody>
@@ -102,7 +103,7 @@ $(document).ready(function(){initNavTree('_theme_8h_source.html',''); initResiza
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">class </span>Attribute;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">class </span>Themeable;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">// NOTE: Below has not been updated to support AttributeType</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">// NOTE: Below has not been updated to support Entity</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">//inline QDataStream&amp; operator &lt;&lt;(QDataStream&amp; stream, const QMap&lt;QString, Attribute*&gt;&amp; attr_map)</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="comment">//{</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="comment">//  stream &lt;&lt; attr_map.count();</span></div>
@@ -116,7 +117,7 @@ $(document).ready(function(){initNavTree('_theme_8h_source.html',''); initResiza
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">//  return stream;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">//}</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// NOTE: Below has not been updated to support AttributeType</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// NOTE: Below has not been updated to support Entity</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="comment">//inline QDataStream&amp; operator &gt;&gt;(QDataStream&amp; stream, QMap&lt;QString, Attribute*&gt;&amp; attr_map)</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">//{</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">//  qsizetype attr_count;</span></div>
@@ -177,7 +178,7 @@ $(document).ready(function(){initNavTree('_theme_8h_source.html',''); initResiza
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        QJsonDocument to_json_document(ThemeDataType data_type = ThemeDataType::All);</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        QMap&lt;QString, AttributeType*&gt;&amp; <a class="code hl_function" href="class_layers_1_1_theme.html#aafb5f7396ffb18db4e720818a9270f0f">operator[]</a>(<span class="keyword">const</span> QString&amp; themeable_tag);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        QMap&lt;QString, Entity*&gt;&amp; <a class="code hl_function" href="class_layers_1_1_theme.html#afa7f750bd83c1e06df482d5abe4ed8c0">operator[]</a>(<span class="keyword">const</span> QString&amp; themeable_tag);</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="comment">//friend QDataStream&amp; operator &lt;&lt;(QDataStream&amp; stream, const Theme&amp; t)</span></div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="comment">//{</span></div>
@@ -196,7 +197,7 @@ $(document).ready(function(){initNavTree('_theme_8h_source.html',''); initResiza
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="comment">//}</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        QHash&lt;QString, QMap&lt;QString, AttributeType*&gt;&gt; m_data{ QHash&lt;QString, QMap&lt;QString, AttributeType*&gt;&gt;() };</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        QHash&lt;QString, QMap&lt;QString, Entity*&gt;&gt; m_data{ QHash&lt;QString, QMap&lt;QString, Entity*&gt;&gt;() };</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <span class="keywordtype">bool</span> m_editable{ <span class="keyword">true</span> };</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
@@ -207,16 +208,16 @@ $(document).ready(function(){initNavTree('_theme_8h_source.html',''); initResiza
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>}</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="preprocessor">#endif </span><span class="comment">// THEME_H</span></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:17</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:28</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html"><div class="ttname"><a href="class_layers_1_1_theme.html">Layers::Theme</a></div><div class="ttdef"><b>Definition:</b> Theme.h:64</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_a08e1177704ac8f2812caf4842460a74f"><div class="ttname"><a href="class_layers_1_1_theme.html#a08e1177704ac8f2812caf4842460a74f">Layers::Theme::editable</a></div><div class="ttdeci">bool editable()</div><div class="ttdef"><b>Definition:</b> Theme.cpp:200</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_a1068abe2505c991e7d0e7ca8310d7860"><div class="ttname"><a href="class_layers_1_1_theme.html#a1068abe2505c991e7d0e7ca8310d7860">Layers::Theme::set_name</a></div><div class="ttdeci">void set_name(const QString &amp;new_name)</div><div class="ttdef"><b>Definition:</b> Theme.cpp:310</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_a514aef4479c615a71aefc5d64c1f53dc"><div class="ttname"><a href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">Layers::Theme::name</a></div><div class="ttdeci">QString &amp; name()</div><div class="ttdef"><b>Definition:</b> Theme.cpp:305</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_aa5be99a9b54e7d9c03f0f19affd22b6b"><div class="ttname"><a href="class_layers_1_1_theme.html#aa5be99a9b54e7d9c03f0f19affd22b6b">Layers::Theme::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> Theme.cpp:90</div></div>
-<div class="ttc" id="aclass_layers_1_1_theme_html_aafb5f7396ffb18db4e720818a9270f0f"><div class="ttname"><a href="class_layers_1_1_theme.html#aafb5f7396ffb18db4e720818a9270f0f">Layers::Theme::operator[]</a></div><div class="ttdeci">QMap&lt; QString, AttributeType * &gt; &amp; operator[](const QString &amp;themeable_tag)</div><div class="ttdef"><b>Definition:</b> Theme.cpp:362</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_ad210ebf66a5fd7f4e4356899108969b3"><div class="ttname"><a href="class_layers_1_1_theme.html#ad210ebf66a5fd7f4e4356899108969b3">Layers::Theme::themeable_tags</a></div><div class="ttdeci">QList&lt; QString &gt; themeable_tags()</div><div class="ttdef"><b>Definition:</b> Theme.cpp:315</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_ad8a1de957d507456ab57c4831b708b2d"><div class="ttname"><a href="class_layers_1_1_theme.html#ad8a1de957d507456ab57c4831b708b2d">Layers::Theme::contains_attributes_for_tag</a></div><div class="ttdeci">bool contains_attributes_for_tag(const QString &amp;themeable_tag)</div><div class="ttdef"><b>Definition:</b> Theme.cpp:135</div></div>
 <div class="ttc" id="aclass_layers_1_1_theme_html_adfc8d73bd896904fc54b595ffaff9944"><div class="ttname"><a href="class_layers_1_1_theme.html#adfc8d73bd896904fc54b595ffaff9944">Layers::Theme::copy</a></div><div class="ttdeci">void copy(Theme &amp;theme)</div><div class="ttdef"><b>Definition:</b> Theme.cpp:140</div></div>
+<div class="ttc" id="aclass_layers_1_1_theme_html_afa7f750bd83c1e06df482d5abe4ed8c0"><div class="ttname"><a href="class_layers_1_1_theme.html#afa7f750bd83c1e06df482d5abe4ed8c0">Layers::Theme::operator[]</a></div><div class="ttdeci">QMap&lt; QString, Entity * &gt; &amp; operator[](const QString &amp;themeable_tag)</div><div class="ttdef"><b>Definition:</b> Theme.cpp:360</div></div>
 <div class="ttc" id="aclass_layers_1_1_themeable_html"><div class="ttname"><a href="class_layers_1_1_themeable.html">Layers::Themeable</a></div><div class="ttdef"><b>Definition:</b> Themeable.h:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

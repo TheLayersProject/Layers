@@ -29,13 +29,13 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 		 {
 		 	m_fill_control->show();
 
-		 	m_attribute_type->set_disabled(false);
+		 	m_entity->set_disabled(false);
 		 }
 		 else
 		 {
 		 	m_fill_control->hide();
 
-		 	m_attribute_type->set_disabled();
+		 	m_entity->set_disabled();
 
 			emit widget_disabled();
 		 }

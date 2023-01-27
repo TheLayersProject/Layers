@@ -41,7 +41,7 @@ namespace Layers
 		*/
 		SVG(const SVG& svg_w);
 
-		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
 
 		/*!
 			Rebuilds the SVG string from the SVG elements list.

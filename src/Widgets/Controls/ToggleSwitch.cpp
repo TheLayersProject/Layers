@@ -117,7 +117,7 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	border.fill.init_state_variant_map({
+	border.fill.init_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
@@ -126,7 +126,7 @@ void ToggleSwitch::init_attributes()
 	corner_radii.top_right.set_value(4.0);
 	corner_radii.bottom_left.set_value(4.0);
 	corner_radii.bottom_right.set_value(4.0);
-	a_fill.init_state_variant_map({
+	a_fill.init_variant_map({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
@@ -146,7 +146,7 @@ void ToggleSwitch::init_attributes()
 	m_square->corner_radii.top_right.set_value(2.0);
 	m_square->corner_radii.bottom_left.set_value(2.0);
 	m_square->corner_radii.bottom_right.set_value(2.0);
-	m_square->a_fill.init_state_variant_map({
+	m_square->a_fill.init_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor(Qt::white) }
 		});
@@ -157,35 +157,35 @@ void ToggleSwitch::init_attributes()
 	// Set initial state
 	set_state("Untoggled");;
 
-	//connect(&a_margin_left, &AttributeType::value_changed, [this] {
+	//connect(&a_margin_left, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_top, &AttributeType::value_changed, [this] {
+	//connect(&a_margin_top, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_right, &AttributeType::value_changed, [this] {
+	//connect(&a_margin_right, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_margin_bottom, &AttributeType::value_changed, [this] {
+	//connect(&a_margin_bottom, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_left, &AttributeType::value_changed, [this] {
+	//connect(&a_padding_left, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_top, &AttributeType::value_changed, [this] {
+	//connect(&a_padding_top, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_right, &AttributeType::value_changed, [this] {
+	//connect(&a_padding_right, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 
-	//connect(&a_padding_bottom, &AttributeType::value_changed, [this] {
+	//connect(&a_padding_bottom, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
 }

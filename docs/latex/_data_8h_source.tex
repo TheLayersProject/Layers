@@ -11,62 +11,56 @@
 \DoxyCodeLine{7 }
 \DoxyCodeLine{8 \textcolor{keyword}{namespace }Layers}
 \DoxyCodeLine{9 \{}
-\DoxyCodeLine{25     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_data}{Data}} : \textcolor{keyword}{public} QObject}
-\DoxyCodeLine{26     \{}
-\DoxyCodeLine{27         Q\_OBJECT}
-\DoxyCodeLine{28 }
-\DoxyCodeLine{29     signals:}
-\DoxyCodeLine{30         \textcolor{keywordtype}{void} changed();}
-\DoxyCodeLine{31 }
-\DoxyCodeLine{32     \textcolor{keyword}{public}:}
-\DoxyCodeLine{33         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(QVariant qvariant);}
-\DoxyCodeLine{34         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(QMap<QString, Variant> state\_variant\_map);}
-\DoxyCodeLine{35         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_data}{Data}}\& d);}
-\DoxyCodeLine{36         \mbox{\hyperlink{class_layers_1_1_data}{\string~Data}}();}
-\DoxyCodeLine{37 }
+\DoxyCodeLine{21     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_data}{Data}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{22     \{}
+\DoxyCodeLine{23         Q\_OBJECT}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     signals:}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} changed();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{public}:}
+\DoxyCodeLine{29         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(QVariant qvariant);}
+\DoxyCodeLine{30         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(VariantMap variant\_map);}
+\DoxyCodeLine{31         \mbox{\hyperlink{class_layers_1_1_data}{Data}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_data}{Data}}\& d);}
+\DoxyCodeLine{32         \mbox{\hyperlink{class_layers_1_1_data}{\string~Data}}();}
+\DoxyCodeLine{33 }
 \DoxyCodeLine{45         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
-\DoxyCodeLine{46         T \mbox{\hyperlink{class_layers_1_1_data_a95db8542e2df42f59bb3db20252d5201}{as}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{46         T \mbox{\hyperlink{class_layers_1_1_data_aa3796ac8384c36f750074041c53c03eb}{as}}(\textcolor{keyword}{const} QString\& state = \textcolor{stringliteral}{"{}"{}}) \textcolor{keyword}{const};}
 \DoxyCodeLine{47 }
-\DoxyCodeLine{56         \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
-\DoxyCodeLine{57         T \mbox{\hyperlink{class_layers_1_1_data_a95db8542e2df42f59bb3db20252d5201}{as}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
-\DoxyCodeLine{58 }
-\DoxyCodeLine{65         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_data_a3b52418760249e57078fd8e9e4fd9011}{contains\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
-\DoxyCodeLine{66 }
-\DoxyCodeLine{74         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_ad11d059bb2964cb47eb340f044815f21}{copy}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_data}{Data}}\& data);}
-\DoxyCodeLine{75 }
-\DoxyCodeLine{81         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_aba004dde3e58fea08d7554410a6500fe}{init\_state\_variant\_map}}(\textcolor{keyword}{const} QMap<QString, Variant>\& state\_variant\_map);}
-\DoxyCodeLine{82 }
-\DoxyCodeLine{88         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_data_a8e4dccaaa27526db929256dee8768f68}{is\_stateful}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{54         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_data_a3b52418760249e57078fd8e9e4fd9011}{contains\_state}}(\textcolor{keyword}{const} QString\& state) \textcolor{keyword}{const};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{63         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_ad11d059bb2964cb47eb340f044815f21}{copy}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_layers_1_1_data}{Data}}\& data);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{70         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_ae69ddbc3c53bb7990eef2e8c7b453579}{init\_variant\_map}}(\textcolor{keyword}{const} VariantMap\& variant\_map);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{77         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_layers_1_1_data_a8e4dccaaa27526db929256dee8768f68}{is\_stateful}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{88         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_a09151718594ab891937cdbb722c8f259}{set\_value}}(QVariant qvariant, \textcolor{keywordtype}{bool} retain\_type = \textcolor{keyword}{true});}
 \DoxyCodeLine{89 }
-\DoxyCodeLine{98         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_a09151718594ab891937cdbb722c8f259}{set\_value}}(QVariant qvariant, \textcolor{keywordtype}{bool} retain\_type = \textcolor{keyword}{true});}
-\DoxyCodeLine{99 }
-\DoxyCodeLine{108         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_a09151718594ab891937cdbb722c8f259}{set\_value}}(\textcolor{keyword}{const} QString\& state, QVariant qvariant);}
+\DoxyCodeLine{99         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_data_a09151718594ab891937cdbb722c8f259}{set\_value}}(\textcolor{keyword}{const} QString\& state, QVariant qvariant);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{108         QStringList \mbox{\hyperlink{class_layers_1_1_data_a5934ac4893f7f4f71acf5f08bb3d9f1e}{states}}() \textcolor{keyword}{const};}
 \DoxyCodeLine{109 }
-\DoxyCodeLine{117         QList<QString> \mbox{\hyperlink{class_layers_1_1_data_a03260a4499ce1cfb8e8ef05d1f668aa2}{states}}() \textcolor{keyword}{const};}
-\DoxyCodeLine{118 }
-\DoxyCodeLine{124         QJsonObject \mbox{\hyperlink{class_layers_1_1_data_a06b73cde929809f8fc89dc914e500e07}{to\_json\_object}}();}
-\DoxyCodeLine{125 }
-\DoxyCodeLine{135         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_layers_1_1_data_a7761821aa1de5b8f6125d62f2c13e29d}{typeName}}() \textcolor{keyword}{const};}
-\DoxyCodeLine{136 }
-\DoxyCodeLine{137     \textcolor{keyword}{private}:}
-\DoxyCodeLine{138         QMap<QString, Variant>* m\_state\_variant\_map\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{139 }
-\DoxyCodeLine{140         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}* m\_variant\{ \textcolor{keyword}{nullptr} \};}
-\DoxyCodeLine{141     \};}
-\DoxyCodeLine{142 }
-\DoxyCodeLine{143     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
-\DoxyCodeLine{144     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_data_a95db8542e2df42f59bb3db20252d5201}{Data::as}}()\textcolor{keyword}{ const}}
-\DoxyCodeLine{145 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{146         \textcolor{keywordflow}{return} m\_variant-\/>\mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}}<T>();}
-\DoxyCodeLine{147     \}}
-\DoxyCodeLine{148 }
-\DoxyCodeLine{149     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
-\DoxyCodeLine{150     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_data_a95db8542e2df42f59bb3db20252d5201}{Data::as}}(\textcolor{keyword}{const} QString\& state)\textcolor{keyword}{ const}}
-\DoxyCodeLine{151 \textcolor{keyword}{    }\{}
-\DoxyCodeLine{152         \textcolor{keywordflow}{return} (*m\_state\_variant\_map)[state].value<T>();}
-\DoxyCodeLine{153     \}}
-\DoxyCodeLine{154 \}}
-\DoxyCodeLine{155 }
-\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DATA\_H}}
+\DoxyCodeLine{115         QJsonObject \mbox{\hyperlink{class_layers_1_1_data_a06b73cde929809f8fc89dc914e500e07}{to\_json\_object}}();}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{128         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_layers_1_1_data_a7761821aa1de5b8f6125d62f2c13e29d}{typeName}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{keyword}{private}:}
+\DoxyCodeLine{131         \mbox{\hyperlink{class_layers_1_1_variant}{Variant}}* m\_variant\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133         VariantMap* m\_variant\_map\{ \textcolor{keyword}{nullptr} \};}
+\DoxyCodeLine{134     \};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{137     \textcolor{keyword}{inline} T \mbox{\hyperlink{class_layers_1_1_data_aa3796ac8384c36f750074041c53c03eb}{Data::as}}(\textcolor{keyword}{const} QString\& state)\textcolor{keyword}{ const}}
+\DoxyCodeLine{138 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if} (state == \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{140             \textcolor{keywordflow}{return} m\_variant-\/>\mbox{\hyperlink{class_layers_1_1_variant_a11c7e10660e96844369b90e47dfb8a2e}{value}}<T>();}
+\DoxyCodeLine{141         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{142             \textcolor{keywordflow}{return} (*m\_variant\_map)[state].value<T>();}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DATA\_H}}
 
 \end{DoxyCode}

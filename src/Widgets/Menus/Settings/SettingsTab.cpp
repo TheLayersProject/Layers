@@ -75,19 +75,19 @@ void SettingsTab::init_attributes()
 
 	m_stretch_widget2->a_fill.set_disabled();
 
-	a_fill.init_state_variant_map({
+	a_fill.init_variant_map({
 		{ "Unselected", QColor(Qt::lightGray) },
 		{ "Selected", QColor(Qt::white) }
 		});
 
 	m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
 
-	m_tab_icon->svg()->a_common_color.init_state_variant_map({
+	m_tab_icon->svg()->a_common_color.init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
 
-	m_text_label->a_text_color.init_state_variant_map({
+	m_text_label->a_text_color.init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});

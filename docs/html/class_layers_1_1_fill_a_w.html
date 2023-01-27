@@ -24,10 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="layers_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0a</span>
    </div>
-   <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
+   <div id="projectbrief">Application template library with a focus on themes and customization</div>
   </td>
  </tr>
  </tbody>
@@ -97,8 +98,9 @@ Inheritance diagram for Layers::FillAW:</div>
  <div class="center">
   <img src="class_layers_1_1_fill_a_w.png" usemap="#Layers::FillAW_map" alt=""/>
   <map id="Layers::FillAW_map" name="Layers::FillAW_map">
-<area href="class_layers_1_1_attribute_widget.html" alt="Layers::AttributeWidget" shape="rect" coords="76,112,218,136"/>
-<area href="class_layers_1_1_widget.html" alt="Layers::Widget" shape="rect" coords="76,56,218,80"/>
+<area href="class_layers_1_1_attribute_widget.html" alt="Layers::AttributeWidget" shape="rect" coords="76,168,218,192"/>
+<area href="class_layers_1_1_widget.html" alt="Layers::Widget" shape="rect" coords="76,112,218,136"/>
+<area href="class_layers_1_1_themeable_box.html" alt="Layers::ThemeableBox" shape="rect" coords="152,56,294,80"/>
 <area href="class_layers_1_1_themeable.html" alt="Layers::Themeable" shape="rect" coords="152,0,294,24"/>
   </map>
 </div></div>
@@ -122,9 +124,9 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="class_layers_1_1_fill_control.html">FillControl</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>fill_control</b> () const</td></tr>
 <tr class="separator:a78206ab98086e3ecb5e433c9f6a063dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_layers_1_1_attribute_widget"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_layers_1_1_attribute_widget')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_layers_1_1_attribute_widget.html">Layers::AttributeWidget</a></td></tr>
-<tr class="memitem:a1e3b31b35bff3aa10385c301781c06ad inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a1e3b31b35bff3aa10385c301781c06ad" name="a1e3b31b35bff3aa10385c301781c06ad"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AttributeWidget</b> (<a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> *attr_type=nullptr, QWidget *parent=nullptr)</td></tr>
-<tr class="separator:a1e3b31b35bff3aa10385c301781c06ad inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc36334aa4bc30024b4b8fbce0a922a8 inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="afc36334aa4bc30024b4b8fbce0a922a8" name="afc36334aa4bc30024b4b8fbce0a922a8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AttributeWidget</b> (<a class="el" href="class_layers_1_1_entity.html">Entity</a> *entity=nullptr, QWidget *parent=nullptr)</td></tr>
+<tr class="separator:afc36334aa4bc30024b4b8fbce0a922a8 inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78fdf86351e624e6bbfacb9c63d999f6 inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a78fdf86351e624e6bbfacb9c63d999f6" name="a78fdf86351e624e6bbfacb9c63d999f6"></a>
 <a class="el" href="class_layers_1_1_toggle_switch.html">ToggleSwitch</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>disable_toggle</b> () const</td></tr>
 <tr class="separator:a78fdf86351e624e6bbfacb9c63d999f6 inherit pub_methods_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,27 +140,28 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>disabled</b> () const
 <tr class="memitem:ace1aa23652eb4425355a81760b39fd37 inherit pub_methods_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="ace1aa23652eb4425355a81760b39fd37" name="ace1aa23652eb4425355a81760b39fd37"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Widget</b> (QWidget *parent=nullptr)</td></tr>
 <tr class="separator:ace1aa23652eb4425355a81760b39fd37 inherit pub_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ff9464ad2728574e19a86de871e1b4 inherit pub_methods_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a77ff9464ad2728574e19a86de871e1b4">apply_theme_attributes</a> (QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;theme_attrs) override</td></tr>
-<tr class="separator:a77ff9464ad2728574e19a86de871e1b4 inherit pub_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc660f84562bc902bf407e02a7f4dca inherit pub_methods_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a9dc660f84562bc902bf407e02a7f4dca">set_margin</a> (double margin)</td></tr>
-<tr class="separator:a9dc660f84562bc902bf407e02a7f4dca inherit pub_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3355f676a3176190389bab29396528f2 inherit pub_methods_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a3355f676a3176190389bab29396528f2">set_margin</a> (double left, double top, double right, double bottom)</td></tr>
-<tr class="separator:a3355f676a3176190389bab29396528f2 inherit pub_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_layers_1_1_themeable_box"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_layers_1_1_themeable_box')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_layers_1_1_themeable_box.html">Layers::ThemeableBox</a></td></tr>
+<tr class="memitem:a782cbee44720d0a410fbaba5a95e849e inherit pub_methods_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a782cbee44720d0a410fbaba5a95e849e">apply_theme_attributes</a> (QMap&lt; QString, <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt; &amp;theme_attrs) override</td></tr>
+<tr class="separator:a782cbee44720d0a410fbaba5a95e849e inherit pub_methods_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c85ccad26b65174c24dc6438e2acdf inherit pub_methods_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a68c85ccad26b65174c24dc6438e2acdf">set_margin</a> (double margin)</td></tr>
+<tr class="separator:a68c85ccad26b65174c24dc6438e2acdf inherit pub_methods_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e01e48e14b92009d7cd14583def8731 inherit pub_methods_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a9e01e48e14b92009d7cd14583def8731">set_margin</a> (double left, double top, double right, double bottom)</td></tr>
+<tr class="separator:a9e01e48e14b92009d7cd14583def8731 inherit pub_methods_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_layers_1_1_themeable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_layers_1_1_themeable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_layers_1_1_themeable.html">Layers::Themeable</a></td></tr>
 <tr class="memitem:ad89c09e860d259ab5752df92a989cd02 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#ad89c09e860d259ab5752df92a989cd02">store_child_themeable_pointer</a> (<a class="el" href="class_layers_1_1_themeable.html">Themeable</a> *child_themeable)</td></tr>
 <tr class="separator:ad89c09e860d259ab5752df92a989cd02 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cf931b355c0d658d5c913af8e49edb6 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6">apply_theme</a> (<a class="el" href="class_layers_1_1_theme.html">Theme</a> &amp;theme)</td></tr>
 <tr class="separator:a1cf931b355c0d658d5c913af8e49edb6 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac41fff46aef6013184721ba044a96d9 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="aac41fff46aef6013184721ba044a96d9" name="aac41fff46aef6013184721ba044a96d9"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>apply_theme_attributes</b> (QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;theme_attrs)</td></tr>
-<tr class="separator:aac41fff46aef6013184721ba044a96d9 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa20559bc2dad064a92974ce3c9fe97a8 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="aa20559bc2dad064a92974ce3c9fe97a8" name="aa20559bc2dad064a92974ce3c9fe97a8"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>apply_theme_attributes</b> (QMap&lt; QString, <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt; &amp;theme_attrs)</td></tr>
+<tr class="separator:aa20559bc2dad064a92974ce3c9fe97a8 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72bbd5ac1f2e4ebb4e1b0bf63b157076 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a72bbd5ac1f2e4ebb4e1b0bf63b157076">assign_tag_prefixes</a> (QList&lt; QString &gt; parent_prefixes=QList&lt; QString &gt;(), const QString &amp;parent_name=&quot;&quot;)</td></tr>
 <tr class="separator:a72bbd5ac1f2e4ebb4e1b0bf63b157076 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf35e8431ab9d29c0c24bed4d8cd229 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#aaaf35e8431ab9d29c0c24bed4d8cd229">attributes</a> ()</td></tr>
-<tr class="separator:aaaf35e8431ab9d29c0c24bed4d8cd229 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273e0041a0be54fc143e3dd0733d7af9 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a273e0041a0be54fc143e3dd0733d7af9" name="a273e0041a0be54fc143e3dd0733d7af9"></a>
-QList&lt; <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_layout</b> ()</td></tr>
-<tr class="separator:a273e0041a0be54fc143e3dd0733d7af9 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5ceb1e528ea1389ccac1430fc778128 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#af5ceb1e528ea1389ccac1430fc778128">attributes</a> ()</td></tr>
+<tr class="separator:af5ceb1e528ea1389ccac1430fc778128 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a3b52f25aa45879a28fab64317a6b56 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a7a3b52f25aa45879a28fab64317a6b56" name="a7a3b52f25aa45879a28fab64317a6b56"></a>
+QList&lt; <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>attribute_layout</b> ()</td></tr>
+<tr class="separator:a7a3b52f25aa45879a28fab64317a6b56 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28ef1b44525f07dc9b029a08b5f9cbe5 inherit pub_methods_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a28ef1b44525f07dc9b029a08b5f9cbe5" name="a28ef1b44525f07dc9b029a08b5f9cbe5"></a>
 QList&lt; <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>child_themeable_references</b> ()</td></tr>
 <tr class="separator:a28ef1b44525f07dc9b029a08b5f9cbe5 inherit pub_methods_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,6 +227,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_attributes</b> (
 <tr class="separator:acf1e13fb2beddd23f6c87e2486df259d inherit pro_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9da6e86a017fc03e607effec4a87f16 inherit pro_methods_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#ad9da6e86a017fc03e607effec4a87f16">paintEvent</a> (QPaintEvent *event) override</td></tr>
 <tr class="separator:ad9da6e86a017fc03e607effec4a87f16 inherit pro_methods_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_layers_1_1_themeable_box"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_layers_1_1_themeable_box')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_layers_1_1_themeable_box.html">Layers::ThemeableBox</a></td></tr>
+<tr class="memitem:a64d661cf44f2daeea5a4728253aadb0b inherit pro_methods_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a64d661cf44f2daeea5a4728253aadb0b">init_attributes</a> ()</td></tr>
+<tr class="separator:a64d661cf44f2daeea5a4728253aadb0b inherit pro_methods_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1109c9e9d2f0f51757c449e50650ad0 inherit pro_methods_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#ac1109c9e9d2f0f51757c449e50650ad0">paint</a> (QWidget *widget)</td></tr>
+<tr class="separator:ac1109c9e9d2f0f51757c449e50650ad0 inherit pro_methods_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85caf98f853b46cb62b72a29f32c3227"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable.html#a85caf98f853b46cb62b72a29f32c3227">init_child_themeable_reference_list</a> ()</td></tr>
 <tr class="separator:a85caf98f853b46cb62b72a29f32c3227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -233,41 +241,38 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a07e7b7a7f812f808e664adad3c78321f inherit signals_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a07e7b7a7f812f808e664adad3c78321f" name="a07e7b7a7f812f808e664adad3c78321f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>widget_disabled</b> ()</td></tr>
 <tr class="separator:a07e7b7a7f812f808e664adad3c78321f inherit signals_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_class_layers_1_1_widget"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_layers_1_1_widget')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_layers_1_1_widget.html">Layers::Widget</a></td></tr>
-<tr class="memitem:acb516cac43bbc27740d9a4d9fc5a128b inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="acb516cac43bbc27740d9a4d9fc5a128b" name="acb516cac43bbc27740d9a4d9fc5a128b"></a>
+<tr class="inherit_header pub_attribs_class_layers_1_1_themeable_box"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_layers_1_1_themeable_box')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_layers_1_1_themeable_box.html">Layers::ThemeableBox</a></td></tr>
+<tr class="memitem:a85bbaa46626532f01bc020ea364f3e8c inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a id="a85bbaa46626532f01bc020ea364f3e8c" name="a85bbaa46626532f01bc020ea364f3e8c"></a>
 <a class="el" href="class_layers_1_1_border_attributes.html">BorderAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>border</b></td></tr>
-<tr class="separator:acb516cac43bbc27740d9a4d9fc5a128b inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9247066c8da6448a40f0f654d3b1709 inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="ae9247066c8da6448a40f0f654d3b1709" name="ae9247066c8da6448a40f0f654d3b1709"></a>
+<tr class="separator:a85bbaa46626532f01bc020ea364f3e8c inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56c478ad0285083e6b0a644250424ac inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a id="ad56c478ad0285083e6b0a644250424ac" name="ad56c478ad0285083e6b0a644250424ac"></a>
 <a class="el" href="class_layers_1_1_corner_radii_attributes.html">CornerRadiiAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>corner_radii</b></td></tr>
-<tr class="separator:ae9247066c8da6448a40f0f654d3b1709 inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cb0c3071a568244c921551eb5f1fb9a inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="a8cb0c3071a568244c921551eb5f1fb9a" name="a8cb0c3071a568244c921551eb5f1fb9a"></a>
+<tr class="separator:ad56c478ad0285083e6b0a644250424ac inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab25b6fd30c8c6c4260498e4e05e4f972 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a id="ab25b6fd30c8c6c4260498e4e05e4f972" name="ab25b6fd30c8c6c4260498e4e05e4f972"></a>
 <a class="el" href="class_layers_1_1_margins_attributes.html">MarginsAttributes</a>&#160;</td><td class="memItemRight" valign="bottom"><b>margins</b></td></tr>
-<tr class="separator:a8cb0c3071a568244c921551eb5f1fb9a inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f33c1b3e38bba50062e9268e9962e0b inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a0f33c1b3e38bba50062e9268e9962e0b">a_corner_color</a></td></tr>
-<tr class="separator:a0f33c1b3e38bba50062e9268e9962e0b inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab73fb14a045f66a85e1a4de3cf198038 inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#ab73fb14a045f66a85e1a4de3cf198038">a_fill</a></td></tr>
-<tr class="separator:ab73fb14a045f66a85e1a4de3cf198038 inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a226274613e842bc0b469e4ffdb677cc6 inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a226274613e842bc0b469e4ffdb677cc6">a_hover_fill</a></td></tr>
-<tr class="separator:a226274613e842bc0b469e4ffdb677cc6 inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67899fa2df88f455001db5276d83eb52 inherit pub_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_widget.html#a67899fa2df88f455001db5276d83eb52">a_outline_color</a></td></tr>
-<tr class="separator:a67899fa2df88f455001db5276d83eb52 inherit pub_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ab25b6fd30c8c6c4260498e4e05e4f972 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae56d006ffa2da448eb633ef92ee9c580 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#ae56d006ffa2da448eb633ef92ee9c580">a_corner_color</a></td></tr>
+<tr class="separator:ae56d006ffa2da448eb633ef92ee9c580 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aef262ad9f52f565493c371ad81b28e inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a3aef262ad9f52f565493c371ad81b28e">a_fill</a></td></tr>
+<tr class="separator:a3aef262ad9f52f565493c371ad81b28e inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7ba1757d3d9006d90676f7c2243836 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#acb7ba1757d3d9006d90676f7c2243836">a_hover_fill</a></td></tr>
+<tr class="separator:acb7ba1757d3d9006d90676f7c2243836 inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73035091b1b6122fca778b6979b4c65b inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_layers_1_1_attribute.html">Attribute</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_layers_1_1_themeable_box.html#a73035091b1b6122fca778b6979b4c65b">a_outline_color</a></td></tr>
+<tr class="separator:a73035091b1b6122fca778b6979b4c65b inherit pub_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_layers_1_1_attribute_widget"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_layers_1_1_attribute_widget')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_layers_1_1_attribute_widget.html">Layers::AttributeWidget</a></td></tr>
-<tr class="memitem:a92dbaaab877f7cc6016684f0bef94503 inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a92dbaaab877f7cc6016684f0bef94503" name="a92dbaaab877f7cc6016684f0bef94503"></a>
-<a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_attribute_type</b></td></tr>
-<tr class="separator:a92dbaaab877f7cc6016684f0bef94503 inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e47ee16cecc60e3bbaad0db948a37ce inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a7e47ee16cecc60e3bbaad0db948a37ce" name="a7e47ee16cecc60e3bbaad0db948a37ce"></a>
+<a class="el" href="class_layers_1_1_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_entity</b></td></tr>
+<tr class="separator:a7e47ee16cecc60e3bbaad0db948a37ce inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7edd087c8784f448afd136c08752189 inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="ac7edd087c8784f448afd136c08752189" name="ac7edd087c8784f448afd136c08752189"></a>
 <a class="el" href="class_layers_1_1_toggle_switch.html">ToggleSwitch</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_disabled_toggle</b> { new <a class="el" href="class_layers_1_1_toggle_switch.html">ToggleSwitch</a> }</td></tr>
 <tr class="separator:ac7edd087c8784f448afd136c08752189 inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a847fb0b996bc938549ed56cf7e35b9db inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memItemLeft" align="right" valign="top"><a id="a847fb0b996bc938549ed56cf7e35b9db" name="a847fb0b996bc938549ed56cf7e35b9db"></a>
 <a class="el" href="class_layers_1_1_widget.html">Widget</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_toggle_label_separator</b> { new <a class="el" href="class_layers_1_1_widget.html">Widget</a> }</td></tr>
 <tr class="separator:a847fb0b996bc938549ed56cf7e35b9db inherit pro_attribs_class_layers_1_1_attribute_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_attribs_class_layers_1_1_widget"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_layers_1_1_widget')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_layers_1_1_widget.html">Layers::Widget</a></td></tr>
-<tr class="memitem:a4bae24de59ffad9d277471876f90ecea inherit pro_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="a4bae24de59ffad9d277471876f90ecea" name="a4bae24de59ffad9d277471876f90ecea"></a>
+<tr class="inherit_header pro_attribs_class_layers_1_1_themeable_box"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_layers_1_1_themeable_box')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_layers_1_1_themeable_box.html">Layers::ThemeableBox</a></td></tr>
+<tr class="memitem:a7926fafe2dbade4036666d17f0ec21ac inherit pro_attribs_class_layers_1_1_themeable_box"><td class="memItemLeft" align="right" valign="top"><a id="a7926fafe2dbade4036666d17f0ec21ac" name="a7926fafe2dbade4036666d17f0ec21ac"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_hovering</b> { false }</td></tr>
-<tr class="separator:a4bae24de59ffad9d277471876f90ecea inherit pro_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66dc4695cd3b275e243b4ac29c301748 inherit pro_attribs_class_layers_1_1_widget"><td class="memItemLeft" align="right" valign="top"><a id="a66dc4695cd3b275e243b4ac29c301748" name="a66dc4695cd3b275e243b4ac29c301748"></a>
-QPainter&#160;</td><td class="memItemRight" valign="bottom"><b>painter</b></td></tr>
-<tr class="separator:a66dc4695cd3b275e243b4ac29c301748 inherit pro_attribs_class_layers_1_1_widget"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a7926fafe2dbade4036666d17f0ec21ac inherit pro_attribs_class_layers_1_1_themeable_box"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_layers_1_1_themeable"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_layers_1_1_themeable')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_layers_1_1_themeable.html">Layers::Themeable</a></td></tr>
 <tr class="memitem:ad8f790a6aa78dfc17c21779b5c09720f inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="ad8f790a6aa78dfc17c21779b5c09720f" name="ad8f790a6aa78dfc17c21779b5c09720f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_functionality_disabled</b> { false }</td></tr>
@@ -302,12 +307,12 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_state</b> { &quo
 <tr class="memitem:ad23e25dbc5ecd2b817b19dcb9e876142 inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="ad23e25dbc5ecd2b817b19dcb9e876142" name="ad23e25dbc5ecd2b817b19dcb9e876142"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_tag</b> { &quot;&quot; }</td></tr>
 <tr class="separator:ad23e25dbc5ecd2b817b19dcb9e876142 inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4774c7269cf3fda80b60a22579b232c inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="af4774c7269cf3fda80b60a22579b232c" name="af4774c7269cf3fda80b60a22579b232c"></a>
-QList&lt; <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attribute_layout</b> { QList&lt;<a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a>*&gt;() }</td></tr>
-<tr class="separator:af4774c7269cf3fda80b60a22579b232c inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc8292c6f571aa5b6870581131a0b2fb inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="afc8292c6f571aa5b6870581131a0b2fb" name="afc8292c6f571aa5b6870581131a0b2fb"></a>
-QMap&lt; QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attributes</b> { QMap&lt;QString, <a class="el" href="class_layers_1_1_attribute_type.html">AttributeType</a>*&gt;() }</td></tr>
-<tr class="separator:afc8292c6f571aa5b6870581131a0b2fb inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97e5467c393bc226311461c72c38384e inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a97e5467c393bc226311461c72c38384e" name="a97e5467c393bc226311461c72c38384e"></a>
+QList&lt; <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attribute_layout</b> { QList&lt;<a class="el" href="class_layers_1_1_entity.html">Entity</a>*&gt;() }</td></tr>
+<tr class="separator:a97e5467c393bc226311461c72c38384e inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a627a9efac3762eb8ba7d4ddd7d3be934 inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a627a9efac3762eb8ba7d4ddd7d3be934" name="a627a9efac3762eb8ba7d4ddd7d3be934"></a>
+QMap&lt; QString, <a class="el" href="class_layers_1_1_entity.html">Entity</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_attributes</b> { QMap&lt;QString, <a class="el" href="class_layers_1_1_entity.html">Entity</a>*&gt;() }</td></tr>
+<tr class="separator:a627a9efac3762eb8ba7d4ddd7d3be934 inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf7a81dcbf2dae48648fef97837a6c3 inherit pro_attribs_class_layers_1_1_themeable"><td class="memItemLeft" align="right" valign="top"><a id="a8bf7a81dcbf2dae48648fef97837a6c3" name="a8bf7a81dcbf2dae48648fef97837a6c3"></a>
 QList&lt; <a class="el" href="class_layers_1_1_themeable.html">Themeable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_child_themeables</b></td></tr>
 <tr class="separator:a8bf7a81dcbf2dae48648fef97837a6c3 inherit pro_attribs_class_layers_1_1_themeable"><td class="memSeparator" colspan="2">&#160;</td></tr>

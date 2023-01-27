@@ -82,12 +82,12 @@ QGradientStops GradientSelectionDialog::gradient_stops() const
 
 void GradientSelectionDialog::init_attributes()
 {
-    for (AttributeType* attr_type :
-        QList<AttributeType*>({
+    for (Entity* entity :
+        QList<Entity*>({
             &border, &border.thickness, &margins,
             &margins.left, &margins.top, &margins.right, &margins.bottom }))
     {
-        connect(attr_type, &Attribute::value_changed,
+        connect(entity, &Entity::value_changed,
             this, &GradientSelectionDialog::update_color_control_positions);
     }
 

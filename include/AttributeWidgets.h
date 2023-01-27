@@ -22,7 +22,7 @@ namespace Layers
 		void widget_disabled();
 
 	public:
-		AttributeWidget(AttributeType* attr_type = nullptr, QWidget* parent = nullptr);
+		AttributeWidget(Entity* entity = nullptr, QWidget* parent = nullptr);
 
 		ToggleSwitch* disable_toggle() const;
 
@@ -36,7 +36,7 @@ namespace Layers
 	protected:
 		void init_attributes();
 
-		AttributeType* m_attribute_type;
+		Entity* m_entity;
 
 		ToggleSwitch* m_disabled_toggle{ new ToggleSwitch };
 

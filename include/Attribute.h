@@ -1,64 +1,60 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
-#include "AttributeType.h"
+#include "Entity.h"
 #include "Data.h"
 
 namespace Layers
 {
 	/*!
-		Attribute implementation used throughout Layers by AttributeGroup, Theme, and Themeable.
+		Attribute implementation used throughout Layers, especially by Themes
+		and Themeables.
 
-		An Attribute stores a pointer to a Data object which is used for drawing Themeables. At first,
-		an Attribute inializes Data and *owns* it. However, through entangle_with(), an Attribute can
-		be made to point to Data from another Attribute.
+		An Attribute represents labeled Data, and if the Data it represents is
+		stateful, the Attribute is also responsible for defining the active
+		state.
+
+		A key feature of Attributes is entanglement. 'Entanglement' is the term
+		used to describe the action of forcing one Attribute to delete its Data
+		and point to the Data of another Attribute. This is done by calling
+		entangle_with().
+
+		Attributes employ a concept of ownership over the Data they point to.
+		Initially, an Attribute owns its Data, but if it becomes *entangled*
+		with another Attribute, it will no longer own Data since the Data it
+		points to after being entangled is owned by the other Attribute.
 	*/
-	class Attribute : public AttributeType
+	class Attribute : public Entity
 	{
 		Q_OBJECT
 
 	signals:
-		void ownership_changed();
+		void entangled();
 
 	public:
 		Attribute(const QString& name, bool disabled = false);
 		Attribute(const QString& name, QVariant qvariant, bool disabled = false);
-		Attribute(const QString& name, QMap<QString, Variant> state_variant_map, bool disabled = false);
+		Attribute(const QString& name, VariantMap variant_map, bool disabled = false);
 		Attribute(const Attribute& a);
 		~Attribute();
 
 		/*!
 			Returns Data value converted to the template type T.
 
-			If the Attribute is stateful, the value associated with the current state is returned.
-			If the value associated with a specific state is desired, use the version of as() that
-			requires a state argument.
+			The state parameter is only necessary for stateful Attributes.
+			If the default value (an empty string) is used, and the Attribute
+			is stateful, the value of the active state is returned.
 
+			@param state - State associated with returned value
 			@returns Data value converted to template type T
 		*/
 		template<typename T>
-		T as() const;
-
-		/*!
-			Returns Data value associated with the supplied state, converted to the template type T.
-
-			This function will work only if the Attribute is stateful and only if the state supplied exists
-			in the state-variant map.
-
-			@returns Data value associated with state, converted to template type T
-		*/
-		template<typename T>
-		T as(const QString& state) const;
-
-		/*!
-			Deletes the Data if the Attribute is the owner.
-		*/
-		void clear_data_if_owner();
+		T as(const QString& state = "") const;
 
 		/*!
 			Returns true if state exists in the Data, otherwise, returns false.
 
-			@param state - State to check whether it exists in the Data
+			@param state - State that might exist in the Data
 			@returns True if state exists in Data, false otherwise
 		*/
 		bool contains_state(const QString& state) const;
@@ -78,14 +74,20 @@ namespace Layers
 		void establish_data_connection();
 
 		/*!
-			Makes this Attribute to point to the Data of another Attribute.
+			Forces the Attribute to point to the Data of another Attribute.
 
-			If the caller Attribute owns its Data, the Data is deleted before the pointer is changed.
+			After this function, the caller Attribute is considered *entangled*
+			with the other Attribute.
 
-			Establishes a new data connection and emits both ownership_changed() and value_changed().
+			If the caller Attribute was not previously entangled, the Data is
+			deleted before the new pointer is assigned.
 
-			Another connection is established so that if the attribute supplied changes its ownership,
-			this function gets called again so the caller Attribute can get a pointer to the new Data.
+			Establishes a new data connection and emits both entangled() and
+			value_changed().
+
+			Another connection is established so that if the supplied attribute
+			becomes entangled, this function gets called again so the caller
+			Attribute can get a pointer to the new Data.
 
 			@param attribute - Attribute to obtain the Data pointer of
 		*/
@@ -94,27 +96,31 @@ namespace Layers
 		/*!
 			Converts to stateful Data initialized with the supplied map.
 
-			This function simply calls Data::init_state_variant_map() and passes the state_variant_map.
+			This function simply calls Data::init_variant_map() and passes the
+			variant_map.
 
-			@param state_variant_map - Map to initialize the Data with
+			@param variant_map - Variant map to initialize the Data with
 		*/
-		void init_state_variant_map(const QMap<QString, Variant>& state_variant_map);
+		void init_variant_map(const VariantMap& variant_map);
 
 		/*!
-			Returns true if stateful, otherwise, returns false.
+			Returns true if Attribute is entangled, otherwise, returns false.
 
-			This function simply calls Data::is_stateful().
+			An entangled Attribute does not own the Data it points to.
+
+			@returns True if entangled, false otherwise
+		*/
+		bool is_entangled() const;
+
+		/*!
+			Returns true if the Data this Attribute points to is stateful,
+			otherwise, returns false.
+
+			This function simply returns the result of Data::is_stateful().
 
 			@returns True if stateful, false otherwise
 		*/
 		virtual bool is_stateful() const override;
-
-		/*!
-			Returns true if Attribute owns the Data object being pointed to, otherwise, returns false.
-
-			@returns True if Data object is owned by Attribute, false otherwise
-		*/
-		bool owns_data() const;
 
 		/*!
 			Sets the Attribute's active state.
@@ -126,11 +132,13 @@ namespace Layers
 		/*!
 			Set the value of the Data.
 
-			This function simply calls Data::set_value() and passes qvariant and retain_type. It only
-			works with Attributes that are not stateful.
+			This function simply calls Data::set_value() and passes qvariant
+			and retain_type. It only works with Attributes that are not
+			stateful.
 
 			@param qvariant - QVariant containing the value being set
-			@param retain_type - Whether to protect the value type from change, true by default
+			@param retain_type - Whether to protect the value type from change,
+			true by default
 		*/
 		void set_value(QVariant qvariant, bool retain_type = true);
 
@@ -155,23 +163,23 @@ namespace Layers
 		QString state() const;
 
 		/*!
-			Returns a list of QStrings representing the available states.
+			Returns a QStringList of the available states.
 
-			If the Attribute is not stateful, then an empty list will be returned.
+			If the Attribute is not stateful, an empty list will be returned.
 
 			@returns QString list where QStrings represent the states
 		*/
-		QList<QString> states() const;
+		QStringList states() const;
 
 		/*!
-			Returns Attribute converted to a QJsonObject.
+			Returns Attribute represented as a QJsonObject.
 
-			@returns QJsonObject pertaining to the Attribute
+			@returns QJsonObject representing the Attribute
 		*/
 		QJsonObject to_json_object();
 
 		/*!
-			Returns the name of the value's type.
+			Returns the name of the Data value's type.
 
 			This function simply calls Data::typeName().
 
@@ -184,24 +192,23 @@ namespace Layers
 
 		QMetaObject::Connection m_data_connection;
 
-		bool m_owns_data{ true };
+		bool m_is_entangled{ false };
 
 		QString m_state{ "" };
 	};
 
 	template<typename T>
-	inline T Attribute::as() const
-	{
-		if (m_data->is_stateful())
-			return m_data->as<T>(m_state);
-
-		return m_data->as<T>();
-	}
-
-	template<typename T>
 	inline T Attribute::as(const QString& state) const
 	{
-		return m_data->as<T>(state);
+		if (m_data->is_stateful())
+		{
+			if (state == "")
+				return m_data->as<T>(m_state);
+			else
+				return m_data->as<T>(state);
+		}
+		
+		return m_data->as<T>();
 	}
 }
 

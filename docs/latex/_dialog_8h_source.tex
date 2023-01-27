@@ -1,0 +1,55 @@
+\hypertarget{_dialog_8h_source}{}\doxysection{Dialog.\+h}
+\label{_dialog_8h_source}\index{include/Dialog.h@{include/Dialog.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DIALOG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DIALOG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QDialog>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Button.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}Graphic.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{namespace }Layers}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_layers_1_1_dialog}{Dialog}} : \textcolor{keyword}{public} QDialog, \textcolor{keyword}{public} \mbox{\hyperlink{class_layers_1_1_themeable_box}{ThemeableBox}}}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         Q\_OBJECT}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \mbox{\hyperlink{class_layers_1_1_dialog}{Dialog}}(\textcolor{keyword}{const} QString\& title = \textcolor{stringliteral}{"{}Dialog"{}}, QWidget* parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} setLayout(QLayout* layout);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} update\_content\_margins();}
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} update\_titlebar();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} init\_attributes();}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_layers_1_1_dialog_a2567397e2e5f8cd8c2a3f30e0db8e237}{init\_child\_themeable\_reference\_list}}();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordtype}{bool} nativeEvent(\textcolor{keyword}{const} QByteArray\& eventType, \textcolor{keywordtype}{void}* message, qintptr* result) \textcolor{keyword}{override};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} paintEvent(QPaintEvent* event) \textcolor{keyword}{override};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         QVBoxLayout* m\_main\_layout\{ \textcolor{keyword}{new} QVBoxLayout \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{private}:}
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} init\_titlebar();}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} setup\_layout();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{bool} m\_hovering\{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \mbox{\hyperlink{class_layers_1_1_widget}{Widget}}* m\_titlebar\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_widget}{Widget}} \};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \mbox{\hyperlink{class_layers_1_1_label}{Label}}* m\_window\_title\_label;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \mbox{\hyperlink{class_layers_1_1_button}{Button}}* m\_exit\_button = \textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_button}{Button}}(\textcolor{keyword}{new} \mbox{\hyperlink{class_layers_1_1_graphic}{Graphic}}(\textcolor{stringliteral}{"{}:/svgs/exit.svg"{}}, QSize(20, 20)), \textcolor{keyword}{true});}
+\DoxyCodeLine{46     \};}
+\DoxyCodeLine{47 \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DIALOG\_H}}
+
+\end{DoxyCode}

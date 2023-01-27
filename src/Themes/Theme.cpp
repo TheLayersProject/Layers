@@ -4,7 +4,7 @@
 #include <QJsonObject>
 
 using Layers::Attribute;
-using Layers::AttributeType;
+using Layers::Entity;
 using Layers::Theme;
 using Layers::Themeable;
 
@@ -33,38 +33,38 @@ Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
 	{
 		QJsonObject themeable_object = data_object.value(themeable_tag).toObject();
 
-		QMap<QString, AttributeType*> themeable_attributes;
+		QMap<QString, Entity*> themeable_attributes;
 
-		for (const QString& attr_type_key : themeable_object.keys())
+		for (const QString& entity_key : themeable_object.keys())
 		{
-			QJsonObject attr_type_object = themeable_object.value(attr_type_key).toObject();
+			QJsonObject entity_object = themeable_object.value(entity_key).toObject();
 
-			QString attr_type_name = attr_type_key;
-			bool attr_type_disabled = false;
+			QString entity_name = entity_key;
+			bool entity_disabled = false;
 			
-			if (attr_type_object.contains("disabled"))
+			if (entity_object.contains("disabled"))
 			{
-				if (attr_type_object.value("disabled").toBool())
-					attr_type_disabled = true;
+				if (entity_object.value("disabled").toBool())
+					entity_disabled = true;
 
-				attr_type_object.remove("disabled");
+				entity_object.remove("disabled");
 			}
 
-			// If attr_type_object contains key 'value', then it is an attribute, not a group
-			if (attr_type_object.contains("value"))
+			// If entity_object contains key 'value', then it is an attribute, not a group
+			if (entity_object.contains("value"))
 			{
-				themeable_attributes[attr_type_key] =
+				themeable_attributes[entity_key] =
 					init_attribute(
-						attr_type_name, attr_type_disabled,
-						attr_type_object.value("value"));
+						entity_name, entity_disabled,
+						entity_object.value("value"));
 			}
-			else // attr_type_object is a group...
+			else // entity_object is a group...
 			{
 				QMap<QString, Attribute*> group_attributes;
 
-				for (const QString& group_attr_key : attr_type_object.keys())
+				for (const QString& group_attr_key : entity_object.keys())
 				{
-					QJsonObject group_attr_object = attr_type_object.value(group_attr_key).toObject();
+					QJsonObject group_attr_object = entity_object.value(group_attr_key).toObject();
 
 					group_attributes[group_attr_key] =
 						init_attribute(
@@ -72,8 +72,8 @@ Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
 							group_attr_object.value("value"));
 				}
 
-				themeable_attributes[attr_type_key] =
-					new AttributeGroup(attr_type_name, group_attributes, attr_type_disabled);
+				themeable_attributes[entity_key] =
+					new AttributeGroup(entity_name, group_attributes, entity_disabled);
 			}
 		}
 
@@ -91,11 +91,11 @@ void Theme::clear()
 {
 	for (const QString& themeable_tag : m_data.keys())
 	{
-		for (AttributeType* attr_type : m_data[themeable_tag])
+		for (Entity* entity : m_data[themeable_tag])
 		{
-			delete attr_type;
+			delete entity;
 
-			attr_type = nullptr;
+			entity = nullptr;
 		}
 	}
 
@@ -143,15 +143,15 @@ void Theme::copy(Theme& theme)
 
 	for (const QString& themeable_tag : theme.m_data.keys())
 	{
-		QMap<QString, AttributeType*>& themeable_data_in_theme =
-			m_data[themeable_tag] = QMap<QString, AttributeType*>();
+		QMap<QString, Entity*>& themeable_data_in_theme =
+			m_data[themeable_tag] = QMap<QString, Entity*>();
 
-		for (const QString& attr_type_key : theme.m_data[themeable_tag].keys())
+		for (const QString& entity_key : theme.m_data[themeable_tag].keys())
 		{
-			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data[themeable_tag][attr_type_key]))
-				themeable_data_in_theme[attr_type_key] = new Attribute(*theme_attr);
-			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data[themeable_tag][attr_type_key]))
-				themeable_data_in_theme[attr_type_key] = new AttributeGroup(*theme_attr_group);
+			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data[themeable_tag][entity_key]))
+				themeable_data_in_theme[entity_key] = new Attribute(*theme_attr);
+			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data[themeable_tag][entity_key]))
+				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
 		}
 	}
 }
@@ -160,16 +160,16 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 {
 	if (m_data.contains(themeable->tag()))
 	{
-		QMap<QString, AttributeType*>& themeable_data_in_theme = m_data[themeable->tag()];
+		QMap<QString, Entity*>& themeable_data_in_theme = m_data[themeable->tag()];
 
-		for (const QString& attr_type_key : themeable_data_in_theme.keys())
+		for (const QString& entity_key : themeable_data_in_theme.keys())
 		{ // HERE
-			if (themeable->attributes().contains(attr_type_key))
+			if (themeable->attributes().contains(entity_key))
 			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[attr_type_key]))
-					dynamic_cast<Attribute*>(themeable_data_in_theme[attr_type_key])->copy(*attr);
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[attr_type_key]))
-					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[attr_type_key])->copy(*attr_group);
+				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[entity_key]))
+					dynamic_cast<Attribute*>(themeable_data_in_theme[entity_key])->copy(*attr);
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[entity_key]))
+					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[entity_key])->copy(*attr_group);
 			}
 		}
 	}
@@ -178,18 +178,18 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 		/* TODO: Temporarily disabling this code which copys themeable data to the theme
 		   even if the theme doesn't already contain attributes for the themeable. This will
 		   need to be re-enabled! */ 
-		QMap<QString, AttributeType*> new_themeable_data_for_theme;
+		QMap<QString, Entity*> new_themeable_data_for_theme;
 
-		for (const QString& attr_type_key : themeable->attributes().keys())
+		for (const QString& entity_key : themeable->attributes().keys())
 		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[attr_type_key]))
+			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[entity_key]))
 			{
-				if (attr->owns_data())
-					new_themeable_data_for_theme[attr_type_key] = new Attribute(*attr);
+				if (!attr->is_entangled())
+					new_themeable_data_for_theme[entity_key] = new Attribute(*attr);
 			}
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[attr_type_key]))
+			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[entity_key]))
 			{
-				new_themeable_data_for_theme[attr_type_key] = new AttributeGroup(*attr_group);
+				new_themeable_data_for_theme[entity_key] = new AttributeGroup(*attr_group);
 			}
 		}
 
@@ -335,21 +335,19 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 			)
 				continue;
 
-		QMap<QString, AttributeType*>& themeable_data_in_theme = m_data[themeable_tag];
+		QMap<QString, Entity*>& themeable_data_in_theme = m_data[themeable_tag];
 
 		QJsonObject themeable_json_object;
 
-		for (const QString& attr_type_key : themeable_data_in_theme.keys())
+		for (const QString& entity_key : themeable_data_in_theme.keys())
 		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(themeable_data_in_theme[attr_type_key]))
-				themeable_json_object.insert(attr_type_key, attr->to_json_object());
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable_data_in_theme[attr_type_key]))
-				themeable_json_object.insert(attr_type_key, attr_group->to_json_object());
+			if (Attribute* attr = dynamic_cast<Attribute*>(themeable_data_in_theme[entity_key]))
+				themeable_json_object.insert(entity_key, attr->to_json_object());
+			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable_data_in_theme[entity_key]))
+				themeable_json_object.insert(entity_key, attr_group->to_json_object());
 		}
 
 		data_json_object.insert(themeable_tag, themeable_json_object);
-
-		//json_object.insert(themeable_tag, QJsonValue());
 	}
 
 	json_object.insert("data", data_json_object);
@@ -359,7 +357,7 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 	return json_document;
 }
 
-QMap<QString, AttributeType*>& Theme::operator[](const QString& themeable_tag)
+QMap<QString, Entity*>& Theme::operator[](const QString& themeable_tag)
 {
 	return m_data[themeable_tag];
 }

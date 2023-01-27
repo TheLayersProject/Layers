@@ -1,0 +1,76 @@
+\hypertarget{class_layers_1_1_color_dialog}{}\doxysection{Layers\+::Color\+Dialog Class Reference}
+\label{class_layers_1_1_color_dialog}\index{Layers::ColorDialog@{Layers::ColorDialog}}
+Inheritance diagram for Layers\+::Color\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_layers_1_1_color_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_color_dialog_afabf00539d37d7ba415c4d63126f691b}\label{class_layers_1_1_color_dialog_afabf00539d37d7ba415c4d63126f691b}} 
+{\bfseries Color\+Dialog} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_layers_1_1_color_dialog_a29d5c550b3fdb82cdb1cc287e300e80e}\label{class_layers_1_1_color_dialog_a29d5c550b3fdb82cdb1cc287e300e80e}} 
+void {\bfseries update\+\_\+color\+\_\+name\+\_\+line\+\_\+editor} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_color_dialog_ab8e240e4709bdf801e35946066928141}\label{class_layers_1_1_color_dialog_ab8e240e4709bdf801e35946066928141}} 
+\mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}} {\bfseries color} \{ \mbox{\hyperlink{class_layers_1_1_attribute}{Attribute}}(\char`\"{}color\char`\"{}, QColor()) \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_layers_1_1_color_dialog_a12fdd91e6949aca219e36b3a5de82bc1}\label{class_layers_1_1_color_dialog_a12fdd91e6949aca219e36b3a5de82bc1}} 
+void {\bfseries init\+\_\+attributes} ()
+\item 
+void \mbox{\hyperlink{class_layers_1_1_color_dialog_afe56984b5910728a87438f97b506b00d}{init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layers_1_1_color_dialog_afe56984b5910728a87438f97b506b00d}\label{class_layers_1_1_color_dialog_afe56984b5910728a87438f97b506b00d}} 
+\index{Layers::ColorDialog@{Layers::ColorDialog}!init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}}
+\index{init\_child\_themeable\_reference\_list@{init\_child\_themeable\_reference\_list}!Layers::ColorDialog@{Layers::ColorDialog}}
+\doxysubsubsection{\texorpdfstring{init\_child\_themeable\_reference\_list()}{init\_child\_themeable\_reference\_list()}}
+{\footnotesize\ttfamily void Color\+Dialog\+::init\+\_\+child\+\_\+themeable\+\_\+reference\+\_\+list (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Updates things that depend on the theme. Called by \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}}.
+
+This function can be defined by implementers of the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class to handle anything they want to change when a theme gets applied that can\textquotesingle{}t be changed through attributes. However, it is not required to implement this function.
+
+Initializes the attributes.
+
+This is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class. This function should be used to define a themeable\textquotesingle{}s attributes with calls to set\+\_\+attribute\+\_\+value().
+
+This function is called by init\+\_\+themeable().
+
+Initializes the customize panel.
+
+A themeable MUST have a proper name to initialize a customize panel. Set one using \mbox{\hyperlink{class_layers_1_1_themeable_a00802c07a93a1eefdbcf74a5c04b863b}{set\+\_\+proper\+\_\+name()}}.
+
+This function is responsible for calling setup\+\_\+customize\+\_\+panel(), which is a pure virtual function that must be defined by other classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class.
+
+\begin{DoxyReturn}{Returns}
+The initialized customize panel.
+\end{DoxyReturn}
+Initializes the reference list to child themeables.
+
+A list of child themeable references is necessary to allow the \mbox{\hyperlink{class_layers_1_1_themeable_a1cf931b355c0d658d5c913af8e49edb6}{apply\+\_\+theme()}} function to work recursively.
+
+Classes that inherit the \mbox{\hyperlink{class_layers_1_1_themeable}{Themeable}} class should define this function and use \mbox{\hyperlink{class_layers_1_1_themeable_ad89c09e860d259ab5752df92a989cd02}{store\+\_\+child\+\_\+themeable\+\_\+pointer()}} to populate the reference list.
+
+This function is called by init\+\_\+themeable(). 
+
+Reimplemented from \mbox{\hyperlink{class_layers_1_1_themeable_a85caf98f853b46cb62b72a29f32c3227}{Layers\+::\+Themeable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Color\+Dialog.\+h\item 
+src/\+Widgets/\+Dialogs/Color\+Dialog.\+cpp\end{DoxyCompactItemize}

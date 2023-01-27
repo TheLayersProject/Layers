@@ -5,7 +5,7 @@
 //
 //namespace Layers
 //{
-//	class AttributeType
+//	class Entity
 //	{
 //	public:
 //

@@ -6,7 +6,7 @@
 #include "../../../include/Themeable.h"
 
 using Layers::Attribute;
-using Layers::AttributeType;
+using Layers::Entity;
 using Layers::CustomizePanel;
 using Layers::Graphic;
 using Layers::Themeable;
@@ -21,12 +21,12 @@ Themeable::~Themeable()
 	m_proper_name = nullptr;
 }
 
-QMap<QString, AttributeType*>& Themeable::attributes()
+QMap<QString, Entity*>& Themeable::attributes()
 {
 	return m_attributes;
 }
 
-QList<AttributeType*>& Themeable::attribute_layout()
+QList<Entity*>& Themeable::attribute_layout()
 {
 	return m_attribute_layout;
 }
@@ -71,14 +71,14 @@ void Themeable::init_child_themeable_reference_list()
 
 bool Themeable::is_stateful() const
 {
-	for (AttributeType* attr_type : m_attributes)
+	for (Entity* entity : m_attributes)
 	{
-		if (Attribute* attr = dynamic_cast<Attribute*>(attr_type))
+		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
 			if (attr->is_stateful())
 				return true;
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_type))
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
 			if (attr_group->is_stateful())
 				return true;
 
@@ -103,7 +103,7 @@ void Themeable::apply_theme(Theme& theme)
 
 			apply_theme_attributes(theme[tag()]);
 
-			QMap<QString, AttributeType*>& theme_attrs = theme[tag()];
+			QMap<QString, Entity*>& theme_attrs = theme[tag()];
 
 			//for (const QString& attr_tag : m_attributes.keys())
 			//{
@@ -118,7 +118,7 @@ void Themeable::apply_theme(Theme& theme)
 	}
 }
 
-void Themeable::apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs)
+void Themeable::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
 {
 }
 
@@ -150,7 +150,7 @@ void Themeable::remove_child_themeable_reference(Themeable* child_themeable)
 //{
 //	if (m_attribute_set.replace_with_proxy(attribute_name, proxy_attribute))
 //	{
-//		proxy_attribute->connect(proxy_attribute, &AttributeType::value_changed, [this]
+//		proxy_attribute->connect(proxy_attribute, &Entity::value_changed, [this]
 //			{
 //				update_theme_dependencies();
 //				issue_update();
@@ -211,13 +211,10 @@ QList<Themeable*>& Themeable::child_themeable_references()
 
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
-	//if (theme->contains_attributes_for_tag(tag()))
-	//{
 	theme->copy_attribute_values_of(this);
 
 	for (Themeable* child_themeable : m_child_themeables)
 		child_themeable->copy_attribute_values_to(theme);
-	//}
 }
 
 Theme* Themeable::current_theme()
@@ -252,20 +249,16 @@ void Themeable::set_state(const QString& state)
 	{
 		m_state = state;
 
-		for (AttributeType* attr_type : m_attributes)
+		for (Entity* entity : m_attributes)
 		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(attr_type))
+			if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 				attr->set_state(state);
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_type))
+			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
 				attr_group->set_state(state);
 		}
 
 		for (Themeable* child_themeable : m_child_themeables)
 			child_themeable->set_state(state);
-
-		//update_theme_dependencies();
-
-		//issue_update();
 	}
 }
 
@@ -304,24 +297,19 @@ QString& Themeable::tag()
 	return m_tag;
 }
 
-//QMap<QString, StatefulAttribute>& Themeable::stateful_attributes()
-//{
-//	return m_stateful_attributes;
-//}
-
 QList<QString> Themeable::states() const
 {
 	QList<QString> states;
 
-	for (AttributeType* attr_type : m_attributes)
+	for (Entity* entity : m_attributes)
 	{
-		if (Attribute* attr = dynamic_cast<Attribute*>(attr_type))
+		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
 			for (const QString& state : attr->states())
 				if (!states.contains(state))
 					states.append(state);
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_type))
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
 		{
 			for (Attribute* attr : attr_group->attributes())
 				for (const QString& state : attr->states())
@@ -332,18 +320,6 @@ QList<QString> Themeable::states() const
 
 	return states;
 }
-
-//void Themeable::update_theme_dependencies()
-//{
-//}
-
-//void Themeable::init_attributes()
-//{
-//}
-
-//void Themeable::init_attribute_widgets()
-//{
-//}
 
 QString Themeable::state() const
 {

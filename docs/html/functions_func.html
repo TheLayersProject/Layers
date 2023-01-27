@@ -24,10 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="layers_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0a</span>
    </div>
-   <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
+   <div id="projectbrief">Application template library with a focus on themes and customization</div>
   </td>
  </tr>
  </tbody>
@@ -87,16 +88,15 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 <h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
 <li>apply_theme()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#aec2122193adf69854bc5e8734f55e111">Layers::Application</a>, <a class="el" href="class_layers_1_1_themeable.html#a1cf931b355c0d658d5c913af8e49edb6">Layers::Themeable</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#aff2d260477fdc37d49d5ac1ec90b4801">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_window.html#a5a0badc67b976fa520d51550429362c2">Layers::Window</a></li>
-<li>as()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#addb52431a3b44a3bbcf5c50ca97da877">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#a95db8542e2df42f59bb3db20252d5201">Layers::Data</a></li>
+<li>as()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a02bdfeed864d49d56d4ef66968b750c9">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#aa3796ac8384c36f750074041c53c03eb">Layers::Data</a></li>
 <li>assign_tag_prefixes()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable.html#a72bbd5ac1f2e4ebb4e1b0bf63b157076">Layers::Themeable</a></li>
-<li>attributes()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute_group.html#a1d9487eb5d284ef335f5ea2bc12928a0">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_themeable.html#aaaf35e8431ab9d29c0c24bed4d8cd229">Layers::Themeable</a></li>
+<li>attributes()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute_group.html#a1d9487eb5d284ef335f5ea2bc12928a0">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_themeable.html#af5ceb1e528ea1389ccac1430fc778128">Layers::Themeable</a></li>
 </ul>
 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
-<li>capitalized_name()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute_type.html#a3cc423b5c9a6dad8575a19e3877f4c71">Layers::AttributeType</a></li>
+<li>capitalized_name()&#160;:&#160;<a class="el" href="class_layers_1_1_entity.html#a498d52396e7ccfa12d1685b55c34fa28">Layers::Entity</a></li>
 <li>clear()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#aa5be99a9b54e7d9c03f0f19affd22b6b">Layers::Theme</a></li>
-<li>clear_data_if_owner()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#ad67b372e97392b344f03b3d39a73897a">Layers::Attribute</a></li>
 <li>contains_attributes_for_tag()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#ad8a1de957d507456ab57c4831b708b2d">Layers::Theme</a></li>
 <li>contains_state()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#ad4c9c0ed45441034bc213301d7b4dc09">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#a3b52418760249e57078fd8e9e4fd9011">Layers::Data</a></li>
 <li>copy()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a8df3262a2acb70a2d8ff733cf42f7516">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#acf2cab6f431f7a42dfd492675e8ef368">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_data.html#ad11d059bb2964cb47eb340f044815f21">Layers::Data</a>, <a class="el" href="class_layers_1_1_theme.html#adfc8d73bd896904fc54b595ffaff9944">Layers::Theme</a></li>
@@ -107,29 +107,26 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
-<li>disabled()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute_type.html#aa42b1dd86ed46b66aaa669672d577e49">Layers::AttributeType</a></li>
+<li>disabled()&#160;:&#160;<a class="el" href="class_layers_1_1_entity.html#ae53935361b38dba1290c4e51efca8113">Layers::Entity</a></li>
 </ul>
 
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
 <li>editable()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#a08e1177704ac8f2812caf4842460a74f">Layers::Theme</a></li>
+<li>entangle_with()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#ae0a1b713db41429200ed97c399a234ba">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#a97df7b2d9ceb388bde86bb673f872f91">Layers::AttributeGroup</a></li>
 <li>establish_data_connection()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a4c75470b727527f86a78038fa2c165f5">Layers::Attribute</a></li>
 <li>eventFilter()&#160;:&#160;<a class="el" href="class_layers_1_1_widget.html#a9eaeeb3eaa6ac82b8d1e76e469e5d093">Layers::Widget</a></li>
-</ul>
-
-
-<h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
-<li>get_data_from()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a71009df30061fc4a7a68bd22be06d3d1">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#a7cb90853ab70573a0618f7966e530456">Layers::AttributeGroup</a></li>
 </ul>
 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>icon()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable.html#a44348cb0e739908c52bf6d640215c1f4">Layers::Themeable</a></li>
 <li>icon_file()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#ac6af7f4b42a30d09a48f1d11c36d49dd">Layers::Application</a></li>
-<li>init_attributes()&#160;:&#160;<a class="el" href="class_layers_1_1_s_v_g.html#a51772ec69b6e9ba794914b69e9010d7e">Layers::SVG</a>, <a class="el" href="class_layers_1_1_widget.html#acf1e13fb2beddd23f6c87e2486df259d">Layers::Widget</a></li>
-<li>init_child_themeable_reference_list()&#160;:&#160;<a class="el" href="class_layers_1_1_a_w_group.html#ad22e6c2e3a6407874f8146739321b130">Layers::AWGroup</a>, <a class="el" href="class_layers_1_1_button.html#abd3b17b04c959e2d9608e48f5062943b">Layers::Button</a>, <a class="el" href="class_layers_1_1_color_a_w.html#a15bbd953b14bf5aeda27c779d5658353">Layers::ColorAW</a>, <a class="el" href="class_layers_1_1_combobox.html#a806b2c8aabf9612c20cb2508d8cef802">Layers::Combobox</a>, <a class="el" href="class_layers_1_1_combobox_item.html#a1fa64015e3814edc5eb8a6805e3f16b2">Layers::ComboboxItem</a>, <a class="el" href="class_layers_1_1_corner_radii_a_w.html#ad25ac99608075877c7e64d0d6931de0f">Layers::CornerRadiiAW</a>, <a class="el" href="class_layers_1_1_create_new_theme_dialog.html#ae72e91068da1cab6cfcc35a7fb743e27">Layers::CreateNewThemeDialog</a>, <a class="el" href="class_layers_1_1_customize_menu.html#ac1e79c91ace636e046f82a53dcbdde01">Layers::CustomizeMenu</a>, <a class="el" href="class_layers_1_1_customize_panel.html#ac55d3c41ab08b45a4c350dbdc4e4234f">Layers::CustomizePanel</a>, <a class="el" href="class_layers_1_1_fill_a_w.html#a5e7d1cf0ade89c79683943217d9ae42d">Layers::FillAW</a>, <a class="el" href="class_layers_1_1_fill_control.html#aa48ecaf3585180865ddf46584f58516f">Layers::FillControl</a>, <a class="el" href="class_layers_1_1_gradient_a_w.html#a9bd39e79051cbc99026e11d2d8edd961">Layers::GradientAW</a>, <a class="el" href="class_layers_1_1_gradient_selection_dialog.html#a3ac018e15cc8827dd22f1bea902d01ca">Layers::GradientSelectionDialog</a>, <a class="el" href="class_layers_1_1_menu_label_layer.html#ad363b095bc0fefd0b3a0856d807d99c1">Layers::MenuLabelLayer</a>, <a class="el" href="class_layers_1_1_mini_slider.html#a4911a65406c7023aa01a0a7dba376a8d">Layers::MiniSlider</a>, <a class="el" href="class_layers_1_1_number_a_w.html#a85701a2652511ceb7a7ed2283c8f01c6">Layers::NumberAW</a>, <a class="el" href="class_layers_1_1_scroll_area.html#a33f193a637988fc4acb5c06d2a772263">Layers::ScrollArea</a>, <a class="el" href="class_layers_1_1_settings_menu.html#a53a028c52207f43352ea276850d647ca">Layers::SettingsMenu</a>, <a class="el" href="class_layers_1_1_settings_tab.html#ac99e19c5454756d4d84efc161942b26d">Layers::SettingsTab</a>, <a class="el" href="class_layers_1_1_slider.html#ac6205a8b62ec2b3d08fe79d5d92e3b4a">Layers::Slider</a>, <a class="el" href="class_layers_1_1_state_a_w.html#a81a6af2ba5e3e70990a19f78827ad35f">Layers::StateAW</a>, <a class="el" href="class_layers_1_1_themeable.html#a85caf98f853b46cb62b72a29f32c3227">Layers::Themeable</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#a3394cf259e836fa1d8e980240857d20e">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_titlebar.html#a4332cc5ba1ae6cabe97f154c485444c2">Layers::Titlebar</a>, <a class="el" href="class_layers_1_1_toggle_switch.html#a9e84984f4c1cc739653aac02e9e6eb24">Layers::ToggleSwitch</a>, <a class="el" href="class_layers_1_1_update_dialog.html#a3367d1e60b8983cb069da4890ea27cba">Layers::UpdateDialog</a>, <a class="el" href="class_layers_1_1_window.html#abcae06c266c64194125b7670bad152e1">Layers::Window</a></li>
-<li>init_state_variant_map()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#ab362514cf7c06fcb4b3c9b360d11d0bd">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#aba004dde3e58fea08d7554410a6500fe">Layers::Data</a></li>
-<li>is_stateful()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a45c9a0eda0fcc1c2056389ba8e2cb4e9">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#aafc07d62c60beac2c5d95ce41a677678">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_attribute_type.html#a5b6670e412de3ad4845a01027cb63fdc">Layers::AttributeType</a>, <a class="el" href="class_layers_1_1_data.html#a8e4dccaaa27526db929256dee8768f68">Layers::Data</a>, <a class="el" href="class_layers_1_1_themeable.html#a693634b06c973c840a8b185b1bdc0224">Layers::Themeable</a></li>
+<li>init_attributes()&#160;:&#160;<a class="el" href="class_layers_1_1_s_v_g.html#a51772ec69b6e9ba794914b69e9010d7e">Layers::SVG</a>, <a class="el" href="class_layers_1_1_themeable_box.html#a64d661cf44f2daeea5a4728253aadb0b">Layers::ThemeableBox</a>, <a class="el" href="class_layers_1_1_widget.html#acf1e13fb2beddd23f6c87e2486df259d">Layers::Widget</a></li>
+<li>init_child_themeable_reference_list()&#160;:&#160;<a class="el" href="class_layers_1_1_a_w_group.html#ad22e6c2e3a6407874f8146739321b130">Layers::AWGroup</a>, <a class="el" href="class_layers_1_1_button.html#abd3b17b04c959e2d9608e48f5062943b">Layers::Button</a>, <a class="el" href="class_layers_1_1_color_a_w.html#a15bbd953b14bf5aeda27c779d5658353">Layers::ColorAW</a>, <a class="el" href="class_layers_1_1_color_dialog.html#afe56984b5910728a87438f97b506b00d">Layers::ColorDialog</a>, <a class="el" href="class_layers_1_1_combobox.html#a806b2c8aabf9612c20cb2508d8cef802">Layers::Combobox</a>, <a class="el" href="class_layers_1_1_combobox_item.html#a1fa64015e3814edc5eb8a6805e3f16b2">Layers::ComboboxItem</a>, <a class="el" href="class_layers_1_1_corner_radii_a_w.html#ad25ac99608075877c7e64d0d6931de0f">Layers::CornerRadiiAW</a>, <a class="el" href="class_layers_1_1_create_new_theme_dialog.html#ae72e91068da1cab6cfcc35a7fb743e27">Layers::CreateNewThemeDialog</a>, <a class="el" href="class_layers_1_1_customize_menu.html#ac1e79c91ace636e046f82a53dcbdde01">Layers::CustomizeMenu</a>, <a class="el" href="class_layers_1_1_customize_panel.html#ac55d3c41ab08b45a4c350dbdc4e4234f">Layers::CustomizePanel</a>, <a class="el" href="class_layers_1_1_dialog.html#a2567397e2e5f8cd8c2a3f30e0db8e237">Layers::Dialog</a>, <a class="el" href="class_layers_1_1_fill_a_w.html#a5e7d1cf0ade89c79683943217d9ae42d">Layers::FillAW</a>, <a class="el" href="class_layers_1_1_fill_control.html#aa48ecaf3585180865ddf46584f58516f">Layers::FillControl</a>, <a class="el" href="class_layers_1_1_gradient_a_w.html#a9bd39e79051cbc99026e11d2d8edd961">Layers::GradientAW</a>, <a class="el" href="class_layers_1_1_gradient_selection_dialog.html#a3ac018e15cc8827dd22f1bea902d01ca">Layers::GradientSelectionDialog</a>, <a class="el" href="class_layers_1_1_menu_label_layer.html#ad363b095bc0fefd0b3a0856d807d99c1">Layers::MenuLabelLayer</a>, <a class="el" href="class_layers_1_1_mini_slider.html#a4911a65406c7023aa01a0a7dba376a8d">Layers::MiniSlider</a>, <a class="el" href="class_layers_1_1_number_a_w.html#a85701a2652511ceb7a7ed2283c8f01c6">Layers::NumberAW</a>, <a class="el" href="class_layers_1_1_scroll_area.html#a33f193a637988fc4acb5c06d2a772263">Layers::ScrollArea</a>, <a class="el" href="class_layers_1_1_settings_menu.html#a53a028c52207f43352ea276850d647ca">Layers::SettingsMenu</a>, <a class="el" href="class_layers_1_1_settings_tab.html#ac99e19c5454756d4d84efc161942b26d">Layers::SettingsTab</a>, <a class="el" href="class_layers_1_1_slider.html#ac6205a8b62ec2b3d08fe79d5d92e3b4a">Layers::Slider</a>, <a class="el" href="class_layers_1_1_state_a_w.html#a81a6af2ba5e3e70990a19f78827ad35f">Layers::StateAW</a>, <a class="el" href="class_layers_1_1_themeable.html#a85caf98f853b46cb62b72a29f32c3227">Layers::Themeable</a>, <a class="el" href="class_layers_1_1_themes_settings_panel.html#a3394cf259e836fa1d8e980240857d20e">Layers::ThemesSettingsPanel</a>, <a class="el" href="class_layers_1_1_titlebar.html#a4332cc5ba1ae6cabe97f154c485444c2">Layers::Titlebar</a>, <a class="el" href="class_layers_1_1_toggle_switch.html#a9e84984f4c1cc739653aac02e9e6eb24">Layers::ToggleSwitch</a>, <a class="el" href="class_layers_1_1_update_dialog.html#a3367d1e60b8983cb069da4890ea27cba">Layers::UpdateDialog</a>, <a class="el" href="class_layers_1_1_window.html#abcae06c266c64194125b7670bad152e1">Layers::Window</a></li>
+<li>init_variant_map()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a6c023c60bdf21fe79e182b3a5cf0e5ea">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#ae69ddbc3c53bb7990eef2e8c7b453579">Layers::Data</a></li>
+<li>is_entangled()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a5dc0b12604970a3a0b2219153d72e48e">Layers::Attribute</a></li>
+<li>is_stateful()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a45c9a0eda0fcc1c2056389ba8e2cb4e9">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#aafc07d62c60beac2c5d95ce41a677678">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_data.html#a8e4dccaaa27526db929256dee8768f68">Layers::Data</a>, <a class="el" href="class_layers_1_1_entity.html#aa2a54e23d6feb9c742aeb90b731a01d2">Layers::Entity</a>, <a class="el" href="class_layers_1_1_themeable.html#a693634b06c973c840a8b185b1bdc0224">Layers::Themeable</a></li>
 </ul>
 
 
@@ -139,17 +136,17 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
-<li>name()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">Layers::Application</a>, <a class="el" href="class_layers_1_1_attribute_type.html#aca369bb6f7315498d4bf25b9b5966bdb">Layers::AttributeType</a>, <a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">Layers::Theme</a>, <a class="el" href="class_layers_1_1_themeable.html#a69b5ef077cdbb52074fcc68db129c093">Layers::Themeable</a></li>
+<li>name()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#a1a05d51c92bf5c99d7f4dabb2159c82b">Layers::Application</a>, <a class="el" href="class_layers_1_1_entity.html#aa4e6bc00a55dfe37a37d3d26181aed2a">Layers::Entity</a>, <a class="el" href="class_layers_1_1_theme.html#a514aef4479c615a71aefc5d64c1f53dc">Layers::Theme</a>, <a class="el" href="class_layers_1_1_themeable.html#a69b5ef077cdbb52074fcc68db129c093">Layers::Themeable</a></li>
 </ul>
 
 
 <h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
-<li>operator[]()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#aafb5f7396ffb18db4e720818a9270f0f">Layers::Theme</a></li>
-<li>owns_data()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a43c93ed2a011b4007148c2c91f641a01">Layers::Attribute</a></li>
+<li>operator[]()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#afa7f750bd83c1e06df482d5abe4ed8c0">Layers::Theme</a></li>
 </ul>
 
 
 <h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>paint()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable_box.html#ac1109c9e9d2f0f51757c449e50650ad0">Layers::ThemeableBox</a></li>
 <li>paintEvent()&#160;:&#160;<a class="el" href="class_layers_1_1_widget.html#ad9da6e86a017fc03e607effec4a87f16">Layers::Widget</a></li>
 <li>proper_name()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable.html#aaf7bac3feceaf1fe625338dbff098189">Layers::Themeable</a></li>
 </ul>
@@ -165,16 +162,17 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>save_theme()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#a25c4b08add4fec47364a57944c07ad8b">Layers::Application</a></li>
-<li>set_disabled()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute_type.html#acbe8ab87d1e82fcdb4235467018ae2f2">Layers::AttributeType</a></li>
+<li>set_disabled()&#160;:&#160;<a class="el" href="class_layers_1_1_entity.html#a10d8e73702383e7bb438da35de965d94">Layers::Entity</a></li>
 <li>set_icon()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable.html#a647a8657ead007473eafaa4ccb6cd4af">Layers::Themeable</a></li>
-<li>set_margin()&#160;:&#160;<a class="el" href="class_layers_1_1_widget.html#a9dc660f84562bc902bf407e02a7f4dca">Layers::Widget</a></li>
+<li>set_margin()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable_box.html#a68c85ccad26b65174c24dc6438e2acdf">Layers::ThemeableBox</a></li>
 <li>set_name()&#160;:&#160;<a class="el" href="class_layers_1_1_theme.html#a1068abe2505c991e7d0e7ca8310d7860">Layers::Theme</a>, <a class="el" href="class_layers_1_1_themeable.html#a78f9b10993fcef1557aeba1bc75e5c90">Layers::Themeable</a></li>
 <li>set_proper_name()&#160;:&#160;<a class="el" href="class_layers_1_1_themeable.html#a00802c07a93a1eefdbcf74a5c04b863b">Layers::Themeable</a></li>
-<li>set_state()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a4e5d144820ee5791880044152f2281c0">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#a087944ae1222b63060b95484529319f2">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_attribute_type.html#aa90b9f76e825c34de17049c4bb0253b4">Layers::AttributeType</a>, <a class="el" href="class_layers_1_1_s_v_g.html#a977c0aba8c4c7e82bb83299acaf34193">Layers::SVG</a>, <a class="el" href="class_layers_1_1_themeable.html#a93ad187cb208ad9ba7b196c05d8f8d29">Layers::Themeable</a></li>
+<li>set_state()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a4e5d144820ee5791880044152f2281c0">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#a087944ae1222b63060b95484529319f2">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_entity.html#aa4cd1fbf2f842059f141b29db2f3a3b5">Layers::Entity</a>, <a class="el" href="class_layers_1_1_s_v_g.html#a977c0aba8c4c7e82bb83299acaf34193">Layers::SVG</a>, <a class="el" href="class_layers_1_1_themeable.html#a93ad187cb208ad9ba7b196c05d8f8d29">Layers::Themeable</a></li>
 <li>set_value()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a4df6d32c26b33b03bd39b39e5a535880">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#a09151718594ab891937cdbb722c8f259">Layers::Data</a></li>
 <li>settings()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#a15b4a434172e92eaed272b7c933e359d">Layers::Application</a></li>
+<li>setup_widget_update_connection()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#adde1e349908d4c4bd36c105eb9b645ad">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_attribute_group.html#af3482e2dfbbd16e9ffc621012b189632">Layers::AttributeGroup</a>, <a class="el" href="class_layers_1_1_entity.html#afae3ee21de6fadf79f727e127eee2111">Layers::Entity</a></li>
 <li>state()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a69d6089128f307d526e5c3395a7518c8">Layers::Attribute</a></li>
-<li>states()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#afa8c1c028fce08ddc42adc39ae30a76f">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#a03260a4499ce1cfb8e8ef05d1f668aa2">Layers::Data</a>, <a class="el" href="class_layers_1_1_themeable.html#a080406efdd426b24c701a0dbcb419a70">Layers::Themeable</a></li>
+<li>states()&#160;:&#160;<a class="el" href="class_layers_1_1_attribute.html#a88d7f6667ed88b5289f6492b6f889d54">Layers::Attribute</a>, <a class="el" href="class_layers_1_1_data.html#a5934ac4893f7f4f71acf5f08bb3d9f1e">Layers::Data</a>, <a class="el" href="class_layers_1_1_themeable.html#a080406efdd426b24c701a0dbcb419a70">Layers::Themeable</a></li>
 <li>store_child_themeable_pointer()&#160;:&#160;<a class="el" href="class_layers_1_1_application.html#a25c2e50517b55d988866b86653e6387f">Layers::Application</a>, <a class="el" href="class_layers_1_1_themeable.html#ad89c09e860d259ab5752df92a989cd02">Layers::Themeable</a></li>
 <li>SVG()&#160;:&#160;<a class="el" href="class_layers_1_1_s_v_g.html#a13a38e7a797ef07ed2a4d54032a14f00">Layers::SVG</a></li>
 </ul>

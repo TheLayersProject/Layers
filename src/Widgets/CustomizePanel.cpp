@@ -183,7 +183,7 @@ void CustomizePanel::init_attribute_widgets()
 		add_attribute_widget(m_state_aw);
 	}
 
-	for (AttributeType* attr_layout_item : m_themeable->attribute_layout())
+	for (Entity* attr_layout_item : m_themeable->attribute_layout())
 	{
 		if (Attribute* attribute = dynamic_cast<Attribute*>(attr_layout_item))
 		{

@@ -24,10 +24,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="layers_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0b</span>
+   <div id="projectname">Layers<span id="projectnumber">&#160;3.1.0a</span>
    </div>
-   <div id="projectbrief">Layers provides a feature-rich template window to build your application from.</div>
+   <div id="projectbrief">Application template library with a focus on themes and customization</div>
   </td>
  </tr>
  </tbody>
@@ -105,7 +106,7 @@ $(document).ready(function(){initNavTree('_line_editor_8h_source.html',''); init
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_class" href="class_layers_1_1_line_editor.html">LineEditor</a>(QWidget* parent = <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> apply_theme_attributes(QMap&lt;QString, AttributeType*&gt;&amp; theme_attrs) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> apply_theme_attributes(QMap&lt;QString, Entity*&gt;&amp; theme_attrs) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">void</span> reconnect_text_attribute();</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
@@ -147,9 +148,9 @@ $(document).ready(function(){initNavTree('_line_editor_8h_source.html',''); init
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif </span><span class="comment">// LINEEDITOR_H</span></div>
-<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:17</div></div>
+<div class="ttc" id="aclass_layers_1_1_attribute_html"><div class="ttname"><a href="class_layers_1_1_attribute.html">Layers::Attribute</a></div><div class="ttdef"><b>Definition:</b> Attribute.h:28</div></div>
 <div class="ttc" id="aclass_layers_1_1_line_editor_html"><div class="ttname"><a href="class_layers_1_1_line_editor.html">Layers::LineEditor</a></div><div class="ttdef"><b>Definition:</b> LineEditor.h:11</div></div>
-<div class="ttc" id="aclass_layers_1_1_widget_html"><div class="ttname"><a href="class_layers_1_1_widget.html">Layers::Widget</a></div><div class="ttdef"><b>Definition:</b> Widget.h:20</div></div>
+<div class="ttc" id="aclass_layers_1_1_widget_html"><div class="ttname"><a href="class_layers_1_1_widget.html">Layers::Widget</a></div><div class="ttdef"><b>Definition:</b> Widget.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

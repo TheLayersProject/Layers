@@ -18,7 +18,7 @@ namespace Layers
 		// TODO: Make override other overloaded versions from the parent class
 		QMenu* addMenu(const QString& title);
 
-		virtual void apply_theme_attributes(QMap<QString, AttributeType*>& theme_attrs) override;
+		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
 
 		//void issue_update();
 
