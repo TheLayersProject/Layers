@@ -33,7 +33,7 @@ void Widget::init_attributes()
 {
     ThemeableBox::init_attributes();
 
-    for (Entity* entity : m_attributes)
+    for (Entity* entity : m_entities)
         entity->setup_widget_update_connection(this);
 }
 

@@ -12,7 +12,7 @@ MenuLabelLayer::MenuLabelLayer(Menu* menu, QWidget* parent) :
 	Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	set_name("menu_label_layer");
 	set_icon(new Graphic(":/svgs/mll_icon.svg", QSize(20, 6)));
@@ -48,11 +48,11 @@ void MenuLabelLayer::init_attributes()
 	m_stretch_widget->a_fill.set_disabled();
 }
 
-void MenuLabelLayer::init_child_themeable_reference_list()
+void MenuLabelLayer::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_back_button);
-	store_child_themeable_pointer(m_icon_button);
-	store_child_themeable_pointer(m_text_label);
+	add_child_themeable_pointer(m_back_button);
+	add_child_themeable_pointer(m_icon_button);
+	add_child_themeable_pointer(m_text_label);
 }
 
 void MenuLabelLayer::shrink()

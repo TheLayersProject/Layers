@@ -8,7 +8,7 @@ using Layers::ThemeableBox;
 
 void ThemeableBox::init_attributes()
 {
-    m_attributes.insert({
+    m_entities.insert({
         { "border", &border },
         { "corner_color", &a_corner_color },
         { "corner_radii", &corner_radii },
@@ -17,28 +17,6 @@ void ThemeableBox::init_attributes()
         { "margins", &margins },
         { "outline_color", &a_outline_color },
         });
-
-    m_attribute_layout.append(&a_fill);
-    m_attribute_layout.append(&a_hover_fill);
-    m_attribute_layout.append(&border);
-    m_attribute_layout.append(&corner_radii);
-    m_attribute_layout.append(&margins);
-    m_attribute_layout.append(&a_corner_color);
-    m_attribute_layout.append(&a_outline_color);
-
-    //for (Entity* entity : m_attributes)
-    //    entity->setup_widget_update_connection(this);
-}
-
-void ThemeableBox::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
-{
-    border.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["border"]));
-    a_corner_color.copy(*dynamic_cast<Attribute*>(theme_attrs["corner_color"]));
-    corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
-    a_fill.copy(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
-    a_hover_fill.copy(*dynamic_cast<Attribute*>(theme_attrs["hover_fill"]));
-    margins.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["margins"]));
-    a_outline_color.copy(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
 }
 
 void ThemeableBox::set_margin(double margin)

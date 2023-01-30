@@ -15,8 +15,6 @@ namespace Layers
 	public:
 		TabBar(QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
-
 		void SetCurrentTab(const QString& text);
 
 		bool ContainsTab(const QString& text);

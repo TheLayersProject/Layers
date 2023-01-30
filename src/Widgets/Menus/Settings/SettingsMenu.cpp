@@ -10,7 +10,7 @@ using Layers::ThemesSettingsPanel;
 SettingsMenu::SettingsMenu(QWidget* parent) :
 	Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	setMouseTracking(true);
 
@@ -46,7 +46,7 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 {
 	SettingsTab* settings_tab = new SettingsTab(icon, label_text);
 
-	m_sidebar->store_child_themeable_pointer(settings_tab);
+	m_sidebar->add_child_themeable_pointer(settings_tab);
 
 	for (SettingsTab* st : m_settings_tabs)
 	{
@@ -67,11 +67,11 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 	m_sidebar_layout->insertWidget(m_sidebar_layout->count() - 1, settings_tab);
 }
 
-void SettingsMenu::init_child_themeable_reference_list()
+void SettingsMenu::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_sidebar);
-	store_child_themeable_pointer(m_app_preferences_settings_panel);
-	store_child_themeable_pointer(m_themes_settings_panel);
+	add_child_themeable_pointer(m_sidebar);
+	add_child_themeable_pointer(m_app_preferences_settings_panel);
+	add_child_themeable_pointer(m_themes_settings_panel);
 }
 
 int SettingsMenu::largest_tab_index() const

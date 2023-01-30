@@ -47,10 +47,10 @@ void Slider::init_attributes()
 	m_handle->corner_radii.bottom_right.set_value(3.0);
 }
 
-void Slider::init_child_themeable_reference_list()
+void Slider::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_bar);
-	store_child_themeable_pointer(m_handle);
+	add_child_themeable_pointer(m_bar);
+	add_child_themeable_pointer(m_handle);
 }
 
 void Slider::set_value(double value)
@@ -62,15 +62,11 @@ void Slider::set_value(double value)
 
 void Slider::update_handle_pos()
 {
-	//qDebug() << "Updating Handle Pos!";
-
 	if (m_is_ratio_slider)
 	{
 		float range = float(width() - m_handle->width());
 
 		float ratio = 1 / range;
-
-		//qDebug() << "Slider Value as double: " + QString::number(a_value.as<double>());
 
 		m_handle->move(a_value.as<double>() / ratio, m_handle->y());
 	}
@@ -148,23 +144,13 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 			int new_value = m_value_on_click + int(delta.x() / drag_increment);
 
 			if (new_value < 0)
-			{
-				if (a_value.as<double>() != 0)
-				{
-					set_value(0);
-				}
-			}
+				set_value(0);
+
 			else if (new_value > m_limit)
-			{
-				if (a_value.as<double>() != m_limit)
-				{
-					set_value(m_limit);
-				}
-			}
+				set_value(m_limit);
+
 			else
-			{
 				set_value(new_value);
-			}
 		}
 	}
 
@@ -174,7 +160,7 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 void Slider::init()
 {
 	init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	installEventFilter(this);
 	setFixedSize(244, 45);

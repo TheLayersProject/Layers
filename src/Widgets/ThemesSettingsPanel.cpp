@@ -10,7 +10,7 @@ using Layers::ThemesSettingsPanel;
 
 ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
@@ -47,10 +47,10 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	m_theme_info_button->set_proper_name("Theme Info Button");
 	m_theme_info_button->disable_graphic_hover_color();
 
-	m_separator_1->replace_all_attributes_with(m_control_separator);
+	m_separator_1->entangle_with(m_control_separator);
 	m_separator_1->setFixedSize(1, 30);
 
-	m_separator_2->replace_all_attributes_with(m_control_separator);
+	m_separator_2->entangle_with(m_control_separator);
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
@@ -80,15 +80,15 @@ void ThemesSettingsPanel::init_attributes()
 	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }
 
-void ThemesSettingsPanel::init_child_themeable_reference_list()
+void ThemesSettingsPanel::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_theme_label);
-	store_child_themeable_pointer(m_theme_combobox);
-	store_child_themeable_pointer(m_new_theme_button);
-	store_child_themeable_pointer(m_customize_theme_button);
-	store_child_themeable_pointer(m_delete_theme_button);
-	store_child_themeable_pointer(m_theme_info_button);
-	store_child_themeable_pointer(m_control_separator);
+	add_child_themeable_pointer(m_theme_label);
+	add_child_themeable_pointer(m_theme_combobox);
+	add_child_themeable_pointer(m_new_theme_button);
+	add_child_themeable_pointer(m_customize_theme_button);
+	add_child_themeable_pointer(m_delete_theme_button);
+	add_child_themeable_pointer(m_theme_info_button);
+	add_child_themeable_pointer(m_control_separator);
 }
 
 void ThemesSettingsPanel::apply_theme(Theme& theme)

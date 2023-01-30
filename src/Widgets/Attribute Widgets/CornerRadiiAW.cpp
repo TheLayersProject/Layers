@@ -10,39 +10,29 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_attribute_widget{ new AttributeWidget },
 	AWGroup(linked_corner_radii, parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	add_attribute_widget(m_attribute_widget);
 
 	m_attribute_widget->a_fill.set_disabled();
 
-	m_tl_line_editor->set_default_value("0");
-	m_tl_line_editor->set_font_size(13);
-	m_tl_line_editor->set_name("line_editor");
+	for (LineEditor* line_editor :
+		QList<LineEditor*>({
+			m_tl_line_editor, m_tr_line_editor,
+			m_bl_line_editor, m_br_line_editor
+			}))
+	{
+		line_editor->set_default_value("0");
+		line_editor->set_font_size(13);
+		line_editor->set_name("line_editor");
+		line_editor->set_text("0");
+		line_editor->set_validator(new QIntValidator(0, 30));
+	}
+
 	m_tl_line_editor->set_proper_name("TL Line Editor");
-	m_tl_line_editor->set_text("0");
-	m_tl_line_editor->set_validator(new QIntValidator(0, 30));
-
-	m_tr_line_editor->set_default_value("0");
-	m_tr_line_editor->set_font_size(13);
-	m_tr_line_editor->set_name("line_editor");
 	m_tr_line_editor->set_proper_name("TR Line Editor");
-	m_tr_line_editor->set_text("0");
-	m_tr_line_editor->set_validator(new QIntValidator(0, 30));
-
-	m_bl_line_editor->set_default_value("0");
-	m_bl_line_editor->set_font_size(13);
-	m_bl_line_editor->set_name("line_editor");
 	m_bl_line_editor->set_proper_name("BL Line Editor");
-	m_bl_line_editor->set_text("0");
-	m_bl_line_editor->set_validator(new QIntValidator(0, 30));
-
-	m_br_line_editor->set_default_value("0");
-	m_br_line_editor->set_font_size(13);
-	m_br_line_editor->set_name("line_editor");
 	m_br_line_editor->set_proper_name("BR Line Editor");
-	m_br_line_editor->set_text("0");
-	m_br_line_editor->set_validator(new QIntValidator(0, 30));
 
 	m_tl_slider->set_name("mini_slider");
 	m_tr_slider->set_name("mini_slider");
@@ -57,18 +47,13 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_example_widget->set_name("example_widget");
 	m_example_widget->set_proper_name("Example Widget");
 
-	// Replace sliders' a_value attributes with linked_corner_radii attributes
+	// Entangle sliders' value attributes with linked_corner_radii attributes
 	m_tl_slider->a_value.entangle_with(linked_corner_radii->top_left);
 	m_tr_slider->a_value.entangle_with(linked_corner_radii->top_right);
 	m_bl_slider->a_value.entangle_with(linked_corner_radii->bottom_left);
 	m_br_slider->a_value.entangle_with(linked_corner_radii->bottom_right);
 
-	m_tl_slider->update_theme_dependencies();
-	m_tr_slider->update_theme_dependencies();
-	m_bl_slider->update_theme_dependencies();
-	m_br_slider->update_theme_dependencies();
-
-	// Replace line editors' a_text attributes with sliders' a_value attributes
+	// Entangle line editors' text attributes with sliders' value attributes
 	m_tl_line_editor->a_text.entangle_with(m_tl_slider->a_value);
 	m_tr_line_editor->a_text.entangle_with(m_tr_slider->a_value);
 	m_bl_line_editor->a_text.entangle_with(m_bl_slider->a_value);
@@ -84,21 +69,10 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_example_widget->corner_radii.top_right.entangle_with(m_tr_slider->a_value);
 	m_example_widget->corner_radii.bottom_left.entangle_with(m_bl_slider->a_value);
 	m_example_widget->corner_radii.bottom_right.entangle_with(m_br_slider->a_value);
-	m_example_widget->attributes().remove("corner_radius_tl");
-	m_example_widget->attributes().remove("corner_radius_tr");
-	m_example_widget->attributes().remove("corner_radius_bl");
-	m_example_widget->attributes().remove("corner_radius_br");
+	m_example_widget->entities().remove("corner_radii");
 
 	setup_layout();
 }
-
-MiniSlider* CornerRadiiAW::tl_slider() const { return m_tl_slider; }
-
-MiniSlider* CornerRadiiAW::tr_slider() const { return m_tr_slider; }
-
-MiniSlider* CornerRadiiAW::bl_slider() const { return m_bl_slider; }
-
-MiniSlider* CornerRadiiAW::br_slider() const { return m_br_slider; }
 
 void CornerRadiiAW::set_current_editting_state(const QString& state)
 {
@@ -118,18 +92,18 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 	m_br_line_editor->set_current_editting_state(state);
 }
 
-void CornerRadiiAW::init_child_themeable_reference_list()
+void CornerRadiiAW::init_child_themeable_list()
 {
-	//store_child_themeable_pointer(m_attribute_widget);
-	store_child_themeable_pointer(m_tl_line_editor);
-	store_child_themeable_pointer(m_tr_line_editor);
-	store_child_themeable_pointer(m_bl_line_editor);
-	store_child_themeable_pointer(m_br_line_editor);
-	store_child_themeable_pointer(m_tl_slider);
-	store_child_themeable_pointer(m_tr_slider);
-	store_child_themeable_pointer(m_bl_slider);
-	store_child_themeable_pointer(m_br_slider);
-	store_child_themeable_pointer(m_example_widget);
+	//add_child_themeable_pointer(m_attribute_widget);
+	add_child_themeable_pointer(m_tl_line_editor);
+	add_child_themeable_pointer(m_tr_line_editor);
+	add_child_themeable_pointer(m_bl_line_editor);
+	add_child_themeable_pointer(m_br_line_editor);
+	add_child_themeable_pointer(m_tl_slider);
+	add_child_themeable_pointer(m_tr_slider);
+	add_child_themeable_pointer(m_bl_slider);
+	add_child_themeable_pointer(m_br_slider);
+	add_child_themeable_pointer(m_example_widget);
 }
 
 void CornerRadiiAW::setup_layout()

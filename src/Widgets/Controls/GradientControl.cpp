@@ -20,7 +20,7 @@ GradientControl::GradientControl(QWidget* parent) : Widget(parent)
 void GradientControl::init_attributes()
 {
 	// Remove control attribute
-	m_attributes.remove("fill");
+	m_entities.remove("fill");
 
 	border.fill.set_value(QColor("#D6D6D6"));
 	border.thickness.set_value(2.0);
@@ -34,7 +34,7 @@ void GradientControl::init_attributes()
 	margins.bottom.set_value(10.0);
 	a_outline_color.set_disabled(false);
 
-    a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
+    a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 }
 
 void GradientControl::set_current_editting_state(const QString& state)
@@ -55,7 +55,7 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			gsd->assign_tag_prefixes();
 
-			gsd->replace_all_attributes_with(
+			gsd->entangle_with(
 				layersApp->main_window()->control_gradient_selection_dialog());
 			
 
@@ -63,10 +63,13 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			if (gsd->exec())
 			{
-				if (a_fill.is_stateful())
-					a_fill.set_value(a_fill.state(), QVariant::fromValue(gsd->gradient_stops()));
-				else
-					a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
+				// TODO: Remove
+				//if (a_fill.is_stateful())
+				//	a_fill.set_value(a_fill.state(), QVariant::fromValue(gsd->gradient_stops()));
+				//else
+				//	a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
+
+				a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
 
 				emit gradient_changed();
 			}

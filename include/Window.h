@@ -63,7 +63,7 @@ namespace Layers
 		void settings_clicked();
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
@@ -111,7 +111,7 @@ namespace Layers
 		//m_main_widget->apply_theme(*layersApp->current_theme());
 		m_main_widget->apply_theme(*m_current_theme);
 
-		store_child_themeable_pointer(m_main_widget);
+		add_child_themeable_pointer(m_main_widget);
 
 		m_app_menu_layout->addWidget(m_main_widget);
 

@@ -41,7 +41,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_control_customize_panel = new CustomizePanel(ccp_widget);
 	m_control_customize_panel->set_proper_name("Customize Panels");
 
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	installEventFilter(this);
 	setMouseTracking(true);
@@ -58,8 +58,6 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 			m_collapse_menu->move(move_point);
 			m_collapse_menu->show();
-			m_collapse_menu->reapply_theme();
-			//m_collapse_menu->repaint();
 			m_collapse_menu->setFocus();
 		}
 		else m_collapse_menu->hide();
@@ -166,26 +164,26 @@ void CustomizeMenu::init_preview_window()
 	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
 }
 
-void CustomizeMenu::init_child_themeable_reference_list()
+void CustomizeMenu::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_preview_scroll_area);
-	store_child_themeable_pointer(m_sidebar);
-	store_child_themeable_pointer(m_topbar);
-	m_topbar->store_child_themeable_pointer(m_apply_button);
-	m_topbar->store_child_themeable_pointer(m_collapse_menu_button);
-	m_topbar->store_child_themeable_pointer(m_collapse_menu);
-	m_topbar->store_child_themeable_pointer(m_control_arrow_graphic);
-	m_topbar->store_child_themeable_pointer(m_control_text_button);
-	m_sidebar->store_child_themeable_pointer(m_control_customize_panel);
-	//m_sidebar_widget->store_child_themeable_pointer(m_sidebar->horizontal_scrollbar());
-	//m_sidebar_widget->store_child_themeable_pointer(m_sidebar->vertical_scrollbar());
-	m_control_customize_panel->store_child_themeable_pointer(m_control_aw_group);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_color_aw);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_corner_radii_aw);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_fill_aw);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_number_aw);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_state_aw);
-	m_control_customize_panel->store_child_themeable_pointer(m_control_widget_button);
+	add_child_themeable_pointer(m_preview_scroll_area);
+	add_child_themeable_pointer(m_sidebar);
+	add_child_themeable_pointer(m_topbar);
+	m_topbar->add_child_themeable_pointer(m_apply_button);
+	m_topbar->add_child_themeable_pointer(m_collapse_menu_button);
+	m_topbar->add_child_themeable_pointer(m_collapse_menu);
+	m_topbar->add_child_themeable_pointer(m_control_arrow_graphic);
+	m_topbar->add_child_themeable_pointer(m_control_text_button);
+	m_sidebar->add_child_themeable_pointer(m_control_customize_panel);
+	//m_sidebar_widget->add_child_themeable_pointer(m_sidebar->horizontal_scrollbar());
+	//m_sidebar_widget->add_child_themeable_pointer(m_sidebar->vertical_scrollbar());
+	m_control_customize_panel->add_child_themeable_pointer(m_control_aw_group);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_color_aw);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_corner_radii_aw);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_fill_aw);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_number_aw);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_state_aw);
+	m_control_customize_panel->add_child_themeable_pointer(m_control_widget_button);
 }
 
 void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
@@ -194,12 +192,8 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 	{
 		if (m_panel_stack.last() != customize_panel)
 		{
-			//m_panel_stack.last()->hide();
-
 			while (m_panel_stack.last() != customize_panel)
 			{
-				remove_child_themeable_reference(m_text_button_stack.last());
-
 				for (Button* text_button : m_topbar_text_buttons)
 					if (text_button == m_text_button_stack.last())
 						m_topbar_text_buttons.removeOne(text_button);
@@ -208,15 +202,12 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 					if (text_button == m_text_button_stack.last())
 						m_collapsed_text_buttons.removeOne(text_button);
 
-				remove_child_themeable_reference(m_panel_stack.last());
 				m_panel_stack.takeLast()->deleteLater();
 
 				m_text_button_stack.takeLast()->deleteLater();
+
 				if (!m_arrow_graphics.isEmpty())
-				{
-					remove_child_themeable_reference(m_arrow_graphics.last());
 					m_arrow_graphics.takeLast()->deleteLater();
-				}
 			}
 
 			customize_panel->show();
@@ -233,15 +224,9 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 	else
 	{
 		if (!m_panel_stack.isEmpty())
-		{
 			m_panel_stack.last()->hide();
 
-			//remove_child_themeable_reference(m_panel_stack.last());
-
-			//m_panel_stack.last()->deleteLater();
-		}
-
-		customize_panel->replace_all_attributes_with(m_control_customize_panel);
+		customize_panel->entangle_with(m_control_customize_panel);
 		customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
 		customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
 		customize_panel->replace_all_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
@@ -271,7 +256,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		m_text_button_stack.append(text_button);
 		m_topbar_text_buttons.append(text_button);
 
-		text_button->replace_all_attributes_with(m_control_text_button);
+		text_button->entangle_with(m_control_text_button);
 
 		// Setup Arrow Graphic
 
@@ -286,7 +271,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 
 			m_arrow_graphics.append(arrow_graphic);
 
-			arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
+			arrow_graphic->entangle_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, arrow_graphic);
 		}
@@ -439,15 +424,9 @@ void CustomizeMenu::collapse_text_buttons()
 		if (m_topbar_text_buttons.count() > 1)
 		{
 			if (m_collapsed_text_buttons.isEmpty())
-			{
 				m_collapse_menu_button->show();
-			}
 			else
-			{
-				remove_child_themeable_reference(m_arrow_graphics.first());
-				//m_control_arrow_graphic->unshare_all_attributes_with(m_arrow_graphics.first());
 				m_arrow_graphics.takeFirst()->deleteLater();
-			}
 
 			m_collapsed_text_buttons.append(m_topbar_text_buttons.takeFirst());
 
@@ -505,7 +484,7 @@ void CustomizeMenu::expand_text_buttons()
 
 			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
 
-			arrow_graphic->replace_all_attributes_with(m_control_arrow_graphic);
+			arrow_graphic->entangle_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(1, text_button);
 

@@ -7,7 +7,7 @@ using Layers::ScrollBar;
 
 ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	installEventFilter(this);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -60,8 +60,8 @@ bool ScrollArea::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-void ScrollArea::init_child_themeable_reference_list()
+void ScrollArea::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_horizontal_scrollbar);
-	store_child_themeable_pointer(m_vertical_scrollbar);
+	add_child_themeable_pointer(m_horizontal_scrollbar);
+	add_child_themeable_pointer(m_vertical_scrollbar);
 }

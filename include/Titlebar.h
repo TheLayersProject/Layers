@@ -31,7 +31,7 @@ namespace Layers
 		Button* exit_button() const;
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 		void resizeEvent(QResizeEvent* event);
 

@@ -18,7 +18,7 @@ namespace Layers
 		FillControl(QWidget* parent = nullptr);
 		~FillControl();
 
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 		void set_attribute(Attribute* attribute);
 

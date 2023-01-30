@@ -82,6 +82,8 @@ void Attribute::entangle_with(Attribute& attribute)
 void Attribute::init_variant_map(const VariantMap& variant_map)
 {
 	m_data->init_variant_map(variant_map);
+
+	m_state = variant_map.firstKey();
 }
 
 bool Attribute::is_entangled() const
@@ -99,14 +101,18 @@ void Attribute::set_state(const QString& state)
 	m_state = state;
 }
 
-void Attribute::set_value(QVariant qvariant, bool retain_type)
+void Attribute::set_value(QVariant qvariant, const QString& state)
 {
-	m_data->set_value(qvariant, retain_type);
-}
+	if (!is_stateful())
+		m_data->set_value(qvariant);
 
-void Attribute::set_value(const QString& state, QVariant qvariant)
-{
-	m_data->set_value(state, qvariant);
+	else
+	{
+		if (state == "")
+			m_data->set_value(qvariant, m_state);
+		else
+			m_data->set_value(qvariant, state);
+	}
 }
 
 void Attribute::setup_widget_update_connection(QWidget* widget)

@@ -89,7 +89,7 @@ namespace Layers
 			becomes entangled, this function gets called again so the caller
 			Attribute can get a pointer to the new Data.
 
-			@param attribute - Attribute to obtain the Data pointer of
+			@param attribute - Attribute to entangle with
 		*/
 		void entangle_with(Attribute& attribute);
 
@@ -130,28 +130,16 @@ namespace Layers
 		virtual void set_state(const QString& state) override;
 
 		/*!
-			Set the value of the Data.
+			Set the Data value.
 
-			This function simply calls Data::set_value() and passes qvariant
-			and retain_type. It only works with Attributes that are not
-			stateful.
+			The state parameter is only necessary for stateful Attributes.
+			If the default value (an empty string) is used, and the Attribute
+			is stateful, the value of the active state is set.
 
 			@param qvariant - QVariant containing the value being set
-			@param retain_type - Whether to protect the value type from change,
-			true by default
-		*/
-		void set_value(QVariant qvariant, bool retain_type = true);
-
-		/*!
-			Set the Data value associated with state.
-
-			This function simply calls Data::set_value() and passes state and qvariant. It only works
-			with Attributes that are stateful.
-
 			@param state - State associated with value
-			@param qvariant - QVariant containing the value being set
 		*/
-		void set_value(const QString& state, QVariant qvariant);
+		void set_value(QVariant qvariant, const QString& state = "");
 
 		virtual void setup_widget_update_connection(QWidget* widget) override;
 

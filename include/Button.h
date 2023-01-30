@@ -50,7 +50,7 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init();
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 		void setup_layout();
 

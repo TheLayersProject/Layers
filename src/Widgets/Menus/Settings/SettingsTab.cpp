@@ -11,7 +11,7 @@ using Layers::SettingsTab;
 SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent) :
 	m_tab_icon{ icon }, m_text_label { new Label(label_text) }, Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	connect(this, &SettingsTab::clicked, [this] { if (state() != "Selected") set_state("Selected"); });
@@ -95,10 +95,10 @@ void SettingsTab::init_attributes()
 	set_state("Unselected");
 }
 
-void SettingsTab::init_child_themeable_reference_list()
+void SettingsTab::init_child_themeable_list()
 {
-    store_child_themeable_pointer(m_tab_icon);
-    store_child_themeable_pointer(m_text_label);
+    add_child_themeable_pointer(m_tab_icon);
+    add_child_themeable_pointer(m_text_label);
 }
 
 int SettingsTab::recommended_minimum_width()

@@ -85,7 +85,7 @@ namespace Layers
 			@param retain_type - Whether to protect the value type from change,
 			true by default
 		*/
-		void set_value(QVariant qvariant, bool retain_type = true);
+		//void set_value(QVariant qvariant);
 
 		/*!
 			Set the value of the stored Variant associated with the supplied
@@ -96,7 +96,7 @@ namespace Layers
 			@param state - State associated with value
 			@param qvariant - QVariant containing the value being set
 		*/
-		void set_value(const QString& state, QVariant qvariant);
+		void set_value(QVariant qvariant, const QString& state = "");
 
 		/*!
 			Returns a QStringList of the available states.

@@ -42,7 +42,7 @@ namespace Layers
 
 		void init_attributes();
 
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();

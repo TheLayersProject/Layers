@@ -6,7 +6,7 @@ using Layers::AWGroup;
 AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
 	m_label{ new Label(attr_group->capitalized_name()) }, AttributeWidget(attr_group, parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	m_label->set_name("label");
@@ -110,11 +110,11 @@ void AWGroup::set_current_editting_state(const QString& state)
 		attribute_widget->set_current_editting_state(state);
 }
 
-void AWGroup::init_child_themeable_reference_list()
+void AWGroup::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_disabled_toggle);
-	store_child_themeable_pointer(m_label);
-	store_child_themeable_pointer(m_collapse_button);
+	add_child_themeable_pointer(m_disabled_toggle);
+	add_child_themeable_pointer(m_label);
+	add_child_themeable_pointer(m_collapse_button);
 }
 
 void AWGroup::setup_layout()

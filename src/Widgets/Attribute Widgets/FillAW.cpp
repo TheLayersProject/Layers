@@ -9,7 +9,7 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 	m_attribute_label{ new Label(attribute->capitalized_name()) },
 	AttributeWidget(attribute, parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -87,9 +87,9 @@ void FillAW::set_current_editting_state(const QString& state)
 	m_fill_control->set_current_editting_state(state);
 }
 
-void FillAW::init_child_themeable_reference_list()
+void FillAW::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_attribute_label);
-	store_child_themeable_pointer(m_disabled_toggle);
-	store_child_themeable_pointer(m_fill_control);
+	add_child_themeable_pointer(m_attribute_label);
+	add_child_themeable_pointer(m_disabled_toggle);
+	add_child_themeable_pointer(m_fill_control);
 }

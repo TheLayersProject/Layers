@@ -17,14 +17,6 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 	//	setFixedHeight(45);
 }
 
-void ScrollBar::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
-{
-	a_background_color.copy(*dynamic_cast<Attribute*>(theme_attrs["background_color"]));
-	corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["corner_radii"]));
-	handle_corner_radii.copy(*dynamic_cast<AttributeGroup*>(theme_attrs["handle_corner_radii"]));
-	a_handle_color.copy(*dynamic_cast<Attribute*>(theme_attrs["handle_color"]));
-}
-
 void ScrollBar::update_theme_dependencies()
 {
 	setStyleSheet(build_stylesheet());
@@ -131,17 +123,12 @@ void ScrollBar::init_attributes()
 	handle_corner_radii.bottom_left.set_value(5.0);
 	handle_corner_radii.bottom_right.set_value(5.0);
 
-	m_attributes.insert({
+	m_entities.insert({
 		{ "background_color", &a_background_color },
 		{ "corner_radii", &corner_radii },
 		{ "handle_corner_radii", &handle_corner_radii },
 		{ "handle_color", &a_handle_color }
 		});
-
-	m_attribute_layout.append(&a_background_color);
-	m_attribute_layout.append(&corner_radii);
-	m_attribute_layout.append(&a_handle_color);
-	m_attribute_layout.append(&handle_corner_radii);
 
 	connect(&a_background_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 	connect(&corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });

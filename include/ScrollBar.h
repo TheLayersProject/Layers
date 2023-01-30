@@ -15,8 +15,6 @@ namespace Layers
 	public:
 		ScrollBar(QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
-
 		void update_theme_dependencies();
 
 		Attribute a_background_color{ Attribute("background_color", QColor(Qt::gray)) };

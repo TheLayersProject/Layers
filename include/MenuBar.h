@@ -18,17 +18,10 @@ namespace Layers
 		// TODO: Make override other overloaded versions from the parent class
 		QMenu* addMenu(const QString& title);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
-
-		//void issue_update();
-
 		void update_theme_dependencies();
 
 		Attribute a_text_color{ Attribute("text_color", QColor(Qt::gray)) };
 		Attribute a_selected_text_color{ Attribute("selected_text_color", QColor(Qt::lightGray)) };
-
-		//Attribute a_text_color{ Attribute("Text Color", QColor(Qt::red)) };
-		//Attribute a_selected_text_color{ Attribute("Selected Text Color", QColor(Qt::blue)) };
 
 	protected:
 		QString build_stylesheet();

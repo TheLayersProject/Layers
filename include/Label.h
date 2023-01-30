@@ -17,8 +17,6 @@ namespace Layers
 		Label(QWidget* parent = nullptr);
 		Label(const QString& text, QWidget* parent = 0);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
-
 		void resize();
 
 		void build_wrapped_lines();

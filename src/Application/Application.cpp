@@ -70,7 +70,7 @@ QString Application::app_identifier()
 	return m_name_underscored + "_" + m_uuid.toString(QUuid::WithoutBraces);
 }
 
-void Application::store_child_themeable_pointer(Themeable& themeable)
+void Application::add_child_themeable_pointer(Themeable& themeable)
 {
 	m_child_themeables.append(&themeable);
 }

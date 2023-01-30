@@ -18,29 +18,16 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 	setText(text);
 }
 
-void Label::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
-{
-	a_fill.copy(*dynamic_cast<Attribute*>(theme_attrs["fill"]));
-	a_text_hover_color.copy(*dynamic_cast<Attribute*>(theme_attrs["text_hover_color"]));
-	a_outline_color.copy(*dynamic_cast<Attribute*>(theme_attrs["outline_color"]));
-	a_text_color.copy(*dynamic_cast<Attribute*>(theme_attrs["text_color"]));
-}
-
 void Label::init_attributes()
 {
-	m_attributes.insert({
+	m_entities.insert({
 		{ "fill", &a_fill },
 		{ "text_hover_color", &a_text_hover_color },
 		{ "outline_color", &a_outline_color },
 		{ "text_color", &a_text_color }
 	});
 
-	m_attribute_layout.append(&a_text_color);
-	m_attribute_layout.append(&a_text_hover_color);
-	m_attribute_layout.append(&a_outline_color);
-	m_attribute_layout.append(&a_fill);
-
-	for (Entity* entity : m_attributes)
+	for (Entity* entity : m_entities)
 		entity->setup_widget_update_connection(this);
 }
 

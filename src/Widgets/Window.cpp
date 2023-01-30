@@ -1,6 +1,7 @@
 #include "../../include/AttributeWidgets.h"
 #include "../../include/Application.h"
 #include "../../include/calculate.h"
+#include "../../include/CustomizePanel.h"
 #include "../../include/Window.h"
 
 #include <Windows.h>
@@ -21,7 +22,7 @@ using Layers::Window;
 Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview }, Widget(parent)
 {
-	layersApp->store_child_themeable_pointer(*this);
+	layersApp->add_child_themeable_pointer(*this);
 
 	set_window_title(layersApp->name());
 	
@@ -32,33 +33,33 @@ Window::Window(bool preview, QWidget* parent) :
 		setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
 	}
 
-    connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
+	connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
 	connect(m_titlebar, &Titlebar::window_icon_updated, [=]
 		{
 			connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
 		});
-    connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
-    connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
-    connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
-    connect(m_titlebar->exit_button(), &Button::clicked, this, &Window::exit_clicked);
-    connect(m_settings_menu->themes_settings_panel()->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
+	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
+	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
+	connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
+	connect(m_titlebar->exit_button(), &Button::clicked, this, &Window::exit_clicked);
+	connect(m_settings_menu->themes_settings_panel()->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
 	connect(m_settings_menu->themes_settings_panel()->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
 
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
-    set_name("window");
-    set_proper_name("Window");
-    border.thickness.set_value(15.0);
+	set_name("window");
+	set_proper_name("Window");
+	border.thickness.set_value(15.0);
 	border.fill.set_value(
 		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
-    corner_radii.top_left.set_value(10.0);
-    corner_radii.top_right.set_value(10.0);
-    corner_radii.bottom_left.set_value(10.0);
-    corner_radii.bottom_right.set_value(10.0);
+	corner_radii.top_left.set_value(10.0);
+	corner_radii.top_right.set_value(10.0);
+	corner_radii.bottom_left.set_value(10.0);
+	corner_radii.bottom_right.set_value(10.0);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-    setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
+	setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
 	resize(1200, 800);
 
 	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
@@ -69,22 +70,22 @@ Window::Window(bool preview, QWidget* parent) :
 
 	m_control_update_dialog->set_proper_name("Update Dialog");
 
-    m_app_menu->a_fill.set_disabled();
+	m_app_menu->a_fill.set_disabled();
 
-    m_settings_menu->a_fill.set_value(QColor("#ff5555"));
-    m_settings_menu->a_fill.set_disabled();
-    m_settings_menu->hide();
+	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
+	m_settings_menu->a_fill.set_disabled();
+	m_settings_menu->hide();
 
-    m_customize_menu->a_fill.set_disabled();
-    m_customize_menu->hide();
+	m_customize_menu->a_fill.set_disabled();
+	m_customize_menu->hide();
 
-    add_menu(m_app_menu);
-    add_menu(m_settings_menu);
-    add_menu(m_customize_menu);
+	add_menu(m_app_menu);
+	add_menu(m_settings_menu);
+	add_menu(m_customize_menu);
 	
-    m_menu_stack.append(m_app_menu);
+	m_menu_stack.append(m_app_menu);
 
-    setup_layout();
+	setup_layout();
 
 	for (const QString& theme_name : layersApp->themes().keys())
 		link_theme_name(theme_name);
@@ -103,7 +104,7 @@ Window::Window(bool preview, QWidget* parent) :
 
 void Window::add_menu(Menu* menu)
 {
-    m_menus.append(menu);
+	m_menus.append(menu);
 }
 
 Menu* Window::app_menu() const
@@ -113,7 +114,7 @@ Menu* Window::app_menu() const
 
 void Window::link_theme_name(const QString& name)
 {
-    m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
+	m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
 	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
 }
@@ -125,7 +126,7 @@ void Window::set_main_widget(Widget* main_widget)
 	main_widget->set_is_app_themeable(true);
 	main_widget->apply_theme(*layersApp->current_theme());
 
-	store_child_themeable_pointer(main_widget);
+	add_child_themeable_pointer(main_widget);
 
 	m_app_menu_layout->addWidget(main_widget);
 
@@ -135,31 +136,31 @@ void Window::set_main_widget(Widget* main_widget)
 
 void Window::apply_theme(Theme& theme)
 {
-    Themeable::apply_theme(theme);
+	Themeable::apply_theme(theme);
 
 	// TODO: The following should be handled in the CustomizeMenu class
-    if (m_customize_menu->preview_widget())
-    {
-        m_customize_menu->preview_widget()->apply_theme(theme);
-        //m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
-    }
+	if (m_customize_menu->preview_widget())
+	{
+		m_customize_menu->preview_widget()->apply_theme(theme);
+		//m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
+	}
 
 	//issue_update(); // Is this necessary???????????????????????
 }
 
 void Window::assign_tag_prefixes()
 {
-    for (Themeable* themeable_child_element : m_child_themeables)
-    {
-        themeable_child_element->assign_tag_prefixes(m_tag_prefixes, "");
-    }
+	for (Themeable* themeable_child_element : m_child_themeables)
+	{
+		themeable_child_element->assign_tag_prefixes(m_tag_prefixes, "");
+	}
 
-    m_tag_prefixes_assigned = true;
+	m_tag_prefixes_assigned = true;
 }
 
 void Window::center_dialog(QDialog* dialog)
 {
-    dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
+	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
 }
 
 ColorDialog* Window::control_color_dialog() const
@@ -174,26 +175,26 @@ GradientSelectionDialog* Window::control_gradient_selection_dialog() const
 
 CustomizeMenu* Window::customize_menu() const
 {
-    return m_customize_menu;
+	return m_customize_menu;
 }
 
 void Window::finalize()
 {
-    m_customize_menu->init_preview_window();
+	m_customize_menu->init_preview_window();
 
 	apply_theme(*layersApp->current_theme()); // Sets initial theme
-    m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
+	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
 }
 
-void Window::init_child_themeable_reference_list()
+void Window::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_titlebar);
-	store_child_themeable_pointer(m_settings_menu);
-	store_child_themeable_pointer(m_customize_menu);
-    store_child_themeable_pointer(m_create_new_theme_dialog);
-	store_child_themeable_pointer(m_control_color_dialog);
-	store_child_themeable_pointer(m_control_gradient_selection_dialog);
-	store_child_themeable_pointer(m_control_update_dialog);
+	add_child_themeable_pointer(m_titlebar);
+	add_child_themeable_pointer(m_settings_menu);
+	add_child_themeable_pointer(m_customize_menu);
+	add_child_themeable_pointer(m_create_new_theme_dialog);
+	add_child_themeable_pointer(m_control_color_dialog);
+	add_child_themeable_pointer(m_control_gradient_selection_dialog);
+	add_child_themeable_pointer(m_control_update_dialog);
 }
 
 void Window::update_theme_dependencies()
@@ -232,84 +233,85 @@ void Window::set_window_title(const QString& title)
 
 SettingsMenu* Window::settings_menu() const
 {
-    return m_settings_menu;
+	return m_settings_menu;
 }
 
 Titlebar* Window::titlebar() const
 {
-    return m_titlebar;
+	return m_titlebar;
 }
 
 void Window::open_menu(Menu* menu)
 {
-    if (m_menu_stack.contains(menu))
-    {
-        if (m_menu_stack.last() != menu)
-        {
-            int menu_index = m_menu_stack.indexOf(menu);
+	if (m_menu_stack.contains(menu))
+	{
+		if (m_menu_stack.last() != menu)
+		{
+			int menu_index = m_menu_stack.indexOf(menu);
 
-            m_menu_stack.last()->hide();
+			m_menu_stack.last()->hide();
 
-            menu->show();
+			menu->show();
 
-            while (menu_index < m_menu_stack.count() - 1) m_menu_stack.removeLast();
+			while (menu_index < m_menu_stack.count() - 1) m_menu_stack.removeLast();
 
-            m_titlebar->remove_mlls_past(menu_index - 1);
-        }
-    }
-    else
-    {
-        MenuLabelLayer* mll = new MenuLabelLayer(menu);
+			m_titlebar->remove_mlls_past(menu_index - 1);
+		}
+	}
+	else
+	{
+		MenuLabelLayer* mll = new MenuLabelLayer(menu);
 
-        Menu* previous_menu = m_menu_stack.last();
+		Menu* previous_menu = m_menu_stack.last();
 
-        connect(mll->back_button(), &Button::clicked, [this, previous_menu] { open_menu(previous_menu); });
+		connect(mll->back_button(), &Button::clicked, [this, previous_menu] { open_menu(previous_menu); });
 
-        previous_menu->hide();
+		previous_menu->hide();
 
-        m_menu_stack.append(menu);
+		m_menu_stack.append(menu);
 
-        menu->show();
+		menu->show();
 
-        connect(mll->icon_button(), &Button::clicked, [this, menu] { open_menu(menu); });
+		connect(mll->icon_button(), &Button::clicked, [this, menu] { open_menu(menu); });
 
-        m_titlebar->add_mll(mll);
-    }
+		m_titlebar->add_mll(mll);
+	}
 }
 
 void Window::customize_clicked()
 {
 	if (m_customize_menu->panels().isEmpty())
-		m_customize_menu->open_customize_panel(m_customize_menu->preview_widget()->customize_panel());
-    
+		m_customize_menu->open_customize_panel(
+			new CustomizePanel(m_customize_menu->preview_widget()));
+	
 	open_menu(m_customize_menu);
 }
 
 void Window::exit_clicked()
 {
-    qApp->quit();
+	qApp->quit();
 }
 
 void Window::maximize_clicked()
 {
-    if (m_maximized)
-    {
-        showNormal();
-        m_maximized = false;
-    }
-    else
-    {
-        showMaximized();
-        m_maximized = true;
-    }
+	if (m_maximized)
+	{
+		showNormal();
+		m_maximized = false;
+	}
+	else
+	{
+		showMaximized();
+		m_maximized = true;
+	}
 
-    update_theme_dependencies();
-    update();
+	update_theme_dependencies();
+	update();
 }
 
 void Window::minimize_clicked()
 {
-    showMinimized();
+	showMinimized();
 }
 
 void Window::new_theme_clicked()
@@ -334,95 +336,95 @@ void Window::new_theme_clicked()
 
 void Window::settings_clicked()
 {
-    open_menu(m_settings_menu);
+	open_menu(m_settings_menu);
 }
 
 bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
-    MSG* msg = static_cast<MSG*>(message);
+	MSG* msg = static_cast<MSG*>(message);
 
-    if (msg->message == WM_NCHITTEST)
-    {
-        if (isMaximized())
-        {
-            return false;
-        }
+	if (msg->message == WM_NCHITTEST)
+	{
+		if (isMaximized())
+		{
+			return false;
+		}
 
-        *result = 0;
-        const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
-        RECT winrect;
-        GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
+		*result = 0;
+		const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
+		RECT winrect;
+		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
-        // must be short to correctly work with multiple monitors (negative coordinates)
-        short x = msg->lParam & 0x0000FFFF;
-        short y = (msg->lParam & 0xFFFF0000) >> 16;
+		// must be short to correctly work with multiple monitors (negative coordinates)
+		short x = msg->lParam & 0x0000FFFF;
+		short y = (msg->lParam & 0xFFFF0000) >> 16;
 
-        bool resizeWidth = minimumWidth() != maximumWidth();
-        bool resizeHeight = minimumHeight() != maximumHeight();
+		bool resizeWidth = minimumWidth() != maximumWidth();
+		bool resizeHeight = minimumHeight() != maximumHeight();
 
-        if (resizeWidth)
-        {
-            //left border
-            if (x >= winrect.left && x < winrect.left + borderWidth)
-            {
-                *result = HTLEFT;
-            }
-            //right border
-            if (x < winrect.right && x >= winrect.right - borderWidth)
-            {
-                *result = HTRIGHT;
-            }
-        }
-        if (resizeHeight)
-        {
-            //bottom border
-            if (y < winrect.bottom && y >= winrect.bottom - borderWidth)
-            {
-                *result = HTBOTTOM;
-            }
-            //top border
-            if (y >= winrect.top && y < winrect.top + borderWidth)
-            {
-                *result = HTTOP;
-            }
-        }
-        if (resizeWidth && resizeHeight)
-        {
-            //bottom left corner
-            if (x >= winrect.left && x < winrect.left + borderWidth &&
-                y < winrect.bottom && y >= winrect.bottom - borderWidth)
-            {
-                *result = HTBOTTOMLEFT;
-            }
-            //bottom right corner
-            if (x < winrect.right && x >= winrect.right - borderWidth &&
-                y < winrect.bottom && y >= winrect.bottom - borderWidth)
-            {
-                *result = HTBOTTOMRIGHT;
-            }
-            //top left corner
-            if (x >= winrect.left && x < winrect.left + borderWidth &&
-                y >= winrect.top && y < winrect.top + borderWidth)
-            {
-                *result = HTTOPLEFT;
-            }
-            //top right corner
-            if (x < winrect.right && x >= winrect.right - borderWidth &&
-                y >= winrect.top && y < winrect.top + borderWidth)
-            {
-                *result = HTTOPRIGHT;
-            }
-        }
+		if (resizeWidth)
+		{
+			//left border
+			if (x >= winrect.left && x < winrect.left + borderWidth)
+			{
+				*result = HTLEFT;
+			}
+			//right border
+			if (x < winrect.right && x >= winrect.right - borderWidth)
+			{
+				*result = HTRIGHT;
+			}
+		}
+		if (resizeHeight)
+		{
+			//bottom border
+			if (y < winrect.bottom && y >= winrect.bottom - borderWidth)
+			{
+				*result = HTBOTTOM;
+			}
+			//top border
+			if (y >= winrect.top && y < winrect.top + borderWidth)
+			{
+				*result = HTTOP;
+			}
+		}
+		if (resizeWidth && resizeHeight)
+		{
+			//bottom left corner
+			if (x >= winrect.left && x < winrect.left + borderWidth &&
+				y < winrect.bottom && y >= winrect.bottom - borderWidth)
+			{
+				*result = HTBOTTOMLEFT;
+			}
+			//bottom right corner
+			if (x < winrect.right && x >= winrect.right - borderWidth &&
+				y < winrect.bottom && y >= winrect.bottom - borderWidth)
+			{
+				*result = HTBOTTOMRIGHT;
+			}
+			//top left corner
+			if (x >= winrect.left && x < winrect.left + borderWidth &&
+				y >= winrect.top && y < winrect.top + borderWidth)
+			{
+				*result = HTTOPLEFT;
+			}
+			//top right corner
+			if (x < winrect.right && x >= winrect.right - borderWidth &&
+				y >= winrect.top && y < winrect.top + borderWidth)
+			{
+				*result = HTTOPRIGHT;
+			}
+		}
 
-        if (m_titlebar->is(QApplication::widgetAt(QCursor::pos()))) {
-            *result = HTCAPTION;
-            return true;
-        }
+		if (m_titlebar->is(QApplication::widgetAt(QCursor::pos()))) {
+			*result = HTCAPTION;
+			return true;
+		}
 
-        if (*result != 0) return true;
-    }
+		if (*result != 0) return true;
+	}
 
-    return false;
+	return false;
 }
 
 void Window::paintEvent(QPaintEvent* event)
@@ -624,12 +626,12 @@ void Window::setup_layout()
 
 	int margin = border.thickness.as<double>();
 
-    m_main_layout->setContentsMargins(margin, margin, margin, margin);
-    m_main_layout->setSpacing(0);
-    m_main_layout->addWidget(m_titlebar);
-    m_main_layout->addWidget(m_app_menu);
-    m_main_layout->addWidget(m_settings_menu);
-    m_main_layout->addWidget(m_customize_menu);
+	m_main_layout->setContentsMargins(margin, margin, margin, margin);
+	m_main_layout->setSpacing(0);
+	m_main_layout->addWidget(m_titlebar);
+	m_main_layout->addWidget(m_app_menu);
+	m_main_layout->addWidget(m_settings_menu);
+	m_main_layout->addWidget(m_customize_menu);
 
-    setLayout(m_main_layout);
+	setLayout(m_main_layout);
 }

@@ -11,7 +11,7 @@ using Layers::FillControl;
 FillControl::FillControl(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	installEventFilter(this);
 	setFixedSize(45, 45);
@@ -25,10 +25,13 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 	connect(m_fill_type_toggle, &ToggleSwitch::toggled_event, [this] {
 		if (m_fill_type_toggle->toggled())
 		{
-			if (a_fill.is_stateful())
-				a_fill.set_value(a_fill.state(), QVariant::fromValue(QGradientStops({{0.0, Qt::white},{1.0, Qt::black}})));
-			else
-				a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
+			// TODO: Remove
+			//if (a_fill.is_stateful())
+			//	a_fill.set_value(a_fill.state(), QVariant::fromValue(QGradientStops({{0.0, Qt::white},{1.0, Qt::black}})));
+			//else
+			//	a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+
+			a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 
 			m_gradient_label_opacity->setOpacity(1.0);
 			m_gradient_control->show();
@@ -38,10 +41,13 @@ FillControl::FillControl(QWidget* parent) : Widget(parent)
 		}
 		else
 		{
-			if (a_fill.is_stateful())
-				a_fill.set_value(a_fill.state(), QVariant::fromValue(QColor(Qt::white)));
-			else
-				a_fill.set_value(QVariant::fromValue(QColor(Qt::white)), false);
+			// TODO: Remove
+			//if (a_fill.is_stateful())
+			//	a_fill.set_value(a_fill.state(), QVariant::fromValue(QColor(Qt::white)));
+			//else
+			//	a_fill.set_value(QVariant::fromValue(QColor(Qt::white)));
+
+			a_fill.set_value(QVariant::fromValue(QColor(Qt::white)));
 
 			m_color_label_opacity->setOpacity(1.0);
 			m_color_control->show();
@@ -96,7 +102,7 @@ FillControl::~FillControl()
 void FillControl::init_attributes()
 {
 	// Remove control attribute
-	m_attributes.remove("fill");
+	m_entities.remove("fill");
 
 	border.fill.set_value(QColor("#D6D6D6"));
 	border.thickness.set_value(2.0);
@@ -125,13 +131,13 @@ void FillControl::init_attributes()
 	m_dialog->corner_radii.bottom_right.set_value(4.0);
 }
 
-void FillControl::init_child_themeable_reference_list()
+void FillControl::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_dialog);
+	add_child_themeable_pointer(m_dialog);
 
-	m_dialog->store_child_themeable_pointer(m_fill_type_toggle);
-	m_dialog->store_child_themeable_pointer(m_color_label);
-	m_dialog->store_child_themeable_pointer(m_gradient_label);
+	m_dialog->add_child_themeable_pointer(m_fill_type_toggle);
+	m_dialog->add_child_themeable_pointer(m_color_label);
+	m_dialog->add_child_themeable_pointer(m_gradient_label);
 }
 
 void FillControl::set_attribute(Attribute* attribute)

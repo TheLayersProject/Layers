@@ -10,7 +10,7 @@ using Layers::ComboboxItem;
 ComboboxItem::ComboboxItem(const QString& item_text, QWidget* parent) :
 	m_item_label{ new Label(item_text) }, m_item_text{ item_text }, Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	set_name("combobox_item");
@@ -54,9 +54,9 @@ void ComboboxItem::init_attributes()
 	a_hover_fill.set_disabled(false);
 }
 
-void ComboboxItem::init_child_themeable_reference_list()
+void ComboboxItem::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_item_label);
+	add_child_themeable_pointer(m_item_label);
 }
 
 QString ComboboxItem::item_text()

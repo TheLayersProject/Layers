@@ -57,29 +57,16 @@ SVG::SVG(const SVG& svg)
 	load(m_svg_str.toUtf8());
 }
 
-void SVG::apply_theme_attributes(QMap<QString, Entity*>& theme_attrs)
-{
-	a_common_color.copy(*dynamic_cast<Attribute*>(theme_attrs["common_color"]));
-	a_common_hover_color.copy(*dynamic_cast<Attribute*>(theme_attrs["common_hover_color"]));
-	a_use_common_color.copy(*dynamic_cast<Attribute*>(theme_attrs["use_common_color"]));
-	a_use_common_hover_color.copy(*dynamic_cast<Attribute*>(theme_attrs["use_common_hover_color"]));
-}
-
 void SVG::init_attributes()
 {
-	m_attributes.insert({
+	m_entities.insert({
 		{ "common_color", &a_common_color },
 		{ "common_hover_color", &a_common_hover_color },
 		{ "use_common_color", &a_use_common_color },
 		{ "use_common_hover_color", &a_use_common_hover_color }
 		});
 
-	m_attribute_layout.append(&a_common_color);
-	m_attribute_layout.append(&a_common_hover_color);
-	//m_attribute_layout.append(&a_use_common_color);
-	//m_attribute_layout.append(&a_use_common_hover_color);
-
-	//for (Entity* entity : m_attributes)
+	//for (Entity* entity : m_entities)
 	//	entity->setup_widget_update_connection(this);
 
 	connect(&a_common_color, &Entity::value_changed, [this] { update(); });

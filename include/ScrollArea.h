@@ -29,7 +29,7 @@ namespace Layers
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 		QScrollArea* m_scroll_area{ new QScrollArea(this) };
 

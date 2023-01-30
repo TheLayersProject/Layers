@@ -117,7 +117,7 @@ namespace Layers
 
 			@param themeable to store a pointer to
 		*/
-		void store_child_themeable_pointer(Themeable& themeable);
+		void add_child_themeable_pointer(Themeable& themeable);
 
 		/*!
 			Returns a pointer to the application theme with the provided name.

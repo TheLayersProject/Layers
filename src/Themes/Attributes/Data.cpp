@@ -54,10 +54,11 @@ void Data::copy(const Data& data)
 		if (m_variant_map)
 		{
 			delete m_variant_map;
-
 			m_variant_map = nullptr;
 
 			m_variant = new Variant(*data.m_variant);
+
+			connect(m_variant, &Variant::changed, [this] { emit changed(); });
 		}
 		else
 			*m_variant = *data.m_variant;
@@ -67,17 +68,20 @@ void Data::copy(const Data& data)
 		if (m_variant)
 		{
 			delete m_variant;
-
 			m_variant = nullptr;
 
 			m_variant_map = new VariantMap(*data.m_variant_map);
+
+			for (const Variant& variant : *m_variant_map)
+				connect(&variant, &Variant::changed, [this] { emit changed(); });
 		}
 		else
-		{
-			m_variant_map->clear();
-
-			m_variant_map->insert(*data.m_variant_map);
-		}
+			/*
+				NOTE:The following does not check that the states match.
+				Not sure if it needs to.
+			*/
+			for (const QString& state : m_variant_map->keys())
+				(*m_variant_map)[state] = (*data.m_variant_map)[state];
 	}
 }
 
@@ -93,67 +97,47 @@ void Data::init_variant_map(const VariantMap& variant_map)
 	else m_variant_map = new VariantMap();
 
 	m_variant_map->insert(variant_map);
+
+	for (const Variant& variant : *m_variant_map)
+		connect(&variant, &Variant::changed, [this] { emit changed(); });
 }
 
 bool Data::is_stateful() const
 {
-	if (m_variant_map)
-		return !m_variant_map->isEmpty();
+	//if (m_variant_map)
+	//	return !m_variant_map->isEmpty();
 
-	return false;
+	return m_variant_map;
 }
 
-void Data::set_value(QVariant qvariant, bool retain_type)
+//void Data::set_value(QVariant qvariant)
+//{
+//	/* Should this function still work with stateful data and just change
+//	   the variant associated with the current state? */
+//
+//	if (m_variant && *m_variant != qvariant)
+//		*m_variant = qvariant;
+//}
+
+void Data::set_value(QVariant qvariant, const QString& state)
 {
-	/* Should this function still work with stateful data and just change
-	   the variant associated with the current state? */
-
-	/* NOTE: qvariant is explicitly converted to the type that this Data
-		already stores. This is necessary because the initial type of Data values
-		needs to be maintained. */
-
 	if (m_variant && *m_variant != qvariant)
+		*m_variant = qvariant;
+
+	else if (m_variant_map)
 	{
-		if (m_variant->typeName() == qvariant.typeName())
-			*m_variant = qvariant;
-		else
+		if (state == "")
 		{
-			if (retain_type)
-			{
-				if (QString(m_variant->typeName()) == "bool")
-					*m_variant = QVariant::fromValue(qvariant.value<bool>());
-
-				else if (QString(m_variant->typeName()) == "double")
-					*m_variant = QVariant::fromValue(qvariant.value<double>());
-
-				else if (QString(m_variant->typeName()) == "QColor")
-					*m_variant = QVariant::fromValue(qvariant.value<QColor>());
-
-				else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
-					*m_variant = QVariant::fromValue(qvariant.value<QGradientStops>());
-
-				else if (QString(m_variant->typeName()) == "QString")
-					*m_variant = QVariant::fromValue(qvariant.value<QString>());
-			}
-			else *m_variant = qvariant;
+			if ((*m_variant_map).first() != qvariant)
+				(*m_variant_map).first() = qvariant;
 		}
-	}
-}
-
-void Data::set_value(const QString& state, QVariant qvariant)
-{
-	if (m_variant_map)
-	{
-		if (m_variant_map->contains(state))
+		else if (m_variant_map->contains(state))
 		{
 			if ((*m_variant_map)[state] != qvariant)
-			{
 				(*m_variant_map)[state] = qvariant;
-			}
 		}
-		else qDebug() << "WARNING: Failed to set attribute value: State does not exist.";
+		else qDebug() << "WARNING: Data::set_value() failed: State does not exist.";
 	}
-	else qDebug() << "WARNING: Failed to set attribute value: State provided but Attribute is not stateful.";
 }
 
 QStringList Data::states() const
@@ -185,6 +169,9 @@ QJsonObject Data::to_json_object()
 
 			else if (QString(variant.typeName()) == "double")
 				insert_value = QJsonValue(variant.value<double>());
+
+			else if (QString(variant.typeName()) == "QString")
+				insert_value = QJsonValue(variant.value<QString>());
 
 			else if (QString(variant.typeName()) == "QColor")
 			{
@@ -237,6 +224,9 @@ QJsonObject Data::to_json_object()
 
 		else if (QString(m_variant->typeName()) == "double")
 			insert_value = QJsonValue(m_variant->value<double>());
+
+		else if (QString(m_variant->typeName()) == "QString")
+			insert_value = QJsonValue(m_variant->value<QString>());
 
 		else if (QString(m_variant->typeName()) == "QColor")
 		{

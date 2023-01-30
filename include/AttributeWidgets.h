@@ -57,7 +57,7 @@ namespace Layers
 		void populate_state_combobox(const QList<QString>& states);
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -90,7 +90,7 @@ namespace Layers
 		virtual void set_current_editting_state(const QString& state) override;
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -113,16 +113,11 @@ namespace Layers
 	public:
 		CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget* parent = nullptr);
 
-		MiniSlider* tl_slider() const;
-		MiniSlider* tr_slider() const;
-		MiniSlider* bl_slider() const;
-		MiniSlider* br_slider() const;
-
 	public slots:
 		void set_current_editting_state(const QString& state);
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -159,7 +154,7 @@ namespace Layers
 		void set_current_editting_state(const QString& state);
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		bool m_centered{ false };
@@ -182,7 +177,7 @@ namespace Layers
 		void set_centered(bool centered = true);
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		bool m_centered{ false };
@@ -210,7 +205,7 @@ namespace Layers
 		virtual void set_current_editting_state(const QString& state) override;
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		bool m_centered{ false };
@@ -235,7 +230,7 @@ namespace Layers
 		void set_unit_label_text(const QString& unit_string);
 
 	protected:
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();

@@ -6,7 +6,6 @@
 namespace Layers
 {
 	class AttributeWidget;
-	class CustomizePanel;
 	class Graphic;
 	class Theme;
 
@@ -23,7 +22,7 @@ namespace Layers
 
 		Themes are applied to themeables recursively through apply_theme(). To do this,
 		references to child themeables need to be stored. These references are stored
-		through store_child_themeable_pointer().
+		through add_child_themeable_pointer().
 
 		Before a themeable can be customized in a Layers application, two requirements
 		must be fullfilled:
@@ -44,7 +43,7 @@ namespace Layers
 
 			@param child_themeable to be added to the reference list
 		*/
-		void store_child_themeable_pointer(Themeable* child_themeable);
+		void add_child_themeable_pointer(Themeable* child_themeable);
 
 		/*!
 			Applies the given theme to the caller and its children.
@@ -59,8 +58,6 @@ namespace Layers
 		*/
 		virtual void apply_theme(Theme& theme);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs);
-
 		/*!
 			Assigns tag prefixes from the parent and the parent's name.
 
@@ -71,7 +68,14 @@ namespace Layers
 			If no arguments are given, then assignment to the caller is skipped and the children have their
 			prefixes assigned. However, the caller will still be marked as having its prefixes assigned.
 		*/
-		void assign_tag_prefixes(QList<QString> parent_prefixes = QList<QString>(), const QString& parent_name = "");
+		void assign_tag_prefixes(QStringList parent_prefixes = QStringList(), const QString& parent_name = "");
+
+		QList<Themeable*>& child_themeables();
+
+		void copy_attribute_values_to(Theme* theme);
+
+		template<typename T>
+		void entangle_with(T* themeable, bool entangle_children = true);
 
 		/*!
 			Get a reference to the attribute set of the given state.
@@ -79,29 +83,7 @@ namespace Layers
 			@param state of the attribute set to be returned, 'default' by default
 			@returns Reference to attribute set of given state
 		*/
-		QMap<QString, Entity*>& attributes();
-
-		QList<Entity*>& attribute_layout();
-
-		//QMap<QString, AttributeWidget*>& attribute_widgets();
-
-		QList<Themeable*>& child_themeable_references();
-
-		void copy_attribute_values_to(Theme* theme);
-
-		/*!
-			Gets the address of the currently applied theme. Returns nullptr if no theme has been applied.
-
-			@returns Address of currently applied theme, or nullptr
-		*/
-		Theme* current_theme();
-
-		/*!
-			Get the address of the themeable's customize panel. Returns nullptr if the panel does not exist.
-
-			@returns Address of customize panel, or nullptr
-		*/
-		CustomizePanel* customize_panel();
+		QMap<QString, Entity*>& entities();
 
 		/*!
 			Get the address of the themeable's icon. Returns nullptr if no icon exists.
@@ -110,25 +92,7 @@ namespace Layers
 		*/
 		Graphic* icon() const;
 
-		/*!
-			Initializes customize panels and adds them to the provided list.
-
-			This function works recursively to initialize all of the customize panels in the caller's
-			hierarchy. As the panels are created, they are added to the list parameter.
-
-			@param list to store initialized customize panels
-		*/
-		//void initialize_and_acquire_panels(QList<CustomizePanel*>& list);
-
 		bool is_stateful() const;
-
-		/*!
-			Calls the inheriting QWidget's update() function
-
-			This is a pure virtual function that must be defined by other classes that inherit the
-			Themeable class. This function should be used to call the inheriting QWidget's update().
-		*/
-		//virtual void issue_update() = 0;
 
 		QString* name() const;
 
@@ -139,35 +103,7 @@ namespace Layers
 		*/
 		QString* proper_name() const;
 
-		/*!
-			Reapplies the theme that is already applied to the caller.
-
-			Does nothing if no theme has been applied yet.
-		*/
-		void reapply_theme();
-
-		/*!
-			Removes the given child themeable from the references list and unassigns tag prefixes.
-
-			@param child_themeable to be removed from the reference list
-		*/
-		void remove_child_themeable_reference(Themeable* child_themeable);
-
-		template<typename T>
-		void replace_all_attributes_with(T* themeable);
-
-		void set_is_app_themeable(bool is_app_themeable);
-
 		void set_functionality_disabled(bool disabled = true);
-
-		//void set_attribute_value(
-		//	const QString& state,
-		//	const QString& attribute_name,
-		//	QVariant value);
-
-		//void set_attribute_value(
-		//	const QString& attribute_name,
-		//	QVariant value);
 
 		/*!
 			Sets an icon for the themeable; replaces it if one already exists.
@@ -175,6 +111,8 @@ namespace Layers
 			@param icon for the themeable
 		*/
 		void set_icon(Graphic* icon);
+
+		void set_is_app_themeable(bool is_app_themeable);
 
 		/*!
 			Sets the name of the themeable; replaces it if one already exists.
@@ -208,19 +146,11 @@ namespace Layers
 		QString state() const;
 
 		/*!
-			Get a reference to the attribute set of the given state.
-
-			@param state of the attribute set to be returned, 'default' by default
-			@returns Reference to attribute set of given state
-		*/
-		//QMap<QString, StatefulAttribute>& stateful_attributes();
-
-		/*!
 			Gets a list of the states that are used to identify the caller's attribute sets.
 
 			@returns List of states that identify attribute sets
 		*/
-		QList<QString> states() const;
+		QStringList states() const;
 
 		/*!
 			Get the theme tag.
@@ -248,102 +178,51 @@ namespace Layers
 		*/
 		void unassign_prefixes();
 
-		/*!
-			Updates things that depend on the theme. Called by apply_theme().
-
-			This function can be defined by implementers of the Themeable class to handle anything they want
-			to change when a theme gets applied that can't be changed through attributes. However, it
-			is not required to implement this function.
-		*/
-		//virtual void update_theme_dependencies();
-
 	protected:
-		/*!
-			Initializes the attributes.
-
-			This is a pure virtual function that must be defined by other classes that inherit the
-			Themeable class. This function should be used to define a themeable's attributes with
-			calls to set_attribute_value().
-
-			This function is called by init_themeable().
-		*/
-		//void init_attributes();
-
-		//virtual void init_attribute_widgets();
-
-		/*!
-			Initializes the customize panel.
-
-			A themeable MUST have a proper name to initialize a customize panel. Set one using set_proper_name().
-
-			This function is responsible for calling setup_customize_panel(), which is a pure virtual function
-			that must be defined by other classes that inherit the Themeable class.
-
-			@returns The initialized customize panel.
-		*/
-		//CustomizePanel* init_customize_panel();
-
-		/*!
-			Initializes the reference list to child themeables.
-
-			A list of child themeable references is necessary to allow the apply_theme() function
-			to work recursively.
-
-			Classes that inherit the Themeable class should define this function and use
-			store_child_themeable_pointer() to populate the reference list.
-
-			This function is called by init_themeable().
-		*/
-		virtual void init_child_themeable_reference_list();
-
-		bool m_functionality_disabled{ false };
-		bool m_tag_prefixes_assigned{ false };
-		bool m_shared_attributes{ false };
-		bool m_is_app_themeable{ false };
-		bool m_is_stateful{ false };
-
-		CustomizePanel* m_customize_panel{ nullptr };
-
-		Graphic* m_icon{ nullptr };
-
-		QString* m_name{ nullptr };
-		QString* m_proper_name{ nullptr };
-		QString m_state{ "" };
-		QString m_tag{ "" };
-
-		//QMap<QString, bool> m_ACW_pre_init_primary_values{ QMap<QString, bool>() };
-		//QMap<QString, AttributeWidget*> m_attribute_widgets{ QMap<QString, AttributeWidget*>() };
-
-		QList<Entity*> m_attribute_layout{ QList<Entity*>() };
-
-		QMap<QString, Entity*> m_attributes{ QMap<QString, Entity*>() };
-
 		QList<Themeable*> m_child_themeables;
 
-		QList<QString> m_filtered_attributes;
-		QList<QString> m_tag_prefixes;
-
 		Theme* m_current_theme{ nullptr };
+
+		QMap<QString, Entity*> m_entities{ QMap<QString, Entity*>() };
+
+		bool m_functionality_disabled{ false };
+
+		Graphic* m_icon{ nullptr };
+		
+		bool m_is_app_themeable{ false };
+
+		QString* m_name{ nullptr };
+
+		QString* m_proper_name{ nullptr };
+
+		QString m_state{ "" };
+		
+		QString m_tag{ "" };
+
+		QStringList m_tag_prefixes;
+
+		bool m_tag_prefixes_assigned{ false };
 	};
 
 	template<typename T>
-	inline void Themeable::replace_all_attributes_with(T* themeable)
+	inline void Themeable::entangle_with(T* themeable, bool entangle_children)
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (const QString& entity_key : m_attributes.keys())
+			for (const QString& entity_key : m_entities.keys())
 			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[entity_key]))
-					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_attributes[entity_key]));
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[entity_key]))
-					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[entity_key]));
+				if (Attribute* attr = dynamic_cast<Attribute*>(m_entities[entity_key]))
+					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_entities[entity_key]));
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_entities[entity_key]))
+					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_entities[entity_key]));
 			}
 
-			for (Themeable* this_child_themeable : m_child_themeables)
-				if (this_child_themeable->m_name)
-					for (Themeable* child_themeable : themeable->m_child_themeables)
-						if (*child_themeable->m_name == *this_child_themeable->m_name)
-							this_child_themeable->replace_all_attributes_with(child_themeable);
+			if (entangle_children)
+				for (Themeable* this_child_themeable : m_child_themeables)
+					if (this_child_themeable->m_name)
+						for (Themeable* child_themeable : themeable->m_child_themeables)
+							if (*child_themeable->m_name == *this_child_themeable->m_name)
+								this_child_themeable->entangle_with(child_themeable);
 		}
 	}
 }

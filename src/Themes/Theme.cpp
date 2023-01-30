@@ -164,11 +164,11 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 
 		for (const QString& entity_key : themeable_data_in_theme.keys())
 		{ // HERE
-			if (themeable->attributes().contains(entity_key))
+			if (themeable->entities().contains(entity_key))
 			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[entity_key]))
+				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
 					dynamic_cast<Attribute*>(themeable_data_in_theme[entity_key])->copy(*attr);
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[entity_key]))
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
 					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[entity_key])->copy(*attr_group);
 			}
 		}
@@ -180,14 +180,14 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 		   need to be re-enabled! */ 
 		QMap<QString, Entity*> new_themeable_data_for_theme;
 
-		for (const QString& entity_key : themeable->attributes().keys())
+		for (const QString& entity_key : themeable->entities().keys())
 		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[entity_key]))
+			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
 			{
 				if (!attr->is_entangled())
 					new_themeable_data_for_theme[entity_key] = new Attribute(*attr);
 			}
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[entity_key]))
+			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
 			{
 				new_themeable_data_for_theme[entity_key] = new AttributeGroup(*attr_group);
 			}

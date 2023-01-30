@@ -17,8 +17,6 @@ namespace Layers
 	public:
 		LineEditor(QWidget* parent = nullptr);
 
-		virtual void apply_theme_attributes(QMap<QString, Entity*>& theme_attrs) override;
-
 		void reconnect_text_attribute();
 
 		void set_default_value(const QString& default_value);

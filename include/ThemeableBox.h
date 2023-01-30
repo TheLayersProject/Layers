@@ -14,9 +14,6 @@ namespace Layers
 	class ThemeableBox : public Themeable
 	{
 	public:
-		virtual void apply_theme_attributes(
-			QMap<QString, Entity*>& theme_attrs) override;
-
 		/*!
 			Sets all margin attributes with one value.
 

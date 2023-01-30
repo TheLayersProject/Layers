@@ -14,11 +14,11 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	set_name("customize_panel");
 	set_proper_name(*themeable->proper_name());
 	setFixedWidth(300);
-	hide();
+	//hide();
 
 	m_attributes_label->set_name("attributes_label");
 	m_attributes_label->set_proper_name("Attributes Label");
@@ -73,10 +73,10 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 		m_show_primary_button->hide();
 	});
 
-	if (m_themeable->child_themeable_references().isEmpty()) m_widgets_label->hide();
+	if (m_themeable->child_themeables().isEmpty()) m_widgets_label->hide();
 	else
 	{
-		for (Themeable* child_themeable : m_themeable->child_themeable_references())
+		for (Themeable* child_themeable : m_themeable->child_themeables())
 		{
 			// Check if themeable has a proper name to determine that it is customizable
 			if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
@@ -89,7 +89,9 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 					element_button = new Button(*child_themeable->proper_name());
 
 				QObject::connect(element_button, &Button::clicked, [child_themeable] {
-					static_cast<Window*>(QApplication::activeWindow())->customize_menu()->open_customize_panel(child_themeable->customize_panel());
+					static_cast<Window*>(QApplication::activeWindow()
+						)->customize_menu()->open_customize_panel(
+							new CustomizePanel(child_themeable));
 				});
 
 				add_widget_button(element_button);
@@ -110,7 +112,7 @@ CustomizePanel::~CustomizePanel()
 
 void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 {
-	//store_child_themeable_pointer(attribute_widget);
+	//add_child_themeable_pointer(attribute_widget);
 	m_attribute_widgets.append(attribute_widget);
 
 	// TEMP
@@ -163,7 +165,7 @@ void CustomizePanel::add_widget_button(Button* button, int index)
 	//button->set_name("widget_button");
 	button->set_text_padding(0, 5, 0, 0);
 
-	//store_child_themeable_pointer(button);
+	//add_child_themeable_pointer(button);
 
 	if (m_current_theme)
 		button->apply_theme(*m_current_theme);
@@ -183,29 +185,11 @@ void CustomizePanel::init_attribute_widgets()
 		add_attribute_widget(m_state_aw);
 	}
 
-	for (Entity* attr_layout_item : m_themeable->attribute_layout())
+	for (Entity* entity : m_themeable->entities())
 	{
-		if (Attribute* attribute = dynamic_cast<Attribute*>(attr_layout_item))
+		if (Attribute* attribute = dynamic_cast<Attribute*>(entity))
 		{
 			AttributeWidget* aw = nullptr;
-
-			//if (attribute->name().contains("Fill"))
-			//{
-			//	aw  = new FillAW(attribute);
-			//	m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
-			//}
-			//else if (attribute->name().contains("Color"))
-			//{
-			//	aw = new ColorAW(attribute);
-			//	m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
-			//}
-			//else if (
-			//	attribute->name().contains("Thickness") ||
-			//	attribute->name().contains("Margin"))
-			//{
-			//	aw = new NumberAW(attribute, new QIntValidator(0, 30));
-			//	m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
-			//}
 
 			if (QString(attribute->typeName()) == "double")
 			{
@@ -240,7 +224,7 @@ void CustomizePanel::init_attribute_widgets()
 					aw->hide();
 				});
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(attr_layout_item))
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
 		{
 			if (attr_group->name().endsWith("corner_radii"))
 			{
@@ -270,24 +254,6 @@ void CustomizePanel::init_attribute_widgets()
 				for (Attribute* attribute : attr_group->attributes())
 				{
 					AttributeWidget* aw = nullptr;
-
-					//if (attribute->name().contains("Fill"))
-					//{
-					//	aw = new FillAW(attribute);
-					//	m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
-					//}
-					//else if (attribute->name().contains("Color"))
-					//{
-					//	aw = new ColorAW(attribute);
-					//	m_color_awidgets.append(dynamic_cast<ColorAW*>(aw));
-					//}
-					//else if (
-					//	attribute->name().contains("Thickness") ||
-					//	attribute->name().contains("Margin"))
-					//{
-					//	aw = new NumberAW(attribute, new QIntValidator(0, 30));
-					//	m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
-					//}
 
 					if (QString(attribute->typeName()) == "double")
 					{
@@ -325,13 +291,13 @@ void CustomizePanel::init_attribute_widgets()
 void CustomizePanel::replace_all_aw_group_attrs_with(AWGroup* control_aw_group)
 {
 	for (AWGroup* aw_group : m_aw_groups)
-		aw_group->replace_all_attributes_with(control_aw_group);
+		aw_group->entangle_with(control_aw_group);
 }
 
 void CustomizePanel::replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw)
 {
 	for (ColorAW* color_aw : m_color_awidgets)
-		color_aw->replace_all_attributes_with(control_color_aw);
+		color_aw->entangle_with(control_color_aw);
 }
 
 void CustomizePanel::init_attributes()
@@ -356,70 +322,48 @@ void CustomizePanel::init_attributes()
 	m_show_primary_button->corner_radii.bottom_right.set_value(5.0);
 }
 
-void CustomizePanel::init_child_themeable_reference_list()
+void CustomizePanel::init_child_themeable_list()
 {
-	//store_child_themeable_pointer(m_state_label);
-	//store_child_themeable_pointer(m_state_combobox);
-	//store_child_themeable_pointer(m_stateful_attributes_label);
-	//store_child_themeable_pointer(m_stateless_attributes_label);
-	store_child_themeable_pointer(m_attributes_label);
-	store_child_themeable_pointer(m_widgets_label);
-	store_child_themeable_pointer(m_show_all_button);
-	store_child_themeable_pointer(m_show_primary_button);
+	add_child_themeable_pointer(m_attributes_label);
+	add_child_themeable_pointer(m_widgets_label);
+	add_child_themeable_pointer(m_show_all_button);
+	add_child_themeable_pointer(m_show_primary_button);
 }
 
 void CustomizePanel::replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw)
 {
 	for (FillAW* fill_aw : m_fill_awidgets)
-		fill_aw->replace_all_attributes_with(control_fill_aw);
+		fill_aw->entangle_with(control_fill_aw);
 }
 
 void CustomizePanel::replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw)
 {
 	for (NumberAW* number_aw : m_number_awidgets)
-		number_aw->replace_all_attributes_with(control_number_aw);
+		number_aw->entangle_with(control_number_aw);
 }
 
 void CustomizePanel::replace_all_state_awidgets_attrs_with(StateAW* control_state_aw)
 {
 	for (StateAW* state_aw : m_state_awidgets)
-		state_aw->replace_all_attributes_with(control_state_aw);
+		state_aw->entangle_with(control_state_aw);
 }
 
 void CustomizePanel::replace_all_widget_buttons_attrs_with(Button* control_widget_button)
 {
 	for (Button* widget_button : m_widget_buttons)
-		widget_button->replace_all_attributes_with(control_widget_button);
+		widget_button->entangle_with(control_widget_button);
 }
 
 void CustomizePanel::replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
 {
 	for (CornerRadiiAW* corner_radii_aw : m_corner_radii_awidgets)
-		corner_radii_aw->replace_all_attributes_with(control_corner_radii_aw);
+		corner_radii_aw->entangle_with(control_corner_radii_aw);
 }
 
 void CustomizePanel::setup_layout()
 {
 	if (!m_layout_setup)
 	{
-		//// States Layout
-		//
-		//m_states_layout->setContentsMargins(6, 0, 0, 0);
-		//m_states_layout->setSpacing(13);
-		//m_states_layout->addWidget(m_state_label);
-		//m_states_layout->addWidget(m_state_combobox);
-		//m_states_layout->addStretch();
-		//
-		//// Stateful Attributes Layout
-		//
-		//m_stateful_attributes_layout->setContentsMargins(0, 0, 0, 0);
-		//m_stateful_attributes_layout->setSpacing(3);
-		//
-		// Stateless Attributes Layout
-		
-		//m_stateless_attributes_layout->setContentsMargins(0, 0, 0, 0);
-		//m_stateless_attributes_layout->setSpacing(3);
-
 		// Attribute Layout HBox 1
 
 		QHBoxLayout* attributes_label_layout = new QHBoxLayout;
@@ -437,29 +381,9 @@ void CustomizePanel::setup_layout()
 		m_attributes_layout->setContentsMargins(0, 0, 0, 0);
 		m_attributes_layout->setSpacing(3);
 		m_attributes_layout->addLayout(attributes_label_layout);
+		m_attributes_layout->addSpacing(8);
 
-		/*if (!m_stateful_attribute_widgets.isEmpty())
-		{
-			m_attributes_layout->addWidget(m_stateful_attributes_label);
-			m_attributes_layout->addSpacing(8);
-			m_attributes_layout->addLayout(m_states_layout);
-			m_attributes_layout->addSpacing(15);
-			m_attributes_layout->addLayout(m_stateful_attributes_layout);
-			m_attributes_layout->setAlignment(m_stateful_attributes_label, Qt::AlignHCenter);
-
-			if (!m_stateless_attribute_widgets.isEmpty())
-			{
-				m_attributes_layout->addSpacing(8);
-				m_attributes_layout->addWidget(m_stateless_attributes_label);
-				m_attributes_layout->addSpacing(8);
-				m_attributes_layout->setAlignment(m_stateless_attributes_label, Qt::AlignHCenter);
-			}
-		}
-		else */m_attributes_layout->addSpacing(8);
-
-		//m_attributes_layout->addLayout(m_stateless_attributes_layout);
-
-		// Elements Layout
+		// Widgets Layout
 
 		QHBoxLayout* hbox2 = new QHBoxLayout;
 

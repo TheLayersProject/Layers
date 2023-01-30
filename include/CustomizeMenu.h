@@ -12,6 +12,8 @@
 
 namespace Layers
 {
+	class CustomizePanel;
+
 	class CustomizeMenu : public Menu
 	{
 		Q_OBJECT
@@ -38,7 +40,7 @@ namespace Layers
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void adjust_collapsed_widget();

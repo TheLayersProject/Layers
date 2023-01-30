@@ -13,7 +13,6 @@ namespace Layers
 		MiniSlider(double limit, QWidget* parent = nullptr);
 
 		void update_handle_pos();
-		void update_theme_dependencies();
 
 		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
 
@@ -24,7 +23,7 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_child_themeable_reference_list();
+		void init_child_themeable_list();
 
 	private:
 		void setup_layout();

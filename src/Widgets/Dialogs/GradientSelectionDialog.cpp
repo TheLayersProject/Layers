@@ -9,7 +9,7 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
     Dialog("Gradient", parent)
 {
     init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	setFixedSize(525, 325);
     installEventFilter(this);
@@ -91,7 +91,7 @@ void GradientSelectionDialog::init_attributes()
             this, &GradientSelectionDialog::update_color_control_positions);
     }
 
-    m_gradient_widget->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })), false);
+    m_gradient_widget->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
     m_gradient_widget->border.fill.set_value(QColor(Qt::black));
     m_gradient_widget->border.thickness.set_value(2.0);
     m_gradient_widget->corner_radii.top_left.set_value(8.0);
@@ -137,9 +137,9 @@ void GradientSelectionDialog::init_gradient_widget()
     m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops));
 }
 
-void GradientSelectionDialog::init_child_themeable_reference_list()
+void GradientSelectionDialog::init_child_themeable_list()
 {
-    store_child_themeable_pointer(m_apply_button);
+    add_child_themeable_pointer(m_apply_button);
 }
 
 void GradientSelectionDialog::update_gradient()

@@ -27,17 +27,20 @@ void ColorControl::click()
 	ColorDialog* color_dialog = new ColorDialog();
 	color_dialog->assign_tag_prefixes();
 
-	color_dialog->replace_all_attributes_with(
+	color_dialog->entangle_with(
 		layersApp->main_window()->control_color_dialog());
 
 	color_dialog->color.set_value(a_fill.as<QColor>());
 
 	if (color_dialog->exec())
 	{
-		if (a_fill.is_stateful())
-			a_fill.set_value(a_fill.state(), color_dialog->color.as<QColor>());
-		else
-			a_fill.set_value(color_dialog->color.as<QColor>());
+		// TODO: Remove
+		//if (a_fill.is_stateful())
+		//	a_fill.set_value(a_fill.state(), color_dialog->color.as<QColor>());
+		//else
+		//	a_fill.set_value(color_dialog->color.as<QColor>());
+
+		a_fill.set_value(color_dialog->color.as<QColor>());
 
 		emit color_changed();
 	}
@@ -53,7 +56,7 @@ void ColorControl::disable_clicking(bool cond)
 void ColorControl::init_attributes()
 {
 	// Remove control attribute
-	m_attributes.remove("fill");
+	m_entities.remove("fill");
 
 	border.fill.set_value(QColor("#D6D6D6"));
 	border.thickness.set_value(2.0);

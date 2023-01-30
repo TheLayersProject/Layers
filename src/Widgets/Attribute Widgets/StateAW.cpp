@@ -6,7 +6,7 @@ using Layers::StateAW;
 
 StateAW::StateAW(QWidget* parent) : AttributeWidget(nullptr, parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	m_label->set_name("label");
@@ -44,10 +44,10 @@ void StateAW::populate_state_combobox(const QList<QString>& states)
 		m_state_combobox->add_item(state);
 }
 
-void StateAW::init_child_themeable_reference_list()
+void StateAW::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_label);
-	store_child_themeable_pointer(m_state_combobox);
+	add_child_themeable_pointer(m_label);
+	add_child_themeable_pointer(m_state_combobox);
 }
 
 void StateAW::setup_layout()

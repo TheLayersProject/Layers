@@ -7,13 +7,14 @@
 #include <algorithm>
 
 using Layers::Combobox;
+using Layers::ComboboxItem;
 
 Combobox::Combobox(QWidget* parent) : Widget(parent)
 {
     connect(m_line_edit, &QLineEdit::returnPressed, this, &Combobox::line_edit_return_pressed);
 
     init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
     installEventFilter(this);
 
@@ -76,7 +77,7 @@ void Combobox::add_item(const QString& item)
 		}
 	}
 
-    combobox_item->replace_all_attributes_with(m_control_combobox_item);
+    combobox_item->entangle_with(m_control_combobox_item);
 
     m_drop_down_layout->addWidget(combobox_item);
 
@@ -137,12 +138,12 @@ void Combobox::init_attributes()
     m_drop_down->a_fill.set_disabled();
 }
 
-void Combobox::init_child_themeable_reference_list()
+void Combobox::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_current_item_label);
-    store_child_themeable_pointer(m_drop_down);
+	add_child_themeable_pointer(m_current_item_label);
+    add_child_themeable_pointer(m_drop_down);
 
-	m_drop_down->store_child_themeable_pointer(m_control_combobox_item);
+	m_drop_down->add_child_themeable_pointer(m_control_combobox_item);
 }
 
 void Combobox::set_current_item(const QString& item)

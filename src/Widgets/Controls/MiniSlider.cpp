@@ -11,7 +11,7 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	installEventFilter(this);
 	setFixedSize(45, 45);
@@ -57,10 +57,10 @@ void MiniSlider::init_attributes()
 	m_handle->a_fill.set_value(QColor(Qt::red));
 }
 
-void MiniSlider::init_child_themeable_reference_list()
+void MiniSlider::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_bar);
-	store_child_themeable_pointer(m_handle);
+	add_child_themeable_pointer(m_bar);
+	add_child_themeable_pointer(m_handle);
 }
 
 void MiniSlider::update_handle_pos()
@@ -71,16 +71,11 @@ void MiniSlider::update_handle_pos()
 	m_handle->move(drag_increment * a_value.as<double>() + 5, m_handle->y()); // 5 is left margin
 }
 
-void MiniSlider::update_theme_dependencies()
-{
-	update_handle_pos();
-}
-
 void MiniSlider::set_current_editting_state(const QString& state)
 {
 	a_value.set_state(state);
 
-	update_theme_dependencies();
+	update_handle_pos();
 
 	// Might need to do more here or add state support is other functions in this document
 }
@@ -130,32 +125,13 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 			double new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
 
 			if (new_value < 0.0)
-			{
-				if (a_value.as<double>() != 0.0)
-				{
-					if (a_value.is_stateful())
-						a_value.set_value(a_value.state(), QVariant::fromValue(0.0));
-					else
-						a_value.set_value(0.0);
-				}
-			}
+				a_value.set_value(0.0);
+
 			else if (new_value > m_limit)
-			{
-				if (a_value.as<double>() != m_limit)
-				{
-					if (a_value.is_stateful())
-						a_value.set_value(a_value.state(), QVariant::fromValue(m_limit));
-					else
-						a_value.set_value(m_limit);
-				}
-			}
+				a_value.set_value(m_limit);
+
 			else
-			{
-				if (a_value.is_stateful())
-					a_value.set_value(a_value.state(), QVariant::fromValue(new_value));
-				else
-					a_value.set_value(new_value);
-			}
+				a_value.set_value(new_value);
 		}
 	}
 

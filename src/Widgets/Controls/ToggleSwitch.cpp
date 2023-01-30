@@ -9,7 +9,7 @@ using Layers::ToggleSwitch;
 ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	m_vertical{ vertical }, Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 	init_attributes();
 
 	installEventFilter(this);
@@ -190,9 +190,9 @@ void ToggleSwitch::init_attributes()
 	//	});
 }
 
-void ToggleSwitch::init_child_themeable_reference_list()
+void ToggleSwitch::init_child_themeable_list()
 {
-	store_child_themeable_pointer(m_square);
+	add_child_themeable_pointer(m_square);
 }
 
 void ToggleSwitch::setup_layout()

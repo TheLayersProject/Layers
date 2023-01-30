@@ -7,7 +7,7 @@ using Layers::Titlebar;
 
 Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_reference_list();
+	init_child_themeable_list();
 
 	setFixedHeight(45);
 
@@ -72,7 +72,7 @@ void Titlebar::add_mll(MenuLabelLayer* mll)
 
     m_buttons_container->raise();
 
-    mll->replace_all_attributes_with(m_control_mll);
+    mll->entangle_with(m_control_mll);
 }
 
 void Titlebar::remove_mlls_past(int index)
@@ -93,14 +93,14 @@ void Titlebar::remove_mlls_past(int index)
     }
 }
 
-void Titlebar::init_child_themeable_reference_list()
+void Titlebar::init_child_themeable_list()
 {
-    store_child_themeable_pointer(m_window_title_label);
-    store_child_themeable_pointer(m_control_mll);
-    store_child_themeable_pointer(m_settings_button);
-    store_child_themeable_pointer(m_minimize_button);
-    store_child_themeable_pointer(m_maximize_button);
-    store_child_themeable_pointer(m_exit_button);
+    add_child_themeable_pointer(m_window_title_label);
+    add_child_themeable_pointer(m_control_mll);
+    add_child_themeable_pointer(m_settings_button);
+    add_child_themeable_pointer(m_minimize_button);
+    add_child_themeable_pointer(m_maximize_button);
+    add_child_themeable_pointer(m_exit_button);
 }
 
 bool Titlebar::is(QWidget* widget)
