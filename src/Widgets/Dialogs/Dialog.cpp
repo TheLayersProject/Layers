@@ -14,7 +14,6 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	m_window_title_label{ new Label(title) }, QDialog(parent)
 {
 	init_attributes();
-	init_child_themeable_list();
 	init_titlebar();
 
 	setFixedSize(525, 300);
@@ -84,11 +83,6 @@ void Dialog::init_attributes()
 
 	for (Attribute* margin : margins)
 		connect(margin, &Entity::value_changed, this, &Dialog::update_content_margins);
-}
-
-void Dialog::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_titlebar);
 }
 
 bool Dialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)

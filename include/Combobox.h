@@ -26,7 +26,6 @@ namespace Layers
 
 	protected:
 		void init_attributes();
-		void init_child_themeable_list();
 
 	private:
 		Label* m_item_label;
@@ -76,7 +75,6 @@ namespace Layers
 		virtual bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -85,8 +83,13 @@ namespace Layers
 		bool m_disabled{ false };
 		bool m_item_renaming_disabled{ true };
 
-		ComboboxItem* m_control_combobox_item{ new ComboboxItem("") };
+		Widget* m_control_drop_down{ new Widget(this) };
+
+		ComboboxItem* m_control_combobox_item{ new ComboboxItem("", m_control_drop_down) };
+
 		ComboboxItem* m_current_combobox_item{ nullptr };
+
+		Widget* m_drop_down{ new Widget };
 
 		Label* m_current_item_label{ new Label(this) };
 
@@ -95,8 +98,6 @@ namespace Layers
 		QList<ComboboxItem*> m_combobox_items;
 
 		QVBoxLayout* m_drop_down_layout{ new QVBoxLayout };
-
-		Widget* m_drop_down{ new Widget };
 	};
 }
 

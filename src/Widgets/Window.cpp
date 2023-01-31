@@ -1,5 +1,4 @@
 #include "../../include/AttributeWidgets.h"
-#include "../../include/Application.h"
 #include "../../include/calculate.h"
 #include "../../include/CustomizePanel.h"
 #include "../../include/Window.h"
@@ -12,7 +11,7 @@
 
 using Layers::ColorDialog;
 using Layers::CustomizeMenu;
-using Layers::GradientSelectionDialog;
+using Layers::GradientDialog;
 using Layers::Menu;
 using Layers::SettingsMenu;
 using Layers::Theme;
@@ -45,8 +44,6 @@ Window::Window(bool preview, QWidget* parent) :
 	connect(m_settings_menu->themes_settings_panel()->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
 	connect(m_settings_menu->themes_settings_panel()->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
 
-	init_child_themeable_list();
-
 	set_name("window");
 	set_proper_name("Window");
 	border.thickness.set_value(15.0);
@@ -64,10 +61,13 @@ Window::Window(bool preview, QWidget* parent) :
 
 	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
 
+	m_control_color_dialog->hide();
 	m_control_color_dialog->set_proper_name("Color Dialog");
 
-	m_control_gradient_selection_dialog->set_proper_name("Gradient Selection Dialog");
+	m_control_gradient_selection_dialog->hide();
+	m_control_gradient_selection_dialog->set_proper_name("Gradient Dialog");
 
+	m_control_update_dialog->hide();
 	m_control_update_dialog->set_proper_name("Update Dialog");
 
 	m_app_menu->a_fill.set_disabled();
@@ -134,23 +134,9 @@ void Window::set_main_widget(Widget* main_widget)
 	//	m_customize_menu->preview_window()->build_main_widget<T>();
 }
 
-void Window::apply_theme(Theme& theme)
-{
-	Themeable::apply_theme(theme);
-
-	// TODO: The following should be handled in the CustomizeMenu class
-	if (m_customize_menu->preview_widget())
-	{
-		m_customize_menu->preview_widget()->apply_theme(theme);
-		//m_customize_menu->preview_window()->settings_menu()->themes_settings_panel()->theme_combobox()->set_current_item(theme.name());
-	}
-
-	//issue_update(); // Is this necessary???????????????????????
-}
-
 void Window::assign_tag_prefixes()
 {
-	for (Themeable* themeable_child_element : m_child_themeables)
+	for (Themeable* themeable_child_element : child_themeables())
 	{
 		themeable_child_element->assign_tag_prefixes(m_tag_prefixes, "");
 	}
@@ -168,7 +154,7 @@ ColorDialog* Window::control_color_dialog() const
 	return m_control_color_dialog;
 }
 
-GradientSelectionDialog* Window::control_gradient_selection_dialog() const
+GradientDialog* Window::control_gradient_selection_dialog() const
 {
 	return m_control_gradient_selection_dialog;
 }
@@ -184,17 +170,6 @@ void Window::finalize()
 
 	apply_theme(*layersApp->current_theme()); // Sets initial theme
 	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
-}
-
-void Window::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_titlebar);
-	add_child_themeable_pointer(m_settings_menu);
-	add_child_themeable_pointer(m_customize_menu);
-	add_child_themeable_pointer(m_create_new_theme_dialog);
-	add_child_themeable_pointer(m_control_color_dialog);
-	add_child_themeable_pointer(m_control_gradient_selection_dialog);
-	add_child_themeable_pointer(m_control_update_dialog);
 }
 
 void Window::update_theme_dependencies()

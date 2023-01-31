@@ -9,10 +9,6 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 	m_attribute_label{ new Label(attribute->capitalized_name()) },
 	AttributeWidget(attribute, parent)
 {
-	init_child_themeable_list();
-
-	//m_attribute = attribute;
-
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_proper_name("Label");
@@ -80,10 +76,4 @@ void ColorAW::set_centered(bool centered)
 void ColorAW::set_current_editting_state(const QString& state)
 {
 	m_color_control->set_current_editting_state(state);
-}
-
-void ColorAW::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_attribute_label);
-	if (m_disabled_toggle) add_child_themeable_pointer(m_disabled_toggle);
 }

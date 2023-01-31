@@ -14,10 +14,10 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     connect(m_line_edit, &QLineEdit::returnPressed, this, &Combobox::line_edit_return_pressed);
 
     init_attributes();
-	init_child_themeable_list();
 
     installEventFilter(this);
 
+    m_control_combobox_item->hide();
 	m_control_combobox_item->set_proper_name("Combobox Items");
 
     m_current_item_label->set_font_size(15);
@@ -27,13 +27,19 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
 
     a_line_edit_text_color.entangle_with(m_current_item_label->a_text_color);
 
+    m_control_drop_down->hide();
+    m_control_drop_down->set_icon(new Graphic(":/svgs/drop_down_icon.svg", QSize(21, 18)));
+    m_control_drop_down->set_name("drop_down");
+    m_control_drop_down->set_proper_name("Drop Down");
+
+    m_drop_down->entangle_with(m_control_drop_down);
     m_drop_down->installEventFilter(this);
     m_drop_down->setWindowFlags(Qt::FramelessWindowHint);
     m_drop_down->setAttribute(Qt::WA_TranslucentBackground);
     m_drop_down->setMouseTracking(true);
-    m_drop_down->set_icon(new Graphic(":/svgs/drop_down_icon.svg", QSize(21, 18)));
-    m_drop_down->set_name("drop_down");
-    m_drop_down->set_proper_name("Drop Down");
+    //m_drop_down->set_icon(new Graphic(":/svgs/drop_down_icon.svg", QSize(21, 18)));
+    //m_drop_down->set_name("drop_down");
+    //m_drop_down->set_proper_name("Drop Down");
 
     m_line_edit->installEventFilter(this);
     m_line_edit->setStyleSheet("QLineEdit { border: none; background: transparent; padding-left: " + QString::number(width() * 0.09 - 2) + "px; color: " + a_line_edit_text_color.as<QColor>().name() + "; }");
@@ -136,14 +142,6 @@ void Combobox::init_attributes()
     m_drop_down->corner_radii.bottom_left.set_value(10.0);
     m_drop_down->corner_radii.bottom_right.set_value(10.0);
     m_drop_down->a_fill.set_disabled();
-}
-
-void Combobox::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_current_item_label);
-    add_child_themeable_pointer(m_drop_down);
-
-	m_drop_down->add_child_themeable_pointer(m_control_combobox_item);
 }
 
 void Combobox::set_current_item(const QString& item)

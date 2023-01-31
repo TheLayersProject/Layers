@@ -47,12 +47,6 @@ void Slider::init_attributes()
 	m_handle->corner_radii.bottom_right.set_value(3.0);
 }
 
-void Slider::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_bar);
-	add_child_themeable_pointer(m_handle);
-}
-
 void Slider::set_value(double value)
 {
 	a_value.set_value(QVariant::fromValue(value));
@@ -160,7 +154,6 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 void Slider::init()
 {
 	init_attributes();
-	init_child_themeable_list();
 
 	installEventFilter(this);
 	setFixedSize(244, 45);

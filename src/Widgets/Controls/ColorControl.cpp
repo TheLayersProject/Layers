@@ -34,12 +34,6 @@ void ColorControl::click()
 
 	if (color_dialog->exec())
 	{
-		// TODO: Remove
-		//if (a_fill.is_stateful())
-		//	a_fill.set_value(a_fill.state(), color_dialog->color.as<QColor>());
-		//else
-		//	a_fill.set_value(color_dialog->color.as<QColor>());
-
 		a_fill.set_value(color_dialog->color.as<QColor>());
 
 		emit color_changed();

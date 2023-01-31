@@ -23,7 +23,6 @@ namespace Layers
 
 	protected:
 		void init_attributes();
-		void init_child_themeable_list();
 
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 

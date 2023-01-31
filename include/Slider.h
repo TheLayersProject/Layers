@@ -29,7 +29,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_child_themeable_list();
 
 	private:
 		void init();

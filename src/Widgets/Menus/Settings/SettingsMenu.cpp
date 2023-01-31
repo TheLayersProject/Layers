@@ -10,8 +10,6 @@ using Layers::ThemesSettingsPanel;
 SettingsMenu::SettingsMenu(QWidget* parent) :
 	Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
 {
-	init_child_themeable_list();
-
 	setMouseTracking(true);
 
 	installEventFilter(this);
@@ -65,13 +63,6 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 	int active_tab_index = m_settings_tabs.indexOf(settings_tab);
 
 	m_sidebar_layout->insertWidget(m_sidebar_layout->count() - 1, settings_tab);
-}
-
-void SettingsMenu::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_sidebar);
-	add_child_themeable_pointer(m_app_preferences_settings_panel);
-	add_child_themeable_pointer(m_themes_settings_panel);
 }
 
 int SettingsMenu::largest_tab_index() const

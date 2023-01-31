@@ -31,8 +31,6 @@ namespace Layers
 		Button* exit_button() const;
 
 	protected:
-		void init_child_themeable_list();
-
 		void resizeEvent(QResizeEvent* event);
 
 		void setup_layout();
@@ -55,7 +53,7 @@ namespace Layers
 
 		MenuLabelLayer* m_base_mll{ nullptr };
 
-		MenuLabelLayer* m_control_mll{ new MenuLabelLayer(new Menu("Control Menu", new Graphic(":/svgs/icon_icon.svg", QSize(20, 20)))) };
+		MenuLabelLayer* m_control_mll{ new MenuLabelLayer(new Menu("Control Menu", new Graphic(":/svgs/icon_icon.svg", QSize(20, 20))), this) };
 
 		Widget* m_stretch_widget{ new Widget };
 	};

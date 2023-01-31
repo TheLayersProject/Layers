@@ -141,7 +141,7 @@
     <ClCompile Include="src\Widgets\Menus\Settings\SettingsTab.cpp">
       <Filter>Source Files\Widgets\Menus\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionDialog.cpp">
+    <ClCompile Include="src\Widgets\Dialogs\GradientDialog.cpp">
       <Filter>Source Files\Widgets\Dialogs</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Dialogs\UpdateDialog.cpp">
@@ -230,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="src\Widgets\ScrollBar.cpp">
       <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Dialogs\FillDialog.cpp">
+      <Filter>Source Files\Widgets\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,7 +325,7 @@
     <QtMoc Include="include\CreateNewThemeDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\GradientSelectionDialog.h">
+    <QtMoc Include="include\GradientDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\UpdateDialog.h">
@@ -365,6 +368,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ColorPlane.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\FillDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

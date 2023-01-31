@@ -12,9 +12,6 @@ namespace Layers
 	public:
 		UpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
 
-	protected:
-		void init_child_themeable_list();
-
 	private:
 		void setup_layout();
 

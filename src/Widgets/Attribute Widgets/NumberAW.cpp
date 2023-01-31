@@ -11,10 +11,6 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	m_slider{ new MiniSlider(int_validator->top()) },
 	AttributeWidget(attribute, parent)
 {
-	init_child_themeable_list();
-
-	//m_attribute = attribute;
-
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_proper_name("Label");
@@ -66,14 +62,6 @@ void NumberAW::set_centered(bool centered)
 void NumberAW::set_unit_label_text(const QString& unit_string)
 {
 	//m_unit_label->setText(unit_string);
-}
-
-void NumberAW::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_attribute_label);
-	add_child_themeable_pointer(m_line_editor);
-	add_child_themeable_pointer(m_slider);
-	//add_child_themeable_pointer(m_unit_label);
 }
 
 void NumberAW::setup_layout()

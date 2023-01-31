@@ -1,5 +1,5 @@
-#ifndef GRADIENTSELECTIONDIALOG_H
-#define GRADIENTSELECTIONDIALOG_H
+#ifndef GRADIENTDIALOG_H
+#define GRADIENTDIALOG_H
 
 #include <QTimer>
 
@@ -10,12 +10,12 @@
 
 namespace Layers
 {
-	class GradientSelectionDialog : public Dialog
+	class GradientDialog : public Dialog
 	{
 		Q_OBJECT
 
 	public:
-		GradientSelectionDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
+		GradientDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
 
 		void add_gradient_stop(double stop_val, QColor color);
 
@@ -31,7 +31,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_child_themeable_list();
 
 	private:
 		void init_color_controls();
@@ -60,4 +59,4 @@ namespace Layers
 	};
 }
 
-#endif // GRADIENTSELECTIONDIALOG_H
+#endif // GRADIENTDIALOG_H

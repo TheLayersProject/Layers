@@ -34,7 +34,6 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 		void init_attributes();
-		void init_child_themeable_list();
 
 		void resizeEvent(QResizeEvent* event);
 
@@ -79,8 +78,6 @@ namespace Layers
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
-
-		void init_child_themeable_list();
 
 	private slots:
 		void shrink_tabs();

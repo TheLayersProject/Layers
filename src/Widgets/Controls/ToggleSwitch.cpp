@@ -9,7 +9,6 @@ using Layers::ToggleSwitch;
 ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	m_vertical{ vertical }, Widget(parent)
 {
-	init_child_themeable_list();
 	init_attributes();
 
 	installEventFilter(this);
@@ -24,6 +23,8 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	m_spacer->hide();
 
 	setup_layout();
+
+	set_state("Untoggled");
 }
 
 void ToggleSwitch::setFixedHeight(int h)
@@ -131,11 +132,7 @@ void ToggleSwitch::init_attributes()
 		{ "Toggled", QColor("#6fc65b") }
 		});
 	if (m_vertical)
-	{
-		margins.top.set_value(12.0);
-		margins.left.set_value(12.0);
-		margins.right.set_value(12.0);
-	}
+		set_margin(12.0);
 	else
 	{
 		margins.top.set_value(12.0);
@@ -152,10 +149,7 @@ void ToggleSwitch::init_attributes()
 		});
 
 	//m_spacer->a_fill.set_disabled();
-	m_spacer->a_fill.set_value(QColor(Qt::blue));
-
-	// Set initial state
-	set_state("Untoggled");;
+	m_spacer->a_fill.set_value(QColor(Qt::blue));	
 
 	//connect(&a_margin_left, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
@@ -188,11 +182,6 @@ void ToggleSwitch::init_attributes()
 	//connect(&a_padding_bottom, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();
 	//	});
-}
-
-void ToggleSwitch::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_square);
 }
 
 void ToggleSwitch::setup_layout()

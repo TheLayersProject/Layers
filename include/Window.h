@@ -1,10 +1,11 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "Application.h"
 #include "ColorDialog.h"
 #include "CreateNewThemeDialog.h"
 #include "CustomizeMenu.h"
-#include "GradientSelectionDialog.h"
+#include "GradientDialog.h"
 #include "SettingsMenu.h"
 #include "Titlebar.h"
 #include "UpdateDialog.h"
@@ -22,8 +23,6 @@ namespace Layers
 
 		Menu* app_menu() const;
 
-		void apply_theme(Theme& theme);
-
 		void assign_tag_prefixes();
 
 		template<typename T>
@@ -33,7 +32,7 @@ namespace Layers
 
 		ColorDialog* control_color_dialog() const;
 
-		GradientSelectionDialog* control_gradient_selection_dialog() const;
+		GradientDialog* control_gradient_selection_dialog() const;
 
 		CustomizeMenu* customize_menu() const;
 
@@ -63,8 +62,6 @@ namespace Layers
 		void settings_clicked();
 
 	protected:
-		void init_child_themeable_list();
-
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
@@ -77,11 +74,11 @@ namespace Layers
 
 		CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
 
-		ColorDialog* m_control_color_dialog{ new ColorDialog };
+		ColorDialog* m_control_color_dialog{ new ColorDialog(this) };
 
-		GradientSelectionDialog* m_control_gradient_selection_dialog{ new GradientSelectionDialog(QGradientStops()) };
+		GradientDialog* m_control_gradient_selection_dialog{ new GradientDialog(QGradientStops(), this) };
 
-		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "")};
+		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "", this) };
 
 		QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
@@ -108,8 +105,8 @@ namespace Layers
 
 		//m_main_widget->set_icon(new Graphic(layersApp->icon_file()->fileName()));
 		m_main_widget->set_is_app_themeable(true);
-		//m_main_widget->apply_theme(*layersApp->current_theme());
-		m_main_widget->apply_theme(*m_current_theme);
+		m_main_widget->apply_theme(*layersApp->current_theme());
+		//m_main_widget->apply_theme(*m_current_theme);
 
 		add_child_themeable_pointer(m_main_widget);
 

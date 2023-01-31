@@ -84,8 +84,6 @@ Graphic* Button::graphic() const
 
 void Button::init()
 {
-	init_child_themeable_list();
-
 	setup_layout();
 
 	installEventFilter(this);
@@ -117,13 +115,6 @@ void Button::init()
 	}
 
 	resize();
-}
-
-void Button::init_child_themeable_list()
-{
-	if (m_graphic) add_child_themeable_pointer(m_graphic);
-	if (m_graphic_after) add_child_themeable_pointer(m_graphic_after);
-	if (m_text_label) add_child_themeable_pointer(m_text_label);
 }
 
 void Button::resize()

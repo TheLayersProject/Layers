@@ -6,7 +6,6 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	Dialog("Create New Theme", parent)
 {
 	init_attributes();
-	init_child_themeable_list();
 
 	set_name("create_new_theme_dialog");
 
@@ -110,15 +109,6 @@ void CreateNewThemeDialog::init_attributes()
 	m_theme_name_line_edit->corner_radii.bottom_left.set_value(7.0);
 	m_theme_name_line_edit->corner_radii.bottom_right.set_value(7.0);
 	m_theme_name_line_edit->a_left_padding.set_value(10.0);
-}
-
-void CreateNewThemeDialog::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_create_button);
-	add_child_themeable_pointer(m_name_label);
-	add_child_themeable_pointer(m_start_as_label);
-	add_child_themeable_pointer(m_start_theme_combobox);
-	add_child_themeable_pointer(m_theme_name_line_edit);
 }
 
 void CreateNewThemeDialog::setup_layout()

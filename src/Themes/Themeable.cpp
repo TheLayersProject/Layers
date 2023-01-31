@@ -20,7 +20,7 @@ Themeable::~Themeable()
 
 void Themeable::add_child_themeable_pointer(Themeable* child_themeable)
 {
-	m_child_themeables.append(child_themeable);
+	//m_child_themeables.append(child_themeable);
 
 	if (m_tag_prefixes_assigned)
 	{
@@ -36,6 +36,35 @@ void Themeable::apply_theme(Theme& theme)
 	if (!m_name) qDebug() << "Unable to apply theme.  You must apply a name to the widget first.";
 	else
 	{
+		QList<Themeable*> children = child_themeables(Qt::FindChildrenRecursively);
+
+		if (!children.isEmpty())
+		{
+			for (Themeable* child_themeable : children)
+			{
+				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
+				{
+					qDebug() << child_themeable->tag();
+
+					if (theme.contains_attributes_for_tag(child_themeable->tag()))
+					{
+						QMap<QString, Entity*>& theme_attrs = theme[child_themeable->tag()];
+
+						for (Entity* entity : child_themeable->m_entities)
+						{
+							if (theme_attrs.contains(entity->name()))
+							{
+								if (Attribute* attr = dynamic_cast<Attribute*>(entity))
+									attr->copy(*dynamic_cast<Attribute*>(theme_attrs[attr->name()]));
+								else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
+									attr_group->copy(*dynamic_cast<AttributeGroup*>(theme_attrs[attr_group->name()]));
+							}
+						}
+					}
+				}
+			}
+		}
+
 		if (theme.contains_attributes_for_tag(tag()))
 		{
 			QMap<QString, Entity*>& theme_attrs = theme[tag()];
@@ -52,38 +81,60 @@ void Themeable::apply_theme(Theme& theme)
 			}
 		}
 
-		for (Themeable* child_themeable : m_child_themeables)
-			child_themeable->apply_theme(theme);
+		//for (Themeable* child_themeable : m_child_themeables)
+		//	child_themeable->apply_theme(theme);
 	}
 }
 
 void Themeable::assign_tag_prefixes(QStringList parent_prefixes, const QString& parent_name)
 {
-	if (parent_name != "")
+	if (m_name)
 	{
-		m_tag_prefixes.append(parent_prefixes);
-		m_tag_prefixes.append(parent_name);
-	}
+		if (parent_name != "")
+		{
+			m_tag_prefixes.append(parent_prefixes);
+			m_tag_prefixes.append(parent_name);
+		}
 
-	for (Themeable* child_themeable : m_child_themeables)
-	{
-		child_themeable->assign_tag_prefixes(m_tag_prefixes, *m_name);
-	}
+		for (Themeable* child_themeable : child_themeables())
+		{
+			child_themeable->assign_tag_prefixes(m_tag_prefixes, *m_name);
+		}
 
-	m_tag_prefixes_assigned = true;
+		m_tag_prefixes_assigned = true;
+	}
 }
 
-QList<Themeable*>& Themeable::child_themeables()
+QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 {
-	return m_child_themeables;
+	QList<Themeable*> child_themeables = QList<Themeable*>();
+
+	if (QWidget* widget = dynamic_cast<QWidget*>(this))
+	{
+		/*
+			NOTE: Qt 6.3 adds an overload for QObject::findChildren() that
+			lets the caller pass only a Qt::FindChildOptions argument.
+		*/
+		QList<QWidget*> child_widgets = widget->findChildren<QWidget*>(QString(), options);
+
+		if (!child_widgets.isEmpty())
+		{
+			for (QWidget* child_widget : child_widgets)
+				if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_widget))
+					child_themeables.append(child_themeable);
+		}
+	}
+
+	return child_themeables;
 }
 
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
 	theme->copy_attribute_values_of(this);
 
-	for (Themeable* child_themeable : m_child_themeables)
-		child_themeable->copy_attribute_values_to(theme);
+	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
+		theme->copy_attribute_values_of(child_themeable);
+		//child_themeable->copy_attribute_values_to(theme);
 }
 
 QMap<QString, Entity*>& Themeable::entities()
@@ -140,8 +191,9 @@ void Themeable::set_is_app_themeable(bool is_app_themeable)
 {
 	m_is_app_themeable = is_app_themeable;
 
-	for (Themeable* m_child_themeable : m_child_themeables)
-		m_child_themeable->set_is_app_themeable(is_app_themeable);
+	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
+		child_themeable->m_is_app_themeable = is_app_themeable;
+		//m_child_themeable->set_is_app_themeable(is_app_themeable);
 }
 
 void Themeable::set_name(const QString& name)
@@ -172,7 +224,7 @@ void Themeable::set_state(const QString& state)
 				attr_group->set_state(state);
 		}
 
-		for (Themeable* child_themeable : m_child_themeables)
+		for (Themeable* child_themeable : child_themeables())
 			child_themeable->set_state(state);
 	}
 }
@@ -225,7 +277,8 @@ QString& Themeable::tag()
 			m_tag += supplemental_prefix + "/";
 		}
 
-		if (m_name) m_tag += *m_name;
+		if (m_name)
+			m_tag += *m_name;
 	}
 
 	return m_tag;
@@ -237,7 +290,7 @@ void Themeable::unassign_prefixes()
 
 	m_tag_prefixes_assigned = false;
 
-	for (Themeable* child_themeable : m_child_themeables)
+	for (Themeable* child_themeable : child_themeables())
 	{
 		child_themeable->unassign_prefixes();
 	}

@@ -1,20 +1,19 @@
-#include "../../../include/GradientSelectionDialog.h"
+#include "../../../include/GradientDialog.h"
 
 #include <QApplication>
 #include <QMouseEvent>
 
-using Layers::GradientSelectionDialog;
+using Layers::GradientDialog;
 
-GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, QWidget* parent) :
+GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
     Dialog("Gradient", parent)
 {
     init_attributes();
-	init_child_themeable_list();
 
 	setFixedSize(525, 325);
     installEventFilter(this);
 
-    set_name("gradient_selection_dialog");
+    set_name("gradient_dialog");
     
     m_gradient_stops = gradient_stops;
 
@@ -33,10 +32,10 @@ GradientSelectionDialog::GradientSelectionDialog(QGradientStops gradient_stops, 
 
     m_single_click_timer.setSingleShot(true);
 
-    connect(&m_single_click_timer, &QTimer::timeout, this, &GradientSelectionDialog::click_control);
+    connect(&m_single_click_timer, &QTimer::timeout, this, &GradientDialog::click_control);
 }
 
-void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
+void GradientDialog::add_gradient_stop(double stop_val, QColor color)
 {
     ColorControl* color_control = new ColorControl(this);
     color_control->show();
@@ -75,12 +74,12 @@ void GradientSelectionDialog::add_gradient_stop(double stop_val, QColor color)
     update_gradient();
 }
 
-QGradientStops GradientSelectionDialog::gradient_stops() const
+QGradientStops GradientDialog::gradient_stops() const
 {
     return m_gradient_stops;
 }
 
-void GradientSelectionDialog::init_attributes()
+void GradientDialog::init_attributes()
 {
     for (Entity* entity :
         QList<Entity*>({
@@ -88,7 +87,7 @@ void GradientSelectionDialog::init_attributes()
             &margins.left, &margins.top, &margins.right, &margins.bottom }))
     {
         connect(entity, &Entity::value_changed,
-            this, &GradientSelectionDialog::update_color_control_positions);
+            this, &GradientDialog::update_color_control_positions);
     }
 
     m_gradient_widget->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
@@ -100,7 +99,7 @@ void GradientSelectionDialog::init_attributes()
     m_gradient_widget->corner_radii.bottom_right.set_value(8.0);
 }
 
-void GradientSelectionDialog::init_color_controls()
+void GradientDialog::init_color_controls()
 {
     for (int i = 0; i < m_gradient_stops.count(); i++)
     {
@@ -130,19 +129,14 @@ void GradientSelectionDialog::init_color_controls()
     }
 }
 
-void GradientSelectionDialog::init_gradient_widget()
+void GradientDialog::init_gradient_widget()
 {
     m_gradient_widget->setFixedSize(448, 176);
 
     m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops));
 }
 
-void GradientSelectionDialog::init_child_themeable_list()
-{
-    add_child_themeable_pointer(m_apply_button);
-}
-
-void GradientSelectionDialog::update_gradient()
+void GradientDialog::update_gradient()
 {
     m_gradient_stops = QGradientStops();
 
@@ -157,14 +151,14 @@ void GradientSelectionDialog::update_gradient()
     m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops)); // , true);
 }
 
-void GradientSelectionDialog::click_control()
+void GradientDialog::click_control()
 {
     m_clicking_color_control->click();
 
     m_clicking_color_control = nullptr;
 }
 
-void GradientSelectionDialog::update_color_control_positions()
+void GradientDialog::update_color_control_positions()
 {
     if (!isVisible())
         m_main_layout->activate();
@@ -181,7 +175,7 @@ void GradientSelectionDialog::update_color_control_positions()
     }
 }
 
-bool GradientSelectionDialog::eventFilter(QObject* object, QEvent* event)
+bool GradientDialog::eventFilter(QObject* object, QEvent* event)
 {
     if (event->type() == QEvent::MouseButtonPress)
     {
@@ -315,7 +309,7 @@ bool GradientSelectionDialog::eventFilter(QObject* object, QEvent* event)
     return false;
 }
 
-void GradientSelectionDialog::setup_layout()
+void GradientDialog::setup_layout()
 {
     QVBoxLayout* layout = new QVBoxLayout;
 

@@ -11,7 +11,6 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_list();
 
 	installEventFilter(this);
 	setFixedSize(45, 45);
@@ -55,12 +54,6 @@ void MiniSlider::init_attributes()
 	m_bar->a_fill.set_value(QColor(Qt::blue));
 
 	m_handle->a_fill.set_value(QColor(Qt::red));
-}
-
-void MiniSlider::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_bar);
-	add_child_themeable_pointer(m_handle);
 }
 
 void MiniSlider::update_handle_pos()

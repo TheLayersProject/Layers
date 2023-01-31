@@ -10,11 +10,16 @@ namespace Layers
 	class Theme;
 
 	/*!
-		Provides compatibility and structure for the Layers theme system.
+		The Themeable class is designed to be wrapped with QWidget classes to
+		provide them functionality to apply Layers Themes.
 
-		The Themeable class is designed to be wrapped with QWidget classes to allow them to be themed
-		in a Layers application. A themeable builds a theme tag from details provided during
-		initialization. The tag is used to retrieve attributes from themes.
+		Themeables are responsible for applying themes to
+		When a theme is applied to a themeable, the themeable also applies the
+		theme to the child themeables.
+		
+		A themeable builds a
+		theme tag from details provided during initialization. The tag is used
+		to retrieve attributes from themes.
 
 		Before a theme can be applied to a themeable, the themeable must have a name.
 		This is because a name is the minimum requirement to construct the theme tag.
@@ -70,7 +75,7 @@ namespace Layers
 		*/
 		void assign_tag_prefixes(QStringList parent_prefixes = QStringList(), const QString& parent_name = "");
 
-		QList<Themeable*>& child_themeables();
+		QList<Themeable*> child_themeables(Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
 		void copy_attribute_values_to(Theme* theme);
 
@@ -179,7 +184,7 @@ namespace Layers
 		void unassign_prefixes();
 
 	protected:
-		QList<Themeable*> m_child_themeables;
+		//QList<Themeable*> m_child_themeables;
 
 		Theme* m_current_theme{ nullptr };
 
@@ -218,11 +223,12 @@ namespace Layers
 			}
 
 			if (entangle_children)
-				for (Themeable* this_child_themeable : m_child_themeables)
+				for (Themeable* this_child_themeable : child_themeables())
 					if (this_child_themeable->m_name)
-						for (Themeable* child_themeable : themeable->m_child_themeables)
-							if (*child_themeable->m_name == *this_child_themeable->m_name)
-								this_child_themeable->entangle_with(child_themeable);
+						for (Themeable* child_themeable : themeable->child_themeables())
+							if (child_themeable->m_name)
+								if (*child_themeable->m_name == *this_child_themeable->m_name)
+									this_child_themeable->entangle_with(child_themeable);
 		}
 	}
 }

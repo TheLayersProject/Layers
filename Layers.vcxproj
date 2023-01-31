@@ -148,7 +148,8 @@
     <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp" />
-    <ClCompile Include="src\Widgets\Dialogs\GradientSelectionDialog.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\FillDialog.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\GradientDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\UpdateDialog.cpp" />
     <ClCompile Include="src\Widgets\Graphic.cpp" />
     <ClCompile Include="src\Widgets\ImageSequenceLabel.cpp" />
@@ -187,6 +188,7 @@
     <QtMoc Include="include\ColorPlane.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
+    <QtMoc Include="include\FillDialog.h" />
     <ClInclude Include="include\GitHubRepo.h" />
     <QtMoc Include="include\ScrollBar.h" />
     <QtMoc Include="include\Variant.h" />
@@ -198,7 +200,7 @@
     <QtMoc Include="include\Application.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />
-    <QtMoc Include="include\GradientSelectionDialog.h" />
+    <QtMoc Include="include\GradientDialog.h" />
     <QtMoc Include="include\CreateNewThemeDialog.h" />
     <QtMoc Include="include\Titlebar.h" />
     <QtMoc Include="include\MenuLabelLayer.h" />

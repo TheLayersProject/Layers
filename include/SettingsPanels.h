@@ -34,7 +34,6 @@ namespace Layers
 
 	protected:
 		void init_attributes();
-		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -48,7 +47,7 @@ namespace Layers
 		Button* m_delete_theme_button{ new Button(new Graphic(":/svgs/delete_theme.svg", QSize(17, 20)), true) };
 		Button* m_theme_info_button{ new Button(new Graphic(":/svgs/info_theme.svg", QSize(20, 20)), true) };
 
-		Widget* m_control_separator{ new Widget };
+		Widget* m_control_separator{ new Widget(this) };
 		Widget* m_separator_1{ new Widget };
 		Widget* m_separator_2{ new Widget };
 		Widget* m_spacer_1{ new Widget };

@@ -56,9 +56,6 @@ namespace Layers
 
 		void populate_state_combobox(const QList<QString>& states);
 
-	protected:
-		void init_child_themeable_list();
-
 	private:
 		void setup_layout();
 
@@ -89,9 +86,6 @@ namespace Layers
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
 
-	protected:
-		void init_child_themeable_list();
-
 	private:
 		void setup_layout();
 
@@ -115,9 +109,6 @@ namespace Layers
 
 	public slots:
 		void set_current_editting_state(const QString& state);
-
-	protected:
-		void init_child_themeable_list();
 
 	private:
 		void setup_layout();
@@ -153,9 +144,6 @@ namespace Layers
 	public slots:
 		void set_current_editting_state(const QString& state);
 
-	protected:
-		void init_child_themeable_list();
-
 	private:
 		bool m_centered{ false };
 
@@ -175,9 +163,6 @@ namespace Layers
 		GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent = nullptr);
 
 		void set_centered(bool centered = true);
-
-	protected:
-		void init_child_themeable_list();
 
 	private:
 		bool m_centered{ false };
@@ -204,9 +189,6 @@ namespace Layers
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
 
-	protected:
-		void init_child_themeable_list();
-
 	private:
 		bool m_centered{ false };
 
@@ -228,9 +210,6 @@ namespace Layers
 		void set_centered(bool centered = true);
 
 		void set_unit_label_text(const QString& unit_string);
-
-	protected:
-		void init_child_themeable_list();
 
 	private:
 		void setup_layout();

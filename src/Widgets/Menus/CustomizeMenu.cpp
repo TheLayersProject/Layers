@@ -13,35 +13,46 @@ using Layers::Window;
 CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	Menu("Customize", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
-	Widget* ccp_widget = new Widget;
-	ccp_widget->set_name("widget");
-	ccp_widget->set_proper_name("Widget");
+	Themeable* ccp_themeable = new Themeable();
 
+	m_control_customize_panel = new CustomizePanel(ccp_themeable, m_sidebar);
+	m_control_customize_panel->hide();
+	m_control_customize_panel->set_proper_name("Customize Panels");
+
+	m_control_aw_group->setParent(m_control_customize_panel);
+	m_control_aw_group->hide();
 	m_control_aw_group->set_name("aw_group");
 	m_control_aw_group->set_proper_name("Attribute Widget Group");
 
+	m_control_color_aw->setParent(m_control_customize_panel);
+	m_control_color_aw->hide();
 	m_control_color_aw->set_name("color_aw");
 	m_control_color_aw->set_proper_name("Color Attribute Widget");
 
-	m_control_corner_radii_aw->set_name("corner_radii_aw");
+	m_control_corner_radii_aw->setParent(m_control_customize_panel);
+	m_control_corner_radii_aw->hide();
+	//m_control_corner_radii_aw->set_name("corner_radii_aw");
 	m_control_corner_radii_aw->set_proper_name("Corner Radii Attribute Widget");
 
+	m_control_fill_aw->setParent(m_control_customize_panel);
+	m_control_fill_aw->hide();
 	m_control_fill_aw->set_name("fill_aw");
 	m_control_fill_aw->set_proper_name("Fill Attribute Widget");
 
+	m_control_number_aw->setParent(m_control_customize_panel);
+	m_control_number_aw->hide();
 	m_control_number_aw->set_name("number_aw");
 	m_control_number_aw->set_proper_name("Number Attribute Widget");
 
+	m_control_state_aw->setParent(m_control_customize_panel);
+	m_control_state_aw->hide();
 	m_control_state_aw->set_name("state_aw");
 	m_control_state_aw->set_proper_name("State Attribute Widget");
 
+	m_control_widget_button->setParent(m_control_customize_panel);
+	m_control_widget_button->hide();
 	m_control_widget_button->set_name("widget_button");
 	m_control_widget_button->set_proper_name("Widget Button");
-
-	m_control_customize_panel = new CustomizePanel(ccp_widget);
-	m_control_customize_panel->set_proper_name("Customize Panels");
-
-	init_child_themeable_list();
 
 	installEventFilter(this);
 	setMouseTracking(true);
@@ -63,9 +74,13 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 		else m_collapse_menu->hide();
 	});
 
+	m_control_arrow_graphic->setParent(m_topbar);
+	m_control_arrow_graphic->hide();
 	m_control_arrow_graphic->set_name("arrow_graphic");
 	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
 
+	m_control_text_button->setParent(m_topbar);
+	m_control_text_button->hide();
 	m_control_text_button->set_name("text_button");
 	m_control_text_button->set_proper_name("Text Buttons");
 
@@ -86,11 +101,11 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	connect(m_apply_button, &Button::clicked, [this] {
 		// TODO:
 		if (m_preview_widget)
-			m_preview_widget->copy_attribute_values_to(m_current_theme);
+			m_preview_widget->copy_attribute_values_to(
+				layersApp->current_theme());
 
 		layersApp->reapply_theme();
-		layersApp->save_theme(*m_current_theme);
-		//layersApp->issue_update();
+		layersApp->save_theme(*layersApp->current_theme());
 	});
 
 	m_collapse_menu_button->hide();
@@ -118,7 +133,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
-	m_sidebar->a_fill.set_value(QColor(Qt::lightGray));
+	//m_sidebar->a_fill.set_value(QColor(Qt::lightGray));
 
 	m_sidebar_widget->installEventFilter(this);
 	m_sidebar_widget->setFixedWidth(300);
@@ -132,7 +147,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_preview_scroll_area->set_name("preview_scroll_area");
 	m_preview_scroll_area->set_proper_name("Preview Scroll Area");
-	m_preview_scroll_area->a_fill.set_disabled();
+	//m_preview_scroll_area->a_fill.set_disabled();
 
 	setup_layout();
 }
@@ -162,28 +177,6 @@ void CustomizeMenu::init_preview_window()
 	
 	//preview_window->customize_menu()->open_customize_panel(preview_window_customize_menu_preview_widget->customize_panel());
 	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
-}
-
-void CustomizeMenu::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_preview_scroll_area);
-	add_child_themeable_pointer(m_sidebar);
-	add_child_themeable_pointer(m_topbar);
-	m_topbar->add_child_themeable_pointer(m_apply_button);
-	m_topbar->add_child_themeable_pointer(m_collapse_menu_button);
-	m_topbar->add_child_themeable_pointer(m_collapse_menu);
-	m_topbar->add_child_themeable_pointer(m_control_arrow_graphic);
-	m_topbar->add_child_themeable_pointer(m_control_text_button);
-	m_sidebar->add_child_themeable_pointer(m_control_customize_panel);
-	//m_sidebar_widget->add_child_themeable_pointer(m_sidebar->horizontal_scrollbar());
-	//m_sidebar_widget->add_child_themeable_pointer(m_sidebar->vertical_scrollbar());
-	m_control_customize_panel->add_child_themeable_pointer(m_control_aw_group);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_color_aw);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_corner_radii_aw);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_fill_aw);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_number_aw);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_state_aw);
-	m_control_customize_panel->add_child_themeable_pointer(m_control_widget_button);
 }
 
 void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
@@ -292,16 +285,6 @@ QList<CustomizePanel*>& CustomizeMenu::panels()
 	return m_panel_stack;
 }
 
-//void CustomizeMenu::populate_panel_layout()
-//{
-//	for (CustomizePanel* customize_panel : m_customize_panels)
-//	{
-//		m_sidebar_layout->addWidget(customize_panel);
-//	}
-//
-//	m_sidebar_layout->addStretch(); // Can this be added in setup_layout, and use insert to add panels?
-//}
-
 Widget* CustomizeMenu::preview_widget() const
 {
 	return m_preview_widget;
@@ -365,8 +348,8 @@ bool CustomizeMenu::eventFilter(QObject* object, QEvent* event)
 
 	else if (event->type() == QEvent::Resize)
 	{
-		if (height() < m_sidebar_widget->height()) m_sidebar->setFixedWidth(m_sidebar_widget->width() + 45); // 45 is sidebar width
-		else m_sidebar->setFixedWidth(m_sidebar_widget->width());
+		if (height() < m_sidebar->widget()->height()) m_sidebar->setFixedWidth(m_sidebar->widget()->width() + 45); // 45 is sidebar width
+		else m_sidebar->setFixedWidth(m_sidebar->widget()->width());
 
 		if (m_previous_size)
 		{
@@ -522,7 +505,7 @@ void CustomizeMenu::setup_layout()
 	m_sidebar_widget->setLayout(m_sidebar_layout);
 
 	m_sidebar->setWidget(m_sidebar_widget);
-	m_sidebar->setFixedWidth(m_sidebar_widget->width());
+	m_sidebar->setFixedWidth(m_sidebar->widget()->width());
 
 	// Preview Widget and Layout
 

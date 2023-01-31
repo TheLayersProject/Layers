@@ -7,10 +7,6 @@ using Layers::Theme;
 GradientAW::GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(attribute, parent)
 {
-	init_child_themeable_list();
-
-	//m_attribute = attribute;
-
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_font_size(14);
@@ -47,10 +43,4 @@ void GradientAW::set_centered(bool centered)
 		if (m_centered) m_left_stretch->show();
 		else m_left_stretch->hide();
 	}
-}
-
-void GradientAW::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_attribute_label);
-	add_child_themeable_pointer(m_gradient_control);
 }

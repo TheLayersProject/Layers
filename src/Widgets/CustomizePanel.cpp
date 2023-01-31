@@ -14,9 +14,11 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
-	init_child_themeable_list();
 	set_name("customize_panel");
-	set_proper_name(*themeable->proper_name());
+	if (themeable->proper_name())
+		set_proper_name(*themeable->proper_name());
+	else
+		set_proper_name("Customize Panel");
 	setFixedWidth(300);
 	//hide();
 
@@ -320,14 +322,6 @@ void CustomizePanel::init_attributes()
 	m_show_primary_button->corner_radii.top_right.set_value(5.0);
 	m_show_primary_button->corner_radii.bottom_left.set_value(5.0);
 	m_show_primary_button->corner_radii.bottom_right.set_value(5.0);
-}
-
-void CustomizePanel::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_attributes_label);
-	add_child_themeable_pointer(m_widgets_label);
-	add_child_themeable_pointer(m_show_all_button);
-	add_child_themeable_pointer(m_show_primary_button);
 }
 
 void CustomizePanel::replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw)

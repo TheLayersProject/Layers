@@ -1,6 +1,6 @@
 #include "../../../include/Application.h"
 #include "../../../include/GradientControl.h"
-#include "../../../include/GradientSelectionDialog.h"
+#include "../../../include/GradientDialog.h"
 #include "../../../include/Window.h"
 
 //#include <QApplication>
@@ -50,8 +50,8 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			GradientSelectionDialog* gsd =
-				new GradientSelectionDialog(a_fill.as<QGradientStops>());
+			GradientDialog* gsd =
+				new GradientDialog(a_fill.as<QGradientStops>());
 
 			gsd->assign_tag_prefixes();
 
@@ -63,12 +63,6 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			if (gsd->exec())
 			{
-				// TODO: Remove
-				//if (a_fill.is_stateful())
-				//	a_fill.set_value(a_fill.state(), QVariant::fromValue(gsd->gradient_stops()));
-				//else
-				//	a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
-
 				a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
 
 				emit gradient_changed();

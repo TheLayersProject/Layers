@@ -18,8 +18,6 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	) },
 	Dialog("Update Available", parent)
 {
-	init_child_themeable_list();
-
 	set_name("update_dialog");
 
 	m_remind_me_later_button->set_name("remind_me_later_button");
@@ -43,13 +41,6 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	m_message_label->setWordWrap(true);
 
 	setup_layout();
-}
-
-void UpdateDialog::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_remind_me_later_button);
-	add_child_themeable_pointer(m_update_button);
-	add_child_themeable_pointer(m_message_label);
 }
 
 void UpdateDialog::setup_layout()

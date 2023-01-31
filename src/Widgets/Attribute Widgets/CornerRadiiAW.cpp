@@ -10,11 +10,11 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_attribute_widget{ new AttributeWidget },
 	AWGroup(linked_corner_radii, parent)
 {
-	init_child_themeable_list();
-
 	add_attribute_widget(m_attribute_widget);
+	set_name("corner_radii_aw_group");
 
 	m_attribute_widget->a_fill.set_disabled();
+	m_attribute_widget->set_name("aw");
 
 	for (LineEditor* line_editor :
 		QList<LineEditor*>({
@@ -90,20 +90,6 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 	m_tr_line_editor->set_current_editting_state(state);
 	m_bl_line_editor->set_current_editting_state(state);
 	m_br_line_editor->set_current_editting_state(state);
-}
-
-void CornerRadiiAW::init_child_themeable_list()
-{
-	//add_child_themeable_pointer(m_attribute_widget);
-	add_child_themeable_pointer(m_tl_line_editor);
-	add_child_themeable_pointer(m_tr_line_editor);
-	add_child_themeable_pointer(m_bl_line_editor);
-	add_child_themeable_pointer(m_br_line_editor);
-	add_child_themeable_pointer(m_tl_slider);
-	add_child_themeable_pointer(m_tr_slider);
-	add_child_themeable_pointer(m_bl_slider);
-	add_child_themeable_pointer(m_br_slider);
-	add_child_themeable_pointer(m_example_widget);
 }
 
 void CornerRadiiAW::setup_layout()

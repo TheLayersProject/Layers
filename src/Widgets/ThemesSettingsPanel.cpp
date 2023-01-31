@@ -10,7 +10,6 @@ using Layers::ThemesSettingsPanel;
 
 ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_list();
 	init_attributes();
 
 	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
@@ -57,14 +56,10 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 
 	m_spacer_2->setFixedWidth(12);
 
+	m_control_separator->hide();
 	m_control_separator->set_name("separator");
 	m_control_separator->set_proper_name("Separators");
 	m_control_separator->setFixedSize(1, 30);
-	//m_control_separator->set_ACW_primary("border_awc", false);
-	//m_control_separator->set_ACW_primary("hover_background_caw", false);
-	//m_control_separator->set_ACW_primary("outline_caw", false);
-	//m_control_separator->set_ACW_primary("corner_color_caw", false);
-	//m_control_separator->set_ACW_primary("corner_radii_awc", false);
 
 	setup_layout();
 }
@@ -78,17 +73,6 @@ void ThemesSettingsPanel::init_attributes()
 	m_spacer_2->a_fill.set_disabled();
 
 	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
-}
-
-void ThemesSettingsPanel::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_theme_label);
-	add_child_themeable_pointer(m_theme_combobox);
-	add_child_themeable_pointer(m_new_theme_button);
-	add_child_themeable_pointer(m_customize_theme_button);
-	add_child_themeable_pointer(m_delete_theme_button);
-	add_child_themeable_pointer(m_theme_info_button);
-	add_child_themeable_pointer(m_control_separator);
 }
 
 void ThemesSettingsPanel::apply_theme(Theme& theme)

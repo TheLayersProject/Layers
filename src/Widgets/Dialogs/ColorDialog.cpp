@@ -8,7 +8,6 @@ ColorDialog::ColorDialog(QWidget* parent) :
     Dialog("Color", parent)
 {
     init_attributes();
-    init_child_themeable_list();
 
     setFixedSize(315, 465);
 
@@ -54,12 +53,6 @@ void ColorDialog::init_attributes()
         this, &ColorDialog::update_color_name_line_editor);
 
     m_z_slider->a_value.entangle_with(m_color_plane->z_value);
-}
-     
-void ColorDialog::init_child_themeable_list()
-{
-    //add_child_themeable_pointer(m_z_slider);
-    add_child_themeable_pointer(m_apply_button);
 }
 
 void ColorDialog::setup_layout()

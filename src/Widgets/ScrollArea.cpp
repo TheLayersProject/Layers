@@ -7,22 +7,24 @@ using Layers::ScrollBar;
 
 ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_list();
-
 	installEventFilter(this);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-	m_horizontal_scrollbar->set_name("horizontal_scrollbar");
-	m_horizontal_scrollbar->set_proper_name("Horizontal Scrollbar");
-
-	m_vertical_scrollbar->set_name("vertical_scrollbar");
-	m_vertical_scrollbar->set_proper_name("Vertical Scrollbar");
-
+	
 	m_scroll_area->setWidgetResizable(true);
 	m_scroll_area->setStyleSheet("QScrollArea { background-color:transparent; border:none; }");
 	m_scroll_area->setHorizontalScrollBar(m_horizontal_scrollbar);
 	m_scroll_area->setVerticalScrollBar(m_vertical_scrollbar);
-	m_scroll_area->setFixedSize(size());
+
+	m_control_horizontal_scrollbar->hide();
+	m_control_horizontal_scrollbar->set_name("horizontal_scrollbar");
+	m_control_horizontal_scrollbar->set_proper_name("Horizontal Scrollbar");
+	
+	m_control_vertical_scrollbar->hide();
+	m_control_vertical_scrollbar->set_name("vertical_scrollbar");
+	m_control_vertical_scrollbar->set_proper_name("Vertical Scrollbar");
+	
+	m_horizontal_scrollbar->entangle_with(m_control_horizontal_scrollbar);
+	m_vertical_scrollbar->entangle_with(m_control_vertical_scrollbar);
 }
 
 ScrollBar* ScrollArea::horizontal_scrollbar() const
@@ -42,14 +44,24 @@ void ScrollArea::setVerticalScrollBarPolicy(Qt::ScrollBarPolicy policy)
 
 void ScrollArea::setWidget(QWidget* widget)
 {
-	widget->setStyleSheet("background-color:transparent;");
-
 	m_scroll_area->setWidget(widget);
+
+	widget->setStyleSheet("background-color:transparent;");
+}
+
+QWidget* ScrollArea::takeWidget() const
+{
+	return m_scroll_area->takeWidget();
 }
 
 ScrollBar* ScrollArea::vertical_scrollbar() const
 {
 	return m_vertical_scrollbar;
+}
+
+QWidget* ScrollArea::widget() const
+{
+	return m_scroll_area->widget();
 }
 
 bool ScrollArea::eventFilter(QObject* object, QEvent* event)
@@ -58,10 +70,4 @@ bool ScrollArea::eventFilter(QObject* object, QEvent* event)
 		m_scroll_area->setFixedSize(size());
 
 	return false;
-}
-
-void ScrollArea::init_child_themeable_list()
-{
-	add_child_themeable_pointer(m_horizontal_scrollbar);
-	add_child_themeable_pointer(m_vertical_scrollbar);
 }

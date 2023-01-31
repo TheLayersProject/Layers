@@ -11,8 +11,7 @@ using Layers::SettingsTab;
 SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent) :
 	m_tab_icon{ icon }, m_text_label { new Label(label_text) }, Widget(parent)
 {
-	init_child_themeable_list();
-	init_attributes();
+    init_attributes();
 
 	connect(this, &SettingsTab::clicked, [this] { if (state() != "Selected") set_state("Selected"); });
 
@@ -44,6 +43,8 @@ SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* pare
     m_stretch_widget2->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     setup_layout();
+
+    set_state("Unselected");
 }
 
 void SettingsTab::expand()
@@ -91,14 +92,6 @@ void SettingsTab::init_attributes()
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
-
-	set_state("Unselected");
-}
-
-void SettingsTab::init_child_themeable_list()
-{
-    add_child_themeable_pointer(m_tab_icon);
-    add_child_themeable_pointer(m_text_label);
 }
 
 int SettingsTab::recommended_minimum_width()

@@ -7,8 +7,6 @@ using Layers::Titlebar;
 
 Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 {
-	init_child_themeable_list();
-
 	setFixedHeight(45);
 
     set_name("titlebar");
@@ -50,6 +48,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
     m_stretch_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
     m_stretch_widget->a_fill.set_disabled();
 
+    m_control_mll->hide();
     m_control_mll->set_proper_name("Menu Label Layers");
 
     setup_layout();
@@ -91,16 +90,6 @@ void Titlebar::remove_mlls_past(int index)
     {
         mll_stack.last()->expand();
     }
-}
-
-void Titlebar::init_child_themeable_list()
-{
-    add_child_themeable_pointer(m_window_title_label);
-    add_child_themeable_pointer(m_control_mll);
-    add_child_themeable_pointer(m_settings_button);
-    add_child_themeable_pointer(m_minimize_button);
-    add_child_themeable_pointer(m_maximize_button);
-    add_child_themeable_pointer(m_exit_button);
 }
 
 bool Titlebar::is(QWidget* widget)

@@ -7,13 +7,13 @@
 #include <QUuid>
 #include "directories.h"
 #include "Theme.h"
-#include "Window.h"
 
 namespace Layers
 {
 	class Downloader;
 	class GitHubRepo;
 	class Version;
+	class Window;
 
 	class Application : public QApplication
 	{

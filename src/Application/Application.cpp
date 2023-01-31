@@ -6,6 +6,7 @@
 #include "../../include/Themeable.h"
 #include "../../include/UpdateDialog.h"
 #include "../../include/Version.h"
+#include "../../include/Window.h"
 
 #include <QFontDatabase>
 #include <QGradientStops>
