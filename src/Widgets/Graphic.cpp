@@ -7,9 +7,10 @@ using Layers::SVG;
 Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent) :
 	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size, this) }, Widget(parent)
 {
-	setFixedSize(size);
-
 	a_fill.set_disabled();
+
+	update_image_location();
+	update_size();
 }
 
 Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
@@ -33,9 +34,10 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		add_child_themeable_pointer(m_svg_widget);
 	}
 
-	setFixedSize(size);
-
 	a_fill.set_disabled();
+
+	update_image_location();
+	update_size();
 }
 
 Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
@@ -56,13 +58,14 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		m_svg_widget = new SVG(filepath, this);
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
-		setFixedSize(m_svg_widget->size());
-		//m_svg_widget->setFixedSize(size);
 
 		add_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
+
+	update_image_location();
+	update_size();
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
@@ -72,9 +75,10 @@ Graphic::Graphic(const QImage& image, QWidget* parent) :
 	m_bitmap_label->setPixmap(QPixmap::fromImage(image));
 	m_bitmap_label->setFixedSize(image.size());
 
-	setFixedSize(m_image_size);
-
 	a_fill.set_disabled();
+
+	update_image_location();
+	update_size();
 }
 
 Graphic::Graphic(const Graphic& gw) : Widget()
@@ -105,9 +109,10 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 
 	m_image_size = gw.m_image_size;
 
-	setFixedSize(gw.size());
-
 	a_fill.set_disabled();
+
+	update_image_location();
+	update_size();
 }
 
 Graphic::~Graphic()
@@ -134,6 +139,17 @@ void Graphic::set_icon(Graphic* icon)
 	if (m_svg_widget) m_svg_widget->set_icon(new Graphic(*icon));
 }
 
+void Graphic::set_padding(int left, int top, int right, int bottom)
+{
+	m_padding_left = left;
+	m_padding_top = top;
+	m_padding_right = right;
+	m_padding_bottom = bottom;
+
+	update_image_location();
+	update_size();
+}
+
 void Graphic::set_pixmap(const QPixmap& pixmap)
 {
 	if (m_bitmap_label)
@@ -143,18 +159,60 @@ void Graphic::set_pixmap(const QPixmap& pixmap)
 	}
 }
 
-void Graphic::set_size(QSize size)
-{
-	if (m_bitmap_label) m_bitmap_label->setFixedSize(size);
-	if (m_svg_widget) m_svg_widget->setFixedSize(size);
-	if (m_image_sequence_label) m_image_sequence_label->setFixedSize(size);
-
-	setFixedSize(size);
-}
+//void Graphic::setFixedSize(QSize s)
+//{
+//	s = s + QSize(
+//		m_padding_left + m_padding_right,
+//		m_padding_top + m_padding_bottom);
+//
+//	Widget::setFixedSize(s);
+//
+//	if (m_bitmap_label)
+//	{
+//		m_bitmap_label->setFixedSize(s);
+//
+//	}
+//	else if (m_svg_widget)
+//	{
+//		m_svg_widget->setFixedSize(s);
+//	}
+//	else if (m_image_sequence_label)
+//	{
+//		m_image_sequence_label->setFixedSize(s);
+//	}
+//}
 
 SVG* Graphic::svg() const
 {
 	return m_svg_widget;
+}
+
+void Graphic::update_image_location()
+{
+	QPoint new_image_location = QPoint(m_padding_left, m_padding_top);
+
+	if (m_bitmap_label)
+		m_bitmap_label->move(new_image_location);
+	else if (m_svg_widget)
+		m_svg_widget->move(new_image_location);
+	else if (m_image_sequence_label)
+		m_image_sequence_label->move(new_image_location);
+}
+
+void Graphic::update_size()
+{
+	QSize new_size = QSize(
+		m_padding_left + m_padding_right,
+		m_padding_top + m_padding_bottom);
+
+	if (m_bitmap_label)
+		new_size += m_bitmap_label->size();
+	else if (m_svg_widget)
+		new_size += m_svg_widget->size();
+	else if (m_image_sequence_label)
+		new_size += m_image_sequence_label->size();
+
+	setFixedSize(new_size);
 }
 
 //void Graphic::update_theme_dependencies()

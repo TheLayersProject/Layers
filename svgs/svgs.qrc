@@ -23,6 +23,7 @@
         <file>settings_animated.svg</file>
         <file>settings_tab_icon.svg</file>
         <file>sidebar_icon.svg</file>
+        <file>tab_exit.svg</file>
         <file>themes_icon.svg</file>
         <file>titlebar_icon.svg</file>
     </qresource>

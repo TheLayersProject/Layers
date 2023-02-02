@@ -22,21 +22,26 @@ Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview }, Widget(parent)
 {
 	layersApp->add_child_themeable_pointer(*this);
-
-	set_window_title(layersApp->name());
 	
 	if (layersApp->icon_file())
 	{
-		set_window_icon(Graphic(layersApp->icon_file()->fileName()));
-
 		setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
+
+		m_app_menu = new Menu(
+			layersApp->name(),
+			new Graphic(layersApp->icon_file()->fileName()));
+	}
+	else
+	{
+		m_app_menu = new Menu(
+			layersApp->name(),
+			new Graphic(
+				QFile(":/image_sequences/layers_logo.imgseq"),
+				QSize(35, 35)
+			)
+		);
 	}
 
-	connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
-	connect(m_titlebar, &Titlebar::window_icon_updated, [=]
-		{
-			connect(m_titlebar->window_icon(), &Button::clicked, [this] { open_menu(m_app_menu); });
-		});
 	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
 	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
 	connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
@@ -54,6 +59,15 @@ Window::Window(bool preview, QWidget* parent) :
 	corner_radii.bottom_left.set_value(10.0);
 	corner_radii.bottom_right.set_value(10.0);
 
+	connect(&border.thickness, &Attribute::value_changed, [this] {
+		update_theme_dependencies();
+		});
+
+	for (Attribute* margin : margins)
+		connect(margin, &Attribute::value_changed, [this] {
+			update_theme_dependencies();
+			});
+
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
@@ -64,13 +78,20 @@ Window::Window(bool preview, QWidget* parent) :
 	m_control_color_dialog->hide();
 	m_control_color_dialog->set_proper_name("Color Dialog");
 
-	m_control_gradient_selection_dialog->hide();
-	m_control_gradient_selection_dialog->set_proper_name("Gradient Dialog");
+	m_control_gradient_dialog->hide();
+	m_control_gradient_dialog->set_proper_name("Gradient Dialog");
 
 	m_control_update_dialog->hide();
 	m_control_update_dialog->set_proper_name("Update Dialog");
 
 	m_app_menu->a_fill.set_disabled();
+
+	m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
+
+	m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
+	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
+	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
+	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");
 
 	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
 	m_settings_menu->a_fill.set_disabled();
@@ -78,6 +99,11 @@ Window::Window(bool preview, QWidget* parent) :
 
 	m_customize_menu->a_fill.set_disabled();
 	m_customize_menu->hide();
+
+	m_tab_menu_separator->a_fill.set_value(QColor("#25272b"));
+	m_tab_menu_separator->setFixedHeight(3);
+	m_tab_menu_separator->set_name("tab_menu_separator");
+	m_tab_menu_separator->set_proper_name("Tab Menu Separator");
 
 	add_menu(m_app_menu);
 	add_menu(m_settings_menu);
@@ -154,9 +180,9 @@ ColorDialog* Window::control_color_dialog() const
 	return m_control_color_dialog;
 }
 
-GradientDialog* Window::control_gradient_selection_dialog() const
+GradientDialog* Window::control_gradient_dialog() const
 {
-	return m_control_gradient_selection_dialog;
+	return m_control_gradient_dialog;
 }
 
 CustomizeMenu* Window::customize_menu() const
@@ -178,32 +204,16 @@ void Window::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int margin = border.thickness.as<double>();
+		int border_thickness = border.thickness.as<double>();
 
-		m_main_layout->setContentsMargins(margin, margin, margin, margin);
+		int left_c_margin = border_thickness + margins.left.as<double>();
+		int top_c_margin = border_thickness + margins.top.as<double>();
+		int right_c_margin = border_thickness + margins.right.as<double>();
+		int bottom_c_margin = border_thickness + margins.bottom.as<double>();
+
+		m_main_layout->setContentsMargins(
+			left_c_margin, top_c_margin, right_c_margin, bottom_c_margin);
 	}
-}
-
-//void Window::set_application_widget(Widget* application_widget)
-//{
-//	m_app_menu_layout->addWidget(application_widget);
-//	//m_app_menu_layout->setAlignment(application_widget, Qt::AlignCenter);
-//}
-
-void Window::set_window_icon(const Graphic& icon_graphic)
-{
-	m_titlebar->set_window_icon(icon_graphic);
-
-	//if (m_customize_menu->preview_window())
-	//	m_customize_menu->preview_window()->set_window_icon(icon_graphic);
-}
-
-void Window::set_window_title(const QString& title)
-{
-	m_titlebar->set_window_title(title);
-
-	//if (m_customize_menu->preview_window())
-	//	m_customize_menu->preview_window()->set_window_title(title);
 }
 
 SettingsMenu* Window::settings_menu() const
@@ -218,38 +228,28 @@ Titlebar* Window::titlebar() const
 
 void Window::open_menu(Menu* menu)
 {
-	if (m_menu_stack.contains(menu))
+	if (!menu->isVisible())
 	{
-		if (m_menu_stack.last() != menu)
+		bool contains_tab_for_menu = false;
+		Tab* pre_existing_tab = nullptr;
+
+		for (Tab* tab : m_titlebar->menu_tab_bar()->tabs())
+			if (tab->menu() == menu)
+			{
+				contains_tab_for_menu = true;
+				pre_existing_tab = tab;
+				break;
+			}
+
+		if (!contains_tab_for_menu)
 		{
-			int menu_index = m_menu_stack.indexOf(menu);
+			m_titlebar->menu_tab_bar()->add_tab(menu);
 
-			m_menu_stack.last()->hide();
-
-			menu->show();
-
-			while (menu_index < m_menu_stack.count() - 1) m_menu_stack.removeLast();
-
-			m_titlebar->remove_mlls_past(menu_index - 1);
+			m_titlebar->menu_tab_bar()->select_tab(
+				m_titlebar->menu_tab_bar()->tabs().last());
 		}
-	}
-	else
-	{
-		MenuLabelLayer* mll = new MenuLabelLayer(menu);
-
-		Menu* previous_menu = m_menu_stack.last();
-
-		connect(mll->back_button(), &Button::clicked, [this, previous_menu] { open_menu(previous_menu); });
-
-		previous_menu->hide();
-
-		m_menu_stack.append(menu);
-
-		menu->show();
-
-		connect(mll->icon_button(), &Button::clicked, [this, menu] { open_menu(menu); });
-
-		m_titlebar->add_mll(mll);
+		else
+			m_titlebar->menu_tab_bar()->select_tab(pre_existing_tab);
 	}
 }
 
@@ -604,6 +604,7 @@ void Window::setup_layout()
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
+	m_main_layout->addWidget(m_tab_menu_separator);
 	m_main_layout->addWidget(m_app_menu);
 	m_main_layout->addWidget(m_settings_menu);
 	m_main_layout->addWidget(m_customize_menu);

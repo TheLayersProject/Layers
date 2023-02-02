@@ -5791,6 +5791,62 @@
                 "value": "#000000"
             }
         },
+        "layers/tab_menu_separator": {
+            "border": {
+                "disabled": true,
+                "fill": {
+                    "value": "#000000"
+                },
+                "thickness": {
+                    "value": 0
+                }
+            },
+            "corner_color": {
+                "disabled": true,
+                "value": "#000000"
+            },
+            "corner_radii": {
+                "bottom_left": {
+                    "value": 0
+                },
+                "bottom_right": {
+                    "value": 0
+                },
+                "disabled": true,
+                "top_left": {
+                    "value": 6
+                },
+                "top_right": {
+                    "value": 6
+                }
+            },
+            "fill": {
+                "value": "#363636"
+            },
+            "hover_fill": {
+                "disabled": true,
+                "value": "#ffffff"
+            },
+            "margins": {
+                "bottom": {
+                    "value": 0
+                },
+                "disabled": true,
+                "left": {
+                    "value": 0
+                },
+                "right": {
+                    "value": 0
+                },
+                "top": {
+                    "value": 0
+                }
+            },
+            "outline_color": {
+                "disabled": true,
+                "value": "#000000"
+            }
+        },
         "layers/titlebar": {
             "border": {
                 "disabled": true,
@@ -6104,7 +6160,7 @@
                 "value": true
             }
         },
-        "layers/titlebar/menu_label_layer": {
+        "layers/titlebar/menu_tab_bar/tabs": {
             "border": {
                 "disabled": true,
                 "fill": {
@@ -6120,20 +6176,25 @@
             },
             "corner_radii": {
                 "bottom_left": {
-                    "value": 10
+                    "value": 0
                 },
                 "bottom_right": {
-                    "value": 10
+                    "value": 0
                 },
                 "top_left": {
-                    "value": 10
+                    "value": 5
                 },
                 "top_right": {
-                    "value": 10
+                    "value": 5
                 }
             },
             "fill": {
-                "value": "#363636"
+                "value": {
+                    "state_value_pairs": {
+                        "Selected": "#363636",
+                        "Unselected": "#2e2e2e"
+                    }
+                }
             },
             "hover_fill": {
                 "disabled": true,
@@ -6159,11 +6220,10 @@
                 "value": "#000000"
             }
         },
-        "layers/titlebar/menu_label_layer/back_button": {
+        "layers/titlebar/menu_tab_bar/tabs/exit_button": {
             "border": {
-                "disabled": true,
                 "fill": {
-                    "value": "#000000"
+                    "value": "#a0a0a4"
                 },
                 "thickness": {
                     "value": 0
@@ -6171,7 +6231,7 @@
             },
             "corner_color": {
                 "disabled": true,
-                "value": "#000000"
+                "value": "#a0a0a4"
             },
             "corner_radii": {
                 "bottom_left": {
@@ -6180,7 +6240,6 @@
                 "bottom_right": {
                     "value": 0
                 },
-                "disabled": true,
                 "top_left": {
                     "value": 0
                 },
@@ -6194,13 +6253,12 @@
             },
             "hover_fill": {
                 "disabled": true,
-                "value": "#ffffff"
+                "value": "#c0c0c0"
             },
             "margins": {
                 "bottom": {
                     "value": 0
                 },
-                "disabled": true,
                 "left": {
                     "value": 0
                 },
@@ -6213,14 +6271,13 @@
             },
             "outline_color": {
                 "disabled": true,
-                "value": "#000000"
+                "value": "#a0a0a4"
             }
         },
-        "layers/titlebar/menu_label_layer/back_button/graphic": {
+        "layers/titlebar/menu_tab_bar/tabs/exit_button/graphic": {
             "border": {
-                "disabled": true,
                 "fill": {
-                    "value": "#000000"
+                    "value": "#a0a0a4"
                 },
                 "thickness": {
                     "value": 0
@@ -6228,7 +6285,7 @@
             },
             "corner_color": {
                 "disabled": true,
-                "value": "#000000"
+                "value": "#a0a0a4"
             },
             "corner_radii": {
                 "bottom_left": {
@@ -6237,7 +6294,6 @@
                 "bottom_right": {
                     "value": 0
                 },
-                "disabled": true,
                 "top_left": {
                     "value": 0
                 },
@@ -6251,13 +6307,12 @@
             },
             "hover_fill": {
                 "disabled": true,
-                "value": "#ffffff"
+                "value": "#c0c0c0"
             },
             "margins": {
                 "bottom": {
                     "value": 0
                 },
-                "disabled": true,
                 "left": {
                     "value": 0
                 },
@@ -6270,15 +6325,15 @@
             },
             "outline_color": {
                 "disabled": true,
-                "value": "#000000"
+                "value": "#a0a0a4"
             }
         },
-        "layers/titlebar/menu_label_layer/back_button/graphic/svg": {
+        "layers/titlebar/menu_tab_bar/tabs/exit_button/graphic/svg": {
             "common_color": {
-                "value": "#6a6a6a"
+                "value": "#5f5f5f"
             },
             "common_hover_color": {
-                "value": "#e3e3e3"
+                "value": "#e95454"
             },
             "use_common_color": {
                 "value": true
@@ -6287,7 +6342,7 @@
                 "value": true
             }
         },
-        "layers/titlebar/menu_label_layer/icon_button": {
+        "layers/titlebar/menu_tab_bar/tabs/icon": {
             "border": {
                 "disabled": true,
                 "fill": {
@@ -6344,64 +6399,7 @@
                 "value": "#000000"
             }
         },
-        "layers/titlebar/menu_label_layer/icon_button/graphic": {
-            "border": {
-                "disabled": true,
-                "fill": {
-                    "value": "#000000"
-                },
-                "thickness": {
-                    "value": 0
-                }
-            },
-            "corner_color": {
-                "disabled": true,
-                "value": "#000000"
-            },
-            "corner_radii": {
-                "bottom_left": {
-                    "value": 0
-                },
-                "bottom_right": {
-                    "value": 0
-                },
-                "disabled": true,
-                "top_left": {
-                    "value": 0
-                },
-                "top_right": {
-                    "value": 0
-                }
-            },
-            "fill": {
-                "disabled": true,
-                "value": "#ffffff"
-            },
-            "hover_fill": {
-                "disabled": true,
-                "value": "#ffffff"
-            },
-            "margins": {
-                "bottom": {
-                    "value": 0
-                },
-                "disabled": true,
-                "left": {
-                    "value": 0
-                },
-                "right": {
-                    "value": 0
-                },
-                "top": {
-                    "value": 0
-                }
-            },
-            "outline_color": {
-                "disabled": true,
-                "value": "#000000"
-            }
-        },
-        "layers/titlebar/menu_label_layer/icon_button/graphic/svg": {
+        "layers/titlebar/menu_tab_bar/tabs/icon/svg": {
             "common_color": {
                 "value": "#e3e3e3"
             },
@@ -6416,7 +6414,7 @@
                 "value": true
             }
         },
-        "layers/titlebar/menu_label_layer/text_label": {
+        "layers/titlebar/menu_tab_bar/tabs/text_label": {
             "fill": {
                 "disabled": true,
                 "value": "#ffffff"

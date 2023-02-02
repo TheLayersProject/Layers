@@ -99,6 +99,8 @@ bool Attribute::is_stateful() const
 void Attribute::set_state(const QString& state)
 {
 	m_state = state;
+
+	emit value_changed();
 }
 
 void Attribute::set_value(QVariant qvariant, const QString& state)

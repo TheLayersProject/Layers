@@ -32,7 +32,7 @@ namespace Layers
 
 		ColorDialog* control_color_dialog() const;
 
-		GradientDialog* control_gradient_selection_dialog() const;
+		GradientDialog* control_gradient_dialog() const;
 
 		CustomizeMenu* customize_menu() const;
 
@@ -41,10 +41,6 @@ namespace Layers
 		void link_theme_name(const QString& name);
 
 		void set_main_widget(Widget* main_widget);
-
-		void set_window_icon(const Graphic& icon_graphic);
-
-		void set_window_title(const QString& title);
 
 		SettingsMenu* settings_menu() const;
 
@@ -76,7 +72,7 @@ namespace Layers
 
 		ColorDialog* m_control_color_dialog{ new ColorDialog(this) };
 
-		GradientDialog* m_control_gradient_selection_dialog{ new GradientDialog(QGradientStops(), this) };
+		GradientDialog* m_control_gradient_dialog{ new GradientDialog(QGradientStops(), this) };
 
 		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "", this) };
 
@@ -88,14 +84,15 @@ namespace Layers
 
 		Titlebar* m_titlebar{ new Titlebar };
 
-		// TODO: Make Menu constructor that does not require an icon
-		Menu* m_app_menu{ new Menu("App", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24))) };
+		Menu* m_app_menu{ nullptr };
 
 		SettingsMenu* m_settings_menu{ new SettingsMenu };
 
 		CustomizeMenu* m_customize_menu{ new CustomizeMenu };
 
 		Widget* m_main_widget{ nullptr };
+
+		Widget* m_tab_menu_separator{ new Widget };
 	};
 
 	template<typename T>
@@ -106,7 +103,6 @@ namespace Layers
 		//m_main_widget->set_icon(new Graphic(layersApp->icon_file()->fileName()));
 		m_main_widget->set_is_app_themeable(true);
 		m_main_widget->apply_theme(*layersApp->current_theme());
-		//m_main_widget->apply_theme(*m_current_theme);
 
 		add_child_themeable_pointer(m_main_widget);
 

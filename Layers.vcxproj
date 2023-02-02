@@ -155,7 +155,7 @@
     <ClCompile Include="src\Widgets\ImageSequenceLabel.cpp" />
     <ClCompile Include="src\Widgets\Label.cpp" />
     <ClCompile Include="src\Widgets\MenuBar.cpp" />
-    <ClCompile Include="src\Widgets\MenuLabelLayer.cpp" />
+    <ClCompile Include="src\Widgets\Tab.cpp" />
     <ClCompile Include="src\Widgets\Menus\CustomizeMenu.cpp" />
     <ClCompile Include="src\Widgets\Menus\Menu.cpp" />
     <ClCompile Include="src\Widgets\Menus\Settings\SettingsMenu.cpp" />
@@ -165,6 +165,7 @@
     <ClCompile Include="src\Widgets\ScrollBar.cpp" />
     <ClCompile Include="src\Widgets\SVG.cpp" />
     <ClCompile Include="src\Widgets\TabBar.cpp" />
+    <ClCompile Include="src\Widgets\TabBar2.cpp" />
     <ClCompile Include="src\Widgets\ThemesSettingsPanel.cpp" />
     <ClCompile Include="src\Widgets\Titlebar.cpp" />
     <ClCompile Include="src\Widgets\Widget.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="include\GitHubRepo.h" />
     <QtMoc Include="include\ScrollBar.h" />
     <QtMoc Include="include\Variant.h" />
+    <QtMoc Include="include\TabBar2.h" />
     <ClInclude Include="include\ThemeableBox.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
@@ -203,7 +205,7 @@
     <QtMoc Include="include\GradientDialog.h" />
     <QtMoc Include="include\CreateNewThemeDialog.h" />
     <QtMoc Include="include\Titlebar.h" />
-    <QtMoc Include="include\MenuLabelLayer.h" />
+    <QtMoc Include="include\Tab.h" />
     <QtMoc Include="include\TabBar.h" />
     <QtMoc Include="include\MenuBar.h" />
     <QtMoc Include="include\ToggleSwitch.h" />

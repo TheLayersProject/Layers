@@ -102,7 +102,7 @@
     <ClCompile Include="src\Widgets\MenuBar.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\MenuLabelLayer.cpp">
+    <ClCompile Include="src\Widgets\Tab.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\ScrollArea.cpp">
@@ -234,6 +234,9 @@
     <ClCompile Include="src\Widgets\Dialogs\FillDialog.cpp">
       <Filter>Source Files\Widgets\Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\TabBar2.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -316,7 +319,7 @@
     <QtMoc Include="include\TabBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\MenuLabelLayer.h">
+    <QtMoc Include="include\Tab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Titlebar.h">
@@ -371,6 +374,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\FillDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\TabBar2.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

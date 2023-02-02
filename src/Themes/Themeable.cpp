@@ -44,7 +44,7 @@ void Themeable::apply_theme(Theme& theme)
 			{
 				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
 				{
-					qDebug() << child_themeable->tag();
+					//qDebug() << child_themeable->tag();
 
 					if (theme.contains_attributes_for_tag(child_themeable->tag()))
 					{
