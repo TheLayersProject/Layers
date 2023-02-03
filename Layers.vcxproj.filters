@@ -259,9 +259,6 @@
     <QtMoc Include="include\SettingsMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Menu.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\SettingsPanels.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -377,6 +374,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\TabBar2.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Menu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

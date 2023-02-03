@@ -195,8 +195,8 @@ void Dialog::init_titlebar()
 	m_exit_button->set_proper_name("Exit Button");
 
 	// Add Titlebar's Themeable Child Element References
-	m_titlebar->add_child_themeable_pointer(m_window_title_label);
-	m_titlebar->add_child_themeable_pointer(m_exit_button);
+	//m_titlebar->add_child_themeable_pointer(m_window_title_label);
+	//m_titlebar->add_child_themeable_pointer(m_exit_button);
 
 	// Setup Layout
 	QHBoxLayout* titlebar_layout = new QHBoxLayout;

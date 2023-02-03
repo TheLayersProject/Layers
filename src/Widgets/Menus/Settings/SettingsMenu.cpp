@@ -44,7 +44,7 @@ void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 {
 	SettingsTab* settings_tab = new SettingsTab(icon, label_text);
 
-	m_sidebar->add_child_themeable_pointer(settings_tab);
+	//m_sidebar->add_child_themeable_pointer(settings_tab);
 
 	for (SettingsTab* st : m_settings_tabs)
 	{

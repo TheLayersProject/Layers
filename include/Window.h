@@ -19,7 +19,7 @@ namespace Layers
 	public:
 		Window(bool preview = false, QWidget* parent = nullptr);
 
-		void add_menu(Menu* menu);
+		//void add_menu(Menu* menu);
 
 		Menu* app_menu() const;
 
@@ -36,11 +36,7 @@ namespace Layers
 
 		CustomizeMenu* customize_menu() const;
 
-		void finalize();
-
 		void link_theme_name(const QString& name);
-
-		void set_main_widget(Widget* main_widget);
 
 		SettingsMenu* settings_menu() const;
 
@@ -76,11 +72,11 @@ namespace Layers
 
 		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "", this) };
 
-		QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
+		//QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		QList<Menu*> m_menus;
-		QList<Menu*> m_menu_stack;
+		//QList<Menu*> m_menus;
+		//QList<Menu*> m_menu_stack;
 
 		Titlebar* m_titlebar{ new Titlebar };
 
@@ -98,15 +94,19 @@ namespace Layers
 	template<typename T>
 	inline void Window::build_main_widget()
 	{
-		m_main_widget = new T;
+		m_app_menu = new T;
 
-		//m_main_widget->set_icon(new Graphic(layersApp->icon_file()->fileName()));
-		m_main_widget->set_is_app_themeable(true);
-		m_main_widget->apply_theme(*layersApp->current_theme());
+		m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
+		m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
+		m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
+		m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
+		m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");
 
-		add_child_themeable_pointer(m_main_widget);
+		m_app_menu->set_is_app_themeable(true);
+		m_app_menu->apply_theme(*layersApp->current_theme());
 
-		m_app_menu_layout->addWidget(m_main_widget);
+		m_main_layout->addWidget(m_app_menu);
+		//m_app_menu_layout->addWidget(m_main_widget);
 
 		if (m_customize_menu->preview_widget())
 		{

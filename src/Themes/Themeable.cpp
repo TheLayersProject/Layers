@@ -18,21 +18,8 @@ Themeable::~Themeable()
 	m_proper_name = nullptr;
 }
 
-void Themeable::add_child_themeable_pointer(Themeable* child_themeable)
-{
-	//m_child_themeables.append(child_themeable);
-
-	if (m_tag_prefixes_assigned)
-	{
-		if (*m_name == "window") child_themeable->assign_tag_prefixes(m_tag_prefixes, "");
-		else child_themeable->assign_tag_prefixes(m_tag_prefixes, *m_name);
-	}
-}
-
 void Themeable::apply_theme(Theme& theme)
 {
-	if (m_current_theme != &theme) m_current_theme = &theme;
-
 	if (!m_name) qDebug() << "Unable to apply theme.  You must apply a name to the widget first.";
 	else
 	{
@@ -80,9 +67,6 @@ void Themeable::apply_theme(Theme& theme)
 				}
 			}
 		}
-
-		//for (Themeable* child_themeable : m_child_themeables)
-		//	child_themeable->apply_theme(theme);
 	}
 }
 
@@ -262,19 +246,12 @@ QString& Themeable::tag()
 {
 	if (m_tag == "")
 	{
-		if (m_is_app_themeable)
-		{
-			//m_tag += "app/" + *m_app_name + "/";
-			m_tag += "app/";
-		}
-		else
-		{
+		if (!m_is_app_themeable)
 			m_tag += "layers/";
-		}
 
-		for (QString supplemental_prefix : m_tag_prefixes)
+		for (QString prefix : m_tag_prefixes)
 		{
-			m_tag += supplemental_prefix + "/";
+			m_tag += prefix + "/";
 		}
 
 		if (m_name)

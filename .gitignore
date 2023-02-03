@@ -55,3 +55,7 @@ release/
 *.user
 *.userosscache
 *.sln.docstates
+
+# Generated Docs
+docs/html
+docs/latex

@@ -31,7 +31,7 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		m_svg_widget->set_proper_name("SVG");
 		m_svg_widget->setFixedSize(size);
 
-		add_child_themeable_pointer(m_svg_widget);
+		//add_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
@@ -59,7 +59,7 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
 
-		add_child_themeable_pointer(m_svg_widget);
+		//add_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
@@ -104,7 +104,7 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget->setParent(this);
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
 
-		add_child_themeable_pointer(m_svg_widget);
+		//add_child_themeable_pointer(m_svg_widget);
 	}
 
 	m_image_size = gw.m_image_size;

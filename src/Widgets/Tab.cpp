@@ -33,15 +33,15 @@ Tab::Tab(QWidget* parent) :
 }
 
 Tab::Tab(Menu* menu, QWidget* parent) :
-	m_tab_icon{ new Graphic(*menu->icon) },
 	m_text_label{ new Label(menu->name) },
 	m_menu{ menu },
 	Widget(parent)
 {
-	init_attributes();
-
+	m_tab_icon = new Graphic(*menu->icon());
 	m_tab_icon->set_name("icon");
 	m_tab_icon->set_padding(11, 0, 11, 0);
+
+	init_attributes();
 
 	m_exit_button->set_name("exit_button");
 

@@ -23,24 +23,24 @@ Window::Window(bool preview, QWidget* parent) :
 {
 	layersApp->add_child_themeable_pointer(*this);
 	
-	if (layersApp->icon_file())
-	{
-		setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
+	//if (layersApp->icon_file())
+	//{
+	//	setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
 
-		m_app_menu = new Menu(
-			layersApp->name(),
-			new Graphic(layersApp->icon_file()->fileName()));
-	}
-	else
-	{
-		m_app_menu = new Menu(
-			layersApp->name(),
-			new Graphic(
-				QFile(":/image_sequences/layers_logo.imgseq"),
-				QSize(35, 35)
-			)
-		);
-	}
+	//	m_app_menu = new Menu(
+	//		layersApp->name(),
+	//		new Graphic(layersApp->icon_file()->fileName()));
+	//}
+	//else
+	//{
+	//	m_app_menu = new Menu(
+	//		layersApp->name(),
+	//		new Graphic(
+	//			QFile(":/image_sequences/layers_logo.imgseq"),
+	//			QSize(35, 35)
+	//		)
+	//	);
+	//}
 
 	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
 	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
@@ -84,14 +84,14 @@ Window::Window(bool preview, QWidget* parent) :
 	m_control_update_dialog->hide();
 	m_control_update_dialog->set_proper_name("Update Dialog");
 
-	m_app_menu->a_fill.set_disabled();
+	//m_app_menu->a_fill.set_disabled();
 
-	m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
+	//m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
 
-	m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
+	/*m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
 	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
 	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
-	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");
+	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");*/
 
 	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
 	m_settings_menu->a_fill.set_disabled();
@@ -105,11 +105,11 @@ Window::Window(bool preview, QWidget* parent) :
 	m_tab_menu_separator->set_name("tab_menu_separator");
 	m_tab_menu_separator->set_proper_name("Tab Menu Separator");
 
-	add_menu(m_app_menu);
-	add_menu(m_settings_menu);
-	add_menu(m_customize_menu);
+	//add_menu(m_app_menu);
+	//add_menu(m_settings_menu);
+	//add_menu(m_customize_menu);
 	
-	m_menu_stack.append(m_app_menu);
+	//m_menu_stack.append(m_app_menu);
 
 	setup_layout();
 
@@ -124,14 +124,14 @@ Window::Window(bool preview, QWidget* parent) :
 		m_customize_menu->init_preview_window();
 
 		apply_theme(*layersApp->current_theme()); // Sets initial theme
-		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
+		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(layersApp->current_theme()->name());
 	}
 }
 
-void Window::add_menu(Menu* menu)
-{
-	m_menus.append(menu);
-}
+//void Window::add_menu(Menu* menu)
+//{
+//	m_menus.append(menu);
+//}
 
 Menu* Window::app_menu() const
 {
@@ -143,21 +143,6 @@ void Window::link_theme_name(const QString& name)
 	m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
 	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
-}
-
-void Window::set_main_widget(Widget* main_widget)
-{
-	m_main_widget = main_widget;
-
-	main_widget->set_is_app_themeable(true);
-	main_widget->apply_theme(*layersApp->current_theme());
-
-	add_child_themeable_pointer(main_widget);
-
-	m_app_menu_layout->addWidget(main_widget);
-
-	//if (m_customize_menu->preview_window())
-	//	m_customize_menu->preview_window()->build_main_widget<T>();
 }
 
 void Window::assign_tag_prefixes()
@@ -188,14 +173,6 @@ GradientDialog* Window::control_gradient_dialog() const
 CustomizeMenu* Window::customize_menu() const
 {
 	return m_customize_menu;
-}
-
-void Window::finalize()
-{
-	m_customize_menu->init_preview_window();
-
-	apply_theme(*layersApp->current_theme()); // Sets initial theme
-	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_current_theme->name());
 }
 
 void Window::update_theme_dependencies()
@@ -291,7 +268,7 @@ void Window::minimize_clicked()
 
 void Window::new_theme_clicked()
 {
-	m_create_new_theme_dialog->set_current_start_theme_name(m_current_theme->name());
+	m_create_new_theme_dialog->set_current_start_theme_name(layersApp->current_theme()->name());
 
 	static_cast<Window*>(QApplication::activeWindow())->center_dialog(m_create_new_theme_dialog);
 
@@ -594,10 +571,10 @@ void Window::paintEvent(QPaintEvent* event)
 
 void Window::setup_layout()
 {
-	m_app_menu_layout->setContentsMargins(0, 0, 0, 0);
-	m_app_menu_layout->setSpacing(0);
+	//m_app_menu_layout->setContentsMargins(0, 0, 0, 0);
+	//m_app_menu_layout->setSpacing(0);
 
-	m_app_menu->setLayout(m_app_menu_layout);
+	//m_app_menu->setLayout(m_app_menu_layout);
 
 	int margin = border.thickness.as<double>();
 
@@ -605,7 +582,7 @@ void Window::setup_layout()
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_tab_menu_separator);
-	m_main_layout->addWidget(m_app_menu);
+	//m_main_layout->addWidget(m_app_menu);
 	m_main_layout->addWidget(m_settings_menu);
 	m_main_layout->addWidget(m_customize_menu);
 

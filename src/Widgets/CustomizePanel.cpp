@@ -167,11 +167,6 @@ void CustomizePanel::add_widget_button(Button* button, int index)
 	//button->set_name("widget_button");
 	button->set_text_padding(0, 5, 0, 0);
 
-	//add_child_themeable_pointer(button);
-
-	if (m_current_theme)
-		button->apply_theme(*m_current_theme);
-
 	if (index == -1) m_widget_buttons_layout->addWidget(button);
 	else m_widget_buttons_layout->insertWidget(index, button);
 }

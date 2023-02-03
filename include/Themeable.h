@@ -13,42 +13,41 @@ namespace Layers
 		The Themeable class is designed to be wrapped with QWidget classes to
 		provide them functionality to apply Layers Themes.
 
-		Themeables are responsible for applying themes to
-		When a theme is applied to a themeable, the themeable also applies the
-		theme to the child themeables.
-		
-		A themeable builds a
-		theme tag from details provided during initialization. The tag is used
-		to retrieve attributes from themes.
+		Before a theme can be applied to a themeable, some setup is required.
 
-		Before a theme can be applied to a themeable, the themeable must have a name.
-		This is because a name is the minimum requirement to construct the theme tag.
-		To set a themeable's name, use set_name().
+		## Populate the Entity Pointer Map
 
-		Themes are applied to themeables recursively through apply_theme(). To do this,
-		references to child themeables need to be stored. These references are stored
-		through add_child_themeable_pointer().
+		Themeables need to store a map of pointers to all enities associated
+		with them. Without this map, themeables would have no way of accessing
+		the entities they are supposed to apply theme values to.
 
-		Before a themeable can be customized in a Layers application, two requirements
-		must be fullfilled:
-			1. A proper name must be defined with set_proper_name()
-			2. Classes that implement Themeable need to define setup_customize_panel()
+		Entities are typically declared as public member variables in classes
+		that implement Themeable. Themeable subclass implementations will need
+		to populate the Themeable's entity pointer map with pointers to these
+		entity variables. The map is accessible through a protected member
+		variable called *m_entities*.
+
+		## Themeable Tags
+
+		A themeable tag is an identifier used to identify a particular
+		themeable.
+
+		The primary component of the themeable tag is the themeable's name. By
+		default, themeables are nameless, 
+
+		Once a name and any necessary tag prefixes have been assigned, a tag
+		can be constructed. Tag construction is done automatically after the
+		first call to tag() (typically during the first apply_theme() call).
+		The tag is cached, so any subsequent calls to tag() will return the
+		cached tag.
+
+		Themes store values labeled under these themeable tags. A themeable
+		obtains its data from a theme by passing its tag to the theme.
 	*/
 	class Themeable
 	{
 	public:
 		~Themeable();
-
-		/*!
-			Adds a themeable to the child themeable references list.
-
-			If the caller has already assigned tag prefixes, then the newly added themeable reference
-			will have its prefixes assigned during this function. Otherwise, child themeables will
-			have their prefixes assigned when the parent calls assign_tag_prefixes().
-
-			@param child_themeable to be added to the reference list
-		*/
-		void add_child_themeable_pointer(Themeable* child_themeable);
 
 		/*!
 			Applies the given theme to the caller and its children.
@@ -184,10 +183,6 @@ namespace Layers
 		void unassign_prefixes();
 
 	protected:
-		//QList<Themeable*> m_child_themeables;
-
-		Theme* m_current_theme{ nullptr };
-
 		QMap<QString, Entity*> m_entities{ QMap<QString, Entity*>() };
 
 		bool m_functionality_disabled{ false };
