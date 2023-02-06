@@ -57,5 +57,5 @@ release/
 *.sln.docstates
 
 # Generated Docs
-docs/html
-docs/latex
+docs/doxygen/html
+docs/doxygen/latex

@@ -96,6 +96,13 @@ void CreateNewThemeDialog::set_current_start_theme_name(const QString& theme_nam
 		m_start_theme_combobox->set_current_item(theme_name);
 }
 
+int CreateNewThemeDialog::exec()
+{
+	m_theme_name_line_edit->setFocus();
+
+	return QDialog::exec();
+}
+
 void CreateNewThemeDialog::init_attributes()
 {
 	m_start_theme_combobox->corner_radii.top_left.set_value(7.0);

@@ -73,7 +73,10 @@ Window::Window(bool preview, QWidget* parent) :
 	setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
 	resize(1200, 800);
 
-	m_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
+	m_control_create_new_theme_dialog->hide();
+	m_control_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
+
+	m_create_new_theme_dialog->entangle_with(m_control_create_new_theme_dialog);
 
 	m_control_color_dialog->hide();
 	m_control_color_dialog->set_proper_name("Color Dialog");
@@ -83,15 +86,6 @@ Window::Window(bool preview, QWidget* parent) :
 
 	m_control_update_dialog->hide();
 	m_control_update_dialog->set_proper_name("Update Dialog");
-
-	//m_app_menu->a_fill.set_disabled();
-
-	//m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
-
-	/*m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
-	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
-	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
-	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");*/
 
 	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
 	m_settings_menu->a_fill.set_disabled();
@@ -104,12 +98,6 @@ Window::Window(bool preview, QWidget* parent) :
 	m_tab_menu_separator->setFixedHeight(3);
 	m_tab_menu_separator->set_name("tab_menu_separator");
 	m_tab_menu_separator->set_proper_name("Tab Menu Separator");
-
-	//add_menu(m_app_menu);
-	//add_menu(m_settings_menu);
-	//add_menu(m_customize_menu);
-	
-	//m_menu_stack.append(m_app_menu);
 
 	setup_layout();
 
@@ -128,11 +116,6 @@ Window::Window(bool preview, QWidget* parent) :
 	}
 }
 
-//void Window::add_menu(Menu* menu)
-//{
-//	m_menus.append(menu);
-//}
-
 Menu* Window::app_menu() const
 {
 	return m_app_menu;
@@ -147,10 +130,8 @@ void Window::link_theme_name(const QString& name)
 
 void Window::assign_tag_prefixes()
 {
-	for (Themeable* themeable_child_element : child_themeables())
-	{
-		themeable_child_element->assign_tag_prefixes(m_tag_prefixes, "");
-	}
+	for (Themeable* child_themeable : child_themeables())
+		child_themeable->assign_tag_prefixes();
 
 	m_tag_prefixes_assigned = true;
 }

@@ -33,6 +33,12 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 		layersApp->apply_theme(layersApp->themes()[m_theme_combobox->current_item()]);
 	});
 
+	connect(layersApp, &Application::current_theme_changed, [this] {
+		handle_custom_theme_buttons_visibility();
+	});
+
+	handle_custom_theme_buttons_visibility();
+
 	m_new_theme_button->set_name("new_theme_button");
 	m_new_theme_button->set_proper_name("New Theme Button");
 
@@ -64,6 +70,14 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	setup_layout();
 }
 
+void ThemesSettingsPanel::handle_custom_theme_buttons_visibility()
+{
+	if (layersApp->current_theme()->editable())
+		show_custom_theme_buttons();
+	else
+		show_custom_theme_buttons(false);
+}
+
 void ThemesSettingsPanel::init_attributes()
 {
 	a_fill.set_disabled();
@@ -77,12 +91,9 @@ void ThemesSettingsPanel::init_attributes()
 
 void ThemesSettingsPanel::apply_theme(Theme& theme)
 {
-	if (theme.editable())
-		show_custom_theme_buttons();
-	else
-		show_custom_theme_buttons(false);
+	
 
-	Themeable::apply_theme(theme);
+	//Themeable::apply_theme(theme);
 }
 
 Button* ThemesSettingsPanel::customize_theme_button() const

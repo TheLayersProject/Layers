@@ -160,6 +160,11 @@ void LineEditor::setFixedWidth(int w)
 	m_line_edit->setFixedWidth(w);
 }
 
+void LineEditor::setFocus(Qt::FocusReason reason)
+{
+	m_line_edit->setFocus();
+}
+
 QString LineEditor::text()
 {
 	return m_line_edit->text();

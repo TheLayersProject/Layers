@@ -31,7 +31,7 @@ void Themeable::apply_theme(Theme& theme)
 			{
 				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
 				{
-					//qDebug() << child_themeable->tag();
+					qDebug() << child_themeable->tag();
 
 					if (theme.contains_attributes_for_tag(child_themeable->tag()))
 					{
@@ -70,20 +70,17 @@ void Themeable::apply_theme(Theme& theme)
 	}
 }
 
-void Themeable::assign_tag_prefixes(QStringList parent_prefixes, const QString& parent_name)
+void Themeable::assign_tag_prefixes(QStringList prefixes)
 {
 	if (m_name)
 	{
-		if (parent_name != "")
-		{
-			m_tag_prefixes.append(parent_prefixes);
-			m_tag_prefixes.append(parent_name);
-		}
+		if (!prefixes.isEmpty())
+			m_tag_prefixes.append(prefixes);
+
+		prefixes.append(*m_name);
 
 		for (Themeable* child_themeable : child_themeables())
-		{
-			child_themeable->assign_tag_prefixes(m_tag_prefixes, *m_name);
-		}
+			child_themeable->assign_tag_prefixes(prefixes);
 
 		m_tag_prefixes_assigned = true;
 	}
@@ -259,16 +256,4 @@ QString& Themeable::tag()
 	}
 
 	return m_tag;
-}
-
-void Themeable::unassign_prefixes()
-{
-	m_tag_prefixes.clear();
-
-	m_tag_prefixes_assigned = false;
-
-	for (Themeable* child_themeable : child_themeables())
-	{
-		child_themeable->unassign_prefixes();
-	}
 }

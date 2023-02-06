@@ -7,6 +7,7 @@
 #include <QUuid>
 #include "directories.h"
 #include "Theme.h"
+#include "Themeable.h"
 
 namespace Layers
 {
@@ -15,7 +16,7 @@ namespace Layers
 	class Version;
 	class Window;
 
-	class Application : public QApplication
+	class Application : public QApplication, public Themeable
 	{
 		Q_OBJECT
 
@@ -39,6 +40,9 @@ namespace Layers
 			@param theme to apply
 		*/
 		void apply_theme(Theme& theme);
+
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
 
 		/*!
 			Creates a new theme.

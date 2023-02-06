@@ -24,6 +24,9 @@ namespace Layers
 
 		void set_current_start_theme_name(const QString& theme_name);
 
+	public slots:
+		virtual int	exec();
+
 	protected:
 		void init_attributes();
 

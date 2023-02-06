@@ -163,7 +163,7 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 		QMap<QString, Entity*>& themeable_data_in_theme = m_data[themeable->tag()];
 
 		for (const QString& entity_key : themeable_data_in_theme.keys())
-		{ // HERE
+		{
 			if (themeable->entities().contains(entity_key))
 			{
 				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
@@ -175,9 +175,6 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 	}
 	else
 	{
-		/* TODO: Temporarily disabling this code which copys themeable data to the theme
-		   even if the theme doesn't already contain attributes for the themeable. This will
-		   need to be re-enabled! */ 
 		QMap<QString, Entity*> new_themeable_data_for_theme;
 
 		for (const QString& entity_key : themeable->entities().keys())

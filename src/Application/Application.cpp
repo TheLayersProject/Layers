@@ -46,6 +46,7 @@ Application::Application(
 	qRegisterMetaType<QGradientStops>("QGradientStops");
 
 	setAttribute(Qt::AA_EnableHighDpiScaling);
+	set_proper_name("App");
 
 	if (m_version)
 	{
@@ -86,7 +87,14 @@ void Application::apply_theme(Theme& theme)
 			themeable->apply_theme(theme);
 
 		m_settings.setValue("themes/active_theme", theme.name());
+
+		emit current_theme_changed();
 	}
+}
+
+QList<Themeable*> Application::child_themeables(Qt::FindChildOptions options)
+{
+	return m_child_themeables;
 }
 
 void Application::create_theme(const QString& new_theme_name, const QString& copy_theme_name)
@@ -182,16 +190,17 @@ void Application::rename_theme(const QString& old_name, const QString& new_name)
 {
 	if (m_themes.contains(old_name))
 	{
+		QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
+
+		QDir old_theme_dir(T1_themes_dir.absoluteFilePath(m_themes[old_name].identifier() + "\\"));
+
+		old_theme_dir.removeRecursively();
+
 		m_themes.insert(new_name, m_themes.take(old_name));
 
 		m_themes[new_name].set_name(new_name);
 
 		apply_theme(m_themes[new_name]);
-
-		QFile old_theme_file(m_app_themes_dir.absoluteFilePath(old_name.toLower()));
-
-		old_theme_file.remove();
-
 		save_theme(m_themes[new_name]);
 	}
 }

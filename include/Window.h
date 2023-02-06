@@ -19,8 +19,6 @@ namespace Layers
 	public:
 		Window(bool preview = false, QWidget* parent = nullptr);
 
-		//void add_menu(Menu* menu);
-
 		Menu* app_menu() const;
 
 		void assign_tag_prefixes();
@@ -66,17 +64,15 @@ namespace Layers
 
 		CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
 
+		CreateNewThemeDialog* m_control_create_new_theme_dialog{ new CreateNewThemeDialog(this)};
+
 		ColorDialog* m_control_color_dialog{ new ColorDialog(this) };
 
 		GradientDialog* m_control_gradient_dialog{ new GradientDialog(QGradientStops(), this) };
 
 		UpdateDialog* m_control_update_dialog{ new UpdateDialog("", "", this) };
 
-		//QVBoxLayout* m_app_menu_layout{ new QVBoxLayout };
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
-
-		//QList<Menu*> m_menus;
-		//QList<Menu*> m_menu_stack;
 
 		Titlebar* m_titlebar{ new Titlebar };
 
@@ -106,7 +102,6 @@ namespace Layers
 		m_app_menu->apply_theme(*layersApp->current_theme());
 
 		m_main_layout->addWidget(m_app_menu);
-		//m_app_menu_layout->addWidget(m_main_widget);
 
 		if (m_customize_menu->preview_widget())
 		{

@@ -1,4 +1,10 @@
-# <img src="https://github.com/huntermalm/Layers/blob/main/svgs/layers_logo_w_text.svg?raw=true" alt="layers_logo" width="500"/>
+# Layers
+
+<div class="title_screenshot">
+
+![Screenshot of Layers Demo 3.1.0a](img/demo_dark.svg)
+
+</div>
 
 Layers is an application template library with a focus on themes and user customization.
 

@@ -53,8 +53,6 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 			GradientDialog* gsd =
 				new GradientDialog(a_fill.as<QGradientStops>());
 
-			gsd->assign_tag_prefixes();
-
 			gsd->entangle_with(
 				layersApp->main_window()->control_gradient_dialog());
 			

@@ -18,17 +18,20 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 	set_name("settings_menu");
 	set_proper_name("Settings Menu");
 
+	m_app_preferences_settings_panel->hide();
 	m_app_preferences_settings_panel->setMouseTracking(true);
 
+	//m_themes_settings_panel->hide();
 	m_themes_settings_panel->setMouseTracking(true);
-	m_themes_settings_panel->hide();
 
 	setup_layout();
 
 	// Add 'App Preferences' Settings Tab
-	add_settings_tab(new Graphic(":/svgs/app_preferences_icon.svg", QSize(25, 25)), "App Preferences");
-	m_settings_tabs.last()->set_name("app_preferences_settings_tab");
-	connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->show(); m_themes_settings_panel->hide(); });
+	//add_settings_tab(new Graphic(":/svgs/app_preferences_icon.svg", QSize(25, 25)), "App Preferences");
+	//m_settings_tabs.last()->set_name("app_preferences_settings_tab");
+	//connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] {
+	//	m_app_preferences_settings_panel->show(); m_themes_settings_panel->hide();
+	//});
 	
 	// Add 'Themes' Settings Tab
 	add_settings_tab(new Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");

@@ -10,30 +10,76 @@ namespace Layers
 	class Theme;
 
 	/*!
-		The Themeable class is designed to be wrapped with QWidget classes to
-		provide them functionality to apply Layers Themes.
+		The Themeable class is designed to be inherited alongside QWidget
+		classes to provide them functionality to apply Layers Themes.
 
 		Before a theme can be applied to a themeable, some setup is required.
 
-		## Populate the Entity Pointer Map
+		# Populate the Entity Pointer Map
 
 		Themeables need to store a map of pointers to all enities associated
 		with them. Without this map, themeables would have no way of accessing
 		the entities they are supposed to apply theme values to.
 
 		Entities are typically declared as public member variables in classes
-		that implement Themeable. Themeable subclass implementations will need
-		to populate the Themeable's entity pointer map with pointers to these
-		entity variables. The map is accessible through a protected member
-		variable called *m_entities*.
+		that implement %Themeable. %Themeable subclass implementations will
+		need to populate the map with pointers to these entity variables. The
+		map is accessible through a protected member variable called
+		*m_entities*.
+		
+		~~~~~~~~~~~~~{.c}
+		// Example from ThemeableBox::init_attributes()
 
-		## Themeable Tags
+		m_entities.insert({
+			{ "border", &border },
+			{ "corner_color", &a_corner_color },
+			{ "corner_radii", &corner_radii },
+			{ "fill", &a_fill },
+			{ "hover_fill", &a_hover_fill },
+			{ "margins", &margins },
+			{ "outline_color", &a_outline_color }
+		});
+		~~~~~~~~~~~~~
+
+		# Themeable Tags
+
+		![Themeable Tag Breakdown](./img/themeable_tag_breakdown.png)
 
 		A themeable tag is an identifier used to identify a particular
 		themeable.
 
-		The primary component of the themeable tag is the themeable's name. By
-		default, themeables are nameless, 
+		## Setting a Name
+
+		The primary component of the themeable tag is the themeable's name
+		which is appended to the end of the tag. By default, themeables are
+		nameless, so <b>it is important to remember to set themeable names
+		since they are required for tag construction</b>. You can do this using
+		set_name():
+
+		~~~~~~~~~~~~~{.c}
+		// Example from Titlebar::Titlebar()
+
+		m_exit_button->set_name("exit_button");
+		~~~~~~~~~~~~~
+
+		## Prefix Assignment
+
+		Tag prefixes consist of the names of the parent themeables in the
+		widget hierarchy.
+
+		Prefix assignment is handled by calling assign_tag_prefixes(). It also
+		works recursively to assign prefixes to associated child themeables.
+		assign_tag_prefixes() is called automatically at the end of the Window
+		constructor after all of its children have presumably been initialized,
+		so <b>as long as your themeable is part of the window's hierarchy, you
+		will not need to call assign_tag_prefixes() manually</b>.
+
+		### Layers Prefix
+
+		Themeables that have been themed by Layers, not an application, have 
+		the 'layers' prefix prepended to the front of the tag.
+
+		## Constructing and Caching the Tag
 
 		Once a name and any necessary tag prefixes have been assigned, a tag
 		can be constructed. Tag construction is done automatically after the
@@ -41,8 +87,63 @@ namespace Layers
 		The tag is cached, so any subsequent calls to tag() will return the
 		cached tag.
 
-		Themes store values labeled under these themeable tags. A themeable
-		obtains its data from a theme by passing its tag to the theme.
+		# Applying Themes
+
+		Once the conditions for tag construction are met, a theme can be
+		applied. This is done by calling apply_theme() and passing the theme
+		as an argument.
+
+		Themes store values labeled under themeable tags. When a theme is
+		applied, the themeable obtains its data from the theme
+		by passing along its tag.
+
+		apply_theme() works recursively to apply the theme to the caller and
+		to the child themeables in the caller's hierarchy. <b>As long as your
+		themeable is part of the window's hierarchy, you will not need to call
+		apply_theme() manually</b>.
+
+		# Copying Entity Values to Themes
+
+		After a user makes changes to a custom theme, they will likely end up
+		applying those changes once they are satisfied. They do this by
+		clicking on the apply button in the CustomizeMenu. This causes
+		copy_attribute_values_to() to be called on the menu's preview window,
+		passing along the active theme.
+
+		copy_attribute_values_to() copies entity values of the caller and of
+		child themeables in the caller's hierarchy to the provided theme. It is
+		effectively the reverse of applying a theme.
+
+		# Themeable Entanglement
+
+		A themeable can be *entangled* with another themeable. This is handled
+		by Themeable::entangle_with() and works by entangling all of caller's
+		entities with the entities of the argument themeable.
+
+		It is important to note that Themeable::entangle_with() will only
+		entangle entities whose pointers have been stored in *m_entities*.
+
+		Example of %Themeable Entanglement:
+
+		~~~~~~~~~~~~~{.c}
+		Widget* widget_a = new Widget;
+		Widget* widget_b = new Widget;
+
+		widget_a->entangle_with(widget_b);
+
+		widget_a->a_fill.set_value(QColor(Qt::black));		// widget_b->a_fill is also black now
+		widget_b->corner_radii.top_left.set_value(10.0);	// widget_a->corner_radii.left is also 10.0 now
+		~~~~~~~~~~~~~
+
+		## Constrain Theme Application to One Entangled Themeable
+
+		Once one themeable has been entangled with another, a theme can be
+		applied to a single one of them but ultimately gets applied to both.
+		You will want to constrain theme application to a single themeable in
+		the entanglement relationship otherwise you may get unexpected results.
+
+		If you want to apply different values to two different themeables, they
+		shouldn't be entangled in the first place.
 	*/
 	class Themeable
 	{
@@ -52,61 +153,129 @@ namespace Layers
 		/*!
 			Applies the given theme to the caller and its children.
 
-			This function works recursively to apply the given theme to the caller and children in the
-			caller's hierarchy.
+			A name must be set with set_name() before themes can be applied.
 
-			A name must be set with set_name() before themes can be applied. This is because a name
-			is the minimum requirement to construct the theme tag.
+			The theme should contain a map of entities that contain values for
+			the themeable.
 
-			@param theme to be applied
+			This function works recursively to apply the theme to the children
+			in the caller's hierarchy.
+
+			@param theme - The Theme to apply
 		*/
 		virtual void apply_theme(Theme& theme);
 
 		/*!
-			Assigns tag prefixes from the parent and the parent's name.
+			Assigns tag prefixes to the themeable.
 
-			This function works recursively to assign tag prefixes to the caller and children in the
-			caller's hierarchy. Each themeable's name gets added to the tag prefix list as this function
-			gets called down the hierarchy.
+			This function works recursively to assign tag prefixes to the
+			caller and child themeables in the caller's hierarchy. Each
+			themeable's name gets added to the prefixes list as this function
+			gets further down the hierarchy.
 
-			If no arguments are given, then assignment to the caller is skipped and the children have their
-			prefixes assigned. However, the caller will still be marked as having its prefixes assigned.
+			If the default empty list is used, then assignment to the caller is
+			skipped while its children continue to have prefixes assigned. The
+			caller will still be marked as having its prefixes assigned.
+
+			@param prefixes - QStringList containing the prefixes to assign
 		*/
-		void assign_tag_prefixes(QStringList parent_prefixes = QStringList(), const QString& parent_name = "");
+		void assign_tag_prefixes(QStringList prefixes = QStringList());
 
-		QList<Themeable*> child_themeables(Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
+		/*!
+			Returns a list of child themeables.
 
+			Since the themeable should be inherited alongside a QWidget class,
+			that should mean that the themeable *is* a QWidget. That means the
+			themeable should be capable of being dynamically casted to a
+			QWidget, which is the first thing this function does.
+
+			QObject::findChildren() is called to obtain a QList of pointers to
+			child QWidgets. Then, another QList is created by iterating the
+			child QWidget pointer list, dynamically casting them to %Themeable
+			pointers, and appending the ones that successfully cast.
+
+			The QList containing the child themeable pointers is returned.
+
+			@param options - FindChildOptions argument that gets forwarded to
+			QObject::findChildren()
+		*/
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
+
+		/*!
+			Copies entity values of the caller and of child themeables in the
+			caller's hierarchy to the provided theme.
+			
+			This is effectively the reverse of applying a theme.
+
+			@param theme - Theme to copy values to
+		*/
 		void copy_attribute_values_to(Theme* theme);
 
+		/*!
+			Entangles the provided themeable by entangling all entities with
+			the entities of the provided themeable.
+
+			@param themeable - The themeable to entangle with
+			@param entangle_children - Boolean value determining whether to
+			entangle child themeables or not, true by default
+		*/
 		template<typename T>
 		void entangle_with(T* themeable, bool entangle_children = true);
 
 		/*!
-			Get a reference to the attribute set of the given state.
+			Returns a reference to the entity pointer map.
 
-			@param state of the attribute set to be returned, 'default' by default
-			@returns Reference to attribute set of given state
+			@returns Reference to entity pointer map
 		*/
 		QMap<QString, Entity*>& entities();
 
 		/*!
-			Get the address of the themeable's icon. Returns nullptr if no icon exists.
+			Returns pointer to the themeable's icon.
+			
+			Returns nullptr if no icon has been set.
 
-			@returns Address of icon, or nullptr
+			@returns Pointer to icon, or nullptr
 		*/
 		Graphic* icon() const;
 
+		/*!
+			Returns true if the themeable is stateful, false otherwise.
+
+			The themeable is considered stateful is any of its entities are
+			stateful.
+
+			@returns True if stateful, false otherwise
+		*/
 		bool is_stateful() const;
 
+		/*!
+			Returns pointer to the themeable's name.
+
+			Returns nullptr if no name has been set.
+
+			@returns Pointer to name, or nullptr
+		*/
 		QString* name() const;
 
 		/*!
-			Get the address of the proper name. Returns nullptr if no proper name has been set.
+			Returns pointer to the themeable's proper name.
+			
+			Returns nullptr if no proper name has been set.
 
-			@returns Address of proper name, or nullptr
+			@returns Pointer to proper name, or nullptr
 		*/
 		QString* proper_name() const;
 
+		/*!
+			Marks the themeable as functional or disfunctional.
+
+			This is used primarily to disable certain functionality of the
+			preview window owned by the CustomizeMenu.
+
+			@param disabled - Boolean value determining whether to disable the
+			themeable's functionality, true by default
+		*/
 		void set_functionality_disabled(bool disabled = true);
 
 		/*!
@@ -116,43 +285,59 @@ namespace Layers
 		*/
 		void set_icon(Graphic* icon);
 
+		/*!
+			Marks the caller and its children as app themeables.
+
+			This prevents the 'layers' prefix from being prepended to the
+			themeable tag.
+
+			@param is_app_themeable - Boolean value determining whether to set
+			the themeable as an app themeable or not
+		*/
 		void set_is_app_themeable(bool is_app_themeable);
 
 		/*!
-			Sets the name of the themeable; replaces it if one already exists.
+			Sets the name of the themeable.
+			
+			If a name already exists, it is replaced.
 
-			A themeable name is the minimum requirement to construct the themeable's theme tag
-			needed to apply a theme.
-
-			@param name of the themeable
+			@param name - Name to assign to the themeable
 		*/
 		void set_name(const QString& name);
 
 		/*!
-			Sets a proper name for the themeable; replaces it if one already exists.
+			Sets the proper name of the themeable.
 
-			A themeable's proper name is used to represent the themeable to the user. It is recommended
-			to use capitalization when setting a proper name.
+			If a proper name already exists, it is replaced.
 
-			@param proper_name for the themeable
+			A themeable's proper name is used to represent the themeable to the
+			user.
+
+			@param proper_name - Proper name to assign to the themeable
 		*/
 		void set_proper_name(const QString& proper_name);
 
 		/*!
-			Sets the current state of the themeable.
+			Sets the active state of the themeable.
 
-			This function calls issue_update() to ensure the state change is visually represented.
-
-			@param state to set the themeable to
+			@param state - New active state to assign to the themeable
 		*/
 		virtual void set_state(const QString& state);
 
+		/*!
+			Returns the active state of the themeable.
+
+			@returns The themeable's active state
+		*/
 		QString state() const;
 
 		/*!
-			Gets a list of the states that are used to identify the caller's attribute sets.
+			Returns a QStringList containing the themeable's available states.
 
-			@returns List of states that identify attribute sets
+			The themeable's available states are a sum of the available states
+			of the themeable's entities.
+
+			@returns QStringList containing available states
 		*/
 		QStringList states() const;
 
@@ -173,14 +358,6 @@ namespace Layers
 			@returns Theme tag
 		*/
 		QString& tag();
-
-		/*!
-			Clears the tag prefix list
-
-			This function works recursively to clear the tag prefixes of the caller and children in the
-			caller's hierarchy.
-		*/
-		void unassign_prefixes();
 
 	protected:
 		QMap<QString, Entity*> m_entities{ QMap<QString, Entity*>() };

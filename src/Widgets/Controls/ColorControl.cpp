@@ -25,7 +25,6 @@ ColorControl::~ColorControl()
 void ColorControl::click()
 {
 	ColorDialog* color_dialog = new ColorDialog();
-	color_dialog->assign_tag_prefixes();
 
 	color_dialog->entangle_with(
 		layersApp->main_window()->control_color_dialog());

@@ -32,6 +32,8 @@ namespace Layers
 
 		void setFixedWidth(int w);
 
+		void setFocus(Qt::FocusReason reason);
+
 		QString text();
 
 		Attribute a_left_padding{ Attribute("left_padding", QVariant::fromValue(3.0)) };
@@ -39,7 +41,10 @@ namespace Layers
 		Attribute a_text{ Attribute("text", QString("")) };
 
 	public slots:
+		inline void setFocus() { setFocus(Qt::OtherFocusReason); }
+
 		void set_current_editting_state(const QString& state);
+
 		void update_theme_dependencies();
 
 	protected:
