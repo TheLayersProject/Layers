@@ -1,0 +1,492 @@
+<svg 
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+width="1221px" height="821px">
+    
+    <!-- #app_menu -->
+    <svg 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     id="app_menu" width="1221px" height="821px">
+        <image  x="0px" y="0px" width="1221px" height="821px"  xlink:href="data:image/png;base64,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f+VXfiU+/elPxx/8wR/Eli1bYsmSJfHhD384/uIv/iI2b94cfX198YlPfCI+97nPnfbWqe1861vfikqlElu3bm0cm8v53HnnnfG7v/u7cfnll8f73ve++PM///P41V/91bj33ntj/fr18ba3vS3uueeeuPnmmxvfu379+vjiF78YH/nIR2Lx4sVx0003xd/8zd/E1Vdf3ek/QgAAgItWqVRqG8MiIg4dOjSnYxE21s9gfHw8hoaGYnh4eNb3FDPDLqZltGaIdcitt94a3/rWt+KBBx6IiIiBgYH4x3/8x7jxxhvjoYceiv/6r/+K2267LW644YZ46KGHIiLihhtuiJ07d8bIyEj80R/9Uezfvz8+97nPxfj4ePT19cXf/d3fxUc/+tH48pe/HBETd3v4xCc+EUeOHImIiHvvvTe2b98e9913X0REPPzww/Gnf/qnMTg4GE899dScz33//v1Rq9Vi1apVjWN33HHHGc/nxIkT8cd//McxNjYWPT09cf/998cv/uIvxp133tmYinv33XfHTTfdFN/85jcb33vkyJG455574vXXX49KpRJ333133HHHHfGZz3xmwa9JBgAAuNi0Lo2c7Rh51Gq10/79u1qtXnRLZ80Q65DPf/7z8cADD0S5XI6BgYGoVCoxMjISq1evjoiJ6PTMM8/Eu9/97oiYCGYbN26Mbdu2xcqVK2PTpk3xn//5n42piMPDw7Fz587YsmVLY4zt27c3YlhExJEjR+KKK66In/qpn4pSqRTPPPNM3HbbbTE0NHRW516tVuPUqVPR29sbETHn83n66acbtfjUqVOxZ8+eeOGFF6bddvbHP/5xXHbZZRExsaT0qquuiv/4j/+I119/PSImyvS//uu/xtq1a+PKK6/s9B8jAADARalerze2uGm1YsWKGcdWrlzZ9r3Ftj+8eXV1dcXg4GDbDfQL/f39MTg4eNYr0DrJDLEOWbVqVXz84x+P6667Lk6dOhWnTp2aMdX00Ucfjd/6rd+KSy+9NK6//vo4depU7NixoxGC7rrrrrjrrrumfaY5LrX64he/GHfeeWf89V//dezduze2b98e3/zmN896P67FixdHb29vI7YV/2E82/Op1WozjtXr9cb/eSi+d+/evdPe8/LLL0fExLLS55577gL+KQEAALw51ev12LlzZ1x11VWNSQmFDRs2RLVajUOHDkWpVIqVK1fGunXrZnzHT37yk9i9e3enL4ULqKurK6655prTxrBCEcWGhoYuitVcglgHlEqluPvuu+PgwYNxxx13NKLRl770pWnv+973vhe/+Zu/GTfccENcf/318YMf/CBOnjzZqPj333//jP/4nO5fuldeeSU++9nPxqpVq+I973lPvP/9748PfehD8Yd/+Idx4MCBOZ//T//0T0fExGyuiDjn8zmTY8eORURET0/PtOOLFy+OiLhoNuoDAABYiGq1WuzZs2dGECuVSrFx48Yzfv7ll1++6JbJMXeni2EjIyNRrVajv79/2vGLKYpZMtkB/f39sX79+nj44YcbMaynpye6u7unvW94eDgef/zx+OAHPxjXXnttPProoxExEbaq1WqsXLkyfvzjHzceL7/8cmP2VKuBgYH45Cc/GWvWrIlXX301HnzwwfjsZz8bl156abz97W+f87n39vbG7bffHvv27WsstTyX85mLffv2xejoaFx77bXTjhfna3YYAADA+Wn9e+jZKLbR4c3ndMskh4eH4+mnn46hoaHGRJZmF8vySTPELpBFixbFVVddNeP4nj17Ynh4OEZGRuLWW2+No0ePRqVSiV/+5V+OxYsXz7iN6Xe/+934/d///RgZGWncyvbkyZPx1a9+NT72sY/FwYMH47HHHovVq1fHb/zGb8STTz4Z//Iv/zJj3KNHj8Y73/nOWLVqVfzDP/xDjI+Px3vf+96ImLkksd119PT0xLp16+IjH/lI9Pf3x+c///lG7T2X85mL0dHRePDBB+OXfumXYu/evfHDH/4wrrrqqvi1X/u1+N73vjftNsAAAACcvfXr15/XZ59++ulOXwJvsCKGtc7+ipiYGTY0NNRYsTU0NNT2vRfDTDFB7AJZtWpVfOELX5hx/O67747/+Z//ib/6q7+KO++8M/7sz/4sxsfH4xvf+Eb09/fH2rVrp73/8ccfjxMnTsT3v//9abcv/cpXvhLVajU+/vGPxx133BG1Wi22b98eX/va19qeT61Wiz/5kz+J3/md34n7778/yuVyjIyMxJe+9KX40Y9+dMbrqNVq8dprr8UTTzwRX/3qV2Pfvn3T3ne25zNX//Zv/xalUik++clPRm9vb1Sr1fjOd74T//zP/zzvf6YAAABvNkePHm0bPubibPejPl/tNvs/H6fb8/pCaJ0Ac6E+c742bdrU9t+J48ePT4thERPbJJ0uim3atOmsb+Q3X0oxsWyyKyIWTT4WR8SSiOiPiEsjYiAiLvvUpz719+c6yI4dOzp9nQtScYfJo0ePzrofVl9fX/zTP/1TfOELX4gnn3yy7XesWLEihoeHG3diPJOenp7o7++PQ4cOtd3Y/nyv6WzPZ67fu3z58jh+/HiMjo6+Id852x1VAAAAMrniiiuir68vXnrppRgbG4t169bF6tWrp71n79698corr8SiRYti/fr1cfTo0dizZ8+8nmexyumNsm3bNufcRrslj8PDw7Fr165Z20W7WWVFLGu3rPJMVq1adc7n/+1vf/u3I+JgRByOiKMRcSwiRiLiRESMTj6qZoh1UDHrajZdXV1x++23x/79+2PXrl2zfsfZbIgfEXHq1Kk4ePDgBbumsz2fuX7vhTpnAACAzF588cVpP7/wwguxdOnSxg3NhoeHGzdVGx0dnfXvp7w5HDt2rDHrq6urK44fPx67du067dLH1pli5xPD5osgtkBt3bo1PvOZz0RPT0/cc889C3bNLQAAAG8utVotdu7c2enToIOKKLZu3bp49tln59Qkigi2adOm2LNnz4KOYRGC2IL1v//7v/HAAw/EM888c153agQAAIA3g/lYLuicpxRR7GwUUexiIIgtUAcPHoyHHnqo06cBAAAA8KZT7vQJAAAAAMB8EsQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAglUqnTwA6pbe3t9OnAAAAAHSAGWIAAAAApCKIAQAAAJDKvCyZPHnyZKevEwAAAICLQH9//wUfwwwxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAgFUEMAAAAgFQEMQAAAABSEcQAAAAASEUQAwAAACAVQQwAAACAVAQxAAAAAFIRxAAAAABIRRADAAAAIBVBDAAAAIBUBDEAAAAAUhHEAAAAAEhFEAMAAAAg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" />
+    </svg>
+
+    <!-- Layers Logo -->
+    <svg 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500px" height="500px" x="37" y="29" viewBox="0 0 7000 7000">
+        <path id="red_out" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="orange_in" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="orange_out" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="yellow_in" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="yellow_out" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="green_in" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="green_out" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="blue_in" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="blue_out" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="indigo_in" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="indigo_out" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="violet_in" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="violet_out" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(100,100)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+        <path id="red_in" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(42,142)"
+         d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+
+        <animateTransform
+            xlink:href="#red_out"
+            id="red_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="0;red_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#red_out"
+            id="red_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="0;red_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#red_out"
+            id="red_out_fade_anim"
+            attributeName="opacity"
+            begin="0;red_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#orange_in"
+            id="orange_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="red_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#orange_in"
+            id="orange_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="red_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#orange_in"
+            id="orange_in_fade_anim"
+            attributeName="opacity"
+            begin="red_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#orange_out"
+            id="orange_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="orange_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#orange_out"
+            id="orange_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="orange_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#orange_out"
+            id="orange_out_fade_anim"
+            attributeName="opacity"
+            begin="orange_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#yellow_in"
+            id="yellow_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="orange_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#yellow_in"
+            id="yellow_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="orange_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#yellow_in"
+            id="yellow_in_fade_anim"
+            attributeName="opacity"
+            begin="orange_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#yellow_out"
+            id="yellow_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="yellow_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#yellow_out"
+            id="yellow_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="yellow_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#yellow_out"
+            id="yellow_out_fade_anim"
+            attributeName="opacity"
+            begin="yellow_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#green_in"
+            id="green_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="yellow_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#green_in"
+            id="green_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="yellow_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#green_in"
+            id="green_in_fade_anim"
+            attributeName="opacity"
+            begin="yellow_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#green_out"
+            id="green_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="green_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#green_out"
+            id="green_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="green_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#green_out"
+            id="green_out_fade_anim"
+            attributeName="opacity"
+            begin="green_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#blue_in"
+            id="blue_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="green_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#blue_in"
+            id="blue_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="green_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#blue_in"
+            id="blue_in_fade_anim"
+            attributeName="opacity"
+            begin="green_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#blue_out"
+            id="blue_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="blue_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#blue_out"
+            id="blue_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="blue_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#blue_out"
+            id="blue_out_fade_anim"
+            attributeName="opacity"
+            begin="blue_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#indigo_in"
+            id="indigo_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="blue_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#indigo_in"
+            id="indigo_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="blue_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#indigo_in"
+            id="indigo_in_fade_anim"
+            attributeName="opacity"
+            begin="blue_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#indigo_out"
+            id="indigo_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="indigo_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#indigo_out"
+            id="indigo_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="indigo_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#indigo_out"
+            id="indigo_out_fade_anim"
+            attributeName="opacity"
+            begin="indigo_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#violet_in"
+            id="violet_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="indigo_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#violet_in"
+            id="violet_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="indigo_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#violet_in"
+            id="violet_in_fade_anim"
+            attributeName="opacity"
+            begin="indigo_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+
+        <animateTransform
+            xlink:href="#violet_out"
+            id="violet_out_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="violet_in_translate_anim.end"
+            dur="0.666666666s"
+            values="100,100; 157,57"/>
+        <animateTransform
+            xlink:href="#violet_out"
+            id="violet_out_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="violet_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1, 1; .95,.95"
+            additive="sum"/>
+        <animate
+            xlink:href="#violet_out"
+            id="violet_out_fade_anim"
+            attributeName="opacity"
+            begin="violet_in_translate_anim.end"
+            dur="0.666666666s"
+            values="1;0"/>
+
+        <animateTransform
+            xlink:href="#red_in"
+            id="red_in_translate_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="translate"
+            begin="violet_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="42,142; 100,100"/>
+        <animateTransform
+            xlink:href="#red_in"
+            id="red_in_scale_anim"
+            attributeType="xml" 
+            attributeName="transform"
+            type="scale"
+            begin="violet_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="1.05, 1.05; 1,1"
+            additive="sum"/>
+        <animate
+            xlink:href="#red_in"
+            id="red_in_fade_anim"
+            attributeName="opacity"
+            begin="violet_out_translate_anim.begin"
+            dur="0.666666666s"
+            values="0;1"/>
+    </svg>
+
+    <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="titlebar_highlight" width="1170px" height="45px" x="26" y="23" opacity="0">
+      <path fill-rule="evenodd" opacity="0.749" fill="rgb(89, 202, 74)"
+       d="M4.1000,0.000 L1165.000,0.000 C1167.761,0.000 1169.1000,2.239 1169.1000,5.000 L1169.1000,44.1000 L0.000,44.1000 L0.000,5.000 C0.000,2.239 2.239,0.000 4.1000,0.000 Z"/>
+      <text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" font-size="28px" x="537px" y="33px">
+         <tspan font-size="28px" font-family="Roboto" font-weight="bold" fill="#20421B">
+            Titlebar
+         </tspan>
+      </text>
+    </svg>
+
+    <svg 
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    id="active_menu_highlight" width="1170px" height="722px" x="26" y="71" opacity="0">
+      <path fill-rule="evenodd" opacity="0.749" fill="rgb(74, 152, 202)"
+       d="M0.000,-0.000 L1169.1000,-0.000 L1169.1000,717.000 C1169.1000,719.761 1167.761,722.000 1165.000,722.000 L4.1000,722.000 C2.239,722.000 0.000,719.761 0.000,717.000 L0.000,-0.000 Z"/>
+      <text kerning="auto" font-family="Myriad Pro" fill="rgb(0, 0, 0)" font-size="28px" x="507px" y="354px">
+        <tspan font-size="28px" font-family="Roboto" font-weight="bold" fill="#1E3748">
+          Active&#32;Menu
+        </tspan>
+      </text>
+    </svg>
+
+    <!-- titlebar_highlight_fade_in -->
+    <animate
+      xlink:href="#titlebar_highlight"
+      id="titlebar_highlight_fade_in"
+      attributeName="opacity"
+      begin="1.5;titlebar_highlight_fade_out.end+1.5"
+      dur="1s"
+      values="0;1"
+      fill="freeze"/>
+
+    <!-- titlebar_highlight_fade_out -->
+    <animate
+      xlink:href="#titlebar_highlight"
+      id="titlebar_highlight_fade_out"
+      attributeName="opacity"
+      begin="titlebar_highlight_fade_in.end+1.5"
+      dur="1s"
+      values="1;0"
+      fill="freeze"/>
+
+    <!-- active_menu_highlight_fade_in -->
+    <animate
+      xlink:href="#active_menu_highlight"
+      id="active_menu_highlight_fade_in"
+      attributeName="opacity"
+      begin="1.5;active_menu_highlight_fade_out.end+1.5"
+      dur="1s"
+      values="0;1"
+      fill="freeze"/>
+
+    <!-- active_menu_highlight_fade_out -->
+    <animate
+      xlink:href="#active_menu_highlight"
+      id="active_menu_highlight_fade_out"
+      attributeName="opacity"
+      begin="active_menu_highlight_fade_in.end+1.5"
+      dur="1s"
+      values="1;0"
+      fill="freeze"/>
+</svg>

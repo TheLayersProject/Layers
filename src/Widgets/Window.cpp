@@ -15,32 +15,15 @@ using Layers::GradientDialog;
 using Layers::Menu;
 using Layers::SettingsMenu;
 using Layers::Theme;
+using Layers::Themeable;
 using Layers::Titlebar;
 using Layers::Window;
 
 Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview }, Widget(parent)
 {
-	layersApp->add_child_themeable_pointer(*this);
-	
-	//if (layersApp->icon_file())
-	//{
-	//	setWindowIcon(QIcon(layersApp->icon_file()->fileName()));
-
-	//	m_app_menu = new Menu(
-	//		layersApp->name(),
-	//		new Graphic(layersApp->icon_file()->fileName()));
-	//}
-	//else
-	//{
-	//	m_app_menu = new Menu(
-	//		layersApp->name(),
-	//		new Graphic(
-	//			QFile(":/image_sequences/layers_logo.imgseq"),
-	//			QSize(35, 35)
-	//		)
-	//	);
-	//}
+	if (!m_preview)
+		layersApp->add_child_themeable_pointer(*this);
 
 	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
 	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
@@ -73,20 +56,6 @@ Window::Window(bool preview, QWidget* parent) :
 	setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
 	resize(1200, 800);
 
-	m_control_create_new_theme_dialog->hide();
-	m_control_create_new_theme_dialog->set_proper_name("Create New Theme Dialog");
-
-	m_create_new_theme_dialog->entangle_with(m_control_create_new_theme_dialog);
-
-	m_control_color_dialog->hide();
-	m_control_color_dialog->set_proper_name("Color Dialog");
-
-	m_control_gradient_dialog->hide();
-	m_control_gradient_dialog->set_proper_name("Gradient Dialog");
-
-	m_control_update_dialog->hide();
-	m_control_update_dialog->set_proper_name("Update Dialog");
-
 	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
 	m_settings_menu->a_fill.set_disabled();
 	m_settings_menu->hide();
@@ -94,26 +63,25 @@ Window::Window(bool preview, QWidget* parent) :
 	m_customize_menu->a_fill.set_disabled();
 	m_customize_menu->hide();
 
-	m_tab_menu_separator->a_fill.set_value(QColor("#25272b"));
-	m_tab_menu_separator->setFixedHeight(3);
-	m_tab_menu_separator->set_name("tab_menu_separator");
-	m_tab_menu_separator->set_proper_name("Tab Menu Separator");
+	m_separator->a_fill.set_value(QColor("#25272b"));
+	m_separator->setFixedHeight(3);
+	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
+	m_separator->set_name("separator");
+	m_separator->set_proper_name("Separator");
 
 	setup_layout();
 
 	for (const QString& theme_name : layersApp->themes().keys())
 		link_theme_name(theme_name);
 
-	// Do this last:
+	// Assign tag prefixes last!
 	assign_tag_prefixes();
 
-	if (!preview)
-	{
-		m_customize_menu->init_preview_window();
+	// Set theme
+	apply_theme(*layersApp->current_theme());
 
-		apply_theme(*layersApp->current_theme()); // Sets initial theme
-		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(layersApp->current_theme()->name());
-	}
+	m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(
+		layersApp->current_theme()->name());
 }
 
 Menu* Window::app_menu() const
@@ -126,6 +94,24 @@ void Window::link_theme_name(const QString& name)
 	m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
 	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
+}
+
+void Window::set_main_menu(Menu* main_menu)
+{
+	m_app_menu = main_menu;
+
+	set_icon(new Graphic(*m_app_menu->icon()));
+
+	m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
+	m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
+	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
+	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
+	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");
+
+	m_app_menu->set_is_app_themeable(true);
+	m_app_menu->apply_theme(*layersApp->current_theme());
+
+	m_main_layout->addWidget(m_app_menu);
 }
 
 void Window::assign_tag_prefixes()
@@ -141,14 +127,25 @@ void Window::center_dialog(QDialog* dialog)
 	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
 }
 
-ColorDialog* Window::control_color_dialog() const
+Themeable* Window::clone()
 {
-	return m_control_color_dialog;
-}
+	Window* w = new Window(true);
 
-GradientDialog* Window::control_gradient_dialog() const
-{
-	return m_control_gradient_dialog;
+	w->setMinimumSize(500, 400);
+	w->setMaximumSize(800, 600);
+	w->set_functionality_disabled();
+	w->titlebar()->exit_button()->set_functionality_disabled();
+	w->customize_menu()->apply_button()->set_functionality_disabled();
+	w->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
+
+	// Setup Preview Window's Customize Menu's Preview Widget
+	Widget* w_customize_menu_preview_widget = new Widget;
+	w_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
+	w_customize_menu_preview_widget->set_proper_name("Preview Widget");
+
+	w->customize_menu()->set_preview_widget(w_customize_menu_preview_widget);
+
+	return w;
 }
 
 CustomizeMenu* Window::customize_menu() const
@@ -215,7 +212,7 @@ void Window::customize_clicked()
 {
 	if (m_customize_menu->panels().isEmpty())
 		m_customize_menu->open_customize_panel(
-			new CustomizePanel(m_customize_menu->preview_widget()));
+			layersApp->customize_panel());
 	
 	open_menu(m_customize_menu);
 }
@@ -562,7 +559,7 @@ void Window::setup_layout()
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
-	m_main_layout->addWidget(m_tab_menu_separator);
+	m_main_layout->addWidget(m_separator);
 	//m_main_layout->addWidget(m_app_menu);
 	m_main_layout->addWidget(m_settings_menu);
 	m_main_layout->addWidget(m_customize_menu);

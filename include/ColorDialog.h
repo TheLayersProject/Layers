@@ -15,6 +15,8 @@ namespace Layers
 	public:
 		ColorDialog(QWidget* parent = nullptr);
 
+		virtual Themeable* clone() override;
+
 		Attribute color{ Attribute("color", QColor()) };
 
 		void update_color_name_line_editor();

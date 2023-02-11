@@ -10,7 +10,7 @@ using Layers::Button;
 using Layers::CustomizePanel;
 using Layers::Label;
 
-CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
+CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
@@ -46,27 +46,14 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	m_show_primary_button->hide();
 
 	connect(m_show_all_button, &Button::clicked, [this] {
-		//m_showing_primary = false;
-
-		for (AttributeWidget* attribute_widget : m_attribute_widgets)
-			attribute_widget->show();
+		for (AttributeWidget* aw : m_attribute_widgets)
+			aw->show();
 
 		m_show_all_button->hide();
 		m_show_primary_button->show();
 	});
 
 	connect(m_show_primary_button, &Button::clicked, [this] {
-		//m_showing_primary = true;
-
-		//for (AttributeWidget* attribute_widget : m_stateful_attribute_widgets)
-		//{
-		//	if (attribute_widget->customize_states().contains(m_state_combobox->current_item()) && !attribute_widget->is_primary())
-		//		attribute_widget->hide();
-		//}
-
-		//for (AttributeWidget* attribute_widget : m_stateless_attribute_widgets)
-		//	if (!attribute_widget->is_primary()) attribute_widget->hide();
-
 		for (AttributeWidget* aw : m_attribute_widgets)
 			if (aw->disabled())
 				aw->hide();
@@ -78,37 +65,103 @@ CustomizePanel::CustomizePanel(Themeable* themeable, QWidget* parent) :
 	if (m_themeable->child_themeables().isEmpty()) m_widgets_label->hide();
 	else
 	{
-		for (Themeable* child_themeable : m_themeable->child_themeables())
+		if (init_buttons)
 		{
-			// Check if themeable has a proper name to determine that it is customizable
-			if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
+			QMap<QString, QWidget*> organized_widgets = QMap<QString, QWidget*>();
+
+			QList<WidgetButton*> button_widget_buttons = QList<WidgetButton*>();
+			QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
+			QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
+			//QList<WidgetButton*> ungrouped_widget_buttons = QList<WidgetButton*>();
+
+			for (Themeable* child_themeable : m_themeable->child_themeables())
 			{
-				Button* element_button;
+				// Check if themeable has a proper name to determine that it is customizable
+				if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
+				{
+					WidgetButton* widget_button;
 
-				if (child_themeable->icon())
-					element_button = new Button(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
-				else
-					element_button = new Button(*child_themeable->proper_name());
+					if (child_themeable->icon())
+						widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
+					else
+						widget_button = new WidgetButton(*child_themeable->proper_name());
 
-				QObject::connect(element_button, &Button::clicked, [child_themeable] {
-					static_cast<Window*>(QApplication::activeWindow()
-						)->customize_menu()->open_customize_panel(
-							new CustomizePanel(child_themeable));
-				});
+					QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
+						static_cast<Window*>(QApplication::activeWindow()
+							)->customize_menu()->open_customize_panel(
+								new CustomizePanel(child_themeable));
+						});
 
-				add_widget_button(element_button);
+					if (dynamic_cast<Button*>(child_themeable))
+						button_widget_buttons.append(widget_button);
+
+					else if (dynamic_cast<Label*>(child_themeable))
+						label_widget_buttons.append(widget_button);
+
+					else if (dynamic_cast<Menu*>(child_themeable))
+						menu_widget_buttons.append(widget_button);
+
+					else
+						organized_widgets[widget_button->label_text()] = widget_button;
+				}
+			}
+
+			if (button_widget_buttons.size() == 1)
+				organized_widgets[button_widget_buttons.first()->label_text()] = button_widget_buttons.first();
+			else if (!button_widget_buttons.isEmpty())
+				organized_widgets["Buttons"] = new WidgetButtonGroup("Buttons", button_widget_buttons);
+
+			if (label_widget_buttons.size() == 1)
+				organized_widgets[label_widget_buttons.first()->label_text()] = label_widget_buttons.first();
+			else if (!label_widget_buttons.isEmpty())
+				organized_widgets["Labels"] = new WidgetButtonGroup("Labels", label_widget_buttons);
+
+			if (menu_widget_buttons.size() == 1)
+				organized_widgets[menu_widget_buttons.first()->label_text()] = menu_widget_buttons.first();
+			else if (!menu_widget_buttons.isEmpty())
+				organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
+
+			//if (label_widget_buttons.size() == 1)
+			//	ungrouped_widget_buttons.append(label_widget_buttons);
+			//else if (!label_widget_buttons.isEmpty())
+			//	add_widget_button_group(new WidgetButtonGroup("Labels", label_widget_buttons));
+
+			//if (menu_widget_buttons.size() == 1)
+			//	ungrouped_widget_buttons.append(menu_widget_buttons);
+			//else if (!menu_widget_buttons.isEmpty())
+			//	add_widget_button_group(new WidgetButtonGroup("Menus", menu_widget_buttons));
+
+			//if (!ungrouped_widget_buttons.isEmpty())
+			//	for (WidgetButton* widget_button : ungrouped_widget_buttons)
+			//		add_widget_button(widget_button);
+
+			for (QWidget* widget : organized_widgets)
+			{
+				if (WidgetButton* widget_button = dynamic_cast<WidgetButton*>(widget))
+					add_widget_button(widget_button);
+				else if (WidgetButtonGroup* widget_button_group = dynamic_cast<WidgetButtonGroup*>(widget))
+					add_widget_button_group(widget_button_group);
 			}
 		}
 	}
 
 	setup_layout();
 
-	init_attribute_widgets();
+	if (!m_themeable->entities().isEmpty())
+		init_attribute_widgets();
+	else
+	{
+		m_attributes_label->hide();
+		m_show_all_button->hide();
+
+		m_attributes_label_layout->setContentsMargins(0, 0, 0, 0);
+		m_widgets_layout->setContentsMargins(0, 5, 0, 0);
+	}
 }
 
 CustomizePanel::~CustomizePanel()
 {
-	for (Button* widget_button : m_widget_buttons)
+	for (WidgetButton* widget_button : m_widget_buttons)
 		widget_button->deleteLater();
 }
 
@@ -157,18 +210,21 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	//}
 }
 
-void CustomizePanel::add_widget_button(Button* button, int index)
+void CustomizePanel::add_widget_button(WidgetButton* button)
 {
 	m_widget_buttons.append(button);
 
-	button->set_available_width(252);
-	button->a_fill.set_disabled();
-	button->set_font_size(16);
-	//button->set_name("widget_button");
-	button->set_text_padding(0, 5, 0, 0);
+	m_widget_buttons_layout->addWidget(button);
+}
 
-	if (index == -1) m_widget_buttons_layout->addWidget(button);
-	else m_widget_buttons_layout->insertWidget(index, button);
+void CustomizePanel::add_widget_button_group(WidgetButtonGroup* button_group)
+{
+	m_widget_button_groups.append(button_group);
+
+	for (WidgetButton* widget_button : button_group->widget_buttons())
+		m_widget_buttons.append(widget_button);
+
+	m_widget_buttons_layout->addWidget(button_group);
 }
 
 void CustomizePanel::init_attribute_widgets()
@@ -337,10 +393,16 @@ void CustomizePanel::replace_all_state_awidgets_attrs_with(StateAW* control_stat
 		state_aw->entangle_with(control_state_aw);
 }
 
-void CustomizePanel::replace_all_widget_buttons_attrs_with(Button* control_widget_button)
+void CustomizePanel::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
 {
-	for (Button* widget_button : m_widget_buttons)
+	for (WidgetButton* widget_button : m_widget_buttons)
 		widget_button->entangle_with(control_widget_button);
+}
+
+void CustomizePanel::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
+{
+	for (WidgetButtonGroup* widget_button_group : m_widget_button_groups)
+		widget_button_group->entangle_with(control_widget_button_group);
 }
 
 void CustomizePanel::replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
@@ -355,22 +417,19 @@ void CustomizePanel::setup_layout()
 	{
 		// Attribute Layout HBox 1
 
-		QHBoxLayout* attributes_label_layout = new QHBoxLayout;
-
-		attributes_label_layout->setContentsMargins(6, 0, 0, 0);
-		attributes_label_layout->setSpacing(0);
-		attributes_label_layout->addWidget(m_attributes_label);
-		attributes_label_layout->addStretch();
-		attributes_label_layout->addWidget(m_show_all_button);
-		attributes_label_layout->addWidget(m_show_primary_button);
-		attributes_label_layout->addStretch();
+		m_attributes_label_layout->setContentsMargins(6, 0, 0, 8);
+		m_attributes_label_layout->setSpacing(0);
+		m_attributes_label_layout->addWidget(m_attributes_label);
+		m_attributes_label_layout->addStretch();
+		m_attributes_label_layout->addWidget(m_show_all_button);
+		m_attributes_label_layout->addWidget(m_show_primary_button);
+		m_attributes_label_layout->addStretch();
 
 		// Attributes Layout
 
 		m_attributes_layout->setContentsMargins(0, 0, 0, 0);
 		m_attributes_layout->setSpacing(3);
-		m_attributes_layout->addLayout(attributes_label_layout);
-		m_attributes_layout->addSpacing(8);
+		m_attributes_layout->addLayout(m_attributes_label_layout);
 
 		// Widgets Layout
 
@@ -382,10 +441,10 @@ void CustomizePanel::setup_layout()
 		hbox2->addStretch();
 		hbox2->activate();
 
-		m_widget_buttons_layout->setContentsMargins(27, 0, 0, 0);
-		m_widget_buttons_layout->setSpacing(10);
+		m_widget_buttons_layout->setContentsMargins(0, 0, 0, 0);
+		m_widget_buttons_layout->setSpacing(3);
 
-		m_widgets_layout->setContentsMargins(0, 0, 0, 0);
+		m_widgets_layout->setContentsMargins(0, 24, 0, 0);
 		m_widgets_layout->setSpacing(15);
 		m_widgets_layout->addLayout(hbox2);
 		m_widgets_layout->addLayout(m_widget_buttons_layout);
@@ -397,7 +456,6 @@ void CustomizePanel::setup_layout()
 		main_layout->setContentsMargins(10, 17, 10, 18);
 		main_layout->setSpacing(0);
 		main_layout->addLayout(m_attributes_layout);
-		main_layout->addSpacing(24);
 		main_layout->addLayout(m_widgets_layout);
 		main_layout->addStretch();
 		main_layout->activate();

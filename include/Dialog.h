@@ -15,6 +15,8 @@ namespace Layers
 	public:
 		Dialog(const QString& title = "Dialog", QWidget* parent = nullptr);
 
+		void set_icon(Graphic* icon);
+
 		void setLayout(QLayout* layout);
 
 	public slots:
@@ -36,6 +38,8 @@ namespace Layers
 		void setup_layout();
 
 		bool m_hovering{ false };
+
+		QHBoxLayout* m_titlebar_layout = new QHBoxLayout;
 
 		Widget* m_titlebar{ new Widget };
 

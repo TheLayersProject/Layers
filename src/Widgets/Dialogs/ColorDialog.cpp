@@ -1,8 +1,11 @@
 #include "../../../include/ColorDialog.h"
 
+#include "../../../include/Application.h"
+
 #include <QRegularExpressionValidator>
 
 using Layers::ColorDialog;
+using Layers::Themeable;
 
 ColorDialog::ColorDialog(QWidget* parent) :
     Dialog("Color", parent)
@@ -11,7 +14,9 @@ ColorDialog::ColorDialog(QWidget* parent) :
 
     setFixedSize(315, 465);
 
+    set_icon(new Graphic(":/svgs/color_icon.png"));
     set_name("color_dialog");
+    set_proper_name("Color Dialog");
 
     m_apply_button->set_name("apply_button");
     m_apply_button->set_proper_name("Apply Button");
@@ -37,6 +42,17 @@ ColorDialog::ColorDialog(QWidget* parent) :
     m_color_plane->setFixedSize(160, 160);
 
     setup_layout();
+
+    // Assign tag prefixes last!
+    assign_tag_prefixes();
+
+    // Set theme
+    apply_theme(*layersApp->current_theme());
+}
+
+Themeable* ColorDialog::clone()
+{
+    return new ColorDialog;
 }
 
 void ColorDialog::update_color_name_line_editor()

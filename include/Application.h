@@ -5,12 +5,19 @@
 #include <QDir>
 #include <QSettings>
 #include <QUuid>
+
 #include "directories.h"
+
+#include "ColorDialog.h"
+#include "CreateNewThemeDialog.h"
+#include "GradientDialog.h"
 #include "Theme.h"
 #include "Themeable.h"
+#include "UpdateDialog.h"
 
 namespace Layers
 {
+	class CustomizePanel;
 	class Downloader;
 	class GitHubRepo;
 	class Version;
@@ -52,12 +59,18 @@ namespace Layers
 		*/
 		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
 
+		ColorDialog* color_dialog() const;
+
 		/*!
 			Returns a pointer to the current theme applied to the application.
 
 			@returns pointer to current application theme
 		*/
 		Theme* current_theme() const;
+
+		CustomizePanel* customize_panel();
+
+		GradientDialog* gradient_dialog() const;
 
 		/*!
 			Returns a pointer to a QFile of the application icon.
@@ -182,6 +195,14 @@ namespace Layers
 		QDir m_layers_themes_dir{ QDir(layers_themes_path()) };
 
 		QList<Themeable*> m_child_themeables;
+
+		CreateNewThemeDialog* m_create_new_theme_dialog;
+
+		ColorDialog* m_color_dialog;
+
+		GradientDialog* m_gradient_dialog;
+
+		UpdateDialog* m_update_dialog;
 
 		Theme* m_current_theme{ nullptr };
 

@@ -5,12 +5,16 @@ using Layers::Graphic;
 using Layers::SVG;
 
 Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent) :
-	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size, this) }, Widget(parent)
+	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size) }, Widget(parent)
 {
 	a_fill.set_disabled();
 
-	update_image_location();
-	update_size();
+	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+	init_layout();
+
+	//update_image_location();
+	init_max_size();
 }
 
 Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
@@ -20,13 +24,13 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		filepath.endsWith(".jpeg") || filepath.endsWith(".bmp") ||
 		filepath.endsWith(".gif"))
 	{
-		m_bitmap_label = new QLabel(this);
+		m_bitmap_label = new QLabel;
 		m_bitmap_label->setPixmap(QPixmap(filepath));
 		m_bitmap_label->setFixedSize(size);
 	}
 	else if (filepath.endsWith(".svg"))
 	{
-		m_svg_widget = new SVG(filepath, this);
+		m_svg_widget = new SVG(filepath);
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
 		m_svg_widget->setFixedSize(size);
@@ -36,8 +40,12 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 
 	a_fill.set_disabled();
 
-	update_image_location();
-	update_size();
+	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+	init_layout();
+
+	//update_image_location();
+	init_max_size();
 }
 
 Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
@@ -48,14 +56,14 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 	{
 		QPixmap pixmap(filepath);
 
-		m_bitmap_label = new QLabel(this);
+		m_bitmap_label = new QLabel;
 		m_bitmap_label->setPixmap(pixmap);
 		m_bitmap_label->setFixedSize(pixmap.size());
 		setFixedSize(pixmap.size());
 	}
 	else if (filepath.endsWith(".svg"))
 	{
-		m_svg_widget = new SVG(filepath, this);
+		m_svg_widget = new SVG(filepath);
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
 
@@ -64,21 +72,29 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 
 	a_fill.set_disabled();
 
-	update_image_location();
-	update_size();
+	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+	init_layout();
+
+	//update_image_location();
+	init_max_size();
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
 	m_image_size{ image.size() }, Widget(parent)
 {
-	m_bitmap_label = new QLabel(this);
+	m_bitmap_label = new QLabel;
 	m_bitmap_label->setPixmap(QPixmap::fromImage(image));
 	m_bitmap_label->setFixedSize(image.size());
 
 	a_fill.set_disabled();
 
-	update_image_location();
-	update_size();
+	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+	init_layout();
+
+	//update_image_location();
+	init_max_size();
 }
 
 Graphic::Graphic(const Graphic& gw) : Widget()
@@ -87,11 +103,10 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 	{
 		m_image_sequence_label = new ImageSequenceLabel(*gw.m_image_sequence_label);
 		m_image_sequence_label->setFixedSize(gw.m_image_sequence_label->size());
-		m_image_sequence_label->setParent(this);
 	}
 	else if (gw.m_bitmap_label)
 	{
-		m_bitmap_label = new QLabel(this);
+		m_bitmap_label = new QLabel;
 		m_bitmap_label->setPixmap(QPixmap(gw.m_bitmap_label->pixmap()));
 		m_bitmap_label->setFixedSize(gw.m_bitmap_label->size());
 
@@ -101,7 +116,6 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget = new SVG(*gw.m_svg_widget);
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
-		m_svg_widget->setParent(this);
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
 
 		//add_child_themeable_pointer(m_svg_widget);
@@ -111,21 +125,44 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 
 	a_fill.set_disabled();
 
-	update_image_location();
-	update_size();
+	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+
+	init_layout();
+
+	//update_image_location();
+	init_max_size();
 }
 
 Graphic::~Graphic()
 {
-	if (m_bitmap_label) m_bitmap_label->deleteLater();
-	if (m_svg_widget) m_svg_widget->deleteLater();
-	if (m_image_sequence_label) m_image_sequence_label->deleteLater();
+	if (m_bitmap_label)
+		m_bitmap_label->deleteLater();
+
+	else if (m_svg_widget)
+		m_svg_widget->deleteLater();
+
+	else if (m_image_sequence_label)
+		m_image_sequence_label->deleteLater();
 }
 
 QSize Graphic::image_size()
 {
 	return m_image_size;
 }
+
+//void Graphic::setMaximumWidth(int maxw)
+//{
+//	QWidget::setMaximumWidth(maxw);
+//
+//	if (m_bitmap_label)
+//		m_bitmap_label->setMaximumWidth(maxw);
+//
+//	else if (m_svg_widget)
+//		m_svg_widget->setMaximumWidth(maxw);
+//
+//	else if (m_image_sequence_label)
+//		m_image_sequence_label->setMaximumWidth(maxw);
+//}
 
 void Graphic::set_hovering(bool cond)
 {
@@ -146,8 +183,8 @@ void Graphic::set_padding(int left, int top, int right, int bottom)
 	m_padding_right = right;
 	m_padding_bottom = bottom;
 
-	update_image_location();
-	update_size();
+	//update_image_location();
+	//update_size();
 }
 
 void Graphic::set_pixmap(const QPixmap& pixmap)
@@ -187,32 +224,60 @@ SVG* Graphic::svg() const
 	return m_svg_widget;
 }
 
-void Graphic::update_image_location()
+void Graphic::init_layout()
 {
-	QPoint new_image_location = QPoint(m_padding_left, m_padding_top);
+	QVBoxLayout* main_layout = new QVBoxLayout;
 
 	if (m_bitmap_label)
-		m_bitmap_label->move(new_image_location);
+	{
+		main_layout->addWidget(m_bitmap_label);
+		main_layout->setAlignment(m_bitmap_label, Qt::AlignHCenter);
+	}
 	else if (m_svg_widget)
-		m_svg_widget->move(new_image_location);
+	{
+		main_layout->addWidget(m_svg_widget);
+		main_layout->setAlignment(m_svg_widget, Qt::AlignHCenter);
+	}
 	else if (m_image_sequence_label)
-		m_image_sequence_label->move(new_image_location);
+	{
+		main_layout->addWidget(m_image_sequence_label);
+		main_layout->setAlignment(m_image_sequence_label, Qt::AlignHCenter);
+	}
+
+	main_layout->setContentsMargins(0, 0, 0, 0);
+	main_layout->setSpacing(0);
+
+	setLayout(main_layout);
 }
 
-void Graphic::update_size()
+//void Graphic::update_image_location()
+//{
+//	QPoint new_image_location = QPoint(m_padding_left, m_padding_top);
+//
+//	if (m_bitmap_label)
+//		m_bitmap_label->move(new_image_location);
+//	else if (m_svg_widget)
+//		m_svg_widget->move(new_image_location);
+//	else if (m_image_sequence_label)
+//		m_image_sequence_label->move(new_image_location);
+//}
+
+void Graphic::init_max_size()
 {
-	QSize new_size = QSize(
-		m_padding_left + m_padding_right,
-		m_padding_top + m_padding_bottom);
+	//QSize new_size = QSize(
+	//	m_padding_left + m_padding_right,
+	//	m_padding_top + m_padding_bottom);
+
+	QSize new_size;
 
 	if (m_bitmap_label)
-		new_size += m_bitmap_label->size();
+		new_size = m_bitmap_label->size();
 	else if (m_svg_widget)
-		new_size += m_svg_widget->size();
+		new_size = m_svg_widget->size();
 	else if (m_image_sequence_label)
-		new_size += m_image_sequence_label->size();
+		new_size = m_image_sequence_label->size();
 
-	setFixedSize(new_size);
+	setMaximumSize(new_size);
 }
 
 //void Graphic::update_theme_dependencies()

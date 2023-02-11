@@ -37,7 +37,8 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 		handle_custom_theme_buttons_visibility();
 	});
 
-	handle_custom_theme_buttons_visibility();
+	if (!layersApp->current_theme()->editable())
+		show_custom_theme_buttons(false);
 
 	m_new_theme_button->set_name("new_theme_button");
 	m_new_theme_button->set_proper_name("New Theme Button");
@@ -87,13 +88,6 @@ void ThemesSettingsPanel::init_attributes()
 	m_spacer_2->a_fill.set_disabled();
 
 	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
-}
-
-void ThemesSettingsPanel::apply_theme(Theme& theme)
-{
-	
-
-	//Themeable::apply_theme(theme);
 }
 
 Button* ThemesSettingsPanel::customize_theme_button() const
@@ -158,4 +152,6 @@ void ThemesSettingsPanel::setup_layout()
 	main_layout->addStretch();
 
 	setLayout(main_layout);
+
+	main_layout->activate();
 }

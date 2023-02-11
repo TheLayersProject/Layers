@@ -109,6 +109,11 @@ QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
+Themeable* Themeable::clone()
+{
+	return new Themeable;
+}
+
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
 	theme->copy_attribute_values_of(this);

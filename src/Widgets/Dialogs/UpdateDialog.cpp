@@ -1,6 +1,8 @@
 #include "../../../include/UpdateDialog.h"
 #include "../../../include/calculate.h"
 
+#include "../../../include/Application.h"
+
 #include <Windows.h>
 #include <windowsx.h>
 
@@ -8,6 +10,7 @@
 #include <QPainterPath>
 
 using Layers::UpdateDialog;
+using Layers::Themeable;
 
 UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent) :
 	m_message_label{
@@ -18,7 +21,9 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	) },
 	Dialog("Update Available", parent)
 {
+	set_icon(new Graphic(":/svgs/update_icon.svg"));
 	set_name("update_dialog");
+	set_proper_name("Update Dialog");
 
 	m_remind_me_later_button->set_name("remind_me_later_button");
 	m_remind_me_later_button->set_proper_name("Remind Me Later Button");
@@ -41,6 +46,17 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	m_message_label->setWordWrap(true);
 
 	setup_layout();
+
+	// Assign tag prefixes last!
+	assign_tag_prefixes();
+
+	// Set theme
+	apply_theme(*layersApp->current_theme());
+}
+
+Themeable* UpdateDialog::clone()
+{
+	return new UpdateDialog("0.0.0", "0.0.0");
 }
 
 void UpdateDialog::setup_layout()

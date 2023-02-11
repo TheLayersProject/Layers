@@ -24,8 +24,6 @@ namespace Layers
 
 		void handle_custom_theme_buttons_visibility();
 
-		void apply_theme(Theme& theme);
-
 		Button* customize_theme_button() const;
 
 		Button* new_theme_button() const;

@@ -2,6 +2,7 @@
     <qresource prefix="/svgs">
         <file>app_preferences_icon.svg</file>
         <file>back.svg</file>
+        <file>color_icon.png</file>
         <file>collapse_arrow_right.svg</file>
         <file>collapse_arrow_down.svg</file>
         <file>combobox_icon.svg</file>
@@ -10,6 +11,7 @@
         <file>drop_down_icon.svg</file>
         <file>ellipsis.svg</file>
         <file>exit.svg</file>
+        <file>gradient_icon.svg</file>
         <file>icon_icon.svg</file>
         <file>info_theme.svg</file>
         <file>label_icon.svg</file>
@@ -19,6 +21,7 @@
         <file>mll_icon.svg</file>
         <file>new_theme.svg</file>
         <file>panel_icon.svg</file>
+        <file>separator_h_icon.svg</file>
         <file>settings.svg</file>
         <file>settings_animated.svg</file>
         <file>settings_tab_icon.svg</file>
@@ -26,5 +29,6 @@
         <file>tab_exit.svg</file>
         <file>themes_icon.svg</file>
         <file>titlebar_icon.svg</file>
+        <file>update_icon.svg</file>
     </qresource>
 </RCC>

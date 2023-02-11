@@ -50,23 +50,27 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			GradientDialog* gsd =
-				new GradientDialog(a_fill.as<QGradientStops>());
+			//GradientDialog* gsd =
+			//	new GradientDialog(a_fill.as<QGradientStops>());
 
-			gsd->entangle_with(
-				layersApp->main_window()->control_gradient_dialog());
+			//gsd->entangle_with(
+			//	layersApp->main_window()->control_gradient_dialog());
+
+			GradientDialog* gradient_dialog = layersApp->gradient_dialog();
 			
 
 			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
 
-			if (gsd->exec())
+			if (gradient_dialog->exec())
 			{
-				a_fill.set_value(QVariant::fromValue(gsd->gradient_stops()));
+				a_fill.set_value(QVariant::fromValue(gradient_dialog->gradient_stops()));
 
 				emit gradient_changed();
 			}
 
-			delete gsd;
+			gradient_dialog->hide();
+
+			//delete gsd;
 		}
 	}
 

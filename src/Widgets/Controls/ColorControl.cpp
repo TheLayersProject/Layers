@@ -24,10 +24,10 @@ ColorControl::~ColorControl()
 
 void ColorControl::click()
 {
-	ColorDialog* color_dialog = new ColorDialog();
+	ColorDialog* color_dialog = layersApp->color_dialog();
 
-	color_dialog->entangle_with(
-		layersApp->main_window()->control_color_dialog());
+	//color_dialog->entangle_with(
+	//	layersApp->main_window()->control_color_dialog());
 
 	color_dialog->color.set_value(a_fill.as<QColor>());
 
@@ -37,6 +37,8 @@ void ColorControl::click()
 
 		emit color_changed();
 	}
+
+	color_dialog->hide();
 
 	open_on_release = false;
 }

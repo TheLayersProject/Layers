@@ -39,7 +39,8 @@ Tab::Tab(Menu* menu, QWidget* parent) :
 {
 	m_tab_icon = new Graphic(*menu->icon());
 	m_tab_icon->set_name("icon");
-	m_tab_icon->set_padding(11, 0, 11, 0);
+	m_tab_icon->setMinimumWidth(42);
+	//m_tab_icon->set_padding(11, 0, 11, 0);
 
 	init_attributes();
 

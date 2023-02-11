@@ -12,6 +12,8 @@ namespace Layers
 	public:
 		UpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
 
+		virtual Themeable* clone() override;
+
 	private:
 		void setup_layout();
 

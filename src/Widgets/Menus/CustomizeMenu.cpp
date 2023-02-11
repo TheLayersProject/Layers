@@ -15,7 +15,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 {
 	Themeable* ccp_themeable = new Themeable();
 
-	m_control_customize_panel = new CustomizePanel(ccp_themeable, m_sidebar);
+	m_control_customize_panel = new CustomizePanel(ccp_themeable, false, m_sidebar);
 	m_control_customize_panel->hide();
 	m_control_customize_panel->set_proper_name("Customize Panels");
 
@@ -51,8 +51,11 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	m_control_widget_button->setParent(m_control_customize_panel);
 	m_control_widget_button->hide();
-	m_control_widget_button->set_name("widget_button");
 	m_control_widget_button->set_proper_name("Widget Button");
+
+	m_control_widget_button_group->setParent(m_control_customize_panel);
+	m_control_widget_button_group->hide();
+	m_control_widget_button_group->set_proper_name("Widget ButtonGroup");
 
 	installEventFilter(this);
 	setMouseTracking(true);
@@ -101,11 +104,16 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	connect(m_apply_button, &Button::clicked, [this] {
 		// TODO:
 		if (m_preview_widget)
-			m_preview_widget->copy_attribute_values_to(
-				layersApp->current_theme());
+		{
+			if (Themeable* preview_themeable = dynamic_cast<Themeable*>(m_preview_widget))
+			{
+				preview_themeable->copy_attribute_values_to(
+					layersApp->current_theme());
 
-		layersApp->reapply_theme();
-		layersApp->save_theme(*layersApp->current_theme());
+				layersApp->reapply_theme();
+				layersApp->save_theme(*layersApp->current_theme());
+			}
+		}
 	});
 
 	m_collapse_menu_button->hide();
@@ -157,28 +165,6 @@ Button* CustomizeMenu::apply_button() const
 	return m_apply_button;
 }
 
-void CustomizeMenu::init_preview_window()
-{
-	Window* preview_window = new Window(true);
-	preview_window->setMinimumSize(500, 400);
-	preview_window->setMaximumSize(800, 600);
-	preview_window->set_functionality_disabled();
-	preview_window->titlebar()->exit_button()->set_functionality_disabled();
-	preview_window->customize_menu()->apply_button()->set_functionality_disabled();
-	preview_window->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
-	
-	//open_customize_panel(preview_window->customize_panel());
-	set_preview_widget(preview_window);
-	
-	// Setup Preview Window's Customize Menu's Preview Widget
-	Widget* preview_window_customize_menu_preview_widget = new Widget;
-	preview_window_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
-	preview_window_customize_menu_preview_widget->set_proper_name("Preview Widget");
-	
-	//preview_window->customize_menu()->open_customize_panel(preview_window_customize_menu_preview_widget->customize_panel());
-	preview_window->customize_menu()->set_preview_widget(preview_window_customize_menu_preview_widget);
-}
-
 void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 {
 	if (m_panel_stack.contains(customize_panel))
@@ -201,6 +187,12 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 
 				if (!m_arrow_graphics.isEmpty())
 					m_arrow_graphics.takeLast()->deleteLater();
+			}
+
+			if (m_panel_stack.size() == 1)
+			{
+				m_preview_widget->deleteLater();
+				m_preview_widget = nullptr;
 			}
 
 			customize_panel->show();
@@ -227,6 +219,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 		customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
 		customize_panel->replace_all_state_awidgets_attrs_with(m_control_state_aw);
 		customize_panel->replace_all_widget_buttons_attrs_with(m_control_widget_button);
+		customize_panel->replace_all_widget_button_groups_attrs_with(m_control_widget_button_group);
 
 		m_sidebar_layout->addWidget(customize_panel);
 
@@ -285,7 +278,7 @@ QList<CustomizePanel*>& CustomizeMenu::panels()
 	return m_panel_stack;
 }
 
-Widget* CustomizeMenu::preview_widget() const
+QWidget* CustomizeMenu::preview_widget() const
 {
 	return m_preview_widget;
 }
@@ -310,7 +303,7 @@ int CustomizeMenu::calculated_topbar_content_width()
 	return calculated_topbar_content_width;
 }
 
-void CustomizeMenu::set_preview_widget(Widget* widget)
+void CustomizeMenu::set_preview_widget(QWidget* widget)
 {
 	m_preview_widget = widget;
 	m_preview_layout->addWidget(widget);

@@ -15,45 +15,45 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
 {
 	init_attributes();
 
-    installEventFilter(this);
-    setFocusPolicy(Qt::ClickFocus);
+	installEventFilter(this);
+	setFocusPolicy(Qt::ClickFocus);
 
-    connect(&border.thickness, &Entity::value_changed, [this] {
-        if (layout())
-        {
-            if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
-                vl->set_border_margin(border.thickness.as<double>());
-            else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
-                hl->set_border_margin(border.thickness.as<double>());
-        }
-        });
+	connect(&border.thickness, &Entity::value_changed, [this] {
+		if (layout())
+		{
+			if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
+				vl->set_border_margin(border.thickness.as<double>());
+			else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
+				hl->set_border_margin(border.thickness.as<double>());
+		}
+		});
 }
 
 void Widget::init_attributes()
 {
-    ThemeableBox::init_attributes();
+	ThemeableBox::init_attributes();
 
-    for (Entity* entity : m_entities)
-        entity->setup_widget_update_connection(this);
+	for (Entity* entity : m_entities)
+		entity->setup_widget_update_connection(this);
 }
 
 bool Widget::eventFilter(QObject* object, QEvent* event)
 {
-    if (event->type() == QEvent::Enter)
-    {
-        m_hovering = true;
-        update();
-    }
-    else if (event->type() == QEvent::Leave)
-    {
-        m_hovering = false;
-        update();
-    }
+	if (event->type() == QEvent::Enter)
+	{
+		m_hovering = true;
+		update();
+	}
+	else if (event->type() == QEvent::Leave)
+	{
+		m_hovering = false;
+		update();
+	}
 
-    return false;
+	return false;
 }
 
 void Widget::paintEvent(QPaintEvent* event)
 {
-    paint(this);
+	paint(this);
 }

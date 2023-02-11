@@ -68,7 +68,7 @@ PROJECT_LOGO           = D:/OneDrive/Projects/Software/Layers-Demo/layers_2d_log
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = .
+OUTPUT_DIRECTORY       = ../
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create up to 4096
 # sub-directories (in 2 levels) under the output directory of each output format
@@ -1397,7 +1397,16 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       =
+HTML_EXTRA_FILES       = img/change_theme.mp4 \
+                         img/create_new_theme.mp4 \
+                         img/demo_dark.svg \
+                         img/open_settings_menu.mp4 \
+                         img/rename_theme.mp4 \
+                         img/tab_bar.svg \
+                         img/themeable_tag_breakdown.png \
+                         img/titlebar_buttons.png \
+                         img/titlebar_layout.svg \
+                         img/window_layout.svg
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
@@ -1950,7 +1959,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = NO
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

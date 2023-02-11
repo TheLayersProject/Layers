@@ -1,13 +1,18 @@
 #include "../../../include/CreateNewThemeDialog.h"
 
+#include "../../../include/Application.h"
+
 using Layers::CreateNewThemeDialog;
+using Layers::Themeable;
 
 CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
-	Dialog("Create New Theme", parent)
+	Dialog("Create Theme", parent)
 {
 	init_attributes();
 
+	set_icon(new Graphic(":/svgs/new_theme.svg", QSize(20, 20)));
 	set_name("create_new_theme_dialog");
+	set_proper_name("Create Theme Dialog");
 
 	m_create_button->set_name("create_button");
 	//m_create_button->set_padding(8, 6, 8, 6);
@@ -66,6 +71,12 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	m_start_theme_combobox->set_font_size(15);
 
 	setup_layout();
+
+	// Assign tag prefixes last!
+	assign_tag_prefixes();
+
+	// Set theme
+	apply_theme(*layersApp->current_theme());
 }
 
 QString CreateNewThemeDialog::new_theme_name()
@@ -83,6 +94,11 @@ void CreateNewThemeDialog::clear()
 	m_theme_name_line_edit->set_text("");
 
 	m_create_button->set_disabled();
+}
+
+Themeable* CreateNewThemeDialog::clone()
+{
+	return new CreateNewThemeDialog;
 }
 
 QString CreateNewThemeDialog::copy_theme_name()

@@ -3,7 +3,7 @@
 
 #include "AttributeWidgets.h"
 #include "Button.h"
-#include "Label.h"
+#include "WidgetButtonGroup.h"
 
 namespace Layers
 {
@@ -12,12 +12,14 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		CustomizePanel(Themeable* themeable, QWidget* parent = nullptr);
+		CustomizePanel(Themeable* themeable, bool init_buttons = true, QWidget* parent = nullptr);
 		~CustomizePanel();
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
-		void add_widget_button(Button* button, int index = -1);
+		void add_widget_button(WidgetButton* button);
+
+		void add_widget_button_group(WidgetButtonGroup* button_group);
 
 		void init_attribute_widgets();
 
@@ -26,7 +28,8 @@ namespace Layers
 		void replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw);
 		void replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw);
 		void replace_all_state_awidgets_attrs_with(StateAW* control_state_aw);
-		void replace_all_widget_buttons_attrs_with(Button* control_widget_button);
+		void replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button);
+		void replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group);
 		void replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw);
 
 	protected:
@@ -40,6 +43,7 @@ namespace Layers
 
 		StateAW* m_state_aw{ nullptr };
 
+		QHBoxLayout* m_attributes_label_layout{ new QHBoxLayout };
 		QVBoxLayout* m_attributes_layout{ new QVBoxLayout };
 		QVBoxLayout* m_widgets_layout{ new QVBoxLayout };
 		QVBoxLayout* m_widget_buttons_layout{ new QVBoxLayout };
@@ -58,7 +62,8 @@ namespace Layers
 		QList<FillAW*> m_fill_awidgets{ QList<FillAW*>() };
 		QList<NumberAW*> m_number_awidgets{ QList<NumberAW*>() };
 		QList<StateAW*> m_state_awidgets{ QList<StateAW*>() };
-		QList<Button*> m_widget_buttons{ QList<Button*>() };
+		QList<WidgetButton*> m_widget_buttons{ QList<WidgetButton*>() };
+		QList<WidgetButtonGroup*> m_widget_button_groups{ QList<WidgetButtonGroup*>() };
 
 		Themeable* m_themeable;
 	};

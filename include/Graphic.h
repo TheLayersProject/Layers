@@ -25,6 +25,8 @@ namespace Layers
 
 		//void setFixedSize(QSize s);
 
+		//void setMaximumWidth(int maxw);
+
 
 		void set_hovering(bool cond = true);
 		void set_icon(Graphic* icon);
@@ -35,8 +37,10 @@ namespace Layers
 		SVG* svg() const;
 
 	private:
-		void update_image_location();
-		void update_size();
+		//void update_image_location();
+		void init_max_size();
+
+		void init_layout();
 
 		int m_padding_bottom{ 0 };
 		int m_padding_left{ 0 };

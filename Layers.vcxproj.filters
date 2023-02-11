@@ -237,6 +237,12 @@
     <ClCompile Include="src\Widgets\TabBar2.cpp">
       <Filter>Source Files\Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\WidgetButton.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\WidgetButtonGroup.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -377,6 +383,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Menu.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\WidgetButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\WidgetButtonGroup.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

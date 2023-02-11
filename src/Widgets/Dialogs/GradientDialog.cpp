@@ -1,9 +1,12 @@
 #include "../../../include/GradientDialog.h"
 
+#include "../../../include/Application.h"
+
 #include <QApplication>
 #include <QMouseEvent>
 
 using Layers::GradientDialog;
+using Layers::Themeable;
 
 GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
     Dialog("Gradient", parent)
@@ -13,7 +16,9 @@ GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
 	setFixedSize(525, 325);
     installEventFilter(this);
 
+    set_icon(new Graphic(":/svgs/gradient_icon.svg"));
     set_name("gradient_dialog");
+    set_proper_name("Gradient Dialog");
     
     m_gradient_stops = gradient_stops;
 
@@ -33,6 +38,12 @@ GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
     m_single_click_timer.setSingleShot(true);
 
     connect(&m_single_click_timer, &QTimer::timeout, this, &GradientDialog::click_control);
+
+    // Assign tag prefixes last!
+    assign_tag_prefixes();
+
+    // Set theme
+    apply_theme(*layersApp->current_theme());
 }
 
 void GradientDialog::add_gradient_stop(double stop_val, QColor color)
@@ -72,6 +83,11 @@ void GradientDialog::add_gradient_stop(double stop_val, QColor color)
         gradient_widget_pos.y() - (color_control->height() / 2) + (m_gradient_widget->height() / 2));
 
     update_gradient();
+}
+
+Themeable* GradientDialog::clone()
+{
+    return new GradientDialog(QGradientStops());
 }
 
 QGradientStops GradientDialog::gradient_stops() const

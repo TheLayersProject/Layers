@@ -19,6 +19,8 @@ namespace Layers
 
 		void add_gradient_stop(double stop_val, QColor color);
 
+		virtual Themeable* clone() override;
+
 		QGradientStops gradient_stops() const;
 
 		void update_gradient();

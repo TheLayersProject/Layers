@@ -18,6 +18,8 @@ namespace Layers
 
 		void clear();
 
+		virtual Themeable* clone() override;
+
 		QString copy_theme_name();
 
 		QString new_theme_name();

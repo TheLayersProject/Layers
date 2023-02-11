@@ -26,6 +26,15 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	setup_layout();
 }
 
+void Dialog::set_icon(Graphic* icon)
+{
+	Themeable::set_icon(icon);
+
+	m_icon->setMinimumWidth(40);
+
+	m_titlebar_layout->insertWidget(0, m_icon);
+}
+
 void Dialog::setLayout(QLayout* layout)
 {
 	m_main_layout->addLayout(layout);
@@ -187,7 +196,7 @@ void Dialog::init_titlebar()
 	m_window_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 	m_window_title_label->set_name("window_title_label");
 	m_window_title_label->set_proper_name("Label");
-	m_window_title_label->set_padding(7, 8, 0, 0);
+	m_window_title_label->set_padding(0, 8, 0, 0);
 	m_window_title_label->set_font_size(14);
 
 	connect(m_exit_button, &Button::clicked, [this] { done(QDialog::Rejected); });
@@ -199,15 +208,14 @@ void Dialog::init_titlebar()
 	//m_titlebar->add_child_themeable_pointer(m_exit_button);
 
 	// Setup Layout
-	QHBoxLayout* titlebar_layout = new QHBoxLayout;
 
-	titlebar_layout->setContentsMargins(10, 0, 10, 0);
-	titlebar_layout->setSpacing(0);
-	titlebar_layout->addWidget(m_window_title_label);
-	titlebar_layout->addStretch();
-	titlebar_layout->addWidget(m_exit_button);
+	m_titlebar_layout->setContentsMargins(0, 0, 0, 0);
+	m_titlebar_layout->setSpacing(0);
+	m_titlebar_layout->addWidget(m_window_title_label);
+	m_titlebar_layout->addStretch();
+	m_titlebar_layout->addWidget(m_exit_button);
 
-	m_titlebar->setLayout(titlebar_layout);
+	m_titlebar->setLayout(m_titlebar_layout);
 }
 
 void Dialog::setup_layout()

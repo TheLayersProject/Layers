@@ -31,14 +31,14 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.1.3</QtInstall>
+    <QtInstall>6.4.2</QtInstall>
     <QtModules>core;gui;network;svgwidgets;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>6.1.3</QtInstall>
+    <QtInstall>6.4.2</QtInstall>
     <QtModules>core;gui;network;svgwidgets;widgets</QtModules>
-    <QtBuildConfig>debug</QtBuildConfig>
+    <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
@@ -169,6 +169,8 @@
     <ClCompile Include="src\Widgets\ThemesSettingsPanel.cpp" />
     <ClCompile Include="src\Widgets\Titlebar.cpp" />
     <ClCompile Include="src\Widgets\Widget.cpp" />
+    <ClCompile Include="src\Widgets\WidgetButton.cpp" />
+    <ClCompile Include="src\Widgets\WidgetButtonGroup.cpp" />
     <ClCompile Include="src\Widgets\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +180,8 @@
     <QtRcc Include="themes\prebuilt_themes.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="include\WidgetButtonGroup.h" />
+    <QtMoc Include="include\WidgetButton.h" />
     <QtMoc Include="include\Attribute.h" />
     <QtMoc Include="include\Data.h" />
     <QtMoc Include="include\AttributeGroup.h" />

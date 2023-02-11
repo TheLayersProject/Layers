@@ -202,6 +202,8 @@ namespace Layers
 		virtual QList<Themeable*> child_themeables(
 			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
+		virtual Themeable* clone();
+
 		/*!
 			Copies entity values of the caller and of child themeables in the
 			caller's hierarchy to the provided theme.

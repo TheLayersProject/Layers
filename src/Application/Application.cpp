@@ -1,11 +1,13 @@
 #include "../../include/Application.h"
 #include "../../include/build_themes.h"
+#include "../../include/CustomizePanel.h"
 #include "../../include/Downloader.h"
 #include "../../include/GitHubRepo.h"
 #include "../../include/theme_loading.h"
 #include "../../include/Themeable.h"
 #include "../../include/UpdateDialog.h"
 #include "../../include/Version.h"
+#include "../../include/WidgetButtonGroup.h"
 #include "../../include/Window.h"
 
 #include <QFontDatabase>
@@ -16,6 +18,9 @@
 #include <QProcess>
 
 using Layers::Application;
+using Layers::ColorDialog;
+using Layers::CustomizePanel;
+using Layers::GradientDialog;
 using Layers::Theme;
 using Layers::Themeable;
 using Layers::Window;
@@ -65,6 +70,24 @@ Application::Application(
 	init_fonts();
 	init_themes();
 	init_latest_version_tag();
+
+	m_create_new_theme_dialog = new CreateNewThemeDialog;
+
+	m_color_dialog = new ColorDialog;
+
+	m_gradient_dialog = new GradientDialog(QGradientStops());
+
+	m_update_dialog = new UpdateDialog("", "");
+
+
+	/*m_control_color_dialog->set_proper_name("Color Dialog");
+	m_control_gradient_dialog->set_proper_name("Gradient Dialog");
+	m_control_update_dialog->set_proper_name("Update Dialog");*/
+
+	add_child_themeable_pointer(*m_create_new_theme_dialog);
+	add_child_themeable_pointer(*m_color_dialog);
+	add_child_themeable_pointer(*m_gradient_dialog);
+	add_child_themeable_pointer(*m_update_dialog);
 }
 
 QString Application::app_identifier()
@@ -108,9 +131,68 @@ void Application::create_theme(const QString& new_theme_name, const QString& cop
 	save_theme(m_themes[new_theme_name]);
 }
 
-Theme* Layers::Application::current_theme() const
+ColorDialog* Application::color_dialog() const
+{
+	return m_color_dialog;
+}
+
+Theme* Application::current_theme() const
 {
 	return m_current_theme;
+}
+
+CustomizePanel* Application::customize_panel()
+{
+	CustomizePanel* customize_panel = new CustomizePanel(this, false);
+
+	QList<WidgetButton*> dialog_widget_buttons = QList<WidgetButton*>();
+	QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
+
+	for (Themeable* child_themeable : child_themeables())
+	{
+		// Check if themeable has a proper name to determine that it is customizable
+		if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
+		{
+			WidgetButton* widget_button;
+
+			if (child_themeable->icon())
+				widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
+			else
+				widget_button = new WidgetButton(*child_themeable->proper_name());
+
+			QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
+				Themeable* cloned_themeable = child_themeable->clone();
+
+				if (QWidget* cloned_widget = dynamic_cast<QWidget*>(cloned_themeable))
+				{
+					static_cast<Window*>(QApplication::activeWindow()
+						)->customize_menu()->set_preview_widget(cloned_widget);
+
+					static_cast<Window*>(QApplication::activeWindow()
+						)->customize_menu()->open_customize_panel(
+							new CustomizePanel(cloned_themeable));
+				}
+			});
+
+			if (dynamic_cast<Dialog*>(child_themeable))
+				dialog_widget_buttons.append(widget_button);
+
+			else if (dynamic_cast<Window*>(child_themeable))
+				window_widget_buttons.append(widget_button);
+		}
+	}
+
+	customize_panel->add_widget_button_group(new WidgetButtonGroup("Dialogs", dialog_widget_buttons));
+
+	if (window_widget_buttons.size() == 1)
+		customize_panel->add_widget_button(window_widget_buttons.first());
+
+	return customize_panel;
+}
+
+GradientDialog* Application::gradient_dialog() const
+{
+	return m_gradient_dialog;
 }
 
 QFile* Application::icon_file()

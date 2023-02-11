@@ -9,10 +9,12 @@
 #include "Layouts.h"
 #include "Menu.h"
 #include "ScrollArea.h"
+#include "WidgetButtonGroup.h"
 
 namespace Layers
 {
 	class CustomizePanel;
+	class Window;
 
 	class CustomizeMenu : public Menu
 	{
@@ -23,17 +25,15 @@ namespace Layers
 
 		Button* apply_button() const;
 
-		void init_preview_window();
-
 		void open_customize_panel(CustomizePanel* customize_panel);
 
 		QList<CustomizePanel*>& panels();
 
-		Widget* preview_widget() const;
+		QWidget* preview_widget() const;
 
 		int calculated_topbar_content_width();
 
-		void set_preview_widget(Widget* widget);
+		void set_preview_widget(QWidget* widget);
 
 		int topbar_content_width(bool include_collapse_button);
 
@@ -52,7 +52,8 @@ namespace Layers
 		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
 		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0.0)), new QIntValidator) };
 		StateAW* m_control_state_aw{ new StateAW };
-		Button* m_control_widget_button{ new Button(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
+		WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
+		WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
 
 		HorizontalLayout* m_main_layout{ new HorizontalLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
@@ -67,7 +68,7 @@ namespace Layers
 		ScrollArea* m_sidebar{ new ScrollArea };
 		ScrollArea* m_preview_scroll_area{ new ScrollArea };
 
-		Widget* m_preview_widget{ nullptr };
+		QWidget* m_preview_widget{ nullptr };
 
 		QList<CustomizePanel*> m_panel_stack;
 		QList<Button*> m_text_button_stack;
