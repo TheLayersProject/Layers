@@ -1,35 +1,49 @@
 <svg 
- xmlns="http://www.w3.org/2000/svg"
- xmlns:xlink="http://www.w3.org/1999/xlink"
- width="500px" height="500px">
-<path id="red_out" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="orange_in" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="orange_out" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="yellow_in" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="yellow_out" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="green_in" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="green_out" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="blue_in" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="blue_out" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="indigo_in" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="indigo_out" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="violet_in" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="violet_out" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(100,100)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-<path id="red_in" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(42,142)"
- d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="500px" height="500px">
+
+	<path id="red_out" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="orange_in" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="orange_out" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="yellow_in" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="yellow_out" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="green_in" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="green_out" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="blue_in" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="blue_out" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="indigo_in" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="indigo_out" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="violet_in" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="violet_out" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(100,100)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+	
+	<path id="red_in" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(42,142)"
+		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
 
 <animateTransform
 	xlink:href="#red_out"
@@ -40,6 +54,7 @@
 	begin="0;red_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#red_out"
 	id="red_out_scale_anim"
@@ -50,6 +65,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#red_out"
 	id="red_out_fade_anim"
@@ -67,6 +83,7 @@
 	begin="red_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#orange_in"
 	id="orange_in_scale_anim"
@@ -77,6 +94,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#orange_in"
 	id="orange_in_fade_anim"
@@ -94,6 +112,7 @@
 	begin="orange_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#orange_out"
 	id="orange_out_scale_anim"
@@ -104,6 +123,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#orange_out"
 	id="orange_out_fade_anim"
@@ -121,6 +141,7 @@
 	begin="orange_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#yellow_in"
 	id="yellow_in_scale_anim"
@@ -131,6 +152,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#yellow_in"
 	id="yellow_in_fade_anim"
@@ -148,6 +170,7 @@
 	begin="yellow_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#yellow_out"
 	id="yellow_out_scale_anim"
@@ -158,6 +181,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#yellow_out"
 	id="yellow_out_fade_anim"
@@ -175,6 +199,7 @@
 	begin="yellow_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#green_in"
 	id="green_in_scale_anim"
@@ -185,6 +210,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#green_in"
 	id="green_in_fade_anim"
@@ -202,6 +228,7 @@
 	begin="green_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#green_out"
 	id="green_out_scale_anim"
@@ -212,6 +239,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#green_out"
 	id="green_out_fade_anim"
@@ -229,6 +257,7 @@
 	begin="green_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#blue_in"
 	id="blue_in_scale_anim"
@@ -239,6 +268,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#blue_in"
 	id="blue_in_fade_anim"
@@ -256,6 +286,7 @@
 	begin="blue_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#blue_out"
 	id="blue_out_scale_anim"
@@ -266,6 +297,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#blue_out"
 	id="blue_out_fade_anim"
@@ -283,6 +315,7 @@
 	begin="blue_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#indigo_in"
 	id="indigo_in_scale_anim"
@@ -293,6 +326,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#indigo_in"
 	id="indigo_in_fade_anim"
@@ -310,6 +344,7 @@
 	begin="indigo_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#indigo_out"
 	id="indigo_out_scale_anim"
@@ -320,6 +355,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#indigo_out"
 	id="indigo_out_fade_anim"
@@ -337,6 +373,7 @@
 	begin="indigo_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#violet_in"
 	id="violet_in_scale_anim"
@@ -347,6 +384,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#violet_in"
 	id="violet_in_fade_anim"
@@ -364,6 +402,7 @@
 	begin="violet_in_translate_anim.end"
 	dur="0.666666666s"
 	values="100,100; 157,57"/>
+
 <animateTransform
 	xlink:href="#violet_out"
 	id="violet_out_scale_anim"
@@ -374,6 +413,7 @@
 	dur="0.666666666s"
 	values="1, 1; .95,.95"
 	additive="sum"/>
+
 <animate
 	xlink:href="#violet_out"
 	id="violet_out_fade_anim"
@@ -391,6 +431,7 @@
 	begin="violet_out_translate_anim.begin"
 	dur="0.666666666s"
 	values="42,142; 100,100"/>
+
 <animateTransform
 	xlink:href="#red_in"
 	id="red_in_scale_anim"
@@ -401,6 +442,7 @@
 	dur="0.666666666s"
 	values="1.05, 1.05; 1,1"
 	additive="sum"/>
+
 <animate
 	xlink:href="#red_in"
 	id="red_in_fade_anim"

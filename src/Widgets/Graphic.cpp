@@ -8,17 +8,12 @@ Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* paren
 	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size) }, Widget(parent)
 {
 	a_fill.set_disabled();
-
-	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
 	init_layout();
-
-	//update_image_location();
 	init_max_size();
 }
 
 Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
-	m_image_size{ size }, Widget(parent)
+	Widget(parent)
 {
 	if (filepath.endsWith(".png") || filepath.endsWith(".jpg") ||
 		filepath.endsWith(".jpeg") || filepath.endsWith(".bmp") ||
@@ -34,17 +29,10 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
 		m_svg_widget->setFixedSize(size);
-
-		//add_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
-
-	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
 	init_layout();
-
-	//update_image_location();
 	init_max_size();
 }
 
@@ -66,34 +54,22 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		m_svg_widget = new SVG(filepath);
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
-
-		//add_child_themeable_pointer(m_svg_widget);
 	}
 
 	a_fill.set_disabled();
-
-	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
 	init_layout();
-
-	//update_image_location();
 	init_max_size();
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
-	m_image_size{ image.size() }, Widget(parent)
+	Widget(parent)
 {
 	m_bitmap_label = new QLabel;
 	m_bitmap_label->setPixmap(QPixmap::fromImage(image));
 	m_bitmap_label->setFixedSize(image.size());
 
 	a_fill.set_disabled();
-
-	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
 	init_layout();
-
-	//update_image_location();
 	init_max_size();
 }
 
@@ -117,19 +93,10 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget->set_name("svg");
 		m_svg_widget->set_proper_name("SVG");
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
-
-		//add_child_themeable_pointer(m_svg_widget);
 	}
 
-	m_image_size = gw.m_image_size;
-
 	a_fill.set_disabled();
-
-	//setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-
 	init_layout();
-
-	//update_image_location();
 	init_max_size();
 }
 
@@ -145,25 +112,6 @@ Graphic::~Graphic()
 		m_image_sequence_label->deleteLater();
 }
 
-QSize Graphic::image_size()
-{
-	return m_image_size;
-}
-
-//void Graphic::setMaximumWidth(int maxw)
-//{
-//	QWidget::setMaximumWidth(maxw);
-//
-//	if (m_bitmap_label)
-//		m_bitmap_label->setMaximumWidth(maxw);
-//
-//	else if (m_svg_widget)
-//		m_svg_widget->setMaximumWidth(maxw);
-//
-//	else if (m_image_sequence_label)
-//		m_image_sequence_label->setMaximumWidth(maxw);
-//}
-
 void Graphic::set_hovering(bool cond)
 {
 	if (m_svg_widget) m_svg_widget->set_hovering(cond);
@@ -176,48 +124,11 @@ void Graphic::set_icon(Graphic* icon)
 	if (m_svg_widget) m_svg_widget->set_icon(new Graphic(*icon));
 }
 
-void Graphic::set_padding(int left, int top, int right, int bottom)
-{
-	m_padding_left = left;
-	m_padding_top = top;
-	m_padding_right = right;
-	m_padding_bottom = bottom;
-
-	//update_image_location();
-	//update_size();
-}
-
 void Graphic::set_pixmap(const QPixmap& pixmap)
 {
 	if (m_bitmap_label)
-	{
 		m_bitmap_label->setPixmap(pixmap);
-		m_image_size = pixmap.size();
-	}
 }
-
-//void Graphic::setFixedSize(QSize s)
-//{
-//	s = s + QSize(
-//		m_padding_left + m_padding_right,
-//		m_padding_top + m_padding_bottom);
-//
-//	Widget::setFixedSize(s);
-//
-//	if (m_bitmap_label)
-//	{
-//		m_bitmap_label->setFixedSize(s);
-//
-//	}
-//	else if (m_svg_widget)
-//	{
-//		m_svg_widget->setFixedSize(s);
-//	}
-//	else if (m_image_sequence_label)
-//	{
-//		m_image_sequence_label->setFixedSize(s);
-//	}
-//}
 
 SVG* Graphic::svg() const
 {
@@ -250,24 +161,8 @@ void Graphic::init_layout()
 	setLayout(main_layout);
 }
 
-//void Graphic::update_image_location()
-//{
-//	QPoint new_image_location = QPoint(m_padding_left, m_padding_top);
-//
-//	if (m_bitmap_label)
-//		m_bitmap_label->move(new_image_location);
-//	else if (m_svg_widget)
-//		m_svg_widget->move(new_image_location);
-//	else if (m_image_sequence_label)
-//		m_image_sequence_label->move(new_image_location);
-//}
-
 void Graphic::init_max_size()
 {
-	//QSize new_size = QSize(
-	//	m_padding_left + m_padding_right,
-	//	m_padding_top + m_padding_bottom);
-
 	QSize new_size;
 
 	if (m_bitmap_label)
@@ -279,20 +174,3 @@ void Graphic::init_max_size()
 
 	setMaximumSize(new_size);
 }
-
-//void Graphic::update_theme_dependencies()
-//{
-//	int border_thickness = a_border_thickness.as<double>();
-//
-//	setFixedSize(
-//		border_thickness + m_image_size.width() + border_thickness,
-//		border_thickness + m_image_size.height() + border_thickness);
-//
-//	if (m_bitmap_label) m_bitmap_label->move(border_thickness, border_thickness);
-//	if (m_svg_widget)
-//	{
-//		m_svg_widget->update_theme_dependencies();
-//		m_svg_widget->move(border_thickness, border_thickness);
-//	}
-//	if (m_image_sequence_label) m_image_sequence_label->move(border_thickness, border_thickness);
-//}

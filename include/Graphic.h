@@ -21,33 +21,17 @@ namespace Layers
 		Graphic(const Graphic& gw);
 		~Graphic();
 
-		QSize image_size();
-
-		//void setFixedSize(QSize s);
-
-		//void setMaximumWidth(int maxw);
-
-
 		void set_hovering(bool cond = true);
 		void set_icon(Graphic* icon);
-
-		void set_padding(int left, int top, int right, int bottom);
 
 		void set_pixmap(const QPixmap& pixmap);
 		SVG* svg() const;
 
 	private:
-		//void update_image_location();
 		void init_max_size();
 
 		void init_layout();
 
-		int m_padding_bottom{ 0 };
-		int m_padding_left{ 0 };
-		int m_padding_right{ 0 };
-		int m_padding_top{ 0 };
-
-		QSize m_image_size{ QSize() };
 		QLabel* m_bitmap_label{ nullptr };
 		SVG* m_svg_widget{ nullptr };
 		ImageSequenceLabel* m_image_sequence_label{ nullptr };

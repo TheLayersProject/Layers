@@ -11,10 +11,19 @@ using Layers::Themeable;
 
 Themeable::~Themeable()
 {
-	if (m_name) delete m_name;
+	if (m_name)
+	{
+		qDebug() << "Deleting: " + *m_name;
+
+		delete m_name;
+
+		m_name = nullptr;
+	}
+
+	if (m_icon) delete m_icon;
 	if (m_proper_name) delete m_proper_name;
 
-	m_name = nullptr;
+	m_icon = nullptr;
 	m_proper_name = nullptr;
 }
 
