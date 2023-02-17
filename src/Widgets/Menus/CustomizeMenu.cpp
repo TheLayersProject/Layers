@@ -13,9 +13,7 @@ using Layers::Window;
 CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	Menu("Customize", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
-	Themeable* ccp_themeable = new Themeable();
-
-	m_control_customize_panel = new CustomizePanel(ccp_themeable, false, m_sidebar);
+	m_control_customize_panel = new CustomizePanel(m_ccp_themeable, false, m_sidebar);
 	m_control_customize_panel->hide();
 	m_control_customize_panel->set_proper_name("Customize Panels");
 
@@ -60,7 +58,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	installEventFilter(this);
 	setMouseTracking(true);
 
-	set_icon(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)));
+	//set_icon(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)));
 	set_name("customize_menu");
 	set_proper_name("Customize Menu");
 
@@ -91,9 +89,9 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");
-	m_topbar->a_fill.set_value(QColor(Qt::lightGray));
-	m_topbar->corner_radii.top_right.set_value(10.0);
-	m_topbar->corner_radii.bottom_right.set_value(10.0);
+	m_topbar->fill()->set_value(QColor(Qt::lightGray));
+	m_topbar->corner_radii()->top_right()->set_value(10.0);
+	m_topbar->corner_radii()->bottom_right()->set_value(10.0);
 
 	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
@@ -119,11 +117,11 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapse_menu_button->hide();
 	m_collapse_menu_button->setFixedWidth(50);
 	m_collapse_menu_button->disable_graphic_hover_color();
-	m_collapse_menu_button->a_fill.set_value(false);
-	m_collapse_menu_button->corner_radii.top_left.set_value(5.0);
-	m_collapse_menu_button->corner_radii.top_right.set_value(5.0);
-	m_collapse_menu_button->corner_radii.bottom_left.set_value(5.0);
-	m_collapse_menu_button->corner_radii.bottom_right.set_value(5.0);
+	m_collapse_menu_button->fill()->set_value(false);
+	m_collapse_menu_button->corner_radii()->top_left()->set_value(5.0);
+	m_collapse_menu_button->corner_radii()->top_right()->set_value(5.0);
+	m_collapse_menu_button->corner_radii()->bottom_left()->set_value(5.0);
+	m_collapse_menu_button->corner_radii()->bottom_right()->set_value(5.0);
 	m_collapse_menu_button->set_margin(0, 10, 0, 10);
 	m_collapse_menu_button->set_name("collapse_menu_button");
 	m_collapse_menu_button->set_proper_name("Collapse Menu Button");
@@ -134,30 +132,39 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	m_collapse_menu->setMouseTracking(true);
 	m_collapse_menu->set_name("collapse_menu");
 	m_collapse_menu->set_proper_name("Collapse Menu");
-	m_collapse_menu->corner_radii.top_left.set_value(5.0);
-	m_collapse_menu->corner_radii.top_right.set_value(5.0);
-	m_collapse_menu->corner_radii.bottom_left.set_value(5.0);
-	m_collapse_menu->corner_radii.bottom_right.set_value(5.0);
+	m_collapse_menu->corner_radii()->top_left()->set_value(5.0);
+	m_collapse_menu->corner_radii()->top_right()->set_value(5.0);
+	m_collapse_menu->corner_radii()->bottom_left()->set_value(5.0);
+	m_collapse_menu->corner_radii()->bottom_right()->set_value(5.0);
 
 	m_sidebar->set_name("sidebar");
 	m_sidebar->set_proper_name("Sidebar");
-	//m_sidebar->a_fill.set_value(QColor(Qt::lightGray));
+	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
 	m_sidebar_widget->installEventFilter(this);
 	m_sidebar_widget->setFixedWidth(300);
 	m_sidebar_widget->setMouseTracking(true);
-	m_sidebar_widget->a_fill.set_disabled();
+	m_sidebar_widget->fill()->set_disabled();
 
-	m_preview_frame->a_corner_color.entangle_with(m_sidebar->a_fill);
+	m_preview_frame->corner_color()->entangle_with(*m_sidebar->fill());
 
-	m_preview_frame->corner_radii.top_left.set_value(10.0);
-	m_preview_frame->a_corner_color.set_disabled(false);
+	m_preview_frame->corner_radii()->top_left()->set_value(10.0);
+	m_preview_frame->corner_color()->set_disabled(false);
 
 	m_preview_scroll_area->set_name("preview_scroll_area");
 	m_preview_scroll_area->set_proper_name("Preview Scroll Area");
-	//m_preview_scroll_area->a_fill.set_disabled();
+	//m_preview_scroll_area->fill()->set_disabled();
 
 	setup_layout();
+}
+
+CustomizeMenu::~CustomizeMenu()
+{
+	delete m_ccp_themeable;
+	delete m_collapse_menu;
+
+	m_ccp_themeable = nullptr;
+	m_collapse_menu = nullptr;
 }
 
 Button* CustomizeMenu::apply_button() const
@@ -227,7 +234,7 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 
 		Button* text_button = new Button(*customize_panel->proper_name(), true);
 		text_button->disable_text_hover_color();
-		text_button->a_fill.set_disabled();
+		text_button->fill()->set_disabled();
 		text_button->set_font_size(14);
 		text_button->set_name("text_button");
 		text_button->set_padding(0, text_button->top_padding(), 0, text_button->bottom_padding());
@@ -505,7 +512,7 @@ void CustomizeMenu::setup_layout()
 	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
 
-	m_preview_frame->a_fill.set_disabled();
+	m_preview_frame->fill()->set_disabled();
 	m_preview_frame->setLayout(m_preview_layout);
 
 	m_preview_scroll_area->setWidget(m_preview_frame);

@@ -70,32 +70,32 @@ bool ToggleSwitch::toggled() const
 
 void ToggleSwitch::update_layout_margins()
 {
-	int b_thickness = border.thickness.as<double>();
+	int b_thickness = border()->thickness()->as<double>();
 
 	if (m_layout_v)
 		m_layout_v->setContentsMargins(
-			0, margins.top.as<double>() + b_thickness + a_padding_top.as<double>(),
-			0, a_padding_bottom.as<double>() + b_thickness + margins.bottom.as<double>());
+			0, m_margins->top()->as<double>() + b_thickness + a_padding_top.as<double>(),
+			0, a_padding_bottom.as<double>() + b_thickness + m_margins->bottom()->as<double>());
 	else if (m_layout_h)
 		m_layout_h->setContentsMargins(
-			margins.left.as<double>() + b_thickness + a_padding_left.as<double>(), 0,
-			a_padding_right.as<double>() + b_thickness + margins.right.as<double>(), 0);
+			margins()->left()->as<double>() + b_thickness + a_padding_left.as<double>(), 0,
+			a_padding_right.as<double>() + b_thickness + m_margins->right()->as<double>(), 0);
 }
 
 void ToggleSwitch::update_spacer_size()
 {
-	int b_thickness = border.thickness.as<double>();
+	int b_thickness = border()->thickness()->as<double>();
 
 	if (m_vertical)
 	{
 		m_spacer->setFixedSize(
-			0, height() - margins.top.as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - margins.bottom.as<double>()
+			0, height() - m_margins->top()->as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - m_margins->bottom()->as<double>()
 		);
 	}
 	else
 	{
 		m_spacer->setFixedSize(
-			width() - margins.left.as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - margins.right.as<double>(), 0
+			width() - m_margins->left()->as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - m_margins->right()->as<double>(), 0
 		);
 	}
 }
@@ -118,16 +118,16 @@ bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void ToggleSwitch::init_attributes()
 {
-	border.fill.init_variant_map({
+	border()->fill()->init_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
-	border.thickness.set_value(3.0);
-	corner_radii.top_left.set_value(4.0);
-	corner_radii.top_right.set_value(4.0);
-	corner_radii.bottom_left.set_value(4.0);
-	corner_radii.bottom_right.set_value(4.0);
-	a_fill.init_variant_map({
+	border()->thickness()->set_value(3.0);
+	corner_radii()->top_left()->set_value(4.0);
+	corner_radii()->top_right()->set_value(4.0);
+	corner_radii()->bottom_left()->set_value(4.0);
+	corner_radii()->bottom_right()->set_value(4.0);
+	fill()->init_variant_map({
 		{ "Untoggled", QColor(Qt::white) },
 		{ "Toggled", QColor("#6fc65b") }
 		});
@@ -135,21 +135,21 @@ void ToggleSwitch::init_attributes()
 		set_margin(12.0);
 	else
 	{
-		margins.top.set_value(12.0);
-		margins.bottom.set_value(12.0);
+		m_margins->top()->set_value(12.0);
+		m_margins->bottom()->set_value(12.0);
 	}
 
-	m_square->corner_radii.top_left.set_value(2.0);
-	m_square->corner_radii.top_right.set_value(2.0);
-	m_square->corner_radii.bottom_left.set_value(2.0);
-	m_square->corner_radii.bottom_right.set_value(2.0);
-	m_square->a_fill.init_variant_map({
+	m_square->corner_radii()->top_left()->set_value(2.0);
+	m_square->corner_radii()->top_right()->set_value(2.0);
+	m_square->corner_radii()->bottom_left()->set_value(2.0);
+	m_square->corner_radii()->bottom_right()->set_value(2.0);
+	m_square->fill()->init_variant_map({
 		{ "Untoggled", QColor(Qt::black) },
 		{ "Toggled", QColor(Qt::white) }
 		});
 
-	//m_spacer->a_fill.set_disabled();
-	m_spacer->a_fill.set_value(QColor(Qt::blue));	
+	//m_spacer->fill()->set_disabled();
+	m_spacer->fill()->set_value(QColor(Qt::blue));	
 
 	//connect(&a_margin_left, &Entity::value_changed, [this] {
 	//	update_layout_margins(); update_spacer_size();

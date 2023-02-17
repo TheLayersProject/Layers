@@ -4,6 +4,7 @@
 
 #include <QPainterPath>
 
+using Layers::Attribute;
 using Layers::Label;
 
 Label::Label(QWidget* parent) : QLabel(parent)
@@ -18,17 +19,58 @@ Label::Label(const QString& text, QWidget* parent) : Label(parent)
 	setText(text);
 }
 
+Label::~Label()
+{
+	delete m_fill;
+	delete m_outline_color;
+	delete m_padding_top;
+	delete m_text_color;
+	delete m_text_hover_color;
+
+	m_fill = nullptr;
+	m_outline_color = nullptr;
+	m_padding_top = nullptr;
+	m_text_color = nullptr;
+	m_text_hover_color = nullptr;
+}
+
+Attribute* Label::fill() const
+{
+	return m_fill;
+}
+
+Attribute* Label::outline_color() const
+{
+	return m_outline_color;
+}
+
+Attribute* Label::padding_top() const
+{
+	return m_padding_top;
+}
+
+Attribute* Label::text_color() const
+{
+	return m_text_color;
+}
+
+Attribute* Label::text_hover_color() const
+{
+	return m_text_hover_color;
+}
+
 void Label::init_attributes()
 {
 	m_entities.insert({
-		{ "fill", &a_fill },
-		{ "text_hover_color", &a_text_hover_color },
-		{ "outline_color", &a_outline_color },
-		{ "text_color", &a_text_color }
+		{ "fill", m_fill },
+		{ "text_hover_color", m_text_hover_color },
+		{ "outline_color", m_outline_color },
+		{ "text_color", m_text_color }
 	});
 
 	for (Entity* entity : m_entities)
-		entity->setup_widget_update_connection(this);
+		establish_update_connection(entity);
+		//entity->setup_widget_update_connection(this);
 }
 
 void Label::resize()
@@ -36,7 +78,7 @@ void Label::resize()
 	QFontMetrics font_metrics(font());
 
 	int unwrapped_width = m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
-	int unwrapped_height = a_padding_top.as<double>() + font_metrics.height() + m_padding_bottom;
+	int unwrapped_height = m_padding_top->as<double>() + font_metrics.height() + m_padding_bottom;
 
 	if (unwrapped_width > m_available_width && wordWrap())
 	{
@@ -46,7 +88,7 @@ void Label::resize()
 
 		build_wrapped_lines();
 
-		int wrapped_height = a_padding_top.as<double>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
+		int wrapped_height = m_padding_top->as<double>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
 
 		QLabel::setFixedHeight(wrapped_height);
 	}
@@ -141,7 +183,7 @@ void Label::set_hovering(bool cond)
 void Label::set_padding(double left, double top, double right, double bottom)
 {
 	m_padding_left = left;
-	a_padding_top.set_value(top);
+	m_padding_top->set_value(top);
 	m_padding_right = right;
 	m_padding_bottom = bottom;
 
@@ -172,14 +214,14 @@ void Label::paintEvent(QPaintEvent* event)
 	QPainterPath path;
 	QPen pen;
 	QFont label_font = font();
-	QBrush fill_brush(a_fill.as<QColor>());
+	QBrush fill_brush(fill()->as<QColor>());
 	QBrush text_brush;
 
-	if (m_hovering) text_brush = QBrush(a_text_hover_color.as<QColor>());
-	else text_brush = QBrush(a_text_color.as<QColor>());
+	if (m_hovering) text_brush = QBrush(m_text_hover_color->as<QColor>());
+	else text_brush = QBrush(m_text_color->as<QColor>());
 
 	pen.setWidth(3);
-	pen.setColor(a_outline_color.as<QColor>());
+	pen.setColor(m_outline_color->as<QColor>());
 
 	painter.begin(this);
 	painter.setRenderHint(QPainter::Antialiasing);
@@ -187,7 +229,7 @@ void Label::paintEvent(QPaintEvent* event)
 	painter.setFont(label_font);
 	painter.setPen(pen);
 
-	if (!a_fill.disabled()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
+	if (!fill()->disabled()) painter.fillRect(QRect(0, 0, width(), height()), fill_brush);
 
 	if (wordWrap() && m_wrapping)
 	{
@@ -195,13 +237,13 @@ void Label::paintEvent(QPaintEvent* event)
 
 		for (int i = 0; i < m_wrapped_lines.count(); i++)
 		{
-			path.addText(m_padding_left, a_padding_top.as<double>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
+			path.addText(m_padding_left, m_padding_top->as<double>() + label_font.pointSizeF() + (font_metrics.height() * i), label_font, m_wrapped_lines[i]);
 		}
 	}
 	else
-		path.addText(m_padding_left, a_padding_top.as<double>() + label_font.pointSizeF(), label_font, text());
+		path.addText(m_padding_left, m_padding_top->as<double>() + label_font.pointSizeF(), label_font, text());
 
-	if (!a_outline_color.disabled()) painter.strokePath(path, pen);
+	if (!outline_color()->disabled()) painter.strokePath(path, pen);
 
 	painter.fillPath(path, text_brush);
 	painter.end();

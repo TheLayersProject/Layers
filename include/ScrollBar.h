@@ -14,20 +14,31 @@ namespace Layers
 
 	public:
 		ScrollBar(QWidget* parent = 0);
+		~ScrollBar();
 
 		void update_theme_dependencies();
 
-		Attribute a_background_color{ Attribute("background_color", QColor(Qt::gray)) };
-		Attribute a_handle_color{ Attribute("handle_color", QColor(Qt::white)) };
+		Attribute* background_color() const;
 
-		CornerRadiiAttributes corner_radii;
+		Attribute* handle_color() const;
 
-		CornerRadiiAttributes handle_corner_radii{ CornerRadiiAttributes("handle_corner_radii") };
+		CornerRadiiAttributes* corner_radii() const;
+
+		CornerRadiiAttributes* handle_corner_radii() const;
 
 	protected:
 		QString build_stylesheet();
 
 		void init_attributes();
+
+	private:
+		Attribute* m_background_color{ new Attribute("background_color", QColor(Qt::gray)) };
+
+		Attribute* m_handle_color{ new Attribute("handle_color", QColor(Qt::white)) };
+
+		CornerRadiiAttributes* m_corner_radii{ new CornerRadiiAttributes };
+
+		CornerRadiiAttributes* m_handle_corner_radii{ new CornerRadiiAttributes("handle_corner_radii") };
 	};
 }
 

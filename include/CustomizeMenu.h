@@ -22,6 +22,7 @@ namespace Layers
 
 	public:
 		CustomizeMenu(QWidget* parent = nullptr);
+		~CustomizeMenu();
 
 		Button* apply_button() const;
 
@@ -46,14 +47,16 @@ namespace Layers
 		void expand_text_buttons();
 		void setup_layout();
 
-		AWGroup* m_control_aw_group{ new AWGroup(new AttributeGroup) };
-		ColorAW* m_control_color_aw{ new ColorAW(new Attribute("", QColor())) };
-		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(new CornerRadiiAttributes) };
-		FillAW* m_control_fill_aw{ new FillAW(new Attribute("", QColor())) };
-		NumberAW* m_control_number_aw{ new NumberAW(new Attribute("", QVariant::fromValue(0.0)), new QIntValidator) };
+		AWGroup* m_control_aw_group{ new AWGroup(nullptr) };
+		ColorAW* m_control_color_aw{ new ColorAW(nullptr) };
+		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(nullptr) };
+		FillAW* m_control_fill_aw{ new FillAW(nullptr) };
+		NumberAW* m_control_number_aw{ new NumberAW(nullptr, nullptr) };
 		StateAW* m_control_state_aw{ new StateAW };
 		WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
 		WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
+
+		Themeable* m_ccp_themeable{ new Themeable };
 
 		HorizontalLayout* m_main_layout{ new HorizontalLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };

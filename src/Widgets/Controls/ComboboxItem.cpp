@@ -20,37 +20,42 @@ ComboboxItem::ComboboxItem(const QString& item_text, QWidget* parent) :
 	m_item_label->set_padding(0, 7, 0, 0);
 }
 
+ComboboxItem::~ComboboxItem()
+{
+	qDebug() << "Deleted ComboboxItem!";
+}
+
 void ComboboxItem::init_attributes()
 {
-	corner_radii.top_left.init_variant_map({
+	m_corner_radii->top_left()->init_variant_map({
 			{ "Single", 10 },
 			{ "Top", 10 },
 			{ "Middle", 0 },
 			{ "Bottom", 0 }
 		});
 
-	corner_radii.top_right.init_variant_map({
+	m_corner_radii->top_right()->init_variant_map({
 			{ "Single", 10 },
 			{ "Top", 10 },
 			{ "Middle", 0 },
 			{ "Bottom", 0 }
 		});
 
-	corner_radii.bottom_left.init_variant_map({
+	m_corner_radii->bottom_left()->init_variant_map({
 			{ "Single", 10 },
 			{ "Top", 0 },
 			{ "Middle", 0 },
 			{ "Bottom", 10 }
 		});
 
-	corner_radii.bottom_right.init_variant_map({
+	m_corner_radii->bottom_right()->init_variant_map({
 			{ "Single", 10 },
 			{ "Top", 0 },
 			{ "Middle", 0 },
 			{ "Bottom", 10 }
 		});
 
-	a_hover_fill.set_disabled(false);
+	m_hover_fill->set_disabled(false);
 }
 
 QString ComboboxItem::item_text()

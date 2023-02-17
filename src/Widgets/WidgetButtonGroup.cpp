@@ -63,11 +63,11 @@ QList<WidgetButton*>& WidgetButtonGroup::widget_buttons()
 
 void WidgetButtonGroup::init_attributes()
 {
-	a_fill.set_value(QColor("#1A000000"));
-	corner_radii.top_left.set_value(10.0);
-	corner_radii.top_right.set_value(10.0);
-	corner_radii.bottom_left.set_value(10.0);
-	corner_radii.bottom_right.set_value(10.0);
+	m_fill->set_value(QColor("#1A000000"));
+	m_corner_radii->top_left()->set_value(10.0);
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
 }
 
 void WidgetButtonGroup::init_layout()

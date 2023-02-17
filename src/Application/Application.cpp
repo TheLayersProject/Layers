@@ -19,6 +19,7 @@
 
 using Layers::Application;
 using Layers::ColorDialog;
+using Layers::CreateNewThemeDialog;
 using Layers::CustomizePanel;
 using Layers::GradientDialog;
 using Layers::Theme;
@@ -79,15 +80,48 @@ Application::Application(
 
 	m_update_dialog = new UpdateDialog("", "");
 
-
-	/*m_control_color_dialog->set_proper_name("Color Dialog");
-	m_control_gradient_dialog->set_proper_name("Gradient Dialog");
-	m_control_update_dialog->set_proper_name("Update Dialog");*/
-
 	add_child_themeable_pointer(*m_create_new_theme_dialog);
 	add_child_themeable_pointer(*m_color_dialog);
 	add_child_themeable_pointer(*m_gradient_dialog);
 	add_child_themeable_pointer(*m_update_dialog);
+}
+
+Application::~Application()
+{
+	if (m_github_repo)
+	{
+		delete m_github_repo;
+		m_github_repo = nullptr;
+	}
+
+	if (m_latest_version)
+	{
+		delete m_latest_version;
+		m_latest_version = nullptr;
+	}
+
+	if (m_version)
+	{
+		delete m_version;
+		m_version = nullptr;
+	}
+
+	for (Theme* theme : m_themes)
+	{
+		delete theme;
+		theme = nullptr;
+	}
+	m_themes.clear();
+
+	delete m_create_new_theme_dialog;
+	delete m_color_dialog;
+	delete m_gradient_dialog;
+	delete m_update_dialog;
+
+	m_create_new_theme_dialog = nullptr;
+	m_color_dialog = nullptr;
+	m_gradient_dialog = nullptr;
+	m_update_dialog = nullptr;
 }
 
 QString Application::app_identifier()
@@ -122,13 +156,18 @@ QList<Themeable*> Application::child_themeables(Qt::FindChildOptions options)
 
 void Application::create_theme(const QString& new_theme_name, const QString& copy_theme_name)
 {
-	m_themes[new_theme_name] = Theme(new_theme_name);
+	m_themes[new_theme_name] = new Theme(new_theme_name);
 
-	Theme& new_theme = m_themes[new_theme_name];
+	Theme* new_theme = m_themes[new_theme_name];
 
-	new_theme.copy(m_themes[copy_theme_name]);
+	new_theme->copy(*m_themes[copy_theme_name]);
 
-	save_theme(m_themes[new_theme_name]);
+	save_theme(*m_themes[new_theme_name]);
+}
+
+CreateNewThemeDialog* Application::create_new_theme_dialog() const
+{
+	return m_create_new_theme_dialog;
 }
 
 ColorDialog* Application::color_dialog() const
@@ -200,7 +239,7 @@ QFile* Application::icon_file()
 	return m_icon_file;
 }
 
-QMap<QString, Theme>& Application::themes()
+QMap<QString, Theme*>& Application::themes()
 {
 	return m_themes;
 }
@@ -274,26 +313,24 @@ void Application::rename_theme(const QString& old_name, const QString& new_name)
 	{
 		QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
 
-		QDir old_theme_dir(T1_themes_dir.absoluteFilePath(m_themes[old_name].identifier() + "\\"));
+		QDir old_theme_dir(T1_themes_dir.absoluteFilePath(m_themes[old_name]->identifier() + "\\"));
 
 		old_theme_dir.removeRecursively();
 
 		m_themes.insert(new_name, m_themes.take(old_name));
 
-		m_themes[new_name].set_name(new_name);
+		m_themes[new_name]->set_name(new_name);
 
-		apply_theme(m_themes[new_name]);
-		save_theme(m_themes[new_name]);
+		apply_theme(*m_themes[new_name]);
+		save_theme(*m_themes[new_name]);
 	}
 }
 
-Theme Application::load_theme(const QString& file_name)
+Theme* Application::load_theme(const QString& file_name)
 {
 	qDebug() << "Loading" << file_name;
 
-	Theme theme = load_theme_1(file_name, app_identifier());
-
-	return theme;
+	return load_theme_1(file_name, app_identifier());
 }
 
 Window* Application::main_window() const
@@ -360,7 +397,7 @@ QSettings& Application::settings()
 Theme* Application::theme(const QString& theme_name)
 {
 	if (m_themes.contains(theme_name))
-		return &m_themes[theme_name];
+		return m_themes[theme_name];
 
 	return nullptr;
 }
@@ -421,7 +458,6 @@ void Application::init_themes()
 	   appear in the custom themes directory. */
 
 	// Load prebuilt theme files
-	//m_themes.insert("Blue", load_theme(":/themes/blue.json"));
 	m_themes.insert("Dark", load_theme(":/themes/dark.json"));
 	m_themes.insert("Light", load_theme(":/themes/light.json"));
 
@@ -436,16 +472,19 @@ void Application::init_themes()
 				QDir(theme_dir_path).filePath(app_identifier() + ".json")
 			).exists())
 		{
-			Theme loaded_theme = load_theme(theme_dir_path);
+			Theme* loaded_theme = load_theme(theme_dir_path);
 
-			m_themes.insert(loaded_theme.name(), loaded_theme);
+			m_themes.insert(loaded_theme->name(), loaded_theme);
 		}
 	}
 
-	if (m_themes.contains(m_settings.value("themes/active_theme").value<QString>()))
-		apply_theme(m_themes[m_settings.value("themes/active_theme").value<QString>()]);
+	QString active_theme_name =
+		m_settings.value("themes/active_theme").value<QString>();
+
+	if (m_themes.contains(active_theme_name))
+		apply_theme(*m_themes[active_theme_name]);
 	else
-		apply_theme(m_themes["Light"]);
+		apply_theme(*m_themes["Light"]);
 }
 
 void Application::init_latest_version_tag()

@@ -9,5 +9,5 @@ AppPreferencesSettingsPanel::AppPreferencesSettingsPanel(QWidget* parent) : Widg
 	set_name("app_preferences_settings_panel");
 	set_proper_name("App Preferences Panel");
 
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 }

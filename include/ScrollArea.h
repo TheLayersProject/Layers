@@ -14,6 +14,7 @@ namespace Layers
 
 	public:
 		ScrollArea(QWidget* parent = nullptr);
+		//~ScrollArea();
 
 		ScrollBar* horizontal_scrollbar() const;
 

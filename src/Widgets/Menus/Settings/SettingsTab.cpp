@@ -67,28 +67,26 @@ void SettingsTab::shrink()
 
 void SettingsTab::init_attributes()
 {
-    corner_radii.top_left.set_value(5.0);
-	corner_radii.bottom_left.set_value(5.0);
+    m_corner_radii->top_left()->set_value(5.0);
+	m_corner_radii->bottom_left()->set_value(5.0);
+    m_fill->init_variant_map({
+        { "Unselected", QColor(Qt::lightGray) },
+        { "Selected", QColor(Qt::white) }
+        });
 
-	m_spacer->a_fill.set_disabled();
+	m_spacer->fill()->set_disabled();
 
-	m_stretch_widget->a_fill.set_disabled();
+	m_stretch_widget->fill()->set_disabled();
 
-	m_stretch_widget2->a_fill.set_disabled();
-
-	a_fill.init_variant_map({
-		{ "Unselected", QColor(Qt::lightGray) },
-		{ "Selected", QColor(Qt::white) }
-		});
+	m_stretch_widget2->fill()->set_disabled();
 
 	m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
-
 	m_tab_icon->svg()->a_common_color.init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
 
-	m_text_label->a_text_color.init_variant_map({
+	m_text_label->text_color()->init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});

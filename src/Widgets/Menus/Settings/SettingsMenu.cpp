@@ -14,7 +14,7 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 
 	installEventFilter(this);
 
-	set_icon(new Graphic(":/svgs/settings_animated.svg", QSize(20, 20)));
+	//set_icon(new Graphic(":/svgs/settings_animated.svg", QSize(20, 20)));
 	set_name("settings_menu");
 	set_proper_name("Settings Menu");
 

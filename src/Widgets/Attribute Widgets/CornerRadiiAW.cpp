@@ -13,8 +13,10 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	add_attribute_widget(m_attribute_widget);
 	set_name("corner_radii_aw_group");
 
-	m_attribute_widget->a_fill.set_disabled();
+	m_attribute_widget->fill()->set_disabled();
 	m_attribute_widget->set_name("aw");
+
+	QIntValidator validator = QIntValidator(0, 30);
 
 	for (LineEditor* line_editor :
 		QList<LineEditor*>({
@@ -26,7 +28,7 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 		line_editor->set_font_size(13);
 		line_editor->set_name("line_editor");
 		line_editor->set_text("0");
-		line_editor->set_validator(new QIntValidator(0, 30));
+		line_editor->set_validator(&validator);
 	}
 
 	m_tl_line_editor->set_proper_name("TL Line Editor");
@@ -47,17 +49,20 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_example_widget->set_name("example_widget");
 	m_example_widget->set_proper_name("Example Widget");
 
-	// Entangle sliders' value attributes with linked_corner_radii attributes
-	m_tl_slider->a_value.entangle_with(linked_corner_radii->top_left);
-	m_tr_slider->a_value.entangle_with(linked_corner_radii->top_right);
-	m_bl_slider->a_value.entangle_with(linked_corner_radii->bottom_left);
-	m_br_slider->a_value.entangle_with(linked_corner_radii->bottom_right);
+	if (linked_corner_radii)
+	{
+		// Entangle sliders' value attributes with linked_corner_radii attributes
+		m_tl_slider->a_value.entangle_with(*linked_corner_radii->top_left());
+		m_tr_slider->a_value.entangle_with(*linked_corner_radii->top_right());
+		m_bl_slider->a_value.entangle_with(*linked_corner_radii->bottom_left());
+		m_br_slider->a_value.entangle_with(*linked_corner_radii->bottom_right());
+	}
 
 	// Entangle line editors' text attributes with sliders' value attributes
-	m_tl_line_editor->a_text.entangle_with(m_tl_slider->a_value);
-	m_tr_line_editor->a_text.entangle_with(m_tr_slider->a_value);
-	m_bl_line_editor->a_text.entangle_with(m_bl_slider->a_value);
-	m_br_line_editor->a_text.entangle_with(m_br_slider->a_value);
+	m_tl_line_editor->text()->entangle_with(m_tl_slider->a_value);
+	m_tr_line_editor->text()->entangle_with(m_tr_slider->a_value);
+	m_bl_line_editor->text()->entangle_with(m_bl_slider->a_value);
+	m_br_line_editor->text()->entangle_with(m_br_slider->a_value);
 
 	m_tl_line_editor->update_theme_dependencies();
 	m_tr_line_editor->update_theme_dependencies();
@@ -65,10 +70,10 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	m_br_line_editor->update_theme_dependencies();
 
 	// Replace example widget's corner radii attributes with sliders' 'value' attributes
-	m_example_widget->corner_radii.top_left.entangle_with(m_tl_slider->a_value);
-	m_example_widget->corner_radii.top_right.entangle_with(m_tr_slider->a_value);
-	m_example_widget->corner_radii.bottom_left.entangle_with(m_bl_slider->a_value);
-	m_example_widget->corner_radii.bottom_right.entangle_with(m_br_slider->a_value);
+	m_example_widget->corner_radii()->top_left()->entangle_with(m_tl_slider->a_value);
+	m_example_widget->corner_radii()->top_right()->entangle_with(m_tr_slider->a_value);
+	m_example_widget->corner_radii()->bottom_left()->entangle_with(m_bl_slider->a_value);
+	m_example_widget->corner_radii()->bottom_right()->entangle_with(m_br_slider->a_value);
 	m_example_widget->entities().remove("corner_radii");
 
 	setup_layout();
@@ -81,10 +86,10 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 	m_bl_slider->set_current_editting_state(state);
 	m_br_slider->set_current_editting_state(state);
 
-	m_example_widget->corner_radii.top_left.set_state(state);
-	m_example_widget->corner_radii.top_right.set_state(state);
-	m_example_widget->corner_radii.bottom_left.set_state(state);
-	m_example_widget->corner_radii.bottom_right.set_state(state);
+	m_example_widget->corner_radii()->top_left()->set_state(state);
+	m_example_widget->corner_radii()->top_right()->set_state(state);
+	m_example_widget->corner_radii()->bottom_left()->set_state(state);
+	m_example_widget->corner_radii()->bottom_right()->set_state(state);
 
 	m_tl_line_editor->set_current_editting_state(state);
 	m_tr_line_editor->set_current_editting_state(state);

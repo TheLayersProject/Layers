@@ -6,8 +6,11 @@ using Layers::BorderAttributes;
 using Layers::CornerRadiiAttributes;
 using Layers::MarginsAttributes;
 
-AttributeGroup::AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled) :
-	m_attributes { attributes }, Entity(name, disabled) { }
+AttributeGroup::AttributeGroup(const QString& name, bool disabled) :
+	Entity(name, disabled) { }
+
+//AttributeGroup::AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled) :
+//	m_attributes{ attributes }, Entity(name, disabled) { }
 
 AttributeGroup::AttributeGroup() :
 	m_attributes{ QMap<QString, Attribute*>() }, Entity("", false) { }
@@ -18,6 +21,17 @@ AttributeGroup::AttributeGroup(const AttributeGroup& ag) : Entity(ag.m_name, ag.
 
 	for (const QString& attr_key : ag.m_attributes.keys())
 		m_attributes[attr_key] = new Attribute(*ag.m_attributes[attr_key]);
+}
+
+AttributeGroup::~AttributeGroup()
+{
+	for (Attribute* attr : m_attributes)
+	{
+		delete attr;
+		attr = nullptr;
+	}
+
+	m_attributes.clear();
 }
 
 QMap<QString, Attribute*>& AttributeGroup::attributes()
@@ -64,13 +78,13 @@ void AttributeGroup::set_state(const QString& state)
 		attr->set_state(state);
 }
 
-void AttributeGroup::setup_widget_update_connection(QWidget* widget)
-{
-	connect(this, &Entity::value_changed, [widget] { widget->update(); });
-
-	for (Attribute* attr : m_attributes)
-		attr->setup_widget_update_connection(widget);
-}
+//void AttributeGroup::setup_widget_update_connection(QWidget* widget)
+//{
+//	connect(this, &Entity::value_changed, [widget] { widget->update(); });
+//
+//	for (Attribute* attr : m_attributes)
+//		attr->setup_widget_update_connection(widget);
+//}
 
 QJsonObject AttributeGroup::to_json_object()
 {
@@ -86,36 +100,85 @@ QJsonObject AttributeGroup::to_json_object()
 }
 
 BorderAttributes::BorderAttributes(const QString& name) :
-	AttributeGroup(name,
-		QMap<QString, Attribute*>({
-			{ "fill", &fill },
-			{ "thickness", &thickness }
-		})
-	)
+	AttributeGroup(name)
 {
+	m_attributes =
+		QMap<QString, Attribute*>({
+			{ "fill", m_fill },
+			{ "thickness", m_thickness }
+		});
+}
 
+Attribute* BorderAttributes::fill() const
+{
+	return m_fill;
+}
+
+Attribute* BorderAttributes::thickness() const
+{
+	return m_thickness;
 }
 
 CornerRadiiAttributes::CornerRadiiAttributes(const QString& name) :
-	AttributeGroup(name,
-		QMap<QString, Attribute*>({
-			{ "bottom_left", &bottom_left },
-			{ "bottom_right", &bottom_right },
-			{ "top_left", &top_left },
-			{ "top_right", &top_right }
-			})
-	)
+	AttributeGroup(name)
 {
+	m_attributes =
+		QMap<QString, Attribute*>({
+			{ "bottom_left", m_bottom_left },
+			{ "bottom_right", m_bottom_right },
+			{ "top_left", m_top_left },
+			{ "top_right", m_top_right }
+		});
+}
+
+Attribute* CornerRadiiAttributes::bottom_left() const
+{
+	return m_bottom_left;
+}
+
+Attribute* CornerRadiiAttributes::bottom_right() const
+{
+	return m_bottom_right;
+}
+
+Attribute* CornerRadiiAttributes::top_left() const
+{
+	return m_top_left;
+}
+
+Attribute* CornerRadiiAttributes::top_right() const
+{
+	return m_top_right;
 }
 
 MarginsAttributes::MarginsAttributes(const QString& name) :
-	AttributeGroup(name,
-		QMap<QString, Attribute*>({
-			{ "bottom", &bottom },
-			{ "left", &left },
-			{ "right", &right },
-			{ "top", &top }
-			})
-	)
+	AttributeGroup(name)
 {
+	m_attributes =
+		QMap<QString, Attribute*>({
+			{ "bottom", m_bottom },
+			{ "left", m_left },
+			{ "right", m_right },
+			{ "top", m_top }
+		});
+}
+
+Attribute* MarginsAttributes::bottom() const
+{
+	return m_bottom;
+}
+
+Attribute* MarginsAttributes::left() const
+{
+	return m_left;
+}
+
+Attribute* MarginsAttributes::right() const
+{
+	return m_right;
+}
+
+Attribute* MarginsAttributes::top() const
+{
+	return m_top;
 }

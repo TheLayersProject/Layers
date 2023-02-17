@@ -19,8 +19,10 @@ namespace Layers
 
 	public:
 		AttributeGroup();
-		AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled = false);
+		AttributeGroup(const QString& name, bool disabled = false);
+		//AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled = false);
 		AttributeGroup(const AttributeGroup& ag);
+		~AttributeGroup();
 
 		/*!
 			Returns a reference to the map of Attributes contained in the group.
@@ -65,7 +67,7 @@ namespace Layers
 		*/
 		virtual void set_state(const QString& state) override;
 
-		virtual void setup_widget_update_connection(QWidget* widget) override;
+		//virtual void setup_widget_update_connection(QWidget* widget) override;
 
 		/*!
 			Returns AttributeGroup converted to a QJsonObject.
@@ -74,7 +76,7 @@ namespace Layers
 		*/
 		QJsonObject to_json_object();
 
-	private:
+	protected:
 		QMap<QString, Attribute*> m_attributes;
 	};
 
@@ -85,12 +87,17 @@ namespace Layers
 	public:
 		BorderAttributes(const QString& name = "border");
 
-		Attribute fill{ Attribute(
+		Attribute* fill() const;
+
+		Attribute* thickness() const;
+
+	private:
+		Attribute* m_fill{ new Attribute(
 			"fill",
 			QColor(Qt::gray)
 			) };
 
-		Attribute thickness{ Attribute(
+		Attribute* m_thickness{ new Attribute(
 			"thickness",
 			QVariant::fromValue(0.0)
 			) };
@@ -103,22 +110,31 @@ namespace Layers
 	public:
 		CornerRadiiAttributes(const QString& name = "corner_radii");
 
-		Attribute bottom_left{ Attribute(
+		Attribute* bottom_left() const;
+
+		Attribute* bottom_right() const;
+
+		Attribute* top_left() const;
+
+		Attribute* top_right() const;
+
+	private:
+		Attribute* m_bottom_left{ new Attribute(
 			"bottom_left",
 			QVariant::fromValue(0.0)
 			) };
 
-		Attribute bottom_right{ Attribute(
+		Attribute* m_bottom_right{ new Attribute(
 			"bottom_right",
 			QVariant::fromValue(0.0)
 			) };
 
-		Attribute top_left{ Attribute(
+		Attribute* m_top_left{ new Attribute(
 			"top_left",
 			QVariant::fromValue(0.0)
 			) };
 
-		Attribute top_right{ Attribute(
+		Attribute* m_top_right{ new Attribute(
 			"top_right",
 			QVariant::fromValue(0.0)
 			) };
@@ -131,23 +147,32 @@ namespace Layers
 	public:
 		MarginsAttributes(const QString& name = "margins");
 
-		Attribute left{ Attribute(
+		Attribute* bottom() const;
+
+		Attribute* left() const;
+
+		Attribute* right() const;
+
+		Attribute* top() const;
+
+	private:
+		Attribute* m_bottom{ new Attribute(
+			"bottom",
+			QVariant::fromValue(0.0)
+			) };
+
+		Attribute* m_left{ new Attribute(
 			"left",
 			QVariant::fromValue(0.0)
 			) };
 
-		Attribute top{ Attribute(
-			"top",
-			QVariant::fromValue(0.0)
-			) };
-
-		Attribute right{ Attribute(
+		Attribute* m_right{ new Attribute(
 			"right",
 			QVariant::fromValue(0.0)
 			) };
 
-		Attribute bottom{ Attribute(
-			"bottom",
+		Attribute* m_top{ new Attribute(
+			"top",
 			QVariant::fromValue(0.0)
 			) };
 	};

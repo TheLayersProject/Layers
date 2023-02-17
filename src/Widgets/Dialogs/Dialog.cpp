@@ -30,9 +30,11 @@ void Dialog::set_icon(Graphic* icon)
 {
 	Themeable::set_icon(icon);
 
-	m_icon->setMinimumWidth(40);
+	Graphic* dialog_icon = new Graphic(*icon);
 
-	m_titlebar_layout->insertWidget(0, m_icon);
+	dialog_icon->setMinimumWidth(40);
+
+	m_titlebar_layout->insertWidget(0, dialog_icon);
 }
 
 void Dialog::setLayout(QLayout* layout)
@@ -42,12 +44,12 @@ void Dialog::setLayout(QLayout* layout)
 
 void Dialog::update_content_margins()
 {
-	int border_thickness = border.thickness.as<double>();
+	int border_thickness = border()->thickness()->as<double>();
 
-	int content_margin_l = margins.left.as<double>() + border_thickness;
-	int content_margin_t = margins.top.as<double>() + border_thickness;
-	int content_margin_r = margins.right.as<double>() + border_thickness;
-	int content_margin_b = margins.bottom.as<double>() + border_thickness;
+	int content_margin_l = margins()->left()->as<double>() + border_thickness;
+	int content_margin_t = margins()->top()->as<double>() + border_thickness;
+	int content_margin_r = margins()->right()->as<double>() + border_thickness;
+	int content_margin_b = margins()->bottom()->as<double>() + border_thickness;
 
 	m_main_layout->setContentsMargins(
 		content_margin_l, content_margin_t,
@@ -56,14 +58,14 @@ void Dialog::update_content_margins()
 
 void Dialog::update_titlebar()
 {
-	int border_thickness = border.thickness.as<double>();
+	int border_thickness = border()->thickness()->as<double>();
 
-	m_titlebar->corner_radii.top_left.set_value(
-		inner_radius(corner_radii.top_left.as<double>(), border_thickness)
+	m_titlebar->corner_radii()->top_left()->set_value(
+		inner_radius(corner_radii()->top_left()->as<double>(), border_thickness)
 	);
 
-	m_titlebar->corner_radii.top_right.set_value(
-		inner_radius(corner_radii.top_right.as<double>(), border_thickness)
+	m_titlebar->corner_radii()->top_right()->set_value(
+		inner_radius(corner_radii()->top_right()->as<double>(), border_thickness)
 	);
 }
 
@@ -71,26 +73,26 @@ void Dialog::init_attributes()
 {
 	ThemeableBox::init_attributes();
 
-	border.fill.set_value(QVariant::fromValue(
+	m_border->fill()->set_value(QVariant::fromValue(
 		QGradientStops({
 			{ 0.0, QColor("#c0c0c0") },
 			{ 1.0, Qt::white }
 		})));
-	border.thickness.set_value(10.0);
-	corner_radii.top_left.set_value(10.0);
-	corner_radii.top_right.set_value(10.0);
-	corner_radii.bottom_left.set_value(10.0);
-	corner_radii.bottom_right.set_value(10.0);
+	m_border->thickness()->set_value(10.0);
+	m_corner_radii->top_left()->set_value(10.0);
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
 
 	update_content_margins();
 	update_titlebar();
 
-	connect(&border.thickness, &Entity::value_changed, [this] {
+	connect(border()->thickness(), &Entity::value_changed, [this] {
 		update_content_margins();
 		update_titlebar();
 		});
 
-	for (Attribute* margin : margins)
+	for (Attribute* margin : *m_margins)
 		connect(margin, &Entity::value_changed, this, &Dialog::update_content_margins);
 }
 
@@ -106,7 +108,7 @@ bool Dialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
 		}
 
 		*result = 0;
-		const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
+		const LONG borderWidth = border()->thickness()->as<double>() * devicePixelRatio();;
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 

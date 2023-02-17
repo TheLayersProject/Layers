@@ -25,7 +25,7 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     m_current_item_label->set_padding(0, 7, 0, 0);
     m_current_item_label->set_name("current_item_label");
 
-    a_line_edit_text_color.entangle_with(m_current_item_label->a_text_color);
+    a_line_edit_text_color.entangle_with(*m_current_item_label->text_color());
 
     m_control_drop_down->hide();
     m_control_drop_down->set_icon(new Graphic(":/svgs/drop_down_icon.svg", QSize(21, 18)));
@@ -48,6 +48,28 @@ Combobox::Combobox(QWidget* parent) : Widget(parent)
     setFixedSize(250, 60);
 
     setup_layout();
+}
+
+Combobox::~Combobox()
+{
+    //for (QWidget* child_widget : m_drop_down->findChildren<QWidget*>(Qt::FindDirectChildrenOnly))
+    //{
+    //    delete child_widget;
+    //    child_widget = nullptr;
+    //}
+
+    //for (ComboboxItem* cb_item : m_combobox_items)
+    //{
+    //    //cb_item->deleteLater();
+
+    //    delete cb_item;
+    //    cb_item = nullptr;
+    //}
+
+    m_combobox_items.clear();
+
+    delete m_drop_down;
+    m_drop_down = nullptr;
 }
 
 void Combobox::add_item(const QString& item)
@@ -131,17 +153,17 @@ void Combobox::enable_alphabetization(bool cond)
 
 void Combobox::init_attributes()
 {
-    corner_radii.top_left.set_value(10.0);
-    corner_radii.top_right.set_value(10.0);
-    corner_radii.bottom_left.set_value(10.0);
-    corner_radii.bottom_right.set_value(10.0);
-    a_fill.set_value(QColor(Qt::lightGray));
+    m_corner_radii->top_left()->set_value(10.0);
+    m_corner_radii->top_right()->set_value(10.0);
+    m_corner_radii->bottom_left()->set_value(10.0);
+    m_corner_radii->bottom_right()->set_value(10.0);
+    m_fill->set_value(QColor(Qt::lightGray));
 
-    m_drop_down->corner_radii.top_left.set_value(10.0);
-    m_drop_down->corner_radii.top_right.set_value(10.0);
-    m_drop_down->corner_radii.bottom_left.set_value(10.0);
-    m_drop_down->corner_radii.bottom_right.set_value(10.0);
-    m_drop_down->a_fill.set_disabled();
+    m_drop_down->corner_radii()->top_left()->set_value(10.0);
+    m_drop_down->corner_radii()->top_right()->set_value(10.0);
+    m_drop_down->corner_radii()->bottom_left()->set_value(10.0);
+    m_drop_down->corner_radii()->bottom_right()->set_value(10.0);
+    m_drop_down->fill()->set_disabled();
 }
 
 void Combobox::set_current_item(const QString& item)

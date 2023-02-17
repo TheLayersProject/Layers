@@ -38,7 +38,9 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	{
 		bool has_char_other_than_space = false;
 
-		for (const QChar& character : m_theme_name_line_edit->text())
+		QString text = m_theme_name_line_edit->text()->as<QString>();
+
+		for (const QChar& character : text)
 		{
 			if (character != ' ') has_char_other_than_space = true;
 		}
@@ -49,14 +51,14 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 			return;
 		}
 
-		if (m_theme_name_line_edit->text() == "")
+		if (text == "")
 		{
 			m_create_button->set_disabled();
 			return;
 		}
 		
 		for (const QString& theme_name : m_start_theme_combobox->items())
-			if (m_theme_name_line_edit->text().toLower().simplified() == theme_name.toLower().simplified())
+			if (text.toLower().simplified() == theme_name.toLower().simplified())
 			{
 				m_create_button->set_disabled();
 				return;
@@ -81,7 +83,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 
 QString CreateNewThemeDialog::new_theme_name()
 {
-	return m_theme_name_line_edit->text().simplified();
+	return m_theme_name_line_edit->text()->as<QString>().simplified();
 }
 
 void CreateNewThemeDialog::add_theme_name_to_combobox(const QString& theme_name)
@@ -121,17 +123,17 @@ int CreateNewThemeDialog::exec()
 
 void CreateNewThemeDialog::init_attributes()
 {
-	m_start_theme_combobox->corner_radii.top_left.set_value(7.0);
-	m_start_theme_combobox->corner_radii.top_right.set_value(7.0);
-	m_start_theme_combobox->corner_radii.bottom_left.set_value(7.0);
-	m_start_theme_combobox->corner_radii.bottom_right.set_value(7.0);
+	m_start_theme_combobox->corner_radii()->top_left()->set_value(7.0);
+	m_start_theme_combobox->corner_radii()->top_right()->set_value(7.0);
+	m_start_theme_combobox->corner_radii()->bottom_left()->set_value(7.0);
+	m_start_theme_combobox->corner_radii()->bottom_right()->set_value(7.0);
 
-	m_theme_name_line_edit->border.thickness.set_value(3.0);
-	m_theme_name_line_edit->corner_radii.top_left.set_value(7.0);
-	m_theme_name_line_edit->corner_radii.top_right.set_value(7.0);
-	m_theme_name_line_edit->corner_radii.bottom_left.set_value(7.0);
-	m_theme_name_line_edit->corner_radii.bottom_right.set_value(7.0);
-	m_theme_name_line_edit->a_left_padding.set_value(10.0);
+	m_theme_name_line_edit->border()->thickness()->set_value(3.0);
+	m_theme_name_line_edit->corner_radii()->top_left()->set_value(7.0);
+	m_theme_name_line_edit->corner_radii()->top_right()->set_value(7.0);
+	m_theme_name_line_edit->corner_radii()->bottom_left()->set_value(7.0);
+	m_theme_name_line_edit->corner_radii()->bottom_right()->set_value(7.0);
+	m_theme_name_line_edit->left_padding()->set_value(10.0);
 }
 
 void CreateNewThemeDialog::setup_layout()

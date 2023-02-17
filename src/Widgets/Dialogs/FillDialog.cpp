@@ -23,7 +23,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	connect(m_fill_type_toggle, &ToggleSwitch::toggled_event, [this] {
 		if (m_fill_type_toggle->toggled())
 		{
-			m_color_control->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+			m_color_control->fill()->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 
 			m_gradient_label_opacity->setOpacity(1.0);
 			m_gradient_control->show();
@@ -33,7 +33,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 		}
 		else
 		{
-			m_color_control->a_fill.set_value(QVariant::fromValue(QColor(Qt::white)));
+			m_color_control->fill()->set_value(QVariant::fromValue(QColor(Qt::white)));
 
 			m_color_label_opacity->setOpacity(1.0);
 			m_color_control->show();
@@ -48,7 +48,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_color_label->set_font_size(14);
 	m_color_label->setFixedHeight(45);
 	m_color_label->set_resize_disabled();
-	m_color_label->a_padding_top.set_value(16.0);
+	m_color_label->padding_top()->set_value(16.0);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
 	m_color_label->set_name("color_label");
 	m_color_label->set_proper_name("Color Label");
@@ -58,7 +58,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_gradient_label->set_font_size(14);
 	m_gradient_label->setFixedHeight(45);
 	m_gradient_label->set_resize_disabled();
-	m_gradient_label->a_padding_top.set_value(13.0);
+	m_gradient_label->padding_top()->set_value(13.0);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
 	m_gradient_label->set_name("gradient_label");
 	m_gradient_label->set_proper_name("Gradient Label");
@@ -68,11 +68,11 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 
 void FillDialog::set_attribute(Attribute* attribute)
 {
-	m_gradient_control->a_fill.entangle_with(*attribute);
+	m_gradient_control->fill()->entangle_with(*attribute);
 
-	m_color_control->a_fill.entangle_with(*attribute);
+	m_color_control->fill()->entangle_with(*attribute);
 
-	if (QString(m_color_control->a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
 	{
 		m_fill_type_toggle->toggle(false);
 
@@ -82,7 +82,7 @@ void FillDialog::set_attribute(Attribute* attribute)
 		m_color_label_opacity->setOpacity(0.25);
 		m_color_control->hide();
 	}
-	else if (QString(m_color_control->a_fill.typeName()) == QString("QColor"))
+	else if (QString(m_color_control->fill()->typeName()) == QString("QColor"))
 	{
 		m_color_label_opacity->setOpacity(1.0);
 		m_color_control->show();
@@ -97,7 +97,7 @@ void FillDialog::set_current_editting_state(const QString& state)
 	m_color_control->set_current_editting_state(state);
 	m_gradient_control->set_current_editting_state(state);
 
-	if (QString(m_color_control->a_fill.typeName()) == QString("QList<std::pair<double,QColor>>") &&
+	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>") &&
 		!m_fill_type_toggle->toggled())
 	{
 		m_fill_type_toggle->toggle(false);
@@ -108,7 +108,7 @@ void FillDialog::set_current_editting_state(const QString& state)
 		m_color_label_opacity->setOpacity(0.25);
 		m_color_control->hide();
 	}
-	else if (QString(m_color_control->a_fill.typeName()) == QString("QColor") &&
+	else if (QString(m_color_control->fill()->typeName()) == QString("QColor") &&
 		m_fill_type_toggle->toggled())
 	{
 		m_fill_type_toggle->toggle(false);
@@ -136,16 +136,16 @@ bool FillDialog::eventFilter(QObject* object, QEvent* event)
 
 void FillDialog::init_attributes()
 {
-	corner_radii.top_left.set_value(4.0);
-	corner_radii.top_right.set_value(4.0);
-	corner_radii.bottom_left.set_value(4.0);
-	corner_radii.bottom_right.set_value(4.0);
+	m_corner_radii->top_left()->set_value(4.0);
+	m_corner_radii->top_right()->set_value(4.0);
+	m_corner_radii->bottom_left()->set_value(4.0);
+	m_corner_radii->bottom_right()->set_value(4.0);
 
-	m_color_control->margins.top.set_value(12.0);
-	m_color_control->margins.bottom.set_value(8.0);
+	m_color_control->margins()->top()->set_value(12.0);
+	m_color_control->margins()->bottom()->set_value(8.0);
 
-	m_gradient_control->margins.top.set_value(8.0);
-	m_gradient_control->margins.bottom.set_value(12.0);
+	m_gradient_control->margins()->top()->set_value(8.0);
+	m_gradient_control->margins()->bottom()->set_value(12.0);
 }
 
 void FillDialog::setup_layout()

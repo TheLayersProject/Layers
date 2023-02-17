@@ -27,7 +27,15 @@ Attribute::Attribute(const Attribute& a) : Entity(a.m_name, a.m_disabled)
 
 Attribute::~Attribute()
 {
-	disconnect(m_data_connection);
+	QObject::disconnect(m_data_connection);
+
+	QObject::disconnect(m_reentanglement_connection);
+
+	if (!m_is_entangled)
+	{
+		delete m_data;
+		m_data = nullptr;
+	}
 }
 
 bool Attribute::contains_state(const QString& state) const
@@ -46,7 +54,7 @@ void Attribute::copy(const Attribute& attr)
 
 void Attribute::establish_data_connection()
 {
-	disconnect(m_data_connection);
+	QObject::disconnect(m_data_connection);
 	m_data_connection = connect(
 		m_data, &Data::changed, [this] { emit value_changed(); }
 	);
@@ -55,8 +63,10 @@ void Attribute::establish_data_connection()
 void Attribute::entangle_with(Attribute& attribute)
 {
 	// TODO: Likely need to store this connection and disconnect in destructor
-	connect(&attribute, &Attribute::entangled, [this, &attribute] {
-		entangle_with(attribute);
+	QObject::disconnect(m_reentanglement_connection);
+	m_reentanglement_connection = 
+		connect(&attribute, &Attribute::entangled, [this, &attribute] {
+			entangle_with(attribute);
 		});
 
 	if (!m_is_entangled)
@@ -117,10 +127,12 @@ void Attribute::set_value(QVariant qvariant, const QString& state)
 	}
 }
 
-void Attribute::setup_widget_update_connection(QWidget* widget)
-{
-	connect(this, &Entity::value_changed, [widget] { widget->update(); });
-}
+//void Attribute::setup_widget_update_connection(QWidget* widget)
+//{
+//	m_update_widget_connections.append(
+//		connect(this, &Entity::value_changed, [widget] { widget->update(); })
+//	);
+//}
 
 QString Attribute::state() const
 {

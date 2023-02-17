@@ -1,5 +1,6 @@
 #include "../../include/TabBar.h"
 
+using Layers::Attribute;
 using Layers::TabBar;
 
 TabBar::TabBar(QWidget* parent) : QTabBar(parent)
@@ -45,17 +46,27 @@ void TabBar::update_theme_dependencies()
 	setStyleSheet(build_stylesheet());
 }
 
+Attribute* TabBar::selected_fill_color() const
+{
+	return m_selected_fill_color;
+}
+
+Attribute* TabBar::text_color() const
+{
+	return m_text_color;
+}
+
 QString TabBar::build_stylesheet()
 {
 	// "; border: 1px solid " + m_attribute_set.attribute_value("border_color")->as<QColor>().name() + 
 
 	return
-		"QTabBar { color: " + a_text_color.as<QColor>().name() + "; font: 12pt; }"
+		"QTabBar { color: " + m_text_color->as<QColor>().name() + "; font: 12pt; }"
 		//"QTabBar::tab { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; }" // padding: 7px; padding-top: 2px; padding-bottom: 2px; border-bottom-color: none }"
 		//"QTabBar::tab:!selected { margin-top: 2px; }"
 		//"QTabBar::tab:!selected { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		"QTabBar::tab:!selected { background:none; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		"QTabBar::tab:selected { background: " + a_selected_fill_color.as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
+		"QTabBar::tab:selected { background: " + m_selected_fill_color->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
 		//"QTabBar::tab:first:selected { margin-left: 0; }"
 		//"QTabBar::tab:last { margin-right: 0; }"
 		"QTabBar::tab:only-one { margin: 0; }"
@@ -66,10 +77,10 @@ QString TabBar::build_stylesheet()
 void TabBar::init_attributes()
 {
 	m_entities.insert({
-		{ "text_color", &a_text_color },
-		{ "selected_fill_color", &a_selected_fill_color }
+		{ "text_color", m_text_color },
+		{ "selected_fill_color", m_selected_fill_color }
 		});
 
-	connect(&a_selected_fill_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&a_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_selected_fill_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 }

@@ -73,7 +73,7 @@ namespace Layers
 
 			@param widget - The widget to establish the connection with
 		*/
-		virtual void setup_widget_update_connection(QWidget* widget) = 0;
+		//virtual void setup_widget_update_connection(QWidget* widget) = 0;
 
 	protected:
 		bool m_disabled{ false };

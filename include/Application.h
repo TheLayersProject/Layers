@@ -39,6 +39,8 @@ namespace Layers
 			Version* version = nullptr,
 			GitHubRepo* github_repo = nullptr);
 
+		~Application();
+
 		QString app_identifier();
 
 		/*!
@@ -58,6 +60,8 @@ namespace Layers
 			@param copy_theme_name - Name of the app theme to copy and use as the basis for the new theme
 		*/
 		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
+
+		CreateNewThemeDialog* create_new_theme_dialog() const;
 
 		ColorDialog* color_dialog() const;
 
@@ -93,7 +97,7 @@ namespace Layers
 			@param file to load theme from
 			@returns theme loaded from file
 		*/
-		Theme load_theme(const QString& file_name);
+		Theme* load_theme(const QString& file_name);
 
 		Window* main_window() const;
 
@@ -151,7 +155,7 @@ namespace Layers
 
 			@returns QMap reference to the app's themes
 		*/
-		QMap<QString, Theme>& themes();
+		QMap<QString, Theme*>& themes();
 
 		/*!
 			Returns true if an application update is available. 
@@ -222,7 +226,7 @@ namespace Layers
 
 		QSettings m_settings;
 
-		QMap<QString, Theme> m_themes;
+		QMap<QString, Theme*> m_themes;
 
 		QUuid m_uuid;
 

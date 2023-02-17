@@ -27,6 +27,21 @@ ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 	m_vertical_scrollbar->entangle_with(m_control_vertical_scrollbar);
 }
 
+//ScrollArea::~ScrollArea()
+//{
+//	//if (!m_horizontal_scrollbar->parentWidget())
+//	//{
+//	delete m_horizontal_scrollbar;
+//	m_horizontal_scrollbar = nullptr;
+//	//}
+//
+//	//if (!m_vertical_scrollbar->parentWidget())
+//	//{
+//	delete m_vertical_scrollbar;
+//	m_vertical_scrollbar = nullptr;
+//	//}
+//}
+
 ScrollBar* ScrollArea::horizontal_scrollbar() const
 {
 	return m_horizontal_scrollbar;

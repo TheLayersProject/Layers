@@ -4,18 +4,41 @@
 #include <QEvent>
 #include <QPainterPath>
 
+using Layers::Attribute;
+using Layers::BorderAttributes;
+using Layers::CornerRadiiAttributes;
+using Layers::MarginsAttributes;
 using Layers::ThemeableBox;
+
+ThemeableBox::~ThemeableBox()
+{
+	delete m_border;
+	delete m_corner_color;
+	delete m_corner_radii;
+	delete m_fill;
+	delete m_hover_fill;
+	delete m_margins;
+	delete m_outline_color;
+
+	m_border = nullptr;
+	m_corner_color = nullptr;
+	m_corner_radii = nullptr;
+	m_fill = nullptr;
+	m_hover_fill = nullptr;
+	m_margins = nullptr;
+	m_outline_color = nullptr;
+}
 
 void ThemeableBox::init_attributes()
 {
 	m_entities.insert({
-		{ "border", &border },
-		{ "corner_color", &a_corner_color },
-		{ "corner_radii", &corner_radii },
-		{ "fill", &a_fill },
-		{ "hover_fill", &a_hover_fill },
-		{ "margins", &margins },
-		{ "outline_color", &a_outline_color }
+		{ "border", m_border },
+		{ "corner_color", m_corner_color },
+		{ "corner_radii", m_corner_radii },
+		{ "fill", m_fill },
+		{ "hover_fill", m_hover_fill },
+		{ "margins", m_margins },
+		{ "outline_color", m_outline_color }
 	});
 }
 
@@ -26,10 +49,10 @@ void ThemeableBox::set_margin(double margin)
 
 void ThemeableBox::set_margin(double left, double top, double right, double bottom)
 {
-	margins.left.set_value(left);
-	margins.top.set_value(top);
-	margins.right.set_value(right);
-	margins.bottom.set_value(bottom);
+	m_margins->left()->set_value(left);
+	m_margins->top()->set_value(top);
+	m_margins->right()->set_value(right);
+	m_margins->bottom()->set_value(bottom);
 }
 
 //bool ThemeableBox::eventFilter(QObject* object, QEvent* event)
@@ -53,15 +76,15 @@ void ThemeableBox::paint(QWidget* widget)
 {
 	// CREATE VARIABLES:
 
-	bool fill_disabled = a_fill.disabled();
+	bool fill_disabled = m_fill->disabled();
 
-	int border_thickness = (!border.disabled()) ?
-		border.thickness.as<double>() : 0;
+	int border_thickness = (!m_border->disabled()) ?
+		m_border->thickness()->as<double>() : 0;
 
-	int margin_left = margins.left.as<double>();
-	int margin_top = margins.top.as<double>();
-	int margin_right = margins.right.as<double>();
-	int margin_bottom = margins.bottom.as<double>();
+	int margin_left = m_margins->left()->as<double>();
+	int margin_top = m_margins->top()->as<double>();
+	int margin_right = m_margins->right()->as<double>();
+	int margin_bottom = m_margins->bottom()->as<double>();
 
 	int widget_width = widget->width();
 	int widget_height = widget->height();
@@ -69,14 +92,14 @@ void ThemeableBox::paint(QWidget* widget)
 	int draw_width = widget_width - margin_left - margin_right;
 	int draw_height = widget_height - margin_top - margin_bottom;
 
-	int corner_radius_tl = (!corner_radii.disabled()) ?
-		corner_radii.top_left.as<double>() : 0;
-	int corner_radius_tr = (!corner_radii.disabled()) ?
-		corner_radii.top_right.as<double>() : 0;
-	int corner_radius_bl = (!corner_radii.disabled()) ?
-		corner_radii.bottom_left.as<double>() : 0;
-	int corner_radius_br = (!corner_radii.disabled()) ?
-		corner_radii.bottom_right.as<double>() : 0;
+	int corner_radius_tl = (!m_corner_radii->disabled()) ?
+		corner_radii()->top_left()->as<double>() : 0;
+	int corner_radius_tr = (!m_corner_radii->disabled()) ?
+		m_corner_radii->top_right()->as<double>() : 0;
+	int corner_radius_bl = (!m_corner_radii->disabled()) ?
+		m_corner_radii->bottom_left()->as<double>() : 0;
+	int corner_radius_br = (!m_corner_radii->disabled()) ?
+		m_corner_radii->bottom_right()->as<double>() : 0;
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -128,52 +151,87 @@ void ThemeableBox::paint(QWidget* widget)
 	painter.setRenderHint(QPainter::Antialiasing);
 
 	// - Draw Corner Color
-	if (!a_corner_color.disabled())
+	if (!m_corner_color->disabled())
 	{
-		painter.fillPath(corner_color_path, a_corner_color.as<QColor>());
+		painter.fillPath(corner_color_path, m_corner_color->as<QColor>());
 	}
 
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (QString(border.fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+		if (QString(m_border->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
 			QLinearGradient border_fill_gradient;
 
 			border_fill_gradient.setStart(0, 0);
 			border_fill_gradient.setFinalStop(widget_width, 0);
-			border_fill_gradient.setStops(border.fill.as<QGradientStops>());
+			border_fill_gradient.setStops(m_border->fill()->as<QGradientStops>());
 
 			painter.fillPath(border_path, border_fill_gradient);
 		}
-		else painter.fillPath(border_path, border.fill.as<QColor>());
+		else painter.fillPath(border_path, m_border->fill()->as<QColor>());
 	}
 
 	// - Draw Background
 	if (!fill_disabled)
 	{
-		if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+		if (QString(m_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
 			QLinearGradient fill_gradient;
 
 			fill_gradient.setStart(0, 0);
 			fill_gradient.setFinalStop(widget_width, 0);
-			fill_gradient.setStops(a_fill.as<QGradientStops>());
+			fill_gradient.setStops(m_fill->as<QGradientStops>());
 
 			painter.fillPath(background_path, fill_gradient);
 		}
 		else
 		{
-			if (m_hovering && !a_hover_fill.disabled())
-				painter.fillPath(background_path, a_hover_fill.as<QColor>());
+			if (m_hovering && !m_hover_fill->disabled())
+				painter.fillPath(background_path, m_hover_fill->as<QColor>());
 			else
-				painter.fillPath(background_path, a_fill.as<QColor>());
+				painter.fillPath(background_path, m_fill->as<QColor>());
 		}
 	}
 
 	// - Draw Outline Color
-	if (!a_outline_color.disabled())
+	if (!m_outline_color->disabled())
 	{
-		painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
+		painter.strokePath(outline_color_path, QPen(m_outline_color->as<QColor>()));
 	}
+}
+
+BorderAttributes* ThemeableBox::border() const
+{
+	return m_border;
+}
+
+CornerRadiiAttributes* ThemeableBox::corner_radii() const
+{
+	return m_corner_radii;
+}
+
+MarginsAttributes* ThemeableBox::margins() const
+{
+	return m_margins;
+}
+
+Attribute* ThemeableBox::corner_color() const
+{
+	return m_corner_color;
+}
+
+Attribute* ThemeableBox::fill() const
+{
+	return m_fill;
+}
+
+Attribute* ThemeableBox::hover_fill() const
+{
+	return m_hover_fill;
+}
+
+Attribute* ThemeableBox::outline_color() const
+{
+	return m_outline_color;
 }

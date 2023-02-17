@@ -2,9 +2,9 @@
 
 using Layers::Theme;
 
-Theme Layers::load_theme_1(const QString& file_name, const QString& app_identifier)
+Theme* Layers::load_theme_1(const QString& file_name, const QString& app_identifier)
 {
-	Theme loaded_theme;
+	Theme* loaded_theme = nullptr;
 
 	if (file_name.endsWith(".json"))
 	{
@@ -22,7 +22,7 @@ Theme Layers::load_theme_1(const QString& file_name, const QString& app_identifi
 			//QDataStream::Status status = in.status();
 
 			// Load JSON
-			loaded_theme = Theme(QJsonDocument::fromJson(file.readAll()));
+			loaded_theme = new Theme(QJsonDocument::fromJson(file.readAll()));
 
 			file.close();
 		}
@@ -43,7 +43,7 @@ Theme Layers::load_theme_1(const QString& file_name, const QString& app_identifi
 				qDebug() << "Could not read theme file";
 
 			// Load JSON
-			loaded_theme = Theme(QJsonDocument::fromJson(layers_theme_file.readAll()), new QUuid(uuid_str));
+			loaded_theme = new Theme(QJsonDocument::fromJson(layers_theme_file.readAll()), new QUuid(uuid_str));
 
 			layers_theme_file.close();
 		}
@@ -56,7 +56,10 @@ Theme Layers::load_theme_1(const QString& file_name, const QString& app_identifi
 				qDebug() << "Could not read theme file";
 
 			// Load JSON
-			loaded_theme.consume(Theme(QJsonDocument::fromJson(app_theme_file.readAll())));
+			if (loaded_theme)
+				loaded_theme->consume(Theme(QJsonDocument::fromJson(app_theme_file.readAll())));
+			else
+				loaded_theme = new Theme(QJsonDocument::fromJson(app_theme_file.readAll()), new QUuid(uuid_str));
 
 			app_theme_file.close();
 		}

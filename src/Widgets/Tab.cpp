@@ -90,17 +90,17 @@ bool Tab::eventFilter(QObject* object, QEvent* event)
 
 void Tab::init_attributes()
 {
-	//a_fill.set_value(QColor("#e6e6e6"));
+	//fill()->set_value(QColor("#e6e6e6"));
 
-	a_fill.init_variant_map({
+	fill()->init_variant_map({
 		{ "Unselected", QColor("#36393f")},
 		{ "Selected", QColor("#25272b") }
 		});
 
-	corner_radii.top_left.set_value(5.0);
-	corner_radii.top_right.set_value(5.0);
+	corner_radii()->top_left()->set_value(5.0);
+	corner_radii()->top_right()->set_value(5.0);
 
-	m_text_label->a_text_color.set_value(QColor("#e3e3e3"));
+	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 
 	if (m_tab_icon->svg())
 	{

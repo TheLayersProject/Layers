@@ -50,18 +50,18 @@ void GradientDialog::add_gradient_stop(double stop_val, QColor color)
 {
     ColorControl* color_control = new ColorControl(this);
     color_control->show();
-    color_control->a_fill.set_value(color);
+    color_control->fill()->set_value(color);
 
     color_control->disable_clicking();
 
     connect(color_control, &ColorControl::color_changed, [this, color_control] {
-        if (color_control->a_fill.as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+        if (color_control->fill()->as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
         {
             m_gradient_stops.replace(
                 color_controls.indexOf(color_control),
-                QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->a_fill.as<QColor>()));
+                QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
 
-            m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops));
+            m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
         }
         });
 
@@ -99,20 +99,25 @@ void GradientDialog::init_attributes()
 {
     for (Entity* entity :
         QList<Entity*>({
-            &border, &border.thickness, &margins,
-            &margins.left, &margins.top, &margins.right, &margins.bottom }))
+            m_border,
+            m_border->thickness(),
+            m_margins,
+            m_margins->left(),
+            m_margins->top(),
+            m_margins->right(),
+            m_margins->bottom()}))
     {
         connect(entity, &Entity::value_changed,
             this, &GradientDialog::update_color_control_positions);
     }
 
-    m_gradient_widget->a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
-    m_gradient_widget->border.fill.set_value(QColor(Qt::black));
-    m_gradient_widget->border.thickness.set_value(2.0);
-    m_gradient_widget->corner_radii.top_left.set_value(8.0);
-    m_gradient_widget->corner_radii.top_right.set_value(8.0);
-    m_gradient_widget->corner_radii.bottom_left.set_value(8.0);
-    m_gradient_widget->corner_radii.bottom_right.set_value(8.0);
+    m_gradient_widget->fill()->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+    m_gradient_widget->border()->fill()->set_value(QColor(Qt::black));
+    m_gradient_widget->border()->thickness()->set_value(2.0);
+    m_gradient_widget->corner_radii()->top_left()->set_value(8.0);
+    m_gradient_widget->corner_radii()->top_right()->set_value(8.0);
+    m_gradient_widget->corner_radii()->bottom_left()->set_value(8.0);
+    m_gradient_widget->corner_radii()->bottom_right()->set_value(8.0);
 }
 
 void GradientDialog::init_color_controls()
@@ -122,17 +127,17 @@ void GradientDialog::init_color_controls()
         QGradientStop gradient_stop = m_gradient_stops.at(i);
 
         ColorControl* color_control = new ColorControl(this);
-        color_control->a_fill.set_value(gradient_stop.second);
+        color_control->fill()->set_value(gradient_stop.second);
         if (i > 0 && i < m_gradient_stops.count() - 1) color_control->disable_clicking();
 
         connect(color_control, &ColorControl::color_changed, [this, color_control] {
-            if (color_control->a_fill.as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+            if (color_control->fill()->as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
             {
                 m_gradient_stops.replace(
                     color_controls.indexOf(color_control),
-                    QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->a_fill.as<QColor>()));
+                    QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
 
-                m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops));
+                m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
             }
             });
 
@@ -149,7 +154,7 @@ void GradientDialog::init_gradient_widget()
 {
     m_gradient_widget->setFixedSize(448, 176);
 
-    m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops));
+    m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
 }
 
 void GradientDialog::update_gradient()
@@ -161,10 +166,10 @@ void GradientDialog::update_gradient()
     for (ColorControl* color_control : color_controls)
     {
         if (m_selected_color_control && m_selected_color_control->x() == color_control->x() && color_control != m_selected_color_control);
-        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->a_fill.as<QColor>() });
+        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->fill()->as<QColor>() });
     }
 
-    m_gradient_widget->a_fill.set_value(QVariant::fromValue(m_gradient_stops)); // , true);
+    m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops)); // , true);
 }
 
 void GradientDialog::click_control()

@@ -23,6 +23,7 @@ namespace Layers
 
 	public:
 		AttributeWidget(Entity* entity = nullptr, QWidget* parent = nullptr);
+		~AttributeWidget();
 
 		ToggleSwitch* disable_toggle() const;
 
@@ -93,7 +94,7 @@ namespace Layers
 
 		bool m_collapsed{ true };
 
-		Label* m_label{ nullptr };
+		Label* m_label{ new Label };
 
 		QList<AttributeWidget*> m_child_attribute_widgets{ QList<AttributeWidget*>() };
 
@@ -139,20 +140,13 @@ namespace Layers
 
 		ColorControl* color_control() const;
 
-		void set_centered(bool centered = true);
-
 	public slots:
 		void set_current_editting_state(const QString& state);
 
 	private:
-		bool m_centered{ false };
-
 		ColorControl* m_color_control{ new ColorControl };
 
-		Label* m_attribute_label;
-
-		Widget* m_left_stretch{ new Widget };
-		Widget* m_right_stretch{ new Widget };
+		Label* m_attribute_label{ new Label };
 	};
 
 	class GradientAW : public AttributeWidget
@@ -162,17 +156,10 @@ namespace Layers
 	public:
 		GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent = nullptr);
 
-		void set_centered(bool centered = true);
-
 	private:
-		bool m_centered{ false };
-
 		GradientControl* m_gradient_control{ new GradientControl };
 
 		Label* m_attribute_label;
-
-		Widget* m_left_stretch{ new Widget };
-		Widget* m_right_stretch{ new Widget };
 	};
 
 	class FillAW : public AttributeWidget
@@ -184,20 +171,13 @@ namespace Layers
 
 		FillControl* fill_control() const;
 
-		//void set_centered(bool centered = true);
-
 	public slots:
 		virtual void set_current_editting_state(const QString& state) override;
 
 	private:
-		bool m_centered{ false };
-
 		FillControl* m_fill_control{ new FillControl };
 
-		Label* m_attribute_label;
-
-		Widget* m_left_stretch{ new Widget };
-		Widget* m_right_stretch{ new Widget };
+		Label* m_attribute_label{ new Label };
 	};
 
 	class NumberAW : public AttributeWidget
@@ -207,26 +187,19 @@ namespace Layers
 	public:
 		NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* parent = nullptr);
 
-		void set_centered(bool centered = true);
-
 		void set_unit_label_text(const QString& unit_string);
 
 	private:
 		void setup_layout();
 
-		bool m_centered{ false };
-
-		Label* m_attribute_label{ nullptr };
-		Label* m_unit_label{ new Label };
+		Label* m_attribute_label{ new Label };
+		//Label* m_unit_label{ new Label };
 
 		LineEditor* m_line_editor{ new LineEditor };
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		MiniSlider* m_slider{ nullptr };
-
-		Widget* m_left_stretch{ new Widget };
-		Widget* m_right_stretch{ new Widget };
+		MiniSlider* m_slider{ new MiniSlider };
 	};
 }
 

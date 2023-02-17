@@ -16,6 +16,13 @@ namespace Layers
 	public:
 		Label(QWidget* parent = nullptr);
 		Label(const QString& text, QWidget* parent = 0);
+		~Label();
+
+		Attribute* fill() const;
+		Attribute* outline_color() const;
+		Attribute* padding_top() const;
+		Attribute* text_color() const;
+		Attribute* text_hover_color() const;
 
 		void resize();
 
@@ -34,12 +41,6 @@ namespace Layers
 		void set_resize_disabled(bool disable = true);
 
 		int width_unwrapped();
-
-		Attribute a_fill{ Attribute("fill", QColor(Qt::white), true) };
-		Attribute a_outline_color{ Attribute("outline_color", QColor(Qt::gray), true) };
-		Attribute a_padding_top{ Attribute("top_padding", QVariant::fromValue(0.0)) };
-		Attribute a_text_color{ Attribute("text_color", QColor(Qt::black)) };
-		Attribute a_text_hover_color{ Attribute("text_hover_color", QColor(Qt::black), true) };
 
 	public slots:
 		void setText(const QString& text);
@@ -62,6 +63,13 @@ namespace Layers
 		//int m_padding_top{ 0 };
 		int m_padding_right{ 0 };
 		int m_padding_bottom{ 0 };
+
+	private:
+		Attribute* m_fill{ new Attribute("fill", QColor(Qt::white), true) };
+		Attribute* m_outline_color{ new Attribute("outline_color", QColor(Qt::gray), true) };
+		Attribute* m_padding_top{ new Attribute("top_padding", QVariant::fromValue(0.0)) };
+		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::black)) };
+		Attribute* m_text_hover_color{ new Attribute("text_hover_color", QColor(Qt::black), true) };
 	};
 }
 

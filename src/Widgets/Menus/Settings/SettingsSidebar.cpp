@@ -10,5 +10,5 @@ SettingsSidebar::SettingsSidebar(QWidget* parent) : Widget(parent)
 	set_icon(new Graphic(":/svgs/sidebar_icon.svg", QSize(20, 20)));
 	set_name("sidebar");
 	set_proper_name("Sidebar");
-	a_fill.set_value(QColor(Qt::lightGray));
+	m_fill->set_value(QColor(Qt::lightGray));
 }

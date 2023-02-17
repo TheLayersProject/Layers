@@ -7,7 +7,7 @@ using Layers::SVG;
 Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent) :
 	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size) }, Widget(parent)
 {
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 	init_layout();
 	init_max_size();
 }
@@ -31,7 +31,7 @@ Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
 		m_svg_widget->setFixedSize(size);
 	}
 
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 	init_layout();
 	init_max_size();
 }
@@ -56,7 +56,7 @@ Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
 		m_svg_widget->set_proper_name("SVG");
 	}
 
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 	init_layout();
 	init_max_size();
 }
@@ -68,7 +68,7 @@ Graphic::Graphic(const QImage& image, QWidget* parent) :
 	m_bitmap_label->setPixmap(QPixmap::fromImage(image));
 	m_bitmap_label->setFixedSize(image.size());
 
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 	init_layout();
 	init_max_size();
 }
@@ -95,7 +95,7 @@ Graphic::Graphic(const Graphic& gw) : Widget()
 		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
 	}
 
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 	init_layout();
 	init_max_size();
 }

@@ -4,12 +4,14 @@
 using Layers::AWGroup;
 
 AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
-	m_label{ new Label(attr_group->capitalized_name()) }, AttributeWidget(attr_group, parent)
+	AttributeWidget(attr_group, parent)
 {
 	init_attributes();
 
 	set_name("aw_group");
 
+	if (attr_group)
+		m_label->setText(attr_group->capitalized_name());
 	m_label->set_name("label");
 	m_label->set_proper_name("Label");
 	m_label->set_font_size(14);
@@ -54,10 +56,13 @@ AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
 		}
 		});
 
-	if (!m_entity->disabled())
-		m_disabled_toggle->toggle(false);
-	else
-		m_collapse_button->hide();
+	if (attr_group)
+	{
+		if (!attr_group->disabled())
+			m_disabled_toggle->toggle(false);
+		else
+			m_collapse_button->hide();
+	}
 
 	setup_layout();
 }

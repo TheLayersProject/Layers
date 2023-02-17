@@ -141,7 +141,7 @@ namespace Layers
 		*/
 		void set_value(QVariant qvariant, const QString& state = "");
 
-		virtual void setup_widget_update_connection(QWidget* widget) override;
+		//virtual void setup_widget_update_connection(QWidget* widget) override;
 
 		/*!
 			Returns the active state of the Attribute.
@@ -179,6 +179,8 @@ namespace Layers
 		Data* m_data{ nullptr };
 
 		QMetaObject::Connection m_data_connection;
+
+		QMetaObject::Connection m_reentanglement_connection;
 
 		bool m_is_entangled{ false };
 

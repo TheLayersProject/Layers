@@ -29,11 +29,11 @@ void ColorControl::click()
 	//color_dialog->entangle_with(
 	//	layersApp->main_window()->control_color_dialog());
 
-	color_dialog->color.set_value(a_fill.as<QColor>());
+	color_dialog->color.set_value(fill()->as<QColor>());
 
 	if (color_dialog->exec())
 	{
-		a_fill.set_value(color_dialog->color.as<QColor>());
+		fill()->set_value(color_dialog->color.as<QColor>());
 
 		emit color_changed();
 	}
@@ -53,22 +53,22 @@ void ColorControl::init_attributes()
 	// Remove control attribute
 	m_entities.remove("fill");
 
-	border.fill.set_value(QColor("#D6D6D6"));
-	border.thickness.set_value(2.0);
-	corner_radii.top_left.set_value(5.0);
-	corner_radii.top_right.set_value(5.0);
-	corner_radii.bottom_left.set_value(5.0);
-	corner_radii.bottom_right.set_value(5.0);
-	margins.left.set_value(10.0);
-	margins.top.set_value(10.0);
-	margins.right.set_value(10.0);
-	margins.bottom.set_value(10.0);
-	a_outline_color.set_disabled(false);
+	m_border->fill()->set_value(QColor("#D6D6D6"));
+	m_border->thickness()->set_value(2.0);
+	m_corner_radii->top_left()->set_value(5.0);
+	m_corner_radii->top_right()->set_value(5.0);
+	m_corner_radii->bottom_left()->set_value(5.0);
+	m_corner_radii->bottom_right()->set_value(5.0);
+	m_margins->left()->set_value(10.0);
+	m_margins->top()->set_value(10.0);
+	m_margins->right()->set_value(10.0);
+	m_margins->bottom()->set_value(10.0);
+	m_outline_color->set_disabled(false);
 }
 
 void ColorControl::set_current_editting_state(const QString& state)
 {
-	a_fill.set_state(state);
+	m_fill->set_state(state);
 }
 
 bool ColorControl::eventFilter(QObject* object, QEvent* event)

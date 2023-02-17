@@ -20,8 +20,8 @@ namespace Layers
 
 		void update_theme_dependencies();
 
-		Attribute a_text_color{ Attribute("text_color", QColor(Qt::gray)) };
-		Attribute a_selected_text_color{ Attribute("selected_text_color", QColor(Qt::lightGray)) };
+		Attribute* selected_text_color() const;
+		Attribute* text_color() const;
 
 	protected:
 		QString build_stylesheet();
@@ -32,6 +32,9 @@ namespace Layers
 
 	private:
 		QList<QMenu*> m_menus{ QList<QMenu*>() };
+
+		Attribute* m_selected_text_color{ new Attribute("selected_text_color", QColor(Qt::lightGray)) };
+		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::gray)) };
 	};
 }
 

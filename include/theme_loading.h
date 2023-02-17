@@ -9,7 +9,7 @@
 
 namespace Layers
 {
-	Theme load_theme_1(const QString& file_name, const QString& app_identifier);
+	Theme* load_theme_1(const QString& file_name, const QString& app_identifier);
 }
 
 #endif // THEME_LOADING_H

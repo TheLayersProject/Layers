@@ -131,8 +131,8 @@ namespace Layers
 
 		widget_a->entangle_with(widget_b);
 
-		widget_a->a_fill.set_value(QColor(Qt::black));		// widget_b->a_fill is also black now
-		widget_b->corner_radii.top_left.set_value(10.0);	// widget_a->corner_radii.left is also 10.0 now
+		widget_a->fill()->set_value(QColor(Qt::black));		// widget_b->a_fill is also black now
+		widget_b->corner_radii()->top_left()->set_value(10.0);	// widget_a->corner_radii()->left is also 10.0 now
 		~~~~~~~~~~~~~
 
 		## Constrain Theme Application to One Entangled Themeable
@@ -231,6 +231,8 @@ namespace Layers
 			@returns Reference to entity pointer map
 		*/
 		QMap<QString, Entity*>& entities();
+
+		void establish_update_connection(Entity* entity);
 
 		/*!
 			Returns pointer to the themeable's icon.
@@ -381,6 +383,8 @@ namespace Layers
 		QStringList m_tag_prefixes;
 
 		bool m_tag_prefixes_assigned{ false };
+
+		QList<QMetaObject::Connection> m_update_widget_connections{ QList<QMetaObject::Connection>() };
 	};
 
 	template<typename T>

@@ -26,16 +26,20 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	m_theme_combobox->set_proper_name("Theme Combobox");
 	m_theme_combobox->set_font_size(15);
 
-	connect(m_theme_combobox, SIGNAL(item_replaced(const QString&, const QString&)),
-		layersApp, SLOT(rename_theme(const QString&, const QString&)));
+	m_connections.append(
+		connect(m_theme_combobox, SIGNAL(item_replaced(const QString&, const QString&)),
+			layersApp, SLOT(rename_theme(const QString&, const QString&))
+	));
 
-	connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
-		layersApp->apply_theme(layersApp->themes()[m_theme_combobox->current_item()]);
-	});
+	m_connections.append(
+		connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
+			layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->current_item()]);
+	}));
 
-	connect(layersApp, &Application::current_theme_changed, [this] {
-		handle_custom_theme_buttons_visibility();
-	});
+	m_connections.append(
+		connect(layersApp, &Application::current_theme_changed, [this] {
+			handle_custom_theme_buttons_visibility();
+	}));
 
 	if (!layersApp->current_theme()->editable())
 		show_custom_theme_buttons(false);
@@ -71,6 +75,12 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	setup_layout();
 }
 
+ThemesSettingsPanel::~ThemesSettingsPanel()
+{
+	for (QMetaObject::Connection connection : m_connections)
+		QObject::disconnect(connection);
+}
+
 void ThemesSettingsPanel::handle_custom_theme_buttons_visibility()
 {
 	if (layersApp->current_theme()->editable())
@@ -81,11 +91,11 @@ void ThemesSettingsPanel::handle_custom_theme_buttons_visibility()
 
 void ThemesSettingsPanel::init_attributes()
 {
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 
-	m_spacer_1->a_fill.set_disabled();
+	m_spacer_1->fill()->set_disabled();
 
-	m_spacer_2->a_fill.set_disabled();
+	m_spacer_2->fill()->set_disabled();
 
 	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }

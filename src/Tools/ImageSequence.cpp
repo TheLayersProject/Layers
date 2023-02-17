@@ -7,7 +7,8 @@ using Layers::ImageSequence;
 
 ImageSequence::ImageSequence(QDir dir)
 {
-	QStringList image_filenames = dir.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files);
+	QStringList image_filenames =
+		dir.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files);
 
 	for (QString filename : image_filenames)
 	{

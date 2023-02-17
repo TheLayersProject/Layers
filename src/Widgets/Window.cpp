@@ -34,36 +34,36 @@ Window::Window(bool preview, QWidget* parent) :
 
 	set_name("window");
 	set_proper_name("Window");
-	border.thickness.set_value(15.0);
-	border.fill.set_value(
+	border()->thickness()->set_value(15.0);
+	border()->fill()->set_value(
 		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
-	corner_radii.top_left.set_value(10.0);
-	corner_radii.top_right.set_value(10.0);
-	corner_radii.bottom_left.set_value(10.0);
-	corner_radii.bottom_right.set_value(10.0);
+	corner_radii()->top_left()->set_value(10.0);
+	corner_radii()->top_right()->set_value(10.0);
+	corner_radii()->bottom_left()->set_value(10.0);
+	corner_radii()->bottom_right()->set_value(10.0);
 
-	connect(&border.thickness, &Attribute::value_changed, [this] {
+	connect(m_border->thickness(), &Attribute::value_changed, [this] {
 		update_theme_dependencies();
 		});
 
-	for (Attribute* margin : margins)
+	for (Attribute* margin : *m_margins)
 		connect(margin, &Attribute::value_changed, [this] {
 			update_theme_dependencies();
 			});
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-	setMinimumSize(200, m_titlebar->height() + border.thickness.as<double>() * 2);
+	setMinimumSize(200, m_titlebar->height() + border()->thickness()->as<double>() * 2);
 	resize(1200, 800);
 
-	m_settings_menu->a_fill.set_value(QColor("#ff5555"));
-	m_settings_menu->a_fill.set_disabled();
+	m_settings_menu->fill()->set_value(QColor("#ff5555"));
+	m_settings_menu->fill()->set_disabled();
 	m_settings_menu->hide();
 
-	m_customize_menu->a_fill.set_disabled();
+	m_customize_menu->fill()->set_disabled();
 	m_customize_menu->hide();
 
-	m_separator->a_fill.set_value(QColor("#25272b"));
+	m_separator->fill()->set_value(QColor("#25272b"));
 	m_separator->setFixedHeight(3);
 	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
 	m_separator->set_name("separator");
@@ -84,6 +84,12 @@ Window::Window(bool preview, QWidget* parent) :
 		layersApp->current_theme()->name());
 }
 
+//Window::~Window()
+//{
+//	delete layersApp->create_new_theme_dialog();
+//	layersApp->create_new_theme_dialog() = nullptr;
+//}
+
 Menu* Window::app_menu() const
 {
 	return m_app_menu;
@@ -93,7 +99,7 @@ void Window::link_theme_name(const QString& name)
 {
 	m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
 
-	m_create_new_theme_dialog->add_theme_name_to_combobox(name);
+	layersApp->create_new_theme_dialog()->add_theme_name_to_combobox(name);
 }
 
 void Window::set_main_menu(Menu* main_menu)
@@ -159,12 +165,12 @@ void Window::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int border_thickness = border.thickness.as<double>();
+		int border_thickness = border()->thickness()->as<double>();
 
-		int left_c_margin = border_thickness + margins.left.as<double>();
-		int top_c_margin = border_thickness + margins.top.as<double>();
-		int right_c_margin = border_thickness + margins.right.as<double>();
-		int bottom_c_margin = border_thickness + margins.bottom.as<double>();
+		int left_c_margin = border_thickness + m_margins->left()->as<double>();
+		int top_c_margin = border_thickness + m_margins->top()->as<double>();
+		int right_c_margin = border_thickness + m_margins->right()->as<double>();
+		int bottom_c_margin = border_thickness + m_margins->bottom()->as<double>();
 
 		m_main_layout->setContentsMargins(
 			left_c_margin, top_c_margin, right_c_margin, bottom_c_margin);
@@ -246,21 +252,21 @@ void Window::minimize_clicked()
 
 void Window::new_theme_clicked()
 {
-	m_create_new_theme_dialog->set_current_start_theme_name(layersApp->current_theme()->name());
+	layersApp->create_new_theme_dialog()->set_current_start_theme_name(layersApp->current_theme()->name());
 
-	static_cast<Window*>(QApplication::activeWindow())->center_dialog(m_create_new_theme_dialog);
+	static_cast<Window*>(QApplication::activeWindow())->center_dialog(layersApp->create_new_theme_dialog());
 
-	m_create_new_theme_dialog->show();
+	layersApp->create_new_theme_dialog()->show();
 
-	if (m_create_new_theme_dialog->exec() && !m_functionality_disabled)
+	if (layersApp->create_new_theme_dialog()->exec() && !m_functionality_disabled)
 	{
-		layersApp->create_theme(m_create_new_theme_dialog->new_theme_name(), m_create_new_theme_dialog->copy_theme_name());
+		layersApp->create_theme(layersApp->create_new_theme_dialog()->new_theme_name(), layersApp->create_new_theme_dialog()->copy_theme_name());
 
-		link_theme_name(m_create_new_theme_dialog->new_theme_name());
+		link_theme_name(layersApp->create_new_theme_dialog()->new_theme_name());
 
-		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(m_create_new_theme_dialog->new_theme_name());
+		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(layersApp->create_new_theme_dialog()->new_theme_name());
 
-		m_create_new_theme_dialog->clear();
+		layersApp->create_new_theme_dialog()->clear();
 	}
 }
 
@@ -281,7 +287,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
 		}
 
 		*result = 0;
-		const LONG borderWidth = border.thickness.as<double>() * devicePixelRatio();;
+		const LONG borderWidth = border()->thickness()->as<double>() * devicePixelRatio();;
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -363,27 +369,27 @@ void Window::paintEvent(QPaintEvent* event)
 	{
 		// CREATE VARIABLES:
 
-		bool fill_disabled = a_fill.disabled();
+		bool fill_disabled = m_fill->disabled();
 
-		int border_thickness = (!border.disabled()) ?
-			border.thickness.as<double>() : 0;
+		int border_thickness = (!border()->disabled()) ?
+			border()->thickness()->as<double>() : 0;
 
-		int margin_left = margins.left.as<double>();
-		int margin_top = margins.top.as<double>();
-		int margin_right = margins.right.as<double>();
-		int margin_bottom = margins.bottom.as<double>();
+		int margin_left = m_margins->left()->as<double>();
+		int margin_top = m_margins->top()->as<double>();
+		int margin_right = m_margins->right()->as<double>();
+		int margin_bottom = m_margins->bottom()->as<double>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
 
-		int corner_radius_tl = (!corner_radii.disabled()) ?
-			corner_radii.top_left.as<double>() : 0;
-		int corner_radius_tr = (!corner_radii.disabled()) ?
-			corner_radii.top_right.as<double>() : 0;
-		int corner_radius_bl = (!corner_radii.disabled()) ?
-			corner_radii.bottom_left.as<double>() : 0;
-		int corner_radius_br = (!corner_radii.disabled()) ?
-			corner_radii.bottom_right.as<double>() : 0;
+		int corner_radius_tl = (!m_corner_radii->disabled()) ?
+			m_corner_radii->top_left()->as<double>() : 0;
+		int corner_radius_tr = (!m_corner_radii->disabled()) ?
+			m_corner_radii->top_right()->as<double>() : 0;
+		int corner_radius_bl = (!m_corner_radii->disabled()) ?
+			m_corner_radii->bottom_left()->as<double>() : 0;
+		int corner_radius_br = (!m_corner_radii->disabled()) ?
+			m_corner_radii->bottom_right()->as<double>() : 0;
 
 		int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 		int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;
@@ -435,65 +441,65 @@ void Window::paintEvent(QPaintEvent* event)
 		painter.setRenderHint(QPainter::Antialiasing);
 
 		// - Draw Corner Color
-		if (!a_corner_color.disabled())
+		if (!m_corner_color->disabled())
 		{
-			painter.fillPath(corner_color_path, a_corner_color.as<QColor>());
+			painter.fillPath(corner_color_path, m_corner_color->as<QColor>());
 		}
 
 		// - Draw Border
 		if (border_thickness)
 		{
-			if (QString(border.fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+			if (QString(m_border->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient gradient;
 
 				gradient.setStart(0, 0);
 				gradient.setFinalStop(width(), 0);
-				gradient.setStops(border.fill.as<QGradientStops>());
+				gradient.setStops(m_border->fill()->as<QGradientStops>());
 
 				painter.fillPath(border_path, gradient);
 			}
-			else painter.fillPath(border_path, border.fill.as<QColor>());
+			else painter.fillPath(border_path, m_border->fill()->as<QColor>());
 		}
 
 		// - Draw Background
 		if (!fill_disabled)
 		{
-			if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+			if (QString(m_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient bg_gradient;
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(a_fill.as<QGradientStops>());
+				bg_gradient.setStops(m_fill->as<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 			else
 			{
-				if (m_hovering && !a_hover_fill.disabled())
-					painter.fillPath(background_path, a_hover_fill.as<QColor>());
+				if (m_hovering && !m_hover_fill->disabled())
+					painter.fillPath(background_path, m_hover_fill->as<QColor>());
 				else
-					painter.fillPath(background_path, a_fill.as<QColor>());
+					painter.fillPath(background_path, m_fill->as<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
-		if (!a_outline_color.disabled())
+		if (!outline_color()->disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
+			painter.strokePath(outline_color_path, QPen(outline_color()->as<QColor>()));
 		}
 	}
 	else
 	{
 		// CREATE VARIABLES:
 
-		bool fill_disabled = a_fill.disabled();
+		bool fill_disabled = m_fill->disabled();
 
-		int margin_left = margins.left.as<double>();
-		int margin_top = margins.top.as<double>();
-		int margin_right = margins.right.as<double>();
-		int margin_bottom = margins.bottom.as<double>();
+		int margin_left = m_margins->left()->as<double>();
+		int margin_top = m_margins->top()->as<double>();
+		int margin_right = m_margins->right()->as<double>();
+		int margin_bottom = m_margins->bottom()->as<double>();
 
 		int draw_width = width() - margin_left - margin_right;
 		int draw_height = height() - margin_top - margin_bottom;
@@ -520,29 +526,29 @@ void Window::paintEvent(QPaintEvent* event)
 		// - Draw Background
 		if (!fill_disabled)
 		{
-			if (QString(a_fill.typeName()) == QString("QList<std::pair<double,QColor>>"))
+			if (QString(m_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
 			{
 				QLinearGradient bg_gradient;
 
 				bg_gradient.setStart(0, 0);
 				bg_gradient.setFinalStop(width(), 0);
-				bg_gradient.setStops(a_fill.as<QGradientStops>());
+				bg_gradient.setStops(m_fill->as<QGradientStops>());
 
 				painter.fillPath(background_path, bg_gradient);
 			}
 			else
 			{
-				if (m_hovering && !a_hover_fill.disabled())
-					painter.fillPath(background_path, a_hover_fill.as<QColor>());
+				if (m_hovering && !m_hover_fill->disabled())
+					painter.fillPath(background_path, m_hover_fill->as<QColor>());
 				else
-					painter.fillPath(background_path, a_fill.as<QColor>());
+					painter.fillPath(background_path, m_fill->as<QColor>());
 			}
 		}
 
 		// - Draw Outline Color
-		if (!a_outline_color.disabled())
+		if (!outline_color()->disabled())
 		{
-			painter.strokePath(outline_color_path, QPen(a_outline_color.as<QColor>()));
+			painter.strokePath(outline_color_path, QPen(outline_color()->as<QColor>()));
 		}
 	}
 }
@@ -554,7 +560,7 @@ void Window::setup_layout()
 
 	//m_app_menu->setLayout(m_app_menu_layout);
 
-	int margin = border.thickness.as<double>();
+	int margin = border()->thickness()->as<double>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);

@@ -2,6 +2,7 @@
 
 #include <QStyleOptionMenuItem>
 
+using Layers::Attribute;
 using Layers::MenuBar;
 
 MenuBar::MenuBar(QWidget* parent) : QMenuBar(parent)
@@ -50,12 +51,12 @@ QMenu* MenuBar::addMenu(const QString& title)
 void MenuBar::init_attributes()
 {
     m_entities.insert({
-        { "text_color", &a_text_color },
-        { "selected_text_color", &a_selected_text_color }
+        { "text_color", m_text_color },
+        { "selected_text_color", m_selected_text_color }
         });
 
-    connect(&a_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
-    connect(&a_selected_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+    connect(m_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+    connect(m_selected_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 }
 
 void MenuBar::update_theme_dependencies()
@@ -65,24 +66,34 @@ void MenuBar::update_theme_dependencies()
     //update();
 }
 
+Attribute* MenuBar::selected_text_color() const
+{
+    return m_selected_text_color;
+}
+
+Attribute* MenuBar::text_color() const
+{
+    return m_text_color;
+}
+
 QString MenuBar::build_stylesheet()
 {
 	return
 		"QMenuBar {"
 		"background: transparent;"
-		"color: " + a_text_color.as<QColor>().name() + ";"
+		"color: " + m_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item {"
 		"spacing: 3px;"
 		"padding: 1px 4px;"
 		"background: transparent;"
-		"color: " + a_text_color.as<QColor>().name() + ";"
+		"color: " + m_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:selected {"
 		"background: transparent;"
-		"color: " + a_selected_text_color.as<QColor>().name() + ";"
+		"color: " + m_selected_text_color->as<QColor>().name() + ";"
 		"}"
 
 		"QMenuBar::item:pressed {"

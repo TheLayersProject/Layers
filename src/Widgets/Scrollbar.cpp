@@ -1,5 +1,7 @@
 #include "../../include/ScrollBar.h"
 
+using Layers::Attribute;
+using Layers::CornerRadiiAttributes;
 using Layers::ScrollBar;
 
 ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
@@ -17,9 +19,42 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 	//	setFixedHeight(45);
 }
 
+ScrollBar::~ScrollBar()
+{
+	delete m_background_color;
+	delete m_handle_color;
+	delete m_corner_radii;
+	delete m_handle_corner_radii;
+
+	m_background_color = nullptr;
+	m_handle_color = nullptr;
+	m_corner_radii = nullptr;
+	m_handle_corner_radii = nullptr;
+}
+
 void ScrollBar::update_theme_dependencies()
 {
 	setStyleSheet(build_stylesheet());
+}
+
+Attribute* ScrollBar::background_color() const
+{
+	return m_background_color;
+}
+
+Attribute* ScrollBar::handle_color() const
+{
+	return m_handle_color;
+}
+
+CornerRadiiAttributes* ScrollBar::corner_radii() const
+{
+	return m_corner_radii;
+}
+
+CornerRadiiAttributes* ScrollBar::handle_corner_radii() const
+{
+	return m_handle_corner_radii;
 }
 
 QString ScrollBar::build_stylesheet()
@@ -28,22 +63,22 @@ QString ScrollBar::build_stylesheet()
 		/* VERTICAL */
 		"QScrollBar:vertical {"
 		//"border-left: 1px solid black;"
-		"background: " + a_background_color.as<QColor>().name() + ";"
+		"background: " + m_background_color->as<QColor>().name() + ";"
 		"width: 45px;"
-		"border-top-left-radius: " + corner_radii.top_left.as<QString>() + "px;"
-		"border-top-right-radius: " + corner_radii.top_right.as<QString>() + "px;"
-		"border-bottom-left-radius: " + corner_radii.bottom_left.as<QString>() + "px;"
-		"border-bottom-right-radius: " + corner_radii.bottom_right.as<QString>() + "px;"
+		"border-top-left-radius: " + corner_radii()->top_left()->as<QString>() + "px;"
+		"border-top-right-radius: " + corner_radii()->top_right()->as<QString>() + "px;"
+		"border-bottom-left-radius: " + corner_radii()->bottom_left()->as<QString>() + "px;"
+		"border-bottom-right-radius: " + corner_radii()->bottom_right()->as<QString>() + "px;"
 		"margin: 0px 0px 0px 0px;"
 		"}"
 
 		"QScrollBar::handle:vertical {"
-		"background: " + a_handle_color.as<QColor>().name() + ";"
+		"background: " + m_handle_color->as<QColor>().name() + ";"
 		"min-height: 26px;"
-		"border-top-left-radius: " + handle_corner_radii.top_left.as<QString>() + "px;"
-		"border-top-right-radius: " + handle_corner_radii.top_right.as<QString>() + "px;"
-		"border-bottom-left-radius: " + handle_corner_radii.bottom_left.as<QString>() + "px;"
-		"border-bottom-right-radius: " + handle_corner_radii.bottom_right.as<QString>() + "px;"
+		"border-top-left-radius: " + handle_corner_radii()->top_left()->as<QString>() + "px;"
+		"border-top-right-radius: " + handle_corner_radii()->top_right()->as<QString>() + "px;"
+		"border-bottom-left-radius: " + handle_corner_radii()->bottom_left()->as<QString>() + "px;"
+		"border-bottom-right-radius: " + handle_corner_radii()->bottom_right()->as<QString>() + "px;"
 		"margin: 10px 10px 10px 10px;"
 		"}"
 
@@ -72,22 +107,22 @@ QString ScrollBar::build_stylesheet()
 		/* HORIZONTAL */
 		"QScrollBar:horizontal {"
 		//"border-top: 1px solid black;"
-		"background: " + a_background_color.as<QColor>().name() + ";"
+		"background: " + m_background_color->as<QColor>().name() + ";"
 		"height: 45px;"
-		"border-top-left-radius: " + corner_radii.top_left.as<QString>() + "px;"
-		"border-top-right-radius: " + corner_radii.top_right.as<QString>() + "px;"
-		"border-bottom-left-radius: " + corner_radii.bottom_left.as<QString>() + "px;"
-		"border-bottom-right-radius: " + corner_radii.bottom_right.as<QString>() + "px;"
+		"border-top-left-radius: " + corner_radii()->top_left()->as<QString>() + "px;"
+		"border-top-right-radius: " + corner_radii()->top_right()->as<QString>() + "px;"
+		"border-bottom-left-radius: " + corner_radii()->bottom_left()->as<QString>() + "px;"
+		"border-bottom-right-radius: " + corner_radii()->bottom_right()->as<QString>() + "px;"
 		"margin: 0px 0px 0px 0px;"
 		"}"
 
 		"QScrollBar::handle:horizontal {"
-		"background: " + a_handle_color.as<QColor>().name() + ";"
+		"background: " + m_handle_color->as<QColor>().name() + ";"
 		"min-width: 26px;"
-		"border-top-left-radius: " + handle_corner_radii.top_left.as<QString>() + "px;"
-		"border-top-right-radius: " + handle_corner_radii.top_right.as<QString>() + "px;"
-		"border-bottom-left-radius: " + handle_corner_radii.bottom_left.as<QString>() + "px;"
-		"border-bottom-right-radius: " + handle_corner_radii.bottom_right.as<QString>() + "px;"
+		"border-top-left-radius: " + handle_corner_radii()->top_left()->as<QString>() + "px;"
+		"border-top-right-radius: " + handle_corner_radii()->top_right()->as<QString>() + "px;"
+		"border-bottom-left-radius: " + handle_corner_radii()->bottom_left()->as<QString>() + "px;"
+		"border-bottom-right-radius: " + handle_corner_radii()->bottom_right()->as<QString>() + "px;"
 		"margin: 10px 10px 10px 10px;"
 		"}"
 
@@ -116,30 +151,30 @@ QString ScrollBar::build_stylesheet()
 
 void ScrollBar::init_attributes()
 {
-	corner_radii.bottom_right.set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
 
-	handle_corner_radii.top_left.set_value(5.0);
-	handle_corner_radii.top_right.set_value(5.0);
-	handle_corner_radii.bottom_left.set_value(5.0);
-	handle_corner_radii.bottom_right.set_value(5.0);
+	m_handle_corner_radii->top_left()->set_value(5.0);
+	m_handle_corner_radii->top_right()->set_value(5.0);
+	m_handle_corner_radii->bottom_left()->set_value(5.0);
+	m_handle_corner_radii->bottom_right()->set_value(5.0);
 
 	m_entities.insert({
-		{ "background_color", &a_background_color },
-		{ "corner_radii", &corner_radii },
-		{ "handle_corner_radii", &handle_corner_radii },
-		{ "handle_color", &a_handle_color }
+		{ "background_color", m_background_color },
+		{ "corner_radii", m_corner_radii },
+		{ "handle_corner_radii", m_handle_corner_radii },
+		{ "handle_color", m_handle_color }
 		});
 
-	connect(&a_background_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.top_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.top_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.bottom_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&corner_radii.bottom_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.top_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.top_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.bottom_left, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&handle_corner_radii.bottom_right, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(&a_handle_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_background_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->top_left(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->top_right(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->bottom_left(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->bottom_right(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->top_left(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->top_right(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->bottom_left(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->bottom_right(), &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
 }

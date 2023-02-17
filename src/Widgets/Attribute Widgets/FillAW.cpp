@@ -6,7 +6,6 @@ using Layers::FillControl;
 using Layers::Theme;
 
 FillAW::FillAW(Attribute* attribute, QWidget* parent) :
-	m_attribute_label{ new Label(attribute->capitalized_name()) },
 	AttributeWidget(attribute, parent)
 {
 	// Setup Attribute Label
@@ -14,13 +13,8 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 	m_attribute_label->set_proper_name("Label");
 	m_attribute_label->set_font_size(14);
 	m_attribute_label->set_padding(0, 7, 0, 0);
-
-	// Setup Left Stretch
-	//m_left_stretch->a_fill.set_disabled();
-	//m_left_stretch->hide();
-
-	// Setup Right Stretch
-	m_right_stretch->a_fill.set_disabled();
+	if (attribute)
+		m_attribute_label->setText(attribute->capitalized_name());
 
 	connect(m_disabled_toggle, &ToggleSwitch::toggled_event, [this] {
 		 if (m_disabled_toggle->toggled())
@@ -39,15 +33,18 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 		 }
 	});
 
-	if (!attribute->disabled())
-		m_disabled_toggle->toggle(false);
-	else
-		/* TODO: Emit a signal when an attribute widget is disabled so that children,
-		   like this, can handle hiding their controls */
-		m_fill_control->hide();
+	if (attribute)
+	{
+		if (!attribute->disabled())
+			m_disabled_toggle->toggle(false);
+		else
+			/* TODO: Emit a signal when an attribute widget is disabled so that children,
+			   like this, can handle hiding their controls */
+			m_fill_control->hide();
 
-	// Setup Control
-	m_fill_control->set_attribute(attribute);
+		// Setup Control
+		m_fill_control->set_attribute(attribute);
+	}
 
 	// Setup Layout
 	QHBoxLayout* hbox = new QHBoxLayout;
@@ -60,7 +57,7 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 	hbox->addWidget(m_attribute_label);
 	//hbox->addSpacing(6);
 	hbox->addWidget(m_fill_control);
-	hbox->addWidget(m_right_stretch);
+	hbox->addStretch();
 	setLayout(hbox);
 }
 

@@ -286,15 +286,17 @@ void ColorPlane::init_attributes()
     connect(&color, &Attribute::value_changed, this, &ColorPlane::update_cursor_position);
     connect(&color, &Attribute::value_changed, this, &ColorPlane::update_z_value);
 
-    color.setup_widget_update_connection(this);
+    connect(&color, &Attribute::value_changed, [this] { update(); });
 
-    m_cursor->a_fill.entangle_with(color);
-    m_cursor->border.fill.set_value(QColor(Qt::lightGray));
-    m_cursor->border.thickness.set_value(2.0);
-	m_cursor->a_outline_color.set_disabled(false);
-	m_cursor->a_outline_color.set_value(QColor(Qt::black));
-	m_cursor->corner_radii.top_left.set_value(2.0);
-	m_cursor->corner_radii.top_right.set_value(2.0);
-	m_cursor->corner_radii.bottom_left.set_value(2.0);
-	m_cursor->corner_radii.bottom_right.set_value(2.0);
+    //color.setup_widget_update_connection(this);
+
+    m_cursor->fill()->entangle_with(color);
+    m_cursor->border()->fill()->set_value(QColor(Qt::lightGray));
+    m_cursor->border()->thickness()->set_value(2.0);
+	m_cursor->outline_color()->set_disabled(false);
+	m_cursor->outline_color()->set_value(QColor(Qt::black));
+	m_cursor->corner_radii()->top_left()->set_value(2.0);
+	m_cursor->corner_radii()->top_right()->set_value(2.0);
+	m_cursor->corner_radii()->bottom_left()->set_value(2.0);
+	m_cursor->corner_radii()->bottom_right()->set_value(2.0);
 }

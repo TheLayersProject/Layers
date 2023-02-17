@@ -29,22 +29,22 @@ void Slider::init_attributes()
 {
 	connect(&a_value, &Entity::value_changed, [this] { update_handle_pos(); });
 
-	corner_radii.top_left.set_value(10.0); // Need to check these values
-	corner_radii.top_right.set_value(10.0);
-	corner_radii.bottom_left.set_value(10.0);
-	corner_radii.bottom_right.set_value(10.0);
+	m_corner_radii->top_left()->set_value(10.0); // Need to check these values
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
 
-	m_bar->a_fill.set_value(QColor(Qt::lightGray));
-	m_bar->corner_radii.top_left.set_value(2.0);
-	m_bar->corner_radii.top_right.set_value(2.0);
-	m_bar->corner_radii.bottom_left.set_value(2.0);
-	m_bar->corner_radii.bottom_right.set_value(2.0);
+	m_bar->fill()->set_value(QColor(Qt::lightGray));
+	m_bar->corner_radii()->top_left()->set_value(2.0);
+	m_bar->corner_radii()->top_right()->set_value(2.0);
+	m_bar->corner_radii()->bottom_left()->set_value(2.0);
+	m_bar->corner_radii()->bottom_right()->set_value(2.0);
 
-	m_handle->a_fill.set_value(QColor(Qt::darkGray));
-	m_handle->corner_radii.top_left.set_value(3.0);
-	m_handle->corner_radii.top_right.set_value(3.0);
-	m_handle->corner_radii.bottom_left.set_value(3.0);
-	m_handle->corner_radii.bottom_right.set_value(3.0);
+	m_handle->fill()->set_value(QColor(Qt::darkGray));
+	m_handle->corner_radii()->top_left()->set_value(3.0);
+	m_handle->corner_radii()->top_right()->set_value(3.0);
+	m_handle->corner_radii()->bottom_left()->set_value(3.0);
+	m_handle->corner_radii()->bottom_right()->set_value(3.0);
 }
 
 void Slider::set_value(double value)

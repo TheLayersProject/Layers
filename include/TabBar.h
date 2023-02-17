@@ -24,13 +24,17 @@ namespace Layers
 
 		void update_theme_dependencies();
 
-		Attribute a_selected_fill_color{ Attribute("selected_fill_color", QColor(Qt::gray)) };
-		Attribute a_text_color{ Attribute("text_color", QColor(Qt::white)) };
+		Attribute* selected_fill_color() const;
+		Attribute* text_color() const;
 
 	protected:
 		QString build_stylesheet();
 
 		void init_attributes();
+
+	private:
+		Attribute* m_selected_fill_color{ new Attribute("selected_fill_color", QColor(Qt::gray)) };
+		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::white)) };
 	};
 }
 

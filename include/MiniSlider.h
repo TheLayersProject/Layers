@@ -10,7 +10,9 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		MiniSlider(double limit, QWidget* parent = nullptr);
+		MiniSlider(double limit = 99.0, QWidget* parent = nullptr);
+
+		void set_limit(double limit);
 
 		void update_handle_pos();
 
@@ -30,7 +32,7 @@ namespace Layers
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
 
-		double m_limit{ 99.0 };
+		double m_limit;
 
 		int m_mouse_move_scale{ 5 };
 		int m_value_on_click{ 0 };

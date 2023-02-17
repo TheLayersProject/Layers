@@ -33,10 +33,10 @@ ColorDialog::ColorDialog(QWidget* parent) :
     //m_color_name_line_editor->set_validator(new QRegularExpressionValidator(rx));
 
     connect(m_color_name_line_editor, &LineEditor::text_edited, [this] {
-        qsizetype text_size = m_color_name_line_editor->text().size();
+        qsizetype text_size = m_color_name_line_editor->text()->as<QString>().size();
 
         if (text_size == 6) // || text_size == 8)
-            color.set_value(QColor("#" + m_color_name_line_editor->text()));
+            color.set_value(QColor("#" + m_color_name_line_editor->text()->as<QString>()));
         });
 
     m_color_plane->setFixedSize(160, 160);

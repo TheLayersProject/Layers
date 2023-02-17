@@ -18,13 +18,13 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
 	installEventFilter(this);
 	setFocusPolicy(Qt::ClickFocus);
 
-	connect(&border.thickness, &Entity::value_changed, [this] {
+	connect(m_border->thickness(), &Entity::value_changed, [this] {
 		if (layout())
 		{
 			if (VerticalLayout* vl = dynamic_cast<VerticalLayout*>(layout()))
-				vl->set_border_margin(border.thickness.as<double>());
+				vl->set_border_margin(m_border->thickness()->as<double>());
 			else if (HorizontalLayout* hl = dynamic_cast<HorizontalLayout*>(layout()))
-				hl->set_border_margin(border.thickness.as<double>());
+				hl->set_border_margin(m_border->thickness()->as<double>());
 		}
 		});
 }
@@ -34,7 +34,8 @@ void Widget::init_attributes()
 	ThemeableBox::init_attributes();
 
 	for (Entity* entity : m_entities)
-		entity->setup_widget_update_connection(this);
+		establish_update_connection(entity);
+		//entity->setup_widget_update_connection(this);
 }
 
 bool Widget::eventFilter(QObject* object, QEvent* event)

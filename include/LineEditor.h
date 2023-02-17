@@ -16,6 +16,7 @@ namespace Layers
 
 	public:
 		LineEditor(QWidget* parent = nullptr);
+		~LineEditor();
 
 		void reconnect_text_attribute();
 
@@ -34,11 +35,11 @@ namespace Layers
 
 		void setFocus(Qt::FocusReason reason);
 
-		QString text();
+		//QString text();
 
-		Attribute a_left_padding{ Attribute("left_padding", QVariant::fromValue(3.0)) };
-		Attribute a_text_color{ Attribute("text_color", QColor(Qt::black)) };
-		Attribute a_text{ Attribute("text", QString("")) };
+		Attribute* left_padding() const;
+		Attribute* text_color() const;
+		Attribute* text() const;
 
 	public slots:
 		inline void setFocus() { setFocus(Qt::OtherFocusReason); }
@@ -53,6 +54,10 @@ namespace Layers
 		void init_attributes();
 
 	private:
+		Attribute* m_left_padding{ new Attribute("left_padding", QVariant::fromValue(3.0)) };
+		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::black)) };
+		Attribute* m_text{ new Attribute("text", QString("")) };
+
 		QString* m_default_value{ nullptr };
 
 		bool m_disabled{ false };

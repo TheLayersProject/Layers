@@ -25,6 +25,9 @@ Themeable::~Themeable()
 
 	m_icon = nullptr;
 	m_proper_name = nullptr;
+
+	//for (QMetaObject::Connection connection : m_update_widget_connections)
+	//	QObject::disconnect(connection);
 }
 
 void Themeable::apply_theme(Theme& theme)
@@ -135,6 +138,33 @@ void Themeable::copy_attribute_values_to(Theme* theme)
 QMap<QString, Entity*>& Themeable::entities()
 {
 	return m_entities;
+}
+
+void Themeable::establish_update_connection(Entity* entity)
+{
+	if (QWidget* widget = dynamic_cast<QWidget*>(this))
+	{
+		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
+		{
+			m_update_widget_connections.append(
+				widget->connect(attr, &Attribute::value_changed, [widget]
+					{ widget->update(); }
+			));
+		}
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
+		{
+			m_update_widget_connections.append(
+				widget->connect(attr, &AttributeGroup::value_changed, [widget]
+					{ widget->update(); }
+			));
+
+			for (Attribute* attr : attr_group->attributes())
+				m_update_widget_connections.append(
+					widget->connect(attr, &Attribute::value_changed, [widget]
+						{ widget->update(); }
+				));
+		}
+	}
 }
 
 Graphic* Themeable::icon() const

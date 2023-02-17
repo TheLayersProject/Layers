@@ -22,24 +22,24 @@ void GradientControl::init_attributes()
 	// Remove control attribute
 	m_entities.remove("fill");
 
-	border.fill.set_value(QColor("#D6D6D6"));
-	border.thickness.set_value(2.0);
-	corner_radii.top_left.set_value(5.0);
-	corner_radii.top_right.set_value(5.0);
-	corner_radii.bottom_left.set_value(5.0);
-	corner_radii.bottom_right.set_value(5.0);
-	margins.left.set_value(10.0);
-	margins.top.set_value(10.0);
-	margins.right.set_value(10.0);
-	margins.bottom.set_value(10.0);
-	a_outline_color.set_disabled(false);
+	m_border->fill()->set_value(QColor("#D6D6D6"));
+	m_border->thickness()->set_value(2.0);
+	m_corner_radii->top_left()->set_value(5.0);
+	m_corner_radii->top_right()->set_value(5.0);
+	m_corner_radii->bottom_left()->set_value(5.0);
+	m_corner_radii->bottom_right()->set_value(5.0);
+	m_margins->left()->set_value(10.0);
+	m_margins->top()->set_value(10.0);
+	m_margins->right()->set_value(10.0);
+	m_margins->bottom()->set_value(10.0);
+	m_outline_color->set_disabled(false);
 
-    a_fill.set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+    m_fill->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 }
 
 void GradientControl::set_current_editting_state(const QString& state)
 {
-	a_fill.set_state(state);
+	fill()->set_state(state);
 }
 
 bool GradientControl::eventFilter(QObject* object, QEvent* event)
@@ -51,7 +51,7 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 		if (mouse_event->button() & Qt::LeftButton)
 		{
 			//GradientDialog* gsd =
-			//	new GradientDialog(a_fill.as<QGradientStops>());
+			//	new GradientDialog(fill()->as<QGradientStops>());
 
 			//gsd->entangle_with(
 			//	layersApp->main_window()->control_gradient_dialog());
@@ -63,7 +63,7 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 			if (gradient_dialog->exec())
 			{
-				a_fill.set_value(QVariant::fromValue(gradient_dialog->gradient_stops()));
+				fill()->set_value(QVariant::fromValue(gradient_dialog->gradient_stops()));
 
 				emit gradient_changed();
 			}

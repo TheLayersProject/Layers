@@ -14,8 +14,23 @@ AttributeWidget::AttributeWidget(Entity* entity, QWidget* parent) :
 	// Setup Disabling Attribute Toggle
 	m_disabled_toggle->set_proper_name("Disable Toggle");
 
-	m_toggle_label_separator->a_fill.set_disabled();
+	m_toggle_label_separator->fill()->set_disabled();
 	m_toggle_label_separator->setFixedSize(16, 1);
+}
+
+AttributeWidget::~AttributeWidget()
+{
+	if (!m_disabled_toggle->parentWidget())
+	{
+		delete m_disabled_toggle;
+		m_disabled_toggle = nullptr;
+	}
+
+	if (!m_toggle_label_separator->parentWidget())
+	{
+		delete m_toggle_label_separator;
+		m_toggle_label_separator = nullptr;
+	}
 }
 
 ToggleSwitch* AttributeWidget::disable_toggle() const
@@ -42,9 +57,9 @@ void AttributeWidget::set_current_editting_state(const QString& state)
 
 void AttributeWidget::init_attributes()
 {
-	a_fill.set_value(QColor("#1A000000")); // Black with 10% opacity
-	corner_radii.top_left.set_value(10.0);
-	corner_radii.top_right.set_value(10.0);
-	corner_radii.bottom_left.set_value(10.0);
-	corner_radii.bottom_right.set_value(10.0);
+	m_fill->set_value(QColor("#1A000000")); // Black with 10% opacity
+	m_corner_radii->top_left()->set_value(10.0);
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
 }

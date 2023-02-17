@@ -356,23 +356,23 @@ void CustomizePanel::replace_all_color_awidgets_attrs_with(ColorAW* control_colo
 void CustomizePanel::init_attributes()
 {
 	// TODO: re-enable
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 
-	m_show_all_button->a_fill.set_value(QColor("#61ad50"));
-	m_show_all_button->a_hover_fill.set_value(QColor("#6fc65b"));
-	//m_show_all_button->a_text_color->set_value(QColor("#f8f8f8"));
-	m_show_all_button->corner_radii.top_left.set_value(5.0);
-	m_show_all_button->corner_radii.top_right.set_value(5.0);
-	m_show_all_button->corner_radii.bottom_left.set_value(5.0);
-	m_show_all_button->corner_radii.bottom_right.set_value(5.0);
+	m_show_all_button->fill()->set_value(QColor("#61ad50"));
+	m_show_all_button->hover_fill()->set_value(QColor("#6fc65b"));
+	//m_show_all_button->text_color()->set_value(QColor("#f8f8f8"));
+	m_show_all_button->corner_radii()->top_left()->set_value(5.0);
+	m_show_all_button->corner_radii()->top_right()->set_value(5.0);
+	m_show_all_button->corner_radii()->bottom_left()->set_value(5.0);
+	m_show_all_button->corner_radii()->bottom_right()->set_value(5.0);
 
-	m_show_primary_button->a_fill.set_value(QColor("#61ad50"));
-	m_show_primary_button->a_hover_fill.set_value(QColor("#6fc65b"));
+	m_show_primary_button->fill()->set_value(QColor("#61ad50"));
+	m_show_primary_button->hover_fill()->set_value(QColor("#6fc65b"));
 	//m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
-	m_show_primary_button->corner_radii.top_left.set_value(5.0);
-	m_show_primary_button->corner_radii.top_right.set_value(5.0);
-	m_show_primary_button->corner_radii.bottom_left.set_value(5.0);
-	m_show_primary_button->corner_radii.bottom_right.set_value(5.0);
+	m_show_primary_button->corner_radii()->top_left()->set_value(5.0);
+	m_show_primary_button->corner_radii()->top_right()->set_value(5.0);
+	m_show_primary_button->corner_radii()->bottom_left()->set_value(5.0);
+	m_show_primary_button->corner_radii()->bottom_right()->set_value(5.0);
 }
 
 void CustomizePanel::replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw)

@@ -72,12 +72,39 @@ Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
 							group_attr_object.value("value"));
 				}
 
-				themeable_attributes[entity_key] =
-					new AttributeGroup(entity_name, group_attributes, entity_disabled);
+				AttributeGroup* attr_group = new AttributeGroup(entity_name, entity_disabled);
+
+				attr_group->attributes() = group_attributes;
+
+				themeable_attributes[entity_key] = attr_group;
 			}
 		}
 
 		m_data[themeable_tag] = themeable_attributes;
+	}
+}
+
+Theme::~Theme()
+{
+	for (const QString& themeable_tag : m_data.keys())
+	{
+		QMap<QString, Entity*>& themeable_data = m_data[themeable_tag];
+
+		for (Entity* entity : themeable_data)
+		{
+			delete entity;
+			entity = nullptr;
+		}
+
+		themeable_data.clear();
+	}
+
+	m_data.clear();
+
+	if (m_uuid)
+	{
+		delete m_uuid;
+		m_uuid = nullptr;
 	}
 }
 

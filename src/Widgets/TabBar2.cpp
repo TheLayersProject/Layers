@@ -81,9 +81,9 @@ void TabBar2::select_tab(Tab* selecting_tab)
 
 void TabBar2::init_attributes()
 {
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 
-	m_foreground_widget->a_fill.set_disabled();
+	m_foreground_widget->fill()->set_disabled();
 }
 
 void TabBar2::resizeEvent(QResizeEvent* event)

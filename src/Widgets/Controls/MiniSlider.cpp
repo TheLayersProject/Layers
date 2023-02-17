@@ -29,31 +29,37 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	setup_layout();
 }
 
+void MiniSlider::set_limit(double limit)
+{
+	m_limit = limit;
+
+	update_handle_pos();
+}
+
 void MiniSlider::init_attributes()
 {
+	m_corner_radii->top_left()->set_value(5.0);
+	m_corner_radii->top_right()->set_value(5.0);
+	m_corner_radii->bottom_left()->set_value(5.0);
+	m_corner_radii->bottom_right()->set_value(5.0);
+
 	m_bar->set_margin(5, 0, 5, 0);
+	m_bar->corner_radii()->top_left()->set_value(2.0);
+	m_bar->corner_radii()->top_right()->set_value(2.0);
+	m_bar->corner_radii()->bottom_left()->set_value(2.0);
+	m_bar->corner_radii()->bottom_right()->set_value(2.0);
 
-	corner_radii.top_left.set_value(5.0);
-	corner_radii.top_right.set_value(5.0);
-	corner_radii.bottom_left.set_value(5.0);
-	corner_radii.bottom_right.set_value(5.0);
-
-	m_bar->corner_radii.top_left.set_value(2.0);
-	m_bar->corner_radii.top_right.set_value(2.0);
-	m_bar->corner_radii.bottom_left.set_value(2.0);
-	m_bar->corner_radii.bottom_right.set_value(2.0);
-
-	m_handle->corner_radii.top_left.set_value(2.0);
-	m_handle->corner_radii.top_right.set_value(2.0);
-	m_handle->corner_radii.bottom_left.set_value(2.0);
-	m_handle->corner_radii.bottom_right.set_value(2.0);
+	m_handle->corner_radii()->top_left()->set_value(2.0);
+	m_handle->corner_radii()->top_right()->set_value(2.0);
+	m_handle->corner_radii()->bottom_left()->set_value(2.0);
+	m_handle->corner_radii()->bottom_right()->set_value(2.0);
 
 	// TODO: TEMP!
-	a_fill.set_value(QColor(Qt::lightGray));
+	m_fill->set_value(QColor(Qt::lightGray));
 
-	m_bar->a_fill.set_value(QColor(Qt::blue));
+	m_bar->fill()->set_value(QColor(Qt::blue));
 
-	m_handle->a_fill.set_value(QColor(Qt::red));
+	m_handle->fill()->set_value(QColor(Qt::red));
 }
 
 void MiniSlider::update_handle_pos()

@@ -13,7 +13,7 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 	set_name("titlebar");
 	set_proper_name("Titlebar");
 	set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
-	a_fill.set_disabled();
+	m_fill->set_disabled();
 
 	m_settings_button->set_name("settings_button");
 	m_settings_button->set_proper_name("Settings Button");

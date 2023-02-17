@@ -66,6 +66,7 @@ namespace Layers
 		Theme();
 		Theme(const QString& name, bool editable = true);
 		Theme(const QJsonDocument& json_document, QUuid* uuid = nullptr);
+		~Theme();
 
 		/*!
 			Adds a themeable tag paired with a set of attributes

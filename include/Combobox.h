@@ -15,6 +15,7 @@ namespace Layers
 
 	public:
 		ComboboxItem(const QString& item_text, QWidget* parent = nullptr);
+		~ComboboxItem();
 
 		QString item_text();
 
@@ -43,6 +44,7 @@ namespace Layers
 
 	public:
 		Combobox(QWidget* parent = nullptr);
+		~Combobox();
 
 		void add_item(const QString& item);
 
