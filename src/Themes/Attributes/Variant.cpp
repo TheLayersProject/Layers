@@ -16,7 +16,7 @@ Variant::Variant(QVariant qvariant) :
 
 Variant::Variant(const Variant& variant) {
 	if (this != &variant)
-		*this = variant;
+		*this = variant.m_qvariant;
 }
 
 void Variant::operator=(const Variant& variant) {
@@ -25,14 +25,8 @@ void Variant::operator=(const Variant& variant) {
 	emit changed();
 }
 
-void Variant::operator=(const QVariant& qvariant) {
-	m_qvariant = qvariant;
-
-	emit changed();
-}
-
-bool Variant::operator!=(const QVariant& qvariant) {
-	return m_qvariant != qvariant;
+bool Variant::operator!=(const Variant& variant) {
+	return m_qvariant != variant.m_qvariant;
 }
 
 const char* Variant::typeName() const {

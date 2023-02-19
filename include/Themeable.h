@@ -43,7 +43,7 @@ namespace Layers
 
 		# Themeable Tags
 
-		![Themeable Tag Breakdown](./img/themeable_tag_breakdown.png)
+		![Themeable Tag Breakdown](themeable_tag_breakdown.png)
 
 		A themeable tag is an identifier used to identify a particular
 		themeable.
