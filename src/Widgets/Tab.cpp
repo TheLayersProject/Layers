@@ -33,7 +33,7 @@ Tab::Tab(QWidget* parent) :
 }
 
 Tab::Tab(Menu* menu, QWidget* parent) :
-	m_text_label{ new Label(menu->name) },
+	m_text_label{ new Label(menu->menu_name()) },
 	m_menu{ menu },
 	Widget(parent)
 {

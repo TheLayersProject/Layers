@@ -201,7 +201,11 @@ void Dialog::init_titlebar()
 	m_window_title_label->set_padding(0, 8, 0, 0);
 	m_window_title_label->set_font_size(14);
 
-	connect(m_exit_button, &Button::clicked, [this] { done(QDialog::Rejected); });
+	connect(m_exit_button, &Button::clicked, [this] {
+		if (!m_functionality_disabled)
+			done(QDialog::Rejected);
+	});
+
 	m_exit_button->set_name("exit_button");
 	m_exit_button->set_proper_name("Exit Button");
 

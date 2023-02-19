@@ -12,7 +12,10 @@ namespace Layers
 	public:
 		Menu(const QString& menu_name, Graphic* menu_icon, QWidget* parent = nullptr);
 
-		QString name;
+		QString menu_name();
+
+	private:
+		QString m_menu_name;
 	};
 }
 

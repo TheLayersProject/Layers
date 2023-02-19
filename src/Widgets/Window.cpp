@@ -22,7 +22,14 @@ using Layers::Window;
 Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview }, Widget(parent)
 {
-	if (!m_preview)
+	if (m_preview)
+	{
+		Widget* preview_widget = new Widget;
+		preview_widget->set_name("preview_widget");
+		preview_widget->set_proper_name("Preview Widget");
+		m_customize_menu->set_preview_widget(preview_widget);
+	}
+	else
 		layersApp->add_child_themeable_pointer(*this);
 
 	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
@@ -84,12 +91,6 @@ Window::Window(bool preview, QWidget* parent) :
 		layersApp->current_theme()->name());
 }
 
-//Window::~Window()
-//{
-//	delete layersApp->create_new_theme_dialog();
-//	layersApp->create_new_theme_dialog() = nullptr;
-//}
-
 Menu* Window::app_menu() const
 {
 	return m_app_menu;
@@ -120,14 +121,6 @@ void Window::set_main_menu(Menu* main_menu)
 	m_main_layout->addWidget(m_app_menu);
 }
 
-void Window::assign_tag_prefixes()
-{
-	for (Themeable* child_themeable : child_themeables())
-		child_themeable->assign_tag_prefixes();
-
-	m_tag_prefixes_assigned = true;
-}
-
 void Window::center_dialog(QDialog* dialog)
 {
 	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
@@ -139,17 +132,6 @@ Themeable* Window::clone()
 
 	w->setMinimumSize(500, 400);
 	w->setMaximumSize(800, 600);
-	w->set_functionality_disabled();
-	w->titlebar()->exit_button()->set_functionality_disabled();
-	w->customize_menu()->apply_button()->set_functionality_disabled();
-	w->settings_menu()->themes_settings_panel()->theme_combobox()->set_disabled();
-
-	// Setup Preview Window's Customize Menu's Preview Widget
-	Widget* w_customize_menu_preview_widget = new Widget;
-	w_customize_menu_preview_widget->set_name("pw_cm_preview_widget");
-	w_customize_menu_preview_widget->set_proper_name("Preview Widget");
-
-	w->customize_menu()->set_preview_widget(w_customize_menu_preview_widget);
 
 	return w;
 }
@@ -225,7 +207,8 @@ void Window::customize_clicked()
 
 void Window::exit_clicked()
 {
-	qApp->quit();
+	if (!m_functionality_disabled)
+		qApp->quit();
 }
 
 void Window::maximize_clicked()

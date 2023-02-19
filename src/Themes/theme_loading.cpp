@@ -1,96 +1,55 @@
 #include "../../../include/theme_loading.h"
 
+#include "../../../include/Application.h"
+
 using Layers::Theme;
 
 Theme* Layers::load_theme_1(const QString& file_name, const QString& app_identifier)
 {
 	Theme* loaded_theme = nullptr;
 
-	if (file_name.endsWith(".json"))
+	QDir dir = QDir(file_name);
+
+	QFile meta_file(dir.filePath("meta.json"));
+	QFile layers_file(dir.filePath("layers.json"));
+	QFile app_file(dir.filePath(layersApp->app_identifier() + ".json"));
+
+	if (meta_file.exists() && layers_file.exists())
 	{
-		QFile file = QFile(file_name);
+		if (!meta_file.open(QIODevice::ReadOnly))
+			qDebug() << "Could not read theme 'meta.json' file";
 
-		if (file.exists())
+		QJsonDocument meta_doc = QJsonDocument::fromJson(meta_file.readAll());
+		QJsonObject meta_obj = meta_doc.object();
+
+		meta_file.close();
+
+		QString name = meta_obj.value("name").toString();
+
+		QUuid* uuid = new QUuid(meta_obj.value("uuid").toString());
+
+		bool editable = true;
+		if (meta_obj.contains("editable"))
+			editable = meta_obj.value("editable").toBool();
+
+		loaded_theme = new Theme(name, uuid, editable);
+
+		if (!layers_file.open(QIODevice::ReadOnly))
+			qDebug() << "Could not read theme 'layers.json' file";
+
+		loaded_theme->load_document(QJsonDocument::fromJson(layers_file.readAll()));
+
+		layers_file.close();
+
+		if (app_file.exists())
 		{
-			if (!file.open(QIODevice::ReadOnly))
-				qDebug() << "Could not read theme file";
+			if (!app_file.open(QIODevice::ReadOnly))
+				qDebug() << "Could not read theme app file";
 
-			// Load Binary
-			//QDataStream in(&file);
-			//in.setVersion(QDataStream::Qt_6_1);
-			//in >> loaded_theme;
-			//QDataStream::Status status = in.status();
+			loaded_theme->load_document(QJsonDocument::fromJson(app_file.readAll()));
 
-			// Load JSON
-			loaded_theme = new Theme(QJsonDocument::fromJson(file.readAll()));
-
-			file.close();
+			app_file.close();
 		}
-	}
-	else
-	{
-		QDir dir = QDir(file_name);
-
-		QStringList file_name_parts = file_name.split('_', Qt::SkipEmptyParts);
-
-		QString uuid_str = file_name_parts.last();
-
-		QFile layers_theme_file(dir.filePath("layers.json"));
-
-		if (layers_theme_file.exists())
-		{
-			if (!layers_theme_file.open(QIODevice::ReadOnly))
-				qDebug() << "Could not read theme file";
-
-			// Load JSON
-			loaded_theme = new Theme(QJsonDocument::fromJson(layers_theme_file.readAll()), new QUuid(uuid_str));
-
-			layers_theme_file.close();
-		}
-
-		QFile app_theme_file(dir.filePath(app_identifier + ".json"));
-
-		if (app_theme_file.exists())
-		{
-			if (!app_theme_file.open(QIODevice::ReadOnly))
-				qDebug() << "Could not read theme file";
-
-			// Load JSON
-			if (loaded_theme)
-				loaded_theme->consume(Theme(QJsonDocument::fromJson(app_theme_file.readAll())));
-			else
-				loaded_theme = new Theme(QJsonDocument::fromJson(app_theme_file.readAll()), new QUuid(uuid_str));
-
-			app_theme_file.close();
-		}
-
-		// Next, load the application's theme file
-
-
-		// Probably don't need to loop since not loading all app theme files
-		//for (const QString& file_name : dir.entryList(QDir::Files))
-		//{
-		//	if
-
-		//	QFile file = QFile(file_name);
-
-		//	if (file.exists())
-		//	{
-		//		if (!file.open(QIODevice::ReadOnly))
-		//			qDebug() << "Could not read theme file";
-
-		//		// Load Binary
-		//		//QDataStream in(&file);
-		//		//in.setVersion(QDataStream::Qt_6_1);
-		//		//in >> loaded_theme;
-		//		//QDataStream::Status status = in.status();
-
-		//		// Load JSON
-		//		loaded_theme = Theme(QJsonDocument::fromJson(file.readAll()));
-
-		//		file.close();
-		//	}
-		//}
 	}
 
 	return loaded_theme;

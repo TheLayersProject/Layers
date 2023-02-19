@@ -15,7 +15,6 @@ namespace Layers
 
 	public:
 		ComboboxItem(const QString& item_text, QWidget* parent = nullptr);
-		~ComboboxItem();
 
 		QString item_text();
 

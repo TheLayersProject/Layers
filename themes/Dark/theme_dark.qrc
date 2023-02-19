@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/themes/Dark">
+        <file>layers.json</file>
+        <file>meta.json</file>
+    </qresource>
+</RCC>

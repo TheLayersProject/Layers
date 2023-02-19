@@ -65,7 +65,7 @@ namespace Layers
 	public:
 		Theme();
 		Theme(const QString& name, bool editable = true);
-		Theme(const QJsonDocument& json_document, QUuid* uuid = nullptr);
+		Theme(const QString& name, QUuid* uuid, bool editable);
 		~Theme();
 
 		/*!
@@ -81,8 +81,6 @@ namespace Layers
 		//	QMap<QString, Attribute*> attributes);
 
 		void clear();
-
-		void consume(Theme&& theme);
 
 		/*!
 			Returns true if the theme contains any attributes for the given themeable tag; otherwise returns false.
@@ -111,6 +109,8 @@ namespace Layers
 		QString identifier();
 
 		Attribute* init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value);
+
+		void load_document(const QJsonDocument& json_document);
 
 		/*!
 			Returns a reference to the theme's name

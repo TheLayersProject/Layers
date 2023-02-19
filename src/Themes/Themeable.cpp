@@ -43,7 +43,7 @@ void Themeable::apply_theme(Theme& theme)
 			{
 				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
 				{
-					qDebug() << child_themeable->tag();
+					//qDebug() << child_themeable->tag();
 
 					if (theme.contains_attributes_for_tag(child_themeable->tag()))
 					{
@@ -104,11 +104,7 @@ QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 
 	if (QWidget* widget = dynamic_cast<QWidget*>(this))
 	{
-		/*
-			NOTE: Qt 6.3 adds an overload for QObject::findChildren() that
-			lets the caller pass only a Qt::FindChildOptions argument.
-		*/
-		QList<QWidget*> child_widgets = widget->findChildren<QWidget*>(QString(), options);
+		QList<QWidget*> child_widgets = widget->findChildren<QWidget*>(options);
 
 		if (!child_widgets.isEmpty())
 		{
@@ -128,11 +124,15 @@ Themeable* Themeable::clone()
 
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
-	theme->copy_attribute_values_of(this);
+	if (m_tag_prefixes_assigned)
+	{
+		theme->copy_attribute_values_of(this);
 
-	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
-		theme->copy_attribute_values_of(child_themeable);
+		for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
+			if (child_themeable->m_tag_prefixes_assigned)
+				theme->copy_attribute_values_of(child_themeable);
 		//child_themeable->copy_attribute_values_to(theme);
+	}
 }
 
 QMap<QString, Entity*>& Themeable::entities()
@@ -203,6 +203,9 @@ QString* Themeable::proper_name() const
 void Themeable::set_functionality_disabled(bool disabled)
 {
 	m_functionality_disabled = disabled;
+
+	for (Themeable* child_themeable : child_themeables())
+		child_themeable->set_functionality_disabled(disabled);
 }
 
 void Themeable::set_icon(Graphic* icon)

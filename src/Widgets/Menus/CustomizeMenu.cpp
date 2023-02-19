@@ -101,7 +101,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 
 	connect(m_apply_button, &Button::clicked, [this] {
 		// TODO:
-		if (m_preview_widget)
+		if (m_preview_widget && !m_functionality_disabled)
 		{
 			if (Themeable* preview_themeable = dynamic_cast<Themeable*>(m_preview_widget))
 			{
@@ -312,6 +312,12 @@ int CustomizeMenu::calculated_topbar_content_width()
 
 void CustomizeMenu::set_preview_widget(QWidget* widget)
 {
+	if (m_preview_widget)
+		m_preview_widget->deleteLater();
+
+	if (Themeable* preview_themeable = dynamic_cast<Themeable*>(widget))
+		preview_themeable->set_functionality_disabled();
+
 	m_preview_widget = widget;
 	m_preview_layout->addWidget(widget);
 }

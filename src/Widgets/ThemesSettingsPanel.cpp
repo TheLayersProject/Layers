@@ -33,7 +33,8 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 
 	m_connections.append(
 		connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
-			layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->current_item()]);
+			if (!m_functionality_disabled)
+				layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->current_item()]);
 	}));
 
 	m_connections.append(

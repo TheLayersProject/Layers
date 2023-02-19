@@ -312,7 +312,7 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			if (!m_disabled && !m_functionality_disabled) emit clicked();
+			if (!m_disabled) emit clicked(); //  && !m_functionality_disabled
 
 			toggle_graphics();
 		}

@@ -20,11 +20,6 @@ ComboboxItem::ComboboxItem(const QString& item_text, QWidget* parent) :
 	m_item_label->set_padding(0, 7, 0, 0);
 }
 
-ComboboxItem::~ComboboxItem()
-{
-	qDebug() << "Deleted ComboboxItem!";
-}
-
 void ComboboxItem::init_attributes()
 {
 	m_corner_radii->top_left()->init_variant_map({

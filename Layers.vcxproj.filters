@@ -251,10 +251,13 @@
     <QtRcc Include="fonts\Roboto\roboto_font.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtRcc Include="themes\prebuilt_themes.qrc">
+    <QtRcc Include="image-sequences\image_sequences.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtRcc Include="image-sequences\image_sequences.qrc">
+    <QtRcc Include="themes\Dark\theme_dark.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="themes\Light\theme_light.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>

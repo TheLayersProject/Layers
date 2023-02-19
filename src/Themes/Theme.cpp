@@ -17,71 +17,9 @@ Theme::Theme(const QString& name, bool editable) :
 {
 }
 
-Theme::Theme(const QJsonDocument& json_document, QUuid* uuid) :
-	m_uuid{ uuid }
+Theme::Theme(const QString& name, QUuid* uuid, bool editable) :
+	m_name{ name }, m_editable{ editable }, m_uuid{ uuid }
 {
-	QJsonObject json_object = json_document.object();
-
-	m_name = json_object.value("name").toString();
-
-	if (json_object.contains("editable"))
-		m_editable = json_object.value("editable").toBool();
-
-	QJsonObject data_object = json_object.value("data").toObject();
-
-	for (const QString& themeable_tag : data_object.keys())
-	{
-		QJsonObject themeable_object = data_object.value(themeable_tag).toObject();
-
-		QMap<QString, Entity*> themeable_attributes;
-
-		for (const QString& entity_key : themeable_object.keys())
-		{
-			QJsonObject entity_object = themeable_object.value(entity_key).toObject();
-
-			QString entity_name = entity_key;
-			bool entity_disabled = false;
-			
-			if (entity_object.contains("disabled"))
-			{
-				if (entity_object.value("disabled").toBool())
-					entity_disabled = true;
-
-				entity_object.remove("disabled");
-			}
-
-			// If entity_object contains key 'value', then it is an attribute, not a group
-			if (entity_object.contains("value"))
-			{
-				themeable_attributes[entity_key] =
-					init_attribute(
-						entity_name, entity_disabled,
-						entity_object.value("value"));
-			}
-			else // entity_object is a group...
-			{
-				QMap<QString, Attribute*> group_attributes;
-
-				for (const QString& group_attr_key : entity_object.keys())
-				{
-					QJsonObject group_attr_object = entity_object.value(group_attr_key).toObject();
-
-					group_attributes[group_attr_key] =
-						init_attribute(
-							group_attr_key, false,
-							group_attr_object.value("value"));
-				}
-
-				AttributeGroup* attr_group = new AttributeGroup(entity_name, entity_disabled);
-
-				attr_group->attributes() = group_attributes;
-
-				themeable_attributes[entity_key] = attr_group;
-			}
-		}
-
-		m_data[themeable_tag] = themeable_attributes;
-	}
 }
 
 Theme::~Theme()
@@ -127,36 +65,6 @@ void Theme::clear()
 	}
 
 	m_data.clear();
-}
-
-void Theme::consume(Theme&& theme)
-{
-	m_data.insert(theme.m_data);
-
-	//for (const QString& themeable_tag : theme.m_data.keys())
-	//{
-	//	//if (!m_data.contains(themeable_tag))
-	//	
-	//	m_data[themeable_tag] = theme.m_data[themeable_tag];
-
-	//	//AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
-
-	//	//for (Attribute* attr : theme.attribute_sets()[themeable_tag].attributes())
-	//	//	if (!attribute_set.contains(attr->name()))
-	//	//		attribute_set.add_attribute(attr);
-	//}
-
-	//for (const QString& themeable_tag : theme.attribute_sets().keys())
-	//{
-	//	if (!m_attribute_sets.contains(themeable_tag))
-	//		m_attribute_sets[themeable_tag] = AttributeSet();
-
-	//	AttributeSet& attribute_set = m_attribute_sets[themeable_tag];
-
-	//	for (Attribute* attr : theme.attribute_sets()[themeable_tag].attributes())
-	//		if (!attribute_set.contains(attr->name()))
-	//			attribute_set.add_attribute(attr);
-	//}
 }
 
 bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
@@ -228,7 +136,10 @@ bool Theme::editable()
 
 QString Theme::identifier()
 {
-	return m_name + "_" + m_uuid->toString(QUuid::WithoutBraces);
+	if (m_uuid)
+		return m_name + "_" + m_uuid->toString(QUuid::WithoutBraces);
+	else
+		return m_name;
 }
 
 Attribute* Theme::init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value)
@@ -323,6 +234,65 @@ Attribute* Theme::init_attribute(const QString& name, bool disabled, const QJson
 
 		if (value_str.startsWith("#"))
 			return new Attribute(name, QVariant::fromValue(QColor(value_str)), disabled);
+	}
+}
+
+void Theme::load_document(const QJsonDocument& json_document)
+{
+	QJsonObject json_object = json_document.object();
+
+	for (const QString& themeable_tag : json_object.keys())
+	{
+		QJsonObject themeable_object = json_object.value(themeable_tag).toObject();
+
+		QMap<QString, Entity*> themeable_attributes;
+
+		for (const QString& entity_key : themeable_object.keys())
+		{
+			QJsonObject entity_object = themeable_object.value(entity_key).toObject();
+
+			QString entity_name = entity_key;
+			bool entity_disabled = false;
+
+			if (entity_object.contains("disabled"))
+			{
+				if (entity_object.value("disabled").toBool())
+					entity_disabled = true;
+
+				entity_object.remove("disabled");
+			}
+
+			// If entity_object contains key 'value', then it is an attribute, not a group
+			if (entity_object.contains("value"))
+			{
+				themeable_attributes[entity_key] =
+					init_attribute(
+						entity_name, entity_disabled,
+						entity_object.value("value"));
+			}
+			else // entity_object is a group...
+			{
+				QMap<QString, Attribute*> group_attributes;
+
+				for (const QString& group_attr_key : entity_object.keys())
+				{
+					QJsonObject group_attr_object = entity_object.value(group_attr_key).toObject();
+
+					group_attributes[group_attr_key] =
+						init_attribute(
+							group_attr_key, false,
+							group_attr_object.value("value"));
+				}
+
+				AttributeGroup* attr_group = new AttributeGroup(entity_name, entity_disabled);
+
+				attr_group->attributes() = group_attributes;
+
+				themeable_attributes[entity_key] = attr_group;
+			}
+		}
+
+		m_data[themeable_tag] = themeable_attributes;
 	}
 }
 

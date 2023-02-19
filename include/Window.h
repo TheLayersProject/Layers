@@ -18,11 +18,8 @@ namespace Layers
 
 	public:
 		Window(bool preview = false, QWidget* parent = nullptr);
-		//~Window();
 
 		Menu* app_menu() const;
-
-		void assign_tag_prefixes();
 
 		void center_dialog(QDialog* dialog);
 
@@ -59,8 +56,6 @@ namespace Layers
 
 		bool m_maximized{ false };
 		bool m_preview{ false };
-
-		//CreateNewThemeDialog* m_create_new_theme_dialog{ new CreateNewThemeDialog };
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
