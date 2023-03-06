@@ -53,12 +53,12 @@ namespace Layers
 		/*!
 			Returns true if stateful, otherwise, returns false.
 
-			This function calls Attribute::is_stateful() on all the Attributes in the group. If any
+			This function calls Attribute::is_multi_valued() on all the Attributes in the group. If any
 			of them are stateful, the group is considered stateful as well.
 
 			@returns True if stateful, false otherwise
 		*/
-		virtual bool is_stateful() const override;
+		virtual bool is_multi_valued() const override;
 
 		/*!
 			Sets the active state of all the Attributes in the group.

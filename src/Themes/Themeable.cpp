@@ -3,6 +3,8 @@
 #include "../../../include/Theme.h"
 #include "../../../include/Themeable.h"
 
+#include <QAbstractItemView>
+
 using Layers::Attribute;
 using Layers::Entity;
 using Layers::Graphic;
@@ -102,16 +104,21 @@ QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 {
 	QList<Themeable*> child_themeables = QList<Themeable*>();
 
-	if (QWidget* widget = dynamic_cast<QWidget*>(this))
-	{
-		QList<QWidget*> child_widgets = widget->findChildren<QWidget*>(options);
-
-		if (!child_widgets.isEmpty())
+	//if (QWidget* widget = dynamic_cast<QWidget*>(this))
+	if (QObject* object = dynamic_cast<QObject*>(this))
 		{
-			for (QWidget* child_widget : child_widgets)
-				if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_widget))
+		QList<QObject*> child_objects = object->findChildren<QObject*>(options);
+
+		if (!child_objects.isEmpty())
+		{
+			for (QObject* child_object : child_objects)
+				if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_object))
 					child_themeables.append(child_themeable);
 		}
+
+		if (QAbstractItemView* item_view_widget = dynamic_cast<QAbstractItemView*>(this))
+			if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(item_view_widget->itemDelegate()))
+				child_themeables.append(child_themeable_item_delegate);
 	}
 
 	return child_themeables;
@@ -172,17 +179,22 @@ Graphic* Themeable::icon() const
 	return m_icon;
 }
 
-bool Themeable::is_stateful() const
+bool Themeable::is_app_themeable() const
+{
+	return m_is_app_themeable;
+}
+
+bool Themeable::is_multi_valued() const
 {
 	for (Entity* entity : m_entities)
 	{
 		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
-			if (attr->is_stateful())
+			if (attr->is_multi_valued())
 				return true;
 		}
 		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
-			if (attr_group->is_stateful())
+			if (attr_group->is_multi_valued())
 				return true;
 
 	}
@@ -290,9 +302,6 @@ QString& Themeable::tag()
 {
 	if (m_tag == "")
 	{
-		if (!m_is_app_themeable)
-			m_tag += "layers/";
-
 		for (QString prefix : m_tag_prefixes)
 		{
 			m_tag += prefix + "/";

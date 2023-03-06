@@ -6,8 +6,8 @@ using Layers::Variant;
 Attribute::Attribute(const QString& name, bool disabled) :
 	Entity(name, disabled) { }
 
-Attribute::Attribute(const QString& name, QVariant qvariant, bool disabled) :
-	m_data{ new Data(qvariant) }, Entity(name, disabled)
+Attribute::Attribute(const QString& name, Variant variant, bool disabled) :
+	m_data{ new Data(variant) }, Entity(name, disabled)
 {
 	establish_data_connection();
 }
@@ -62,7 +62,6 @@ void Attribute::establish_data_connection()
 
 void Attribute::entangle_with(Attribute& attribute)
 {
-	// TODO: Likely need to store this connection and disconnect in destructor
 	QObject::disconnect(m_reentanglement_connection);
 	m_reentanglement_connection = 
 		connect(&attribute, &Attribute::entangled, [this, &attribute] {
@@ -101,9 +100,9 @@ bool Attribute::is_entangled() const
 	return m_is_entangled;
 }
 
-bool Attribute::is_stateful() const
+bool Attribute::is_multi_valued() const
 {
-	return m_data->is_stateful();
+	return m_data->is_multi_valued();
 }
 
 void Attribute::set_state(const QString& state)
@@ -113,26 +112,19 @@ void Attribute::set_state(const QString& state)
 	emit value_changed();
 }
 
-void Attribute::set_value(QVariant qvariant, const QString& state)
+void Attribute::set_value(Variant variant, const QString& state)
 {
-	if (!is_stateful())
-		m_data->set_value(qvariant);
+	if (!is_multi_valued())
+		m_data->set_value(variant);
 
 	else
 	{
 		if (state == "")
-			m_data->set_value(qvariant, m_state);
+			m_data->set_value(variant, m_state);
 		else
-			m_data->set_value(qvariant, state);
+			m_data->set_value(variant, state);
 	}
 }
-
-//void Attribute::setup_widget_update_connection(QWidget* widget)
-//{
-//	m_update_widget_connections.append(
-//		connect(this, &Entity::value_changed, [widget] { widget->update(); })
-//	);
-//}
 
 QString Attribute::state() const
 {

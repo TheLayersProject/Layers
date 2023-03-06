@@ -8,15 +8,59 @@
 namespace Layers
 {
 	/*!
-		Data type which represents either a single Variant or multiple Variants
+		A Data object is a QObject that implements a specialized Variant
+		container.
 
-		A Data object is a QObject that stores a pointer to either a single
-		Variant or a QVariantMap where QString represents the state of the
-		Variant.
+		%Data can be either single-valued or multi-valued. This is referred to
+		as the data's *plurality*.
+		
+		This is accomplished by storing a pointer to either a single variant or
+		a variant map where QStrings represent variant states. States are
+		required for multi-valued data in order to distinguish between the
+		different values.
 
-		Data associated with multiple Variants is stateful, whereas Data
-		associated with a single Variant is not stateful. This is referred to
-		as the Data's statehood or statefulness.
+		~~~~~~~~~~~~~{.c}
+		// Example of single-valued and multi-valued data
+
+		Data thickness = Data(10);
+
+		Data fill = Data({
+			{ "Selected", QColor(Qt::lightGray) },
+			{ "Unselected", QColor(Qt::darkGray) }
+		});
+
+		// thickness is single-valued data
+		// fill is multi-valued data
+		~~~~~~~~~~~~~
+
+		%Data is synonymous with its value(s). Therefore, it is the
+		responsibility of the *user* of data to label it, give it a purpose,
+		and in the case of multi-valued data, define which state is active.
+		%Data, by itself, does none of those things.
+
+		# Value Change Detection
+
+		A data object sets up connections that emit Data::changed() any time
+		Variant::changed() is emitted from any of the associated variants. This
+		works as a sort of signal repeater so that other objects associated
+		with the data object can enable value change detection.
+
+		~~~~~~~~~~~~~{.c}
+		// Example of value change detection
+
+		Data thickness = Data(10);
+
+		connect(&thickness, &Data::changed, []
+			{ qDebug() << "Thickness changed!"; });
+
+		thickness.set_value(15);
+
+		// The assignment above causes Data::changed() to emit and
+		// 'Thickness changed!' is output to the console.
+		~~~~~~~~~~~~~
+
+		Value change detection is used to support critical Layers functionality
+		like Attribute entanglement.
 	*/
 	class Data : public QObject
 	{
@@ -26,21 +70,18 @@ namespace Layers
 		void changed();
 
 	public:
-		Data(QVariant qvariant);
+		Data(Variant variant);
 		Data(VariantMap variant_map);
 		Data(const Data& d);
 		~Data();
 
 		/*!
-			Returns value of the Variant associated with the supplied state,
-			converted to the template type T.
+			Returns data's value converted to the template type T.
 
-			Ignore the state parameter when calling this with Data that is not
-			stateful.
+			The state parameter is ignored if the caller is not multi-valued.
 
-			@param state - State, if any, associated with Variant
-			@returns Value of Variant associated with state, converted to
-			template type T
+			@param state - State, if any, associated with value
+			@returns Value, converted to template type T
 		*/
 		template<typename T>
 		T as(const QString& state = "") const;
@@ -54,76 +95,72 @@ namespace Layers
 		bool contains_state(const QString& state) const;
 
 		/*!
-			Copies the supplied Data object.
+			Copies the valuation of the supplied data object.
 
-			If the statehood of the data objects is different, then the caller
-			is converted to match the statehood of the supplied Data before the
-			values are copied.
+			If the caller's plurality does not match the plurality of the
+			supplied data, then the caller is converted before copying takes
+			place.
 		*/
 		void copy(const Data& data);
 
 		/*!
-			Converts to stateful Data initialized with the supplied map.
+			Converts to multi-valued data initialized with the supplied map.
 
-			@param variant_map - Variant map to initialize the Data with
+			@param variant_map - Variant map to initialize the data with
 		*/
 		void init_variant_map(const VariantMap& variant_map);
 
 		/*!
-			Returns true if the Data is stateful, otherwise, returns false.
+			Returns true if the data is multi-valued, otherwise, returns false.
 
-			@returns True if stateful, false otherwise
+			@returns True if multi-valued, false otherwise
 		*/
-		bool is_stateful() const;
+		bool is_multi_valued() const;
 
 		/*!
-			Set the value of the stored Variant.
+			Sets the data's value.
 
-			<b>Only works with Data objects that are not stateful!</b>
+			For single-valued data, the *state* parameter is ignored.
 
-			@param qvariant - QVariant containing the value being set
-			@param retain_type - Whether to protect the value type from change,
-			true by default
+			For multi-valued data, the *state* parameter is highly recommended.
+			If the default argument is used with multi-valued data, then this
+			function sets the value of the first variant in the map, which may
+			be an undesirable result. It is likely in the interest of the
+			caller to supply an explicit state argument when multi-valued data
+			is involved.
+
+			@param variant - Variant containing the value being set
+			@param state - State associated with value, if any
 		*/
-		//void set_value(QVariant qvariant);
+		void set_value(Variant variant, const QString& state = "");
 
 		/*!
-			Set the value of the stored Variant associated with the supplied
-			state.
+			Returns a QStringList of the states associated with the data's
+			values.
 
-			<b>Only works with Data objects that are stateful!</b>
-
-			@param state - State associated with value
-			@param qvariant - QVariant containing the value being set
-		*/
-		void set_value(QVariant qvariant, const QString& state = "");
-
-		/*!
-			Returns a QStringList of the available states.
-
-			If the Data is not stateful, an empty list will be returned.
+			If the data is single-valued, an empty list will be returned.
 
 			@returns QStringList where QStrings represent the states
 		*/
 		QStringList states() const;
 
 		/*!
-			Returns Data represented as a QJsonObject.
+			Returns data represented as a QJsonObject.
 
-			@returns QJsonObject representing the Data
+			@returns QJsonObject representation of the data
 		*/
 		QJsonObject to_json_object();
 
 		/*!
-			Returns the name of the type stored in the Data.
+			Returns the name of the type stored in the data.
 
-			If the Data is not stateful, the type name of the single Variant is
+			If the data is single-valued, then the type name of that value is
 			returned.
 			
-			If it is stateful, then the type name of the Variant associated
-			with the first key state of the Variant map is returned.
+			If the data is multi-valued, then the type name of the first
+			variant in the map is returned.
 
-			@returns Name of type stored within the Data
+			@returns Name of type stored within the data
 		*/
 		const char* typeName() const;
 

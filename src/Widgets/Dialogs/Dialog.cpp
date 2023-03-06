@@ -16,9 +16,9 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	init_attributes();
 	init_titlebar();
 
-	setFixedSize(525, 300);
-	setWindowFlags(Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
+	//setFixedSize(525, 300);
+	setWindowFlags(Qt::FramelessWindowHint);
 	//installEventFilter(this);
 
 	set_name("dialog");

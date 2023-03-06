@@ -88,7 +88,10 @@ void Label::resize()
 
 		build_wrapped_lines();
 
-		int wrapped_height = m_padding_top->as<double>() + font_metrics.height() * m_wrapped_lines.count() + m_padding_bottom;
+		int wrapped_height =
+			m_padding_top->as<double>() +
+			font_metrics.height() * m_wrapped_lines.count() +
+			m_padding_bottom;
 
 		QLabel::setFixedHeight(wrapped_height);
 	}
@@ -141,12 +144,12 @@ void Label::setFont(const QFont& f)
 	if (!m_resize_disabled) resize();
 }
 
-void Label::setMaximumWidth(int maxw)
-{
-	QLabel::setMaximumWidth(maxw);
-
-	if (!m_resize_disabled) resize();
-}
+//void Label::setFixedWidth(int w)
+//{
+//	QLabel::setFixedWidth(w);
+//
+//	if (!m_resize_disabled) resize();
+//}
 
 void Label::setWordWrap(bool on)
 {

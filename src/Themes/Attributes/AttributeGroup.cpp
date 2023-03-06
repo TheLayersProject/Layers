@@ -63,10 +63,10 @@ void AttributeGroup::entangle_with(AttributeGroup& attr_group)
 		m_attributes[attr_key]->entangle_with(*attr_group.m_attributes[attr_key]);
 }
 
-bool AttributeGroup::is_stateful() const
+bool AttributeGroup::is_multi_valued() const
 {
 	for (Attribute* attribute : m_attributes)
-		if (attribute->is_stateful())
+		if (attribute->is_multi_valued())
 			return true;
 
 	return false;

@@ -9,45 +9,21 @@
 
 #include "Attribute.h"
 
+#define EntityMap QMap<QString, Layers::Entity*>
+
+#define ThemeData QHash<QString, EntityMap>
+
 namespace Layers
 {
 	class Attribute;
 	class Themeable;
 
-	// NOTE: Below has not been updated to support Entity
-	//inline QDataStream& operator <<(QDataStream& stream, const QMap<QString, Attribute*>& attr_map)
-	//{
-	//	stream << attr_map.count();
-
-	//	for (const QString& attr_tag : attr_map.keys())
-	//	{
-	//		stream << attr_tag;
-	//		stream << *attr_map[attr_tag];
-	//	}
-	//	
-	//	return stream;
-	//}
-
-	// NOTE: Below has not been updated to support Entity
-	//inline QDataStream& operator >>(QDataStream& stream, QMap<QString, Attribute*>& attr_map)
-	//{
-	//	qsizetype attr_count;
-	//	
-	//	stream >> attr_count;
-	//	
-	//	for (int i = 0; i < attr_count; i++)
-	//	{
-	//		QString attr_tag = "";
-	//		Attribute* attr = new Attribute("");
-	//		
-	//		stream >> attr_tag;
-	//		stream >> *attr;
-	//	
-	//		attr_map[attr_tag] = attr;
-	//	}
-	//	
-	//	return stream;
-	//}
+	struct ThemeLineageData
+	{
+		QString name;
+		QString uuid;
+		bool has_app_implementation_available = false;
+	};
 
 	enum class ThemeDataType
 	{
@@ -68,19 +44,13 @@ namespace Layers
 		Theme(const QString& name, QUuid* uuid, bool editable);
 		~Theme();
 
-		/*!
-			Adds a themeable tag paired with a set of attributes
+		void append_to_lineage(const QString& theme_id);
 
-			Does nothing if themeable tag already exists in the theme.
-
-			@param themeable_tag of the themeable that the supplied attributes belong to
-			@param attributes that belong to a themeable for this theme to store
-		*/
-		//void add_attributes(
-		//	const QString& themeable_tag,
-		//	QMap<QString, Attribute*> attributes);
+		void append_to_lineage(QStringList lineage_list);
 
 		void clear();
+
+		void clear_data_for_themeable(const QString& themeable_tag);
 
 		/*!
 			Returns true if the theme contains any attributes for the given themeable tag; otherwise returns false.
@@ -106,18 +76,22 @@ namespace Layers
 		*/
 		bool editable();
 
+		bool has_app_implementation() const;
+
 		QString identifier();
 
 		Attribute* init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value);
 
-		void load_document(const QJsonDocument& json_document);
+		QStringList lineage() const;
+
+		void load_document(const QJsonDocument& json_document, const ThemeDataType& data_type);
 
 		/*!
-			Returns a reference to the theme's name
+			Returns the theme's name
 
-			@returns Reference to theme's name
+			@returns Theme's name
 		*/
-		QString& name();
+		QString name() const;
 
 		/*!
 			Sets the theme's name
@@ -143,28 +117,15 @@ namespace Layers
 
 			@returns Reference to attribute set of themeable_tag
 		*/
-		QMap<QString, Entity*>& operator[](const QString& themeable_tag);
-
-		//friend QDataStream& operator <<(QDataStream& stream, const Theme& t)
-		//{
-		//	stream << t.m_data;
-		//	stream << t.m_editable;
-		//	stream << t.m_name;
-		//	return stream;
-		//}
-
-		//friend QDataStream& operator >>(QDataStream& stream, Theme& t)
-		//{
-		//	stream >> t.m_data;
-		//	stream >> t.m_editable;
-		//	stream >> t.m_name;
-		//	return stream;
-		//}
+		EntityMap& operator[](const QString& themeable_tag);
 
 	private:
-		QHash<QString, QMap<QString, Entity*>> m_data{ QHash<QString, QMap<QString, Entity*>>() };
+		ThemeData m_data_for_app_themeables{ ThemeData() };
+		ThemeData m_data_for_layers_themeables{ ThemeData() };
 
 		bool m_editable{ true };
+
+		QStringList m_lineage{ QStringList() };
 
 		QString m_name{ "" };
 

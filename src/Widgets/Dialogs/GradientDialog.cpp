@@ -8,7 +8,7 @@
 using Layers::GradientDialog;
 using Layers::Themeable;
 
-GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
+GradientDialog::GradientDialog(QWidget* parent) :
     Dialog("Gradient", parent)
 {
     init_attributes();
@@ -20,9 +20,10 @@ GradientDialog::GradientDialog(QGradientStops gradient_stops, QWidget* parent) :
     set_name("gradient_dialog");
     set_proper_name("Gradient Dialog");
     
-    m_gradient_stops = gradient_stops;
+    //m_gradient_stops = gradient_stops;
 
-    init_gradient_widget();
+    m_gradient_widget->setFixedSize(448, 176);
+    m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
 
     m_apply_button->set_name("apply_button");
     m_apply_button->set_proper_name("Apply Button");
@@ -55,11 +56,11 @@ void GradientDialog::add_gradient_stop(double stop_val, QColor color)
     color_control->disable_clicking();
 
     connect(color_control, &ColorControl::color_changed, [this, color_control] {
-        if (color_control->fill()->as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+        if (color_control->fill()->as<QColor>() != m_gradient_stops.at(m_color_controls.indexOf(color_control)).second)
         {
             m_gradient_stops.replace(
-                color_controls.indexOf(color_control),
-                QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
+                m_color_controls.indexOf(color_control),
+                QGradientStop(m_gradient_stops.at(m_color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
 
             m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
         }
@@ -75,7 +76,7 @@ void GradientDialog::add_gradient_stop(double stop_val, QColor color)
             break;
         }
     }
-    color_controls.insert(higher_index, color_control);
+    m_color_controls.insert(higher_index, color_control);
 
     QPoint gradient_widget_pos = m_gradient_widget->pos();
 
@@ -87,12 +88,21 @@ void GradientDialog::add_gradient_stop(double stop_val, QColor color)
 
 Themeable* GradientDialog::clone()
 {
-    return new GradientDialog(QGradientStops());
+    return new GradientDialog;
 }
 
 QGradientStops GradientDialog::gradient_stops() const
 {
     return m_gradient_stops;
+}
+
+void GradientDialog::set_gradient_stops(QGradientStops gradient_stops)
+{
+    m_gradient_stops = gradient_stops;
+
+    init_color_controls();
+
+    m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
 }
 
 void GradientDialog::init_attributes()
@@ -122,6 +132,15 @@ void GradientDialog::init_attributes()
 
 void GradientDialog::init_color_controls()
 {
+    for (ColorControl* color_control : m_color_controls)
+    {
+        delete color_control;
+
+        color_control = nullptr;
+    }
+
+    m_color_controls.clear();
+
     for (int i = 0; i < m_gradient_stops.count(); i++)
     {
         QGradientStop gradient_stop = m_gradient_stops.at(i);
@@ -131,17 +150,17 @@ void GradientDialog::init_color_controls()
         if (i > 0 && i < m_gradient_stops.count() - 1) color_control->disable_clicking();
 
         connect(color_control, &ColorControl::color_changed, [this, color_control] {
-            if (color_control->fill()->as<QColor>() != m_gradient_stops.at(color_controls.indexOf(color_control)).second)
+            if (color_control->fill()->as<QColor>() != m_gradient_stops.at(m_color_controls.indexOf(color_control)).second)
             {
                 m_gradient_stops.replace(
-                    color_controls.indexOf(color_control),
-                    QGradientStop(m_gradient_stops.at(color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
+                    m_color_controls.indexOf(color_control),
+                    QGradientStop(m_gradient_stops.at(m_color_controls.indexOf(color_control)).first, color_control->fill()->as<QColor>()));
 
                 m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
             }
             });
 
-        color_controls.append(color_control);
+        m_color_controls.append(color_control);
 
         QPoint gradient_widget_pos = m_gradient_widget->pos();
 
@@ -150,23 +169,16 @@ void GradientDialog::init_color_controls()
     }
 }
 
-void GradientDialog::init_gradient_widget()
-{
-    m_gradient_widget->setFixedSize(448, 176);
-
-    m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
-}
-
 void GradientDialog::update_gradient()
 {
     m_gradient_stops = QGradientStops();
 
-    int range = color_controls.last()->x() - color_controls.first()->x();
+    int range = m_color_controls.last()->x() - m_color_controls.first()->x();
 
-    for (ColorControl* color_control : color_controls)
+    for (ColorControl* color_control : m_color_controls)
     {
         if (m_selected_color_control && m_selected_color_control->x() == color_control->x() && color_control != m_selected_color_control);
-        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - color_controls.first()->x()) / double(range), color_control->fill()->as<QColor>() });
+        else m_gradient_stops.append(QGradientStop{ double(color_control->x() - m_color_controls.first()->x()) / double(range), color_control->fill()->as<QColor>() });
     }
 
     m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops)); // , true);
@@ -189,7 +201,7 @@ void GradientDialog::update_color_control_positions()
     for (int i = 0; i < m_gradient_stops.count(); i++)
     {
         QGradientStop gradient_stop = m_gradient_stops.at(i);
-        ColorControl* color_control = color_controls.at(i);
+        ColorControl* color_control = m_color_controls.at(i);
 
         color_control->move(gradient_widget_pos.x() - (color_control->width() / 2) + m_gradient_widget->width() * gradient_stop.first,
             gradient_widget_pos.y() - (color_control->height() / 2) + (m_gradient_widget->height() / 2));
@@ -204,13 +216,13 @@ bool GradientDialog::eventFilter(QObject* object, QEvent* event)
 
         if (mouse_event->button() & Qt::LeftButton)
         {
-            for (int i = 1; i < color_controls.count() - 1; i++)
+            for (int i = 1; i < m_color_controls.count() - 1; i++)
             {
-                if (color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
-                    mouse_event->pos().x() < color_controls.at(i)->pos().x() + color_controls.at(i)->width() &&
+                if (m_color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
+                    mouse_event->pos().x() < m_color_controls.at(i)->pos().x() + m_color_controls.at(i)->width() &&
                     m_gradient_widget->geometry().contains(mouse_event->pos()))
                 {
-                    m_selected_color_control = color_controls.at(i);
+                    m_selected_color_control = m_color_controls.at(i);
                     m_selected_color_control->raise();
 
                     m_selection_start_point = mouse_event->pos();
@@ -226,17 +238,17 @@ bool GradientDialog::eventFilter(QObject* object, QEvent* event)
 
         if (mouse_event->button() & Qt::LeftButton)
         {
-            for (ColorControl* color_control : color_controls)
+            for (ColorControl* color_control : m_color_controls)
             {
                 if (m_selected_color_control->x() == color_control->x() && color_control != m_selected_color_control)
                 {
-                    if (color_controls.indexOf(color_control) == 0 || color_controls.indexOf(color_control) == color_controls.count() - 1)
+                    if (m_color_controls.indexOf(color_control) == 0 || m_color_controls.indexOf(color_control) == m_color_controls.count() - 1)
                     {
                         m_selected_color_control->disable_clicking(false);
                     }
 
-                    color_controls.swapItemsAt(color_controls.indexOf(color_control), color_controls.indexOf(m_selected_color_control));
-                    color_controls.removeOne(color_control);
+                    m_color_controls.swapItemsAt(m_color_controls.indexOf(color_control), m_color_controls.indexOf(m_selected_color_control));
+                    m_color_controls.removeOne(color_control);
                     color_control->deleteLater();
                     break;
                 }
@@ -260,7 +272,7 @@ bool GradientDialog::eventFilter(QObject* object, QEvent* event)
         QPoint delta = mouse_event->pos() - m_selection_start_point;
 
         int lower_range = m_gradient_widget->pos().x() - (m_selected_color_control->width() / 2);
-        int higher_range = m_gradient_widget->pos().x() - (color_controls.first()->width() / 2) + m_gradient_widget->width();
+        int higher_range = m_gradient_widget->pos().x() - (m_color_controls.first()->width() / 2) + m_gradient_widget->width();
 
         if (m_selected_control_start_x + delta.x() < lower_range)
         {
@@ -289,14 +301,14 @@ bool GradientDialog::eventFilter(QObject* object, QEvent* event)
             {
                 m_single_click_timer.stop();
 
-                for (int i = 1; i < color_controls.count() - 1; i++)
+                for (int i = 1; i < m_color_controls.count() - 1; i++)
                 {
-                    if (color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
-                        mouse_event->pos().x() < color_controls.at(i)->pos().x() + color_controls.at(i)->width() &&
+                    if (m_color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
+                        mouse_event->pos().x() < m_color_controls.at(i)->pos().x() + m_color_controls.at(i)->width() &&
                         m_gradient_widget->geometry().contains(mouse_event->pos()))
                     {
-                        color_controls.at(i)->deleteLater();
-                        color_controls.removeAt(i);
+                        m_color_controls.at(i)->deleteLater();
+                        m_color_controls.removeAt(i);
 
                         update_gradient();
 
@@ -308,10 +320,10 @@ bool GradientDialog::eventFilter(QObject* object, QEvent* event)
             {
                 bool clicked_on_control = false;
 
-                for (int i = 0; i < color_controls.count(); i++)
+                for (int i = 0; i < m_color_controls.count(); i++)
                 {
-                    if (color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
-                        mouse_event->pos().x() < color_controls.at(i)->pos().x() + color_controls.at(i)->width() &&
+                    if (m_color_controls.at(i)->pos().x() <= mouse_event->pos().x() &&
+                        mouse_event->pos().x() < m_color_controls.at(i)->pos().x() + m_color_controls.at(i)->width() &&
                         m_gradient_widget->geometry().contains(mouse_event->pos()))
                     {
                         clicked_on_control = true;

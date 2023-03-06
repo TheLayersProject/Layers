@@ -42,7 +42,7 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	m_message_label->set_name("message_label");
 	m_message_label->set_proper_name("Message Label");
 	m_message_label->set_font_size(15);
-	m_message_label->set_available_width(475);
+	m_message_label->setMaximumWidth(475);
 	m_message_label->setWordWrap(true);
 
 	setup_layout();

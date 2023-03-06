@@ -16,6 +16,11 @@ namespace Layers
 	{
 		Q_OBJECT
 
+	signals:
+		void hover_enter();
+		void hover_leave();
+		void hover_move();
+
 	public:
 		Widget(QWidget* parent = nullptr);
 

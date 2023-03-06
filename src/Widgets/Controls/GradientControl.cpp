@@ -57,6 +57,8 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 			//	layersApp->main_window()->control_gradient_dialog());
 
 			GradientDialog* gradient_dialog = layersApp->gradient_dialog();
+
+			gradient_dialog->set_gradient_stops(fill()->as<QGradientStops>());
 			
 
 			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);

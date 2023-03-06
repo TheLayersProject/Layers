@@ -11,11 +11,15 @@ namespace Layers
 		A Variant is a QObject that wraps a QVariant to enable Qt signal/slot
 		functionality.
 
+		A variant represents a value. Therefore, the terms *variant* and *value*
+		are often used synonymously.
+
 		# Value Change Detection
 
 		The purpose of having a variant type with signal/slot support is to
-		enable value change detection. Any time the QVariant is modified, the
-		changed() signal gets emitted.
+		enable value change detection. Any time the variant is modified, the
+		changed() signal gets emitted. This signal can be connected to execute
+		specific functionality whenever value changes occur.
 
 		~~~~~~~~~~~~~{.c}
 		// Example of value change detection
@@ -31,8 +35,8 @@ namespace Layers
 		// 'Thickness changed!' is output to the console.
 		~~~~~~~~~~~~~
 
-		%Variant value change detection is used to support critical Layers
-		functionality like Attribute entanglement.
+		Value change detection is used to support critical Layers functionality
+		like Attribute entanglement.
 	*/
 	class Variant : public QObject
 	{
@@ -45,6 +49,7 @@ namespace Layers
 		Variant();
 		Variant(double d);
 		Variant(QColor color);
+		Variant(QString string);
 		Variant(QVariant qvariant);
 		Variant(const Variant& variant);
 

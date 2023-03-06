@@ -4,6 +4,7 @@
 
 #include <QRegularExpressionValidator>
 
+using Layers::Attribute;
 using Layers::ColorDialog;
 using Layers::Themeable;
 
@@ -36,7 +37,7 @@ ColorDialog::ColorDialog(QWidget* parent) :
         qsizetype text_size = m_color_name_line_editor->text()->as<QString>().size();
 
         if (text_size == 6) // || text_size == 8)
-            color.set_value(QColor("#" + m_color_name_line_editor->text()->as<QString>()));
+            m_color->set_value(QColor("#" + m_color_name_line_editor->text()->as<QString>()));
         });
 
     m_color_plane->setFixedSize(160, 160);
@@ -50,22 +51,34 @@ ColorDialog::ColorDialog(QWidget* parent) :
     apply_theme(*layersApp->current_theme());
 }
 
+ColorDialog::~ColorDialog()
+{
+    delete m_color;
+
+    m_color = nullptr;
+}
+
 Themeable* ColorDialog::clone()
 {
     return new ColorDialog;
 }
 
+Attribute* ColorDialog::color() const
+{
+    return m_color;
+}
+
 void ColorDialog::update_color_name_line_editor()
 {
     m_color_name_line_editor->set_text(
-        color.as<QColor>().name().remove("#"));
+        m_color->as<QColor>().name().remove("#"));
 }
 
 void ColorDialog::init_attributes()
 {
-    color.entangle_with(m_color_plane->color);
+    m_color->entangle_with(m_color_plane->color);
 
-    connect(&color, &Attribute::value_changed,
+    connect(m_color, &Attribute::value_changed,
         this, &ColorDialog::update_color_name_line_editor);
 
     m_z_slider->a_value.entangle_with(m_color_plane->z_value);

@@ -24,9 +24,30 @@ Theme::Theme(const QString& name, QUuid* uuid, bool editable) :
 
 Theme::~Theme()
 {
-	for (const QString& themeable_tag : m_data.keys())
+	clear();
+
+	if (m_uuid)
 	{
-		QMap<QString, Entity*>& themeable_data = m_data[themeable_tag];
+		delete m_uuid;
+		m_uuid = nullptr;
+	}
+}
+
+void Theme::append_to_lineage(const QString& theme_id)
+{
+	m_lineage.append(theme_id);
+}
+
+void Theme::append_to_lineage(QStringList lineage_list)
+{
+	m_lineage.append(lineage_list);
+}
+
+void Theme::clear()
+{
+	for (const QString& themeable_tag : m_data_for_app_themeables.keys())
+	{
+		EntityMap& themeable_data = m_data_for_app_themeables[themeable_tag];
 
 		for (Entity* entity : themeable_data)
 		{
@@ -37,55 +58,91 @@ Theme::~Theme()
 		themeable_data.clear();
 	}
 
-	m_data.clear();
-
-	if (m_uuid)
+	for (const QString& themeable_tag : m_data_for_layers_themeables.keys())
 	{
-		delete m_uuid;
-		m_uuid = nullptr;
-	}
-}
+		EntityMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
 
-//void Theme::add_attributes(const QString& themeable_tag, QMap<QString, Attribute*> attributes)
-//{
-//	if (!m_data.contains(themeable_tag))
-//		m_data[themeable_tag] = attributes;
-//}
-
-void Theme::clear()
-{
-	for (const QString& themeable_tag : m_data.keys())
-	{
-		for (Entity* entity : m_data[themeable_tag])
+		for (Entity* entity : themeable_data)
 		{
 			delete entity;
-
 			entity = nullptr;
 		}
+
+		themeable_data.clear();
 	}
 
-	m_data.clear();
+
+	m_data_for_app_themeables.clear();
+	m_data_for_layers_themeables.clear();
+}
+
+void Theme::clear_data_for_themeable(const QString& themeable_tag)
+{
+	ThemeData* relevant_theme_data = nullptr;
+
+	if (m_data_for_app_themeables.contains(themeable_tag))
+		relevant_theme_data = &m_data_for_app_themeables;
+	else if (m_data_for_layers_themeables.contains(themeable_tag))
+		relevant_theme_data = &m_data_for_layers_themeables;
+
+	if (relevant_theme_data)
+	{
+		EntityMap& themeable_data = (*relevant_theme_data)[themeable_tag];
+
+		for (Entity* entity : themeable_data)
+		{
+			delete entity;
+			entity = nullptr;
+		}
+
+		themeable_data.clear();
+
+		relevant_theme_data->remove(themeable_tag);
+	}
 }
 
 bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 {
-	return m_data.contains(themeable_tag);
+	return
+		m_data_for_app_themeables.contains(themeable_tag) ||
+		m_data_for_layers_themeables.contains(themeable_tag);
 }
 
 void Theme::copy(Theme& theme)
 {
+	/*  
+		NOTE ABOUT Theme::copy():
+		This function might be misleading since the copy only considers
+		what the supplied theme currently has loaded. It **does not** consider
+		the addional app theme files that did not get loaded in with the Theme.
+	*/
+
 	clear();
 
-	for (const QString& themeable_tag : theme.m_data.keys())
+	for (const QString& themeable_tag : theme.m_data_for_app_themeables.keys())
 	{
-		QMap<QString, Entity*>& themeable_data_in_theme =
-			m_data[themeable_tag] = QMap<QString, Entity*>();
+		EntityMap& themeable_data_in_theme =
+			m_data_for_app_themeables[themeable_tag] = EntityMap();
 
-		for (const QString& entity_key : theme.m_data[themeable_tag].keys())
+		for (const QString& entity_key : theme.m_data_for_app_themeables[themeable_tag].keys())
 		{
-			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data[themeable_tag][entity_key]))
+			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data_for_app_themeables[themeable_tag][entity_key]))
 				themeable_data_in_theme[entity_key] = new Attribute(*theme_attr);
-			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data[themeable_tag][entity_key]))
+			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data_for_app_themeables[themeable_tag][entity_key]))
+				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
+		}
+	}
+
+	for (const QString& themeable_tag : theme.m_data_for_layers_themeables.keys())
+	{
+		EntityMap& themeable_data_in_theme =
+			m_data_for_layers_themeables[themeable_tag] = EntityMap();
+
+		for (const QString& entity_key : theme.m_data_for_layers_themeables[themeable_tag].keys())
+		{
+			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data_for_layers_themeables[themeable_tag][entity_key]))
+				themeable_data_in_theme[entity_key] = new Attribute(*theme_attr);
+			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data_for_layers_themeables[themeable_tag][entity_key]))
 				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
 		}
 	}
@@ -93,45 +150,38 @@ void Theme::copy(Theme& theme)
 
 void Theme::copy_attribute_values_of(Themeable* themeable)
 {
-	if (m_data.contains(themeable->tag()))
-	{
-		QMap<QString, Entity*>& themeable_data_in_theme = m_data[themeable->tag()];
+	clear_data_for_themeable(themeable->tag());
 
-		for (const QString& entity_key : themeable_data_in_theme.keys())
+	EntityMap new_themeable_data;
+
+	for (const QString& entity_key : themeable->entities().keys())
+	{
+		if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
 		{
-			if (themeable->entities().contains(entity_key))
-			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
-					dynamic_cast<Attribute*>(themeable_data_in_theme[entity_key])->copy(*attr);
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
-					dynamic_cast<AttributeGroup*>(themeable_data_in_theme[entity_key])->copy(*attr_group);
-			}
+			if (!attr->is_entangled())
+				new_themeable_data[entity_key] = new Attribute(*attr);
+		}
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
+		{
+			new_themeable_data[entity_key] = new AttributeGroup(*attr_group);
 		}
 	}
+
+	if (themeable->is_app_themeable())
+		m_data_for_app_themeables[themeable->tag()] = new_themeable_data;
 	else
-	{
-		QMap<QString, Entity*> new_themeable_data_for_theme;
-
-		for (const QString& entity_key : themeable->entities().keys())
-		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
-			{
-				if (!attr->is_entangled())
-					new_themeable_data_for_theme[entity_key] = new Attribute(*attr);
-			}
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
-			{
-				new_themeable_data_for_theme[entity_key] = new AttributeGroup(*attr_group);
-			}
-		}
-
-		m_data[themeable->tag()] = new_themeable_data_for_theme;
-	}
+		m_data_for_layers_themeables[themeable->tag()] = new_themeable_data;
 }
 
 bool Theme::editable()
 {
 	return m_editable;
+}
+
+bool Theme::has_app_implementation() const
+{
+	return
+		!m_data_for_app_themeables.isEmpty();
 }
 
 QString Theme::identifier()
@@ -237,7 +287,12 @@ Attribute* Theme::init_attribute(const QString& name, bool disabled, const QJson
 	}
 }
 
-void Theme::load_document(const QJsonDocument& json_document)
+QStringList Theme::lineage() const
+{
+	return m_lineage;
+}
+
+void Theme::load_document(const QJsonDocument& json_document, const ThemeDataType& data_type)
 {
 	QJsonObject json_object = json_document.object();
 
@@ -245,7 +300,7 @@ void Theme::load_document(const QJsonDocument& json_document)
 	{
 		QJsonObject themeable_object = json_object.value(themeable_tag).toObject();
 
-		QMap<QString, Entity*> themeable_attributes;
+		EntityMap themeable_attributes;
 
 		for (const QString& entity_key : themeable_object.keys())
 		{
@@ -292,11 +347,14 @@ void Theme::load_document(const QJsonDocument& json_document)
 			}
 		}
 
-		m_data[themeable_tag] = themeable_attributes;
+		if (data_type == ThemeDataType::Application)
+			m_data_for_app_themeables[themeable_tag] = themeable_attributes;
+		else if (data_type == ThemeDataType::Layers)
+			m_data_for_layers_themeables[themeable_tag] = themeable_attributes;
 	}
 }
 
-QString& Theme::name()
+QString Theme::name() const
 {
 	return m_name;
 }
@@ -308,7 +366,9 @@ void Theme::set_name(const QString& new_name)
 
 QList<QString> Theme::themeable_tags()
 {
-	return m_data.keys();
+	return
+		m_data_for_app_themeables.keys() +
+		m_data_for_layers_themeables.keys();
 }
 
 QJsonDocument Theme::to_json_document(ThemeDataType data_type)
@@ -317,41 +377,62 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 
 	QJsonObject json_object;
 
-	json_object.insert("name", m_name);
-
-	QJsonObject data_json_object;
-
-	for (const QString& themeable_tag : m_data.keys())
+	switch (data_type)
 	{
-		if (
-			(data_type == ThemeDataType::Application && themeable_tag.startsWith("layers/")) ||
-			(data_type == ThemeDataType::Layers && !themeable_tag.startsWith("layers/"))
-			)
-				continue;
-
-		QMap<QString, Entity*>& themeable_data_in_theme = m_data[themeable_tag];
-
-		QJsonObject themeable_json_object;
-
-		for (const QString& entity_key : themeable_data_in_theme.keys())
+	case (ThemeDataType::All):
+	case (ThemeDataType::Application):
+		for (const QString& themeable_tag : m_data_for_app_themeables.keys())
 		{
-			if (Attribute* attr = dynamic_cast<Attribute*>(themeable_data_in_theme[entity_key]))
-				themeable_json_object.insert(entity_key, attr->to_json_object());
-			else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable_data_in_theme[entity_key]))
-				themeable_json_object.insert(entity_key, attr_group->to_json_object());
+			EntityMap& themeable_data = m_data_for_app_themeables[themeable_tag];
+
+			QJsonObject themeable_json_object;
+
+			for (const QString& entity_key : themeable_data.keys())
+			{
+				if (Attribute* attr = dynamic_cast<Attribute*>(themeable_data[entity_key]))
+					themeable_json_object.insert(entity_key, attr->to_json_object());
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable_data[entity_key]))
+					themeable_json_object.insert(entity_key, attr_group->to_json_object());
+			}
+
+			json_object.insert(themeable_tag, themeable_json_object);
 		}
 
-		data_json_object.insert(themeable_tag, themeable_json_object);
-	}
+		if (data_type == ThemeDataType::Application)
+			break;
 
-	json_object.insert("data", data_json_object);
+		[[fallthrough]];
+
+	case (ThemeDataType::Layers):
+		for (const QString& themeable_tag : m_data_for_layers_themeables.keys())
+		{
+			EntityMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
+
+			QJsonObject themeable_json_object;
+
+			for (const QString& entity_key : themeable_data.keys())
+			{
+				if (Attribute* attr = dynamic_cast<Attribute*>(themeable_data[entity_key]))
+					themeable_json_object.insert(entity_key, attr->to_json_object());
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable_data[entity_key]))
+					themeable_json_object.insert(entity_key, attr_group->to_json_object());
+			}
+
+			json_object.insert(themeable_tag, themeable_json_object);
+		}
+	}
 
 	json_document.setObject(json_object);
 
 	return json_document;
 }
 
-QMap<QString, Entity*>& Theme::operator[](const QString& themeable_tag)
+EntityMap& Theme::operator[](const QString& themeable_tag)
 {
-	return m_data[themeable_tag];
+	if (m_data_for_app_themeables.contains(themeable_tag))
+		return m_data_for_app_themeables[themeable_tag];
+	else if (m_data_for_layers_themeables.contains(themeable_tag))
+		return m_data_for_layers_themeables[themeable_tag];
+	else
+		return m_data_for_layers_themeables[themeable_tag];
 }

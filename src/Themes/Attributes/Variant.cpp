@@ -11,6 +11,9 @@ Variant::Variant(double d) :
 Variant::Variant(QColor color) :
 	m_qvariant{ QVariant(color) } { }
 
+Variant::Variant(QString string) :
+	m_qvariant{ QVariant(string) } { }
+
 Variant::Variant(QVariant qvariant) :
 	m_qvariant{ qvariant } { }
 

@@ -517,6 +517,8 @@ void CustomizeMenu::setup_layout()
 
 	m_preview_layout->setContentsMargins(32, 32, 32, 32);
 	m_preview_layout->setSpacing(0);
+	//m_preview_layout->addStretch();
+	//m_preview_layout->addStretch();
 
 	m_preview_frame->fill()->set_disabled();
 	m_preview_frame->setLayout(m_preview_layout);

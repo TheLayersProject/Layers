@@ -15,13 +15,15 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		GradientDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
+		GradientDialog(QWidget* parent = nullptr);
 
 		void add_gradient_stop(double stop_val, QColor color);
 
 		virtual Themeable* clone() override;
 
 		QGradientStops gradient_stops() const;
+
+		void set_gradient_stops(QGradientStops gradient_stops);
 
 		void update_gradient();
 
@@ -36,15 +38,14 @@ namespace Layers
 
 	private:
 		void init_color_controls();
-		void init_gradient_widget();
 
 		void setup_layout();
 
 		Widget* m_gradient_widget{ new Widget };
 
-		QGradientStops m_gradient_stops{ { 0.0, Qt::white },{ 1.0, Qt::black } };
+		QGradientStops m_gradient_stops{ {0.0, Qt::white},{1.0, Qt::black} };
 
-		QList<ColorControl*> color_controls;
+		QList<ColorControl*> m_color_controls;
 
 		Button* m_apply_button{ new Button("Apply") };
 

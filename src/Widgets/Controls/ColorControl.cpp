@@ -29,11 +29,11 @@ void ColorControl::click()
 	//color_dialog->entangle_with(
 	//	layersApp->main_window()->control_color_dialog());
 
-	color_dialog->color.set_value(fill()->as<QColor>());
+	color_dialog->color()->set_value(fill()->as<QColor>());
 
 	if (color_dialog->exec())
 	{
-		fill()->set_value(color_dialog->color.as<QColor>());
+		fill()->set_value(color_dialog->color()->as<QColor>());
 
 		emit color_changed();
 	}

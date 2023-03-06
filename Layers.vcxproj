@@ -111,6 +111,7 @@
     <ClCompile Include="src\Application\directories.cpp" />
     <ClCompile Include="src\Layouts\HorizontalLayout.cpp" />
     <ClCompile Include="src\Layouts\VerticalLayout.cpp" />
+    <ClCompile Include="src\TableModels\ThemeLineageModel.cpp" />
     <ClCompile Include="src\Themes\Attributes\Attribute.cpp" />
     <ClCompile Include="src\Themes\Attributes\Data.cpp" />
     <ClCompile Include="src\Themes\Attributes\AttributeGroup.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="src\Tools\Downloader.cpp" />
     <ClCompile Include="src\Tools\GitHubRepo.cpp" />
     <ClCompile Include="src\Tools\ImageSequence.cpp" />
+    <ClCompile Include="src\Tools\SvgRenderer.cpp" />
     <ClCompile Include="src\Tools\Version.cpp" />
     <ClCompile Include="src\Widgets\AppPreferencesSettingsPanel.cpp" />
     <ClCompile Include="src\Widgets\Attribute Widgets\AttributeWidget.cpp" />
@@ -150,9 +152,12 @@
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\FillDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\GradientDialog.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\UpdateDialog.cpp" />
     <ClCompile Include="src\Widgets\Graphic.cpp" />
+    <ClCompile Include="src\Widgets\HeaderView.cpp" />
     <ClCompile Include="src\Widgets\ImageSequenceLabel.cpp" />
+    <ClCompile Include="src\Widgets\ThemeableItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\Label.cpp" />
     <ClCompile Include="src\Widgets\MenuBar.cpp" />
     <ClCompile Include="src\Widgets\Tab.cpp" />
@@ -166,6 +171,8 @@
     <ClCompile Include="src\Widgets\SVG.cpp" />
     <ClCompile Include="src\Widgets\TabBar.cpp" />
     <ClCompile Include="src\Widgets\TabBar2.cpp" />
+    <ClCompile Include="src\Widgets\TableView.cpp" />
+    <ClCompile Include="src\Widgets\ThemeCompatibilityItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\ThemesSettingsPanel.cpp" />
     <ClCompile Include="src\Widgets\Titlebar.cpp" />
     <ClCompile Include="src\Widgets\Widget.cpp" />
@@ -199,7 +206,14 @@
     <QtMoc Include="include\ScrollBar.h" />
     <QtMoc Include="include\Variant.h" />
     <QtMoc Include="include\TabBar2.h" />
+    <QtMoc Include="include\TableView.h" />
+    <QtMoc Include="include\SvgRenderer.h" />
+    <QtMoc Include="include\HeaderView.h" />
+    <QtMoc Include="include\ThemeableItemDelegate.h" />
     <ClInclude Include="include\ThemeableBox.h" />
+    <QtMoc Include="include\ThemeCompatibilityCautionDialog.h" />
+    <QtMoc Include="include\ThemeLineageModel.h" />
+    <QtMoc Include="include\ThemeCompatibilityItemDelegate.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />

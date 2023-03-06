@@ -7,22 +7,70 @@
 namespace Layers
 {
 	/*!
-		Attribute implementation used throughout Layers, especially by Themes
-		and Themeables.
-
-		An Attribute represents labeled Data, and if the Data it represents is
-		stateful, the Attribute is also responsible for defining the active
-		state.
-
-		A key feature of Attributes is entanglement. 'Entanglement' is the term
-		used to describe the action of forcing one Attribute to delete its Data
-		and point to the Data of another Attribute. This is done by calling
+		An Attribute is an Entity that implements a specialized Data container.
+	
+		An attribute works by pointing to a data object and providing it with
+		the characteristics of an entity. An attribute *labels* data and gives
+		it purpose.
+	
+		The relationship between attributes and data is analogous to the
+		relationship between variables (i.e., value containers) and the values
+		they store.
+	
+		# Data Ownership
+	
+		Initially, an attribute will *own* the data it points to. However, it
+		can be forced to *entangle* with another attribute, after which it will
+		no longer own the data it points to.
+	
+		# Entanglement
+	
+		A key feature of attributes is entanglement. *Entanglement* is the term
+		used to describe the action of forcing one attribute to delete its data
+		and point to the data of another attribute. This is done by calling
 		entangle_with().
+	
+		~~~~~~~~~~~~~{.c}
+		//  Example of attribute entanglement
+	
+		Attribute slider_value = Attribute("slider_value", 0);
+		Attribute thickness = Attribute("thickness", 10);
+	
+		slider_value.entangle_with(thickness);
+	
+		//	After entangle_with() is called above, the slider_value attribute
+		//	discards its data object containing the 0 value and points to the
+		//	data object owned by the thickness attribute. The slider_value
+		//	attribute is considered entangled beyond this point.
 
-		Attributes employ a concept of ownership over the Data they point to.
-		Initially, an Attribute owns its Data, but if it becomes *entangled*
-		with another Attribute, it will no longer own Data since the Data it
-		points to after being entangled is owned by the other Attribute.
+		slider_value.set_value(15);
+
+		//  The above call sets the value of the slider_value attribute to 15,
+		//  but since it is entangled with the thickness attribute, it
+		//  actually updates the value of the data object owned by the
+		//  thickness attribute. 
+		~~~~~~~~~~~~~
+
+		Combine this with value change detection and you get a recipe for
+		attribute control widgets that update in real-time.
+
+		~~~~~~~~~~~~~{.c}
+		//  Example of attribute control widgets that update in real-time
+		//  via attribute entanglement and value change detection.
+
+		//  Keep in mind that Layers widgets have been setup already to call
+		//  QWidget::update() when changes to their attributes are detected.
+
+		Widget* widget = new Widget;
+		Slider* thickness_slider = new Slider;
+
+		thickness_slider->value()->entangle_with(
+			*widget->border()->thickness());
+
+		//  Thats it! Display both the widget and the thickness_slider to the
+		//  user, and when they make changes to the slider, those changes will
+		//  update the widget's border thickness in real-time.
+		~~~~~~~~~~~~~
 	*/
 	class Attribute : public Entity
 	{
@@ -33,7 +81,7 @@ namespace Layers
 
 	public:
 		Attribute(const QString& name, bool disabled = false);
-		Attribute(const QString& name, QVariant qvariant, bool disabled = false);
+		Attribute(const QString& name, Variant variant, bool disabled = false);
 		Attribute(const QString& name, VariantMap variant_map, bool disabled = false);
 		Attribute(const Attribute& a);
 		~Attribute();
@@ -116,11 +164,11 @@ namespace Layers
 			Returns true if the Data this Attribute points to is stateful,
 			otherwise, returns false.
 
-			This function simply returns the result of Data::is_stateful().
+			This function simply returns the result of Data::is_multi_valued().
 
 			@returns True if stateful, false otherwise
 		*/
-		virtual bool is_stateful() const override;
+		virtual bool is_multi_valued() const override;
 
 		/*!
 			Sets the Attribute's active state.
@@ -139,9 +187,7 @@ namespace Layers
 			@param qvariant - QVariant containing the value being set
 			@param state - State associated with value
 		*/
-		void set_value(QVariant qvariant, const QString& state = "");
-
-		//virtual void setup_widget_update_connection(QWidget* widget) override;
+		void set_value(Variant variant, const QString& state = "");
 
 		/*!
 			Returns the active state of the Attribute.
@@ -190,7 +236,7 @@ namespace Layers
 	template<typename T>
 	inline T Attribute::as(const QString& state) const
 	{
-		if (m_data->is_stateful())
+		if (m_data->is_multi_valued())
 		{
 			if (state == "")
 				return m_data->as<T>(m_state);

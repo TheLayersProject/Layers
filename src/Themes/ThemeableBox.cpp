@@ -3,6 +3,7 @@
 
 #include <QEvent>
 #include <QPainterPath>
+#include <QWidget>
 
 using Layers::Attribute;
 using Layers::BorderAttributes;

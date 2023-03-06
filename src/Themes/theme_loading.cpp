@@ -2,6 +2,8 @@
 
 #include "../../../include/Application.h"
 
+#include <QJsonArray>
+
 using Layers::Theme;
 
 Theme* Layers::load_theme_1(const QString& file_name, const QString& app_identifier)
@@ -34,10 +36,15 @@ Theme* Layers::load_theme_1(const QString& file_name, const QString& app_identif
 
 		loaded_theme = new Theme(name, uuid, editable);
 
+		QStringList lineage = QStringList();
+		for (QJsonValue lineage_value : meta_obj.value("lineage").toArray())
+			lineage.append(lineage_value.toString());
+		loaded_theme->append_to_lineage(lineage);
+
 		if (!layers_file.open(QIODevice::ReadOnly))
 			qDebug() << "Could not read theme 'layers.json' file";
 
-		loaded_theme->load_document(QJsonDocument::fromJson(layers_file.readAll()));
+		loaded_theme->load_document(QJsonDocument::fromJson(layers_file.readAll()), ThemeDataType::Layers);
 
 		layers_file.close();
 
@@ -46,7 +53,7 @@ Theme* Layers::load_theme_1(const QString& file_name, const QString& app_identif
 			if (!app_file.open(QIODevice::ReadOnly))
 				qDebug() << "Could not read theme app file";
 
-			loaded_theme->load_document(QJsonDocument::fromJson(app_file.readAll()));
+			loaded_theme->load_document(QJsonDocument::fromJson(app_file.readAll()), ThemeDataType::Application);
 
 			app_file.close();
 		}

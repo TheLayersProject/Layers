@@ -3,8 +3,8 @@
 using Layers::Data;
 using Layers::Variant;
 
-Data::Data(QVariant qvariant) :
-	m_variant{ new Variant(qvariant) }
+Data::Data(Variant variant) :
+	m_variant{ new Variant(variant) }
 {
 	connect(m_variant, &Variant::changed, [this] { emit changed(); });
 }
@@ -102,39 +102,27 @@ void Data::init_variant_map(const VariantMap& variant_map)
 		connect(&variant, &Variant::changed, [this] { emit changed(); });
 }
 
-bool Data::is_stateful() const
+bool Data::is_multi_valued() const
 {
-	//if (m_variant_map)
-	//	return !m_variant_map->isEmpty();
-
 	return m_variant_map;
 }
 
-//void Data::set_value(QVariant qvariant)
-//{
-//	/* Should this function still work with stateful data and just change
-//	   the variant associated with the current state? */
-//
-//	if (m_variant && *m_variant != qvariant)
-//		*m_variant = qvariant;
-//}
-
-void Data::set_value(QVariant qvariant, const QString& state)
+void Data::set_value(Variant variant, const QString& state)
 {
-	if (m_variant && *m_variant != qvariant)
-		*m_variant = qvariant;
+	if (m_variant && *m_variant != variant)
+		*m_variant = variant;
 
 	else if (m_variant_map)
 	{
 		if (state == "")
 		{
-			if ((*m_variant_map).first() != qvariant)
-				(*m_variant_map).first() = qvariant;
+			if ((*m_variant_map).first() != variant)
+				(*m_variant_map).first() = variant;
 		}
 		else if (m_variant_map->contains(state))
 		{
-			if ((*m_variant_map)[state] != qvariant)
-				(*m_variant_map)[state] = qvariant;
+			if ((*m_variant_map)[state] != variant)
+				(*m_variant_map)[state] = variant;
 		}
 		else qDebug() << "WARNING: Data::set_value() failed: State does not exist.";
 	}
@@ -152,7 +140,7 @@ QJsonObject Data::to_json_object()
 {
 	QJsonObject json_object;
 
-	if (is_stateful())
+	if (is_multi_valued())
 	{
 		QJsonObject value_json_object;
 
@@ -274,7 +262,7 @@ const char* Data::typeName() const
 		/* NOTE: Stateful Data could have Variants with different value
 		   types. But this function only returns one typename, so there's a
 		   chance it will not work properly. */
-		return (*m_variant_map)[m_variant_map->firstKey()].typeName();
+		return (*m_variant_map).first().typeName();
 	else
 		return m_variant->typeName();
 }

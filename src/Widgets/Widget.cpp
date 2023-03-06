@@ -44,11 +44,17 @@ bool Widget::eventFilter(QObject* object, QEvent* event)
 	{
 		m_hovering = true;
 		update();
+		emit hover_enter();
 	}
 	else if (event->type() == QEvent::Leave)
 	{
 		m_hovering = false;
 		update();
+		emit hover_leave();
+	}
+	else if (event->type() == QEvent::MouseMove)
+	{
+		emit hover_move();
 	}
 
 	return false;

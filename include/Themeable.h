@@ -243,6 +243,8 @@ namespace Layers
 		*/
 		Graphic* icon() const;
 
+		bool is_app_themeable() const;
+
 		/*!
 			Returns true if the themeable is stateful, false otherwise.
 
@@ -251,7 +253,7 @@ namespace Layers
 
 			@returns True if stateful, false otherwise
 		*/
-		bool is_stateful() const;
+		bool is_multi_valued() const;
 
 		/*!
 			Returns pointer to the themeable's name.

@@ -1,6 +1,7 @@
 #ifndef COMBOBOX_H
 #define COMBOBOX_H
 
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QVBoxLayout>
 
@@ -16,21 +17,25 @@ namespace Layers
 	public:
 		ComboboxItem(const QString& item_text, QWidget* parent = nullptr);
 
+		QHBoxLayout* layout() const;
+
 		QString item_text();
 
 		void replace_item_text(const QString& new_item_text);
 
 		void set_font_size(int size);
-		void setFixedSize(const QSize& s);
-		void setFixedSize(int w, int h);
 
 	protected:
 		void init_attributes();
 
 	private:
+		void init_layout();
+
 		Label* m_item_label;
 
 		QString m_item_text;
+
+		QHBoxLayout* m_layout{ new QHBoxLayout };
 	};
 
 	class Combobox : public Widget
@@ -45,7 +50,7 @@ namespace Layers
 		Combobox(QWidget* parent = nullptr);
 		~Combobox();
 
-		void add_item(const QString& item);
+		ComboboxItem* add_item(const QString& item);
 
 		void alphabetize();
 

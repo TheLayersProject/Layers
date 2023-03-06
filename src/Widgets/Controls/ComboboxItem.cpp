@@ -11,13 +11,18 @@ ComboboxItem::ComboboxItem(const QString& item_text, QWidget* parent) :
 	m_item_label{ new Label(item_text) }, m_item_text{ item_text }, Widget(parent)
 {
 	init_attributes();
+	init_layout();
 
 	set_name("combobox_item");
 
-	m_item_label->setParent(this);
 	m_item_label->set_name("label");
 	m_item_label->set_proper_name("Item Label");
 	m_item_label->set_padding(0, 7, 0, 0);
+}
+
+QHBoxLayout* ComboboxItem::layout() const
+{
+	return m_layout;
 }
 
 void ComboboxItem::init_attributes()
@@ -68,18 +73,13 @@ void ComboboxItem::replace_item_text(const QString& new_item_text)
 void ComboboxItem::set_font_size(int size)
 {
 	m_item_label->set_font_size(size);
-
-	m_item_label->move(width() * 0.09, height() / 2 - m_item_label->height() / 2);
 }
 
-void ComboboxItem::setFixedSize(const QSize& s)
+void ComboboxItem::init_layout()
 {
-	Widget::setFixedSize(s);
+	m_layout->setContentsMargins(20, 0, 0, 0);
+	m_layout->addWidget(m_item_label);
+	m_layout->addStretch();
 
-	m_item_label->move(width() * 0.09, height() / 2 - m_item_label->height() / 2);
-}
-
-void ComboboxItem::setFixedSize(int w, int h)
-{
-	setFixedSize(QSize(w, h));
+	setLayout(m_layout);
 }

@@ -13,6 +13,7 @@
 #include "GradientDialog.h"
 #include "Theme.h"
 #include "Themeable.h"
+#include "ThemeCompatibilityCautionDialog.h"
 #include "UpdateDialog.h"
 
 namespace Layers
@@ -148,6 +149,8 @@ namespace Layers
 		*/
 		Theme* theme(const QString& theme_name);
 
+		ThemeCompatibilityCautionDialog* theme_compatibility_caution_dialog() const;
+
 		/*!
 			Returns a reference to a QMap containing the application's themes.
 
@@ -205,6 +208,8 @@ namespace Layers
 		ColorDialog* m_color_dialog;
 
 		GradientDialog* m_gradient_dialog;
+
+		ThemeCompatibilityCautionDialog* m_theme_compatibility_caution_dialog;
 
 		UpdateDialog* m_update_dialog;
 

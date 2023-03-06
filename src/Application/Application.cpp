@@ -24,6 +24,7 @@ using Layers::CustomizePanel;
 using Layers::GradientDialog;
 using Layers::Theme;
 using Layers::Themeable;
+using Layers::ThemeCompatibilityCautionDialog;
 using Layers::Window;
 
 Application::Application(
@@ -77,13 +78,17 @@ Application::Application(
 
 	m_color_dialog = new ColorDialog;
 
-	m_gradient_dialog = new GradientDialog(QGradientStops());
+	m_gradient_dialog = new GradientDialog;
+
+	m_theme_compatibility_caution_dialog =
+		new ThemeCompatibilityCautionDialog;
 
 	m_update_dialog = new UpdateDialog("", "");
 
 	add_child_themeable_pointer(*m_create_new_theme_dialog);
 	add_child_themeable_pointer(*m_color_dialog);
 	add_child_themeable_pointer(*m_gradient_dialog);
+	add_child_themeable_pointer(*m_theme_compatibility_caution_dialog);
 	add_child_themeable_pointer(*m_update_dialog);
 }
 
@@ -117,11 +122,13 @@ Application::~Application()
 	delete m_create_new_theme_dialog;
 	delete m_color_dialog;
 	delete m_gradient_dialog;
+	delete m_theme_compatibility_caution_dialog;
 	delete m_update_dialog;
 
 	m_create_new_theme_dialog = nullptr;
 	m_color_dialog = nullptr;
 	m_gradient_dialog = nullptr;
+	m_theme_compatibility_caution_dialog = nullptr;
 	m_update_dialog = nullptr;
 }
 
@@ -401,6 +408,11 @@ Theme* Application::theme(const QString& theme_name)
 		return m_themes[theme_name];
 
 	return nullptr;
+}
+
+ThemeCompatibilityCautionDialog* Application::theme_compatibility_caution_dialog() const
+{
+	return m_theme_compatibility_caution_dialog;
 }
 
 void Application::init_directories()

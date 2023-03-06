@@ -29,3 +29,8 @@ void Entity::set_disabled(bool disabled)
 
 	emit value_changed();
 }
+
+void Entity::set_name(const QString& name)
+{
+	m_name = name;
+}

@@ -30,7 +30,7 @@ namespace Layers
 
 		void setFont(const QFont& f);
 
-		void setMaximumWidth(int maxw);
+		//void setFixedWidth(int w);
 
 		void setWordWrap(bool on);
 

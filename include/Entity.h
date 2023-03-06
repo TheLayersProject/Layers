@@ -2,18 +2,15 @@
 #define ATTRIBUTETYPE_H
 
 #include <QObject>
-#include <QWidget>
 
 namespace Layers
 {
 	/*!
-		An Entity is a QObject that is a named, disableable, and stateable.
+		An Entity is an abstract QObject that represents a nameable,
+		disableable, and stateable type.
 
-		Named means that an Entity has a name.
-
-		Disableable means that an Entity can be switched between on/off states.
-
-		Stateable means that an Entity can be in different states.
+		Nameable means that an entity can be named. Disableable means they can
+		be switched on/off. Stateable means they can be in different states.
 	*/
 	class Entity : public QObject
 	{
@@ -44,7 +41,7 @@ namespace Layers
 
 			@returns True if stateful, false otherwise
 		*/
-		virtual bool is_stateful() const = 0;
+		virtual bool is_multi_valued() const = 0;
 
 		/*!
 			Returns the name of the Entity
@@ -60,6 +57,8 @@ namespace Layers
 		*/
 		virtual void set_disabled(bool disabled = true);
 
+		void set_name(const QString& name);
+
 		/*!
 			Sets the Entity's active state.
 
@@ -67,18 +66,10 @@ namespace Layers
 		*/
 		virtual void set_state(const QString& state) = 0;
 
-		/*!
-			Establishes a connection that calls QWidget::update() when the
-			Entity's value_changed() signal gets emitted.
-
-			@param widget - The widget to establish the connection with
-		*/
-		//virtual void setup_widget_update_connection(QWidget* widget) = 0;
-
 	protected:
-		bool m_disabled{ false };
+		bool m_disabled;
 
-		QString m_name{ "" };
+		QString m_name;
 	};
 }
 

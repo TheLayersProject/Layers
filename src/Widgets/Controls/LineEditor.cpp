@@ -22,7 +22,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
   //      if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
   //      else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
   //      {
-  //          if (m_text->is_stateful())
+  //          if (m_text->is_multi_valued())
   //              m_text->set_value(m_text->state(), m_line_edit->text());
   //          else
   //              m_text->set_value(m_line_edit->text());
@@ -32,7 +32,7 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 		// TODO: Simplify below after merging Attribute::set_value() overloads
 		// into a single function
 		// TODO: Remove
-		//if (m_text->is_stateful())
+		//if (m_text->is_multi_valued())
 		//{
 		//	if (QString(m_text->typeName()) == "QString")
 		//		m_text->set_value(m_text->state(), m_line_edit->text());
@@ -151,7 +151,7 @@ void LineEditor::set_text(const QString& text)
 {
 	m_line_edit->setText(text);
 
-	//if (m_text->is_stateful())
+	//if (m_text->is_multi_valued())
 	//	m_text->set_value(m_text->state(), text);
 	//else
 	//	m_text->set_value(text);

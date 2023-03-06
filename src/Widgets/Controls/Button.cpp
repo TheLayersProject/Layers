@@ -153,7 +153,7 @@ void Button::resize()
 
 		if (text_label_available_width < 0) text_label_available_width = 0;
 
-		m_text_label->set_available_width(text_label_available_width);
+		m_text_label->setMaximumWidth(text_label_available_width);
 	}
 
 	if (m_graphic && m_text_label)

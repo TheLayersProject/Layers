@@ -69,7 +69,7 @@ void WidgetButton::init()
 		m_icon->setMinimumWidth(40);
 	}
 
-	m_label->set_available_width(252); // TODO: Verify this width
+	m_label->setMaximumWidth(252); // TODO: Verify this width
 	m_label->set_font_size(14);
 	m_label->set_name("label");
 	m_label->set_proper_name("Label");

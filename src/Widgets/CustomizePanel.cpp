@@ -229,7 +229,7 @@ void CustomizePanel::add_widget_button_group(WidgetButtonGroup* button_group)
 
 void CustomizePanel::init_attribute_widgets()
 {
-	if (m_themeable->is_stateful()) // TODO: IF THEMEABLE CONTAINS STATE
+	if (m_themeable->is_multi_valued()) // TODO: IF THEMEABLE CONTAINS STATE
 	{
 		m_state_aw = new StateAW;
 		m_state_aw->populate_state_combobox(m_themeable->states());
@@ -262,7 +262,7 @@ void CustomizePanel::init_attribute_widgets()
 			if (attribute->disabled())
 				aw->hide();
 
-			if (attribute->is_stateful())
+			if (attribute->is_multi_valued())
 			{
 				m_state_aw->add_attribute_widget(aw);
 
@@ -287,7 +287,7 @@ void CustomizePanel::init_attribute_widgets()
 				if (attr_group->disabled())
 					corner_radii_aw->hide();
 
-				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(corner_radii_aw);
+				if (attr_group->is_multi_valued()) m_state_aw->add_attribute_widget(corner_radii_aw);
 				else add_attribute_widget(corner_radii_aw);
 
 				connect(corner_radii_aw, &AttributeWidget::widget_disabled, [this, corner_radii_aw] {
@@ -329,7 +329,7 @@ void CustomizePanel::init_attribute_widgets()
 				if (attr_group->disabled())
 					aw_group->hide();
 
-				if (attr_group->is_stateful()) m_state_aw->add_attribute_widget(aw_group);
+				if (attr_group->is_multi_valued()) m_state_aw->add_attribute_widget(aw_group);
 				else add_attribute_widget(aw_group);
 
 				connect(aw_group, &AttributeWidget::widget_disabled, [this, aw_group] {

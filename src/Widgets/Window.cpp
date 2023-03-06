@@ -78,8 +78,8 @@ Window::Window(bool preview, QWidget* parent) :
 
 	setup_layout();
 
-	for (const QString& theme_name : layersApp->themes().keys())
-		link_theme_name(theme_name);
+	for (Theme* theme : layersApp->themes())
+		link_theme(theme);
 
 	// Assign tag prefixes last!
 	assign_tag_prefixes();
@@ -96,11 +96,40 @@ Menu* Window::app_menu() const
 	return m_app_menu;
 }
 
-void Window::link_theme_name(const QString& name)
+void Window::link_theme(Theme* theme)
 {
-	m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(name);
+	ComboboxItem* cb_item =
+		m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(theme->name());
 
-	layersApp->create_new_theme_dialog()->add_theme_name_to_combobox(name);
+	if (!theme->has_app_implementation())
+	{
+		Graphic* caution_graphic = new Graphic(":/svgs/caution.svg");
+		caution_graphic->setMinimumSize(45, 45);
+		caution_graphic->setMouseTracking(true);
+
+		connect(caution_graphic, &Widget::hover_enter, [theme]
+			{
+				layersApp->theme_compatibility_caution_dialog()->set_lineage_table_data(theme->lineage());
+				layersApp->theme_compatibility_caution_dialog()->move(QCursor::pos() + QPoint(20, 20));
+				layersApp->theme_compatibility_caution_dialog()->show();
+				layersApp->theme_compatibility_caution_dialog()->raise();
+			});
+
+		connect(caution_graphic, &Widget::hover_leave, []
+			{ 
+				layersApp->theme_compatibility_caution_dialog()->hide();
+			});
+		
+		connect(caution_graphic, &Widget::hover_move, []
+			{
+				layersApp->theme_compatibility_caution_dialog()->move(QCursor::pos() + QPoint(20, 20));
+			});
+
+		cb_item->layout()->addWidget(caution_graphic);
+		cb_item->layout()->setAlignment(caution_graphic, Qt::AlignVCenter);
+	}
+
+	layersApp->create_new_theme_dialog()->add_theme_name_to_combobox(theme->name());
 }
 
 void Window::set_main_menu(Menu* main_menu)
@@ -245,7 +274,7 @@ void Window::new_theme_clicked()
 	{
 		layersApp->create_theme(layersApp->create_new_theme_dialog()->new_theme_name(), layersApp->create_new_theme_dialog()->copy_theme_name());
 
-		link_theme_name(layersApp->create_new_theme_dialog()->new_theme_name());
+		link_theme(layersApp->themes().last());
 
 		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(layersApp->create_new_theme_dialog()->new_theme_name());
 

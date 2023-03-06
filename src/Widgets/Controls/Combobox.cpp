@@ -72,10 +72,10 @@ Combobox::~Combobox()
     m_drop_down = nullptr;
 }
 
-void Combobox::add_item(const QString& item)
+ComboboxItem* Combobox::add_item(const QString& item)
 {
-	for (ComboboxItem* cb_item : m_combobox_items)
-		if (cb_item->item_text() == item) return;
+	//for (ComboboxItem* cb_item : m_combobox_items)
+	//	if (cb_item->item_text() == item) return;
 
 	ComboboxItem* combobox_item = new ComboboxItem(item);
 
@@ -112,6 +112,8 @@ void Combobox::add_item(const QString& item)
     m_drop_down->setFixedHeight(m_combobox_items.count() * height());
 
 	if (m_alphabetize) alphabetize();
+
+    return combobox_item;
 }
 
 void Combobox::alphabetize()

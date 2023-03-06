@@ -2,6 +2,8 @@
     <qresource prefix="/svgs">
         <file>app_preferences_icon.svg</file>
         <file>back.svg</file>
+        <file>caution.svg</file>
+        <file>check.svg</file>
         <file>color_icon.png</file>
         <file>collapse_arrow_right.svg</file>
         <file>collapse_arrow_down.svg</file>

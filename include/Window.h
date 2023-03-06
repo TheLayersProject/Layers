@@ -27,7 +27,7 @@ namespace Layers
 
 		CustomizeMenu* customize_menu() const;
 
-		void link_theme_name(const QString& name);
+		void link_theme(Theme* theme);
 
 		void set_main_menu(Menu* main_menu);
 

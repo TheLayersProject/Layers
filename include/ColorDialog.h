@@ -14,10 +14,11 @@ namespace Layers
 
 	public:
 		ColorDialog(QWidget* parent = nullptr);
+		~ColorDialog();
 
 		virtual Themeable* clone() override;
 
-		Attribute color{ Attribute("color", QColor()) };
+		Attribute* color() const;
 
 		void update_color_name_line_editor();
 
@@ -34,6 +35,8 @@ namespace Layers
 		ColorPlane* m_color_plane{ new ColorPlane };
 
 		Slider* m_z_slider{ new Slider(359) };
+
+		Attribute* m_color{ new Attribute("color", QColor()) };
 	};
 }
 
