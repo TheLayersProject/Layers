@@ -1,6 +1,9 @@
 #include "../../../include/Theme.h"
+
+#include "../../../include/Application.h"
 #include "../../../include/Themeable.h"
 
+#include <QJsonArray>
 #include <QJsonObject>
 
 using Layers::Attribute;
@@ -22,6 +25,33 @@ Theme::Theme(const QString& name, QUuid* uuid, bool editable) :
 {
 }
 
+Theme::Theme(QDir dir) :
+	m_dir{ dir }
+{
+	QFile meta_file(dir.filePath("meta.json"));
+
+	if (meta_file.exists())
+	{
+		if (!meta_file.open(QIODevice::ReadOnly))
+			qDebug() << "Could not read theme 'meta.json' file";
+
+		QJsonDocument meta_doc = QJsonDocument::fromJson(meta_file.readAll());
+		QJsonObject meta_obj = meta_doc.object();
+
+		meta_file.close();
+
+		m_name = meta_obj.value("name").toString();
+
+		m_uuid = new QUuid(meta_obj.value("uuid").toString());
+
+		if (meta_obj.contains("editable"))
+			m_editable = meta_obj.value("editable").toBool();
+
+		for (QJsonValue lineage_value : meta_obj.value("lineage").toArray())
+			append_to_lineage(lineage_value.toString());
+	}
+}
+
 Theme::~Theme()
 {
 	clear();
@@ -36,11 +66,6 @@ Theme::~Theme()
 void Theme::append_to_lineage(const QString& theme_id)
 {
 	m_lineage.append(theme_id);
-}
-
-void Theme::append_to_lineage(QStringList lineage_list)
-{
-	m_lineage.append(lineage_list);
 }
 
 void Theme::clear()
@@ -146,6 +171,11 @@ void Theme::copy(Theme& theme)
 				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
 		}
 	}
+
+	for (const QString& theme_id : theme.lineage())
+		append_to_lineage(theme_id);
+
+	append_to_lineage(theme.identifier());
 }
 
 void Theme::copy_attribute_values_of(Themeable* themeable)
@@ -173,6 +203,11 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 		m_data_for_layers_themeables[themeable->tag()] = new_themeable_data;
 }
 
+QDir Theme::dir() const
+{
+	return m_dir;
+}
+
 bool Theme::editable()
 {
 	return m_editable;
@@ -180,8 +215,9 @@ bool Theme::editable()
 
 bool Theme::has_app_implementation() const
 {
-	return
-		!m_data_for_app_themeables.isEmpty();
+	return QFile(
+		m_dir.filePath(layersApp->app_identifier() + ".json")
+	).exists();
 }
 
 QString Theme::identifier()
@@ -292,6 +328,32 @@ QStringList Theme::lineage() const
 	return m_lineage;
 }
 
+void Theme::load()
+{
+	if (m_dir.exists())
+	{
+		QFile layers_file(m_dir.filePath("layers.json"));
+		QFile app_file(m_dir.filePath(layersApp->app_identifier() + ".json"));
+
+		if (!layers_file.open(QIODevice::ReadOnly))
+			qDebug() << "Could not read theme 'layers.json' file";
+
+		load_document(QJsonDocument::fromJson(layers_file.readAll()), ThemeDataType::Layers);
+
+		layers_file.close();
+
+		if (app_file.exists())
+		{
+			if (!app_file.open(QIODevice::ReadOnly))
+				qDebug() << "Could not read theme app file";
+
+			load_document(QJsonDocument::fromJson(app_file.readAll()), ThemeDataType::Application);
+
+			app_file.close();
+		}
+	}
+}
+
 void Theme::load_document(const QJsonDocument& json_document, const ThemeDataType& data_type)
 {
 	QJsonObject json_object = json_document.object();
@@ -364,11 +426,45 @@ void Theme::set_name(const QString& new_name)
 	m_name = new_name;
 }
 
+void Theme::save_meta_file()
+{
+	QJsonDocument json_document;
+
+	QJsonObject json_object;
+
+	QJsonArray lineage_array;
+
+	for (const QString& theme_id : m_lineage)
+		lineage_array.append(theme_id);
+
+	json_object.insert("lineage", lineage_array);
+	json_object.insert("name", m_name);
+	json_object.insert("uuid", m_uuid->toString(QUuid::WithoutBraces));
+
+	json_document.setObject(json_object);
+
+	QFile meta_file(m_dir.filePath("meta.json"));
+
+	if (!meta_file.open(QIODevice::WriteOnly))
+	{
+		qDebug() << "Could not create theme 'meta.json' file";
+		return;
+	}
+
+	meta_file.write(json_document.toJson());
+	meta_file.close();
+}
+
 QList<QString> Theme::themeable_tags()
 {
 	return
 		m_data_for_app_themeables.keys() +
 		m_data_for_layers_themeables.keys();
+}
+
+void Theme::set_dir(QDir dir)
+{
+	m_dir = dir;
 }
 
 QJsonDocument Theme::to_json_document(ThemeDataType data_type)
@@ -435,4 +531,9 @@ EntityMap& Theme::operator[](const QString& themeable_tag)
 		return m_data_for_layers_themeables[themeable_tag];
 	else
 		return m_data_for_layers_themeables[themeable_tag];
+}
+
+QUuid* Theme::uuid() const
+{
+	return m_uuid;
 }

@@ -1067,6 +1067,23 @@
             "value": "#000000"
         }
     },
+    "theme_compatibility_caution_dialog/table_label": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        },
+        "outline_color": {
+            "disabled": true,
+            "value": "#a0a0a4"
+        },
+        "text_color": {
+            "value": "#e9e9e9"
+        },
+        "text_hover_color": {
+            "disabled": true,
+            "value": "#000000"
+        }
+    },
     "theme_compatibility_caution_dialog/theme_lineage_table": {
         "border": {
             "fill": {
@@ -1075,9 +1092,6 @@
             "thickness": {
                 "value": 3
             }
-        },
-        "check_color": {
-            "value": "#e9e9e9"
         },
         "corner_radii": {
             "bottom_left": {
@@ -1097,6 +1111,15 @@
             "disabled": true,
             "value": "#ffffff"
         },
+        "item_fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        },
+        "text_color": {
+            "value": "#e9e9e9"
+        }
+    },
+    "theme_compatibility_caution_dialog/theme_lineage_table/cells": {
         "grid": {
             "fill": {
                 "value": "#505050"
@@ -1104,13 +1127,14 @@
             "thickness": {
                 "value": 3
             }
-        },
-        "item_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
+        }
+    },
+    "theme_compatibility_caution_dialog/theme_lineage_table/cells/checkmark_svg": {
+        "common_color": {
             "value": "#e9e9e9"
+        },
+        "use_common_color": {
+            "value": true
         }
     },
     "theme_compatibility_caution_dialog/theme_lineage_table/horizontal_header": {

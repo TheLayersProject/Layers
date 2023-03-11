@@ -1,6 +1,7 @@
 #include "../../include/AttributeWidgets.h"
 #include "../../include/calculate.h"
 #include "../../include/CustomizePanel.h"
+#include "../../include/directories.h"
 #include "../../include/Window.h"
 
 #include <Windows.h>
@@ -99,7 +100,7 @@ Menu* Window::app_menu() const
 void Window::link_theme(Theme* theme)
 {
 	ComboboxItem* cb_item =
-		m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(theme->name());
+		m_settings_menu->themes_settings_panel()->theme_combobox()->add_item(theme->identifier());
 
 	if (!theme->has_app_implementation())
 	{
@@ -109,10 +110,14 @@ void Window::link_theme(Theme* theme)
 
 		connect(caution_graphic, &Widget::hover_enter, [theme]
 			{
-				layersApp->theme_compatibility_caution_dialog()->set_lineage_table_data(theme->lineage());
-				layersApp->theme_compatibility_caution_dialog()->move(QCursor::pos() + QPoint(20, 20));
-				layersApp->theme_compatibility_caution_dialog()->show();
-				layersApp->theme_compatibility_caution_dialog()->raise();
+				ThemeCompatibilityCautionDialog* dialog =
+					layersApp->theme_compatibility_caution_dialog();
+
+				dialog->set_lineage_table_data(theme->lineage());
+				dialog->set_theme_name(theme->name());
+				dialog->move(QCursor::pos() + QPoint(20, 20));
+				dialog->show();
+				dialog->raise();
 			});
 
 		connect(caution_graphic, &Widget::hover_leave, []
@@ -127,9 +132,13 @@ void Window::link_theme(Theme* theme)
 
 		cb_item->layout()->addWidget(caution_graphic);
 		cb_item->layout()->setAlignment(caution_graphic, Qt::AlignVCenter);
+
+		connect(theme, &Theme::applied, [caution_graphic] {
+			caution_graphic->deleteLater();
+			});
 	}
 
-	layersApp->create_new_theme_dialog()->add_theme_name_to_combobox(theme->name());
+	layersApp->create_new_theme_dialog()->add_theme_name_to_combobox(theme->identifier());
 }
 
 void Window::set_main_menu(Menu* main_menu)
@@ -264,21 +273,46 @@ void Window::minimize_clicked()
 
 void Window::new_theme_clicked()
 {
-	layersApp->create_new_theme_dialog()->set_current_start_theme_name(layersApp->current_theme()->name());
+	CreateNewThemeDialog* dialog = layersApp->create_new_theme_dialog();
 
-	static_cast<Window*>(QApplication::activeWindow())->center_dialog(layersApp->create_new_theme_dialog());
+	dialog->set_current_start_theme_name(
+		layersApp->current_theme()->name());
 
-	layersApp->create_new_theme_dialog()->show();
+	static_cast<Window*>(QApplication::activeWindow())->center_dialog(dialog);
 
-	if (layersApp->create_new_theme_dialog()->exec() && !m_functionality_disabled)
+	dialog->show();
+
+	if (dialog->exec() && !m_functionality_disabled)
 	{
-		layersApp->create_theme(layersApp->create_new_theme_dialog()->new_theme_name(), layersApp->create_new_theme_dialog()->copy_theme_name());
+		Theme* new_theme = new Theme(dialog->new_theme_name());
 
-		link_theme(layersApp->themes().last());
+		layersApp->themes()[new_theme->identifier()] = new_theme;
 
-		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(layersApp->create_new_theme_dialog()->new_theme_name());
+		QDir new_theme_dir(latest_T_version_path() + new_theme->identifier() + "\\");
+		QDir copy_theme_dir = layersApp->themes()[dialog->copy_theme_name()]->dir(); // TODO: Fix This!
 
-		layersApp->create_new_theme_dialog()->clear();
+		new_theme->set_dir(new_theme_dir);
+
+		if (!new_theme_dir.exists())
+			new_theme_dir.mkdir(".");
+
+		for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
+			if (file_name != "meta.json")
+				QFile::copy(
+					copy_theme_dir.filePath(file_name),
+					new_theme_dir.filePath(file_name));
+
+		new_theme->save_meta_file();
+		new_theme->load();
+
+		link_theme(new_theme);
+
+		layersApp->apply_theme(*new_theme);
+
+		m_settings_menu->themes_settings_panel()->theme_combobox()->set_current_item(
+			dialog->new_theme_name());
+
+		dialog->clear();
 	}
 }
 
@@ -567,18 +601,12 @@ void Window::paintEvent(QPaintEvent* event)
 
 void Window::setup_layout()
 {
-	//m_app_menu_layout->setContentsMargins(0, 0, 0, 0);
-	//m_app_menu_layout->setSpacing(0);
-
-	//m_app_menu->setLayout(m_app_menu_layout);
-
 	int margin = border()->thickness()->as<double>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_separator);
-	//m_main_layout->addWidget(m_app_menu);
 	m_main_layout->addWidget(m_settings_menu);
 	m_main_layout->addWidget(m_customize_menu);
 

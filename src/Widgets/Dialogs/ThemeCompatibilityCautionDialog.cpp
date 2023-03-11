@@ -33,6 +33,11 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 		"theme.");
 	m_message_label->setWordWrap(true);
 
+	m_table_label->set_font_size(14);
+	m_table_label->set_name("table_label");
+	m_table_label->set_proper_name("Table Label");
+	m_table_label->setText("Lineage");
+
 	init_lineage_table();
 
 	// Assign tag prefixes last!
@@ -90,6 +95,11 @@ void ThemeCompatibilityCautionDialog::set_lineage_table_data(
 	m_lineage_table->update_height();
 }
 
+void ThemeCompatibilityCautionDialog::set_theme_name(const QString& theme_name)
+{
+	m_table_label->setText(theme_name + "'s Lineage");
+}
+
 void ThemeCompatibilityCautionDialog::init_attributes()
 {
 	m_border->thickness()->set_value(3.0);
@@ -106,10 +116,13 @@ void ThemeCompatibilityCautionDialog::init_layout()
 {
 	QVBoxLayout* layout = new QVBoxLayout;
 
-	layout->setContentsMargins(12, 12, 12, 12);
-	layout->setSpacing(20);
 	layout->addWidget(m_message_label);
+	layout->addSpacing(15);
+	layout->addWidget(m_table_label);
 	layout->addWidget(m_lineage_table);
+	layout->setAlignment(m_table_label, Qt::AlignHCenter);
+	layout->setContentsMargins(12, 12, 12, 12);
+	layout->setSpacing(5);
 
 	setLayout(layout);
 }
@@ -124,7 +137,6 @@ void ThemeCompatibilityCautionDialog::init_lineage_table()
 	m_lineage_table->set_name("theme_lineage_table");
 	m_lineage_table->set_proper_name("Theme Lineage Table");
 	m_lineage_table->setModel(&m_theme_lineage_model);
-	//m_lineage_table->setMaximumHeight(144);
 
 	// Set 'Theme' column to fized size:
 	m_lineage_table->horizontalHeader()->resizeSection(0, 370);

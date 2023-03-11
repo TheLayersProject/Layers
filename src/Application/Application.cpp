@@ -3,7 +3,7 @@
 #include "../../include/CustomizePanel.h"
 #include "../../include/Downloader.h"
 #include "../../include/GitHubRepo.h"
-#include "../../include/theme_loading.h"
+//#include "../../include/theme_loading.h"
 #include "../../include/Themeable.h"
 #include "../../include/UpdateDialog.h"
 #include "../../include/Version.h"
@@ -146,10 +146,44 @@ void Application::apply_theme(Theme& theme)
 {
 	if (m_current_theme != &theme)
 	{
+		if (m_current_theme)
+			m_current_theme->clear();
+
 		m_current_theme = &theme;
+
+		if (!m_current_theme->has_app_implementation())
+		{
+			// Iterate backwards through the lineage to determine last CAT.
+			for (int i = m_current_theme->lineage().size() - 1; i >= 0; i--)
+			{
+				QString theme_id = m_current_theme->lineage()[i];
+
+				QString theme_name = (theme_id.contains("_")) ?
+					theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
+
+				if (Theme* theme = layersApp->theme(theme_name))
+					if (theme->has_app_implementation())
+					{
+						QString app_file_name =
+							layersApp->app_identifier() + ".json";
+
+						QFile last_CAT_app_file(
+							theme->dir().filePath(app_file_name));
+						
+						if (last_CAT_app_file.exists())
+							last_CAT_app_file.copy(
+								m_current_theme->dir().filePath(app_file_name)
+							);
+					}
+			}
+		}
+
+		m_current_theme->load();
 
 		for (Themeable* themeable : m_child_themeables)
 			themeable->apply_theme(theme);
+
+		emit theme.applied();
 
 		m_settings.setValue("themes/active_theme", theme.name());
 
@@ -160,17 +194,6 @@ void Application::apply_theme(Theme& theme)
 QList<Themeable*> Application::child_themeables(Qt::FindChildOptions options)
 {
 	return m_child_themeables;
-}
-
-void Application::create_theme(const QString& new_theme_name, const QString& copy_theme_name)
-{
-	m_themes[new_theme_name] = new Theme(new_theme_name);
-
-	Theme* new_theme = m_themes[new_theme_name];
-
-	new_theme->copy(*m_themes[copy_theme_name]);
-
-	save_theme(*m_themes[new_theme_name]);
 }
 
 CreateNewThemeDialog* Application::create_new_theme_dialog() const
@@ -315,30 +338,29 @@ bool Application::update_on_request()
 	return false;
 }
 
-void Application::rename_theme(const QString& old_name, const QString& new_name)
+void Application::rename_theme(const QString& theme_id, const QString& new_name)
 {
-	if (m_themes.contains(old_name))
+	if (m_themes.contains(theme_id))
 	{
-		QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
+		Theme* theme = m_themes[theme_id];
 
-		QDir old_theme_dir(T1_themes_dir.absoluteFilePath(m_themes[old_name]->identifier() + "\\"));
+		QDir old_theme_dir = theme->dir();
 
-		old_theme_dir.removeRecursively();
+		old_theme_dir.rename(
+			old_theme_dir.absoluteFilePath("."),
+			latest_T_version_path() + new_name + theme->uuid()->toString(QUuid::WithoutBraces) + "\\");
 
-		m_themes.insert(new_name, m_themes.take(old_name));
+		theme->set_name(new_name);
 
-		m_themes[new_name]->set_name(new_name);
+		//old_theme_dir.removeRecursively();
 
-		apply_theme(*m_themes[new_name]);
-		save_theme(*m_themes[new_name]);
+		//m_themes.insert(new_name, m_themes.take(old_name));
+
+		//m_themes[new_name]->set_name(new_name);
+
+		//apply_theme(*m_themes[new_name]);
+		//save_theme(*m_themes[new_name]);
 	}
-}
-
-Theme* Application::load_theme(const QString& file_name)
-{
-	qDebug() << "Loading" << file_name;
-
-	return load_theme_1(file_name, app_identifier());
 }
 
 Window* Application::main_window() const
@@ -364,26 +386,22 @@ void Application::reapply_theme()
 
 void Application::save_theme(Theme& theme)
 {
-	QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
-
-	QDir theme_dir(T1_themes_dir.absoluteFilePath(theme.identifier() + "\\"));
+	QDir theme_dir = latest_T_version_path() + theme.identifier() + "\\";
 
 	if (!theme_dir.exists())
-		theme_dir.mkdir(theme_dir.absolutePath());
+		theme_dir.mkdir(".");
 
-	QFile layers_theme_file(theme_dir.absoluteFilePath("layers.json"));
+	QFile theme_layers_file(theme_dir.absoluteFilePath("layers.json"));
 
-	if (!layers_theme_file.open(QIODevice::WriteOnly))
+	if (!theme_layers_file.open(QIODevice::WriteOnly))
 	{
-		qDebug() << "Could not create theme file";
+		qDebug() << "Could not write theme layers file";
 		return;
 	}
 
-	layers_theme_file.write(theme.to_json_document(ThemeDataType::Layers).toJson());
-	layers_theme_file.close();
+	theme_layers_file.write(theme.to_json_document(ThemeDataType::Layers).toJson());
+	theme_layers_file.close();
 
-	//if (app_identifier() != "layers_demo_f97aae7f-2076-4918-93ce-19321584f675")
-	//{
 	QFile app_theme_file(theme_dir.absoluteFilePath(app_identifier() + ".json"));
 
 	if (!app_theme_file.open(QIODevice::WriteOnly))
@@ -394,7 +412,6 @@ void Application::save_theme(Theme& theme)
 
 	app_theme_file.write(theme.to_json_document(ThemeDataType::Application).toJson());
 	app_theme_file.close();
-	//}
 }
 
 QSettings& Application::settings()
@@ -402,10 +419,10 @@ QSettings& Application::settings()
 	return m_settings;
 }
 
-Theme* Application::theme(const QString& theme_name)
+Theme* Application::theme(const QString& theme_id)
 {
-	if (m_themes.contains(theme_name))
-		return m_themes[theme_name];
+	if (m_themes.contains(theme_id))
+		return m_themes[theme_id];
 
 	return nullptr;
 }
@@ -417,16 +434,23 @@ ThemeCompatibilityCautionDialog* Application::theme_compatibility_caution_dialog
 
 void Application::init_directories()
 {
-	if (!m_layers_dir.exists())
-	{
-		m_layers_dir.mkdir(m_layers_dir.absolutePath());
-		m_layers_themes_dir.mkdir(m_layers_themes_dir.absolutePath());
-	}
+	QDir layers_dir = layers_path();
+	QDir themes_dir = themes_path();
+	QDir latest_T_version_dir = latest_T_version_path();
+
+	if (!layers_dir.exists())
+		layers_dir.mkdir(".");
+
+	if (!themes_dir.exists())
+		themes_dir.mkdir(".");
+
+	if (!latest_T_version_dir.exists())
+		latest_T_version_dir.mkdir(".");
 
 	if (!m_app_dir.exists())
 	{
-		m_app_dir.mkdir(m_app_dir.absolutePath());
-		m_app_themes_dir.mkdir(m_app_themes_dir.absolutePath());
+		m_app_dir.mkdir(".");
+		m_app_themes_dir.mkdir(".");
 
 		//m_layers_dir(deprecated_layers_path());
 
@@ -471,30 +495,23 @@ void Application::init_themes()
 	   appear in the custom themes directory. */
 
 	// Load prebuilt theme files
-	m_themes.insert("Dark", load_theme(":/themes/Dark"));
-	m_themes.insert("Light", load_theme(":/themes/Light"));
+	m_themes["Dark"] = new Theme(QDir(":/themes/Dark"));
+	m_themes["Light"] = new Theme(QDir(":/themes/Light"));
 
-	QDir T1_themes_dir(m_layers_themes_dir.filePath("T1\\"));
+	QDir latest_T_version_dir = latest_T_version_path();
 
-	for (const QString& file_name : T1_themes_dir.entryList(QDir::NoDotAndDotDot|QDir::AllEntries))
+	for (const QString& dir_name : latest_T_version_dir.entryList(QDir::NoDotAndDotDot|QDir::Dirs))
 	{
-		QString theme_dir_path = T1_themes_dir.absoluteFilePath(file_name);
+		Theme* loaded_theme = new Theme(QDir(latest_T_version_dir.absoluteFilePath(dir_name)));
 
-		//if (QFile(
-		//		QDir(theme_dir_path).filePath(app_identifier() + ".json")
-		//	).exists())
-		//{
-		Theme* loaded_theme = load_theme(theme_dir_path);
-
-		m_themes.insert(loaded_theme->name(), loaded_theme);
-		//}
+		m_themes[loaded_theme->identifier()] = loaded_theme;
 	}
 
-	QString active_theme_name =
+	QString active_theme_id =
 		m_settings.value("themes/active_theme").value<QString>();
 
-	if (m_themes.contains(active_theme_name))
-		apply_theme(*m_themes[active_theme_name]);
+	if (m_themes.contains(active_theme_id))
+		apply_theme(*m_themes[active_theme_id]);
 	else
 		apply_theme(*m_themes["Light"]);
 }

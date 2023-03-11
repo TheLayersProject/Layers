@@ -120,7 +120,6 @@
     <ClCompile Include="src\Themes\Theme.cpp" />
     <ClCompile Include="src\Themes\Themeable.cpp" />
     <ClCompile Include="src\Themes\ThemeableBox.cpp" />
-    <ClCompile Include="src\Themes\theme_loading.cpp" />
     <ClCompile Include="src\Tools\Downloader.cpp" />
     <ClCompile Include="src\Tools\GitHubRepo.cpp" />
     <ClCompile Include="src\Tools\ImageSequence.cpp" />
@@ -217,7 +216,6 @@
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />
-    <ClInclude Include="include\theme_loading.h" />
     <QtMoc Include="include\Application.h" />
     <QtMoc Include="include\Window.h" />
     <QtMoc Include="include\UpdateDialog.h" />
@@ -246,7 +244,7 @@
     <QtMoc Include="include\Button.h" />
     <QtMoc Include="include\SettingsPanels.h" />
     <QtMoc Include="include\Menu.h" />
-    <ClInclude Include="include\Theme.h" />
+    <QtMoc Include="include\Theme.h" />
     <ClInclude Include="include\Themeable.h" />
     <QtMoc Include="include\SettingsMenu.h" />
     <QtMoc Include="include\Widget.h" />

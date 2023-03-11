@@ -10,14 +10,24 @@ QString Layers::app_themes_path(const QString& app_name)
 	return QString(app_path(app_name) + "Themes\\");
 }
 
+QString Layers::latest_T_version_path()
+{
+	return T1_path();
+}
+
 QString Layers::layers_path()
 {
 	return QString(local_app_data_path() + "Layers\\");
 }
 
-QString Layers::layers_themes_path()
+QString Layers::themes_path()
 {
 	return QString(layers_path() + "Themes\\");
+}
+
+QString Layers::T1_path()
+{
+	return QString(themes_path() + "T1\\");
 }
 
 QString Layers::local_app_data_path()

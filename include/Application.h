@@ -6,10 +6,9 @@
 #include <QSettings>
 #include <QUuid>
 
-#include "directories.h"
-
 #include "ColorDialog.h"
 #include "CreateNewThemeDialog.h"
+#include "directories.h"
 #include "GradientDialog.h"
 #include "Theme.h"
 #include "Themeable.h"
@@ -54,14 +53,6 @@ namespace Layers
 		virtual QList<Themeable*> child_themeables(
 			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
 
-		/*!
-			Creates a new theme.
-
-			@param new_theme_name - Name to give the new theme
-			@param copy_theme_name - Name of the app theme to copy and use as the basis for the new theme
-		*/
-		void create_theme(const QString& new_theme_name, const QString& copy_theme_name);
-
 		CreateNewThemeDialog* create_new_theme_dialog() const;
 
 		ColorDialog* color_dialog() const;
@@ -85,20 +76,6 @@ namespace Layers
 			@returns pointer to QFile of app icon, nullptr if none exists
 		*/
 		QFile* icon_file();
-
-		/*!
-			Loads and returns a theme from the supplied file.
-
-			This function first attempts to load the theme as a latest version theme. If that fails,
-			it will attempt to load the file under older version conditions until a successful load.
-			Once the particular version is found and loaded, it is updated to the latest version.
-
-			This function is updated with each new version of Layers.
-
-			@param file to load theme from
-			@returns theme loaded from file
-		*/
-		Theme* load_theme(const QString& file_name);
 
 		Window* main_window() const;
 
@@ -197,9 +174,9 @@ namespace Layers
 
 		QDir m_app_themes_dir;
 
-		QDir m_layers_dir{ QDir(layers_path()) };
+		//QDir m_layers_dir{ QDir(layers_path()) };
 
-		QDir m_layers_themes_dir{ QDir(layers_themes_path()) };
+		//QDir m_layers_themes_dir{ QDir(themes_path()) };
 
 		QList<Themeable*> m_child_themeables;
 

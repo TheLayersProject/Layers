@@ -2,6 +2,7 @@
 #define THEME_H
 
 #include <QDataStream>
+#include <QDir>
 #include <QHash>
 #include <QJsonDocument>
 #include <QString>
@@ -36,17 +37,21 @@ namespace Layers
 		Layers themes store sets of attributes associated with their themeable tags. When a theme is applied,
 		themeables retrieve their attribute sets from the theme by passing along their tags.
 	*/
-	class Theme
+	class Theme : public QObject
 	{
+		Q_OBJECT
+
+	signals:
+		void applied();
+
 	public:
 		Theme();
+		Theme(QDir dir);
 		Theme(const QString& name, bool editable = true);
 		Theme(const QString& name, QUuid* uuid, bool editable);
 		~Theme();
 
 		void append_to_lineage(const QString& theme_id);
-
-		void append_to_lineage(QStringList lineage_list);
 
 		void clear();
 
@@ -69,6 +74,8 @@ namespace Layers
 
 		void copy_attribute_values_of(Themeable* themeable);
 
+		QDir dir() const;
+
 		/*!
 			Returns true if the theme is a custom, user-created theme
 
@@ -84,6 +91,8 @@ namespace Layers
 
 		QStringList lineage() const;
 
+		void load();
+
 		void load_document(const QJsonDocument& json_document, const ThemeDataType& data_type);
 
 		/*!
@@ -92,6 +101,10 @@ namespace Layers
 			@returns Theme's name
 		*/
 		QString name() const;
+
+		void save_meta_file();
+
+		void set_dir(QDir dir);
 
 		/*!
 			Sets the theme's name
@@ -109,6 +122,8 @@ namespace Layers
 
 		QJsonDocument to_json_document(ThemeDataType data_type = ThemeDataType::All);
 
+		QUuid* uuid() const;
+
 		/*!
 			Returns a reference to the attribute set of the themeable tag given in the subscript.
 
@@ -122,6 +137,8 @@ namespace Layers
 	private:
 		ThemeData m_data_for_app_themeables{ ThemeData() };
 		ThemeData m_data_for_layers_themeables{ ThemeData() };
+
+		QDir m_dir;
 
 		bool m_editable{ true };
 

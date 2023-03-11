@@ -104,21 +104,56 @@ QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 {
 	QList<Themeable*> child_themeables = QList<Themeable*>();
 
-	//if (QWidget* widget = dynamic_cast<QWidget*>(this))
 	if (QObject* object = dynamic_cast<QObject*>(this))
-		{
+	{
 		QList<QObject*> child_objects = object->findChildren<QObject*>(options);
 
 		if (!child_objects.isEmpty())
 		{
 			for (QObject* child_object : child_objects)
+			{
 				if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_object))
 					child_themeables.append(child_themeable);
+
+				if (options == Qt::FindChildrenRecursively)
+					if (QAbstractItemView* item_view_widget = dynamic_cast<QAbstractItemView*>(child_object))
+						if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(item_view_widget->itemDelegate()))
+						{
+							child_themeables.append(child_themeable_item_delegate);
+
+							QList<QObject*> delegate_child_objects = item_view_widget->itemDelegate()->findChildren<QObject*>(options);
+
+							if (!delegate_child_objects.isEmpty())
+							{
+								for (QObject* delegate_child_object : delegate_child_objects)
+								{
+									if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
+										child_themeables.append(child_themeable);
+								}
+							}
+						}
+			}
 		}
 
 		if (QAbstractItemView* item_view_widget = dynamic_cast<QAbstractItemView*>(this))
 			if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(item_view_widget->itemDelegate()))
+			{
 				child_themeables.append(child_themeable_item_delegate);
+
+				if (options == Qt::FindChildrenRecursively)
+				{
+					QList<QObject*> delegate_child_objects = item_view_widget->itemDelegate()->findChildren<QObject*>(options);
+
+					if (!delegate_child_objects.isEmpty())
+					{
+						for (QObject* delegate_child_object : delegate_child_objects)
+						{
+							if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
+								child_themeables.append(child_themeable);
+						}
+					}
+				}
+			}
 	}
 
 	return child_themeables;

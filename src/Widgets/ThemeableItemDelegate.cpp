@@ -10,8 +10,8 @@ ThemeableItemDelegate::ThemeableItemDelegate(QObject* parent) :
 {
 	init_attributes();
 
-	set_name("item_delegate");
-	set_proper_name("Item Delegate");
+	set_name("cells");
+	set_proper_name("Cells");
 }
 
 BorderAttributes* ThemeableItemDelegate::grid() const

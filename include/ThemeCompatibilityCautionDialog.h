@@ -20,6 +20,8 @@ namespace Layers
 
 		void set_lineage_table_data(const QStringList& lineage_list);
 
+		void set_theme_name(const QString& theme_name);
+
 	protected:
 		/*!
 			Overrides the QWidget::eventFilter() to handle widget hover coloring
@@ -34,6 +36,7 @@ namespace Layers
 		void init_lineage_table();
 
 		Label* m_message_label{ new Label };
+		Label* m_table_label{ new Label };
 
 		TableView* m_lineage_table{ new TableView };
 

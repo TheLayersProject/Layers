@@ -192,9 +192,6 @@
     <ClCompile Include="src\Themes\Themeable.cpp">
       <Filter>Source Files\Themes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Themes\theme_loading.cpp">
-      <Filter>Source Files\Themes</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\Controls\FillControl.cpp">
       <Filter>Source Files\Widgets\Controls</Filter>
     </ClCompile>
@@ -439,12 +436,12 @@
     <QtMoc Include="include\ThemeCompatibilityItemDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\Theme.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layouts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Theme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\ImageSequence.h">
@@ -457,9 +454,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\directories.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\theme_loading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\GitHubRepo.h">
