@@ -2,8 +2,9 @@
 #define SETTINGSMENU_H
 
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 
-#include "Layouts.h"
+//#include "Layouts.h"
 #include "Menu.h"
 #include "SettingsPanels.h"
 
@@ -91,7 +92,7 @@ namespace Layers
 		bool m_hovering_over_divider{ false };
 		bool m_shrunk{ false };
 
-		VerticalLayout* m_sidebar_layout = new VerticalLayout;
+		QVBoxLayout* m_sidebar_layout = new QVBoxLayout;
 
 		QList<SettingsTab*> m_settings_tabs;
 

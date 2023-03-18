@@ -119,12 +119,12 @@ namespace Layers
 		void add_child_themeable_pointer(Themeable& themeable);
 
 		/*!
-			Returns a pointer to the application theme with the provided name.
+			Returns a pointer to the application theme with the provided id.
 
-			@param theme_name - Name of the theme to be returned
+			@param theme_id - ID of the theme to be returned
 			@returns pointer to theme
 		*/
-		Theme* theme(const QString& theme_name);
+		Theme* theme(const QString& theme_id);
 
 		ThemeCompatibilityCautionDialog* theme_compatibility_caution_dialog() const;
 
@@ -169,14 +169,6 @@ namespace Layers
 		void init_fonts();
 		void init_themes();
 		void init_latest_version_tag();
-
-		QDir m_app_dir;
-
-		QDir m_app_themes_dir;
-
-		//QDir m_layers_dir{ QDir(layers_path()) };
-
-		//QDir m_layers_themes_dir{ QDir(themes_path()) };
 
 		QList<Themeable*> m_child_themeables;
 

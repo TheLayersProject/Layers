@@ -1,13 +1,12 @@
-#ifndef TABLE_H
-#define TABLE_H
+#ifndef THEMECOMPATIBILITYITEMDELEGATE_H
+#define THEMECOMPATIBILITYITEMDELEGATE_H
 
-#include "ThemeableItemDelegate.h"
+#include "GridlineItemDelegate.h"
 #include "SvgRenderer.h"
-//#include "Themeable.h"
 
 namespace Layers
 {
-	class ThemeCompatibilityItemDelegate : public ThemeableItemDelegate
+	class ThemeCompatibilityItemDelegate : public GridlineItemDelegate
 	{
 		Q_OBJECT
 
@@ -17,12 +16,6 @@ namespace Layers
 		void paint(QPainter* painter,
 			const QStyleOptionViewItem& option,
 			const QModelIndex& index) const;
-
-		using ThemeableItemDelegate::sizeHint;
-		using ThemeableItemDelegate::createEditor;
-		using ThemeableItemDelegate::setEditorData;
-		using ThemeableItemDelegate::setModelData;
-		using ThemeableItemDelegate::updateEditorGeometry;
 
 		SvgRenderer* check_svg() const;
 

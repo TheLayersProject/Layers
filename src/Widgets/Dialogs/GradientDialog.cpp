@@ -1,6 +1,6 @@
-#include "../../../include/GradientDialog.h"
+#include "GradientDialog.h"
 
-#include "../../../include/Application.h"
+#include "Application.h"
 
 #include <QApplication>
 #include <QMouseEvent>

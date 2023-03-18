@@ -1,7 +1,7 @@
-#include "../../../include/UpdateDialog.h"
-#include "../../../include/calculate.h"
+#include "UpdateDialog.h"
+#include "calculate.h"
 
-#include "../../../include/Application.h"
+#include "Application.h"
 
 #include <Windows.h>
 #include <windowsx.h>

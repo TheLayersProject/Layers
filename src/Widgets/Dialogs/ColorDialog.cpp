@@ -1,6 +1,6 @@
-#include "../../../include/ColorDialog.h"
+#include "ColorDialog.h"
 
-#include "../../../include/Application.h"
+#include "Application.h"
 
 #include <QRegularExpressionValidator>
 

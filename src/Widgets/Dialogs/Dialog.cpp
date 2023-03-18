@@ -1,5 +1,5 @@
-#include "../../../include/Dialog.h"
-#include "../../../include/calculate.h"
+#include "Dialog.h"
+#include "calculate.h"
 
 #include <Windows.h>
 #include <windowsx.h>

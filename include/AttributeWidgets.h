@@ -3,7 +3,7 @@
 
 #include "Button.h"
 #include "ColorControl.h"
-#include "Combobox.h"
+#include "ComboBox.h"
 #include "GradientControl.h"
 #include "FillControl.h"
 #include "Graphic.h"
@@ -53,14 +53,14 @@ namespace Layers
 
 		void add_attribute_widget(AttributeWidget* attribute_widget);
 
-		Combobox* state_combobox() const;
+		ComboBox* state_combobox() const;
 
 		void populate_state_combobox(const QList<QString>& states);
 
 	private:
 		void setup_layout();
 
-		Combobox* m_state_combobox{ new Combobox };
+		ComboBox* m_state_combobox{ new ComboBox };
 
 		Label* m_label{ new Label("State")};
 

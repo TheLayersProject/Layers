@@ -1,7 +1,7 @@
-#include "../../../include/ThemeCompatibilityCautionDialog.h"
+#include "ThemeCompatibilityCautionDialog.h"
 
-#include "../../../include/Application.h"
-#include "../../../include/ThemeCompatibilityItemDelegate.h"
+#include "Application.h"
+#include "ThemeCompatibilityItemDelegate.h"
 
 #include <QHeaderView>
 #include <QSizePolicy>
@@ -18,7 +18,7 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	setAttribute(Qt::WA_ShowWithoutActivating);
 	setFixedWidth(520);
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
-	setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
+	setWindowFlags(windowFlags() | Qt::Tool | Qt::WindowStaysOnTopHint);
 	set_icon(new Graphic(":/svgs/caution.svg"));
 	set_name("theme_compatibility_caution_dialog");
 	set_proper_name("Theme Compatibility Caution Dialog");

@@ -1,7 +1,7 @@
 #ifndef CREATENEWTHEMEDIALOG_H
 #define CREATENEWTHEMEDIALOG_H
 
-#include "Combobox.h"
+#include "ThemeComboBox.h"
 #include "Dialog.h"
 #include "LineEditor.h"
 
@@ -14,13 +14,15 @@ namespace Layers
 	public:
 		CreateNewThemeDialog(QWidget* parent = nullptr);
 
-		void add_theme_name_to_combobox(const QString& theme_name);
+		void add_theme_to_combobox(Theme* theme);
 
 		void clear();
 
+		void clear_theme_combobox();
+
 		virtual Themeable* clone() override;
 
-		QString copy_theme_name();
+		QString copy_theme_id();
 
 		QString new_theme_name();
 
@@ -37,7 +39,7 @@ namespace Layers
 
 		Button* m_create_button{ new Button("Create") };
 
-		Combobox* m_start_theme_combobox{ new Combobox };
+		ThemeComboBox* m_start_theme_combobox{ new ThemeComboBox };
 
 		Label* m_name_label{ new Label("Name") };
 		Label* m_start_as_label{ new Label("Start as copy of") };

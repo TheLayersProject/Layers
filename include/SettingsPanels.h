@@ -2,7 +2,7 @@
 #define SETTINGSPANELS_H
 
 #include "Button.h"
-#include "Combobox.h"
+#include "ThemeComboBox.h"
 #include "Graphic.h"
 
 namespace Layers
@@ -29,7 +29,7 @@ namespace Layers
 
 		Button* new_theme_button() const;
 
-		Combobox* theme_combobox() const;
+		ThemeComboBox* theme_combobox() const;
 
 		void show_custom_theme_buttons(bool cond = true);
 
@@ -41,7 +41,7 @@ namespace Layers
 
 		Label* m_theme_label{ new Label("Theme") };
 
-		Combobox* m_theme_combobox{ new Combobox };
+		ThemeComboBox* m_theme_combobox{ new ThemeComboBox };
 
 		Button* m_new_theme_button{ new Button(new Graphic(":/svgs/new_theme.svg", QSize(20, 20)), true) };
 		Button* m_customize_theme_button{ new Button(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)), true) };

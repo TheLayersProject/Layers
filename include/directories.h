@@ -6,7 +6,6 @@
 namespace Layers
 {
 	QString app_path(const QString& app_name);
-	QString app_themes_path(const QString& app_name);
 	QString latest_T_version_path();
 	QString layers_path();
 	QString themes_path();

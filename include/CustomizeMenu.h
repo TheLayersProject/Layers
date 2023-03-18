@@ -6,7 +6,6 @@
 #include "AttributeWidgets.h"
 #include "Button.h"
 #include "Graphic.h"
-#include "Layouts.h"
 #include "Menu.h"
 #include "ScrollArea.h"
 #include "WidgetButtonGroup.h"
@@ -58,7 +57,7 @@ namespace Layers
 
 		Themeable* m_ccp_themeable{ new Themeable };
 
-		HorizontalLayout* m_main_layout{ new HorizontalLayout };
+		QHBoxLayout* m_main_layout{ new QHBoxLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
 		QVBoxLayout* m_sidebar_layout{ new QVBoxLayout };
 		QHBoxLayout* m_topbar_layout{ new QHBoxLayout };

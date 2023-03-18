@@ -1,4 +1,4 @@
-#include "../../../include/FillDialog.h"
+#include "FillDialog.h"
 
 #include <QEvent>
 
