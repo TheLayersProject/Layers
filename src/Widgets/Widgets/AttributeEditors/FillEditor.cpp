@@ -1,12 +1,12 @@
-#include "AttributeWidgets.h"
+#include "FillEditor.h"
 
 using Layers::Attribute;
-using Layers::FillAW;
+using Layers::FillEditor;
 using Layers::FillControl;
 using Layers::Theme;
 
-FillAW::FillAW(Attribute* attribute, QWidget* parent) :
-	AttributeWidget(attribute, parent)
+FillEditor::FillEditor(Attribute* attribute, QWidget* parent) :
+	AttributeEditor(attribute, parent)
 {
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -61,12 +61,12 @@ FillAW::FillAW(Attribute* attribute, QWidget* parent) :
 	setLayout(hbox);
 }
 
-FillControl* FillAW::fill_control() const
+FillControl* FillEditor::fill_control() const
 {
 	return m_fill_control;
 }
 
-//void FillAW::set_centered(bool centered)
+//void FillEditor::set_centered(bool centered)
 //{
 //	if (m_centered != centered)
 //	{
@@ -77,7 +77,7 @@ FillControl* FillAW::fill_control() const
 //	}
 //}
 
-void FillAW::set_current_editting_state(const QString& state)
+void FillEditor::set_current_editting_state(const QString& state)
 {
 	m_fill_control->set_current_editting_state(state);
 }

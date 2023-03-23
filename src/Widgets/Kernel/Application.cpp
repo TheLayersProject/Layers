@@ -1,13 +1,16 @@
 #include "Application.h"
-#include "build_themes.h"
-#include "CustomizePanel.h"
+
 #include "Downloader.h"
 #include "GitHubRepo.h"
-#include "Themeable.h"
-#include "UpdateDialog.h"
 #include "Version.h"
-#include "WidgetButtonGroup.h"
 #include "Window.h"
+
+#include "Widgets/Dialogs/CreateNewThemeDialog.h"
+#include "Widgets/Dialogs/ColorDialog.h"
+#include "Widgets/Dialogs/GradientDialog.h"
+#include "Widgets/Dialogs/ThemeCompatibilityCautionDialog.h"
+#include "Widgets/Dialogs/UpdateDialog.h"
+#include "Widgets/Widgets/Menus/ThemeEditor/WidgetEditor.h"
 
 #include <QFontDatabase>
 #include <QGradientStops>
@@ -19,7 +22,7 @@
 using Layers::Application;
 using Layers::ColorDialog;
 using Layers::CreateNewThemeDialog;
-using Layers::CustomizePanel;
+using Layers::WidgetEditor;
 using Layers::GradientDialog;
 using Layers::Theme;
 using Layers::Themeable;
@@ -209,9 +212,9 @@ Theme* Application::current_theme() const
 	return m_current_theme;
 }
 
-CustomizePanel* Application::customize_panel()
+WidgetEditor* Application::customize_panel()
 {
-	CustomizePanel* customize_panel = new CustomizePanel(this, false);
+	WidgetEditor* customize_panel = new WidgetEditor(this, false);
 
 	QList<WidgetButton*> dialog_widget_buttons = QList<WidgetButton*>();
 	QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
@@ -234,11 +237,11 @@ CustomizePanel* Application::customize_panel()
 				if (QWidget* cloned_widget = dynamic_cast<QWidget*>(cloned_themeable))
 				{
 					static_cast<Window*>(QApplication::activeWindow()
-						)->customize_menu()->set_preview_widget(cloned_widget);
+						)->set_theme_customization_menu_preview_widget(cloned_widget);
 
 					static_cast<Window*>(QApplication::activeWindow()
-						)->customize_menu()->open_customize_panel(
-							new CustomizePanel(cloned_themeable));
+						)->open_themeable_customization_widget(
+							new WidgetEditor(cloned_themeable));
 				}
 			});
 

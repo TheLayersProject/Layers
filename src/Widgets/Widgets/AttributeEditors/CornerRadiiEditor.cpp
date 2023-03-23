@@ -1,16 +1,16 @@
-#include "AttributeWidgets.h"
+#include "CornerRadiiEditor.h"
 
 #include <QIntValidator>
 
-using Layers::CornerRadiiAW;
+using Layers::CornerRadiiEditor;
 using Layers::MiniSlider;
 using Layers::Theme;
 
-CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget* parent) :
-	m_attribute_widget{ new AttributeWidget },
-	AWGroup(linked_corner_radii, parent)
+CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii, QWidget* parent) :
+	m_attribute_widget{ new AttributeEditor },
+	AttributeEditorGroup(linked_corner_radii, parent)
 {
-	add_attribute_widget(m_attribute_widget);
+	add_modifier_widget(m_attribute_widget);
 	set_name("corner_radii_aw_group");
 
 	m_attribute_widget->fill()->set_disabled();
@@ -79,7 +79,7 @@ CornerRadiiAW::CornerRadiiAW(CornerRadiiAttributes* linked_corner_radii, QWidget
 	setup_layout();
 }
 
-void CornerRadiiAW::set_current_editting_state(const QString& state)
+void CornerRadiiEditor::set_current_editting_state(const QString& state)
 {
 	m_tl_slider->set_current_editting_state(state);
 	m_tr_slider->set_current_editting_state(state);
@@ -97,7 +97,7 @@ void CornerRadiiAW::set_current_editting_state(const QString& state)
 	m_br_line_editor->set_current_editting_state(state);
 }
 
-void CornerRadiiAW::setup_layout()
+void CornerRadiiEditor::setup_layout()
 {
 	QHBoxLayout* top_controls_hbox = new QHBoxLayout;
 	QHBoxLayout* bottom_controls_hbox = new QHBoxLayout;

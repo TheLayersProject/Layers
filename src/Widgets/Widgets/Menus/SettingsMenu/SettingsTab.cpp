@@ -1,6 +1,7 @@
-#include "AttributeWidgets.h"
-#include "CustomizePanel.h"
-#include "SettingsMenu.h"
+#include "SettingsTab.h"
+
+#include "Graphic.h"
+#include "Label.h"
 
 #include <QIntValidator>
 #include <QMouseEvent>

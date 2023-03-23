@@ -5,7 +5,7 @@
 
 namespace Layers
 {
-	class AttributeWidget;
+	//class AttributeWidget;
 	class Graphic;
 	class Theme;
 
@@ -106,7 +106,7 @@ namespace Layers
 
 		After a user makes changes to a custom theme, they will likely end up
 		applying those changes once they are satisfied. They do this by
-		clicking on the apply button in the CustomizeMenu. This causes
+		clicking on the apply button in the ThemeEditor. This causes
 		copy_attribute_values_to() to be called on the menu's preview window,
 		passing along the active theme.
 
@@ -277,7 +277,7 @@ namespace Layers
 			Marks the themeable as functional or disfunctional.
 
 			This is used primarily to disable certain functionality of the
-			preview window owned by the CustomizeMenu.
+			preview window owned by the ThemeEditor.
 
 			@param disabled - Boolean value determining whether to disable the
 			themeable's functionality, true by default

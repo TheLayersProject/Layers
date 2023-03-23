@@ -70,7 +70,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(Layers)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Layers)/include;$(Layers)/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Lib>
@@ -109,7 +109,7 @@
   <ItemGroup>
     <ClCompile Include="src\Widgets\Kernel\Application.cpp" />
     <ClCompile Include="src\Core\Tools\directories.cpp" />
-    <ClCompile Include="src\Core\ItemModels\ThemeComboBoxItemModel.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemModel.cpp" />
     <ClCompile Include="src\Core\ItemModels\ThemeLineageModel.cpp" />
     <ClCompile Include="src\Core\Kernel\Attribute.cpp" />
     <ClCompile Include="src\Core\Kernel\Data.cpp" />
@@ -124,15 +124,14 @@
     <ClCompile Include="src\Core\Tools\ImageSequence.cpp" />
     <ClCompile Include="src\Svg\SvgRenderer.cpp" />
     <ClCompile Include="src\Core\Tools\Version.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\AppPreferencesSettingsPanel.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\AttributeWidget.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\AWGroup.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\ColorAW.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\CornerRadiiAW.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\FillAW.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\GradientAW.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\NumberAW.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\StateAW.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\AttributeEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\AttributeEditorGroup.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\ColorEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\CornerRadiiEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\FillEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\NumberEditor.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\StateEditor.cpp" />
     <ClCompile Include="src\Widgets\Widgets\ColorPlane.cpp" />
     <ClCompile Include="src\Widgets\ItemDelegates\ComboBoxItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\Button.cpp" />
@@ -145,7 +144,7 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\Slider.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBox.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ToggleSwitch.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\CustomizePanel.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp" />
@@ -160,10 +159,9 @@
     <ClCompile Include="src\Widgets\Widgets\Label.cpp" />
     <ClCompile Include="src\Widgets\Widgets\MenuBar.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Tab.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Menus\CustomizeMenu.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\Menu.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsSidebar.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsTab.cpp" />
     <ClCompile Include="src\Widgets\Widgets\ScrollArea.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ScrollBar.cpp" />
@@ -171,13 +169,13 @@
     <ClCompile Include="src\Widgets\Widgets\TabBar.cpp" />
     <ClCompile Include="src\Widgets\Widgets\TabBar2.cpp" />
     <ClCompile Include="src\Widgets\ItemViews\TableView.cpp" />
-    <ClCompile Include="src\Widgets\ItemDelegates\ThemeComboBoxItemDelegate.cpp" />
-    <ClCompile Include="src\Widgets\ItemDelegates\ThemeCompatibilityItemDelegate.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesSettingsPanel.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Titlebar.cpp" />
     <ClCompile Include="src\Widgets\Kernel\Widget.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\WidgetButton.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\WidgetButtonGroup.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButtonGroup.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,22 +186,29 @@
     <QtRcc Include="themes\Light\theme_light.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="include\WidgetButtonGroup.h" />
-    <QtMoc Include="include\WidgetButton.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\FillEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\CornerRadiiEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\ColorEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\AttributeEditorGroup.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\StateEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\AttributeEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsTab.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButtonGroup.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.h" />
     <QtMoc Include="include\Attribute.h" />
     <QtMoc Include="include\Data.h" />
     <QtMoc Include="include\AttributeGroup.h" />
     <ClInclude Include="include\AttributeLayout.h" />
     <QtMoc Include="include\Entity.h" />
-    <ClInclude Include="include\build_themes.h" />
     <QtMoc Include="include\Dialog.h" />
-    <QtMoc Include="include\ColorDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\ColorDialog.h" />
     <QtMoc Include="include\ColorPlane.h" />
     <QtMoc Include="include\ComboBox.h" />
     <QtMoc Include="include\ComboBoxItemDelegate.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
-    <QtMoc Include="include\FillDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\FillDialog.h" />
     <ClInclude Include="include\GitHubRepo.h" />
     <QtMoc Include="include\ScrollBar.h" />
     <QtMoc Include="include\Variant.h" />
@@ -214,21 +219,21 @@
     <QtMoc Include="include\GridlineItemDelegate.h" />
     <ClInclude Include="include\Layers.h" />
     <ClInclude Include="include\ThemeableBox.h" />
-    <QtMoc Include="include\ThemeCompatibilityCautionDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.h" />
     <QtMoc Include="include\ThemeLineageModel.h" />
-    <QtMoc Include="include\ThemeCompatibilityItemDelegate.h" />
-    <QtMoc Include="include\ThemeComboBoxItemModel.h" />
+    <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.h" />
+    <QtMoc Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemModel.h" />
     <QtMoc Include="include\ThemeComboBox.h" />
-    <QtMoc Include="include\ThemeComboBoxItemDelegate.h" />
+    <QtMoc Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.h" />
     <ClInclude Include="include\Version.h" />
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />
     <QtMoc Include="include\Application.h" />
     <QtMoc Include="include\Window.h" />
-    <QtMoc Include="include\UpdateDialog.h" />
-    <QtMoc Include="include\GradientDialog.h" />
-    <QtMoc Include="include\CreateNewThemeDialog.h" />
-    <QtMoc Include="include\Titlebar.h" />
+    <QtMoc Include="src\Widgets\Dialogs\UpdateDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\GradientDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h" />
+    <QtMoc Include="src\Widgets\Widgets\Titlebar.h" />
     <QtMoc Include="include\Tab.h" />
     <QtMoc Include="include\TabBar.h" />
     <QtMoc Include="include\MenuBar.h" />
@@ -237,10 +242,10 @@
     <QtMoc Include="include\MiniSlider.h" />
     <QtMoc Include="include\GradientControl.h" />
     <QtMoc Include="include\ColorControl.h" />
-    <QtMoc Include="include\AttributeWidgets.h" />
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\NumberEditor.h" />
     <QtMoc Include="include\ScrollArea.h" />
-    <QtMoc Include="include\CustomizeMenu.h" />
-    <QtMoc Include="include\CustomizePanel.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.h" />
     <ClInclude Include="include\ImageSequence.h" />
     <QtMoc Include="include\LineEditor.h" />
     <QtMoc Include="include\SVG.h" />
@@ -248,11 +253,11 @@
     <QtMoc Include="include\Graphic.h" />
     <QtMoc Include="include\Label.h" />
     <QtMoc Include="include\Button.h" />
-    <QtMoc Include="include\SettingsPanels.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.h" />
     <QtMoc Include="include\Menu.h" />
     <QtMoc Include="include\Theme.h" />
     <ClInclude Include="include\Themeable.h" />
-    <QtMoc Include="include\SettingsMenu.h" />
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.h" />
     <QtMoc Include="include\Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

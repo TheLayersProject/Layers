@@ -1,12 +1,12 @@
-#include "AttributeWidgets.h"
+#include "ColorEditor.h"
 
 using Layers::Attribute;
-using Layers::ColorAW;
+using Layers::ColorEditor;
 using Layers::ColorControl;
 using Layers::Theme;
 
-ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
-	AttributeWidget(attribute, parent)
+ColorEditor::ColorEditor(Attribute* attribute, QWidget* parent) :
+	AttributeEditor(attribute, parent)
 {
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -53,12 +53,12 @@ ColorAW::ColorAW(Attribute* attribute, QWidget* parent) :
 	setLayout(hbox);
 }
 
-ColorControl* ColorAW::color_control() const
+ColorControl* ColorEditor::color_control() const
 {
 	return m_color_control;
 }
 
-void ColorAW::set_current_editting_state(const QString& state)
+void ColorEditor::set_current_editting_state(const QString& state)
 {
 	m_color_control->set_current_editting_state(state);
 }

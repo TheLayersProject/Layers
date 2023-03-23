@@ -1,10 +1,11 @@
-#include "AttributeWidgets.h"
+#include "StateEditor.h"
+
 #include "calculate.h"
 
 using Layers::ComboBox;
-using Layers::StateAW;
+using Layers::StateEditor;
 
-StateAW::StateAW(QWidget* parent) : AttributeWidget(nullptr, parent)
+StateEditor::StateEditor(QWidget* parent) : AttributeEditor(nullptr, parent)
 {
 	init_attributes();
 
@@ -18,32 +19,32 @@ StateAW::StateAW(QWidget* parent) : AttributeWidget(nullptr, parent)
 	m_state_combobox->setFixedSize(190, 35);
 
 	connect(m_state_combobox, &ComboBox::currentTextChanged, [this] {
-		for (AttributeWidget* aw : m_child_attribute_widgets)
+		for (AttributeEditor* aw : m_child_attribute_widgets)
 			aw->set_current_editting_state(m_state_combobox->currentText());
 		});
 
 	setup_layout();
 }
 
-void StateAW::add_attribute_widget(AttributeWidget* attribute_widget)
+void StateEditor::add_modifier_widget(AttributeEditor* attribute_widget)
 {
 	m_widgets_vbox->addWidget(attribute_widget);
 
 	m_child_attribute_widgets.append(attribute_widget);
 }
 
-ComboBox* StateAW::state_combobox() const
+ComboBox* StateEditor::state_combobox() const
 {
 	return m_state_combobox;
 }
 
-void StateAW::populate_state_combobox(const QList<QString>& states)
+void StateEditor::populate_state_combobox(const QList<QString>& states)
 {
 	for (const QString& state : states)
 		m_state_combobox->addItem(state);
 }
 
-void StateAW::setup_layout()
+void StateEditor::setup_layout()
 {
 	QHBoxLayout* top_hbox = new QHBoxLayout;
 

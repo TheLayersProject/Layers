@@ -5630,165 +5630,6 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/sidebar/app_preferences_settings_tab": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": {
-                "state_value_pairs": {
-                    "Selected": "#ffffff",
-                    "Unselected": "#c0c0c0"
-                }
-            }
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/settings_menu/sidebar/app_preferences_settings_tab/icon": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/settings_menu/sidebar/app_preferences_settings_tab/icon/svg": {
-        "common_color": {
-            "value": {
-                "state_value_pairs": {
-                    "Selected": "#2e2e2e",
-                    "Unselected": "#5d5d5d"
-                }
-            }
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#6a8ac3"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
-        }
-    },
-    "window/settings_menu/sidebar/app_preferences_settings_tab/text_label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
-        "text_color": {
-            "value": {
-                "state_value_pairs": {
-                    "Selected": "#2e2e2e",
-                    "Unselected": "#5d5d5d"
-                }
-            }
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/sidebar/themes_settings_tab": {
         "border": {
             "disabled": true,
@@ -5948,7 +5789,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel": {
+    "window/settings_menu/themes_widget": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6005,7 +5846,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/customize_theme_button": {
+    "window/settings_menu/themes_widget/customize_theme_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6062,7 +5903,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/customize_theme_button/graphic": {
+    "window/settings_menu/themes_widget/customize_theme_button/graphic": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6119,7 +5960,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/customize_theme_button/graphic/svg": {
+    "window/settings_menu/themes_widget/customize_theme_button/graphic/svg": {
         "common_color": {
             "value": "#c3c3c3"
         },
@@ -6133,7 +5974,7 @@
             "value": true
         }
     },
-    "window/settings_menu/themes_settings_panel/delete_theme_button": {
+    "window/settings_menu/themes_widget/delete_theme_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6190,7 +6031,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/delete_theme_button/graphic": {
+    "window/settings_menu/themes_widget/delete_theme_button/graphic": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6247,7 +6088,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/delete_theme_button/graphic/svg": {
+    "window/settings_menu/themes_widget/delete_theme_button/graphic/svg": {
         "common_color": {
             "value": "#e95454"
         },
@@ -6261,7 +6102,7 @@
             "value": true
         }
     },
-    "window/settings_menu/themes_settings_panel/new_theme_button": {
+    "window/settings_menu/themes_widget/new_theme_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6318,7 +6159,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/new_theme_button/graphic": {
+    "window/settings_menu/themes_widget/new_theme_button/graphic": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6375,7 +6216,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/new_theme_button/graphic/svg": {
+    "window/settings_menu/themes_widget/new_theme_button/graphic/svg": {
         "common_color": {
             "value": "#6fc654"
         },
@@ -6389,7 +6230,7 @@
             "value": true
         }
     },
-    "window/settings_menu/themes_settings_panel/separator": {
+    "window/settings_menu/themes_widget/separator": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6445,7 +6286,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_combobox": {
+    "window/settings_menu/themes_widget/theme_combobox": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6465,7 +6306,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_combobox/items": {
+    "window/settings_menu/themes_widget/theme_combobox/items": {
         "corner_radius": {
             "value": 10
         },
@@ -6481,7 +6322,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_info_button": {
+    "window/settings_menu/themes_widget/theme_info_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6538,7 +6379,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_info_button/graphic": {
+    "window/settings_menu/themes_widget/theme_info_button/graphic": {
         "border": {
             "disabled": true,
             "fill": {
@@ -6595,7 +6436,7 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_info_button/graphic/svg": {
+    "window/settings_menu/themes_widget/theme_info_button/graphic/svg": {
         "common_color": {
             "value": "#6a6a6a"
         },
@@ -6610,7 +6451,7 @@
             "value": false
         }
     },
-    "window/settings_menu/themes_settings_panel/theme_label": {
+    "window/settings_menu/themes_widget/theme_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"

@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Layers.h"
 
+#include "Widgets/Dialogs/ThemeCompatibilityCautionDialog.h"
+
 #include <QMouseEvent>
 #include <QPainter>
 

@@ -1,5 +1,3 @@
-#include "AttributeWidgets.h"
-#include "CustomizePanel.h"
 #include "SVG.h"
 
 #include <QFile>

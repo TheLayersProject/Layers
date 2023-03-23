@@ -1,10 +1,12 @@
 #ifndef FILLCONTROL_H
 #define FILLCONTROL_H
 
-#include "FillDialog.h"
+#include "Widget.h"
 
 namespace Layers
 {
+	class FillDialog;
+
 	class FillControl : public Widget
 	{
 		Q_OBJECT
@@ -24,9 +26,9 @@ namespace Layers
 		void init_attributes();
 
 	private:
-		FillDialog* m_control_dialog{ new FillDialog(this) };
+		FillDialog* m_control_dialog;
 
-		FillDialog* m_dialog{ new FillDialog };
+		FillDialog* m_dialog;
 	};
 }
 

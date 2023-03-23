@@ -6,21 +6,21 @@
 #include <QSettings>
 #include <QUuid>
 
-#include "ColorDialog.h"
-#include "CreateNewThemeDialog.h"
 #include "directories.h"
-#include "GradientDialog.h"
 #include "Theme.h"
 #include "Themeable.h"
-#include "ThemeCompatibilityCautionDialog.h"
-#include "UpdateDialog.h"
 
 namespace Layers
 {
-	class CustomizePanel;
+	class CreateNewThemeDialog;
+	class ColorDialog;
 	class Downloader;
 	class GitHubRepo;
+	class GradientDialog;
+	class ThemeCompatibilityCautionDialog;
+	class UpdateDialog;
 	class Version;
+	class WidgetEditor;
 	class Window;
 
 	class Application : public QApplication, public Themeable
@@ -64,7 +64,7 @@ namespace Layers
 		*/
 		Theme* current_theme() const;
 
-		CustomizePanel* customize_panel();
+		WidgetEditor* customize_panel();
 
 		GradientDialog* gradient_dialog() const;
 

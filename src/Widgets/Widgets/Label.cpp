@@ -1,6 +1,6 @@
-#include "AttributeWidgets.h"
-#include "CustomizePanel.h"
 #include "Label.h"
+
+#include "Graphic.h"
 
 #include <QPainterPath>
 

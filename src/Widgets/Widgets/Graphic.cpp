@@ -1,5 +1,6 @@
-#include "AttributeWidgets.h"
 #include "Graphic.h"
+
+#include <QVBoxLayout>
 
 using Layers::Graphic;
 using Layers::SVG;

@@ -1,7 +1,9 @@
-#include "Application.h"
 #include "GradientControl.h"
-#include "GradientDialog.h"
+
+#include "Application.h"
 #include "Window.h"
+
+#include "Widgets/Dialogs/GradientDialog.h"
 
 #include <QMouseEvent>
 #include <QPainterPath>

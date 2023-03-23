@@ -3,13 +3,17 @@
 #include "Application.h"
 #include "Layers.h"
 #include "ThemeComboBoxItemDelegate.h"
+#include "ThemeComboBoxItemModel.h"
+
+#include "Widgets/Dialogs/ThemeCompatibilityCautionDialog.h"
 
 #include <QAbstractItemView>
 #include <QEvent>
 
 using Layers::ThemeComboBox;
 
-ThemeComboBox::ThemeComboBox(QWidget* parent) : ComboBox(parent)
+ThemeComboBox::ThemeComboBox(QWidget* parent) :
+	m_model{ new ThemeComboBoxItemModel }, ComboBox(parent)
 {
 	setFixedSize(250, 60);
 	setItemDelegate(new ThemeComboBoxItemDelegate);

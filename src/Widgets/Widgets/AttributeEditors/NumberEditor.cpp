@@ -1,13 +1,13 @@
-#include "AttributeWidgets.h"
+#include "NumberEditor.h"
 
 #include <QIntValidator>
 
 using Layers::Attribute;
-using Layers::NumberAW;
+using Layers::NumberEditor;
 using Layers::Theme;
 
-NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* parent) :
-	AttributeWidget(attribute, parent)
+NumberEditor::NumberEditor(Attribute* attribute, QIntValidator* int_validator, QWidget* parent) :
+	AttributeEditor(attribute, parent)
 {
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
@@ -47,12 +47,12 @@ NumberAW::NumberAW(Attribute* attribute, QIntValidator* int_validator, QWidget* 
 	setup_layout();
 }
 
-void NumberAW::set_unit_label_text(const QString& unit_string)
+void NumberEditor::set_unit_label_text(const QString& unit_string)
 {
 	//m_unit_label->setText(unit_string);
 }
 
-void NumberAW::setup_layout()
+void NumberEditor::setup_layout()
 {
 	QHBoxLayout* hbox1 = new QHBoxLayout;
 

@@ -1,7 +1,14 @@
 #include "Window.h"
 
+#include "Menu.h"
+#include "Titlebar.h"
+
+#include "Menus/SettingsMenu/SettingsMenu.h"
+#include "Menus/SettingsMenu/ThemesWidget.h"
+#include "Menus/ThemeEditor/ThemeEditor.h"
+#include "Widgets/Dialogs/CreateNewThemeDialog.h"
+
 #include "calculate.h"
-#include "directories.h"
 
 #include <Windows.h>
 #include <windowsx.h>
@@ -10,7 +17,7 @@
 #include <QPainterPath>
 
 using Layers::ColorDialog;
-using Layers::CustomizeMenu;
+using Layers::ThemeEditor;
 using Layers::GradientDialog;
 using Layers::Menu;
 using Layers::SettingsMenu;
@@ -20,14 +27,18 @@ using Layers::Titlebar;
 using Layers::Window;
 
 Window::Window(bool preview, QWidget* parent) :
-	m_preview{ preview }, Widget(parent)
+	m_preview{ preview },
+	m_settings_menu{ new SettingsMenu },
+	m_theme_customization_menu{ new ThemeEditor },
+	m_titlebar{ new Titlebar },
+	Widget(parent)
 {
 	if (m_preview)
 	{
 		Widget* preview_widget = new Widget;
 		preview_widget->set_name("preview_widget");
 		preview_widget->set_proper_name("Preview Widget");
-		m_customize_menu->set_preview_widget(preview_widget);
+		m_theme_customization_menu->set_preview_widget(preview_widget);
 	}
 	else
 		layersApp->add_child_themeable_pointer(*this);
@@ -36,8 +47,6 @@ Window::Window(bool preview, QWidget* parent) :
 	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
 	connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
 	connect(m_titlebar->exit_button(), &Button::clicked, this, &Window::exit_clicked);
-	connect(m_settings_menu->themes_settings_panel()->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
-	connect(m_settings_menu->themes_settings_panel()->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
 
 	set_name("window");
 	set_proper_name("Window");
@@ -67,8 +76,8 @@ Window::Window(bool preview, QWidget* parent) :
 	m_settings_menu->fill()->set_disabled();
 	m_settings_menu->hide();
 
-	m_customize_menu->fill()->set_disabled();
-	m_customize_menu->hide();
+	m_theme_customization_menu->fill()->set_disabled();
+	m_theme_customization_menu->hide();
 
 	m_separator->fill()->set_value(QColor("#25272b"));
 	m_separator->setFixedHeight(3);
@@ -78,17 +87,21 @@ Window::Window(bool preview, QWidget* parent) :
 
 	setup_layout();
 
-	for (Theme* theme : layersApp->themes())
-		m_settings_menu->themes_settings_panel()->theme_combobox()->addItem(theme);
-
 	// Assign tag prefixes last!
 	assign_tag_prefixes();
 
 	// Set theme
 	apply_theme(*layersApp->current_theme());
 
-	ThemeComboBox* theme_combobox =
-			m_settings_menu->themes_settings_panel()->theme_combobox();
+	ThemesWidget* themes_widget = m_settings_menu->themes_widget();
+
+	ThemeComboBox* theme_combobox = themes_widget->theme_combobox();
+
+	connect(themes_widget->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
+	connect(themes_widget->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
+
+	for (Theme* theme : layersApp->themes())
+		theme_combobox->addItem(theme);
 
 	for (int i = 0; i < theme_combobox->count(); i++)
 		if (theme_combobox->itemData(i) == layersApp->current_theme()->identifier())
@@ -97,17 +110,22 @@ Window::Window(bool preview, QWidget* parent) :
 			break;
 		}
 
-	//connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
-	connect(m_settings_menu->themes_settings_panel()->theme_combobox(), &ThemeComboBox::currentIndexChanged, [this] {
+	connect(theme_combobox, &ThemeComboBox::currentIndexChanged, [this, theme_combobox] {
 		if (!m_functionality_disabled)
-			//layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->current_item()]);
-			layersApp->apply_theme(*layersApp->themes()[m_settings_menu->themes_settings_panel()->theme_combobox()->currentData().toString()]);
+			layersApp->apply_theme(*layersApp->theme(theme_combobox->currentData().toString()));
 		});
 }
 
 Menu* Window::app_menu() const
 {
 	return m_app_menu;
+}
+
+void Window::open_themeable_customization_widget(
+	WidgetEditor* themeable_customization_widget)
+{
+	m_theme_customization_menu->open_customize_panel(
+		themeable_customization_widget);
 }
 
 void Window::set_main_menu(Menu* main_menu)
@@ -128,6 +146,11 @@ void Window::set_main_menu(Menu* main_menu)
 	m_main_layout->addWidget(m_app_menu);
 }
 
+void Window::set_theme_customization_menu_preview_widget(QWidget* widget)
+{
+	m_theme_customization_menu->set_preview_widget(widget);
+}
+
 void Window::center_dialog(QDialog* dialog)
 {
 	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
@@ -143,10 +166,10 @@ Themeable* Window::clone()
 	return w;
 }
 
-CustomizeMenu* Window::customize_menu() const
-{
-	return m_customize_menu;
-}
+//ThemeEditor* Window::customize_menu() const
+//{
+//	return m_theme_customization_menu;
+//}
 
 void Window::update_theme_dependencies()
 {
@@ -166,15 +189,10 @@ void Window::update_theme_dependencies()
 	}
 }
 
-SettingsMenu* Window::settings_menu() const
-{
-	return m_settings_menu;
-}
-
-Titlebar* Window::titlebar() const
-{
-	return m_titlebar;
-}
+//SettingsMenu* Window::settings_menu() const
+//{
+//	return m_settings_menu;
+//}
 
 void Window::open_menu(Menu* menu)
 {
@@ -205,11 +223,11 @@ void Window::open_menu(Menu* menu)
 
 void Window::customize_clicked()
 {
-	if (m_customize_menu->panels().isEmpty())
-		m_customize_menu->open_customize_panel(
+	if (m_theme_customization_menu->panels().isEmpty())
+		m_theme_customization_menu->open_customize_panel(
 			layersApp->customize_panel());
 	
-	open_menu(m_customize_menu);
+	open_menu(m_theme_customization_menu);
 }
 
 void Window::exit_clicked()
@@ -287,7 +305,7 @@ void Window::new_theme_clicked()
 		new_theme->load();
 
 		ThemeComboBox* theme_combobox =
-			m_settings_menu->themes_settings_panel()->theme_combobox();
+			m_settings_menu->themes_widget()->theme_combobox();
 
 		theme_combobox->addItem(new_theme);
 
@@ -596,7 +614,7 @@ void Window::setup_layout()
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_separator);
 	m_main_layout->addWidget(m_settings_menu);
-	m_main_layout->addWidget(m_customize_menu);
+	m_main_layout->addWidget(m_theme_customization_menu);
 
 	setLayout(m_main_layout);
 }

@@ -3,6 +3,8 @@
 #include "GradientControl.h"
 #include "Window.h"
 
+#include "Widgets/Dialogs/ColorDialog.h"
+
 #include <QColorDialog>
 #include <QMouseEvent>
 #include <QPainterPath>

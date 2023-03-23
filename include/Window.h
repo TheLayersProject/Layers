@@ -1,17 +1,18 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <QVBoxLayout>
+
 #include "Application.h"
-#include "ColorDialog.h"
-#include "CreateNewThemeDialog.h"
-#include "CustomizeMenu.h"
-#include "GradientDialog.h"
-#include "SettingsMenu.h"
-#include "Titlebar.h"
-#include "UpdateDialog.h"
+#include "Widget.h"
 
 namespace Layers
 {
+	class Menu;
+	class SettingsMenu;
+	class ThemeEditor;
+	class Titlebar;
+
 	class Window : public Widget
 	{
 		Q_OBJECT
@@ -25,13 +26,13 @@ namespace Layers
 
 		virtual Themeable* clone() override;
 
-		CustomizeMenu* customize_menu() const;
+		void open_themeable_customization_widget(
+			WidgetEditor* themeable_customization_widget);
 
 		void set_main_menu(Menu* main_menu);
 
-		SettingsMenu* settings_menu() const;
-
-		Titlebar* titlebar() const;
+		void set_theme_customization_menu_preview_widget(
+			QWidget* widget);
 
 		void update_theme_dependencies();
 
@@ -57,13 +58,13 @@ namespace Layers
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		Titlebar* m_titlebar{ new Titlebar };
+		Titlebar* m_titlebar;
 
 		Menu* m_app_menu{ nullptr };
 
-		SettingsMenu* m_settings_menu{ new SettingsMenu };
+		SettingsMenu* m_settings_menu;
 
-		CustomizeMenu* m_customize_menu{ new CustomizeMenu };
+		ThemeEditor* m_theme_customization_menu;
 
 		Widget* m_main_widget{ nullptr };
 

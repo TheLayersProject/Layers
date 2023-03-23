@@ -15,13 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Widgets\Widgets\Menus\CustomizeMenu.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Menus\Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\AppPreferencesSettingsPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\ColorPlane.cpp">
@@ -30,7 +27,7 @@
     <ClCompile Include="src\Widgets\ItemDelegates\ComboBoxItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\CustomizePanel.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Graphic.cpp">
@@ -75,13 +72,13 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\ItemDelegates\ThemeComboBoxItemDelegate.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\ItemDelegates\ThemeCompatibilityItemDelegate.cpp">
+    <ClCompile Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesSettingsPanel.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Titlebar.cpp">
@@ -90,19 +87,16 @@
     <ClCompile Include="src\Widgets\Kernel\Widget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\WidgetButton.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\WidgetButtonGroup.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButtonGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsSidebar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsTab.cpp">
@@ -156,28 +150,28 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\ToggleSwitch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\StateAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\StateEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\AttributeWidget.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\AttributeEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\AWGroup.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\AttributeEditorGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\ColorAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\ColorEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\CornerRadiiAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\CornerRadiiEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\FillAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\FillEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\GradientAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\ModifierWidgets\NumberAW.cpp">
+    <ClCompile Include="src\Widgets\Widgets\AttributeEditors\NumberEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Tools\Version.cpp">
@@ -222,7 +216,7 @@
     <ClCompile Include="src\Core\ItemModels\ThemeLineageModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\ItemModels\ThemeComboBoxItemModel.cpp">
+    <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Tools\directories.cpp">
@@ -253,10 +247,10 @@
     <QtMoc Include="include\Widget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\SettingsMenu.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\SettingsPanels.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Button.h">
@@ -277,16 +271,16 @@
     <QtMoc Include="include\LineEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\CustomizePanel.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\CustomizeMenu.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ScrollArea.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\AttributeWidgets.h">
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\NumberEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ColorControl.h">
@@ -313,16 +307,16 @@
     <QtMoc Include="include\Tab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Titlebar.h">
+    <QtMoc Include="src\Widgets\Widgets\Titlebar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\CreateNewThemeDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\GradientDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\GradientDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\UpdateDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\UpdateDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Window.h">
@@ -358,13 +352,13 @@
     <QtMoc Include="include\Dialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\ColorDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\ColorDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ColorPlane.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\FillDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\FillDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\TabBar2.h">
@@ -373,13 +367,13 @@
     <QtMoc Include="include\Menu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\WidgetButton.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\WidgetButtonGroup.h">
+    <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButtonGroup.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\ThemeCompatibilityCautionDialog.h">
+    <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ThemeLineageModel.h">
@@ -397,7 +391,7 @@
     <QtMoc Include="include\GridlineItemDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\ThemeCompatibilityItemDelegate.h">
+    <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Theme.h">
@@ -409,21 +403,42 @@
     <QtMoc Include="include\ComboBoxItemDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\ThemeComboBoxItemModel.h">
+    <QtMoc Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ThemeComboBox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\ThemeComboBoxItemDelegate.h">
+    <QtMoc Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsTab.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\AttributeEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\StateEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\AttributeEditorGroup.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\ColorEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\CornerRadiiEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\FillEditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ImageSequence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\build_themes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\calculate.h">

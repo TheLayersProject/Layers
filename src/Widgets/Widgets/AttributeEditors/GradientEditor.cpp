@@ -1,11 +1,11 @@
-#include "AttributeWidgets.h"
+#include "GradientEditor.h"
 
 using Layers::Attribute;
-using Layers::GradientAW;
+using Layers::GradientEditor;
 using Layers::Theme;
 
-GradientAW::GradientAW(const QString& attribute_label_text, Attribute* attribute, QWidget* parent) :
-	m_attribute_label{ new Label(attribute_label_text) }, AttributeWidget(attribute, parent)
+GradientEditor::GradientEditor(const QString& attribute_label_text, Attribute* attribute, QWidget* parent) :
+	m_attribute_label{ new Label(attribute_label_text) }, AttributeEditor(attribute, parent)
 {
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");

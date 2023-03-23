@@ -1,19 +1,32 @@
+#include "ThemeEditor.h"
+
 #include "Application.h"
-#include "AttributeWidgets.h"
-#include "CustomizeMenu.h"
-#include "CustomizePanel.h"
+#include "WidgetEditor.h"
 #include "Window.h"
 
+#include "Widgets/Widgets/AttributeEditors/AttributeEditor.h"
+#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
+#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
+#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
+#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
+#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
+
 using Layers::Button;
-using Layers::CustomizeMenu;
-using Layers::CustomizePanel;
+using Layers::ThemeEditor;
 using Layers::Widget;
+using Layers::WidgetEditor;
 using Layers::Window;
 
-CustomizeMenu::CustomizeMenu(QWidget* parent) :
-	Menu("Customize", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
+ThemeEditor::ThemeEditor(QWidget* parent) :
+	m_control_aw_group{ new AttributeEditorGroup(nullptr) },
+	m_control_color_aw{ new ColorEditor(nullptr) },
+	m_control_corner_radii_aw{ new CornerRadiiEditor(nullptr) },
+	m_control_fill_aw{ new FillEditor(nullptr) },
+	m_control_number_aw{ new NumberEditor(nullptr, nullptr) },
+	m_control_state_aw{ new StateEditor },
+	Menu("Theme Editor", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
-	m_control_customize_panel = new CustomizePanel(m_ccp_themeable, false, m_sidebar);
+	m_control_customize_panel = new WidgetEditor(m_ccp_themeable, false, m_sidebar);
 	m_control_customize_panel->hide();
 	m_control_customize_panel->set_proper_name("Customize Panels");
 
@@ -158,7 +171,7 @@ CustomizeMenu::CustomizeMenu(QWidget* parent) :
 	setup_layout();
 }
 
-CustomizeMenu::~CustomizeMenu()
+ThemeEditor::~ThemeEditor()
 {
 	delete m_ccp_themeable;
 	delete m_collapse_menu;
@@ -167,12 +180,12 @@ CustomizeMenu::~CustomizeMenu()
 	m_collapse_menu = nullptr;
 }
 
-Button* CustomizeMenu::apply_button() const
+Button* ThemeEditor::apply_button() const
 {
 	return m_apply_button;
 }
 
-void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
+void ThemeEditor::open_customize_panel(WidgetEditor* customize_panel)
 {
 	if (m_panel_stack.contains(customize_panel))
 	{
@@ -280,17 +293,17 @@ void CustomizeMenu::open_customize_panel(CustomizePanel* customize_panel)
 	}
 }
 
-QList<CustomizePanel*>& CustomizeMenu::panels()
+QList<WidgetEditor*>& ThemeEditor::panels()
 {
 	return m_panel_stack;
 }
 
-QWidget* CustomizeMenu::preview_widget() const
+QWidget* ThemeEditor::preview_widget() const
 {
 	return m_preview_widget;
 }
 
-int CustomizeMenu::calculated_topbar_content_width()
+int ThemeEditor::calculated_topbar_content_width()
 {
 	int calculated_topbar_content_width = 0;
 
@@ -310,7 +323,7 @@ int CustomizeMenu::calculated_topbar_content_width()
 	return calculated_topbar_content_width;
 }
 
-void CustomizeMenu::set_preview_widget(QWidget* widget)
+void ThemeEditor::set_preview_widget(QWidget* widget)
 {
 	if (m_preview_widget)
 		m_preview_widget->deleteLater();
@@ -322,7 +335,7 @@ void CustomizeMenu::set_preview_widget(QWidget* widget)
 	m_preview_layout->addWidget(widget);
 }
 
-int CustomizeMenu::topbar_content_width(bool include_collapse_button)
+int ThemeEditor::topbar_content_width(bool include_collapse_button)
 {
 	int topbar_content_width = 0;
 
@@ -343,7 +356,7 @@ int CustomizeMenu::topbar_content_width(bool include_collapse_button)
 	return topbar_content_width;
 }
 
-bool CustomizeMenu::eventFilter(QObject* object, QEvent* event)
+bool ThemeEditor::eventFilter(QObject* object, QEvent* event)
 {
 	if (object == m_collapse_menu && event->type() == QEvent::FocusOut)
 	{
@@ -390,7 +403,7 @@ bool CustomizeMenu::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-void CustomizeMenu::adjust_collapsed_widget()
+void ThemeEditor::adjust_collapsed_widget()
 {
 	QMargins margins = m_collapsed_text_buttons_layout->contentsMargins();
 
@@ -406,7 +419,7 @@ void CustomizeMenu::adjust_collapsed_widget()
 	m_collapse_menu->setFixedSize(collapsed_widget_width, collapsed_widget_height);
 }
 
-void CustomizeMenu::collapse_text_buttons()
+void ThemeEditor::collapse_text_buttons()
 {
 	while (topbar_content_width(true) > m_topbar->width())
 	{
@@ -427,7 +440,7 @@ void CustomizeMenu::collapse_text_buttons()
 	}
 }
 
-void CustomizeMenu::expand_text_buttons()
+void ThemeEditor::expand_text_buttons()
 {
 	//int calculated_topbar_content_width = 0;
 
@@ -484,7 +497,7 @@ void CustomizeMenu::expand_text_buttons()
 	}
 }
 
-void CustomizeMenu::setup_layout()
+void ThemeEditor::setup_layout()
 {
 	// Collapsed Labels Widget
 

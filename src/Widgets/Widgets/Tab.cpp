@@ -1,4 +1,3 @@
-#include "AttributeWidgets.h"
 #include "Tab.h"
 
 #include <QEvent>

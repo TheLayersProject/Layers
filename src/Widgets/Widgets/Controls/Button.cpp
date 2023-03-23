@@ -1,5 +1,5 @@
-#include "AttributeWidgets.h"
 #include "Button.h"
+
 #include "Graphic.h"
 
 #include <QMouseEvent>

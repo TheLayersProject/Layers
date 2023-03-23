@@ -1,13 +1,16 @@
-#include "AttributeWidgets.h"
 #include "SettingsMenu.h"
+
+#include "SettingsTab.h"
+#include "ThemesWidget.h"
 
 #include <QMouseEvent>
 
 using Layers::Graphic;
 using Layers::SettingsMenu;
-using Layers::ThemesSettingsPanel;
+using Layers::ThemesWidget;
 
 SettingsMenu::SettingsMenu(QWidget* parent) :
+	m_themes_widget{ new ThemesWidget },
 	Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
 {
 	setMouseTracking(true);
@@ -18,11 +21,8 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 	set_name("settings_menu");
 	set_proper_name("Settings Menu");
 
-	m_app_preferences_settings_panel->hide();
-	m_app_preferences_settings_panel->setMouseTracking(true);
-
 	//m_themes_settings_panel->hide();
-	m_themes_settings_panel->setMouseTracking(true);
+	m_themes_widget->setMouseTracking(true);
 
 	setup_layout();
 
@@ -36,11 +36,16 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 	// Add 'Themes' Settings Tab
 	add_settings_tab(new Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
 	m_settings_tabs.last()->set_name("themes_settings_tab");
-	connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
+	//connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
 
 	m_settings_tabs.first()->set_state("Selected");
 
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
+	m_sidebar->setMouseTracking(true);
+	m_sidebar->set_icon(new Graphic(":/svgs/sidebar_icon.svg", QSize(20, 20)));
+	m_sidebar->set_name("sidebar");
+	m_sidebar->set_proper_name("Sidebar");
+	m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 }
 
 void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
@@ -100,9 +105,9 @@ int SettingsMenu::recommended_minimum_tab_width() const
 	return tab_width;
 }
 
-ThemesSettingsPanel* SettingsMenu::themes_settings_panel() const
+ThemesWidget* SettingsMenu::themes_widget() const
 {
-	return m_themes_settings_panel;
+	return m_themes_widget;
 }
 
 bool SettingsMenu::eventFilter(QObject* object, QEvent* event)
@@ -253,8 +258,7 @@ void SettingsMenu::setup_layout()
 	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addWidget(m_sidebar);
-	main_layout->addWidget(m_app_preferences_settings_panel);
-	main_layout->addWidget(m_themes_settings_panel);
+	main_layout->addWidget(m_themes_widget);
 
 	setLayout(main_layout);
 }

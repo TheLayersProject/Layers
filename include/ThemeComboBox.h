@@ -2,10 +2,11 @@
 #define THEMECOMBOBOX_H
 
 #include "ComboBox.h"
-#include "ThemeComboBoxItemModel.h"
 
 namespace Layers
 {
+	class ThemeComboBoxItemModel;
+
 	class ThemeComboBox : public ComboBox
 	{
 		Q_OBJECT
@@ -23,7 +24,7 @@ namespace Layers
 		virtual void paintEvent(QPaintEvent* event) override;
 
 	private:
-		ThemeComboBoxItemModel* m_model{ new ThemeComboBoxItemModel };
+		ThemeComboBoxItemModel* m_model;
 	};
 }
 

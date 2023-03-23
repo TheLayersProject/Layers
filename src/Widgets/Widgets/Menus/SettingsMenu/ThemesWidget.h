@@ -1,5 +1,5 @@
-#ifndef SETTINGSPANELS_H
-#define SETTINGSPANELS_H
+#ifndef THEMESWIDGET_H
+#define THEMESWIDGET_H
 
 #include "Button.h"
 #include "ThemeComboBox.h"
@@ -7,21 +7,13 @@
 
 namespace Layers
 {
-	class AppPreferencesSettingsPanel : public Widget
+	class ThemesWidget : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		AppPreferencesSettingsPanel(QWidget* parent = nullptr);
-	};
-
-	class ThemesSettingsPanel : public Widget
-	{
-		Q_OBJECT
-
-	public:
-		ThemesSettingsPanel(QWidget* parent = nullptr);
-		~ThemesSettingsPanel();
+		ThemesWidget(QWidget* parent = nullptr);
+		~ThemesWidget();
 
 		void handle_custom_theme_buttons_visibility();
 
@@ -58,4 +50,4 @@ namespace Layers
 	};
 }
 
-#endif // SETTINGSPANELS_H
+#endif // THEMESWIDGET_H

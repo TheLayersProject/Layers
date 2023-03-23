@@ -1,9 +1,8 @@
-#ifndef CUSTOMIZEMENU_H
-#define CUSTOMIZEMENU_H
+#ifndef THEMEEDITOR_H
+#define THEMEEDITOR_H
 
 #include <QIntValidator>
 
-#include "AttributeWidgets.h"
 #include "Button.h"
 #include "Graphic.h"
 #include "Menu.h"
@@ -12,22 +11,28 @@
 
 namespace Layers
 {
-	class CustomizePanel;
+	class AttributeEditorGroup;
+	class ColorEditor;
+	class CornerRadiiEditor;
+	class FillEditor;
+	class NumberEditor;
+	class StateEditor;
+	class WidgetEditor;
 	class Window;
 
-	class CustomizeMenu : public Menu
+	class ThemeEditor : public Menu
 	{
 		Q_OBJECT
 
 	public:
-		CustomizeMenu(QWidget* parent = nullptr);
-		~CustomizeMenu();
+		ThemeEditor(QWidget* parent = nullptr);
+		~ThemeEditor();
 
 		Button* apply_button() const;
 
-		void open_customize_panel(CustomizePanel* customize_panel);
+		void open_customize_panel(WidgetEditor* customize_panel);
 
-		QList<CustomizePanel*>& panels();
+		QList<WidgetEditor*>& panels();
 
 		QWidget* preview_widget() const;
 
@@ -46,12 +51,12 @@ namespace Layers
 		void expand_text_buttons();
 		void setup_layout();
 
-		AWGroup* m_control_aw_group{ new AWGroup(nullptr) };
-		ColorAW* m_control_color_aw{ new ColorAW(nullptr) };
-		CornerRadiiAW* m_control_corner_radii_aw{ new CornerRadiiAW(nullptr) };
-		FillAW* m_control_fill_aw{ new FillAW(nullptr) };
-		NumberAW* m_control_number_aw{ new NumberAW(nullptr, nullptr) };
-		StateAW* m_control_state_aw{ new StateAW };
+		AttributeEditorGroup* m_control_aw_group;
+		ColorEditor* m_control_color_aw;
+		CornerRadiiEditor* m_control_corner_radii_aw;
+		FillEditor* m_control_fill_aw;
+		NumberEditor* m_control_number_aw;
+		StateEditor* m_control_state_aw;
 		WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
 		WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
 
@@ -72,7 +77,7 @@ namespace Layers
 
 		QWidget* m_preview_widget{ nullptr };
 
-		QList<CustomizePanel*> m_panel_stack;
+		QList<WidgetEditor*> m_panel_stack;
 		QList<Button*> m_text_button_stack;
 		QList<Button*> m_topbar_text_buttons;
 		QList<Button*> m_collapsed_text_buttons;
@@ -85,7 +90,7 @@ namespace Layers
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
 
-		CustomizePanel* m_control_customize_panel{ nullptr };
+		WidgetEditor* m_control_customize_panel{ nullptr };
 
 		Button* m_control_text_button{ new Button("") };
 
@@ -93,4 +98,4 @@ namespace Layers
 	};
 }
 
-#endif // CUSTOMIZEMENU_H
+#endif // THEMEEDITOR_H

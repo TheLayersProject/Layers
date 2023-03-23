@@ -1,22 +1,20 @@
-#include "AttributeWidgets.h"
+#include "ThemesWidget.h"
+
 #include "Application.h"
-//#include "Layouts.h"
-#include "SettingsPanels.h"
-#include "ThemeComboBoxItemModel.h"
 
 using Layers::Button;
 using Layers::ComboBox;
 using Layers::Theme;
 using Layers::ThemeComboBox;
-using Layers::ThemesSettingsPanel;
+using Layers::ThemesWidget;
 
-ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
+ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
 	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
-	set_name("themes_settings_panel");
-	set_proper_name("Themes Panel");
+	set_name("themes_widget");
+	set_proper_name("Themes Widget");
 
 	m_theme_label->set_name("theme_label");
 	m_theme_label->set_proper_name("\"Theme\" Label");
@@ -26,21 +24,11 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	//m_theme_combobox->set_item_renaming_disabled(false);
 	m_theme_combobox->set_name("theme_combobox");
 	m_theme_combobox->set_proper_name("Theme Combobox");
-	//m_theme_combobox->set_font_size(15);
-	//m_theme_combobox->setFixedSize(250, 60);
 
 	m_connections.append(
 		connect(m_theme_combobox, SIGNAL(item_replaced(const QString&, const QString&)),
 			layersApp, SLOT(rename_theme(const QString&, const QString&))
 	));
-
-	//m_connections.append(
-	//	//connect(m_theme_combobox, &Combobox::current_item_changed, [this] {
-	//	connect(m_theme_combobox, &ComboBox::currentIndexChanged, [this] {
-	//		if (!m_functionality_disabled)
-	//			//layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->current_item()]);
-	//			layersApp->apply_theme(*layersApp->themes()[m_theme_combobox->currentData().toString()]);
-	//		}));
 
 	m_connections.append(
 		connect(layersApp, &Application::current_theme_changed, [this] {
@@ -81,13 +69,13 @@ ThemesSettingsPanel::ThemesSettingsPanel(QWidget* parent) : Widget(parent)
 	setup_layout();
 }
 
-ThemesSettingsPanel::~ThemesSettingsPanel()
+ThemesWidget::~ThemesWidget()
 {
 	for (QMetaObject::Connection connection : m_connections)
 		QObject::disconnect(connection);
 }
 
-void ThemesSettingsPanel::handle_custom_theme_buttons_visibility()
+void ThemesWidget::handle_custom_theme_buttons_visibility()
 {
 	if (layersApp->current_theme()->editable())
 		show_custom_theme_buttons();
@@ -95,7 +83,7 @@ void ThemesSettingsPanel::handle_custom_theme_buttons_visibility()
 		show_custom_theme_buttons(false);
 }
 
-void ThemesSettingsPanel::init_attributes()
+void ThemesWidget::init_attributes()
 {
 	m_fill->set_disabled();
 
@@ -106,22 +94,22 @@ void ThemesSettingsPanel::init_attributes()
 	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }
 
-Button* ThemesSettingsPanel::customize_theme_button() const
+Button* ThemesWidget::customize_theme_button() const
 {
 	return m_customize_theme_button;
 }
 
-Button* ThemesSettingsPanel::new_theme_button() const
+Button* ThemesWidget::new_theme_button() const
 {
 	return m_new_theme_button;
 }
 
-ThemeComboBox* ThemesSettingsPanel::theme_combobox() const
+ThemeComboBox* ThemesWidget::theme_combobox() const
 {
 	return m_theme_combobox;
 }
 
-void ThemesSettingsPanel::show_custom_theme_buttons(bool cond)
+void ThemesWidget::show_custom_theme_buttons(bool cond)
 {
 	if (cond)
 	{
@@ -141,7 +129,7 @@ void ThemesSettingsPanel::show_custom_theme_buttons(bool cond)
 	}
 }
 
-void ThemesSettingsPanel::setup_layout()
+void ThemesWidget::setup_layout()
 {
 	QHBoxLayout* theme_buttons_hbox = new QHBoxLayout;
 

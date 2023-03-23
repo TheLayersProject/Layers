@@ -1,10 +1,10 @@
-#include "AttributeWidgets.h"
+#include "AttributeEditor.h"
 
-using Layers::AttributeWidget;
+using Layers::AttributeEditor;
 using Layers::ToggleSwitch;
 using Layers::Widget;
 
-AttributeWidget::AttributeWidget(Entity* entity, QWidget* parent) :
+AttributeEditor::AttributeEditor(Entity* entity, QWidget* parent) :
 	m_entity{ entity }, Widget(parent)
 {
 	init_attributes();
@@ -18,7 +18,7 @@ AttributeWidget::AttributeWidget(Entity* entity, QWidget* parent) :
 	m_toggle_label_separator->setFixedSize(16, 1);
 }
 
-AttributeWidget::~AttributeWidget()
+AttributeEditor::~AttributeEditor()
 {
 	if (!m_disabled_toggle->parentWidget())
 	{
@@ -33,12 +33,12 @@ AttributeWidget::~AttributeWidget()
 	}
 }
 
-ToggleSwitch* AttributeWidget::disable_toggle() const
+ToggleSwitch* AttributeEditor::disable_toggle() const
 {
 	return m_disabled_toggle;
 }
 
-bool AttributeWidget::disabled() const
+bool AttributeEditor::disabled() const
 {
 	if (m_entity)
 		return m_entity->disabled();
@@ -46,16 +46,16 @@ bool AttributeWidget::disabled() const
 	return false;
 }
 
-Widget* AttributeWidget::toggle_label_separator() const
+Widget* AttributeEditor::toggle_label_separator() const
 {
 	return m_toggle_label_separator;
 }
 
-void AttributeWidget::set_current_editting_state(const QString& state)
+void AttributeEditor::set_current_editting_state(const QString& state)
 {
 }
 
-void AttributeWidget::init_attributes()
+void AttributeEditor::init_attributes()
 {
 	m_fill->set_value(QColor("#1A000000")); // Black with 10% opacity
 	m_corner_radii->top_left()->set_value(10.0);

@@ -1,5 +1,7 @@
 #include "FillControl.h"
 
+#include "Widgets/Dialogs/FillDialog.h"
+
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QMouseEvent>
@@ -8,7 +10,10 @@
 
 using Layers::FillControl;
 
-FillControl::FillControl(QWidget* parent) : Widget(parent)
+FillControl::FillControl(QWidget* parent) :
+	m_control_dialog{ new FillDialog(this) },
+	m_dialog{ new FillDialog },
+	Widget(parent)
 {
 	init_attributes();
 

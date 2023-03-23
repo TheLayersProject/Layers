@@ -1,10 +1,11 @@
-#include "AttributeWidgets.h"
+#include "AttributeEditorGroup.h"
+
 #include "calculate.h"
 
-using Layers::AWGroup;
+using Layers::AttributeEditorGroup;
 
-AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
-	AttributeWidget(attr_group, parent)
+AttributeEditorGroup::AttributeEditorGroup(AttributeGroup* attr_group, QWidget* parent) :
+	AttributeEditor(attr_group, parent)
 {
 	init_attributes();
 
@@ -67,7 +68,7 @@ AWGroup::AWGroup(AttributeGroup* attr_group, QWidget* parent) :
 	setup_layout();
 }
 
-void AWGroup::add_attribute_widget(AttributeWidget* attribute_widget)
+void AttributeEditorGroup::add_modifier_widget(AttributeEditor* attribute_widget)
 {
 	attribute_widget->disable_toggle()->hide();
 	attribute_widget->toggle_label_separator()->hide();
@@ -79,13 +80,13 @@ void AWGroup::add_attribute_widget(AttributeWidget* attribute_widget)
 	if (m_collapsed) attribute_widget->hide();
 }
 
-void AWGroup::set_collapsed(bool collapsed)
+void AttributeEditorGroup::set_collapsed(bool collapsed)
 {
 	if (collapsed)
 	{
 		m_widgets_vbox->setContentsMargins(0, 0, 0, 0);
 
-		for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
+		for (AttributeEditor* attribute_widget : m_child_attribute_widgets)
 			attribute_widget->hide();
 
 		m_collapsed = true;
@@ -94,14 +95,14 @@ void AWGroup::set_collapsed(bool collapsed)
 	{
 		m_widgets_vbox->setContentsMargins(10, 0, 10, 10);
 
-		for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
+		for (AttributeEditor* attribute_widget : m_child_attribute_widgets)
 			attribute_widget->show();
 
 		m_collapsed = false;
 	}
 }
 
-//bool AWGroup::disabled() const
+//bool AttributeEditorGroup::disabled() const
 //{
 //	for (Attribute* attribute : m_attr_group->attributes())
 //		if (attribute->disabled())
@@ -110,13 +111,13 @@ void AWGroup::set_collapsed(bool collapsed)
 //	return false;
 //}
 
-void AWGroup::set_current_editting_state(const QString& state)
+void AttributeEditorGroup::set_current_editting_state(const QString& state)
 {
-	for (AttributeWidget* attribute_widget : m_child_attribute_widgets)
+	for (AttributeEditor* attribute_widget : m_child_attribute_widgets)
 		attribute_widget->set_current_editting_state(state);
 }
 
-void AWGroup::setup_layout()
+void AttributeEditorGroup::setup_layout()
 {
 	QHBoxLayout* top_hbox = new QHBoxLayout;
 

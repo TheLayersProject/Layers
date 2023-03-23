@@ -1,16 +1,25 @@
-#include "CustomizePanel.h"
+#include "WidgetEditor.h"
+
 #include "calculate.h"
+#include "Menu.h"
 #include "Window.h"
+
+#include "Widgets/Widgets/AttributeEditors/AttributeEditor.h"
+#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
+#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
+#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
+#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
+#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
 
 #include <QApplication>
 #include <QIntValidator>
 
-using Layers::AttributeWidget;
+using Layers::AttributeEditor;
 using Layers::Button;
-using Layers::CustomizePanel;
+using Layers::WidgetEditor;
 using Layers::Label;
 
-CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget* parent) :
+WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
@@ -46,7 +55,7 @@ CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget*
 	m_show_primary_button->hide();
 
 	connect(m_show_all_button, &Button::clicked, [this] {
-		for (AttributeWidget* aw : m_attribute_widgets)
+		for (AttributeEditor* aw : m_modifier_widgets)
 			aw->show();
 
 		m_show_all_button->hide();
@@ -54,7 +63,7 @@ CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget*
 	});
 
 	connect(m_show_primary_button, &Button::clicked, [this] {
-		for (AttributeWidget* aw : m_attribute_widgets)
+		for (AttributeEditor* aw : m_modifier_widgets)
 			if (aw->disabled())
 				aw->hide();
 
@@ -88,8 +97,8 @@ CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget*
 
 					QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
 						static_cast<Window*>(QApplication::activeWindow()
-							)->customize_menu()->open_customize_panel(
-								new CustomizePanel(child_themeable));
+							)->open_themeable_customization_widget(
+								new WidgetEditor(child_themeable));
 						});
 
 					if (dynamic_cast<Button*>(child_themeable))
@@ -159,16 +168,16 @@ CustomizePanel::CustomizePanel(Themeable* themeable, bool init_buttons, QWidget*
 	}
 }
 
-CustomizePanel::~CustomizePanel()
+WidgetEditor::~WidgetEditor()
 {
 	for (WidgetButton* widget_button : m_widget_buttons)
 		widget_button->deleteLater();
 }
 
-void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
+void WidgetEditor::add_modifier_widget(AttributeEditor* attribute_widget)
 {
 	//add_child_themeable_pointer(attribute_widget);
-	m_attribute_widgets.append(attribute_widget);
+	m_modifier_widgets.append(attribute_widget);
 
 	// TEMP
 	m_attributes_layout->addWidget(attribute_widget);
@@ -179,12 +188,12 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	//	m_stateful_attribute_widgets.append(attribute_widget);
 	//	m_stateful_attributes_layout->addWidget(attribute_widget);
 
-	//	if (ColorAW* caw = dynamic_cast<ColorAW*>(attribute_widget))
+	//	if (ColorEditor* caw = dynamic_cast<ColorEditor*>(attribute_widget))
 	//		connect(
 	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
 	//			caw->color_control(), SLOT(set_current_editting_state(const QString&)));
 
-	//	else if (CornerRadiiAW* craw = dynamic_cast<CornerRadiiAW*>(attribute_widget))
+	//	else if (CornerRadiiEditor* craw = dynamic_cast<CornerRadiiEditor*>(attribute_widget))
 	//	{
 	//		connect(
 	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
@@ -210,14 +219,14 @@ void CustomizePanel::add_attribute_widget(AttributeWidget* attribute_widget)
 	//}
 }
 
-void CustomizePanel::add_widget_button(WidgetButton* button)
+void WidgetEditor::add_widget_button(WidgetButton* button)
 {
 	m_widget_buttons.append(button);
 
 	m_widget_buttons_layout->addWidget(button);
 }
 
-void CustomizePanel::add_widget_button_group(WidgetButtonGroup* button_group)
+void WidgetEditor::add_widget_button_group(WidgetButtonGroup* button_group)
 {
 	m_widget_button_groups.append(button_group);
 
@@ -227,27 +236,27 @@ void CustomizePanel::add_widget_button_group(WidgetButtonGroup* button_group)
 	m_widget_buttons_layout->addWidget(button_group);
 }
 
-void CustomizePanel::init_attribute_widgets()
+void WidgetEditor::init_attribute_widgets()
 {
 	if (m_themeable->is_multi_valued()) // TODO: IF THEMEABLE CONTAINS STATE
 	{
-		m_state_aw = new StateAW;
+		m_state_aw = new StateEditor;
 		m_state_aw->populate_state_combobox(m_themeable->states());
 		m_state_awidgets.append(m_state_aw);
 
-		add_attribute_widget(m_state_aw);
+		add_modifier_widget(m_state_aw);
 	}
 
 	for (Entity* entity : m_themeable->entities())
 	{
 		if (Attribute* attribute = dynamic_cast<Attribute*>(entity))
 		{
-			AttributeWidget* aw = nullptr;
+			AttributeEditor* aw = nullptr;
 
 			if (QString(attribute->typeName()) == "double")
 			{
-				aw = new NumberAW(attribute, new QIntValidator(0, 30));
-				m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
+				aw = new NumberEditor(attribute, new QIntValidator(0, 30));
+				m_number_awidgets.append(dynamic_cast<NumberEditor*>(aw));
 			}
 			else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
 				// TEMP: For now, we will assume all use FillControl
@@ -255,8 +264,8 @@ void CustomizePanel::init_attribute_widgets()
 				QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
 				)
 			{
-				aw = new FillAW(attribute);
-				m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
+				aw = new FillEditor(attribute);
+				m_fill_awidgets.append(dynamic_cast<FillEditor*>(aw));
 			}
 
 			if (attribute->disabled())
@@ -264,15 +273,15 @@ void CustomizePanel::init_attribute_widgets()
 
 			if (attribute->is_multi_valued())
 			{
-				m_state_aw->add_attribute_widget(aw);
+				m_state_aw->add_modifier_widget(aw);
 
 				//connect(
 				//	m_state_aw->state_combobox(), SIGNAL(current_item_changed(const QString&)),
 				//	aw, SLOT(set_current_editting_state(const QString&)));
 			}
-			else add_attribute_widget(aw);
+			else add_modifier_widget(aw);
 
-			connect(aw, &AttributeWidget::widget_disabled, [this, aw] {
+			connect(aw, &AttributeEditor::widget_disabled, [this, aw] {
 				if (m_show_all_button->isVisible())
 					aw->hide();
 				});
@@ -281,37 +290,37 @@ void CustomizePanel::init_attribute_widgets()
 		{
 			if (attr_group->name().endsWith("corner_radii"))
 			{
-				CornerRadiiAW* corner_radii_aw = new CornerRadiiAW(dynamic_cast<CornerRadiiAttributes*>(attr_group));
+				CornerRadiiEditor* corner_radii_aw = new CornerRadiiEditor(dynamic_cast<CornerRadiiAttributes*>(attr_group));
 				m_corner_radii_awidgets.append(corner_radii_aw);
 
 				if (attr_group->disabled())
 					corner_radii_aw->hide();
 
-				if (attr_group->is_multi_valued()) m_state_aw->add_attribute_widget(corner_radii_aw);
-				else add_attribute_widget(corner_radii_aw);
+				if (attr_group->is_multi_valued()) m_state_aw->add_modifier_widget(corner_radii_aw);
+				else add_modifier_widget(corner_radii_aw);
 
-				connect(corner_radii_aw, &AttributeWidget::widget_disabled, [this, corner_radii_aw] {
+				connect(corner_radii_aw, &AttributeEditor::widget_disabled, [this, corner_radii_aw] {
 					if (m_show_all_button->isVisible())
 						corner_radii_aw->hide();
 					});
 			}
 			else
 			{
-				/* TODO: Now that AWGroup requires the attr_group data,
+				/* TODO: Now that AttributeEditorGroup requires the attr_group data,
 				   it could initialize its own AttributeWidgets */
-				AWGroup* aw_group = new AWGroup(attr_group);
+				AttributeEditorGroup* aw_group = new AttributeEditorGroup(attr_group);
 				m_aw_groups.append(aw_group);
 
 				bool hide_aw_group = true;
 
 				for (Attribute* attribute : attr_group->attributes())
 				{
-					AttributeWidget* aw = nullptr;
+					AttributeEditor* aw = nullptr;
 
 					if (QString(attribute->typeName()) == "double")
 					{
-						aw = new NumberAW(attribute, new QIntValidator(0, 30));
-						m_number_awidgets.append(dynamic_cast<NumberAW*>(aw));
+						aw = new NumberEditor(attribute, new QIntValidator(0, 30));
+						m_number_awidgets.append(dynamic_cast<NumberEditor*>(aw));
 					}
 					else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
 						// TEMP: For now, we will assume all use FillControl
@@ -319,20 +328,20 @@ void CustomizePanel::init_attribute_widgets()
 						QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
 						)
 					{
-						aw = new FillAW(attribute);
-						m_fill_awidgets.append(dynamic_cast<FillAW*>(aw));
+						aw = new FillEditor(attribute);
+						m_fill_awidgets.append(dynamic_cast<FillEditor*>(aw));
 					}
 
-					aw_group->add_attribute_widget(aw);
+					aw_group->add_modifier_widget(aw);
 				}
 
 				if (attr_group->disabled())
 					aw_group->hide();
 
-				if (attr_group->is_multi_valued()) m_state_aw->add_attribute_widget(aw_group);
-				else add_attribute_widget(aw_group);
+				if (attr_group->is_multi_valued()) m_state_aw->add_modifier_widget(aw_group);
+				else add_modifier_widget(aw_group);
 
-				connect(aw_group, &AttributeWidget::widget_disabled, [this, aw_group] {
+				connect(aw_group, &AttributeEditor::widget_disabled, [this, aw_group] {
 					if (m_show_all_button->isVisible())
 						aw_group->hide();
 					});
@@ -341,19 +350,19 @@ void CustomizePanel::init_attribute_widgets()
 	}
 }
 
-void CustomizePanel::replace_all_aw_group_attrs_with(AWGroup* control_aw_group)
+void WidgetEditor::replace_all_aw_group_attrs_with(AttributeEditorGroup* control_aw_group)
 {
-	for (AWGroup* aw_group : m_aw_groups)
+	for (AttributeEditorGroup* aw_group : m_aw_groups)
 		aw_group->entangle_with(control_aw_group);
 }
 
-void CustomizePanel::replace_all_color_awidgets_attrs_with(ColorAW* control_color_aw)
+void WidgetEditor::replace_all_color_awidgets_attrs_with(ColorEditor* control_color_aw)
 {
-	for (ColorAW* color_aw : m_color_awidgets)
+	for (ColorEditor* color_aw : m_color_awidgets)
 		color_aw->entangle_with(control_color_aw);
 }
 
-void CustomizePanel::init_attributes()
+void WidgetEditor::init_attributes()
 {
 	// TODO: re-enable
 	m_fill->set_disabled();
@@ -375,43 +384,43 @@ void CustomizePanel::init_attributes()
 	m_show_primary_button->corner_radii()->bottom_right()->set_value(5.0);
 }
 
-void CustomizePanel::replace_all_fill_awidgets_attrs_with(FillAW* control_fill_aw)
+void WidgetEditor::replace_all_fill_awidgets_attrs_with(FillEditor* control_fill_aw)
 {
-	for (FillAW* fill_aw : m_fill_awidgets)
+	for (FillEditor* fill_aw : m_fill_awidgets)
 		fill_aw->entangle_with(control_fill_aw);
 }
 
-void CustomizePanel::replace_all_number_awidgets_attrs_with(NumberAW* control_number_aw)
+void WidgetEditor::replace_all_number_awidgets_attrs_with(NumberEditor* control_number_aw)
 {
-	for (NumberAW* number_aw : m_number_awidgets)
+	for (NumberEditor* number_aw : m_number_awidgets)
 		number_aw->entangle_with(control_number_aw);
 }
 
-void CustomizePanel::replace_all_state_awidgets_attrs_with(StateAW* control_state_aw)
+void WidgetEditor::replace_all_state_awidgets_attrs_with(StateEditor* control_state_aw)
 {
-	for (StateAW* state_aw : m_state_awidgets)
+	for (StateEditor* state_aw : m_state_awidgets)
 		state_aw->entangle_with(control_state_aw);
 }
 
-void CustomizePanel::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
+void WidgetEditor::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
 {
 	for (WidgetButton* widget_button : m_widget_buttons)
 		widget_button->entangle_with(control_widget_button);
 }
 
-void CustomizePanel::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
+void WidgetEditor::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
 {
 	for (WidgetButtonGroup* widget_button_group : m_widget_button_groups)
 		widget_button_group->entangle_with(control_widget_button_group);
 }
 
-void CustomizePanel::replace_all_corner_radii_aw_attrs_with(CornerRadiiAW* control_corner_radii_aw)
+void WidgetEditor::replace_all_corner_radii_aw_attrs_with(CornerRadiiEditor* control_corner_radii_aw)
 {
-	for (CornerRadiiAW* corner_radii_aw : m_corner_radii_awidgets)
+	for (CornerRadiiEditor* corner_radii_aw : m_corner_radii_awidgets)
 		corner_radii_aw->entangle_with(control_corner_radii_aw);
 }
 
-void CustomizePanel::setup_layout()
+void WidgetEditor::setup_layout()
 {
 	if (!m_layout_setup)
 	{
