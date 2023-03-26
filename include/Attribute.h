@@ -1,13 +1,14 @@
 #ifndef ATTRIBUTE_H
 #define ATTRIBUTE_H
 
-#include "Entity.h"
+#include "AbstractAttribute.h"
 #include "Data.h"
 
 namespace Layers
 {
 	/*!
-		An Attribute is an Entity that implements a specialized Data container.
+		An Attribute is an AbstractAttribute that implements a specialized Data
+		container.
 	
 		An attribute works by pointing to a data object and providing it with
 		the characteristics of an entity. An attribute *labels* data and gives
@@ -72,7 +73,7 @@ namespace Layers
 		//  update the widget's border thickness in real-time.
 		~~~~~~~~~~~~~
 	*/
-	class Attribute : public Entity
+	class Attribute : public AbstractAttribute
 	{
 		Q_OBJECT
 

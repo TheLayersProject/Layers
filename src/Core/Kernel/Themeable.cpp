@@ -6,8 +6,8 @@
 #include <QAbstractItemView>
 #include <QComboBox>
 
+using Layers::AbstractAttribute;
 using Layers::Attribute;
-using Layers::Entity;
 using Layers::Graphic;
 using Layers::Theme;
 using Layers::Themeable;
@@ -46,13 +46,13 @@ void Themeable::apply_theme(Theme& theme)
 			{
 				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
 				{
-					//qDebug() << child_themeable->tag();
+					qDebug() << child_themeable->tag();
 
 					if (theme.contains_attributes_for_tag(child_themeable->tag()))
 					{
-						QMap<QString, Entity*>& theme_attrs = theme[child_themeable->tag()];
+						QMap<QString, AbstractAttribute*>& theme_attrs = theme[child_themeable->tag()];
 
-						for (Entity* entity : child_themeable->m_entities)
+						for (AbstractAttribute* entity : child_themeable->m_attributes)
 						{
 							if (theme_attrs.contains(entity->name()))
 							{
@@ -69,9 +69,9 @@ void Themeable::apply_theme(Theme& theme)
 
 		if (theme.contains_attributes_for_tag(tag()))
 		{
-			QMap<QString, Entity*>& theme_attrs = theme[tag()];
+			QMap<QString, AbstractAttribute*>& theme_attrs = theme[tag()];
 
-			for (Entity* entity : m_entities)
+			for (AbstractAttribute* entity : m_attributes)
 			{
 				if (theme_attrs.contains(entity->name()))
 				{
@@ -223,12 +223,12 @@ void Themeable::copy_attribute_values_to(Theme* theme)
 	}
 }
 
-QMap<QString, Entity*>& Themeable::entities()
+QMap<QString, AbstractAttribute*>& Themeable::attributes()
 {
-	return m_entities;
+	return m_attributes;
 }
 
-void Themeable::establish_update_connection(Entity* entity)
+void Themeable::establish_update_connection(AbstractAttribute* entity)
 {
 	if (QWidget* widget = dynamic_cast<QWidget*>(this))
 	{
@@ -267,7 +267,7 @@ bool Themeable::is_app_themeable() const
 
 bool Themeable::is_multi_valued() const
 {
-	for (Entity* entity : m_entities)
+	for (AbstractAttribute* entity : m_attributes)
 	{
 		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
@@ -337,7 +337,7 @@ void Themeable::set_state(const QString& state)
 	{
 		m_state = state;
 
-		for (Entity* entity : m_entities)
+		for (AbstractAttribute* entity : m_attributes)
 		{
 			if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 				attr->set_state(state);
@@ -359,7 +359,7 @@ QStringList Themeable::states() const
 {
 	QStringList states;
 
-	for (Entity* entity : m_entities)
+	for (AbstractAttribute* entity : m_attributes)
 	{
 		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
@@ -393,4 +393,9 @@ QString& Themeable::tag()
 	}
 
 	return m_tag;
+}
+
+QStringList Themeable::tag_prefixes() const
+{
+	return m_tag_prefixes;
 }

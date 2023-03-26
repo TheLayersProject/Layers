@@ -32,7 +32,7 @@ ThemeableBox::~ThemeableBox()
 
 void ThemeableBox::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "border", m_border },
 		{ "corner_color", m_corner_color },
 		{ "corner_radii", m_corner_radii },

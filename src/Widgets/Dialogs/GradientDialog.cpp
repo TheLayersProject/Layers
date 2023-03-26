@@ -107,8 +107,8 @@ void GradientDialog::set_gradient_stops(QGradientStops gradient_stops)
 
 void GradientDialog::init_attributes()
 {
-    for (Entity* entity :
-        QList<Entity*>({
+    for (AbstractAttribute* entity :
+        QList<AbstractAttribute*>({
             m_border,
             m_border->thickness(),
             m_margins,
@@ -117,7 +117,7 @@ void GradientDialog::init_attributes()
             m_margins->right(),
             m_margins->bottom()}))
     {
-        connect(entity, &Entity::value_changed,
+        connect(entity, &AbstractAttribute::value_changed,
             this, &GradientDialog::update_color_control_positions);
     }
 

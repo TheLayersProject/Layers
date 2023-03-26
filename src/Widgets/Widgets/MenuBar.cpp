@@ -50,13 +50,13 @@ QMenu* MenuBar::addMenu(const QString& title)
 
 void MenuBar::init_attributes()
 {
-    m_entities.insert({
+    m_attributes.insert({
         { "text_color", m_text_color },
         { "selected_text_color", m_selected_text_color }
         });
 
-    connect(m_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
-    connect(m_selected_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+    connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
+    connect(m_selected_text_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
 }
 
 void MenuBar::update_theme_dependencies()

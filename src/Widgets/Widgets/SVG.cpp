@@ -57,20 +57,20 @@ SVG::SVG(const SVG& svg)
 
 void SVG::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "common_color", &a_common_color },
 		{ "common_hover_color", &a_common_hover_color },
 		{ "use_common_color", &a_use_common_color },
 		{ "use_common_hover_color", &a_use_common_hover_color }
 		});
 
-	//for (Entity* entity : m_entities)
+	//for (Entity* entity : m_attributes)
 	//	entity->setup_widget_update_connection(this);
 
-	connect(&a_common_color, &Entity::value_changed, [this] { update(); });
-	connect(&a_common_hover_color, &Entity::value_changed, [this] { update(); });
-	connect(&a_use_common_color, &Entity::value_changed, [this] { update(); });
-	connect(&a_use_common_hover_color, &Entity::value_changed, [this] { update(); });
+	connect(&a_common_color, &AbstractAttribute::value_changed, [this] { update(); });
+	connect(&a_common_hover_color, &AbstractAttribute::value_changed, [this] { update(); });
+	connect(&a_use_common_color, &AbstractAttribute::value_changed, [this] { update(); });
+	connect(&a_use_common_hover_color, &AbstractAttribute::value_changed, [this] { update(); });
 }
 
 void SVG::rebuild_svg_str()

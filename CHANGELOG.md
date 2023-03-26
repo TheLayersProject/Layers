@@ -3,19 +3,56 @@ All notable changes to this project will be documented in this file.
 
 ## Alpha Phase
 
-### 3.1.0a (Unreleased)
-    - Implemented the AttributeType class which now serves as the abstract parent class of Attribute and AttributeGroup.
-    - Added AttributeType::setup_widget_update_connection() which simplifies connecting attribute value change to the QWidget::update() function
+### 4.0.0a (Unreleased)
+    - Implemented the Data class which either stores a single variant or multiple state-variant pairs
+    - Implemented the AbstractAttribute class which now serves as the abstract parent class of Attribute and AttributeGroup.
     - Attribute groups are now recognized by themes
     - Attribute groups are now disableable
-    - All top-level attribute widgets now have a disable toggle switch. The disable toggle switch has been realigned to the top-left corner of attribute widgets.
+    - Now using the term 'entangle' to describe the action of forcing one attribute to discard its data and use the data of another attribute.
     - Capitalized attribute names are now derived
-    - Implemented the Data class which either stores a single variant or multiple state-variant pairs
-    - Implemented the ThemeableBox class which generalizes functionality that was shared between the Widget class and the various dialog classes.
-    - Implemented the Dialog class which further generalizes the dialog sub-classes
-    - Implemented a ScrollBar class that is themeable and customizable
+    - Attribute now emits value_changed() if the state is set. This fixed some cases where themeables connected to multi-valued attributes didn't update properly.
+    - Member attributes are now private with public access functions.
     - Themes are now stored in the AppData/Local/Layers directory which has been reinstated to aid multiple app support for themes.
     - Implemented theme directories and app/theme UUIDs
+    - Theme directories now contain a file labeled meta.json. It stores the metadata regarding the theme.
+    - Implemented theme meta-loading. When a Layers app is initialized, instead of fully loading all the themes, only their metadata is loaded. Only the active theme is fully loaded.
+    - The functionality that loaded theme data from JSON files has been moved from the Theme constructor into a separate member function, Theme::load_document(). It can be called multiple times to load multiple theme files into a single Theme instance.
+    - Theme::consume() has been removed in favor of Theme::load_document()
+    - Improved the loading method for default themes. They are loaded as theme directories now which allows the the app implementations to be loaded at the same time. Previously, default themes were loaded from individual files which meant that the app implementations would have to manually loaded afterwards.
+    - Themes now keep track of their lineage.
+    - Created a generic form of Themeable::apply_theme_attributes(), and merged it into Themeable::apply_theme(). apply_theme_attributes() was removed from all Themeable subclasses.
+    - Renamed Themeable::replace_all_attributes_with() to Themeable::entangle_with().
+    - Renamed Themeable::store_child_themeable_pointer() to Themeable::add_child_themeable_pointer().
+    - Window now uses Themeable::assign_tag_prefixes() instead of a special implementation.
+    - Themeable::set_functionality_disabled() now propagates to the caller's children.
+    - Themeable tags no longer use the 'layers' prefix.
+    - Renamed AttributeWidget to AttributeEditor
+    - Renamed CustomizePanel to WidgetEditor
+    - Renamed CustomizeMenu to ThemeEditor
+    - The theme editor now opens up to a widget editor pertaining to the app instead of the window.
+    - The app menu is now considered the window's main menu. A main menu is expected to be implemented by Layers app developers.
+    - A second window is no longer automatically initialized at launch. When selecting child widgets from the app's widget editor, the widget is cloned before being set as the theme editor's preview widget.
+    - The dialogs are now app child widgets.
+    - Added icons to the dialogs.
+    - Implemented WidgetButton and WidgetButtonGroup classes which improve the design and organization of widget buttons in widget editors.
+    - All top-level attribute editors now have a disable toggle switch. The disable toggle switch has been realigned to the top-left corner of attribute editors.
+    - Implemented the ThemeableBox class which generalizes functionality that was shared between the Widget class and the various dialog classes.
+    - Created the ThemeCompatibilityCautionDialog, which is supposed to alert users when a theme lacks an implementation for the app they are using. This does not mean that they can't apply the theme. If they do, an implementation will be obtained from the last compatible ancestor theme.
+    - Implemented the Dialog class which further generalizes the dialog sub-classes
+    - Implemented a ScrollBar class that is themeable and customizable
+    - Implemented the ColorPlane class which represents a 3D slider of an HSV cylinder. It displays a 2D cross-section of the cylinder and links with an external slider to allow for manipulation of the plane's z-value.
+    - Implemented the ColorDialog class which utilizes the new ColorPlane.
+    - The FillDialog class was created to separate its logic from the FillControl class.
+    - Renamed GradientSelectionDialog to GradientDialog.
+    - Transformed the MenuLabelLayer class into the Tab class.
+    - Created a new tab bar class to support the new tabs.
+    - Created TableView class which provides a themeable table. Several other classes were also created to support tables.
+    - Replaced the Layers combobox class with a new one that implements a QComboBox and uses the model-view design pattern.
+    - Graphics now support padding.
+    - Created SvgRenderer class which provides a new themeable SVG mechanism.
+    - Numerous memory leak issues were discovered and patched.
+    - Reorganized files and directories. Privatized several classes.
+    - init_child_themeable_list() has been replaced with new functionality that allows a Themeable to autonomously generate a list of associated child Themeables. It has been removed from all classes that previously implemented it.
 
 ### 3.0.0a (November 29, 2022)
     - The Attribute class now inherits QObject to provide signal/slot functionality.

@@ -8,6 +8,10 @@ using Layers::Theme;
 FillEditor::FillEditor(Attribute* attribute, QWidget* parent) :
 	AttributeEditor(attribute, parent)
 {
+	// TODO: Change name to 'fill_editor'
+	set_name("fill_aw");
+	set_proper_name("Fill Editor");
+
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_proper_name("Label");

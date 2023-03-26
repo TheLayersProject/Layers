@@ -76,11 +76,11 @@ QString TabBar::build_stylesheet()
 
 void TabBar::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "text_color", m_text_color },
 		{ "selected_fill_color", m_selected_fill_color }
 		});
 
-	connect(m_selected_fill_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_text_color, &Entity::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_selected_fill_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
 }

@@ -51,14 +51,14 @@ namespace Layers
 		void expand_text_buttons();
 		void setup_layout();
 
-		AttributeEditorGroup* m_control_aw_group;
-		ColorEditor* m_control_color_aw;
-		CornerRadiiEditor* m_control_corner_radii_aw;
-		FillEditor* m_control_fill_aw;
-		NumberEditor* m_control_number_aw;
-		StateEditor* m_control_state_aw;
-		WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
-		WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
+		//AttributeEditorGroup* m_control_aw_group;
+		//ColorEditor* m_control_color_aw;
+		//CornerRadiiEditor* m_control_corner_radii_aw;
+		//FillEditor* m_control_fill_aw;
+		//NumberEditor* m_control_number_aw;
+		//StateEditor* m_control_state_aw;
+		//WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
+		//WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
 
 		Themeable* m_ccp_themeable{ new Themeable };
 
@@ -90,7 +90,7 @@ namespace Layers
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
 
-		WidgetEditor* m_control_customize_panel{ nullptr };
+		//WidgetEditor* m_control_customize_panel{ nullptr };
 
 		Button* m_control_text_button{ new Button("") };
 

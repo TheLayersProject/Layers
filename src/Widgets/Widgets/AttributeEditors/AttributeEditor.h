@@ -15,7 +15,7 @@ namespace Layers
 		void widget_disabled();
 
 	public:
-		AttributeEditor(Entity* entity = nullptr, QWidget* parent = nullptr);
+		AttributeEditor(AbstractAttribute* entity = nullptr, QWidget* parent = nullptr);
 		~AttributeEditor();
 
 		ToggleSwitch* disable_toggle() const;
@@ -30,7 +30,7 @@ namespace Layers
 	protected:
 		void init_attributes();
 
-		Entity* m_entity;
+		AbstractAttribute* m_entity;
 
 		ToggleSwitch* m_disabled_toggle{ new ToggleSwitch };
 

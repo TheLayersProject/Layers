@@ -13,7 +13,7 @@ namespace Layers
 
 		A group of Attributes is stateful if a single Attribute in the group is stateful.
 	*/
-	class AttributeGroup : public Entity
+	class AttributeGroup : public AbstractAttribute
 	{
 		Q_OBJECT
 

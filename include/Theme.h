@@ -10,9 +10,9 @@
 
 #include "Attribute.h"
 
-#define EntityMap QMap<QString, Layers::Entity*>
+#define AttributeMap QMap<QString, Layers::AbstractAttribute*>
 
-#define ThemeData QHash<QString, EntityMap>
+#define ThemeData QHash<QString, AttributeMap>
 
 namespace Layers
 {
@@ -132,7 +132,7 @@ namespace Layers
 
 			@returns Reference to attribute set of themeable_tag
 		*/
-		EntityMap& operator[](const QString& themeable_tag);
+		AttributeMap& operator[](const QString& themeable_tag);
 
 	private:
 		ThemeData m_data_for_app_themeables{ ThemeData() };

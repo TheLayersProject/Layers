@@ -1,7 +1,6 @@
 #ifndef WIDGETEDITOR_H
 #define WIDGETEDITOR_H
 
-//#include "AttributeWidgets.h"
 #include "Button.h"
 #include "WidgetButtonGroup.h"
 
@@ -30,8 +29,6 @@ namespace Layers
 
 		void add_widget_button_group(WidgetButtonGroup* button_group);
 
-		void init_attribute_widgets();
-
 		void replace_all_aw_group_attrs_with(AttributeEditorGroup* control_aw_group);
 		void replace_all_color_awidgets_attrs_with(ColorEditor* control_color_aw);
 		void replace_all_fill_awidgets_attrs_with(FillEditor* control_fill_aw);
@@ -41,10 +38,11 @@ namespace Layers
 		void replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group);
 		void replace_all_corner_radii_aw_attrs_with(CornerRadiiEditor* control_corner_radii_aw);
 
-	protected:
+	private:
+		void init_attribute_editors();
+
 		void init_attributes();
 
-	private:
 		void setup_layout();
 
 		bool m_layout_setup{ false };

@@ -5,7 +5,6 @@
 
 namespace Layers
 {
-	//class AttributeWidget;
 	class Graphic;
 	class Theme;
 
@@ -19,18 +18,18 @@ namespace Layers
 
 		Themeables need to store a map of pointers to all enities associated
 		with them. Without this map, themeables would have no way of accessing
-		the entities they are supposed to apply theme values to.
+		the attributes they are supposed to apply theme values to.
 
 		Entities are typically declared as public member variables in classes
 		that implement %Themeable. %Themeable subclass implementations will
 		need to populate the map with pointers to these entity variables. The
 		map is accessible through a protected member variable called
-		*m_entities*.
+		*m_attributes*.
 		
 		~~~~~~~~~~~~~{.c}
 		// Example from ThemeableBox::init_attributes()
 
-		m_entities.insert({
+		m_attributes.insert({
 			{ "border", &border },
 			{ "corner_color", &a_corner_color },
 			{ "corner_radii", &corner_radii },
@@ -118,10 +117,10 @@ namespace Layers
 
 		A themeable can be *entangled* with another themeable. This is handled
 		by Themeable::entangle_with() and works by entangling all of caller's
-		entities with the entities of the argument themeable.
+		attributes with the attributes of the argument themeable.
 
 		It is important to note that Themeable::entangle_with() will only
-		entangle entities whose pointers have been stored in *m_entities*.
+		entangle attributes whose pointers have been stored in *m_attributes*.
 
 		Example of %Themeable Entanglement:
 
@@ -155,7 +154,7 @@ namespace Layers
 
 			A name must be set with set_name() before themes can be applied.
 
-			The theme should contain a map of entities that contain values for
+			The theme should contain a map of attributes that contain values for
 			the themeable.
 
 			This function works recursively to apply the theme to the children
@@ -180,6 +179,13 @@ namespace Layers
 			@param prefixes - QStringList containing the prefixes to assign
 		*/
 		void assign_tag_prefixes(QStringList prefixes = QStringList());
+
+		/*!
+			Returns a reference to the attribute pointer map.
+
+			@returns Reference to attribute pointer map
+		*/
+		QMap<QString, AbstractAttribute*>& attributes();
 
 		/*!
 			Returns a list of child themeables.
@@ -215,8 +221,8 @@ namespace Layers
 		void copy_attribute_values_to(Theme* theme);
 
 		/*!
-			Entangles the provided themeable by entangling all entities with
-			the entities of the provided themeable.
+			Entangles the provided themeable by entangling all attributes with
+			the attributes of the provided themeable.
 
 			@param themeable - The themeable to entangle with
 			@param entangle_children - Boolean value determining whether to
@@ -225,14 +231,7 @@ namespace Layers
 		template<typename T>
 		void entangle_with(T* themeable, bool entangle_children = true);
 
-		/*!
-			Returns a reference to the entity pointer map.
-
-			@returns Reference to entity pointer map
-		*/
-		QMap<QString, Entity*>& entities();
-
-		void establish_update_connection(Entity* entity);
+		void establish_update_connection(AbstractAttribute* entity);
 
 		/*!
 			Returns pointer to the themeable's icon.
@@ -248,7 +247,7 @@ namespace Layers
 		/*!
 			Returns true if the themeable is stateful, false otherwise.
 
-			The themeable is considered stateful is any of its entities are
+			The themeable is considered stateful is any of its attributes are
 			stateful.
 
 			@returns True if stateful, false otherwise
@@ -341,7 +340,7 @@ namespace Layers
 			Returns a QStringList containing the themeable's available states.
 
 			The themeable's available states are a sum of the available states
-			of the themeable's entities.
+			of the themeable's attributes.
 
 			@returns QStringList containing available states
 		*/
@@ -365,8 +364,10 @@ namespace Layers
 		*/
 		QString& tag();
 
+		QStringList tag_prefixes() const;
+
 	protected:
-		QMap<QString, Entity*> m_entities{ QMap<QString, Entity*>() };
+		QMap<QString, AbstractAttribute*> m_attributes{ QMap<QString, AbstractAttribute*>() };
 
 		bool m_functionality_disabled{ false };
 
@@ -394,12 +395,12 @@ namespace Layers
 	{
 		if (typeid(*this) == typeid(*themeable))
 		{
-			for (const QString& entity_key : m_entities.keys())
+			for (const QString& entity_key : m_attributes.keys())
 			{
-				if (Attribute* attr = dynamic_cast<Attribute*>(m_entities[entity_key]))
-					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_entities[entity_key]));
-				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_entities[entity_key]))
-					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_entities[entity_key]));
+				if (Attribute* attr = dynamic_cast<Attribute*>(m_attributes[entity_key]))
+					attr->entangle_with(*dynamic_cast<Attribute*>(themeable->m_attributes[entity_key]));
+				else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(m_attributes[entity_key]))
+					attr_group->entangle_with(*dynamic_cast<AttributeGroup*>(themeable->m_attributes[entity_key]));
 			}
 
 			if (entangle_children)

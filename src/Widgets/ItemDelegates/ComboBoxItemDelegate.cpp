@@ -139,7 +139,7 @@ void ComboBoxItemDelegate::set_is_above_control(bool condition)
 
 void ComboBoxItemDelegate::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "corner_radius", m_corner_radius },
 		{ "fill", m_fill },
 		{ "text_color", m_text_color }

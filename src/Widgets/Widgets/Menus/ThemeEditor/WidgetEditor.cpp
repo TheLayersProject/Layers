@@ -27,9 +27,8 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 	if (themeable->proper_name())
 		set_proper_name(*themeable->proper_name());
 	else
-		set_proper_name("Customize Panel");
+		set_proper_name("Widget Editor");
 	setFixedWidth(300);
-	//hide();
 
 	m_attributes_label->set_name("attributes_label");
 	m_attributes_label->set_proper_name("Attributes Label");
@@ -81,7 +80,6 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 			QList<WidgetButton*> button_widget_buttons = QList<WidgetButton*>();
 			QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
 			QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
-			//QList<WidgetButton*> ungrouped_widget_buttons = QList<WidgetButton*>();
 
 			for (Themeable* child_themeable : m_themeable->child_themeables())
 			{
@@ -130,20 +128,6 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 			else if (!menu_widget_buttons.isEmpty())
 				organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
 
-			//if (label_widget_buttons.size() == 1)
-			//	ungrouped_widget_buttons.append(label_widget_buttons);
-			//else if (!label_widget_buttons.isEmpty())
-			//	add_widget_button_group(new WidgetButtonGroup("Labels", label_widget_buttons));
-
-			//if (menu_widget_buttons.size() == 1)
-			//	ungrouped_widget_buttons.append(menu_widget_buttons);
-			//else if (!menu_widget_buttons.isEmpty())
-			//	add_widget_button_group(new WidgetButtonGroup("Menus", menu_widget_buttons));
-
-			//if (!ungrouped_widget_buttons.isEmpty())
-			//	for (WidgetButton* widget_button : ungrouped_widget_buttons)
-			//		add_widget_button(widget_button);
-
 			for (QWidget* widget : organized_widgets)
 			{
 				if (WidgetButton* widget_button = dynamic_cast<WidgetButton*>(widget))
@@ -156,8 +140,8 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 
 	setup_layout();
 
-	if (!m_themeable->entities().isEmpty())
-		init_attribute_widgets();
+	if (!m_themeable->attributes().isEmpty())
+		init_attribute_editors();
 	else
 	{
 		m_attributes_label->hide();
@@ -181,42 +165,6 @@ void WidgetEditor::add_modifier_widget(AttributeEditor* attribute_widget)
 
 	// TEMP
 	m_attributes_layout->addWidget(attribute_widget);
-	//
-	
-	//if (attribute_widget->attribute())
-	//{
-	//	m_stateful_attribute_widgets.append(attribute_widget);
-	//	m_stateful_attributes_layout->addWidget(attribute_widget);
-
-	//	if (ColorEditor* caw = dynamic_cast<ColorEditor*>(attribute_widget))
-	//		connect(
-	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-	//			caw->color_control(), SLOT(set_current_editting_state(const QString&)));
-
-	//	else if (CornerRadiiEditor* craw = dynamic_cast<CornerRadiiEditor*>(attribute_widget))
-	//	{
-	//		connect(
-	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-	//			craw->tl_slider(), SLOT(set_current_editting_state(const QString&)));
-
-	//		connect(
-	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-	//			craw->tr_slider(), SLOT(set_current_editting_state(const QString&)));
-
-	//		connect(
-	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-	//			craw->bl_slider(), SLOT(set_current_editting_state(const QString&)));
-
-	//		connect(
-	//			m_state_combobox, SIGNAL(current_item_changed(const QString&)),
-	//			craw->br_slider(), SLOT(set_current_editting_state(const QString&)));
-	//	}
-	//}
-	//else
-	//{
-	//	m_stateless_attribute_widgets.append(attribute_widget);
-	//	m_stateless_attributes_layout->addWidget(attribute_widget);
-	//}
 }
 
 void WidgetEditor::add_widget_button(WidgetButton* button)
@@ -236,7 +184,55 @@ void WidgetEditor::add_widget_button_group(WidgetButtonGroup* button_group)
 	m_widget_buttons_layout->addWidget(button_group);
 }
 
-void WidgetEditor::init_attribute_widgets()
+void WidgetEditor::replace_all_aw_group_attrs_with(AttributeEditorGroup* control_aw_group)
+{
+	for (AttributeEditorGroup* aw_group : m_aw_groups)
+		aw_group->entangle_with(control_aw_group);
+}
+
+void WidgetEditor::replace_all_color_awidgets_attrs_with(ColorEditor* control_color_aw)
+{
+	for (ColorEditor* color_aw : m_color_awidgets)
+		color_aw->entangle_with(control_color_aw);
+}
+
+void WidgetEditor::replace_all_fill_awidgets_attrs_with(FillEditor* control_fill_aw)
+{
+	for (FillEditor* fill_aw : m_fill_awidgets)
+		fill_aw->entangle_with(control_fill_aw);
+}
+
+void WidgetEditor::replace_all_number_awidgets_attrs_with(NumberEditor* control_number_aw)
+{
+	for (NumberEditor* number_aw : m_number_awidgets)
+		number_aw->entangle_with(control_number_aw);
+}
+
+void WidgetEditor::replace_all_state_awidgets_attrs_with(StateEditor* control_state_aw)
+{
+	for (StateEditor* state_aw : m_state_awidgets)
+		state_aw->entangle_with(control_state_aw);
+}
+
+void WidgetEditor::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
+{
+	for (WidgetButton* widget_button : m_widget_buttons)
+		widget_button->entangle_with(control_widget_button);
+}
+
+void WidgetEditor::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
+{
+	for (WidgetButtonGroup* widget_button_group : m_widget_button_groups)
+		widget_button_group->entangle_with(control_widget_button_group);
+}
+
+void WidgetEditor::replace_all_corner_radii_aw_attrs_with(CornerRadiiEditor* control_corner_radii_aw)
+{
+	for (CornerRadiiEditor* corner_radii_aw : m_corner_radii_awidgets)
+		corner_radii_aw->entangle_with(control_corner_radii_aw);
+}
+
+void WidgetEditor::init_attribute_editors()
 {
 	if (m_themeable->is_multi_valued()) // TODO: IF THEMEABLE CONTAINS STATE
 	{
@@ -247,7 +243,7 @@ void WidgetEditor::init_attribute_widgets()
 		add_modifier_widget(m_state_aw);
 	}
 
-	for (Entity* entity : m_themeable->entities())
+	for (AbstractAttribute* entity : m_themeable->attributes())
 	{
 		if (Attribute* attribute = dynamic_cast<Attribute*>(entity))
 		{
@@ -350,18 +346,6 @@ void WidgetEditor::init_attribute_widgets()
 	}
 }
 
-void WidgetEditor::replace_all_aw_group_attrs_with(AttributeEditorGroup* control_aw_group)
-{
-	for (AttributeEditorGroup* aw_group : m_aw_groups)
-		aw_group->entangle_with(control_aw_group);
-}
-
-void WidgetEditor::replace_all_color_awidgets_attrs_with(ColorEditor* control_color_aw)
-{
-	for (ColorEditor* color_aw : m_color_awidgets)
-		color_aw->entangle_with(control_color_aw);
-}
-
 void WidgetEditor::init_attributes()
 {
 	// TODO: re-enable
@@ -382,42 +366,6 @@ void WidgetEditor::init_attributes()
 	m_show_primary_button->corner_radii()->top_right()->set_value(5.0);
 	m_show_primary_button->corner_radii()->bottom_left()->set_value(5.0);
 	m_show_primary_button->corner_radii()->bottom_right()->set_value(5.0);
-}
-
-void WidgetEditor::replace_all_fill_awidgets_attrs_with(FillEditor* control_fill_aw)
-{
-	for (FillEditor* fill_aw : m_fill_awidgets)
-		fill_aw->entangle_with(control_fill_aw);
-}
-
-void WidgetEditor::replace_all_number_awidgets_attrs_with(NumberEditor* control_number_aw)
-{
-	for (NumberEditor* number_aw : m_number_awidgets)
-		number_aw->entangle_with(control_number_aw);
-}
-
-void WidgetEditor::replace_all_state_awidgets_attrs_with(StateEditor* control_state_aw)
-{
-	for (StateEditor* state_aw : m_state_awidgets)
-		state_aw->entangle_with(control_state_aw);
-}
-
-void WidgetEditor::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
-{
-	for (WidgetButton* widget_button : m_widget_buttons)
-		widget_button->entangle_with(control_widget_button);
-}
-
-void WidgetEditor::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
-{
-	for (WidgetButtonGroup* widget_button_group : m_widget_button_groups)
-		widget_button_group->entangle_with(control_widget_button_group);
-}
-
-void WidgetEditor::replace_all_corner_radii_aw_attrs_with(CornerRadiiEditor* control_corner_radii_aw)
-{
-	for (CornerRadiiEditor* corner_radii_aw : m_corner_radii_awidgets)
-		corner_radii_aw->entangle_with(control_corner_radii_aw);
 }
 
 void WidgetEditor::setup_layout()

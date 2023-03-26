@@ -114,7 +114,7 @@
     <ClCompile Include="src\Core\Kernel\Attribute.cpp" />
     <ClCompile Include="src\Core\Kernel\Data.cpp" />
     <ClCompile Include="src\Core\Kernel\AttributeGroup.cpp" />
-    <ClCompile Include="src\Core\Kernel\Entity.cpp" />
+    <ClCompile Include="src\Core\Kernel\AbstractAttribute.cpp" />
     <ClCompile Include="src\Core\Kernel\Variant.cpp" />
     <ClCompile Include="src\Core\Kernel\Theme.cpp" />
     <ClCompile Include="src\Core\Kernel\Themeable.cpp" />
@@ -200,7 +200,7 @@
     <QtMoc Include="include\Data.h" />
     <QtMoc Include="include\AttributeGroup.h" />
     <ClInclude Include="include\AttributeLayout.h" />
-    <QtMoc Include="include\Entity.h" />
+    <QtMoc Include="include\AbstractAttribute.h" />
     <QtMoc Include="include\Dialog.h" />
     <QtMoc Include="src\Widgets\Dialogs\ColorDialog.h" />
     <QtMoc Include="include\ColorPlane.h" />

@@ -6,8 +6,8 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
+using Layers::AbstractAttribute;
 using Layers::Attribute;
-using Layers::Entity;
 using Layers::Theme;
 using Layers::Themeable;
 using Layers::ThemeLineageData;
@@ -74,9 +74,9 @@ void Theme::clear()
 {
 	for (const QString& themeable_tag : m_data_for_app_themeables.keys())
 	{
-		EntityMap& themeable_data = m_data_for_app_themeables[themeable_tag];
+		AttributeMap& themeable_data = m_data_for_app_themeables[themeable_tag];
 
-		for (Entity* entity : themeable_data)
+		for (AbstractAttribute* entity : themeable_data)
 		{
 			delete entity;
 			entity = nullptr;
@@ -87,9 +87,9 @@ void Theme::clear()
 
 	for (const QString& themeable_tag : m_data_for_layers_themeables.keys())
 	{
-		EntityMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
+		AttributeMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
 
-		for (Entity* entity : themeable_data)
+		for (AbstractAttribute* entity : themeable_data)
 		{
 			delete entity;
 			entity = nullptr;
@@ -114,9 +114,9 @@ void Theme::clear_data_for_themeable(const QString& themeable_tag)
 
 	if (relevant_theme_data)
 	{
-		EntityMap& themeable_data = (*relevant_theme_data)[themeable_tag];
+		AttributeMap& themeable_data = (*relevant_theme_data)[themeable_tag];
 
-		for (Entity* entity : themeable_data)
+		for (AbstractAttribute* entity : themeable_data)
 		{
 			delete entity;
 			entity = nullptr;
@@ -148,8 +148,8 @@ void Theme::copy(Theme& theme)
 
 	for (const QString& themeable_tag : theme.m_data_for_app_themeables.keys())
 	{
-		EntityMap& themeable_data_in_theme =
-			m_data_for_app_themeables[themeable_tag] = EntityMap();
+		AttributeMap& themeable_data_in_theme =
+			m_data_for_app_themeables[themeable_tag] = AttributeMap();
 
 		for (const QString& entity_key : theme.m_data_for_app_themeables[themeable_tag].keys())
 		{
@@ -162,8 +162,8 @@ void Theme::copy(Theme& theme)
 
 	for (const QString& themeable_tag : theme.m_data_for_layers_themeables.keys())
 	{
-		EntityMap& themeable_data_in_theme =
-			m_data_for_layers_themeables[themeable_tag] = EntityMap();
+		AttributeMap& themeable_data_in_theme =
+			m_data_for_layers_themeables[themeable_tag] = AttributeMap();
 
 		for (const QString& entity_key : theme.m_data_for_layers_themeables[themeable_tag].keys())
 		{
@@ -184,16 +184,16 @@ void Theme::copy_attribute_values_of(Themeable* themeable)
 {
 	clear_data_for_themeable(themeable->tag());
 
-	EntityMap new_themeable_data;
+	AttributeMap new_themeable_data;
 
-	for (const QString& entity_key : themeable->entities().keys())
+	for (const QString& entity_key : themeable->attributes().keys())
 	{
-		if (Attribute* attr = dynamic_cast<Attribute*>(themeable->entities()[entity_key]))
+		if (Attribute* attr = dynamic_cast<Attribute*>(themeable->attributes()[entity_key]))
 		{
 			if (!attr->is_entangled())
 				new_themeable_data[entity_key] = new Attribute(*attr);
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->entities()[entity_key]))
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(themeable->attributes()[entity_key]))
 		{
 			new_themeable_data[entity_key] = new AttributeGroup(*attr_group);
 		}
@@ -364,7 +364,7 @@ void Theme::load_document(const QJsonDocument& json_document, const ThemeDataTyp
 	{
 		QJsonObject themeable_object = json_object.value(themeable_tag).toObject();
 
-		EntityMap themeable_attributes;
+		AttributeMap themeable_attributes;
 
 		for (const QString& entity_key : themeable_object.keys())
 		{
@@ -481,7 +481,7 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 	case (ThemeDataType::Application):
 		for (const QString& themeable_tag : m_data_for_app_themeables.keys())
 		{
-			EntityMap& themeable_data = m_data_for_app_themeables[themeable_tag];
+			AttributeMap& themeable_data = m_data_for_app_themeables[themeable_tag];
 
 			QJsonObject themeable_json_object;
 
@@ -504,7 +504,7 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 	case (ThemeDataType::Layers):
 		for (const QString& themeable_tag : m_data_for_layers_themeables.keys())
 		{
-			EntityMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
+			AttributeMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
 
 			QJsonObject themeable_json_object;
 
@@ -525,7 +525,7 @@ QJsonDocument Theme::to_json_document(ThemeDataType data_type)
 	return json_document;
 }
 
-EntityMap& Theme::operator[](const QString& themeable_tag)
+AttributeMap& Theme::operator[](const QString& themeable_tag)
 {
 	if (m_data_for_app_themeables.contains(themeable_tag))
 		return m_data_for_app_themeables[themeable_tag];

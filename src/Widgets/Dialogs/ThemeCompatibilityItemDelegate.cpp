@@ -15,7 +15,7 @@ ThemeCompatibilityItemDelegate::ThemeCompatibilityItemDelegate(QObject* parent) 
 	QPainter check_image_painter(&m_check_image);
 	m_check_svg->render(&check_image_painter);
 
-	connect(&m_check_svg->a_common_color, &Entity::value_changed, [this] {
+	connect(&m_check_svg->a_common_color, &AbstractAttribute::value_changed, [this] {
 		QPainter check_image_painter(&m_check_image);
 		m_check_svg->render(&check_image_painter);
 		});

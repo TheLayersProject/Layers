@@ -74,7 +74,7 @@ CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii,
 	m_example_widget->corner_radii()->top_right()->entangle_with(m_tr_slider->a_value);
 	m_example_widget->corner_radii()->bottom_left()->entangle_with(m_bl_slider->a_value);
 	m_example_widget->corner_radii()->bottom_right()->entangle_with(m_br_slider->a_value);
-	m_example_widget->entities().remove("corner_radii");
+	m_example_widget->attributes().remove("corner_radii");
 
 	setup_layout();
 }

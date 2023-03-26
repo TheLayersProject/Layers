@@ -4,21 +4,21 @@ using Layers::Attribute;
 using Layers::Variant;
 
 Attribute::Attribute(const QString& name, bool disabled) :
-	Entity(name, disabled) { }
+	AbstractAttribute(name, disabled) { }
 
 Attribute::Attribute(const QString& name, Variant variant, bool disabled) :
-	m_data{ new Data(variant) }, Entity(name, disabled)
+	m_data{ new Data(variant) }, AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
 Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled) :
-	m_data{ new Data(variant_map) }, Entity(name, disabled)
+	m_data{ new Data(variant_map) }, AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const Attribute& a) : Entity(a.m_name, a.m_disabled)
+Attribute::Attribute(const Attribute& a) : AbstractAttribute(a.m_name, a.m_disabled)
 {
 	m_data = new Data(*a.m_data);
 

@@ -7,15 +7,15 @@ using Layers::CornerRadiiAttributes;
 using Layers::MarginsAttributes;
 
 AttributeGroup::AttributeGroup(const QString& name, bool disabled) :
-	Entity(name, disabled) { }
+	AbstractAttribute(name, disabled) { }
 
 //AttributeGroup::AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled) :
-//	m_attributes{ attributes }, Entity(name, disabled) { }
+//	m_attributes{ attributes }, AbstractAttribute(name, disabled) { }
 
 AttributeGroup::AttributeGroup() :
-	m_attributes{ QMap<QString, Attribute*>() }, Entity("", false) { }
+	m_attributes{ QMap<QString, Attribute*>() }, AbstractAttribute("", false) { }
 
-AttributeGroup::AttributeGroup(const AttributeGroup& ag) : Entity(ag.m_name, ag.m_disabled)
+AttributeGroup::AttributeGroup(const AttributeGroup& ag) : AbstractAttribute(ag.m_name, ag.m_disabled)
 {
 	m_disabled = ag.m_disabled;
 
@@ -80,7 +80,7 @@ void AttributeGroup::set_state(const QString& state)
 
 //void AttributeGroup::setup_widget_update_connection(QWidget* widget)
 //{
-//	connect(this, &Entity::value_changed, [widget] { widget->update(); });
+//	connect(this, &AbstractAttribute::value_changed, [widget] { widget->update(); });
 //
 //	for (Attribute* attr : m_attributes)
 //		attr->setup_widget_update_connection(widget);

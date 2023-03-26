@@ -232,18 +232,18 @@ void ComboBox::paintEvent(QPaintEvent* event)
 
 void ComboBox::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "border", m_border },
 		{ "corner_radii", m_corner_radius },
 		{ "fill", m_fill },
 		{ "text_color", m_text_color }
 		});
 
-	connect(m_border->fill(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_border->thickness(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radius, &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_fill, &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_text_color, &Entity::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->fill(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->thickness(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_corner_radius, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_fill, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
 
 	m_border->thickness()->set_value(0.0);
 }

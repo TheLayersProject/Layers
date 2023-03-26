@@ -61,14 +61,14 @@ Attribute* Label::text_hover_color() const
 
 void Label::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "fill", m_fill },
 		{ "text_hover_color", m_text_hover_color },
 		{ "outline_color", m_outline_color },
 		{ "text_color", m_text_color }
 	});
 
-	for (Entity* entity : m_entities)
+	for (AbstractAttribute* entity : m_attributes)
 		establish_update_connection(entity);
 		//entity->setup_widget_update_connection(this);
 }

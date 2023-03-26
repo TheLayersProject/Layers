@@ -4,7 +4,7 @@ using Layers::AttributeEditor;
 using Layers::ToggleSwitch;
 using Layers::Widget;
 
-AttributeEditor::AttributeEditor(Entity* entity, QWidget* parent) :
+AttributeEditor::AttributeEditor(AbstractAttribute* entity, QWidget* parent) :
 	m_entity{ entity }, Widget(parent)
 {
 	init_attributes();

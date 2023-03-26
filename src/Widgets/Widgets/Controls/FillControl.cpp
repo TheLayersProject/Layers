@@ -40,7 +40,7 @@ FillControl::~FillControl()
 void FillControl::init_attributes()
 {
 	// Remove control attribute
-	m_entities.remove("fill");
+	m_attributes.remove("fill");
 
 	m_border->fill()->set_value(QColor("#D6D6D6"));
 	m_border->thickness()->set_value(2.0);

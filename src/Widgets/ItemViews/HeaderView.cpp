@@ -25,21 +25,21 @@ HeaderView::HeaderView(Qt::Orientation orientation, QWidget* parent) :
 
 void HeaderView::init_attributes()
 {
-	m_entities.insert({
+	m_attributes.insert({
 		{ "border", m_border },
 		{ "corner_radii", m_corner_radii },
 		{ "fill", m_fill },
 		{ "text_color", m_text_color }
 		});
 
-	connect(m_border->fill(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_border->thickness(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->top_left(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->top_right(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->bottom_left(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->bottom_right(), &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_fill, &Entity::value_changed, [this] { update_stylesheet(); });
-	connect(m_text_color, &Entity::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->fill(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->thickness(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_left(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_right(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_left(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_right(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_fill, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
 
 	m_corner_radii->top_left()->set_value(2.0);
 	m_corner_radii->top_right()->set_value(2.0);
