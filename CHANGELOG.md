@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
     - Implemented theme meta-loading. When a Layers app is initialized, instead of fully loading all the themes, only their metadata is loaded. Only the active theme is fully loaded.
     - The functionality that loaded theme data from JSON files has been moved from the Theme constructor into a separate member function, Theme::load_document(). It can be called multiple times to load multiple theme files into a single Theme instance.
     - Theme::consume() has been removed in favor of Theme::load_document()
-    - Improved the loading method for default themes. They are loaded as theme directories now which allows the the app implementations to be loaded at the same time. Previously, default themes were loaded from individual files which meant that the app implementations would have to manually loaded afterwards.
+    - Improved the loading method for default themes. They are loaded as theme directories now which allows the the app implementations to be loaded at the same time. Previously, default themes were loaded from individual files which meant that the app implementations would have to be manually loaded afterwards.
     - Themes now keep track of their lineage.
     - Created a generic form of Themeable::apply_theme_attributes(), and merged it into Themeable::apply_theme(). apply_theme_attributes() was removed from all Themeable subclasses.
     - Renamed Themeable::replace_all_attributes_with() to Themeable::entangle_with().
