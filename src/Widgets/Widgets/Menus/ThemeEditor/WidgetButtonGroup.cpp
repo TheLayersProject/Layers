@@ -32,6 +32,9 @@ WidgetButtonGroup::WidgetButtonGroup(
 		else
 			set_collapsed();
 	});
+
+	for (WidgetButton* widget_button : widget_buttons)
+		widget_button->exclude_tag_prefixes({ "widget_button_group" });
 }
 
 void WidgetButtonGroup::set_collapsed(bool collapsed)

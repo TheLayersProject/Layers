@@ -9,6 +9,12 @@ using Layers::Theme;
 NumberEditor::NumberEditor(Attribute* attribute, QIntValidator* int_validator, QWidget* parent) :
 	AttributeEditor(attribute, parent)
 {
+	exclude_tag_prefixes({ "aw_group", "state_aw" });
+
+	// TODO: Change name to 'fill_editor'
+	set_name("number_aw");
+	set_proper_name("Number Editor");
+
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_proper_name("Label");

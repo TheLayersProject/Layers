@@ -9,6 +9,7 @@ AttributeEditorGroup::AttributeEditorGroup(AttributeGroup* attr_group, QWidget* 
 {
 	init_attributes();
 
+	//exclude_from_prefixes();
 	set_name("aw_group");
 
 	if (attr_group)

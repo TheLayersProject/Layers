@@ -233,6 +233,8 @@ namespace Layers
 
 		void establish_update_connection(AbstractAttribute* entity);
 
+		void exclude_tag_prefixes(const QStringList& tag_prefixes);
+
 		/*!
 			Returns pointer to the themeable's icon.
 			
@@ -368,6 +370,8 @@ namespace Layers
 
 	protected:
 		QMap<QString, AbstractAttribute*> m_attributes{ QMap<QString, AbstractAttribute*>() };
+
+		QStringList m_excluded_tag_prefixes;
 
 		bool m_functionality_disabled{ false };
 

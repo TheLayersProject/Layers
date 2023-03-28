@@ -154,8 +154,8 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 
 WidgetEditor::~WidgetEditor()
 {
-	for (WidgetButton* widget_button : m_widget_buttons)
-		widget_button->deleteLater();
+	//for (WidgetButton* widget_button : m_widget_buttons)
+	//	widget_button->deleteLater();
 }
 
 void WidgetEditor::add_modifier_widget(AttributeEditor* attribute_widget)
@@ -169,67 +169,19 @@ void WidgetEditor::add_modifier_widget(AttributeEditor* attribute_widget)
 
 void WidgetEditor::add_widget_button(WidgetButton* button)
 {
-	m_widget_buttons.append(button);
+	//m_widget_buttons.append(button);
 
 	m_widget_buttons_layout->addWidget(button);
 }
 
 void WidgetEditor::add_widget_button_group(WidgetButtonGroup* button_group)
 {
-	m_widget_button_groups.append(button_group);
+	//m_widget_button_groups.append(button_group);
 
-	for (WidgetButton* widget_button : button_group->widget_buttons())
-		m_widget_buttons.append(widget_button);
+	//for (WidgetButton* widget_button : button_group->widget_buttons())
+	//	m_widget_buttons.append(widget_button);
 
 	m_widget_buttons_layout->addWidget(button_group);
-}
-
-void WidgetEditor::replace_all_aw_group_attrs_with(AttributeEditorGroup* control_aw_group)
-{
-	for (AttributeEditorGroup* aw_group : m_aw_groups)
-		aw_group->entangle_with(control_aw_group);
-}
-
-void WidgetEditor::replace_all_color_awidgets_attrs_with(ColorEditor* control_color_aw)
-{
-	for (ColorEditor* color_aw : m_color_awidgets)
-		color_aw->entangle_with(control_color_aw);
-}
-
-void WidgetEditor::replace_all_fill_awidgets_attrs_with(FillEditor* control_fill_aw)
-{
-	for (FillEditor* fill_aw : m_fill_awidgets)
-		fill_aw->entangle_with(control_fill_aw);
-}
-
-void WidgetEditor::replace_all_number_awidgets_attrs_with(NumberEditor* control_number_aw)
-{
-	for (NumberEditor* number_aw : m_number_awidgets)
-		number_aw->entangle_with(control_number_aw);
-}
-
-void WidgetEditor::replace_all_state_awidgets_attrs_with(StateEditor* control_state_aw)
-{
-	for (StateEditor* state_aw : m_state_awidgets)
-		state_aw->entangle_with(control_state_aw);
-}
-
-void WidgetEditor::replace_all_widget_buttons_attrs_with(WidgetButton* control_widget_button)
-{
-	for (WidgetButton* widget_button : m_widget_buttons)
-		widget_button->entangle_with(control_widget_button);
-}
-
-void WidgetEditor::replace_all_widget_button_groups_attrs_with(WidgetButtonGroup* control_widget_button_group)
-{
-	for (WidgetButtonGroup* widget_button_group : m_widget_button_groups)
-		widget_button_group->entangle_with(control_widget_button_group);
-}
-
-void WidgetEditor::replace_all_corner_radii_aw_attrs_with(CornerRadiiEditor* control_corner_radii_aw)
-{
-	for (CornerRadiiEditor* corner_radii_aw : m_corner_radii_awidgets)
-		corner_radii_aw->entangle_with(control_corner_radii_aw);
 }
 
 void WidgetEditor::init_attribute_editors()
@@ -238,7 +190,6 @@ void WidgetEditor::init_attribute_editors()
 	{
 		m_state_aw = new StateEditor;
 		m_state_aw->populate_state_combobox(m_themeable->states());
-		m_state_awidgets.append(m_state_aw);
 
 		add_modifier_widget(m_state_aw);
 	}
@@ -252,7 +203,6 @@ void WidgetEditor::init_attribute_editors()
 			if (QString(attribute->typeName()) == "double")
 			{
 				aw = new NumberEditor(attribute, new QIntValidator(0, 30));
-				m_number_awidgets.append(dynamic_cast<NumberEditor*>(aw));
 			}
 			else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
 				// TEMP: For now, we will assume all use FillControl
@@ -261,7 +211,6 @@ void WidgetEditor::init_attribute_editors()
 				)
 			{
 				aw = new FillEditor(attribute);
-				m_fill_awidgets.append(dynamic_cast<FillEditor*>(aw));
 			}
 
 			if (attribute->disabled())
@@ -287,7 +236,6 @@ void WidgetEditor::init_attribute_editors()
 			if (attr_group->name().endsWith("corner_radii"))
 			{
 				CornerRadiiEditor* corner_radii_aw = new CornerRadiiEditor(dynamic_cast<CornerRadiiAttributes*>(attr_group));
-				m_corner_radii_awidgets.append(corner_radii_aw);
 
 				if (attr_group->disabled())
 					corner_radii_aw->hide();
@@ -305,7 +253,6 @@ void WidgetEditor::init_attribute_editors()
 				/* TODO: Now that AttributeEditorGroup requires the attr_group data,
 				   it could initialize its own AttributeWidgets */
 				AttributeEditorGroup* aw_group = new AttributeEditorGroup(attr_group);
-				m_aw_groups.append(aw_group);
 
 				bool hide_aw_group = true;
 
@@ -316,7 +263,6 @@ void WidgetEditor::init_attribute_editors()
 					if (QString(attribute->typeName()) == "double")
 					{
 						aw = new NumberEditor(attribute, new QIntValidator(0, 30));
-						m_number_awidgets.append(dynamic_cast<NumberEditor*>(aw));
 					}
 					else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
 						// TEMP: For now, we will assume all use FillControl
@@ -325,7 +271,6 @@ void WidgetEditor::init_attribute_editors()
 						)
 					{
 						aw = new FillEditor(attribute);
-						m_fill_awidgets.append(dynamic_cast<FillEditor*>(aw));
 					}
 
 					aw_group->add_modifier_widget(aw);

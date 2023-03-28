@@ -18,6 +18,9 @@ namespace Layers
 		TableView(QWidget* parent = nullptr);
 		// TODO: Create a destructor; free the attributes
 
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
+
 		void setItemDelegate(QAbstractItemDelegate* item_delegate);
 
 		void update_height();

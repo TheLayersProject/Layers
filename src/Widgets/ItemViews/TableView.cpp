@@ -6,9 +6,10 @@
 #include <QPainter>
 
 using Layers::BorderAttributes;
+using Layers::GridlineItemDelegate;
 using Layers::SvgRenderer;
 using Layers::TableView;
-using Layers::GridlineItemDelegate;
+using Layers::Themeable;
 
 TableView::TableView(QWidget* parent) : QTableView(parent)
 {
@@ -26,6 +27,27 @@ TableView::TableView(QWidget* parent) : QTableView(parent)
 	verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 	verticalHeader()->setDefaultSectionSize(48);
 	verticalHeader()->hide();
+}
+
+QList<Themeable*> TableView::child_themeables(Qt::FindChildOptions options)
+{
+	QList<Themeable*> child_themeables = Themeable::child_themeables(options);
+
+	if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(itemDelegate()))
+	{
+		child_themeables.append(child_themeable_item_delegate);
+
+		if (options == Qt::FindChildrenRecursively)
+		{
+			QList<QObject*> delegate_child_objects = itemDelegate()->findChildren<QObject*>(options);
+
+			for (QObject* delegate_child_object : delegate_child_objects)
+				if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
+					child_themeables.append(child_themeable);
+		}
+	}
+
+	return child_themeables;
 }
 
 void TableView::setItemDelegate(QAbstractItemDelegate* item_delegate)

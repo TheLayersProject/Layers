@@ -18,56 +18,8 @@ using Layers::WidgetEditor;
 using Layers::Window;
 
 ThemeEditor::ThemeEditor(QWidget* parent) :
-	//m_control_aw_group{ new AttributeEditorGroup(nullptr) },
-	//m_control_color_aw{ new ColorEditor(nullptr) },
-	//m_control_corner_radii_aw{ new CornerRadiiEditor(nullptr) },
-	//m_control_fill_aw{ new FillEditor(nullptr) },
-	//m_control_number_aw{ new NumberEditor(nullptr, nullptr) },
-	//m_control_state_aw{ new StateEditor },
 	Menu("Theme Editor", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 {
-	//m_control_customize_panel = new WidgetEditor(m_ccp_themeable, false, m_sidebar);
-	//m_control_customize_panel->hide();
-	//m_control_customize_panel->set_proper_name("Customize Panels");
-	//
-	//m_control_aw_group->setParent(m_control_customize_panel);
-	//m_control_aw_group->hide();
-	//m_control_aw_group->set_name("aw_group");
-	//m_control_aw_group->set_proper_name("Attribute Widget Group");
-	//
-	//m_control_color_aw->setParent(m_control_customize_panel);
-	//m_control_color_aw->hide();
-	//m_control_color_aw->set_name("color_aw");
-	//m_control_color_aw->set_proper_name("Color Attribute Widget");
-	//
-	//m_control_corner_radii_aw->setParent(m_control_customize_panel);
-	//m_control_corner_radii_aw->hide();
-	////m_control_corner_radii_aw->set_name("corner_radii_aw");
-	//m_control_corner_radii_aw->set_proper_name("Corner Radii Attribute Widget");
-	//
-	//m_control_fill_aw->setParent(m_control_customize_panel);
-	//m_control_fill_aw->hide();
-	//m_control_fill_aw->set_name("fill_aw");
-	//m_control_fill_aw->set_proper_name("Fill Attribute Widget");
-	//
-	//m_control_number_aw->setParent(m_control_customize_panel);
-	//m_control_number_aw->hide();
-	//m_control_number_aw->set_name("number_aw");
-	//m_control_number_aw->set_proper_name("Number Attribute Widget");
-	//
-	//m_control_state_aw->setParent(m_control_customize_panel);
-	//m_control_state_aw->hide();
-	//m_control_state_aw->set_name("state_aw");
-	//m_control_state_aw->set_proper_name("State Attribute Widget");
-	//
-	//m_control_widget_button->setParent(m_control_customize_panel);
-	//m_control_widget_button->hide();
-	//m_control_widget_button->set_proper_name("Widget Button");
-	//
-	//m_control_widget_button_group->setParent(m_control_customize_panel);
-	//m_control_widget_button_group->hide();
-	//m_control_widget_button_group->set_proper_name("Widget ButtonGroup");
-
 	installEventFilter(this);
 	setMouseTracking(true);
 
@@ -173,16 +125,31 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 
 ThemeEditor::~ThemeEditor()
 {
-	delete m_ccp_themeable;
 	delete m_collapse_menu;
 
-	m_ccp_themeable = nullptr;
 	m_collapse_menu = nullptr;
 }
 
 Button* ThemeEditor::apply_button() const
 {
 	return m_apply_button;
+}
+
+void ThemeEditor::apply_theme(Theme& theme)
+{
+	Themeable::apply_theme(theme);
+
+	for (WidgetEditor* widget_editor : m_panel_stack)
+		widget_editor->apply_theme(theme);
+
+	if (m_preview_widget)
+	{
+		if (Themeable* themeable_preview_widget =
+			dynamic_cast<Themeable*>(m_preview_widget))
+		{
+			themeable_preview_widget->apply_theme(theme);
+		}
+	}
 }
 
 void ThemeEditor::open_customize_panel(WidgetEditor* customize_panel)
@@ -231,21 +198,7 @@ void ThemeEditor::open_customize_panel(WidgetEditor* customize_panel)
 		if (!m_panel_stack.isEmpty())
 			m_panel_stack.last()->hide();
 
-
-
-		//customize_panel->entangle_with(m_control_customize_panel);
-		//customize_panel->replace_all_aw_group_attrs_with(m_control_aw_group);
-		//customize_panel->replace_all_color_awidgets_attrs_with(m_control_color_aw);
-		//customize_panel->replace_all_corner_radii_aw_attrs_with(m_control_corner_radii_aw);
-		//customize_panel->replace_all_fill_awidgets_attrs_with(m_control_fill_aw);
-		//customize_panel->replace_all_number_awidgets_attrs_with(m_control_number_aw);
-		//customize_panel->replace_all_state_awidgets_attrs_with(m_control_state_aw);
-		//customize_panel->replace_all_widget_buttons_attrs_with(m_control_widget_button);
-		//customize_panel->replace_all_widget_button_groups_attrs_with(m_control_widget_button_group);
-
 		m_sidebar_layout->addWidget(customize_panel);
-
-		qDebug() << "CARE HERE";
 
 		QStringList widget_editor_prefixes = m_sidebar->tag_prefixes();
 
@@ -295,7 +248,7 @@ void ThemeEditor::open_customize_panel(WidgetEditor* customize_panel)
 
 		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
 
-		customize_panel->show();
+		//customize_panel->show();
 
 		m_panel_stack.append(customize_panel);
 

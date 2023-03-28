@@ -30,6 +30,8 @@ namespace Layers
 
 		Button* apply_button() const;
 
+		virtual void apply_theme(Theme& theme) override;
+
 		void open_customize_panel(WidgetEditor* customize_panel);
 
 		QList<WidgetEditor*>& panels();
@@ -50,17 +52,6 @@ namespace Layers
 		void collapse_text_buttons();
 		void expand_text_buttons();
 		void setup_layout();
-
-		//AttributeEditorGroup* m_control_aw_group;
-		//ColorEditor* m_control_color_aw;
-		//CornerRadiiEditor* m_control_corner_radii_aw;
-		//FillEditor* m_control_fill_aw;
-		//NumberEditor* m_control_number_aw;
-		//StateEditor* m_control_state_aw;
-		//WidgetButton* m_control_widget_button{ new WidgetButton(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), QString("")) };
-		//WidgetButtonGroup* m_control_widget_button_group{ new WidgetButtonGroup(QString(""), QList<WidgetButton*>()) };
-
-		Themeable* m_ccp_themeable{ new Themeable };
 
 		QHBoxLayout* m_main_layout{ new QHBoxLayout };
 		QVBoxLayout* m_collapsed_text_buttons_layout{ new QVBoxLayout };
@@ -89,8 +80,6 @@ namespace Layers
 		Button* m_collapse_menu_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
 
 		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
-
-		//WidgetEditor* m_control_customize_panel{ nullptr };
 
 		Button* m_control_text_button{ new Button("") };
 

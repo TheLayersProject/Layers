@@ -38,46 +38,21 @@ void Themeable::apply_theme(Theme& theme)
 	if (!m_name) qDebug() << "Unable to apply theme.  You must apply a name to the widget first.";
 	else
 	{
-		QList<Themeable*> children = child_themeables(Qt::FindChildrenRecursively);
-
-		if (!children.isEmpty())
-		{
-			for (Themeable* child_themeable : children)
-			{
-				if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
-				{
-					qDebug() << child_themeable->tag();
-
-					if (theme.contains_attributes_for_tag(child_themeable->tag()))
-					{
-						QMap<QString, AbstractAttribute*>& theme_attrs = theme[child_themeable->tag()];
-
-						for (AbstractAttribute* entity : child_themeable->m_attributes)
-						{
-							if (theme_attrs.contains(entity->name()))
-							{
-								if (Attribute* attr = dynamic_cast<Attribute*>(entity))
-									attr->copy(*dynamic_cast<Attribute*>(theme_attrs[attr->name()]));
-								else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
-									attr_group->copy(*dynamic_cast<AttributeGroup*>(theme_attrs[attr_group->name()]));
-							}
-						}
-					}
-				}
-			}
-		}
+		for (Themeable* child_themeable : child_themeables())
+			if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
+				child_themeable->apply_theme(theme);
 
 		if (theme.contains_attributes_for_tag(tag()))
 		{
-			QMap<QString, AbstractAttribute*>& theme_attrs = theme[tag()];
+			AttributeMap& theme_attrs = theme[tag()];
 
-			for (AbstractAttribute* entity : m_attributes)
+			for (AbstractAttribute* abstract_attr : m_attributes)
 			{
-				if (theme_attrs.contains(entity->name()))
+				if (theme_attrs.contains(abstract_attr->name()))
 				{
-					if (Attribute* attr = dynamic_cast<Attribute*>(entity))
+					if (Attribute* attr = dynamic_cast<Attribute*>(abstract_attr))
 						attr->copy(*dynamic_cast<Attribute*>(theme_attrs[attr->name()]));
-					else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
+					else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(abstract_attr))
 						attr_group->copy(*dynamic_cast<AttributeGroup*>(theme_attrs[attr_group->name()]));
 				}
 			}
@@ -89,12 +64,18 @@ void Themeable::assign_tag_prefixes(QStringList prefixes)
 {
 	if (m_name)
 	{
+		for (const QString& filtered_prefix : m_excluded_tag_prefixes)
+			if (prefixes.contains(filtered_prefix))
+				prefixes.removeAll(filtered_prefix);
+
 		if (!prefixes.isEmpty())
 			m_tag_prefixes.append(prefixes);
 
 		prefixes.append(*m_name);
 
-		for (Themeable* child_themeable : child_themeables())
+		QList<Themeable*> children = child_themeables();
+
+		for (Themeable* child_themeable : children)
 			child_themeable->assign_tag_prefixes(prefixes);
 
 		m_tag_prefixes_assigned = true;
@@ -107,97 +88,17 @@ QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
 
 	if (QObject* object = dynamic_cast<QObject*>(this))
 	{
-		QList<QObject*> child_objects = object->findChildren<QObject*>(options);
+		QList<QObject*> child_objects =
+			object->findChildren<QObject*>(Qt::FindDirectChildrenOnly);
 
-		if (!child_objects.isEmpty())
+		for (QObject* child_object : child_objects)
 		{
-			for (QObject* child_object : child_objects)
+			if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_object))
 			{
-				if (Themeable* child_themeable = dynamic_cast<Themeable*>(child_object))
-					child_themeables.append(child_themeable);
+				child_themeables.append(child_themeable);
 
 				if (options == Qt::FindChildrenRecursively)
-				{
-					if (QAbstractItemView* item_view_widget = dynamic_cast<QAbstractItemView*>(child_object))
-					{
-						if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(item_view_widget->itemDelegate()))
-						{
-							child_themeables.append(child_themeable_item_delegate);
-
-							QList<QObject*> delegate_child_objects = item_view_widget->itemDelegate()->findChildren<QObject*>(options);
-
-							if (!delegate_child_objects.isEmpty())
-							{
-								for (QObject* delegate_child_object : delegate_child_objects)
-								{
-									if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
-										child_themeables.append(child_themeable);
-								}
-							}
-						}
-					}
-					else if (QComboBox* combobox = dynamic_cast<QComboBox*>(child_object))
-					{
-						if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(combobox->itemDelegate()))
-						{
-							child_themeables.append(child_themeable_item_delegate);
-
-							QList<QObject*> delegate_child_objects = combobox->itemDelegate()->findChildren<QObject*>(options);
-
-							if (!delegate_child_objects.isEmpty())
-							{
-								for (QObject* delegate_child_object : delegate_child_objects)
-								{
-									if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
-										child_themeables.append(child_themeable);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		if (QAbstractItemView* item_view_widget = dynamic_cast<QAbstractItemView*>(this))
-		{
-			if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(item_view_widget->itemDelegate()))
-			{
-				child_themeables.append(child_themeable_item_delegate);
-
-				if (options == Qt::FindChildrenRecursively)
-				{
-					QList<QObject*> delegate_child_objects = item_view_widget->itemDelegate()->findChildren<QObject*>(options);
-
-					if (!delegate_child_objects.isEmpty())
-					{
-						for (QObject* delegate_child_object : delegate_child_objects)
-						{
-							if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
-								child_themeables.append(child_themeable);
-						}
-					}
-				}
-			}
-		}
-		else if (QComboBox* combobox = dynamic_cast<QComboBox*>(this))
-		{
-			if (Themeable* child_themeable_item_delegate = dynamic_cast<Themeable*>(combobox->itemDelegate()))
-			{
-				child_themeables.append(child_themeable_item_delegate);
-
-				if (options == Qt::FindChildrenRecursively)
-				{
-					QList<QObject*> delegate_child_objects = combobox->itemDelegate()->findChildren<QObject*>(options);
-
-					if (!delegate_child_objects.isEmpty())
-					{
-						for (QObject* delegate_child_object : delegate_child_objects)
-						{
-							if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
-								child_themeables.append(child_themeable);
-						}
-					}
-				}
+					child_themeables.append(child_themeable->child_themeables(options));
 			}
 		}
 	}
@@ -253,6 +154,11 @@ void Themeable::establish_update_connection(AbstractAttribute* entity)
 				));
 		}
 	}
+}
+
+void Themeable::exclude_tag_prefixes(const QStringList& tag_prefixes)
+{
+	m_excluded_tag_prefixes.append(tag_prefixes);
 }
 
 Graphic* Themeable::icon() const

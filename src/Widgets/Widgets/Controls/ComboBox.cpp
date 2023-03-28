@@ -6,6 +6,7 @@
 #include <QPainter>
 
 using Layers::ComboBox;
+using Layers::Themeable;
 
 ComboBox::ComboBox(QWidget* parent) : QComboBox(parent)
 {
@@ -18,6 +19,27 @@ ComboBox::ComboBox(QWidget* parent) : QComboBox(parent)
 
 	init_attributes();
 	update_stylesheet();
+}
+
+QList<Themeable*> ComboBox::child_themeables(Qt::FindChildOptions options)
+{
+	QList<Themeable*> child_themeables = Themeable::child_themeables(options);
+
+	if (Themeable* themeable_item_delegate = dynamic_cast<Themeable*>(itemDelegate()))
+	{
+		child_themeables.append(themeable_item_delegate);
+
+		if (options == Qt::FindChildrenRecursively)
+		{
+			QList<QObject*> delegate_child_objects = itemDelegate()->findChildren<QObject*>(options);
+
+			for (QObject* delegate_child_object : delegate_child_objects)
+				if (Themeable* child_themeable = dynamic_cast<Themeable*>(delegate_child_object))
+					child_themeables.append(child_themeable);
+		}
+	}
+
+	return child_themeables;
 }
 
 void ComboBox::setFixedSize(int w, int h)

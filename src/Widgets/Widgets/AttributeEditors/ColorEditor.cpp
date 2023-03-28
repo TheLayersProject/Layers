@@ -8,6 +8,8 @@ using Layers::Theme;
 ColorEditor::ColorEditor(Attribute* attribute, QWidget* parent) :
 	AttributeEditor(attribute, parent)
 {
+	exclude_tag_prefixes({ "aw_group", "state_aw" });
+
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_proper_name("Label");

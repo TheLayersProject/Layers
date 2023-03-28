@@ -16,6 +16,9 @@ namespace Layers
 		ComboBox(QWidget* parent = nullptr);
 		//~ComboBox();
 
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
+
 		void setFixedSize(int w, int h);
 		void setFixedSize(QSize size);
 

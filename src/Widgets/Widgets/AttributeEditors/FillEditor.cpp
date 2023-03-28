@@ -8,6 +8,8 @@ using Layers::Theme;
 FillEditor::FillEditor(Attribute* attribute, QWidget* parent) :
 	AttributeEditor(attribute, parent)
 {
+	exclude_tag_prefixes({ "aw_group", "state_aw" });
+
 	// TODO: Change name to 'fill_editor'
 	set_name("fill_aw");
 	set_proper_name("Fill Editor");
