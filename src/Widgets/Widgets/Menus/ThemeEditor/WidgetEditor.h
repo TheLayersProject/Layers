@@ -29,6 +29,8 @@ namespace Layers
 
 		void add_widget_button_group(WidgetButtonGroup* button_group);
 
+		Themeable* themeable() const;
+
 	private:
 		void init_attribute_editors();
 

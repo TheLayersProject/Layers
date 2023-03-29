@@ -4,6 +4,7 @@
 
 using Layers::ScrollArea;
 using Layers::ScrollBar;
+using Layers::Themeable;
 
 ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 {
@@ -41,6 +42,27 @@ ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 //	m_vertical_scrollbar = nullptr;
 //	//}
 //}
+
+QList<Themeable*> ScrollArea::child_themeables(Qt::FindChildOptions options)
+{
+	QList<Themeable*> child_themeables = Themeable::child_themeables(options);
+
+	if (Themeable* themeable_widget = dynamic_cast<Themeable*>(widget()))
+	{
+		child_themeables.append(themeable_widget);
+
+		if (options == Qt::FindChildrenRecursively)
+		{
+			QList<QObject*> widget_child_objects = widget()->findChildren<QObject*>(options);
+
+			for (QObject* widget_child_object : widget_child_objects)
+				if (Themeable* child_themeable = dynamic_cast<Themeable*>(widget_child_object))
+					child_themeables.append(child_themeable);
+		}
+	}
+
+	return child_themeables;
+}
 
 ScrollBar* ScrollArea::horizontal_scrollbar() const
 {

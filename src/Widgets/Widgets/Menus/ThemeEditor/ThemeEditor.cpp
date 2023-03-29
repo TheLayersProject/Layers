@@ -4,14 +4,15 @@
 #include "WidgetEditor.h"
 #include "Window.h"
 
-#include "Widgets/Widgets/AttributeEditors/AttributeEditor.h"
-#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
-#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
-#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
-#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
-#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/AttributeEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
+//#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
 
 using Layers::Button;
+using Layers::Graphic;
 using Layers::ThemeEditor;
 using Layers::Widget;
 using Layers::WidgetEditor;
@@ -25,7 +26,7 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 
 	//set_icon(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20)));
 	set_name("customize_menu");
-	set_proper_name("Customize Menu");
+	set_proper_name("Theme Editor");
 
 	connect(m_collapse_menu_button, &Button::clicked, [this] {
 		if (!m_collapse_menu->isVisible())
@@ -40,15 +41,15 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 		else m_collapse_menu->hide();
 	});
 
-	m_control_arrow_graphic->setParent(m_topbar);
-	m_control_arrow_graphic->hide();
-	m_control_arrow_graphic->set_name("arrow_graphic");
-	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
-
-	m_control_text_button->setParent(m_topbar);
-	m_control_text_button->hide();
-	m_control_text_button->set_name("text_button");
-	m_control_text_button->set_proper_name("Text Buttons");
+	//m_control_arrow_graphic->setParent(m_topbar);
+	//m_control_arrow_graphic->hide();
+	//m_control_arrow_graphic->set_name("arrow_graphic");
+	//m_control_arrow_graphic->set_proper_name("Arrow Graphics");
+	
+	//m_control_text_button->setParent(m_topbar);
+	//m_control_text_button->hide();
+	//m_control_text_button->set_name("text_button");
+	//m_control_text_button->set_proper_name("Text Buttons");
 
 	m_topbar->setFixedHeight(45);
 	m_topbar->setMouseTracking(true);
@@ -106,10 +107,10 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	m_sidebar->set_proper_name("Sidebar");
 	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
-	m_sidebar_widget->installEventFilter(this);
-	m_sidebar_widget->setFixedWidth(300);
-	m_sidebar_widget->setMouseTracking(true);
-	m_sidebar_widget->fill()->set_disabled();
+	//m_sidebar_widget->installEventFilter(this);
+	//m_sidebar_widget->setFixedWidth(300);
+	//m_sidebar_widget->setMouseTracking(true);
+	//m_sidebar_widget->fill()->set_disabled();
 
 	m_preview_frame->corner_color()->entangle_with(*m_sidebar->fill());
 
@@ -139,8 +140,8 @@ void ThemeEditor::apply_theme(Theme& theme)
 {
 	Themeable::apply_theme(theme);
 
-	for (WidgetEditor* widget_editor : m_panel_stack)
-		widget_editor->apply_theme(theme);
+	//for (WidgetEditor* widget_editor : m_panel_stack)
+	//	widget_editor->apply_theme(theme);
 
 	if (m_preview_widget)
 	{
@@ -154,112 +155,37 @@ void ThemeEditor::apply_theme(Theme& theme)
 
 void ThemeEditor::open_customize_panel(WidgetEditor* customize_panel)
 {
-	if (m_panel_stack.contains(customize_panel))
+	if (m_sidebar->widget())
+		m_sidebar->takeWidget();
+
+	m_sidebar->setWidget(customize_panel);
+	m_sidebar->setFixedWidth(customize_panel->width());
+
+	QStringList widget_editor_prefixes = m_sidebar->tag_prefixes();
+	widget_editor_prefixes.append(*m_sidebar->name());
+	customize_panel->assign_tag_prefixes(widget_editor_prefixes);
+	customize_panel->apply_theme(*layersApp->current_theme());
+
+	if (!m_open_widget_editors.contains(customize_panel))
 	{
-		if (m_panel_stack.last() != customize_panel)
-		{
-			while (m_panel_stack.last() != customize_panel)
-			{
-				for (Button* text_button : m_topbar_text_buttons)
-					if (text_button == m_text_button_stack.last())
-						m_topbar_text_buttons.removeOne(text_button);
+		m_open_widget_editors.append(customize_panel);
 
-				for (Button* text_button : m_collapsed_text_buttons)
-					if (text_button == m_text_button_stack.last())
-						m_collapsed_text_buttons.removeOne(text_button);
+		if (m_open_widget_editors.count() > 1)
+			m_button_and_arrow_layout->addWidget(
+				create_arrow_graphic());
+			
+		m_button_and_arrow_layout->addWidget(
+			create_text_button(customize_panel));
 
-				m_panel_stack.takeLast()->deleteLater();
-
-				m_text_button_stack.takeLast()->deleteLater();
-
-				if (!m_arrow_graphics.isEmpty())
-					m_arrow_graphics.takeLast()->deleteLater();
-			}
-
-			if (m_panel_stack.size() == 1)
-			{
-				m_preview_widget->deleteLater();
-				m_preview_widget = nullptr;
-			}
-
-			customize_panel->show();
-
-			m_text_button_stack.last()->disable_text_hover_color();
-
-			while (calculated_topbar_content_width() < m_topbar->width() &&
-				!m_collapsed_text_buttons.isEmpty())
-			{
-				expand_text_buttons();
-			}
-		}
+		//if (m_topbar->width() < topbar_content_width(true))
+		//	collapse_text_buttons();
 	}
-	else
-	{
-		if (!m_panel_stack.isEmpty())
-			m_panel_stack.last()->hide();
 
-		m_sidebar_layout->addWidget(customize_panel);
-
-		QStringList widget_editor_prefixes = m_sidebar->tag_prefixes();
-
-		widget_editor_prefixes.append(*m_sidebar->name());
-
-		customize_panel->assign_tag_prefixes(widget_editor_prefixes);
-		customize_panel->apply_theme(*layersApp->current_theme());
-
-		// Setup Button
-
-		Button* text_button = new Button(*customize_panel->proper_name(), true);
-		text_button->disable_text_hover_color();
-		text_button->fill()->set_disabled();
-		text_button->set_font_size(14);
-		text_button->set_name("text_button");
-		text_button->set_padding(0, text_button->top_padding(), 0, text_button->bottom_padding());
-		text_button->set_text_padding(0, 4, 0, 0);
-
-		connect(text_button, &Button::clicked, [this, customize_panel] {
-			open_customize_panel(customize_panel);
-			});
-
-		if (!m_text_button_stack.isEmpty()) m_text_button_stack.last()->disable_text_hover_color(false);
-
-		m_text_button_stack.append(text_button);
-		m_topbar_text_buttons.append(text_button);
-
-		text_button->entangle_with(m_control_text_button);
-
-		// Setup Arrow Graphic
-
-		if (m_text_button_stack.count() > 1)
-		{
-			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
-			arrow_opacity->setOpacity(0.5);
-
-			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
-			arrow_graphic->setGraphicsEffect(arrow_opacity);
-			arrow_graphic->set_name("arrow_graphic");
-
-			m_arrow_graphics.append(arrow_graphic);
-
-			arrow_graphic->entangle_with(m_control_arrow_graphic);
-
-			m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, arrow_graphic);
-		}
-
-		m_topbar_layout->insertWidget(m_topbar_layout->count() - 2, text_button);
-
-		//customize_panel->show();
-
-		m_panel_stack.append(customize_panel);
-
-		if (m_topbar->width() < topbar_content_width(true))
-			collapse_text_buttons();
-	}
-}
-
-QList<WidgetEditor*>& ThemeEditor::panels()
-{
-	return m_panel_stack;
+	//if (m_open_widget_editors.size() == 1 && m_preview_widget)
+	//{
+	//	m_preview_widget->deleteLater();
+	//	m_preview_widget = nullptr;
+	//}
 }
 
 QWidget* ThemeEditor::preview_widget() const
@@ -305,8 +231,8 @@ int ThemeEditor::topbar_content_width(bool include_collapse_button)
 
 	topbar_content_width += m_topbar_layout->contentsMargins().left() + m_topbar_layout->contentsMargins().right();
 
-	for (Button* text_button : m_topbar_text_buttons)
-		topbar_content_width += text_button->width();
+	//for (Button* text_button : m_topbar_text_buttons)
+	//	topbar_content_width += text_button->width();
 
 	for (Graphic* arrow_graphic : m_arrow_graphics)
 		topbar_content_width += arrow_graphic->width();
@@ -331,8 +257,11 @@ bool ThemeEditor::eventFilter(QObject* object, QEvent* event)
 
 	else if (event->type() == QEvent::Resize)
 	{
-		if (height() < m_sidebar->widget()->height()) m_sidebar->setFixedWidth(m_sidebar->widget()->width() + 45); // 45 is sidebar width
-		else m_sidebar->setFixedWidth(m_sidebar->widget()->width());
+		if (m_sidebar->widget())
+		{
+			if (height() < m_sidebar->widget()->height()) m_sidebar->setFixedWidth(m_sidebar->widget()->width() + 45); // 45 is sidebar width
+			else m_sidebar->setFixedWidth(m_sidebar->widget()->width());
+		}
 
 		if (m_previous_size)
 		{
@@ -383,25 +312,69 @@ void ThemeEditor::adjust_collapsed_widget()
 	m_collapse_menu->setFixedSize(collapsed_widget_width, collapsed_widget_height);
 }
 
+Graphic* ThemeEditor::create_arrow_graphic()
+{
+	QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
+	arrow_opacity->setOpacity(0.5);
+
+	Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
+	arrow_graphic->setGraphicsEffect(arrow_opacity);
+	arrow_graphic->set_name("arrow_graphic");
+
+	m_arrow_graphics.append(arrow_graphic);
+
+	return arrow_graphic;
+}
+
+Button* ThemeEditor::create_text_button(WidgetEditor* widget_edtior)
+{
+	Button* text_button = new Button(*widget_edtior->themeable()->proper_name(), true);
+
+	text_button->disable_text_hover_color();
+	text_button->fill()->set_disabled();
+	text_button->set_font_size(14);
+	text_button->set_name("text_button");
+	text_button->set_padding(0, text_button->top_padding(), 0, text_button->bottom_padding());
+	text_button->set_text_padding(0, 4, 0, 0);
+
+	if (!m_text_button_stack.isEmpty()) m_text_button_stack.last()->disable_text_hover_color(false);
+
+	m_text_button_stack.append(text_button);
+	//m_topbar_text_buttons.append(text_button);
+
+	connect(text_button, &Button::clicked, [this, widget_edtior] {
+		while (m_open_widget_editors.size() - 1 > m_open_widget_editors.indexOf(widget_edtior))
+		{
+			m_open_widget_editors.takeLast()->deleteLater();
+			m_text_button_stack.takeLast()->deleteLater();
+			m_arrow_graphics.takeLast()->deleteLater();
+		}
+
+		open_customize_panel(widget_edtior);
+		});
+
+	return text_button;
+}
+
 void ThemeEditor::collapse_text_buttons()
 {
-	while (topbar_content_width(true) > m_topbar->width())
-	{
-		if (m_topbar_text_buttons.count() > 1)
-		{
-			if (m_collapsed_text_buttons.isEmpty())
-				m_collapse_menu_button->show();
-			else
-				m_arrow_graphics.takeFirst()->deleteLater();
+	//while (topbar_content_width(true) > m_topbar->width())
+	//{
+	//	if (m_topbar_text_buttons.count() > 1)
+	//	{
+	//		if (m_collapsed_text_buttons.isEmpty())
+	//			m_collapse_menu_button->show();
+	//		else
+	//			m_arrow_graphics.takeFirst()->deleteLater();
 
-			m_collapsed_text_buttons.append(m_topbar_text_buttons.takeFirst());
+	//		m_collapsed_text_buttons.append(m_topbar_text_buttons.takeFirst());
 
-			m_collapsed_text_buttons_layout->addWidget(m_collapsed_text_buttons.last());
+	//		m_collapsed_text_buttons_layout->addWidget(m_collapsed_text_buttons.last());
 
-			adjust_collapsed_widget();
-		}
-		else if (m_topbar_text_buttons.count() == 1) break;
-	}
+	//		adjust_collapsed_widget();
+	//	}
+	//	else if (m_topbar_text_buttons.count() == 1) break;
+	//}
 }
 
 void ThemeEditor::expand_text_buttons()
@@ -430,7 +403,7 @@ void ThemeEditor::expand_text_buttons()
 	{
 		Button* text_button = m_collapsed_text_buttons.last();
 
-		m_topbar_text_buttons.insert(0, m_collapsed_text_buttons.takeLast());
+		//m_topbar_text_buttons.insert(0, m_collapsed_text_buttons.takeLast());
 
 		if (m_collapsed_text_buttons.isEmpty())
 		{
@@ -450,7 +423,7 @@ void ThemeEditor::expand_text_buttons()
 
 			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
 
-			arrow_graphic->entangle_with(m_control_arrow_graphic);
+			//arrow_graphic->entangle_with(m_control_arrow_graphic);
 
 			m_topbar_layout->insertWidget(1, text_button);
 
@@ -472,9 +445,13 @@ void ThemeEditor::setup_layout()
 
 	// Topbar
 
+	m_button_and_arrow_layout->setContentsMargins(0, 0, 0, 0);
+	m_button_and_arrow_layout->setSpacing(10);
+
 	m_topbar_layout->setContentsMargins(8, 0, 8, 0);
 	m_topbar_layout->setSpacing(10);
-	m_topbar_layout->addWidget(m_collapse_menu_button);
+	m_topbar_layout->addLayout(m_button_and_arrow_layout);
+	//m_topbar_layout->addWidget(m_collapse_menu_button);
 	m_topbar_layout->addStretch();
 	m_topbar_layout->addWidget(m_apply_button);
 
@@ -482,13 +459,13 @@ void ThemeEditor::setup_layout()
 
 	// Sidebar
 
-	m_sidebar_layout->setContentsMargins(0, 0, 0, 0);
-	m_sidebar_layout->setSpacing(0);
+	//m_sidebar_layout->setContentsMargins(0, 0, 0, 0);
+	//m_sidebar_layout->setSpacing(0);
 
-	m_sidebar_widget->setLayout(m_sidebar_layout);
+	//m_sidebar_widget->setLayout(m_sidebar_layout);
 
-	m_sidebar->setWidget(m_sidebar_widget);
-	m_sidebar->setFixedWidth(m_sidebar->widget()->width());
+	//m_sidebar->setWidget(m_sidebar_widget);
+	//m_sidebar->setFixedWidth(m_sidebar->widget()->width());
 
 	// Preview Widget and Layout
 

@@ -18,16 +18,17 @@ using Layers::AttributeEditor;
 using Layers::Button;
 using Layers::WidgetEditor;
 using Layers::Label;
+using Layers::Themeable;
 
 WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
 	set_name("customize_panel");
-	if (themeable->proper_name())
-		set_proper_name(*themeable->proper_name());
-	else
-		set_proper_name("Widget Editor");
+	//if (themeable->proper_name())
+	//	set_proper_name(*themeable->proper_name());
+	//else
+	set_proper_name("Widget Editor");
 	setFixedWidth(300);
 
 	m_attributes_label->set_name("attributes_label");
@@ -182,6 +183,11 @@ void WidgetEditor::add_widget_button_group(WidgetButtonGroup* button_group)
 	//	m_widget_buttons.append(widget_button);
 
 	m_widget_buttons_layout->addWidget(button_group);
+}
+
+Themeable* WidgetEditor::themeable() const
+{
+	return m_themeable;
 }
 
 void WidgetEditor::init_attribute_editors()

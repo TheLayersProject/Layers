@@ -6,6 +6,7 @@
 #include "Menus/SettingsMenu/SettingsMenu.h"
 #include "Menus/SettingsMenu/ThemesWidget.h"
 #include "Menus/ThemeEditor/ThemeEditor.h"
+#include "Menus/ThemeEditor/WidgetEditor.h"
 #include "Widgets/Dialogs/CreateNewThemeDialog.h"
 
 #include "calculate.h"
@@ -33,16 +34,6 @@ Window::Window(bool preview, QWidget* parent) :
 	m_titlebar{ new Titlebar },
 	Widget(parent)
 {
-	if (m_preview)
-	{
-		Widget* preview_widget = new Widget;
-		preview_widget->set_name("preview_widget");
-		preview_widget->set_proper_name("Preview Widget");
-		m_theme_customization_menu->set_preview_widget(preview_widget);
-	}
-	else
-		layersApp->add_child_themeable_pointer(*this);
-
 	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
 	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
 	connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
@@ -89,6 +80,18 @@ Window::Window(bool preview, QWidget* parent) :
 
 	// Assign tag prefixes last!
 	assign_tag_prefixes();
+
+	if (m_preview)
+	{
+		Widget* preview_widget = new Widget;
+		preview_widget->set_name("preview_widget");
+		preview_widget->set_proper_name("Preview Widget");
+		m_theme_customization_menu->set_preview_widget(preview_widget);
+		m_theme_customization_menu->open_customize_panel(
+			new WidgetEditor(preview_widget));
+	}
+	else
+		layersApp->add_child_themeable_pointer(*this);
 
 	// Set theme
 	apply_theme(*layersApp->current_theme());
@@ -223,9 +226,16 @@ void Window::open_menu(Menu* menu)
 
 void Window::customize_clicked()
 {
-	if (m_theme_customization_menu->panels().isEmpty())
+	//if (m_theme_customization_menu->panels().isEmpty())
+	if (!m_theme_customization_menu->preview_widget())
 		m_theme_customization_menu->open_customize_panel(
 			layersApp->customize_panel());
+	//else if (Themeable* preview_themeable =
+	//	dynamic_cast<Themeable*>(m_theme_customization_menu->preview_widget()))
+	//{
+	//	m_theme_customization_menu->open_customize_panel(
+	//		new WidgetEditor(preview_themeable));
+	//}
 	
 	open_menu(m_theme_customization_menu);
 }

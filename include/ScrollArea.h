@@ -16,6 +16,9 @@ namespace Layers
 		ScrollArea(QWidget* parent = nullptr);
 		//~ScrollArea();
 
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
+
 		ScrollBar* horizontal_scrollbar() const;
 
 		void setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy policy);
