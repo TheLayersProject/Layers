@@ -1,43 +1,40 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include <QImage>
-#include <QTimer>
-#include <QWidget>
+#include <QLabel>
 
-#include "ImageSequence.h"
-#include "SvgRenderer.h"
-#include "Themeable.h"
+#include "ImageSequenceLabel.h"
+#include "SVG.h"
+#include "Widget.h"
 
 namespace Layers
 {
-	class Graphic : public QWidget, public Themeable
+	class Graphic : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Graphic(const QString& file_path, QSize size = QSize(), QWidget* parent = nullptr);
-		Graphic(const Graphic& g);
+		Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent = nullptr);
+		Graphic(const QString& filepath, QSize size, QWidget* parent = nullptr);
+		Graphic(const QString& filepath, QWidget* parent = nullptr);
+		Graphic(const QImage& image, QWidget* parent = 0);
+		Graphic(const Graphic& gw);
+		~Graphic();
 
-		Attribute* common_color() const;
+		void set_hovering(bool cond = true);
+		void set_icon(Graphic* icon);
 
-	protected:
-		void paintEvent(QPaintEvent* event) override;
+		void set_pixmap(const QPixmap& pixmap);
+		SVG* svg() const;
 
 	private:
-		void init_attributes();
+		void init_max_size();
 
-		Attribute* m_common_color{ new Attribute("common_color", QColor(Qt::black)) };
+		void init_layout();
 
-		int m_frame{ 0 };
-
-		ImageSequence* m_image_sequence{ nullptr };
-
-		QImage* m_image{ nullptr };
-
-		SvgRenderer* m_svg{ nullptr };
-
-		QTimer m_timer;
+		QLabel* m_bitmap_label{ nullptr };
+		SVG* m_svg_widget{ nullptr };
+		ImageSequenceLabel* m_image_sequence_label{ nullptr };
 	};
 }
 

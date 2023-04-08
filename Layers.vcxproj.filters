@@ -30,6 +30,9 @@
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\Widgets\Graphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Widgets\ItemDelegates\GridlineItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -222,9 +225,6 @@
     <ClCompile Include="src\Widgets\Kernel\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\Graphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -257,6 +257,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Label.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Graphic.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\ImageSequenceLabel.h">
@@ -431,9 +434,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\Graphic.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

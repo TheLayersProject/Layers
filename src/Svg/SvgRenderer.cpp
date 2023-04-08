@@ -2,7 +2,6 @@
 
 #include <QFile>
 
-using Layers::Attribute;
 using Layers::SvgRenderer;
 
 SvgRenderer::SvgRenderer(const QString& file_path, QObject* parent) : QSvgRenderer(parent)
@@ -18,24 +17,18 @@ SvgRenderer::SvgRenderer(const QString& file_path, QObject* parent) : QSvgRender
 		file.close();
 	}
 
+	//if (m_svg_str.contains("BLOCK_THEMING"))
+	//	m_theming_blocked = true;
+
 	init_svg_elements_list();
 
-	load(m_svg_str.toUtf8());
-}
+	//init_size();
 
-SvgRenderer::SvgRenderer(const SvgRenderer& sr)
-{
-	m_svg_str = sr.m_svg_str;
-
-	for (const QString& svg_element : sr.m_svg_elements)
-		m_svg_elements.append(svg_element);
+	//if (!m_theming_blocked)
+	//	// Call init_attributes() AFTER m_svg_elements has been initialized
+	//	init_attributes();
 
 	load(m_svg_str.toUtf8());
-}
-
-Attribute* SvgRenderer::common_color() const
-{
-	return m_common_color;
 }
 
 void SvgRenderer::rebuild_svg_str()
@@ -52,28 +45,51 @@ void SvgRenderer::rebuild_svg_str()
 
 void SvgRenderer::update()
 {
+	//if (!m_theming_blocked)
+	//{
 	for (int i = 0; i < m_svg_elements.size(); i++)
 	{
 		if (m_svg_elements[i].startsWith("<path") && m_svg_elements[i].contains("id="))
 		{
-			m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_common_color->as<QColor>().name());
+			//if (m_hovering)
+			//{
+			//	if (a_use_common_hover_color.as<bool>())
+			//	{
+			//		m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_hover_color.as<QColor>().name());
+			//	}
+			//}
+			//else
+			//{
+			if (a_use_common_color.as<bool>())
+			{
+				m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, a_common_color.as<QColor>().name());
+			}
+			//}
 		}
 	}
 
 	rebuild_svg_str();
 
 	load(m_svg_str.toUtf8());
+	//}
 }
 
 void SvgRenderer::init_attributes()
 {
 	m_attributes.insert({
-		{ "common_color", m_common_color },
-		//{ "use_common_color", &a_use_common_color }
+		{ "common_color", &a_common_color },
+		//{ "common_hover_color", &a_common_hover_color },
+		{ "use_common_color", &a_use_common_color }
+		//{ "use_common_hover_color", &a_use_common_hover_color }
 		});
 
-	connect(m_common_color, &AbstractAttribute::value_changed, [this] { update(); });
-	//connect(&a_use_common_color, &AbstractAttribute::value_changed, [this] { update(); });
+	//for (Entity* entity : m_attributes)
+	//	entity->setup_widget_update_connection(this);
+
+	connect(&a_common_color, &AbstractAttribute::value_changed, [this] { update(); });
+	//connect(&a_common_hover_color, &Entity::value_changed, [this] { update(); });
+	connect(&a_use_common_color, &AbstractAttribute::value_changed, [this] { update(); });
+	//connect(&a_use_common_hover_color, &Entity::value_changed, [this] { update(); });
 }
 
 void SvgRenderer::init_svg_elements_list()

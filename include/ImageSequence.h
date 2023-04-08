@@ -9,15 +9,12 @@ namespace Layers
 	{
 	public:
 		ImageSequence(QDir dir);
+
 		ImageSequence(QFile file);
 
 		void save(QFile file);
 
-		qsizetype size() const;
-
 		QList<QPixmap> to_pixmaps() const;
-
-		QImage& operator[](int i);
 
 	private:
 		QList<QImage> m_images{ QList<QImage>() };

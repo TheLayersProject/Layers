@@ -20,7 +20,7 @@ SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* pare
     setMouseTracking(true);
 	setFixedHeight(60);
 
-    set_icon(new Graphic(":/svgs/settings_tab_icon.svg"));
+    set_icon(new Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
     set_name("settings_tab");
     set_proper_name(label_text + " Tab");
 
@@ -81,11 +81,11 @@ void SettingsTab::init_attributes()
 
 	m_stretch_widget2->fill()->set_disabled();
 
-	//m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
-	//m_tab_icon->svg()->a_common_color.init_variant_map({
-	//	{ "Unselected", QColor(Qt::gray) },
-	//	{ "Selected", QColor(Qt::black) }
-	//	});
+	m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
+	m_tab_icon->svg()->a_common_color.init_variant_map({
+		{ "Unselected", QColor(Qt::gray) },
+		{ "Selected", QColor(Qt::black) }
+		});
 
 	m_text_label->text_color()->init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },

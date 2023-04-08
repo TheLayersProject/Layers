@@ -15,8 +15,7 @@ ThemeCompatibilityItemDelegate::ThemeCompatibilityItemDelegate(QObject* parent) 
 	QPainter check_image_painter(&m_check_image);
 	m_check_svg->render(&check_image_painter);
 
-	connect(m_check_svg->common_color(), &AbstractAttribute::value_changed, [this] {
-		m_check_image.fill(qRgba(0, 0, 0, 0));
+	connect(&m_check_svg->a_common_color, &AbstractAttribute::value_changed, [this] {
 		QPainter check_image_painter(&m_check_image);
 		m_check_svg->render(&check_image_painter);
 		});
@@ -51,5 +50,5 @@ SvgRenderer* ThemeCompatibilityItemDelegate::check_svg() const
 
 void ThemeCompatibilityItemDelegate::init_attributes()
 {
-	//m_check_svg->a_use_common_color.set_value(QVariant::fromValue(true));
+	m_check_svg->a_use_common_color.set_value(QVariant::fromValue(true));
 }

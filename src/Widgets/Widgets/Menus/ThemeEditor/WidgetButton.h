@@ -3,7 +3,6 @@
 
 #include "Graphic.h"
 #include "Label.h"
-#include "Widget.h"
 
 namespace Layers
 {

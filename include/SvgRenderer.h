@@ -16,14 +16,20 @@ namespace Layers
 			Constructs an SVG from an SVG file.
 		*/
 		SvgRenderer(const QString& file_path, QObject* parent = nullptr);
-		SvgRenderer(const SvgRenderer& sr);
 
-		Attribute* common_color() const;
+		///*!
+		//	Copy constructs an SVG from another SVG.
+		//*/
+		//SvgRenderer(const SvgRenderer& svg_w);
 
 		/*!
 			Rebuilds the SVG string from the SVG elements list.
 		*/
 		void rebuild_svg_str();
+
+		//void set_hovering(bool cond = true);
+
+		//virtual void set_state(const QString& state) override;
 
 		/*!
 			Updates things that depend on the theme.
@@ -34,7 +40,10 @@ namespace Layers
 		*/
 		void update();
 
-		//Attribute a_use_common_color{ Attribute("use_common_color", QVariant::fromValue(false)) };
+		Attribute a_common_color{ Attribute("common_color", QColor(Qt::black)) };
+		//Attribute a_common_hover_color{ Attribute("common_hover_color", QColor(Qt::darkGray)) };
+		Attribute a_use_common_color{ Attribute("use_common_color", QVariant::fromValue(false)) };
+		//Attribute a_use_common_hover_color{ Attribute("use_common_hover_color", QVariant::fromValue(false)) };
 
 	private:
 		/*!
@@ -44,9 +53,16 @@ namespace Layers
 		*/
 		void init_attributes();
 
+
+		//void init_size();
+
 		void init_svg_elements_list();
 
-		Attribute* m_common_color{ new Attribute("common_color", QColor(Qt::black)) };
+		//QString element_id(const QString& element);
+
+		//bool m_theming_blocked{ false };
+
+		//bool m_hovering{ false };
 
 		QString m_svg_str{  };
 
