@@ -9,7 +9,7 @@ using Layers::Menu;
 using Layers::Tab;
 
 Tab::Tab(QWidget* parent) :
-	m_tab_icon{ new Graphic(":/svgs/mll_icon.svg", QSize(20, 6)) },
+	m_tab_icon{ new Graphic(":/svgs/mll_icon.svg") },
 	m_text_label{ new Label("") },
 	Widget(parent)
 {
@@ -101,16 +101,19 @@ void Tab::init_attributes()
 
 	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 
-	if (m_tab_icon->svg())
-	{
-		m_tab_icon->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
-		m_tab_icon->svg()->a_common_color.set_value(QColor("#e3e3e3"));
-	}
+	// TODO: Remove below
+	//if (m_tab_icon->svg())
+	//{
+	//	m_tab_icon->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
+	//	m_tab_icon->svg()->a_common_color.set_value(QColor("#e3e3e3"));
+	//}
 
-	m_exit_button->graphic()->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
-	m_exit_button->graphic()->svg()->a_use_common_hover_color.set_value(QVariant::fromValue(true));
-	m_exit_button->graphic()->svg()->a_common_color.set_value(QColor("#5f5f5f"));
-	m_exit_button->graphic()->svg()->a_common_hover_color.set_value(QColor("#e95454"));
+	m_tab_icon->common_color()->set_value(QColor("#e3e3e3"));
+
+	//m_exit_button->graphic()->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
+	//m_exit_button->graphic()->svg()->a_use_common_hover_color.set_value(QVariant::fromValue(true));
+	//m_exit_button->graphic()->svg()->a_common_color.set_value(QColor("#5f5f5f"));
+	//m_exit_button->graphic()->svg()->a_common_hover_color.set_value(QColor("#e95454"));
 }
 
 Button* Tab::exit_button() const

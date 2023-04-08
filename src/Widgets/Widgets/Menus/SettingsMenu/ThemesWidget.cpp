@@ -91,7 +91,7 @@ void ThemesWidget::init_attributes()
 
 	m_spacer_2->fill()->set_disabled();
 
-	m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
+	//m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }
 
 Button* ThemesWidget::customize_theme_button() const

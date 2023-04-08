@@ -15,7 +15,7 @@ ImageSequence::ImageSequence(QDir dir)
 		m_images.append(QImage(dir.filePath(filename)));
 	}
 
-	save(QFile("layers_logo.imgseq"));
+	//save(QFile("layers_logo.imgseq"));
 }
 
 ImageSequence::ImageSequence(QFile file)
@@ -50,6 +50,11 @@ void ImageSequence::save(QFile file)
 	file.close();
 }
 
+qsizetype ImageSequence::size() const
+{
+	return m_images.size();
+}
+
 QList<QPixmap> ImageSequence::to_pixmaps() const
 {
 	QList<QPixmap> pixmaps;
@@ -58,4 +63,9 @@ QList<QPixmap> ImageSequence::to_pixmaps() const
 		pixmaps.append(QPixmap::fromImage(image));
 
 	return pixmaps;
+}
+
+QImage& ImageSequence::operator[](int i)
+{
+	return m_images[i];
 }

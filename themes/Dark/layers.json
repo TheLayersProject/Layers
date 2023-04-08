@@ -6589,74 +6589,13 @@
         }
     },
     "window/titlebar/exit_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#6a6a6a"
-        },
-        "common_hover_color": {
-            "value": "#e33034"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#e33034",
+                    "Unselected": "#6a6a6a"
+                }
+            }
         }
     },
     "window/titlebar/maximize_button": {

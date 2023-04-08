@@ -39,14 +39,14 @@ bool WidgetButton::eventFilter(QObject* object, QEvent* event)
 	}
 	else if (event->type() == QEvent::Enter)
 	{
-		if (m_icon)
-			m_icon->set_hovering(true);
+		//if (m_icon)
+		//	m_icon->set_hovering(true);
 		m_label->set_hovering(true);
 	}
 	else if (event->type() == QEvent::Leave)
 	{
-		if (m_icon)
-			m_icon->set_hovering(false);
+		//if (m_icon)
+		//	m_icon->set_hovering(false);
 		m_label->set_hovering(false);
 	}
 

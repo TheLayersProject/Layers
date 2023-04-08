@@ -59,8 +59,8 @@ Button::~Button()
 
 void Button::disable_graphic_hover_color(bool cond)
 {
-	if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
-	if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
+	//if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
+	//if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
 
 	m_use_graphic_hover_color = !cond;
 }
@@ -98,6 +98,13 @@ void Button::init()
 		m_graphic->set_icon(new Graphic(*m_graphic));
 		m_graphic->set_name("graphic");
 		m_graphic->set_proper_name("Graphic");
+
+		m_graphic->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::lightGray) },
+			{ "Selected", QColor(Qt::white) }
+			});
+
+		m_graphic->common_color()->set_state("Unselected");
 	}
 
 	if (m_text_label)
@@ -321,8 +328,8 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(true);
-			if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(true);
+			//if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(true);
+			//if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(true);
 			if (m_text_label && m_use_text_hover_color) m_text_label->set_hovering(true);
 		}
 	}
@@ -330,8 +337,8 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
-			if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
+			//if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
+			//if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
 			if (m_text_label && m_use_text_hover_color) m_text_label->set_hovering(false);
 		}
 	}
