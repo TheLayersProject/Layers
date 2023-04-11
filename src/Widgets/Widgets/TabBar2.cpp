@@ -68,13 +68,13 @@ QList<Tab*> TabBar2::tabs()
 
 void TabBar2::select_tab(Tab* selecting_tab)
 {
-	selecting_tab->set_state("Selected");
+	selecting_tab->fill()->set_state("Active");
 	selecting_tab->menu()->show();
 
 	for (Tab* tab : tabs())
 		if (tab != selecting_tab)
 		{
-			tab->set_state("Unselected");
+			tab->fill()->set_state("Inactive");
 			tab->menu()->hide();
 		}
 }

@@ -39,14 +39,14 @@ bool WidgetButton::eventFilter(QObject* object, QEvent* event)
 	}
 	else if (event->type() == QEvent::Enter)
 	{
-		if (m_icon)
-			m_icon->set_hovering(true);
+		if (m_icon && m_icon->svg())
+			m_icon->svg()->common_color()->set_state("Selected");
 		m_label->set_hovering(true);
 	}
 	else if (event->type() == QEvent::Leave)
 	{
-		if (m_icon)
-			m_icon->set_hovering(false);
+		if (m_icon && m_icon->svg())
+			m_icon->svg()->common_color()->set_state("Unselected");
 		m_label->set_hovering(false);
 	}
 
@@ -84,6 +84,16 @@ void WidgetButton::init_attributes()
 	m_corner_radii->top_right()->set_value(10.0);
 	m_corner_radii->bottom_left()->set_value(10.0);
 	m_corner_radii->bottom_right()->set_value(10.0);
+
+	if (m_icon && m_icon->svg())
+	{
+		m_icon->svg()->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+			});
+
+		m_icon->svg()->common_color()->set_state("Unselected");
+	}
 }
 
 void WidgetButton::init_layout()

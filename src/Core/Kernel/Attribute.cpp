@@ -28,7 +28,6 @@ Attribute::Attribute(const Attribute& a) : AbstractAttribute(a.m_name, a.m_disab
 Attribute::~Attribute()
 {
 	QObject::disconnect(m_data_connection);
-
 	QObject::disconnect(m_reentanglement_connection);
 
 	if (!m_is_entangled)
@@ -56,33 +55,37 @@ void Attribute::establish_data_connection()
 {
 	QObject::disconnect(m_data_connection);
 	m_data_connection = connect(
-		m_data, &Data::changed, [this] { emit value_changed(); }
-	);
+		m_data, &Data::changed, [this]
+		{ emit value_changed(); });
+}
+
+void Attribute::establish_reentanglement_connection(Attribute& attribute)
+{
+	QObject::disconnect(m_reentanglement_connection);
+	m_reentanglement_connection = connect(
+		&attribute, &Attribute::entangled, [this, &attribute]
+		{ entangle_with(attribute); });
 }
 
 void Attribute::entangle_with(Attribute& attribute)
 {
-	QObject::disconnect(m_reentanglement_connection);
-	m_reentanglement_connection = 
-		connect(&attribute, &Attribute::entangled, [this, &attribute] {
-			entangle_with(attribute);
-		});
-
 	if (!m_is_entangled)
 	{
 		m_is_entangled = true;
-
 		delete m_data;
 	}
 
 	m_data = attribute.m_data;
 
-	if (m_data->states().isEmpty() && m_state != "")
-		m_state = "";
-	else if (!m_data->states().isEmpty() && m_state == "")
-		m_state = m_data->states().first();
+	m_state = attribute.m_state;
+
+	//if (m_data->states().isEmpty() && m_state != "")
+	//	m_state = "";
+	//else if (!m_data->states().isEmpty() && m_state == "")
+	//	m_state = m_data->states().first();
 
 	establish_data_connection();
+	establish_reentanglement_connection(attribute);
 
 	emit entangled();
 	emit value_changed();

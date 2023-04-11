@@ -372,75 +372,14 @@
             "value": "#000000"
         }
     },
-    "create_new_theme_dialog/titlebar/exit_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "create_new_theme_dialog/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#f25557"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#f25557",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "create_new_theme_dialog/titlebar/window_title_label": {
@@ -706,75 +645,14 @@
             "value": "#000000"
         }
     },
-    "gradient_dialog/titlebar/exit_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "gradient_dialog/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#f25557"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#f25557",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "gradient_dialog/titlebar/window_title_label": {
@@ -1085,72 +963,14 @@
             "value": "#a0a0a4"
         }
     },
-    "theme_compatibility_caution_dialog/titlebar/exit_button/graphic": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#c0c0c0"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        }
-    },
     "theme_compatibility_caution_dialog/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#000000"
-        },
-        "common_hover_color": {
-            "value": "#808080"
-        },
-        "use_common_color": {
-            "value": false
-        },
-        "use_common_hover_color": {
-            "value": false
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#f25557",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "theme_compatibility_caution_dialog/titlebar/window_title_label": {
@@ -1434,75 +1254,14 @@
             "value": "#000000"
         }
     },
-    "update_dialog/titlebar/exit_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "update_dialog/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#f25557"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#f25557",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "update_dialog/titlebar/window_title_label": {
@@ -2085,143 +1844,24 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic_after": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic_after/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/aw_group/label": {
@@ -2987,143 +2627,24 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic_after": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic_after/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/label": {
@@ -4510,75 +4031,14 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button/icon": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/sidebar/customize_panel/widget_button/icon/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/widget_button/label": {
@@ -4709,143 +4169,24 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic_after": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic_after/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "value": "#ffffff"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ffffff",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/sidebar/customize_panel/widget_button_group/label": {
@@ -5078,76 +4419,9 @@
             "value": "#6aaaf7"
         }
     },
-    "window/customize_menu/topbar/arrow_graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/topbar/arrow_graphic/svg": {
         "common_color": {
             "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#2e2e2e"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": false
         }
     },
     "window/customize_menu/topbar/collapse_menu": {
@@ -5259,76 +4533,14 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/collapse_menu_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/customize_menu/topbar/collapse_menu_button/graphic/svg": {
         "common_color": {
-            "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#2e2e2e"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": false
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#2e2e2e",
+                    "Unselected": "#2e2e2e"
+                }
+            }
         }
     },
     "window/customize_menu/topbar/text_button": {
@@ -5690,63 +4902,6 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/sidebar/themes_settings_tab/icon": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/sidebar/themes_settings_tab/icon/svg": {
         "common_color": {
             "value": {
@@ -5755,16 +4910,6 @@
                     "Unselected": "#5d5d5d"
                 }
             }
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#6a8ac3"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
         }
     },
     "window/settings_menu/sidebar/themes_settings_tab/text_label": {
@@ -5903,75 +5048,14 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_widget/customize_theme_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/themes_widget/customize_theme_button/graphic/svg": {
         "common_color": {
-            "value": "#c3c3c3"
-        },
-        "common_hover_color": {
-            "value": "#e6e6e6"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#e6e6e6",
+                    "Unselected": "#c3c3c3"
+                }
+            }
         }
     },
     "window/settings_menu/themes_widget/delete_theme_button": {
@@ -6031,75 +5115,14 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_widget/delete_theme_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/themes_widget/delete_theme_button/graphic/svg": {
         "common_color": {
-            "value": "#e95454"
-        },
-        "common_hover_color": {
-            "value": "#ff7f7f"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#ff7f7f",
+                    "Unselected": "#e95454"
+                }
+            }
         }
     },
     "window/settings_menu/themes_widget/new_theme_button": {
@@ -6159,75 +5182,14 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_widget/new_theme_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/themes_widget/new_theme_button/graphic/svg": {
         "common_color": {
-            "value": "#6fc654"
-        },
-        "common_hover_color": {
-            "value": "#8cfa6a"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#8cfa6a",
+                    "Unselected": "#6fc654"
+                }
+            }
         }
     },
     "window/settings_menu/themes_widget/separator": {
@@ -6379,76 +5341,14 @@
             "value": "#000000"
         }
     },
-    "window/settings_menu/themes_widget/theme_info_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/settings_menu/themes_widget/theme_info_button/graphic/svg": {
         "common_color": {
-            "value": "#6a6a6a"
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#6a6a6a"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": false
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#6a6a6a",
+                    "Unselected": "#6a6a6a"
+                }
+            }
         }
     },
     "window/settings_menu/themes_widget/theme_label": {
@@ -6582,75 +5482,14 @@
             "value": "#000000"
         }
     },
-    "window/titlebar/exit_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/titlebar/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#e33034"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#e33034",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "window/titlebar/maximize_button": {
@@ -6710,75 +5549,14 @@
             "value": "#000000"
         }
     },
-    "window/titlebar/maximize_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/titlebar/maximize_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#6a6a6a"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#6a6a6a",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "window/titlebar/menu_tab_bar": {
@@ -6866,8 +5644,8 @@
         "fill": {
             "value": {
                 "state_value_pairs": {
-                    "Selected": "#e1e1e1",
-                    "Unselected": "#ffffff"
+                    "Active": "#e1e1e1",
+                    "Inactive": "#ffffff"
                 }
             }
         },
@@ -6949,144 +5727,19 @@
             "value": "#a0a0a4"
         }
     },
-    "window/titlebar/menu_tab_bar/tabs/exit_button/graphic": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#c0c0c0"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        }
-    },
     "window/titlebar/menu_tab_bar/tabs/exit_button/graphic/svg": {
         "common_color": {
-            "value": "#5f5f5f"
-        },
-        "common_hover_color": {
-            "value": "#e95454"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
-        }
-    },
-    "window/titlebar/menu_tab_bar/tabs/icon": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#e95454",
+                    "Unselected": "#5f5f5f"
+                }
             }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "window/titlebar/menu_tab_bar/tabs/icon/svg": {
         "common_color": {
             "value": "#2e2e2e"
-        },
-        "common_hover_color": {
-            "disabled": true,
-            "value": "#2e2e2e"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
         }
     },
     "window/titlebar/menu_tab_bar/tabs/text_label": {
@@ -7163,75 +5816,14 @@
             "value": "#000000"
         }
     },
-    "window/titlebar/minimize_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/titlebar/minimize_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#6a6a6a"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#6a6a6a",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "window/titlebar/settings_button": {
@@ -7291,75 +5883,14 @@
             "value": "#000000"
         }
     },
-    "window/titlebar/settings_button/graphic": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#000000"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#000000"
-        }
-    },
     "window/titlebar/settings_button/graphic/svg": {
         "common_color": {
-            "value": "#c5c5c5"
-        },
-        "common_hover_color": {
-            "value": "#6a6a6a"
-        },
-        "use_common_color": {
-            "value": true
-        },
-        "use_common_hover_color": {
-            "value": true
+            "value": {
+                "state_value_pairs": {
+                    "Selected": "#6a6a6a",
+                    "Unselected": "#c5c5c5"
+                }
+            }
         }
     },
     "window/titlebar/window_title_label": {

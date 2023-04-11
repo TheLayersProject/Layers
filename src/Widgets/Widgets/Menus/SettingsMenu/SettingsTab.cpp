@@ -81,8 +81,7 @@ void SettingsTab::init_attributes()
 
 	m_stretch_widget2->fill()->set_disabled();
 
-	m_tab_icon->svg()->a_use_common_hover_color.set_value(false);
-	m_tab_icon->svg()->a_common_color.init_variant_map({
+	m_tab_icon->svg()->common_color()->init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});

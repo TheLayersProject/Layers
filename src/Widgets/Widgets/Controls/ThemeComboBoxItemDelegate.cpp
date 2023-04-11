@@ -10,15 +10,6 @@
 
 using Layers::ThemeComboBoxItemDelegate;
 
-ThemeComboBoxItemDelegate::ThemeComboBoxItemDelegate(QObject* parent) :
-	ComboBoxItemDelegate(parent)
-{
-	m_caution_image.fill(qRgba(0, 0, 0, 0));
-
-	QPainter caution_image_painter(&m_caution_image);
-	m_caution_svg->render(&caution_image_painter);
-}
-
 bool ThemeComboBoxItemDelegate::editorEvent(
 	QEvent* event,
 	QAbstractItemModel* model,

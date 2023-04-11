@@ -56,7 +56,7 @@ Tab::Tab(Menu* menu, QWidget* parent) :
 
 	setup_layout();
 
-	set_state("Unselected");
+	m_fill->set_state("Inactive");
 }
 
 Menu* Tab::menu() const
@@ -91,9 +91,9 @@ void Tab::init_attributes()
 {
 	//fill()->set_value(QColor("#e6e6e6"));
 
-	fill()->init_variant_map({
-		{ "Unselected", QColor("#36393f")},
-		{ "Selected", QColor("#25272b") }
+	m_fill->init_variant_map({
+		{ "Inactive", QColor("#36393f") },
+		{ "Active", QColor("#25272b") }
 		});
 
 	corner_radii()->top_left()->set_value(5.0);
@@ -103,14 +103,14 @@ void Tab::init_attributes()
 
 	if (m_tab_icon->svg())
 	{
-		m_tab_icon->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
-		m_tab_icon->svg()->a_common_color.set_value(QColor("#e3e3e3"));
+		//m_tab_icon->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
+		m_tab_icon->svg()->common_color()->set_value(QColor("#e3e3e3"));
 	}
 
-	m_exit_button->graphic()->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
-	m_exit_button->graphic()->svg()->a_use_common_hover_color.set_value(QVariant::fromValue(true));
-	m_exit_button->graphic()->svg()->a_common_color.set_value(QColor("#5f5f5f"));
-	m_exit_button->graphic()->svg()->a_common_hover_color.set_value(QColor("#e95454"));
+	//m_exit_button->graphic()->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
+	//m_exit_button->graphic()->svg()->a_use_common_hover_color.set_value(QVariant::fromValue(true));
+	m_exit_button->graphic()->svg()->common_color()->set_value(QColor("#5f5f5f"));
+	//m_exit_button->graphic()->svg()->a_common_hover_color.set_value(QColor("#e95454"));
 }
 
 Button* Tab::exit_button() const

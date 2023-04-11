@@ -14,7 +14,11 @@ namespace Layers
 
 		void save(QFile file);
 
+		qsizetype size() const;
+
 		QList<QPixmap> to_pixmaps() const;
+
+		QImage& operator[](int i);
 
 	private:
 		QList<QImage> m_images{ QList<QImage>() };

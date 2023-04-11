@@ -141,7 +141,7 @@ void Window::set_main_menu(Menu* main_menu)
 	m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
 	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
 	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
-	m_titlebar->menu_tab_bar()->tabs().last()->set_state("Selected");
+	m_titlebar->menu_tab_bar()->tabs().last()->fill()->set_state("Active");
 
 	m_app_menu->set_is_app_themeable(true);
 	m_app_menu->apply_theme(*layersApp->current_theme());

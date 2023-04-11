@@ -1,187 +1,136 @@
 #include "Graphic.h"
 
+#include <QPainter>
 #include <QVBoxLayout>
 
+using Layers::Attribute;
 using Layers::Graphic;
-using Layers::SVG;
+using Layers::SvgRenderer;
+using Layers::Themeable;
 
-Graphic::Graphic(const ImageSequence& image_sequence, QSize size, QWidget* parent) :
-	m_image_sequence_label{ new ImageSequenceLabel(image_sequence, size) }, Widget(parent)
+Graphic::Graphic(const QString& file_path, QSize size, QWidget* parent) :
+	QWidget(parent)
 {
-	m_image_sequence_label->setAttribute(Qt::WA_TransparentForMouseEvents);
+	if (file_path.endsWith(".png") || file_path.endsWith(".jpg") ||
+		file_path.endsWith(".jpeg") || file_path.endsWith(".bmp") ||
+		file_path.endsWith(".gif"))
+	{
+		m_image = new QImage(file_path);
+	}
+	else if (file_path.endsWith(".svg"))
+	{
+		m_svg = new SvgRenderer(file_path);
+		m_svg->set_name("svg");
+		m_svg->set_proper_name("SVG");
 
-	m_fill->set_disabled();
-	init_layout();
-	init_max_size();
+		m_repaint_connection = connect(m_svg, &QSvgRenderer::repaintNeeded,
+			[this] { update(); });
+	}
+	else if (file_path.endsWith(".imgseq"))
+	{
+		m_image_sequence = new ImageSequence(QFile(file_path));
+
+		connect(&m_timer, &QTimer::timeout, [this] {
+			m_timer.start(17);
+			update();
+			});
+
+		m_timer.start(17);
+	}
+
+	if (size.isValid())
+		setMaximumSize(size);
+	else if (m_svg)
+		setMaximumSize(m_svg->defaultSize());
+	else if (m_image)
+		setMaximumSize(m_image->size());
+	else if (m_image_sequence)
+		setMaximumSize((*m_image_sequence)[0].size());
+
+	m_draw_size = maximumSize();
 }
 
-Graphic::Graphic(const QString& filepath, QSize size, QWidget* parent) :
-	Widget(parent)
+Graphic::Graphic(const Graphic& g)
 {
-	if (filepath.endsWith(".png") || filepath.endsWith(".jpg") ||
-		filepath.endsWith(".jpeg") || filepath.endsWith(".bmp") ||
-		filepath.endsWith(".gif"))
+	if (g.m_svg)
 	{
-		m_bitmap_label = new QLabel;
-		m_bitmap_label->setPixmap(QPixmap(filepath));
-		m_bitmap_label->setFixedSize(size);
-		m_bitmap_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	}
-	else if (filepath.endsWith(".svg"))
-	{
-		m_svg_widget = new SVG(filepath);
-		m_svg_widget->set_name("svg");
-		m_svg_widget->set_proper_name("SVG");
-		m_svg_widget->setFixedSize(size);
-		m_svg_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-	}
+		m_svg = new SvgRenderer(*g.m_svg);
+		m_svg->set_name("svg");
+		m_svg->set_proper_name("SVG");
 
-	m_fill->set_disabled();
-	init_layout();
-	init_max_size();
-}
-
-Graphic::Graphic(const QString& filepath, QWidget* parent) : Widget(parent)
-{
-	if (filepath.endsWith(".png") || filepath.endsWith(".jpg") ||
-		filepath.endsWith(".jpeg") || filepath.endsWith(".bmp") ||
-		filepath.endsWith(".gif"))
-	{
-		QPixmap pixmap(filepath);
-
-		m_bitmap_label = new QLabel;
-		m_bitmap_label->setPixmap(pixmap);
-		m_bitmap_label->setFixedSize(pixmap.size());
-		setFixedSize(pixmap.size());
-		m_bitmap_label->setAttribute(Qt::WA_TransparentForMouseEvents);
+		m_repaint_connection = connect(m_svg, &QSvgRenderer::repaintNeeded,
+			[this] { update(); });
 	}
-	else if (filepath.endsWith(".svg"))
+	else if (g.m_image)
 	{
-		m_svg_widget = new SVG(filepath);
-		m_svg_widget->set_name("svg");
-		m_svg_widget->set_proper_name("SVG");
-		m_svg_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
+		m_image = new QImage(*g.m_image);
+	}
+	else if (g.m_image_sequence)
+	{
+		m_image_sequence = new ImageSequence(*g.m_image_sequence);
+
+		connect(&m_timer, &QTimer::timeout, [this] {
+			m_timer.start(17);
+			update();
+			});
+
+		m_timer.start(17);
 	}
 
-	m_fill->set_disabled();
-	init_layout();
-	init_max_size();
-}
+	setMaximumSize(g.maximumSize());
 
-Graphic::Graphic(const QImage& image, QWidget* parent) :
-	Widget(parent)
-{
-	m_bitmap_label = new QLabel;
-	m_bitmap_label->setPixmap(QPixmap::fromImage(image));
-	m_bitmap_label->setFixedSize(image.size());
-	m_bitmap_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-
-	m_fill->set_disabled();
-	init_layout();
-	init_max_size();
-}
-
-Graphic::Graphic(const Graphic& gw) : Widget()
-{
-	if (gw.m_image_sequence_label)
-	{
-		m_image_sequence_label = new ImageSequenceLabel(*gw.m_image_sequence_label);
-		m_image_sequence_label->setFixedSize(gw.m_image_sequence_label->size());
-		m_image_sequence_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	}
-	else if (gw.m_bitmap_label)
-	{
-		m_bitmap_label = new QLabel;
-		m_bitmap_label->setPixmap(QPixmap(gw.m_bitmap_label->pixmap()));
-		m_bitmap_label->setFixedSize(gw.m_bitmap_label->size());
-		m_bitmap_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-
-	}
-	else if (gw.m_svg_widget)
-	{
-		m_svg_widget = new SVG(*gw.m_svg_widget);
-		m_svg_widget->set_name("svg");
-		m_svg_widget->set_proper_name("SVG");
-		m_svg_widget->setFixedSize(gw.m_svg_widget->size());
-		m_svg_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-	}
-
-	m_fill->set_disabled();
-	init_layout();
-	init_max_size();
+	m_draw_size = maximumSize();
 }
 
 Graphic::~Graphic()
 {
-	if (m_bitmap_label)
-		m_bitmap_label->deleteLater();
-
-	else if (m_svg_widget)
-		m_svg_widget->deleteLater();
-
-	else if (m_image_sequence_label)
-		m_image_sequence_label->deleteLater();
-}
-
-void Graphic::set_hovering(bool cond)
-{
-	if (m_svg_widget) m_svg_widget->set_hovering(cond);
-}
-
-void Graphic::set_icon(Graphic* icon)
-{
-	Themeable::set_icon(icon);
-
-	if (m_svg_widget) m_svg_widget->set_icon(new Graphic(*icon));
-}
-
-void Graphic::set_pixmap(const QPixmap& pixmap)
-{
-	if (m_bitmap_label)
-		m_bitmap_label->setPixmap(pixmap);
-}
-
-SVG* Graphic::svg() const
-{
-	return m_svg_widget;
-}
-
-void Graphic::init_layout()
-{
-	QVBoxLayout* main_layout = new QVBoxLayout;
-
-	if (m_bitmap_label)
+	if (m_svg)
 	{
-		main_layout->addWidget(m_bitmap_label);
-		main_layout->setAlignment(m_bitmap_label, Qt::AlignCenter);
+		delete m_svg;
+		QObject::disconnect(m_repaint_connection);
 	}
-	else if (m_svg_widget)
-	{
-		main_layout->addWidget(m_svg_widget);
-		main_layout->setAlignment(m_svg_widget, Qt::AlignCenter);
-	}
-	else if (m_image_sequence_label)
-	{
-		main_layout->addWidget(m_image_sequence_label);
-		main_layout->setAlignment(m_image_sequence_label, Qt::AlignCenter);
-	}
-
-	main_layout->setContentsMargins(0, 0, 0, 0);
-	main_layout->setSpacing(0);
-
-	setLayout(main_layout);
+	else if (m_image)
+		delete m_image;
+	else if (m_image_sequence)
+		delete m_image_sequence;
 }
 
-void Graphic::init_max_size()
+QList<Themeable*> Graphic::child_themeables(Qt::FindChildOptions options)
 {
-	QSize new_size;
+	QList<Themeable*> child_themeables;
 
-	if (m_bitmap_label)
-		new_size = m_bitmap_label->size();
-	else if (m_svg_widget)
-		new_size = m_svg_widget->size();
-	else if (m_image_sequence_label)
-		new_size = m_image_sequence_label->size();
+	if (m_svg)
+		child_themeables.append(m_svg);
 
-	setMaximumSize(new_size);
+	return child_themeables;
+}
+
+SvgRenderer* Graphic::svg() const
+{
+	return m_svg;
+}
+
+void Graphic::paintEvent(QPaintEvent* event)
+{
+	QPainter painter = QPainter(this);
+
+	int centered_x = (width() / 2) - (m_draw_size.width() / 2);
+	int centered_y = (height() / 2) - (m_draw_size.height() / 2);
+
+	if (m_svg)
+	{
+		m_svg->render(&painter,
+			QRectF(QPoint(centered_x, centered_y), m_draw_size));
+	}
+	else if (m_image)
+	{
+		painter.drawImage(centered_x, centered_y, *m_image);
+	}
+	else if (m_image_sequence)
+	{
+		painter.drawImage(centered_x, centered_y,
+			(*m_image_sequence)[m_frame++]);
+
+		if (m_frame == m_image_sequence->size()) m_frame = 0;
+	}
 }

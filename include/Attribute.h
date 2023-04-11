@@ -116,13 +116,6 @@ namespace Layers
 		void copy(const Attribute& attr);
 
 		/*!
-			Connects the Data changed signal to emit value_changed().
-
-			The previous connection is disconnected.
-		*/
-		void establish_data_connection();
-
-		/*!
 			Forces the Attribute to point to the Data of another Attribute.
 
 			After this function, the caller Attribute is considered *entangled*
@@ -223,6 +216,15 @@ namespace Layers
 		const char* typeName() const;
 
 	private:
+		/*!
+			Connects the Data changed signal to emit value_changed().
+
+			The previous connection is disconnected.
+		*/
+		void establish_data_connection();
+
+		void establish_reentanglement_connection(Attribute& attribute);
+
 		Data* m_data{ nullptr };
 
 		QMetaObject::Connection m_data_connection;

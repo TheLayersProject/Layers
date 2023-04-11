@@ -59,8 +59,9 @@ Button::~Button()
 
 void Button::disable_graphic_hover_color(bool cond)
 {
-	if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
-	if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
+	// TODO:
+	//if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
+	//if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
 
 	m_use_graphic_hover_color = !cond;
 }
@@ -98,13 +99,13 @@ void Button::init()
 		m_graphic->set_icon(new Graphic(*m_graphic));
 		m_graphic->set_name("graphic");
 		m_graphic->set_proper_name("Graphic");
-	}
 
-	if (m_text_label)
-	{
-		m_text_label->set_name("text_label");
-		m_text_label->set_proper_name("Text Label");
-		m_text_label->setWordWrap(true);
+		m_graphic->svg()->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+			});
+
+		m_graphic->svg()->common_color()->set_state("Unselected");
 	}
 
 	if (m_graphic_after)
@@ -112,6 +113,20 @@ void Button::init()
 		m_graphic_after->set_name("graphic_after");
 		//m_graphic_after->set_proper_name("Graphic After");
 		m_graphic_after->hide();
+
+		m_graphic_after->svg()->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+			});
+
+		m_graphic_after->svg()->common_color()->set_state("Unselected");
+	}
+
+	if (m_text_label)
+	{
+		m_text_label->set_name("text_label");
+		m_text_label->set_proper_name("Text Label");
+		m_text_label->setWordWrap(true);
 	}
 
 	resize();
@@ -321,18 +336,28 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(true);
-			if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(true);
-			if (m_text_label && m_use_text_hover_color) m_text_label->set_hovering(true);
+			if (m_graphic)
+				m_graphic->svg()->common_color()->set_state("Selected");
+
+			if (m_graphic_after)
+				m_graphic_after->svg()->common_color()->set_state("Selected");
+
+			if (m_text_label && m_use_text_hover_color)
+				m_text_label->set_hovering(true);
 		}
 	}
 	else if (event->type() == QEvent::Leave)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic && m_use_graphic_hover_color) m_graphic->set_hovering(false);
-			if (m_graphic_after && m_use_graphic_hover_color) m_graphic_after->set_hovering(false);
-			if (m_text_label && m_use_text_hover_color) m_text_label->set_hovering(false);
+			if (m_graphic)
+				m_graphic->svg()->common_color()->set_state("Unselected");
+
+			if (m_graphic_after)
+				m_graphic_after->svg()->common_color()->set_state("Unselected");
+
+			if (m_text_label && m_use_text_hover_color)
+				m_text_label->set_hovering(false);
 		}
 	}
 
