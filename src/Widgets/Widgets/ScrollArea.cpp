@@ -16,16 +16,11 @@ ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 	m_scroll_area->setHorizontalScrollBar(m_horizontal_scrollbar);
 	m_scroll_area->setVerticalScrollBar(m_vertical_scrollbar);
 
-	m_control_horizontal_scrollbar->hide();
-	m_control_horizontal_scrollbar->set_name("horizontal_scrollbar");
-	m_control_horizontal_scrollbar->set_proper_name("Horizontal Scrollbar");
-	
-	m_control_vertical_scrollbar->hide();
-	m_control_vertical_scrollbar->set_name("vertical_scrollbar");
-	m_control_vertical_scrollbar->set_proper_name("Vertical Scrollbar");
-	
-	m_horizontal_scrollbar->entangle_with(m_control_horizontal_scrollbar);
-	m_vertical_scrollbar->entangle_with(m_control_vertical_scrollbar);
+	m_horizontal_scrollbar->set_name("horizontal_scrollbar");
+	m_horizontal_scrollbar->set_proper_name("Horizontal Scrollbar");
+
+	m_vertical_scrollbar->set_name("vertical_scrollbar");
+	m_vertical_scrollbar->set_proper_name("Vertical Scrollbar");
 }
 
 //ScrollArea::~ScrollArea()
@@ -46,6 +41,9 @@ ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 QList<Themeable*> ScrollArea::child_themeables(Qt::FindChildOptions options)
 {
 	QList<Themeable*> child_themeables = Themeable::child_themeables(options);
+
+	child_themeables.append(m_horizontal_scrollbar);
+	child_themeables.append(m_vertical_scrollbar);
 
 	if (Themeable* themeable_widget = dynamic_cast<Themeable*>(widget()))
 	{

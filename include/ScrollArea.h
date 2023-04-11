@@ -38,9 +38,6 @@ namespace Layers
 
 		QScrollArea* m_scroll_area{ new QScrollArea(this) };
 
-		ScrollBar* m_control_horizontal_scrollbar{ new ScrollBar(this) };
-		ScrollBar* m_control_vertical_scrollbar{ new ScrollBar(this) };
-
 		ScrollBar* m_horizontal_scrollbar{ new ScrollBar };
 		ScrollBar* m_vertical_scrollbar{ new ScrollBar };
 	};
