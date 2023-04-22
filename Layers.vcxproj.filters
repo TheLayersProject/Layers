@@ -219,6 +219,9 @@
     <ClCompile Include="src\Widgets\Widgets\Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\Widgets\Navigator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -422,6 +425,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Graphic.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Navigator.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

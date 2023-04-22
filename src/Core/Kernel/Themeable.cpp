@@ -136,22 +136,19 @@ void Themeable::establish_update_connection(AbstractAttribute* entity)
 		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
 		{
 			m_update_widget_connections.append(
-				widget->connect(attr, &Attribute::value_changed, [widget]
-					{ widget->update(); }
-			));
+				widget->connect(attr, &Attribute::value_changed,
+					[widget] { widget->update(); }));
 		}
 		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
 		{
 			m_update_widget_connections.append(
-				widget->connect(attr, &AttributeGroup::value_changed, [widget]
-					{ widget->update(); }
-			));
+				widget->connect(attr_group, &AttributeGroup::value_changed,
+					[widget] { widget->update(); }));
 
 			for (Attribute* attr : attr_group->attributes())
 				m_update_widget_connections.append(
-					widget->connect(attr, &Attribute::value_changed, [widget]
-						{ widget->update(); }
-				));
+					widget->connect(attr, &Attribute::value_changed,
+						[widget] { widget->update(); }));
 		}
 	}
 }

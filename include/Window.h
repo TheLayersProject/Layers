@@ -26,13 +26,9 @@ namespace Layers
 
 		virtual Themeable* clone() override;
 
-		void open_themeable_customization_widget(
-			WidgetEditor* themeable_customization_widget);
+		void edit_themeable(Themeable* themeable);
 
 		void set_main_menu(Menu* main_menu);
-
-		void set_theme_customization_menu_preview_widget(
-			QWidget* widget);
 
 		void update_theme_dependencies();
 
@@ -64,7 +60,7 @@ namespace Layers
 
 		SettingsMenu* m_settings_menu;
 
-		ThemeEditor* m_theme_customization_menu;
+		ThemeEditor* m_theme_editor;
 
 		Widget* m_main_widget{ nullptr };
 

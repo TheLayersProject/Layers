@@ -21,7 +21,10 @@ bool AbstractAttribute::disabled() const
 	return m_disabled;
 }
 
-QString AbstractAttribute::name() { return m_name; }
+QString AbstractAttribute::name()
+{
+	return m_name;
+}
 
 void AbstractAttribute::set_disabled(bool disabled)
 {

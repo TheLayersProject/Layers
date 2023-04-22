@@ -20,7 +20,7 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		WidgetEditor(Themeable* themeable, bool init_buttons = true, QWidget* parent = nullptr);
+		WidgetEditor(Themeable* themeable, QWidget* parent = nullptr);
 		~WidgetEditor();
 
 		void add_modifier_widget(AttributeEditor* attribute_widget);

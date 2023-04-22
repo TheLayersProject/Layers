@@ -20,7 +20,6 @@ namespace Layers
 	class ThemeCompatibilityCautionDialog;
 	class UpdateDialog;
 	class Version;
-	class WidgetEditor;
 	class Window;
 
 	class Application : public QApplication, public Themeable
@@ -63,8 +62,6 @@ namespace Layers
 			@returns pointer to current application theme
 		*/
 		Theme* current_theme() const;
-
-		WidgetEditor* customize_panel();
 
 		GradientDialog* gradient_dialog() const;
 

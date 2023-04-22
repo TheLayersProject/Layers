@@ -212,55 +212,6 @@ Theme* Application::current_theme() const
 	return m_current_theme;
 }
 
-WidgetEditor* Application::customize_panel()
-{
-	WidgetEditor* customize_panel = new WidgetEditor(this, false);
-
-	QList<WidgetButton*> dialog_widget_buttons = QList<WidgetButton*>();
-	QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
-
-	for (Themeable* child_themeable : child_themeables())
-	{
-		// Check if themeable has a proper name to determine that it is customizable
-		if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
-		{
-			WidgetButton* widget_button;
-
-			if (child_themeable->icon())
-				widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
-			else
-				widget_button = new WidgetButton(*child_themeable->proper_name());
-
-			QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
-				Themeable* cloned_themeable = child_themeable->clone();
-
-				if (QWidget* cloned_widget = dynamic_cast<QWidget*>(cloned_themeable))
-				{
-					static_cast<Window*>(QApplication::activeWindow()
-						)->set_theme_customization_menu_preview_widget(cloned_widget);
-
-					static_cast<Window*>(QApplication::activeWindow()
-						)->open_themeable_customization_widget(
-							new WidgetEditor(cloned_themeable));
-				}
-			});
-
-			if (dynamic_cast<Dialog*>(child_themeable))
-				dialog_widget_buttons.append(widget_button);
-
-			else if (dynamic_cast<Window*>(child_themeable))
-				window_widget_buttons.append(widget_button);
-		}
-	}
-
-	customize_panel->add_widget_button_group(new WidgetButtonGroup("Dialogs", dialog_widget_buttons));
-
-	if (window_widget_buttons.size() == 1)
-		customize_panel->add_widget_button(window_widget_buttons.first());
-
-	return customize_panel;
-}
-
 GradientDialog* Application::gradient_dialog() const
 {
 	return m_gradient_dialog;

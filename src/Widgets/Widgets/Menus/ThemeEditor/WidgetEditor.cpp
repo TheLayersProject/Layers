@@ -1,6 +1,7 @@
 #include "WidgetEditor.h"
 
 #include "calculate.h"
+#include "Dialog.h"
 #include "Menu.h"
 #include "Window.h"
 
@@ -20,14 +21,11 @@ using Layers::WidgetEditor;
 using Layers::Label;
 using Layers::Themeable;
 
-WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* parent) :
+WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
-	set_name("customize_panel");
-	//if (themeable->proper_name())
-	//	set_proper_name(*themeable->proper_name());
-	//else
+	set_name("widget_editor");
 	set_proper_name("Widget Editor");
 	setFixedWidth(300);
 
@@ -71,71 +69,108 @@ WidgetEditor::WidgetEditor(Themeable* themeable, bool init_buttons, QWidget* par
 		m_show_primary_button->hide();
 	});
 
-	if (m_themeable->child_themeables().isEmpty()) m_widgets_label->hide();
+	if (m_themeable->child_themeables().isEmpty())
+		m_widgets_label->hide();
 	else
 	{
-		if (init_buttons)
+		QMap<QString, QWidget*> organized_widgets = QMap<QString, QWidget*>();
+
+		QList<WidgetButton*> button_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> dialog_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
+
+		for (Themeable* child_themeable : m_themeable->child_themeables())
 		{
-			QMap<QString, QWidget*> organized_widgets = QMap<QString, QWidget*>();
+			/*qDebug() << child_themeable->tag();
 
-			QList<WidgetButton*> button_widget_buttons = QList<WidgetButton*>();
-			QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
-			QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
-
-			for (Themeable* child_themeable : m_themeable->child_themeables())
+			if (QObject* child_object = dynamic_cast<QObject*>(child_themeable))
 			{
-				// Check if themeable has a proper name to determine that it is customizable
-				if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
+				QStringList child_hierarchy;
+
+				const QMetaObject* meta_object = child_object->metaObject();
+
+				while (meta_object)
 				{
-					WidgetButton* widget_button;
+					QString class_name = QString(meta_object->className());
 
-					if (child_themeable->icon())
-						widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
-					else
-						widget_button = new WidgetButton(*child_themeable->proper_name());
+					if (class_name != "QObject" && class_name != "QWidget")
+						child_hierarchy.append(class_name);
 
-					QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
-						static_cast<Window*>(QApplication::activeWindow()
-							)->open_themeable_customization_widget(
-								new WidgetEditor(child_themeable));
-						});
-
-					if (dynamic_cast<Button*>(child_themeable))
-						button_widget_buttons.append(widget_button);
-
-					else if (dynamic_cast<Label*>(child_themeable))
-						label_widget_buttons.append(widget_button);
-
-					else if (dynamic_cast<Menu*>(child_themeable))
-						menu_widget_buttons.append(widget_button);
-
-					else
-						organized_widgets[widget_button->label_text()] = widget_button;
+					meta_object = meta_object->superClass();
 				}
-			}
 
-			if (button_widget_buttons.size() == 1)
-				organized_widgets[button_widget_buttons.first()->label_text()] = button_widget_buttons.first();
-			else if (!button_widget_buttons.isEmpty())
-				organized_widgets["Buttons"] = new WidgetButtonGroup("Buttons", button_widget_buttons);
+				qDebug() << child_hierarchy;
+				qDebug() << "";
+			}*/
 
-			if (label_widget_buttons.size() == 1)
-				organized_widgets[label_widget_buttons.first()->label_text()] = label_widget_buttons.first();
-			else if (!label_widget_buttons.isEmpty())
-				organized_widgets["Labels"] = new WidgetButtonGroup("Labels", label_widget_buttons);
-
-			if (menu_widget_buttons.size() == 1)
-				organized_widgets[menu_widget_buttons.first()->label_text()] = menu_widget_buttons.first();
-			else if (!menu_widget_buttons.isEmpty())
-				organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
-
-			for (QWidget* widget : organized_widgets)
+			// Check if themeable has a proper name to determine that it is customizable
+			if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
 			{
-				if (WidgetButton* widget_button = dynamic_cast<WidgetButton*>(widget))
-					add_widget_button(widget_button);
-				else if (WidgetButtonGroup* widget_button_group = dynamic_cast<WidgetButtonGroup*>(widget))
-					add_widget_button_group(widget_button_group);
+				WidgetButton* widget_button;
+
+				if (child_themeable->icon())
+					widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
+				else
+					widget_button = new WidgetButton(*child_themeable->proper_name());
+
+				QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
+					static_cast<Window*>(QApplication::activeWindow()
+						)->edit_themeable(child_themeable);
+					});
+
+				if (dynamic_cast<Button*>(child_themeable))
+					button_widget_buttons.append(widget_button);
+
+				else if (dynamic_cast<Dialog*>(child_themeable))
+					dialog_widget_buttons.append(widget_button);
+
+				else if (dynamic_cast<Label*>(child_themeable))
+					label_widget_buttons.append(widget_button);
+
+				else if (dynamic_cast<Menu*>(child_themeable))
+					menu_widget_buttons.append(widget_button);
+
+				else if (dynamic_cast<Window*>(child_themeable))
+					window_widget_buttons.append(widget_button);
+
+				else
+					organized_widgets[widget_button->label_text()] = widget_button;
 			}
+		}
+
+		if (button_widget_buttons.size() == 1)
+			organized_widgets[button_widget_buttons.first()->label_text()] = button_widget_buttons.first();
+		else if (!button_widget_buttons.isEmpty())
+			organized_widgets["Buttons"] = new WidgetButtonGroup("Buttons", button_widget_buttons);
+
+		if (dialog_widget_buttons.size() == 1)
+			organized_widgets[dialog_widget_buttons.first()->label_text()] = dialog_widget_buttons.first();
+		else if (!dialog_widget_buttons.isEmpty())
+			organized_widgets["Dialogs"] = new WidgetButtonGroup("Dialogs", dialog_widget_buttons);
+
+		if (label_widget_buttons.size() == 1)
+			organized_widgets[label_widget_buttons.first()->label_text()] = label_widget_buttons.first();
+		else if (!label_widget_buttons.isEmpty())
+			organized_widgets["Labels"] = new WidgetButtonGroup("Labels", label_widget_buttons);
+
+		if (menu_widget_buttons.size() == 1)
+			organized_widgets[menu_widget_buttons.first()->label_text()] = menu_widget_buttons.first();
+		else if (!menu_widget_buttons.isEmpty())
+			organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
+
+		if (window_widget_buttons.size() == 1)
+			organized_widgets[window_widget_buttons.first()->label_text()] = window_widget_buttons.first();
+		else if (!window_widget_buttons.isEmpty())
+			organized_widgets["Windows"] = new WidgetButtonGroup("Windows", window_widget_buttons);
+
+		for (QWidget* widget : organized_widgets)
+		{
+			if (WidgetButton* widget_button = dynamic_cast<WidgetButton*>(widget))
+				add_widget_button(widget_button);
+			else if (WidgetButtonGroup* widget_button_group = dynamic_cast<WidgetButtonGroup*>(widget))
+				add_widget_button_group(widget_button_group);
 		}
 	}
 

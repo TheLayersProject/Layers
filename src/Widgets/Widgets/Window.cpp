@@ -30,7 +30,7 @@ using Layers::Window;
 Window::Window(bool preview, QWidget* parent) :
 	m_preview{ preview },
 	m_settings_menu{ new SettingsMenu },
-	m_theme_customization_menu{ new ThemeEditor },
+	m_theme_editor{ new ThemeEditor },
 	m_titlebar{ new Titlebar },
 	Widget(parent)
 {
@@ -67,8 +67,8 @@ Window::Window(bool preview, QWidget* parent) :
 	m_settings_menu->fill()->set_disabled();
 	m_settings_menu->hide();
 
-	m_theme_customization_menu->fill()->set_disabled();
-	m_theme_customization_menu->hide();
+	m_theme_editor->fill()->set_disabled();
+	m_theme_editor->hide();
 
 	m_separator->fill()->set_value(QColor("#25272b"));
 	m_separator->setFixedHeight(3);
@@ -86,9 +86,9 @@ Window::Window(bool preview, QWidget* parent) :
 		Widget* preview_widget = new Widget;
 		preview_widget->set_name("preview_widget");
 		preview_widget->set_proper_name("Preview Widget");
-		m_theme_customization_menu->set_preview_widget(preview_widget);
-		m_theme_customization_menu->open_customize_panel(
-			new WidgetEditor(preview_widget));
+		m_theme_editor->set_preview_widget(preview_widget);
+		m_theme_editor->edit_themeable(
+			preview_widget);
 	}
 	else
 		layersApp->add_child_themeable_pointer(*this);
@@ -124,11 +124,9 @@ Menu* Window::app_menu() const
 	return m_app_menu;
 }
 
-void Window::open_themeable_customization_widget(
-	WidgetEditor* themeable_customization_widget)
+void Window::edit_themeable(Themeable* themeable)
 {
-	m_theme_customization_menu->open_customize_panel(
-		themeable_customization_widget);
+	m_theme_editor->edit_themeable(themeable);
 }
 
 void Window::set_main_menu(Menu* main_menu)
@@ -149,11 +147,6 @@ void Window::set_main_menu(Menu* main_menu)
 	m_main_layout->addWidget(m_app_menu);
 }
 
-void Window::set_theme_customization_menu_preview_widget(QWidget* widget)
-{
-	m_theme_customization_menu->set_preview_widget(widget);
-}
-
 void Window::center_dialog(QDialog* dialog)
 {
 	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
@@ -171,7 +164,7 @@ Themeable* Window::clone()
 
 //ThemeEditor* Window::customize_menu() const
 //{
-//	return m_theme_customization_menu;
+//	return m_theme_editor;
 //}
 
 void Window::update_theme_dependencies()
@@ -226,18 +219,10 @@ void Window::open_menu(Menu* menu)
 
 void Window::customize_clicked()
 {
-	//if (m_theme_customization_menu->panels().isEmpty())
-	if (!m_theme_customization_menu->preview_widget())
-		m_theme_customization_menu->open_customize_panel(
-			layersApp->customize_panel());
-	//else if (Themeable* preview_themeable =
-	//	dynamic_cast<Themeable*>(m_theme_customization_menu->preview_widget()))
-	//{
-	//	m_theme_customization_menu->open_customize_panel(
-	//		new WidgetEditor(preview_themeable));
-	//}
+	if (!m_theme_editor->preview_widget())
+		m_theme_editor->edit_themeable(layersApp);
 	
-	open_menu(m_theme_customization_menu);
+	open_menu(m_theme_editor);
 }
 
 void Window::exit_clicked()
@@ -624,7 +609,7 @@ void Window::setup_layout()
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_separator);
 	m_main_layout->addWidget(m_settings_menu);
-	m_main_layout->addWidget(m_theme_customization_menu);
+	m_main_layout->addWidget(m_theme_editor);
 
 	setLayout(m_main_layout);
 }

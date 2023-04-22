@@ -1420,7 +1420,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu": {
+    "window/theme_editor": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1477,7 +1477,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/preview_scroll_area": {
+    "window/theme_editor/preview_scroll_area": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1534,7 +1534,7 @@
             "value": "#a0a0a4"
         }
     },
-    "window/customize_menu/preview_scroll_area/horizontal_scrollbar": {
+    "window/theme_editor/preview_scroll_area/horizontal_scrollbar": {
         "background_color": {
             "value": "#2e2e2e"
         },
@@ -1570,7 +1570,7 @@
             }
         }
     },
-    "window/customize_menu/preview_scroll_area/vertical_scrollbar": {
+    "window/theme_editor/preview_scroll_area/vertical_scrollbar": {
         "background_color": {
             "value": "#2e2e2e"
         },
@@ -1606,7 +1606,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar": {
+    "window/theme_editor/sidebar": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1661,7 +1661,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel": {
+    "window/theme_editor/sidebar/widget_editor": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1718,7 +1718,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/attributes_label": {
+    "window/theme_editor/sidebar/widget_editor/attributes_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -1735,7 +1735,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group": {
+    "window/theme_editor/sidebar/widget_editor/aw_group": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1790,7 +1790,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/collapse_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -1847,7 +1847,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic/svg": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/collapse_button/graphic/svg": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -1857,7 +1857,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/collapse_button/graphic_after": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/collapse_button/graphic_after": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -1867,7 +1867,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/label": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -1884,7 +1884,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/toggle_switch": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/toggle_switch": {
         "border": {
             "fill": {
                 "value": {
@@ -1947,7 +1947,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/aw_group/toggle_switch/square": {
+    "window/theme_editor/sidebar/widget_editor/aw_group/toggle_switch/square": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2007,7 +2007,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/color_aw": {
+    "window/theme_editor/sidebar/widget_editor/color_aw": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2062,7 +2062,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/color_aw/label": {
+    "window/theme_editor/sidebar/widget_editor/color_aw/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -2079,7 +2079,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/color_aw/toggle_switch": {
+    "window/theme_editor/sidebar/widget_editor/color_aw/toggle_switch": {
         "border": {
             "fill": {
                 "value": {
@@ -2142,7 +2142,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/color_aw/toggle_switch/square": {
+    "window/theme_editor/sidebar/widget_editor/color_aw/toggle_switch/square": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2202,7 +2202,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2257,7 +2257,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw": {
         "border": {
             "fill": {
                 "value": "#a0a0a4"
@@ -2311,7 +2311,7 @@
             "value": "#a0a0a4"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw/example_widget": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw/example_widget": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2352,7 +2352,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw/line_editor": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw/line_editor": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2409,7 +2409,7 @@
             "value": "#6a6a6a"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw/mini_slider": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw/mini_slider": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2464,7 +2464,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw/mini_slider/bar": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw/mini_slider/bar": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2518,7 +2518,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/aw/mini_slider/handle": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/aw/mini_slider/handle": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2573,7 +2573,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/collapse_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2630,7 +2630,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic/svg": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/collapse_button/graphic/svg": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -2640,7 +2640,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/collapse_button/graphic_after": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/collapse_button/graphic_after": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -2650,7 +2650,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/label": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -2667,7 +2667,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/toggle_switch": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/toggle_switch": {
         "border": {
             "fill": {
                 "value": {
@@ -2730,7 +2730,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/corner_radii_aw_group/toggle_switch/square": {
+    "window/theme_editor/sidebar/widget_editor/corner_radii_aw_group/toggle_switch/square": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2790,7 +2790,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2845,7 +2845,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control": {
         "border": {
             "fill": {
                 "value": "#d6d6d6"
@@ -2895,7 +2895,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control/dialog": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control/dialog": {
         "border": {
             "disabled": true,
             "fill": {
@@ -2950,7 +2950,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control/dialog/color_label": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control/dialog/color_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -2967,7 +2967,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control/dialog/gradient_label": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control/dialog/gradient_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -2984,7 +2984,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control/dialog/vertical_toggle_switch": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control/dialog/vertical_toggle_switch": {
         "border": {
             "fill": {
                 "value": {
@@ -3047,7 +3047,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/fill_control/dialog/vertical_toggle_switch/square": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/fill_control/dialog/vertical_toggle_switch/square": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3107,7 +3107,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/label": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3124,7 +3124,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/toggle_switch": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/toggle_switch": {
         "border": {
             "fill": {
                 "value": {
@@ -3187,7 +3187,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/fill_aw/toggle_switch/square": {
+    "window/theme_editor/sidebar/widget_editor/fill_aw/toggle_switch/square": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3247,7 +3247,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw": {
+    "window/theme_editor/sidebar/widget_editor/number_aw": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3302,7 +3302,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw/label": {
+    "window/theme_editor/sidebar/widget_editor/number_aw/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3319,7 +3319,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw/line_editor": {
+    "window/theme_editor/sidebar/widget_editor/number_aw/line_editor": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3376,7 +3376,7 @@
             "value": "#6a6a6a"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw/mini_slider": {
+    "window/theme_editor/sidebar/widget_editor/number_aw/mini_slider": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3430,7 +3430,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw/mini_slider/bar": {
+    "window/theme_editor/sidebar/widget_editor/number_aw/mini_slider/bar": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3484,7 +3484,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/number_aw/mini_slider/handle": {
+    "window/theme_editor/sidebar/widget_editor/number_aw/mini_slider/handle": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3539,7 +3539,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/show_all_button": {
+    "window/theme_editor/sidebar/widget_editor/show_all_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3592,7 +3592,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/show_all_button/text_label": {
+    "window/theme_editor/sidebar/widget_editor/show_all_button/text_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3609,7 +3609,7 @@
             "value": "#6aaaf7"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/show_primary_button": {
+    "window/theme_editor/sidebar/widget_editor/show_primary_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3662,7 +3662,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/show_primary_button/text_label": {
+    "window/theme_editor/sidebar/widget_editor/show_primary_button/text_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3679,7 +3679,7 @@
             "value": "#f8f8f8"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw": {
+    "window/theme_editor/sidebar/widget_editor/state_aw": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3734,7 +3734,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/label": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3751,7 +3751,7 @@
             "value": "#2e2e2e"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/state_combobox": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/state_combobox": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3806,7 +3806,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/state_combobox/current_item_label": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/state_combobox/current_item_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3823,7 +3823,7 @@
             "value": "#6a6a6a"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/state_combobox/drop_down": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3880,7 +3880,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/state_combobox/drop_down/combobox_item": {
         "border": {
             "disabled": true,
             "fill": {
@@ -3962,7 +3962,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/state_aw/state_combobox/drop_down/combobox_item/label": {
+    "window/theme_editor/sidebar/widget_editor/state_aw/state_combobox/drop_down/combobox_item/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -3979,7 +3979,7 @@
             "value": "#f0f0f0"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button": {
+    "window/theme_editor/sidebar/widget_editor/widget_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4034,7 +4034,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button/icon/svg": {
+    "window/theme_editor/sidebar/widget_editor/widget_button/icon/svg": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -4044,7 +4044,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button/label": {
+    "window/theme_editor/sidebar/widget_editor/widget_button/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -4060,7 +4060,7 @@
             "value": "#e1e1e1"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group": {
+    "window/theme_editor/sidebar/widget_editor/widget_button_group": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4115,7 +4115,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button": {
+    "window/theme_editor/sidebar/widget_editor/widget_button_group/collapse_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4172,7 +4172,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic/svg": {
+    "window/theme_editor/sidebar/widget_editor/widget_button_group/collapse_button/graphic/svg": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -4182,7 +4182,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/collapse_button/graphic_after": {
+    "window/theme_editor/sidebar/widget_editor/widget_button_group/collapse_button/graphic_after": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -4192,7 +4192,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widget_button_group/label": {
+    "window/theme_editor/sidebar/widget_editor/widget_button_group/label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -4208,7 +4208,7 @@
             "value": "#e1e1e1"
         }
     },
-    "window/customize_menu/sidebar/customize_panel/widgets_label": {
+    "window/theme_editor/sidebar/widget_editor/widgets_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -4225,7 +4225,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/sidebar/horizontal_scrollbar": {
+    "window/theme_editor/sidebar/horizontal_scrollbar": {
         "background_color": {
             "value": "#a0a0a4"
         },
@@ -4261,7 +4261,7 @@
             }
         }
     },
-    "window/customize_menu/sidebar/vertical_scrollbar": {
+    "window/theme_editor/sidebar/vertical_scrollbar": {
         "background_color": {
             "value": "#6a6a6a"
         },
@@ -4297,7 +4297,7 @@
             }
         }
     },
-    "window/customize_menu/topbar": {
+    "window/theme_editor/topbar": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4352,7 +4352,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/apply_button": {
+    "window/theme_editor/topbar/apply_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4405,7 +4405,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/apply_button/text_label": {
+    "window/theme_editor/topbar/apply_button/text_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -4422,12 +4422,12 @@
             "value": "#6aaaf7"
         }
     },
-    "window/customize_menu/topbar/arrow_graphic/svg": {
+    "window/theme_editor/topbar/navigator/arrow_graphic/svg": {
         "common_color": {
             "value": "#2e2e2e"
         }
     },
-    "window/customize_menu/topbar/collapse_menu": {
+    "window/theme_editor/topbar/navigator/collapse_menu": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4482,7 +4482,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/collapse_menu_button": {
+    "window/theme_editor/topbar/navigator/collapse_menu_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4536,7 +4536,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/collapse_menu_button/graphic/svg": {
+    "window/theme_editor/topbar/navigator/collapse_menu_button/graphic/svg": {
         "common_color": {
             "value": {
                 "state_value_pairs": {
@@ -4546,7 +4546,7 @@
             }
         }
     },
-    "window/customize_menu/topbar/text_button": {
+    "window/theme_editor/topbar/navigator/text_button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -4603,7 +4603,7 @@
             "value": "#000000"
         }
     },
-    "window/customize_menu/topbar/text_button/text_label": {
+    "window/theme_editor/topbar/navigator/text_button/text_label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
