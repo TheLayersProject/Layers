@@ -16,6 +16,30 @@ Data::Data(VariantMap variant_map) :
 		connect(&variant, &Variant::changed, [this] { emit changed(); });
 }
 
+Data::Data(QJsonObject json_object)
+{
+	if (json_object.contains("value"))
+	{
+		m_variant = new Variant(json_object.value("value"));
+
+		connect(m_variant, &Variant::changed, [this] { emit changed(); });
+	}
+	else if (json_object.contains("values"))
+	{
+		QJsonObject values_object = json_object.value("values").toObject();
+
+		m_variant_map = new VariantMap;
+
+		for (const QString& state : values_object.keys())
+		{
+			(*m_variant_map)[state] = Variant(values_object.value(state));
+
+			connect(&(*m_variant_map)[state], &Variant::changed,
+				[this] { emit changed(); });
+		}
+	}
+}
+
 Data::Data(const Data& d)
 {
 	if (d.m_variant)
@@ -142,116 +166,16 @@ QJsonObject Data::to_json_object()
 
 	if (is_multi_valued())
 	{
-		QJsonObject value_json_object;
-
-		QJsonObject state_value_pairs_json_object;
+		QJsonObject values_json_object;
 
 		for (const QString& state : m_variant_map->keys())
-		{
-			QJsonValue insert_value;
+			values_json_object.insert(
+				state, (*m_variant_map)[state].to_json_value());
 
-			Variant& variant = (*m_variant_map)[state];
-
-			if (QString(variant.typeName()) == "bool")
-				insert_value = QJsonValue(variant.value<bool>());
-
-			else if (QString(variant.typeName()) == "double")
-				insert_value = QJsonValue(variant.value<double>());
-
-			else if (QString(variant.typeName()) == "QString")
-				insert_value = QJsonValue(variant.value<QString>());
-
-			else if (QString(variant.typeName()) == "QColor")
-			{
-				QColor color = variant.value<QColor>();
-
-				if (color.alpha() == 255)
-					insert_value = QJsonValue(variant.value<QColor>().name());
-				else
-					insert_value = QJsonValue(variant.value<QColor>().name(QColor::HexArgb));
-			}
-
-			else if (QString(variant.typeName()) == "QList<std::pair<double,QColor>>")
-			{
-				QJsonObject gradient_wrapper_json_object;
-
-				QJsonObject gradient_json_object;
-
-				QGradientStops gradient_stops = variant.value<QGradientStops>();
-
-				int stop_counter = 1;
-
-				for (const QGradientStop& gradient_stop : gradient_stops)
-				{
-					QJsonObject gradient_stop_json_object;
-
-					gradient_stop_json_object.insert("point", gradient_stop.first);
-					gradient_stop_json_object.insert("color", gradient_stop.second.name());
-
-					gradient_json_object.insert(QString("stop-") + QString::number(stop_counter++), gradient_stop_json_object);
-				}
-
-				gradient_wrapper_json_object.insert("gradient", gradient_json_object);
-
-				insert_value = gradient_wrapper_json_object;
-			}
-
-			state_value_pairs_json_object.insert(state, insert_value);
-		}
-
-		value_json_object.insert("state_value_pairs", state_value_pairs_json_object);
-
-		json_object.insert("value", value_json_object);
+		json_object.insert("values", values_json_object);
 	}
 	else
-	{
-		QJsonValue insert_value;
-
-		if (QString(m_variant->typeName()) == "bool")
-			insert_value = QJsonValue(m_variant->value<bool>());
-
-		else if (QString(m_variant->typeName()) == "double")
-			insert_value = QJsonValue(m_variant->value<double>());
-
-		else if (QString(m_variant->typeName()) == "QString")
-			insert_value = QJsonValue(m_variant->value<QString>());
-
-		else if (QString(m_variant->typeName()) == "QColor")
-		{
-			QColor color = m_variant->value<QColor>();
-
-			if (color.alpha() == 255)
-				insert_value = QJsonValue(m_variant->value<QColor>().name());
-			else
-				insert_value = QJsonValue(m_variant->value<QColor>().name(QColor::HexArgb));
-		}
-		else if (QString(m_variant->typeName()) == "QList<std::pair<double,QColor>>")
-		{
-			QJsonObject gradient_wrapper_json_object;
-
-			QJsonObject gradient_json_object;
-
-			QGradientStops gradient_stops = m_variant->value<QGradientStops>();
-
-			int stop_counter = 1;
-
-			for (const QGradientStop& gradient_stop : gradient_stops)
-			{
-				QJsonObject gradient_stop_json_object;
-
-				gradient_stop_json_object.insert("point", gradient_stop.first);
-				gradient_stop_json_object.insert("color", gradient_stop.second.name());
-
-				gradient_json_object.insert(QString("stop-") + QString::number(stop_counter++), gradient_stop_json_object);
-			}
-
-			gradient_wrapper_json_object.insert("gradient", gradient_json_object);
-
-			insert_value = gradient_wrapper_json_object;
-		}
-
-		json_object.insert("value", insert_value);
-	}
+		json_object.insert("value", m_variant->to_json_value());
 
 	return json_object;
 }

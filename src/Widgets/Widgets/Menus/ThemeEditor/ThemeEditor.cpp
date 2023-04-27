@@ -20,6 +20,9 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	set_name("theme_editor");
 	set_proper_name("Theme Editor");
 
+	m_control_widget_editor = new WidgetEditor(m_control_themeable, this, m_sidebar);
+	m_control_widget_editor->set_proper_name("Widget Editor");
+
 	m_topbar->setFixedHeight(45);
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
@@ -104,7 +107,7 @@ void ThemeEditor::edit_themeable(Themeable* themeable)
 			set_preview_widget(cloned_widget);
 	}
 	
-	WidgetEditor* widget_editor = new WidgetEditor(themeable);
+	WidgetEditor* widget_editor = new WidgetEditor(themeable, this);
 
 	if (m_sidebar->widget())
 		m_sidebar->takeWidget()->deleteLater();
@@ -112,10 +115,7 @@ void ThemeEditor::edit_themeable(Themeable* themeable)
 	m_sidebar->setWidget(widget_editor);
 	m_sidebar->setFixedWidth(widget_editor->width());
 
-	QStringList widget_editor_prefixes = m_sidebar->tag_prefixes();
-	widget_editor_prefixes.append(*m_sidebar->name());
-	widget_editor->assign_tag_prefixes(widget_editor_prefixes);
-	widget_editor->apply_theme(*layersApp->current_theme());
+	widget_editor->entangle_with(m_control_widget_editor);
 
 	if (!m_open_themeables.contains(themeable))
 	{

@@ -10,7 +10,8 @@ AttributeEditorGroup::AttributeEditorGroup(AttributeGroup* attr_group, QWidget* 
 	init_attributes();
 
 	//exclude_from_prefixes();
-	set_name("aw_group");
+	set_name("group_editor");
+	set_proper_name("Editor Group");
 
 	if (attr_group)
 		m_label->setText(attr_group->capitalized_name());

@@ -84,6 +84,7 @@ namespace Layers
 		Attribute(const QString& name, bool disabled = false);
 		Attribute(const QString& name, Variant variant, bool disabled = false);
 		Attribute(const QString& name, VariantMap variant_map, bool disabled = false);
+		Attribute(const QString& name, QJsonObject json_object, bool disabled = false);
 		Attribute(const Attribute& a);
 		~Attribute();
 

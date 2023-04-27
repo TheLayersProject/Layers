@@ -9,8 +9,6 @@ AttributeEditor::AttributeEditor(AbstractAttribute* entity, QWidget* parent) :
 {
 	init_attributes();
 
-	set_name("attribute_widget");
-
 	// Setup Disabling Attribute Toggle
 	m_disabled_toggle->set_proper_name("Disable Toggle");
 

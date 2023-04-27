@@ -61,6 +61,7 @@ void WidgetButton::init()
 	init_layout();
 
 	set_name("widget_button");
+	set_proper_name("Widget Button");
 	setMinimumHeight(45);
 
 	if (m_icon)

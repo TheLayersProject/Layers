@@ -12,6 +12,8 @@
 
 namespace Layers
 {
+	class WidgetEditor;
+
 	class ThemeEditor : public Menu
 	{
 		Q_OBJECT
@@ -35,6 +37,10 @@ namespace Layers
 
 	private:
 		void init_layout();
+
+		Themeable* m_control_themeable{ new Themeable };
+
+		WidgetEditor* m_control_widget_editor{ nullptr };
 
 		Navigator* m_navigator{ new Navigator };
 

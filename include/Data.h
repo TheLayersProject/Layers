@@ -72,6 +72,7 @@ namespace Layers
 	public:
 		Data(Variant variant);
 		Data(VariantMap variant_map);
+		Data(QJsonObject json_object);
 		Data(const Data& d);
 		~Data();
 

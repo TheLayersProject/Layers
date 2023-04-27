@@ -8,9 +8,11 @@
 
 using Layers::AbstractAttribute;
 using Layers::Attribute;
+using Layers::AttributeGroup;
 using Layers::Theme;
 using Layers::Themeable;
 using Layers::ThemeLineageData;
+using Layers::Variant;
 
 Theme::Theme()
 {
@@ -230,101 +232,6 @@ QString Theme::identifier()
 		return m_name;
 }
 
-Attribute* Theme::init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value)
-{
-	if (attr_value.isObject())
-	{
-		QJsonObject attr_value_object = attr_value.toObject();
-
-		if (attr_value_object.contains("state_value_pairs")) // Is Stateful
-		{
-			QMap<QString, Variant> state_variant_map;
-
-			QJsonObject state_value_pairs_object = attr_value_object.value("state_value_pairs").toObject();
-
-			for (const QString& state : state_value_pairs_object.keys())
-			{
-				QJsonValue state_value = state_value_pairs_object.value(state);
-
-				if (state_value.isBool())
-					state_variant_map[state] = Variant(state_value.toBool());
-
-				else if (state_value.isDouble())
-					// TODO: Below implicitly converts double to int when constructing Variant!
-					state_variant_map[state] = Variant(state_value.toDouble());
-
-				else if (state_value.isString())
-				{
-					QString state_value_str = state_value.toString();
-
-					if (state_value_str.startsWith("#"))
-						state_variant_map[state] = Variant(QColor(state_value_str));
-				}
-				else if (state_value.isObject())
-				{
-					QJsonObject state_value_object = state_value.toObject();
-
-					if (state_value_object.contains("gradient"))
-					{
-						QJsonObject gradient_object = state_value_object.value("gradient").toObject();
-
-						QGradientStops gradient_stops;
-
-						for (const QJsonValue& stop : gradient_object)
-						{
-							QJsonObject stop_object = stop.toObject();
-
-							gradient_stops.append(
-								QGradientStop(
-									stop_object.value("point").toDouble(),
-									stop_object.value("color").toString()
-								)
-							);
-						}
-
-						state_variant_map[state] = Variant(QVariant::fromValue(gradient_stops));
-					}
-				}
-			}
-
-			return new Attribute(name, state_variant_map, disabled);
-		}
-		else if (attr_value_object.contains("gradient"))
-		{
-			QJsonObject gradient_object = attr_value_object.value("gradient").toObject();
-
-			QGradientStops gradient_stops;
-
-			for (const QJsonValue& stop : gradient_object)
-			{
-				QJsonObject stop_object = stop.toObject();
-
-				gradient_stops.append(
-					QGradientStop(
-						stop_object.value("point").toDouble(),
-						stop_object.value("color").toString()
-					)
-				);
-			}
-
-			return new Attribute(name, QVariant::fromValue(gradient_stops), disabled);
-		}
-	}
-	else if (attr_value.isBool())
-		return new Attribute(name, QVariant::fromValue(attr_value.toBool()), disabled);
-
-	else if (attr_value.isDouble())
-		return new Attribute(name, QVariant::fromValue(attr_value.toDouble()), disabled);
-
-	else if (attr_value.isString())
-	{
-		QString value_str = attr_value.toString();
-
-		if (value_str.startsWith("#"))
-			return new Attribute(name, QVariant::fromValue(QColor(value_str)), disabled);
-	}
-}
-
 QStringList Theme::lineage() const
 {
 	return m_lineage;
@@ -360,61 +267,57 @@ void Theme::load_document(const QJsonDocument& json_document, const ThemeDataTyp
 {
 	QJsonObject json_object = json_document.object();
 
-	for (const QString& themeable_tag : json_object.keys())
+	for (const QString& tag : json_object.keys())
 	{
-		QJsonObject themeable_object = json_object.value(themeable_tag).toObject();
+		QJsonObject themeable_object = json_object.value(tag).toObject();
 
 		AttributeMap themeable_attributes;
 
-		for (const QString& entity_key : themeable_object.keys())
+		for (const QString& attr_key : themeable_object.keys())
 		{
-			QJsonObject entity_object = themeable_object.value(entity_key).toObject();
+			QJsonObject attr_object = themeable_object.value(attr_key).toObject();
 
-			QString entity_name = entity_key;
-			bool entity_disabled = false;
+			QString name = attr_key;
+			bool disabled = false;
 
-			if (entity_object.contains("disabled"))
+			if (attr_object.contains("disabled"))
 			{
-				if (entity_object.value("disabled").toBool())
-					entity_disabled = true;
+				if (attr_object.value("disabled").toBool())
+					disabled = true;
 
-				entity_object.remove("disabled");
+				attr_object.remove("disabled");
 			}
 
 			// If entity_object contains key 'value', then it is an attribute, not a group
-			if (entity_object.contains("value"))
+			if (attr_object.contains("value") || attr_object.contains("values"))
 			{
-				themeable_attributes[entity_key] =
-					init_attribute(
-						entity_name, entity_disabled,
-						entity_object.value("value"));
+				themeable_attributes[attr_key] =
+					new Attribute(name, attr_object, disabled);
 			}
 			else // entity_object is a group...
 			{
 				QMap<QString, Attribute*> group_attributes;
 
-				for (const QString& group_attr_key : entity_object.keys())
+				for (const QString& group_attr_key : attr_object.keys())
 				{
-					QJsonObject group_attr_object = entity_object.value(group_attr_key).toObject();
+					QJsonObject group_attr_object = attr_object.value(group_attr_key).toObject();
 
 					group_attributes[group_attr_key] =
-						init_attribute(
-							group_attr_key, false,
-							group_attr_object.value("value"));
+						new Attribute(group_attr_key, group_attr_object);
 				}
 
-				AttributeGroup* attr_group = new AttributeGroup(entity_name, entity_disabled);
+				AttributeGroup* attr_group = new AttributeGroup(name, disabled);
 
 				attr_group->attributes() = group_attributes;
 
-				themeable_attributes[entity_key] = attr_group;
+				themeable_attributes[attr_key] = attr_group;
 			}
 		}
 
 		if (data_type == ThemeDataType::Application)
-			m_data_for_app_themeables[themeable_tag] = themeable_attributes;
+			m_data_for_app_themeables[tag] = themeable_attributes;
 		else if (data_type == ThemeDataType::Layers)
-			m_data_for_layers_themeables[themeable_tag] = themeable_attributes;
+			m_data_for_layers_themeables[tag] = themeable_attributes;
 	}
 }
 

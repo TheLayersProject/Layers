@@ -5,16 +5,19 @@
 using Layers::CornerRadiiEditor;
 using Layers::MiniSlider;
 using Layers::Theme;
+using Layers::Themeable;
 
 CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii, QWidget* parent) :
 	m_attribute_widget{ new AttributeEditor },
 	AttributeEditorGroup(linked_corner_radii, parent)
 {
 	add_modifier_widget(m_attribute_widget);
-	set_name("corner_radii_aw_group");
+	set_name("corner_radii_editor");
+	set_proper_name("Corner Radii Editor");
 
 	m_attribute_widget->fill()->set_disabled();
-	m_attribute_widget->set_name("aw");
+	m_attribute_widget->set_name("editor");
+	m_attribute_widget->set_proper_name("Editor");
 
 	QIntValidator validator = QIntValidator(0, 30);
 
@@ -26,20 +29,23 @@ CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii,
 	{
 		line_editor->set_default_value("0");
 		line_editor->set_font_size(13);
-		line_editor->set_name("line_editor");
 		line_editor->set_text("0");
 		line_editor->set_validator(&validator);
 	}
 
+	m_tl_line_editor->set_name("tl_line_editor");
+	m_tr_line_editor->set_name("tr_line_editor");
+	m_bl_line_editor->set_name("bl_line_editor");
+	m_br_line_editor->set_name("br_line_editor");
 	m_tl_line_editor->set_proper_name("TL Line Editor");
 	m_tr_line_editor->set_proper_name("TR Line Editor");
 	m_bl_line_editor->set_proper_name("BL Line Editor");
 	m_br_line_editor->set_proper_name("BR Line Editor");
 
-	m_tl_slider->set_name("mini_slider");
-	m_tr_slider->set_name("mini_slider");
-	m_bl_slider->set_name("mini_slider");
-	m_br_slider->set_name("mini_slider");
+	m_tl_slider->set_name("tl_slider");
+	m_tr_slider->set_name("tr_slider");
+	m_bl_slider->set_name("bl_slider");
+	m_br_slider->set_name("br_slider");
 	m_tl_slider->set_proper_name("TL Slider");
 	m_tr_slider->set_proper_name("TR Slider");
 	m_bl_slider->set_proper_name("BL Slider");

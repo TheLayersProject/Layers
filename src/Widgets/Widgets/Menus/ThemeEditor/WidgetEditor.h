@@ -4,44 +4,69 @@
 #include "Button.h"
 #include "WidgetButtonGroup.h"
 
+#include "Widgets/Widgets/AttributeEditors/AttributeEditorGroup.h"
+#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
+#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
+#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
+#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
+#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
+
 namespace Layers
 {
-	class AttributeEditor;
-	class AttributeEditorGroup;
-	class ColorEditor;
-	class CornerRadiiEditor;
-	class FillEditor;
-	//class GradientEditor;
-	class NumberEditor;
-	class StateEditor;
+	class ThemeEditor;
 
 	class WidgetEditor : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		WidgetEditor(Themeable* themeable, QWidget* parent = nullptr);
+		WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_editor, QWidget* parent = nullptr);
 		~WidgetEditor();
 
-		void add_modifier_widget(AttributeEditor* attribute_widget);
+		Themeable* themeable() const;
+
+	private:
+		void add_attribute_editor(AttributeEditor* editor);
 
 		void add_widget_button(WidgetButton* button);
 
 		void add_widget_button_group(WidgetButtonGroup* button_group);
 
-		Themeable* themeable() const;
+		AttributeEditor* create_edtior(Attribute* attribute);
 
-	private:
+		void handle_editor(AbstractAttribute* abs_attr, AttributeEditor* editor);
+
 		void init_attribute_editors();
 
 		void init_attributes();
 
 		void setup_layout();
 
+		AttributeEditorGroup* m_control_attribute_editor_group{
+			new AttributeEditorGroup(new AttributeGroup, this) };
+
+		CornerRadiiEditor* m_control_corner_radii_editor{
+			new CornerRadiiEditor(new CornerRadiiAttributes, this) };
+
+		FillEditor* m_control_fill_editor{
+			new FillEditor(new Attribute("", QColor()), this) };
+
+		NumberEditor* m_control_number_editor{
+			new NumberEditor(new Attribute("", QVariant::fromValue(0)), new QIntValidator, this) };
+
+		StateEditor* m_control_state_editor{
+			new StateEditor(this) };
+
+		WidgetButton* m_control_widget_button{
+			new WidgetButton(new Graphic(":/svgs/exit.svg"), "", this)};
+
+		WidgetButtonGroup* m_control_widget_button_group{
+			new WidgetButtonGroup("", QList<WidgetButton*>(), this) };
+
 		bool m_layout_setup{ false };
 		bool m_showing_primary{ true };
 
-		StateEditor* m_state_aw{ nullptr };
+		StateEditor* m_state_editor{ nullptr };
 
 		QHBoxLayout* m_attributes_label_layout{ new QHBoxLayout };
 		QVBoxLayout* m_attributes_layout{ new QVBoxLayout };

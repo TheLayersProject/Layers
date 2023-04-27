@@ -5,12 +5,7 @@
 #include "Menu.h"
 #include "Window.h"
 
-#include "Widgets/Widgets/AttributeEditors/AttributeEditor.h"
-#include "Widgets/Widgets/AttributeEditors/ColorEditor.h"
-#include "Widgets/Widgets/AttributeEditors/CornerRadiiEditor.h"
-#include "Widgets/Widgets/AttributeEditors/FillEditor.h"
-#include "Widgets/Widgets/AttributeEditors/NumberEditor.h"
-#include "Widgets/Widgets/AttributeEditors/StateEditor.h"
+#include "ThemeEditor.h"
 
 #include <QApplication>
 #include <QIntValidator>
@@ -21,13 +16,21 @@ using Layers::WidgetEditor;
 using Layers::Label;
 using Layers::Themeable;
 
-WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
+WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_editor, QWidget* parent) :
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
 	set_name("widget_editor");
-	set_proper_name("Widget Editor");
+	//set_proper_name("Widget Editor");
 	setFixedWidth(300);
+
+	m_control_attribute_editor_group->hide();
+	m_control_corner_radii_editor->hide();
+	m_control_fill_editor->hide();
+	m_control_number_editor->hide();
+	m_control_state_editor->hide();
+	m_control_widget_button->hide();
+	m_control_widget_button_group->hide();
 
 	m_attributes_label->set_name("attributes_label");
 	m_attributes_label->set_proper_name("Attributes Label");
@@ -77,8 +80,11 @@ WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
 
 		QList<WidgetButton*> button_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> dialog_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> editor_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> line_editor_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> slider_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
 
 		for (Themeable* child_themeable : m_themeable->child_themeables())
@@ -115,9 +121,11 @@ WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
 				else
 					widget_button = new WidgetButton(*child_themeable->proper_name());
 
-				QObject::connect(widget_button, &WidgetButton::clicked, [child_themeable] {
-					static_cast<Window*>(QApplication::activeWindow()
-						)->edit_themeable(child_themeable);
+				widget_button->entangle_with(m_control_widget_button);
+
+				QObject::connect(widget_button, &WidgetButton::clicked,
+					[child_themeable, parent_theme_editor] {
+						parent_theme_editor->edit_themeable(child_themeable);
 					});
 
 				if (dynamic_cast<Button*>(child_themeable))
@@ -126,11 +134,20 @@ WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
 				else if (dynamic_cast<Dialog*>(child_themeable))
 					dialog_widget_buttons.append(widget_button);
 
+				else if (dynamic_cast<AttributeEditor*>(child_themeable))
+					editor_widget_buttons.append(widget_button);
+
 				else if (dynamic_cast<Label*>(child_themeable))
 					label_widget_buttons.append(widget_button);
 
+				else if (dynamic_cast<LineEditor*>(child_themeable))
+					line_editor_widget_buttons.append(widget_button);
+
 				else if (dynamic_cast<Menu*>(child_themeable))
 					menu_widget_buttons.append(widget_button);
+
+				else if (dynamic_cast<MiniSlider*>(child_themeable))
+					slider_widget_buttons.append(widget_button);
 
 				else if (dynamic_cast<Window*>(child_themeable))
 					window_widget_buttons.append(widget_button);
@@ -150,15 +167,30 @@ WidgetEditor::WidgetEditor(Themeable* themeable, QWidget* parent) :
 		else if (!dialog_widget_buttons.isEmpty())
 			organized_widgets["Dialogs"] = new WidgetButtonGroup("Dialogs", dialog_widget_buttons);
 
+		if (editor_widget_buttons.size() == 1)
+			organized_widgets[editor_widget_buttons.first()->label_text()] = editor_widget_buttons.first();
+		else if (!editor_widget_buttons.isEmpty())
+			organized_widgets["Editors"] = new WidgetButtonGroup("Editors", editor_widget_buttons);
+
 		if (label_widget_buttons.size() == 1)
 			organized_widgets[label_widget_buttons.first()->label_text()] = label_widget_buttons.first();
 		else if (!label_widget_buttons.isEmpty())
 			organized_widgets["Labels"] = new WidgetButtonGroup("Labels", label_widget_buttons);
 
+		if (line_editor_widget_buttons.size() == 1)
+			organized_widgets[line_editor_widget_buttons.first()->label_text()] = line_editor_widget_buttons.first();
+		else if (!line_editor_widget_buttons.isEmpty())
+			organized_widgets["Line Editors"] = new WidgetButtonGroup("Line Editors", line_editor_widget_buttons);
+
 		if (menu_widget_buttons.size() == 1)
 			organized_widgets[menu_widget_buttons.first()->label_text()] = menu_widget_buttons.first();
 		else if (!menu_widget_buttons.isEmpty())
 			organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
+
+		if (slider_widget_buttons.size() == 1)
+			organized_widgets[slider_widget_buttons.first()->label_text()] = slider_widget_buttons.first();
+		else if (!slider_widget_buttons.isEmpty())
+			organized_widgets["Sliders"] = new WidgetButtonGroup("Sliders", slider_widget_buttons);
 
 		if (window_widget_buttons.size() == 1)
 			organized_widgets[window_widget_buttons.first()->label_text()] = window_widget_buttons.first();
@@ -194,13 +226,52 @@ WidgetEditor::~WidgetEditor()
 	//	widget_button->deleteLater();
 }
 
-void WidgetEditor::add_modifier_widget(AttributeEditor* attribute_widget)
+void WidgetEditor::add_attribute_editor(AttributeEditor* editor)
 {
 	//add_child_themeable_pointer(attribute_widget);
-	m_modifier_widgets.append(attribute_widget);
+	m_modifier_widgets.append(editor);
 
 	// TEMP
-	m_attributes_layout->addWidget(attribute_widget);
+	m_attributes_layout->addWidget(editor);
+}
+
+AttributeEditor* WidgetEditor::create_edtior(Attribute* attribute)
+{
+	AttributeEditor* editor = nullptr;
+
+	if (QString(attribute->typeName()) == "double")
+	{
+		editor = new NumberEditor(attribute, new QIntValidator(0, 30));
+		editor->entangle_with(m_control_number_editor);
+	}
+	else if (
+		// TODO: Decide how to differ between when to use a FillControl or a ColorControl
+		// TEMP: For now, we will assume all use FillControl
+		QString(attribute->typeName()) == "QColor" ||
+		QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
+		)
+	{
+		editor = new FillEditor(attribute);
+		editor->entangle_with(m_control_fill_editor);
+	}
+
+	return editor;
+}
+
+void WidgetEditor::handle_editor(AbstractAttribute* abs_attr, AttributeEditor* editor)
+{
+	if (abs_attr->disabled())
+		editor->hide();
+
+	if (abs_attr->is_multi_valued())
+		m_state_editor->add_modifier_widget(editor);
+	else
+		add_attribute_editor(editor);
+
+	connect(editor, &AttributeEditor::widget_disabled, [this, editor] {
+		if (m_show_all_button->isVisible())
+			editor->hide();
+		});
 }
 
 void WidgetEditor::add_widget_button(WidgetButton* button)
@@ -212,10 +283,7 @@ void WidgetEditor::add_widget_button(WidgetButton* button)
 
 void WidgetEditor::add_widget_button_group(WidgetButtonGroup* button_group)
 {
-	//m_widget_button_groups.append(button_group);
-
-	//for (WidgetButton* widget_button : button_group->widget_buttons())
-	//	m_widget_buttons.append(widget_button);
+	button_group->entangle_with(m_control_widget_button_group);
 
 	m_widget_buttons_layout->addWidget(button_group);
 }
@@ -227,106 +295,39 @@ Themeable* WidgetEditor::themeable() const
 
 void WidgetEditor::init_attribute_editors()
 {
-	if (m_themeable->is_multi_valued()) // TODO: IF THEMEABLE CONTAINS STATE
+	if (m_themeable->is_multi_valued())
 	{
-		m_state_aw = new StateEditor;
-		m_state_aw->populate_state_combobox(m_themeable->states());
+		m_state_editor = new StateEditor;
+		m_state_editor->entangle_with(m_control_state_editor);
+		m_state_editor->populate_state_combobox(m_themeable->states());
 
-		add_modifier_widget(m_state_aw);
+		add_attribute_editor(m_state_editor);
 	}
 
-	for (AbstractAttribute* entity : m_themeable->attributes())
+	for (AbstractAttribute* abs_attribute : m_themeable->attributes())
 	{
-		if (Attribute* attribute = dynamic_cast<Attribute*>(entity))
+		if (Attribute* attribute = dynamic_cast<Attribute*>(abs_attribute))
 		{
-			AttributeEditor* aw = nullptr;
-
-			if (QString(attribute->typeName()) == "double")
-			{
-				aw = new NumberEditor(attribute, new QIntValidator(0, 30));
-			}
-			else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
-				// TEMP: For now, we will assume all use FillControl
-				QString(attribute->typeName()) == "QColor" ||
-				QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
-				)
-			{
-				aw = new FillEditor(attribute);
-			}
-
-			if (attribute->disabled())
-				aw->hide();
-
-			if (attribute->is_multi_valued())
-			{
-				m_state_aw->add_modifier_widget(aw);
-
-				//connect(
-				//	m_state_aw->state_combobox(), SIGNAL(current_item_changed(const QString&)),
-				//	aw, SLOT(set_current_editting_state(const QString&)));
-			}
-			else add_modifier_widget(aw);
-
-			connect(aw, &AttributeEditor::widget_disabled, [this, aw] {
-				if (m_show_all_button->isVisible())
-					aw->hide();
-				});
+			handle_editor(attribute, create_edtior(attribute));
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
+		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(abs_attribute))
 		{
-			if (attr_group->name().endsWith("corner_radii"))
+			if (CornerRadiiAttributes* corner_radii = dynamic_cast<CornerRadiiAttributes*>(attr_group))
 			{
-				CornerRadiiEditor* corner_radii_aw = new CornerRadiiEditor(dynamic_cast<CornerRadiiAttributes*>(attr_group));
+				CornerRadiiEditor* corner_radii_editor = new CornerRadiiEditor(corner_radii);
+				corner_radii_editor->entangle_with(m_control_corner_radii_editor);
 
-				if (attr_group->disabled())
-					corner_radii_aw->hide();
-
-				if (attr_group->is_multi_valued()) m_state_aw->add_modifier_widget(corner_radii_aw);
-				else add_modifier_widget(corner_radii_aw);
-
-				connect(corner_radii_aw, &AttributeEditor::widget_disabled, [this, corner_radii_aw] {
-					if (m_show_all_button->isVisible())
-						corner_radii_aw->hide();
-					});
+				handle_editor(corner_radii, corner_radii_editor);
 			}
 			else
 			{
-				/* TODO: Now that AttributeEditorGroup requires the attr_group data,
-				   it could initialize its own AttributeWidgets */
 				AttributeEditorGroup* aw_group = new AttributeEditorGroup(attr_group);
-
-				bool hide_aw_group = true;
+				aw_group->entangle_with(m_control_attribute_editor_group);
 
 				for (Attribute* attribute : attr_group->attributes())
-				{
-					AttributeEditor* aw = nullptr;
+					aw_group->add_modifier_widget(create_edtior(attribute));
 
-					if (QString(attribute->typeName()) == "double")
-					{
-						aw = new NumberEditor(attribute, new QIntValidator(0, 30));
-					}
-					else if ( // TODO: Decide how to differ between when to use a FillControl or a ColorControl
-						// TEMP: For now, we will assume all use FillControl
-						QString(attribute->typeName()) == "QColor" ||
-						QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
-						)
-					{
-						aw = new FillEditor(attribute);
-					}
-
-					aw_group->add_modifier_widget(aw);
-				}
-
-				if (attr_group->disabled())
-					aw_group->hide();
-
-				if (attr_group->is_multi_valued()) m_state_aw->add_modifier_widget(aw_group);
-				else add_modifier_widget(aw_group);
-
-				connect(aw_group, &AttributeEditor::widget_disabled, [this, aw_group] {
-					if (m_show_all_button->isVisible())
-						aw_group->hide();
-					});
+				handle_editor(attr_group, aw_group);
 			}
 		}
 	}

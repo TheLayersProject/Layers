@@ -87,8 +87,6 @@ namespace Layers
 
 		QString identifier();
 
-		Attribute* init_attribute(const QString& name, bool disabled, const QJsonValue& attr_value);
-
 		QStringList lineage() const;
 
 		void load();

@@ -14,7 +14,7 @@ namespace Layers
 
 	public:
 		ComboBox(QWidget* parent = nullptr);
-		//~ComboBox();
+		~ComboBox();
 
 		virtual QList<Themeable*> child_themeables(
 			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;

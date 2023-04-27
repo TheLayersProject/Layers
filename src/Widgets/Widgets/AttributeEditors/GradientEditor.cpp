@@ -7,8 +7,6 @@ using Layers::Theme;
 GradientEditor::GradientEditor(const QString& attribute_label_text, Attribute* attribute, QWidget* parent) :
 	m_attribute_label{ new Label(attribute_label_text) }, AttributeEditor(attribute, parent)
 {
-	exclude_tag_prefixes({ "aw_group", "state_aw" });
-
 	// Setup Attribute Label
 	m_attribute_label->set_name("label");
 	m_attribute_label->set_font_size(14);

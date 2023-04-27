@@ -81,16 +81,7 @@ Window::Window(bool preview, QWidget* parent) :
 	// Assign tag prefixes last!
 	assign_tag_prefixes();
 
-	if (m_preview)
-	{
-		Widget* preview_widget = new Widget;
-		preview_widget->set_name("preview_widget");
-		preview_widget->set_proper_name("Preview Widget");
-		m_theme_editor->set_preview_widget(preview_widget);
-		m_theme_editor->edit_themeable(
-			preview_widget);
-	}
-	else
+	if (!m_preview)
 		layersApp->add_child_themeable_pointer(*this);
 
 	// Set theme

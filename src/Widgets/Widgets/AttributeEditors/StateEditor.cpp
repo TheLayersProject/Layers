@@ -9,7 +9,7 @@ StateEditor::StateEditor(QWidget* parent) : AttributeEditor(nullptr, parent)
 {
 	//init_attributes();
 
-	set_name("state_aw");
+	set_name("state_editor");
 	set_proper_name("State Editor");
 
 	m_label->set_name("label");

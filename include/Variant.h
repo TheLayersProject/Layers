@@ -3,6 +3,7 @@
 
 #include <QColor>
 #include <QGradient>
+#include <QJsonValue>
 #include <QVariant>
 
 namespace Layers
@@ -51,10 +52,13 @@ namespace Layers
 		Variant(QColor color);
 		Variant(QString string);
 		Variant(QVariant qvariant);
+		Variant(QJsonValue json_value);
 		Variant(const Variant& variant);
 
 		void operator=(const Variant& variant);
 		bool operator!=(const Variant& variant);
+
+		QJsonValue to_json_value();
 
 		/*!
 			Returns the name of the type stored in the variant.

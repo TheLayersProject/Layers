@@ -4,21 +4,32 @@ using Layers::Attribute;
 using Layers::Variant;
 
 Attribute::Attribute(const QString& name, bool disabled) :
+	m_data{ new Data(Variant(0)) },
 	AbstractAttribute(name, disabled) { }
 
 Attribute::Attribute(const QString& name, Variant variant, bool disabled) :
-	m_data{ new Data(variant) }, AbstractAttribute(name, disabled)
+	m_data{ new Data(variant) },
+	AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
 Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled) :
-	m_data{ new Data(variant_map) }, AbstractAttribute(name, disabled)
+	m_data{ new Data(variant_map) },
+	AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const Attribute& a) : AbstractAttribute(a.m_name, a.m_disabled)
+Attribute::Attribute(const QString& name, QJsonObject json_object, bool disabled) :
+	m_data{ new Data(json_object) },
+	AbstractAttribute(name, disabled)
+{
+	establish_data_connection();
+}
+
+Attribute::Attribute(const Attribute& a) :
+	AbstractAttribute(a.m_name, a.m_disabled)
 {
 	m_data = new Data(*a.m_data);
 
@@ -77,12 +88,12 @@ void Attribute::entangle_with(Attribute& attribute)
 
 	m_data = attribute.m_data;
 
-	m_state = attribute.m_state;
+	//m_state = attribute.m_state;
 
-	//if (m_data->states().isEmpty() && m_state != "")
-	//	m_state = "";
-	//else if (!m_data->states().isEmpty() && m_state == "")
-	//	m_state = m_data->states().first();
+	if (m_data->states().isEmpty() && m_state != "")
+		m_state = "";
+	else if (!m_data->states().isEmpty() && m_state == "")
+		m_state = m_data->states().first();
 
 	establish_data_connection();
 	establish_reentanglement_connection(attribute);
