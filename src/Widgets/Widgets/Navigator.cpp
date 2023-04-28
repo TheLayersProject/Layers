@@ -49,6 +49,7 @@ Navigator::Navigator(QWidget* parent)
 		else m_collapse_menu->hide();
 		});
 
+	m_control_arrow_graphic->setMaximumWidth(28);
 	m_control_arrow_graphic->setParent(this);
 	m_control_arrow_graphic->hide();
 	m_control_arrow_graphic->set_name("arrow_graphic");
@@ -60,26 +61,27 @@ Navigator::Navigator(QWidget* parent)
 	m_control_text_button->set_proper_name("Text Buttons");
 }
 
-int Navigator::calculated_topbar_content_width()
+int Navigator::calculated_width_after_expand()
 {
-	int calculated_topbar_content_width = 0;
+	int calculated_width_after_expand = 0;
 
 	if (m_collapsed_text_buttons.count() == 1)
 	{
-		calculated_topbar_content_width += content_width(false);
-		//calculated_topbar_content_width += m_topbar_layout->spacing();
+		calculated_width_after_expand += content_width(false);
 	}
 	else
 	{
-		calculated_topbar_content_width += content_width(true);
-		calculated_topbar_content_width += m_main_layout->spacing() * 3;
+		calculated_width_after_expand += content_width(true);
+		calculated_width_after_expand += m_control_arrow_graphic->width();
 	}
 
 	if (!m_collapsed_text_buttons.isEmpty())
-		calculated_topbar_content_width +=
-		m_collapsed_text_buttons.last()->width();
+	{
+		calculated_width_after_expand +=
+			m_collapsed_text_buttons.last()->width();
+	}
 
-	return calculated_topbar_content_width;
+	return calculated_width_after_expand;
 }
 
 int Navigator::content_width(bool include_collapse_button)
@@ -122,7 +124,7 @@ bool Navigator::eventFilter(QObject* object, QEvent* event)
 		QResizeEvent* resize_event = static_cast<QResizeEvent*>(event);
 
 		if (resize_event->size().width() > resize_event->oldSize().width() &&
-			width() > content_width(true) &&
+			width() > calculated_width_after_expand() &&
 			!m_collapsed_text_buttons.isEmpty())
 		{
 			expand_text_buttons();
@@ -137,26 +139,8 @@ bool Navigator::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-void Navigator::adjust_collapsed_widget()
-{
-	QMargins margins = m_collapse_menu_layout->contentsMargins();
-
-	int collapsed_widget_width = 0;
-	int collapsed_widget_height = 45 * m_collapsed_text_buttons.count();
-
-	for (Button* text_button : m_collapsed_text_buttons)
-		if (text_button->width() > collapsed_widget_width)
-			collapsed_widget_width = text_button->width();
-
-	collapsed_widget_width += margins.left() + margins.right();
-
-	m_collapse_menu->setFixedSize(collapsed_widget_width, collapsed_widget_height);
-}
-
 void Navigator::collapse_text_buttons()
 {
-	qDebug() << "collapse_text_buttons START";
-
 	while (width() < content_width(true))
 	{
 		if (m_topbar_text_buttons.count() > 1)
@@ -169,21 +153,16 @@ void Navigator::collapse_text_buttons()
 			m_collapsed_text_buttons.append(m_topbar_text_buttons.takeFirst());
 
 			m_collapse_menu_layout->addWidget(m_collapsed_text_buttons.last());
-
-			adjust_collapsed_widget();
 		}
 		else if (m_topbar_text_buttons.count() == 1)
 			break;
 	}
-
-	qDebug() << "collapse_text_buttons END";
 }
 
 void Navigator::expand_text_buttons()
 {
-	qDebug() << "expand_text_buttons START";
-
-	if (calculated_topbar_content_width() < width())
+	while (!m_collapsed_text_buttons.isEmpty() &&
+			calculated_width_after_expand() < width())
 	{
 		Button* text_button = m_collapsed_text_buttons.last();
 
@@ -201,22 +180,16 @@ void Navigator::expand_text_buttons()
 			arrow_opacity->setOpacity(0.5);
 
 			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
-			arrow_graphic->setFixedSize(8, 12);
+			arrow_graphic->setFixedWidth(28);
 			arrow_graphic->setGraphicsEffect(arrow_opacity);
 			arrow_graphic->set_name("arrow_graphic");
 
-			m_arrow_graphics.insert(0, arrow_graphic); // Was 1! Trying 0..
-
-			//arrow_graphic->entangle_with(m_control_arrow_graphic);
+			m_arrow_graphics.insert(0, arrow_graphic);
 
 			m_main_layout->insertWidget(1, text_button);
 			m_main_layout->insertWidget(1, arrow_graphic);
 		}
-
-		adjust_collapsed_widget();
 	}
-
-	qDebug() << "expand_text_buttons END";
 }
 
 void Navigator::init_layout()
@@ -230,21 +203,19 @@ void Navigator::init_layout()
 	m_main_layout->addWidget(m_collapse_menu_button);
 	m_main_layout->addStretch();
 	m_main_layout->setContentsMargins(0, 0, 0, 0);
-	m_main_layout->setSpacing(10);
+	m_main_layout->setSpacing(0);
 	setLayout(m_main_layout);
 }
 
 Graphic* Navigator::create_arrow_graphic()
 {
-	qDebug() << "Creating Arrow Graphic..";
-
 	QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 	arrow_opacity->setOpacity(0.5);
 
 	Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
+	arrow_graphic->setFixedWidth(28);
 	arrow_graphic->entangle_with(m_control_arrow_graphic);
 	arrow_graphic->set_name("arrow_graphic");
-	arrow_graphic->setFixedSize(8, 12);
 	arrow_graphic->setGraphicsEffect(arrow_opacity);
 
 	m_arrow_graphics.append(arrow_graphic);
@@ -254,8 +225,6 @@ Graphic* Navigator::create_arrow_graphic()
 
 Button* Navigator::create_text_button(const QString& text)
 {
-	qDebug() << "Creating Hierarchy Button..";
-
 	Button* text_button = new Button(text);
 
 	text_button->setFixedHeight(45);
@@ -293,9 +262,20 @@ Button* Navigator::create_text_button(const QString& text)
 				m_collapsed_text_buttons.removeOne(last_button);
 
 			last_button->deleteLater();
-			m_arrow_graphics.takeLast()->deleteLater();
+
+			if (!m_arrow_graphics.isEmpty())
+				m_arrow_graphics.takeLast()->deleteLater();
+
+			if (width() > calculated_width_after_expand() &&
+				!m_collapsed_text_buttons.isEmpty())
+			{
+				expand_text_buttons();
+			}
 		}
 		});
+
+	if (width() < content_width(true))
+		collapse_text_buttons();
 
 	return text_button;
 }

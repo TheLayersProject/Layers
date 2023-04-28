@@ -22,9 +22,7 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 	private:
-		void adjust_collapsed_widget();
-
-		int calculated_topbar_content_width();
+		int calculated_width_after_expand();
 
 		void collapse_text_buttons();
 
