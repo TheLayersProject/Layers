@@ -16,6 +16,7 @@ Attribute::Attribute(const QString& name, Variant variant, bool disabled) :
 
 Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled) :
 	m_data{ new Data(variant_map) },
+	m_state{ variant_map.firstKey() },
 	AbstractAttribute(name, disabled)
 {
 	establish_data_connection();

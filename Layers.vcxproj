@@ -109,6 +109,8 @@
   <ItemGroup>
     <ClCompile Include="src\Widgets\Kernel\Application.cpp" />
     <ClCompile Include="src\Core\Tools\directories.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Controls\RadioButton.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\Controls\RadioButtonPool.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemModel.cpp" />
     <ClCompile Include="src\Core\ItemModels\ThemeLineageModel.cpp" />
     <ClCompile Include="src\Core\Kernel\Attribute.cpp" />
@@ -205,6 +207,7 @@
     <QtMoc Include="include\ColorPlane.h" />
     <QtMoc Include="include\ComboBox.h" />
     <QtMoc Include="include\ComboBoxItemDelegate.h" />
+    <ClInclude Include="include\color.h" />
     <ClInclude Include="include\directories.h" />
     <QtMoc Include="include\FillControl.h" />
     <QtMoc Include="src\Widgets\Dialogs\FillDialog.h" />
@@ -219,6 +222,8 @@
     <QtMoc Include="include\Graphic.h" />
     <QtMoc Include="include\Navigator.h" />
     <ClInclude Include="include\Layers.h" />
+    <QtMoc Include="include\RadioButton.h" />
+    <QtMoc Include="include\RadioButtonPool.h" />
     <ClInclude Include="include\ThemeableBox.h" />
     <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.h" />
     <QtMoc Include="include\ThemeLineageModel.h" />

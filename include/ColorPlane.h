@@ -5,6 +5,7 @@
 
 #include "Attribute.h"
 #include "calculate.h"
+#include "color.h"
 #include "Widget.h"
 
 namespace Layers
@@ -17,15 +18,13 @@ namespace Layers
 		void active_mode_changed();
 
 	public:
-		enum class Mode { Hue, Saturation, Value };
-
 		ColorPlane(QWidget* parent = nullptr);
 
-		Mode active_mode() const;
+		HSV active_hsv() const;
 
 		float pos_as_ratio(int pos, int available_space);
 
-		void set_active_mode(Mode new_active_hsv);
+		void set_active_hsv(HSV new_active_hsv);
 
 		void setFixedHeight(int h);
 		void setFixedSize(const QSize& s);
@@ -55,7 +54,7 @@ namespace Layers
 
 		void init_attributes();
 
-		Mode m_active_mode{ Mode::Hue };
+		HSV m_active_hsv{ HSV::Hue };
 
 		Widget* m_cursor{ new Widget(this) };
 
@@ -63,9 +62,6 @@ namespace Layers
 		int m_draw_width{ 245 };
 
 		const int margin{ 5 };
-		const int max_H{ 359 };
-		const int max_SV{ 255 };
-		const int max_RGB{ 255 };
 
 		bool m_dragging{ false };
 	};

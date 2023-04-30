@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 
 using Layers::ColorPlane;
+using Layers::HSV;
 
 ColorPlane::ColorPlane(QWidget* parent)
 	: QWidget(parent)
@@ -18,9 +19,9 @@ ColorPlane::ColorPlane(QWidget* parent)
     m_cursor->move(width() - margin - (m_cursor->width() / 2), 0);
 }
 
-ColorPlane::Mode ColorPlane::active_mode() const
+HSV ColorPlane::active_hsv() const
 {
-	return m_active_mode;
+	return m_active_hsv;
 }
 
 float ColorPlane::pos_as_ratio(int pos, int available_space)
@@ -30,9 +31,11 @@ float ColorPlane::pos_as_ratio(int pos, int available_space)
             float(available_space - (margin * 2) - 1);
 }
 
-void ColorPlane::set_active_mode(Mode new_active_hsv)
+void ColorPlane::set_active_hsv(HSV new_active_hsv)
 {
-	m_active_mode = new_active_hsv;
+	m_active_hsv = new_active_hsv;
+
+    update();
 
     update_cursor_position();
 
@@ -73,15 +76,15 @@ void ColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)
 {
     QColor c = color.as<QColor>();
 
-    switch (m_active_mode)
+    switch (m_active_hsv)
     {
-    case Mode::Hue:
+    case HSV::Hue:
         c.setHsvF(c.hueF(), x_pos_ratio, 1.f - y_pos_ratio);
         break;
-    case Mode::Saturation:
+    case HSV::Saturation:
         c.setHsvF(x_pos_ratio, c.saturationF(), 1.f - y_pos_ratio);
         break;
-    case Mode::Value:
+    case HSV::Value:
         c.setHsvF(x_pos_ratio, 1.f - y_pos_ratio, c.valueF());
         break;
     }
@@ -98,17 +101,17 @@ void ColorPlane::update_cursor_position()
 
     QPoint new_cursor_location;
 
-    switch (m_active_mode)
+    switch (m_active_hsv)
     {
-    case Mode::Hue:
+    case HSV::Hue:
         new_cursor_location = QPoint(
             c.saturationF() / w_ratio, (1.f - c.valueF()) / h_ratio);
         break;
-    case Mode::Saturation:
+    case HSV::Saturation:
         new_cursor_location = QPoint(
             c.hueF() / w_ratio, (1.f - c.valueF()) / h_ratio);
         break;
-    case Mode::Value:
+    case HSV::Value:
         new_cursor_location = QPoint(
             c.hueF() / w_ratio, (1.f - c.saturationF()) / h_ratio);
         break;
@@ -121,15 +124,15 @@ void ColorPlane::update_cursor_position()
 
 void ColorPlane::update_z_value()
 {
-    switch (m_active_mode)
+    switch (m_active_hsv)
     {
-    case Mode::Hue:
+    case HSV::Hue:
         z_value.set_value(double(color.as<QColor>().hue()));
         break;
-    case Mode::Saturation:
+    case HSV::Saturation:
         z_value.set_value(double(color.as<QColor>().saturation()));
         break;
-    case Mode::Value:
+    case HSV::Value:
         z_value.set_value(double(color.as<QColor>().value()));
         break;
     }
@@ -211,46 +214,46 @@ void ColorPlane::paintEvent(QPaintEvent* event)
     QColor paint_color;
 	QPainter painter(this);
 
-	switch (m_active_mode)
+	switch (m_active_hsv)
 	{
-	case Mode::Hue:
+	case HSV::Hue:
     {
-        image = QImage(max_SV + 1, max_SV + 1, QImage::Format_RGB32);
+        image = QImage(MAX_SV + 1, MAX_SV + 1, QImage::Format_RGB32);
 
         int h = color.as<QColor>().hue();
 
-        for (int s = 0; s <= max_SV; s++) {
-            for (int v = 0; v <= max_SV; v++) {
+        for (int s = 0; s <= MAX_SV; s++) {
+            for (int v = 0; v <= MAX_SV; v++) {
                 paint_color.setHsv(h, s, v);
-                image.setPixel(s, max_SV - v, paint_color.rgb());
+                image.setPixel(s, MAX_SV - v, paint_color.rgb());
             }
         }
         break;
     }
-	case Mode::Saturation:
+	case HSV::Saturation:
     {
-        image = QImage(max_H + 1, max_SV + 1, QImage::Format_RGB32);
+        image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
         int s = color.as<QColor>().saturation();
 
-        for (int h = 0; h <= max_H; h++) {
-            for (int v = 0; v <= max_SV; v++) {
+        for (int h = 0; h <= MAX_H; h++) {
+            for (int v = 0; v <= MAX_SV; v++) {
                 paint_color.setHsv(h, s, v);
-                image.setPixel(h, max_SV - v, paint_color.rgb());
+                image.setPixel(h, MAX_SV - v, paint_color.rgb());
             }
         }
         break;
     }
-	case Mode::Value:
+	case HSV::Value:
     {
-        image = QImage(max_H + 1, max_SV + 1, QImage::Format_RGB32);
+        image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
         int v = color.as<QColor>().value();
 
-        for (int h = 0; h <= max_H; h++) {
-            for (int s = 0; s <= max_SV; s++) {
+        for (int h = 0; h <= MAX_H; h++) {
+            for (int s = 0; s <= MAX_SV; s++) {
                 paint_color.setHsv(h, s, v);
-                image.setPixel(h, max_SV - s, paint_color.rgb());
+                image.setPixel(h, MAX_SV - s, paint_color.rgb());
             }
         }
         break;
@@ -267,15 +270,15 @@ void ColorPlane::init_attributes()
     connect(&z_value, &Attribute::value_changed, [this] {
         QColor c = color.as<QColor>();
 
-        switch (m_active_mode)
+        switch (m_active_hsv)
         {
-        case Mode::Hue:
+        case HSV::Hue:
             c.setHsv(z_value.as<int>(), c.saturation(), c.value());
             break;
-        case Mode::Saturation:
+        case HSV::Saturation:
             c.setHsv(c.hue(), z_value.as<int>(), c.value());
             break;
-        case Mode::Value:
+        case HSV::Value:
             c.setHsv(c.hue(), c.saturation(), z_value.as<int>());
             break;
         }

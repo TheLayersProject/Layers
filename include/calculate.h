@@ -1,5 +1,5 @@
-#ifndef MATH_H
-#define MATH_H
+#ifndef CALCULATE_H
+#define CALCULATE_H
 
 #include <cmath>
 
@@ -41,4 +41,4 @@ namespace Layers
 	}
 }
 
-#endif // MATH_H
+#endif // CALCULATE_H

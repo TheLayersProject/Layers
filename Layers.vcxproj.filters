@@ -222,6 +222,12 @@
     <ClCompile Include="src\Widgets\Widgets\Navigator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Widgets\Widgets\Controls\RadioButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Widgets\Controls\RadioButtonPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="svgs\svgs.qrc">
@@ -430,6 +436,12 @@
     <QtMoc Include="include\Navigator.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="include\RadioButton.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\RadioButtonPool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ImageSequence.h">
@@ -457,6 +469,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
