@@ -56,10 +56,7 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	m_sidebar->set_proper_name("Sidebar");
 	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
-	m_preview_frame->corner_color()->entangle_with(*m_sidebar->fill());
-
 	m_preview_frame->corner_radii()->top_left()->set_value(10.0);
-	m_preview_frame->corner_color()->set_disabled(false);
 
 	m_preview_scroll_area->set_name("preview_scroll_area");
 	m_preview_scroll_area->set_proper_name("Preview Scroll Area");

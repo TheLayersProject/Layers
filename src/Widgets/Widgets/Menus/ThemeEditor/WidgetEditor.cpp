@@ -335,20 +335,19 @@ void WidgetEditor::init_attribute_editors()
 
 void WidgetEditor::init_attributes()
 {
-	// TODO: re-enable
 	m_fill->set_disabled();
 
 	m_show_all_button->fill()->set_value(QColor("#61ad50"));
-	m_show_all_button->hover_fill()->set_value(QColor("#6fc65b"));
-	//m_show_all_button->text_color()->set_value(QColor("#f8f8f8"));
+	// TODO:
+	//m_show_all_button->hover_fill()->set_value(QColor("#6fc65b"));
 	m_show_all_button->corner_radii()->top_left()->set_value(5.0);
 	m_show_all_button->corner_radii()->top_right()->set_value(5.0);
 	m_show_all_button->corner_radii()->bottom_left()->set_value(5.0);
 	m_show_all_button->corner_radii()->bottom_right()->set_value(5.0);
 
 	m_show_primary_button->fill()->set_value(QColor("#61ad50"));
-	m_show_primary_button->hover_fill()->set_value(QColor("#6fc65b"));
-	//m_show_primary_button->set_attribute_value("text_color", QColor("#f8f8f8"));
+	// TODO:
+	//m_show_primary_button->hover_fill()->set_value(QColor("#6fc65b"));
 	m_show_primary_button->corner_radii()->top_left()->set_value(5.0);
 	m_show_primary_button->corner_radii()->top_right()->set_value(5.0);
 	m_show_primary_button->corner_radii()->bottom_left()->set_value(5.0);

@@ -15,7 +15,7 @@ namespace Layers
 		ThemesWidget(QWidget* parent = nullptr);
 		~ThemesWidget();
 
-		void handle_custom_theme_buttons_visibility();
+		void handle_theme_buttons_visibility();
 
 		Button* customize_theme_button() const;
 
@@ -46,7 +46,7 @@ namespace Layers
 		Widget* m_spacer_1{ new Widget };
 		Widget* m_spacer_2{ new Widget };
 
-		QList<QMetaObject::Connection> m_connections{ QList<QMetaObject::Connection>() };
+		QMetaObject::Connection m_theme_buttons_handler_connection;
 	};
 }
 

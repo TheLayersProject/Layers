@@ -50,6 +50,15 @@ Graphic::Graphic(const QString& file_path, QSize size, QWidget* parent) :
 	m_draw_size = maximumSize();
 }
 
+Graphic::Graphic(const QImage& image, QWidget* parent) :
+	m_image{ new QImage(image) },
+	QWidget(parent)
+{
+	setMaximumSize(m_image->size());
+
+	m_draw_size = maximumSize();
+}
+
 Graphic::Graphic(const Graphic& g)
 {
 	if (g.m_svg)

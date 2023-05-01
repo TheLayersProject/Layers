@@ -20,8 +20,6 @@ namespace Layers
 	public:
 		Window(bool preview = false, QWidget* parent = nullptr);
 
-		Menu* app_menu() const;
-
 		void center_dialog(QDialog* dialog);
 
 		virtual Themeable* clone() override;
@@ -33,13 +31,8 @@ namespace Layers
 		void update_theme_dependencies();
 
 	public slots:
-		void customize_clicked();
-		void exit_clicked();
-		void maximize_clicked();
-		void minimize_clicked();
 		void new_theme_clicked();
 		void open_menu(Menu* menu);
-		void settings_clicked();
 
 	protected:
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
@@ -47,24 +40,21 @@ namespace Layers
 		void paintEvent(QPaintEvent* event) override;
 
 	private:
-		void setup_layout();
-
-		bool m_maximized{ false };
-		bool m_preview{ false };
+		void init_attributes();
+		void init_layout();
+		void init_themes_widget_connections();
+		void init_titlebar_connections();
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 		Titlebar* m_titlebar;
 
-		Menu* m_app_menu{ nullptr };
-
-		SettingsMenu* m_settings_menu;
-
-		ThemeEditor* m_theme_editor;
-
-		Widget* m_main_widget{ nullptr };
-
 		Widget* m_separator{ new Widget };
+
+		// Menus
+		Menu* m_app_menu{ nullptr };
+		SettingsMenu* m_settings_menu;
+		ThemeEditor* m_theme_editor;
 	};
 }
 

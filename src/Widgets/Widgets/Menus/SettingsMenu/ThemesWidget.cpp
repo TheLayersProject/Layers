@@ -21,19 +21,32 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 	m_theme_label->set_font_size(15);
 
 	m_theme_combobox->set_icon(new Graphic(":/svgs/combobox_icon.svg", QSize(21, 18)));
-	//m_theme_combobox->set_item_renaming_disabled(false);
 	m_theme_combobox->set_name("theme_combobox");
 	m_theme_combobox->set_proper_name("Theme Combobox");
 
-	m_connections.append(
-		connect(m_theme_combobox, SIGNAL(item_replaced(const QString&, const QString&)),
-			layersApp, SLOT(rename_theme(const QString&, const QString&))
-	));
+	for (Theme* theme : layersApp->themes())
+		m_theme_combobox->addItem(theme);
 
-	m_connections.append(
-		connect(layersApp, &Application::current_theme_changed, [this] {
-			handle_custom_theme_buttons_visibility();
-	}));
+	for (int i = 0; i < m_theme_combobox->count(); i++)
+		if (m_theme_combobox->itemData(i) == layersApp->current_theme()->id())
+		{
+			m_theme_combobox->setCurrentIndex(i);
+			break;
+		}
+
+	connect(m_theme_combobox, &ThemeComboBox::currentIndexChanged, [this]
+		{
+			if (!m_functionality_disabled)
+				layersApp->apply_theme(
+					*layersApp->theme(m_theme_combobox->currentData().toString())
+				);
+		});
+
+	m_theme_buttons_handler_connection =
+		connect(layersApp, &Application::current_theme_changed, [this]
+			{
+				handle_theme_buttons_visibility();
+			});
 
 	if (!layersApp->current_theme()->editable())
 		show_custom_theme_buttons(false);
@@ -58,7 +71,6 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
-
 	m_spacer_2->setFixedWidth(12);
 
 	m_control_separator->hide();
@@ -71,11 +83,10 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 
 ThemesWidget::~ThemesWidget()
 {
-	for (QMetaObject::Connection connection : m_connections)
-		QObject::disconnect(connection);
+	QObject::disconnect(m_theme_buttons_handler_connection);
 }
 
-void ThemesWidget::handle_custom_theme_buttons_visibility()
+void ThemesWidget::handle_theme_buttons_visibility()
 {
 	if (layersApp->current_theme()->editable())
 		show_custom_theme_buttons();

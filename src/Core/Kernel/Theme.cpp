@@ -179,7 +179,7 @@ void Theme::copy(Theme& theme)
 	for (const QString& theme_id : theme.lineage())
 		append_to_lineage(theme_id);
 
-	append_to_lineage(theme.identifier());
+	append_to_lineage(theme.id());
 }
 
 void Theme::copy_attribute_values_of(Themeable* themeable)
@@ -224,7 +224,7 @@ bool Theme::has_app_implementation() const
 	).exists();
 }
 
-QString Theme::identifier()
+QString Theme::id()
 {
 	if (m_uuid)
 		return m_name + "_" + m_uuid->toString(QUuid::WithoutBraces);

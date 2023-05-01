@@ -1,4 +1,3 @@
-//#include "Layouts.h"
 #include "Widget.h"
 
 #include <QEvent>
@@ -11,7 +10,6 @@ Widget::Widget(QWidget* parent) : QWidget(parent)
 {
 	init_attributes();
 
-	installEventFilter(this);
 	setFocusPolicy(Qt::ClickFocus);
 
 	connect(m_border->thickness(), &AbstractAttribute::value_changed, [this] {
@@ -32,28 +30,6 @@ void Widget::init_attributes()
 	for (AbstractAttribute* entity : m_attributes)
 		establish_update_connection(entity);
 		//entity->setup_widget_update_connection(this);
-}
-
-bool Widget::eventFilter(QObject* object, QEvent* event)
-{
-	if (event->type() == QEvent::Enter)
-	{
-		m_hovering = true;
-		update();
-		emit hover_enter();
-	}
-	else if (event->type() == QEvent::Leave)
-	{
-		m_hovering = false;
-		update();
-		emit hover_leave();
-	}
-	else if (event->type() == QEvent::MouseMove)
-	{
-		emit hover_move();
-	}
-
-	return false;
 }
 
 void Widget::paintEvent(QPaintEvent* event)

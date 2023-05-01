@@ -17,7 +17,8 @@ Button::Button(Graphic* graphic, const QString& text, bool auto_touch_target_com
 	m_corner_radii->top_right()->set_value(7.0);
 	m_corner_radii->bottom_left()->set_value(7.0);
 	m_corner_radii->bottom_right()->set_value(7.0);
-	m_hover_fill->set_disabled(false);
+	// TODO:
+	//m_hover_fill->set_disabled(false);
 }
 
 Button::Button(Graphic* graphic, bool auto_touch_target_compliance, QWidget* parent) :
@@ -38,7 +39,8 @@ Button::Button(const QString& text, bool auto_touch_target_compliance, QWidget* 
 	m_corner_radii->top_right()->set_value(7.0);
 	m_corner_radii->bottom_left()->set_value(7.0);
 	m_corner_radii->bottom_right()->set_value(7.0);
-	m_hover_fill->set_disabled(false);
+	// TODO:
+	//m_hover_fill->set_disabled(false);
 }
 
 Button::Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance, QWidget* parent) :

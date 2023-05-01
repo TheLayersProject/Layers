@@ -65,7 +65,6 @@ void ColorControl::init_attributes()
 	m_margins->top()->set_value(10.0);
 	m_margins->right()->set_value(10.0);
 	m_margins->bottom()->set_value(10.0);
-	m_outline_color->set_disabled(false);
 }
 
 void ColorControl::set_current_editting_state(const QString& state)

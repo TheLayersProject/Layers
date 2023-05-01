@@ -186,7 +186,7 @@ void Application::apply_theme(Theme& theme)
 
 		emit theme.applied();
 
-		m_settings.setValue("themes/active_theme", theme.identifier());
+		m_settings.setValue("themes/active_theme", theme.id());
 
 		emit current_theme_changed();
 	}
@@ -340,7 +340,7 @@ void Application::reapply_theme()
 
 void Application::save_theme(Theme& theme)
 {
-	QDir theme_dir = latest_T_version_path() + theme.identifier() + "\\";
+	QDir theme_dir = latest_T_version_path() + theme.id() + "\\";
 
 	if (!theme_dir.exists())
 		theme_dir.mkdir(".");
@@ -443,7 +443,7 @@ void Application::init_themes()
 	{
 		Theme* loaded_theme = new Theme(QDir(latest_T_version_dir.absoluteFilePath(dir_name)));
 
-		m_themes[loaded_theme->identifier()] = loaded_theme;
+		m_themes[loaded_theme->id()] = loaded_theme;
 	}
 
 	QString active_theme_id =

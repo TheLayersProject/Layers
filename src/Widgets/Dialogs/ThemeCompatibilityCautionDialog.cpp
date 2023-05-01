@@ -103,8 +103,6 @@ void ThemeCompatibilityCautionDialog::set_theme_name(const QString& theme_name)
 void ThemeCompatibilityCautionDialog::init_attributes()
 {
 	m_border->thickness()->set_value(3.0);
-	m_outline_color->set_disabled(false);
-	m_outline_color->set_value(QColor("#2f2f2f"));
 
 	m_corner_radii->top_left()->set_value(10.0);
 	m_corner_radii->top_right()->set_value(10.0);

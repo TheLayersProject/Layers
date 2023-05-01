@@ -296,8 +296,6 @@ void ColorPlane::init_attributes()
     m_cursor->fill()->entangle_with(color);
     m_cursor->border()->fill()->set_value(QColor(Qt::lightGray));
     m_cursor->border()->thickness()->set_value(2.0);
-	m_cursor->outline_color()->set_disabled(false);
-	m_cursor->outline_color()->set_value(QColor(Qt::black));
 	m_cursor->corner_radii()->top_left()->set_value(2.0);
 	m_cursor->corner_radii()->top_right()->set_value(2.0);
 	m_cursor->corner_radii()->bottom_left()->set_value(2.0);

@@ -209,10 +209,6 @@ void Dialog::init_titlebar()
 	m_exit_button->set_name("exit_button");
 	m_exit_button->set_proper_name("Exit Button");
 
-	// Add Titlebar's Themeable Child Element References
-	//m_titlebar->add_child_themeable_pointer(m_window_title_label);
-	//m_titlebar->add_child_themeable_pointer(m_exit_button);
-
 	// Setup Layout
 
 	m_titlebar_layout->setContentsMargins(0, 0, 0, 0);

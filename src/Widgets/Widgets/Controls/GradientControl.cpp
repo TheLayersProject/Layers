@@ -33,7 +33,6 @@ void GradientControl::init_attributes()
 	m_margins->top()->set_value(10.0);
 	m_margins->right()->set_value(10.0);
 	m_margins->bottom()->set_value(10.0);
-	m_outline_color->set_disabled(false);
 
     m_fill->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 }

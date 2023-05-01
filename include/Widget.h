@@ -16,20 +16,10 @@ namespace Layers
 	{
 		Q_OBJECT
 
-	signals:
-		void hover_enter();
-		void hover_leave();
-		void hover_move();
-
 	public:
 		Widget(QWidget* parent = nullptr);
 
 	protected:
-		/*!
-			Overrides the QWidget::eventFilter() to handle widget hover coloring
-		*/
-		bool eventFilter(QObject* object, QEvent* event) override;
-
 		/*!
 			Initializes the widget's attributes.
 

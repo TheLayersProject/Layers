@@ -85,7 +85,7 @@ namespace Layers
 
 		bool has_app_implementation() const;
 
-		QString identifier();
+		QString id();
 
 		QStringList lineage() const;
 

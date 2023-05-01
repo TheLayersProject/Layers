@@ -1,5 +1,6 @@
 #include "Window.h"
 
+#include "calculate.h"
 #include "Menu.h"
 #include "Titlebar.h"
 
@@ -8,8 +9,6 @@
 #include "Menus/ThemeEditor/ThemeEditor.h"
 #include "Menus/ThemeEditor/WidgetEditor.h"
 #include "Widgets/Dialogs/CreateNewThemeDialog.h"
-
-#include "calculate.h"
 
 #include <Windows.h>
 #include <windowsx.h>
@@ -28,91 +27,34 @@ using Layers::Titlebar;
 using Layers::Window;
 
 Window::Window(bool preview, QWidget* parent) :
-	m_preview{ preview },
 	m_settings_menu{ new SettingsMenu },
 	m_theme_editor{ new ThemeEditor },
 	m_titlebar{ new Titlebar },
 	Widget(parent)
 {
-	connect(m_titlebar->settings_button(), &Button::clicked, this, &Window::settings_clicked);
-	connect(m_titlebar->minimize_button(), &Button::clicked, this, &Window::minimize_clicked);
-	connect(m_titlebar->maximize_button(), &Button::clicked, this, &Window::maximize_clicked);
-	connect(m_titlebar->exit_button(), &Button::clicked, this, &Window::exit_clicked);
-
+	init_attributes();
+	init_layout();
+	init_themes_widget_connections();
+	init_titlebar_connections();
+	resize(1200, 800);
 	set_name("window");
 	set_proper_name("Window");
-	border()->thickness()->set_value(15.0);
-	border()->fill()->set_value(
-		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
-	corner_radii()->top_left()->set_value(10.0);
-	corner_radii()->top_right()->set_value(10.0);
-	corner_radii()->bottom_left()->set_value(10.0);
-	corner_radii()->bottom_right()->set_value(10.0);
-
-	connect(m_border->thickness(), &Attribute::value_changed, [this] {
-		update_theme_dependencies();
-		});
-
-	for (Attribute* margin : *m_margins)
-		connect(margin, &Attribute::value_changed, [this] {
-			update_theme_dependencies();
-			});
-
-	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
-	setMinimumSize(200, m_titlebar->height() + border()->thickness()->as<double>() * 2);
-	resize(1200, 800);
+	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
-	m_settings_menu->fill()->set_value(QColor("#ff5555"));
-	m_settings_menu->fill()->set_disabled();
+	if (!preview)
+		layersApp->add_child_themeable_pointer(*this);
+	
 	m_settings_menu->hide();
-
-	m_theme_editor->fill()->set_disabled();
 	m_theme_editor->hide();
 
-	m_separator->fill()->set_value(QColor("#25272b"));
-	m_separator->setFixedHeight(3);
 	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
 	m_separator->set_name("separator");
 	m_separator->set_proper_name("Separator");
+	m_separator->setFixedHeight(3);
 
-	setup_layout();
-
-	// Assign tag prefixes last!
 	assign_tag_prefixes();
-
-	if (!m_preview)
-		layersApp->add_child_themeable_pointer(*this);
-
-	// Set theme
 	apply_theme(*layersApp->current_theme());
-
-	ThemesWidget* themes_widget = m_settings_menu->themes_widget();
-
-	ThemeComboBox* theme_combobox = themes_widget->theme_combobox();
-
-	connect(themes_widget->customize_theme_button(), &Button::clicked, this, &Window::customize_clicked);
-	connect(themes_widget->new_theme_button(), &Button::clicked, this, &Window::new_theme_clicked);
-
-	for (Theme* theme : layersApp->themes())
-		theme_combobox->addItem(theme);
-
-	for (int i = 0; i < theme_combobox->count(); i++)
-		if (theme_combobox->itemData(i) == layersApp->current_theme()->identifier())
-		{
-			theme_combobox->setCurrentIndex(i);
-			break;
-		}
-
-	connect(theme_combobox, &ThemeComboBox::currentIndexChanged, [this, theme_combobox] {
-		if (!m_functionality_disabled)
-			layersApp->apply_theme(*layersApp->theme(theme_combobox->currentData().toString()));
-		});
-}
-
-Menu* Window::app_menu() const
-{
-	return m_app_menu;
 }
 
 void Window::edit_themeable(Themeable* themeable)
@@ -153,14 +95,9 @@ Themeable* Window::clone()
 	return w;
 }
 
-//ThemeEditor* Window::customize_menu() const
-//{
-//	return m_theme_editor;
-//}
-
 void Window::update_theme_dependencies()
 {
-	if (m_maximized)
+	if (isMaximized())
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
@@ -175,11 +112,6 @@ void Window::update_theme_dependencies()
 			left_c_margin, top_c_margin, right_c_margin, bottom_c_margin);
 	}
 }
-
-//SettingsMenu* Window::settings_menu() const
-//{
-//	return m_settings_menu;
-//}
 
 void Window::open_menu(Menu* menu)
 {
@@ -208,42 +140,6 @@ void Window::open_menu(Menu* menu)
 	}
 }
 
-void Window::customize_clicked()
-{
-	if (!m_theme_editor->preview_widget())
-		m_theme_editor->edit_themeable(layersApp);
-	
-	open_menu(m_theme_editor);
-}
-
-void Window::exit_clicked()
-{
-	if (!m_functionality_disabled)
-		qApp->quit();
-}
-
-void Window::maximize_clicked()
-{
-	if (m_maximized)
-	{
-		showNormal();
-		m_maximized = false;
-	}
-	else
-	{
-		showMaximized();
-		m_maximized = true;
-	}
-
-	update_theme_dependencies();
-	update();
-}
-
-void Window::minimize_clicked()
-{
-	showMinimized();
-}
-
 void Window::new_theme_clicked()
 {
 	CreateNewThemeDialog* dialog = layersApp->create_new_theme_dialog();
@@ -266,9 +162,9 @@ void Window::new_theme_clicked()
 		Theme* copy_theme = layersApp->theme(dialog->copy_theme_id());
 		Theme* new_theme = new Theme(dialog->new_theme_name());
 
-		layersApp->themes()[new_theme->identifier()] = new_theme;
+		layersApp->themes()[new_theme->id()] = new_theme;
 
-		QDir new_theme_dir = latest_T_version_path() + new_theme->identifier() + "\\";
+		QDir new_theme_dir = latest_T_version_path() + new_theme->id() + "\\";
 		QDir copy_theme_dir = copy_theme->dir();
 
 		new_theme->set_dir(new_theme_dir);
@@ -285,7 +181,7 @@ void Window::new_theme_clicked()
 		for (const QString& theme_id : copy_theme->lineage())
 			new_theme->append_to_lineage(theme_id);
 
-		new_theme->append_to_lineage(copy_theme->identifier());
+		new_theme->append_to_lineage(copy_theme->id());
 
 		new_theme->save_meta_file();
 		new_theme->load();
@@ -298,7 +194,7 @@ void Window::new_theme_clicked()
 		layersApp->apply_theme(*new_theme);
 
 		for (int i = 0; i < theme_combobox->count(); i++)
-			if (theme_combobox->itemData(i) == new_theme->identifier())
+			if (theme_combobox->itemData(i) == new_theme->id())
 			{
 				theme_combobox->setCurrentIndex(i);
 				break;
@@ -306,11 +202,6 @@ void Window::new_theme_clicked()
 
 		dialog->clear();
 	}
-}
-
-void Window::settings_clicked()
-{
-	open_menu(m_settings_menu);
 }
 
 bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
@@ -403,7 +294,7 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
 
 void Window::paintEvent(QPaintEvent* event)
 {
-	if (!m_maximized)
+	if (!isMaximized())
 	{
 		// CREATE VARIABLES:
 
@@ -478,12 +369,6 @@ void Window::paintEvent(QPaintEvent* event)
 		QPainter painter(this);
 		painter.setRenderHint(QPainter::Antialiasing);
 
-		// - Draw Corner Color
-		if (!m_corner_color->disabled())
-		{
-			painter.fillPath(corner_color_path, m_corner_color->as<QColor>());
-		}
-
 		// - Draw Border
 		if (border_thickness)
 		{
@@ -515,17 +400,8 @@ void Window::paintEvent(QPaintEvent* event)
 			}
 			else
 			{
-				if (m_hovering && !m_hover_fill->disabled())
-					painter.fillPath(background_path, m_hover_fill->as<QColor>());
-				else
-					painter.fillPath(background_path, m_fill->as<QColor>());
+				painter.fillPath(background_path, m_fill->as<QColor>());
 			}
-		}
-
-		// - Draw Outline Color
-		if (!outline_color()->disabled())
-		{
-			painter.strokePath(outline_color_path, QPen(outline_color()->as<QColor>()));
 		}
 	}
 	else
@@ -576,22 +452,40 @@ void Window::paintEvent(QPaintEvent* event)
 			}
 			else
 			{
-				if (m_hovering && !m_hover_fill->disabled())
-					painter.fillPath(background_path, m_hover_fill->as<QColor>());
-				else
-					painter.fillPath(background_path, m_fill->as<QColor>());
+				painter.fillPath(background_path, m_fill->as<QColor>());
 			}
-		}
-
-		// - Draw Outline Color
-		if (!outline_color()->disabled())
-		{
-			painter.strokePath(outline_color_path, QPen(outline_color()->as<QColor>()));
 		}
 	}
 }
 
-void Window::setup_layout()
+void Window::init_attributes()
+{
+	m_border->thickness()->set_value(15.0);
+	m_border->fill()->set_value(
+		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
+	m_corner_radii->top_left()->set_value(10.0);
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
+
+	connect(m_border->thickness(), &Attribute::value_changed, [this] {
+		update_theme_dependencies();
+		});
+
+	for (Attribute* margin : *m_margins)
+		connect(margin, &Attribute::value_changed, [this] {
+		update_theme_dependencies();
+			});
+
+	m_settings_menu->fill()->set_value(QColor("#ff5555"));
+	m_settings_menu->fill()->set_disabled();
+
+	m_theme_editor->fill()->set_disabled();
+
+	m_separator->fill()->set_value(QColor("#25272b"));
+}
+
+void Window::init_layout()
 {
 	int margin = border()->thickness()->as<double>();
 
@@ -603,4 +497,50 @@ void Window::setup_layout()
 	m_main_layout->addWidget(m_theme_editor);
 
 	setLayout(m_main_layout);
+}
+
+void Window::init_themes_widget_connections()
+{
+	ThemesWidget* themes_widget = m_settings_menu->themes_widget();
+
+	connect(themes_widget->customize_theme_button(), &Button::clicked, [this]
+		{
+			if (!m_theme_editor->preview_widget())
+				m_theme_editor->edit_themeable(layersApp);
+
+			open_menu(m_theme_editor);
+		});
+
+	connect(themes_widget->new_theme_button(), &Button::clicked,
+		this, &Window::new_theme_clicked);
+}
+
+void Window::init_titlebar_connections()
+{
+	connect(m_titlebar->settings_button(), &Button::clicked, [this]
+		{
+			open_menu(m_settings_menu);
+		});
+
+	connect(m_titlebar->minimize_button(), &Button::clicked, [this]
+		{
+			showMinimized();
+		});
+
+	connect(m_titlebar->maximize_button(), &Button::clicked, [this]
+		{
+			if (isMaximized())
+				showNormal();
+			else
+				showMaximized();
+
+			update_theme_dependencies();
+			update();
+		});
+
+	connect(m_titlebar->exit_button(), &Button::clicked, [this]
+		{
+			if (!m_functionality_disabled)
+				qApp->quit();
+		});
 }

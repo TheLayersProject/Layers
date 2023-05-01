@@ -17,6 +17,7 @@ namespace Layers
 
 	public:
 		Graphic(const QString& file_path, QSize size = QSize(), QWidget* parent = nullptr);
+		Graphic(const QImage& image, QWidget* parent = nullptr);
 		Graphic(const Graphic& g);
 		~Graphic();
 

@@ -14,32 +14,23 @@ using Layers::ThemeableBox;
 ThemeableBox::~ThemeableBox()
 {
 	delete m_border;
-	delete m_corner_color;
 	delete m_corner_radii;
 	delete m_fill;
-	delete m_hover_fill;
 	delete m_margins;
-	delete m_outline_color;
 
 	m_border = nullptr;
-	m_corner_color = nullptr;
 	m_corner_radii = nullptr;
 	m_fill = nullptr;
-	m_hover_fill = nullptr;
 	m_margins = nullptr;
-	m_outline_color = nullptr;
 }
 
 void ThemeableBox::init_attributes()
 {
 	m_attributes.insert({
 		{ "border", m_border },
-		{ "corner_color", m_corner_color },
 		{ "corner_radii", m_corner_radii },
 		{ "fill", m_fill },
-		{ "hover_fill", m_hover_fill },
-		{ "margins", m_margins },
-		{ "outline_color", m_outline_color }
+		{ "margins", m_margins }
 	});
 }
 
@@ -55,23 +46,6 @@ void ThemeableBox::set_margin(double left, double top, double right, double bott
 	m_margins->right()->set_value(right);
 	m_margins->bottom()->set_value(bottom);
 }
-
-//bool ThemeableBox::eventFilter(QObject* object, QEvent* event)
-//{
-//    // TODO: Could make an Attribute for hovering which would also handle updating
-//    if (event->type() == QEvent::Enter)
-//    {
-//        m_hovering = true;
-//        //update();
-//    }
-//    else if (event->type() == QEvent::Leave)
-//    {
-//        m_hovering = false;
-//       //update();
-//    }
-//
-//    return false;
-//}
 
 void ThemeableBox::paint(QWidget* widget)
 {
@@ -151,12 +125,6 @@ void ThemeableBox::paint(QWidget* widget)
 	QPainter painter(widget);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	// - Draw Corner Color
-	if (!m_corner_color->disabled())
-	{
-		painter.fillPath(corner_color_path, m_corner_color->as<QColor>());
-	}
-
 	// - Draw Border
 	if (border_thickness)
 	{
@@ -188,17 +156,8 @@ void ThemeableBox::paint(QWidget* widget)
 		}
 		else
 		{
-			if (m_hovering && !m_hover_fill->disabled())
-				painter.fillPath(background_path, m_hover_fill->as<QColor>());
-			else
-				painter.fillPath(background_path, m_fill->as<QColor>());
+			painter.fillPath(background_path, m_fill->as<QColor>());
 		}
-	}
-
-	// - Draw Outline Color
-	if (!m_outline_color->disabled())
-	{
-		painter.strokePath(outline_color_path, QPen(m_outline_color->as<QColor>()));
 	}
 }
 
@@ -217,22 +176,7 @@ MarginsAttributes* ThemeableBox::margins() const
 	return m_margins;
 }
 
-Attribute* ThemeableBox::corner_color() const
-{
-	return m_corner_color;
-}
-
 Attribute* ThemeableBox::fill() const
 {
 	return m_fill;
-}
-
-Attribute* ThemeableBox::hover_fill() const
-{
-	return m_hover_fill;
-}
-
-Attribute* ThemeableBox::outline_color() const
-{
-	return m_outline_color;
 }
