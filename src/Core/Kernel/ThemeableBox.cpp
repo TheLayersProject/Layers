@@ -32,6 +32,9 @@ void ThemeableBox::init_attributes()
 		{ "fill", m_fill },
 		{ "margins", m_margins }
 	});
+
+	for (AbstractAttribute* attribute : m_attributes)
+		establish_update_connection(attribute);
 }
 
 void ThemeableBox::set_margin(double margin)
@@ -75,6 +78,15 @@ void ThemeableBox::paint(QWidget* widget)
 		m_corner_radii->bottom_left()->as<double>() : 0;
 	int corner_radius_br = (!m_corner_radii->disabled()) ?
 		m_corner_radii->bottom_right()->as<double>() : 0;
+
+	if (widget->isMaximized())
+	{
+		border_thickness = 0;
+		corner_radius_tl = 0;
+		corner_radius_tr = 0;
+		corner_radius_bl = 0;
+		corner_radius_br = 0;
+	}
 
 	int tl_background_radius = border_thickness ? inner_radius(corner_radius_tl, border_thickness) : corner_radius_tl;
 	int tr_background_radius = border_thickness ? inner_radius(corner_radius_tr, border_thickness) : corner_radius_tr;

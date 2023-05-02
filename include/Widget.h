@@ -21,19 +21,9 @@ namespace Layers
 
 	protected:
 		/*!
-			Initializes the widget's attributes.
-
-			This function uses calls to set_attribute_value() to define attributes.
-
-			Widget attributes include background color/gradient, corner radii, margins, outline color, and
-			other varius numerical values, colors, and booleans.
-		*/
-		void init_attributes();
-
-		/*!
 			Paints the widget with values obtained from the widget's attributes.
 		*/
-		void paintEvent(QPaintEvent* event) override;
+		virtual void paintEvent(QPaintEvent* event) override;
 	};
 }
 

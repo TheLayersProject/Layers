@@ -37,8 +37,6 @@ namespace Layers
 	protected:
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
-		void paintEvent(QPaintEvent* event) override;
-
 	private:
 		void init_attributes();
 		void init_layout();
