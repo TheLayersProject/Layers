@@ -42,6 +42,7 @@ Tab::Tab(Menu* menu, QWidget* parent) :
 	//m_tab_icon->set_padding(11, 0, 11, 0);
 
 	init_attributes();
+	installEventFilter(this);
 
 	m_exit_button->set_name("exit_button");
 

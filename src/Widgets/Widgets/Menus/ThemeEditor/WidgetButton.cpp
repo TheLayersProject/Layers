@@ -59,6 +59,7 @@ void WidgetButton::init()
 {
 	init_attributes();
 	init_layout();
+	installEventFilter(this);
 
 	set_name("widget_button");
 	set_proper_name("Widget Button");
