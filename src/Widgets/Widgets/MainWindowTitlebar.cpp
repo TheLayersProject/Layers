@@ -1,11 +1,12 @@
-#include "Titlebar.h"
+#include "MainWindowTitlebar.h"
 
 using Layers::Button;
 using Layers::Tab;
 using Layers::TabBar2;
-using Layers::Titlebar;
+using Layers::MainWindowTitlebar;
 
-Titlebar::Titlebar(QWidget* parent) : Widget(parent)
+MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
+	Widget(parent)
 {
 	setFixedHeight(45);
 
@@ -13,6 +14,9 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 	set_proper_name("Titlebar");
 	set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
 	m_fill->set_disabled();
+
+	m_menu_tab_bar->set_name("menu_tab_bar");
+	m_menu_tab_bar->set_proper_name("Menu Tab Bar");
 
 	m_settings_button->set_name("settings_button");
 	m_settings_button->set_proper_name("Settings Button");
@@ -26,51 +30,41 @@ Titlebar::Titlebar(QWidget* parent) : Widget(parent)
 	m_exit_button->set_name("exit_button");
 	m_exit_button->set_proper_name("Exit Button");
 
-	m_menu_tab_bar->set_name("menu_tab_bar");
-	m_menu_tab_bar->set_proper_name("Menu Tab Bar");
-
 	setup_layout();
 }
 
-bool Titlebar::is(QWidget* widget)
-{
-	if (this == widget || m_menu_tab_bar->is(widget))
-		return true;
-
-	return false;
-}
-
-TabBar2* Titlebar::menu_tab_bar() const
+TabBar2* MainWindowTitlebar::menu_tab_bar() const
 {
 	return m_menu_tab_bar;
 }
 
-Button* Titlebar::settings_button() const
+Button* MainWindowTitlebar::settings_button() const
 {
 	return m_settings_button;
 }
 
-Button* Titlebar::minimize_button() const
+Button* MainWindowTitlebar::minimize_button() const
 {
 	return m_minimize_button;
 }
 
-Button* Titlebar::maximize_button() const
+Button* MainWindowTitlebar::maximize_button() const
 {
 	return m_maximize_button;
 }
 
-Button* Titlebar::exit_button() const
+Button* MainWindowTitlebar::exit_button() const
 {
 	return m_exit_button;
 }
 
-void Titlebar::setup_layout()
+void MainWindowTitlebar::setup_layout()
 {
 	// Main Layout
 	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->setSpacing(0);
 	main_layout->addWidget(m_menu_tab_bar);
+	main_layout->addStretch();
 	main_layout->addWidget(m_settings_button);
 	main_layout->addWidget(m_minimize_button);
 	main_layout->addWidget(m_maximize_button);

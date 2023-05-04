@@ -76,12 +76,6 @@ bool Tab::eventFilter(QObject* object, QEvent* event)
 			emit clicked();
 		}
 	}
-	//else if (event->type() == QEvent::Enter)
-	//{
-	//}
-	//else if (event->type() == QEvent::Leave)
-	//{
-	//}
 
 	Widget::eventFilter(object, event);
 
@@ -90,8 +84,6 @@ bool Tab::eventFilter(QObject* object, QEvent* event)
 
 void Tab::init_attributes()
 {
-	//fill()->set_value(QColor("#e6e6e6"));
-
 	m_fill->init_variant_map({
 		{ "Inactive", QColor("#36393f") },
 		{ "Active", QColor("#25272b") }
@@ -104,14 +96,10 @@ void Tab::init_attributes()
 
 	if (m_tab_icon->svg())
 	{
-		//m_tab_icon->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
 		m_tab_icon->svg()->common_color()->set_value(QColor("#e3e3e3"));
 	}
 
-	//m_exit_button->graphic()->svg()->a_use_common_color.set_value(QVariant::fromValue(true));
-	//m_exit_button->graphic()->svg()->a_use_common_hover_color.set_value(QVariant::fromValue(true));
 	m_exit_button->graphic()->svg()->common_color()->set_value(QColor("#5f5f5f"));
-	//m_exit_button->graphic()->svg()->a_common_hover_color.set_value(QColor("#e95454"));
 }
 
 Button* Tab::exit_button() const

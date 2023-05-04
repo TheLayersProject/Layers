@@ -43,7 +43,7 @@ namespace Layers
 
 		Widget* m_titlebar{ new Widget };
 
-		Label* m_window_title_label;
+		Label* m_title_label;
 
 		Button* m_exit_button = new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true);
 	};

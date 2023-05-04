@@ -1,8 +1,8 @@
-#include "Window.h"
+#include "MainWindow.h"
 
 #include "calculate.h"
 #include "Menu.h"
-#include "Titlebar.h"
+#include "MainWindowTitlebar.h"
 
 #include "Menus/SettingsMenu/SettingsMenu.h"
 #include "Menus/SettingsMenu/ThemesWidget.h"
@@ -16,20 +16,17 @@
 #include <QIcon>
 #include <QPainterPath>
 
-using Layers::ColorDialog;
 using Layers::ThemeEditor;
-using Layers::GradientDialog;
 using Layers::Menu;
 using Layers::SettingsMenu;
-using Layers::Theme;
 using Layers::Themeable;
-using Layers::Titlebar;
-using Layers::Window;
+using Layers::MainWindowTitlebar;
+using Layers::MainWindow;
 
-Window::Window(bool preview, QWidget* parent) :
+MainWindow::MainWindow(bool preview, QWidget* parent) :
 	m_settings_menu{ new SettingsMenu },
 	m_theme_editor{ new ThemeEditor },
-	m_titlebar{ new Titlebar },
+	m_titlebar{ new MainWindowTitlebar },
 	Widget(parent)
 {
 	init_attributes();
@@ -37,8 +34,8 @@ Window::Window(bool preview, QWidget* parent) :
 	init_themes_widget_connections();
 	init_titlebar_connections();
 	resize(1200, 800);
-	set_name("window");
-	set_proper_name("Window");
+	set_name("main_window");
+	set_proper_name("Main Window");
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
@@ -57,22 +54,22 @@ Window::Window(bool preview, QWidget* parent) :
 	apply_theme(*layersApp->current_theme());
 }
 
-void Window::edit_themeable(Themeable* themeable)
+void MainWindow::edit_themeable(Themeable* themeable)
 {
 	m_theme_editor->edit_themeable(themeable);
 }
 
-void Window::set_main_menu(Menu* main_menu)
+void MainWindow::set_main_menu(Menu* main_menu)
 {
 	m_app_menu = main_menu;
 
 	set_icon(new Graphic(*m_app_menu->icon()));
 
-	m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
-	m_titlebar->menu_tab_bar()->tabs().last()->exit_button()->hide();
-	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_font_size(12);
-	m_titlebar->menu_tab_bar()->tabs().last()->text_label()->set_padding(0, 8, 8, 0);
-	m_titlebar->menu_tab_bar()->tabs().last()->fill()->set_state("Active");
+	Tab* main_menu_tab = m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
+	main_menu_tab->exit_button()->hide();
+	main_menu_tab->text_label()->set_font_size(12);
+	main_menu_tab->text_label()->set_padding(0, 8, 8, 0);
+	main_menu_tab->fill()->set_state("Active");
 
 	m_app_menu->set_is_app_themeable(true);
 	m_app_menu->apply_theme(*layersApp->current_theme());
@@ -80,14 +77,16 @@ void Window::set_main_menu(Menu* main_menu)
 	m_main_layout->addWidget(m_app_menu);
 }
 
-void Window::center_dialog(QDialog* dialog)
+void MainWindow::center_dialog(QDialog* dialog)
 {
-	dialog->move(x() + (width() / 2) - (dialog->width() / 2), y() + (height() / 2) - (dialog->height() / 2));
+	dialog->move(
+		x() + (width() - dialog->width()) / 2,
+		y() + (height() - dialog->height()) / 2);
 }
 
-Themeable* Window::clone()
+Themeable* MainWindow::clone()
 {
-	Window* w = new Window(true);
+	MainWindow* w = new MainWindow(true);
 
 	w->setMinimumSize(500, 400);
 	w->setMaximumSize(800, 600);
@@ -95,7 +94,7 @@ Themeable* Window::clone()
 	return w;
 }
 
-void Window::update_theme_dependencies()
+void MainWindow::update_theme_dependencies()
 {
 	if (isMaximized())
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
@@ -103,17 +102,15 @@ void Window::update_theme_dependencies()
 	{
 		int border_thickness = border()->thickness()->as<double>();
 
-		int left_c_margin = border_thickness + m_margins->left()->as<double>();
-		int top_c_margin = border_thickness + m_margins->top()->as<double>();
-		int right_c_margin = border_thickness + m_margins->right()->as<double>();
-		int bottom_c_margin = border_thickness + m_margins->bottom()->as<double>();
-
 		m_main_layout->setContentsMargins(
-			left_c_margin, top_c_margin, right_c_margin, bottom_c_margin);
+			border_thickness + m_margins->left()->as<double>(),
+			border_thickness + m_margins->top()->as<double>(),
+			border_thickness + m_margins->right()->as<double>(),
+			border_thickness + m_margins->bottom()->as<double>());
 	}
 }
 
-void Window::open_menu(Menu* menu)
+void MainWindow::open_menu(Menu* menu)
 {
 	if (!menu->isVisible())
 	{
@@ -140,7 +137,7 @@ void Window::open_menu(Menu* menu)
 	}
 }
 
-void Window::new_theme_clicked()
+void MainWindow::new_theme_clicked()
 {
 	CreateNewThemeDialog* dialog = layersApp->create_new_theme_dialog();
 
@@ -153,7 +150,7 @@ void Window::new_theme_clicked()
 	dialog->set_current_start_theme_name(
 		layersApp->current_theme()->name());
 
-	static_cast<Window*>(QApplication::activeWindow())->center_dialog(dialog);
+	center_dialog(dialog);
 
 	dialog->show();
 
@@ -204,23 +201,23 @@ void Window::new_theme_clicked()
 	}
 }
 
-bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
+bool MainWindow::nativeEvent(
+	const QByteArray& eventType, void* message, qintptr* result)
 {
 	MSG* msg = static_cast<MSG*>(message);
 
 	if (msg->message == WM_NCHITTEST)
 	{
 		if (isMaximized())
-		{
 			return false;
-		}
 
 		*result = 0;
-		const LONG borderWidth = border()->thickness()->as<double>() * devicePixelRatio();;
+		const LONG borderWidth =
+			border()->thickness()->as<qreal>() * devicePixelRatio();
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
-		// must be short to correctly work with multiple monitors (negative coordinates)
+		// must be short to correctly work with multiple monitors
 		short x = msg->lParam & 0x0000FFFF;
 		short y = (msg->lParam & 0xFFFF0000) >> 16;
 
@@ -281,22 +278,25 @@ bool Window::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
 			}
 		}
 
-		if (m_titlebar->is(QApplication::widgetAt(QCursor::pos()))) {
+		if (m_titlebar == QApplication::widgetAt(QCursor::pos()))
+		{
 			*result = HTCAPTION;
 			return true;
 		}
 
-		if (*result != 0) return true;
+		if (*result != 0)
+			return true;
 	}
 
 	return false;
 }
 
-void Window::init_attributes()
+void MainWindow::init_attributes()
 {
 	m_border->thickness()->set_value(15.0);
 	m_border->fill()->set_value(
-		QVariant::fromValue(QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
+		QVariant::fromValue(
+			QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
 	m_corner_radii->top_left()->set_value(10.0);
 	m_corner_radii->top_right()->set_value(10.0);
 	m_corner_radii->bottom_left()->set_value(10.0);
@@ -319,7 +319,7 @@ void Window::init_attributes()
 	m_separator->fill()->set_value(QColor("#25272b"));
 }
 
-void Window::init_layout()
+void MainWindow::init_layout()
 {
 	int margin = border()->thickness()->as<double>();
 
@@ -333,7 +333,7 @@ void Window::init_layout()
 	setLayout(m_main_layout);
 }
 
-void Window::init_themes_widget_connections()
+void MainWindow::init_themes_widget_connections()
 {
 	ThemesWidget* themes_widget = m_settings_menu->themes_widget();
 
@@ -346,10 +346,10 @@ void Window::init_themes_widget_connections()
 		});
 
 	connect(themes_widget->new_theme_button(), &Button::clicked,
-		this, &Window::new_theme_clicked);
+		this, &MainWindow::new_theme_clicked);
 }
 
-void Window::init_titlebar_connections()
+void MainWindow::init_titlebar_connections()
 {
 	connect(m_titlebar->settings_button(), &Button::clicked, [this]
 		{

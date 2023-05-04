@@ -173,11 +173,11 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Titlebar.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\MainWindowTitlebar.cpp" />
     <ClCompile Include="src\Widgets\Kernel\Widget.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButtonGroup.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Window.cpp" />
+    <ClCompile Include="src\Widgets\Widgets\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
@@ -235,11 +235,11 @@
     <QtMoc Include="include\Downloader.h" />
     <ClInclude Include="include\calculate.h" />
     <QtMoc Include="include\Application.h" />
-    <QtMoc Include="include\Window.h" />
+    <QtMoc Include="include\MainWindow.h" />
     <QtMoc Include="src\Widgets\Dialogs\UpdateDialog.h" />
     <QtMoc Include="src\Widgets\Dialogs\GradientDialog.h" />
     <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h" />
-    <QtMoc Include="src\Widgets\Widgets\Titlebar.h" />
+    <QtMoc Include="src\Widgets\Widgets\MainWindowTitlebar.h" />
     <QtMoc Include="include\Tab.h" />
     <QtMoc Include="include\TabBar.h" />
     <QtMoc Include="include\MenuBar.h" />

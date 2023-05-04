@@ -10,14 +10,12 @@ TabBar2::TabBar2(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
 	m_control_tab->hide();
 
 	setup_layout();
 }
 
-void TabBar2::add_tab(Menu* menu)
+Tab* TabBar2::add_tab(Menu* menu)
 {
 	Tab* tab = new Tab(menu);
 
@@ -44,15 +42,9 @@ void TabBar2::add_tab(Menu* menu)
 		tab->deleteLater();
 	});
 
-	m_tab_layout->insertWidget(m_tab_layout->count() - 1, tab);
-}
+	m_tab_layout->addWidget(tab);
 
-bool TabBar2::is(QWidget* widget)
-{
-	if (this == widget || m_foreground_widget == widget)
-		return true;
-
-	return false;
+	return tab;
 }
 
 QList<Tab*> TabBar2::tabs()
@@ -82,21 +74,12 @@ void TabBar2::select_tab(Tab* selecting_tab)
 void TabBar2::init_attributes()
 {
 	m_fill->set_disabled();
-
-	m_foreground_widget->fill()->set_disabled();
-}
-
-void TabBar2::resizeEvent(QResizeEvent* event)
-{
-	m_foreground_widget->setFixedSize(size());
-	//m_foreground_widget->setFixedSize(size());
 }
 
 void TabBar2::setup_layout()
 {
-	m_tab_layout->addStretch();
 	m_tab_layout->setContentsMargins(0, 0, 0, 0);
 	m_tab_layout->setSpacing(0);
 
-	m_foreground_widget->setLayout(m_tab_layout);
+	setLayout(m_tab_layout);
 }

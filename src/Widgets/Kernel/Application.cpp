@@ -3,7 +3,7 @@
 #include "Downloader.h"
 #include "GitHubRepo.h"
 #include "Version.h"
-#include "Window.h"
+#include "MainWindow.h"
 
 #include "Widgets/Dialogs/CreateNewThemeDialog.h"
 #include "Widgets/Dialogs/ColorDialog.h"
@@ -27,7 +27,7 @@ using Layers::GradientDialog;
 using Layers::Theme;
 using Layers::Themeable;
 using Layers::ThemeCompatibilityCautionDialog;
-using Layers::Window;
+using Layers::MainWindow;
 
 Application::Application(
 	int& argc, char** argv,
@@ -317,12 +317,12 @@ void Application::rename_theme(const QString& theme_id, const QString& new_name)
 	}
 }
 
-Window* Application::main_window() const
+MainWindow* Application::main_window() const
 {
 	// TODO: Below is temporary and will not work right if the application supports multiple windows.
 	for (Themeable* themeable : m_child_themeables)
 		if (themeable->name() && *themeable->name() == "window")
-			return static_cast<Window*>(themeable);
+			return static_cast<MainWindow*>(themeable);
 
 	return nullptr;
 }

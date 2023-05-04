@@ -1,5 +1,5 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QVBoxLayout>
 
@@ -11,14 +11,14 @@ namespace Layers
 	class Menu;
 	class SettingsMenu;
 	class ThemeEditor;
-	class Titlebar;
+	class MainWindowTitlebar;
 
-	class Window : public Widget
+	class MainWindow : public Widget
 	{
 		Q_OBJECT
 
 	public:
-		Window(bool preview = false, QWidget* parent = nullptr);
+		MainWindow(bool preview = false, QWidget* parent = nullptr);
 
 		void center_dialog(QDialog* dialog);
 
@@ -35,7 +35,8 @@ namespace Layers
 		void open_menu(Menu* menu);
 
 	protected:
-		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
+		bool nativeEvent(
+			const QByteArray& eventType, void* message, qintptr* result) override;
 
 	private:
 		void init_attributes();
@@ -45,7 +46,7 @@ namespace Layers
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		Titlebar* m_titlebar;
+		MainWindowTitlebar* m_titlebar;
 
 		Widget* m_separator{ new Widget };
 
@@ -56,4 +57,4 @@ namespace Layers
 	};
 }
 
-#endif // WINDOW_H
+#endif // MAINWINDOW_H

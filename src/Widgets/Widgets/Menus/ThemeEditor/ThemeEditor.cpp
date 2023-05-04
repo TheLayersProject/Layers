@@ -22,6 +22,7 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 
 	m_control_widget_editor = new WidgetEditor(m_control_themeable, this, m_sidebar);
 	m_control_widget_editor->set_proper_name("Widget Editor");
+	m_control_widget_editor->hide();
 
 	m_topbar->setFixedHeight(45);
 	m_topbar->setMouseTracking(true);
@@ -112,6 +113,7 @@ void ThemeEditor::edit_themeable(Themeable* themeable)
 	m_sidebar->setWidget(widget_editor);
 	m_sidebar->setFixedWidth(widget_editor->width());
 
+	widget_editor->installEventFilter(this);
 	widget_editor->entangle_with(m_control_widget_editor);
 
 	if (!m_open_themeables.contains(themeable))
@@ -157,18 +159,23 @@ void ThemeEditor::set_preview_widget(QWidget* widget)
 
 bool ThemeEditor::eventFilter(QObject* object, QEvent* event)
 {
-	if (object == this && event->type() == QEvent::Resize)
-	{
-		if (m_sidebar->widget())
-		{
-			if (height() < m_sidebar->widget()->height())
-				m_sidebar->setFixedWidth(m_sidebar->widget()->width() + 45); // 45 is scrollbar width
-			else
-				m_sidebar->setFixedWidth(m_sidebar->widget()->width());
-		}
-	}
+	if (event->type() == QEvent::Resize)
+		handle_sidebar_width();
 
 	return false;
+}
+
+void ThemeEditor::handle_sidebar_width()
+{
+	if (m_sidebar->widget())
+	{
+		if (height() < m_sidebar->widget()->height())
+			m_sidebar->setFixedWidth(
+				m_sidebar->widget()->width() +
+				m_sidebar->vertical_scrollbar()->width());
+		else
+			m_sidebar->setFixedWidth(m_sidebar->widget()->width());
+	}
 }
 
 void ThemeEditor::init_layout()

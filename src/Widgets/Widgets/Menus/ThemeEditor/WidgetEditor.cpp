@@ -3,7 +3,7 @@
 #include "calculate.h"
 #include "Dialog.h"
 #include "Menu.h"
-#include "Window.h"
+#include "MainWindow.h"
 
 #include "ThemeEditor.h"
 
@@ -48,28 +48,28 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 	m_show_all_button->set_margin(0, 7, 0, 7);
 	m_show_all_button->set_text_padding(3, 5, 0, 0);
 
-	m_show_primary_button->set_name("show_primary_button");
-	m_show_primary_button->set_proper_name("'Show Primary' Button");
-	m_show_primary_button->disable_text_hover_color();
-	m_show_primary_button->set_margin(0, 7, 0, 7);
-	m_show_primary_button->set_text_padding(3, 5, 0, 0);
-	m_show_primary_button->hide();
+	m_show_enabled_button->set_name("show_enabled_button");
+	m_show_enabled_button->set_proper_name("'Show Enabled' Button");
+	m_show_enabled_button->disable_text_hover_color();
+	m_show_enabled_button->set_margin(0, 7, 0, 7);
+	m_show_enabled_button->set_text_padding(3, 5, 0, 0);
+	m_show_enabled_button->hide();
 
 	connect(m_show_all_button, &Button::clicked, [this] {
 		for (AttributeEditor* aw : m_modifier_widgets)
 			aw->show();
 
 		m_show_all_button->hide();
-		m_show_primary_button->show();
+		m_show_enabled_button->show();
 	});
 
-	connect(m_show_primary_button, &Button::clicked, [this] {
+	connect(m_show_enabled_button, &Button::clicked, [this] {
 		for (AttributeEditor* aw : m_modifier_widgets)
 			if (aw->disabled())
 				aw->hide();
 
 		m_show_all_button->show();
-		m_show_primary_button->hide();
+		m_show_enabled_button->hide();
 	});
 
 	if (m_themeable->child_themeables().isEmpty())
@@ -149,7 +149,7 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 				else if (dynamic_cast<MiniSlider*>(child_themeable))
 					slider_widget_buttons.append(widget_button);
 
-				else if (dynamic_cast<Window*>(child_themeable))
+				else if (dynamic_cast<MainWindow*>(child_themeable))
 					window_widget_buttons.append(widget_button);
 
 				else
@@ -345,13 +345,13 @@ void WidgetEditor::init_attributes()
 	m_show_all_button->corner_radii()->bottom_left()->set_value(5.0);
 	m_show_all_button->corner_radii()->bottom_right()->set_value(5.0);
 
-	m_show_primary_button->fill()->set_value(QColor("#61ad50"));
+	m_show_enabled_button->fill()->set_value(QColor("#61ad50"));
 	// TODO:
 	//m_show_primary_button->hover_fill()->set_value(QColor("#6fc65b"));
-	m_show_primary_button->corner_radii()->top_left()->set_value(5.0);
-	m_show_primary_button->corner_radii()->top_right()->set_value(5.0);
-	m_show_primary_button->corner_radii()->bottom_left()->set_value(5.0);
-	m_show_primary_button->corner_radii()->bottom_right()->set_value(5.0);
+	m_show_enabled_button->corner_radii()->top_left()->set_value(5.0);
+	m_show_enabled_button->corner_radii()->top_right()->set_value(5.0);
+	m_show_enabled_button->corner_radii()->bottom_left()->set_value(5.0);
+	m_show_enabled_button->corner_radii()->bottom_right()->set_value(5.0);
 }
 
 void WidgetEditor::setup_layout()
@@ -365,7 +365,7 @@ void WidgetEditor::setup_layout()
 		m_attributes_label_layout->addWidget(m_attributes_label);
 		m_attributes_label_layout->addStretch();
 		m_attributes_label_layout->addWidget(m_show_all_button);
-		m_attributes_label_layout->addWidget(m_show_primary_button);
+		m_attributes_label_layout->addWidget(m_show_enabled_button);
 		m_attributes_label_layout->addStretch();
 
 		// Attributes Layout

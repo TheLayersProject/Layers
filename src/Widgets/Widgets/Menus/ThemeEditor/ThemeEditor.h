@@ -36,6 +36,8 @@ namespace Layers
 		bool eventFilter(QObject* object, QEvent* event) override;
 
 	private:
+		void handle_sidebar_width();
+
 		void init_layout();
 
 		Themeable* m_control_themeable{ new Themeable };

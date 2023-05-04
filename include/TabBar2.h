@@ -15,9 +15,7 @@ namespace Layers
 	public:
 		TabBar2(QWidget* parent = nullptr);
 
-		void add_tab(Menu* menu);
-
-		bool is(QWidget* widget);
+		Tab* add_tab(Menu* menu);
 
 		QList<Tab*> tabs();
 
@@ -26,15 +24,10 @@ namespace Layers
 	protected:
 		void init_attributes();
 
-		void resizeEvent(QResizeEvent* event);
-
 	private:
 		void setup_layout();
 
 		Tab* m_control_tab{ new Tab(this) };
-
-		//Widget* m_background_widget{ new Widget(this) };
-		Widget* m_foreground_widget{ new Widget(this) };
 
 		QHBoxLayout* m_tab_layout{ new QHBoxLayout };
 	};

@@ -20,7 +20,7 @@ namespace Layers
 	class ThemeCompatibilityCautionDialog;
 	class UpdateDialog;
 	class Version;
-	class Window;
+	class MainWindow;
 
 	class Application : public QApplication, public Themeable
 	{
@@ -74,7 +74,7 @@ namespace Layers
 		*/
 		QFile* icon_file();
 
-		Window* main_window() const;
+		MainWindow* main_window() const;
 
 		/*!
 			Returns the name of the application.

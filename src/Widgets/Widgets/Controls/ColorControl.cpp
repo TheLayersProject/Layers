@@ -1,7 +1,6 @@
-#include "Application.h"
 #include "ColorControl.h"
-#include "GradientControl.h"
-#include "Window.h"
+
+#include "Application.h"
 
 #include "Widgets/Dialogs/ColorDialog.h"
 
@@ -27,9 +26,6 @@ ColorControl::~ColorControl()
 void ColorControl::click()
 {
 	ColorDialog* color_dialog = layersApp->color_dialog();
-
-	//color_dialog->entangle_with(
-	//	layersApp->main_window()->control_color_dialog());
 
 	color_dialog->color()->set_value(fill()->as<QColor>());
 

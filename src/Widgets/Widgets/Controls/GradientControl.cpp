@@ -1,7 +1,6 @@
 #include "GradientControl.h"
 
 #include "Application.h"
-#include "Window.h"
 
 #include "Widgets/Dialogs/GradientDialog.h"
 
@@ -34,7 +33,9 @@ void GradientControl::init_attributes()
 	m_margins->right()->set_value(10.0);
 	m_margins->bottom()->set_value(10.0);
 
-    m_fill->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+    m_fill->set_value(
+		QVariant::fromValue(
+			QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
 }
 
 void GradientControl::set_current_editting_state(const QString& state)
@@ -50,18 +51,9 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			//GradientDialog* gsd =
-			//	new GradientDialog(fill()->as<QGradientStops>());
-
-			//gsd->entangle_with(
-			//	layersApp->main_window()->control_gradient_dialog());
-
 			GradientDialog* gradient_dialog = layersApp->gradient_dialog();
 
 			gradient_dialog->set_gradient_stops(fill()->as<QGradientStops>());
-			
-
-			//static_cast<Window*>(QApplication::activeWindow())->center_dialog(gsd);
 
 			if (gradient_dialog->exec())
 			{
@@ -71,8 +63,6 @@ bool GradientControl::eventFilter(QObject* object, QEvent* event)
 			}
 
 			gradient_dialog->hide();
-
-			//delete gsd;
 		}
 	}
 

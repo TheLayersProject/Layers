@@ -11,7 +11,7 @@
 using Layers::Dialog;
 
 Dialog::Dialog(const QString& title, QWidget* parent) :
-	m_window_title_label{ new Label(title) }, QDialog(parent)
+	m_title_label{ new Label(title) }, QDialog(parent)
 {
 	init_attributes();
 	init_titlebar();
@@ -96,23 +96,23 @@ void Dialog::init_attributes()
 		connect(margin, &AbstractAttribute::value_changed, this, &Dialog::update_content_margins);
 }
 
-bool Dialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
+bool Dialog::nativeEvent(
+	const QByteArray& eventType, void* message, qintptr* result)
 {
 	MSG* msg = static_cast<MSG*>(message);
 
 	if (msg->message == WM_NCHITTEST)
 	{
 		if (isMaximized())
-		{
 			return false;
-		}
 
 		*result = 0;
-		const LONG borderWidth = border()->thickness()->as<double>() * devicePixelRatio();;
+		const LONG borderWidth =
+			border()->thickness()->as<qreal>() * devicePixelRatio();
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
-		// must be short to correctly work with multiple monitors (negative coordinates)
+		// must be short to correctly work with multiple monitors
 		short x = msg->lParam & 0x0000FFFF;
 		short y = (msg->lParam & 0xFFFF0000) >> 16;
 
@@ -173,12 +173,14 @@ bool Dialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* re
 			}
 		}
 
-		if (m_titlebar == QApplication::widgetAt(QCursor::pos())) {
+		if (m_titlebar == QApplication::widgetAt(QCursor::pos()))
+		{
 			*result = HTCAPTION;
 			return true;
 		}
 
-		if (*result != 0) return true;
+		if (*result != 0)
+			return true;
 	}
 
 	return false;
@@ -195,11 +197,11 @@ void Dialog::init_titlebar()
 	m_titlebar->set_name("titlebar");
 	m_titlebar->set_proper_name("Titlebar");
 
-	m_window_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_window_title_label->set_name("window_title_label");
-	m_window_title_label->set_proper_name("Label");
-	m_window_title_label->set_padding(0, 8, 0, 0);
-	m_window_title_label->set_font_size(14);
+	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
+	m_title_label->set_name("title_label");
+	m_title_label->set_proper_name("Title Label");
+	m_title_label->set_padding(0, 8, 0, 0);
+	m_title_label->set_font_size(14);
 
 	connect(m_exit_button, &Button::clicked, [this] {
 		if (!m_functionality_disabled)
@@ -213,7 +215,7 @@ void Dialog::init_titlebar()
 
 	m_titlebar_layout->setContentsMargins(0, 0, 0, 0);
 	m_titlebar_layout->setSpacing(0);
-	m_titlebar_layout->addWidget(m_window_title_label);
+	m_titlebar_layout->addWidget(m_title_label);
 	m_titlebar_layout->addStretch();
 	m_titlebar_layout->addWidget(m_exit_button);
 
