@@ -2,7 +2,7 @@
 
 using Layers::Button;
 using Layers::Tab;
-using Layers::TabBar2;
+using Layers::TabBar;
 using Layers::MainWindowTitlebar;
 
 MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
@@ -33,7 +33,7 @@ MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
 	setup_layout();
 }
 
-TabBar2* MainWindowTitlebar::menu_tab_bar() const
+TabBar* MainWindowTitlebar::menu_tab_bar() const
 {
 	return m_menu_tab_bar;
 }

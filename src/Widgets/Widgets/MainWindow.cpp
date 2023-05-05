@@ -45,6 +45,12 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	m_settings_menu->hide();
 	m_theme_editor->hide();
 
+	connect(m_titlebar->menu_tab_bar(), SIGNAL(index_changed(int, int)),
+		this, SLOT(menu_changed(int, int)));
+
+	connect(m_titlebar->menu_tab_bar(), SIGNAL(tab_closed(int)),
+		this, SLOT(close_menu(int)));
+
 	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
 	m_separator->set_name("separator");
 	m_separator->set_proper_name("Separator");
@@ -62,19 +68,19 @@ void MainWindow::edit_themeable(Themeable* themeable)
 void MainWindow::set_main_menu(Menu* main_menu)
 {
 	m_app_menu = main_menu;
-
-	set_icon(new Graphic(*m_app_menu->icon()));
-
-	Tab* main_menu_tab = m_titlebar->menu_tab_bar()->add_tab(m_app_menu);
-	main_menu_tab->exit_button()->hide();
-	main_menu_tab->text_label()->set_font_size(12);
-	main_menu_tab->text_label()->set_padding(0, 8, 8, 0);
-	main_menu_tab->fill()->set_state("Active");
-
 	m_app_menu->set_is_app_themeable(true);
 	m_app_menu->apply_theme(*layersApp->current_theme());
 
 	m_main_layout->addWidget(m_app_menu);
+
+	set_icon(new Graphic(*m_app_menu->icon()));
+
+	open_menu(main_menu);
+
+	Tab* app_menu_tab = m_titlebar->menu_tab_bar()->tabs().last();
+	app_menu_tab->close_button()->hide();
+	app_menu_tab->text_label()->set_font_size(12);
+	app_menu_tab->text_label()->set_padding(0, 8, 8, 0);
 }
 
 void MainWindow::center_dialog(QDialog* dialog)
@@ -110,31 +116,34 @@ void MainWindow::update_theme_dependencies()
 	}
 }
 
+void MainWindow::menu_changed(int old_index, int new_index)
+{
+	if (Menu* old_menu = (old_index != -1) ?
+		m_opened_menus[old_index] : nullptr)
+	{
+		old_menu->hide();
+	}
+
+	m_opened_menus[new_index]->show();
+}
+
 void MainWindow::open_menu(Menu* menu)
 {
-	if (!menu->isVisible())
+	TabBar* tab_bar = m_titlebar->menu_tab_bar();
+
+	if (!m_opened_menus.contains(menu))
 	{
-		bool contains_tab_for_menu = false;
-		Tab* pre_existing_tab = nullptr;
+		m_opened_menus.append(menu);
 
-		for (Tab* tab : m_titlebar->menu_tab_bar()->tabs())
-			if (tab->menu() == menu)
-			{
-				contains_tab_for_menu = true;
-				pre_existing_tab = tab;
-				break;
-			}
-
-		if (!contains_tab_for_menu)
-		{
-			m_titlebar->menu_tab_bar()->add_tab(menu);
-
-			m_titlebar->menu_tab_bar()->select_tab(
-				m_titlebar->menu_tab_bar()->tabs().last());
-		}
-		else
-			m_titlebar->menu_tab_bar()->select_tab(pre_existing_tab);
+		tab_bar->add_tab(new Graphic(*menu->icon()), menu->menu_name());
 	}
+
+	tab_bar->set_current_index(m_opened_menus.indexOf(menu));
+}
+
+void MainWindow::close_menu(int index)
+{
+	m_opened_menus.removeAt(index);
 }
 
 void MainWindow::new_theme_clicked()

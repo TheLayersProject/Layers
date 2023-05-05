@@ -31,7 +31,9 @@ namespace Layers
 		void update_theme_dependencies();
 
 	public slots:
+		void close_menu(int index);
 		void new_theme_clicked();
+		void menu_changed(int old_index, int new_index);
 		void open_menu(Menu* menu);
 
 	protected:
@@ -45,6 +47,8 @@ namespace Layers
 		void init_titlebar_connections();
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+
+		QList<Menu*> m_opened_menus;
 
 		MainWindowTitlebar* m_titlebar;
 

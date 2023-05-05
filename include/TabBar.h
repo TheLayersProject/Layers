@@ -1,40 +1,47 @@
 #ifndef TABBAR_H
 #define TABBAR_H
 
-#include <QTabBar>
+#include <QHBoxLayout>
 
-#include "Attribute.h"
-#include "Themeable.h"
+#include "Tab.h"
+#include "Widget.h"
 
 namespace Layers
 {
-	class TabBar : public QTabBar, public Themeable
+	class TabBar : public Widget
 	{
 		Q_OBJECT
 
+	signals:
+		void index_changed(int old_index, int new_index);
+		void tab_closed(int index);
+
 	public:
-		TabBar(QWidget* parent = 0);
+		TabBar(QWidget* parent = nullptr);
 
-		void SetCurrentTab(const QString& text);
+		void add_tab(Graphic* icon, const QString& text);
 
-		bool ContainsTab(const QString& text);
+		void add_tab(const QString& text);
 
-		//void removeTab(int index);
-		void removeTab(const QString& text);
+		int current_index() const;
 
-		void update_theme_dependencies();
+		void set_current_index(int index);
 
-		Attribute* selected_fill_color() const;
-		Attribute* text_color() const;
+		QList<Tab*> tabs() const;
 
 	protected:
-		QString build_stylesheet();
-
 		void init_attributes();
+		void init_layout();
 
-	private:
-		Attribute* m_selected_fill_color{ new Attribute("selected_fill_color", QColor(Qt::gray)) };
-		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::white)) };
+		void _add_tab(Tab* tab);
+
+		Tab* m_control_tab{ new Tab(new Graphic(":/svgs/exit.svg"), "", this)};
+
+		int m_current_index{ -1 };
+
+		QList<Tab*> m_tabs;
+
+		QHBoxLayout* m_tab_layout{ new QHBoxLayout };
 	};
 }
 

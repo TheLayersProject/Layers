@@ -1,86 +1,97 @@
 #include "TabBar.h"
 
-using Layers::Attribute;
+#include <QEvent>
+#include <QResizeEvent>
+
+using Layers::Tab;
 using Layers::TabBar;
 
-TabBar::TabBar(QWidget* parent) : QTabBar(parent)
+TabBar::TabBar(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
+	init_layout();
 
-	setDrawBase(false);
-
-	update_theme_dependencies();
+	m_control_tab->hide();
+	m_control_tab->set_icon(new Graphic(":/svgs/mll_icon.svg", QSize(20, 6)));
+	m_control_tab->set_name("tabs");
+	m_control_tab->set_proper_name("Tabs");
 }
 
-void TabBar::SetCurrentTab(const QString& text)
+void TabBar::add_tab(Graphic* icon, const QString& text)
 {
-	for (int i = 0; i < count(); i++)
-		if (tabText(i) == text) setCurrentIndex(i);
+	_add_tab(new Tab(icon, text));
 }
 
-bool TabBar::ContainsTab(const QString& text)
+void TabBar::add_tab(const QString& text)
 {
-	for (int i = 0; i < count(); i++)
-		if (tabText(i) == text) return true;
-
-	return false;
+	_add_tab(new Tab(text));
 }
 
-//void TabBar::removeTab(int index)
-//{
-//	QTabBar::removeTab(index);
-//}
-
-void TabBar::removeTab(const QString& text)
+int TabBar::current_index() const
 {
-	for (int i = 0; i < count(); i++)
+	return m_current_index;
+}
+
+void TabBar::set_current_index(int index)
+{
+	if (index != m_current_index)
 	{
-		QString TabText = tabText(i);
+		int old_index = m_current_index;
+		m_current_index = index;
+		emit index_changed(old_index, index);
 
-		if (TabText == text) QTabBar::removeTab(i);
+		if (old_index != -1)
+			m_tabs[old_index]->fill()->set_state("Inactive");
+
+		m_tabs[index]->fill()->set_state("Active");
 	}
 }
 
-void TabBar::update_theme_dependencies()
+QList<Tab*> TabBar::tabs() const
 {
-	setStyleSheet(build_stylesheet());
-}
-
-Attribute* TabBar::selected_fill_color() const
-{
-	return m_selected_fill_color;
-}
-
-Attribute* TabBar::text_color() const
-{
-	return m_text_color;
-}
-
-QString TabBar::build_stylesheet()
-{
-	// "; border: 1px solid " + m_attribute_set.attribute_value("border_color")->as<QColor>().name() + 
-
-	return
-		"QTabBar { color: " + m_text_color->as<QColor>().name() + "; font: 12pt; }"
-		//"QTabBar::tab { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; }" // padding: 7px; padding-top: 2px; padding-bottom: 2px; border-bottom-color: none }"
-		//"QTabBar::tab:!selected { margin-top: 2px; }"
-		//"QTabBar::tab:!selected { background: " + m_attribute_set.attribute_value("background_color")->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		"QTabBar::tab:!selected { background:none; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		"QTabBar::tab:selected { background: " + m_selected_fill_color->as<QColor>().name() + "; padding:10px; border-top-left-radius:5px; border-top-right-radius:5px; }"
-		//"QTabBar::tab:first:selected { margin-left: 0; }"
-		//"QTabBar::tab:last { margin-right: 0; }"
-		"QTabBar::tab:only-one { margin: 0; }"
-		"QTabBar::close-button { image:url(./data/images/close_tab_before.png); margin-bottom:3px; }"
-		"QTabBar::close-button:hover { image:url(./data/images/close_tab_after.png); margin-bottom:3px; }";
+	return m_tabs;
 }
 
 void TabBar::init_attributes()
 {
-	m_attributes.insert({
-		{ "text_color", m_text_color },
-		{ "selected_fill_color", m_selected_fill_color }
-		});
+	m_fill->set_disabled();
+}
 
-	connect(m_selected_fill_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
+void TabBar::init_layout()
+{
+	m_tab_layout->setContentsMargins(0, 0, 0, 0);
+	m_tab_layout->setSpacing(0);
+
+	setLayout(m_tab_layout);
+}
+
+void TabBar::_add_tab(Tab* tab)
+{
+	tab->entangle_with(m_control_tab);
+
+	m_tabs.append(tab);
+	m_tab_layout->addWidget(tab);
+
+	connect(tab, &Tab::clicked, [this, tab]
+		{ set_current_index(m_tabs.indexOf(tab)); });
+
+	connect(tab, &Tab::closed, [this, tab]
+		{
+			int remove_index = m_tabs.indexOf(tab);
+
+			if (m_current_index == remove_index)
+			{
+				if (remove_index < m_tabs.count() - 1)
+					set_current_index(remove_index + 1);
+				else
+					set_current_index(remove_index - 1);
+			}
+
+			m_tabs.takeAt(remove_index)->deleteLater();
+
+			if (m_current_index > remove_index)
+				m_current_index--;
+
+			emit tab_closed(remove_index);
+		});
 }

@@ -54,9 +54,6 @@
     <ClCompile Include="src\Widgets\Widgets\TabBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\TabBar2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\ItemViews\TableView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -295,9 +292,6 @@
     <QtMoc Include="include\MenuBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\TabBar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Tab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -355,7 +349,7 @@
     <QtMoc Include="src\Widgets\Dialogs\FillDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\TabBar2.h">
+    <QtMoc Include="include\TabBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Menu.h">

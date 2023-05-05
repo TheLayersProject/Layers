@@ -1,7 +1,7 @@
 #ifndef MAINWINDOWTITLEBAR_H
 #define MAINWINDOWTITLEBAR_H
 
-#include "TabBar2.h"
+#include "TabBar.h"
 
 namespace Layers
 {
@@ -12,7 +12,7 @@ namespace Layers
 	public:
 		MainWindowTitlebar(QWidget* parent = nullptr);
 
-		TabBar2* menu_tab_bar() const;
+		TabBar* menu_tab_bar() const;
 
 		Button* settings_button() const;
 		Button* minimize_button() const;
@@ -45,7 +45,7 @@ namespace Layers
 				new Graphic(":/svgs/exit.svg", QSize(20, 20)),
 				true) };
 
-		TabBar2* m_menu_tab_bar{ new TabBar2 };
+		TabBar* m_menu_tab_bar{ new TabBar };
 	};
 }
 

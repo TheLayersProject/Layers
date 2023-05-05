@@ -5691,7 +5691,7 @@
             }
         }
     },
-    "main_window/titlebar/menu_tab_bar/tabs/exit_button": {
+    "main_window/titlebar/menu_tab_bar/tabs/close_button": {
         "border": {
             "fill": {
                 "value": "#a0a0a4"
@@ -5733,7 +5733,7 @@
             }
         }
     },
-    "main_window/titlebar/menu_tab_bar/tabs/exit_button/graphic/svg": {
+    "main_window/titlebar/menu_tab_bar/tabs/close_button/graphic/svg": {
         "common_color": {
             "values": {
                 "Selected": "#e95454",

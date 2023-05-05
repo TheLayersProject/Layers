@@ -168,7 +168,6 @@
     <ClCompile Include="src\Widgets\Widgets\ScrollArea.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ScrollBar.cpp" />
     <ClCompile Include="src\Widgets\Widgets\TabBar.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\TabBar2.cpp" />
     <ClCompile Include="src\Widgets\ItemViews\TableView.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBoxItemDelegate.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\ThemeCompatibilityItemDelegate.cpp" />
@@ -214,7 +213,7 @@
     <ClInclude Include="include\GitHubRepo.h" />
     <QtMoc Include="include\ScrollBar.h" />
     <QtMoc Include="include\Variant.h" />
-    <QtMoc Include="include\TabBar2.h" />
+    <QtMoc Include="include\TabBar.h" />
     <QtMoc Include="include\TableView.h" />
     <QtMoc Include="include\SvgRenderer.h" />
     <QtMoc Include="include\HeaderView.h" />
@@ -241,7 +240,6 @@
     <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h" />
     <QtMoc Include="src\Widgets\Widgets\MainWindowTitlebar.h" />
     <QtMoc Include="include\Tab.h" />
-    <QtMoc Include="include\TabBar.h" />
     <QtMoc Include="include\MenuBar.h" />
     <QtMoc Include="include\ToggleSwitch.h" />
     <QtMoc Include="include\Slider.h" />
