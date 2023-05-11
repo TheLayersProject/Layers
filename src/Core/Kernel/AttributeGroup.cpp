@@ -9,18 +9,14 @@ using Layers::MarginsAttributes;
 AttributeGroup::AttributeGroup(const QString& name, bool disabled) :
 	AbstractAttribute(name, disabled) { }
 
-//AttributeGroup::AttributeGroup(const QString& name, const QMap<QString, Attribute*>& attributes, bool disabled) :
-//	m_attributes{ attributes }, AbstractAttribute(name, disabled) { }
-
-AttributeGroup::AttributeGroup() :
-	m_attributes{ QMap<QString, Attribute*>() }, AbstractAttribute("", false) { }
-
-AttributeGroup::AttributeGroup(const AttributeGroup& ag) : AbstractAttribute(ag.m_name, ag.m_disabled)
+AttributeGroup::AttributeGroup(const AttributeGroup& attribute_group) :
+	AbstractAttribute(attribute_group.m_name, attribute_group.m_disabled)
 {
-	m_disabled = ag.m_disabled;
+	m_disabled = attribute_group.m_disabled;
 
-	for (const QString& attr_key : ag.m_attributes.keys())
-		m_attributes[attr_key] = new Attribute(*ag.m_attributes[attr_key]);
+	for (const QString& attr_key : attribute_group.m_attributes.keys())
+		m_attributes[attr_key] =
+			new Attribute(*attribute_group.m_attributes[attr_key]);
 }
 
 AttributeGroup::~AttributeGroup()
@@ -44,12 +40,13 @@ QMap<QString, Attribute*>::iterator AttributeGroup::begin()
 	return m_attributes.begin();
 }
 
-void AttributeGroup::copy(const AttributeGroup& ag)
+void AttributeGroup::copy(const AttributeGroup& attribute_group)
 {
-	for (const QString& attr_key : m_attributes.keys())
-		m_attributes[attr_key]->copy(*ag.m_attributes[attr_key]);
+	for (const QString& key : m_attributes.keys())
+		m_attributes[key]->copy(
+			*attribute_group.m_attributes[key]);
 
-	m_disabled = ag.m_disabled;
+	m_disabled = attribute_group.m_disabled;
 }
 
 QMap<QString, Attribute*>::iterator AttributeGroup::end()
@@ -57,10 +54,11 @@ QMap<QString, Attribute*>::iterator AttributeGroup::end()
 	return m_attributes.end();
 }
 
-void AttributeGroup::entangle_with(AttributeGroup& attr_group)
+void AttributeGroup::entangle_with(AttributeGroup& attribute_group)
 {
 	for (const QString& attr_key : m_attributes.keys())
-		m_attributes[attr_key]->entangle_with(*attr_group.m_attributes[attr_key]);
+		m_attributes[attr_key]->entangle_with(
+			*attribute_group.m_attributes[attr_key]);
 }
 
 bool AttributeGroup::is_multi_valued() const
@@ -78,14 +76,6 @@ void AttributeGroup::set_state(const QString& state)
 		attr->set_state(state);
 }
 
-//void AttributeGroup::setup_widget_update_connection(QWidget* widget)
-//{
-//	connect(this, &AbstractAttribute::value_changed, [widget] { widget->update(); });
-//
-//	for (Attribute* attr : m_attributes)
-//		attr->setup_widget_update_connection(widget);
-//}
-
 QJsonObject AttributeGroup::to_json_object()
 {
 	QJsonObject json_object;
@@ -93,8 +83,8 @@ QJsonObject AttributeGroup::to_json_object()
 	if (m_disabled)
 		json_object.insert("disabled", m_disabled);
 
-	for (const QString& attr_key : m_attributes.keys())
-		json_object.insert(attr_key, m_attributes[attr_key]->to_json_object());
+	for (const QString& key : m_attributes.keys())
+		json_object.insert(key, m_attributes[key]->to_json_object());
 
 	return json_object;
 }

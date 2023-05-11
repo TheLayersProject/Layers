@@ -62,8 +62,8 @@ void GridlineItemDelegate::init_attributes()
 		{ "grid", m_grid }
 		});
 
-	connect(m_grid->fill(), &AbstractAttribute::value_changed, [this] { emit changed(); });
-	connect(m_grid->thickness(), &AbstractAttribute::value_changed, [this] { emit changed(); });
+	connect(m_grid->fill(), &AbstractAttribute::changed, [this] { emit changed(); });
+	connect(m_grid->thickness(), &AbstractAttribute::changed, [this] { emit changed(); });
 
 	m_grid->fill()->set_value(QColor("#808080"));
 	m_grid->thickness()->set_value(3.0);

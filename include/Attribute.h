@@ -7,24 +7,23 @@
 namespace Layers
 {
 	/*!
-		An Attribute is an AbstractAttribute that implements a specialized Data
-		container.
+		An Attribute is an implementaion of AbstractAttribute that creates a
+		specialized Data container.
 	
-		An attribute works by pointing to a data object and providing it with
-		the characteristics of an entity. An attribute *labels* data and gives
-		it purpose.
+		An attribute works by pointing to a data object, labeling it, and
+		giving it a purpose.
 	
 		The relationship between attributes and data is analogous to the
 		relationship between variables (i.e., value containers) and the values
 		they store.
 	
-		# Data Ownership
+		## Data Ownership
 	
-		Initially, an attribute will *own* the data it points to. However, it
-		can be forced to *entangle* with another attribute, after which it will
-		no longer own the data it points to.
+		Initially, an attribute *owns* the data it points to. However, it can
+		be *entangled* with another attribute, after which it will no longer
+		own the data it points to.
 	
-		# Entanglement
+		## Entanglement
 	
 		A key feature of attributes is entanglement. *Entanglement* is the term
 		used to describe the action of forcing one attribute to delete its data
@@ -78,150 +77,137 @@ namespace Layers
 		Q_OBJECT
 
 	signals:
+		/*!
+			This signal is emitted if the attribute becomes entangled.
+		*/
 		void entangled();
 
 	public:
-		Attribute(const QString& name, bool disabled = false);
-		Attribute(const QString& name, Variant variant, bool disabled = false);
-		Attribute(const QString& name, VariantMap variant_map, bool disabled = false);
-		Attribute(const QString& name, QJsonObject json_object, bool disabled = false);
-		Attribute(const Attribute& a);
+		/*!
+			Constructs an attribute with invalid data.
+		*/
+		Attribute(const QString& name,
+			bool disabled = false);
+
+		/*!
+			Constructs an attribute with single-valued data.
+		*/
+		Attribute(const QString& name, Variant variant,
+			bool disabled = false);
+
+		/*!
+			Constructs an attribute with multi-valued data.
+		*/
+		Attribute(const QString& name, VariantMap variant_map,
+			bool disabled = false);
+
+		/*!
+			Constructs an attribute with data initialized with a QJsonObject.
+		*/
+		Attribute(const QString& name, QJsonObject json_object,
+			bool disabled = false);
+
+		/*!
+			Constructs a copy of *attribute*.
+		*/
+		Attribute(const Attribute& attribute);
+
 		~Attribute();
 
 		/*!
-			Returns Data value converted to the template type T.
+			Returns data value converted to the template type T.
 
-			The state parameter is only necessary for stateful Attributes.
-			If the default value (an empty string) is used, and the Attribute
-			is stateful, the value of the active state is returned.
-
-			@param state - State associated with returned value
-			@returns Data value converted to template type T
+			The *state* parameter is only necessary for multi-valued
+			attributes. If the default value (an empty string) is used, and the
+			attribute is multi-valued, then the value of the active state is
+			returned.
 		*/
 		template<typename T>
 		T as(const QString& state = "") const;
 
 		/*!
-			Returns true if state exists in the Data, otherwise, returns false.
-
-			@param state - State that might exist in the Data
-			@returns True if state exists in Data, false otherwise
+			Returns true if state exists in the data. Otherwise, returns false.
 		*/
 		bool contains_state(const QString& state) const;
 
 		/*!
-			Copies the supplied Attribute
-
-			@param attr - Attribute to copy
+			Copies the valuation of *attribute*.
 		*/
-		void copy(const Attribute& attr);
+		void copy(const Attribute& attribute);
 
 		/*!
-			Forces the Attribute to point to the Data of another Attribute.
+			Forces this attribute to point to the data of *attribute*.
 
-			After this function, the caller Attribute is considered *entangled*
-			with the other Attribute.
+			After this function executes, this attribute is considered
+			*entangled* with *attribute*.
 
-			If the caller Attribute was not previously entangled, the Data is
+			If this attribute was not previously entangled, the data is
 			deleted before the new pointer is assigned.
 
-			Establishes a new data connection and emits both entangled() and
-			value_changed().
+			Emits both entangled() and changed().
 
-			Another connection is established so that if the supplied attribute
-			becomes entangled, this function gets called again so the caller
-			Attribute can get a pointer to the new Data.
-
-			@param attribute - Attribute to entangle with
+			Another connection is established so that if *attribute* becomes
+			entangled, this function gets called again so this attribute can
+			get a pointer to the new data.
 		*/
 		void entangle_with(Attribute& attribute);
 
 		/*!
-			Converts to stateful Data initialized with the supplied map.
-
-			This function simply calls Data::init_variant_map() and passes the
-			variant_map.
-
-			@param variant_map - Variant map to initialize the Data with
+			Converts to multi-valued data initialized with *variant_map*.
 		*/
 		void init_variant_map(const VariantMap& variant_map);
 
 		/*!
-			Returns true if Attribute is entangled, otherwise, returns false.
-
-			An entangled Attribute does not own the Data it points to.
-
-			@returns True if entangled, false otherwise
+			Returns true if this attribute is entangled. Otherwise, returns
+			false.
 		*/
 		bool is_entangled() const;
 
 		/*!
-			Returns true if the Data this Attribute points to is stateful,
-			otherwise, returns false.
-
-			This function simply returns the result of Data::is_multi_valued().
-
-			@returns True if stateful, false otherwise
+			Returns true if this attribute's data is multi-valued. Otherwise,
+			returns false.
 		*/
 		virtual bool is_multi_valued() const override;
 
 		/*!
-			Sets the Attribute's active state.
-
-			@param state - QString representing new active state
+			Sets the active state of this attribute to *state*.
 		*/
 		virtual void set_state(const QString& state) override;
 
 		/*!
-			Set the Data value.
+			Sets the data's value.
 
-			The state parameter is only necessary for stateful Attributes.
-			If the default value (an empty string) is used, and the Attribute
-			is stateful, the value of the active state is set.
-
-			@param qvariant - QVariant containing the value being set
-			@param state - State associated with value
+			The *state* parameter is only necessary for multi-valued
+			attributes. If the default value (an empty string) is used, and the
+			attribute is multi-valued, then the value of the active state is
+			set.
 		*/
 		void set_value(Variant variant, const QString& state = "");
 
 		/*!
-			Returns the active state of the Attribute.
-
-			@returns Active state represented as a QString
+			Returns the active state of the attribute.
 		*/
 		QString state() const;
 
 		/*!
-			Returns a QStringList of the available states.
+			Returns a QStringList of the states associated with the attribute's
+			data.
 
-			If the Attribute is not stateful, an empty list will be returned.
-
-			@returns QString list where QStrings represent the states
+			If the data is single-valued, an empty list will be returned.
 		*/
 		QStringList states() const;
 
 		/*!
-			Returns Attribute represented as a QJsonObject.
-
-			@returns QJsonObject representing the Attribute
+			Returns attribute represented as a QJsonObject.
 		*/
 		QJsonObject to_json_object();
 
 		/*!
-			Returns the name of the Data value's type.
-
-			This function simply calls Data::typeName().
-
-			@returns Name of value's type
+			Returns the name of type stored in the attribute's data.
 		*/
 		const char* typeName() const;
 
 	private:
-		/*!
-			Connects the Data changed signal to emit value_changed().
-
-			The previous connection is disconnected.
-		*/
 		void establish_data_connection();
 
 		void establish_reentanglement_connection(Attribute& attribute);

@@ -28,7 +28,7 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 		m_theme_combobox->addItem(theme);
 
 	for (int i = 0; i < m_theme_combobox->count(); i++)
-		if (m_theme_combobox->itemData(i) == layersApp->current_theme()->id())
+		if (m_theme_combobox->itemData(i) == layersApp->active_theme()->id())
 		{
 			m_theme_combobox->setCurrentIndex(i);
 			break;
@@ -43,12 +43,12 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 		});
 
 	m_theme_buttons_handler_connection =
-		connect(layersApp, &Application::current_theme_changed, [this]
+		connect(layersApp, &Application::active_theme_changed, [this]
 			{
 				handle_theme_buttons_visibility();
 			});
 
-	if (!layersApp->current_theme()->editable())
+	if (!layersApp->active_theme()->editable())
 		show_custom_theme_buttons(false);
 
 	m_new_theme_button->set_name("new_theme_button");
@@ -88,7 +88,7 @@ ThemesWidget::~ThemesWidget()
 
 void ThemesWidget::handle_theme_buttons_visibility()
 {
-	if (layersApp->current_theme()->editable())
+	if (layersApp->active_theme()->editable())
 		show_custom_theme_buttons();
 	else
 		show_custom_theme_buttons(false);

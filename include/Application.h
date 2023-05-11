@@ -22,16 +22,79 @@ namespace Layers
 	class Version;
 	class MainWindow;
 
+	/*!
+		A Layers Application is a QApplication and a Themeable that provides
+		structure and functionality for a Layers app.
+
+		## App ID
+
+		Layers app developers will need to manually produce a UUID for their
+		application. The app name and UUID are used together to produce an
+		app ID which is used by themes to specify app-implementations. The UUID
+		for an application should never be changed because things may stop
+		working properly if it does.
+
+		## Theme Management
+
+		The application manages loaded themes. The application is responsible
+		for applying themes to known top-level widgets.
+
+		## Updating
+
+		The application includes functionality capable of updating itself when
+		an update is available.
+
+		<b>For now, this only works for applications hosted on GitHub. In the
+		future, there will be an option to enable updating from file
+		servers.</b>
+
+		To enable update checking, Layers app developers will need to include
+		Version and GitHubRepo objects as arguments for Application
+		construction. These objects are used during initialization to retrieve
+		the latest version via GitHub's API and compare it with the current
+		version to determine if an update is available.
+
+		After the application has been initialized in the *main()* function,
+		the developers can include the following code:
+
+		~~~~~~~~~~~~~{.c}
+		if (app.update_available())
+			if (app.update_on_request())
+				return 0;
+		~~~~~~~~~~~~~
+
+		In the code above, update_available() is called to check if an update
+		is available. If so, update_on_request() is called to display an
+		UpdateDialog to the user which alerts them and asks if they would like
+		to update the application. If they choose 'Update', then
+		update_on_request() will return true and cause the *main()* function
+		to end, closing the application while the update takes place. If the
+		user chooses not to update, then the *main()* function will proceed.
+
+		It is recommended to perform this sequence before initializing the
+		MainWindow.
+	*/
 	class Application : public QApplication, public Themeable
 	{
 		Q_OBJECT
 
 	signals:
-		void current_theme_changed();
+		/*!
+			This signal is emitted if the active theme changes.
+		*/
+		void active_theme_changed();
 
 	public:
-		Application(
-			int& argc, char** argv,
+		/*!
+			Constructs a Layers application.
+
+			The *name* and *uuid* parameters are required.
+
+			The *version* and *github_repo* parameters are only required if the
+			Layers app developer decides to utilize the included updating
+			functionality.
+		*/
+		Application(int& argc, char** argv,
 			const QString& name,
 			const QUuid& uuid,
 			QFile* icon_file = nullptr,
@@ -40,124 +103,119 @@ namespace Layers
 
 		~Application();
 
+		/*!
+			Returns a pointer to the active theme.
+		*/
+		Theme* active_theme() const;
+
+		/*!
+			Stores a pointer to the provided themeable.
+
+			This function should be used to make top-level widgets known to the
+			application.
+		*/
+		void add_child_themeable_pointer(Themeable& themeable);
+
+		/*!
+			Returns a string representation of the app ID.
+		*/
 		QString app_identifier();
 
 		/*!
-			Applies a theme across the entire application.
-
-			@param theme to apply
+			Applies *theme* to the known top-level widgets.
 		*/
 		void apply_theme(Theme& theme);
 
-		virtual QList<Themeable*> child_themeables(
-			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
+		/*!
+			Returns a list of child themeables.
 
+			This function overrides Themeable::child_themeables() to include
+			the known top-level widgets.
+		*/
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
+		) override;
+
+		/*!
+			Returns a pointer to the application's CreateNewThemeDialog.
+		*/
 		CreateNewThemeDialog* create_new_theme_dialog() const;
 
+		/*!
+			Returns a pointer to the application's ColorDialog.
+		*/
 		ColorDialog* color_dialog() const;
 
 		/*!
-			Returns a pointer to the current theme applied to the application.
-
-			@returns pointer to current application theme
+			Returns a pointer to the application's GradientDialog.
 		*/
-		Theme* current_theme() const;
-
 		GradientDialog* gradient_dialog() const;
 
 		/*!
 			Returns a pointer to a QFile of the application icon.
 
 			If no icon was supplied during initialization, nullptr is returned.
-
-			@returns pointer to QFile of app icon, nullptr if none exists
 		*/
 		QFile* icon_file();
 
-		MainWindow* main_window() const;
-
 		/*!
 			Returns the name of the application.
-
-			@returns application name
 		*/
-		QString& name();
+		QString name();
 
 		/*!
-			Reapplies the theme that is already set.
+			Reapplies the active theme.
 		*/
 		void reapply_theme();
 
 		/*!
-			Saves a theme to a file.
-
-			The file is saved to 'C:/Users/{Your username}/AppData/Local/{Application name}/Themes'.
-			
-			The theme name, lowercased, is used as the filename.
-
-			@param theme to save
+			Saves *theme* to the system.
 		*/
 		void save_theme(Theme& theme);
 
 		/*!
 			Returns the application's settings.
-
-			@returns Settings of the application
 		*/
 		QSettings& settings();
 
 		/*!
-			Stores a pointer to the provided themeable.
-
-			The child themeable pointers are used to apply themes to child themeables.
-
-			@param themeable to store a pointer to
-		*/
-		void add_child_themeable_pointer(Themeable& themeable);
-
-		/*!
-			Returns a pointer to the application theme with the provided id.
-
-			@param theme_id - ID of the theme to be returned
-			@returns pointer to theme
+			Returns a pointer to the theme specified by *theme_id*.
 		*/
 		Theme* theme(const QString& theme_id);
 
-		ThemeCompatibilityCautionDialog* theme_compatibility_caution_dialog() const;
+		/*!
+			Returns a pointer to the application's
+			ThemeCompatibilityCautionDialog.
+		*/
+		ThemeCompatibilityCautionDialog* theme_compatibility_caution_dialog()
+			const;
 
 		/*!
-			Returns a reference to a QMap containing the application's themes.
+			Returns a reference to the QMap containing the application's
+			themes.
 
-			The QMap pairs QStrings to Themes, where the QString is the name of the associated theme.
-
-			@returns QMap reference to the app's themes
+			The QMap contains QString-Theme* pairs where the QString matches
+			the name of the associated theme.
 		*/
 		QMap<QString, Theme*>& themes();
 
 		/*!
-			Returns true if an application update is available. 
-
-			This function compares the current version tag of the application (supplied during initialization)
-			with the latest known version tag found on the application's GitHub repo (also supplied during initialization). 
-			If they do not match, true is returned.
-
-			@returns true if update is available, false otherwise
+			Returns true if an application update is available.
 		*/
 		bool update_available();
 
 		/*!
-			Prompts the user and asks if they'd like to update. Updates application if they choose to.
+			Prompts the user with an UpdateDialog asking if they would like to
+			update the application.
 
-			@returns true if user chooses to update, false otherwise
+			Returns true if the user decides to update. Otherwise, returns
+			false.
 		*/
 		bool update_on_request();
 
 	public slots:
 		/*!
-			Renames a theme with the provided new name.
-
-			@param old_name - Name of the theme to rename
-			@param new_name - New name to give to theme
+			Renames the theme specified by *old_name* to *new_name*.
 		*/
 		void rename_theme(const QString& old_name, const QString& new_name);
 
@@ -179,7 +237,7 @@ namespace Layers
 
 		UpdateDialog* m_update_dialog;
 
-		Theme* m_current_theme{ nullptr };
+		Theme* m_active_theme{ nullptr };
 
 		Downloader* m_downloader{ nullptr };
 

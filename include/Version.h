@@ -6,26 +6,48 @@
 
 namespace Layers
 {
+	/*!
+		A Version object is an object that represents a version tag.
+		
+		%Version tags make it easy to compare software iterations and determine
+		if updates are available.
+	*/
 	class Version
 	{
 	public:
-		Version(int major, int minor = 0, int patch = 0, QString phase = "");
+		/*!
+			Constructs a version object from major, minor, and patch integers.
 
+			An optional *suffix* may be included.
+		*/
+		Version(int major, int minor = 0, int patch = 0, QString suffix = "");
+
+		/*!
+			Constructs a version object from a string.
+		*/
 		Version(QString version_string);
 
+		/*!
+			Constructs a null version object.
+			
+			The resulting version tag will be '0.0.0'.
+		*/
 		Version();
 
-		QString toString();
+		/*!
+			Returns a string representation of the version.
+		*/
+		QString to_string();
 
 	private:
-		const QList<QString> m_acceptable_phases{ QList<QString>({
+		QList<QString> m_acceptable_suffixes{ QList<QString>({
 			"alpha", "a", "beta", "b", "release-candidate", "rc" }) };
 
 		int m_major{ 0 };
 		int m_minor{ 0 };
 		int m_patch{ 0 };
 
-		QString m_phase{ "" };
+		QString m_suffix{ "" };
 
 		QString m_separator_charactor{ "" };
 	};

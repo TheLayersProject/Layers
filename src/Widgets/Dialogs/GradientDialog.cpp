@@ -44,7 +44,7 @@ GradientDialog::GradientDialog(QWidget* parent) :
     assign_tag_prefixes();
 
     // Set theme
-    apply_theme(*layersApp->current_theme());
+    apply_theme(*layersApp->active_theme());
 }
 
 void GradientDialog::add_gradient_stop(double stop_val, QColor color)
@@ -117,7 +117,7 @@ void GradientDialog::init_attributes()
             m_margins->right(),
             m_margins->bottom()}))
     {
-        connect(entity, &AbstractAttribute::value_changed,
+        connect(entity, &AbstractAttribute::changed,
             this, &GradientDialog::update_color_control_positions);
     }
 

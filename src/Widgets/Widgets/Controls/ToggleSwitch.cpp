@@ -149,39 +149,7 @@ void ToggleSwitch::init_attributes()
 		});
 
 	//m_spacer->fill()->set_disabled();
-	m_spacer->fill()->set_value(QColor(Qt::blue));	
-
-	//connect(&a_margin_left, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_margin_top, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_margin_right, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_margin_bottom, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_padding_left, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_padding_top, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_padding_right, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
-
-	//connect(&a_padding_bottom, &Entity::value_changed, [this] {
-	//	update_layout_margins(); update_spacer_size();
-	//	});
+	m_spacer->fill()->set_value(QColor(Qt::blue));
 }
 
 void ToggleSwitch::setup_layout()

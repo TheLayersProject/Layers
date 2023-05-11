@@ -165,16 +165,16 @@ void ScrollBar::init_attributes()
 		{ "handle_color", m_handle_color }
 		});
 
-	connect(m_background_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->top_left(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->top_right(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->bottom_left(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->bottom_right(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->top_left(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->top_right(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->bottom_left(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->bottom_right(), &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_color, &AbstractAttribute::value_changed, [this] { update_theme_dependencies(); });
+	connect(m_background_color, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+	connect(m_handle_color, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
 }

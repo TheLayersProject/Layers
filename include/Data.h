@@ -25,8 +25,8 @@ namespace Layers
 		Data thickness = Data(10);
 
 		Data fill = Data({
-			{ "Selected", QColor(Qt::lightGray) },
-			{ "Unselected", QColor(Qt::darkGray) }
+			{ "Active", QColor(Qt::lightGray) },
+			{ "Inactive", QColor(Qt::darkGray) }
 		});
 
 		// thickness is single-valued data
@@ -38,7 +38,7 @@ namespace Layers
 		and in the case of multi-valued data, define which state is active.
 		%Data, by itself, does none of those things.
 
-		# Value Change Detection
+		## Value Change Detection
 
 		A data object sets up connections that emit Data::changed() any time
 		Variant::changed() is emitted from any of the associated variants. This
@@ -67,31 +67,44 @@ namespace Layers
 		Q_OBJECT
 
 	signals:
+		/*!
+			This signal is emitted when the data's value changes.
+		*/
 		void changed();
 
 	public:
+		/*!
+			Constructs single-valued data with a variant.
+		*/
 		Data(Variant variant);
+
+		/*!
+			Constructs multi-valued data with a variant map.
+		*/
 		Data(VariantMap variant_map);
+
+		/*!
+			Constructs data from a QJsonObject.
+		*/
 		Data(QJsonObject json_object);
-		Data(const Data& d);
+
+		/*!
+			Constructs a copy of *data*.
+		*/
+		Data(const Data& data);
+
 		~Data();
 
 		/*!
 			Returns data's value converted to the template type T.
 
-			The state parameter is ignored if the caller is not multi-valued.
-
-			@param state - State, if any, associated with value
-			@returns Value, converted to template type T
+			The *state* parameter is ignored if the caller is not multi-valued.
 		*/
 		template<typename T>
 		T as(const QString& state = "") const;
 
 		/*!
-			Returns true if state exists in variant map
-
-			@param state - State that might exist in variant map
-			@returns True if state exists in variant map, false otherwise
+			Returns true if *state* exists in variant map.
 		*/
 		bool contains_state(const QString& state) const;
 
@@ -99,22 +112,17 @@ namespace Layers
 			Copies the valuation of the supplied data object.
 
 			If the caller's plurality does not match the plurality of the
-			supplied data, then the caller is converted before copying takes
-			place.
+			supplied data, then the caller is converted before copying..
 		*/
 		void copy(const Data& data);
 
 		/*!
-			Converts to multi-valued data initialized with the supplied map.
-
-			@param variant_map - Variant map to initialize the data with
+			Converts to multi-valued data initialized with *variant_map*.
 		*/
 		void init_variant_map(const VariantMap& variant_map);
 
 		/*!
-			Returns true if the data is multi-valued, otherwise, returns false.
-
-			@returns True if multi-valued, false otherwise
+			Returns true if the data is multi-valued. Otherwise, returns false.
 		*/
 		bool is_multi_valued() const;
 
@@ -129,9 +137,6 @@ namespace Layers
 			be an undesirable result. It is likely in the interest of the
 			caller to supply an explicit state argument when multi-valued data
 			is involved.
-
-			@param variant - Variant containing the value being set
-			@param state - State associated with value, if any
 		*/
 		void set_value(Variant variant, const QString& state = "");
 
@@ -140,15 +145,11 @@ namespace Layers
 			values.
 
 			If the data is single-valued, an empty list will be returned.
-
-			@returns QStringList where QStrings represent the states
 		*/
 		QStringList states() const;
 
 		/*!
 			Returns data represented as a QJsonObject.
-
-			@returns QJsonObject representation of the data
 		*/
 		QJsonObject to_json_object();
 
@@ -160,8 +161,6 @@ namespace Layers
 			
 			If the data is multi-valued, then the type name of the first
 			variant in the map is returned.
-
-			@returns Name of type stored within the data
 		*/
 		const char* typeName() const;
 

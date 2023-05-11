@@ -2,18 +2,22 @@
 
 using Layers::Version;
 
-Version::Version(int major, int minor, int patch, QString phase) :
-	m_major{ major }, m_minor{ minor }, m_patch{ patch }, m_phase{ phase } {}
+Version::Version(int major, int minor, int patch, QString suffix) :
+	m_major{ major },
+	m_minor{ minor },
+	m_patch{ patch },
+	m_suffix{ suffix }
+{}
 
 Version::Version(QString version_string)
 {
-	for (const QString& acceptable_phase : m_acceptable_phases)
+	for (const QString& suffix : m_acceptable_suffixes)
 	{
-		if (version_string.endsWith(acceptable_phase))
+		if (version_string.endsWith(suffix))
 		{
-			m_phase = acceptable_phase;
+			m_suffix = suffix;
 
-			version_string.chop(acceptable_phase.size());
+			version_string.chop(suffix.size());
 
 			break;
 		}
@@ -48,7 +52,10 @@ Version::Version(QString version_string)
 
 Version::Version() {}
 
-QString Version::toString()
+QString Version::to_string()
 {
-	return QString::number(m_major) + "." + QString::number(m_minor) + "." + QString::number(m_patch) + m_separator_charactor + m_phase;
+	return
+		QString::number(m_major) + "." +
+		QString::number(m_minor) + "." +
+		QString::number(m_patch) + m_separator_charactor + m_suffix;
 }

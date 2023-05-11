@@ -267,7 +267,7 @@ void ColorPlane::paintEvent(QPaintEvent* event)
 
 void ColorPlane::init_attributes()
 {
-    connect(&z_value, &Attribute::value_changed, [this] {
+    connect(&z_value, &Attribute::changed, [this] {
         QColor c = color.as<QColor>();
 
         switch (m_active_hsv)
@@ -286,10 +286,10 @@ void ColorPlane::init_attributes()
         color.set_value(c);
         });
     
-    connect(&color, &Attribute::value_changed, this, &ColorPlane::update_cursor_position);
-    connect(&color, &Attribute::value_changed, this, &ColorPlane::update_z_value);
+    connect(&color, &Attribute::changed, this, &ColorPlane::update_cursor_position);
+    connect(&color, &Attribute::changed, this, &ColorPlane::update_z_value);
 
-    connect(&color, &Attribute::value_changed, [this] { update(); });
+    connect(&color, &Attribute::changed, [this] { update(); });
 
     //color.setup_widget_update_connection(this);
 

@@ -32,14 +32,14 @@ void HeaderView::init_attributes()
 		{ "text_color", m_text_color }
 		});
 
-	connect(m_border->fill(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_border->thickness(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->top_left(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->top_right(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->bottom_left(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radii->bottom_right(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_fill, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->fill(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_border->thickness(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_fill, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_text_color, &AbstractAttribute::changed, [this] { update_stylesheet(); });
 
 	m_corner_radii->top_left()->set_value(2.0);
 	m_corner_radii->top_right()->set_value(2.0);

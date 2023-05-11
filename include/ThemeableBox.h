@@ -9,51 +9,54 @@
 namespace Layers
 {
 	/*!
-
+		A ThemeableBox is a Themeable that defines attributes and painting
+		functionality for a box-shaped widget.
 	*/
 	class ThemeableBox : public Themeable
 	{
 	public:
 		~ThemeableBox();
 
+		/*!
+			Returns a pointer to the border attributes of this themeable.
+		*/
 		BorderAttributes* border() const;
 
+		/*!
+			Returns a pointer to the corner radii attributes of this themeable.
+		*/
 		CornerRadiiAttributes* corner_radii() const;
 
+		/*!
+			Returns a pointer to the margin attributes of this themeable.
+		*/
 		MarginsAttributes* margins() const;
 
+		/*!
+			Returns a pointer to the fill attribute of this themeable.
+		*/
 		Attribute* fill() const;
 
 		/*!
 			Sets all margin attributes with one value.
-
-			@param margin
 		*/
 		void set_margin(double margin);
 
 		/*!
 			Sets the margin attributes individually.
-
-			@param left margin
-			@param top margin
-			@param right margin
-			@param bottom margin
 		*/
 		void set_margin(double left, double top, double right, double bottom);
 
 	protected:
 		/*!
-			Initializes the widget's attributes.
+			Initializes the attributes.
 
-			This function uses calls to set_attribute_value() to define attributes.
-
-			Widget attributes include background color/gradient, corner radii, margins, outline color, and
-			other varius numerical values, colors, and booleans.
+			ThemeableBox subclasses need to call this function manually.
 		*/
 		void init_attributes();
 
 		/*!
-			Paints the widget with values obtained from the widget's attributes.
+			Paints *widget* using the attributes of this ThemeableBox.
 		*/
 		void paint(QWidget* widget);
 
@@ -63,10 +66,7 @@ namespace Layers
 
 		MarginsAttributes* m_margins{ new MarginsAttributes };
 
-		Attribute* m_fill{ new Attribute(
-			"fill",
-			QColor(Qt::white)
-			) };
+		Attribute* m_fill{ new Attribute("fill", QColor(Qt::white)) };
 	};
 }
 

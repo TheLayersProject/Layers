@@ -40,13 +40,12 @@ Data::Data(QJsonObject json_object)
 	}
 }
 
-Data::Data(const Data& d)
+Data::Data(const Data& data)
 {
-	if (d.m_variant)
-		m_variant = new Variant(*d.m_variant);
+	if (data.m_variant)
+		m_variant = new Variant(*data.m_variant);
 	else
-		m_variant_map =
-			new VariantMap(*d.m_variant_map);
+		m_variant_map = new VariantMap(*data.m_variant_map);
 }
 
 Data::~Data()

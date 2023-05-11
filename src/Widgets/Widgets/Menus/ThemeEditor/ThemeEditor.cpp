@@ -45,10 +45,10 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 			if (Themeable* preview_themeable = dynamic_cast<Themeable*>(m_preview_widget))
 			{
 				preview_themeable->copy_attribute_values_to(
-					layersApp->current_theme());
+					layersApp->active_theme());
 
 				layersApp->reapply_theme();
-				layersApp->save_theme(*layersApp->current_theme());
+				layersApp->save_theme(*layersApp->active_theme());
 			}
 		}
 	});

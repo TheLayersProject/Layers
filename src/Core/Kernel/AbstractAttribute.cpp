@@ -30,10 +30,5 @@ void AbstractAttribute::set_disabled(bool disabled)
 {
 	m_disabled = disabled;
 
-	emit value_changed();
-}
-
-void AbstractAttribute::set_name(const QString& name)
-{
-	m_name = name;
+	emit changed();
 }

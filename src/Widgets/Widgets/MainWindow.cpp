@@ -57,7 +57,7 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	m_separator->setFixedHeight(3);
 
 	assign_tag_prefixes();
-	apply_theme(*layersApp->current_theme());
+	apply_theme(*layersApp->active_theme());
 }
 
 void MainWindow::edit_themeable(Themeable* themeable)
@@ -69,7 +69,7 @@ void MainWindow::set_main_menu(Menu* main_menu)
 {
 	m_app_menu = main_menu;
 	m_app_menu->set_is_app_themeable(true);
-	m_app_menu->apply_theme(*layersApp->current_theme());
+	m_app_menu->apply_theme(*layersApp->active_theme());
 
 	m_main_layout->addWidget(m_app_menu);
 
@@ -157,7 +157,7 @@ void MainWindow::new_theme_clicked()
 			dialog->add_theme_to_combobox(theme);
 
 	dialog->set_current_start_theme_name(
-		layersApp->current_theme()->name());
+		layersApp->active_theme()->name());
 
 	center_dialog(dialog);
 
@@ -311,14 +311,12 @@ void MainWindow::init_attributes()
 	m_corner_radii->bottom_left()->set_value(10.0);
 	m_corner_radii->bottom_right()->set_value(10.0);
 
-	connect(m_border->thickness(), &Attribute::value_changed, [this] {
-		update_theme_dependencies();
-		});
+	connect(m_border->thickness(), &Attribute::changed, [this]
+		{ update_theme_dependencies(); });
 
 	for (Attribute* margin : *m_margins)
-		connect(margin, &Attribute::value_changed, [this] {
-		update_theme_dependencies();
-			});
+		connect(margin, &Attribute::changed, [this]
+			{ update_theme_dependencies(); });
 
 	m_settings_menu->fill()->set_value(QColor("#ff5555"));
 	m_settings_menu->fill()->set_disabled();

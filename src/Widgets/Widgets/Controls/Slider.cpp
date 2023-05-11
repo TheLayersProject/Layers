@@ -27,7 +27,7 @@ void Slider::set_limit(int limit)
 
 void Slider::init_attributes()
 {
-	connect(&a_value, &AbstractAttribute::value_changed, [this] { update_handle_pos(); });
+	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
 
 	m_corner_radii->top_left()->set_value(10.0); // Need to check these values
 	m_corner_radii->top_right()->set_value(10.0);

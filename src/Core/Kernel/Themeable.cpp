@@ -3,9 +3,6 @@
 #include "Theme.h"
 #include "Themeable.h"
 
-#include <QAbstractItemView>
-#include <QComboBox>
-
 using Layers::AbstractAttribute;
 using Layers::Attribute;
 using Layers::Graphic;
@@ -17,9 +14,7 @@ Themeable::~Themeable()
 	if (m_name)
 	{
 		qDebug() << "Deleting: " + *m_name;
-
 		delete m_name;
-
 		m_name = nullptr;
 	}
 
@@ -28,14 +23,13 @@ Themeable::~Themeable()
 
 	m_icon = nullptr;
 	m_proper_name = nullptr;
-
-	//for (QMetaObject::Connection connection : m_update_widget_connections)
-	//	QObject::disconnect(connection);
 }
 
 void Themeable::apply_theme(Theme& theme)
 {
-	if (!m_name) qDebug() << "Unable to apply theme.  You must apply a name to the widget first.";
+	if (!m_name)
+		qDebug() << "Unable to apply theme. "
+			"You must apply a name to the widget first.";
 	else
 	{
 		for (Themeable* child_themeable : child_themeables())
@@ -64,22 +58,19 @@ void Themeable::assign_tag_prefixes(QStringList prefixes)
 {
 	if (m_name)
 	{
-		for (const QString& filtered_prefix : m_excluded_tag_prefixes)
-			if (prefixes.contains(filtered_prefix))
-				prefixes.removeAll(filtered_prefix);
-
-		if (!prefixes.isEmpty())
-			m_tag_prefixes.append(prefixes);
+		m_tag_prefixes.append(prefixes);
+		m_tag_prefixes_assigned = true;
 
 		prefixes.append(*m_name);
 
-		QList<Themeable*> children = child_themeables();
-
-		for (Themeable* child_themeable : children)
+		for (Themeable* child_themeable : child_themeables())
 			child_themeable->assign_tag_prefixes(prefixes);
-
-		m_tag_prefixes_assigned = true;
 	}
+}
+
+QMap<QString, AbstractAttribute*>& Themeable::attributes()
+{
+	return m_attributes;
 }
 
 QList<Themeable*> Themeable::child_themeables(Qt::FindChildOptions options)
@@ -120,42 +111,30 @@ void Themeable::copy_attribute_values_to(Theme* theme)
 		for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
 			if (child_themeable->m_tag_prefixes_assigned)
 				theme->copy_attribute_values_of(child_themeable);
-		//child_themeable->copy_attribute_values_to(theme);
 	}
 }
 
-QMap<QString, AbstractAttribute*>& Themeable::attributes()
-{
-	return m_attributes;
-}
-
-void Themeable::establish_update_connection(AbstractAttribute* entity)
+void Themeable::establish_update_connection(
+	AbstractAttribute* abstract_attribute)
 {
 	if (QWidget* widget = dynamic_cast<QWidget*>(this))
 	{
-		if (Attribute* attr = dynamic_cast<Attribute*>(entity))
+		if (Attribute* attr = dynamic_cast<Attribute*>(abstract_attribute))
 		{
-			m_update_widget_connections.append(
-				widget->connect(attr, &Attribute::value_changed,
-					[widget] { widget->update(); }));
+			widget->connect(attr, &Attribute::changed, [widget]
+				{ widget->update(); });
 		}
-		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(entity))
+		else if (AttributeGroup* attr_group =
+			dynamic_cast<AttributeGroup*>(abstract_attribute))
 		{
-			m_update_widget_connections.append(
-				widget->connect(attr_group, &AttributeGroup::value_changed,
-					[widget] { widget->update(); }));
+			widget->connect(attr_group, &AttributeGroup::changed, [widget]
+				{ widget->update(); });
 
 			for (Attribute* attr : attr_group->attributes())
-				m_update_widget_connections.append(
-					widget->connect(attr, &Attribute::value_changed,
-						[widget] { widget->update(); }));
+				widget->connect(attr, &Attribute::changed, [widget]
+					{ widget->update(); });
 		}
 	}
-}
-
-void Themeable::exclude_tag_prefixes(const QStringList& tag_prefixes)
-{
-	m_excluded_tag_prefixes.append(tag_prefixes);
 }
 
 Graphic* Themeable::icon() const
@@ -206,7 +185,8 @@ void Themeable::set_functionality_disabled(bool disabled)
 
 void Themeable::set_icon(Graphic* icon)
 {
-	if (m_icon) m_icon->deleteLater();
+	if (m_icon)
+		m_icon->deleteLater();
 
 	m_icon = icon;
 }
@@ -217,19 +197,20 @@ void Themeable::set_is_app_themeable(bool is_app_themeable)
 
 	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
 		child_themeable->m_is_app_themeable = is_app_themeable;
-		//m_child_themeable->set_is_app_themeable(is_app_themeable);
 }
 
 void Themeable::set_name(const QString& name)
 {
-	if (m_name) delete m_name;
+	if (m_name)
+		delete m_name;
 
 	m_name = new QString(name);
 }
 
 void Themeable::set_proper_name(const QString& proper_name)
 {
-	if (m_proper_name) delete m_proper_name;
+	if (m_proper_name)
+		delete m_proper_name;
 
 	m_proper_name = new QString(proper_name);
 }

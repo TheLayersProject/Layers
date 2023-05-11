@@ -24,7 +24,7 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	m_handle->set_name("handle");
 	m_handle->set_proper_name("Handle");
 
-	connect(&a_value, &AbstractAttribute::value_changed, [this] { update_handle_pos(); });
+	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
 
 	setup_layout();
 }

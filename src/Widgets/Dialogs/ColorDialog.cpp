@@ -122,7 +122,7 @@ ColorDialog::ColorDialog(QWidget* parent) :
 	assign_tag_prefixes();
 
 	// Set theme
-	apply_theme(*layersApp->current_theme());
+	apply_theme(*layersApp->active_theme());
 }
 
 ColorDialog::~ColorDialog()
@@ -146,7 +146,7 @@ void ColorDialog::init_attributes()
 {
 	m_color->entangle_with(m_color_plane->color);
 
-	connect(m_color, &Attribute::value_changed, [this]
+	connect(m_color, &Attribute::changed, [this]
 		{
 			QColor color = m_color->as<QColor>();
 

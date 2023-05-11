@@ -42,7 +42,8 @@ void ThemeableBox::set_margin(double margin)
 	set_margin(margin, margin, margin, margin);
 }
 
-void ThemeableBox::set_margin(double left, double top, double right, double bottom)
+void ThemeableBox::set_margin(
+	double left, double top, double right, double bottom)
 {
 	m_margins->left()->set_value(left);
 	m_margins->top()->set_value(top);
@@ -120,17 +121,6 @@ void ThemeableBox::paint(QWidget* widget)
 	background_path.lineTo(margin_left + border_thickness, margin_top + border_thickness + tl_background_radius);
 
 	border_path = border_path - background_path;
-
-	// - Create Corner Path
-	QPainterPath corner_color_path;
-	corner_color_path.addRect(0, 0, widget_width, widget_height);
-	corner_color_path = corner_color_path - background_path;
-	corner_color_path = corner_color_path - border_path;
-
-	// - Create Outline Path
-	QPainterPath outline_color_path;
-	outline_color_path.addRect(0, 0, widget_width, widget_height);
-	outline_color_path = outline_color_path - corner_color_path;
 
 	// DRAW:
 

@@ -3,18 +3,21 @@
 using Layers::Attribute;
 using Layers::Variant;
 
-Attribute::Attribute(const QString& name, bool disabled) :
-	m_data{ new Data(Variant(0)) },
+Attribute::Attribute(const QString& name,
+	bool disabled) :
+	m_data{ new Data(Variant()) },
 	AbstractAttribute(name, disabled) { }
 
-Attribute::Attribute(const QString& name, Variant variant, bool disabled) :
+Attribute::Attribute(const QString& name, Variant variant,
+	bool disabled) :
 	m_data{ new Data(variant) },
 	AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled) :
+Attribute::Attribute(const QString& name, VariantMap variant_map,
+	bool disabled) :
 	m_data{ new Data(variant_map) },
 	m_state{ variant_map.firstKey() },
 	AbstractAttribute(name, disabled)
@@ -22,17 +25,18 @@ Attribute::Attribute(const QString& name, VariantMap variant_map, bool disabled)
 	establish_data_connection();
 }
 
-Attribute::Attribute(const QString& name, QJsonObject json_object, bool disabled) :
+Attribute::Attribute(const QString& name, QJsonObject json_object,
+	bool disabled) :
 	m_data{ new Data(json_object) },
 	AbstractAttribute(name, disabled)
 {
 	establish_data_connection();
 }
 
-Attribute::Attribute(const Attribute& a) :
-	AbstractAttribute(a.m_name, a.m_disabled)
+Attribute::Attribute(const Attribute& attribute) :
+	AbstractAttribute(attribute.m_name, attribute.m_disabled)
 {
-	m_data = new Data(*a.m_data);
+	m_data = new Data(*attribute.m_data);
 
 	establish_data_connection();
 }
@@ -54,13 +58,13 @@ bool Attribute::contains_state(const QString& state) const
 	return m_data->contains_state(state);
 }
 
-void Attribute::copy(const Attribute& attr)
+void Attribute::copy(const Attribute& attribute)
 {
-	m_data->copy(*attr.m_data);
+	m_data->copy(*attribute.m_data);
 
-	m_disabled = attr.m_disabled;
+	m_disabled = attribute.m_disabled;
 	
-	emit value_changed();
+	emit changed();
 }
 
 void Attribute::establish_data_connection()
@@ -68,7 +72,7 @@ void Attribute::establish_data_connection()
 	QObject::disconnect(m_data_connection);
 	m_data_connection = connect(
 		m_data, &Data::changed, [this]
-		{ emit value_changed(); });
+		{ emit changed(); });
 }
 
 void Attribute::establish_reentanglement_connection(Attribute& attribute)
@@ -89,8 +93,6 @@ void Attribute::entangle_with(Attribute& attribute)
 
 	m_data = attribute.m_data;
 
-	//m_state = attribute.m_state;
-
 	if (m_data->states().isEmpty() && m_state != "")
 		m_state = "";
 	else if (!m_data->states().isEmpty() && m_state == "")
@@ -100,7 +102,7 @@ void Attribute::entangle_with(Attribute& attribute)
 	establish_reentanglement_connection(attribute);
 
 	emit entangled();
-	emit value_changed();
+	emit changed();
 }
 
 void Attribute::init_variant_map(const VariantMap& variant_map)
@@ -124,7 +126,7 @@ void Attribute::set_state(const QString& state)
 {
 	m_state = state;
 
-	emit value_changed();
+	emit changed();
 }
 
 void Attribute::set_value(Variant variant, const QString& state)

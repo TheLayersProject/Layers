@@ -78,7 +78,7 @@ void SvgRenderer::init_attributes()
 		{ "common_color", m_common_color }
 		});
 
-	connect(m_common_color, &AbstractAttribute::value_changed, [this] {
+	connect(m_common_color, &AbstractAttribute::changed, [this] {
 		update();
 		emit repaintNeeded();
 		});

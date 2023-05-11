@@ -82,7 +82,7 @@ LineEditor::~LineEditor()
 
 void LineEditor::reconnect_text_attribute()
 {
-	connect(m_text, &AbstractAttribute::value_changed, [this]
+	connect(m_text, &AbstractAttribute::changed, [this]
 		{
 			update_theme_dependencies();
 
@@ -104,7 +104,7 @@ void LineEditor::init_attributes()
 	m_corner_radii->bottom_right()->set_value(5.0);
 	m_fill->set_value(QColor(Qt::lightGray));
 
-	connect(m_text_color, &AbstractAttribute::value_changed, [this] {
+	connect(m_text_color, &AbstractAttribute::changed, [this] {
 		update_theme_dependencies();
 		m_line_edit->update();
 		});

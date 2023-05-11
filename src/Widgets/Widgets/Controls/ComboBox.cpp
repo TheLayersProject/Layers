@@ -14,7 +14,8 @@ ComboBox::ComboBox(QWidget* parent) : QComboBox(parent)
 
 	view()->window()->installEventFilter(this);
 	view()->window()->setAttribute(Qt::WA_TranslucentBackground);
-	view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
+	view()->window()->setWindowFlags(
+		Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
 	view()->setMouseTracking(true);
 
 	init_attributes();
@@ -171,10 +172,10 @@ QPainterPath ComboBox::background_path() const
 		}
 	}
 
-	int double_cr_tl = cr_tl * 2;
-	int double_cr_tr = cr_tr * 2;
-	int double_cr_bl = cr_bl * 2;
-	int double_cr_br = cr_br * 2;
+	int doubled_cr_tl = cr_tl * 2;
+	int doubled_cr_tr = cr_tr * 2;
+	int doubled_cr_bl = cr_bl * 2;
+	int doubled_cr_br = cr_br * 2;
 
 	// Move to start point
 	background_path.moveTo(0, cr_tl);
@@ -183,7 +184,7 @@ QPainterPath ComboBox::background_path() const
 	background_path.arcTo(
 		QRect(
 			0, 0,
-			double_cr_tl, double_cr_tl
+			doubled_cr_tl, doubled_cr_tl
 		),
 		180, -90);
 
@@ -193,8 +194,8 @@ QPainterPath ComboBox::background_path() const
 	// Arc Top-Right
 	background_path.arcTo(
 		QRect(
-			width() - double_cr_tr, 0,
-			double_cr_tr, double_cr_tr
+			width() - doubled_cr_tr, 0,
+			doubled_cr_tr, doubled_cr_tr
 		),
 		90, -90);
 
@@ -204,8 +205,8 @@ QPainterPath ComboBox::background_path() const
 	// Arc Bottom-Right
 	background_path.arcTo(
 		QRect(
-			width() - double_cr_br, height() - double_cr_br,
-			double_cr_br, double_cr_br
+			width() - doubled_cr_br, height() - doubled_cr_br,
+			doubled_cr_br, doubled_cr_br
 		),
 		0, -90);
 
@@ -215,8 +216,8 @@ QPainterPath ComboBox::background_path() const
 	// Arc Bottom-Left
 	background_path.arcTo(
 		QRect(
-			0, height() - double_cr_bl,
-			double_cr_bl, double_cr_bl
+			0, height() - doubled_cr_bl,
+			doubled_cr_bl, doubled_cr_bl
 		),
 		-90, -90);
 
@@ -274,11 +275,11 @@ void ComboBox::init_attributes()
 		{ "text_color", m_text_color }
 		});
 
-	connect(m_border->fill(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_border->thickness(), &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_corner_radius, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_fill, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
-	connect(m_text_color, &AbstractAttribute::value_changed, [this] { update_stylesheet(); });
+	connect(m_border->fill(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_border->thickness(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radius, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_fill, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_text_color, &AbstractAttribute::changed, [this] { update_stylesheet(); });
 
 	m_border->thickness()->set_value(0.0);
 }

@@ -8,14 +8,14 @@ using Layers::Variant;
 Variant::Variant() :
 	m_qvariant{ QVariant() } { }
 
-Variant::Variant(double d) :
-	m_qvariant{ QVariant(d) } { }
+Variant::Variant(double value) :
+	m_qvariant{ QVariant(value) } { }
 
-Variant::Variant(QColor color) :
-	m_qvariant{ QVariant(color) } { }
+Variant::Variant(const QColor& value) :
+	m_qvariant{ QVariant(value) } { }
 
-Variant::Variant(QString string) :
-	m_qvariant{ QVariant(string) } { }
+Variant::Variant(const QString& value) :
+	m_qvariant{ QVariant(value) } { }
 
 Variant::Variant(QVariant qvariant) :
 	m_qvariant{ qvariant } { }

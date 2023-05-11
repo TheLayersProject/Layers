@@ -72,7 +72,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	assign_tag_prefixes();
 
 	// Set theme
-	apply_theme(*layersApp->current_theme());
+	apply_theme(*layersApp->active_theme());
 }
 
 QString CreateNewThemeDialog::new_theme_name()

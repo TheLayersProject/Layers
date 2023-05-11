@@ -43,7 +43,7 @@ namespace Layers
 		void setup_layout();
 
 		AttributeEditorGroup* m_control_attribute_editor_group{
-			new AttributeEditorGroup(new AttributeGroup, this) };
+			new AttributeEditorGroup(new AttributeGroup(""), this)};
 
 		CornerRadiiEditor* m_control_corner_radii_editor{
 			new CornerRadiiEditor(new CornerRadiiAttributes, this) };

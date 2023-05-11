@@ -44,7 +44,7 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	assign_tag_prefixes();
 
 	// Set theme
-	apply_theme(*layersApp->current_theme());
+	apply_theme(*layersApp->active_theme());
 }
 
 Themeable* ThemeCompatibilityCautionDialog::clone()

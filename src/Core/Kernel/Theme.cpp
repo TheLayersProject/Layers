@@ -18,16 +18,6 @@ Theme::Theme()
 {
 }
 
-Theme::Theme(const QString& name, bool editable) :
-	m_name{ name }, m_editable{ editable }, m_uuid{ new QUuid(QUuid::createUuid().toString()) }
-{
-}
-
-Theme::Theme(const QString& name, QUuid* uuid, bool editable) :
-	m_name{ name }, m_editable{ editable }, m_uuid{ uuid }
-{
-}
-
 Theme::Theme(QDir dir) :
 	m_dir{ dir }
 {
@@ -54,6 +44,20 @@ Theme::Theme(QDir dir) :
 		for (QJsonValue lineage_value : meta_obj.value("lineage").toArray())
 			append_to_lineage(lineage_value.toString());
 	}
+}
+
+Theme::Theme(const QString& name, bool editable) :
+	m_name{ name },
+	m_editable{ editable },
+	m_uuid{ new QUuid(QUuid::createUuid().toString()) }
+{
+}
+
+Theme::Theme(const QString& name, QUuid* uuid, bool editable) :
+	m_name{ name },
+	m_editable{ editable },
+	m_uuid{ uuid }
+{
 }
 
 Theme::~Theme()
@@ -137,51 +141,6 @@ bool Theme::contains_attributes_for_tag(const QString& themeable_tag)
 		m_data_for_layers_themeables.contains(themeable_tag);
 }
 
-void Theme::copy(Theme& theme)
-{
-	/*  
-		NOTE ABOUT Theme::copy():
-		This function might be misleading since the copy only considers
-		what the supplied theme currently has loaded. It **does not** consider
-		the addional app theme files that did not get loaded in with the Theme.
-	*/
-
-	clear();
-
-	for (const QString& themeable_tag : theme.m_data_for_app_themeables.keys())
-	{
-		AttributeMap& themeable_data_in_theme =
-			m_data_for_app_themeables[themeable_tag] = AttributeMap();
-
-		for (const QString& entity_key : theme.m_data_for_app_themeables[themeable_tag].keys())
-		{
-			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data_for_app_themeables[themeable_tag][entity_key]))
-				themeable_data_in_theme[entity_key] = new Attribute(*theme_attr);
-			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data_for_app_themeables[themeable_tag][entity_key]))
-				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
-		}
-	}
-
-	for (const QString& themeable_tag : theme.m_data_for_layers_themeables.keys())
-	{
-		AttributeMap& themeable_data_in_theme =
-			m_data_for_layers_themeables[themeable_tag] = AttributeMap();
-
-		for (const QString& entity_key : theme.m_data_for_layers_themeables[themeable_tag].keys())
-		{
-			if (Attribute* theme_attr = dynamic_cast<Attribute*>(theme.m_data_for_layers_themeables[themeable_tag][entity_key]))
-				themeable_data_in_theme[entity_key] = new Attribute(*theme_attr);
-			else if (AttributeGroup* theme_attr_group = dynamic_cast<AttributeGroup*>(theme.m_data_for_layers_themeables[themeable_tag][entity_key]))
-				themeable_data_in_theme[entity_key] = new AttributeGroup(*theme_attr_group);
-		}
-	}
-
-	for (const QString& theme_id : theme.lineage())
-		append_to_lineage(theme_id);
-
-	append_to_lineage(theme.id());
-}
-
 void Theme::copy_attribute_values_of(Themeable* themeable)
 {
 	clear_data_for_themeable(themeable->tag());
@@ -219,9 +178,10 @@ bool Theme::editable()
 
 bool Theme::has_app_implementation() const
 {
-	return QFile(
-		m_dir.filePath(layersApp->app_identifier() + ".json")
-	).exists();
+	return
+		QFile(
+			m_dir.filePath(layersApp->app_identifier() + ".json")
+		).exists();
 }
 
 QString Theme::id()
@@ -360,7 +320,7 @@ void Theme::save_meta_file()
 	meta_file.close();
 }
 
-QList<QString> Theme::themeable_tags()
+QStringList Theme::themeable_tags()
 {
 	return
 		m_data_for_app_themeables.keys() +

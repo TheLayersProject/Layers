@@ -87,13 +87,13 @@ void Dialog::init_attributes()
 	update_content_margins();
 	update_titlebar();
 
-	connect(border()->thickness(), &AbstractAttribute::value_changed, [this] {
+	connect(border()->thickness(), &AbstractAttribute::changed, [this] {
 		update_content_margins();
 		update_titlebar();
 		});
 
 	for (Attribute* margin : *m_margins)
-		connect(margin, &AbstractAttribute::value_changed, this, &Dialog::update_content_margins);
+		connect(margin, &AbstractAttribute::changed, this, &Dialog::update_content_margins);
 }
 
 bool Dialog::nativeEvent(

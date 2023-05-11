@@ -12,6 +12,7 @@
 #include "Widgets/Dialogs/UpdateDialog.h"
 #include "Widgets/Widgets/Menus/ThemeEditor/WidgetEditor.h"
 
+#include <QDirIterator>
 #include <QFontDatabase>
 #include <QGradientStops>
 #include <QJsonDocument>
@@ -59,9 +60,10 @@ Application::Application(
 
 	if (m_version)
 	{
-		QFile setup_file(QDir(app_path(name)).filePath(m_name + "-" + m_version->toString() + "-setup.exe"));
+		QFile setup_file(QDir(app_path(name)).filePath(m_name + "-" + m_version->to_string() + "-setup.exe"));
 
-		if (setup_file.exists()) setup_file.remove();
+		if (setup_file.exists())
+			setup_file.remove();
 	}
 
 	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
@@ -145,19 +147,19 @@ void Application::add_child_themeable_pointer(Themeable& themeable)
 
 void Application::apply_theme(Theme& theme)
 {
-	if (m_current_theme != &theme)
+	if (m_active_theme != &theme)
 	{
-		if (m_current_theme)
-			m_current_theme->clear();
+		if (m_active_theme)
+			m_active_theme->clear();
 
-		m_current_theme = &theme;
+		m_active_theme = &theme;
 
-		if (!m_current_theme->has_app_implementation())
+		if (!m_active_theme->has_app_implementation())
 		{
 			// Iterate backwards through the lineage to determine last CAT.
-			for (int i = m_current_theme->lineage().size() - 1; i >= 0; i--)
+			for (int i = m_active_theme->lineage().size() - 1; i >= 0; i--)
 			{
-				QString theme_id = m_current_theme->lineage()[i];
+				QString theme_id = m_active_theme->lineage()[i];
 
 				QString theme_name = (theme_id.contains("_")) ?
 					theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
@@ -173,22 +175,20 @@ void Application::apply_theme(Theme& theme)
 						
 						if (last_CAT_app_file.exists())
 							last_CAT_app_file.copy(
-								m_current_theme->dir().filePath(app_file_name)
+								m_active_theme->dir().filePath(app_file_name)
 							);
 					}
 			}
 		}
 
-		m_current_theme->load();
+		m_active_theme->load();
 
 		for (Themeable* themeable : m_child_themeables)
 			themeable->apply_theme(theme);
 
-		emit theme.applied();
-
 		m_settings.setValue("themes/active_theme", theme.id());
 
-		emit current_theme_changed();
+		emit active_theme_changed();
 	}
 }
 
@@ -207,9 +207,9 @@ ColorDialog* Application::color_dialog() const
 	return m_color_dialog;
 }
 
-Theme* Application::current_theme() const
+Theme* Application::active_theme() const
 {
-	return m_current_theme;
+	return m_active_theme;
 }
 
 GradientDialog* Application::gradient_dialog() const
@@ -230,22 +230,23 @@ QMap<QString, Theme*>& Application::themes()
 bool Application::update_available()
 {
 	if (m_latest_version && m_version)
-		return *m_latest_version != m_version->toString();
+		return *m_latest_version != m_version->to_string();
 	else
 		return false;
 }
 
 bool Application::update_on_request()
 {
-	UpdateDialog* update_dialog = new UpdateDialog(m_version->toString(), *m_latest_version);
+	UpdateDialog* update_dialog = new UpdateDialog(m_version->to_string(), *m_latest_version);
 
-	update_dialog->assign_tag_prefixes();
-	if (m_current_theme) update_dialog->apply_theme(*m_current_theme);
+	if (m_active_theme)
+		update_dialog->apply_theme(*m_active_theme);
+
 	update_dialog->show();
 
 	if (update_dialog->exec())
 	{
-		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/releases");
+		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/releases");
 
 		QNetworkReply* repo_releases_json_download = m_downloader->download(repo_releases_json_download_url);
 
@@ -317,17 +318,7 @@ void Application::rename_theme(const QString& theme_id, const QString& new_name)
 	}
 }
 
-MainWindow* Application::main_window() const
-{
-	// TODO: Below is temporary and will not work right if the application supports multiple windows.
-	for (Themeable* themeable : m_child_themeables)
-		if (themeable->name() && *themeable->name() == "window")
-			return static_cast<MainWindow*>(themeable);
-
-	return nullptr;
-}
-
-QString& Application::name()
+QString Application::name()
 {
 	return m_name;
 }
@@ -335,7 +326,7 @@ QString& Application::name()
 void Application::reapply_theme()
 {
 	for (Themeable* themeable : m_child_themeables)
-		themeable->apply_theme(*m_current_theme);
+		themeable->apply_theme(*m_active_theme);
 }
 
 void Application::save_theme(Theme& theme)
@@ -360,7 +351,7 @@ void Application::save_theme(Theme& theme)
 
 	if (!app_theme_file.open(QIODevice::WriteOnly))
 	{
-		qDebug() << "Could not create theme file";
+		qDebug() << "Could not create theme app-implementation file";
 		return;
 	}
 
@@ -408,23 +399,16 @@ void Application::init_directories()
 
 void Application::init_fonts()
 {
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Black.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-BlackItalic.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Bold.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-BoldItalic.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Italic.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Light.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-LightItalic.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Medium.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-MediumItalic.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Regular.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-Thin.ttf");
-	QFontDatabase::addApplicationFont(":/fonts/Roboto/Roboto-ThinItalic.ttf");
+	QDirIterator fonts_iterator(
+		":/fonts",
+		{ "*.ttf", "*.otf" },
+		QDir::Files, QDirIterator::Subdirectories);
+
+	while (fonts_iterator.hasNext())
+		QFontDatabase::addApplicationFont(fonts_iterator.next());
 
 	QFont font("Roboto", 12, QFont::Normal);
-
 	font.setStyleStrategy(QFont::PreferAntialias);
-
 	setFont(font);
 }
 
@@ -459,7 +443,7 @@ void Application::init_latest_version_tag()
 {
 	if (m_github_repo)
 	{
-		QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->toString() + "/tags");
+		QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/tags");
 
 		QNetworkReply* repo_tags_json_download = m_downloader->download(repo_tags_json_download_url);
 

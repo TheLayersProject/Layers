@@ -51,7 +51,7 @@ UpdateDialog::UpdateDialog(const QString& current_version_tag, const QString& la
 	assign_tag_prefixes();
 
 	// Set theme
-	apply_theme(*layersApp->current_theme());
+	apply_theme(*layersApp->active_theme());
 }
 
 Themeable* UpdateDialog::clone()
