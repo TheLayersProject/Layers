@@ -38,7 +38,8 @@ namespace Layers
 
 		Widget* m_collapse_menu{ new Widget };
 
-		Button* m_collapse_menu_button{ new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8)), true) };
+		Button* m_collapse_menu_button{
+			new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8))) };
 
 		QVBoxLayout* m_collapse_menu_layout{ new QVBoxLayout };
 

@@ -17,10 +17,10 @@ namespace Layers
 		void clicked();
 
 	public:
-		Button(Graphic* graphic, const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-		Button(Graphic* graphic, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-		Button(const QString& text, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
-		Button(Graphic* graphic_before, Graphic* graphic_after, bool auto_touch_target_compliance = false, QWidget* parent = nullptr);
+		Button(Graphic* graphic, const QString& text, QWidget* parent = nullptr);
+		Button(Graphic* graphic, QWidget* parent = nullptr);
+		Button(const QString& text, QWidget* parent = nullptr);
+		Button(Graphic* graphic_before, Graphic* graphic_after, QWidget* parent = nullptr);
 		~Button();
 
 		void disable_graphic_hover_color(bool cond = true);
@@ -30,8 +30,6 @@ namespace Layers
 
 		Graphic* graphic() const;
 
-		void resize();
-
 		void set_available_width(int available_width);
 		void set_disabled(bool cond = true);
 		void set_font_size(int size);
@@ -40,11 +38,6 @@ namespace Layers
 		void set_text_padding(int left, int top, int right, int bottom);
 
 		void toggle_graphics();
-
-		int left_padding() const;
-		int top_padding() const;
-		int right_padding() const;
-		int bottom_padding() const;
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
@@ -57,8 +50,6 @@ namespace Layers
 		QHBoxLayout* main_layout{ new QHBoxLayout };
 
 		QGraphicsOpacityEffect* m_button_opacity{ new QGraphicsOpacityEffect };
-
-		bool m_auto_touch_target_compliance{ false };
 
 		bool m_disabled{ false };
 

@@ -95,7 +95,6 @@ Themeable* MainWindow::clone()
 	MainWindow* w = new MainWindow(true);
 
 	w->setMinimumSize(500, 400);
-	w->setMaximumSize(800, 600);
 
 	return w;
 }

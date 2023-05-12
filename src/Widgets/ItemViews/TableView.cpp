@@ -21,7 +21,7 @@ TableView::TableView(QWidget* parent) : QTableView(parent)
 	setHorizontalHeader(new HeaderView(Qt::Horizontal));
 
 	horizontalHeader()->setStretchLastSection(true);
-	horizontalHeader()->setMinimumHeight(45);
+	horizontalHeader()->setMinimumHeight(40);
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 	setShowGrid(false);
 	verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);

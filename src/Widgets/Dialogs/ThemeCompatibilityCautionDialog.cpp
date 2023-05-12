@@ -90,7 +90,7 @@ void ThemeCompatibilityCautionDialog::set_lineage_table_data(
 		m_theme_lineage_model.append(lineage_data);
 
 	m_lineage_table->verticalHeader()->resizeSection(
-		m_lineage_table->verticalHeader()->count() - 1, 45);
+		m_lineage_table->verticalHeader()->count() - 1, 40);
 
 	m_lineage_table->update_height();
 }

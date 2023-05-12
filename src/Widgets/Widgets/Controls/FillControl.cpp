@@ -18,7 +18,7 @@ FillControl::FillControl(QWidget* parent) :
 	init_attributes();
 
 	installEventFilter(this);
-	setFixedSize(45, 45);
+	setFixedSize(40, 40);
 	set_name("fill_control");
 	set_proper_name("Fill Control");
 
@@ -48,10 +48,10 @@ void FillControl::init_attributes()
 	m_corner_radii->top_right()->set_value(5.0);
 	m_corner_radii->bottom_left()->set_value(5.0);
 	m_corner_radii->bottom_right()->set_value(5.0);
-	m_margins->left()->set_value(10.0);
-	m_margins->top()->set_value(10.0);
-	m_margins->right()->set_value(10.0);
-	m_margins->bottom()->set_value(10.0);
+	m_margins->left()->set_value(8.0);
+	m_margins->top()->set_value(8.0);
+	m_margins->right()->set_value(8.0);
+	m_margins->bottom()->set_value(8.0);
 }
 
 void FillControl::set_attribute(Attribute* attribute)

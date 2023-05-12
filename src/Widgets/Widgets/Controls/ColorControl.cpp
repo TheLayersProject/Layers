@@ -14,7 +14,7 @@ ColorControl::ColorControl(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
-    setFixedSize(45, 45);
+    setFixedSize(40, 40);
 	installEventFilter(this);
 }
 
@@ -57,10 +57,10 @@ void ColorControl::init_attributes()
 	m_corner_radii->top_right()->set_value(5.0);
 	m_corner_radii->bottom_left()->set_value(5.0);
 	m_corner_radii->bottom_right()->set_value(5.0);
-	m_margins->left()->set_value(10.0);
-	m_margins->top()->set_value(10.0);
-	m_margins->right()->set_value(10.0);
-	m_margins->bottom()->set_value(10.0);
+	m_margins->left()->set_value(8.0);
+	m_margins->top()->set_value(8.0);
+	m_margins->right()->set_value(8.0);
+	m_margins->bottom()->set_value(8.0);
 }
 
 void ColorControl::set_current_editting_state(const QString& state)

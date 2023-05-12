@@ -8,7 +8,7 @@ using Layers::MainWindowTitlebar;
 MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
 	Widget(parent)
 {
-	setFixedHeight(45);
+	setFixedHeight(40);
 
 	set_name("titlebar");
 	set_proper_name("Titlebar");

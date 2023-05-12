@@ -63,7 +63,7 @@ void WidgetButton::init()
 
 	set_name("widget_button");
 	set_proper_name("Widget Button");
-	setMinimumHeight(45);
+	setMinimumHeight(40);
 
 	if (m_icon)
 	{
@@ -76,7 +76,7 @@ void WidgetButton::init()
 	m_label->set_name("label");
 	m_label->set_proper_name("Label");
 	m_label->set_padding(0, 8, 0, 0);
-	//m_label->setFixedHeight(45);
+	//m_label->setFixedHeight(40);
 }
 
 void WidgetButton::init_attributes()

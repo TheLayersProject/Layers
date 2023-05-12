@@ -12,11 +12,6 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 	set_proper_name("ScrollBar");
 
 	update_theme_dependencies();
-
-	//if (orientation() == Qt::Vertical)
-	//	setFixedWidth(45);
-	//else if (orientation() == Qt::Horizontal)
-	//	setFixedHeight(45);
 }
 
 ScrollBar::~ScrollBar()

@@ -39,15 +39,15 @@ Graphic::Graphic(const QString& file_path, QSize size, QWidget* parent) :
 	}
 
 	if (size.isValid())
-		setMaximumSize(size);
+		setFixedSize(size);
 	else if (m_svg)
-		setMaximumSize(m_svg->defaultSize());
+		setFixedSize(m_svg->defaultSize());
 	else if (m_image)
-		setMaximumSize(m_image->size());
+		setFixedSize(m_image->size());
 	else if (m_image_sequence)
-		setMaximumSize((*m_image_sequence)[0].size());
+		setFixedSize((*m_image_sequence)[0].size());
 
-	m_draw_size = maximumSize();
+	m_draw_size = QWidget::size();
 }
 
 Graphic::Graphic(const QImage& image, QWidget* parent) :
@@ -86,9 +86,9 @@ Graphic::Graphic(const Graphic& g)
 		m_timer.start(17);
 	}
 
-	setMaximumSize(g.maximumSize());
+	setFixedSize(g.size());
 
-	m_draw_size = maximumSize();
+	m_draw_size = size();
 }
 
 Graphic::~Graphic()

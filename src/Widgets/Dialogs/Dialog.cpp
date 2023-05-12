@@ -193,7 +193,7 @@ void Dialog::paintEvent(QPaintEvent* event)
 
 void Dialog::init_titlebar()
 {
-	m_titlebar->setFixedHeight(45);
+	m_titlebar->setFixedHeight(40);
 	m_titlebar->set_name("titlebar");
 	m_titlebar->set_proper_name("Titlebar");
 

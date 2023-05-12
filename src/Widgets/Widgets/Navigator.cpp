@@ -97,7 +97,7 @@ int Navigator::content_width(bool include_collapse_button)
 
 	for (Button* text_button : m_topbar_text_buttons)
 		hierarchy_content_width +=
-		text_button->width() +
+		text_button->sizeHint().width() +
 		m_main_layout->spacing();
 
 	for (Graphic* arrow_graphic : m_arrow_graphics)
@@ -226,15 +226,13 @@ Graphic* Navigator::create_arrow_graphic()
 Button* Navigator::create_text_button(const QString& text)
 {
 	Button* text_button = new Button(text);
-
-	text_button->setFixedHeight(45);
 	text_button->disable_text_hover_color();
 	text_button->entangle_with(m_control_text_button);
 	text_button->fill()->set_disabled();
 	text_button->set_font_size(14);
 	text_button->set_name("text_button");
-	text_button->set_padding(0, text_button->top_padding(), 0, text_button->bottom_padding());
-	text_button->set_text_padding(0, 4, 0, 0);
+	text_button->set_padding(0);
+	text_button->set_text_padding(0, 8, 0, 0);
 
 	if (!m_text_button_stack.isEmpty())
 		m_text_button_stack.last()->disable_text_hover_color(false);

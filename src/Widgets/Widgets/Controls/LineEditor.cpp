@@ -10,8 +10,8 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
-	setFixedSize(45, 45);
-	set_margin(7, 7, 8, 8);
+	setFixedSize(40, 40);
+	set_margin(5, 5, 5, 5);
 
 	m_line_edit->installEventFilter(this);
 	m_line_edit->setStyleSheet(

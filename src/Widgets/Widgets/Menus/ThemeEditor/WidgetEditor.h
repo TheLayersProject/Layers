@@ -73,8 +73,8 @@ namespace Layers
 		QVBoxLayout* m_widgets_layout{ new QVBoxLayout };
 		QVBoxLayout* m_widget_buttons_layout{ new QVBoxLayout };
 
-		Button* m_show_all_button{ new Button("Show All", true) };
-		Button* m_show_enabled_button{ new Button("Show Enabled", true) };
+		Button* m_show_all_button{ new Button("Show All") };
+		Button* m_show_enabled_button{ new Button("Show Enabled") };
 
 		Label* m_attributes_label{ new Label("Attributes:") };
 		Label* m_widgets_label{ new Label("Widgets:") };

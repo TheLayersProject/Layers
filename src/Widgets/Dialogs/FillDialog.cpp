@@ -10,13 +10,13 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 
 	installEventFilter(this);
 	setAttribute(Qt::WA_TranslucentBackground);
-	setFixedSize(165, 90);
+	setFixedSize(165, 85);
 	setMouseTracking(true);
 	setWindowFlags(Qt::FramelessWindowHint);
 	set_name("dialog");
 	set_proper_name("Dialog");
 
-	m_fill_type_toggle->setFixedHeight(90);
+	m_fill_type_toggle->setFixedHeight(85);
 	m_fill_type_toggle->set_name("vertical_toggle_switch");
 	m_fill_type_toggle->set_proper_name("Fill Type Toggle");
 
@@ -46,9 +46,9 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_color_label_opacity->setOpacity(1.0);
 
 	m_color_label->set_font_size(14);
-	m_color_label->setFixedHeight(45);
+	m_color_label->setFixedHeight(40);
 	m_color_label->set_resize_disabled();
-	m_color_label->padding_top()->set_value(16.0);
+	m_color_label->padding_top()->set_value(13.0);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
 	m_color_label->set_name("color_label");
 	m_color_label->set_proper_name("Color Label");
@@ -56,7 +56,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_gradient_label_opacity->setOpacity(1.0);
 
 	m_gradient_label->set_font_size(14);
-	m_gradient_label->setFixedHeight(45);
+	m_gradient_label->setFixedHeight(40);
 	m_gradient_label->set_resize_disabled();
 	m_gradient_label->padding_top()->set_value(13.0);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
@@ -141,11 +141,11 @@ void FillDialog::init_attributes()
 	m_corner_radii->bottom_left()->set_value(4.0);
 	m_corner_radii->bottom_right()->set_value(4.0);
 
-	m_color_control->margins()->top()->set_value(12.0);
+	m_color_control->margins()->top()->set_value(8.0);
 	m_color_control->margins()->bottom()->set_value(8.0);
 
 	m_gradient_control->margins()->top()->set_value(8.0);
-	m_gradient_control->margins()->bottom()->set_value(12.0);
+	m_gradient_control->margins()->bottom()->set_value(8.0);
 }
 
 void FillDialog::setup_layout()

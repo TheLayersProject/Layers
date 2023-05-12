@@ -156,13 +156,13 @@ void Slider::init()
 	init_attributes();
 
 	installEventFilter(this);
-	setFixedSize(244, 45);
+	setFixedSize(244, 40);
 
 	m_bar->setFixedHeight(5);
 	m_bar->set_name("bar");
 	m_bar->set_margin(23, 0, 23, 0);
 
-	m_handle->setFixedSize(45, 45);
+	m_handle->setFixedSize(40, 40);
 	m_handle->set_name("handle");
 	m_handle->set_margin(15, 5, 15, 5);
 

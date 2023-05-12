@@ -45,7 +45,8 @@ namespace Layers
 
 		Label* m_title_label;
 
-		Button* m_exit_button = new Button(new Graphic(":/svgs/exit.svg", QSize(20, 20)), true);
+		Button* m_exit_button = new Button(
+			new Graphic(":/svgs/exit.svg", QSize(20, 20)));
 	};
 }
 

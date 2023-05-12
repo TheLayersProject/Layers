@@ -2784,7 +2784,7 @@
         },
         "margins": {
             "bottom": {
-                "value": 12
+                "value": 10
             },
             "left": {
                 "value": 0
@@ -2793,7 +2793,7 @@
                 "value": 0
             },
             "top": {
-                "value": 12
+                "value": 10
             }
         }
     },
@@ -3018,16 +3018,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 8
+                "value": 5
             },
             "left": {
-                "value": 7
+                "value": 5
             },
             "right": {
-                "value": 8
+                "value": 5
             },
             "top": {
-                "value": 7
+                "value": 5
             }
         },
         "text_color": {
@@ -3191,16 +3191,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 8
+                "value": 5
             },
             "left": {
-                "value": 7
+                "value": 5
             },
             "right": {
-                "value": 8
+                "value": 5
             },
             "top": {
-                "value": 7
+                "value": 5
             }
         },
         "text_color": {
@@ -3393,16 +3393,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 8
+                "value": 5
             },
             "left": {
-                "value": 7
+                "value": 5
             },
             "right": {
-                "value": 8
+                "value": 5
             },
             "top": {
-                "value": 7
+                "value": 5
             }
         },
         "text_color": {
@@ -3566,16 +3566,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 8
+                "value": 5
             },
             "left": {
-                "value": 7
+                "value": 5
             },
             "right": {
-                "value": 8
+                "value": 5
             },
             "top": {
-                "value": 7
+                "value": 5
             }
         },
         "text_color": {
@@ -3761,7 +3761,7 @@
         },
         "margins": {
             "bottom": {
-                "value": 12
+                "value": 10
             },
             "left": {
                 "value": 0
@@ -3770,7 +3770,7 @@
                 "value": 0
             },
             "top": {
-                "value": 12
+                "value": 10
             }
         }
     },
@@ -3888,16 +3888,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 10
+                "value": 8
             },
             "left": {
-                "value": 10
+                "value": 8
             },
             "right": {
-                "value": 10
+                "value": 8
             },
             "top": {
-                "value": 10
+                "value": 8
             }
         }
     },
@@ -4012,16 +4012,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 12
+                "value": 10
             },
             "left": {
-                "value": 12
+                "value": 10
             },
             "right": {
-                "value": 12
+                "value": 10
             },
             "top": {
-                "value": 12
+                "value": 10
             }
         }
     },
@@ -4122,7 +4122,7 @@
         },
         "margins": {
             "bottom": {
-                "value": 12
+                "value": 10
             },
             "left": {
                 "value": 0
@@ -4131,7 +4131,7 @@
                 "value": 0
             },
             "top": {
-                "value": 12
+                "value": 10
             }
         }
     },
@@ -4336,7 +4336,7 @@
         },
         "margins": {
             "bottom": {
-                "value": 12
+                "value": 10
             },
             "left": {
                 "value": 0
@@ -4345,7 +4345,7 @@
                 "value": 0
             },
             "top": {
-                "value": 12
+                "value": 10
             }
         }
     },
@@ -4484,16 +4484,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 8
+                "value": 5
             },
             "left": {
-                "value": 7
+                "value": 5
             },
             "right": {
-                "value": 8
+                "value": 5
             },
             "top": {
-                "value": 7
+                "value": 5
             }
         },
         "text_color": {

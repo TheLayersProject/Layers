@@ -10,7 +10,7 @@ RadioButton::RadioButton(QWidget* parent) : QWidget(parent)
 {
 	init_attributes();
 	installEventFilter(this);
-	setFixedSize(45, 45);
+	setFixedSize(40, 40);
 }
 
 bool RadioButton::eventFilter(QObject* object, QEvent* event)

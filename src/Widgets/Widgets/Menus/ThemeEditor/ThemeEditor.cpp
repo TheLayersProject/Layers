@@ -24,7 +24,7 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	m_control_widget_editor->set_proper_name("Widget Editor");
 	m_control_widget_editor->hide();
 
-	m_topbar->setFixedHeight(45);
+	m_topbar->setFixedHeight(40);
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("topbar");
 	m_topbar->set_proper_name("Topbar");

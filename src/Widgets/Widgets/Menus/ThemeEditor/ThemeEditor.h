@@ -61,7 +61,7 @@ namespace Layers
 
 		QList<Themeable*> m_open_themeables;
 
-		Button* m_apply_button{ new Button("Apply", true) };
+		Button* m_apply_button{ new Button("Apply") };
 	};
 }
 

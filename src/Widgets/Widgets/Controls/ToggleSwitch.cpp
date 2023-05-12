@@ -12,12 +12,12 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	init_attributes();
 
 	installEventFilter(this);
-	setFixedSize(45, 45);
+	setFixedSize(40, 40);
 	set_name("toggle_switch");
 
 	m_square->set_name("square");
 	m_square->set_proper_name("Square");
-	m_square->setFixedSize(11, 11);
+	m_square->setFixedSize(10, 10);
 
 	update_spacer_size();
 	m_spacer->hide();
@@ -132,11 +132,11 @@ void ToggleSwitch::init_attributes()
 		{ "Toggled", QColor("#6fc65b") }
 		});
 	if (m_vertical)
-		set_margin(12.0);
+		set_margin(10.0);
 	else
 	{
-		m_margins->top()->set_value(12.0);
-		m_margins->bottom()->set_value(12.0);
+		m_margins->top()->set_value(10.0);
+		m_margins->bottom()->set_value(10.0);
 	}
 
 	m_square->corner_radii()->top_left()->set_value(2.0);
