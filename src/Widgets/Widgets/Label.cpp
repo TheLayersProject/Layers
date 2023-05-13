@@ -141,7 +141,8 @@ void Label::setFont(const QFont& f)
 {
 	QLabel::setFont(f);
 
-	if (!m_resize_disabled) resize();
+	if (!m_resize_disabled)
+		resize();
 }
 
 //void Label::setFixedWidth(int w)
@@ -155,14 +156,16 @@ void Label::setWordWrap(bool on)
 {
 	QLabel::setWordWrap(on);
 
-	if (!m_resize_disabled) resize();
+	if (!m_resize_disabled)
+		resize();
 }
 
 void Label::set_available_width(int available_width)
 {
 	m_available_width = available_width;
 
-	if (!m_resize_disabled) resize();
+	if (!m_resize_disabled)
+		resize();
 }
 
 void Label::set_font_size(int size)
@@ -173,7 +176,8 @@ void Label::set_font_size(int size)
 
 	setFont(f);
 
-	if (!m_resize_disabled) resize();
+	if (!m_resize_disabled)
+		resize();
 }
 
 void Label::set_hovering(bool cond)
@@ -190,7 +194,8 @@ void Label::set_padding(double left, double top, double right, double bottom)
 	m_padding_right = right;
 	m_padding_bottom = bottom;
 
-	if (!m_resize_disabled) resize();
+	if (!m_resize_disabled)
+		resize();
 }
 
 void Label::set_resize_disabled(bool disable)
@@ -246,7 +251,8 @@ void Label::paintEvent(QPaintEvent* event)
 	else
 		path.addText(m_padding_left, m_padding_top->as<double>() + label_font.pointSizeF(), label_font, text());
 
-	if (!outline_color()->disabled()) painter.strokePath(path, pen);
+	if (!outline_color()->disabled())
+		painter.strokePath(path, pen);
 
 	painter.fillPath(path, text_brush);
 	painter.end();

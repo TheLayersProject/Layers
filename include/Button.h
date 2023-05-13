@@ -42,11 +42,10 @@ namespace Layers
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init();
-
-		void setup_layout();
-
 	private:
+		void init();
+		void init_layout();
+
 		QHBoxLayout* main_layout{ new QHBoxLayout };
 
 		QGraphicsOpacityEffect* m_button_opacity{ new QGraphicsOpacityEffect };

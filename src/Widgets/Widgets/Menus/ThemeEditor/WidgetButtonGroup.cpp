@@ -19,6 +19,9 @@ WidgetButtonGroup::WidgetButtonGroup(
 	set_proper_name("Widget Button Group");
 	setMinimumHeight(40);
 
+	for (WidgetButton* widget_button : widget_buttons)
+		widget_button->label()->set_available_width(210);
+
 	m_label->set_font_size(14);
 	m_label->set_name("label");
 	m_label->set_proper_name("Label");

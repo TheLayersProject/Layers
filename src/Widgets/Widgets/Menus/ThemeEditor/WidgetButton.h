@@ -18,6 +18,8 @@ namespace Layers
 		WidgetButton(const QString& label_text, QWidget* parent = nullptr);
 		WidgetButton(Graphic* icon, const QString label_text, QWidget* parent = nullptr);
 
+		Label* label() const;
+
 		QString label_text() const;
 
 	protected:

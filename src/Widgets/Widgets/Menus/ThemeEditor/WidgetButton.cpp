@@ -3,6 +3,7 @@
 #include <QHBoxLayout>
 #include <QMouseEvent>
 
+using Layers::Label;
 using Layers::WidgetButton;
 
 WidgetButton::WidgetButton(const QString& label_text, QWidget* parent) :
@@ -19,6 +20,11 @@ WidgetButton::WidgetButton(Graphic* icon, const QString label_text, QWidget* par
 	m_icon = icon;
 
 	init();
+}
+
+Label* WidgetButton::label() const
+{
+	return m_label;
 }
 
 QString WidgetButton::label_text() const
@@ -71,7 +77,8 @@ void WidgetButton::init()
 		m_icon->setMinimumWidth(40);
 	}
 
-	m_label->setMaximumWidth(252); // TODO: Verify this width
+	m_label->setWordWrap(true);
+	m_label->set_available_width(230);
 	m_label->set_font_size(14);
 	m_label->set_name("label");
 	m_label->set_proper_name("Label");

@@ -97,53 +97,6 @@ Graphic* Button::graphic() const
 	return m_graphic;
 }
 
-void Button::init()
-{
-	setup_layout();
-	setMinimumSize(40, 40);
-	installEventFilter(this);
-
-	m_button_opacity->setOpacity(1.0);
-	setGraphicsEffect(m_button_opacity);
-
-	if (m_graphic)
-	{
-		set_icon(new Graphic(*m_graphic));
-
-		m_graphic->set_icon(new Graphic(*m_graphic));
-		m_graphic->set_name("graphic");
-		m_graphic->set_proper_name("Graphic");
-
-		m_graphic->svg()->common_color()->init_variant_map({
-			{ "Unselected", QColor(Qt::darkGray) },
-			{ "Selected", QColor(Qt::lightGray) }
-			});
-
-		m_graphic->svg()->common_color()->set_state("Unselected");
-	}
-
-	if (m_graphic_after)
-	{
-		m_graphic_after->set_name("graphic_after");
-		//m_graphic_after->set_proper_name("Graphic After");
-		m_graphic_after->hide();
-
-		m_graphic_after->svg()->common_color()->init_variant_map({
-			{ "Unselected", QColor(Qt::darkGray) },
-			{ "Selected", QColor(Qt::lightGray) }
-			});
-
-		m_graphic_after->svg()->common_color()->set_state("Unselected");
-	}
-
-	if (m_text_label)
-	{
-		m_text_label->set_name("text_label");
-		m_text_label->set_proper_name("Text Label");
-		m_text_label->setWordWrap(true);
-	}
-}
-
 void Button::set_available_width(int available_width)
 {
 	m_available_width = available_width;
@@ -250,7 +203,54 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-void Button::setup_layout()
+void Button::init()
+{
+	init_layout();
+	setMinimumSize(40, 40);
+	installEventFilter(this);
+
+	m_button_opacity->setOpacity(1.0);
+	setGraphicsEffect(m_button_opacity);
+
+	if (m_graphic)
+	{
+		set_icon(new Graphic(*m_graphic));
+
+		m_graphic->set_icon(new Graphic(*m_graphic));
+		m_graphic->set_name("graphic");
+		m_graphic->set_proper_name("Graphic");
+
+		m_graphic->svg()->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+			});
+
+		m_graphic->svg()->common_color()->set_state("Unselected");
+	}
+
+	if (m_graphic_after)
+	{
+		m_graphic_after->set_name("graphic_after");
+		//m_graphic_after->set_proper_name("Graphic After");
+		m_graphic_after->hide();
+
+		m_graphic_after->svg()->common_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+			});
+
+		m_graphic_after->svg()->common_color()->set_state("Unselected");
+	}
+
+	if (m_text_label)
+	{
+		m_text_label->set_name("text_label");
+		m_text_label->set_proper_name("Text Label");
+		m_text_label->setWordWrap(true);
+	}
+}
+
+void Button::init_layout()
 {
 	if (m_graphic)
 		main_layout->addWidget(m_graphic);
