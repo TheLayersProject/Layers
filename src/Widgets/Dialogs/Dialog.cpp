@@ -14,6 +14,7 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	m_title_label{ new Label(title) }, QDialog(parent)
 {
 	init_attributes();
+	init_layout();
 	init_titlebar();
 
 	setAttribute(Qt::WA_TranslucentBackground);
@@ -22,8 +23,6 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	//installEventFilter(this);
 
 	set_name("dialog");
-
-	setup_layout();
 }
 
 void Dialog::set_icon(Graphic* icon)
@@ -67,33 +66,6 @@ void Dialog::update_titlebar()
 	m_titlebar->corner_radii()->top_right()->set_value(
 		inner_radius(corner_radii()->top_right()->as<double>(), border_thickness)
 	);
-}
-
-void Dialog::init_attributes()
-{
-	ThemeableBox::init_attributes();
-
-	m_border->fill()->set_value(QVariant::fromValue(
-		QGradientStops({
-			{ 0.0, QColor("#c0c0c0") },
-			{ 1.0, Qt::white }
-		})));
-	m_border->thickness()->set_value(10.0);
-	m_corner_radii->top_left()->set_value(10.0);
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
-
-	update_content_margins();
-	update_titlebar();
-
-	connect(border()->thickness(), &AbstractAttribute::changed, [this] {
-		update_content_margins();
-		update_titlebar();
-		});
-
-	for (Attribute* margin : *m_margins)
-		connect(margin, &AbstractAttribute::changed, this, &Dialog::update_content_margins);
 }
 
 bool Dialog::nativeEvent(
@@ -191,6 +163,47 @@ void Dialog::paintEvent(QPaintEvent* event)
 	paint(this);
 }
 
+void Dialog::init_attributes()
+{
+	ThemeableBox::init_attributes();
+
+	m_border->fill()->set_value(QVariant::fromValue(
+		QGradientStops({
+			{ 0.0, QColor("#c0c0c0") },
+			{ 1.0, Qt::white }
+			})));
+	m_border->thickness()->set_value(10.0);
+	m_corner_radii->top_left()->set_value(10.0);
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
+
+	update_content_margins();
+	update_titlebar();
+
+	connect(border()->thickness(), &AbstractAttribute::changed, [this] {
+		update_content_margins();
+		update_titlebar();
+		});
+
+	for (Attribute* margin : *m_margins)
+		connect(margin, &AbstractAttribute::changed, this, &Dialog::update_content_margins);
+}
+
+void Dialog::init_layout()
+{
+	// Main Layout
+	update_content_margins();
+
+	m_main_layout->setSpacing(0);
+	m_main_layout->addWidget(m_titlebar);
+	m_main_layout->setAlignment(m_titlebar, Qt::AlignTop);
+
+	QWidget::setLayout(m_main_layout);
+
+	m_main_layout->activate();
+}
+
 void Dialog::init_titlebar()
 {
 	m_titlebar->setFixedHeight(40);
@@ -206,7 +219,7 @@ void Dialog::init_titlebar()
 	connect(m_exit_button, &Button::clicked, [this] {
 		if (!m_functionality_disabled)
 			done(QDialog::Rejected);
-	});
+		});
 
 	m_exit_button->set_name("exit_button");
 	m_exit_button->set_proper_name("Exit Button");
@@ -220,18 +233,4 @@ void Dialog::init_titlebar()
 	m_titlebar_layout->addWidget(m_exit_button);
 
 	m_titlebar->setLayout(m_titlebar_layout);
-}
-
-void Dialog::setup_layout()
-{
-	// Main Layout
-	update_content_margins();
-
-	m_main_layout->setSpacing(0);
-	m_main_layout->addWidget(m_titlebar);
-	m_main_layout->setAlignment(m_titlebar, Qt::AlignTop);
-
-	QWidget::setLayout(m_main_layout);
-
-	m_main_layout->activate();
 }

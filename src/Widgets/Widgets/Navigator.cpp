@@ -26,7 +26,6 @@ Navigator::Navigator(QWidget* parent)
 
 	m_collapse_menu_button->hide();
 	m_collapse_menu_button->setFixedWidth(50);
-	m_collapse_menu_button->disable_graphic_hover_color();
 	m_collapse_menu_button->fill()->set_value(false);
 	m_collapse_menu_button->corner_radii()->top_left()->set_value(5.0);
 	m_collapse_menu_button->corner_radii()->top_right()->set_value(5.0);

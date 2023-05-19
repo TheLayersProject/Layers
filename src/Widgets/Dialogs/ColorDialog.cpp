@@ -112,8 +112,6 @@ ColorDialog::ColorDialog(QWidget* parent) :
 					m_z_slider->set_limit(255);
 					break;
 				}
-
-			m_color_plane->update_z_value();
 		});
 
 	setup_layout();
@@ -144,7 +142,7 @@ Attribute* ColorDialog::color() const
 
 void ColorDialog::init_attributes()
 {
-	m_color->entangle_with(m_color_plane->color);
+	m_color->entangle_with(m_color_plane->color());
 
 	connect(m_color, &Attribute::changed, [this]
 		{
@@ -163,7 +161,7 @@ void ColorDialog::init_attributes()
 				QString::number(int(round(color.valueF() * 100.f))));
 		});
 
-	m_z_slider->a_value.entangle_with(m_color_plane->z_value);
+	m_z_slider->a_value.entangle_with(m_color_plane->z_value());
 }
 
 void ColorDialog::hsv_changed()

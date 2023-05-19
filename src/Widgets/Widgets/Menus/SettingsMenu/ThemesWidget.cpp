@@ -62,7 +62,6 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 
 	m_theme_info_button->set_name("theme_info_button");
 	m_theme_info_button->set_proper_name("Theme Info Button");
-	m_theme_info_button->disable_graphic_hover_color();
 
 	m_separator_1->entangle_with(m_control_separator);
 	m_separator_1->setFixedSize(1, 30);

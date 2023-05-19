@@ -56,14 +56,28 @@ QList<Themeable*> ComboBox::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
+void ComboBox::setFixedHeight(int h)
+{
+	QComboBox::setFixedHeight(h);
+
+	update_stylesheet();
+}
+
 void ComboBox::setFixedSize(int w, int h)
 {
 	ComboBox::setFixedSize(QSize(w, h));
 }
 
-void ComboBox::setFixedSize(QSize size)
+void ComboBox::setFixedSize(const QSize& s)
 {
-	QComboBox::setFixedSize(size);
+	QComboBox::setFixedSize(s);
+
+	update_stylesheet();
+}
+
+void ComboBox::setFixedWidth(int w)
+{
+	QComboBox::setFixedWidth(w);
 
 	update_stylesheet();
 }

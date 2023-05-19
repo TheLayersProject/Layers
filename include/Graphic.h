@@ -16,13 +16,18 @@ namespace Layers
 		Q_OBJECT
 
 	public:
-		Graphic(const QString& file_path, QSize size = QSize(), QWidget* parent = nullptr);
+		Graphic(const QString& file_path, QSize size = QSize(),
+			QWidget* parent = nullptr);
+		
 		Graphic(const QImage& image, QWidget* parent = nullptr);
+		
 		Graphic(const Graphic& g);
+
 		~Graphic();
 
 		virtual QList<Themeable*> child_themeables(
-			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
+		) override;
 
 		SvgRenderer* svg() const;
 
@@ -46,4 +51,4 @@ namespace Layers
 	};
 }
 
-#endif // GRAPHIC2_H
+#endif // GRAPHIC_H

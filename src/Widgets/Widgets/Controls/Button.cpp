@@ -67,18 +67,6 @@ Button::~Button()
 		m_text_label->deleteLater();
 }
 
-void Button::disable_graphic_hover_color(bool cond)
-{
-	// TODO:
-	//if (m_graphic && m_use_graphic_hover_color)
-	// m_graphic->set_hovering(false);
-	// 
-	//if (m_graphic_after && m_use_graphic_hover_color)
-	//	m_graphic_after->set_hovering(false);
-
-	m_use_graphic_hover_color = !cond;
-}
-
 void Button::disable_text_hover_color(bool cond)
 {
 	if (m_text_label && m_use_text_hover_color)
@@ -95,11 +83,6 @@ bool Button::disabled() const
 Graphic* Button::graphic() const
 {
 	return m_graphic;
-}
-
-void Button::set_available_width(int available_width)
-{
-	m_available_width = available_width;
 }
 
 void Button::set_disabled(bool cond)
@@ -120,7 +103,8 @@ void Button::set_disabled(bool cond)
 
 void Button::set_font_size(int size)
 {
-	m_text_label->set_font_size(size);
+	if (m_text_label)
+		m_text_label->set_font_size(size);
 }
 
 void Button::set_padding(int padding)
@@ -164,7 +148,8 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			if (!m_disabled) emit clicked(); //  && !m_functionality_disabled
+			if (!m_disabled)
+				emit clicked();
 
 			toggle_graphics();
 		}

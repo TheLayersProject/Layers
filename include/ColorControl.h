@@ -5,42 +5,58 @@
 
 namespace Layers
 {
+	/*!
+		A ColorControl is a Widget that gives the user a way to access the
+		ColorDialog. When the user clicks on the control, the application's
+		ColorDialog is displayed.
+	*/
 	class ColorControl : public Widget
 	{
 		Q_OBJECT
 
 	signals:
+		/*!
+			This signal is emitted if the associated color attribute changes.
+		*/
 		void color_changed();
 
 	public:
+		/*!
+			Constructs a color control.
+		*/
 		ColorControl(QWidget* parent = nullptr);
+
 		~ColorControl();
 
+		/*!
+			Displays the application's ColorDialog to the user.
+		*/
 		void click();
 
+		/*!
+			Disables or enables the click functionality of the control
+			depending on *cond*.
+		*/
 		void disable_clicking(bool cond = true);
 
-		//void set_attribute(Attribute* attribute);
-
-		//Attribute a_corner_radii{ Attribute("Corner Radii", QVariant::fromValue(5.0)) };
-		//Attribute a_inner_border_color{ Attribute("Inner Border Color", QColor("#2c2c2c")) };
-		//Attribute a_outer_border_color{ Attribute("Outer Border Color", QColor("#d6d6d6")) };
-
 	public slots:
+		/*!
+			Sets the state that is currently being editted.
+		*/
 		void set_current_editting_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);
 
+	private:
 		void init_attributes();
 
-	private:
 		bool clicking_disabled{ false };
 		bool open_on_release{ false };
 
 		QMetaObject::Connection attribute_connection;
 
-		QList<QString> m_attribute_states{ QList<QString>() };
+		QStringList m_attribute_states;
 	};
 }
 

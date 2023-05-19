@@ -46,23 +46,6 @@ void ColorControl::disable_clicking(bool cond)
 	clicking_disabled = cond;
 }
 
-void ColorControl::init_attributes()
-{
-	// Remove control attribute
-	m_attributes.remove("fill");
-
-	m_border->fill()->set_value(QColor("#D6D6D6"));
-	m_border->thickness()->set_value(2.0);
-	m_corner_radii->top_left()->set_value(5.0);
-	m_corner_radii->top_right()->set_value(5.0);
-	m_corner_radii->bottom_left()->set_value(5.0);
-	m_corner_radii->bottom_right()->set_value(5.0);
-	m_margins->left()->set_value(8.0);
-	m_margins->top()->set_value(8.0);
-	m_margins->right()->set_value(8.0);
-	m_margins->bottom()->set_value(8.0);
-}
-
 void ColorControl::set_current_editting_state(const QString& state)
 {
 	m_fill->set_state(state);
@@ -94,4 +77,21 @@ bool ColorControl::eventFilter(QObject* object, QEvent* event)
 	}
 
     return false;
+}
+
+void ColorControl::init_attributes()
+{
+	// Remove control attribute
+	m_attributes.remove("fill");
+
+	m_border->fill()->set_value(QColor("#D6D6D6"));
+	m_border->thickness()->set_value(2.0);
+	m_corner_radii->top_left()->set_value(5.0);
+	m_corner_radii->top_right()->set_value(5.0);
+	m_corner_radii->bottom_left()->set_value(5.0);
+	m_corner_radii->bottom_right()->set_value(5.0);
+	m_margins->left()->set_value(8.0);
+	m_margins->top()->set_value(8.0);
+	m_margins->right()->set_value(8.0);
+	m_margins->bottom()->set_value(8.0);
 }

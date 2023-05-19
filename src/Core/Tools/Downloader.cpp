@@ -10,6 +10,19 @@ Downloader::Downloader(QObject* parent) :
 {
 }
 
+QNetworkReply* Downloader::download(const QUrl& file_url)
+{
+	QNetworkRequest request(file_url);
+
+	QNetworkReply* reply = m_network_manager.get(request);
+
+	connect(reply, &QNetworkReply::finished, [=] {
+		reply->deleteLater();
+	});
+
+	return reply;
+}
+
 QNetworkReply* Downloader::download(const QUrl& file_url, const QDir& directory)
 {
 	QNetworkRequest request(file_url);
@@ -28,20 +41,7 @@ QNetworkReply* Downloader::download(const QUrl& file_url, const QDir& directory)
 		}
 
 		reply->deleteLater();
-	});
-
-	return reply;
-}
-
-QNetworkReply* Downloader::download(const QUrl& file_url)
-{
-	QNetworkRequest request(file_url);
-
-	QNetworkReply* reply = m_network_manager.get(request);
-
-	connect(reply, &QNetworkReply::finished, [=] {
-		reply->deleteLater();
-	});
+		});
 
 	return reply;
 }

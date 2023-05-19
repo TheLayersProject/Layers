@@ -8,34 +8,45 @@
 
 namespace Layers
 {
+	/*!
+		A Dialog is a QDialog and a ThemeableBox that is used for short-term
+		tasks or brief communications with the user.
+	*/
 	class Dialog : public QDialog, public ThemeableBox
 	{
 		Q_OBJECT
 
 	public:
+		/*!
+			Constructs a dialog labeled with *title*.
+		*/
 		Dialog(const QString& title = "Dialog", QWidget* parent = nullptr);
 
+		/*!
+			Sets the dialog's icon.
+		*/
 		void set_icon(Graphic* icon);
 
+		/*!
+			Sets the layout of the dialog.
+		*/
 		void setLayout(QLayout* layout);
 
-	public slots:
-		void update_content_margins();
-		void update_titlebar();
-
 	protected:
-		void init_attributes();
-
 		bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 		void paintEvent(QPaintEvent* event) override;
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-	private:
-		void init_titlebar();
+	private slots:
+		void update_content_margins();
+		void update_titlebar();
 
-		void setup_layout();
+	private:
+		void init_attributes();
+		void init_layout();
+		void init_titlebar();
 
 		bool m_hovering{ false };
 
