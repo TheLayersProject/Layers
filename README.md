@@ -1,46 +1,60 @@
-# Layers
+# <img src="https://github.com/huntermalm/Layers/blob/main/svgs/layers_logo.svg?raw=true" alt="layers_logo" width="50" align="left"/>Layers
 
-<div class="title_screenshot">
+Layers is a Qt library that provides an application template with a focus on themes and user customization.
 
-![Screenshot of Layers Demo 3.1.0a](img/demo_dark.svg)
+With Layers, you will be able to create simple, modern desktop apps that give users the freedom to change the appearance of your apps!
 
-</div>
+Features include:
 
-Layers is an application template library with a focus on themes and user customization.
+- Template window with built-in features
+- Theme creation and customization
+- Themes that work across multiple apps
+- User-friendly control widgets
+- Updating system for apps hosted on GitHub
+
+**NOTE: At this time, Layers only supports Windows. Other operating systems will be supported in the future.**
 
 ## Demo
 
-The [Layers Demo](https://github.com/huntermalm/Layers-Demo) is a minimal Layers application that demonstrates the capabilities of the Layers software library. The source-code demonstrates how to get a basic Layers application up and running, while the binary release is provided to let developers see a Layers app in action.
+The [Layers Demo](https://github.com/huntermalm/Layers-Demo) is a basic Layers application that demonstrates the capabilities of the Layers software library. The source-code demonstrates how to get a basic Layers application up and running, while the binary release is provided to let developers see a Layers app in action.
 
 ## Development and Testing
 
-These are the steps to install a copy of Layers source-code on your local machine for development and testing purposes.
+### Building Layers
 
-It is recommended to clone a copy of the project repository to be able to use project features that have been implemented.  You may clone the project's repository with:
+These are the steps to build Layers from source-code with Microsoft Visual Studio (MSVC).
 
-> git clone https://github.com/huntermalm/Layers.git
+1. Install [Microsoft Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (2019 should also work)
+    - Be sure to select *Desktop development with C++* from *Workloads*
+2. Install the *Qt Visual Studio Tools* extension
+    - Launch VS
+    - From the menu bar, select *Extensions > Manage Extensions*
+    - Search for *Qt Visual Studio Tools* and download it
+    - Exit VS for the extension to install
+3. Install Qt 6.5.x for open source use
+    - Download [Qt Online Installer](https://www.qt.io/download-qt-installer-oss) and run it
+    - When you get to the section labeled *Installation Folder*, choose the *'Custom Installation'* option
+    - When you get to the section labeled *Select Components*, select the following options:
+        - *Qt > Qt 6.5.x > MSVC 2019 64-bit*
+        - *Qt > Developer and Designer Tools > OpenSSL 1.1.1q Toolkit*
+4. Link the downloaded Qt version with Visual Studio
+    - Launch VS
+    - From the menu bar, select *Extensions > Qt VS Tools > Qt Versions*
+    - Under *Version*, click the option to *add new Qt version*
+    - Label the version as *'6.5'*
+    - Under *Path*, click the folder icon and browse to the qmake executable from the Qt installation. It should be in the directory *'...\Qt\6.5.x\msvc2019_64\bin'*
+5. Build Layers
+    - Clone this project
+    - Open the project file *Layers.vcxproj*
+    - From the menu bar, select *Build > Build Layers*
 
-You may also download a .zip of the project [here](https://github.com/huntermalm/Layers/archive/main.zip).
+### Testing Layers
 
-##### Layers development requires Qt 6.  Other Qt versions may work but have not been tested.
+Since Layers is a library, a separate application that is implemented with Layers is required to test changes. The [Layers Demo](https://github.com/huntermalm/Layers-Demo) application is recommended for that purpose. Visit the GitHub page for the Layers Demo to find steps on how to build it from source-code.
 
-#### Documentation
+### Documentation
 
 Layers documentation is still in progress.  Once it is completed, a link will be provided here.
-
-#### Project Goals
-
-A list of project goals is still in progress.  Once it is completed, a link will be provided here.
-
-## Installation
-
-**Since Layers development is still in the alpha stage, do not expect everything this library has to offer to be stable or functional. Alpha releases are provided for developers to test library functionality. It is not recommended to start developing your application with a Layers alpha build since things can change before a production build is released.**
-
-Grab the latest version of Layers from the downloads below.  Follow the standard library linking process for your IDE.
-
-## Download
-
-* [Layers-2.2.0a.zip](https://github.com/huntermalm/Layers/releases/download/2.2.0a/Layers-2.2.0a.zip) (2021-09-11)
 
 ## Authors
 
