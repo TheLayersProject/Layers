@@ -59,24 +59,24 @@ Graphic::Graphic(const QImage& image, QWidget* parent) :
 	m_draw_size = maximumSize();
 }
 
-Graphic::Graphic(const Graphic& g)
+Graphic::Graphic(const Graphic& graphic)
 {
-	if (g.m_svg)
+	if (graphic.m_svg)
 	{
-		m_svg = new SvgRenderer(*g.m_svg);
+		m_svg = new SvgRenderer(*graphic.m_svg);
 		m_svg->set_name("svg");
 		m_svg->set_proper_name("SVG");
 
 		m_repaint_connection = connect(m_svg, &QSvgRenderer::repaintNeeded,
 			[this] { update(); });
 	}
-	else if (g.m_image)
+	else if (graphic.m_image)
 	{
-		m_image = new QImage(*g.m_image);
+		m_image = new QImage(*graphic.m_image);
 	}
-	else if (g.m_image_sequence)
+	else if (graphic.m_image_sequence)
 	{
-		m_image_sequence = new ImageSequence(*g.m_image_sequence);
+		m_image_sequence = new ImageSequence(*graphic.m_image_sequence);
 
 		connect(&m_timer, &QTimer::timeout, [this] {
 			m_timer.start(17);
@@ -86,7 +86,7 @@ Graphic::Graphic(const Graphic& g)
 		m_timer.start(17);
 	}
 
-	setFixedSize(g.size());
+	setFixedSize(graphic.size());
 
 	m_draw_size = size();
 }
