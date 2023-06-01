@@ -19,38 +19,6 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 		QString::number(m_left_padding->as<double>() + m_margins->left()->as<double>()) + "px; padding-bottom: 1px; }");
 
 	connect(m_line_edit, &QLineEdit::textEdited, [this] {
-  //      if (m_line_edit->text().startsWith("0")) m_line_edit->setText("0");
-  //      else if (m_line_edit->hasAcceptableInput() || m_line_edit->text() == "")
-  //      {
-  //          if (m_text->is_multi_valued())
-  //              m_text->set_value(m_text->state(), m_line_edit->text());
-  //          else
-  //              m_text->set_value(m_line_edit->text());
-  //      }
-  //      else m_line_edit->setText(m_text->as<QString>());
-
-		// TODO: Simplify below after merging Attribute::set_value() overloads
-		// into a single function
-		// TODO: Remove
-		//if (m_text->is_multi_valued())
-		//{
-		//	if (QString(m_text->typeName()) == "QString")
-		//		m_text->set_value(m_text->state(), m_line_edit->text());
-
-		//	else if (QString(m_text->typeName()) == "double")
-		//		m_text->set_value(m_text->state(), QVariant(m_line_edit->text().toDouble()));
-		//}
-		//else
-		//{
-		//	if (QString(m_text->typeName()) == "QString")
-		//		m_text->set_value(m_line_edit->text());
-
-		//	else if (QString(m_text->typeName()) == "double")
-		//		m_text->set_value(QVariant(m_line_edit->text().toDouble()));
-
-		//	//m_text->set_value(m_line_edit->text());
-		//}
-
 		if (QString(m_text->typeName()) == "QString")
 			m_text->set_value(m_line_edit->text());
 
@@ -60,7 +28,10 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 		emit text_edited(m_line_edit->text());
 		});
 
-	reconnect_text_attribute();
+	connect(m_text, &AbstractAttribute::changed, [this]
+		{
+			update_theme_dependencies();
+		});
 }
 
 LineEditor::~LineEditor()
@@ -78,18 +49,6 @@ LineEditor::~LineEditor()
 	m_left_padding = nullptr;
 	m_text_color = nullptr;
 	m_text = nullptr;
-}
-
-void LineEditor::reconnect_text_attribute()
-{
-	connect(m_text, &AbstractAttribute::changed, [this]
-		{
-			update_theme_dependencies();
-
-			//QString new_text = m_text->as<QString>();
-
-			//if (m_line_edit->text() != new_text) m_line_edit->setText(new_text);
-		});
 }
 
 void LineEditor::init_attributes()
@@ -112,14 +71,10 @@ void LineEditor::init_attributes()
 
 void LineEditor::set_default_value(const QString& default_value)
 {
-	if (m_default_value) delete m_default_value;
+	if (m_default_value)
+		delete m_default_value;
 
 	m_default_value = new QString(default_value);
-}
-
-void LineEditor::set_disabled(bool cond)
-{
-	m_disabled = cond;
 }
 
 void LineEditor::set_font_size(int size)
@@ -177,16 +132,6 @@ void LineEditor::setFixedWidth(int w)
 
 	m_line_edit->setFixedWidth(w);
 }
-
-void LineEditor::setFocus(Qt::FocusReason reason)
-{
-	m_line_edit->setFocus();
-}
-
-//QString LineEditor::text()
-//{
-//	return m_line_edit->text();
-//}
 
 Attribute* LineEditor::left_padding() const
 {
