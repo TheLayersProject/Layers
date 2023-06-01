@@ -12,10 +12,8 @@ ImageSequence::ImageSequence(QDir dir)
 
 	for (QString filename : image_filenames)
 	{
-		m_images.append(QImage(dir.filePath(filename)));
+		m_frames.append(QImage(dir.filePath(filename)));
 	}
-
-	save(QFile("layers_logo.imgseq"));
 }
 
 ImageSequence::ImageSequence(QFile file)
@@ -26,9 +24,8 @@ ImageSequence::ImageSequence(QFile file)
 			qDebug() << "Could not read file '" + file.fileName() + "'";
 
 		QDataStream in(&file);
-		in.setVersion(QDataStream::Qt_6_1);
 
-		in >> m_images;
+		in >> m_frames;
 
 		file.close();
 	}
@@ -43,29 +40,18 @@ void ImageSequence::save(QFile file)
 	}
 
 	QDataStream out(&file);
-	out.setVersion(QDataStream::Qt_6_1);
 
-	out << m_images;
+	out << m_frames;
 
 	file.close();
 }
 
 qsizetype ImageSequence::size() const
 {
-	return m_images.size();
-}
-
-QList<QPixmap> ImageSequence::to_pixmaps() const
-{
-	QList<QPixmap> pixmaps;
-
-	for (const QImage& image : m_images)
-		pixmaps.append(QPixmap::fromImage(image));
-
-	return pixmaps;
+	return m_frames.size();
 }
 
 QImage& ImageSequence::operator[](int i)
 {
-	return m_images[i];
+	return m_frames[i];
 }
