@@ -5,7 +5,6 @@
 
 #include "Button.h"
 #include "Graphic.h"
-#include "Menu.h"
 #include "Navigator.h"
 #include "ScrollArea.h"
 #include "WidgetButtonGroup.h"
@@ -14,7 +13,7 @@ namespace Layers
 {
 	class WidgetEditor;
 
-	class ThemeEditor : public Menu
+	class ThemeEditor : public Widget
 	{
 		Q_OBJECT
 

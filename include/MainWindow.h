@@ -13,6 +13,9 @@ namespace Layers
 	class ThemeEditor;
 	class MainWindowTitlebar;
 
+	/*!
+		A MainWindow is a Widget that provides a main application window.
+	*/
 	class MainWindow : public Widget
 	{
 		Q_OBJECT
@@ -26,7 +29,7 @@ namespace Layers
 
 		void edit_themeable(Themeable* themeable);
 
-		void set_main_menu(Menu* main_menu);
+		void set_central_widget(Widget* central_widget);
 
 		void update_theme_dependencies();
 
@@ -34,7 +37,8 @@ namespace Layers
 		void close_menu(int index);
 		void new_theme_clicked();
 		void menu_changed(int old_index, int new_index);
-		void open_menu(Menu* menu);
+		void open_widget(
+			Widget* widget, const QString& name, Graphic* graphic = nullptr);
 
 	protected:
 		bool nativeEvent(
@@ -48,14 +52,15 @@ namespace Layers
 
 		QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		QList<Menu*> m_opened_menus;
+		QList<QWidget*> m_opened_widgets;
 
 		MainWindowTitlebar* m_titlebar;
 
 		Widget* m_separator{ new Widget };
 
+		Widget* m_central_widget{ nullptr };
+
 		// Menus
-		Menu* m_app_menu{ nullptr };
 		SettingsMenu* m_settings_menu;
 		ThemeEditor* m_theme_editor;
 	};

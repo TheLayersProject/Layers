@@ -11,7 +11,8 @@ using Layers::ThemesWidget;
 
 SettingsMenu::SettingsMenu(QWidget* parent) :
 	m_themes_widget{ new ThemesWidget },
-	Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
+	//Menu("Settings", new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)), parent)
+	Widget(parent)
 {
 	setMouseTracking(true);
 

@@ -12,7 +12,8 @@ using Layers::Widget;
 using Layers::WidgetEditor;
 
 ThemeEditor::ThemeEditor(QWidget* parent) :
-	Menu("Theme Editor", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
+	//Menu("Theme Editor", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
+	Widget(parent)
 {
 	installEventFilter(this);
 	setMouseTracking(true);

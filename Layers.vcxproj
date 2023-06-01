@@ -162,7 +162,6 @@
     <ClCompile Include="src\Widgets\Widgets\MenuBar.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Tab.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Menus\Menu.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsTab.cpp" />
     <ClCompile Include="src\Widgets\Widgets\ScrollArea.cpp" />
@@ -255,7 +254,6 @@
     <QtMoc Include="include\Label.h" />
     <QtMoc Include="include\Button.h" />
     <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\ThemesWidget.h" />
-    <QtMoc Include="include\Menu.h" />
     <QtMoc Include="include\Theme.h" />
     <ClInclude Include="include\Themeable.h" />
     <QtMoc Include="src\Widgets\Widgets\Menus\SettingsMenu\SettingsMenu.h" />

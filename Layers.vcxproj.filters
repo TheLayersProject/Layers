@@ -18,9 +18,6 @@
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\ThemeEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\Menus\Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\ColorPlane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -350,9 +347,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\TabBar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\Menu.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetButton.h">

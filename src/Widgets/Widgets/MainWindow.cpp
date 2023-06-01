@@ -1,7 +1,6 @@
 #include "MainWindow.h"
 
 #include "calculate.h"
-#include "Menu.h"
 #include "MainWindowTitlebar.h"
 
 #include "Menus/SettingsMenu/SettingsMenu.h"
@@ -65,21 +64,30 @@ void MainWindow::edit_themeable(Themeable* themeable)
 	m_theme_editor->edit_themeable(themeable);
 }
 
-void MainWindow::set_main_menu(Menu* main_menu)
+void MainWindow::set_central_widget(Widget* central_widget)
 {
-	m_app_menu = main_menu;
-	m_app_menu->set_is_app_themeable(true);
-	m_app_menu->apply_theme(*layersApp->active_theme());
+	m_central_widget = central_widget;
 
-	m_main_layout->addWidget(m_app_menu);
+	if (Themeable* central_themeable = dynamic_cast<Themeable*>(m_central_widget))
+	{
+		central_themeable->set_is_app_themeable(true);
+		central_themeable->apply_theme(*layersApp->active_theme());
 
-	set_icon(new Graphic(*m_app_menu->icon()));
+		if (central_themeable->icon())
+			set_icon(new Graphic(*central_themeable->icon()));
+	}
 
-	open_menu(main_menu);
+	m_main_layout->addWidget(m_central_widget);
+
+	if (m_central_widget->icon())
+		open_widget(m_central_widget, *m_central_widget->name(),
+			m_central_widget->icon());
+	else
+		open_widget(m_central_widget, *m_central_widget->name());
 
 	Tab* app_menu_tab = m_titlebar->menu_tab_bar()->tabs().last();
 	app_menu_tab->close_button()->hide();
-	app_menu_tab->text_label()->set_font_size(12);
+	//app_menu_tab->text_label()->set_font_size(12);
 	app_menu_tab->text_label()->set_padding(0, 8, 8, 0);
 }
 
@@ -117,32 +125,36 @@ void MainWindow::update_theme_dependencies()
 
 void MainWindow::menu_changed(int old_index, int new_index)
 {
-	if (Menu* old_menu = (old_index != -1) ?
-		m_opened_menus[old_index] : nullptr)
+	if (QWidget* old_widget = (old_index != -1) ?
+		m_opened_widgets[old_index] : nullptr)
 	{
-		old_menu->hide();
+		old_widget->hide();
 	}
 
-	m_opened_menus[new_index]->show();
+	m_opened_widgets[new_index]->show();
 }
 
-void MainWindow::open_menu(Menu* menu)
+void MainWindow::open_widget(
+	Widget* widget, const QString& name, Graphic* graphic)
 {
 	TabBar* tab_bar = m_titlebar->menu_tab_bar();
 
-	if (!m_opened_menus.contains(menu))
+	if (!m_opened_widgets.contains(widget))
 	{
-		m_opened_menus.append(menu);
+		m_opened_widgets.append(widget);
 
-		tab_bar->add_tab(new Graphic(*menu->icon()), menu->menu_name());
+		if (graphic)
+			tab_bar->add_tab(new Graphic(*graphic), name);
+		else
+			tab_bar->add_tab(name);
 	}
 
-	tab_bar->set_current_index(m_opened_menus.indexOf(menu));
+	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
 }
 
 void MainWindow::close_menu(int index)
 {
-	m_opened_menus.removeAt(index);
+	m_opened_widgets.removeAt(index);
 }
 
 void MainWindow::new_theme_clicked()
@@ -348,7 +360,7 @@ void MainWindow::init_themes_widget_connections()
 			if (!m_theme_editor->preview_widget())
 				m_theme_editor->edit_themeable(layersApp);
 
-			open_menu(m_theme_editor);
+			open_widget(m_theme_editor, *m_theme_editor->name());
 		});
 
 	connect(themes_widget->new_theme_button(), &Button::clicked,
@@ -359,7 +371,7 @@ void MainWindow::init_titlebar_connections()
 {
 	connect(m_titlebar->settings_button(), &Button::clicked, [this]
 		{
-			open_menu(m_settings_menu);
+			open_widget(m_settings_menu, *m_settings_menu->name());
 		});
 
 	connect(m_titlebar->minimize_button(), &Button::clicked, [this]

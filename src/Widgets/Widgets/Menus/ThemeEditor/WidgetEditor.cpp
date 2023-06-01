@@ -2,7 +2,6 @@
 
 #include "calculate.h"
 #include "Dialog.h"
-#include "Menu.h"
 #include "MainWindow.h"
 
 #include "ThemeEditor.h"
@@ -143,8 +142,8 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 				else if (dynamic_cast<LineEditor*>(child_themeable))
 					line_editor_widget_buttons.append(widget_button);
 
-				else if (dynamic_cast<Menu*>(child_themeable))
-					menu_widget_buttons.append(widget_button);
+				//else if (dynamic_cast<Menu*>(child_themeable))
+				//	menu_widget_buttons.append(widget_button);
 
 				else if (dynamic_cast<MiniSlider*>(child_themeable))
 					slider_widget_buttons.append(widget_button);

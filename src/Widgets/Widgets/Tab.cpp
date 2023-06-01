@@ -65,7 +65,7 @@ void Tab::init()
 	m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 	m_text_label->set_name("text_label");
 	m_text_label->set_proper_name("Text Label");
-	m_text_label->set_font_size(16);
+	m_text_label->set_font_size(12);
 	m_text_label->set_padding(0, 8, 0, 0);
 
 	m_close_button->set_name("close_button");

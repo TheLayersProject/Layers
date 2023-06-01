@@ -4,7 +4,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-#include "Menu.h"
+#include "Widget.h"
 
 namespace Layers
 {
@@ -12,7 +12,7 @@ namespace Layers
 	class SettingsTab;
 	class ThemesWidget;
 
-	class SettingsMenu : public Menu
+	class SettingsMenu : public Widget
 	{
 		Q_OBJECT
 
