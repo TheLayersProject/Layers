@@ -7,20 +7,25 @@
 
 namespace Layers
 {
+	/*!
+		A HeaderView is a QHeaderView and a Themeable that is customizable.
+	*/
 	class HeaderView : public QHeaderView, public Themeable
 	{
 		Q_OBJECT
 
 	public:
+		/*!
+			Constructs a header view with a specified *orientation*.
+		*/
 		HeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
 		// TODO: Create a destructor; free the attributes
 
-	protected:
+	private:
 		void init_attributes();
 
 		void update_stylesheet();
 
-	private:
 		BorderAttributes* m_border{ new BorderAttributes };
 
 		CornerRadiiAttributes* m_corner_radii{ new CornerRadiiAttributes };
