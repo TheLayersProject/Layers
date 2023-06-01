@@ -40,7 +40,7 @@ ColorDialog::ColorDialog(QWidget* parent) :
 		});
 
 	m_radio_button_hue->set_name("Hue Radio Button");
-	m_radio_button_hue->set_state("Active");
+	//m_radio_button_hue->set_state("Active");
 	connect(m_radio_button_hue, &RadioButton::clicked, [this]
 		{ m_color_plane->set_active_hsv(HSV::Hue); });
 
