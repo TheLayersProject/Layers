@@ -455,7 +455,8 @@ void Application::init_latest_version_tag()
 		{
 			QJsonDocument json_doc = QJsonDocument::fromJson(repo_tags_json_download->readAll());
 
-			m_latest_version = new QString(json_doc.array().first().toObject()["name"].toString());
+			if (!json_doc.array().isEmpty())
+				m_latest_version = new QString(json_doc.array().first().toObject()["name"].toString());
 		}
 	}
 }
