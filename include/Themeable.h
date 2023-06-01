@@ -242,13 +242,6 @@ namespace Layers
 		QString* name() const;
 
 		/*!
-			Returns a pointer to the proper name of this themeable.
-
-			Returns nullptr if no proper name has been set.
-		*/
-		QString* proper_name() const;
-
-		/*!
 			Sets the functionality of this themeable and its children to
 			*disabled*.
 
@@ -273,16 +266,6 @@ namespace Layers
 			If a name already exists, it is replaced.
 		*/
 		void set_name(const QString& name);
-
-		/*!
-			Sets the proper name of this themeable.
-
-			If a proper name already exists, it is replaced.
-
-			A themeable's proper name is used to represent the themeable to the
-			user.
-		*/
-		void set_proper_name(const QString& proper_name);
 
 		/*!
 			Sets the active state of this themeable.
@@ -328,8 +311,6 @@ namespace Layers
 		bool m_is_app_themeable{ false };
 
 		QString* m_name{ nullptr };
-
-		QString* m_proper_name{ nullptr };
 
 		QString m_state{ "" };
 		

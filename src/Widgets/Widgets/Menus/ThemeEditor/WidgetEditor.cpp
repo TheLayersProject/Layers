@@ -19,8 +19,6 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 	m_themeable{ themeable }, Widget(parent)
 {
 	init_attributes();
-	set_name("widget_editor");
-	//set_proper_name("Widget Editor");
 	setFixedWidth(300);
 
 	m_control_attribute_editor_group->hide();
@@ -31,24 +29,20 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 	m_control_widget_button->hide();
 	m_control_widget_button_group->hide();
 
-	m_attributes_label->set_name("attributes_label");
-	m_attributes_label->set_proper_name("Attributes Label");
+	m_attributes_label->set_name("Attributes Label");
 	m_attributes_label->set_font_size(17);
 	m_attributes_label->set_padding(0, 8, 0, 0);
 
-	m_widgets_label->set_name("widgets_label");
-	m_widgets_label->set_proper_name("Widgets Label");
+	m_widgets_label->set_name("Widgets Label");
 	m_widgets_label->set_font_size(17);
 	m_widgets_label->set_padding(0, 8, 0, 0);
 
-	m_show_all_button->set_name("show_all_button");
-	m_show_all_button->set_proper_name("'Show All' Button");
+	m_show_all_button->set_name("Show All Button");
 	m_show_all_button->disable_text_hover_color();
 	m_show_all_button->set_margin(0, 7, 0, 7);
 	m_show_all_button->set_text_padding(3, 5, 0, 0);
 
-	m_show_enabled_button->set_name("show_enabled_button");
-	m_show_enabled_button->set_proper_name("'Show Enabled' Button");
+	m_show_enabled_button->set_name("Show Enabled Button");
 	m_show_enabled_button->disable_text_hover_color();
 	m_show_enabled_button->set_margin(0, 7, 0, 7);
 	m_show_enabled_button->set_text_padding(3, 5, 0, 0);
@@ -110,15 +104,14 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 				qDebug() << "";
 			}*/
 
-			// Check if themeable has a proper name to determine that it is customizable
-			if (child_themeable->proper_name()) // TODO: Consider a Themeable::is_customizable() function so this is clearer
+			if (child_themeable->name())
 			{
 				WidgetButton* widget_button;
 
 				if (child_themeable->icon())
-					widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->proper_name());
+					widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->name());
 				else
-					widget_button = new WidgetButton(*child_themeable->proper_name());
+					widget_button = new WidgetButton(*child_themeable->name());
 
 				widget_button->entangle_with(m_control_widget_button);
 

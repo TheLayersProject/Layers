@@ -10,15 +10,13 @@ Navigator::Navigator(QWidget* parent)
 {
 	installEventFilter(this);
 	init_layout();
-	set_name("navigator");
-	set_proper_name("Navigator");
+	set_name("Navigator");
 
 	m_collapse_menu->installEventFilter(this);
 	m_collapse_menu->setWindowFlags(Qt::FramelessWindowHint);
 	m_collapse_menu->setAttribute(Qt::WA_TranslucentBackground);
 	m_collapse_menu->setMouseTracking(true);
-	m_collapse_menu->set_name("collapse_menu");
-	m_collapse_menu->set_proper_name("Collapse Menu");
+	m_collapse_menu->set_name("Collapse Menu");
 	m_collapse_menu->corner_radii()->top_left()->set_value(5.0);
 	m_collapse_menu->corner_radii()->top_right()->set_value(5.0);
 	m_collapse_menu->corner_radii()->bottom_left()->set_value(5.0);
@@ -32,8 +30,7 @@ Navigator::Navigator(QWidget* parent)
 	m_collapse_menu_button->corner_radii()->bottom_left()->set_value(5.0);
 	m_collapse_menu_button->corner_radii()->bottom_right()->set_value(5.0);
 	m_collapse_menu_button->set_margin(0, 10, 0, 10);
-	m_collapse_menu_button->set_name("collapse_menu_button");
-	m_collapse_menu_button->set_proper_name("Collapse Menu Button");
+	m_collapse_menu_button->set_name("Collapse Menu Button");
 
 	connect(m_collapse_menu_button, &Button::clicked, [this] {
 		if (!m_collapse_menu->isVisible())
@@ -51,13 +48,11 @@ Navigator::Navigator(QWidget* parent)
 	m_control_arrow_graphic->setMaximumWidth(28);
 	m_control_arrow_graphic->setParent(this);
 	m_control_arrow_graphic->hide();
-	m_control_arrow_graphic->set_name("arrow_graphic");
-	m_control_arrow_graphic->set_proper_name("Arrow Graphics");
+	m_control_arrow_graphic->set_name("Arrow Graphics");
 
 	m_control_text_button->setParent(this);
 	m_control_text_button->hide();
-	m_control_text_button->set_name("text_button");
-	m_control_text_button->set_proper_name("Text Buttons");
+	m_control_text_button->set_name("Text Buttons");
 }
 
 int Navigator::calculated_width_after_expand()

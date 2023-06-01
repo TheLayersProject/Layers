@@ -202,8 +202,7 @@ void Button::init()
 		set_icon(new Graphic(*m_graphic));
 
 		m_graphic->set_icon(new Graphic(*m_graphic));
-		m_graphic->set_name("graphic");
-		m_graphic->set_proper_name("Graphic");
+		m_graphic->set_name("Graphic");
 
 		m_graphic->svg()->common_color()->init_variant_map({
 			{ "Unselected", QColor(Qt::darkGray) },
@@ -215,8 +214,7 @@ void Button::init()
 
 	if (m_graphic_after)
 	{
-		m_graphic_after->set_name("graphic_after");
-		//m_graphic_after->set_proper_name("Graphic After");
+		m_graphic_after->set_name("Graphic After");
 		m_graphic_after->hide();
 
 		m_graphic_after->svg()->common_color()->init_variant_map({
@@ -229,8 +227,7 @@ void Button::init()
 
 	if (m_text_label)
 	{
-		m_text_label->set_name("text_label");
-		m_text_label->set_proper_name("Text Label");
+		m_text_label->set_name("Text Label");
 		m_text_label->setWordWrap(true);
 	}
 }

@@ -10,7 +10,7 @@ AttributeEditor::AttributeEditor(AbstractAttribute* entity, QWidget* parent) :
 	init_attributes();
 
 	// Setup Disabling Attribute Toggle
-	m_disabled_toggle->set_proper_name("Disable Toggle");
+	m_disabled_toggle->set_name("Disable Toggle");
 
 	m_toggle_label_separator->fill()->set_disabled();
 	m_toggle_label_separator->setFixedSize(16, 1);

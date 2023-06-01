@@ -9,16 +9,13 @@ StateEditor::StateEditor(QWidget* parent) : AttributeEditor(nullptr, parent)
 {
 	//init_attributes();
 
-	set_name("state_editor");
-	set_proper_name("State Editor");
+	set_name("State Editor");
 
-	m_label->set_name("label");
-	m_label->set_proper_name("Label");
+	m_label->set_name("Label");
 	m_label->set_font_size(16);
 	m_label->set_padding(0, 7, 0, 0);
 
-	m_state_combobox->set_name("state_combobox");
-	m_state_combobox->set_proper_name("State Combobox");
+	m_state_combobox->set_name("State Combobox");
 	m_state_combobox->setFixedSize(190, 35);
 
 	connect(m_state_combobox, &ComboBox::currentTextChanged, [this] {

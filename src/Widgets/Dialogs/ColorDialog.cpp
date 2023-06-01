@@ -17,21 +17,17 @@ ColorDialog::ColorDialog(QWidget* parent) :
 	setFixedSize(315, 465);
 
 	set_icon(new Graphic(":/svgs/color_icon.png"));
-	set_name("color_dialog");
-	set_proper_name("Color Dialog");
+	set_name("Color Dialog");
 
-	m_apply_button->set_name("apply_button");
-	m_apply_button->set_proper_name("Apply Button");
+	m_apply_button->set_name("Apply Button");
 	//m_apply_button->set_padding(8, 6, 8, 6);
 	m_apply_button->set_text_padding(1, 3, 0, 0);
 	m_apply_button->disable_text_hover_color();
 	connect(m_apply_button, &Button::clicked, [this] { done(QDialog::Accepted); });
 
-	m_color_unit_label->set_name("color_unit_label");
-	m_color_unit_label->set_proper_name("Color Unit Label");
+	m_color_unit_label->set_name("Color Unit Label");
 
-	m_line_editor_color_name->set_name("color_name_line_editor");
-	m_line_editor_color_name->set_proper_name("Color Name Line Editor");
+	m_line_editor_color_name->set_name("Color Name Line Editor");
 	m_line_editor_color_name->setFixedWidth(100);
 	//QRegularExpression rx("^#[0-9a-f]{3}([0-9a-f]{3})?$")
 	//m_color_name_line_editor->set_validator(new QRegularExpressionValidator(rx));
@@ -43,50 +39,38 @@ ColorDialog::ColorDialog(QWidget* parent) :
 			m_color->set_value(QColor("#" + m_line_editor_color_name->text()->as<QString>()));
 		});
 
-	m_radio_button_hue->set_name("hue_radio_button");
-	m_radio_button_hue->set_proper_name("Hue Radio Button");
+	m_radio_button_hue->set_name("Hue Radio Button");
 	m_radio_button_hue->set_state("Active");
 	connect(m_radio_button_hue, &RadioButton::clicked, [this]
 		{ m_color_plane->set_active_hsv(HSV::Hue); });
 
-	m_radio_button_sat->set_name("saturation_radio_button");
-	m_radio_button_sat->set_proper_name("Saturation Radio Button");
+	m_radio_button_sat->set_name("Saturation Radio Button");
 	connect(m_radio_button_sat, &RadioButton::clicked, [this]
 		{ m_color_plane->set_active_hsv(HSV::Saturation); });
 
-	m_radio_button_val->set_name("value_radio_button");
-	m_radio_button_val->set_proper_name("Value Radio Button");
+	m_radio_button_val->set_name("Value Radio Button");
 	connect(m_radio_button_val, &RadioButton::clicked, [this]
 		{ m_color_plane->set_active_hsv(HSV::Value); });
 
-	m_label_hue->set_name("hue_label");
-	m_label_hue->set_proper_name("Hue Label");
+	m_label_hue->set_name("Hue Label");
 
-	m_label_hue_unit->set_name("hue_unit_label");
-	m_label_hue_unit->set_proper_name("Hue Unit Label");
+	m_label_hue_unit->set_name("Hue Unit Label");
 
-	m_label_sat->set_name("saturation_label");
-	m_label_sat->set_proper_name("Saturation Label");
+	m_label_sat->set_name("Saturation Label");
 
-	m_label_sat_unit->set_name("saturation_unit_label");
-	m_label_sat_unit->set_proper_name("Saturation Unit Label");
+	m_label_sat_unit->set_name("Saturation Unit Label");
 
-	m_label_val->set_name("value_label");
-	m_label_val->set_proper_name("Value Label");
+	m_label_val->set_name("Value Label");
 
-	m_label_val_unit->set_name("value_unit_label");
-	m_label_val_unit->set_proper_name("Value Unit Label");
+	m_label_val_unit->set_name("Value Unit Label");
 
-	m_line_editor_hue->set_name("hue_line_editor");
-	m_line_editor_hue->set_proper_name("Hue Line Editor");
+	m_line_editor_hue->set_name("Hue Line Editor");
 	m_line_editor_hue->setFixedWidth(55);
 
-	m_line_editor_sat->set_name("saturation_line_editor");
-	m_line_editor_sat->set_proper_name("Saturation Line Editor");
+	m_line_editor_sat->set_name("Saturation Line Editor");
 	m_line_editor_sat->setFixedWidth(55);
 
-	m_line_editor_val->set_name("value_line_editor");
-	m_line_editor_val->set_proper_name("Value Line Editor");
+	m_line_editor_val->set_name("Value Line Editor");
 	m_line_editor_val->setFixedWidth(55);
 
 	connect(m_line_editor_hue, &LineEditor::text_edited,

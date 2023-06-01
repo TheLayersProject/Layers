@@ -33,8 +33,7 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	init_themes_widget_connections();
 	init_titlebar_connections();
 	resize(1200, 800);
-	set_name("main_window");
-	set_proper_name("Main Window");
+	set_name("Main Window");
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
@@ -51,8 +50,7 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 		this, SLOT(close_menu(int)));
 
 	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
-	m_separator->set_name("separator");
-	m_separator->set_proper_name("Separator");
+	m_separator->set_name("Separator");
 	m_separator->setFixedHeight(3);
 
 	assign_tag_prefixes();
@@ -360,7 +358,8 @@ void MainWindow::init_themes_widget_connections()
 			if (!m_theme_editor->preview_widget())
 				m_theme_editor->edit_themeable(layersApp);
 
-			open_widget(m_theme_editor, *m_theme_editor->name());
+			open_widget(m_theme_editor,
+				*m_theme_editor->name(), m_theme_editor->icon());
 		});
 
 	connect(themes_widget->new_theme_button(), &Button::clicked,
@@ -371,7 +370,8 @@ void MainWindow::init_titlebar_connections()
 {
 	connect(m_titlebar->settings_button(), &Button::clicked, [this]
 		{
-			open_widget(m_settings_menu, *m_settings_menu->name());
+			open_widget(m_settings_menu,
+			*m_settings_menu->name(), m_settings_menu->icon());
 		});
 
 	connect(m_titlebar->minimize_button(), &Button::clicked, [this]

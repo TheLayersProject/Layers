@@ -67,21 +67,19 @@ void WidgetButton::init()
 	init_layout();
 	installEventFilter(this);
 
-	set_name("widget_button");
-	set_proper_name("Widget Button");
+	set_name("Widget Button");
 	setMinimumHeight(40);
 
 	if (m_icon)
 	{
-		m_icon->set_name("icon");
+		m_icon->set_name("Icon");
 		m_icon->setMinimumWidth(40);
 	}
 
 	m_label->setWordWrap(true);
 	m_label->set_available_width(230);
 	m_label->set_font_size(14);
-	m_label->set_name("label");
-	m_label->set_proper_name("Label");
+	m_label->set_name("Label");
 	m_label->set_padding(0, 8, 0, 0);
 	//m_label->setFixedHeight(40);
 }

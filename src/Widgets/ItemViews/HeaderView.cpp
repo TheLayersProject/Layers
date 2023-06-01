@@ -12,15 +12,9 @@ HeaderView::HeaderView(Qt::Orientation orientation, QWidget* parent) :
 	update_stylesheet();
 
 	if (orientation == Qt::Horizontal)
-	{
-		set_name("horizontal_header");
-		set_proper_name("Horizontal Header");
-	}
+		set_name("Horizontal Header");
 	else
-	{
-		set_name("vertical_header");
-		set_proper_name("Vertical Header");
-	}
+		set_name("Vertical Header");
 }
 
 void HeaderView::init_attributes()

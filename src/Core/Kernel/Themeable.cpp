@@ -18,11 +18,11 @@ Themeable::~Themeable()
 		m_name = nullptr;
 	}
 
-	if (m_icon) delete m_icon;
-	if (m_proper_name) delete m_proper_name;
-
-	m_icon = nullptr;
-	m_proper_name = nullptr;
+	if (m_icon)
+	{
+		delete m_icon;
+		m_icon = nullptr;
+	}
 }
 
 void Themeable::apply_theme(Theme& theme)
@@ -170,11 +170,6 @@ QString* Themeable::name() const
 	return m_name;
 }
 
-QString* Themeable::proper_name() const
-{
-	return m_proper_name;
-}
-
 void Themeable::set_functionality_disabled(bool disabled)
 {
 	m_functionality_disabled = disabled;
@@ -205,14 +200,6 @@ void Themeable::set_name(const QString& name)
 		delete m_name;
 
 	m_name = new QString(name);
-}
-
-void Themeable::set_proper_name(const QString& proper_name)
-{
-	if (m_proper_name)
-		delete m_proper_name;
-
-	m_proper_name = new QString(proper_name);
 }
 
 void Themeable::set_state(const QString& state)

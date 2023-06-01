@@ -207,12 +207,10 @@ void Dialog::init_layout()
 void Dialog::init_titlebar()
 {
 	m_titlebar->setFixedHeight(40);
-	m_titlebar->set_name("titlebar");
-	m_titlebar->set_proper_name("Titlebar");
+	m_titlebar->set_name("Titlebar");
 
 	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_title_label->set_name("title_label");
-	m_title_label->set_proper_name("Title Label");
+	m_title_label->set_name("Title Label");
 	m_title_label->set_padding(0, 8, 0, 0);
 	m_title_label->set_font_size(14);
 
@@ -221,8 +219,7 @@ void Dialog::init_titlebar()
 			done(QDialog::Rejected);
 		});
 
-	m_exit_button->set_name("exit_button");
-	m_exit_button->set_proper_name("Exit Button");
+	m_exit_button->set_name("Exit Button");
 
 	// Setup Layout
 

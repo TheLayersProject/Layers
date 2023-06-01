@@ -8,8 +8,7 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 {
 	init_attributes();
 
-	set_name("scrollbar");
-	set_proper_name("ScrollBar");
+	set_name("ScrollBar");
 
 	update_theme_dependencies();
 }

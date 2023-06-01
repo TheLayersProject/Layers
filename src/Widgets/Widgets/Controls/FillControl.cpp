@@ -19,8 +19,7 @@ FillControl::FillControl(QWidget* parent) :
 
 	installEventFilter(this);
 	setFixedSize(40, 40);
-	set_name("fill_control");
-	set_proper_name("Fill Control");
+	set_name("Fill Control");
 
 	m_control_dialog->hide();
 

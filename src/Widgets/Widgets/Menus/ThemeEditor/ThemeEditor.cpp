@@ -12,31 +12,28 @@ using Layers::Widget;
 using Layers::WidgetEditor;
 
 ThemeEditor::ThemeEditor(QWidget* parent) :
-	//Menu("Theme Editor", new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)), parent)
 	Widget(parent)
 {
 	installEventFilter(this);
 	setMouseTracking(true);
 
-	set_name("theme_editor");
-	set_proper_name("Theme Editor");
+	set_icon(new Graphic(":/svgs/customize_theme.svg", QSize(24, 24)));
+	set_name("Theme Editor");
 
 	m_control_widget_editor = new WidgetEditor(m_control_themeable, this, m_sidebar);
-	m_control_widget_editor->set_proper_name("Widget Editor");
+	m_control_widget_editor->set_name("Widget Editor");
 	m_control_widget_editor->hide();
 
 	m_topbar->setFixedHeight(40);
 	m_topbar->setMouseTracking(true);
-	m_topbar->set_name("topbar");
-	m_topbar->set_proper_name("Topbar");
+	m_topbar->set_name("Topbar");
 	m_topbar->fill()->set_value(QColor(Qt::lightGray));
 	m_topbar->corner_radii()->top_right()->set_value(10.0);
 	m_topbar->corner_radii()->bottom_right()->set_value(10.0);
 
 	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
-	m_apply_button->set_name("apply_button");
-	m_apply_button->set_proper_name("Apply Button");
+	m_apply_button->set_name("Apply Button");
 	m_apply_button->set_text_padding(3, 5, 0, 0);
 
 	connect(m_apply_button, &Button::clicked, [this] {
@@ -54,14 +51,12 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 		}
 	});
 
-	m_sidebar->set_name("sidebar");
-	m_sidebar->set_proper_name("Sidebar");
+	m_sidebar->set_name("Sidebar");
 	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
 	m_preview_frame->corner_radii()->top_left()->set_value(10.0);
 
-	m_preview_scroll_area->set_name("preview_scroll_area");
-	m_preview_scroll_area->set_proper_name("Preview Scroll Area");
+	m_preview_scroll_area->set_name("Preview Scroll Area");
 	//m_preview_scroll_area->fill()->set_disabled();
 
 	init_layout();
@@ -121,7 +116,7 @@ void ThemeEditor::edit_themeable(Themeable* themeable)
 	{
 		m_open_themeables.append(themeable);
 
-		Button* text_button = m_navigator->create_text_button(*themeable->proper_name());
+		Button* text_button = m_navigator->create_text_button(*themeable->name());
 
 		connect(text_button, &Button::clicked, [this, themeable] {
 			while (themeable != m_open_themeables.last())

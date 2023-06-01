@@ -13,16 +13,13 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 	init_attributes();
 
 	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
-	set_name("themes_widget");
-	set_proper_name("Themes Widget");
+	set_name("Themes Widget");
 
-	m_theme_label->set_name("theme_label");
-	m_theme_label->set_proper_name("\"Theme\" Label");
+	m_theme_label->set_name("Theme Label");
 	m_theme_label->set_font_size(15);
 
 	m_theme_combobox->set_icon(new Graphic(":/svgs/combobox_icon.svg", QSize(21, 18)));
-	m_theme_combobox->set_name("theme_combobox");
-	m_theme_combobox->set_proper_name("Theme Combobox");
+	m_theme_combobox->set_name("Theme Combobox");
 
 	for (Theme* theme : layersApp->themes())
 		m_theme_combobox->addItem(theme);
@@ -51,17 +48,13 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 	if (!layersApp->active_theme()->editable())
 		show_custom_theme_buttons(false);
 
-	m_new_theme_button->set_name("new_theme_button");
-	m_new_theme_button->set_proper_name("New Theme Button");
+	m_new_theme_button->set_name("New Theme Button");
 
-	m_customize_theme_button->set_name("customize_theme_button");
-	m_customize_theme_button->set_proper_name("Customize Theme Button");
+	m_customize_theme_button->set_name("Customize Theme Button");
 
-	m_delete_theme_button->set_name("delete_theme_button");
-	m_delete_theme_button->set_proper_name("Delete Theme Button");
+	m_delete_theme_button->set_name("Delete Theme Button");
 
-	m_theme_info_button->set_name("theme_info_button");
-	m_theme_info_button->set_proper_name("Theme Info Button");
+	m_theme_info_button->set_name("Theme Info Button");
 
 	m_separator_1->entangle_with(m_control_separator);
 	m_separator_1->setFixedSize(1, 30);
@@ -73,8 +66,7 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 	m_spacer_2->setFixedWidth(12);
 
 	m_control_separator->hide();
-	m_control_separator->set_name("separator");
-	m_control_separator->set_proper_name("Separators");
+	m_control_separator->set_name("Separators");
 	m_control_separator->setFixedSize(1, 30);
 
 	setup_layout();

@@ -56,7 +56,7 @@ Application::Application(
 
 	setAttribute(Qt::AA_EnableHighDpiScaling);
 	setEffectEnabled(Qt::UI_AnimateCombo, false);
-	set_proper_name("App");
+	set_name("App");
 
 	if (m_version)
 	{

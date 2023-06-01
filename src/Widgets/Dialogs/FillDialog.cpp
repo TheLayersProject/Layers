@@ -13,12 +13,10 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	setFixedSize(165, 85);
 	setMouseTracking(true);
 	setWindowFlags(Qt::FramelessWindowHint);
-	set_name("dialog");
-	set_proper_name("Dialog");
+	set_name("Dialog");
 
 	m_fill_type_toggle->setFixedHeight(85);
-	m_fill_type_toggle->set_name("vertical_toggle_switch");
-	m_fill_type_toggle->set_proper_name("Fill Type Toggle");
+	m_fill_type_toggle->set_name("Fill Type Toggle");
 
 	connect(m_fill_type_toggle, &ToggleSwitch::toggled_event, [this] {
 		if (m_fill_type_toggle->toggled())
@@ -50,8 +48,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_color_label->set_resize_disabled();
 	m_color_label->padding_top()->set_value(13.0);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
-	m_color_label->set_name("color_label");
-	m_color_label->set_proper_name("Color Label");
+	m_color_label->set_name("Color Label");
 
 	m_gradient_label_opacity->setOpacity(1.0);
 
@@ -60,8 +57,7 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 	m_gradient_label->set_resize_disabled();
 	m_gradient_label->padding_top()->set_value(13.0);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
-	m_gradient_label->set_name("gradient_label");
-	m_gradient_label->set_proper_name("Gradient Label");
+	m_gradient_label->set_name("Gradient Label");
 
 	setup_layout();
 }

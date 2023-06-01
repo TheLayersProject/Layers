@@ -13,8 +13,7 @@ TabBar::TabBar(QWidget* parent) : Widget(parent)
 
 	m_control_tab->hide();
 	m_control_tab->set_icon(new Graphic(":/svgs/mll_icon.svg", QSize(20, 6)));
-	m_control_tab->set_name("tabs");
-	m_control_tab->set_proper_name("Tabs");
+	m_control_tab->set_name("Tabs");
 }
 
 void TabBar::add_tab(Graphic* icon, const QString& text)

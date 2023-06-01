@@ -13,10 +13,9 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 
 	installEventFilter(this);
 	setFixedSize(40, 40);
-	set_name("toggle_switch");
+	set_name("Toggle Switch");
 
-	m_square->set_name("square");
-	m_square->set_proper_name("Square");
+	m_square->set_name("Square");
 	m_square->setFixedSize(10, 10);
 
 	update_spacer_size();

@@ -10,8 +10,7 @@ GridlineItemDelegate::GridlineItemDelegate(QObject* parent) :
 {
 	init_attributes();
 
-	set_name("cells");
-	set_proper_name("Cells");
+	set_name("Cells");
 }
 
 BorderAttributes* GridlineItemDelegate::grid() const

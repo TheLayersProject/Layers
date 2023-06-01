@@ -8,20 +8,15 @@ AttributeEditorGroup::AttributeEditorGroup(AttributeGroup* attr_group, QWidget* 
 	AttributeEditor(attr_group, parent)
 {
 	init_attributes();
-
-	//exclude_from_prefixes();
-	set_name("group_editor");
-	set_proper_name("Editor Group");
+	set_name("Group Editor");
 
 	if (attr_group)
 		m_label->setText(attr_group->capitalized_name());
-	m_label->set_name("label");
-	m_label->set_proper_name("Label");
+	m_label->set_name("Label");
 	m_label->set_font_size(14);
 	m_label->set_padding(0, 7, 0, 0);
 
-	m_collapse_button->set_name("collapse_button");
-	m_collapse_button->set_proper_name("Collapse Button");
+	m_collapse_button->set_name("Collapse Button");
 
 	connect(m_collapse_button, &Button::clicked, [this] {
 		if (m_collapsed)

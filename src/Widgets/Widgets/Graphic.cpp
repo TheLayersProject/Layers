@@ -20,8 +20,7 @@ Graphic::Graphic(const QString& file_path, QSize size, QWidget* parent) :
 	else if (file_path.endsWith(".svg"))
 	{
 		m_svg = new SvgRenderer(file_path);
-		m_svg->set_name("svg");
-		m_svg->set_proper_name("SVG");
+		m_svg->set_name("Svg");
 
 		m_repaint_connection = connect(m_svg, &QSvgRenderer::repaintNeeded,
 			[this] { update(); });
@@ -64,8 +63,7 @@ Graphic::Graphic(const Graphic& graphic)
 	if (graphic.m_svg)
 	{
 		m_svg = new SvgRenderer(*graphic.m_svg);
-		m_svg->set_name("svg");
-		m_svg->set_proper_name("SVG");
+		m_svg->set_name("Svg");
 
 		m_repaint_connection = connect(m_svg, &QSvgRenderer::repaintNeeded,
 			[this] { update(); });

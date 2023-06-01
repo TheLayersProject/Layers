@@ -20,13 +20,11 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
 	setWindowFlags(windowFlags() | Qt::Tool | Qt::WindowStaysOnTopHint);
 	set_icon(new Graphic(":/svgs/caution.png"));
-	set_name("theme_compatibility_caution_dialog");
-	set_proper_name("Theme Compatibility Caution Dialog");
+	set_name("Theme Compatibility Caution Dialog");
 
 	m_message_label->set_available_width(490);
 	m_message_label->set_font_size(14);
-	m_message_label->set_name("message_label");
-	m_message_label->set_proper_name("Message Label");
+	m_message_label->set_name("Message Label");
 	m_message_label->setText(
 		layersApp->name() + " has not been implemented in this theme. An "
 		"implementation will be inherited from the last compatible ancestor "
@@ -34,8 +32,7 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	m_message_label->setWordWrap(true);
 
 	m_table_label->set_font_size(14);
-	m_table_label->set_name("table_label");
-	m_table_label->set_proper_name("Table Label");
+	m_table_label->set_name("Table Label");
 	m_table_label->setText("Lineage");
 
 	init_lineage_table();
@@ -132,8 +129,7 @@ void ThemeCompatibilityCautionDialog::init_lineage_table()
 
 	m_lineage_table->setItemDelegate(item_delegate);
 
-	m_lineage_table->set_name("theme_lineage_table");
-	m_lineage_table->set_proper_name("Theme Lineage Table");
+	m_lineage_table->set_name("Theme Lineage Table");
 	m_lineage_table->setModel(&m_theme_lineage_model);
 
 	// Set 'Theme' column to fized size:

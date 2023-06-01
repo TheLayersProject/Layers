@@ -16,13 +16,11 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 	setFixedSize(40, 40);
 
 	m_bar->setFixedHeight(3);
-	m_bar->set_name("bar");
-	m_bar->set_proper_name("Bar");
+	m_bar->set_name("Bar");
 
 	m_handle->move(5, 13);
 	m_handle->setFixedSize(5, 13);
-	m_handle->set_name("handle");
-	m_handle->set_proper_name("Handle");
+	m_handle->set_name("Handle");
 
 	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
 

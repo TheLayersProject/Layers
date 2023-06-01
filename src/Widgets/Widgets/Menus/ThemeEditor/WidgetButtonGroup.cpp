@@ -15,20 +15,17 @@ WidgetButtonGroup::WidgetButtonGroup(
 	init_attributes();
 	init_layout();
 
-	set_name("widget_button_group");
-	set_proper_name("Widget Button Group");
+	set_name("Widget Button Group");
 	setMinimumHeight(40);
 
 	for (WidgetButton* widget_button : widget_buttons)
 		widget_button->label()->set_available_width(210);
 
 	m_label->set_font_size(14);
-	m_label->set_name("label");
-	m_label->set_proper_name("Label");
+	m_label->set_name("Label");
 	m_label->set_padding(0, 8, 0, 0);
 
-	m_collapse_button->set_name("collapse_button");
-	m_collapse_button->set_proper_name("Collapse Button");
+	m_collapse_button->set_name("Collapse Button");
 
 	connect(m_collapse_button, &Button::clicked, [this] {
 		if (m_collapsed)

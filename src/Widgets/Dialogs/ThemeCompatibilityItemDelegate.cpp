@@ -8,8 +8,7 @@ using Layers::ThemeCompatibilityItemDelegate;
 ThemeCompatibilityItemDelegate::ThemeCompatibilityItemDelegate(QObject* parent) :
 	GridlineItemDelegate(parent)
 {
-	m_check_svg->set_name("checkmark_svg");
-	m_check_svg->set_proper_name("Checkmark SVG");
+	m_check_svg->set_name("Checkmark Svg");
 }
 
 void ThemeCompatibilityItemDelegate::paint(

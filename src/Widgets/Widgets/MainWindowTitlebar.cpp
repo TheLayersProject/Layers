@@ -10,25 +10,19 @@ MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
 {
 	setFixedHeight(40);
 
-	set_name("titlebar");
-	set_proper_name("Titlebar");
+	set_name("Titlebar");
 	set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
 	m_fill->set_disabled();
 
-	m_menu_tab_bar->set_name("menu_tab_bar");
-	m_menu_tab_bar->set_proper_name("Menu Tab Bar");
+	m_menu_tab_bar->set_name("Menu Tab Bar");
 
-	m_settings_button->set_name("settings_button");
-	m_settings_button->set_proper_name("Settings Button");
+	m_settings_button->set_name("Settings Button");
 
-	m_minimize_button->set_name("minimize_button");
-	m_minimize_button->set_proper_name("Minimize Button");
+	m_minimize_button->set_name("Minimize Button");
 
-	m_maximize_button->set_name("maximize_button");
-	m_maximize_button->set_proper_name("Maximize Button");
+	m_maximize_button->set_name("Maximize Button");
 
-	m_exit_button->set_name("exit_button");
-	m_exit_button->set_proper_name("Exit Button");
+	m_exit_button->set_name("Exit Button");
 
 	setup_layout();
 }

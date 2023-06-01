@@ -21,17 +21,14 @@ SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* pare
 	setFixedHeight(60);
 
     set_icon(new Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
-    set_name("settings_tab");
-    set_proper_name(label_text + " Tab");
+    set_name("Setting Tab");
 
     m_tab_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
 	m_tab_icon->set_icon(new Graphic(*m_tab_icon));
-    m_tab_icon->set_name("icon");
-	m_tab_icon->set_proper_name("Icon");
+	m_tab_icon->set_name("Icon");
 
     m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_text_label->set_name("text_label");
-    m_text_label->set_proper_name("Text Label");
+    m_text_label->set_name("Text Label");
     m_text_label->set_font_size(14);
     m_text_label->set_padding(0, 8, 0, 0);
 

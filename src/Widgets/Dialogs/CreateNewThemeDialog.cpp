@@ -11,8 +11,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	init_attributes();
 
 	set_icon(new Graphic(":/svgs/new_theme.svg", QSize(20, 20)));
-	set_name("create_new_theme_dialog");
-	set_proper_name("Create Theme Dialog");
+	set_name("Create Theme Dialog");
 	setFixedSize(525, 300);
 	setModal(true);
 
@@ -23,16 +22,13 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	m_create_button->set_disabled();
 	connect(m_create_button, &Button::clicked, [this] { done(QDialog::Accepted); });
 
-	m_name_label->set_name("name_label");
-	m_name_label->set_proper_name("Name Label");
+	m_name_label->set_name("Name Label");
 	m_name_label->set_font_size(15);
 
-	m_start_as_label->set_name("start_as_label");
-	m_start_as_label->set_proper_name("Start as Label");
+	m_start_as_label->set_name("Start as Label");
 	m_start_as_label->set_font_size(15);
 
-	m_theme_name_line_edit->set_name("theme_name_line_edit");
-	m_theme_name_line_edit->set_proper_name("Name Line Editor");
+	m_theme_name_line_edit->set_name("Theme Name Line Editor");
 	m_theme_name_line_edit->setFixedSize(250, 50);
 	m_theme_name_line_edit->set_margin(0);
 	m_theme_name_line_edit->set_font_size(15);
@@ -63,8 +59,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 			m_create_button->set_disabled(false);
 	});
 
-	m_start_theme_combobox->set_name("start_theme_combobox");
-	m_start_theme_combobox->set_proper_name("Start as Combobox");
+	m_start_theme_combobox->set_name("Start as Combobox");
 
 	setup_layout();
 

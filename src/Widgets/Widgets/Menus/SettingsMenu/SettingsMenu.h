@@ -35,7 +35,7 @@ namespace Layers
 		void expand_tabs();
 
 	private:
-		void setup_layout();
+		void init_layout();
 
 		bool m_dragging_sidebar{ false };
 		bool m_frozen{ false };

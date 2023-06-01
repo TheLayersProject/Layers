@@ -17,16 +17,14 @@ GradientDialog::GradientDialog(QWidget* parent) :
     installEventFilter(this);
 
     set_icon(new Graphic(":/svgs/gradient_icon.svg"));
-    set_name("gradient_dialog");
-    set_proper_name("Gradient Dialog");
+    set_name("Gradient Dialog");
     
     //m_gradient_stops = gradient_stops;
 
     m_gradient_widget->setFixedSize(448, 176);
     m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
 
-    m_apply_button->set_name("apply_button");
-    m_apply_button->set_proper_name("Apply Button");
+    m_apply_button->set_name("Apply Button");
     //m_apply_button->set_padding(8, 6, 8, 6);
     m_apply_button->set_text_padding(1, 3, 0, 0);
     m_apply_button->disable_text_hover_color();

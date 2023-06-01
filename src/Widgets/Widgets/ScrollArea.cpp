@@ -16,27 +16,10 @@ ScrollArea::ScrollArea(QWidget* parent) : Widget(parent)
 	m_scroll_area->setHorizontalScrollBar(m_horizontal_scrollbar);
 	m_scroll_area->setVerticalScrollBar(m_vertical_scrollbar);
 
-	m_horizontal_scrollbar->set_name("horizontal_scrollbar");
-	m_horizontal_scrollbar->set_proper_name("Horizontal Scrollbar");
+	m_horizontal_scrollbar->set_name("Horizontal ScrollBar");
 
-	m_vertical_scrollbar->set_name("vertical_scrollbar");
-	m_vertical_scrollbar->set_proper_name("Vertical Scrollbar");
+	m_vertical_scrollbar->set_name("Vertical ScrollBar");
 }
-
-//ScrollArea::~ScrollArea()
-//{
-//	//if (!m_horizontal_scrollbar->parentWidget())
-//	//{
-//	delete m_horizontal_scrollbar;
-//	m_horizontal_scrollbar = nullptr;
-//	//}
-//
-//	//if (!m_vertical_scrollbar->parentWidget())
-//	//{
-//	delete m_vertical_scrollbar;
-//	m_vertical_scrollbar = nullptr;
-//	//}
-//}
 
 QList<Themeable*> ScrollArea::child_themeables(Qt::FindChildOptions options)
 {

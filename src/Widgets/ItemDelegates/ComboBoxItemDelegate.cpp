@@ -11,9 +11,7 @@ ComboBoxItemDelegate::ComboBoxItemDelegate(QObject* parent) :
 	QStyledItemDelegate(parent)
 {
 	init_attributes();
-
-	set_name("items");
-	set_proper_name("Items");
+	set_name("Items");
 }
 
 QPainterPath ComboBoxItemDelegate::background_path(
