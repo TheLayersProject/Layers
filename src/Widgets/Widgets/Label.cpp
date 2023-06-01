@@ -137,20 +137,13 @@ void Label::build_wrapped_lines()
 	}
 }
 
-void Label::setFont(const QFont& f)
+void Label::setFont(const QFont& font)
 {
-	QLabel::setFont(f);
+	QLabel::setFont(font);
 
 	if (!m_resize_disabled)
 		resize();
 }
-
-//void Label::setFixedWidth(int w)
-//{
-//	QLabel::setFixedWidth(w);
-//
-//	if (!m_resize_disabled) resize();
-//}
 
 void Label::setWordWrap(bool on)
 {
@@ -180,9 +173,9 @@ void Label::set_font_size(int size)
 		resize();
 }
 
-void Label::set_hovering(bool cond)
+void Label::set_hovering(bool condition)
 {
-	m_hovering = cond;
+	m_hovering = condition;
 
 	update();
 }
@@ -201,13 +194,6 @@ void Label::set_padding(double left, double top, double right, double bottom)
 void Label::set_resize_disabled(bool disable)
 {
 	m_resize_disabled = disable;
-}
-
-int Label::width_unwrapped()
-{
-	QFontMetrics font_metrics(font());
-
-	return m_padding_left + font_metrics.horizontalAdvance(text()) + 2 + m_padding_right;
 }
 
 void Label::setText(const QString& text)
