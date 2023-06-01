@@ -15,8 +15,10 @@ namespace Layers
 	public:
 		RadioButtonPool(QList<RadioButton*> radio_buttons);
 
+		void set_active(RadioButton* button);
+
 	private:
-		RadioButton* m_active_radio_button{ nullptr };
+		RadioButton* m_active_button{ nullptr };
 
 		QList<RadioButton*> m_radio_buttons;
 	};

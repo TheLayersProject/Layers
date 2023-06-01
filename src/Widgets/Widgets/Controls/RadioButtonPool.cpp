@@ -7,13 +7,21 @@ using Layers::RadioButtonPool;
 RadioButtonPool::RadioButtonPool(QList<RadioButton*> radio_buttons) :
 	m_radio_buttons{ radio_buttons }
 {
-	for (RadioButton* radio_button : radio_buttons)
-		connect(radio_button, &RadioButton::clicked, [this, radio_button]
-			{
-				if (m_active_radio_button)
-					m_active_radio_button->set_state("Inactive");
+	set_active(m_radio_buttons.first());
 
-				m_active_radio_button = radio_button;
-				m_active_radio_button->set_state("Active");
-			});
+	for (RadioButton* radio_button : m_radio_buttons)
+		connect(radio_button, &RadioButton::clicked, [this, radio_button]
+			{ set_active(radio_button); });
+}
+
+void RadioButtonPool::set_active(RadioButton* button)
+{
+	if (m_radio_buttons.contains(button) && m_active_button != button)
+	{
+		if (m_active_button)
+			m_active_button->set_state("Inactive");
+
+		m_active_button = button;
+		m_active_button->set_state("Active");
+	}
 }
