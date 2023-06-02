@@ -27,26 +27,12 @@ namespace Layers
 
 		ThemesWidget* themes_widget() const;
 
-	protected:
-		bool eventFilter(QObject* object, QEvent* event) override;
-
-	private slots:
-		void shrink_tabs();
-		void expand_tabs();
-
 	private:
 		void init_layout();
-
-		bool m_dragging_sidebar{ false };
-		bool m_frozen{ false };
-		bool m_hovering_over_divider{ false };
-		bool m_shrunk{ false };
 
 		QVBoxLayout* m_sidebar_layout = new QVBoxLayout;
 
 		QList<SettingsTab*> m_settings_tabs;
-
-		QPoint last_pos;
 
 		Widget* m_sidebar{ new Widget };
 

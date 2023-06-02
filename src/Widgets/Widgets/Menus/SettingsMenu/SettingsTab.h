@@ -22,9 +22,6 @@ namespace Layers
 	public:
 		SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent = nullptr);
 
-		void expand();
-		void shrink();
-
 		int recommended_minimum_width();
 
 		void set_disabled(bool cond = true);
@@ -37,7 +34,7 @@ namespace Layers
 		void resizeEvent(QResizeEvent* event);
 
 	private:
-		void setup_layout();
+		void init_layout();
 
 		QHBoxLayout* main_layout{ new QHBoxLayout };
 
@@ -46,10 +43,6 @@ namespace Layers
 		Label* m_text_label;
 
 		Graphic* m_tab_icon;
-
-		Widget* m_spacer{ new Widget };
-		Widget* m_stretch_widget{ new Widget };
-		Widget* m_stretch_widget2{ new Widget };
 	};
 }
 

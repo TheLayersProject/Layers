@@ -14,7 +14,6 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 	Widget(parent)
 {
 	init_layout();
-	installEventFilter(this);
 	setMouseTracking(true);
 	set_icon(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)));
 	set_name("Settings Menu");
@@ -39,8 +38,6 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
 {
 	SettingsTab* settings_tab = new SettingsTab(icon, label_text);
-
-	//m_sidebar->add_child_themeable_pointer(settings_tab);
 
 	for (SettingsTab* st : m_settings_tabs)
 	{
@@ -96,137 +93,6 @@ int SettingsMenu::recommended_minimum_tab_width() const
 ThemesWidget* SettingsMenu::themes_widget() const
 {
 	return m_themes_widget;
-}
-
-bool SettingsMenu::eventFilter(QObject* object, QEvent* event)
-{
-	if (event->type() == QEvent::MouseButtonPress)
-	{
-		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-
-		if (mouse_event->button() & Qt::LeftButton)
-		{
-			if (m_hovering_over_divider)
-			{
-				m_dragging_sidebar = true;
-
-				last_pos = mouse_event->globalPos();
-			}
-		}
-	}
-	else if (event->type() == QEvent::MouseButtonRelease)
-	{
-		m_dragging_sidebar = false;
-	}
-	else if (event->type() == QEvent::MouseButtonDblClick)
-	{
-		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-
-		if (mouse_event->button() & Qt::LeftButton)
-		{
-			QRect division_rect(m_sidebar->width() - 8, 0, 16, height());
-
-			if (division_rect.contains(mouse_event->pos()))
-			{
-				int index_of_largest_tab = largest_tab_index();
-				int recommended_tab_width = recommended_minimum_tab_width();
-
-				if (m_settings_tabs.at(index_of_largest_tab)->width() == recommended_tab_width)
-				{
-					m_sidebar->setFixedWidth(61);
-					shrink_tabs();
-				}
-				else
-				{
-					m_sidebar->setFixedWidth(recommended_tab_width);
-					expand_tabs();
-				}
-			}
-		}
-	}
-	else if (event->type() == QEvent::MouseMove)
-	{
-		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-
-		QRect division_rect(m_sidebar->width() - 8, 0, 16, height());
-
-		if (m_dragging_sidebar)
-		{
-			QPoint delta = QPoint(mouse_event->globalPos() - last_pos);
-
-			int x_change = delta.x();
-
-			int new_width = m_sidebar->width() + x_change;
-
-			if (new_width >= 61)
-			{
-				m_frozen = false;
-				m_sidebar->setFixedWidth(new_width);
-			}
-			else if (new_width < 61) m_frozen = true;
-
-			int largest_tab_index = -1;
-			int recommended_minimum_tab_width = 0;
-
-			for (SettingsTab* st : m_settings_tabs)
-			{
-				int tab_rec_min_width = st->recommended_minimum_width();
-				if (tab_rec_min_width > recommended_minimum_tab_width)
-				{
-					largest_tab_index = m_settings_tabs.indexOf(st);
-					recommended_minimum_tab_width = tab_rec_min_width;
-				}
-			}
-
-			if (m_settings_tabs.at(largest_tab_index)->width() < recommended_minimum_tab_width) shrink_tabs();
-			else expand_tabs();
-
-			if (!m_frozen) last_pos = mouse_event->globalPos();
-		}
-		else
-		{
-			if (division_rect.contains(mouse_event->pos()))
-			{
-				m_hovering_over_divider = true;
-				setCursor(Qt::SizeHorCursor);
-			}
-			else
-			{
-				m_hovering_over_divider = false;
-				unsetCursor();
-			}
-		}
-	}
-
-	Widget::eventFilter(object, event);
-
-	return false;
-}
-
-void SettingsMenu::shrink_tabs()
-{
-	if (!m_shrunk)
-	{
-		m_shrunk = true;
-
-		for (SettingsTab* st : m_settings_tabs)
-		{
-			st->shrink();
-		}
-	}
-}
-
-void SettingsMenu::expand_tabs()
-{
-	if (m_shrunk)
-	{
-		m_shrunk = false;
-
-		for (SettingsTab* st : m_settings_tabs)
-		{
-			st->expand();
-		}
-	}
 }
 
 void SettingsMenu::init_layout()

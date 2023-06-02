@@ -30,37 +30,10 @@ SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* pare
     m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
     m_text_label->set_name("Text Label");
     m_text_label->set_font_size(14);
-    m_text_label->set_padding(0, 8, 0, 0);
 
-    m_spacer->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_spacer->setFixedSize(12, 12);
-
-    m_stretch_widget->setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_stretch_widget->hide();
-
-    m_stretch_widget2->setAttribute(Qt::WA_TransparentForMouseEvents);
-
-    setup_layout();
+    init_layout();
 
     set_state("Unselected");
-}
-
-void SettingsTab::expand()
-{
-    m_spacer->show();
-    m_text_label->show();
-    m_stretch_widget->hide();
-
-    main_layout->setContentsMargins(18, 0, 0, 0);
-}
-
-void SettingsTab::shrink()
-{
-    m_spacer->hide();
-    m_text_label->hide();
-    m_stretch_widget->show();
-
-    main_layout->setContentsMargins(0, 0, 0, 0);
 }
 
 void SettingsTab::init_attributes()
@@ -71,12 +44,6 @@ void SettingsTab::init_attributes()
         { "Unselected", QColor(Qt::lightGray) },
         { "Selected", QColor(Qt::white) }
         });
-
-	m_spacer->fill()->set_disabled();
-
-	m_stretch_widget->fill()->set_disabled();
-
-	m_stretch_widget2->fill()->set_disabled();
 
 	m_tab_icon->svg()->common_color()->init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
@@ -91,7 +58,7 @@ void SettingsTab::init_attributes()
 
 int SettingsTab::recommended_minimum_width()
 {
-    return 18 + m_tab_icon->width() + 12 + m_text_label->width() + 18;
+    return 18 + m_tab_icon->width() + 12 + m_text_label->sizeHint().width() + 18;
 }
 
 void SettingsTab::set_disabled(bool cond)
@@ -125,15 +92,12 @@ void SettingsTab::resizeEvent(QResizeEvent* event)
     else emit over_minimum_width();
 }
 
-void SettingsTab::setup_layout()
+void SettingsTab::init_layout()
 {
-    main_layout->setContentsMargins(18, 0, 0, 0);
-    main_layout->setSpacing(0);
-    main_layout->addWidget(m_stretch_widget);
+    main_layout->setContentsMargins(18, 0, 18, 0);
+    main_layout->setSpacing(12);
     main_layout->addWidget(m_tab_icon);
-    main_layout->addWidget(m_spacer);
     main_layout->addWidget(m_text_label);
-    main_layout->addWidget(m_stretch_widget2);
 
     setLayout(main_layout);
 }
