@@ -62,6 +62,9 @@ void Attribute::copy(const Attribute& attribute)
 {
 	m_data->copy(*attribute.m_data);
 
+	if (m_data->is_multi_valued() && m_state.isEmpty())
+		m_state = m_data->states().first();
+
 	m_disabled = attribute.m_disabled;
 	
 	emit changed();
