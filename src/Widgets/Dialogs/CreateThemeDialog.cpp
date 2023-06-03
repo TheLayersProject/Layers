@@ -1,11 +1,11 @@
-#include "CreateNewThemeDialog.h"
+#include "CreateThemeDialog.h"
 
 #include "Application.h"
 
-using Layers::CreateNewThemeDialog;
+using Layers::CreateThemeDialog;
 using Layers::Themeable;
 
-CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
+CreateThemeDialog::CreateThemeDialog(QWidget* parent) :
 	Dialog("Create Theme", parent)
 {
 	init_attributes();
@@ -68,40 +68,40 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	apply_theme(*layersApp->active_theme());
 }
 
-QString CreateNewThemeDialog::new_theme_name()
+QString CreateThemeDialog::new_theme_name()
 {
 	return m_theme_name_line_editor->text()->as<QString>().simplified();
 }
 
-void CreateNewThemeDialog::add_theme_to_combobox(Theme* theme)
+void CreateThemeDialog::add_theme_to_combobox(Theme* theme)
 {
 	m_start_theme_combobox->addItem(theme);
 }
 
-void CreateNewThemeDialog::clear()
+void CreateThemeDialog::clear()
 {
 	m_theme_name_line_editor->set_text("");
 
 	m_create_button->set_disabled();
 }
 
-void CreateNewThemeDialog::clear_theme_combobox()
+void CreateThemeDialog::clear_theme_combobox()
 {
 	m_start_theme_combobox->clear();
 }
 
-Themeable* CreateNewThemeDialog::clone()
+Themeable* CreateThemeDialog::clone()
 {
-	return new CreateNewThemeDialog;
+	return new CreateThemeDialog;
 }
 
-QString CreateNewThemeDialog::copy_theme_id()
+QString CreateThemeDialog::copy_theme_id()
 {
 	return m_start_theme_combobox->currentData().toString();
 	//return m_start_theme_combobox->currentData(Qt::DisplayRole).toString();
 }
 
-void CreateNewThemeDialog::set_current_start_theme_name(const QString& theme_id)
+void CreateThemeDialog::set_current_start_theme_name(const QString& theme_id)
 {
 	//if (m_start_theme_combobox->count().contains(theme_name))
 	//	m_start_theme_combobox->set_current_item(theme_name);
@@ -111,14 +111,14 @@ void CreateNewThemeDialog::set_current_start_theme_name(const QString& theme_id)
 			m_start_theme_combobox->setCurrentIndex(i);
 }
 
-int CreateNewThemeDialog::exec()
+int CreateThemeDialog::exec()
 {
 	m_theme_name_line_editor->setFocus();
 
 	return QDialog::exec();
 }
 
-void CreateNewThemeDialog::init_attributes()
+void CreateThemeDialog::init_attributes()
 {
 	//m_start_theme_combobox->corner_radii()->top_left()->set_value(7.0);
 	//m_start_theme_combobox->corner_radii()->top_right()->set_value(7.0);
@@ -133,7 +133,7 @@ void CreateNewThemeDialog::init_attributes()
 	m_theme_name_line_editor->left_padding()->set_value(10.0);
 }
 
-void CreateNewThemeDialog::setup_layout()
+void CreateThemeDialog::setup_layout()
 {
 	QVBoxLayout* layout = new QVBoxLayout;
 

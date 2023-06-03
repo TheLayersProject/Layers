@@ -12,7 +12,7 @@
 
 namespace Layers
 {
-	class CreateNewThemeDialog;
+	class CreateThemeDialog;
 	class ColorDialog;
 	class Downloader;
 	class GitHubRepo;
@@ -137,9 +137,9 @@ namespace Layers
 		) override;
 
 		/*!
-			Returns a pointer to the application's CreateNewThemeDialog.
+			Returns a pointer to the application's CreateThemeDialog.
 		*/
-		CreateNewThemeDialog* create_new_theme_dialog() const;
+		CreateThemeDialog* create_theme_dialog() const;
 
 		/*!
 			Returns a pointer to the application's ColorDialog.
@@ -227,7 +227,7 @@ namespace Layers
 
 		QList<Themeable*> m_child_themeables;
 
-		CreateNewThemeDialog* m_create_new_theme_dialog;
+		CreateThemeDialog* m_create_theme_dialog;
 
 		ColorDialog* m_color_dialog;
 

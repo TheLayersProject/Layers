@@ -7,7 +7,7 @@
 #include "Menus/SettingsMenu/ThemesWidget.h"
 #include "Menus/ThemeEditor/ThemeEditor.h"
 #include "Menus/ThemeEditor/WidgetEditor.h"
-#include "Widgets/Dialogs/CreateNewThemeDialog.h"
+#include "Widgets/Dialogs/CreateThemeDialog.h"
 
 #include <Windows.h>
 #include <windowsx.h>
@@ -156,7 +156,7 @@ void MainWindow::close_menu(int index)
 
 void MainWindow::new_theme_clicked()
 {
-	CreateNewThemeDialog* dialog = layersApp->create_new_theme_dialog();
+	CreateThemeDialog* dialog = layersApp->create_theme_dialog();
 
 	dialog->clear_theme_combobox();
 

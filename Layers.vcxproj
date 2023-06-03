@@ -150,7 +150,7 @@
     <ClCompile Include="src\Widgets\Widgets\Navigator.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp" />
-    <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp" />
+    <ClCompile Include="src\Widgets\Dialogs\CreateThemeDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\FillDialog.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\GradientDialog.cpp" />
@@ -236,7 +236,7 @@
     <QtMoc Include="include\MainWindow.h" />
     <QtMoc Include="src\Widgets\Dialogs\UpdateDialog.h" />
     <QtMoc Include="src\Widgets\Dialogs\GradientDialog.h" />
-    <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h" />
+    <QtMoc Include="src\Widgets\Dialogs\CreateThemeDialog.h" />
     <QtMoc Include="src\Widgets\Widgets\MainWindowTitlebar.h" />
     <QtMoc Include="include\Tab.h" />
     <QtMoc Include="include\MenuBar.h" />

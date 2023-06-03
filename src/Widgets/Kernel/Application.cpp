@@ -5,7 +5,7 @@
 #include "Version.h"
 #include "MainWindow.h"
 
-#include "Widgets/Dialogs/CreateNewThemeDialog.h"
+#include "Widgets/Dialogs/CreateThemeDialog.h"
 #include "Widgets/Dialogs/ColorDialog.h"
 #include "Widgets/Dialogs/GradientDialog.h"
 #include "Widgets/Dialogs/ThemeCompatibilityCautionDialog.h"
@@ -22,7 +22,7 @@
 
 using Layers::Application;
 using Layers::ColorDialog;
-using Layers::CreateNewThemeDialog;
+using Layers::CreateThemeDialog;
 using Layers::WidgetEditor;
 using Layers::GradientDialog;
 using Layers::Theme;
@@ -77,7 +77,7 @@ Application::Application(
 	init_themes();
 	init_latest_version_tag();
 
-	m_create_new_theme_dialog = new CreateNewThemeDialog;
+	m_create_theme_dialog = new CreateThemeDialog;
 
 	m_color_dialog = new ColorDialog;
 
@@ -88,7 +88,7 @@ Application::Application(
 
 	m_update_dialog = new UpdateDialog("", "");
 
-	add_child_themeable_pointer(*m_create_new_theme_dialog);
+	add_child_themeable_pointer(*m_create_theme_dialog);
 	add_child_themeable_pointer(*m_color_dialog);
 	add_child_themeable_pointer(*m_gradient_dialog);
 	add_child_themeable_pointer(*m_theme_compatibility_caution_dialog);
@@ -122,13 +122,13 @@ Application::~Application()
 	}
 	m_themes.clear();
 
-	delete m_create_new_theme_dialog;
+	delete m_create_theme_dialog;
 	delete m_color_dialog;
 	delete m_gradient_dialog;
 	delete m_theme_compatibility_caution_dialog;
 	delete m_update_dialog;
 
-	m_create_new_theme_dialog = nullptr;
+	m_create_theme_dialog = nullptr;
 	m_color_dialog = nullptr;
 	m_gradient_dialog = nullptr;
 	m_theme_compatibility_caution_dialog = nullptr;
@@ -197,9 +197,9 @@ QList<Themeable*> Application::child_themeables(Qt::FindChildOptions options)
 	return m_child_themeables;
 }
 
-CreateNewThemeDialog* Application::create_new_theme_dialog() const
+CreateThemeDialog* Application::create_theme_dialog() const
 {
-	return m_create_new_theme_dialog;
+	return m_create_theme_dialog;
 }
 
 ColorDialog* Application::color_dialog() const

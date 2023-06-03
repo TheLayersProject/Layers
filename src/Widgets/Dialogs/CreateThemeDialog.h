@@ -1,5 +1,5 @@
-#ifndef CREATENEWTHEMEDIALOG_H
-#define CREATENEWTHEMEDIALOG_H
+#ifndef CREATETHEMEDIALOG_H
+#define CREATETHEMEDIALOG_H
 
 #include "ThemeComboBox.h"
 #include "Dialog.h"
@@ -7,12 +7,12 @@
 
 namespace Layers
 {
-	class CreateNewThemeDialog : public Dialog
+	class CreateThemeDialog : public Dialog
 	{
 		Q_OBJECT
 
 	public:
-		CreateNewThemeDialog(QWidget* parent = nullptr);
+		CreateThemeDialog(QWidget* parent = nullptr);
 
 		void add_theme_to_combobox(Theme* theme);
 
@@ -48,4 +48,4 @@ namespace Layers
 	};
 }
 
-#endif // CREATENEWTHEMEDIALOG_H
+#endif // CREATETHEMEDIALOG_H
