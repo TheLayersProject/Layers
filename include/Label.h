@@ -3,6 +3,7 @@
 
 #include <QLabel>
 
+#include "NewGraphic.h"
 #include "Themeable.h"
 
 namespace Layers
@@ -25,12 +26,35 @@ namespace Layers
 		*/
 		Label(const QString& text, QWidget* parent = nullptr);
 
+		/*!
+			Constructs a label that displays *graphic*.
+		*/
+		Label(const NewGraphic& graphic, QWidget* parent = nullptr);
+
 		~Label();
+
+		/*!
+			Returns a list of child themeables.
+
+			This function overrides Themeable::child_themeables() to include
+			a pointer to the SvgRenderer, if the label uses a graphic that has
+			one.
+		*/
+		virtual QList<Themeable*> child_themeables(
+			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
+		) override;
 
 		/*!
 			Returns a pointer to the fill attribute of the label.
 		*/
 		Attribute* fill() const;
+
+		/*!
+			Returns a pointer to the label's graphic.
+
+			Returns nullptr if the label does not have a graphic.
+		*/
+		NewGraphic* graphic() const;
 
 		/*!
 			Sets the *size* of the label's font.
@@ -42,8 +66,8 @@ namespace Layers
 		*/
 		Attribute* text_color() const;
 
-	//protected:
-	//	void paintEvent(QPaintEvent* event);
+	protected:
+		void paintEvent(QPaintEvent* event);
 
 	private slots:
 		void update_stylesheet();
@@ -52,13 +76,17 @@ namespace Layers
 		void init();
 		void init_attributes();
 
-		bool m_contains_text{ true };
+		int m_frame{ 0 };
+
+		NewGraphic* m_graphic{ nullptr };
 
 		Attribute* m_fill{
 			new Attribute("fill", QColor(Qt::white), true) };
 
 		Attribute* m_text_color{
 			new Attribute("text_color", QColor(Qt::black)) };
+
+		QTimer m_timer;
 	};
 }
 

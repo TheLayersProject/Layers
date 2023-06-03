@@ -107,6 +107,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\Tools\NewGraphic.cpp" />
     <ClCompile Include="src\Widgets\Kernel\Application.cpp" />
     <ClCompile Include="src\Core\Tools\directories.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\RadioButton.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="include\Layers.h" />
     <QtMoc Include="include\RadioButton.h" />
     <QtMoc Include="include\RadioButtonPool.h" />
+    <ClInclude Include="include\NewGraphic.h" />
     <ClInclude Include="include\ThemeableBox.h" />
     <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.h" />
     <QtMoc Include="include\ThemeLineageModel.h" />
