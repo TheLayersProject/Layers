@@ -507,8 +507,8 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#6a6a6a",
-                        "1:#444444"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
@@ -531,7 +531,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -605,7 +605,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#6a6a6a"
+            "value": "#b9bbbe"
         }
     },
     "Create New Theme Dialog/Start As Label": {
@@ -614,7 +614,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#6a6a6a"
+            "value": "#b9bbbe"
         }
     },
     "Create New Theme Dialog/Start Theme Combobox": {
@@ -631,10 +631,10 @@
             "value": 10
         },
         "fill": {
-            "value": "#6a6a6a"
+            "value": "#1e2023"
         },
         "text_color": {
-            "value": "#e3e3e3"
+            "value": "#b9bbbe"
         }
     },
     "Create New Theme Dialog/Start Theme Combobox/Items": {
@@ -643,18 +643,18 @@
         },
         "fill": {
             "values": {
-                "Selected": "#8a8a8a",
-                "Unselected": "#4d4d4d"
+                "Selected": "#2b2e32",
+                "Unselected": "#16181a"
             }
         },
         "text_color": {
-            "value": "#e3e3e3"
+            "value": "#b9bbbe"
         }
     },
     "Create New Theme Dialog/Theme Name Line Edit": {
         "border": {
             "fill": {
-                "value": "#6a6a6a"
+                "value": "#1e2023"
             },
             "thickness": {
                 "value": 3
@@ -715,14 +715,14 @@
                 "value": 0
             },
             "top_left": {
-                "value": 6
+                "value": 5
             },
             "top_right": {
-                "value": 6
+                "value": 5
             }
         },
         "fill": {
-            "value": "#363636"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -807,8 +807,8 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#6a6a6a",
-                        "1:#444444"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
@@ -831,7 +831,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -925,7 +925,7 @@
             }
         },
         "fill": {
-            "value": "#363636"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -1010,8 +1010,8 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#6a6a6a",
-                        "1:#444444"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
@@ -1034,7 +1034,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -1078,7 +1078,7 @@
             }
         },
         "fill": {
-            "value": "#363636"
+            "value": "#25272b"
         },
         "margins": {
             "bottom": {
@@ -1212,7 +1212,7 @@
             }
         },
         "fill": {
-            "value": "#6a6a6a"
+            "value": "#2f3136"
         },
         "margins": {
             "bottom": {
@@ -1245,34 +1245,33 @@
                 "value": 5
             },
             "bottom_right": {
-                "value": 0
+                "value": 5
             },
             "top_left": {
                 "value": 5
             },
             "top_right": {
-                "value": 0
+                "value": 5
             }
         },
         "fill": {
             "values": {
-                "Selected": "#2e2e2e",
-                "Unselected": "#6a6a6a"
+                "Selected": "#42464d",
+                "Unselected": "#2f3136"
             }
         },
         "margins": {
             "bottom": {
-                "value": 0
+                "value": 7
             },
-            "disabled": true,
             "left": {
-                "value": 0
+                "value": 7
             },
             "right": {
-                "value": 0
+                "value": 7
             },
             "top": {
-                "value": 0
+                "value": 7
             }
         }
     },
@@ -1281,8 +1280,8 @@
     "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#6a6a6a",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -1293,8 +1292,8 @@
         },
         "text_color": {
             "values": {
-                "Selected": "#6a6a6a",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -1566,10 +1565,10 @@
             "value": 10
         },
         "fill": {
-            "value": "#6a6a6a"
+            "value": "#1e2023"
         },
         "text_color": {
-            "value": "#e3e3e3"
+            "value": "#b9bbbe"
         }
     },
     "Main Window/Settings Menu/Themes Widget/Theme Combobox/Items": {
@@ -1578,12 +1577,12 @@
         },
         "fill": {
             "values": {
-                "Selected": "#8a8a8a",
-                "Unselected": "#4d4d4d"
+                "Selected": "#2b2e32",
+                "Unselected": "#16181a"
             }
         },
         "text_color": {
-            "value": "#e3e3e3"
+            "value": "#b9bbbe"
         }
     },
     "Main Window/Settings Menu/Themes Widget/Theme Info Button": {
@@ -1647,7 +1646,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#6a6a6a"
+            "value": "#b9bbbe"
         }
     },
     "Main Window/Theme Editor": {
@@ -1742,7 +1741,7 @@
     },
     "Main Window/Theme Editor/Preview Scroll Area/Horizontal ScrollBar": {
         "background_color": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "corner_radii": {
             "bottom_left": {
@@ -1759,7 +1758,7 @@
             }
         },
         "handle_color": {
-            "value": "#989898"
+            "value": "#202225"
         },
         "handle_corner_radii": {
             "bottom_left": {
@@ -1778,7 +1777,7 @@
     },
     "Main Window/Theme Editor/Preview Scroll Area/Vertical ScrollBar": {
         "background_color": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "corner_radii": {
             "bottom_left": {
@@ -1795,7 +1794,7 @@
             }
         },
         "handle_color": {
-            "value": "#989898"
+            "value": "#202225"
         },
         "handle_corner_radii": {
             "bottom_left": {
@@ -1837,7 +1836,7 @@
             }
         },
         "fill": {
-            "value": "#6a6a6a"
+            "value": "#2f3136"
         },
         "margins": {
             "bottom": {
@@ -1893,14 +1892,14 @@
     },
     "Main Window/Theme Editor/Sidebar/Vertical ScrollBar": {
         "background_color": {
-            "value": "#6a6a6a"
+            "value": "#2f3136"
         },
         "corner_radii": {
             "bottom_left": {
                 "value": 0
             },
             "bottom_right": {
-                "value": 0
+                "value": 10
             },
             "top_left": {
                 "value": 0
@@ -1910,7 +1909,7 @@
             }
         },
         "handle_color": {
-            "value": "#989898"
+            "value": "#202225"
         },
         "handle_corner_radii": {
             "bottom_left": {
@@ -2006,7 +2005,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -2030,7 +2029,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#fbfbfc"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Disable Toggle": {
@@ -2038,31 +2037,31 @@
             "fill": {
                 "values": {
                     "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
+                    "Untoggled": "#b9bbbe"
                 }
             },
             "thickness": {
-                "value": 3
+                "value": 0
             }
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
             "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#6a6a6a"
+                "Toggled": "#3ba55d",
+                "Untoggled": "#202225"
             }
         },
         "margins": {
@@ -2092,22 +2091,22 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
             "values": {
                 "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
+                "Untoggled": "#b9bbbe"
             }
         },
         "margins": {
@@ -2151,7 +2150,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -2221,16 +2220,16 @@
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#c0c0c0",
-                "Unselected": "#808080"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -2633,7 +2632,7 @@
             }
         },
         "fill": {
-            "value": "#989898"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -3003,7 +3002,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#fbfbfc"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle": {
@@ -3015,27 +3014,27 @@
                 }
             },
             "thickness": {
-                "value": 3
+                "value": 0
             }
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
             "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#6a6a6a"
+                "Toggled": "#3ba55d",
+                "Untoggled": "#202225"
             }
         },
         "margins": {
@@ -3065,22 +3064,22 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
             "values": {
                 "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
+                "Untoggled": "#b9bbbe"
             }
         },
         "margins": {
@@ -3124,7 +3123,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -3340,7 +3339,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#fbfbfc"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle": {
@@ -3352,27 +3351,27 @@
                 }
             },
             "thickness": {
-                "value": 3
+                "value": 0
             }
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
             "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#6a6a6a"
+                "Toggled": "#3ba55d",
+                "Untoggled": "#202225"
             }
         },
         "margins": {
@@ -3402,22 +3401,22 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
             "values": {
                 "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
+                "Untoggled": "#b9bbbe"
             }
         },
         "margins": {
@@ -3461,7 +3460,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -3531,16 +3530,16 @@
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -3550,7 +3549,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#fbfbfc"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Disable Toggle": {
@@ -3562,27 +3561,27 @@
                 }
             },
             "thickness": {
-                "value": 3
+                "value": 0
             }
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
             "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#6a6a6a"
+                "Toggled": "#3ba55d",
+                "Untoggled": "#202225"
             }
         },
         "margins": {
@@ -3612,22 +3611,22 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
             "values": {
                 "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
+                "Untoggled": "#b9bbbe"
             }
         },
         "margins": {
@@ -3671,7 +3670,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -3695,7 +3694,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#fbfbfc"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Line Editor": {
@@ -3997,7 +3996,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -4021,7 +4020,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#001122"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox": {
@@ -4038,10 +4037,10 @@
             "value": 10
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#001122"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#001122"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Current Item Label": {
@@ -4050,7 +4049,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#6a6a6a"
+            "value": "#4571a2"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Drop Down": {
@@ -4143,7 +4142,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#001122"
         },
         "margins": {
             "bottom": {
@@ -4167,7 +4166,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#f0f0f0"
+            "value": "#5082bb"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Items": {
@@ -4176,12 +4175,12 @@
         },
         "fill": {
             "values": {
-                "Selected": "#00ff00",
-                "Unselected": "#ffffff"
+                "Selected": "#5b96cd",
+                "Unselected": "#253859"
             }
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#000b16"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
@@ -4209,7 +4208,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -4252,7 +4251,7 @@
             }
         },
         "fill": {
-            "value": "#1a000000"
+            "value": "#1a888888"
         },
         "margins": {
             "bottom": {
@@ -4322,16 +4321,16 @@
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#c0c0c0",
-                "Unselected": "#808080"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -4341,7 +4340,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#2e2e2e"
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label": {
@@ -4349,8 +4348,8 @@
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -4361,8 +4360,8 @@
         },
         "text_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -4400,7 +4399,7 @@
             }
         },
         "fill": {
-            "value": "#6a6a6a"
+            "value": "#2f3136"
         },
         "margins": {
             "bottom": {
@@ -4475,7 +4474,7 @@
     },
     "Main Window/Theme Editor/Topbar/Navigator/Arrow Graphics/Svg": {
         "common_color": {
-            "value": "#2e2e2e"
+            "value": "#5e636d"
         }
     },
     "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu": {
@@ -4625,8 +4624,8 @@
         },
         "text_color": {
             "values": {
-                "Selected": "#e1e1e1",
-                "Unselected": "#2e2e2e"
+                "Selected": "#fbfbfc",
+                "Unselected": "#96989d"
             }
         }
     },
@@ -4853,8 +4852,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#363636",
-                "Inactive": "#2e2e2e"
+                "Active": "#25272b",
+                "Inactive": "#36393f"
             }
         },
         "margins": {
@@ -5056,8 +5055,8 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#6a6a6a",
-                        "1:#444444"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
@@ -5080,7 +5079,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -5104,7 +5103,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#808080"
+            "value": "#b9bbbe"
         }
     },
     "Theme Compatibility Caution Dialog/Table Label": {
@@ -5113,13 +5112,13 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#e9e9e9"
+            "value": "#b9bbbe"
         }
     },
     "Theme Compatibility Caution Dialog/Theme Lineage Table": {
         "border": {
             "fill": {
-                "value": "#6a6a6a"
+                "value": "#1e2023"
             },
             "thickness": {
                 "value": 3
@@ -5148,13 +5147,13 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#e9e9e9"
+            "value": "#b9bbbe"
         }
     },
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells": {
         "grid": {
             "fill": {
-                "value": "#505050"
+                "value": "#25272b"
             },
             "thickness": {
                 "value": 3
@@ -5163,7 +5162,7 @@
     },
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
         "common_color": {
-            "value": "#e9e9e9"
+            "value": "#b9bbbe"
         },
         "use_common_color": {
             "value": true
@@ -5194,10 +5193,10 @@
             }
         },
         "fill": {
-            "value": "#505050"
+            "value": "#25272b"
         },
         "text_color": {
-            "value": "#e9e9e9"
+            "value": "#b9bbbe"
         }
     },
     "Theme Compatibility Caution Dialog/Titlebar": {
@@ -5225,7 +5224,7 @@
             }
         },
         "fill": {
-            "value": "#363636"
+            "value": "#25272b"
         },
         "margins": {
             "bottom": {
@@ -5302,7 +5301,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#c0c0c0"
+            "value": "#e3e3e3"
         }
     },
     "Update Dialog": {
@@ -5310,8 +5309,8 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#6a6a6a",
-                        "1:#444444"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
@@ -5334,7 +5333,7 @@
             }
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -5438,7 +5437,7 @@
             }
         },
         "fill": {
-            "value": "#363636"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
