@@ -20,8 +20,6 @@ ColorDialog::ColorDialog(QWidget* parent) :
 	set_name("Color Dialog");
 
 	m_apply_button->set_name("Apply Button");
-	//m_apply_button->set_padding(8, 6, 8, 6);
-	m_apply_button->set_text_padding(1, 3, 0, 0);
 	m_apply_button->disable_text_hover_color();
 	connect(m_apply_button, &Button::clicked, [this] { done(QDialog::Accepted); });
 

@@ -16,8 +16,6 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	setModal(true);
 
 	m_create_button->set_name("create_button");
-	//m_create_button->set_padding(8, 6, 8, 6);
-	m_create_button->set_text_padding(1, 3, 0, 0);
 	m_create_button->disable_text_hover_color();
 	m_create_button->set_disabled();
 	connect(m_create_button, &Button::clicked, [this] { done(QDialog::Accepted); });

@@ -211,7 +211,6 @@ void Dialog::init_titlebar()
 
 	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 	m_title_label->set_name("Title Label");
-	m_title_label->set_padding(0, 8, 0, 0);
 	m_title_label->set_font_size(14);
 
 	connect(m_exit_button, &Button::clicked, [this] {

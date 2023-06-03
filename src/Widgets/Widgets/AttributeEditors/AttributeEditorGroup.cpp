@@ -14,7 +14,6 @@ AttributeEditorGroup::AttributeEditorGroup(AttributeGroup* attr_group, QWidget* 
 		m_label->setText(attr_group->capitalized_name());
 	m_label->set_name("Label");
 	m_label->set_font_size(14);
-	m_label->set_padding(0, 7, 0, 0);
 
 	m_collapse_button->set_name("Collapse Button");
 

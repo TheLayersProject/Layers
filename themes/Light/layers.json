@@ -91,15 +91,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -152,15 +144,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -169,15 +153,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -252,15 +228,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -269,15 +237,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -352,15 +312,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -462,15 +414,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -479,15 +423,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -562,15 +498,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -667,15 +595,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#f8f8f8"
         }
     },
@@ -684,15 +604,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -701,15 +613,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -894,15 +798,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -1000,15 +896,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#f8f8f8"
         }
     },
@@ -1113,15 +1001,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -1411,19 +1291,11 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "values": {
                 "Selected": "#2e2e2e",
                 "Unselected": "#5d5d5d"
             }
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Settings Menu/Themes Widget": {
@@ -1774,16 +1646,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor": {
@@ -2113,16 +1977,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#ffffff"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor": {
@@ -2173,16 +2029,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Disable Toggle": {
@@ -3154,16 +3002,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle": {
@@ -3388,16 +3228,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#ffffff"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
@@ -3405,16 +3237,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#ffffff"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
@@ -3515,16 +3339,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle": {
@@ -3733,16 +3549,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Disable Toggle": {
@@ -3886,16 +3694,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Line Editor": {
@@ -4117,16 +3917,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#6aaaf7"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Show Enabled Button": {
@@ -4176,15 +3968,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#f8f8f8"
         }
     },
@@ -4236,15 +4020,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -4273,15 +4049,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#6a6a6a"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#6a6a6a"
         }
     },
@@ -4398,15 +4166,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#f0f0f0"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#f0f0f0"
         }
     },
@@ -4580,15 +4340,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "value": "#ffffff"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon": {
@@ -4606,15 +4359,11 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "value": "#ffffff"
+            "values": {
+                "Selected": "#ffffff",
+                "Unselected": "#2e2e2e"
+            }
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
@@ -4622,16 +4371,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#ffffff"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Theme Editor/Topbar": {
@@ -4724,16 +4465,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#6aaaf7"
         }
     },
     "Main Window/Theme Editor/Topbar/Navigator": {
@@ -4890,15 +4623,11 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "value": "#ffffff"
+            "values": {
+                "Selected": "#ffffff",
+                "Unselected": "#2e2e2e"
+            }
         }
     },
     "Main Window/Titlebar": {
@@ -5208,16 +4937,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Main Window/Titlebar/Minimize Button": {
@@ -5382,16 +5103,8 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
             "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
-            "value": "#000000"
         }
     },
     "Theme Compatibility Caution Dialog/Table Label": {
@@ -5399,15 +5112,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -5593,15 +5298,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#000000"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#000000"
         }
     },
@@ -5657,15 +5354,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -5717,15 +5406,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -5830,15 +5511,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#2e2e2e"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#2e2e2e"
         }
     },
@@ -5890,15 +5563,7 @@
             "disabled": true,
             "value": "#ffffff"
         },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
-        },
         "text_color": {
-            "value": "#f8f8f8"
-        },
-        "text_hover_color": {
-            "disabled": true,
             "value": "#f8f8f8"
         }
     }

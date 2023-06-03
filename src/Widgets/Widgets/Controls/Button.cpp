@@ -70,7 +70,7 @@ Button::~Button()
 void Button::disable_text_hover_color(bool cond)
 {
 	if (m_text_label && m_use_text_hover_color)
-		m_text_label->set_hovering(false);
+		m_text_label->text_color()->set_state("Unselected");
 
 	m_use_text_hover_color = !cond;
 }
@@ -117,12 +117,6 @@ void Button::set_padding(int left, int top, int right, int bottom)
 	main_layout->setContentsMargins(left, top, right, bottom);
 }
 
-void Button::set_text_padding(int left, int top, int right, int bottom)
-{
-	if (m_text_label)
-		m_text_label->set_padding(left, top, right, bottom);
-}
-
 void Button::toggle_graphics()
 {
 	if (m_graphic_after)
@@ -165,7 +159,7 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 				m_graphic_after->svg()->common_color()->set_state("Selected");
 
 			if (m_text_label && m_use_text_hover_color)
-				m_text_label->set_hovering(true);
+				m_text_label->text_color()->set_state("Selected");
 		}
 	}
 	else if (event->type() == QEvent::Leave)
@@ -179,7 +173,7 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 				m_graphic_after->svg()->common_color()->set_state("Unselected");
 
 			if (m_text_label && m_use_text_hover_color)
-				m_text_label->set_hovering(false);
+				m_text_label->text_color()->set_state("Unselected");
 		}
 	}
 
@@ -228,7 +222,7 @@ void Button::init()
 	if (m_text_label)
 	{
 		m_text_label->set_name("Text Label");
-		m_text_label->setWordWrap(true);
+		m_text_label->text_color()->set_state("Unselected");
 	}
 }
 

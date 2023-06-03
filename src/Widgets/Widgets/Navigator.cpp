@@ -226,7 +226,6 @@ Button* Navigator::create_text_button(const QString& text)
 	text_button->set_font_size(14);
 	text_button->set_name("text_button");
 	text_button->set_padding(0);
-	text_button->set_text_padding(0, 8, 0, 0);
 
 	if (!m_text_button_stack.isEmpty())
 		m_text_button_stack.last()->disable_text_hover_color(false);

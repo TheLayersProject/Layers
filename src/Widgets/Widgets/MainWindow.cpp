@@ -85,8 +85,7 @@ void MainWindow::set_central_widget(Widget* central_widget)
 
 	Tab* app_menu_tab = m_titlebar->menu_tab_bar()->tabs().last();
 	app_menu_tab->close_button()->hide();
-	//app_menu_tab->text_label()->set_font_size(12);
-	app_menu_tab->text_label()->set_padding(0, 8, 8, 0);
+	app_menu_tab->layout()->setContentsMargins(2, 0, 12, 0);
 }
 
 void MainWindow::center_dialog(QDialog* dialog)

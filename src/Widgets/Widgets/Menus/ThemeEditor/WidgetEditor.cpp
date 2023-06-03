@@ -31,21 +31,17 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 
 	m_attributes_label->set_name("Attributes Label");
 	m_attributes_label->set_font_size(17);
-	m_attributes_label->set_padding(0, 8, 0, 0);
 
 	m_widgets_label->set_name("Widgets Label");
 	m_widgets_label->set_font_size(17);
-	m_widgets_label->set_padding(0, 8, 0, 0);
 
 	m_show_all_button->set_name("Show All Button");
 	m_show_all_button->disable_text_hover_color();
 	m_show_all_button->set_margin(0, 7, 0, 7);
-	m_show_all_button->set_text_padding(3, 5, 0, 0);
 
 	m_show_enabled_button->set_name("Show Enabled Button");
 	m_show_enabled_button->disable_text_hover_color();
 	m_show_enabled_button->set_margin(0, 7, 0, 7);
-	m_show_enabled_button->set_text_padding(3, 5, 0, 0);
 	m_show_enabled_button->hide();
 
 	connect(m_show_all_button, &Button::clicked, [this] {

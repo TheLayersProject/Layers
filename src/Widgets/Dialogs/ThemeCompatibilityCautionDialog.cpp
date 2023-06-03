@@ -22,7 +22,6 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	set_icon(new Graphic(":/svgs/caution.png"));
 	set_name("Theme Compatibility Caution Dialog");
 
-	m_message_label->set_available_width(490);
 	m_message_label->set_font_size(14);
 	m_message_label->set_name("Message Label");
 	m_message_label->setText(

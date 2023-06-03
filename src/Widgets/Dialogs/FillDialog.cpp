@@ -45,8 +45,6 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 
 	m_color_label->set_font_size(14);
 	m_color_label->setFixedHeight(40);
-	m_color_label->set_resize_disabled();
-	m_color_label->padding_top()->set_value(13.0);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
 	m_color_label->set_name("Color Label");
 
@@ -54,8 +52,6 @@ FillDialog::FillDialog(QWidget* parent) : Widget(parent)
 
 	m_gradient_label->set_font_size(14);
 	m_gradient_label->setFixedHeight(40);
-	m_gradient_label->set_resize_disabled();
-	m_gradient_label->padding_top()->set_value(13.0);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
 	m_gradient_label->set_name("Gradient Label");
 

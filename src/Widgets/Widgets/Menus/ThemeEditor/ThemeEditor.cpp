@@ -34,7 +34,6 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
 	m_apply_button->set_name("Apply Button");
-	m_apply_button->set_text_padding(3, 5, 0, 0);
 
 	connect(m_apply_button, &Button::clicked, [this] {
 		// TODO:

@@ -92,11 +92,6 @@ namespace Layers
 		void set_padding(int left, int top, int right, int bottom);
 
 		/*!
-			Sets the padding of the button's text with individual values.
-		*/
-		void set_text_padding(int left, int top, int right, int bottom);
-
-		/*!
 			Toggles the visibility of the graphics.
 
 			This function only works if the button was constructed with two

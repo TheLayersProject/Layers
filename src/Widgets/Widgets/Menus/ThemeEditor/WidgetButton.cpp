@@ -47,13 +47,13 @@ bool WidgetButton::eventFilter(QObject* object, QEvent* event)
 	{
 		if (m_icon && m_icon->svg())
 			m_icon->svg()->common_color()->set_state("Selected");
-		m_label->set_hovering(true);
+		m_label->text_color()->set_state("Selected");
 	}
 	else if (event->type() == QEvent::Leave)
 	{
 		if (m_icon && m_icon->svg())
 			m_icon->svg()->common_color()->set_state("Unselected");
-		m_label->set_hovering(false);
+		m_label->text_color()->set_state("Unselected");
 	}
 
 	Widget::eventFilter(object, event);
@@ -77,11 +77,8 @@ void WidgetButton::init()
 	}
 
 	m_label->setWordWrap(true);
-	m_label->set_available_width(230);
 	m_label->set_font_size(14);
 	m_label->set_name("Label");
-	m_label->set_padding(0, 8, 0, 0);
-	//m_label->setFixedHeight(40);
 }
 
 void WidgetButton::init_attributes()
@@ -101,6 +98,13 @@ void WidgetButton::init_attributes()
 
 		m_icon->svg()->common_color()->set_state("Unselected");
 	}
+
+	m_label->text_color()->init_variant_map({
+			{ "Unselected", QColor(Qt::darkGray) },
+			{ "Selected", QColor(Qt::lightGray) }
+		});
+
+	m_label->text_color()->set_state("Unselected");
 }
 
 void WidgetButton::init_layout()

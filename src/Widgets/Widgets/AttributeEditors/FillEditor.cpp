@@ -13,7 +13,6 @@ FillEditor::FillEditor(Attribute* attribute, QWidget* parent) :
 	// Setup Attribute Label
 	m_attribute_label->set_name("Label");
 	m_attribute_label->set_font_size(14);
-	m_attribute_label->set_padding(0, 7, 0, 0);
 	if (attribute)
 		m_attribute_label->setText(attribute->capitalized_name());
 
