@@ -502,7 +502,7 @@
             "value": "#000000"
         }
     },
-    "Create New Theme Dialog": {
+    "Create Theme Dialog": {
         "border": {
             "fill": {
                 "value": {
@@ -513,7 +513,7 @@
                 }
             },
             "thickness": {
-                "value": 10
+                "value": 3
             }
         },
         "corner_radii": {
@@ -549,7 +549,7 @@
             }
         }
     },
-    "Create New Theme Dialog/Create Button": {
+    "Create Theme Dialog/Create Button": {
         "border": {
             "fill": {
                 "value": "#000000"
@@ -590,7 +590,7 @@
             }
         }
     },
-    "Create New Theme Dialog/Create Button/Text Label": {
+    "Create Theme Dialog/Create Button/Text Label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -599,7 +599,7 @@
             "value": "#f8f8f8"
         }
     },
-    "Create New Theme Dialog/Name Label": {
+    "Create Theme Dialog/Name Label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -608,7 +608,7 @@
             "value": "#2e2e2e"
         }
     },
-    "Create New Theme Dialog/Start As Label": {
+    "Create Theme Dialog/Start As Label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -617,7 +617,7 @@
             "value": "#2e2e2e"
         }
     },
-    "Create New Theme Dialog/Start Theme Combobox": {
+    "Create Theme Dialog/Start Theme Combobox": {
         "border": {
             "disabled": true,
             "fill": {
@@ -637,7 +637,7 @@
             "value": "#000000"
         }
     },
-    "Create New Theme Dialog/Start Theme Combobox/Items": {
+    "Create Theme Dialog/Start Theme Combobox/Items": {
         "corner_radius": {
             "value": 10
         },
@@ -651,7 +651,7 @@
             "value": "#000000"
         }
     },
-    "Create New Theme Dialog/Theme Name Line Edit": {
+    "Create Theme Dialog/Theme Name Line Editor": {
         "border": {
             "fill": {
                 "value": "#c0c0c0"
@@ -697,7 +697,7 @@
             "value": "#2e2e2e"
         }
     },
-    "Create New Theme Dialog/Titlebar": {
+    "Create Theme Dialog/Titlebar": {
         "border": {
             "disabled": true,
             "fill": {
@@ -715,10 +715,10 @@
                 "value": 0
             },
             "top_left": {
-                "value": 6
+                "value": 7
             },
             "top_right": {
-                "value": 6
+                "value": 7
             }
         },
         "fill": {
@@ -740,7 +740,7 @@
             }
         }
     },
-    "Create New Theme Dialog/Titlebar/Exit Button": {
+    "Create Theme Dialog/Titlebar/Exit Button": {
         "border": {
             "disabled": true,
             "fill": {
@@ -785,7 +785,13 @@
             }
         }
     },
-    "Create New Theme Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "Create Theme Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        }
+    },
+    "Create Theme Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
             "values": {
                 "Selected": "#f25557",
@@ -793,7 +799,7 @@
             }
         }
     },
-    "Create New Theme Dialog/Titlebar/Title Label": {
+    "Create Theme Dialog/Titlebar/Title Label": {
         "fill": {
             "disabled": true,
             "value": "#ffffff"
@@ -813,7 +819,7 @@
                 }
             },
             "thickness": {
-                "value": 10
+                "value": 3
             }
         },
         "corner_radii": {
@@ -918,10 +924,10 @@
                 "value": 0
             },
             "top_left": {
-                "value": 6
+                "value": 7
             },
             "top_right": {
-                "value": 6
+                "value": 7
             }
         },
         "fill": {
@@ -986,6 +992,12 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Gradient Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
         }
     },
     "Gradient Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -1141,51 +1153,6 @@
             }
         }
     },
-    "Main Window/Settings Menu/App Preferences Settings Panel": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
     "Main Window/Settings Menu/Sidebar": {
         "border": {
             "disabled": true,
@@ -1245,13 +1212,13 @@
                 "value": 5
             },
             "bottom_right": {
-                "value": 0
+                "value": 5
             },
             "top_left": {
                 "value": 5
             },
             "top_right": {
-                "value": 0
+                "value": 5
             }
         },
         "fill": {
@@ -1262,17 +1229,16 @@
         },
         "margins": {
             "bottom": {
-                "value": 0
+                "value": 7
             },
-            "disabled": true,
             "left": {
-                "value": 0
+                "value": 7
             },
             "right": {
-                "value": 0
+                "value": 7
             },
             "top": {
-                "value": 0
+                "value": 7
             }
         }
     },
@@ -2024,15 +1990,6 @@
             }
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#2e2e2e"
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Disable Toggle": {
         "border": {
             "fill": {
@@ -2047,16 +2004,16 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
@@ -2092,16 +2049,16 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
@@ -2124,6 +2081,15 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        },
+        "text_color": {
+            "value": "#2e2e2e"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor": {
@@ -2231,6 +2197,99 @@
             "values": {
                 "Selected": "#ffffff",
                 "Unselected": "#2e2e2e"
+            }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle": {
+        "border": {
+            "fill": {
+                "values": {
+                    "Toggled": "#6fc65b",
+                    "Untoggled": "#2e2e2e"
+                }
+            },
+            "thickness": {
+                "value": 3
+            }
+        },
+        "corner_radii": {
+            "bottom_left": {
+                "value": 10
+            },
+            "bottom_right": {
+                "value": 10
+            },
+            "top_left": {
+                "value": 10
+            },
+            "top_right": {
+                "value": 10
+            }
+        },
+        "fill": {
+            "values": {
+                "Toggled": "#6fc65b",
+                "Untoggled": "#c0c0c0"
+            }
+        },
+        "margins": {
+            "bottom": {
+                "value": 10
+            },
+            "left": {
+                "value": 0
+            },
+            "right": {
+                "value": 0
+            },
+            "top": {
+                "value": 10
+            }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle/Square": {
+        "border": {
+            "disabled": true,
+            "fill": {
+                "value": "#000000"
+            },
+            "thickness": {
+                "value": 0
+            }
+        },
+        "corner_radii": {
+            "bottom_left": {
+                "value": 5
+            },
+            "bottom_right": {
+                "value": 5
+            },
+            "top_left": {
+                "value": 5
+            },
+            "top_right": {
+                "value": 5
+            }
+        },
+        "fill": {
+            "values": {
+                "Toggled": "#ffffff",
+                "Untoggled": "#2e2e2e"
+            }
+        },
+        "margins": {
+            "bottom": {
+                "value": 0
+            },
+            "disabled": true,
+            "left": {
+                "value": 0
+            },
+            "right": {
+                "value": 0
+            },
+            "top": {
+                "value": 0
             }
         }
     },
@@ -3006,99 +3065,6 @@
             "value": "#2e2e2e"
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 4
-            },
-            "bottom_right": {
-                "value": 4
-            },
-            "top_left": {
-                "value": 4
-            },
-            "top_right": {
-                "value": 4
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#c0c0c0"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle/Square": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor": {
         "border": {
             "disabled": true,
@@ -3125,6 +3091,99 @@
         },
         "fill": {
             "value": "#1a000000"
+        },
+        "margins": {
+            "bottom": {
+                "value": 0
+            },
+            "disabled": true,
+            "left": {
+                "value": 0
+            },
+            "right": {
+                "value": 0
+            },
+            "top": {
+                "value": 0
+            }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle": {
+        "border": {
+            "fill": {
+                "values": {
+                    "Toggled": "#6fc65b",
+                    "Untoggled": "#2e2e2e"
+                }
+            },
+            "thickness": {
+                "value": 3
+            }
+        },
+        "corner_radii": {
+            "bottom_left": {
+                "value": 10
+            },
+            "bottom_right": {
+                "value": 10
+            },
+            "top_left": {
+                "value": 10
+            },
+            "top_right": {
+                "value": 10
+            }
+        },
+        "fill": {
+            "values": {
+                "Toggled": "#6fc65b",
+                "Untoggled": "#c0c0c0"
+            }
+        },
+        "margins": {
+            "bottom": {
+                "value": 10
+            },
+            "left": {
+                "value": 0
+            },
+            "right": {
+                "value": 0
+            },
+            "top": {
+                "value": 10
+            }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle/Square": {
+        "border": {
+            "disabled": true,
+            "fill": {
+                "value": "#000000"
+            },
+            "thickness": {
+                "value": 0
+            }
+        },
+        "corner_radii": {
+            "bottom_left": {
+                "value": 5
+            },
+            "bottom_right": {
+                "value": 5
+            },
+            "top_left": {
+                "value": 5
+            },
+            "top_right": {
+                "value": 5
+            }
+        },
+        "fill": {
+            "values": {
+                "Toggled": "#ffffff",
+                "Untoggled": "#2e2e2e"
+            }
         },
         "margins": {
             "bottom": {
@@ -3232,15 +3291,6 @@
             "value": "#ffffff"
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#ffffff"
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
         "border": {
             "fill": {
@@ -3334,6 +3384,15 @@
             }
         }
     },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        },
+        "text_color": {
+            "value": "#ffffff"
+        }
+    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Label": {
         "fill": {
             "disabled": true,
@@ -3341,99 +3400,6 @@
         },
         "text_color": {
             "value": "#2e2e2e"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 4
-            },
-            "bottom_right": {
-                "value": 4
-            },
-            "top_left": {
-                "value": 4
-            },
-            "top_right": {
-                "value": 4
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#c0c0c0"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle/Square": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#2e2e2e"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor": {
@@ -3544,15 +3510,6 @@
             }
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#2e2e2e"
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Disable Toggle": {
         "border": {
             "fill": {
@@ -3567,16 +3524,16 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 4
+                "value": 10
             },
             "bottom_right": {
-                "value": 4
+                "value": 10
             },
             "top_left": {
-                "value": 4
+                "value": 10
             },
             "top_right": {
-                "value": 4
+                "value": 10
             }
         },
         "fill": {
@@ -3612,16 +3569,16 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 2
+                "value": 5
             },
             "bottom_right": {
-                "value": 2
+                "value": 5
             },
             "top_left": {
-                "value": 2
+                "value": 5
             },
             "top_right": {
-                "value": 2
+                "value": 5
             }
         },
         "fill": {
@@ -3644,6 +3601,15 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        },
+        "text_color": {
+            "value": "#2e2e2e"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor": {
@@ -4051,123 +4017,6 @@
         },
         "text_color": {
             "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Drop Down": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "disabled": true,
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Drop Down/Combobox Item": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "values": {
-                    "Bottom": 10,
-                    "Middle": 0,
-                    "Single": 10,
-                    "Top": 0
-                }
-            },
-            "bottom_right": {
-                "values": {
-                    "Bottom": 10,
-                    "Middle": 0,
-                    "Single": 10,
-                    "Top": 0
-                }
-            },
-            "top_left": {
-                "values": {
-                    "Bottom": 0,
-                    "Middle": 0,
-                    "Single": 10,
-                    "Top": 10
-                }
-            },
-            "top_right": {
-                "values": {
-                    "Bottom": 0,
-                    "Middle": 0,
-                    "Single": 10,
-                    "Top": 10
-                }
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Drop Down/Combobox Item/Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f0f0f0"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Items": {
@@ -5313,7 +5162,7 @@
                 }
             },
             "thickness": {
-                "value": 10
+                "value": 3
             }
         },
         "corner_radii": {
@@ -5428,10 +5277,10 @@
                 "value": 0
             },
             "top_left": {
-                "value": 6
+                "value": 7
             },
             "top_right": {
-                "value": 6
+                "value": 7
             }
         },
         "fill": {
@@ -5496,6 +5345,12 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Update Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
         }
     },
     "Update Dialog/Titlebar/Exit Button/Graphic/Svg": {

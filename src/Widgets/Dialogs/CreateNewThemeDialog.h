@@ -44,7 +44,7 @@ namespace Layers
 		Label* m_name_label{ new Label("Name") };
 		Label* m_start_as_label{ new Label("Start as copy of") };
 
-		LineEditor* m_theme_name_line_edit{ new LineEditor };
+		LineEditor* m_theme_name_line_editor{ new LineEditor };
 	};
 }
 

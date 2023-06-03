@@ -15,7 +15,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	setFixedSize(525, 300);
 	setModal(true);
 
-	m_create_button->set_name("create_button");
+	m_create_button->set_name("Create Button");
 	m_create_button->disable_text_hover_color();
 	m_create_button->set_disabled();
 	connect(m_create_button, &Button::clicked, [this] { done(QDialog::Accepted); });
@@ -23,18 +23,18 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 	m_name_label->set_name("Name Label");
 	m_name_label->set_font_size(15);
 
-	m_start_as_label->set_name("Start as Label");
+	m_start_as_label->set_name("Start As Label");
 	m_start_as_label->set_font_size(15);
 
-	m_theme_name_line_edit->set_name("Theme Name Line Editor");
-	m_theme_name_line_edit->setFixedSize(250, 50);
-	m_theme_name_line_edit->set_margin(0);
-	m_theme_name_line_edit->set_font_size(15);
-	connect(m_theme_name_line_edit, &LineEditor::text_edited, [this] 
+	m_theme_name_line_editor->set_name("Theme Name Line Editor");
+	m_theme_name_line_editor->setFixedSize(250, 50);
+	m_theme_name_line_editor->set_margin(0);
+	m_theme_name_line_editor->set_font_size(15);
+	connect(m_theme_name_line_editor, &LineEditor::text_edited, [this] 
 	{
 		bool has_char_other_than_space = false;
 
-		QString text = m_theme_name_line_edit->text()->as<QString>();
+		QString text = m_theme_name_line_editor->text()->as<QString>();
 
 		for (const QChar& character : text)
 		{
@@ -57,7 +57,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 			m_create_button->set_disabled(false);
 	});
 
-	m_start_theme_combobox->set_name("Start as Combobox");
+	m_start_theme_combobox->set_name("Start Theme Combobox");
 
 	setup_layout();
 
@@ -70,7 +70,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 
 QString CreateNewThemeDialog::new_theme_name()
 {
-	return m_theme_name_line_edit->text()->as<QString>().simplified();
+	return m_theme_name_line_editor->text()->as<QString>().simplified();
 }
 
 void CreateNewThemeDialog::add_theme_to_combobox(Theme* theme)
@@ -80,7 +80,7 @@ void CreateNewThemeDialog::add_theme_to_combobox(Theme* theme)
 
 void CreateNewThemeDialog::clear()
 {
-	m_theme_name_line_edit->set_text("");
+	m_theme_name_line_editor->set_text("");
 
 	m_create_button->set_disabled();
 }
@@ -113,7 +113,7 @@ void CreateNewThemeDialog::set_current_start_theme_name(const QString& theme_id)
 
 int CreateNewThemeDialog::exec()
 {
-	m_theme_name_line_edit->setFocus();
+	m_theme_name_line_editor->setFocus();
 
 	return QDialog::exec();
 }
@@ -125,12 +125,12 @@ void CreateNewThemeDialog::init_attributes()
 	//m_start_theme_combobox->corner_radii()->bottom_left()->set_value(7.0);
 	//m_start_theme_combobox->corner_radii()->bottom_right()->set_value(7.0);
 
-	m_theme_name_line_edit->border()->thickness()->set_value(3.0);
-	m_theme_name_line_edit->corner_radii()->top_left()->set_value(7.0);
-	m_theme_name_line_edit->corner_radii()->top_right()->set_value(7.0);
-	m_theme_name_line_edit->corner_radii()->bottom_left()->set_value(7.0);
-	m_theme_name_line_edit->corner_radii()->bottom_right()->set_value(7.0);
-	m_theme_name_line_edit->left_padding()->set_value(10.0);
+	m_theme_name_line_editor->border()->thickness()->set_value(3.0);
+	m_theme_name_line_editor->corner_radii()->top_left()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii()->top_right()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii()->bottom_left()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii()->bottom_right()->set_value(7.0);
+	m_theme_name_line_editor->left_padding()->set_value(10.0);
 }
 
 void CreateNewThemeDialog::setup_layout()
@@ -139,14 +139,14 @@ void CreateNewThemeDialog::setup_layout()
 
 	layout->setContentsMargins(15, 22, 15, 0);
 	layout->addWidget(m_name_label);
-	layout->addWidget(m_theme_name_line_edit);
+	layout->addWidget(m_theme_name_line_editor);
 	layout->addSpacing(20);
 	layout->addWidget(m_start_as_label);
 	layout->addWidget(m_start_theme_combobox);
 	layout->addWidget(m_create_button);
 	layout->addStretch();
 	layout->setAlignment(m_name_label, Qt::AlignLeft);
-	layout->setAlignment(m_theme_name_line_edit, Qt::AlignLeft);
+	layout->setAlignment(m_theme_name_line_editor, Qt::AlignLeft);
 	layout->setAlignment(m_start_as_label, Qt::AlignLeft);
 	layout->setAlignment(m_start_theme_combobox, Qt::AlignLeft);
 	layout->setAlignment(m_create_button, Qt::AlignRight);
