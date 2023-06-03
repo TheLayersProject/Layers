@@ -3,7 +3,7 @@
 #include <QResizeEvent>
 
 using Layers::Button;
-using Layers::Graphic;
+using Layers::Label;
 using Layers::Navigator;
 
 Navigator::Navigator(QWidget* parent)
@@ -45,10 +45,10 @@ Navigator::Navigator(QWidget* parent)
 		else m_collapse_menu->hide();
 		});
 
-	m_control_arrow_graphic->setMaximumWidth(28);
-	m_control_arrow_graphic->setParent(this);
-	m_control_arrow_graphic->hide();
-	m_control_arrow_graphic->set_name("Arrow Graphics");
+	m_control_arrow_label->setMaximumWidth(28);
+	m_control_arrow_label->setParent(this);
+	m_control_arrow_label->hide();
+	m_control_arrow_label->set_name("Arrow Labels");
 
 	m_control_text_button->setParent(this);
 	m_control_text_button->hide();
@@ -66,7 +66,7 @@ int Navigator::calculated_width_after_expand()
 	else
 	{
 		calculated_width_after_expand += content_width(true);
-		calculated_width_after_expand += m_control_arrow_graphic->width();
+		calculated_width_after_expand += m_control_arrow_label->width();
 	}
 
 	if (!m_collapsed_text_buttons.isEmpty())
@@ -94,9 +94,9 @@ int Navigator::content_width(bool include_collapse_button)
 		text_button->sizeHint().width() +
 		m_main_layout->spacing();
 
-	for (Graphic* arrow_graphic : m_arrow_graphics)
+	for (Label* arrow_label : m_arrow_labels)
 		hierarchy_content_width +=
-		arrow_graphic->width() +
+		arrow_label->width() +
 		m_main_layout->spacing();
 
 	hierarchy_content_width -= m_main_layout->spacing();
@@ -142,7 +142,7 @@ void Navigator::collapse_text_buttons()
 			if (m_collapsed_text_buttons.isEmpty())
 				m_collapse_menu_button->show();
 			else
-				m_arrow_graphics.takeFirst()->deleteLater();
+				m_arrow_labels.takeFirst()->deleteLater();
 
 			m_collapsed_text_buttons.append(m_topbar_text_buttons.takeFirst());
 
@@ -173,15 +173,16 @@ void Navigator::expand_text_buttons()
 			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 			arrow_opacity->setOpacity(0.5);
 
-			Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
-			arrow_graphic->setFixedWidth(28);
-			arrow_graphic->setGraphicsEffect(arrow_opacity);
-			arrow_graphic->set_name("arrow_graphic");
+			Label* arrow_label = new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)));
+			arrow_label->setAlignment(Qt::AlignCenter);
+			arrow_label->setFixedWidth(28);
+			arrow_label->entangle_with(m_control_arrow_label);
+			arrow_label->setGraphicsEffect(arrow_opacity);
 
-			m_arrow_graphics.insert(0, arrow_graphic);
+			m_arrow_labels.insert(0, arrow_label);
 
 			m_main_layout->insertWidget(1, text_button);
-			m_main_layout->insertWidget(1, arrow_graphic);
+			m_main_layout->insertWidget(1, arrow_label);
 		}
 	}
 }
@@ -201,20 +202,20 @@ void Navigator::init_layout()
 	setLayout(m_main_layout);
 }
 
-Graphic* Navigator::create_arrow_graphic()
+Label* Navigator::create_arrow_label()
 {
 	QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 	arrow_opacity->setOpacity(0.5);
 
-	Graphic* arrow_graphic = new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12));
-	arrow_graphic->setFixedWidth(28);
-	arrow_graphic->entangle_with(m_control_arrow_graphic);
-	arrow_graphic->set_name("arrow_graphic");
-	arrow_graphic->setGraphicsEffect(arrow_opacity);
+	Label* arrow_label = new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)));
+	arrow_label->setAlignment(Qt::AlignCenter);
+	arrow_label->setFixedWidth(28);
+	arrow_label->entangle_with(m_control_arrow_label);
+	arrow_label->setGraphicsEffect(arrow_opacity);
 
-	m_arrow_graphics.append(arrow_graphic);
+	m_arrow_labels.append(arrow_label);
 
-	return arrow_graphic;
+	return arrow_label;
 }
 
 Button* Navigator::create_text_button(const QString& text)
@@ -236,7 +237,7 @@ Button* Navigator::create_text_button(const QString& text)
 	if (m_text_button_stack.count() > 1)
 		m_main_layout->insertWidget(
 			m_main_layout->count() - 1,
-			create_arrow_graphic());
+			create_arrow_label());
 
 	m_main_layout->insertWidget(
 		m_main_layout->count() - 1,
@@ -254,8 +255,8 @@ Button* Navigator::create_text_button(const QString& text)
 
 			last_button->deleteLater();
 
-			if (!m_arrow_graphics.isEmpty())
-				m_arrow_graphics.takeLast()->deleteLater();
+			if (!m_arrow_labels.isEmpty())
+				m_arrow_labels.takeLast()->deleteLater();
 
 			if (width() > calculated_width_after_expand() &&
 				!m_collapsed_text_buttons.isEmpty())

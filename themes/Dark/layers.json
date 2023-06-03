@@ -1276,9 +1276,9 @@
             }
         }
     },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon": {
+    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label": {
     },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon/Svg": {
+    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label/Svg": {
         "common_color": {
             "values": {
                 "Selected": "#6a6a6a",
@@ -4344,9 +4344,9 @@
             "value": "#2e2e2e"
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon": {
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label": {
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon/Svg": {
+    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
         "common_color": {
             "values": {
                 "Selected": "#e1e1e1",

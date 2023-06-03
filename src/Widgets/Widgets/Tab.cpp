@@ -7,8 +7,8 @@ using Layers::Button;
 using Layers::Label;
 using Layers::Tab;
 
-Tab::Tab(Graphic* icon, const QString& text, QWidget* parent) :
-	m_tab_icon{ icon },
+Tab::Tab(const Graphic& icon, const QString& text, QWidget* parent) :
+	m_icon_label{ new Label(icon) },
 	m_text_label{ new Label(text) },
 	Widget(parent)
 {
@@ -55,10 +55,11 @@ void Tab::init()
 	init_layout();
 	installEventFilter(this);
 
-	if (m_tab_icon)
+	if (m_icon_label)
 	{
-		m_tab_icon->setMinimumWidth(42);
-		m_tab_icon->set_name("Icon");
+		m_icon_label->setAlignment(Qt::AlignCenter);
+		m_icon_label->setMinimumWidth(42);
+		m_icon_label->set_name("Icon");
 	}
 
 	m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -85,17 +86,17 @@ void Tab::init_attributes()
 
 	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 
-	if (m_tab_icon && m_tab_icon->svg())
-		m_tab_icon->svg()->common_color()->set_value(QColor("#e3e3e3"));
+	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
+		m_icon_label->graphic()->svg_renderer()->common_color()->set_value(QColor("#e3e3e3"));
 
-	m_close_button->graphic()->svg()->common_color()->set_value(QColor("#5f5f5f"));
+	m_close_button->graphic_label()->graphic()->svg_renderer()->common_color()->set_value(QColor("#5f5f5f"));
 }
 
 void Tab::init_layout()
 {
 	main_layout->setContentsMargins(2, 0, 4, 0);
 	main_layout->setSpacing(0);
-	main_layout->addWidget(m_tab_icon);
+	main_layout->addWidget(m_icon_label);
 	main_layout->addWidget(m_text_label);
 	main_layout->addWidget(m_close_button);
 

@@ -9,8 +9,8 @@
 using Layers::Graphic;
 using Layers::SettingsTab;
 
-SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent) :
-	m_tab_icon{ icon }, m_text_label { new Label(label_text) }, Widget(parent)
+SettingsTab::SettingsTab(const Graphic& icon, const QString& label_text, QWidget* parent) :
+	m_icon_label{ new Label(icon) }, m_text_label { new Label(label_text) }, Widget(parent)
 {
     init_attributes();
 
@@ -20,12 +20,12 @@ SettingsTab::SettingsTab(Graphic* icon, const QString& label_text, QWidget* pare
     setMouseTracking(true);
 	setFixedHeight(60);
 
-    set_icon(new Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
+    set_icon(Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
     set_name("Setting Tab");
 
-    m_tab_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_tab_icon->set_icon(new Graphic(*m_tab_icon));
-	m_tab_icon->set_name("Icon");
+    m_icon_label->setAttribute(Qt::WA_TransparentForMouseEvents);
+	m_icon_label->set_icon(icon);
+	m_icon_label->set_name("Icon Label");
 
     m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
     m_text_label->set_name("Text Label");
@@ -45,7 +45,7 @@ void SettingsTab::init_attributes()
         { "Selected", QColor(Qt::white) }
         });
 
-	m_tab_icon->svg()->common_color()->init_variant_map({
+    m_icon_label->graphic()->svg_renderer()->common_color()->init_variant_map({
 		{ "Unselected", QColor(Qt::gray) },
 		{ "Selected", QColor(Qt::black) }
 		});
@@ -58,7 +58,7 @@ void SettingsTab::init_attributes()
 
 int SettingsTab::recommended_minimum_width()
 {
-    return 18 + m_tab_icon->width() + 12 + m_text_label->sizeHint().width() + 18;
+    return 18 + m_icon_label->sizeHint().width() + 12 + m_text_label->sizeHint().width() + 18;
 }
 
 void SettingsTab::set_disabled(bool cond)
@@ -86,17 +86,19 @@ bool SettingsTab::eventFilter(QObject* object, QEvent* event)
 
 void SettingsTab::resizeEvent(QResizeEvent* event)
 {
-    int minimum_width = 18 + m_tab_icon->width() + 12 + m_text_label->width() + 18;
+    int minimum_width = 18 + m_icon_label->width() + 12 + m_text_label->width() + 18;
 
-    if (width() < minimum_width) emit under_minimum_width();
-    else emit over_minimum_width();
+    if (width() < minimum_width)
+        emit under_minimum_width();
+    else
+        emit over_minimum_width();
 }
 
 void SettingsTab::init_layout()
 {
     main_layout->setContentsMargins(18, 0, 18, 0);
     main_layout->setSpacing(12);
-    main_layout->addWidget(m_tab_icon);
+    main_layout->addWidget(m_icon_label);
     main_layout->addWidget(m_text_label);
 
     setLayout(main_layout);

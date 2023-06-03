@@ -105,7 +105,7 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 				WidgetButton* widget_button;
 
 				if (child_themeable->icon())
-					widget_button = new WidgetButton(new Graphic(*child_themeable->icon()), *child_themeable->name());
+					widget_button = new WidgetButton(*child_themeable->icon(), *child_themeable->name());
 				else
 					widget_button = new WidgetButton(*child_themeable->name());
 

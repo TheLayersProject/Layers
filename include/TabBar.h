@@ -19,7 +19,7 @@ namespace Layers
 	public:
 		TabBar(QWidget* parent = nullptr);
 
-		void add_tab(Graphic* icon, const QString& text);
+		void add_tab(const Graphic& icon, const QString& text);
 
 		void add_tab(const QString& text);
 
@@ -35,7 +35,7 @@ namespace Layers
 
 		void _add_tab(Tab* tab);
 
-		Tab* m_control_tab{ new Tab(new Graphic(":/svgs/exit.svg"), "", this)};
+		Tab* m_control_tab{ new Tab(Graphic(":/svgs/exit.svg"), "", this)};
 
 		int m_current_index{ -1 };
 

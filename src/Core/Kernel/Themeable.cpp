@@ -1,7 +1,10 @@
+#include "Themeable.h"
+
+#include <QWidget>
+
 #include "Attribute.h"
 #include "Graphic.h"
 #include "Theme.h"
-#include "Themeable.h"
 
 using Layers::AbstractAttribute;
 using Layers::Attribute;
@@ -178,12 +181,12 @@ void Themeable::set_functionality_disabled(bool disabled)
 		child_themeable->set_functionality_disabled(disabled);
 }
 
-void Themeable::set_icon(Graphic* icon)
+void Themeable::set_icon(const Graphic& icon)
 {
 	if (m_icon)
-		m_icon->deleteLater();
+		delete m_icon;
 
-	m_icon = icon;
+	m_icon = new Graphic(icon);
 }
 
 void Themeable::set_is_app_themeable(bool is_app_themeable)

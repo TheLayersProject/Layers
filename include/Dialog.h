@@ -25,7 +25,7 @@ namespace Layers
 		/*!
 			Sets the dialog's icon.
 		*/
-		void set_icon(Graphic* icon);
+		void set_icon(const Graphic& icon);
 
 		/*!
 			Sets the layout of the dialog.
@@ -54,10 +54,12 @@ namespace Layers
 
 		Widget* m_titlebar{ new Widget };
 
-		Label* m_title_label;
+		Label* m_icon_label{ nullptr };
+
+		Label* m_title_label{ nullptr };
 
 		Button* m_exit_button = new Button(
-			new Graphic(":/svgs/exit.svg", QSize(20, 20)));
+			Graphic(":/svgs/exit.svg", QSize(20, 20)));
 	};
 }
 

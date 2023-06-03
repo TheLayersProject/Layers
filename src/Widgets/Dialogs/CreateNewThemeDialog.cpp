@@ -10,7 +10,7 @@ CreateNewThemeDialog::CreateNewThemeDialog(QWidget* parent) :
 {
 	init_attributes();
 
-	set_icon(new Graphic(":/svgs/new_theme.svg", QSize(20, 20)));
+	set_icon(Graphic(":/svgs/new_theme.svg", QSize(20, 20)));
 	set_name("Create Theme Dialog");
 	setFixedSize(525, 300);
 	setModal(true);

@@ -253,7 +253,7 @@ namespace Layers
 		/*!
 			Sets an icon for the themeable; replaces it if one already exists.
 		*/
-		void set_icon(Graphic* icon);
+		void set_icon(const Graphic& icon);
 
 		/*!
 			Marks the caller and its children as application themeables.

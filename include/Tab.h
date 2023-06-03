@@ -16,7 +16,7 @@ namespace Layers
 		void closed();
 
 	public:
-		Tab(Graphic* icon, const QString& text, QWidget* parent = nullptr);
+		Tab(const Graphic& icon, const QString& text, QWidget* parent = nullptr);
 		Tab(const QString& text, QWidget* parent = nullptr);
 
 		Button* close_button() const;
@@ -34,9 +34,9 @@ namespace Layers
 		QHBoxLayout* main_layout = new QHBoxLayout;
 
 		Button* m_close_button{
-			new Button(new Graphic(":/svgs/tab_exit.svg", QSize(16, 17))) };
+			new Button(Graphic(":/svgs/tab_exit.svg", QSize(16, 17))) };
 
-		Graphic* m_tab_icon{ nullptr };
+		Label* m_icon_label{ nullptr };
 
 		Label* m_text_label{ nullptr };
 	};

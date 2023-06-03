@@ -49,7 +49,7 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	connect(m_titlebar->menu_tab_bar(), SIGNAL(tab_closed(int)),
 		this, SLOT(close_menu(int)));
 
-	m_separator->set_icon(new Graphic(":/svgs/separator_h_icon.svg"));
+	m_separator->set_icon(Graphic(":/svgs/separator_h_icon.svg"));
 	m_separator->set_name("Separator");
 	m_separator->setFixedHeight(3);
 
@@ -72,7 +72,7 @@ void MainWindow::set_central_widget(Widget* central_widget)
 		central_themeable->apply_theme(*layersApp->active_theme());
 
 		if (central_themeable->icon())
-			set_icon(new Graphic(*central_themeable->icon()));
+			set_icon(Graphic(*central_themeable->icon()));
 	}
 
 	m_main_layout->addWidget(m_central_widget);
@@ -132,7 +132,7 @@ void MainWindow::menu_changed(int old_index, int new_index)
 }
 
 void MainWindow::open_widget(
-	Widget* widget, const QString& name, Graphic* graphic)
+	Widget* widget, const QString& name, Graphic* icon)
 {
 	TabBar* tab_bar = m_titlebar->menu_tab_bar();
 
@@ -140,8 +140,8 @@ void MainWindow::open_widget(
 	{
 		m_opened_widgets.append(widget);
 
-		if (graphic)
-			tab_bar->add_tab(new Graphic(*graphic), name);
+		if (icon)
+			tab_bar->add_tab(*icon, name);
 		else
 			tab_bar->add_tab(name);
 	}

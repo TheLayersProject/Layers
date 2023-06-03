@@ -1,10 +1,10 @@
-#include "NewGraphic.h"
+#include "Graphic.h"
 
+using Layers::Graphic;
 using Layers::ImageSequence;
-using Layers::NewGraphic;
 using Layers::SvgRenderer;
 
-NewGraphic::NewGraphic(const QString& file_path, QSize size, QWidget* parent)
+Graphic::Graphic(const QString& file_path, QSize size, QWidget* parent)
 {
 	if (file_path.endsWith(".png") || file_path.endsWith(".jpg") ||
 		file_path.endsWith(".jpeg") || file_path.endsWith(".bmp") ||
@@ -32,13 +32,13 @@ NewGraphic::NewGraphic(const QString& file_path, QSize size, QWidget* parent)
 		m_size = (*m_image_sequence)[0].size();
 }
 
-NewGraphic::NewGraphic(const QImage& image, QWidget* parent) :
+Graphic::Graphic(const QImage& image, QWidget* parent) :
 	m_image{ new QImage(image) }
 {
 	m_size = m_image->size();
 }
 
-NewGraphic::NewGraphic(const NewGraphic& graphic)
+Graphic::Graphic(const Graphic& graphic)
 {
 	if (graphic.m_svg_renderer)
 	{
@@ -53,49 +53,36 @@ NewGraphic::NewGraphic(const NewGraphic& graphic)
 	{
 		m_image_sequence = new ImageSequence(*graphic.m_image_sequence);
 	}
-	
+
 	m_size = graphic.m_size;
 }
 
-NewGraphic::~NewGraphic()
+Graphic::~Graphic()
 {
 	if (m_svg_renderer)
-	{
 		delete m_svg_renderer;
-		//QObject::disconnect(m_repaint_connection);
-	}
 	else if (m_image)
 		delete m_image;
 	else if (m_image_sequence)
 		delete m_image_sequence;
 }
 
-QImage* NewGraphic::image() const
+QImage* Graphic::image() const
 {
 	return m_image;
 }
 
-ImageSequence* NewGraphic::image_sequence() const
+ImageSequence* Graphic::image_sequence() const
 {
 	return m_image_sequence;
 }
 
-//QList<Themeable*> Graphic::child_themeables(Qt::FindChildOptions options)
-//{
-//	QList<Themeable*> child_themeables;
-//
-//	if (m_svg)
-//		child_themeables.append(m_svg);
-//
-//	return child_themeables;
-//}
-
-QSize NewGraphic::size() const
+QSize Graphic::size() const
 {
 	return m_size;
 }
 
-SvgRenderer* NewGraphic::svg_renderer() const
+SvgRenderer* Graphic::svg_renderer() const
 {
 	return m_svg_renderer;
 }

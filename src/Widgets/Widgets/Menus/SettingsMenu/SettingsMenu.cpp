@@ -15,14 +15,14 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 {
 	init_layout();
 	setMouseTracking(true);
-	set_icon(new Graphic(":/svgs/settings_animated.svg", QSize(24, 24)));
+	set_icon(Graphic(":/svgs/settings_animated.svg", QSize(24, 24)));
 	set_name("Settings Menu");
 
 	//m_themes_settings_panel->hide();
 	m_themes_widget->setMouseTracking(true);
 	
 	// Add Themes Settings Tab
-	add_settings_tab(new Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
+	add_settings_tab(Graphic(":/svgs/themes_icon.svg", QSize(25, 25)), "Themes");
 	m_settings_tabs.last()->set_name("Themes Settings Tab");
 	//connect(m_settings_tabs.last(), &SettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
 
@@ -30,12 +30,12 @@ SettingsMenu::SettingsMenu(QWidget* parent) :
 
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
 	m_sidebar->setMouseTracking(true);
-	m_sidebar->set_icon(new Graphic(":/svgs/sidebar_icon.svg", QSize(20, 20)));
+	m_sidebar->set_icon(Graphic(":/svgs/sidebar_icon.svg", QSize(20, 20)));
 	m_sidebar->set_name("Sidebar");
 	m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 }
 
-void SettingsMenu::add_settings_tab(Graphic* icon, const QString& label_text)
+void SettingsMenu::add_settings_tab(const Graphic& icon, const QString& label_text)
 {
 	SettingsTab* settings_tab = new SettingsTab(icon, label_text);
 

@@ -2,23 +2,14 @@
 #define GRAPHIC_H
 
 #include <QImage>
-#include <QTimer>
-#include <QWidget>
 
 #include "ImageSequence.h"
 #include "SvgRenderer.h"
-#include "Themeable.h"
 
 namespace Layers
 {
-	/*!
-		A Graphic is a QWidget and a Themeable that displays a graphical
-		representation to the user.
-	*/
-	class Graphic : public QWidget, public Themeable
+	class Graphic
 	{
-		Q_OBJECT
-
 	public:
 		/*!
 			Constructs a graphic from a file located at *file_path* with the
@@ -29,12 +20,12 @@ namespace Layers
 		*/
 		Graphic(const QString& file_path, QSize size = QSize(),
 			QWidget* parent = nullptr);
-		
+
 		/*!
 			Constructs a graphic from a QImage.
 		*/
 		Graphic(const QImage& image, QWidget* parent = nullptr);
-		
+
 		/*!
 			Constructs a copy of *graphic*.
 		*/
@@ -43,37 +34,36 @@ namespace Layers
 		~Graphic();
 
 		/*!
-			Returns a list of child themeables.
-
-			This function overrides Themeable::child_themeables() to include
-			a pointer to the SvgRenderer, if this graphic uses one.
+			Returns a pointer to the graphic's QImage, if this graphic uses
+			one.
 		*/
-		virtual QList<Themeable*> child_themeables(
-			Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
-		) override;
+		QImage* image() const;
 
 		/*!
-			Returns a pointer to the SvgRenderer, if this graphic uses one.
+			Returns a pointer to the graphic's ImageSequence, if this graphic
+			uses one.
 		*/
-		SvgRenderer* svg() const;
+		ImageSequence* image_sequence() const;
 
-	protected:
-		void paintEvent(QPaintEvent* event) override;
+		/*!
+			Returns the size (width and height) of the graphic.
+		*/
+		QSize size() const;
+
+		/*!
+			Returns a pointer to the graphic's SvgRenderer, if this graphic
+			uses one.
+		*/
+		SvgRenderer* svg_renderer() const;
 
 	private:
-		QSize m_draw_size;
-
-		int m_frame{ 0 };
+		QSize m_size;
 
 		ImageSequence* m_image_sequence{ nullptr };
 
 		QImage* m_image{ nullptr };
 
-		QMetaObject::Connection m_repaint_connection;
-
-		SvgRenderer* m_svg{ nullptr };
-
-		QTimer m_timer;
+		SvgRenderer* m_svg_renderer{ nullptr };
 	};
 }
 

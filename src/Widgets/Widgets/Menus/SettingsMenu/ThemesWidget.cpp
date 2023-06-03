@@ -12,13 +12,13 @@ ThemesWidget::ThemesWidget(QWidget* parent) : Widget(parent)
 {
 	init_attributes();
 
-	set_icon(new Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
+	set_icon(Graphic(":/svgs/panel_icon.svg", QSize(20, 20)));
 	set_name("Themes Widget");
 
 	m_theme_label->set_name("Theme Label");
 	m_theme_label->set_font_size(15);
 
-	m_theme_combobox->set_icon(new Graphic(":/svgs/combobox_icon.svg", QSize(21, 18)));
+	m_theme_combobox->set_icon(Graphic(":/svgs/combobox_icon.svg", QSize(21, 18)));
 	m_theme_combobox->set_name("Theme Combobox");
 
 	for (Theme* theme : layersApp->themes())

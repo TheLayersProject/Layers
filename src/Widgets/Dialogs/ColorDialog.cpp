@@ -16,7 +16,7 @@ ColorDialog::ColorDialog(QWidget* parent) :
 
 	setFixedSize(315, 465);
 
-	set_icon(new Graphic(":/svgs/color_icon.png"));
+	set_icon(Graphic(":/svgs/color_icon.png"));
 	set_name("Color Dialog");
 
 	m_apply_button->set_name("Apply Button");

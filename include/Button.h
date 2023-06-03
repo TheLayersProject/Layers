@@ -28,7 +28,7 @@ namespace Layers
 		/*!
 			Constructs a button with a graphic and text.
 		*/
-		Button(Graphic* graphic, const QString& text,
+		Button(const Graphic& graphic, const QString& text,
 			QWidget* parent = nullptr);
 
 		/*!
@@ -36,7 +36,7 @@ namespace Layers
 
 			By default, the fill is disabled.
 		*/
-		Button(Graphic* graphic, QWidget* parent = nullptr);
+		Button(const Graphic& graphic, QWidget* parent = nullptr);
 
 		/*!
 			Constructs a button with text.
@@ -50,10 +50,10 @@ namespace Layers
 
 			By default, the fill is disabled.
 		*/
-		Button(Graphic* graphic_before, Graphic* graphic_after,
+		Button(const Graphic& graphic, const Graphic& graphic_after,
 			QWidget* parent = nullptr);
 
-		~Button();
+		//~Button();
 
 		/*!
 			Disables or enables text hover coloring depending on *cond*.
@@ -69,7 +69,7 @@ namespace Layers
 			Returns a pointer to the button's graphic. If the button does not
 			have a graphic, then nullptr is returned.
 		*/
-		Graphic* graphic() const;
+		Label* graphic_label() const;
 
 		/*!
 			Disables or enables the button depending on *cond*.
@@ -115,8 +115,8 @@ namespace Layers
 		bool m_use_graphic_hover_color{ true };
 		bool m_use_text_hover_color{ true };
 
-		Graphic* m_graphic{ nullptr };
-		Graphic* m_graphic_after{ nullptr };
+		Label* m_graphic_label{ nullptr };
+		Label* m_graphic_after_label{ nullptr };
 
 		Label* m_text_label{ nullptr };
 	};

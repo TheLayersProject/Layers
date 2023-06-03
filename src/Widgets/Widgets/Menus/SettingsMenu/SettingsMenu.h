@@ -19,7 +19,7 @@ namespace Layers
 	public:
 		SettingsMenu(QWidget* parent = nullptr);
 
-		void add_settings_tab(Graphic* icon, const QString& label_text);
+		void add_settings_tab(const Graphic& icon, const QString& label_text);
 
 		int largest_tab_index() const;
 

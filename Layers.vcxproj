@@ -107,7 +107,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Tools\NewGraphic.cpp" />
     <ClCompile Include="src\Widgets\Kernel\Application.cpp" />
     <ClCompile Include="src\Core\Tools\directories.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\RadioButton.cpp" />
@@ -147,7 +146,7 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\Slider.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ThemeComboBox.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Controls\ToggleSwitch.cpp" />
-    <ClCompile Include="src\Widgets\Widgets\Graphic.cpp" />
+    <ClCompile Include="src\Core\Tools\Graphic.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Navigator.cpp" />
     <ClCompile Include="src\Widgets\Widgets\Menus\ThemeEditor\WidgetEditor.cpp" />
     <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp" />
@@ -218,12 +217,11 @@
     <QtMoc Include="include\SvgRenderer.h" />
     <QtMoc Include="include\HeaderView.h" />
     <QtMoc Include="include\GridlineItemDelegate.h" />
-    <QtMoc Include="include\Graphic.h" />
+    <ClInclude Include="include\Graphic.h" />
     <QtMoc Include="include\Navigator.h" />
     <ClInclude Include="include\Layers.h" />
     <QtMoc Include="include\RadioButton.h" />
     <QtMoc Include="include\RadioButtonPool.h" />
-    <ClInclude Include="include\NewGraphic.h" />
     <ClInclude Include="include\ThemeableBox.h" />
     <QtMoc Include="src\Widgets\Dialogs\ThemeCompatibilityCautionDialog.h" />
     <QtMoc Include="include\ThemeLineageModel.h" />

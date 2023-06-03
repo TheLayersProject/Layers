@@ -33,8 +33,8 @@ namespace Layers
 
 		Button* m_collapse_button{
 			new Button(
-				new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)),
-				new Graphic(":/svgs/collapse_arrow_down.svg", QSize(12, 8))) };
+				Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)),
+				Graphic(":/svgs/collapse_arrow_down.svg", QSize(12, 8))) };
 
 		bool m_collapsed{ true };
 

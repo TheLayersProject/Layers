@@ -4,11 +4,11 @@
 
 #include <QMouseEvent>
 
-using Layers::Graphic;
+using Layers::Label;
 using Layers::Button;
 
-Button::Button(Graphic* graphic, const QString& text, QWidget* parent) :
-	m_graphic{ graphic },
+Button::Button(const Graphic& graphic, const QString& text, QWidget* parent) :
+	m_graphic_label{ new Label(graphic) },
 	m_text_label{ new Label(text) },
 	Widget(parent)
 {
@@ -22,8 +22,8 @@ Button::Button(Graphic* graphic, const QString& text, QWidget* parent) :
 	//m_hover_fill->set_disabled(false);
 }
 
-Button::Button(Graphic* graphic, QWidget* parent) :
-	m_graphic{ graphic },
+Button::Button(const Graphic& graphic, QWidget* parent) :
+	m_graphic_label{ new Label(graphic) },
 	Widget(parent)
 {
 	init();
@@ -45,9 +45,9 @@ Button::Button(const QString& text, QWidget* parent) :
 	//m_hover_fill->set_disabled(false);
 }
 
-Button::Button(Graphic* graphic_before, Graphic* graphic_after, QWidget* parent) :
-	m_graphic{ graphic_before },
-	m_graphic_after{ graphic_after },
+Button::Button(const Graphic& graphic, const Graphic& graphic_after, QWidget* parent) :
+	m_graphic_label{ new Label(graphic) },
+	m_graphic_after_label{ new Label(graphic_after) },
 	Widget(parent)
 {
 	init();
@@ -55,17 +55,17 @@ Button::Button(Graphic* graphic_before, Graphic* graphic_after, QWidget* parent)
 	m_fill->set_disabled();
 }
 
-Button::~Button()
-{
-	if (m_graphic)
-		m_graphic->deleteLater();
-
-	if (m_graphic_after)
-		m_graphic_after->deleteLater();
-
-	if (m_text_label)
-		m_text_label->deleteLater();
-}
+//Button::~Button()
+//{
+//	if (m_graphic)
+//		delete m_graphic;
+//
+//	if (m_graphic_after)
+//		delete m_graphic_after;
+//
+//	if (m_text_label)
+//		m_text_label->deleteLater();
+//}
 
 void Button::disable_text_hover_color(bool cond)
 {
@@ -80,9 +80,9 @@ bool Button::disabled() const
 	return m_disabled;
 }
 
-Graphic* Button::graphic() const
+Label* Button::graphic_label() const
 {
-	return m_graphic;
+	return m_graphic_label;
 }
 
 void Button::set_disabled(bool cond)
@@ -119,17 +119,17 @@ void Button::set_padding(int left, int top, int right, int bottom)
 
 void Button::toggle_graphics()
 {
-	if (m_graphic_after)
+	if (m_graphic_after_label)
 	{
-		if (m_graphic->isVisible())
+		if (m_graphic_label->isVisible())
 		{
-			m_graphic->hide();
-			m_graphic_after->show();
+			m_graphic_label->hide();
+			m_graphic_after_label->show();
 		}
 		else
 		{
-			m_graphic->show();
-			m_graphic_after->hide();
+			m_graphic_label->show();
+			m_graphic_after_label->hide();
 		}
 	}
 }
@@ -152,11 +152,11 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic)
-				m_graphic->svg()->common_color()->set_state("Selected");
+			if (m_graphic_label)
+				m_graphic_label->graphic()->svg_renderer()->common_color()->set_state("Selected");
 
-			if (m_graphic_after)
-				m_graphic_after->svg()->common_color()->set_state("Selected");
+			if (m_graphic_after_label)
+				m_graphic_after_label->graphic()->svg_renderer()->common_color()->set_state("Selected");
 
 			if (m_text_label && m_use_text_hover_color)
 				m_text_label->text_color()->set_state("Selected");
@@ -166,11 +166,11 @@ bool Button::eventFilter(QObject* object, QEvent* event)
 	{
 		if (!m_disabled)
 		{
-			if (m_graphic)
-				m_graphic->svg()->common_color()->set_state("Unselected");
+			if (m_graphic_label)
+				m_graphic_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 
-			if (m_graphic_after)
-				m_graphic_after->svg()->common_color()->set_state("Unselected");
+			if (m_graphic_after_label)
+				m_graphic_after_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 
 			if (m_text_label && m_use_text_hover_color)
 				m_text_label->text_color()->set_state("Unselected");
@@ -191,32 +191,33 @@ void Button::init()
 	m_button_opacity->setOpacity(1.0);
 	setGraphicsEffect(m_button_opacity);
 
-	if (m_graphic)
+	if (m_graphic_label)
 	{
-		set_icon(new Graphic(*m_graphic));
+		set_icon(*m_graphic_label->graphic());
 
-		m_graphic->set_icon(new Graphic(*m_graphic));
-		m_graphic->set_name("Graphic");
+		m_graphic_label->setAlignment(Qt::AlignCenter);
+		m_graphic_label->set_icon(*m_graphic_label->graphic());
+		m_graphic_label->set_name("Graphic");
 
-		m_graphic->svg()->common_color()->init_variant_map({
+		m_graphic_label->graphic()->svg_renderer()->common_color()->init_variant_map({
 			{ "Unselected", QColor(Qt::darkGray) },
 			{ "Selected", QColor(Qt::lightGray) }
 			});
 
-		m_graphic->svg()->common_color()->set_state("Unselected");
+		m_graphic_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 	}
 
-	if (m_graphic_after)
+	if (m_graphic_after_label)
 	{
-		m_graphic_after->set_name("Graphic After");
-		m_graphic_after->hide();
+		m_graphic_after_label->set_name("Graphic After");
+		m_graphic_after_label->hide();
 
-		m_graphic_after->svg()->common_color()->init_variant_map({
+		m_graphic_after_label->graphic()->svg_renderer()->common_color()->init_variant_map({
 			{ "Unselected", QColor(Qt::darkGray) },
 			{ "Selected", QColor(Qt::lightGray) }
 			});
 
-		m_graphic_after->svg()->common_color()->set_state("Unselected");
+		m_graphic_after_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 	}
 
 	if (m_text_label)
@@ -228,11 +229,11 @@ void Button::init()
 
 void Button::init_layout()
 {
-	if (m_graphic)
-		main_layout->addWidget(m_graphic);
+	if (m_graphic_label)
+		main_layout->addWidget(m_graphic_label);
 
-	if (m_graphic_after)
-		main_layout->addWidget(m_graphic_after);
+	if (m_graphic_after_label)
+		main_layout->addWidget(m_graphic_after_label);
 
 	if (m_text_label)
 		main_layout->addWidget(m_text_label);

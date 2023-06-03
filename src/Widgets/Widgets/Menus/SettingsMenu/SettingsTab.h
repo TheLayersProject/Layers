@@ -20,7 +20,7 @@ namespace Layers
 		void over_minimum_width();
 
 	public:
-		SettingsTab(Graphic* icon, const QString& label_text, QWidget* parent = nullptr);
+		SettingsTab(const Graphic& icon, const QString& label_text, QWidget* parent = nullptr);
 
 		int recommended_minimum_width();
 
@@ -40,9 +40,9 @@ namespace Layers
 
 		bool m_disabled{ false };
 
-		Label* m_text_label;
+		Label* m_icon_label;
 
-		Graphic* m_tab_icon;
+		Label* m_text_label;
 	};
 }
 

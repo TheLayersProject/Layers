@@ -2,8 +2,9 @@
 #define LABEL_H
 
 #include <QLabel>
+#include <QTimer>
 
-#include "NewGraphic.h"
+#include "Graphic.h"
 #include "Themeable.h"
 
 namespace Layers
@@ -29,7 +30,7 @@ namespace Layers
 		/*!
 			Constructs a label that displays *graphic*.
 		*/
-		Label(const NewGraphic& graphic, QWidget* parent = nullptr);
+		Label(const Graphic& graphic, QWidget* parent = nullptr);
 
 		~Label();
 
@@ -54,12 +55,14 @@ namespace Layers
 
 			Returns nullptr if the label does not have a graphic.
 		*/
-		NewGraphic* graphic() const;
+		Graphic* graphic() const;
 
 		/*!
 			Sets the *size* of the label's font.
 		*/
 		void set_font_size(int size);
+
+		QSize sizeHint() const;
 
 		/*!
 			Returns a pointer to the text color attribute of the label.
@@ -78,13 +81,15 @@ namespace Layers
 
 		int m_frame{ 0 };
 
-		NewGraphic* m_graphic{ nullptr };
+		Graphic* m_graphic{ nullptr };
 
 		Attribute* m_fill{
 			new Attribute("fill", QColor(Qt::white), true) };
 
 		Attribute* m_text_color{
 			new Attribute("text_color", QColor(Qt::black)) };
+
+		QMetaObject::Connection m_repaint_connection;
 
 		QTimer m_timer;
 	};

@@ -1,11 +1,9 @@
 #include "Label.h"
 
-#include "Graphic.h"
-
 #include <QPainter>
 
 using Layers::Attribute;
-using Layers::NewGraphic;
+using Layers::Graphic;
 using Layers::Label;
 using Layers::Themeable;
 
@@ -21,15 +19,16 @@ Label::Label(const QString& text, QWidget* parent) :
 	init();
 }
 
-Label::Label(const NewGraphic& graphic, QWidget* parent) :
-	m_graphic{ new NewGraphic(graphic) }
+Label::Label(const Graphic& graphic, QWidget* parent) :
+	m_graphic{ new Graphic(graphic) }
 {
 	init();
 
 	if (m_graphic->svg_renderer())
 	{
-		connect(m_graphic->svg_renderer(), &QSvgRenderer::repaintNeeded,
-			[this] { update(); });
+		m_repaint_connection =
+			connect(m_graphic->svg_renderer(), &QSvgRenderer::repaintNeeded,
+				[this] { update(); });
 	}
 	else
 	{
@@ -46,6 +45,8 @@ Label::Label(const NewGraphic& graphic, QWidget* parent) :
 
 Label::~Label()
 {
+	disconnect(m_repaint_connection);
+
 	delete m_fill;
 	delete m_text_color;
 
@@ -68,7 +69,7 @@ Attribute* Label::fill() const
 	return m_fill;
 }
 
-NewGraphic* Label::graphic() const
+Graphic* Label::graphic() const
 {
 	return m_graphic;
 }
@@ -85,6 +86,14 @@ void Label::set_font_size(int size)
 	f.setPointSize(size);
 
 	setFont(f);
+}
+
+QSize Label::sizeHint() const
+{
+	if (m_graphic)
+		return m_graphic->size();
+	else
+		return QLabel::sizeHint();
 }
 
 void Label::paintEvent(QPaintEvent* event)
@@ -152,7 +161,7 @@ void Label::init()
 	init_attributes();
 
 	if (!m_graphic)
-		set_icon(new Graphic(":/svgs/label_icon.svg", QSize(17, 6)));
+		set_icon(Graphic(":/svgs/label_icon.svg", QSize(17, 6)));
 
 	update_stylesheet();
 }

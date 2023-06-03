@@ -16,7 +16,7 @@ GradientDialog::GradientDialog(QWidget* parent) :
 	setFixedSize(525, 325);
     installEventFilter(this);
 
-    set_icon(new Graphic(":/svgs/gradient_icon.svg"));
+    set_icon(Graphic(":/svgs/gradient_icon.svg"));
     set_name("Gradient Dialog");
 
     m_gradient_widget->setFixedSize(448, 176);

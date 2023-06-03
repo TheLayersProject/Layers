@@ -16,7 +16,7 @@ namespace Layers
 
 	public:
 		WidgetButton(const QString& label_text, QWidget* parent = nullptr);
-		WidgetButton(Graphic* icon, const QString label_text, QWidget* parent = nullptr);
+		WidgetButton(const Graphic& icon, const QString label_text, QWidget* parent = nullptr);
 
 		Label* label() const;
 
@@ -31,6 +31,8 @@ namespace Layers
 		void init_attributes();
 
 		void init_layout();
+
+		Label* m_icon_label{ nullptr };
 
 		Label* m_label{ nullptr };
 	};

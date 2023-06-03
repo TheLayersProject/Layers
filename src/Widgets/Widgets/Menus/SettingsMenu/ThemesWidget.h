@@ -36,16 +36,16 @@ namespace Layers
 		ThemeComboBox* m_theme_combobox{ new ThemeComboBox };
 
 		Button* m_new_theme_button{
-			new Button(new Graphic(":/svgs/new_theme.svg", QSize(20, 20))) };
+			new Button(Graphic(":/svgs/new_theme.svg", QSize(20, 20))) };
 		
 		Button* m_customize_theme_button{
-			new Button(new Graphic(":/svgs/customize_theme.svg", QSize(20, 20))) };
+			new Button(Graphic(":/svgs/customize_theme.svg", QSize(20, 20))) };
 		
 		Button* m_delete_theme_button{
-			new Button(new Graphic(":/svgs/delete_theme.svg", QSize(17, 20))) };
+			new Button(Graphic(":/svgs/delete_theme.svg", QSize(17, 20))) };
 		
 		Button* m_theme_info_button{
-			new Button(new Graphic(":/svgs/info_theme.svg", QSize(20, 20))) };
+			new Button(Graphic(":/svgs/info_theme.svg", QSize(20, 20))) };
 
 		Widget* m_control_separator{ new Widget(this) };
 		Widget* m_separator_1{ new Widget };

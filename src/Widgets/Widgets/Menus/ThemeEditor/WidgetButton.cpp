@@ -13,11 +13,12 @@ WidgetButton::WidgetButton(const QString& label_text, QWidget* parent) :
 	init();
 }
 
-WidgetButton::WidgetButton(Graphic* icon, const QString label_text, QWidget* parent) :
+WidgetButton::WidgetButton(const Graphic& icon, const QString label_text, QWidget* parent) :
+	m_icon_label{ new Label(icon) },
 	m_label{ new Label(label_text) },
 	Widget(parent)
 {
-	m_icon = icon;
+	set_icon(icon);
 
 	init();
 }
@@ -45,14 +46,14 @@ bool WidgetButton::eventFilter(QObject* object, QEvent* event)
 	}
 	else if (event->type() == QEvent::Enter)
 	{
-		if (m_icon && m_icon->svg())
-			m_icon->svg()->common_color()->set_state("Selected");
+		if (m_icon_label && m_icon_label->graphic()->svg_renderer())
+			m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Selected");
 		m_label->text_color()->set_state("Selected");
 	}
 	else if (event->type() == QEvent::Leave)
 	{
-		if (m_icon && m_icon->svg())
-			m_icon->svg()->common_color()->set_state("Unselected");
+		if (m_icon_label && m_icon_label->graphic()->svg_renderer())
+			m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 		m_label->text_color()->set_state("Unselected");
 	}
 
@@ -70,10 +71,11 @@ void WidgetButton::init()
 	set_name("Widget Button");
 	setMinimumHeight(40);
 
-	if (m_icon)
+	if (m_icon_label)
 	{
-		m_icon->set_name("Icon");
-		m_icon->setMinimumWidth(40);
+		m_icon_label->set_name("Icon Label");
+		m_icon_label->setMinimumWidth(40);
+		m_icon_label->setAlignment(Qt::AlignCenter);
 	}
 
 	m_label->setWordWrap(true);
@@ -89,14 +91,14 @@ void WidgetButton::init_attributes()
 	m_corner_radii->bottom_left()->set_value(10.0);
 	m_corner_radii->bottom_right()->set_value(10.0);
 
-	if (m_icon && m_icon->svg())
+	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
 	{
-		m_icon->svg()->common_color()->init_variant_map({
+		m_icon_label->graphic()->svg_renderer()->common_color()->init_variant_map({
 			{ "Unselected", QColor(Qt::darkGray) },
 			{ "Selected", QColor(Qt::lightGray) }
 			});
 
-		m_icon->svg()->common_color()->set_state("Unselected");
+		m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
 	}
 
 	m_label->text_color()->init_variant_map({
@@ -111,9 +113,9 @@ void WidgetButton::init_layout()
 {
 	QHBoxLayout* main_layout = new QHBoxLayout;
 
-	if (m_icon)
+	if (m_icon_label)
 	{
-		main_layout->addWidget(m_icon);
+		main_layout->addWidget(m_icon_label);
 		main_layout->setContentsMargins(0, 0, 0, 0);
 	}
 	else

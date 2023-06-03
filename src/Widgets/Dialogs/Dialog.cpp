@@ -18,22 +18,18 @@ Dialog::Dialog(const QString& title, QWidget* parent) :
 	init_titlebar();
 
 	setAttribute(Qt::WA_TranslucentBackground);
-	//setFixedSize(525, 300);
 	setWindowFlags(Qt::FramelessWindowHint);
-	//installEventFilter(this);
-
-	set_name("dialog");
 }
 
-void Dialog::set_icon(Graphic* icon)
+void Dialog::set_icon(const Graphic& icon)
 {
 	Themeable::set_icon(icon);
 
-	Graphic* dialog_icon = new Graphic(*icon);
+	m_icon_label = new Label(icon);
+	m_icon_label->setAlignment(Qt::AlignCenter);
+	m_icon_label->setMinimumWidth(40);
 
-	dialog_icon->setMinimumWidth(40);
-
-	m_titlebar_layout->insertWidget(0, dialog_icon);
+	m_titlebar_layout->insertWidget(0, m_icon_label);
 }
 
 void Dialog::setLayout(QLayout* layout)

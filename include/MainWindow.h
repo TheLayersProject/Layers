@@ -38,7 +38,7 @@ namespace Layers
 		void new_theme_clicked();
 		void menu_changed(int old_index, int new_index);
 		void open_widget(
-			Widget* widget, const QString& name, Graphic* graphic = nullptr);
+			Widget* widget, const QString& name, Graphic* icon = nullptr);
 
 	protected:
 		bool nativeEvent(

@@ -4,7 +4,6 @@
 #include <QIntValidator>
 
 #include "Button.h"
-#include "Graphic.h"
 
 namespace Layers
 {
@@ -28,24 +27,25 @@ namespace Layers
 
 		int content_width(bool include_collapse_button);
 
-		Graphic* create_arrow_graphic();
+		Label* create_arrow_label();
 
 		void expand_text_buttons();
 
 		void init_layout();
 
-		QList<Graphic*> m_arrow_graphics;
+		QList<Label*> m_arrow_labels;
 
 		Widget* m_collapse_menu{ new Widget };
 
 		Button* m_collapse_menu_button{
-			new Button(new Graphic(":/svgs/ellipsis.svg", QSize(32, 8))) };
+			new Button(Graphic(":/svgs/ellipsis.svg", QSize(32, 8))) };
 
 		QVBoxLayout* m_collapse_menu_layout{ new QVBoxLayout };
 
 		QList<Button*> m_collapsed_text_buttons;
 
-		Graphic* m_control_arrow_graphic{ new Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)) };
+		Label* m_control_arrow_label{
+			new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12))) };
 
 		Button* m_control_text_button{ new Button("") };
 

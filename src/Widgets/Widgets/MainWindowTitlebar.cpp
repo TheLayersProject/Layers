@@ -11,7 +11,7 @@ MainWindowTitlebar::MainWindowTitlebar(QWidget* parent) :
 	setFixedHeight(40);
 
 	set_name("Titlebar");
-	set_icon(new Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
+	set_icon(Graphic(":/svgs/titlebar_icon.svg", QSize(20, 20)));
 	m_fill->set_disabled();
 
 	m_menu_tab_bar->set_name("Menu Tab Bar");
