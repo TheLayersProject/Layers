@@ -10,7 +10,8 @@
 namespace Layers
 {
 	/*!
-		A Label is a QLabel and a Themeable that is used to display text.
+		A Label is a QLabel and a Themeable that is used to display text or a
+		Graphic.
 	*/
 	class Label : public QLabel, public Themeable
 	{
@@ -62,7 +63,10 @@ namespace Layers
 		*/
 		void set_font_size(int size);
 
-		QSize sizeHint() const;
+		/*!
+			Returns the recommended size for the label.
+		*/
+		virtual QSize sizeHint() const override;
 
 		/*!
 			Returns a pointer to the text color attribute of the label.
