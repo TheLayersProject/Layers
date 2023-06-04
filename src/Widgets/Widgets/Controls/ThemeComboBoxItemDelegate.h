@@ -21,7 +21,7 @@ namespace Layers
 			const QModelIndex& index) const override;
 
 	private:
-		QImage m_caution_image{ QImage(":/svgs/caution.png") };
+		QImage m_caution_image{ QImage(":/images/caution.png") };
 	};
 }
 

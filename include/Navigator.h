@@ -38,14 +38,14 @@ namespace Layers
 		Widget* m_collapse_menu{ new Widget };
 
 		Button* m_collapse_menu_button{
-			new Button(Graphic(":/svgs/ellipsis.svg", QSize(32, 8))) };
+			new Button(Graphic(":/images/ellipsis.svg", QSize(32, 8))) };
 
 		QVBoxLayout* m_collapse_menu_layout{ new QVBoxLayout };
 
 		QList<Button*> m_collapsed_text_buttons;
 
 		Label* m_control_arrow_label{
-			new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12))) };
+			new Label(Graphic(":/images/collapse_arrow_right.svg", QSize(8, 12))) };
 
 		Button* m_control_text_button{ new Button("") };
 

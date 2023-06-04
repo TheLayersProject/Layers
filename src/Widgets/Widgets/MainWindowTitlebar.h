@@ -26,16 +26,16 @@ namespace Layers
 		QHBoxLayout* main_layout = new QHBoxLayout;
 
 		Button* m_settings_button{
-			new Button(Graphic(":/svgs/settings.svg", QSize(20, 20))) };
+			new Button(Graphic(":/images/settings.svg", QSize(20, 20))) };
 
 		Button* m_minimize_button{
-			new Button(Graphic(":/svgs/minimize.svg", QSize(20, 20))) };
+			new Button(Graphic(":/images/minimize.svg", QSize(20, 20))) };
 
 		Button* m_maximize_button{
-			new Button(Graphic(":/svgs/maximize.svg", QSize(20, 20))) };
+			new Button(Graphic(":/images/maximize.svg", QSize(20, 20))) };
 
 		Button* m_exit_button{
-			new Button(Graphic(":/svgs/exit.svg", QSize(20, 20))) };
+			new Button(Graphic(":/images/exit.svg", QSize(20, 20))) };
 
 		TabBar* m_menu_tab_bar{ new TabBar };
 	};

@@ -49,7 +49,7 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	connect(m_titlebar->menu_tab_bar(), SIGNAL(tab_closed(int)),
 		this, SLOT(close_menu(int)));
 
-	m_separator->set_icon(Graphic(":/svgs/separator_h_icon.svg"));
+	m_separator->set_icon(Graphic(":/images/separator_h_icon.svg"));
 	m_separator->set_name("Separator");
 	m_separator->setFixedHeight(3);
 

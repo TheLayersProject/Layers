@@ -26,7 +26,7 @@ UpdateDialog::UpdateDialog(
 	Dialog("Update Available", parent)
 {
 	setFixedSize(525, 300);
-	set_icon(Graphic(":/svgs/update_icon.svg"));
+	set_icon(Graphic(":/images/update_icon.svg"));
 	set_name("Update Dialog");
 
 	m_remind_me_later_button->set_name("Remind Me Later Button");

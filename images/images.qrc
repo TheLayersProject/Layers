@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/svgs">
+    <qresource prefix="/images">
         <file>app_preferences_icon.svg</file>
         <file>back.svg</file>
         <file>caution.png</file>

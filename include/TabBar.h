@@ -35,7 +35,7 @@ namespace Layers
 
 		void _add_tab(Tab* tab);
 
-		Tab* m_control_tab{ new Tab(Graphic(":/svgs/exit.svg"), "", this)};
+		Tab* m_control_tab{ new Tab(Graphic(":/images/exit.svg"), "", this)};
 
 		int m_current_index{ -1 };
 

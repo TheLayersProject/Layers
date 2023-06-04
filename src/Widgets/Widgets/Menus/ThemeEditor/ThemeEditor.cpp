@@ -17,7 +17,7 @@ ThemeEditor::ThemeEditor(QWidget* parent) :
 	installEventFilter(this);
 	setMouseTracking(true);
 
-	set_icon(Graphic(":/svgs/customize_theme.svg", QSize(24, 24)));
+	set_icon(Graphic(":/images/customize_theme.svg", QSize(24, 24)));
 	set_name("Theme Editor");
 
 	m_control_widget_editor = new WidgetEditor(m_control_themeable, this, m_sidebar);

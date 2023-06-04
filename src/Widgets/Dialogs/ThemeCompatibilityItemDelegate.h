@@ -19,7 +19,7 @@ namespace Layers
 			const QModelIndex& index) const;
 
 	private:
-		SvgRenderer* m_check_svg{ new SvgRenderer(":/svgs/check.svg", this) };
+		SvgRenderer* m_check_svg{ new SvgRenderer(":/images/check.svg", this) };
 	};
 }
 

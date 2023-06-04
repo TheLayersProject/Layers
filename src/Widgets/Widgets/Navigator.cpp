@@ -173,7 +173,7 @@ void Navigator::expand_text_buttons()
 			QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 			arrow_opacity->setOpacity(0.5);
 
-			Label* arrow_label = new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)));
+			Label* arrow_label = new Label(Graphic(":/images/collapse_arrow_right.svg", QSize(8, 12)));
 			arrow_label->setAlignment(Qt::AlignCenter);
 			arrow_label->setFixedWidth(28);
 			arrow_label->entangle_with(m_control_arrow_label);
@@ -207,7 +207,7 @@ Label* Navigator::create_arrow_label()
 	QGraphicsOpacityEffect* arrow_opacity = new QGraphicsOpacityEffect;
 	arrow_opacity->setOpacity(0.5);
 
-	Label* arrow_label = new Label(Graphic(":/svgs/collapse_arrow_right.svg", QSize(8, 12)));
+	Label* arrow_label = new Label(Graphic(":/images/collapse_arrow_right.svg", QSize(8, 12)));
 	arrow_label->setAlignment(Qt::AlignCenter);
 	arrow_label->setFixedWidth(28);
 	arrow_label->entangle_with(m_control_arrow_label);

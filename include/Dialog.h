@@ -59,7 +59,7 @@ namespace Layers
 		Label* m_title_label{ nullptr };
 
 		Button* m_exit_button = new Button(
-			Graphic(":/svgs/exit.svg", QSize(20, 20)));
+			Graphic(":/images/exit.svg", QSize(20, 20)));
 	};
 }
 

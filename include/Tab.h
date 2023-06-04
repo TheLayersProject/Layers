@@ -34,7 +34,7 @@ namespace Layers
 		QHBoxLayout* main_layout = new QHBoxLayout;
 
 		Button* m_close_button{
-			new Button(Graphic(":/svgs/tab_exit.svg", QSize(16, 17))) };
+			new Button(Graphic(":/images/tab_exit.svg", QSize(16, 17))) };
 
 		Label* m_icon_label{ nullptr };
 

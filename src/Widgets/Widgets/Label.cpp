@@ -158,7 +158,7 @@ void Label::init()
 	init_attributes();
 
 	if (!m_graphic)
-		set_icon(Graphic(":/svgs/label_icon.svg", QSize(17, 6)));
+		set_icon(Graphic(":/images/label_icon.svg", QSize(17, 6)));
 
 	update_stylesheet();
 }

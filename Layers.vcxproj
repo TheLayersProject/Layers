@@ -180,7 +180,7 @@
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
     <QtRcc Include="image-sequences\image_sequences.qrc" />
-    <QtRcc Include="svgs\svgs.qrc" />
+    <QtRcc Include="images\images.qrc" />
     <QtRcc Include="themes\Dark\theme_dark.qrc" />
     <QtRcc Include="themes\Light\theme_light.qrc" />
   </ItemGroup>

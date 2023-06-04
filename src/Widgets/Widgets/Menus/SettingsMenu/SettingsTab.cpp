@@ -20,7 +20,7 @@ SettingsTab::SettingsTab(const Graphic& icon, const QString& label_text, QWidget
     setMouseTracking(true);
 	setFixedHeight(60);
 
-    set_icon(Graphic(":/svgs/settings_tab_icon.svg", QSize(20, 9)));
+    set_icon(Graphic(":/images/settings_tab_icon.svg", QSize(20, 9)));
     set_name("Setting Tab");
 
     m_icon_label->setAttribute(Qt::WA_TransparentForMouseEvents);

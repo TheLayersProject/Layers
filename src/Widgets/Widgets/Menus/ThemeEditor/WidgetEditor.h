@@ -58,7 +58,7 @@ namespace Layers
 			new StateEditor(this) };
 
 		WidgetButton* m_control_widget_button{
-			new WidgetButton(Graphic(":/svgs/exit.svg"), "", this)};
+			new WidgetButton(Graphic(":/images/exit.svg"), "", this)};
 
 		WidgetButtonGroup* m_control_widget_button_group{
 			new WidgetButtonGroup("", QList<WidgetButton*>(), this) };

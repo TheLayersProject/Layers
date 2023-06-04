@@ -90,9 +90,6 @@
     <ClCompile Include="src\Widgets\Dialogs\ColorDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Dialogs\CreateNewThemeDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\Dialogs\Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -210,9 +207,6 @@
     <ClCompile Include="src\Widgets\Kernel\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Widgets\Widgets\Graphic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Widgets\Widgets\Navigator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -222,14 +216,14 @@
     <ClCompile Include="src\Widgets\Widgets\Controls\RadioButtonPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Tools\NewGraphic.cpp">
+    <ClCompile Include="src\Core\Tools\Graphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Widgets\Dialogs\CreateThemeDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="svgs\svgs.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
@@ -240,6 +234,9 @@
       <Filter>Resource Files</Filter>
     </QtRcc>
     <QtRcc Include="themes\Light\theme_light.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="images\images.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
@@ -296,9 +293,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Widgets\Widgets\MainWindowTitlebar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="src\Widgets\Dialogs\CreateNewThemeDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="src\Widgets\Dialogs\GradientDialog.h">
@@ -421,9 +415,6 @@
     <QtMoc Include="src\Widgets\Widgets\AttributeEditors\GradientEditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Graphic.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Navigator.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -431,6 +422,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\RadioButtonPool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Widgets\Dialogs\CreateThemeDialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -465,7 +459,7 @@
     <ClInclude Include="include\color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\NewGraphic.h">
+    <ClInclude Include="include\Graphic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,7 +19,7 @@ ThemeCompatibilityCautionDialog::ThemeCompatibilityCautionDialog(QWidget* parent
 	setFixedWidth(520);
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
 	setWindowFlags(windowFlags() | Qt::Tool | Qt::WindowStaysOnTopHint);
-	set_icon(Graphic(":/svgs/caution.png"));
+	set_icon(Graphic(":/images/caution.png"));
 	set_name("Theme Compatibility Caution Dialog");
 
 	m_message_label->set_font_size(14);
