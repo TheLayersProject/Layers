@@ -32,7 +32,7 @@ namespace Layers
 
 		void add_widget_button_group(WidgetButtonGroup* button_group);
 
-		AttributeEditor* create_edtior(Attribute* attribute);
+		AttributeEditor* create_editor(Attribute* attribute);
 
 		void handle_editor(AbstractAttribute* abs_attr, AttributeEditor* editor);
 

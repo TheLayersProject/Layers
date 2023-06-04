@@ -223,7 +223,7 @@ void WidgetEditor::add_attribute_editor(AttributeEditor* editor)
 	m_attributes_layout->addWidget(editor);
 }
 
-AttributeEditor* WidgetEditor::create_edtior(Attribute* attribute)
+AttributeEditor* WidgetEditor::create_editor(Attribute* attribute)
 {
 	AttributeEditor* editor = nullptr;
 
@@ -296,7 +296,7 @@ void WidgetEditor::init_attribute_editors()
 	{
 		if (Attribute* attribute = dynamic_cast<Attribute*>(abs_attribute))
 		{
-			handle_editor(attribute, create_edtior(attribute));
+			handle_editor(attribute, create_editor(attribute));
 		}
 		else if (AttributeGroup* attr_group = dynamic_cast<AttributeGroup*>(abs_attribute))
 		{
@@ -313,7 +313,7 @@ void WidgetEditor::init_attribute_editors()
 				aw_group->entangle_with(m_control_attribute_editor_group);
 
 				for (Attribute* attribute : attr_group->attributes())
-					aw_group->add_modifier_widget(create_edtior(attribute));
+					aw_group->add_modifier_widget(create_editor(attribute));
 
 				handle_editor(attr_group, aw_group);
 			}
