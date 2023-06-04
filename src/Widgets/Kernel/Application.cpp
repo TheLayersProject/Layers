@@ -58,14 +58,6 @@ Application::Application(
 	setEffectEnabled(Qt::UI_AnimateCombo, false);
 	set_name("App");
 
-	if (m_version)
-	{
-		QFile setup_file(QDir(app_path(name)).filePath(m_name + "-" + m_version->to_string() + "-setup.exe"));
-
-		if (setup_file.exists())
-			setup_file.remove();
-	}
-
 	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
 	for (int i = 0; i < name_parts.size(); i++)
 		name_parts[i].replace(0, 1, name_parts[i][0].toLower());
@@ -249,13 +241,13 @@ bool Application::update_on_request()
 
 				if (release_asset_name.endsWith(".exe") || release_asset_name.endsWith(".msi"))
 				{
-					QDir app_dir = app_path(m_name);
+					QDir temp_dir = local_app_data_path() + "Temp\\";
 
 					QUrl latest_version_download_url = QUrl(release_asset.toObject()["browser_download_url"].toString());
 
 					if (!QFile::exists(latest_version_download_url.fileName()))
 					{
-						QNetworkReply* update_download = m_downloader->download(latest_version_download_url, app_dir);
+						QNetworkReply* update_download = m_downloader->download(latest_version_download_url, temp_dir);
 
 						QEventLoop loop;
 						connect(update_download, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -265,7 +257,7 @@ bool Application::update_on_request()
 					QStringList args = { "/SILENT" };
 
 					QProcess update_process;
-					update_process.startDetached(app_dir.filePath(latest_version_download_url.fileName()), args);
+					update_process.startDetached(temp_dir.filePath(latest_version_download_url.fileName()), args);
 
 					return true;
 				}
