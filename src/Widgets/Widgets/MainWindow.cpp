@@ -188,9 +188,15 @@ void MainWindow::new_theme_clicked()
 
 		for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
 			if (file_name != "meta.json")
+			{
 				QFile::copy(
 					copy_theme_dir.filePath(file_name),
 					new_theme_dir.filePath(file_name));
+
+				QFile::setPermissions(
+					new_theme_dir.filePath(file_name),
+					QFileDevice::WriteUser);
+			}
 
 		for (const QString& theme_id : copy_theme->lineage())
 			new_theme->append_to_lineage(theme_id);
