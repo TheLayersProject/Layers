@@ -1,4 +1,6 @@
-# <img src="https://github.com/huntermalm/Layers/blob/main/svgs/layers_logo.svg?raw=true" alt="layers_logo" width="50" align="left"/>Layers
+# Layers
+
+<img src="https://github.com/huntermalm/Layers/blob/main/svgs/layers_banner.svg?raw=true" alt="layers_banner"/>
 
 Layers is a Qt library that provides an application template with a focus on themes and user customization.
 
