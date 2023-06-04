@@ -49,9 +49,6 @@ Label::~Label()
 
 	delete m_fill;
 	delete m_text_color;
-
-	m_fill = nullptr;
-	m_text_color = nullptr;
 }
 
 QList<Themeable*> Label::child_themeables(Qt::FindChildOptions options)

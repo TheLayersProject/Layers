@@ -31,9 +31,6 @@ FillControl::~FillControl()
 	// TODO: Maybe the dialog should just be generated when it is needed
 	delete m_control_dialog;
 	delete m_dialog;
-
-	m_control_dialog = nullptr;
-	m_dialog = nullptr;
 }
 
 void FillControl::set_attribute(Attribute* attribute)

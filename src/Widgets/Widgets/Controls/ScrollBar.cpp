@@ -19,11 +19,6 @@ ScrollBar::~ScrollBar()
 	delete m_handle_color;
 	delete m_corner_radii;
 	delete m_handle_corner_radii;
-
-	m_background_color = nullptr;
-	m_handle_color = nullptr;
-	m_corner_radii = nullptr;
-	m_handle_corner_radii = nullptr;
 }
 
 void ScrollBar::update_theme_dependencies()

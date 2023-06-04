@@ -47,10 +47,7 @@ Attribute::~Attribute()
 	QObject::disconnect(m_reentanglement_connection);
 
 	if (!m_is_entangled)
-	{
 		delete m_data;
-		m_data = nullptr;
-	}
 }
 
 bool Attribute::contains_state(const QString& state) const

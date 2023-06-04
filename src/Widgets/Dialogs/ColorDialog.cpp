@@ -107,8 +107,6 @@ ColorDialog::ColorDialog(QWidget* parent) :
 ColorDialog::~ColorDialog()
 {
 	delete m_color;
-
-	m_color = nullptr;
 }
 
 Themeable* ColorDialog::clone()

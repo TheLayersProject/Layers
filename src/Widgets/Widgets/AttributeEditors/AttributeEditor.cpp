@@ -18,17 +18,15 @@ AttributeEditor::AttributeEditor(AbstractAttribute* entity, QWidget* parent) :
 
 AttributeEditor::~AttributeEditor()
 {
+	/*
+		TODO: Should probably just not initialize the disable toggle if it is
+		not used.
+	*/
 	if (!m_disabled_toggle->parentWidget())
-	{
 		delete m_disabled_toggle;
-		m_disabled_toggle = nullptr;
-	}
 
 	if (!m_toggle_label_separator->parentWidget())
-	{
 		delete m_toggle_label_separator;
-		m_toggle_label_separator = nullptr;
-	}
 }
 
 ToggleSwitch* AttributeEditor::disable_toggle() const

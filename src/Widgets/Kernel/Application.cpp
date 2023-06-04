@@ -98,28 +98,17 @@ Application::Application(
 Application::~Application()
 {
 	if (m_github_repo)
-	{
 		delete m_github_repo;
-		m_github_repo = nullptr;
-	}
 
 	if (m_latest_version)
-	{
 		delete m_latest_version;
-		m_latest_version = nullptr;
-	}
 
 	if (m_version)
-	{
 		delete m_version;
-		m_version = nullptr;
-	}
 
 	for (Theme* theme : m_themes)
-	{
 		delete theme;
-		theme = nullptr;
-	}
+
 	m_themes.clear();
 
 	delete m_create_theme_dialog;
@@ -127,12 +116,6 @@ Application::~Application()
 	delete m_gradient_dialog;
 	delete m_theme_compatibility_caution_dialog;
 	delete m_update_dialog;
-
-	m_create_theme_dialog = nullptr;
-	m_color_dialog = nullptr;
-	m_gradient_dialog = nullptr;
-	m_theme_compatibility_caution_dialog = nullptr;
-	m_update_dialog = nullptr;
 }
 
 QString Application::app_identifier()

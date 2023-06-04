@@ -22,10 +22,7 @@ AttributeGroup::AttributeGroup(const AttributeGroup& attribute_group) :
 AttributeGroup::~AttributeGroup()
 {
 	for (Attribute* attr : m_attributes)
-	{
 		delete attr;
-		attr = nullptr;
-	}
 
 	m_attributes.clear();
 }

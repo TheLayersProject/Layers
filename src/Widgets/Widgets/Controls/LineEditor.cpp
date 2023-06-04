@@ -37,18 +37,11 @@ LineEditor::LineEditor(QWidget* parent) : Widget(parent)
 LineEditor::~LineEditor()
 {
 	if (m_default_value)
-	{
 		delete m_default_value;
-		m_default_value = nullptr;
-	}
 
 	delete m_left_padding;
 	delete m_text_color;
 	delete m_text;
-
-	m_left_padding = nullptr;
-	m_text_color = nullptr;
-	m_text = nullptr;
 }
 
 void LineEditor::init_attributes()

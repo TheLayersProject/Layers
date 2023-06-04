@@ -17,11 +17,6 @@ ThemeableBox::~ThemeableBox()
 	delete m_corner_radii;
 	delete m_fill;
 	delete m_margins;
-
-	m_border = nullptr;
-	m_corner_radii = nullptr;
-	m_fill = nullptr;
-	m_margins = nullptr;
 }
 
 void ThemeableBox::init_attributes()

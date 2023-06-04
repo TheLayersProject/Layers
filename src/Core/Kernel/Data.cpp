@@ -51,15 +51,9 @@ Data::Data(const Data& data)
 Data::~Data()
 {
 	if (m_variant)
-	{
 		delete m_variant;
-		m_variant = nullptr;
-	}
 	else if (m_variant_map)
-	{
 		delete m_variant_map;
-		m_variant_map = nullptr;
-	}
 }
 
 bool Data::contains_state(const QString& state) const

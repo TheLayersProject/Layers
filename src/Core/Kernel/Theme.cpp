@@ -65,10 +65,7 @@ Theme::~Theme()
 	clear();
 
 	if (m_uuid)
-	{
 		delete m_uuid;
-		m_uuid = nullptr;
-	}
 }
 
 void Theme::append_to_lineage(const QString& theme_id)
@@ -83,10 +80,7 @@ void Theme::clear()
 		AttributeMap& themeable_data = m_data_for_app_themeables[themeable_tag];
 
 		for (AbstractAttribute* entity : themeable_data)
-		{
 			delete entity;
-			entity = nullptr;
-		}
 
 		themeable_data.clear();
 	}
@@ -96,10 +90,7 @@ void Theme::clear()
 		AttributeMap& themeable_data = m_data_for_layers_themeables[themeable_tag];
 
 		for (AbstractAttribute* entity : themeable_data)
-		{
 			delete entity;
-			entity = nullptr;
-		}
 
 		themeable_data.clear();
 	}
@@ -123,10 +114,7 @@ void Theme::clear_data_for_themeable(const QString& themeable_tag)
 		AttributeMap& themeable_data = (*relevant_theme_data)[themeable_tag];
 
 		for (AbstractAttribute* entity : themeable_data)
-		{
 			delete entity;
-			entity = nullptr;
-		}
 
 		themeable_data.clear();
 

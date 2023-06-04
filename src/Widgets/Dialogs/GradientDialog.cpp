@@ -127,11 +127,7 @@ void GradientDialog::init_attributes()
 void GradientDialog::init_color_controls()
 {
     for (ColorControl* color_control : m_color_controls)
-    {
         delete color_control;
-
-        color_control = nullptr;
-    }
 
     m_color_controls.clear();
 

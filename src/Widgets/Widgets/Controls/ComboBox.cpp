@@ -28,11 +28,6 @@ ComboBox::~ComboBox()
 	delete m_corner_radius;
 	delete m_fill;
 	delete m_text_color;
-
-	m_border = nullptr;
-	m_corner_radius = nullptr;
-	m_fill = nullptr;
-	m_text_color = nullptr;
 }
 
 QList<Themeable*> ComboBox::child_themeables(Qt::FindChildOptions options)

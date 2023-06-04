@@ -15,17 +15,10 @@ using Layers::Themeable;
 Themeable::~Themeable()
 {
 	if (m_name)
-	{
-		qDebug() << "Deleting: " + *m_name;
 		delete m_name;
-		m_name = nullptr;
-	}
 
 	if (m_icon)
-	{
 		delete m_icon;
-		m_icon = nullptr;
-	}
 }
 
 void Themeable::apply_theme(Theme& theme)
