@@ -100,13 +100,12 @@ Themeable* Themeable::clone()
 
 void Themeable::copy_attribute_values_to(Theme* theme)
 {
-	if (m_tag_prefixes_assigned)
+	if (m_tag_prefixes_assigned && !m_is_blocked_from_theme)
 	{
 		theme->copy_attribute_values_of(this);
 
-		for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
-			if (child_themeable->m_tag_prefixes_assigned)
-				theme->copy_attribute_values_of(child_themeable);
+		for (Themeable* child_themeable : child_themeables())
+			child_themeable->copy_attribute_values_to(theme);
 	}
 }
 
@@ -188,6 +187,22 @@ void Themeable::set_is_app_themeable(bool is_app_themeable)
 
 	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
 		child_themeable->m_is_app_themeable = is_app_themeable;
+}
+
+void Themeable::set_is_blocked_from_theme(bool is_blocked_from_theme)
+{
+	m_is_blocked_from_theme = is_blocked_from_theme;
+
+	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
+		child_themeable->m_is_blocked_from_theme = is_blocked_from_theme;
+}
+
+void Themeable::set_is_preview_themeable(bool is_preview_themeable)
+{
+	m_is_preview_themeable = is_preview_themeable;
+
+	for (Themeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
+		child_themeable->m_is_preview_themeable = is_preview_themeable;
 }
 
 void Themeable::set_name(const QString& name)

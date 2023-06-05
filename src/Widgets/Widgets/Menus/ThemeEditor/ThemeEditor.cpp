@@ -96,6 +96,11 @@ void ThemeEditor::edit_themeable(Themeable* themeable)
 	{
 		themeable = themeable->clone();
 
+		themeable->set_is_preview_themeable(true);
+
+		if (m_is_preview_themeable)
+			themeable->set_is_blocked_from_theme(true);
+
 		if (QWidget* cloned_widget = dynamic_cast<QWidget*>(themeable))
 			set_preview_widget(cloned_widget);
 	}

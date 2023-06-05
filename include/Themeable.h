@@ -261,6 +261,17 @@ namespace Layers
 		void set_is_app_themeable(bool is_app_themeable);
 
 		/*!
+			Marks the caller and its children as themeables that are blocked
+			from being copied to a theme.
+		*/
+		void set_is_blocked_from_theme(bool is_blocked_from_theme);
+
+		/*!
+			Marks the caller and its children as preview themeables.
+		*/
+		void set_is_preview_themeable(bool is_preview_themeable);
+
+		/*!
 			Sets the name of this themeable.
 			
 			If a name already exists, it is replaced.
@@ -309,6 +320,10 @@ namespace Layers
 		Graphic* m_icon{ nullptr };
 		
 		bool m_is_app_themeable{ false };
+
+		bool m_is_blocked_from_theme{ false };
+
+		bool m_is_preview_themeable{ false };
 
 		QString* m_name{ nullptr };
 
