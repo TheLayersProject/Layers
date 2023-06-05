@@ -44,10 +44,10 @@ MainWindow::MainWindow(bool preview, QWidget* parent) :
 	m_theme_editor->hide();
 
 	connect(m_titlebar->menu_tab_bar(), SIGNAL(index_changed(int, int)),
-		this, SLOT(menu_changed(int, int)));
+		this, SLOT(open_widget_changed(int, int)));
 
 	connect(m_titlebar->menu_tab_bar(), SIGNAL(tab_closed(int)),
-		this, SLOT(close_menu(int)));
+		this, SLOT(close_widget(int)));
 
 	m_separator->set_icon(Graphic(":/images/separator_h_icon.svg"));
 	m_separator->set_name("Separator");
@@ -104,52 +104,7 @@ Themeable* MainWindow::clone()
 	return w;
 }
 
-void MainWindow::update_theme_dependencies()
-{
-	if (isMaximized())
-		m_main_layout->setContentsMargins(0, 0, 0, 0);
-	else
-	{
-		int border_thickness = border()->thickness()->as<double>();
-
-		m_main_layout->setContentsMargins(
-			border_thickness + m_margins->left()->as<double>(),
-			border_thickness + m_margins->top()->as<double>(),
-			border_thickness + m_margins->right()->as<double>(),
-			border_thickness + m_margins->bottom()->as<double>());
-	}
-}
-
-void MainWindow::menu_changed(int old_index, int new_index)
-{
-	if (QWidget* old_widget = (old_index != -1) ?
-		m_opened_widgets[old_index] : nullptr)
-	{
-		old_widget->hide();
-	}
-
-	m_opened_widgets[new_index]->show();
-}
-
-void MainWindow::open_widget(
-	Widget* widget, const QString& name, Graphic* icon)
-{
-	TabBar* tab_bar = m_titlebar->menu_tab_bar();
-
-	if (!m_opened_widgets.contains(widget))
-	{
-		m_opened_widgets.append(widget);
-
-		if (icon)
-			tab_bar->add_tab(*icon, name);
-		else
-			tab_bar->add_tab(name);
-	}
-
-	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
-}
-
-void MainWindow::close_menu(int index)
+void MainWindow::close_widget(int index)
 {
 	m_opened_widgets.removeAt(index);
 }
@@ -222,6 +177,35 @@ void MainWindow::new_theme_clicked()
 
 		dialog->clear();
 	}
+}
+
+void MainWindow::open_widget(
+	Widget* widget, const QString& name, Graphic* icon)
+{
+	TabBar* tab_bar = m_titlebar->menu_tab_bar();
+
+	if (!m_opened_widgets.contains(widget))
+	{
+		m_opened_widgets.append(widget);
+
+		if (icon)
+			tab_bar->add_tab(*icon, name);
+		else
+			tab_bar->add_tab(name);
+	}
+
+	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
+}
+
+void MainWindow::open_widget_changed(int old_index, int new_index)
+{
+	if (QWidget* old_widget = (old_index != -1) ?
+		m_opened_widgets[old_index] : nullptr)
+	{
+		old_widget->hide();
+	}
+
+	m_opened_widgets[new_index]->show();
 }
 
 bool MainWindow::nativeEvent(
@@ -400,4 +384,20 @@ void MainWindow::init_titlebar_connections()
 			if (!m_functionality_disabled)
 				qApp->quit();
 		});
+}
+
+void MainWindow::update_theme_dependencies()
+{
+	if (isMaximized())
+		m_main_layout->setContentsMargins(0, 0, 0, 0);
+	else
+	{
+		int border_thickness = border()->thickness()->as<double>();
+
+		m_main_layout->setContentsMargins(
+			border_thickness + m_margins->left()->as<double>(),
+			border_thickness + m_margins->top()->as<double>(),
+			border_thickness + m_margins->right()->as<double>(),
+			border_thickness + m_margins->bottom()->as<double>());
+	}
 }
