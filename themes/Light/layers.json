@@ -4004,19 +4004,10 @@
             "value": 10
         },
         "fill": {
-            "value": "#2e2e2e"
+            "value": "#c0c0c0"
         },
         "text_color": {
             "value": "#000000"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Current Item Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#6a6a6a"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Items": {
@@ -4025,8 +4016,8 @@
         },
         "fill": {
             "values": {
-                "Selected": "#00ff00",
-                "Unselected": "#ffffff"
+                "Selected": "#dbdbdb",
+                "Unselected": "#a6a6a6"
             }
         },
         "text_color": {

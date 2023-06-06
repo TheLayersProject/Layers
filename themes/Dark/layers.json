@@ -3987,7 +3987,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#001122"
+            "value": "#e1e1e1"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox": {
@@ -4004,19 +4004,10 @@
             "value": 10
         },
         "fill": {
-            "value": "#001122"
+            "value": "#1e2023"
         },
         "text_color": {
-            "value": "#001122"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Current Item Label": {
-        "fill": {
-            "disabled": true,
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#4571a2"
+            "value": "#b9bbbe"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Items": {
@@ -4025,12 +4016,12 @@
         },
         "fill": {
             "values": {
-                "Selected": "#5b96cd",
-                "Unselected": "#253859"
+                "Selected": "#2b2e32",
+                "Unselected": "#16181a"
             }
         },
         "text_color": {
-            "value": "#000b16"
+            "value": "#b9bbbe"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
