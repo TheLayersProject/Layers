@@ -4320,9 +4320,9 @@
     },
     "Main Window/Theme Editor/Topbar/Navigator": {
     },
-    "Main Window/Theme Editor/Topbar/Navigator/Arrow Graphics": {
+    "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels": {
     },
-    "Main Window/Theme Editor/Topbar/Navigator/Arrow Graphics/Svg": {
+    "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels/Svg": {
         "common_color": {
             "value": "#2e2e2e"
         }
