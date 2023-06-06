@@ -225,7 +225,6 @@ Button* Navigator::create_text_button(const QString& text)
 	text_button->entangle_with(m_control_text_button);
 	text_button->fill()->set_disabled();
 	text_button->set_font_size(14);
-	text_button->set_name("text_button");
 	text_button->set_padding(0);
 
 	if (!m_text_button_stack.isEmpty())
