@@ -8,33 +8,43 @@
 
 namespace Layers
 {
+	/*!
+		A MenuBar is a QMenuBar and a Themeable that provides a menu bar that
+		consists of a list of pull-down menu items.
+	*/
 	class MenuBar : public QMenuBar, public Themeable
 	{
 		Q_OBJECT
 
 	public:
-		MenuBar(QWidget* parent = 0);
+		/*!
+			Constructs a menu bar.
+		*/
+		MenuBar(QWidget* parent = nullptr);
 
-		// TODO: Make override other overloaded versions from the parent class
-		QMenu* addMenu(const QString& title);
-
-		void update_theme_dependencies();
-
+		/*!
+			Returns a pointer to the selected text color attribute of the menu
+			bar.
+		*/
 		Attribute* selected_text_color() const;
+
+		/*!
+			Returns a pointer to the text color attribute of the menu bar.
+		*/
 		Attribute* text_color() const;
 
-	protected:
+	private:
 		QString build_stylesheet();
 
 		void init_attributes();
 
-		//void paintEvent(QPaintEvent* event);
+		void update_theme_dependencies();
 
-	private:
-		QList<QMenu*> m_menus{ QList<QMenu*>() };
+		Attribute* m_selected_text_color{
+			new Attribute("selected_text_color", QColor(Qt::lightGray)) };
 
-		Attribute* m_selected_text_color{ new Attribute("selected_text_color", QColor(Qt::lightGray)) };
-		Attribute* m_text_color{ new Attribute("text_color", QColor(Qt::gray)) };
+		Attribute* m_text_color{
+			new Attribute("text_color", QColor(Qt::gray)) };
 	};
 }
 
