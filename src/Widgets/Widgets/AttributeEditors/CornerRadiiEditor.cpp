@@ -47,17 +47,17 @@ CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii,
 	if (linked_corner_radii)
 	{
 		// Entangle sliders' value attributes with linked_corner_radii attributes
-		m_tl_slider->a_value.entangle_with(*linked_corner_radii->top_left());
-		m_tr_slider->a_value.entangle_with(*linked_corner_radii->top_right());
-		m_bl_slider->a_value.entangle_with(*linked_corner_radii->bottom_left());
-		m_br_slider->a_value.entangle_with(*linked_corner_radii->bottom_right());
+		m_tl_slider->value().entangle_with(*linked_corner_radii->top_left());
+		m_tr_slider->value().entangle_with(*linked_corner_radii->top_right());
+		m_bl_slider->value().entangle_with(*linked_corner_radii->bottom_left());
+		m_br_slider->value().entangle_with(*linked_corner_radii->bottom_right());
 	}
 
 	// Entangle line editors' text attributes with sliders' value attributes
-	m_tl_line_editor->text()->entangle_with(m_tl_slider->a_value);
-	m_tr_line_editor->text()->entangle_with(m_tr_slider->a_value);
-	m_bl_line_editor->text()->entangle_with(m_bl_slider->a_value);
-	m_br_line_editor->text()->entangle_with(m_br_slider->a_value);
+	m_tl_line_editor->text()->entangle_with(m_tl_slider->value());
+	m_tr_line_editor->text()->entangle_with(m_tr_slider->value());
+	m_bl_line_editor->text()->entangle_with(m_bl_slider->value());
+	m_br_line_editor->text()->entangle_with(m_br_slider->value());
 
 	m_tl_line_editor->update_theme_dependencies();
 	m_tr_line_editor->update_theme_dependencies();
@@ -65,10 +65,10 @@ CornerRadiiEditor::CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii,
 	m_br_line_editor->update_theme_dependencies();
 
 	// Replace example widget's corner radii attributes with sliders' 'value' attributes
-	m_example_widget->corner_radii()->top_left()->entangle_with(m_tl_slider->a_value);
-	m_example_widget->corner_radii()->top_right()->entangle_with(m_tr_slider->a_value);
-	m_example_widget->corner_radii()->bottom_left()->entangle_with(m_bl_slider->a_value);
-	m_example_widget->corner_radii()->bottom_right()->entangle_with(m_br_slider->a_value);
+	m_example_widget->corner_radii()->top_left()->entangle_with(m_tl_slider->value());
+	m_example_widget->corner_radii()->top_right()->entangle_with(m_tr_slider->value());
+	m_example_widget->corner_radii()->bottom_left()->entangle_with(m_bl_slider->value());
+	m_example_widget->corner_radii()->bottom_right()->entangle_with(m_br_slider->value());
 	m_example_widget->attributes().remove("corner_radii");
 
 	setup_layout();

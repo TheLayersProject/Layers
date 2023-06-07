@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 
+using Layers::Attribute;
 using Layers::MiniSlider;
 
 MiniSlider::MiniSlider(double limit, QWidget* parent) :
@@ -24,7 +25,7 @@ MiniSlider::MiniSlider(double limit, QWidget* parent) :
 
 	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
 
-	setup_layout();
+	init_layout();
 }
 
 void MiniSlider::set_limit(double limit)
@@ -32,6 +33,11 @@ void MiniSlider::set_limit(double limit)
 	m_limit = limit;
 
 	update_handle_pos();
+}
+
+Attribute& MiniSlider::value()
+{
+	return a_value;
 }
 
 void MiniSlider::init_attributes()
@@ -135,7 +141,7 @@ bool MiniSlider::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-void MiniSlider::setup_layout()
+void MiniSlider::init_layout()
 {
 	QVBoxLayout* main_layout = new QVBoxLayout;
 

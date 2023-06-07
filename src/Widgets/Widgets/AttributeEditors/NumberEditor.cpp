@@ -31,7 +31,7 @@ NumberEditor::NumberEditor(Attribute* attribute, QIntValidator* int_validator, Q
 
 	// Setup Slider
 	m_slider->set_name("Slider");
-	m_slider->a_value.entangle_with(*m_line_editor->text());
+	m_slider->value().entangle_with(*m_line_editor->text());
 	if (int_validator)
 		m_slider->set_limit(int_validator->top());
 

@@ -5,18 +5,29 @@
 
 namespace Layers
 {
+	/*!
+		A MiniSlider is a Widget that provides a mechanism for a user to
+		control a numerical value within a set range.
+	*/
 	class MiniSlider : public Widget
 	{
 		Q_OBJECT
 
 	public:
+		/*!
+			Constructs a mini-slider with a fixed *limit*.
+		*/
 		MiniSlider(double limit = 99.0, QWidget* parent = nullptr);
 
+		/*!
+			Sets the upper limit of the slider.
+		*/
 		void set_limit(double limit);
 
-		void update_handle_pos();
-
-		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
+		/*!
+			Returns a reference to the value attribute of the slider.
+		*/
+		Attribute& value();
 
 	public slots:
 		void set_current_editing_state(const QString& state);
@@ -27,7 +38,11 @@ namespace Layers
 		void init_attributes();
 
 	private:
-		void setup_layout();
+		void init_layout();
+
+		void update_handle_pos();
+
+		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
 
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
