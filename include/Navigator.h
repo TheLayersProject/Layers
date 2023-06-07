@@ -7,14 +7,29 @@
 
 namespace Layers
 {
+	/*!
+		A Navigator is a QWidget and a Themeable that provides the user with a
+		set of text-buttons that represent items of a hierarchy. The buttons
+		can be clicked to navigate between the hierarchy of items.
+	*/
 	class Navigator : public QWidget, public Themeable
 	{
 		Q_OBJECT
 
 	public:
+		/*!
+			Constructs a navigator.
+		*/
 		Navigator(QWidget* parent = nullptr);
+
 		//~Navigator();
 
+		/*!
+			Creates a new text-button for the navigator labeled with *text*.
+			
+			The button is returned so that the caller can connect it with other
+			functionality.
+		*/
 		Button* create_text_button(const QString& text);
 
 	protected:
