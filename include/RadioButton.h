@@ -7,14 +7,28 @@
 
 namespace Layers
 {
+	/*!
+		A RadioButton is a QWidget and a Themeable that provides the user with
+		a button that can be switched on or off. Typically, in a group of radio
+		buttons, only one radio button can be active at a time.
+
+		To enforce the idea that only one radio button is active at a time, it
+		is recommended to use a RadioButtonPool.
+	*/
 	class RadioButton : public QWidget, public Themeable
 	{
 		Q_OBJECT
 
 	signals:
+		/*!
+			This signal is emitted whenever the button is pressed.
+		*/
 		void clicked();
 
 	public:
+		/*!
+			Constructs a radio button.
+		*/
 		RadioButton(QWidget* parent = nullptr);
 
 	protected:
