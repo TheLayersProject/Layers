@@ -25,7 +25,7 @@ namespace Layers
 		Widget* toggle_label_separator() const;
 
 	public slots:
-		virtual void set_current_editting_state(const QString& state);
+		virtual void set_current_editing_state(const QString& state);
 
 	protected:
 		void init_attributes();

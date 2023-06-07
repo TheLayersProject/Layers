@@ -19,7 +19,7 @@ namespace Layers
 		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
 
 	public slots:
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;

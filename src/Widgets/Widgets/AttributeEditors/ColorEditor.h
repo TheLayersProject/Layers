@@ -17,7 +17,7 @@ namespace Layers
 		ColorControl* color_control() const;
 
 	public slots:
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 	private:
 		ColorControl* m_color_control{ new ColorControl };

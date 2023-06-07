@@ -22,7 +22,7 @@ namespace Layers
 		//virtual bool disabled() const;
 
 	public slots:
-		virtual void set_current_editting_state(const QString& state) override;
+		virtual void set_current_editing_state(const QString& state) override;
 
 	private:
 		void setup_layout();

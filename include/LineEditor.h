@@ -88,7 +88,7 @@ namespace Layers
 		Attribute* text() const;
 
 	public slots:
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 		void update_theme_dependencies();
 

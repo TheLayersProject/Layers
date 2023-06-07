@@ -151,7 +151,7 @@ void LineEditor::update_theme_dependencies()
 		m_line_edit->setText(m_text->as<QString>());
 }
 
-void LineEditor::set_current_editting_state(const QString& state)
+void LineEditor::set_current_editing_state(const QString& state)
 {
 	m_text->set_state(state);
 

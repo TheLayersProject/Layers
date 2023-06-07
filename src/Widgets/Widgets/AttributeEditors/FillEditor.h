@@ -17,7 +17,7 @@ namespace Layers
 		FillControl* fill_control() const;
 
 	public slots:
-		virtual void set_current_editting_state(const QString& state) override;
+		virtual void set_current_editing_state(const QString& state) override;
 
 	private:
 		FillControl* m_fill_control{ new FillControl };

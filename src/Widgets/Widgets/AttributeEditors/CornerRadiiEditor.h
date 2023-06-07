@@ -15,7 +15,7 @@ namespace Layers
 		CornerRadiiEditor(CornerRadiiAttributes* linked_corner_radii, QWidget* parent = nullptr);
 
 	public slots:
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 	private:
 		void setup_layout();

@@ -47,7 +47,7 @@ Widget* AttributeEditor::toggle_label_separator() const
 	return m_toggle_label_separator;
 }
 
-void AttributeEditor::set_current_editting_state(const QString& state)
+void AttributeEditor::set_current_editing_state(const QString& state)
 {
 }
 

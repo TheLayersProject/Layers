@@ -20,7 +20,7 @@ namespace Layers
 		void set_attribute(Attribute* attribute);
 
 	//public slots:
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);

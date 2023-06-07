@@ -19,7 +19,7 @@ StateEditor::StateEditor(QWidget* parent) : AttributeEditor(nullptr, parent)
 
 	connect(m_state_combobox, &ComboBox::currentTextChanged, [this] {
 		for (AttributeEditor* aw : m_child_attribute_widgets)
-			aw->set_current_editting_state(m_state_combobox->currentText());
+			aw->set_current_editing_state(m_state_combobox->currentText());
 		});
 
 	setup_layout();

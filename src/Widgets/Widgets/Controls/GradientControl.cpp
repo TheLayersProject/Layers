@@ -17,7 +17,7 @@ GradientControl::GradientControl(QWidget* parent) : Widget(parent)
 	setFixedSize(40, 40);
 }
 
-void GradientControl::set_current_editting_state(const QString& state)
+void GradientControl::set_current_editing_state(const QString& state)
 {
 	fill()->set_state(state);
 }

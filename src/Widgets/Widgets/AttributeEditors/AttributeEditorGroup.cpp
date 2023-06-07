@@ -107,10 +107,10 @@ void AttributeEditorGroup::set_collapsed(bool collapsed)
 //	return false;
 //}
 
-void AttributeEditorGroup::set_current_editting_state(const QString& state)
+void AttributeEditorGroup::set_current_editing_state(const QString& state)
 {
 	for (AttributeEditor* attribute_widget : m_child_attribute_widgets)
-		attribute_widget->set_current_editting_state(state);
+		attribute_widget->set_current_editing_state(state);
 }
 
 void AttributeEditorGroup::setup_layout()

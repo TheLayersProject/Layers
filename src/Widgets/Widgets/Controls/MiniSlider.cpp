@@ -68,7 +68,7 @@ void MiniSlider::update_handle_pos()
 	m_handle->move(drag_increment * a_value.as<double>() + 5, m_handle->y()); // 5 is left margin
 }
 
-void MiniSlider::set_current_editting_state(const QString& state)
+void MiniSlider::set_current_editing_state(const QString& state)
 {
 	a_value.set_state(state);
 

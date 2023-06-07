@@ -84,10 +84,10 @@ void FillDialog::set_attribute(Attribute* attribute)
 	}
 }
 
-void FillDialog::set_current_editting_state(const QString& state)
+void FillDialog::set_current_editing_state(const QString& state)
 {
-	m_color_control->set_current_editting_state(state);
-	m_gradient_control->set_current_editting_state(state);
+	m_color_control->set_current_editing_state(state);
+	m_gradient_control->set_current_editing_state(state);
 
 	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>") &&
 		!m_fill_type_toggle->toggled())

@@ -77,7 +77,7 @@ FillControl* FillEditor::fill_control() const
 //	}
 //}
 
-void FillEditor::set_current_editting_state(const QString& state)
+void FillEditor::set_current_editing_state(const QString& state)
 {
-	m_fill_control->set_current_editting_state(state);
+	m_fill_control->set_current_editing_state(state);
 }

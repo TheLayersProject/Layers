@@ -43,7 +43,7 @@ namespace Layers
 		/*!
 			Sets the state that is currently being editted.
 		*/
-		void set_current_editting_state(const QString& state);
+		void set_current_editing_state(const QString& state);
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event);

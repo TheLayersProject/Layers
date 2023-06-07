@@ -46,7 +46,7 @@ void ColorControl::disable_clicking(bool cond)
 	clicking_disabled = cond;
 }
 
-void ColorControl::set_current_editting_state(const QString& state)
+void ColorControl::set_current_editing_state(const QString& state)
 {
 	m_fill->set_state(state);
 }

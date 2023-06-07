@@ -40,11 +40,11 @@ void FillControl::set_attribute(Attribute* attribute)
 	m_dialog->set_attribute(attribute);
 }
 
-void FillControl::set_current_editting_state(const QString& state)
+void FillControl::set_current_editing_state(const QString& state)
 {
 	fill()->set_state(state);
 
-	m_dialog->set_current_editting_state(state);
+	m_dialog->set_current_editing_state(state);
 }
 
 bool FillControl::eventFilter(QObject* object, QEvent* event)
