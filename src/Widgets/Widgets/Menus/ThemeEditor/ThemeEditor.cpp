@@ -172,7 +172,7 @@ void ThemeEditor::handle_sidebar_width()
 		if (height() < m_sidebar->widget()->height())
 			m_sidebar->setFixedWidth(
 				m_sidebar->widget()->width() +
-				m_sidebar->vertical_scrollbar()->width());
+				m_sidebar->verticalScrollBar()->width());
 		else
 			m_sidebar->setFixedWidth(m_sidebar->widget()->width());
 	}

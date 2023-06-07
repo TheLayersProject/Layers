@@ -323,8 +323,6 @@ void WidgetEditor::init_attribute_editors()
 
 void WidgetEditor::init_attributes()
 {
-	m_fill->set_disabled();
-
 	m_show_all_button->fill()->set_value(QColor("#61ad50"));
 	// TODO:
 	//m_show_all_button->hover_fill()->set_value(QColor("#6fc65b"));

@@ -1779,47 +1779,6 @@
         }
     },
     "Main Window/Theme Editor/Sidebar": {
-        "border": {
-            "disabled": true,
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 4
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#c0c0c0"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "disabled": true,
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
     },
     "Main Window/Theme Editor/Sidebar/Horizontal ScrollBar": {
         "background_color": {
@@ -1919,8 +1878,7 @@
             }
         },
         "fill": {
-            "disabled": true,
-            "value": "#ffffff"
+            "value": "#c0c0c0"
         },
         "margins": {
             "bottom": {
@@ -4230,13 +4188,14 @@
                 "value": 0
             },
             "bottom_right": {
-                "value": 10
+                "value": 0
             },
+            "disabled": true,
             "top_left": {
                 "value": 0
             },
             "top_right": {
-                "value": 10
+                "value": 0
             }
         },
         "fill": {
