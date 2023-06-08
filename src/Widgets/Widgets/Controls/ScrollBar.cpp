@@ -10,7 +10,7 @@ ScrollBar::ScrollBar(QWidget* parent) : QScrollBar(parent)
 
 	set_name("ScrollBar");
 
-	update_theme_dependencies();
+	update_stylesheet();
 }
 
 ScrollBar::~ScrollBar()
@@ -19,11 +19,6 @@ ScrollBar::~ScrollBar()
 	delete m_handle_color;
 	delete m_corner_radii;
 	delete m_handle_corner_radii;
-}
-
-void ScrollBar::update_theme_dependencies()
-{
-	setStyleSheet(build_stylesheet());
 }
 
 Attribute* ScrollBar::background_color() const
@@ -46,9 +41,39 @@ CornerRadiiAttributes* ScrollBar::handle_corner_radii() const
 	return m_handle_corner_radii;
 }
 
-QString ScrollBar::build_stylesheet()
+void ScrollBar::init_attributes()
 {
-	return
+	m_corner_radii->bottom_right()->set_value(10.0);
+
+	m_handle_corner_radii->top_left()->set_value(5.0);
+	m_handle_corner_radii->top_right()->set_value(5.0);
+	m_handle_corner_radii->bottom_left()->set_value(5.0);
+	m_handle_corner_radii->bottom_right()->set_value(5.0);
+
+	m_attributes.insert({
+		{ "background_color", m_background_color },
+		{ "corner_radii", m_corner_radii },
+		{ "handle_corner_radii", m_handle_corner_radii },
+		{ "handle_color", m_handle_color }
+		});
+
+	connect(m_background_color, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_corner_radii, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_stylesheet(); });
+	connect(m_handle_color, &AbstractAttribute::changed, [this] { update_stylesheet(); });
+}
+
+void ScrollBar::update_stylesheet()
+{
+	setStyleSheet(
 		/* VERTICAL */
 		"QScrollBar:vertical {"
 		//"border-left: 1px solid black;"
@@ -135,35 +160,5 @@ QString ScrollBar::build_stylesheet()
 
 		"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {"
 		"background: none;"
-		"}";
-}
-
-void ScrollBar::init_attributes()
-{
-	m_corner_radii->bottom_right()->set_value(10.0);
-
-	m_handle_corner_radii->top_left()->set_value(5.0);
-	m_handle_corner_radii->top_right()->set_value(5.0);
-	m_handle_corner_radii->bottom_left()->set_value(5.0);
-	m_handle_corner_radii->bottom_right()->set_value(5.0);
-
-	m_attributes.insert({
-		{ "background_color", m_background_color },
-		{ "corner_radii", m_corner_radii },
-		{ "handle_corner_radii", m_handle_corner_radii },
-		{ "handle_color", m_handle_color }
-		});
-
-	connect(m_background_color, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->top_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->top_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->bottom_left(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_corner_radii->bottom_right(), &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
-	connect(m_handle_color, &AbstractAttribute::changed, [this] { update_theme_dependencies(); });
+		"}");
 }

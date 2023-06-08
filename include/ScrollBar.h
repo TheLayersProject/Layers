@@ -8,30 +8,50 @@
 
 namespace Layers
 {
+	/*!
+		A ScrollBar is a QScrollBar and a Themeable that provides a control
+		that allows the user to scroll to different parts of a widget in cases
+		where the widget is larger than the available area it is displayed.
+	*/
 	class ScrollBar : public QScrollBar, public Themeable
 	{
 		Q_OBJECT
 
 	public:
-		ScrollBar(QWidget* parent = 0);
+		/*!
+			Constructs a scroll bar.
+		*/
+		ScrollBar(QWidget* parent = nullptr);
+
 		~ScrollBar();
 
-		void update_theme_dependencies();
-
+		/*!
+			Returns a pointer to the background color attribute of the scroll
+			bar.
+		*/
 		Attribute* background_color() const;
 
+		/*!
+			Returns a pointer to the handle color attribute of the scroll bar.
+		*/
 		Attribute* handle_color() const;
 
+		/*!
+			Returns a pointer to the corner radii attributes of the scroll bar.
+		*/
 		CornerRadiiAttributes* corner_radii() const;
 
+		/*!
+			Returns a pointer to the corner radii attributes of the scroll
+			bar's handle.
+		*/
 		CornerRadiiAttributes* handle_corner_radii() const;
 
-	protected:
-		QString build_stylesheet();
-
+	private:
 		void init_attributes();
 
-	private:
+		void update_stylesheet();
+
 		Attribute* m_background_color{ new Attribute("background_color", QColor(Qt::gray)) };
 
 		Attribute* m_handle_color{ new Attribute("handle_color", QColor(Qt::white)) };
