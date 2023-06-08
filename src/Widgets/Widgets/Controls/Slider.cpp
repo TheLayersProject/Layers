@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 
+using Layers::Attribute;
 using Layers::Slider;
 
 Slider::Slider(QWidget* parent) :
@@ -25,51 +26,9 @@ void Slider::set_limit(int limit)
 	update_handle_pos();
 }
 
-void Slider::init_attributes()
+Attribute& Slider::value()
 {
-	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
-
-	m_corner_radii->top_left()->set_value(10.0); // Need to check these values
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
-
-	m_bar->fill()->set_value(QColor(Qt::lightGray));
-	m_bar->corner_radii()->top_left()->set_value(2.0);
-	m_bar->corner_radii()->top_right()->set_value(2.0);
-	m_bar->corner_radii()->bottom_left()->set_value(2.0);
-	m_bar->corner_radii()->bottom_right()->set_value(2.0);
-
-	m_handle->fill()->set_value(QColor(Qt::darkGray));
-	m_handle->corner_radii()->top_left()->set_value(3.0);
-	m_handle->corner_radii()->top_right()->set_value(3.0);
-	m_handle->corner_radii()->bottom_left()->set_value(3.0);
-	m_handle->corner_radii()->bottom_right()->set_value(3.0);
-}
-
-void Slider::set_value(double value)
-{
-	a_value.set_value(QVariant::fromValue(value));
-
-	emit value_changed(value);
-}
-
-void Slider::update_handle_pos()
-{
-	if (m_is_ratio_slider)
-	{
-		float range = float(width() - m_handle->width());
-
-		float ratio = 1 / range;
-
-		m_handle->move(a_value.as<double>() / ratio, m_handle->y());
-	}
-	else
-	{
-		double drag_increment = double(width() - m_handle->width()) / double(m_limit);
-
-		m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
-	}
+	return a_value;
 }
 
 bool Slider::eventFilter(QObject* object, QEvent* event)
@@ -110,41 +69,39 @@ bool Slider::eventFilter(QObject* object, QEvent* event)
 
 			double new_value = float(m_value_on_click) + (float(delta.x()) * ratio);
 
-			qDebug() << "New Value: " + QString::number(new_value);
-
 			if (new_value < 0.0)
 			{
-				if (a_value.as<double>() != 0)
+				if (a_value.as<double>() != 0.0)
 				{
-					set_value(0.0);
+					a_value.set_value(0.0);
 				}
 			}
 			else if (new_value > 1.0)
 			{
 				if (a_value.as<double>() != 1.0)
 				{
-					set_value(1.0);
+					a_value.set_value(1.0);
 				}
 			}
 			else
 			{
-				set_value(new_value);
+				a_value.set_value(new_value);
 			}
 		}
 		else
 		{
 			double drag_increment = double(m_bar->width() - m_handle->width()) / double(m_limit);
 
-			int new_value = m_value_on_click + int(delta.x() / drag_increment);
+			double new_value = m_value_on_click + float(delta.x() / drag_increment);
 
-			if (new_value < 0)
-				set_value(0);
+			if (new_value < 0.0)
+				a_value.set_value(0.0);
 
 			else if (new_value > m_limit)
-				set_value(m_limit);
+				a_value.set_value(double(m_limit));
 
 			else
-				set_value(new_value);
+				a_value.set_value(new_value);
 		}
 	}
 
@@ -166,10 +123,32 @@ void Slider::init()
 	m_handle->set_name("handle");
 	m_handle->set_margin(15, 5, 15, 5);
 
-	setup_layout();
+	init_layout();
 }
 
-void Slider::setup_layout()
+void Slider::init_attributes()
+{
+	connect(&a_value, &AbstractAttribute::changed, [this] { update_handle_pos(); });
+
+	m_corner_radii->top_left()->set_value(10.0); // Need to check these values
+	m_corner_radii->top_right()->set_value(10.0);
+	m_corner_radii->bottom_left()->set_value(10.0);
+	m_corner_radii->bottom_right()->set_value(10.0);
+
+	m_bar->fill()->set_value(QColor(Qt::lightGray));
+	m_bar->corner_radii()->top_left()->set_value(2.0);
+	m_bar->corner_radii()->top_right()->set_value(2.0);
+	m_bar->corner_radii()->bottom_left()->set_value(2.0);
+	m_bar->corner_radii()->bottom_right()->set_value(2.0);
+
+	m_handle->fill()->set_value(QColor(Qt::darkGray));
+	m_handle->corner_radii()->top_left()->set_value(3.0);
+	m_handle->corner_radii()->top_right()->set_value(3.0);
+	m_handle->corner_radii()->bottom_left()->set_value(3.0);
+	m_handle->corner_radii()->bottom_right()->set_value(3.0);
+}
+
+void Slider::init_layout()
 {
 	QVBoxLayout* main_layout = new QVBoxLayout;
 
@@ -180,4 +159,22 @@ void Slider::setup_layout()
 	setLayout(main_layout);
 
 	m_handle->raise();
+}
+
+void Slider::update_handle_pos()
+{
+	if (m_is_ratio_slider)
+	{
+		float range = float(width() - m_handle->width());
+
+		float ratio = 1 / range;
+
+		m_handle->move(a_value.as<double>() / ratio, m_handle->y());
+	}
+	else
+	{
+		double drag_increment = double(width() - m_handle->width()) / double(m_limit);
+
+		m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
+	}
 }

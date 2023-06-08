@@ -140,7 +140,7 @@ void ColorDialog::init_attributes()
 				QString::number(int(round(color.valueF() * 100.f))));
 		});
 
-	m_z_slider->a_value.entangle_with(m_color_plane->z_value());
+	m_z_slider->value().entangle_with(m_color_plane->z_value());
 }
 
 void ColorDialog::hsv_changed()

@@ -5,35 +5,50 @@
 
 namespace Layers
 {
+	/*!
+		A Slider is a Widget that provides a mechanism for a user to control a
+		numerical value within a set range.
+	*/
 	class Slider : public Widget
 	{
 		Q_OBJECT
 
-	signals:
-		void value_changed(int value);
-
 	public:
+		/*!
+			Constructs a slider delimited by a ratio (0:1).
+		*/
 		Slider(QWidget* parent = nullptr);
+
+		/*!
+			Constructs a slider with a fixed *limit*.
+		*/
 		Slider(int limit, QWidget* parent = nullptr);
 
+		/*!
+			Sets the upper limit of the slider.
+		*/
 		void set_limit(int limit);
 
-		void set_value(double value);
+		//void set_value(double value);
 
-		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
-
-	public slots:
-		void update_handle_pos();
+		/*!
+			Returns a reference to the value attribute of the slider.
+		*/
+		Attribute& value();
 
 	protected:
 		bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init_attributes();
-
 	private:
 		void init();
 
-		void setup_layout();
+		void init_attributes();
+
+		void init_layout();
+
+		void update_handle_pos();
+
+		Attribute a_value{ Attribute("value", QVariant::fromValue(0.0)) };
 
 		Widget* m_bar{ new Widget };
 		Widget* m_handle{ new Widget(this) };
