@@ -5,7 +5,8 @@
 using Layers::Attribute;
 using Layers::SvgRenderer;
 
-SvgRenderer::SvgRenderer(const QString& file_path, QObject* parent) : QSvgRenderer(parent)
+SvgRenderer::SvgRenderer(const QString& file_path, QObject* parent) :
+	QSvgRenderer(parent)
 {
 	init_attributes();
 
@@ -23,13 +24,13 @@ SvgRenderer::SvgRenderer(const QString& file_path, QObject* parent) : QSvgRender
 	load(m_svg_str.toUtf8());
 }
 
-SvgRenderer::SvgRenderer(const SvgRenderer& sr)
+SvgRenderer::SvgRenderer(const SvgRenderer& svg_renderer)
 {
 	init_attributes();
 
-	m_svg_str = sr.m_svg_str;
+	m_svg_str = svg_renderer.m_svg_str;
 
-	for (const QString& svg_element : sr.m_svg_elements)
+	for (const QString& svg_element : svg_renderer.m_svg_elements)
 		m_svg_elements.append(svg_element);
 
 	load(m_svg_str.toUtf8());
@@ -61,9 +62,12 @@ void SvgRenderer::update()
 {
 	for (int i = 0; i < m_svg_elements.size(); i++)
 	{
-		if (m_svg_elements[i].startsWith("<path") && m_svg_elements[i].contains("id="))
+		if (m_svg_elements[i].startsWith("<path") &&
+			m_svg_elements[i].contains("id="))
 		{
-			m_svg_elements[i].replace(m_svg_elements[i].indexOf("fill=") + 6, 7, m_common_color->as<QColor>().name());
+			m_svg_elements[i].replace(
+				m_svg_elements[i].indexOf("fill=") + 6, 7,
+				m_common_color->as<QColor>().name());
 		}
 	}
 

@@ -29,8 +29,6 @@ namespace Layers
 		*/
 		void set_limit(int limit);
 
-		//void set_value(double value);
-
 		/*!
 			Returns a reference to the value attribute of the slider.
 		*/
