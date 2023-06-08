@@ -1,5 +1,5 @@
-#ifndef MENULABELLAYER_H
-#define MENULABELLAYER_H
+#ifndef TAB_H
+#define TAB_H
 
 #include "Button.h"
 #include "Graphic.h"
@@ -7,20 +7,44 @@
 
 namespace Layers
 {
+	/*!
+		A Tab is a Widget that labels another widget and can be clicked by the
+		user to switch between different widgets.
+	*/
 	class Tab : public Widget
 	{
 		Q_OBJECT
 
 	signals:
+		/*!
+			This signal is emitted when the tab is clicked.
+		*/
 		void clicked();
+
+		/*!
+			This signal is emitted when the tab is closed.
+		*/
 		void closed();
 
 	public:
+		/*!
+			Constructs a tab labeled with an *icon* and *text*.
+		*/
 		Tab(const Graphic& icon, const QString& text, QWidget* parent = nullptr);
+
+		/*!
+			Constructs a tab labeled with *text*.
+		*/
 		Tab(const QString& text, QWidget* parent = nullptr);
 
+		/*!
+			Returns a pointer to the tab's close button.
+		*/
 		Button* close_button() const;
 
+		/*!
+			Returns a pointer to the tab's text label.
+		*/
 		Label* text_label() const;
 
 	protected:
@@ -42,4 +66,4 @@ namespace Layers
 	};
 }
 
-#endif // MENULABELLAYER_H
+#endif // TAB_H
