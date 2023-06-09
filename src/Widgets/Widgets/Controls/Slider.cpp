@@ -113,7 +113,7 @@ void Slider::init()
 	init_attributes();
 
 	installEventFilter(this);
-	setFixedSize(244, 40);
+	setFixedHeight(40);
 
 	m_bar->setFixedHeight(5);
 	m_bar->set_name("bar");
