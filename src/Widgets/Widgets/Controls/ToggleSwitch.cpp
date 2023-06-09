@@ -21,7 +21,7 @@ ToggleSwitch::ToggleSwitch(bool vertical, QWidget* parent) :
 	update_spacer_size();
 	m_spacer->hide();
 
-	setup_layout();
+	init_layout();
 
 	set_state("Untoggled");
 }
@@ -56,7 +56,8 @@ void ToggleSwitch::toggle(bool emit_toggled_event)
 		m_spacer->hide();
 	}
 
-	if (emit_toggled_event) emit toggled_event();
+	if (emit_toggled_event)
+		emit toggled_event();
 
 	update();
 }
@@ -65,38 +66,6 @@ bool ToggleSwitch::toggled() const
 {
 	if (state() == "Toggled") return true;
 	else return false;
-}
-
-void ToggleSwitch::update_layout_margins()
-{
-	int b_thickness = border()->thickness()->as<double>();
-
-	if (m_layout_v)
-		m_layout_v->setContentsMargins(
-			0, m_margins->top()->as<double>() + b_thickness + a_padding_top.as<double>(),
-			0, a_padding_bottom.as<double>() + b_thickness + m_margins->bottom()->as<double>());
-	else if (m_layout_h)
-		m_layout_h->setContentsMargins(
-			margins()->left()->as<double>() + b_thickness + a_padding_left.as<double>(), 0,
-			a_padding_right.as<double>() + b_thickness + m_margins->right()->as<double>(), 0);
-}
-
-void ToggleSwitch::update_spacer_size()
-{
-	int b_thickness = border()->thickness()->as<double>();
-
-	if (m_vertical)
-	{
-		m_spacer->setFixedSize(
-			0, height() - m_margins->top()->as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - m_margins->bottom()->as<double>()
-		);
-	}
-	else
-	{
-		m_spacer->setFixedSize(
-			width() - m_margins->left()->as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - m_margins->right()->as<double>(), 0
-		);
-	}
 }
 
 bool ToggleSwitch::eventFilter(QObject* object, QEvent* event)
@@ -151,7 +120,7 @@ void ToggleSwitch::init_attributes()
 	m_spacer->fill()->set_value(QColor(Qt::blue));
 }
 
-void ToggleSwitch::setup_layout()
+void ToggleSwitch::init_layout()
 {
 	if (m_vertical)
 	{
@@ -182,5 +151,37 @@ void ToggleSwitch::setup_layout()
 		m_layout_h->setAlignment(m_square, Qt::AlignVCenter);
 
 		setLayout(m_layout_h);
+	}
+}
+
+void ToggleSwitch::update_layout_margins()
+{
+	int b_thickness = border()->thickness()->as<double>();
+
+	if (m_layout_v)
+		m_layout_v->setContentsMargins(
+			0, m_margins->top()->as<double>() + b_thickness + a_padding_top.as<double>(),
+			0, a_padding_bottom.as<double>() + b_thickness + m_margins->bottom()->as<double>());
+	else if (m_layout_h)
+		m_layout_h->setContentsMargins(
+			margins()->left()->as<double>() + b_thickness + a_padding_left.as<double>(), 0,
+			a_padding_right.as<double>() + b_thickness + m_margins->right()->as<double>(), 0);
+}
+
+void ToggleSwitch::update_spacer_size()
+{
+	int b_thickness = border()->thickness()->as<double>();
+
+	if (m_vertical)
+	{
+		m_spacer->setFixedSize(
+			0, height() - m_margins->top()->as<double>() - b_thickness - a_padding_top.as<double>() - m_square->height() - a_padding_bottom.as<double>() - b_thickness - m_margins->bottom()->as<double>()
+		);
+	}
+	else
+	{
+		m_spacer->setFixedSize(
+			width() - m_margins->left()->as<double>() - b_thickness - a_padding_left.as<double>() - m_square->width() - a_padding_right.as<double>() - b_thickness - m_margins->right()->as<double>(), 0
+		);
 	}
 }
