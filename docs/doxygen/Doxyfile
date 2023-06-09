@@ -1025,11 +1025,12 @@ EXCLUDE                = .gitattributes \
                          Layers.vcxproj.user \
                          LICENSE \
                          .git \
+                         .github \
                          .vs \
                          docs \
                          fonts \
                          image-sequences \
-                         svgs \
+                         images \
                          themes \
                          x64 \
                          ../../x64
@@ -1397,16 +1398,7 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = img/change_theme.mp4 \
-                         img/create_new_theme.mp4 \
-                         img/demo_dark.svg \
-                         img/open_settings_menu.mp4 \
-                         img/rename_theme.mp4 \
-                         img/tab_bar.svg \
-                         img/titlebar_buttons.png \
-                         img/titlebar_layout.svg \
-                         img/window_layout.svg \
-                         img/themeable_tag_example.png
+HTML_EXTRA_FILES       = img/themeable_tag_example.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
