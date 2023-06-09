@@ -4,13 +4,13 @@
             "fill": {
                 "value": {
                     "gradient": [
-                        "0:#c0c0c0",
-                        "1:#ffffff"
+                        "0:#202225",
+                        "1:#36393f"
                     ]
                 }
             },
             "thickness": {
-                "value": 10
+                "value": 3
             }
         },
         "corner_radii": {
@@ -28,12 +28,13 @@
             }
         },
         "fill": {
-            "value": "#ffffff"
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
                 "value": 0
             },
+            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -119,7 +120,7 @@
             }
         },
         "fill": {
-            "value": "#c0c0c0"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -136,7 +137,7 @@
             }
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Color Unit Label": {
@@ -145,7 +146,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Hue Label": {
@@ -154,7 +155,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Hue Line Editor": {
@@ -181,7 +182,7 @@
             }
         },
         "fill": {
-            "value": "#c0c0c0"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -198,16 +199,16 @@
             }
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Hue Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#161c22"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#768199"
             },
             "thickness": {
                 "values": {
@@ -218,8 +219,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#9daccc",
+                "Inactive": "#313640"
             }
         }
     },
@@ -229,7 +230,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Saturation Label": {
@@ -238,7 +239,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Saturation Line Editor": {
@@ -265,7 +266,7 @@
             }
         },
         "fill": {
-            "value": "#c0c0c0"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -282,16 +283,16 @@
             }
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Saturation Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#161c22"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#768199"
             },
             "thickness": {
                 "values": {
@@ -302,8 +303,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#9daccc",
+                "Inactive": "#313640"
             }
         }
     },
@@ -313,11 +314,12 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Titlebar": {
         "border": {
+            "disabled": true,
             "fill": {
                 "value": "#a0a0a4"
             },
@@ -327,25 +329,26 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
-                "value": 6
+                "value": 7
             },
             "top_right": {
-                "value": 6
+                "value": 7
             }
         },
         "fill": {
-            "value": "#ffffff"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
                 "value": 0
             },
+            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -359,6 +362,7 @@
     },
     "Color Dialog/Titlebar/Exit Button": {
         "border": {
+            "disabled": true,
             "fill": {
                 "value": "#a0a0a4"
             },
@@ -373,6 +377,7 @@
             "bottom_right": {
                 "value": 0
             },
+            "disabled": true,
             "top_left": {
                 "value": 0
             },
@@ -388,6 +393,7 @@
             "bottom": {
                 "value": 0
             },
+            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -400,12 +406,16 @@
         }
     },
     "Color Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        }
     },
     "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
             "values": {
-                "Selected": "#c0c0c0",
-                "Unselected": "#808080"
+                "Selected": "#e33036",
+                "Unselected": "#6a6a6a"
             }
         }
     },
@@ -415,7 +425,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#c0c0c0"
         }
     },
     "Color Dialog/Value Label": {
@@ -424,7 +434,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Value Line Editor": {
@@ -451,7 +461,7 @@
             }
         },
         "fill": {
-            "value": "#c0c0c0"
+            "value": "#202225"
         },
         "margins": {
             "bottom": {
@@ -468,16 +478,16 @@
             }
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Color Dialog/Value Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#161c22"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#768199"
             },
             "thickness": {
                 "values": {
@@ -488,8 +498,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#9daccc",
+                "Inactive": "#313640"
             }
         }
     },
@@ -499,7 +509,7 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "value": "#000000"
+            "value": "#b9bbbe"
         }
     },
     "Create Theme Dialog": {
@@ -709,10 +719,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
@@ -918,10 +928,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
@@ -4963,9 +4973,6 @@
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
         "common_color": {
             "value": "#b9bbbe"
-        },
-        "use_common_color": {
-            "value": true
         }
     },
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
@@ -5011,10 +5018,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
@@ -5085,6 +5092,12 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
         }
     },
     "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -5224,10 +5237,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7

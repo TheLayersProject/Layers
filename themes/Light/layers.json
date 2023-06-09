@@ -10,7 +10,7 @@
                 }
             },
             "thickness": {
-                "value": 10
+                "value": 3
             }
         },
         "corner_radii": {
@@ -34,6 +34,7 @@
             "bottom": {
                 "value": 0
             },
+            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -203,11 +204,11 @@
     },
     "Color Dialog/Hue Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#222222"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#4f4f4f"
             },
             "thickness": {
                 "values": {
@@ -218,8 +219,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#b3b3b3",
+                "Inactive": "#8c8c8c"
             }
         }
     },
@@ -287,11 +288,11 @@
     },
     "Color Dialog/Saturation Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#222222"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#4f4f4f"
             },
             "thickness": {
                 "values": {
@@ -302,8 +303,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#b3b3b3",
+                "Inactive": "#8c8c8c"
             }
         }
     },
@@ -318,6 +319,7 @@
     },
     "Color Dialog/Titlebar": {
         "border": {
+            "disabled": true,
             "fill": {
                 "value": "#a0a0a4"
             },
@@ -327,25 +329,26 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
-                "value": 6
+                "value": 7
             },
             "top_right": {
-                "value": 6
+                "value": 7
             }
         },
         "fill": {
-            "value": "#ffffff"
+            "value": "#d6d6d6"
         },
         "margins": {
             "bottom": {
                 "value": 0
             },
+            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -400,6 +403,10 @@
         }
     },
     "Color Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
+        }
     },
     "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
@@ -473,11 +480,11 @@
     },
     "Color Dialog/Value Radio Button": {
         "active_dot_fill": {
-            "value": "#001122"
+            "value": "#222222"
         },
         "border": {
             "fill": {
-                "value": "#0077b2"
+                "value": "#4f4f4f"
             },
             "thickness": {
                 "values": {
@@ -488,8 +495,8 @@
         },
         "fill": {
             "values": {
-                "Active": "#00aaff",
-                "Inactive": "#112942"
+                "Active": "#b3b3b3",
+                "Inactive": "#8c8c8c"
             }
         }
     },
@@ -918,10 +925,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
@@ -4963,9 +4970,6 @@
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
         "common_color": {
             "value": "#000000"
-        },
-        "use_common_color": {
-            "value": true
         }
     },
     "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
@@ -5011,10 +5015,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
@@ -5082,6 +5086,12 @@
             "top": {
                 "value": 0
             }
+        }
+    },
+    "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic": {
+        "fill": {
+            "disabled": true,
+            "value": "#ffffff"
         }
     },
     "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -5221,10 +5231,10 @@
         },
         "corner_radii": {
             "bottom_left": {
-                "value": 0
+                "value": 7
             },
             "bottom_right": {
-                "value": 0
+                "value": 7
             },
             "top_left": {
                 "value": 7
