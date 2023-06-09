@@ -3,6 +3,7 @@
 #include "calculate.h"
 #include "Dialog.h"
 #include "MainWindow.h"
+#include "RadioButton.h"
 
 #include "ThemeEditor.h"
 
@@ -73,6 +74,7 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 		QList<WidgetButton*> label_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> line_editor_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> menu_widget_buttons = QList<WidgetButton*>();
+		QList<WidgetButton*> radio_button_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> slider_widget_buttons = QList<WidgetButton*>();
 		QList<WidgetButton*> window_widget_buttons = QList<WidgetButton*>();
 
@@ -131,8 +133,8 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 				else if (dynamic_cast<LineEditor*>(child_themeable))
 					line_editor_widget_buttons.append(widget_button);
 
-				//else if (dynamic_cast<Menu*>(child_themeable))
-				//	menu_widget_buttons.append(widget_button);
+				else if (dynamic_cast<RadioButton*>(child_themeable))
+					radio_button_widget_buttons.append(widget_button);
 
 				else if (dynamic_cast<MiniSlider*>(child_themeable))
 					slider_widget_buttons.append(widget_button);
@@ -170,10 +172,10 @@ WidgetEditor::WidgetEditor(Themeable* themeable, ThemeEditor* parent_theme_edito
 		else if (!line_editor_widget_buttons.isEmpty())
 			organized_widgets["Line Editors"] = new WidgetButtonGroup("Line Editors", line_editor_widget_buttons);
 
-		if (menu_widget_buttons.size() == 1)
-			organized_widgets[menu_widget_buttons.first()->label_text()] = menu_widget_buttons.first();
-		else if (!menu_widget_buttons.isEmpty())
-			organized_widgets["Menus"] = new WidgetButtonGroup("Menus", menu_widget_buttons);
+		if (radio_button_widget_buttons.size() == 1)
+			organized_widgets[radio_button_widget_buttons.first()->label_text()] = radio_button_widget_buttons.first();
+		else if (!radio_button_widget_buttons.isEmpty())
+			organized_widgets["Radio Buttons"] = new WidgetButtonGroup("Radio Buttons", radio_button_widget_buttons);
 
 		if (slider_widget_buttons.size() == 1)
 			organized_widgets[slider_widget_buttons.first()->label_text()] = slider_widget_buttons.first();
