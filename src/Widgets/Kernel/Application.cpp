@@ -411,7 +411,7 @@ void Application::init_themes()
 	if (m_themes.contains(active_theme_id))
 		apply_theme(*m_themes[active_theme_id]);
 	else
-		apply_theme(*m_themes["Light"]);
+		apply_theme(*m_themes["Dark"]);
 }
 
 void Application::init_latest_version_tag()
