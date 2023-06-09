@@ -25,9 +25,9 @@ void ThemeComboBox::clear()
 	m_model->clear();
 }
 
-void ThemeComboBox::addItem(Theme* value)
+void ThemeComboBox::addItem(Theme* theme)
 {
-	m_model->append(value);
+	m_model->append(theme);
 }
 
 bool ThemeComboBox::eventFilter(QObject* object, QEvent* event)

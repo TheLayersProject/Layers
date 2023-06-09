@@ -7,15 +7,30 @@ namespace Layers
 {
 	class ThemeComboBoxItemModel;
 
+	/*!
+		A ThemeComboBox is a ComboBox that displays Theme items.
+
+		Each item displays two pieces of theme metadata: the theme's name and
+		its UUID.
+	*/
 	class ThemeComboBox : public ComboBox
 	{
 		Q_OBJECT
 
 	public:
+		/*!
+			Constructs a theme combo box.
+		*/
 		ThemeComboBox(QWidget* parent = nullptr);
 
-		void addItem(Theme* value);
+		/*!
+			Adds a theme to the combo box's item model.
+		*/
+		void addItem(Theme* theme);
 
+		/*!
+			Clears the combo box's item model.
+		*/
 		void clear();
 
 	protected:
