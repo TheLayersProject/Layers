@@ -55,7 +55,7 @@ namespace Layers
 		~~~~~~~~~~~~~{.c}
 		// Example from Dialog::init_titlebar()
 
-		m_exit_button->set_name("exit_button");
+		m_exit_button->set_name("Exit Button");
 		~~~~~~~~~~~~~
 
 		### Prefix Assignment
