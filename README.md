@@ -35,7 +35,7 @@ These are the steps to build Layers from source-code with Microsoft Visual Studi
     - Exit VS for the extension to install
 3. Install Qt 6.5.x for open source use
     - Download [Qt Online Installer](https://www.qt.io/download-qt-installer-oss) and run it
-    - When you get to the section labeled *Installation Folder*, choose the *'Custom Installation'* option
+    - When you get to the section labeled *Installation Folder*, choose the *Custom Installation* option
     - When you get to the section labeled *Select Components*, select the following options:
         - *Qt > Qt 6.5.x > MSVC 2019 64-bit*
         - *Qt > Developer and Designer Tools > OpenSSL 1.1.1q Toolkit*
@@ -43,8 +43,9 @@ These are the steps to build Layers from source-code with Microsoft Visual Studi
     - Launch VS
     - From the menu bar, select *Extensions > Qt VS Tools > Qt Versions*
     - Under *Version*, click the option to *add new Qt version*
-    - Label the version as *'6.5'*
-    - Under *Path*, click the folder icon and browse to the qmake executable from the Qt installation. It should be in the directory *'...\Qt\6.5.x\msvc2019_64\bin'*
+    - Label the version as *6.5*
+    - Under *Path*, click the folder icon and browse to the qmake executable from the Qt installation. It should be in the following directory
+        - <i>...\Qt\6.5.x\msvc2019_64\bin</i>
 5. Build Layers
     - Clone this project
     - Open the project file *Layers.vcxproj*
