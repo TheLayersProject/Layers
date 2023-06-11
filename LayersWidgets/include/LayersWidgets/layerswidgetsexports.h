@@ -1,0 +1,16 @@
+#ifndef LAYERSWIDGETSEXPORTS_H
+#define LAYERSWIDGETSEXPORTS_H
+
+#include <QtCore/qglobal.h>
+
+#ifndef BUILD_STATIC
+# if defined(LAYERS_WIDGETS_LIB)
+#  define LAYERS_WIDGETS_EXPORT Q_DECL_EXPORT
+# else
+#  define LAYERS_WIDGETS_EXPORT Q_DECL_IMPORT
+# endif
+#else
+# define LAYERS_WIDGETS_EXPORT
+#endif
+
+#endif // LAYERSWIDGETSEXPORTS_H

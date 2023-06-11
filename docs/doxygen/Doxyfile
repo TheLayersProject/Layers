@@ -1018,22 +1018,25 @@ RECURSIVE              = YES
 
 EXCLUDE                = .gitattributes \
                          .gitignore \
-                         Doxyfile \
                          Layers.sln \
-                         Layers.vcxproj \
-                         Layers.vcxproj.filters \
-                         Layers.vcxproj.user \
                          LICENSE \
                          .git \
                          .github \
                          .vs \
                          docs \
-                         fonts \
-                         image-sequences \
-                         images \
-                         themes \
                          x64 \
-                         ../../x64
+                         ../../LayersCore/LayersCore.vcxproj \
+                         ../../LayersCore/LayersCore.vcxproj.filters \
+                         ../../LayersCore/LayersCore.vcxproj.user \
+                         ../../LayersCore/x64 \
+                         ../../LayersWidgets/LayersWidgets.vcxproj \
+                         ../../LayersWidgets/LayersWidgets.vcxproj.filters \
+                         ../../LayersWidgets/LayersWidgets.vcxproj.user \
+                         ../../LayersWidgets/x64 \
+                         ../../LayersWidgets/fonts \
+                         ../../LayersWidgets/images \
+                         ../../LayersWidgets/image-sequences \
+                         ../../LayersWidgets/themes
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
