@@ -2,69 +2,72 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.16.0] - 2023-06-12
 
 ### Added
 
-- Implemented the Data class which stores either a single variant or a map of state-variant pairs.
-- Implemented the AbstractAttribute class which now serves as the abstract parent class of Attribute and AttributeGroup.
+- The Layers Demo applicaton has been integrated with Layers. 
+- Implemented the LData class which stores either a single variant or a map of state-variant pairs.
+- Implemented the LAbstractAttribute class which now serves as the abstract parent class of LAttribute and LAttributeGroup.
 - Implemented theme file separation and theme directories.
 - Implemented theme meta-loading. When an application is launched, instead of fully loading all the themes, only their metadata is loaded. Only the active theme is fully loaded.
 - Added icons to the dialogs.
-- Implemented WidgetButton and WidgetButtonGroup classes which improve the design and organization of widget buttons in widget editors.
-- Implemented the ThemeableBox class which generalizes functionality that was shared between the Widget class and the various dialog classes.
-- Implemented the Dialog class which further generalizes the dialog subclasses.
-- Implemented the ThemeCompatibilityCautionDialog which is supposed to alert users when a theme lacks an implementation for the app they are using. This does not mean that they can't apply the theme. If they do, an implementation will be obtained from the last compatible ancestor theme.
-- Implemented a ScrollBar class that is themeable and customizable.
-- Implemented the ColorPlane class which serves as a two-dimensional slider for selecting a color from an HSV cylinder. It displays a cross-section of the cylinder and can be linked with an external slider to allow for manipulation of the plane's z-value.
-- Implemented the ColorDialog class which utilizes the new ColorPlane.
-- Implemented the FillDialog class to separate its logic from the FillControl class.
-- Implemented a new TabBar class that replaces the MenuLabelLayer class.
-- Implemented TableView class which provides a themeable table.
-- Implemented SvgRenderer class which provides a new themeable SVG mechanism.
-- Implemented the Navigator class which utilizes buttons that label a hierarchy of items, allowing the user to navigate between the items in the hierarchy.
-- Implemented RadioButton class.
-- Implemented RadioButtonPool class which helps to ensure that only one radio button in a collection can be enabled at a time.
+- Implemented LWidgetButton and LWidgetButtonGroup classes which improve the design and organization of widget buttons in widget editors.
+- Implemented the LThemeableBox class which generalizes functionality that was shared between the LWidget class and the various dialog classes.
+- Implemented the LDialog class which further generalizes the dialog subclasses.
+- Implemented the LThemeCompatibilityCautionDialog which is supposed to alert users when a theme lacks an implementation for the app they are using. This does not mean that they can't apply the theme. If they do, an implementation will be obtained from the last compatible ancestor theme.
+- Implemented a LScrollBar class that is themeable and customizable.
+- Implemented the LColorPlane class which serves as a two-dimensional slider for selecting a color from an HSV cylinder. It displays a cross-section of the cylinder and can be linked with an external slider to allow for manipulation of the plane's z-value.
+- Implemented the LColorDialog class which utilizes the new LColorPlane.
+- Implemented the LFillDialog class to separate its logic from the LFillControl class.
+- Implemented a new LTabBar class that replaces the LMenuLabelLayer class.
+- Implemented LTableView class which provides a themeable table.
+- Implemented LSvgRenderer class which provides a new themeable SVG mechanism.
+- Implemented the LNavigator class which utilizes buttons that label a hierarchy of items, allowing the user to navigate between the items in the hierarchy.
+- Implemented LRadioButton class.
+- Implemented LRadioButtonPool class which helps to ensure that only one radio button in a collection can be enabled at a time.
 
 ### Changed
 
+- Layers has been split into two sub-projects, LayersCore and LayersWidgets. Developers may choose to use LayersCore classes independently or with LayersWidgets classes.
+- LayersCore and LayersWidgets are now built as dynamic link libraries.
+- Class identifiers are now prefixed with the letter 'L'.
 - Renamed several classes and functions:
-    - Window ➔ MainWindow
-    - Titlebar ➔ MainWindowTitlebar
-    - CustomizeMenu ➔ ThemeEditor
-    - CustomizePanel ➔ WidgetEditor
-    - AttributeWidget ➔ AttributeEditor
-    - GradientSelectionDialog ➔ GradientDialog
-    - Application::current_theme() ➔ Application::active_theme()
-    - Themeable::replace_all_attributes_with() ➔ Themeable::entangle_with()
-    - Themeable::store_child_themeable_pointer() ➔ Themeable::add_child_themeable_pointer()
-    - AbstractAttribute::value_changed() ➔ AbstractAttribute::changed()
+    - LWindow ➔ LMainWindow
+    - LTitlebar ➔ LMainWindowTitlebar
+    - LCustomizeMenu ➔ LThemeEditor
+    - LCustomizePanel ➔ LWidgetEditor
+    - LAttributeWidget ➔ LAttributeEditor
+    - LGradientSelectionDialog ➔ LGradientDialog
+    - LApplication::current_theme() ➔ LApplication::active_theme()
+    - LThemeable::replace_all_attributes_with() ➔ LThemeable::entangle_with()
+    - LThemeable::store_child_themeable_pointer() ➔ LThemeable::add_child_themeable_pointer()
+    - LAbstractAttribute::value_changed() ➔ LAbstractAttribute::changed()
 - Applications and themes now use UUIDs to prevent name-clash.
 - Attribute groups are now recognized by themes.
 - Attribute groups are now disableable.
 - The term 'entangle' is now used to describe the action of forcing one attribute to discard its data and use the data of another attribute.
 - Capitalized attribute names are now derived.
-- Attribute now emits value_changed() if the state is set.
+- LAttribute now emits changed() if the state is set.
 - Member attributes are now private with public access functions.
 - Themes are now stored in the ".../AppData/Local/Layers" directory which has been reinstated to aid multiple app support for themes.
-- The functionality to load theme implementation files has been moved from the Theme constructor into a separate member function, Theme::load_document(). It can be called multiple times to load multiple implementation files into a single Theme instance.
+- The functionality to load theme implementation files has been moved from the LTheme constructor into a separate member function, LTheme::load_document(). It can be called multiple times to load multiple implementation files into a single LTheme instance.
 - Default themes are now stored in theme directories identified by resource files.
 - Theme lineage is now tracked with theme metadata. 
-- MainWindow now uses Themeable::assign_tag_prefixes() instead of an override implementation.
-- Themeable::set_functionality_disabled() now propagates to the caller's children.
+- LMainWindow now uses LThemeable::assign_tag_prefixes() instead of an override implementation.
+- LThemeable::set_functionality_disabled() now propagates to the caller's children.
 - The theme editor now opens up to a widget editor pertaining to the app instead of the window.
 - A second window is no longer automatically initialized at launch. When selecting child widgets from the app's widget editor, another instance of the child widget is initialized and set as the theme editor's preview widget.
 - The dialogs are now app child widgets.
 - All top-level attribute editors now have a disable toggle switch. The disable toggle switch has been realigned to the top-left corner of attribute editors.
 - Replaced the Layers combobox class with a new one that implements a QComboBox subclass and uses the model-view design pattern.
-- Graphics now support padding.
 - Reorganized files and directories. Privatized several classes.
-- init_child_themeable_list() has been replaced with new functionality that allows a Themeable to autonomously generate a list of associated child Themeables.
-- The Graphic class has been reworked to incorporate the functionality of the ImageSequenceLabel class and make use of the SvgRenderer class.
+- init_child_themeable_list() has been replaced with new functionality that allows a LThemeable to autonomously generate a list of associated child LThemeables.
+- The LGraphic class has been reworked to incorporate the functionality of the ImageSequenceLabel class and make use of the LSvgRenderer class.
 - Simplified how multi-valued attributes are stored in theme files.
 - Simplified how gradients are stored in theme files.
-- The Application will now load any fonts found in the ":/fonts" resource directory.
-- GitHubRepo can now be constructed using either a full URL or shortened one.
+- LApplication will now load any fonts found in the ":/fonts" resource directory.
+- LGitHubRepo can now be constructed using either a full URL or shortened one.
 - The minimum size suggestion is now 40px instead of 45px. It works better as an even number, and the smaller size will allow for more widgets to fit together in smaller spaces. This has been updated throughout the library.
 - Simplified the calculation for the inner-radius of borders with rounded corners.
 
@@ -75,14 +78,14 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
-- Removed the SVG class in favor of the SvgRenderer class.
+- Removed the SVG class in favor of the LSvgRenderer class.
 - Removed the ImageSequenceLabel class since its functionality is now handled by the Graphic class.
-- Removed Theme::consume() in favor of Theme::load_document().
-- Removed Theme::copy().
-- Removed Themeable::apply_theme_attributes() from all Themeable subclasses. A generic version is now included in Themeable::apply_theme().
+- Removed LTheme::consume() in favor of LTheme::load_document().
+- Removed LTheme::copy().
+- Removed LThemeable::apply_theme_attributes() from all Themeable subclasses. A generic version is now included in LThemeable::apply_theme().
 - Removed the 'layers' prefix from themeable tags.
-- Removed corner color, hover fill, and outline color attributes from ThemeableBox due to low usage.
-- Removed auto_touch_target_compliance parameter from Button constructors. Minimum sizing will be a suggestion from now on.
+- Removed corner color, hover fill, and outline color attributes from LThemeableBox due to low usage.
+- Removed auto_touch_target_compliance parameter from LButton constructors. Minimum sizing will be a suggestion from now on.
 
 ## [0.15.0] - 2022-11-29
 
