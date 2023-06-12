@@ -8,7 +8,7 @@ LayersDemoWindow::LayersDemoWindow(bool preview, QWidget* parent) :
 	LMainWindow(preview, parent)
 {
 	set_central_widget(new LayersDemo);
-	setWindowIcon(QIcon("layers_2d_logo.png"));
+	setWindowIcon(QIcon(":/images/layers_2d.png"));
 }
 
 LThemeable* LayersDemoWindow::clone()
