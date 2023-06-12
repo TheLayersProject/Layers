@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/themes/Dark">
+        <file alias="layers_demo_f97aae7f-2076-4918-93ce-19321584f675.json">dark.json</file>
+    </qresource>
+    <qresource prefix="/themes/Light">
+        <file alias="layers_demo_f97aae7f-2076-4918-93ce-19321584f675.json">light.json</file>
+    </qresource>
+</RCC>

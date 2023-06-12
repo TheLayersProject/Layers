@@ -44,7 +44,6 @@ CMakeLists.txt.user*
 
 # Visual Studio
 .vs/
-*.sln
 x64/
 debug/
 release/
