@@ -53,7 +53,9 @@ To test Layers, select *Debug > Start Debugging* from the menu bar. This will la
 
 ### Documentation
 
-Layers documentation is still in progress.  Once it is completed, a link will be provided here.
+Documentation for Layers can be found at [here](https://huntermalm.github.io/Layers/).
+
+**NOTE: Layers Documentation is NOT 100% complete at this time!**
 
 ## Authors
 
