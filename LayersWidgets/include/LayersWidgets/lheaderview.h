@@ -3,46 +3,46 @@
 
 #include <QHeaderView>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include <LayersCore/lthemeable.h>
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+/*!
+	An LHeaderView is a QHeaderView and a LThemeable that is customizable.
+*/
+class LAYERS_WIDGETS_EXPORT LHeaderView : public QHeaderView, public LThemeable
 {
+	Q_OBJECT
+
+public:
 	/*!
-		A LHeaderView is a QHeaderView and a LThemeable that is customizable.
+		Constructs a header view with a specified *orientation*.
 	*/
-	class LAYERS_WIDGETS_EXPORT LHeaderView : public QHeaderView, public LThemeable
-	{
-		Q_OBJECT
+	LHeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
 
-	public:
-		/*!
-			Constructs a header view with a specified *orientation*.
-		*/
-		LHeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
+	// TODO: Create a destructor; free the attributes
 
-		// TODO: Create a destructor; free the attributes
+private:
+	void init_attributes();
 
-	private:
-		void init_attributes();
+	void update_stylesheet();
 
-		void update_stylesheet();
+	LBorderAttributes* m_border{ new LBorderAttributes };
 
-		LBorderAttributes* m_border{ new LBorderAttributes };
+	LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
 
-		LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
+	LAttribute* m_fill{ new LAttribute(
+		"fill",
+		QColor(Qt::white)
+		) };
 
-		LAttribute* m_fill{ new LAttribute(
-			"fill",
-			QColor(Qt::white)
-			) };
-
-		LAttribute* m_text_color{ new LAttribute(
-			"text_color",
-			QColor(Qt::black)
-			) };
-	};
-}
+	LAttribute* m_text_color{ new LAttribute(
+		"text_color",
+		QColor(Qt::black)
+		) };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LHEADERVIEW_H  

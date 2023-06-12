@@ -3,48 +3,48 @@
 
 #include <QTableView>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include <LayersCore/lthemelineagemodel.h>
 
 #include "ldialog.h"
 #include "ltableview.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LAYERS_WIDGETS_EXPORT LThemeCompatibilityCautionDialog : public LDialog
 {
-	class LAYERS_WIDGETS_EXPORT LThemeCompatibilityCautionDialog : public LDialog
-	{
-		Q_OBJECT
+	Q_OBJECT
 
-	public:
-		LThemeCompatibilityCautionDialog(QWidget* parent = nullptr);
+public:
+	LThemeCompatibilityCautionDialog(QWidget* parent = nullptr);
 
-		virtual LThemeable* clone() override;
+	virtual LThemeable* clone() override;
 
-		void set_lineage_table_data(const QStringList& lineage_list);
+	void set_lineage_table_data(const QStringList& lineage_list);
 
-		void set_theme_name(const QString& theme_name);
+	void set_theme_name(const QString& theme_name);
 
-	protected:
-		/*!
-			Overrides the QWidget::eventFilter() to handle widget hover coloring
-		*/
-		//bool eventFilter(QObject* object, QEvent* event) override;
+protected:
+	/*!
+		Overrides the QWidget::eventFilter() to handle widget hover coloring
+	*/
+	//bool eventFilter(QObject* object, QEvent* event) override;
 
-		void init_attributes();
+	void init_attributes();
 
-	private:
-		void init_layout();
+private:
+	void init_layout();
 
-		void init_lineage_table();
+	void init_lineage_table();
 
-		LLabel* m_message_label{ new LLabel };
-		LLabel* m_table_label{ new LLabel };
+	LLabel* m_message_label{ new LLabel };
+	LLabel* m_table_label{ new LLabel };
 
-		LTableView* m_lineage_table{ new LTableView };
+	LTableView* m_lineage_table{ new LTableView };
 
-		LThemeLineageModel m_theme_lineage_model;
-	};
-}
+	LThemeLineageModel m_theme_lineage_model;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LTHEMECOMPATIBILITYCAUTIONDIALOG_H  

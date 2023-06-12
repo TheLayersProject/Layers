@@ -1,5 +1,5 @@
-#ifndef LAYERSCOREEXPORTS_H
-#define LAYERSCOREEXPORTS_H
+#ifndef LAYERSCORE_EXPORTS_H
+#define LAYERSCORE_EXPORTS_H
 
 #include <QtCore/qglobal.h>
 
@@ -13,4 +13,4 @@
 # define LAYERS_CORE_EXPORT
 #endif
 
-#endif // LAYERSCOREEXPORTS_H
+#endif // LAYERSCORE_EXPORTS_H

@@ -147,7 +147,7 @@
     <QtMoc Include="include\LayersWidgets\lgridlineitemdelegate.h" />
     <QtMoc Include="include\LayersWidgets\lcombobox.h" />
     <QtMoc Include="include\LayersWidgets\lcomboboxitemdelegate.h" />
-    <ClInclude Include="include\LayersWidgets\layerswidgetsexports.h" />
+    <ClInclude Include="include\LayersWidgets\layerswidgets_exports.h" />
     <QtMoc Include="include\LayersWidgets\lwidget.h" />
   </ItemGroup>
   <ItemGroup>

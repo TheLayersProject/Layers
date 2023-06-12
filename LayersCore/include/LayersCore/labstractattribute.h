@@ -3,68 +3,68 @@
 
 #include <QObject>
 
-#include "layerscoreexports.h"
+#include "layers_global.h"
+#include "layerscore_exports.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+/*!
+	An LAbstractAttribute is an abstract QObject that represents an attribute or a
+	group of attributes.
+*/
+class LAYERS_CORE_EXPORT LAbstractAttribute : public QObject
 {
+	Q_OBJECT
+
+signals:
 	/*!
-		An abstract QObject that represents an attribute or a group of
-		attributes.
+		This signal is emitted when value changes occur.
+
+		It is also emitted when the disabled status changes or when the active
+		state is changed.
 	*/
-	class LAYERS_CORE_EXPORT LAbstractAttribute : public QObject
-	{
-		Q_OBJECT
+	void changed();
 
-	signals:
-		/*!
-			This signal is emitted when value changes occur.
+public:
+	/*!
+		Constructs an abstract attribute with a name and disabled value.
+	*/
+	LAbstractAttribute(const QString& name, bool disabled);
 
-			It is also emitted when the disabled status changes or when the
-			active state is changed.
-		*/
-		void changed();
+	/*!
+		Returns a capitalized version of the name without underscores.
+	*/
+	QString capitalized_name();
 
-	public:
-		/*!
-			Constructs an abstract attribute with a name and disabled value.
-		*/
-		LAbstractAttribute(const QString& name, bool disabled);
+	/*!
+		Returns the disabled condition.
+	*/
+	bool disabled() const;
 
-		/*!
-			Returns a capitalized version of the name without underscores.
-		*/
-		QString capitalized_name();
+	/*!
+		Returns true if multi-valued.
+	*/
+	virtual bool is_multi_valued() const = 0;
 
-		/*!
-			Returns the disabled condition.
-		*/
-		bool disabled() const;
+	/*!
+		Returns the name of the attribute
+	*/
+	QString name();
 
-		/*!
-			Returns true if multi-valued.
-		*/
-		virtual bool is_multi_valued() const = 0;
+	/*!
+		Sets the disabled condition.
+	*/
+	virtual void set_disabled(bool disabled = true);
 
-		/*!
-			Returns the name of the attribute
-		*/
-		QString name();
+	/*!
+		Sets the active state.
+	*/
+	virtual void set_state(const QString& state) = 0;
 
-		/*!
-			Sets the disabled condition.
-		*/
-		virtual void set_disabled(bool disabled = true);
+protected:
+	bool m_disabled;
 
-		/*!
-			Sets the active state.
-		*/
-		virtual void set_state(const QString& state) = 0;
-
-	protected:
-		bool m_disabled;
-
-		QString m_name;
-	};
-}
+	QString m_name;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LABSTRACTATTRIBUTE_H

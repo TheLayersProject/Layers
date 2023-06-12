@@ -4,87 +4,88 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lwidget.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+
+class LLabel;
+
+/*!
+	An LToggleSwitch is a LWidget that provides the user with a way to control
+	an on/off state.
+*/
+class LAYERS_WIDGETS_EXPORT LToggleSwitch : public LWidget
 {
-	class LLabel;
+	Q_OBJECT
+
+signals:
+	/*!
+		This signal is emitted when the switch is toggled.
+	*/
+	void toggled_event();
+
+public:
+	/*!
+		Constructs a toggle switch.
+
+		The *vertical* parameter is used to determine the orientation of the
+		switch. The switch is in horizontal orientation by default.
+	*/
+	LToggleSwitch(bool vertical = false, QWidget* parent = nullptr);
 
 	/*!
-		A LToggleSwitch is a LWidget that provides the user with a way to control
-		an on/off state.
+		Sets both the minimum and maximum heights of the widget to *h* without
+		changing the widths.
 	*/
-	class LAYERS_WIDGETS_EXPORT LToggleSwitch : public LWidget
-	{
-		Q_OBJECT
+	void setFixedHeight(int h);
 
-	signals:
-		/*!
-			This signal is emitted when the switch is toggled.
-		*/
-		void toggled_event();
+	/*!
+		Sets the toggle state of the switch.
+	*/
+	void set_toggled(bool toggled);
 
-	public:
-		/*!
-			Constructs a toggle switch.
+	/*!
+		Toggles the switch.
 
-			The *vertical* parameter is used to determine the orientation of
-			the switch. The switch is in horizontal orientation by default.
-		*/
-		LToggleSwitch(bool vertical = false, QWidget* parent = nullptr);
+		The *emit_toggled_event* parameter is used to determine if the
+		toggled_event() signal should be emitted. It is true by default.
+	*/
+	void toggle(bool emit_toggled_event = true);
 
-		/*!
-			Sets both the minimum and maximum heights of the widget to *h*
-			without changing the widths.
-		*/
-		void setFixedHeight(int h);
+	/*!
+		Returns the toggle state of the switch.
+	*/
+	bool toggled() const;
 
-		/*!
-			Sets the toggle state of the switch.
-		*/
-		void set_toggled(bool toggled);
+	LAttribute a_padding_left{ LAttribute("Left Padding", QVariant::fromValue(2.0)) };
+	LAttribute a_padding_top{ LAttribute("Top Padding", QVariant::fromValue(2.0)) };
+	LAttribute a_padding_right{ LAttribute("Right Padding", QVariant::fromValue(2.0)) };
+	LAttribute a_padding_bottom{ LAttribute("Bottom Padding", QVariant::fromValue(2.0)) };
 
-		/*!
-			Toggles the switch.
+protected:
+	bool eventFilter(QObject* object, QEvent* event) override;
 
-			The *emit_toggled_event* parameter is used to determine if the
-			toggled_event() signal should be emitted. It is true by default.
-		*/
-		void toggle(bool emit_toggled_event = true);
+private:
+	void init_attributes();
 
-		/*!
-			Returns the toggle state of the switch.
-		*/
-		bool toggled() const;
+	void init_layout();
 
-		LAttribute a_padding_left{ LAttribute("Left Padding", QVariant::fromValue(2.0)) };
-		LAttribute a_padding_top{ LAttribute("Top Padding", QVariant::fromValue(2.0)) };
-		LAttribute a_padding_right{ LAttribute("Right Padding", QVariant::fromValue(2.0)) };
-		LAttribute a_padding_bottom{ LAttribute("Bottom Padding", QVariant::fromValue(2.0)) };
+	void update_layout_margins();
 
-	protected:
-		bool eventFilter(QObject* object, QEvent* event) override;
+	void update_spacer_size();
 
-	private:
-		void init_attributes();
+	QHBoxLayout* m_layout_h{ nullptr };
 
-		void init_layout();
+	QVBoxLayout* m_layout_v{ nullptr };
 
-		void update_layout_margins();
+	LWidget* m_spacer{ new LWidget };
+	LWidget* m_square{ new LWidget };
 
-		void update_spacer_size();
-
-		QHBoxLayout* m_layout_h{ nullptr };
-
-		QVBoxLayout* m_layout_v{ nullptr };
-
-		LWidget* m_spacer{ new LWidget };
-		LWidget* m_square{ new LWidget };
-
-		bool m_vertical{ false };
-	};
-}
+	bool m_vertical{ false };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LTOGGLESWITCH_H

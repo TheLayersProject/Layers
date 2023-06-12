@@ -3,45 +3,46 @@
 
 #include <QHBoxLayout>
 
+#include <LayersCore/layers_global.h>
+
 #include <LayersWidgets/lwidget.h>
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LLabel;
+class LThemesWidget;
+
+class LSettingsTab : public LWidget
 {
-	class LLabel;
-	class LThemesWidget;
+	Q_OBJECT
 
-	class LSettingsTab : public LWidget
-	{
-		Q_OBJECT
+signals:
+	void clicked();
 
-	signals:
-		void clicked();
+public:
+	LSettingsTab(const LGraphic& icon, const QString& label_text, QWidget* parent = nullptr);
 
-	public:
-		LSettingsTab(const LGraphic& icon, const QString& label_text, QWidget* parent = nullptr);
+	int recommended_minimum_width();
 
-		int recommended_minimum_width();
+	void set_disabled(bool cond = true);
 
-		void set_disabled(bool cond = true);
+protected:
+	bool eventFilter(QObject* object, QEvent* event) override;
 
-	protected:
-		bool eventFilter(QObject* object, QEvent* event) override;
+	void init_attributes();
 
-		void init_attributes();
+	//void resizeEvent(QResizeEvent* event);
 
-		//void resizeEvent(QResizeEvent* event);
+private:
+	void init_layout();
 
-	private:
-		void init_layout();
+	QHBoxLayout* main_layout{ new QHBoxLayout };
 
-		QHBoxLayout* main_layout{ new QHBoxLayout };
+	bool m_disabled{ false };
 
-		bool m_disabled{ false };
+	LLabel* m_icon_label;
 
-		LLabel* m_icon_label;
-
-		LLabel* m_text_label;
-	};
-}
+	LLabel* m_text_label;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LSETTINGSTAB_H

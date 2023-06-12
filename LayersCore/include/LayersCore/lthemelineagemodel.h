@@ -3,36 +3,36 @@
 
 #include <QAbstractTableModel>
 
-#include "layerscoreexports.h"
+#include "layers_global.h"
+#include "layerscore_exports.h"
 
 #include "ltheme.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LAYERS_CORE_EXPORT LThemeLineageModel : public QAbstractTableModel
 {
-	class LAYERS_CORE_EXPORT LThemeLineageModel : public QAbstractTableModel
-	{
-		Q_OBJECT
+	Q_OBJECT
 
-	public:
-		LThemeLineageModel(QObject* parent = nullptr);
+public:
+	LThemeLineageModel(QObject* parent = nullptr);
 
-		void append(const LThemeLineageData& lineage_data);
+	void append(const LThemeLineageData& lineage_data);
 
-		void clear();
+	void clear();
 
-		virtual int columnCount(const QModelIndex& index) const override;
+	virtual int columnCount(const QModelIndex& index) const override;
 
-		virtual QVariant data(
-			const QModelIndex& index, int role) const override;
+	virtual QVariant data(
+		const QModelIndex& index, int role) const override;
 
-		virtual QVariant headerData(
-			int section, Qt::Orientation orientation, int role) const override;
+	virtual QVariant headerData(
+		int section, Qt::Orientation orientation, int role) const override;
 
-		virtual int rowCount(const QModelIndex& index) const override;
+	virtual int rowCount(const QModelIndex& index) const override;
 
-	private:
-		QList<LThemeLineageData> m_lineage_data{ QList<LThemeLineageData>() };
-	};
-}
+private:
+	QList<LThemeLineageData> m_lineage_data{ QList<LThemeLineageData>() };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LTHEMELINEAGEMODEL_H  

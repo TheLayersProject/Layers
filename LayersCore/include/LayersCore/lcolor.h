@@ -1,15 +1,17 @@
 #ifndef LCOLOR_H
 #define LCOLOR_H
 
-#include "layerscoreexports.h"
+#include "layers_global.h"
+#include "layerscore_exports.h"
 
-namespace Layers
-{
-	enum class LAYERS_CORE_EXPORT HSV { Hue, Saturation, Value };
+LAYERS_NAMESPACE_BEGIN
 
-	LAYERS_CORE_EXPORT extern const int MAX_H;
-	LAYERS_CORE_EXPORT extern const int MAX_SV;
-	LAYERS_CORE_EXPORT extern const int MAX_RGB;
-}
+enum class LAYERS_CORE_EXPORT HSV { Hue, Saturation, Value };
+
+LAYERS_CORE_EXPORT extern const int MAX_H;
+LAYERS_CORE_EXPORT extern const int MAX_SV;
+LAYERS_CORE_EXPORT extern const int MAX_RGB;
+
+LAYERS_NAMESPACE_END
 
 #endif // LCOLOR_H

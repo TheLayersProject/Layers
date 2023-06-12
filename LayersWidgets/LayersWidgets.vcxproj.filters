@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LayersWidgets\layerswidgetsexports.h">
+    <ClInclude Include="include\LayersWidgets\layerswidgets_exports.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\LayersWidgets\lenums.h">

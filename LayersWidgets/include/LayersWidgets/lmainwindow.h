@@ -3,101 +3,101 @@
 
 #include <QVBoxLayout>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lwidget.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class Menu;
+class LSettingsMenu;
+class LThemeEditor;
+class LMainWindowTitlebar;
+
+/*!
+	An LMainWindow is a LWidget that provides a main application window.
+*/
+class LAYERS_WIDGETS_EXPORT LMainWindow : public LWidget
 {
-	class Menu;
-	class LSettingsMenu;
-	class LThemeEditor;
-	class LMainWindowTitlebar;
+	Q_OBJECT
+
+public:
+	/*!
+		Constructs a main window.
+	*/
+	LMainWindow(bool preview = false, QWidget* parent = nullptr);
 
 	/*!
-		A LMainWindow is a LWidget that provides a main application window.
+		Moves *dialog* to the center of the window.
 	*/
-	class LAYERS_WIDGETS_EXPORT LMainWindow : public LWidget
-	{
-		Q_OBJECT
+	void center_dialog(QDialog* dialog);
 
-	public:
-		/*!
-			Constructs a main window.
-		*/
-		LMainWindow(bool preview = false, QWidget* parent = nullptr);
+	/*!
+		Constructs a new LMainWindow and returns it as a pointer to a
+		LThemeable.
 
-		/*!
-			Moves *dialog* to the center of the window.
-		*/
-		void center_dialog(QDialog* dialog);
+		The returned main window is intended to be used as a preview widget
+		in the LThemeEditor.
+	*/
+	virtual LThemeable* clone() override;
 
-		/*!
-			Constructs a new LMainWindow and returns it as a pointer to a
-			LThemeable.
+	/*!
+		Sets *themeable* as the themeable being edited by the LThemeEditor.
+	*/
+	void edit_themeable(LThemeable* themeable);
 
-			The returned main window is intended to be used as a preview widget
-			in the LThemeEditor.
-		*/
-		virtual LThemeable* clone() override;
+	/*!
+		Sets *central_widget* to be the main window's central widget. 
+	*/
+	void set_central_widget(LWidget* central_widget);
 
-		/*!
-			Sets *themeable* as the themeable being edited by the LThemeEditor.
-		*/
-		void edit_themeable(LThemeable* themeable);
+public slots:
+	/*!
+		Closes the widget specified by *index*.
+	*/
+	void close_widget(int index);
 
-		/*!
-			Sets *central_widget* to be the main window's central widget. 
-		*/
-		void set_central_widget(LWidget* central_widget);
+	/*!
+		Opens the specified *widget*.
 
-	public slots:
-		/*!
-			Closes the widget specified by *index*.
-		*/
-		void close_widget(int index);
+		The *name* and *icon* parameters are used to create the tab that
+		corresponds to the widget.
+	*/
+	void open_widget(
+		LWidget* widget, const QString& name, LGraphic* icon = nullptr);
 
-		/*!
-			Opens the specified *widget*.
+protected:
+	bool nativeEvent(
+		const QByteArray& eventType, void* message, qintptr* result
+	) override;
 
-			The *name* and *icon* parameters are used to create the tab that
-			corresponds to the widget.
-		*/
-		void open_widget(
-			LWidget* widget, const QString& name, LGraphic* icon = nullptr);
+private slots:
+	void new_theme_clicked();
 
-	protected:
-		bool nativeEvent(
-			const QByteArray& eventType, void* message, qintptr* result
-		) override;
+	void open_widget_changed(int old_index, int new_index);
 
-	private slots:
-		void new_theme_clicked();
+private:
+	void init_attributes();
+	void init_layout();
+	void init_themes_widget_connections();
+	void init_titlebar_connections();
 
-		void open_widget_changed(int old_index, int new_index);
+	void update_theme_dependencies();
 
-	private:
-		void init_attributes();
-		void init_layout();
-		void init_themes_widget_connections();
-		void init_titlebar_connections();
+	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		void update_theme_dependencies();
+	QList<QWidget*> m_opened_widgets;
 
-		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+	LMainWindowTitlebar* m_titlebar;
 
-		QList<QWidget*> m_opened_widgets;
+	LWidget* m_separator{ new LWidget };
 
-		LMainWindowTitlebar* m_titlebar;
+	LWidget* m_central_widget{ nullptr };
 
-		LWidget* m_separator{ new LWidget };
-
-		LWidget* m_central_widget{ nullptr };
-
-		// Menus
-		LSettingsMenu* m_settings_menu;
-		LThemeEditor* m_theme_editor;
-	};
-}
+	// Menus
+	LSettingsMenu* m_settings_menu;
+	LThemeEditor* m_theme_editor;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LMAINWINDOW_H

@@ -3,45 +3,45 @@
 
 #include <QVBoxLayout>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lbutton.h"
 #include "lwidgetbutton.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LWidgetButtonGroup : public LWidget
 {
-	class LWidgetButtonGroup : public LWidget
-	{
-		Q_OBJECT
+	Q_OBJECT
 
-	public:
-		LWidgetButtonGroup(
-			const QString& label_text,
-			QList<LWidgetButton*> widget_buttons,
-			QWidget* parent = nullptr);
+public:
+	LWidgetButtonGroup(
+		const QString& label_text,
+		QList<LWidgetButton*> widget_buttons,
+		QWidget* parent = nullptr);
 
-		void set_collapsed(bool collapsed = true);
+	void set_collapsed(bool collapsed = true);
 
-		QList<LWidgetButton*>& widget_buttons();
+	QList<LWidgetButton*>& widget_buttons();
 
-	private:
-		void init_attributes();
+private:
+	void init_attributes();
 
-		void init_layout();
+	void init_layout();
 
-		LButton* m_collapse_button{
-			new LButton(
-				LGraphic(":/images/collapse_arrow_right.svg", QSize(8, 12)),
-				LGraphic(":/images/collapse_arrow_down.svg", QSize(12, 8))) };
+	LButton* m_collapse_button{
+		new LButton(
+			LGraphic(":/images/collapse_arrow_right.svg", QSize(8, 12)),
+			LGraphic(":/images/collapse_arrow_down.svg", QSize(12, 8))) };
 
-		bool m_collapsed{ true };
+	bool m_collapsed{ true };
 
-		LLabel* m_label{ nullptr };
+	LLabel* m_label{ nullptr };
 
-		QList<LWidgetButton*> m_widget_buttons{ QList<LWidgetButton*>() };
+	QList<LWidgetButton*> m_widget_buttons{ QList<LWidgetButton*>() };
 
-		QVBoxLayout* m_widget_buttons_vbox{ new QVBoxLayout };
-	};
-}
+	QVBoxLayout* m_widget_buttons_vbox{ new QVBoxLayout };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LWIDGETBUTTONGROUP_H

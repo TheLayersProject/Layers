@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\LayersCore\layers_global.h" />
     <ClInclude Include="include\LayersCore\lversion.h" />
     <QtMoc Include="include\LayersCore\ldownloader.h" />
     <ClInclude Include="include\LayersCore\lgithubrepo.h" />
@@ -106,7 +107,7 @@
     <QtMoc Include="include\LayersCore\labstractattribute.h" />
     <QtMoc Include="include\LayersCore\lattribute.h" />
     <QtMoc Include="include\LayersCore\lattributegroup.h" />
-    <ClInclude Include="include\LayersCore\layerscoreexports.h" />
+    <ClInclude Include="include\LayersCore\layerscore_exports.h" />
     <ClInclude Include="include\LayersCore\lpaths.h" />
     <QtMoc Include="include\LayersCore\lvariant.h" />
   </ItemGroup>

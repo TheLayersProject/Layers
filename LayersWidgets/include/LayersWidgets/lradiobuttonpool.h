@@ -4,37 +4,36 @@
 #include <QList>
 #include <QObject>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LRadioButton;
+
+/*!
+	An LRadioButtonPool is a QObject that ensures that within a group of
+	LRadioButton widgets, only one is active at a time.
+*/
+class LAYERS_WIDGETS_EXPORT LRadioButtonPool : public QObject
 {
-	class LRadioButton;
+	Q_OBJECT
+
+public:
+	/*!
+		Constructs a radio button pool object with a set of *radio_buttons*.
+	*/
+	LRadioButtonPool(QList<LRadioButton*> radio_buttons);
 
 	/*!
-		A LRadioButtonPool is a QObject that ensures that within a group of
-		LRadioButton widgets, only one is active at a time.
+		Sets *button* as the active radio button in the pool.
 	*/
-	class LAYERS_WIDGETS_EXPORT LRadioButtonPool : public QObject
-	{
-		Q_OBJECT
+	void set_active(LRadioButton* button);
 
-	public:
-		/*!
-			Constructs a radio button pool object with a set of
-			*radio_buttons*.
-		*/
-		LRadioButtonPool(QList<LRadioButton*> radio_buttons);
+private:
+	LRadioButton* m_active_button{ nullptr };
 
-		/*!
-			Sets *button* as the active radio button in the pool.
-		*/
-		void set_active(LRadioButton* button);
-
-	private:
-		LRadioButton* m_active_button{ nullptr };
-
-		QList<LRadioButton*> m_radio_buttons;
-	};
-}
+	QList<LRadioButton*> m_radio_buttons;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LRADIOBUTTONPOOL_H

@@ -23,7 +23,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LayersCore\layerscoreexports.h">
+    <ClInclude Include="include\LayersCore\layerscore_exports.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\LayersCore\lpaths.h">
@@ -51,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\LayersCore\lversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LayersCore\layers_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

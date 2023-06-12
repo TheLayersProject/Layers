@@ -3,36 +3,36 @@
 
 #include <QIntValidator>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lattributeeditor.h"
 #include "llabel.h"
 #include "llineeditor.h"
 #include "lminislider.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LAYERS_WIDGETS_EXPORT LNumberEditor : public LAttributeEditor
 {
-	class LAYERS_WIDGETS_EXPORT LNumberEditor : public LAttributeEditor
-	{
-		Q_OBJECT
+	Q_OBJECT
 
-	public:
-		LNumberEditor(LAttribute* attribute, QIntValidator* int_validator, QWidget* parent = nullptr);
+public:
+	LNumberEditor(LAttribute* attribute, QIntValidator* int_validator, QWidget* parent = nullptr);
 
-		void set_unit_label_text(const QString& unit_string);
+	void set_unit_label_text(const QString& unit_string);
 
-	private:
-		void init_layout();
+private:
+	void init_layout();
 
-		LLabel* m_attribute_label{ new LLabel };
-		//LLabel* m_unit_label{ new LLabel };
+	LLabel* m_attribute_label{ new LLabel };
+	//LLabel* m_unit_label{ new LLabel };
 
-		LLineEditor* m_line_editor{ new LLineEditor };
+	LLineEditor* m_line_editor{ new LLineEditor };
 
-		QVBoxLayout* m_main_layout{ new QVBoxLayout };
+	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-		LMiniSlider* m_slider{ new LMiniSlider };
-	};
-}
+	LMiniSlider* m_slider{ new LMiniSlider };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LNUMBEREDITOR_H

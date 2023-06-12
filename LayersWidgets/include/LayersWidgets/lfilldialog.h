@@ -3,49 +3,49 @@
 
 #include <QGraphicsOpacityEffect>
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lcolorcontrol.h"
 #include "lgradientcontrol.h"
 #include "llabel.h"
 #include "ltoggleswitch.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LAYERS_WIDGETS_EXPORT LFillDialog : public LWidget
 {
-	class LAYERS_WIDGETS_EXPORT LFillDialog : public LWidget
-	{
-		Q_OBJECT
+	Q_OBJECT
 
-	public:
-		LFillDialog(QWidget* parent = nullptr);
+public:
+	LFillDialog(QWidget* parent = nullptr);
 
-		void set_attribute(LAttribute* attribute);
+	void set_attribute(LAttribute* attribute);
 
-	//public slots:
-		void set_current_editing_state(const QString& state);
+//public slots:
+	void set_current_editing_state(const QString& state);
 
-	protected:
-		bool eventFilter(QObject* object, QEvent* event);
+protected:
+	bool eventFilter(QObject* object, QEvent* event);
 
-		void init_attributes();
+	void init_attributes();
 
-	private:
-		void init_layout();
+private:
+	void init_layout();
 
-		LColorControl* m_color_control{ new LColorControl };
+	LColorControl* m_color_control{ new LColorControl };
 
-		LLabel* m_color_label{ new LLabel("Color") };
+	LLabel* m_color_label{ new LLabel("Color") };
 
-		QGraphicsOpacityEffect* m_color_label_opacity{ new QGraphicsOpacityEffect };
+	QGraphicsOpacityEffect* m_color_label_opacity{ new QGraphicsOpacityEffect };
 
-		LToggleSwitch* m_fill_type_toggle{ new LToggleSwitch(true) };
+	LToggleSwitch* m_fill_type_toggle{ new LToggleSwitch(true) };
 
-		LGradientControl* m_gradient_control{ new LGradientControl };
+	LGradientControl* m_gradient_control{ new LGradientControl };
 
-		LLabel* m_gradient_label{ new LLabel("Gradient") };
+	LLabel* m_gradient_label{ new LLabel("Gradient") };
 
-		QGraphicsOpacityEffect* m_gradient_label_opacity{ new QGraphicsOpacityEffect };
-	};
-}
+	QGraphicsOpacityEffect* m_gradient_label_opacity{ new QGraphicsOpacityEffect };
+};
+LAYERS_NAMESPACE_END
 
 #endif // LFILLDIALOG_H

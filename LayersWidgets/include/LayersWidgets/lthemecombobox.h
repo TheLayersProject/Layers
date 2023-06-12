@@ -1,48 +1,48 @@
 #ifndef LTHEMECOMBOBOX_H
 #define LTHEMECOMBOBOX_H
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lcombobox.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LThemeComboBoxItemModel;
+
+/*!
+	An LThemeComboBox is a LComboBox that displays LTheme items.
+
+	Each item displays two pieces of theme metadata: the theme's name and
+	its UUID.
+*/
+class LAYERS_WIDGETS_EXPORT LThemeComboBox : public LComboBox
 {
-	class LThemeComboBoxItemModel;
+	Q_OBJECT
+
+public:
+	/*!
+		Constructs a theme combo box.
+	*/
+	LThemeComboBox(QWidget* parent = nullptr);
 
 	/*!
-		A LThemeComboBox is a LComboBox that displays LTheme items.
-
-		Each item displays two pieces of theme metadata: the theme's name and
-		its UUID.
+		Adds a theme to the combo box's item model.
 	*/
-	class LAYERS_WIDGETS_EXPORT LThemeComboBox : public LComboBox
-	{
-		Q_OBJECT
+	void addItem(LTheme* theme);
 
-	public:
-		/*!
-			Constructs a theme combo box.
-		*/
-		LThemeComboBox(QWidget* parent = nullptr);
+	/*!
+		Clears the combo box's item model.
+	*/
+	void clear();
 
-		/*!
-			Adds a theme to the combo box's item model.
-		*/
-		void addItem(LTheme* theme);
+protected:
+	virtual bool eventFilter(QObject* object, QEvent* event) override;
 
-		/*!
-			Clears the combo box's item model.
-		*/
-		void clear();
+	virtual void paintEvent(QPaintEvent* event) override;
 
-	protected:
-		virtual bool eventFilter(QObject* object, QEvent* event) override;
-
-		virtual void paintEvent(QPaintEvent* event) override;
-
-	private:
-		LThemeComboBoxItemModel* m_model;
-	};
-}
+private:
+	LThemeComboBoxItemModel* m_model;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LTHEMECOMBOBOX_H

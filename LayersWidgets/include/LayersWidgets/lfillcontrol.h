@@ -1,52 +1,52 @@
 #ifndef LFILLCONTROL_H
 #define LFILLCONTROL_H
 
-#include "layerswidgetsexports.h"
+#include <LayersCore/layers_global.h>
+#include "layerswidgets_exports.h"
 
 #include "lwidget.h"
 
-namespace Layers
+LAYERS_NAMESPACE_BEGIN
+class LFillDialog;
+
+/*!
+	An LFillControl is a LWidget that gives the user a way to access the
+	LFillDialog. When the user clicks on the control, a LFillDialog is
+	displayed.
+*/
+class LAYERS_WIDGETS_EXPORT LFillControl : public LWidget
 {
-	class LFillDialog;
+	Q_OBJECT
+
+public:
+	/*!
+		Constructs a fill control.
+	*/
+	LFillControl(QWidget* parent = nullptr);
+
+	~LFillControl();
 
 	/*!
-		A LFillControl is a LWidget that gives the user a way to access the
-		LFillDialog. When the user clicks on the control, a LFillDialog is
-		displayed.
+		Sets the attribute to link with the control.
 	*/
-	class LAYERS_WIDGETS_EXPORT LFillControl : public LWidget
-	{
-		Q_OBJECT
+	void set_attribute(LAttribute* attribute);
 
-	public:
-		/*!
-			Constructs a fill control.
-		*/
-		LFillControl(QWidget* parent = nullptr);
+public slots:
+	/*!
+		Sets the state that is currently being edited.
+	*/
+	void set_current_editing_state(const QString& state);
 
-		~LFillControl();
+protected:
+	bool eventFilter(QObject* object, QEvent* event);
 
-		/*!
-			Sets the attribute to link with the control.
-		*/
-		void set_attribute(LAttribute* attribute);
+private:
+	void init_attributes();
 
-	public slots:
-		/*!
-			Sets the state that is currently being edited.
-		*/
-		void set_current_editing_state(const QString& state);
+	LFillDialog* m_control_dialog;
 
-	protected:
-		bool eventFilter(QObject* object, QEvent* event);
-
-	private:
-		void init_attributes();
-
-		LFillDialog* m_control_dialog;
-
-		LFillDialog* m_dialog;
-	};
-}
+	LFillDialog* m_dialog;
+};
+LAYERS_NAMESPACE_END
 
 #endif // LFILLCONTROL_H
