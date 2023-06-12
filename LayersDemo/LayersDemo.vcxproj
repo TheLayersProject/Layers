@@ -58,6 +58,7 @@
     <TargetName>$(ProjectName)-debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\demo\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -76,6 +77,33 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>LayersCore.lib;LayersWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>del /q "$(SolutionDir)$(IntDir)LayersCore.exp"
+del /q "$(SolutionDir)$(IntDir)LayersWidgets.exp"
+
+xcopy /y /d /i /r "$(SolutionDir)$(IntDir)LayersCore.dll" "$(OutDir)"
+xcopy /y /d /i /r "$(SolutionDir)$(IntDir)LayersWidgets.dll" "$(OutDir)"
+
+mkdir "$(SolutionDir)$(IntDir)bin"
+mkdir "$(SolutionDir)$(IntDir)include"
+mkdir "$(SolutionDir)$(IntDir)lib"
+
+move "$(SolutionDir)$(IntDir)LayersCore.dll" "$(SolutionDir)$(IntDir)bin\"
+move "$(SolutionDir)$(IntDir)LayersWidgets.dll" "$(SolutionDir)$(IntDir)bin\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\LayersCored.dll" "$(SolutionDir)$(IntDir)bin\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\LayersWidgetsd.dll" "$(SolutionDir)$(IntDir)bin\"
+
+move "$(SolutionDir)$(IntDir)LayersCore.lib" "$(SolutionDir)$(IntDir)lib\"
+move "$(SolutionDir)$(IntDir)LayersWidgets.lib" "$(SolutionDir)$(IntDir)lib\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\LayersCored.lib" "$(SolutionDir)$(IntDir)lib\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\LayersWidgetsd.lib" "$(SolutionDir)$(IntDir)lib\"
+
+xcopy /y /d /i /r "$(SolutionDir)LayersCore\include\LayersCore" "$(SolutionDir)$(IntDir)include\LayersCore\"
+xcopy /y /d /i /r "$(SolutionDir)LayersWidgets\include\LayersWidgets" "$(SolutionDir)$(IntDir)include\LayersWidgets\"
+
+$(QtDir)\bin\windeployqt.exe "$(OutDir)$(TargetName).exe"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
