@@ -40,6 +40,6 @@ protected:
 private:
 	void init_attributes();
 };
-:LAYERS_NAMESPACE_END
+LAYERS_NAMESPACE_END
 
 #endif // LGRADIENTCONTROL_H
