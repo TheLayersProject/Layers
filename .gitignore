@@ -44,7 +44,17 @@ CMakeLists.txt.user*
 
 # Visual Studio
 .vs/
-*.sln
 x64/
 debug/
 release/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Generated Docs
+docs/html
+docs/latex

@@ -1,0 +1,21 @@
+name: publish
+on:
+  release:
+    types: [published]
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Generate Documentation
+        uses: mattnotmitt/doxygen-action@edge
+        with:
+          doxyfile-path: 'docs/doxygen'
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/html

@@ -1,0 +1,12 @@
+<svg 
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18px" height="17px">
+  <!--BLOCK_THEMING-->
+  <path id="triangle" fill-rule="evenodd"  stroke="#000000" stroke-width="1.5px" stroke-linecap="butt" stroke-linejoin="miter" fill="#fff94c"
+    d="M7.005,1.924 C7.769,0.560 9.731,0.560 10.495,1.924 L16.413,12.494 C17.159,13.827 16.196,15.471 14.668,15.471 L2.832,15.471 C1.304,15.471 0.341,13.827 1.087,12.494 L7.005,1.924 Z"/>
+  <path id="line" fill-rule="evenodd" fill="#000000" transform="translate(7, 5)"
+    d="M-0.000,-0.000 L3.000,-0.000 L3.000,5.000 L-0.000,5.000 L-0.000,-0.000 Z"/>
+  <path id="dot" fill-rule="evenodd" fill="#000000" transform="translate(7, 11)"
+    d="M-0.000,-0.000 L3.000,-0.000 L3.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z"/>
+</svg>

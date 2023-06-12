@@ -1,0 +1,14 @@
+<svg 
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="20px" height="20px">
+  <defs>
+    <linearGradient id="grad" x1="0%" x2="0%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+
+  <path fill-rule="evenodd"  fill="url(#grad)"
+   d="M2.500,-0.000 L17.500,-0.000 C18.881,-0.000 19.1000,1.119 19.1000,2.500 L19.1000,17.500 C19.1000,18.881 18.881,19.1000 17.500,19.1000 L2.500,19.1000 C1.119,19.1000 -0.000,18.881 -0.000,17.500 L-0.000,2.500 C-0.000,1.119 1.119,-0.000 2.500,-0.000 Z"/>
+</svg>
