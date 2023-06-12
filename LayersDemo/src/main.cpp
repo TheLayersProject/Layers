@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 		QUuid("f97aae7f-2076-4918-93ce-19321584f675"),
 		nullptr,
 		new Layers::LVersion("0.16.0"),
-		new Layers::LGitHubRepo("huntermalm/Layers-Demo"));
+		new Layers::LGitHubRepo("huntermalm/Layers"));
 
 	if (app.update_available())
 		if (app.update_on_request())
