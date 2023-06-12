@@ -1,6 +1,6 @@
 # Layers
 
-<img src="https://github.com/huntermalm/Layers/blob/main/svgs/layers_banner.svg?raw=true" alt="layers_banner"/>
+<img src="https://github.com/huntermalm/Layers/blob/main/LayersWidgets/images/layers_banner.svg?raw=true" alt="layers_banner"/>
 
 Layers is a Qt library that provides an application template with a focus on themes and user customization.
 
@@ -15,10 +15,6 @@ Features include:
 - Updating system for apps hosted on GitHub
 
 **NOTE: At this time, Layers only supports Windows. Other operating systems will be supported in the future.**
-
-## Demo
-
-The [Layers Demo](https://github.com/huntermalm/Layers-Demo) is a basic Layers application that demonstrates the capabilities of the Layers software library. The source-code demonstrates how to get a basic Layers application up and running, while the binary release is provided to let developers see a Layers app in action.
 
 ## Development and Testing
 
@@ -48,12 +44,12 @@ These are the steps to build Layers from source-code with Microsoft Visual Studi
         - <i>...\Qt\6.5.x\msvc2019_64\bin</i>
 5. Build Layers
     - Clone this project
-    - Open the project file *Layers.vcxproj*
-    - From the menu bar, select *Build > Build Layers*
+    - Open the solution file *Layers.sln*
+    - From the menu bar, select *Build > Build Solution*
 
 ### Testing Layers
 
-Since Layers is a library, a separate application that is implemented with Layers is required to test changes. The [Layers Demo](https://github.com/huntermalm/Layers-Demo) application is recommended for that purpose. Visit the GitHub page for the Layers Demo to find steps on how to build it from source-code.
+To test Layers, select *Debug > Start Debugging* from the menu bar. This will launch the *Layers Demo* application.
 
 ### Documentation
 
