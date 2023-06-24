@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\labstractattribute.cpp" />
+    <ClCompile Include="src\lapplication.cpp" />
+    <ClCompile Include="src\lattribute.cpp" />
+    <ClCompile Include="src\lattributedata.cpp" />
+    <ClCompile Include="src\lattributeeditor.cpp" />
+    <ClCompile Include="src\lattributeeditorgroup.cpp" />
+    <ClCompile Include="src\lattributegroup.cpp" />
+    <ClCompile Include="src\lbutton.cpp" />
+    <ClCompile Include="src\lcolor.cpp" />
+    <ClCompile Include="src\lcolorcontrol.cpp" />
+    <ClCompile Include="src\lcolordialog.cpp" />
+    <ClCompile Include="src\lcoloreditor.cpp" />
+    <ClCompile Include="src\lcolorplane.cpp" />
+    <ClCompile Include="src\lcombobox.cpp" />
+    <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
+    <ClCompile Include="src\lcornerradiieditor.cpp" />
+    <ClCompile Include="src\lcreatethemedialog.cpp" />
+    <ClCompile Include="src\ldata.cpp" />
+    <ClCompile Include="src\ldialog.cpp" />
+    <ClCompile Include="src\ldownloader.cpp" />
+    <ClCompile Include="src\lfillcontrol.cpp" />
+    <ClCompile Include="src\lfilldialog.cpp" />
+    <ClCompile Include="src\lfilleditor.cpp" />
+    <ClCompile Include="src\lgithubrepo.cpp" />
+    <ClCompile Include="src\lgradientcontrol.cpp" />
+    <ClCompile Include="src\lgradientdialog.cpp" />
+    <ClCompile Include="src\lgradienteditor.cpp" />
+    <ClCompile Include="src\lgraphic.cpp" />
+    <ClCompile Include="src\lgridlineitemdelegate.cpp" />
+    <ClCompile Include="src\lheaderview.cpp" />
+    <ClCompile Include="src\limagesequence.cpp" />
+    <ClCompile Include="src\llabel.cpp" />
+    <ClCompile Include="src\llineeditor.cpp" />
+    <ClCompile Include="src\lmainwindow.cpp" />
+    <ClCompile Include="src\lmainwindowtitlebar.cpp" />
+    <ClCompile Include="src\lmenubar.cpp" />
+    <ClCompile Include="src\lminislider.cpp" />
+    <ClCompile Include="src\lnavigator.cpp" />
+    <ClCompile Include="src\lnumbereditor.cpp" />
+    <ClCompile Include="src\lpaths.cpp" />
+    <ClCompile Include="src\lradiobutton.cpp" />
+    <ClCompile Include="src\lradiobuttonpool.cpp" />
+    <ClCompile Include="src\lscrollarea.cpp" />
+    <ClCompile Include="src\lscrollbar.cpp" />
+    <ClCompile Include="src\lsettingsmenu.cpp" />
+    <ClCompile Include="src\lsettingstab.cpp" />
+    <ClCompile Include="src\lslider.cpp" />
+    <ClCompile Include="src\lstateeditor.cpp" />
+    <ClCompile Include="src\lsvgrenderer.cpp" />
+    <ClCompile Include="src\ltab.cpp" />
+    <ClCompile Include="src\ltabbar.cpp" />
+    <ClCompile Include="src\ltableview.cpp" />
+    <ClCompile Include="src\ltheme.cpp" />
+    <ClCompile Include="src\lthemeable.cpp" />
+    <ClCompile Include="src\lthemeablebox.cpp" />
+    <ClCompile Include="src\lthemecombobox.cpp" />
+    <ClCompile Include="src\lthemecomboboxitemdelegate.cpp" />
+    <ClCompile Include="src\lthemecomboboxitemmodel.cpp" />
+    <ClCompile Include="src\lthemecompatibilitycautiondialog.cpp" />
+    <ClCompile Include="src\lthemecompatibilityitemdelegate.cpp" />
+    <ClCompile Include="src\lthemeeditor.cpp" />
+    <ClCompile Include="src\lthemelineagemodel.cpp" />
+    <ClCompile Include="src\lthemeswidget.cpp" />
+    <ClCompile Include="src\ltoggleswitch.cpp" />
+    <ClCompile Include="src\lupdatedialog.cpp" />
+    <ClCompile Include="src\lvariant.cpp" />
+    <ClCompile Include="src\lversion.cpp" />
+    <ClCompile Include="src\lwidget.cpp" />
+    <ClCompile Include="src\lwidgetbutton.cpp" />
+    <ClCompile Include="src\lwidgetbuttongroup.cpp" />
+    <ClCompile Include="src\lwidgeteditor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\lmainwindowtitlebar.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\lsettingsmenu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\lsettingstab.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\lthemeeditor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\lthemeswidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\Layers\lbutton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Layers\labstractattribute.h" />
+    <ClInclude Include="include\Layers\lattributedata.h" />
+    <ClInclude Include="include\Layers\layers_exports.h" />
+    <ClInclude Include="include\Layers\layers_global.h" />
+    <QtMoc Include="include\Layers\lattributegroup.h" />
+    <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
+    <QtMoc Include="include\Layers\lattributeeditor.h" />
+    <QtMoc Include="include\Layers\lattribute.h" />
+    <QtMoc Include="include\Layers\lapplication.h" />
+    <ClInclude Include="include\Layers\lcalculate.h" />
+    <ClInclude Include="include\Layers\lcolor.h" />
+    <ClInclude Include="include\Layers\lenums.h" />
+    <ClInclude Include="include\Layers\lgithubrepo.h" />
+    <ClInclude Include="include\Layers\lgraphic.h" />
+    <ClInclude Include="include\Layers\limagesequence.h" />
+    <ClInclude Include="include\Layers\lpaths.h" />
+    <ClInclude Include="include\Layers\lthemeable.h" />
+    <ClInclude Include="include\Layers\lthemeablebox.h" />
+    <ClInclude Include="include\Layers\lversion.h" />
+    <QtMoc Include="include\Layers\lwidgeteditor.h" />
+    <QtMoc Include="include\Layers\lwidgetbuttongroup.h" />
+    <QtMoc Include="include\Layers\lwidgetbutton.h" />
+    <QtMoc Include="include\Layers\lwidget.h" />
+    <QtMoc Include="include\Layers\lvariant.h" />
+    <QtMoc Include="include\Layers\lupdatedialog.h" />
+    <QtMoc Include="include\Layers\ltoggleswitch.h" />
+    <QtMoc Include="include\Layers\lthemelineagemodel.h" />
+    <QtMoc Include="include\Layers\lthemecompatibilityitemdelegate.h" />
+    <QtMoc Include="include\Layers\lthemecompatibilitycautiondialog.h" />
+    <QtMoc Include="include\Layers\lthemecomboboxitemmodel.h" />
+    <QtMoc Include="include\Layers\lthemecomboboxitemdelegate.h" />
+    <QtMoc Include="include\Layers\lthemecombobox.h" />
+    <QtMoc Include="include\Layers\ltheme.h" />
+    <QtMoc Include="include\Layers\ltableview.h" />
+    <QtMoc Include="include\Layers\ltabbar.h" />
+    <QtMoc Include="include\Layers\ltab.h" />
+    <QtMoc Include="include\Layers\lsvgrenderer.h" />
+    <QtMoc Include="include\Layers\lstateeditor.h" />
+    <QtMoc Include="include\Layers\lslider.h" />
+    <QtMoc Include="include\Layers\lscrollbar.h" />
+    <QtMoc Include="include\Layers\lscrollarea.h" />
+    <QtMoc Include="include\Layers\lradiobuttonpool.h" />
+    <QtMoc Include="include\Layers\lradiobutton.h" />
+    <QtMoc Include="include\Layers\lnumbereditor.h" />
+    <QtMoc Include="include\Layers\lnavigator.h" />
+    <QtMoc Include="include\Layers\lminislider.h" />
+    <QtMoc Include="include\Layers\lmenubar.h" />
+    <QtMoc Include="include\Layers\lmainwindow.h" />
+    <QtMoc Include="include\Layers\llineeditor.h" />
+    <QtMoc Include="include\Layers\llabel.h" />
+    <QtMoc Include="include\Layers\lheaderview.h" />
+    <QtMoc Include="include\Layers\lgridlineitemdelegate.h" />
+    <QtMoc Include="include\Layers\lgradienteditor.h" />
+    <QtMoc Include="include\Layers\lgradientdialog.h" />
+    <QtMoc Include="include\Layers\lgradientcontrol.h" />
+    <QtMoc Include="include\Layers\lfilleditor.h" />
+    <QtMoc Include="include\Layers\lfilldialog.h" />
+    <QtMoc Include="include\Layers\lfillcontrol.h" />
+    <QtMoc Include="include\Layers\ldownloader.h" />
+    <QtMoc Include="include\Layers\ldialog.h" />
+    <QtMoc Include="include\Layers\ldata.h" />
+    <QtMoc Include="include\Layers\lcreatethemedialog.h" />
+    <QtMoc Include="include\Layers\lcornerradiieditor.h" />
+    <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />
+    <QtMoc Include="include\Layers\lcombobox.h" />
+    <QtMoc Include="include\Layers\lcolorplane.h" />
+    <QtMoc Include="include\Layers\lcoloreditor.h" />
+    <QtMoc Include="include\Layers\lcolordialog.h" />
+    <QtMoc Include="include\Layers\lcolorcontrol.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
+    <QtRcc Include="image-sequences\image_sequences.qrc" />
+    <QtRcc Include="images\images.qrc" />
+    <QtRcc Include="themes\Dark\theme_dark.qrc" />
+    <QtRcc Include="themes\Light\theme_light.qrc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C3974001-260F-4BED-8E06-123547376B01}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>6.5</QtInstall>
+    <QtModules>core;network;widgets;svgwidgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>6.5</QtInstall>
+    <QtModules>core;network;widgets;svgwidgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>LAYERS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>LAYERS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,17 +1,12 @@
 {
     "Layers Demo": {
         "border": {
-            "disabled": true,
             "fill": {
                 "value": "#a0a0a4"
             },
             "thickness": {
                 "value": 0
             }
-        },
-        "corner_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
         },
         "corner_radii": {
             "bottom_left": {
@@ -20,7 +15,6 @@
             "bottom_right": {
                 "value": 0
             },
-            "disabled": true,
             "top_left": {
                 "value": 0
             },
@@ -29,18 +23,12 @@
             }
         },
         "fill": {
-            "disabled": true,
             "value": "#ffffff"
-        },
-        "hover_fill": {
-            "disabled": true,
-            "value": "#c0c0c0"
         },
         "margins": {
             "bottom": {
                 "value": 0
             },
-            "disabled": true,
             "left": {
                 "value": 0
             },
@@ -50,10 +38,6 @@
             "top": {
                 "value": 0
             }
-        },
-        "outline_color": {
-            "disabled": true,
-            "value": "#a0a0a4"
         }
     }
 }

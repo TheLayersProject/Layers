@@ -1,7 +1,7 @@
 #ifndef LAYERSDEMOWINDOW_H
 #define LAYERSDEMOWINDOW_H
 
-#include <LayersWidgets/lmainwindow.h>
+#include <Layers/lmainwindow.h>
 
 class LayersDemoWindow : public Layers::LMainWindow
 {

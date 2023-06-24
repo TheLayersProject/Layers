@@ -1,7 +1,7 @@
 #ifndef LAYERSDEMO_H
 #define LAYERSDEMO_H
 
-#include <LayersWidgets/lwidget.h>
+#include <Layers/lwidget.h>
 
 class LayersDemo : public Layers::LWidget
 {
