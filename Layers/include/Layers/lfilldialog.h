@@ -21,9 +21,6 @@ public:
 
 	void set_attribute(LAttribute* attribute);
 
-//public slots:
-	void set_current_editing_state(const QString& state);
-
 protected:
 	bool eventFilter(QObject* object, QEvent* event);
 

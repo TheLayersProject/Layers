@@ -46,15 +46,11 @@ bool LWidgetButton::eventFilter(QObject* object, QEvent* event)
 	}
 	else if (event->type() == QEvent::Enter)
 	{
-		if (m_icon_label && m_icon_label->graphic()->svg_renderer())
-			m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Selected");
-		m_label->text_color()->set_state("Selected");
+		m_select_states->set_state("Selected");
 	}
 	else if (event->type() == QEvent::Leave)
 	{
-		if (m_icon_label && m_icon_label->graphic()->svg_renderer())
-			m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
-		m_label->text_color()->set_state("Unselected");
+		m_select_states->set_state("Unselected");
 	}
 
 	LWidget::eventFilter(object, event);
@@ -67,6 +63,9 @@ void LWidgetButton::init()
 	init_attributes();
 	init_layout();
 	installEventFilter(this);
+	add_state_pool(m_select_states);
+
+	m_select_states->set_state("Unselected");
 
 	set_name("Widget Button");
 	setMinimumHeight(40);
@@ -93,20 +92,14 @@ void LWidgetButton::init_attributes()
 
 	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
 	{
-		m_icon_label->graphic()->svg_renderer()->common_color()->init_variant_map({
-			{ "Unselected", QColor(Qt::darkGray) },
-			{ "Selected", QColor(Qt::lightGray) }
-			});
-
-		m_icon_label->graphic()->svg_renderer()->common_color()->set_state("Unselected");
+		m_icon_label->graphic()->svg_renderer()->common_color()->set_value(
+			QColor(Qt::darkGray));
+		m_icon_label->graphic()->svg_renderer()->common_color()->add_override(
+			"Selected", QColor(Qt::lightGray));
 	}
 
-	m_label->text_color()->init_variant_map({
-			{ "Unselected", QColor(Qt::darkGray) },
-			{ "Selected", QColor(Qt::lightGray) }
-		});
-
-	m_label->text_color()->set_state("Unselected");
+	m_label->text_color()->set_value(QColor(Qt::darkGray));
+	m_label->text_color()->add_override("Selected", QColor(Qt::lightGray));
 }
 
 void LWidgetButton::init_layout()

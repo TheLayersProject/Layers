@@ -269,7 +269,7 @@ void LColorPlane::init_attributes()
 	connect(&m_color, &LAttribute::changed, [this]
 		{
 			update_cursor_position();
-			update_z_value();
+			//update_z_value();
 			update();
 		});
 

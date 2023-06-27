@@ -3,13 +3,17 @@
 
 #include <QHash>
 #include <QObject>
+#include <QVariant>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "ldata.h"
-
 LAYERS_NAMESPACE_BEGIN
+
+class LAttribute;
+
+using LAttributeMap = QMap<QString, LAttribute*>;
+
 /*!
 	An LAttribute is an LAbstractAttribute that creates a specialized Data
 	container.
@@ -98,12 +102,7 @@ public:
 	/*!
 		Constructs an attribute with single-valued data.
 	*/
-	LAttribute(const QString& name, LVariant variant);
-
-	/*!
-		Constructs an attribute with multi-valued data.
-	*/
-	LAttribute(const QString& name, LVariantMap variant_map);
+	LAttribute(const QString& name, QVariant value);
 
 	/*!
 		Constructs an attribute with data initialized with a QJsonObject.
@@ -117,6 +116,8 @@ public:
 
 	~LAttribute();
 
+	void add_override(const QString& name, QVariant value);
+
 	/*!
 		Returns data value converted to the template type T.
 
@@ -126,12 +127,9 @@ public:
 		returned.
 	*/
 	template<typename T>
-	T as(const QString& state = "") const;
+	T as(const QStringList& states = QStringList()) const;
 
-	/*!
-		Returns true if state exists in the data. Otherwise, returns false.
-	*/
-	bool contains_state(const QString& state) const;
+	void clear_overrides();
 
 	/*!
 		Copies the valuation of *attribute*.
@@ -158,31 +156,15 @@ public:
 	void set_link_new(const QString& link);
 
 	/*!
-		Converts to multi-valued data initialized with *variant_map*.
-	*/
-	void init_variant_map(const LVariantMap& variant_map);
-
-	/*!
-		Returns true if this attribute is linked. Otherwise, returns
-		false.
-	*/
-	bool link_established() const;
-
-	/*!
 		Returns true if this attribute's data is multi-valued. Otherwise,
 		returns false.
 	*/
-	bool is_multi_valued() const;
+	bool has_overrides() const;
 
 	/*!
 		Returns the name of the attribute.
 	*/
 	QString name();
-
-	/*!
-		Sets the active state of this attribute to *state*.
-	*/
-	void set_state(const QString& state);
 
 	/*!
 		Sets the data's value.
@@ -191,25 +173,14 @@ public:
 		the default value (an empty string) is used, and the attribute is
 		multi-valued, then the value of the active state is set.
 	*/
-	void set_value(LVariant variant, const QString& state = "");
-
-	/*!
-		Returns the active state of the attribute.
-	*/
-	QString state() const;
-
-	/*!
-		Returns a QStringList of the states associated with the attribute's
-		data.
-
-		If the data is single-valued, an empty list will be returned.
-	*/
-	QStringList states() const;
+	void set_value(QVariant value);
 
 	/*!
 		Returns attribute represented as a QJsonObject.
 	*/
 	QJsonObject to_json_object();
+
+	QJsonValue to_json_value();
 
 	/*!
 		Returns the name of type stored in the attribute's data.
@@ -217,40 +188,44 @@ public:
 	const char* typeName() const;
 
 private:
-	void establish_data_connection();
+	void establish_link_connection();
 
-	void establish_reentanglement_connection(LAttribute& attribute);
+	QMetaObject::Connection m_link_connection;
 
-	LData* m_data{ nullptr };
-
-	QMetaObject::Connection m_data_connection;
-
-	QMetaObject::Connection m_reentanglement_connection;
-
-	bool m_link_established{ false };
+	LAttribute* m_linked_attr{ nullptr };
 
 	QString m_link;
 
 	QString m_name;
 
-	QString m_state;
+	LAttributeMap m_overrides;
+
+	QVariant m_value;
 };
 
 template<typename T>
-inline T LAttribute::as(const QString& state) const
+inline T LAttribute::as(const QStringList& states) const
 {
-	if (m_data->is_multi_valued())
+	if (!m_overrides.isEmpty() && !states.isEmpty())
 	{
-		if (state == "")
-			return m_data->as<T>(m_state);
-		else
-			return m_data->as<T>(state);
-	}
-		
-	return m_data->as<T>();
-}
+		for (LAttribute* override_attr : m_overrides)
+		{
+			QStringList override_states = override_attr->name().split(":");
 
-using LAttributeMap = QMap<QString, LAttribute*>;
+			if (override_states == states)
+				return override_attr->as<T>();
+		}
+
+		// TODO: Handle returning override with highest number of matching
+		// states. If there is a conflict (two matching overrides), just
+		// return the value of this
+	}
+
+	if (m_linked_attr)
+		return m_linked_attr->as<T>(states);
+
+	return m_value.value<T>();
+}
 
 LAYERS_NAMESPACE_END
 

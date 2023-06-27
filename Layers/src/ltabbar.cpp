@@ -40,9 +40,9 @@ void LTabBar::set_current_index(int index)
 		emit index_changed(old_index, index);
 
 		if (old_index != -1)
-			m_tabs[old_index]->fill()->set_state("Inactive");
+			m_tabs[old_index]->status_states()->set_state("Inactive");
 
-		m_tabs[index]->fill()->set_state("Active");
+		m_tabs[index]->status_states()->set_state("Active");
 	}
 }
 

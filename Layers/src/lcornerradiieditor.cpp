@@ -73,24 +73,6 @@ LCornerRadiiEditor::LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_rad
 	init_layout();
 }
 
-void LCornerRadiiEditor::set_current_editing_state(const QString& state)
-{
-	m_tl_slider->set_current_editing_state(state);
-	m_tr_slider->set_current_editing_state(state);
-	m_bl_slider->set_current_editing_state(state);
-	m_br_slider->set_current_editing_state(state);
-
-	m_example_widget->corner_radii()->top_left()->set_state(state);
-	m_example_widget->corner_radii()->top_right()->set_state(state);
-	m_example_widget->corner_radii()->bottom_left()->set_state(state);
-	m_example_widget->corner_radii()->bottom_right()->set_state(state);
-
-	m_tl_line_editor->set_current_editing_state(state);
-	m_tr_line_editor->set_current_editing_state(state);
-	m_bl_line_editor->set_current_editing_state(state);
-	m_br_line_editor->set_current_editing_state(state);
-}
-
 void LCornerRadiiEditor::init_layout()
 {
 	QHBoxLayout* top_controls_hbox = new QHBoxLayout;

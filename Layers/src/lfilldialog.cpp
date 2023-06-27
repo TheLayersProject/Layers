@@ -84,35 +84,6 @@ void LFillDialog::set_attribute(LAttribute* attribute)
 	}
 }
 
-void LFillDialog::set_current_editing_state(const QString& state)
-{
-	m_color_control->set_current_editing_state(state);
-	m_gradient_control->set_current_editing_state(state);
-
-	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>") &&
-		!m_fill_type_toggle->toggled())
-	{
-		m_fill_type_toggle->toggle(false);
-
-		m_gradient_label_opacity->setOpacity(1.0);
-		m_gradient_control->show();
-
-		m_color_label_opacity->setOpacity(0.25);
-		m_color_control->hide();
-	}
-	else if (QString(m_color_control->fill()->typeName()) == QString("QColor") &&
-		m_fill_type_toggle->toggled())
-	{
-		m_fill_type_toggle->toggle(false);
-
-		m_color_label_opacity->setOpacity(1.0);
-		m_color_control->show();
-
-		m_gradient_label_opacity->setOpacity(0.25);
-		m_gradient_control->hide();
-	}
-}
-
 bool LFillDialog::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::FocusOut)

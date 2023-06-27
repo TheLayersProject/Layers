@@ -99,11 +99,6 @@ void LLineEditor::set_text(const QString& text)
 {
 	m_line_edit->setText(text);
 
-	//if (m_text->is_multi_valued())
-	//	m_text->set_value(m_text->state(), text);
-	//else
-	//	m_text->set_value(text);
-
 	m_text->set_value(text);
 }
 
@@ -149,13 +144,6 @@ void LLineEditor::update_theme_dependencies()
 
 	if (m_line_edit->text() != m_text->as<QString>())
 		m_line_edit->setText(m_text->as<QString>());
-}
-
-void LLineEditor::set_current_editing_state(const QString& state)
-{
-	m_text->set_state(state);
-
-	update_theme_dependencies();
 }
 
 bool LLineEditor::eventFilter(QObject* object, QEvent* event)

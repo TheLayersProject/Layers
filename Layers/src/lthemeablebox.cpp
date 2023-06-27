@@ -60,12 +60,15 @@ void LThemeableBox::paint(QWidget* widget)
 {
 	// CREATE VARIABLES:
 
-	int border_thickness = m_border->thickness()->as<double>();
+	// The active states of the themeable
+	QStringList s = states();
 
-	int margin_left = m_margins->left()->as<double>();
-	int margin_top = m_margins->top()->as<double>();
-	int margin_right = m_margins->right()->as<double>();
-	int margin_bottom = m_margins->bottom()->as<double>();
+	int border_thickness = m_border->thickness()->as<double>(s);
+
+	int margin_left = m_margins->left()->as<double>(s);
+	int margin_top = m_margins->top()->as<double>(s);
+	int margin_right = m_margins->right()->as<double>(s);
+	int margin_bottom = m_margins->bottom()->as<double>(s);
 
 	int widget_width = widget->width();
 	int widget_height = widget->height();
@@ -78,10 +81,10 @@ void LThemeableBox::paint(QWidget* widget)
 		tl = top-left
 	*/
 
-	int cr_tl = m_corner_radii->top_left()->as<double>();
-	int cr_tr = m_corner_radii->top_right()->as<double>();
-	int cr_bl = m_corner_radii->bottom_left()->as<double>();
-	int cr_br = m_corner_radii->bottom_right()->as<double>();
+	int cr_tl = m_corner_radii->top_left()->as<double>(s);
+	int cr_tr = m_corner_radii->top_right()->as<double>(s);
+	int cr_bl = m_corner_radii->bottom_left()->as<double>(s);
+	int cr_br = m_corner_radii->bottom_right()->as<double>(s);
 
 	if (widget->isMaximized())
 	{
@@ -143,11 +146,11 @@ void LThemeableBox::paint(QWidget* widget)
 
 			border_fill_gradient.setStart(0, 0);
 			border_fill_gradient.setFinalStop(widget_width, 0);
-			border_fill_gradient.setStops(m_border->fill()->as<QGradientStops>());
+			border_fill_gradient.setStops(m_border->fill()->as<QGradientStops>(s));
 
 			painter.fillPath(border_path, border_fill_gradient);
 		}
-		else painter.fillPath(border_path, m_border->fill()->as<QColor>());
+		else painter.fillPath(border_path, m_border->fill()->as<QColor>(s));
 	}
 
 	// - Draw Background
@@ -157,13 +160,13 @@ void LThemeableBox::paint(QWidget* widget)
 
 		fill_gradient.setStart(0, 0);
 		fill_gradient.setFinalStop(widget_width, 0);
-		fill_gradient.setStops(m_fill->as<QGradientStops>());
+		fill_gradient.setStops(m_fill->as<QGradientStops>(s));
 
 		painter.fillPath(background_path, fill_gradient);
 	}
 	else
 	{
-		painter.fillPath(background_path, m_fill->as<QColor>());
+		painter.fillPath(background_path, m_fill->as<QColor>(s));
 	}
 }
 

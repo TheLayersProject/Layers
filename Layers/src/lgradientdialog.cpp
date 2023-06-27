@@ -22,7 +22,6 @@ LGradientDialog::LGradientDialog(QWidget* parent) :
     m_gradient_widget->fill()->set_value(QVariant::fromValue(m_gradient_stops));
 
     m_apply_button->set_name("Apply Button");
-    m_apply_button->disable_text_hover_color();
     connect(m_apply_button, &LButton::clicked, [this] { done(QDialog::Accepted); });
 
     init_layout();

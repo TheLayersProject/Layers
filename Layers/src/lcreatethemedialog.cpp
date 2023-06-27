@@ -16,7 +16,6 @@ LCreateThemeDialog::LCreateThemeDialog(QWidget* parent) :
 	setModal(true);
 
 	m_create_button->set_name("Create Button");
-	m_create_button->disable_text_hover_color();
 	m_create_button->set_disabled();
 	connect(m_create_button, &LButton::clicked, [this] { done(QDialog::Accepted); });
 

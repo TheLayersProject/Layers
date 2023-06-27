@@ -12,7 +12,6 @@ using Layers::LAttributeMap;
 using Layers::LTheme;
 using Layers::LThemeable;
 using Layers::LThemeLineageData;
-using Layers::LVariant;
 
 LTheme::LTheme()
 {
@@ -222,10 +221,10 @@ void LTheme::load_document(const QJsonDocument& json_document, const LThemeDataT
 
 			QString name = key;
 
-			// If entity_object contains key 'value' or 'values',
+			// If entity_object contains key 'value', 'overrides', or 'linked_to',
 			// then it is an attribute, not a group
 			if (attr_object.contains("value") ||
-				attr_object.contains("values") ||
+				attr_object.contains("overrides") ||
 				attr_object.contains("linked_to"))
 			{
 				m_attr_map[key] = new LAttribute(name, attr_object);

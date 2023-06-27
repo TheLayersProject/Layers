@@ -23,6 +23,8 @@ public:
 
 	int recommended_minimum_width();
 
+	LStatePool* select_states() const;
+
 	void set_disabled(bool cond = true);
 
 protected:
@@ -42,6 +44,9 @@ private:
 	LLabel* m_icon_label;
 
 	LLabel* m_text_label;
+
+	LStatePool* m_select_states{
+		new LStatePool("Select", { "Selected", "Unselected" }) };
 };
 LAYERS_NAMESPACE_END
 

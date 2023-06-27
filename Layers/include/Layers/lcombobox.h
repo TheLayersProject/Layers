@@ -81,7 +81,7 @@ protected:
 	LBorderAttributes* m_border{ new LBorderAttributes };
 
 	LAttribute* m_corner_radius{
-		new LAttribute("corner_radius", LVariant(10.0)) };
+		new LAttribute("corner_radius", QVariant(10.0)) };
 
 	LAttribute* m_fill{
 		new LAttribute("fill", QColor(Qt::white)) };

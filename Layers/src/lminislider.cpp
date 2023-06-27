@@ -74,15 +74,6 @@ void LMiniSlider::update_handle_pos()
 	m_handle->move(drag_increment * a_value.as<double>() + 5, m_handle->y()); // 5 is left margin
 }
 
-void LMiniSlider::set_current_editing_state(const QString& state)
-{
-	a_value.set_state(state);
-
-	update_handle_pos();
-
-	// Might need to do more here or add state support is other functions in this document
-}
-
 bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::MouseButtonPress)

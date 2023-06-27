@@ -5,6 +5,7 @@
 
 using Layers::LButton;
 using Layers::LLabel;
+using Layers::LStatePool;
 using Layers::LTab;
 
 LTab::LTab(const LGraphic& icon, const QString& text, QWidget* parent) :
@@ -25,6 +26,11 @@ LTab::LTab(const QString& text, QWidget* parent) :
 LButton* LTab::close_button() const
 {
 	return m_close_button;
+}
+
+LStatePool* LTab::status_states() const
+{
+	return m_status_states;
 }
 
 LLabel* LTab::text_label() const
@@ -54,6 +60,9 @@ void LTab::init()
 	init_attributes();
 	init_layout();
 	installEventFilter(this);
+	add_state_pool(m_status_states);
+
+	m_status_states->set_state("Inactive");
 
 	if (m_icon_label)
 	{
@@ -70,16 +79,12 @@ void LTab::init()
 
 	connect(m_close_button, &LButton::clicked, [this]
 		{ emit closed(); });
-
-	m_fill->set_state("Inactive");
 }
 
 void LTab::init_attributes()
 {
-	m_fill->init_variant_map({
-		{ "Inactive", QColor("#36393f") },
-		{ "Active", QColor("#25272b") }
-		});
+	m_fill->set_value(QColor("#36393f"));
+	m_fill->add_override("Active", QColor("#25272b"));
 
 	corner_radii()->top_left()->set_value(5.0);
 	corner_radii()->top_right()->set_value(5.0);

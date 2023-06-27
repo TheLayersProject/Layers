@@ -21,6 +21,20 @@ LThemeable::~LThemeable()
 		delete m_icon;
 }
 
+void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
+{
+	m_state_pools.append(state_pool);
+
+	state_pool->connect(state_pool, &LStatePool::changed, [this]
+		{
+			for (LAttribute* attr : m_attr_data.ungrouped_attrs)
+				attr->changed();
+		});
+
+	for (LThemeable* child_themeable : child_themeables())
+		child_themeable->add_state_pool(state_pool, include_children);
+}
+
 void LThemeable::apply_theme(LTheme& theme)
 {
 	if (!m_name)
@@ -178,24 +192,6 @@ bool LThemeable::is_app_themeable() const
 	return m_is_app_themeable;
 }
 
-//bool LThemeable::is_multi_valued() const
-//{
-//	for (LAbstractAttribute* entity : m_attrs)
-//	{
-//		if (LAttribute* attr = dynamic_cast<LAttribute*>(entity))
-//		{
-//			if (attr->is_multi_valued())
-//				return true;
-//		}
-//		else if (LAttributeGroup* attr_group = dynamic_cast<LAttributeGroup*>(entity))
-//			if (attr_group->is_multi_valued())
-//				return true;
-//
-//	}
-//
-//	return false;
-//}
-
 QString* LThemeable::name() const
 {
 	return m_name;
@@ -249,37 +245,12 @@ void LThemeable::set_name(const QString& name)
 	m_name = new QString(name);
 }
 
-void LThemeable::set_state(const QString& state)
-{
-	//if (m_state != state)
-	//{
-	//	m_state = state;
-
-	//	for (LAttribute* attribute : m_attrs)
-	//		attribute->set_state(state);
-
-	//	for (LThemeable* child_themeable : child_themeables())
-	//		child_themeable->set_state(state);
-	//}
-}
-
-QString LThemeable::state() const
-{
-	return m_state;
-}
-
-/*
-	TODO: The themeable should be responsible for storing the available state
-	pools.
-*/
 QStringList LThemeable::states() const
 {
 	QStringList states;
 
-	//for (LAttribute* attribute : m_attrs)
-	//	for (const QString& state : attribute->states())
-	//		if (!states.contains(state))
-	//			states.append(state);
+	for (LStatePool* state_pool : m_state_pools)
+		states.append(state_pool->state());
 
 	return states;
 }

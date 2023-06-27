@@ -24,13 +24,11 @@ LUpdateDialog::LUpdateDialog(
 
 	m_remind_me_later_button->set_name("Remind Me Later Button");
 	m_remind_me_later_button->set_padding(8, 6, 8, 6);
-	m_remind_me_later_button->disable_text_hover_color();
 	connect(m_remind_me_later_button, &LButton::clicked,
 		[this] { done(QDialog::Rejected); });
 
 	m_update_button->set_name("Update Button");
 	m_update_button->set_padding(8, 6, 8, 6);
-	m_update_button->disable_text_hover_color();
 	connect(m_update_button, &LButton::clicked,
 		[this] { done(QDialog::Accepted); });
 

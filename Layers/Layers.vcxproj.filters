@@ -21,9 +21,6 @@
     <ClCompile Include="src\lupdatedialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lvariant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\lversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -37,9 +34,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lwidgeteditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\labstractattribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lapplication.cpp">
@@ -88,9 +82,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lcreatethemedialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ldata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ldialog.cpp">
@@ -180,9 +171,6 @@
     <ClCompile Include="src\lslider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lstateeditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\lsvgrenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -228,6 +216,9 @@
     <ClCompile Include="src\lthemeswidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\lstatepool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h">
@@ -270,9 +261,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lcreatethemedialog.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\Layers\ldata.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\ldialog.h">
@@ -341,9 +329,6 @@
     <QtMoc Include="include\Layers\lslider.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Layers\lstateeditor.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Layers\lsvgrenderer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -383,9 +368,6 @@
     <QtMoc Include="include\Layers\lupdatedialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Layers\lvariant.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Layers\lwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -411,6 +393,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lattributegroup.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="include\Layers\lstatepool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -443,9 +428,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\lversion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Layers\labstractattribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\lattributedata.h">

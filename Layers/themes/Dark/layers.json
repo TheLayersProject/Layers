@@ -207,17 +207,21 @@
                 "value": "#768199"
             },
             "thickness": {
-                "values": {
-                    "Active": 0,
-                    "Inactive": 3
-                }
+                "overrides": {
+                    "Active": {
+                        "value": 0
+                    }
+                },
+                "value": 3
             }
         },
         "fill": {
-            "values": {
-                "Active": "#9daccc",
-                "Inactive": "#313640"
-            }
+            "overrides": {
+                "Active": {
+                    "value": "#9daccc"
+                }
+            },
+            "value": "#313640"
         }
     },
     "Color Dialog/Hue Unit Label": {
@@ -289,17 +293,21 @@
                 "value": "#768199"
             },
             "thickness": {
-                "values": {
-                    "Active": 0,
-                    "Inactive": 3
-                }
+                "overrides": {
+                    "Active": {
+                        "value": 0
+                    }
+                },
+                "value": 3
             }
         },
         "fill": {
-            "values": {
-                "Active": "#9daccc",
-                "Inactive": "#313640"
-            }
+            "overrides": {
+                "Active": {
+                    "value": "#9daccc"
+                }
+            },
+            "value": "#313640"
         }
     },
     "Color Dialog/Saturation Unit Label": {
@@ -399,10 +407,12 @@
     },
     "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33036",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33036"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Color Dialog/Titlebar/Title Label": {
@@ -474,17 +484,21 @@
                 "value": "#768199"
             },
             "thickness": {
-                "values": {
-                    "Active": 0,
-                    "Inactive": 3
-                }
+                "overrides": {
+                    "Active": {
+                        "value": 0
+                    }
+                },
+                "value": 3
             }
         },
         "fill": {
-            "values": {
-                "Active": "#9daccc",
-                "Inactive": "#313640"
-            }
+            "overrides": {
+                "Active": {
+                    "value": "#9daccc"
+                }
+            },
+            "value": "#313640"
         }
     },
     "Color Dialog/Value Unit Label": {
@@ -630,10 +644,12 @@
             "value": 10
         },
         "fill": {
-            "values": {
-                "Selected": "#2b2e32",
-                "Unselected": "#16181a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#2b2e32"
+                }
+            },
+            "value": "#16181a"
         },
         "text_color": {
             "value": "#b9bbbe"
@@ -772,10 +788,12 @@
     },
     "Create Theme Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33034",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33036"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Create Theme Dialog/Titlebar/Title Label": {
@@ -970,10 +988,12 @@
     },
     "Gradient Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33034",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33036"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Gradient Dialog/Titlebar/Title Label": {
@@ -1177,10 +1197,12 @@
             }
         },
         "fill": {
-            "values": {
-                "Selected": "#42464d",
-                "Unselected": "#2f3136"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#42464d"
+                }
+            },
+            "value": "#2f3136"
         },
         "margins": {
             "bottom": {
@@ -1201,10 +1223,12 @@
     },
     "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Text Label": {
@@ -1212,10 +1236,12 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Settings Menu/Themes Widget": {
@@ -1304,10 +1330,12 @@
     },
     "Main Window/Settings Menu/Themes Widget/Customize Theme Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e6e6e6",
-                "Unselected": "#c3c3c3"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e6e6e6"
+                }
+            },
+            "value": "#c3c3c3"
         }
     },
     "Main Window/Settings Menu/Themes Widget/Delete Theme Button": {
@@ -1355,10 +1383,12 @@
     },
     "Main Window/Settings Menu/Themes Widget/Delete Theme Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#ff7f7f",
-                "Unselected": "#e95454"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#ff7f7f"
+                }
+            },
+            "value": "#e95454"
         }
     },
     "Main Window/Settings Menu/Themes Widget/New Theme Button": {
@@ -1406,10 +1436,12 @@
     },
     "Main Window/Settings Menu/Themes Widget/New Theme Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#8cfa6a",
-                "Unselected": "#6fc654"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#8cfa6a"
+                }
+            },
+            "value": "#6fc654"
         }
     },
     "Main Window/Settings Menu/Themes Widget/Separators": {
@@ -1477,10 +1509,12 @@
             "value": 10
         },
         "fill": {
-            "values": {
-                "Selected": "#2b2e32",
-                "Unselected": "#16181a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#2b2e32"
+                }
+            },
+            "value": "#16181a"
         },
         "text_color": {
             "value": "#b9bbbe"
@@ -1531,10 +1565,7 @@
     },
     "Main Window/Settings Menu/Themes Widget/Theme Info Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#6a6a6a",
-                "Unselected": "#6a6a6a"
-            }
+            "value": "#6a6a6a"
         }
     },
     "Main Window/Settings Menu/Themes Widget/Theme Label": {
@@ -1863,97 +1894,6 @@
             }
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#b9bbbe"
-                }
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#3ba55d",
-                "Untoggled": "#202225"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Disable Toggle/Square": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#b9bbbe"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
         "fill": {
             "value": "#ffffff"
@@ -2050,109 +1990,22 @@
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
                 }
             },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#3ba55d",
-                "Untoggled": "#202225"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Disable Toggle/Square": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#b9bbbe"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor": {
@@ -2940,97 +2793,6 @@
             }
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
-                }
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#3ba55d",
-                "Untoggled": "#202225"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Disable Toggle/Square": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#b9bbbe"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control": {
         "border": {
             "fill": {
@@ -3121,13 +2883,10 @@
     "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
         "border": {
             "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#6fc65b"
-                }
+                "value": "#000000"
             },
             "thickness": {
-                "value": 3
+                "value": 0
             }
         },
         "corner_radii": {
@@ -3145,10 +2904,7 @@
             }
         },
         "fill": {
-            "values": {
-                "Toggled": "#6fc65b",
-                "Untoggled": "#6fc65b"
-            }
+            "value": "#6fc65b"
         },
         "margins": {
             "bottom": {
@@ -3189,10 +2945,7 @@
             }
         },
         "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#ffffff"
-            }
+            "value": "#ffffff"
         },
         "margins": {
             "bottom": {
@@ -3313,109 +3066,22 @@
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Disable Toggle": {
-        "border": {
-            "fill": {
-                "values": {
-                    "Toggled": "#6fc65b",
-                    "Untoggled": "#2e2e2e"
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
                 }
             },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#3ba55d",
-                "Untoggled": "#202225"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Disable Toggle/Square": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "values": {
-                "Toggled": "#ffffff",
-                "Untoggled": "#b9bbbe"
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
@@ -3740,88 +3406,6 @@
             "value": "#f8f8f8"
         }
     },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e1e1e1"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "value": 10
-        },
-        "fill": {
-            "value": "#1e2023"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/State Editor/State Combobox/Items": {
-        "corner_radius": {
-            "value": 10
-        },
-        "fill": {
-            "values": {
-                "Selected": "#2b2e32",
-                "Unselected": "#16181a"
-            }
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
         "border": {
             "fill": {
@@ -3951,18 +3535,22 @@
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Label": {
@@ -3977,10 +3565,12 @@
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Label": {
@@ -3988,10 +3578,12 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
@@ -4187,10 +3779,7 @@
     },
     "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#2e2e2e",
-                "Unselected": "#2e2e2e"
-            }
+            "value": "#2e2e2e"
         }
     },
     "Main Window/Theme Editor/Topbar/Navigator/Text Buttons": {
@@ -4239,10 +3828,12 @@
             "value": "#ffffff"
         },
         "text_color": {
-            "values": {
-                "Selected": "#fbfbfc",
-                "Unselected": "#96989d"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#fbfbfc"
+                }
+            },
+            "value": "#96989d"
         }
     },
     "Main Window/Titlebar": {
@@ -4331,10 +3922,12 @@
     },
     "Main Window/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33034",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33034"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Main Window/Titlebar/Maximize Button": {
@@ -4382,10 +3975,12 @@
     },
     "Main Window/Titlebar/Maximize Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e3e3e3",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e3e3e3"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Main Window/Titlebar/Menu Tab Bar": {
@@ -4453,10 +4048,12 @@
             }
         },
         "fill": {
-            "values": {
-                "Active": "#25272b",
-                "Inactive": "#36393f"
-            }
+            "overrides": {
+                "Active": {
+                    "value": "#25272b"
+                }
+            },
+            "value": "#36393f"
         },
         "margins": {
             "bottom": {
@@ -4518,10 +4115,12 @@
     },
     "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e95454",
-                "Unselected": "#5f5f5f"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e95454"
+                }
+            },
+            "value": "#5f5f5f"
         }
     },
     "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon": {
@@ -4584,10 +4183,12 @@
     },
     "Main Window/Titlebar/Minimize Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e3e3e3",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e3e3e3"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Main Window/Titlebar/Settings Button": {
@@ -4635,10 +4236,12 @@
     },
     "Main Window/Titlebar/Settings Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e3e3e3",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e3e3e3"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Theme Compatibility Caution Dialog": {
@@ -4870,10 +4473,12 @@
     },
     "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33034",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33036"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Theme Compatibility Caution Dialog/Titlebar/Title Label": {
@@ -5076,10 +4681,12 @@
     },
     "Update Dialog/Titlebar/Exit Button/Graphic/Svg": {
         "common_color": {
-            "values": {
-                "Selected": "#e33034",
-                "Unselected": "#6a6a6a"
-            }
+            "overrides": {
+                "Selected": {
+                    "value": "#e33036"
+                }
+            },
+            "value": "#6a6a6a"
         }
     },
     "Update Dialog/Titlebar/Title Label": {

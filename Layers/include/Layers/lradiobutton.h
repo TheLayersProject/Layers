@@ -33,6 +33,8 @@ public:
 	*/
 	LRadioButton(QWidget* parent = nullptr);
 
+	LStatePool* status_states() const;
+
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 
@@ -45,12 +47,15 @@ private:
 
 	LBorderAttributes* m_border{ new LBorderAttributes };
 
-	LAttribute* m_fill{ new LAttribute("fill", {
-		{ "Active", QColor(Qt::lightGray) },
-		{ "Inactive", QColor(Qt::darkGray) }
-		}) };
+	LAttribute* m_fill{ new LAttribute("fill", QColor(Qt::darkGray)) };
 
-	LAttribute* m_margin{ new LAttribute("margin", LVariant(10)) };
+	LAttribute* m_margin{ new LAttribute("margin", QVariant(10.0)) };
+
+	//LStatePool* m_select_states{
+	//	new LStatePool("Select", { "Selected", "Unselected" }) };
+
+	LStatePool* m_status_states{
+		new LStatePool("Status", { "Active", "Inactive" }) };
 };
 LAYERS_NAMESPACE_END
 

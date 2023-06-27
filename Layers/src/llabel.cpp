@@ -139,14 +139,16 @@ void LLabel::paintEvent(QPaintEvent* event)
 
 void LLabel::update_stylesheet()
 {
+	QStringList s = states();
+
 	QString stylesheet = "QLabel {";
 
 	// TEMP:
-	//stylesheet += "background: " + m_fill->as<QColor>().name() + ";";
+	//stylesheet += "background: " + m_fill->as<QColor>(s).name() + ";";
 	stylesheet += "background: transparent;";
 
 	if (!m_graphic)
-		stylesheet += "color: " + m_text_color->as<QColor>().name() + ";";
+		stylesheet += "color: " + m_text_color->as<QColor>(s).name() + ";";
 
 	stylesheet += "}";
 

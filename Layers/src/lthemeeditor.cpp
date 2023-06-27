@@ -29,7 +29,6 @@ LThemeEditor::LThemeEditor(QWidget* parent) :
 	m_topbar->corner_radii()->top_right()->set_value(10.0);
 	m_topbar->corner_radii()->bottom_right()->set_value(10.0);
 
-	m_apply_button->disable_text_hover_color();
 	m_apply_button->set_margin(0, 7, 0, 7);
 	m_apply_button->set_name("Apply Button");
 

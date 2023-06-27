@@ -6,6 +6,7 @@
 
 #include "lbutton.h"
 #include "llabel.h"
+#include "lstatepool.h"
 
 LAYERS_NAMESPACE_BEGIN
 /*!
@@ -43,6 +44,8 @@ public:
 	*/
 	LButton* close_button() const;
 
+	LStatePool* status_states() const;
+
 	/*!
 		Returns a pointer to the tab's text label.
 	*/
@@ -64,6 +67,9 @@ private:
 	LLabel* m_icon_label{ nullptr };
 
 	LLabel* m_text_label{ nullptr };
+
+	LStatePool* m_status_states{
+		new LStatePool("Status", { "Active", "Inactive" })};
 };
 LAYERS_NAMESPACE_END
 

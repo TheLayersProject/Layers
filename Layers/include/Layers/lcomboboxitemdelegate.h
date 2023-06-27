@@ -49,13 +49,10 @@ public:
 
 protected:
 	LAttribute* m_corner_radius{
-		new LAttribute("corner_radius", LVariant(10.0)) };
+		new LAttribute("corner_radius", QVariant(10.0)) };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", LVariantMap({
-			{ "Selected", QColor(Qt::green) },
-			{ "Unselected", QColor(Qt::white) }
-		})) };
+		new LAttribute("fill", QColor(Qt::gray)) };
 
 	LAttribute* m_text_color{
 		new LAttribute("text_color", QColor(Qt::black)) };

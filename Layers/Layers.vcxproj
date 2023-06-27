@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\labstractattribute.cpp" />
     <ClCompile Include="src\lapplication.cpp" />
     <ClCompile Include="src\lattribute.cpp" />
     <ClCompile Include="src\lattributedata.cpp" />
@@ -28,7 +27,6 @@
     <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
     <ClCompile Include="src\lcornerradiieditor.cpp" />
     <ClCompile Include="src\lcreatethemedialog.cpp" />
-    <ClCompile Include="src\ldata.cpp" />
     <ClCompile Include="src\ldialog.cpp" />
     <ClCompile Include="src\ldownloader.cpp" />
     <ClCompile Include="src\lfillcontrol.cpp" />
@@ -58,7 +56,7 @@
     <ClCompile Include="src\lsettingsmenu.cpp" />
     <ClCompile Include="src\lsettingstab.cpp" />
     <ClCompile Include="src\lslider.cpp" />
-    <ClCompile Include="src\lstateeditor.cpp" />
+    <ClCompile Include="src\lstatepool.cpp" />
     <ClCompile Include="src\lsvgrenderer.cpp" />
     <ClCompile Include="src\ltab.cpp" />
     <ClCompile Include="src\ltabbar.cpp" />
@@ -76,7 +74,6 @@
     <ClCompile Include="src\lthemeswidget.cpp" />
     <ClCompile Include="src\ltoggleswitch.cpp" />
     <ClCompile Include="src\lupdatedialog.cpp" />
-    <ClCompile Include="src\lvariant.cpp" />
     <ClCompile Include="src\lversion.cpp" />
     <ClCompile Include="src\lwidget.cpp" />
     <ClCompile Include="src\lwidgetbutton.cpp" />
@@ -102,7 +99,7 @@
     <QtMoc Include="include\Layers\lbutton.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Layers\labstractattribute.h" />
+    <QtMoc Include="include\Layers\lstatepool.h" />
     <ClInclude Include="include\Layers\lattributedata.h" />
     <ClInclude Include="include\Layers\layers_exports.h" />
     <ClInclude Include="include\Layers\layers_global.h" />
@@ -125,7 +122,6 @@
     <QtMoc Include="include\Layers\lwidgetbuttongroup.h" />
     <QtMoc Include="include\Layers\lwidgetbutton.h" />
     <QtMoc Include="include\Layers\lwidget.h" />
-    <QtMoc Include="include\Layers\lvariant.h" />
     <QtMoc Include="include\Layers\lupdatedialog.h" />
     <QtMoc Include="include\Layers\ltoggleswitch.h" />
     <QtMoc Include="include\Layers\lthemelineagemodel.h" />
@@ -139,7 +135,6 @@
     <QtMoc Include="include\Layers\ltabbar.h" />
     <QtMoc Include="include\Layers\ltab.h" />
     <QtMoc Include="include\Layers\lsvgrenderer.h" />
-    <QtMoc Include="include\Layers\lstateeditor.h" />
     <QtMoc Include="include\Layers\lslider.h" />
     <QtMoc Include="include\Layers\lscrollbar.h" />
     <QtMoc Include="include\Layers\lscrollarea.h" />
@@ -162,7 +157,6 @@
     <QtMoc Include="include\Layers\lfillcontrol.h" />
     <QtMoc Include="include\Layers\ldownloader.h" />
     <QtMoc Include="include\Layers\ldialog.h" />
-    <QtMoc Include="include\Layers\ldata.h" />
     <QtMoc Include="include\Layers\lcreatethemedialog.h" />
     <QtMoc Include="include\Layers\lcornerradiieditor.h" />
     <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />

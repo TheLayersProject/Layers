@@ -36,13 +36,6 @@ void LFillControl::set_attribute(LAttribute* attribute)
 	m_dialog->set_attribute(attribute);
 }
 
-void LFillControl::set_current_editing_state(const QString& state)
-{
-	fill()->set_state(state);
-
-	m_dialog->set_current_editing_state(state);
-}
-
 bool LFillControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (object == this)

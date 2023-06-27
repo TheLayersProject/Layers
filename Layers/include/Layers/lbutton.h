@@ -54,13 +54,6 @@ public:
 	LButton(const LGraphic& graphic, const LGraphic& graphic_after,
 		QWidget* parent = nullptr);
 
-	//~LButton();
-
-	/*!
-		Disables or enables text hover coloring depending on *cond*.
-	*/
-	void disable_text_hover_color(bool cond = true);
-
 	/*!
 		Returns true if the button is disabled. Otherwise, returns false.
 	*/
@@ -113,13 +106,13 @@ private:
 
 	bool m_disabled{ false };
 
-	bool m_use_graphic_hover_color{ true };
-	bool m_use_text_hover_color{ true };
-
 	LLabel* m_graphic_label{ nullptr };
 	LLabel* m_graphic_after_label{ nullptr };
 
 	LLabel* m_text_label{ nullptr };
+
+	LStatePool* m_select_states{
+		new LStatePool("Select", { "Selected", "Unselected" }) };
 };
 LAYERS_NAMESPACE_END
 

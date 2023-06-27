@@ -43,11 +43,6 @@ void LColorControl::disable_clicking(bool cond)
 	clicking_disabled = cond;
 }
 
-void LColorControl::set_current_editing_state(const QString& state)
-{
-	m_fill->set_state(state);
-}
-
 bool LColorControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::MouseButtonPress)

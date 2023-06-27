@@ -26,7 +26,6 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 	m_control_corner_radii_editor->hide();
 	m_control_fill_editor->hide();
 	m_control_number_editor->hide();
-	m_control_state_editor->hide();
 	m_control_widget_button->hide();
 	m_control_widget_button_group->hide();
 
@@ -233,15 +232,6 @@ LThemeable* LWidgetEditor::themeable() const
 
 void LWidgetEditor::init_attribute_editors()
 {
-	//if (m_themeable->is_multi_valued())
-	//{
-	//	m_state_editor = new LStateEditor;
-	//	m_state_editor->establish_link(m_control_state_editor);
-	//	m_state_editor->populate_state_combobox(m_themeable->states());
-
-	//	add_attribute_editor(m_state_editor);
-	//}
-
 	// Handle groups
 	for (LAttributeGroup* attr_group : m_themeable->attribute_data().attr_groups)
 	{
@@ -271,21 +261,6 @@ void LWidgetEditor::init_attribute_editors()
 
 void LWidgetEditor::init_attributes()
 {
-	//m_show_all_button->fill()->set_value(QColor("#61ad50"));
-	//// TODO:
-	////m_show_all_button->hover_fill()->set_value(QColor("#6fc65b"));
-	//m_show_all_button->corner_radii()->top_left()->set_value(5.0);
-	//m_show_all_button->corner_radii()->top_right()->set_value(5.0);
-	//m_show_all_button->corner_radii()->bottom_left()->set_value(5.0);
-	//m_show_all_button->corner_radii()->bottom_right()->set_value(5.0);
-
-	//m_show_enabled_button->fill()->set_value(QColor("#61ad50"));
-	//// TODO:
-	////m_show_primary_button->hover_fill()->set_value(QColor("#6fc65b"));
-	//m_show_enabled_button->corner_radii()->top_left()->set_value(5.0);
-	//m_show_enabled_button->corner_radii()->top_right()->set_value(5.0);
-	//m_show_enabled_button->corner_radii()->bottom_left()->set_value(5.0);
-	//m_show_enabled_button->corner_radii()->bottom_right()->set_value(5.0);
 }
 
 void LWidgetEditor::init_layout()

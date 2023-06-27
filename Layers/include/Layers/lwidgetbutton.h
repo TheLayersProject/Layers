@@ -34,6 +34,9 @@ private:
 	LLabel* m_icon_label{ nullptr };
 
 	LLabel* m_label{ nullptr };
+
+	LStatePool* m_select_states{
+		new LStatePool("Select", { "Selected", "Unselected" }) };
 };
 LAYERS_NAMESPACE_END
 

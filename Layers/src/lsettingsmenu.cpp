@@ -26,7 +26,7 @@ LSettingsMenu::LSettingsMenu(QWidget* parent) :
 	m_settings_tabs.last()->set_name("Themes Settings Tab");
 	//connect(m_settings_tabs.last(), &LSettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
 
-	m_settings_tabs.first()->set_state("Selected");
+	m_settings_tabs.first()->select_states()->set_state("Selected");
 
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
 	m_sidebar->setMouseTracking(true);
@@ -42,11 +42,11 @@ void LSettingsMenu::add_settings_tab(const LGraphic& icon, const QString& label_
 	for (LSettingsTab* st : m_settings_tabs)
 	{
 		connect(st, &LSettingsTab::clicked, [settings_tab] {
-			settings_tab->set_state("Unselected");
+			settings_tab->select_states()->set_state("Unselected");
 			settings_tab->update();
 			});
 		connect(settings_tab, &LSettingsTab::clicked, [st] {
-			st->set_state("Unselected");
+			st->select_states()->set_state("Unselected");
 			st->update();
 			});
 	}

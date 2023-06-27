@@ -16,9 +16,6 @@ class LAYERS_EXPORT LCornerRadiiEditor : public LAttributeEditorGroup
 public:
 	LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_radii, QWidget* parent = nullptr);
 
-public slots:
-	void set_current_editing_state(const QString& state);
-
 private:
 	void init_layout();
 

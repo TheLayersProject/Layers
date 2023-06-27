@@ -7,6 +7,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lstatepool.h"
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -85,6 +86,8 @@ private:
 	LWidget* m_square{ new LWidget };
 
 	bool m_vertical{ false };
+
+	LStatePool* m_toggle_states{ new LStatePool("Toggle", { "Toggled", "Untoggled" })};
 };
 LAYERS_NAMESPACE_END
 

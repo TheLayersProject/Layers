@@ -15,11 +15,6 @@ LGradientControl::LGradientControl(QWidget* parent) : LWidget(parent)
 	setFixedSize(40, 40);
 }
 
-void LGradientControl::set_current_editing_state(const QString& state)
-{
-	fill()->set_state(state);
-}
-
 bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick)

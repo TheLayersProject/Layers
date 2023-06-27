@@ -1,6 +1,8 @@
 #ifndef LATTRIBUTEGROUP_H
 #define LATTRIBUTEGROUP_H
 
+#include <QColor>
+
 #include "layers_global.h"
 #include "layers_exports.h"
 

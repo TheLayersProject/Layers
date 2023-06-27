@@ -9,7 +9,6 @@
 #include "lcornerradiieditor.h"
 #include "lfilleditor.h"
 #include "lnumbereditor.h"
-#include "lstateeditor.h"
 #include "lwidgetbuttongroup.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -51,9 +50,6 @@ private:
 	LNumberEditor* m_control_number_editor{
 		new LNumberEditor(new LAttribute("", QVariant::fromValue(0)), new QIntValidator, this) };
 
-	LStateEditor* m_control_state_editor{
-		new LStateEditor(this) };
-
 	LWidgetButton* m_control_widget_button{
 		new LWidgetButton(LGraphic(":/images/exit.svg", QSize(20, 20)), "", this)};
 
@@ -62,8 +58,6 @@ private:
 
 	bool m_layout_setup{ false };
 	bool m_showing_primary{ true };
-
-	LStateEditor* m_state_editor{ nullptr };
 
 	QHBoxLayout* m_attributes_label_layout{ new QHBoxLayout };
 	QVBoxLayout* m_attributes_layout{ new QVBoxLayout };

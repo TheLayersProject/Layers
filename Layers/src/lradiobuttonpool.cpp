@@ -19,9 +19,9 @@ void LRadioButtonPool::set_active(LRadioButton* button)
 	if (m_radio_buttons.contains(button) && m_active_button != button)
 	{
 		if (m_active_button)
-			m_active_button->set_state("Inactive");
+			m_active_button->status_states()->set_state("Inactive");
 
 		m_active_button = button;
-		m_active_button->set_state("Active");
+		m_active_button->status_states()->set_state("Active");
 	}
 }

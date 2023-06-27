@@ -108,7 +108,7 @@ void LComboBoxItemDelegate::paint(
 	const QModelIndex& index) const
 {
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
-		m_fill->as<QColor>("Selected") : m_fill->as<QColor>("Unselected");
+		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>();
 
 	const QFontMetrics& item_font_metrics = option.fontMetrics;
 
@@ -141,6 +141,5 @@ void LComboBoxItemDelegate::init_attributes()
 		{ "text_color", m_text_color }
 		});
 
-	// TODO: Remove
-	m_fill->set_value(QColor(Qt::green));
+	m_fill->add_override("Selected", QColor(Qt::lightGray));
 }

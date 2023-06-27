@@ -65,9 +65,11 @@ void LSvgRenderer::update()
 		if (m_svg_elements[i].startsWith("<path") &&
 			m_svg_elements[i].contains("id="))
 		{
+			QString common_color_name = m_common_color->as<QColor>(states()).name();
+
 			m_svg_elements[i].replace(
 				m_svg_elements[i].indexOf("fill=") + 6, 7,
-				m_common_color->as<QColor>().name());
+				common_color_name);
 		}
 	}
 

@@ -31,9 +31,6 @@ public:
 	*/
 	LAttribute& value();
 
-public slots:
-	void set_current_editing_state(const QString& state);
-
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 

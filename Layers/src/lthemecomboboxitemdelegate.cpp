@@ -50,7 +50,7 @@ void LThemeComboBoxItemDelegate::paint(
 	const QModelIndex& index) const
 {
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
-		m_fill->as<QColor>("Selected") : m_fill->as<QColor>("Unselected");
+		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>({ "Unselected" });
 
 	QFont uuid_font(option.font.family(), 8);
 

@@ -1,5 +1,7 @@
 #include <Layers/lattributegroup.h>
 
+#include <QJsonObject>
+
 using Layers::LAttribute;
 using Layers::LAttributeGroup;
 using Layers::LAttributeMap;

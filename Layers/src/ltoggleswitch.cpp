@@ -8,6 +8,7 @@ using Layers::LToggleSwitch;
 LToggleSwitch::LToggleSwitch(bool vertical, QWidget* parent) :
 	m_vertical{ vertical }, LWidget(parent)
 {
+	add_state_pool(m_toggle_states);
 	init_attributes();
 
 	installEventFilter(this);
@@ -22,7 +23,7 @@ LToggleSwitch::LToggleSwitch(bool vertical, QWidget* parent) :
 
 	init_layout();
 
-	set_state("Untoggled");
+	m_toggle_states->set_state("Untoggled");
 }
 
 void LToggleSwitch::setFixedHeight(int h)
@@ -34,7 +35,8 @@ void LToggleSwitch::setFixedHeight(int h)
 
 void LToggleSwitch::set_toggled(bool toggled)
 {
-	if ((toggled && state() != "Toggled") || (!toggled && state() == "Toggled"))
+	if ((toggled && m_toggle_states->state() != "Toggled") ||
+		(!toggled && m_toggle_states->state() == "Toggled"))
 	{
 		toggle();
 	}
@@ -42,15 +44,15 @@ void LToggleSwitch::set_toggled(bool toggled)
 
 void LToggleSwitch::toggle(bool emit_toggled_event)
 {
-	if (state() == "Untoggled")
+	if (m_toggle_states->state() == "Untoggled")
 	{
-		set_state("Toggled");
+		m_toggle_states->set_state("Toggled");
 
 		m_spacer->show();
 	}
 	else
 	{
-		set_state("Untoggled");
+		m_toggle_states->set_state("Untoggled");
 
 		m_spacer->hide();
 	}
@@ -63,7 +65,7 @@ void LToggleSwitch::toggle(bool emit_toggled_event)
 
 bool LToggleSwitch::toggled() const
 {
-	if (state() == "Toggled") return true;
+	if (m_toggle_states->state() == "Toggled") return true;
 	else return false;
 }
 
@@ -85,19 +87,15 @@ bool LToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void LToggleSwitch::init_attributes()
 {
-	border()->fill()->init_variant_map({
-		{ "Untoggled", QColor(Qt::black) },
-		{ "Toggled", QColor("#6fc65b") }
-		});
+	border()->fill()->set_value(QColor(Qt::black));
+	border()->fill()->add_override("Active", QColor("#6fc65b"));
 	border()->thickness()->set_value(3.0);
 	corner_radii()->top_left()->set_value(4.0);
 	corner_radii()->top_right()->set_value(4.0);
 	corner_radii()->bottom_left()->set_value(4.0);
 	corner_radii()->bottom_right()->set_value(4.0);
-	fill()->init_variant_map({
-		{ "Untoggled", QColor(Qt::white) },
-		{ "Toggled", QColor("#6fc65b") }
-		});
+	m_fill->set_value(QColor(Qt::white));
+	m_fill->add_override("Toggled", QColor("#6fc65b"));
 	if (m_vertical)
 		set_margin(10.0);
 	else
@@ -110,10 +108,8 @@ void LToggleSwitch::init_attributes()
 	m_square->corner_radii()->top_right()->set_value(2.0);
 	m_square->corner_radii()->bottom_left()->set_value(2.0);
 	m_square->corner_radii()->bottom_right()->set_value(2.0);
-	m_square->fill()->init_variant_map({
-		{ "Untoggled", QColor(Qt::black) },
-		{ "Toggled", QColor(Qt::white) }
-		});
+	m_square->fill()->set_value(QColor(Qt::black));
+	m_square->fill()->add_override("Toggled", QColor(Qt::white));
 
 	//m_spacer->fill()->set_disabled();
 	m_spacer->fill()->set_value(QColor(Qt::blue));

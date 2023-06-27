@@ -221,13 +221,9 @@ LLabel* LNavigator::create_arrow_label()
 LButton* LNavigator::create_text_button(const QString& text)
 {
 	LButton* text_button = new LButton(text);
-	text_button->disable_text_hover_color();
 	text_button->entangle_with(m_control_text_button);
 	text_button->set_font_size(14);
 	text_button->set_padding(0);
-
-	if (!m_text_button_stack.isEmpty())
-		m_text_button_stack.last()->disable_text_hover_color(false);
 
 	m_text_button_stack.append(text_button);
 	m_topbar_text_buttons.append(text_button);

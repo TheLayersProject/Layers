@@ -5,6 +5,7 @@
 #include "layers_exports.h"
 
 #include "lattributedata.h"
+#include "lstatepool.h"
 
 LAYERS_NAMESPACE_BEGIN
 
@@ -150,6 +151,8 @@ class LAYERS_EXPORT LThemeable
 public:
 	~LThemeable();
 
+	void add_state_pool(LStatePool* state_pool, bool include_children = true);
+
 	/*!
 		Applies *theme* to this themeable and its children.
 
@@ -228,12 +231,6 @@ public:
 	bool is_app_themeable() const;
 
 	/*!
-		Returns true if any of this themeable's attributes are multi-valued;
-		otherwise, returns false.
-	*/
-	//bool is_multi_valued() const;
-
-	/*!
 		Returns a pointer to the name of this themeable.
 
 		Returns nullptr if no name has been set.
@@ -277,16 +274,6 @@ public:
 	void set_name(const QString& name);
 
 	/*!
-		Sets the active state of this themeable.
-	*/
-	virtual void set_state(const QString& state);
-
-	/*!
-		Returns the active state of this themeable.
-	*/
-	QString state() const;
-
-	/*!
 		Returns a QStringList containing the available states of this themeable.
 
 		The themeable's available states are a sum of the available states of
@@ -322,10 +309,10 @@ protected:
 	bool m_is_preview_themeable{ false };
 
 	QString* m_name{ nullptr };
-
-	QString m_state{ "" };
 		
 	QString m_tag{ "" };
+
+	QList<LStatePool*> m_state_pools;
 
 	QStringList m_tag_prefixes;
 

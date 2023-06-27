@@ -31,12 +31,6 @@ public:
 	*/
 	void set_attribute(LAttribute* attribute);
 
-public slots:
-	/*!
-		Sets the state that is currently being edited.
-	*/
-	void set_current_editing_state(const QString& state);
-
 protected:
 	bool eventFilter(QObject* object, QEvent* event);
 
