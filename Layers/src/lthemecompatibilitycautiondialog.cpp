@@ -98,12 +98,12 @@ void LThemeCompatibilityCautionDialog::set_theme_name(const QString& theme_name)
 
 void LThemeCompatibilityCautionDialog::init_attributes()
 {
-	m_border->thickness()->set_value(3.0);
+	m_border_thickness->set_value(3.0);
 
-	m_corner_radii->top_left()->set_value(10.0);
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
+	m_corner_radii_top_left->set_value(10.0);
+	m_corner_radii_top_right->set_value(10.0);
+	m_corner_radii_bottom_left->set_value(10.0);
+	m_corner_radii_bottom_right->set_value(10.0);
 }
 
 void LThemeCompatibilityCautionDialog::init_layout()

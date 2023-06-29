@@ -8,21 +8,21 @@
 
 using Layers::LAttribute;
 
-LAttribute::LAttribute(const QString& name) :
+LAttribute::LAttribute(const QString& name, QObject* parent) :
 	m_name{ name },
-	QObject() { }
+	QObject(parent) { }
 
-LAttribute::LAttribute(const QString& name, QVariant value) :
+LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
 	m_value{ value },
 	m_name{ name },
-	QObject()
+	QObject(parent)
 {
 	establish_link_connection();
 }
 
-LAttribute::LAttribute(const QString& name, QJsonObject json_object) :
+LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* parent) :
 	m_name{ name },
-	QObject()
+	QObject(parent)
 {
 	if (json_object.contains("linked_to"))
 	{

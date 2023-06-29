@@ -135,11 +135,5 @@ void LComboBoxItemDelegate::set_is_above_control(bool condition)
 
 void LComboBoxItemDelegate::init_attributes()
 {
-	m_attr_data.ungrouped_attrs.insert({
-		{ "corner_radius", m_corner_radius },
-		{ "fill", m_fill },
-		{ "text_color", m_text_color }
-		});
-
 	m_fill->add_override("Selected", QColor(Qt::lightGray));
 }

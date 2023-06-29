@@ -38,7 +38,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 
 	QStringList s = states();
 
-	int border_thickness = m_border->thickness()->as<int>(s);
+	int border_thickness = m_border_thickness->as<int>(s);
 	qreal margin = m_margin->as<qreal>(s);
 
 	qreal radius_h = (width() / 2) - margin;
@@ -58,7 +58,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 	border_path = border_path - fill_path;
 
 	if (border_thickness)
-		painter.fillPath(border_path, m_border->fill()->as<QColor>(s));
+		painter.fillPath(border_path, m_border_fill->as<QColor>(s));
 
 	// Active Dot
 	if (s.contains("Active"))
@@ -73,26 +73,10 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 
 void LRadioButton::init_attributes()
 {
-	// Handle groups
-	m_attr_data.attr_groups.insert({
-		{ "border", m_border }
-		});
-
-	for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
-		for (LAttribute* attr : (*attr_group))
-			establish_update_connection(attr);
-
-	m_border->thickness()->set_value(3.0);
-	m_border->thickness()->add_override("Active", 0.0);
-
-	// Handle ungrouped
-	m_attr_data.ungrouped_attrs.insert({
-		{ "active_dot_fill", m_active_dot_fill },
-		{ "fill", m_fill }
-		});
-
-	for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-		establish_update_connection(attr);
+	m_border_thickness->add_override("Active", 0.0);
 
 	m_fill->add_override("Active", QColor(Qt::lightGray));
+
+	for (LAttribute* attr : attributes())
+		establish_update_connection(attr);
 }

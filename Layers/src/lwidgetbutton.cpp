@@ -85,10 +85,10 @@ void LWidgetButton::init()
 void LWidgetButton::init_attributes()
 {
 	m_fill->set_value(QColor("#1A000000"));
-	m_corner_radii->top_left()->set_value(10.0);
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
+	m_corner_radii_top_left->set_value(10.0);
+	m_corner_radii_top_right->set_value(10.0);
+	m_corner_radii_bottom_left->set_value(10.0);
+	m_corner_radii_bottom_right->set_value(10.0);
 
 	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
 	{

@@ -219,7 +219,7 @@ bool LMainWindow::nativeEvent(
 
 		*result = 0;
 		const LONG borderWidth =
-			border()->thickness()->as<qreal>() * devicePixelRatio();
+			border_thickness()->as<qreal>() * devicePixelRatio();
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -301,28 +301,34 @@ void LMainWindow::init_attributes()
 {
 	m_fill->set_link_new("App.Primary");
 
-	m_border->thickness()->set_value(15.0);
-	m_border->fill()->set_value(
+	m_border_thickness->set_value(15.0);
+	m_border_fill->set_value(
 		QVariant::fromValue(
 			QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
-	m_corner_radii->top_left()->set_value(10.0);
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
+	m_corner_radii_top_left->set_value(10.0);
+	m_corner_radii_top_right->set_value(10.0);
+	m_corner_radii_bottom_left->set_value(10.0);
+	m_corner_radii_bottom_right->set_value(10.0);
 
-	connect(m_border->thickness(), &LAttribute::changed, [this]
+	connect(m_border_thickness, &LAttribute::changed, [this]
 		{ update_theme_dependencies(); });
 
-	for (LAttribute* margin : *m_margins)
+	for (LAttribute* margin : QList<LAttribute*>(
+		{
+			m_margins_left, m_margins_top,
+			m_margins_right, m_margins_bottom
+		}))
+	{
 		connect(margin, &LAttribute::changed, [this]
 			{ update_theme_dependencies(); });
+	}
 
 	m_separator->fill()->set_value(QColor("#25272b"));
 }
 
 void LMainWindow::init_layout()
 {
-	int margin = border()->thickness()->as<double>();
+	int margin = border_thickness()->as<double>();
 
 	m_main_layout->setContentsMargins(margin, margin, margin, margin);
 	m_main_layout->setSpacing(0);
@@ -388,12 +394,12 @@ void LMainWindow::update_theme_dependencies()
 		m_main_layout->setContentsMargins(0, 0, 0, 0);
 	else
 	{
-		int border_thickness = border()->thickness()->as<double>();
+		int border_thickness = m_border_thickness->as<double>();
 
 		m_main_layout->setContentsMargins(
-			border_thickness + m_margins->left()->as<double>(),
-			border_thickness + m_margins->top()->as<double>(),
-			border_thickness + m_margins->right()->as<double>(),
-			border_thickness + m_margins->bottom()->as<double>());
+			border_thickness + m_margins_left->as<double>(),
+			border_thickness + m_margins_top->as<double>(),
+			border_thickness + m_margins_right->as<double>(),
+			border_thickness + m_margins_bottom->as<double>());
 	}
 }

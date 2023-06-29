@@ -48,7 +48,9 @@ LLabel::~LLabel()
 	disconnect(m_repaint_connection);
 
 	delete m_fill;
-	delete m_text_color;
+
+	if (!m_text_color->parent())
+		delete m_text_color;
 }
 
 QList<LThemeable*> LLabel::child_themeables(Qt::FindChildOptions options)
@@ -168,12 +170,9 @@ void LLabel::init()
 
 void LLabel::init_attributes()
 {
-	m_attr_data.ungrouped_attrs.insert("fill", m_fill);
-
 	if (!m_graphic)
-		m_attr_data.ungrouped_attrs.insert("text_color", m_text_color);
+		m_text_color->setParent(this);
 
-	for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-		connect(attr, &LAttribute::changed,
-			this, &LLabel::update_stylesheet);
+	for (LAttribute* attr : attributes())
+		connect(attr, &LAttribute::changed, this, &LLabel::update_stylesheet);
 }

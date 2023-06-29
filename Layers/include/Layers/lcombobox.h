@@ -24,8 +24,6 @@ public:
 	*/
 	LComboBox(QWidget* parent = nullptr);
 
-	~LComboBox();
-
 	/*!
 		Returns a list of child themeables.
 
@@ -78,16 +76,20 @@ protected:
 
 	virtual void paintEvent(QPaintEvent* event) override;
 
-	LBorderAttributes* m_border{ new LBorderAttributes };
+	LAttribute* m_border_fill{
+		new LAttribute("border.fill", QColor(Qt::gray), this) };
+
+	LAttribute* m_border_thickness{
+		new LAttribute("border.thickness", 0.0, this) };
 
 	LAttribute* m_corner_radius{
-		new LAttribute("corner_radius", QVariant(10.0)) };
+		new LAttribute("corner_radius", QVariant(10.0), this) };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor(Qt::white)) };
+		new LAttribute("fill", QColor(Qt::white), this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("text_color", QColor(Qt::black)) };
+		new LAttribute("text_color", QColor(Qt::black), this) };
 
 private:
 	void init_attributes();

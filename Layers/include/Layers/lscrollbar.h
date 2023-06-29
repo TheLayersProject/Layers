@@ -24,12 +24,34 @@ public:
 	*/
 	LScrollBar(QWidget* parent = nullptr);
 
-	~LScrollBar();
-
 	/*!
 		Returns a pointer to the background color attribute of the scroll bar.
 	*/
 	LAttribute* background_color() const;
+
+	/*!
+		Returns a pointer to the bottom-left corner radii attribute of the
+		scroll bar.
+	*/
+	LAttribute* corner_radii_bottom_left() const;
+
+	/*!
+		Returns a pointer to the bottom-right corner radii attribute of the
+		scroll bar.
+	*/
+	LAttribute* corner_radii_bottom_right() const;
+
+	/*!
+		Returns a pointer to the top-left corner radii attribute of the scroll
+		bar.
+	*/
+	LAttribute* corner_radii_top_left() const;
+
+	/*!
+		Returns a pointer to the top-right corner radii attribute of the scroll
+		bar.
+	*/
+	LAttribute* corner_radii_top_right() const;
 
 	/*!
 		Returns a pointer to the handle color attribute of the scroll bar.
@@ -37,28 +59,63 @@ public:
 	LAttribute* handle_color() const;
 
 	/*!
-		Returns a pointer to the corner radii attributes of the scroll bar.
+		Returns a pointer to the bottom-left corner radii attribute of the
+		scroll bar's handle.
 	*/
-	LCornerRadiiAttributes* corner_radii() const;
+	LAttribute* handle_corner_radii_bottom_left() const;
 
 	/*!
-		Returns a pointer to the corner radii attributes of the scroll bar's
-		handle.
+		Returns a pointer to the bottom-right corner radii attribute of the
+		scroll bar's handle.
 	*/
-	LCornerRadiiAttributes* handle_corner_radii() const;
+	LAttribute* handle_corner_radii_bottom_right() const;
+
+	/*!
+		Returns a pointer to the top-left corner radii attribute of the scroll
+		bar's handle.
+	*/
+	LAttribute* handle_corner_radii_top_left() const;
+
+	/*!
+		Returns a pointer to the top-right corner radii attribute of the scroll
+		bar's handle.
+	*/
+	LAttribute* handle_corner_radii_top_right() const;
 
 private:
 	void init_attributes();
 
 	void update_stylesheet();
 
-	LAttribute* m_background_color{ new LAttribute("background_color", QColor(Qt::gray)) };
+	LAttribute* m_background_color{
+		new LAttribute("background_color", QColor(Qt::gray), this) };
 
-	LAttribute* m_handle_color{ new LAttribute("handle_color", QColor(Qt::white)) };
+	LAttribute* m_corner_radii_bottom_left{
+		new LAttribute("corner_radii.bottom_left", 0.0, this) };
 
-	LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
+	LAttribute* m_corner_radii_bottom_right{
+		new LAttribute("corner_radii.bottom_right", 0.0, this) };
 
-	LCornerRadiiAttributes* m_handle_corner_radii{ new LCornerRadiiAttributes("handle_corner_radii") };
+	LAttribute* m_corner_radii_top_left{
+		new LAttribute("corner_radii.top_left", 0.0, this) };
+
+	LAttribute* m_corner_radii_top_right{
+		new LAttribute("corner_radii.top_right", 0.0, this) };
+
+	LAttribute* m_handle_color{
+		new LAttribute("handle_color", QColor(Qt::white), this) };
+
+	LAttribute* m_handle_corner_radii_bottom_left{
+		new LAttribute("handle_corner_radii.bottom_left", 5.0, this) };
+
+	LAttribute* m_handle_corner_radii_bottom_right{
+		new LAttribute("handle_corner_radii.bottom_right", 5.0, this) };
+
+	LAttribute* m_handle_corner_radii_top_left{
+		new LAttribute("handle_corner_radii.top_left", 5.0, this) };
+
+	LAttribute* m_handle_corner_radii_top_right{
+		new LAttribute("handle_corner_radii.top_right", 5.0, this) };
 };
 LAYERS_NAMESPACE_END
 

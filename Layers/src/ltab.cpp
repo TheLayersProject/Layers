@@ -86,8 +86,8 @@ void LTab::init_attributes()
 	m_fill->set_value(QColor("#36393f"));
 	m_fill->add_override("Active", QColor("#25272b"));
 
-	corner_radii()->top_left()->set_value(5.0);
-	corner_radii()->top_right()->set_value(5.0);
+	corner_radii_top_left()->set_value(5.0);
+	corner_radii_top_right()->set_value(5.0);
 
 	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 

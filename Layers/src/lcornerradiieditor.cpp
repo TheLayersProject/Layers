@@ -7,9 +7,13 @@ using Layers::LMiniSlider;
 using Layers::LTheme;
 using Layers::LThemeable;
 
-LCornerRadiiEditor::LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_radii, QWidget* parent) :
+LCornerRadiiEditor::LCornerRadiiEditor(
+	const QString& name,
+	LAttributeMap corner_radii,
+	QWidget* parent
+) :
 	m_attribute_editor{ new LAttributeEditor },
-	LAttributeEditorGroup(linked_corner_radii, parent)
+	LAttributeEditorGroup(name, parent)
 {
 	add_attribute_editor(m_attribute_editor);
 	set_name("Corner Radii Editor");
@@ -43,13 +47,13 @@ LCornerRadiiEditor::LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_rad
 	m_example_widget->setFixedSize(50, 50);
 	m_example_widget->set_name("Example Widget");
 
-	if (linked_corner_radii)
+	if (!corner_radii.isEmpty())
 	{
 		// Entangle sliders' value attributes with linked_corner_radii attributes
-		m_tl_slider->value().establish_link(*linked_corner_radii->top_left());
-		m_tr_slider->value().establish_link(*linked_corner_radii->top_right());
-		m_bl_slider->value().establish_link(*linked_corner_radii->bottom_left());
-		m_br_slider->value().establish_link(*linked_corner_radii->bottom_right());
+		m_tl_slider->value().establish_link(*corner_radii["corner_radii.top_left"]);
+		m_tr_slider->value().establish_link(*corner_radii["corner_radii.top_right"]);
+		m_bl_slider->value().establish_link(*corner_radii["corner_radii.bottom_left"]);
+		m_br_slider->value().establish_link(*corner_radii["corner_radii.bottom_right"]);
 	}
 
 	// Entangle line editors' text attributes with sliders' value attributes
@@ -64,11 +68,15 @@ LCornerRadiiEditor::LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_rad
 	m_br_line_editor->update_theme_dependencies();
 
 	// Replace example widget's corner radii attributes with sliders' 'value' attributes
-	m_example_widget->corner_radii()->top_left()->establish_link(m_tl_slider->value());
-	m_example_widget->corner_radii()->top_right()->establish_link(m_tr_slider->value());
-	m_example_widget->corner_radii()->bottom_left()->establish_link(m_bl_slider->value());
-	m_example_widget->corner_radii()->bottom_right()->establish_link(m_br_slider->value());
-	m_example_widget->attribute_data().attr_groups.remove("corner_radii");
+	m_example_widget->corner_radii_top_left()->establish_link(m_tl_slider->value());
+	m_example_widget->corner_radii_top_right()->establish_link(m_tr_slider->value());
+	m_example_widget->corner_radii_bottom_left()->establish_link(m_bl_slider->value());
+	m_example_widget->corner_radii_bottom_right()->establish_link(m_br_slider->value());
+	//m_example_widget->attribute_data().attr_groups.remove("corner_radii");
+
+	for (LAttribute* attr : m_example_widget->attributes())
+		if (attr->name().startsWith("corner_radii"))
+			attr->setParent(nullptr);
 
 	init_layout();
 }

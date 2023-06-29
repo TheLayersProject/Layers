@@ -4,7 +4,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattributedata.h"
+#include "lattribute.h"
 #include "lstatepool.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -180,10 +180,7 @@ public:
 
 	LAttribute* attribute(const QString& search_tag, const QString& attr_id);
 
-	/*!
-		Returns a reference to the attribute map.
-	*/
-	LAttributeData& attribute_data();
+	QList<LAttribute*> attributes();
 
 	/*!
 		Returns a list of child themeables.
@@ -296,8 +293,6 @@ public:
 	QStringList tag_prefixes() const;
 
 protected:
-	LAttributeData m_attr_data;
-
 	bool m_functionality_disabled{ false };
 
 	LGraphic* m_icon{ nullptr };
@@ -324,28 +319,21 @@ inline void LThemeable::entangle_with(T* t, bool entangle_children)
 {
 	if (typeid(*this) == typeid(*t))
 	{
-		// Handle groups
-		for (const QString& key : m_attr_data.attr_groups.keys())
-		{
-			LAttributeGroup& attr_group = *m_attr_data.attr_groups[key];
-			LAttributeGroup& t_attr_group = *t->m_attr_data.attr_groups[key];
-
-			for (const QString& key : attr_group.keys())
-				attr_group[key]->establish_link(*t_attr_group[key]);
-		}
-
-		// Handle ungrouped
-		for (const QString& key : m_attr_data.ungrouped_attrs.keys())
-			m_attr_data.ungrouped_attrs[key]->establish_link(
-				*t->m_attr_data.ungrouped_attrs[key]);
+		for (LAttribute* attr : attributes())
+			for (LAttribute* t_attr : t->attributes())
+				if (attr->name() == t_attr->name())
+				{
+					attr->establish_link(*t_attr);
+					break;
+				}
 
 		if (entangle_children)
-			for (LThemeable* this_child_themeable : child_themeables())
-				if (this_child_themeable->m_name)
-					for (LThemeable* child_themeable : t->child_themeables())
-						if (child_themeable->m_name)
-							if (*child_themeable->m_name == *this_child_themeable->m_name)
-								this_child_themeable->entangle_with(child_themeable);
+			for (LThemeable* child_themeable : child_themeables())
+				if (child_themeable->m_name)
+					for (LThemeable* t_child_themeable : t->child_themeables())
+						if (t_child_themeable->m_name)
+							if (*t_child_themeable->m_name == *child_themeable->m_name)
+								child_themeable->entangle_with(t_child_themeable);
 	}
 }
 LAYERS_NAMESPACE_END

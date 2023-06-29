@@ -6,8 +6,6 @@
 #include <Layers/lthemeable.h>
 
 using Layers::LAttribute;
-using Layers::LAttributeData;
-using Layers::LAttributeGroup;
 using Layers::LAttributeMap;
 using Layers::LTheme;
 using Layers::LThemeable;
@@ -87,7 +85,7 @@ void LTheme::clear()
 
 void LTheme::clear_tag(const QString& tag)
 {
-	LAttributeDataHash* relevant_hash = nullptr;
+	LAttributeMapHash* relevant_hash = nullptr;
 
 	if (m_hash.contains(tag))
 		relevant_hash = &m_hash;
@@ -113,38 +111,19 @@ void LTheme::copy_attribute_values_of(LThemeable* themeable)
 {
 	clear_tag(themeable->tag());
 
-	LAttributeData& themeable_attr_data = themeable->attribute_data();
+	QList<LAttribute*> themeable_attrs = themeable->attributes();
+	LAttributeMap theme_attrs;
 
-	// Handle groups
-	LAttributeGroupMap attr_groups;
-
-	for (const QString& key : themeable_attr_data.attr_groups.keys())
+	for (LAttribute* attr : themeable_attrs)
 	{
-		LAttributeGroup* attr_group = themeable_attr_data.attr_groups[key];
-
-		attr_groups[key] = new LAttributeGroup(*attr_group);
-	}
-
-	if (themeable->is_app_themeable())
-		m_hash[themeable->tag()].attr_groups = attr_groups;
-	else
-		m_hash_layers[themeable->tag()].attr_groups = attr_groups;
-
-	// Handle ungrouped
-	LAttributeMap ungrouped_attrs;
-
-	for (const QString& key : themeable_attr_data.ungrouped_attrs.keys())
-	{
-		LAttribute* attr = themeable_attr_data.ungrouped_attrs[key];
-
 		//if (!attr->link_established())
-		ungrouped_attrs[key] = new LAttribute(*attr);
+		theme_attrs[attr->name()] = new LAttribute(*attr);
 	}
 
 	if (themeable->is_app_themeable())
-		m_hash[themeable->tag()].ungrouped_attrs = ungrouped_attrs;
+		m_hash[themeable->tag()] = theme_attrs;
 	else
-		m_hash_layers[themeable->tag()].ungrouped_attrs = ungrouped_attrs;
+		m_hash_layers[themeable->tag()] = theme_attrs;
 }
 
 QDir LTheme::dir() const
@@ -204,7 +183,8 @@ void LTheme::load(const QString& app_id)
 	}
 }
 
-void LTheme::load_document(const QJsonDocument& json_document, const LThemeDataType& data_type)
+void LTheme::load_document(
+	const QJsonDocument& json_document, const LThemeDataType& data_type)
 {
 	QJsonObject json_object = json_document.object();
 
@@ -213,53 +193,15 @@ void LTheme::load_document(const QJsonDocument& json_document, const LThemeDataT
 		QJsonObject themeable_object = json_object.value(tag).toObject();
 
 		LAttributeMap m_attr_map;
-		LAttributeGroupMap m_attr_group_map;
 
 		for (const QString& key : themeable_object.keys())
-		{
-			QJsonObject attr_object = themeable_object.value(key).toObject();
-
-			QString name = key;
-
-			// If entity_object contains key 'value', 'overrides', or 'linked_to',
-			// then it is an attribute, not a group
-			if (attr_object.contains("value") ||
-				attr_object.contains("overrides") ||
-				attr_object.contains("linked_to"))
-			{
-				m_attr_map[key] = new LAttribute(name, attr_object);
-			}
-			else // entity_object is a group...
-			{
-				LAttributeMap group_attributes;
-
-				for (const QString& group_attr_key : attr_object.keys())
-				{
-					QJsonObject group_attr_object =
-						attr_object.value(group_attr_key).toObject();
-
-					group_attributes[group_attr_key] =
-						new LAttribute(group_attr_key, group_attr_object);
-				}
-
-				LAttributeGroup* attr_group = new LAttributeGroup(name);
-
-				attr_group->attributes() = group_attributes;
-
-				m_attr_group_map[key] = attr_group;
-			}
-		}
+			m_attr_map[key] = new LAttribute(
+				key, themeable_object.value(key).toObject());
 
 		if (data_type == LThemeDataType::LApplication)
-		{
-			m_hash[tag].ungrouped_attrs = m_attr_map;
-			m_hash[tag].attr_groups = m_attr_group_map;
-		}
+			m_hash[tag] = m_attr_map;
 		else if (data_type == LThemeDataType::Layers)
-		{
-			m_hash_layers[tag].ungrouped_attrs = m_attr_map;
-			m_hash_layers[tag].attr_groups = m_attr_group_map;
-		}
+			m_hash_layers[tag] = m_attr_map;
 	}
 }
 
@@ -326,25 +268,12 @@ QJsonDocument LTheme::to_json_document(LThemeDataType data_type)
 	case (LThemeDataType::LApplication):
 		for (const QString& tag : m_hash.keys())
 		{
-			LAttributeData& attr_data = m_hash[tag];
+			LAttributeMap& tag_attrs = m_hash[tag];
 
 			QJsonObject tag_object;
 
-			// Handle groups
-			for (const QString& key : attr_data.attr_groups.keys())
-			{
-				LAttributeGroup& attr_group = *attr_data.attr_groups[key];
-
-				tag_object.insert(key, attr_group.to_json_object());
-			}
-
-			// Handle ungrouped
-			for (const QString& key : attr_data.ungrouped_attrs.keys())
-			{
-				LAttribute* attr = attr_data.ungrouped_attrs[key];
-
-				tag_object.insert(key, attr->to_json_object());
-			}
+			for (const QString& key : tag_attrs.keys())
+				tag_object.insert(key, tag_attrs[key]->to_json_object());
 
 			document_object.insert(tag, tag_object);
 		}
@@ -357,25 +286,12 @@ QJsonDocument LTheme::to_json_document(LThemeDataType data_type)
 	case (LThemeDataType::Layers):
 		for (const QString& tag : m_hash_layers.keys())
 		{
-			LAttributeData& attr_data = m_hash_layers[tag];
+			LAttributeMap& tag_attrs = m_hash_layers[tag];
 
 			QJsonObject tag_object;
 
-			// Handle groups
-			for (const QString& key : attr_data.attr_groups.keys())
-			{
-				LAttributeGroup& attr_group = *attr_data.attr_groups[key];
-
-				tag_object.insert(key, attr_group.to_json_object());
-			}
-
-			// Handle the rest of the attributes
-			for (const QString& key : attr_data.ungrouped_attrs.keys())
-			{
-				LAttribute* attr = attr_data.ungrouped_attrs[key];
-
-				tag_object.insert(key, attr->to_json_object());
-			}
+			for (const QString& key : tag_attrs.keys())
+				tag_object.insert(key, tag_attrs[key]->to_json_object());
 
 			document_object.insert(tag, tag_object);
 		}
@@ -386,7 +302,7 @@ QJsonDocument LTheme::to_json_document(LThemeDataType data_type)
 	return document;
 }
 
-LAttributeData& LTheme::operator[](const QString& tag)
+LAttributeMap& LTheme::operator[](const QString& tag)
 {
 	if (m_hash.contains(tag))
 		return m_hash[tag];

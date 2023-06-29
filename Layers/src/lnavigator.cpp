@@ -17,18 +17,18 @@ LNavigator::LNavigator(QWidget* parent)
 	m_collapse_menu->setAttribute(Qt::WA_TranslucentBackground);
 	m_collapse_menu->setMouseTracking(true);
 	m_collapse_menu->set_name("Collapse Menu");
-	m_collapse_menu->corner_radii()->top_left()->set_value(5.0);
-	m_collapse_menu->corner_radii()->top_right()->set_value(5.0);
-	m_collapse_menu->corner_radii()->bottom_left()->set_value(5.0);
-	m_collapse_menu->corner_radii()->bottom_right()->set_value(5.0);
+	m_collapse_menu->corner_radii_top_left()->set_value(5.0);
+	m_collapse_menu->corner_radii_top_right()->set_value(5.0);
+	m_collapse_menu->corner_radii_bottom_left()->set_value(5.0);
+	m_collapse_menu->corner_radii_bottom_right()->set_value(5.0);
 
 	m_collapse_menu_button->hide();
 	m_collapse_menu_button->setFixedWidth(50);
 	m_collapse_menu_button->fill()->set_value(false);
-	m_collapse_menu_button->corner_radii()->top_left()->set_value(5.0);
-	m_collapse_menu_button->corner_radii()->top_right()->set_value(5.0);
-	m_collapse_menu_button->corner_radii()->bottom_left()->set_value(5.0);
-	m_collapse_menu_button->corner_radii()->bottom_right()->set_value(5.0);
+	m_collapse_menu_button->corner_radii_top_left()->set_value(5.0);
+	m_collapse_menu_button->corner_radii_top_right()->set_value(5.0);
+	m_collapse_menu_button->corner_radii_bottom_left()->set_value(5.0);
+	m_collapse_menu_button->corner_radii_bottom_right()->set_value(5.0);
 	m_collapse_menu_button->set_margin(0, 10, 0, 10);
 	m_collapse_menu_button->set_name("Collapse Menu Button");
 

@@ -39,10 +39,10 @@ private:
 	void init_layout();
 
 	LAttributeEditorGroup* m_control_attribute_editor_group{
-		new LAttributeEditorGroup(new LAttributeGroup(""), this)};
+		new LAttributeEditorGroup("", this)};
 
 	LCornerRadiiEditor* m_control_corner_radii_editor{
-		new LCornerRadiiEditor(new LCornerRadiiAttributes, this) };
+		new LCornerRadiiEditor("", LAttributeMap(), this)};
 
 	LFillEditor* m_control_fill_editor{
 		new LFillEditor(new LAttribute("", QColor()), this) };

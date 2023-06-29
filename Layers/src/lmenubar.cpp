@@ -19,12 +19,7 @@ LMenuBar::LMenuBar(QWidget* parent) : QMenuBar(parent)
 
 void LMenuBar::init_attributes()
 {
-    m_attr_data.ungrouped_attrs.insert({
-        { "text_color", m_text_color },
-        { "selected_text_color", m_selected_text_color }
-        });
-
-	for (LAttribute* attr : m_attr_data.ungrouped_attrs)
+	for (LAttribute* attr : attributes())
 		connect(attr, &LAttribute::changed,
 			[this] { update_theme_dependencies(); });
 }

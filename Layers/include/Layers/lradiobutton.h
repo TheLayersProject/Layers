@@ -43,13 +43,18 @@ protected:
 private:
 	void init_attributes();
 
-	LAttribute* m_active_dot_fill{ new LAttribute("active_dot_fill", QColor(Qt::black)) };
+	LAttribute* m_active_dot_fill{
+		new LAttribute("active_dot_fill", QColor(Qt::black), this) };
 
-	LBorderAttributes* m_border{ new LBorderAttributes };
+	LAttribute* m_border_fill{
+		new LAttribute("border.fill", QColor(Qt::gray), this) };
 
-	LAttribute* m_fill{ new LAttribute("fill", QColor(Qt::darkGray)) };
+	LAttribute* m_border_thickness{
+		new LAttribute("border.thickness", 3.0, this) };
 
-	LAttribute* m_margin{ new LAttribute("margin", QVariant(10.0)) };
+	LAttribute* m_fill{ new LAttribute("fill", QColor(Qt::darkGray), this) };
+
+	LAttribute* m_margin{ new LAttribute("margin", QVariant(10.0), this) };
 
 	//LStatePool* m_select_states{
 	//	new LStatePool("Select", { "Selected", "Unselected" }) };

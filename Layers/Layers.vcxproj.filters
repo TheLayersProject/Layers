@@ -42,16 +42,10 @@
     <ClCompile Include="src\lattribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lattributedata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\lattributeeditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lattributeeditorgroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\lattributegroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lbutton.cpp">
@@ -392,9 +386,6 @@
     <QtMoc Include="include\Layers\lattributeeditorgroup.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Layers\lattributegroup.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Layers\lstatepool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -428,9 +419,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\lversion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Layers\lattributedata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\layers_exports.h">

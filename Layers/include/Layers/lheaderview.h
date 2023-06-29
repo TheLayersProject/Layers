@@ -29,19 +29,29 @@ private:
 
 	void update_stylesheet();
 
-	LBorderAttributes* m_border{ new LBorderAttributes };
+	LAttribute* m_border_fill{
+		new LAttribute("border.fill", QColor(Qt::gray), this) };
 
-	LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
+	LAttribute* m_border_thickness{
+		new LAttribute("border.thickness", 0.0, this) };
 
-	LAttribute* m_fill{ new LAttribute(
-		"fill",
-		QColor(Qt::white)
-		) };
+	LAttribute* m_corner_radii_bottom_left{
+		new LAttribute("corner_radii.bottom_left", 0.0, this) };
 
-	LAttribute* m_text_color{ new LAttribute(
-		"text_color",
-		QColor(Qt::black)
-		) };
+	LAttribute* m_corner_radii_bottom_right{
+		new LAttribute("corner_radii.bottom_right", 0.0, this) };
+
+	LAttribute* m_corner_radii_top_left{
+		new LAttribute("corner_radii.top_left", 2.0, this) };
+
+	LAttribute* m_corner_radii_top_right{
+		new LAttribute("corner_radii.top_right", 2.0, this) };
+
+	LAttribute* m_fill{
+		new LAttribute("fill", QColor("#808080"), this) };
+
+	LAttribute* m_text_color{
+		new LAttribute("text_color", QColor(Qt::black), this) };
 };
 LAYERS_NAMESPACE_END
 

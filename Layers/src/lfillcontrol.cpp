@@ -59,16 +59,16 @@ bool LFillControl::eventFilter(QObject* object, QEvent* event)
 void LFillControl::init_attributes()
 {
 	// Remove control attribute
-	m_attr_data.ungrouped_attrs.remove("fill");
+	m_fill->setParent(nullptr);
 
-	m_border->fill()->set_value(QColor("#D6D6D6"));
-	m_border->thickness()->set_value(2.0);
-	m_corner_radii->top_left()->set_value(5.0);
-	m_corner_radii->top_right()->set_value(5.0);
-	m_corner_radii->bottom_left()->set_value(5.0);
-	m_corner_radii->bottom_right()->set_value(5.0);
-	m_margins->left()->set_value(8.0);
-	m_margins->top()->set_value(8.0);
-	m_margins->right()->set_value(8.0);
-	m_margins->bottom()->set_value(8.0);
+	m_border_fill->set_value(QColor("#D6D6D6"));
+	m_border_thickness->set_value(2.0);
+	m_corner_radii_top_left->set_value(5.0);
+	m_corner_radii_top_right->set_value(5.0);
+	m_corner_radii_bottom_left->set_value(5.0);
+	m_corner_radii_bottom_right->set_value(5.0);
+	m_margins_left->set_value(8.0);
+	m_margins_top->set_value(8.0);
+	m_margins_right->set_value(8.0);
+	m_margins_bottom->set_value(8.0);
 }

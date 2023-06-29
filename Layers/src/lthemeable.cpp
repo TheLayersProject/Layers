@@ -7,7 +7,6 @@
 #include <Layers/ltheme.h>
 
 using Layers::LAttribute;
-using Layers::LAttributeData;
 using Layers::LGraphic;
 using Layers::LTheme;
 using Layers::LThemeable;
@@ -27,7 +26,7 @@ void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
 
 	state_pool->connect(state_pool, &LStatePool::changed, [this]
 		{
-			for (LAttribute* attr : m_attr_data.ungrouped_attrs)
+			for (LAttribute* attr : attributes())
 				attr->changed();
 		});
 
@@ -48,19 +47,11 @@ void LThemeable::apply_theme(LTheme& theme)
 
 		if (theme.contains_attributes_for_tag(tag()))
 		{
-			// Handle groups
-			LAttributeGroupMap& theme_attr_groups = theme[tag()].attr_groups;
+			LAttributeMap& theme_attrs = theme[tag()];
 
-			for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
-				if (theme_attr_groups.contains(attr_group->name()))
-					attr_group->copy(*theme_attr_groups[attr_group->name()]);
-
-			// Handle ungrouped
-			LAttributeMap& theme_ungrouped_attrs = theme[tag()].ungrouped_attrs;
-
-			for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-				if (theme_ungrouped_attrs.contains(attr->name()))
-					attr->copy(*theme_ungrouped_attrs[attr->name()]);
+			for (LAttribute* attr : attributes())
+				if (theme_attrs.contains(attr->name()))
+					attr->copy(*theme_attrs[attr->name()]);
 		}
 	}
 }
@@ -91,46 +82,58 @@ LAttribute* LThemeable::attribute(const QString& link)
 
 LAttribute* LThemeable::attribute(const QString& search_tag, const QString& attr_id)
 {
-	if (tag() == search_tag)
-	{
-		QStringList attr_parts = attr_id.split('.');
+	//if (tag() == search_tag)
+	//{
+	//	QStringList attr_parts = attr_id.split('.');
 
-		if (attr_parts.size() > 1)
-		{
-			for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
-			{
-				if (attr_group->name() == attr_parts[0])
-				{
-					for (LAttribute* group_attr : (*attr_group))
-						if (group_attr->name() == attr_parts[1])
-							return group_attr;
-				}
-			}
-		}
-		else
-		{
-			for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-				if (attr->name() == attr_parts[0])
-					return attr;
-		}
+	//	if (attr_parts.size() > 1)
+	//	{
+	//		for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
+	//		{
+	//			if (attr_group->name() == attr_parts[0])
+	//			{
+	//				for (LAttribute* group_attr : (*attr_group))
+	//					if (group_attr->name() == attr_parts[1])
+	//						return group_attr;
+	//			}
+	//		}
+	//	}
+	//	else
+	//	{
+	//		for (LAttribute* attr : m_attr_data.ungrouped_attrs)
+	//			if (attr->name() == attr_parts[0])
+	//				return attr;
+	//	}
 
-		// TODO: Add support for override attributes
-	}
-	else
-	{
-		for (LThemeable* child_themeable : child_themeables())
-		{
-			if (search_tag.contains(child_themeable->tag()))
-				return child_themeable->attribute(search_tag, attr_id);
-		}
-	}
+	//	// TODO: Add support for override attributes
+	//}
+	//else
+	//{
+	//	for (LThemeable* child_themeable : child_themeables())
+	//	{
+	//		if (search_tag.contains(child_themeable->tag()))
+	//			return child_themeable->attribute(search_tag, attr_id);
+	//	}
+	//}
 
 	return nullptr;
 }
 
-LAttributeData& LThemeable::attribute_data()
+QList<LAttribute*> LThemeable::attributes()
 {
-	return m_attr_data;
+	QList<LAttribute*> attributes;
+
+	if (QObject* object = dynamic_cast<QObject*>(this))
+	{
+		QList<QObject*> child_objects =
+			object->findChildren<QObject*>(Qt::FindDirectChildrenOnly);
+
+		for (QObject* child_object : child_objects)
+			if (LAttribute* attr = dynamic_cast<LAttribute*>(child_object))
+				attributes.append(attr);
+	}
+
+	return attributes;
 }
 
 QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)

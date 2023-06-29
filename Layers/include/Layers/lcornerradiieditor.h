@@ -14,7 +14,10 @@ class LAYERS_EXPORT LCornerRadiiEditor : public LAttributeEditorGroup
 	Q_OBJECT
 
 public:
-	LCornerRadiiEditor(LCornerRadiiAttributes* linked_corner_radii, QWidget* parent = nullptr);
+	LCornerRadiiEditor(
+		const QString& name,
+		LAttributeMap corner_radii,
+		QWidget* parent = nullptr);
 
 private:
 	void init_layout();

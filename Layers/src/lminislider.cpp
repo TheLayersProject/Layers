@@ -42,21 +42,21 @@ LAttribute& LMiniSlider::value()
 
 void LMiniSlider::init_attributes()
 {
-	m_corner_radii->top_left()->set_value(5.0);
-	m_corner_radii->top_right()->set_value(5.0);
-	m_corner_radii->bottom_left()->set_value(5.0);
-	m_corner_radii->bottom_right()->set_value(5.0);
+	m_corner_radii_top_left->set_value(5.0);
+	m_corner_radii_top_right->set_value(5.0);
+	m_corner_radii_bottom_left->set_value(5.0);
+	m_corner_radii_bottom_right->set_value(5.0);
 
 	m_bar->set_margin(5, 0, 5, 0);
-	m_bar->corner_radii()->top_left()->set_value(2.0);
-	m_bar->corner_radii()->top_right()->set_value(2.0);
-	m_bar->corner_radii()->bottom_left()->set_value(2.0);
-	m_bar->corner_radii()->bottom_right()->set_value(2.0);
+	m_bar->corner_radii_top_left()->set_value(2.0);
+	m_bar->corner_radii_top_right()->set_value(2.0);
+	m_bar->corner_radii_bottom_left()->set_value(2.0);
+	m_bar->corner_radii_bottom_right()->set_value(2.0);
 
-	m_handle->corner_radii()->top_left()->set_value(2.0);
-	m_handle->corner_radii()->top_right()->set_value(2.0);
-	m_handle->corner_radii()->bottom_left()->set_value(2.0);
-	m_handle->corner_radii()->bottom_right()->set_value(2.0);
+	m_handle->corner_radii_top_left()->set_value(2.0);
+	m_handle->corner_radii_top_right()->set_value(2.0);
+	m_handle->corner_radii_bottom_left()->set_value(2.0);
+	m_handle->corner_radii_bottom_right()->set_value(2.0);
 
 	// TODO: TEMP!
 	m_fill->set_value(QColor(Qt::lightGray));

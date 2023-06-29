@@ -46,20 +46,34 @@ private:
 
 	void update_stylesheet();
 
-	LBorderAttributes* m_border{ new LBorderAttributes };
+	LAttribute* m_border_fill{
+		new LAttribute("border.fill", QColor(Qt::gray), this) };
 
-	LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
+	LAttribute* m_border_thickness{
+		new LAttribute("border.thickness", 3.0, this) };
+
+	LAttribute* m_corner_radii_bottom_left{
+		new LAttribute("corner_radii.bottom_left", 5.0, this) };
+
+	LAttribute* m_corner_radii_bottom_right{
+		new LAttribute("corner_radii.bottom_right", 5.0, this) };
+
+	LAttribute* m_corner_radii_top_left{
+		new LAttribute("corner_radii.top_left", 5.0, this) };
+
+	LAttribute* m_corner_radii_top_right{
+		new LAttribute("corner_radii.top_right", 5.0, this) };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor(Qt::white)) };
+		new LAttribute("fill", QColor(Qt::white), this) };
 
 	LAttribute* m_item_fill{
-		new LAttribute("item_fill", QColor(Qt::white)) };
+		new LAttribute("item_fill", QColor(Qt::white), this) };
 
 	QAbstractItemDelegate* m_table_delegate{ nullptr };
 
 	LAttribute* m_text_color{
-		new LAttribute("text_color", QColor(Qt::black)) };
+		new LAttribute("text_color", QColor(Qt::black), this) };
 
 	int m_visible_row_limit{ 3 };
 };

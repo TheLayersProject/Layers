@@ -119,16 +119,16 @@ int LCreateThemeDialog::exec()
 
 void LCreateThemeDialog::init_attributes()
 {
-	//m_start_theme_combobox->corner_radii()->top_left()->set_value(7.0);
-	//m_start_theme_combobox->corner_radii()->top_right()->set_value(7.0);
-	//m_start_theme_combobox->corner_radii()->bottom_left()->set_value(7.0);
-	//m_start_theme_combobox->corner_radii()->bottom_right()->set_value(7.0);
+	//m_start_theme_combobox->corner_radii_top_left()->set_value(7.0);
+	//m_start_theme_combobox->corner_radii_top_right()->set_value(7.0);
+	//m_start_theme_combobox->corner_radii_bottom_left()->set_value(7.0);
+	//m_start_theme_combobox->corner_radii_bottom_right()->set_value(7.0);
 
-	m_theme_name_line_editor->border()->thickness()->set_value(3.0);
-	m_theme_name_line_editor->corner_radii()->top_left()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii()->top_right()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii()->bottom_left()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii()->bottom_right()->set_value(7.0);
+	m_theme_name_line_editor->border_thickness()->set_value(3.0);
+	m_theme_name_line_editor->corner_radii_top_left()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii_top_right()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii_bottom_left()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii_bottom_right()->set_value(7.0);
 	m_theme_name_line_editor->left_padding()->set_value(10.0);
 }
 

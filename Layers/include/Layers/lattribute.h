@@ -71,7 +71,7 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 	LWidget* widget = new LWidget;
 	LSlider* thickness_slider = new LSlider;
 
-	thickness_slider->value()->link_to(*widget->border()->thickness());
+	thickness_slider->value()->link_to(*widget->border_thickness());
 
 	//  That's it! Display both the widget and the thickness_slider to the
 	//  user, and when they make changes to the slider, those changes will
@@ -97,17 +97,17 @@ public:
 	/*!
 		Constructs an attribute with invalid data.
 	*/
-	LAttribute(const QString& name);
+	LAttribute(const QString& name, QObject* parent = nullptr);
 
 	/*!
 		Constructs an attribute with single-valued data.
 	*/
-	LAttribute(const QString& name, QVariant value);
+	LAttribute(const QString& name, QVariant value, QObject* parent = nullptr);
 
 	/*!
 		Constructs an attribute with data initialized with a QJsonObject.
 	*/
-	LAttribute(const QString& name, QJsonObject json_object);
+	LAttribute(const QString& name, QJsonObject json_object, QObject* parent = nullptr);
 
 	/*!
 		Constructs a copy of *attribute*.

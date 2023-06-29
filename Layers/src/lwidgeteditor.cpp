@@ -171,7 +171,7 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 
 	init_layout();
 
-	if (!m_themeable->attribute_data().is_empty())
+	if (!m_themeable->attributes().isEmpty())
 		init_attribute_editors();
 	else
 	{
@@ -232,30 +232,33 @@ LThemeable* LWidgetEditor::themeable() const
 
 void LWidgetEditor::init_attribute_editors()
 {
-	// Handle groups
-	for (LAttributeGroup* attr_group : m_themeable->attribute_data().attr_groups)
-	{
-		if (LCornerRadiiAttributes* corner_radii = dynamic_cast<LCornerRadiiAttributes*>(attr_group))
-		{
-			LCornerRadiiEditor* corner_radii_editor = new LCornerRadiiEditor(corner_radii);
-			corner_radii_editor->entangle_with(m_control_corner_radii_editor);
+	//// Handle groups
+	//for (LAttributeGroup* attr_group : m_themeable->attribute_data().attr_groups)
+	//{
+	//	if (LCornerRadiiAttributes* corner_radii = dynamic_cast<LCornerRadiiAttributes*>(attr_group))
+	//	{
+	//		LCornerRadiiEditor* corner_radii_editor = new LCornerRadiiEditor(corner_radii);
+	//		corner_radii_editor->entangle_with(m_control_corner_radii_editor);
 
-			m_attributes_layout->addWidget(corner_radii_editor);
-		}
-		else
-		{
-			LAttributeEditorGroup* attr_editor_group = new LAttributeEditorGroup(attr_group);
-			attr_editor_group->entangle_with(m_control_attribute_editor_group);
+	//		m_attributes_layout->addWidget(corner_radii_editor);
+	//	}
+	//	else
+	//	{
+	//		LAttributeEditorGroup* attr_editor_group = new LAttributeEditorGroup(attr_group);
+	//		attr_editor_group->entangle_with(m_control_attribute_editor_group);
 
-			for (LAttribute* group_attr : attr_group->attributes())
-				attr_editor_group->add_attribute_editor(create_editor(group_attr));
+	//		for (LAttribute* group_attr : attr_group->attributes())
+	//			attr_editor_group->add_attribute_editor(create_editor(group_attr));
 
-			m_attributes_layout->addWidget(attr_editor_group);
-		}
-	}
+	//		m_attributes_layout->addWidget(attr_editor_group);
+	//	}
+	//}
 
-	// Handled ungrouped
-	for (LAttribute* attr : m_themeable->attribute_data().ungrouped_attrs)
+	//// Handled ungrouped
+	//for (LAttribute* attr : m_themeable->attribute_data().ungrouped_attrs)
+	//	m_attributes_layout->addWidget(create_editor(attr));
+
+	for (LAttribute* attr : m_themeable->attributes())
 		m_attributes_layout->addWidget(create_editor(attr));
 }
 

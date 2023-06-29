@@ -7,39 +7,61 @@
 #include <Layers/lcalculate.h>
 
 using Layers::LAttribute;
-using Layers::LBorderAttributes;
-using Layers::LCornerRadiiAttributes;
-using Layers::LMarginsAttributes;
 using Layers::LThemeableBox;
 
-LThemeableBox::~LThemeableBox()
+LAttribute* LThemeableBox::border_fill() const
 {
-	delete m_border;
-	delete m_corner_radii;
-	delete m_fill;
-	delete m_margins;
+	return m_border_fill;
 }
 
-void LThemeableBox::init_attributes()
+LAttribute* LThemeableBox::border_thickness() const
 {
-	// Handle groups
-	m_attr_data.attr_groups.insert({
-		{ "border", m_border },
-		{ "corner_radii", m_corner_radii },
-		{ "margins", m_margins }
-	});
+	return m_border_thickness;
+}
 
-	for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
-		for (LAttribute* group_attr : (*attr_group))
-			establish_update_connection(group_attr);
+LAttribute* LThemeableBox::corner_radii_bottom_left() const
+{
+	return m_corner_radii_bottom_left;
+}
 
-	// Handle ungrouped
-	m_attr_data.ungrouped_attrs.insert({
-		{ "fill", m_fill }
-	});
+LAttribute* LThemeableBox::corner_radii_bottom_right() const
+{
+	return m_corner_radii_bottom_right;
+}
 
-	for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-		establish_update_connection(attr);
+LAttribute* LThemeableBox::corner_radii_top_left() const
+{
+	return m_corner_radii_top_left;
+}
+
+LAttribute* LThemeableBox::corner_radii_top_right() const
+{
+	return m_corner_radii_top_right;
+}
+
+LAttribute* LThemeableBox::fill() const
+{
+	return m_fill;
+}
+
+LAttribute* LThemeableBox::margins_bottom() const
+{
+	return m_margins_bottom;
+}
+
+LAttribute* LThemeableBox::margins_left() const
+{
+	return m_margins_left;
+}
+
+LAttribute* LThemeableBox::margins_right() const
+{
+	return m_margins_right;
+}
+
+LAttribute* LThemeableBox::margins_top() const
+{
+	return m_margins_top;
 }
 
 void LThemeableBox::set_margin(double margin)
@@ -50,10 +72,31 @@ void LThemeableBox::set_margin(double margin)
 void LThemeableBox::set_margin(
 	double left, double top, double right, double bottom)
 {
-	m_margins->left()->set_value(left);
-	m_margins->top()->set_value(top);
-	m_margins->right()->set_value(right);
-	m_margins->bottom()->set_value(bottom);
+	m_margins_left->set_value(left);
+	m_margins_top->set_value(top);
+	m_margins_right->set_value(right);
+	m_margins_bottom->set_value(bottom);
+}
+
+void LThemeableBox::init_attributes()
+{
+	if (QObject* object = dynamic_cast<QObject*>(this))
+	{
+		m_border_fill->setParent(object);
+		m_border_thickness->setParent(object);
+		m_corner_radii_bottom_left->setParent(object);
+		m_corner_radii_bottom_right->setParent(object);
+		m_corner_radii_top_left->setParent(object);
+		m_corner_radii_top_right->setParent(object);
+		m_fill->setParent(object);
+		m_margins_bottom->setParent(object);
+		m_margins_left->setParent(object);
+		m_margins_top->setParent(object);
+		m_margins_right->setParent(object);
+	}
+
+	for (LAttribute* attr : attributes())
+		establish_update_connection(attr);
 }
 
 void LThemeableBox::paint(QWidget* widget)
@@ -63,12 +106,12 @@ void LThemeableBox::paint(QWidget* widget)
 	// The active states of the themeable
 	QStringList s = states();
 
-	int border_thickness = m_border->thickness()->as<double>(s);
+	int border_thickness = m_border_thickness->as<double>(s);
 
-	int margin_left = m_margins->left()->as<double>(s);
-	int margin_top = m_margins->top()->as<double>(s);
-	int margin_right = m_margins->right()->as<double>(s);
-	int margin_bottom = m_margins->bottom()->as<double>(s);
+	int margin_left = m_margins_left->as<double>(s);
+	int margin_top = m_margins_top->as<double>(s);
+	int margin_right = m_margins_right->as<double>(s);
+	int margin_bottom = m_margins_bottom->as<double>(s);
 
 	int widget_width = widget->width();
 	int widget_height = widget->height();
@@ -81,10 +124,10 @@ void LThemeableBox::paint(QWidget* widget)
 		tl = top-left
 	*/
 
-	int cr_tl = m_corner_radii->top_left()->as<double>(s);
-	int cr_tr = m_corner_radii->top_right()->as<double>(s);
-	int cr_bl = m_corner_radii->bottom_left()->as<double>(s);
-	int cr_br = m_corner_radii->bottom_right()->as<double>(s);
+	int cr_tl = m_corner_radii_top_left->as<double>(s);
+	int cr_tr = m_corner_radii_top_right->as<double>(s);
+	int cr_bl = m_corner_radii_bottom_left->as<double>(s);
+	int cr_br = m_corner_radii_bottom_right->as<double>(s);
 
 	if (widget->isMaximized())
 	{
@@ -95,13 +138,13 @@ void LThemeableBox::paint(QWidget* widget)
 		cr_br = 0;
 	}
 
-	int tl_background_radius = (border_thickness) ? 
+	int tl_background_radius = (border_thickness) ?
 		inner_radius(cr_tl, border_thickness) : cr_tl;
-	int tr_background_radius = (border_thickness) ? 
+	int tr_background_radius = (border_thickness) ?
 		inner_radius(cr_tr, border_thickness) : cr_tr;
-	int bl_background_radius = (border_thickness) ? 
+	int bl_background_radius = (border_thickness) ?
 		inner_radius(cr_bl, border_thickness) : cr_bl;
-	int br_background_radius = (border_thickness) ? 
+	int br_background_radius = (border_thickness) ?
 		inner_radius(cr_br, border_thickness) : cr_br;
 
 	// CREATE PATHS:
@@ -140,17 +183,17 @@ void LThemeableBox::paint(QWidget* widget)
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (QString(m_border->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
+		if (QString(m_border_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
 		{
 			QLinearGradient border_fill_gradient;
 
 			border_fill_gradient.setStart(0, 0);
 			border_fill_gradient.setFinalStop(widget_width, 0);
-			border_fill_gradient.setStops(m_border->fill()->as<QGradientStops>(s));
+			border_fill_gradient.setStops(m_border_fill->as<QGradientStops>(s));
 
 			painter.fillPath(border_path, border_fill_gradient);
 		}
-		else painter.fillPath(border_path, m_border->fill()->as<QColor>(s));
+		else painter.fillPath(border_path, m_border_fill->as<QColor>(s));
 	}
 
 	// - Draw Background
@@ -168,24 +211,4 @@ void LThemeableBox::paint(QWidget* widget)
 	{
 		painter.fillPath(background_path, m_fill->as<QColor>(s));
 	}
-}
-
-LBorderAttributes* LThemeableBox::border() const
-{
-	return m_border;
-}
-
-LCornerRadiiAttributes* LThemeableBox::corner_radii() const
-{
-	return m_corner_radii;
-}
-
-LMarginsAttributes* LThemeableBox::margins() const
-{
-	return m_margins;
-}
-
-LAttribute* LThemeableBox::fill() const
-{
-	return m_fill;
 }

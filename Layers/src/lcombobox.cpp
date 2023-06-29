@@ -23,14 +23,6 @@ LComboBox::LComboBox(QWidget* parent) : QComboBox(parent)
 	update_stylesheet();
 }
 
-LComboBox::~LComboBox()
-{
-	delete m_border;
-	delete m_corner_radius;
-	delete m_fill;
-	delete m_text_color;
-}
-
 QList<LThemeable*> LComboBox::child_themeables(Qt::FindChildOptions options)
 {
 	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
@@ -94,7 +86,7 @@ void LComboBox::update_stylesheet()
 {
 	QString stylesheet =
 		"QComboBox {"
-		"border: " + m_border->thickness()->as<QString>() + "px solid " + m_border->fill()->as<QColor>().name() + ";"
+		"border: " + m_border_thickness->as<QString>() + "px solid " + m_border_fill->as<QColor>().name() + ";"
 		"color: " + m_text_color->as<QColor>().name() + ";"
 		"}"
 		
@@ -271,21 +263,6 @@ void LComboBox::paintEvent(QPaintEvent* event)
 
 void LComboBox::init_attributes()
 {
-	m_attr_data.attr_groups.insert({
-		{ "border", m_border }
-		});
-
-	m_attr_data.ungrouped_attrs.insert({
-		{ "corner_radii", m_corner_radius },
-		{ "fill", m_fill },
-		{ "text_color", m_text_color }
-		});
-
-	connect(m_border->fill(), &LAttribute::changed, [this] { update_stylesheet(); });
-	connect(m_border->thickness(), &LAttribute::changed, [this] { update_stylesheet(); });
-	connect(m_corner_radius, &LAttribute::changed, [this] { update_stylesheet(); });
-	connect(m_fill, &LAttribute::changed, [this] { update_stylesheet(); });
-	connect(m_text_color, &LAttribute::changed, [this] { update_stylesheet(); });
-
-	m_border->thickness()->set_value(0.0);
+	for (LAttribute* attr : attributes())
+		connect(attr, &LAttribute::changed, [this] { update_stylesheet(); });
 }

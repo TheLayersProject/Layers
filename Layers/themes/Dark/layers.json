@@ -1,4749 +1,4067 @@
 {
-    "Color Dialog": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
+  "Color Dialog": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
     },
-    "Color Dialog/Apply Button": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
+    "border.thickness": {
+      "value": 3
     },
-    "Color Dialog/Apply Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#000000"
-        }
+    "corner_radii.bottom_left": {
+      "value": 10
     },
-    "Color Dialog/Color Name Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 8
-            },
-            "left": {
-                "value": 7
-            },
-            "right": {
-                "value": 8
-            },
-            "top": {
-                "value": 7
-            }
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "corner_radii.bottom_right": {
+      "value": 10
     },
-    "Color Dialog/Color Unit Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "corner_radii.top_left": {
+      "value": 10
     },
-    "Color Dialog/Hue Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "corner_radii.top_right": {
+      "value": 10
     },
-    "Color Dialog/Hue Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 8
-            },
-            "left": {
-                "value": 7
-            },
-            "right": {
-                "value": 8
-            },
-            "top": {
-                "value": 7
-            }
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "fill": {
+      "value": "#36393f"
     },
-    "Color Dialog/Hue Radio Button": {
-        "active_dot_fill": {
-            "value": "#161c22"
-        },
-        "border": {
-            "fill": {
-                "value": "#768199"
-            },
-            "thickness": {
-                "overrides": {
-                    "Active": {
-                        "value": 0
-                    }
-                },
-                "value": 3
-            }
-        },
-        "fill": {
-            "overrides": {
-                "Active": {
-                    "value": "#9daccc"
-                }
-            },
-            "value": "#313640"
-        }
+    "margins.bottom": {
+      "value": 0
     },
-    "Color Dialog/Hue Unit Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "margins.left": {
+      "value": 0
     },
-    "Color Dialog/Saturation Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
+    "margins.right": {
+      "value": 0
     },
-    "Color Dialog/Saturation Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 8
-            },
-            "left": {
-                "value": 7
-            },
-            "right": {
-                "value": 8
-            },
-            "top": {
-                "value": 7
-            }
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Color Dialog/Saturation Radio Button": {
-        "active_dot_fill": {
-            "value": "#161c22"
-        },
-        "border": {
-            "fill": {
-                "value": "#768199"
-            },
-            "thickness": {
-                "overrides": {
-                    "Active": {
-                        "value": 0
-                    }
-                },
-                "value": 3
-            }
-        },
-        "fill": {
-            "overrides": {
-                "Active": {
-                    "value": "#9daccc"
-                }
-            },
-            "value": "#313640"
-        }
-    },
-    "Color Dialog/Saturation Unit Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Color Dialog/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Color Dialog/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Color Dialog/Titlebar/Exit Button/Graphic": {
-        "fill": {
-            "value": "#ffffff"
-        }
-    },
-    "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33036"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Color Dialog/Titlebar/Title Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#c0c0c0"
-        }
-    },
-    "Color Dialog/Value Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Color Dialog/Value Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 8
-            },
-            "left": {
-                "value": 7
-            },
-            "right": {
-                "value": 8
-            },
-            "top": {
-                "value": 7
-            }
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Color Dialog/Value Radio Button": {
-        "active_dot_fill": {
-            "value": "#161c22"
-        },
-        "border": {
-            "fill": {
-                "value": "#768199"
-            },
-            "thickness": {
-                "overrides": {
-                    "Active": {
-                        "value": 0
-                    }
-                },
-                "value": 3
-            }
-        },
-        "fill": {
-            "overrides": {
-                "Active": {
-                    "value": "#9daccc"
-                }
-            },
-            "value": "#313640"
-        }
-    },
-    "Color Dialog/Value Unit Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Create Theme Dialog": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Create Theme Dialog/Create Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 6
-            },
-            "left": {
-                "value": 4
-            },
-            "right": {
-                "value": 4
-            },
-            "top": {
-                "value": 6
-            }
-        }
-    },
-    "Create Theme Dialog/Create Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
-    },
-    "Create Theme Dialog/Name Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Create Theme Dialog/Start As Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Create Theme Dialog/Start Theme Combobox": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "value": 10
-        },
-        "fill": {
-            "value": "#1e2023"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Create Theme Dialog/Start Theme Combobox/Items": {
-        "corner_radius": {
-            "value": 10
-        },
-        "fill": {
-            "overrides": {
-                "Selected": {
-                    "value": "#2b2e32"
-                }
-            },
-            "value": "#16181a"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Create Theme Dialog/Theme Name Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#1e2023"
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Create Theme Dialog/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Create Theme Dialog/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Create Theme Dialog/Titlebar/Exit Button/Graphic": {
-        "fill": {
-            "value": "#ffffff"
-        }
-    },
-    "Create Theme Dialog/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33036"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Create Theme Dialog/Titlebar/Title Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#c0c0c0"
-        }
-    },
-    "Gradient Dialog": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Gradient Dialog/Apply Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 6
-            },
-            "left": {
-                "value": 4
-            },
-            "right": {
-                "value": 4
-            },
-            "top": {
-                "value": 6
-            }
-        }
-    },
-    "Gradient Dialog/Apply Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
-    },
-    "Gradient Dialog/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Gradient Dialog/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Gradient Dialog/Titlebar/Exit Button/Graphic": {
-        "fill": {
-            "value": "#ffffff"
-        }
-    },
-    "Gradient Dialog/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33036"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Gradient Dialog/Titlebar/Title Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#c0c0c0"
-        }
-    },
-    "Main Window": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 15
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Separator": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 6
-            },
-            "top_right": {
-                "value": 6
-            }
-        },
-        "fill": {
-            "value": "#25272b"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Sidebar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#2f3136"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "overrides": {
-                "Selected": {
-                    "value": "#42464d"
-                }
-            },
-            "value": "#2f3136"
-        },
-        "margins": {
-            "bottom": {
-                "value": 7
-            },
-            "left": {
-                "value": 7
-            },
-            "right": {
-                "value": 7
-            },
-            "top": {
-                "value": 7
-            }
-        }
-    },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label": {
-    },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Customize Theme Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Customize Theme Button/Graphic": {
-    },
-    "Main Window/Settings Menu/Themes Widget/Customize Theme Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e6e6e6"
-                }
-            },
-            "value": "#c3c3c3"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Delete Theme Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Delete Theme Button/Graphic": {
-    },
-    "Main Window/Settings Menu/Themes Widget/Delete Theme Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#ff7f7f"
-                }
-            },
-            "value": "#e95454"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/New Theme Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/New Theme Button/Graphic": {
-    },
-    "Main Window/Settings Menu/Themes Widget/New Theme Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#8cfa6a"
-                }
-            },
-            "value": "#6fc654"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Separators": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#6a6a6a"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Combobox": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "value": 10
-        },
-        "fill": {
-            "value": "#1e2023"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Combobox/Items": {
-        "corner_radius": {
-            "value": 10
-        },
-        "fill": {
-            "overrides": {
-                "Selected": {
-                    "value": "#2b2e32"
-                }
-            },
-            "value": "#16181a"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Info Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Info Button/Graphic": {
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Info Button/Graphic/Svg": {
-        "common_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Settings Menu/Themes Widget/Theme Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Main Window/Theme Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Preview Scroll Area": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Preview Scroll Area/Horizontal ScrollBar": {
-        "background_color": {
-            "value": "#36393f"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "handle_color": {
-            "value": "#202225"
-        },
-        "handle_corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        }
-    },
-    "Main Window/Theme Editor/Preview Scroll Area/Vertical ScrollBar": {
-        "background_color": {
-            "value": "#36393f"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "handle_color": {
-            "value": "#202225"
-        },
-        "handle_corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar": {
-    },
-    "Main Window/Theme Editor/Sidebar/Horizontal ScrollBar": {
-        "background_color": {
-            "value": "#a0a0a4"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "handle_color": {
-            "value": "#ffffff"
-        },
-        "handle_corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Vertical ScrollBar": {
-        "background_color": {
-            "value": "#2f3136"
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "handle_color": {
-            "value": "#202225"
-        },
-        "handle_corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#2f3136"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Attributes Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e1e1e1"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#fbfbfc"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a000000"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 5
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Bar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#7c7c7c"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Handle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 5
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Bar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#7c7c7c"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Handle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/Example Widget": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 5
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Bar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#7c7c7c"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Handle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 5
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Bar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#7c7c7c"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Handle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#fbfbfc"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control": {
-        "border": {
-            "fill": {
-                "value": "#d6d6d6"
-            },
-            "thickness": {
-                "value": 2
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "margins": {
-            "bottom": {
-                "value": 8
-            },
-            "left": {
-                "value": 8
-            },
-            "right": {
-                "value": 8
-            },
-            "top": {
-                "value": 8
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 4
-            },
-            "bottom_right": {
-                "value": 4
-            },
-            "top_left": {
-                "value": 4
-            },
-            "top_right": {
-                "value": 4
-            }
-        },
-        "fill": {
-            "value": "#404040"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Color Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e1e1e1"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 4
-            },
-            "bottom_right": {
-                "value": 4
-            },
-            "top_left": {
-                "value": 4
-            },
-            "top_right": {
-                "value": 4
-            }
-        },
-        "fill": {
-            "value": "#6fc65b"
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 10
-            },
-            "right": {
-                "value": 10
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle/Square": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e1e1e1"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#fbfbfc"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#fbfbfc"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#fbfbfc"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Line Editor": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 5
-            }
-        },
-        "text_color": {
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 5
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 5
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Bar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#7c7c7c"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 5
-            },
-            "right": {
-                "value": 5
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Handle": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 2
-            },
-            "bottom_right": {
-                "value": 2
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#2e2e2e"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Show All Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 7
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 7
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Show All Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Show Enabled Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 7
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 7
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Show Enabled Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#1a888888"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label": {
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e1e1e1"
-        }
-    },
-    "Main Window/Theme Editor/Topbar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#2f3136"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Apply Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 7
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 7
-            }
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Apply Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator": {
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels": {
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels/Svg": {
-        "common_color": {
-            "value": "#5e636d"
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#959595"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#e1e1e1"
-        },
-        "margins": {
-            "bottom": {
-                "value": 10
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 10
-            }
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic": {
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic/Svg": {
-        "common_color": {
-            "value": "#2e2e2e"
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Text Buttons": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Theme Editor/Topbar/Navigator/Text Buttons/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#fbfbfc"
-                }
-            },
-            "value": "#96989d"
-        }
-    },
-    "Main Window/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 6
-            },
-            "top_right": {
-                "value": 6
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Exit Button/Graphic": {
-    },
-    "Main Window/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33034"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Titlebar/Maximize Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Maximize Button/Graphic": {
-    },
-    "Main Window/Titlebar/Maximize Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e3e3e3"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "overrides": {
-                "Active": {
-                    "value": "#25272b"
-                }
-            },
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button/Graphic": {
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e95454"
-                }
-            },
-            "value": "#5f5f5f"
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon": {
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon/Svg": {
-        "common_color": {
-            "value": "#e3e3e3"
-        }
-    },
-    "Main Window/Titlebar/Menu Tab Bar/Tabs/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e3e3e3"
-        }
-    },
-    "Main Window/Titlebar/Minimize Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Minimize Button/Graphic": {
-    },
-    "Main Window/Titlebar/Minimize Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e3e3e3"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Main Window/Titlebar/Settings Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Main Window/Titlebar/Settings Button/Graphic": {
-    },
-    "Main Window/Titlebar/Settings Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e3e3e3"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Theme Compatibility Caution Dialog": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Theme Compatibility Caution Dialog/Message Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Table Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Theme Lineage Table": {
-        "border": {
-            "fill": {
-                "value": "#1e2023"
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "item_fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells": {
-        "grid": {
-            "fill": {
-                "value": "#25272b"
-            },
-            "thickness": {
-                "value": 3
-            }
-        }
-    },
-    "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
-        "common_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 2
-            },
-            "top_right": {
-                "value": 2
-            }
-        },
-        "fill": {
-            "value": "#25272b"
-        },
-        "text_color": {
-            "value": "#b9bbbe"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#25272b"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Theme Compatibility Caution Dialog/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic": {
-        "fill": {
-            "value": "#ffffff"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33036"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Theme Compatibility Caution Dialog/Titlebar/Title Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#e3e3e3"
-        }
-    },
-    "Update Dialog": {
-        "border": {
-            "fill": {
-                "value": {
-                    "gradient": [
-                        "0:#202225",
-                        "1:#36393f"
-                    ]
-                }
-            },
-            "thickness": {
-                "value": 3
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 10
-            },
-            "bottom_right": {
-                "value": 10
-            },
-            "top_left": {
-                "value": 10
-            },
-            "top_right": {
-                "value": 10
-            }
-        },
-        "fill": {
-            "value": "#36393f"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Update Dialog/Message Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#c0c0c0"
-        }
-    },
-    "Update Dialog/Remind Me Later Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#6a6a6a"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Update Dialog/Remind Me Later Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#2e2e2e"
-        }
-    },
-    "Update Dialog/Titlebar": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 7
-            },
-            "bottom_right": {
-                "value": 7
-            },
-            "top_left": {
-                "value": 7
-            },
-            "top_right": {
-                "value": 7
-            }
-        },
-        "fill": {
-            "value": "#202225"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Update Dialog/Titlebar/Exit Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Update Dialog/Titlebar/Exit Button/Graphic": {
-        "fill": {
-            "value": "#ffffff"
-        }
-    },
-    "Update Dialog/Titlebar/Exit Button/Graphic/Svg": {
-        "common_color": {
-            "overrides": {
-                "Selected": {
-                    "value": "#e33036"
-                }
-            },
-            "value": "#6a6a6a"
-        }
-    },
-    "Update Dialog/Titlebar/Title Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#c0c0c0"
-        }
-    },
-    "Update Dialog/Update Button": {
-        "border": {
-            "fill": {
-                "value": "#000000"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 5
-            },
-            "bottom_right": {
-                "value": 5
-            },
-            "top_left": {
-                "value": 5
-            },
-            "top_right": {
-                "value": 5
-            }
-        },
-        "fill": {
-            "value": "#61ad50"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
-    },
-    "Update Dialog/Update Button/Text Label": {
-        "fill": {
-            "value": "#ffffff"
-        },
-        "text_color": {
-            "value": "#f8f8f8"
-        }
+    "margins.top": {
+      "value": 0
     }
+  },
+  "Color Dialog/Apply Button": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Color Dialog/Apply Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#000000"
+    }
+  },
+  "Color Dialog/Color Name Line Editor": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 8
+    },
+    "margins.left": {
+      "value": 7
+    },
+    "margins.right": {
+      "value": 8
+    },
+    "margins.top": {
+      "value": 7
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Color Unit Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Hue Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Hue Line Editor": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 8
+    },
+    "margins.left": {
+      "value": 7
+    },
+    "margins.right": {
+      "value": 8
+    },
+    "margins.top": {
+      "value": 7
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Hue Radio Button": {
+    "active_dot_fill": {
+      "value": "#161c22"
+    },
+    "border.fill": {
+      "value": "#768199"
+    },
+    "border.thickness": {
+      "overrides": {
+        "Active": {
+          "value": 0
+        }
+      },
+      "value": 3
+    },
+    "fill": {
+      "overrides": {
+        "Active": {
+          "value": "#9daccc"
+        }
+      },
+      "value": "#313640"
+    }
+  },
+  "Color Dialog/Hue Unit Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Saturation Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Saturation Line Editor": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 8
+    },
+    "margins.left": {
+      "value": 7
+    },
+    "margins.right": {
+      "value": 8
+    },
+    "margins.top": {
+      "value": 7
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Saturation Radio Button": {
+    "active_dot_fill": {
+      "value": "#161c22"
+    },
+    "border.fill": {
+      "value": "#768199"
+    },
+    "border.thickness": {
+      "overrides": {
+        "Active": {
+          "value": 0
+        }
+      },
+      "value": 3
+    },
+    "fill": {
+      "overrides": {
+        "Active": {
+          "value": "#9daccc"
+        }
+      },
+      "value": "#313640"
+    }
+  },
+  "Color Dialog/Saturation Unit Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Titlebar": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Color Dialog/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Color Dialog/Titlebar/Exit Button/Graphic": {
+    "fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Color Dialog/Titlebar/Title Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#c0c0c0"
+    }
+  },
+  "Color Dialog/Value Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Value Line Editor": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 8
+    },
+    "margins.left": {
+      "value": 7
+    },
+    "margins.right": {
+      "value": 8
+    },
+    "margins.top": {
+      "value": 7
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Color Dialog/Value Radio Button": {
+    "active_dot_fill": {
+      "value": "#161c22"
+    },
+    "border.fill": {
+      "value": "#768199"
+    },
+    "border.thickness": {
+      "overrides": {
+        "Active": {
+          "value": 0
+        }
+      },
+      "value": 3
+    },
+    "fill": {
+      "overrides": {
+        "Active": {
+          "value": "#9daccc"
+        }
+      },
+      "value": "#313640"
+    }
+  },
+  "Color Dialog/Value Unit Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Create Theme Dialog": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Create Theme Dialog/Create Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#61ad50"
+    },
+    "margins.bottom": {
+      "value": 6
+    },
+    "margins.left": {
+      "value": 4
+    },
+    "margins.right": {
+      "value": 4
+    },
+    "margins.top": {
+      "value": 6
+    }
+  },
+  "Create Theme Dialog/Create Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#f8f8f8"
+    }
+  },
+  "Create Theme Dialog/Name Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Create Theme Dialog/Start As Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Create Theme Dialog/Start Theme Combobox": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1e2023"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Create Theme Dialog/Start Theme Combobox/Items": {
+    "corner_radius": {
+      "value": 10
+    },
+    "fill": {
+      "overrides": {
+        "Selected": {
+          "value": "#2b2e32"
+        }
+      },
+      "value": "#16181a"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Create Theme Dialog/Theme Name Line Editor": {
+    "border.fill": {
+      "value": "#1e2023"
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Create Theme Dialog/Titlebar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Create Theme Dialog/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Create Theme Dialog/Titlebar/Exit Button/Graphic": {
+    "fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Create Theme Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Create Theme Dialog/Titlebar/Title Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#c0c0c0"
+    }
+  },
+  "Gradient Dialog": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Gradient Dialog/Apply Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#61ad50"
+    },
+    "margins.bottom": {
+      "value": 6
+    },
+    "margins.left": {
+      "value": 4
+    },
+    "margins.right": {
+      "value": 4
+    },
+    "margins.top": {
+      "value": 6
+    }
+  },
+  "Gradient Dialog/Apply Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#f8f8f8"
+    }
+  },
+  "Gradient Dialog/Titlebar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Gradient Dialog/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Gradient Dialog/Titlebar/Exit Button/Graphic": {
+    "fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Gradient Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Gradient Dialog/Titlebar/Title Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#c0c0c0"
+    }
+  },
+  "Main Window": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "border.thickness": {
+      "value": 15
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Separator": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 6
+    },
+    "corner_radii.top_right": {
+      "value": 6
+    },
+    "fill": {
+      "value": "#25272b"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Sidebar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#2f3136"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Sidebar/Themes Settings Tab": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "overrides": {
+        "Selected": {
+          "value": "#42464d"
+        }
+      },
+      "value": "#2f3136"
+    },
+    "margins.bottom": {
+      "value": 7
+    },
+    "margins.left": {
+      "value": 7
+    },
+    "margins.right": {
+      "value": 7
+    },
+    "margins.top": {
+      "value": 7
+    }
+  },
+  "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label": {},
+  "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Icon Label/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Customize Theme Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Customize Theme Button/Graphic": {},
+  "Main Window/Settings Menu/Themes Widget/Customize Theme Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e6e6e6"
+        }
+      },
+      "value": "#c3c3c3"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Delete Theme Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Delete Theme Button/Graphic": {},
+  "Main Window/Settings Menu/Themes Widget/Delete Theme Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#ff7f7f"
+        }
+      },
+      "value": "#e95454"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/New Theme Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/New Theme Button/Graphic": {},
+  "Main Window/Settings Menu/Themes Widget/New Theme Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#8cfa6a"
+        }
+      },
+      "value": "#6fc654"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Separators": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#6a6a6a"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Theme Combobox": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1e2023"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Theme Combobox/Items": {
+    "corner_radius": {
+      "value": 10
+    },
+    "fill": {
+      "overrides": {
+        "Selected": {
+          "value": "#2b2e32"
+        }
+      },
+      "value": "#16181a"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Theme Info Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Theme Info Button/Graphic": {},
+  "Main Window/Settings Menu/Themes Widget/Theme Info Button/Graphic/Svg": {
+    "common_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Settings Menu/Themes Widget/Theme Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Main Window/Theme Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Preview Scroll Area": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Preview Scroll Area/Horizontal ScrollBar": {
+    "background_color": {
+      "value": "#36393f"
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "handle_color": {
+      "value": "#202225"
+    },
+    "handle_corner_radii.bottom_left": {
+      "value": 5
+    },
+    "handle_corner_radii.bottom_right": {
+      "value": 5
+    },
+    "handle_corner_radii.top_left": {
+      "value": 5
+    },
+    "handle_corner_radii.top_right": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Preview Scroll Area/Vertical ScrollBar": {
+    "background_color": {
+      "value": "#36393f"
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "handle_color": {
+      "value": "#202225"
+    },
+    "handle_corner_radii.bottom_left": {
+      "value": 5
+    },
+    "handle_corner_radii.bottom_right": {
+      "value": 5
+    },
+    "handle_corner_radii.top_left": {
+      "value": 5
+    },
+    "handle_corner_radii.top_right": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Sidebar": {},
+  "Main Window/Theme Editor/Sidebar/Horizontal ScrollBar": {
+    "background_color": {
+      "value": "#a0a0a4"
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "handle_color": {
+      "value": "#ffffff"
+    },
+    "handle_corner_radii.bottom_left": {
+      "value": 5
+    },
+    "handle_corner_radii.bottom_right": {
+      "value": 5
+    },
+    "handle_corner_radii.top_left": {
+      "value": 5
+    },
+    "handle_corner_radii.top_right": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Vertical ScrollBar": {
+    "background_color": {
+      "value": "#2f3136"
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "handle_color": {
+      "value": "#202225"
+    },
+    "handle_corner_radii.bottom_left": {
+      "value": 5
+    },
+    "handle_corner_radii.bottom_right": {
+      "value": 5
+    },
+    "handle_corner_radii.top_left": {
+      "value": 5
+    },
+    "handle_corner_radii.top_right": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#2f3136"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attributes Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a000000"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Line Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 5
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Bar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#7c7c7c"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Handle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Line Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 5
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Bar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#7c7c7c"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Handle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/Example Widget": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Line Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 5
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Bar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#7c7c7c"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Handle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Line Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 5
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Bar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#7c7c7c"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Handle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control": {
+    "border.fill": {
+      "value": "#d6d6d6"
+    },
+    "border.thickness": {
+      "value": 2
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "margins.bottom": {
+      "value": 8
+    },
+    "margins.left": {
+      "value": 8
+    },
+    "margins.right": {
+      "value": 8
+    },
+    "margins.top": {
+      "value": 8
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 4
+    },
+    "corner_radii.bottom_right": {
+      "value": 4
+    },
+    "corner_radii.top_left": {
+      "value": 4
+    },
+    "corner_radii.top_right": {
+      "value": 4
+    },
+    "fill": {
+      "value": "#404040"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Color Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 4
+    },
+    "corner_radii.bottom_right": {
+      "value": 4
+    },
+    "corner_radii.top_left": {
+      "value": 4
+    },
+    "corner_radii.top_right": {
+      "value": 4
+    },
+    "fill": {
+      "value": "#6fc65b"
+    },
+    "margins.bottom": {
+      "value": 10
+    },
+    "margins.left": {
+      "value": 10
+    },
+    "margins.right": {
+      "value": 10
+    },
+    "margins.top": {
+      "value": 10
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle/Square": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Line Editor": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 5
+    },
+    "text_color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 5
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Bar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#7c7c7c"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 5
+    },
+    "margins.right": {
+      "value": 5
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Handle": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 2
+    },
+    "corner_radii.bottom_right": {
+      "value": 2
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#2e2e2e"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#1a888888"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Topbar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#2f3136"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Apply Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#61ad50"
+    },
+    "margins.bottom": {
+      "value": 7
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 7
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Apply Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#f8f8f8"
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator": {},
+  "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels": {},
+  "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels/Svg": {
+    "common_color": {
+      "value": "#5e636d"
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#959595"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#e1e1e1"
+    },
+    "margins.bottom": {
+      "value": 10
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 10
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic": {},
+  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic/Svg": {
+    "common_color": {
+      "value": "#2e2e2e"
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator/Text Buttons": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Topbar/Navigator/Text Buttons/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Titlebar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 6
+    },
+    "corner_radii.top_right": {
+      "value": 6
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Exit Button/Graphic": {},
+  "Main Window/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33034"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Titlebar/Maximize Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Maximize Button/Graphic": {},
+  "Main Window/Titlebar/Maximize Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e3e3e3"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar/Tabs": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "overrides": {
+        "Active": {
+          "value": "#25272b"
+        }
+      },
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button/Graphic": {},
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e95454"
+        }
+      },
+      "value": "#5f5f5f"
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon": {},
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon/Svg": {
+    "common_color": {
+      "value": "#e3e3e3"
+    }
+  },
+  "Main Window/Titlebar/Menu Tab Bar/Tabs/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e3e3e3"
+    }
+  },
+  "Main Window/Titlebar/Minimize Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Minimize Button/Graphic": {},
+  "Main Window/Titlebar/Minimize Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e3e3e3"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Titlebar/Settings Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Main Window/Titlebar/Settings Button/Graphic": {},
+  "Main Window/Titlebar/Settings Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e3e3e3"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Theme Compatibility Caution Dialog": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Theme Compatibility Caution Dialog/Message Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Table Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Theme Lineage Table": {
+    "border.fill": {
+      "value": "#1e2023"
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "item_fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells": {
+    "grid.fill": {
+      "value": "#25272b"
+    },
+    "grid.thickness": {
+      "value": 3
+    }
+  },
+  "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
+    "common_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 2
+    },
+    "corner_radii.top_right": {
+      "value": 2
+    },
+    "fill": {
+      "value": "#25272b"
+    },
+    "text_color": {
+      "value": "#b9bbbe"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Titlebar": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#25272b"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Theme Compatibility Caution Dialog/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#a0a0a4"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic": {
+    "fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Theme Compatibility Caution Dialog/Titlebar/Title Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#e3e3e3"
+    }
+  },
+  "Update Dialog": {
+    "border.fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "border.thickness": {
+      "value": 3
+    },
+    "corner_radii.bottom_left": {
+      "value": 10
+    },
+    "corner_radii.bottom_right": {
+      "value": 10
+    },
+    "corner_radii.top_left": {
+      "value": 10
+    },
+    "corner_radii.top_right": {
+      "value": 10
+    },
+    "fill": {
+      "value": "#36393f"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Update Dialog/Message Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#c0c0c0"
+    }
+  },
+  "Update Dialog/Remind Me Later Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#6a6a6a"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Update Dialog/Remind Me Later Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#2e2e2e"
+    }
+  },
+  "Update Dialog/Titlebar": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 7
+    },
+    "corner_radii.bottom_right": {
+      "value": 7
+    },
+    "corner_radii.top_left": {
+      "value": 7
+    },
+    "corner_radii.top_right": {
+      "value": 7
+    },
+    "fill": {
+      "value": "#202225"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Update Dialog/Titlebar/Exit Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 0
+    },
+    "corner_radii.bottom_right": {
+      "value": 0
+    },
+    "corner_radii.top_left": {
+      "value": 0
+    },
+    "corner_radii.top_right": {
+      "value": 0
+    },
+    "fill": {
+      "value": "#ffffff"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Update Dialog/Titlebar/Exit Button/Graphic": {
+    "fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Update Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Update Dialog/Titlebar/Title Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#c0c0c0"
+    }
+  },
+  "Update Dialog/Update Button": {
+    "border.fill": {
+      "value": "#000000"
+    },
+    "border.thickness": {
+      "value": 0
+    },
+    "corner_radii.bottom_left": {
+      "value": 5
+    },
+    "corner_radii.bottom_right": {
+      "value": 5
+    },
+    "corner_radii.top_left": {
+      "value": 5
+    },
+    "corner_radii.top_right": {
+      "value": 5
+    },
+    "fill": {
+      "value": "#61ad50"
+    },
+    "margins.bottom": {
+      "value": 0
+    },
+    "margins.left": {
+      "value": 0
+    },
+    "margins.right": {
+      "value": 0
+    },
+    "margins.top": {
+      "value": 0
+    }
+  },
+  "Update Dialog/Update Button/Text Label": {
+    "fill": {
+      "value": "#ffffff"
+    },
+    "text_color": {
+      "value": "#f8f8f8"
+    }
+  }
 }

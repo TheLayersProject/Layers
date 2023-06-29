@@ -62,7 +62,6 @@ LApplication::LApplication(
 
 	m_name_underscored = name_parts.join("_");
 
-	init_attributes();
 	init_directories();
 	init_fonts();
 	init_themes();
@@ -354,11 +353,6 @@ LTheme* LApplication::theme(const QString& theme_id)
 LThemeCompatibilityCautionDialog* LApplication::theme_compatibility_caution_dialog() const
 {
 	return m_theme_compatibility_caution_dialog;
-}
-
-void LApplication::init_attributes()
-{
-	m_attr_data.ungrouped_attrs.insert("Primary", m_primary);
 }
 
 void LApplication::init_directories()

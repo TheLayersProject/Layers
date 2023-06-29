@@ -40,12 +40,12 @@ void LDialog::setLayout(QLayout* layout)
 
 void LDialog::update_content_margins()
 {
-	int border_thickness = border()->thickness()->as<double>();
+	int border_thickness = m_border_thickness->as<double>();
 
-	int content_margin_l = margins()->left()->as<double>() + border_thickness;
-	int content_margin_t = margins()->top()->as<double>() + border_thickness;
-	int content_margin_r = margins()->right()->as<double>() + border_thickness;
-	int content_margin_b = margins()->bottom()->as<double>() + border_thickness;
+	int content_margin_l = m_margins_left->as<double>() + border_thickness;
+	int content_margin_t = m_margins_top->as<double>() + border_thickness;
+	int content_margin_r = m_margins_right->as<double>() + border_thickness;
+	int content_margin_b = m_margins_bottom->as<double>() + border_thickness;
 
 	m_main_layout->setContentsMargins(
 		content_margin_l, content_margin_t,
@@ -54,14 +54,14 @@ void LDialog::update_content_margins()
 
 void LDialog::update_titlebar()
 {
-	int border_thickness = border()->thickness()->as<double>();
+	int border_thickness = m_border_thickness->as<double>();
 
-	m_titlebar->corner_radii()->top_left()->set_value(
-		inner_radius(corner_radii()->top_left()->as<double>(), border_thickness)
+	m_titlebar->corner_radii_top_left()->set_value(
+		inner_radius(corner_radii_top_left()->as<double>(), border_thickness)
 	);
 
-	m_titlebar->corner_radii()->top_right()->set_value(
-		inner_radius(corner_radii()->top_right()->as<double>(), border_thickness)
+	m_titlebar->corner_radii_top_right()->set_value(
+		inner_radius(corner_radii_top_right()->as<double>(), border_thickness)
 	);
 }
 
@@ -77,7 +77,7 @@ bool LDialog::nativeEvent(
 
 		*result = 0;
 		const LONG borderWidth =
-			border()->thickness()->as<qreal>() * devicePixelRatio();
+			border_thickness()->as<qreal>() * devicePixelRatio();
 		RECT winrect;
 		GetWindowRect(reinterpret_cast<HWND>(winId()), &winrect);
 
@@ -164,27 +164,29 @@ void LDialog::init_attributes()
 {
 	LThemeableBox::init_attributes();
 
-	m_border->fill()->set_value(QVariant::fromValue(
+	m_border_fill->set_value(QVariant::fromValue(
 		QGradientStops({
 			{ 0.0, QColor("#c0c0c0") },
 			{ 1.0, Qt::white }
 			})));
-	m_border->thickness()->set_value(10.0);
-	m_corner_radii->top_left()->set_value(10.0);
-	m_corner_radii->top_right()->set_value(10.0);
-	m_corner_radii->bottom_left()->set_value(10.0);
-	m_corner_radii->bottom_right()->set_value(10.0);
+	m_border_thickness->set_value(10.0);
+	m_corner_radii_top_left->set_value(10.0);
+	m_corner_radii_top_right->set_value(10.0);
+	m_corner_radii_bottom_left->set_value(10.0);
+	m_corner_radii_bottom_right->set_value(10.0);
 
 	update_content_margins();
 	update_titlebar();
 
-	connect(border()->thickness(), &LAttribute::changed, [this] {
+	connect(border_thickness(), &LAttribute::changed, [this] {
 		update_content_margins();
 		update_titlebar();
 		});
 
-	for (LAttribute* margin : *m_margins)
-		connect(margin, &LAttribute::changed, this, &LDialog::update_content_margins);
+	for (LAttribute* attr : attributes())
+		if (attr->name().startsWith("margins."))
+			connect(attr, &LAttribute::changed,
+				this, &LDialog::update_content_margins);
 }
 
 void LDialog::init_layout()

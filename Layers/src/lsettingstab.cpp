@@ -41,8 +41,8 @@ LSettingsTab::LSettingsTab(const LGraphic& icon, const QString& label_text, QWid
 
 void LSettingsTab::init_attributes()
 {
-	m_corner_radii->top_left()->set_value(5.0);
-	m_corner_radii->bottom_left()->set_value(5.0);
+	m_corner_radii_top_left->set_value(5.0);
+	m_corner_radii_bottom_left->set_value(5.0);
 	m_fill->set_value(QColor(Qt::lightGray));
 	m_fill->add_override("Selected", QColor(Qt::white));
 

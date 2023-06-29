@@ -33,9 +33,14 @@ public:
 	// TODO: Create a destructor; free the attributes
 
 	/*!
-		Returns a pointer to the grid attributes of this item delegate.
+		Returns a pointer to the grid fill attribute of this themeable.
 	*/
-	LBorderAttributes* grid() const;
+	LAttribute* grid_fill() const;
+
+	/*!
+		Returns a pointer to the grid thickness attribute of this themeable.
+	*/
+	LAttribute* grid_thickness() const;
 
 	/*!
 		Renders the delegate using the given *painter* and style *option* for
@@ -54,7 +59,11 @@ public:
 private:
 	void init_attributes();
 
-	LBorderAttributes* m_grid{ new LBorderAttributes("grid") };
+	LAttribute* m_grid_fill{
+		new LAttribute("grid.fill", QColor("#808080"), this) };
+
+	LAttribute* m_grid_thickness{
+		new LAttribute("grid.thickness", 3.0, this) };
 };
 LAYERS_NAMESPACE_END
 

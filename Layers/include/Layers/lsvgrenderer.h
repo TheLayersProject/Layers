@@ -1,6 +1,7 @@
 #ifndef LSVGRENDERER_H
 #define LSVGRENDERER_H
 
+#include <QColor>
 #include <QSvgRenderer>
 
 #include "layers_global.h"
@@ -45,7 +46,7 @@ private:
 	void update();
 
 	LAttribute* m_common_color{
-		new LAttribute("common_color", QColor(Qt::black)) };
+		new LAttribute("common_color", QColor(Qt::black), this) };
 
 	QStringList m_svg_elements;
 

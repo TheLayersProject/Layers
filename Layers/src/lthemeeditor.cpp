@@ -26,8 +26,8 @@ LThemeEditor::LThemeEditor(QWidget* parent) :
 	m_topbar->setMouseTracking(true);
 	m_topbar->set_name("Topbar");
 	m_topbar->fill()->set_value(QColor(Qt::lightGray));
-	m_topbar->corner_radii()->top_right()->set_value(10.0);
-	m_topbar->corner_radii()->bottom_right()->set_value(10.0);
+	m_topbar->corner_radii_top_right()->set_value(10.0);
+	m_topbar->corner_radii_bottom_right()->set_value(10.0);
 
 	m_apply_button->set_margin(0, 7, 0, 7);
 	m_apply_button->set_name("Apply Button");
@@ -50,7 +50,7 @@ LThemeEditor::LThemeEditor(QWidget* parent) :
 	m_sidebar->set_name("Sidebar");
 	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
-	m_preview_frame->corner_radii()->top_left()->set_value(10.0);
+	m_preview_frame->corner_radii_top_left()->set_value(10.0);
 
 	m_preview_scroll_area->set_name("Preview Scroll Area");
 	//m_preview_scroll_area->fill()->set_disabled();

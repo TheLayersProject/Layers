@@ -13,10 +13,8 @@
   <ItemGroup>
     <ClCompile Include="src\lapplication.cpp" />
     <ClCompile Include="src\lattribute.cpp" />
-    <ClCompile Include="src\lattributedata.cpp" />
     <ClCompile Include="src\lattributeeditor.cpp" />
     <ClCompile Include="src\lattributeeditorgroup.cpp" />
-    <ClCompile Include="src\lattributegroup.cpp" />
     <ClCompile Include="src\lbutton.cpp" />
     <ClCompile Include="src\lcolor.cpp" />
     <ClCompile Include="src\lcolorcontrol.cpp" />
@@ -100,10 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="include\Layers\lstatepool.h" />
-    <ClInclude Include="include\Layers\lattributedata.h" />
     <ClInclude Include="include\Layers\layers_exports.h" />
     <ClInclude Include="include\Layers\layers_global.h" />
-    <QtMoc Include="include\Layers\lattributegroup.h" />
     <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
     <QtMoc Include="include\Layers\lattributeeditor.h" />
     <QtMoc Include="include\Layers\lattribute.h" />

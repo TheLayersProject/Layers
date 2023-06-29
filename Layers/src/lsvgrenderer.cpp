@@ -80,10 +80,6 @@ void LSvgRenderer::update()
 
 void LSvgRenderer::init_attributes()
 {
-	m_attr_data.ungrouped_attrs.insert({
-		{ "common_color", m_common_color }
-		});
-
 	connect(m_common_color, &LAttribute::changed, [this] {
 		update();
 		emit repaintNeeded();

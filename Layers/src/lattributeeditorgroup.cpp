@@ -4,14 +4,13 @@
 
 using Layers::LAttributeEditorGroup;
 
-LAttributeEditorGroup::LAttributeEditorGroup(LAttributeGroup* attr_group, QWidget* parent) :
+LAttributeEditorGroup::LAttributeEditorGroup(const QString& name, QWidget* parent) :
 	LWidget(parent)
 {
 	init_attributes();
 	set_name("Group Editor");
 
-	if (attr_group)
-		m_label->setText(attr_group->name());
+	m_label->setText(name);
 	m_label->set_name("Label");
 	m_label->set_font_size(14);
 

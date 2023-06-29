@@ -16,7 +16,7 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 	m_line_edit->installEventFilter(this);
 	m_line_edit->setStyleSheet(
 		"QLineEdit { border: none; background: transparent; padding-left: " +
-		QString::number(m_left_padding->as<double>() + m_margins->left()->as<double>()) + "px; padding-bottom: 1px; }");
+		QString::number(m_left_padding->as<double>() + m_margins_left->as<double>()) + "px; padding-bottom: 1px; }");
 
 	connect(m_line_edit, &QLineEdit::textEdited, [this] {
 		if (QString(m_text->typeName()) == "QString")
@@ -42,24 +42,6 @@ LLineEditor::~LLineEditor()
 	delete m_left_padding;
 	delete m_text_color;
 	delete m_text;
-}
-
-void LLineEditor::init_attributes()
-{
-	m_attr_data.ungrouped_attrs.insert({
-		{ "text_color", m_text_color }
-		});
-
-	m_corner_radii->top_left()->set_value(5.0);
-	m_corner_radii->top_right()->set_value(5.0);
-	m_corner_radii->bottom_left()->set_value(5.0);
-	m_corner_radii->bottom_right()->set_value(5.0);
-	m_fill->set_value(QColor(Qt::lightGray));
-
-	connect(m_text_color, &LAttribute::changed, [this] {
-		update_theme_dependencies();
-		m_line_edit->update();
-		});
 }
 
 void LLineEditor::set_default_value(const QString& default_value)
@@ -140,7 +122,7 @@ void LLineEditor::update_theme_dependencies()
 {
 	m_line_edit->setStyleSheet(
 		"QLineEdit { border: none; background: transparent; color: " + m_text_color->as<QColor>().name() + "; padding-left: " +
-		QString::number(m_left_padding->as<double>() + margins()->left()->as<double>()) + "px; padding-bottom: 2px; }");
+		QString::number(m_left_padding->as<double>() + m_margins_left->as<double>()) + "px; padding-bottom: 2px; }");
 
 	if (m_line_edit->text() != m_text->as<QString>())
 		m_line_edit->setText(m_text->as<QString>());
@@ -158,4 +140,18 @@ bool LLineEditor::eventFilter(QObject* object, QEvent* event)
 	}
 
 	return false;
+}
+
+void LLineEditor::init_attributes()
+{
+	m_corner_radii_top_left->set_value(5.0);
+	m_corner_radii_top_right->set_value(5.0);
+	m_corner_radii_bottom_left->set_value(5.0);
+	m_corner_radii_bottom_right->set_value(5.0);
+	m_fill->set_value(QColor(Qt::lightGray));
+
+	connect(m_text_color, &LAttribute::changed, [this] {
+		update_theme_dependencies();
+		m_line_edit->update();
+		});
 }

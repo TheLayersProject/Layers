@@ -13,7 +13,7 @@ class LAYERS_EXPORT LAttributeEditorGroup : public LWidget
 	Q_OBJECT
 
 public:
-	LAttributeEditorGroup(LAttributeGroup* attr_group, QWidget* parent = nullptr);
+	LAttributeEditorGroup(const QString& name, QWidget* parent = nullptr);
 
 	void add_attribute_editor(LAttributeEditor* attribute_editor);
 

@@ -99,16 +99,16 @@ bool LFillDialog::eventFilter(QObject* object, QEvent* event)
 
 void LFillDialog::init_attributes()
 {
-	m_corner_radii->top_left()->set_value(4.0);
-	m_corner_radii->top_right()->set_value(4.0);
-	m_corner_radii->bottom_left()->set_value(4.0);
-	m_corner_radii->bottom_right()->set_value(4.0);
+	m_corner_radii_top_left->set_value(4.0);
+	m_corner_radii_top_right->set_value(4.0);
+	m_corner_radii_bottom_left->set_value(4.0);
+	m_corner_radii_bottom_right->set_value(4.0);
 
-	m_color_control->margins()->top()->set_value(8.0);
-	m_color_control->margins()->bottom()->set_value(8.0);
+	m_color_control->margins_top()->set_value(8.0);
+	m_color_control->margins_bottom()->set_value(8.0);
 
-	m_gradient_control->margins()->top()->set_value(8.0);
-	m_gradient_control->margins()->bottom()->set_value(8.0);
+	m_gradient_control->margins_top()->set_value(8.0);
+	m_gradient_control->margins_bottom()->set_value(8.0);
 }
 
 void LFillDialog::init_layout()

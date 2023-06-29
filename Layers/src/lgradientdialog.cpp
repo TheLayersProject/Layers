@@ -101,23 +101,23 @@ void LGradientDialog::init_attributes()
 {
     for (LAttribute* attr :
         QList<LAttribute*>({
-            m_border->thickness(),
-            m_margins->left(),
-            m_margins->top(),
-            m_margins->right(),
-            m_margins->bottom()}))
+            m_border_thickness,
+            m_margins_left,
+            m_margins_top,
+            m_margins_right,
+            m_margins_bottom}))
     {
         connect(attr, &LAttribute::changed,
             this, &LGradientDialog::update_color_control_positions);
     }
 
     m_gradient_widget->fill()->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
-    m_gradient_widget->border()->fill()->set_value(QColor(Qt::black));
-    m_gradient_widget->border()->thickness()->set_value(2.0);
-    m_gradient_widget->corner_radii()->top_left()->set_value(8.0);
-    m_gradient_widget->corner_radii()->top_right()->set_value(8.0);
-    m_gradient_widget->corner_radii()->bottom_left()->set_value(8.0);
-    m_gradient_widget->corner_radii()->bottom_right()->set_value(8.0);
+    m_gradient_widget->border_fill()->set_value(QColor(Qt::black));
+    m_gradient_widget->border_thickness()->set_value(2.0);
+    m_gradient_widget->corner_radii_top_left()->set_value(8.0);
+    m_gradient_widget->corner_radii_top_right()->set_value(8.0);
+    m_gradient_widget->corner_radii_bottom_left()->set_value(8.0);
+    m_gradient_widget->corner_radii_bottom_right()->set_value(8.0);
 }
 
 void LGradientDialog::init_color_controls()

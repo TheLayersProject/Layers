@@ -10,9 +10,11 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattributedata.h"
+#include "lattribute.h"
 
 LAYERS_NAMESPACE_BEGIN
+
+using LAttributeMapHash = QHash<QString, LAttributeMap>;
 
 class LAttribute;
 class LThemeable;
@@ -186,7 +188,7 @@ public:
 		to *themeable_tag* exists in the theme. For this reason, it is
 		recommended to call contains_attributes_for_tag() first.
 	*/
-	LAttributeData& operator[](const QString& tag);
+	LAttributeMap& operator[](const QString& tag);
 
 	/*!
 		Saves a *meta.json* file to the directory pertaining to this theme.
@@ -224,8 +226,8 @@ public:
 	QUuid* uuid() const;
 
 private:
-	LAttributeDataHash m_hash;
-	LAttributeDataHash m_hash_layers;
+	LAttributeMapHash m_hash;
+	LAttributeMapHash m_hash_layers;
 
 	QDir m_dir;
 

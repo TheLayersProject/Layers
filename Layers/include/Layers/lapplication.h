@@ -223,13 +223,12 @@ public slots:
 	void rename_theme(const QString& old_name, const QString& new_name);
 
 private:
-	void init_attributes();
 	void init_directories();
 	void init_fonts();
 	void init_themes();
 	void init_latest_version_tag();
 
-	LAttribute* m_primary{ new LAttribute("Primary", QColor("#36393f"))};
+	LAttribute* m_primary{ new LAttribute("Primary", QColor("#36393f"), this)};
 
 	QList<LThemeable*> m_child_themeables;
 

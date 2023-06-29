@@ -276,12 +276,12 @@ void LColorPlane::init_attributes()
 	//color.setup_widget_update_connection(this);
 
 	m_cursor->fill()->establish_link(m_color);
-	m_cursor->border()->fill()->set_value(QColor(Qt::lightGray));
-	m_cursor->border()->thickness()->set_value(2.0);
-	m_cursor->corner_radii()->top_left()->set_value(2.0);
-	m_cursor->corner_radii()->top_right()->set_value(2.0);
-	m_cursor->corner_radii()->bottom_left()->set_value(2.0);
-	m_cursor->corner_radii()->bottom_right()->set_value(2.0);
+	m_cursor->border_fill()->set_value(QColor(Qt::lightGray));
+	m_cursor->border_thickness()->set_value(2.0);
+	m_cursor->corner_radii_top_left()->set_value(2.0);
+	m_cursor->corner_radii_top_right()->set_value(2.0);
+	m_cursor->corner_radii_bottom_left()->set_value(2.0);
+	m_cursor->corner_radii_bottom_right()->set_value(2.0);
 }
 
 void LColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)

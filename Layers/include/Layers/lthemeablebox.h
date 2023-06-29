@@ -17,27 +17,64 @@ LAYERS_NAMESPACE_BEGIN
 class LAYERS_EXPORT LThemeableBox : public LThemeable
 {
 public:
-	~LThemeableBox();
+	/*!
+		Returns a pointer to the border fill attribute of this themeable.
+	*/
+	LAttribute* border_fill() const;
 
 	/*!
-		Returns a pointer to the border attributes of this themeable.
+		Returns a pointer to the border thickness attribute of this themeable.
 	*/
-	LBorderAttributes* border() const;
+	LAttribute* border_thickness() const;
 
 	/*!
-		Returns a pointer to the corner radii attributes of this themeable.
+		Returns a pointer to the bottom-left corner radii attribute of this
+		themeable.
 	*/
-	LCornerRadiiAttributes* corner_radii() const;
+	LAttribute* corner_radii_bottom_left() const;
 
 	/*!
-		Returns a pointer to the margin attributes of this themeable.
+		Returns a pointer to the bottom-right corner radii attribute of this
+		themeable.
 	*/
-	LMarginsAttributes* margins() const;
+	LAttribute* corner_radii_bottom_right() const;
+
+	/*!
+		Returns a pointer to the top-left corner radii attribute of this
+		themeable.
+	*/
+	LAttribute* corner_radii_top_left() const;
+
+	/*!
+		Returns a pointer to the top-right corner radii attribute of this
+		themeable.
+	*/
+	LAttribute* corner_radii_top_right() const;
 
 	/*!
 		Returns a pointer to the fill attribute of this themeable.
 	*/
 	LAttribute* fill() const;
+
+	/*!
+		Returns a pointer to the bottom margin attribute of this themeable.
+	*/
+	LAttribute* margins_bottom() const;
+
+	/*!
+		Returns a pointer to the left margin attribute of this themeable.
+	*/
+	LAttribute* margins_left() const;
+
+	/*!
+		Returns a pointer to the right margin attribute of this themeable.
+	*/
+	LAttribute* margins_right() const;
+
+	/*!
+		Returns a pointer to the top margin attribute of this themeable.
+	*/
+	LAttribute* margins_top() const;
 
 	/*!
 		Sets all margin attributes with one value.
@@ -59,16 +96,43 @@ protected:
 
 	/*!
 		Paints *widget* using the attributes of this LThemeableBox.
+
+		LThemeableBox subclasses should call this function from paintEvent().
 	*/
 	void paint(QWidget* widget);
 
-	LBorderAttributes* m_border{ new LBorderAttributes };
+	LAttribute* m_border_fill{
+		new LAttribute("border.fill", QColor(Qt::gray)) };
 
-	LCornerRadiiAttributes* m_corner_radii{ new LCornerRadiiAttributes };
+	LAttribute* m_border_thickness{
+		new LAttribute("border.thickness", 0.0) };
 
-	LMarginsAttributes* m_margins{ new LMarginsAttributes };
+	LAttribute* m_corner_radii_bottom_left{
+		new LAttribute("corner_radii.bottom_left", 0.0) };
 
-	LAttribute* m_fill{ new LAttribute("fill", QColor(Qt::white)) };
+	LAttribute* m_corner_radii_bottom_right{
+		new LAttribute("corner_radii.bottom_right", 0.0) };
+
+	LAttribute* m_corner_radii_top_left{
+		new LAttribute("corner_radii.top_left", 0.0) };
+
+	LAttribute* m_corner_radii_top_right{
+		new LAttribute("corner_radii.top_right", 0.0) };
+
+	LAttribute* m_fill{
+		new LAttribute("fill", QColor(Qt::white)) };
+
+	LAttribute* m_margins_bottom{
+		new LAttribute("margins.bottom", 0.0) };
+
+	LAttribute* m_margins_left{
+		new LAttribute("margins.left", 0.0) };
+
+	LAttribute* m_margins_right{
+		new LAttribute("margins.right", 0.0) };
+
+	LAttribute* m_margins_top{
+		new LAttribute("margins.top", 0.0) };
 };
 LAYERS_NAMESPACE_END
 

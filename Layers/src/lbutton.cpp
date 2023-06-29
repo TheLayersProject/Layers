@@ -14,10 +14,10 @@ LButton::LButton(const LGraphic& graphic, const QString& text, QWidget* parent) 
 {
 	init();
 	
-	m_corner_radii->top_left()->set_value(7.0);
-	m_corner_radii->top_right()->set_value(7.0);
-	m_corner_radii->bottom_left()->set_value(7.0);
-	m_corner_radii->bottom_right()->set_value(7.0);
+	m_corner_radii_top_left->set_value(7.0);
+	m_corner_radii_top_right->set_value(7.0);
+	m_corner_radii_bottom_left->set_value(7.0);
+	m_corner_radii_bottom_right->set_value(7.0);
 }
 
 LButton::LButton(const LGraphic& graphic, QWidget* parent) :
@@ -33,10 +33,10 @@ LButton::LButton(const QString& text, QWidget* parent) :
 {
 	init();
 
-	m_corner_radii->top_left()->set_value(7.0);
-	m_corner_radii->top_right()->set_value(7.0);
-	m_corner_radii->bottom_left()->set_value(7.0);
-	m_corner_radii->bottom_right()->set_value(7.0);
+	m_corner_radii_top_left->set_value(7.0);
+	m_corner_radii_top_right->set_value(7.0);
+	m_corner_radii_bottom_left->set_value(7.0);
+	m_corner_radii_bottom_right->set_value(7.0);
 }
 
 LButton::LButton(const LGraphic& graphic, const LGraphic& graphic_after, QWidget* parent) :

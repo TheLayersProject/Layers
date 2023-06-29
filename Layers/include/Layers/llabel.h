@@ -89,7 +89,7 @@ private:
 	LGraphic* m_graphic{ nullptr };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor(Qt::white)) };
+		new LAttribute("fill", QColor(Qt::white), this) };
 
 	LAttribute* m_text_color{
 		new LAttribute("text_color", QColor(Qt::black)) };
