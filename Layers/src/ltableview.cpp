@@ -12,8 +12,7 @@ using Layers::LThemeable;
 
 LTableView::LTableView(QWidget* parent) : QTableView(parent)
 {
-	init_attributes();
-	update_stylesheet();
+	update();
 
 	//setItemDelegate(new LGridlineItemDelegate);
 
@@ -55,19 +54,13 @@ void LTableView::setItemDelegate(QAbstractItemDelegate* item_delegate)
 		dynamic_cast<LGridlineItemDelegate*>(item_delegate))
 	{
 		connect(themeable_item_delegate, &LGridlineItemDelegate::changed,
-			[this] { update(); });
+			[this] { QWidget::update(); });
 	}
 	
 	QTableView::setItemDelegate(item_delegate);
 }
 
-void LTableView::init_attributes()
-{
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed, [this] { update_stylesheet(); });
-}
-
-void LTableView::update_stylesheet()
+void LTableView::update()
 {
 	QString stylesheet =
 		"QTableView {"
@@ -91,7 +84,7 @@ void LTableView::update_stylesheet()
 
 	setStyleSheet(stylesheet);
 
-	update();
+	QWidget::update();
 }
 
 void LTableView::update_height()

@@ -41,14 +41,16 @@ void LSettingsMenu::add_settings_tab(const LGraphic& icon, const QString& label_
 
 	for (LSettingsTab* st : m_settings_tabs)
 	{
-		connect(st, &LSettingsTab::clicked, [settings_tab] {
+		connect(st, &LSettingsTab::clicked, [settings_tab]
+		{
 			settings_tab->select_states()->set_state("Unselected");
-			settings_tab->update();
-			});
-		connect(settings_tab, &LSettingsTab::clicked, [st] {
+			settings_tab->LThemeable::update();
+		});
+		connect(settings_tab, &LSettingsTab::clicked, [st]
+		{
 			st->select_states()->set_state("Unselected");
-			st->update();
-			});
+			st->LThemeable::update();
+		});
 	}
 
 	m_settings_tabs.append(settings_tab);

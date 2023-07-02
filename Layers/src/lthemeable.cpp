@@ -176,15 +176,6 @@ void LThemeable::copy_attribute_values_to(LTheme* theme)
 	}
 }
 
-void LThemeable::establish_update_connection(LAttribute* attribute)
-{
-	if (QWidget* widget = dynamic_cast<QWidget*>(this))
-	{
-		widget->connect(attribute, &LAttribute::changed, [widget]
-			{ widget->update(); });
-	}
-}
-
 LGraphic* LThemeable::icon() const
 {
 	return m_icon;
@@ -277,4 +268,10 @@ QString& LThemeable::tag()
 QStringList LThemeable::tag_prefixes() const
 {
 	return m_tag_prefixes;
+}
+
+void LThemeable::update()
+{
+	if (QWidget* widget = dynamic_cast<QWidget*>(this))
+		widget->update();
 }

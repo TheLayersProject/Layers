@@ -36,6 +36,8 @@ public:
 	*/
 	void setItemDelegate(QAbstractItemDelegate* item_delegate);
 
+	virtual void update() override;
+
 	/*!
 		Updates the height of the table view.
 	*/
@@ -43,8 +45,6 @@ public:
 
 private:
 	void init_attributes();
-
-	void update_stylesheet();
 
 	LAttribute* m_border_fill{
 		new LAttribute("border.fill", QColor(Qt::gray), this) };

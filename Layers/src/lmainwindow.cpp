@@ -108,76 +108,6 @@ void LMainWindow::close_widget(int index)
 	m_opened_widgets.removeAt(index);
 }
 
-void LMainWindow::new_theme_clicked()
-{
-	LCreateThemeDialog* dialog = layersApp->create_theme_dialog();
-
-	dialog->clear_theme_combobox();
-
-	for (LTheme* theme : layersApp->themes())
-		if (theme->has_app_implementation(layersApp->app_identifier()))
-			dialog->add_theme_to_combobox(theme);
-
-	dialog->set_current_start_theme_name(
-		layersApp->active_theme()->name());
-
-	center_dialog(dialog);
-
-	dialog->show();
-
-	if (dialog->exec() && !m_functionality_disabled)
-	{
-		LTheme* copy_theme = layersApp->theme(dialog->copy_theme_id());
-		LTheme* new_theme = new LTheme(dialog->new_theme_name());
-
-		layersApp->themes()[new_theme->id()] = new_theme;
-
-		QDir new_theme_dir = latest_T_version_path() + new_theme->id() + "\\";
-		QDir copy_theme_dir = copy_theme->dir();
-
-		new_theme->set_dir(new_theme_dir);
-
-		if (!new_theme_dir.exists())
-			new_theme_dir.mkdir(".");
-
-		for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
-			if (file_name != "meta.json")
-			{
-				QFile::copy(
-					copy_theme_dir.filePath(file_name),
-					new_theme_dir.filePath(file_name));
-
-				QFile::setPermissions(
-					new_theme_dir.filePath(file_name),
-					QFileDevice::WriteUser);
-			}
-
-		for (const QString& theme_id : copy_theme->lineage())
-			new_theme->append_to_lineage(theme_id);
-
-		new_theme->append_to_lineage(copy_theme->id());
-
-		new_theme->save_meta_file();
-		new_theme->load(layersApp->app_identifier());
-
-		LThemeComboBox* theme_combobox =
-			m_settings_menu->themes_widget()->theme_combobox();
-
-		theme_combobox->addItem(new_theme);
-
-		layersApp->apply_theme(*new_theme);
-
-		for (int i = 0; i < theme_combobox->count(); i++)
-			if (theme_combobox->itemData(i) == new_theme->id())
-			{
-				theme_combobox->setCurrentIndex(i);
-				break;
-			}
-
-		dialog->clear();
-	}
-}
-
 void LMainWindow::open_widget(
 	LWidget* widget, const QString& name, LGraphic* icon)
 {
@@ -196,15 +126,22 @@ void LMainWindow::open_widget(
 	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
 }
 
-void LMainWindow::open_widget_changed(int old_index, int new_index)
+void LMainWindow::update()
 {
-	if (QWidget* old_widget = (old_index != -1) ?
-		m_opened_widgets[old_index] : nullptr)
+	if (isMaximized())
+		m_main_layout->setContentsMargins(0, 0, 0, 0);
+	else
 	{
-		old_widget->hide();
+		int border_thickness = m_border_thickness->as<double>();
+
+		m_main_layout->setContentsMargins(
+			border_thickness + m_margins_left->as<double>(),
+			border_thickness + m_margins_top->as<double>(),
+			border_thickness + m_margins_right->as<double>(),
+			border_thickness + m_margins_bottom->as<double>());
 	}
 
-	m_opened_widgets[new_index]->show();
+	QWidget::update();
 }
 
 bool LMainWindow::nativeEvent(
@@ -297,9 +234,91 @@ bool LMainWindow::nativeEvent(
 	return false;
 }
 
+void LMainWindow::new_theme_clicked()
+{
+	LCreateThemeDialog* dialog = layersApp->create_theme_dialog();
+
+	dialog->clear_theme_combobox();
+
+	for (LTheme* theme : layersApp->themes())
+		if (theme->has_app_implementation(layersApp->app_identifier()))
+			dialog->add_theme_to_combobox(theme);
+
+	dialog->set_current_start_theme_name(
+		layersApp->active_theme()->name());
+
+	center_dialog(dialog);
+
+	dialog->show();
+
+	if (dialog->exec() && !m_functionality_disabled)
+	{
+		LTheme* copy_theme = layersApp->theme(dialog->copy_theme_id());
+		LTheme* new_theme = new LTheme(dialog->new_theme_name());
+
+		layersApp->themes()[new_theme->id()] = new_theme;
+
+		QDir new_theme_dir = latest_T_version_path() + new_theme->id() + "\\";
+		QDir copy_theme_dir = copy_theme->dir();
+
+		new_theme->set_dir(new_theme_dir);
+
+		if (!new_theme_dir.exists())
+			new_theme_dir.mkdir(".");
+
+		for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
+			if (file_name != "meta.json")
+			{
+				QFile::copy(
+					copy_theme_dir.filePath(file_name),
+					new_theme_dir.filePath(file_name));
+
+				QFile::setPermissions(
+					new_theme_dir.filePath(file_name),
+					QFileDevice::WriteUser);
+			}
+
+		for (const QString& theme_id : copy_theme->lineage())
+			new_theme->append_to_lineage(theme_id);
+
+		new_theme->append_to_lineage(copy_theme->id());
+
+		new_theme->save_meta_file();
+		new_theme->load(layersApp->app_identifier());
+
+		LThemeComboBox* theme_combobox =
+			m_settings_menu->themes_widget()->theme_combobox();
+
+		theme_combobox->addItem(new_theme);
+
+		layersApp->apply_theme(*new_theme);
+
+		for (int i = 0; i < theme_combobox->count(); i++)
+			if (theme_combobox->itemData(i) == new_theme->id())
+			{
+				theme_combobox->setCurrentIndex(i);
+				break;
+			}
+
+		dialog->clear();
+	}
+}
+
+void LMainWindow::open_widget_changed(int old_index, int new_index)
+{
+	if (QWidget* old_widget = (old_index != -1) ?
+		m_opened_widgets[old_index] : nullptr)
+	{
+		old_widget->hide();
+	}
+
+	m_opened_widgets[new_index]->show();
+}
+
 void LMainWindow::init_attributes()
 {
-	m_fill->set_link_new("App.Primary");
+	m_fill->establish_link(*layersApp->primary());
+	//m_fill->set_link_new("App.Primary");
 
 	m_border_thickness->set_value(15.0);
 	m_border_fill->set_value(
@@ -309,19 +328,6 @@ void LMainWindow::init_attributes()
 	m_corner_radii_top_right->set_value(10.0);
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
-
-	connect(m_border_thickness, &LAttribute::changed, [this]
-		{ update_theme_dependencies(); });
-
-	for (LAttribute* margin : QList<LAttribute*>(
-		{
-			m_margins_left, m_margins_top,
-			m_margins_right, m_margins_bottom
-		}))
-	{
-		connect(margin, &LAttribute::changed, [this]
-			{ update_theme_dependencies(); });
-	}
 
 	m_separator->fill()->set_value(QColor("#25272b"));
 }
@@ -377,7 +383,6 @@ void LMainWindow::init_titlebar_connections()
 			else
 				showMaximized();
 
-			update_theme_dependencies();
 			update();
 		});
 
@@ -386,20 +391,4 @@ void LMainWindow::init_titlebar_connections()
 			if (!m_functionality_disabled)
 				qApp->quit();
 		});
-}
-
-void LMainWindow::update_theme_dependencies()
-{
-	if (isMaximized())
-		m_main_layout->setContentsMargins(0, 0, 0, 0);
-	else
-	{
-		int border_thickness = m_border_thickness->as<double>();
-
-		m_main_layout->setContentsMargins(
-			border_thickness + m_margins_left->as<double>(),
-			border_thickness + m_margins_top->as<double>(),
-			border_thickness + m_margins_right->as<double>(),
-			border_thickness + m_margins_bottom->as<double>());
-	}
 }

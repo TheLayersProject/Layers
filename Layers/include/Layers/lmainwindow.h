@@ -66,6 +66,8 @@ public slots:
 	void open_widget(
 		LWidget* widget, const QString& name, LGraphic* icon = nullptr);
 
+	virtual void update() override;
+
 protected:
 	bool nativeEvent(
 		const QByteArray& eventType, void* message, qintptr* result
@@ -81,8 +83,6 @@ private:
 	void init_layout();
 	void init_themes_widget_connections();
 	void init_titlebar_connections();
-
-	void update_theme_dependencies();
 
 	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 

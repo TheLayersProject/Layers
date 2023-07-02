@@ -74,11 +74,10 @@ public:
 	*/
 	LAttribute* text_color() const;
 
+	virtual void update() override;
+
 protected:
 	void paintEvent(QPaintEvent* event);
-
-private slots:
-	void update_stylesheet();
 
 private:
 	void init();

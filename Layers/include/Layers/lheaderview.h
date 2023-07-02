@@ -24,11 +24,9 @@ public:
 
 	// TODO: Create a destructor; free the attributes
 
+	virtual void update() override;
+
 private:
-	void init_attributes();
-
-	void update_stylesheet();
-
 	LAttribute* m_border_fill{
 		new LAttribute("border.fill", QColor(Qt::gray), this) };
 

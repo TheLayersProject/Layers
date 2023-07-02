@@ -17,6 +17,13 @@ LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
 	m_name{ name },
 	QObject(parent)
 {
+	connect(this, &LAttribute::changed, [this]
+	{
+		if (this->parent())
+			if (LThemeable* t = dynamic_cast<LThemeable*>(this->parent()))
+				t->update();
+	});
+
 	establish_link_connection();
 }
 

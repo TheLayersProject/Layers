@@ -7,8 +7,7 @@ using Layers::LHeaderView;
 LHeaderView::LHeaderView(Qt::Orientation orientation, QWidget* parent) :
 	QHeaderView(orientation, parent)
 {
-	init_attributes();
-	update_stylesheet();
+	update();
 
 	if (orientation == Qt::Horizontal)
 		set_name("Horizontal Header");
@@ -16,13 +15,7 @@ LHeaderView::LHeaderView(Qt::Orientation orientation, QWidget* parent) :
 		set_name("Vertical Header");
 }
 
-void LHeaderView::init_attributes()
-{
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed, [this] { update_stylesheet(); });
-}
-
-void LHeaderView::update_stylesheet()
+void LHeaderView::update()
 {
 	setStyleSheet(
 		"QHeaderView {"
@@ -39,5 +32,5 @@ void LHeaderView::update_stylesheet()
 		"}"
 	);
 
-	update();
+	QWidget::update();
 }

@@ -19,8 +19,7 @@ LComboBox::LComboBox(QWidget* parent) : QComboBox(parent)
 		Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
 	view()->setMouseTracking(true);
 
-	init_attributes();
-	update_stylesheet();
+	update();
 }
 
 QList<LThemeable*> LComboBox::child_themeables(Qt::FindChildOptions options)
@@ -48,7 +47,7 @@ void LComboBox::setFixedHeight(int h)
 {
 	QComboBox::setFixedHeight(h);
 
-	update_stylesheet();
+	update();
 }
 
 void LComboBox::setFixedSize(int w, int h)
@@ -60,14 +59,14 @@ void LComboBox::setFixedSize(const QSize& s)
 {
 	QComboBox::setFixedSize(s);
 
-	update_stylesheet();
+	update();
 }
 
 void LComboBox::setFixedWidth(int w)
 {
 	QComboBox::setFixedWidth(w);
 
-	update_stylesheet();
+	update();
 }
 
 void LComboBox::showPopup()
@@ -82,7 +81,7 @@ void LComboBox::showPopup()
 	}
 }
 
-void LComboBox::update_stylesheet()
+void LComboBox::update()
 {
 	QString stylesheet =
 		"QComboBox {"
@@ -142,7 +141,7 @@ void LComboBox::update_stylesheet()
 		"}"
 	);
 
-	update();
+	QWidget::update();
 }
 
 QPainterPath LComboBox::background_path() const
@@ -226,12 +225,8 @@ QPainterPath LComboBox::background_path() const
 bool LComboBox::eventFilter(QObject* object, QEvent* event)
 {
 	if (object == view()->window())
-	{
 		if (event->type() == QEvent::Show || event->type() == QEvent::Hide)
-		{
-			update_stylesheet();
-		}
-	}
+			update();
 
 	return false;
 }
@@ -259,10 +254,4 @@ void LComboBox::paintEvent(QPaintEvent* event)
 	);
 
 	painter.fillPath(item_text_path, m_text_color->as<QColor>());
-}
-
-void LComboBox::init_attributes()
-{
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed, [this] { update_stylesheet(); });
 }

@@ -66,6 +66,8 @@ public:
 	*/
 	virtual void showPopup() override;
 
+	virtual void update() override;
+
 protected:
 	/*!
 		Returns a QPainterPath that represents the combo box's background.
@@ -90,11 +92,6 @@ protected:
 
 	LAttribute* m_text_color{
 		new LAttribute("text_color", QColor(Qt::black), this) };
-
-private:
-	void init_attributes();
-
-	void update_stylesheet();
 };
 LAYERS_NAMESPACE_END
 

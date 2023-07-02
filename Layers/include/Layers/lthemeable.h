@@ -209,12 +209,6 @@ public:
 	void entangle_with(T* themeable, bool entangle_children = true);
 
 	/*!
-		Creates a connection to call QWidget::update() when the
-		LAbstractAttribute::changed() signal is emitted by *abstract_attribute*.
-	*/
-	void establish_update_connection(LAttribute* attribute);
-
-	/*!
 		Returns a pointer to the themeable's icon.
 			
 		Returns nullptr if no icon has been set.
@@ -291,6 +285,8 @@ public:
 		Returns a QStringList containing the tag prefixes of this themeable.
 	*/
 	QStringList tag_prefixes() const;
+
+	virtual void update();
 
 protected:
 	bool m_functionality_disabled{ false };

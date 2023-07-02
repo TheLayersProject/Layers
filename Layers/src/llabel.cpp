@@ -28,13 +28,13 @@ LLabel::LLabel(const LGraphic& graphic, QWidget* parent) :
 	{
 		m_repaint_connection =
 			connect(m_graphic->svg_renderer(), &LSvgRenderer::repaintNeeded,
-				[this] { update(); });
+				[this] { QWidget::update(); });
 	}
 	else
 	{
 		connect(&m_timer, &QTimer::timeout, [this] {
 			m_timer.start(17);
-			update();
+			QWidget::update();
 			});
 
 		m_timer.start(17);
@@ -139,7 +139,7 @@ void LLabel::paintEvent(QPaintEvent* event)
 		QLabel::paintEvent(event);
 }
 
-void LLabel::update_stylesheet()
+void LLabel::update()
 {
 	QStringList s = states();
 
@@ -155,7 +155,8 @@ void LLabel::update_stylesheet()
 	stylesheet += "}";
 
 	setStyleSheet(stylesheet);
-	update();
+
+	QWidget::update();
 }
 
 void LLabel::init()
@@ -165,14 +166,11 @@ void LLabel::init()
 	if (!m_graphic)
 		set_icon(LGraphic(":/images/label_icon.svg", QSize(17, 6)));
 
-	update_stylesheet();
+	update();
 }
 
 void LLabel::init_attributes()
 {
 	if (!m_graphic)
 		m_text_color->setParent(this);
-
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed, this, &LLabel::update_stylesheet);
 }

@@ -76,7 +76,4 @@ void LRadioButton::init_attributes()
 	m_border_thickness->add_override("Active", 0.0);
 
 	m_fill->add_override("Active", QColor(Qt::lightGray));
-
-	for (LAttribute* attr : attributes())
-		establish_update_connection(attr);
 }

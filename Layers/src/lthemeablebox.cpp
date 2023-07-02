@@ -94,9 +94,6 @@ void LThemeableBox::init_attributes()
 		m_margins_top->setParent(object);
 		m_margins_right->setParent(object);
 	}
-
-	for (LAttribute* attr : attributes())
-		establish_update_connection(attr);
 }
 
 void LThemeableBox::paint(QWidget* widget)

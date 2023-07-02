@@ -60,7 +60,7 @@ void LToggleSwitch::toggle(bool emit_toggled_event)
 	if (emit_toggled_event)
 		emit toggled_event();
 
-	update();
+	QWidget::update();
 }
 
 bool LToggleSwitch::toggled() const
