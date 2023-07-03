@@ -5,11 +5,9 @@ using Layers::LScrollBar;
 
 LScrollBar::LScrollBar(QWidget* parent) : QScrollBar(parent)
 {
-	init_attributes();
-
 	set_name("ScrollBar");
 
-	update_stylesheet();
+	update();
 }
 
 LAttribute* LScrollBar::background_color() const
@@ -62,13 +60,7 @@ LAttribute* LScrollBar::handle_corner_radii_top_right() const
 	return m_handle_corner_radii_top_right;
 }
 
-void LScrollBar::init_attributes()
-{
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed, [this] { update_stylesheet(); });
-}
-
-void LScrollBar::update_stylesheet()
+void LScrollBar::update()
 {
 	setStyleSheet(
 		/* VERTICAL */

@@ -33,16 +33,14 @@ public:
 	*/
 	void setLayout(QLayout* layout);
 
+	virtual void update() override;
+
 protected:
 	bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
 	void paintEvent(QPaintEvent* event) override;
 
 	QVBoxLayout* m_main_layout{ new QVBoxLayout };
-
-private slots:
-	void update_content_margins();
-	void update_titlebar();
 
 private:
 	void init_attributes();

@@ -37,8 +37,6 @@ public:
 	LAttribute* common_color() const;
 
 private:
-	void init_attributes();
-
 	void init_svg_elements_list();
 
 	void rebuild_svg_str();

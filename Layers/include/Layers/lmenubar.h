@@ -33,12 +33,10 @@ public:
 	*/
 	LAttribute* text_color() const;
 
+	virtual void update() override;
+
 private:
 	QString build_stylesheet();
-
-	void init_attributes();
-
-	void update_theme_dependencies();
 
 	LAttribute* m_selected_text_color{
 		new LAttribute("selected_text_color", QColor(Qt::lightGray), this) };

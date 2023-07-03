@@ -23,8 +23,6 @@ LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
 			if (LThemeable* t = dynamic_cast<LThemeable*>(this->parent()))
 				t->update();
 	});
-
-	establish_link_connection();
 }
 
 LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* parent) :
@@ -92,8 +90,6 @@ LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* pa
 			m_overrides[key] =
 				new LAttribute(key, overrides_object.value(key).toObject());
 	}
-
-	establish_link_connection();
 }
 
 LAttribute::LAttribute(const LAttribute& attribute) :
@@ -107,8 +103,6 @@ LAttribute::LAttribute(const LAttribute& attribute) :
 		for (LAttribute* override_attr : attribute.m_overrides)
 			m_overrides[override_attr->name()] = new LAttribute(*override_attr);
 	}
-
-	establish_link_connection();
 }
 
 LAttribute::~LAttribute()

@@ -9,8 +9,6 @@ using Layers::LThemesWidget;
 
 LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 {
-	init_attributes();
-
 	set_icon(LGraphic(":/images/panel_icon.svg", QSize(20, 20)));
 	set_name("Themes Widget");
 
@@ -82,16 +80,6 @@ void LThemesWidget::handle_theme_buttons_visibility()
 		show_custom_theme_buttons();
 	else
 		show_custom_theme_buttons(false);
-}
-
-void LThemesWidget::init_attributes()
-{
-	//m_fill->set_disabled();
-
-	//m_spacer_1->fill()->set_disabled();
-	//m_spacer_2->fill()->set_disabled();
-
-	//m_theme_info_button->graphic()->svg()->a_use_common_hover_color.set_value(false);
 }
 
 LButton* LThemesWidget::customize_theme_button() const

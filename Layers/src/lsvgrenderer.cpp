@@ -8,8 +8,6 @@ using Layers::LSvgRenderer;
 LSvgRenderer::LSvgRenderer(const QString& file_path, QObject* parent) :
 	QSvgRenderer(parent)
 {
-	init_attributes();
-
 	QFile file(file_path);
 
 	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -26,8 +24,6 @@ LSvgRenderer::LSvgRenderer(const QString& file_path, QObject* parent) :
 
 LSvgRenderer::LSvgRenderer(const LSvgRenderer& svg_renderer)
 {
-	init_attributes();
-
 	m_svg_str = svg_renderer.m_svg_str;
 
 	for (const QString& svg_element : svg_renderer.m_svg_elements)
@@ -76,14 +72,6 @@ void LSvgRenderer::update()
 	rebuild_svg_str();
 
 	load(m_svg_str.toUtf8());
-}
-
-void LSvgRenderer::init_attributes()
-{
-	connect(m_common_color, &LAttribute::changed, [this] {
-		update();
-		emit repaintNeeded();
-		});
 }
 
 void LSvgRenderer::init_svg_elements_list()

@@ -62,10 +62,10 @@ LCornerRadiiEditor::LCornerRadiiEditor(
 	m_bl_line_editor->text()->establish_link(m_bl_slider->value());
 	m_br_line_editor->text()->establish_link(m_br_slider->value());
 
-	m_tl_line_editor->update_theme_dependencies();
-	m_tr_line_editor->update_theme_dependencies();
-	m_bl_line_editor->update_theme_dependencies();
-	m_br_line_editor->update_theme_dependencies();
+	m_tl_line_editor->update();
+	m_tr_line_editor->update();
+	m_bl_line_editor->update();
+	m_br_line_editor->update();
 
 	// Replace example widget's corner radii attributes with sliders' 'value' attributes
 	m_example_widget->corner_radii_top_left()->establish_link(m_tl_slider->value());

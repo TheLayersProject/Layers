@@ -17,9 +17,9 @@ LDialog::LDialog(const QString& title, QWidget* parent) :
 	init_attributes();
 	init_layout();
 	init_titlebar();
-
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::FramelessWindowHint);
+	update();
 }
 
 void LDialog::set_icon(const LGraphic& icon)
@@ -38,31 +38,17 @@ void LDialog::setLayout(QLayout* layout)
 	m_main_layout->addLayout(layout);
 }
 
-void LDialog::update_content_margins()
+void LDialog::update()
 {
 	int border_thickness = m_border_thickness->as<double>();
-
-	int content_margin_l = m_margins_left->as<double>() + border_thickness;
-	int content_margin_t = m_margins_top->as<double>() + border_thickness;
-	int content_margin_r = m_margins_right->as<double>() + border_thickness;
-	int content_margin_b = m_margins_bottom->as<double>() + border_thickness;
 
 	m_main_layout->setContentsMargins(
-		content_margin_l, content_margin_t,
-		content_margin_r, content_margin_b);
-}
+		border_thickness + m_margins_left->as<double>(),
+		border_thickness + m_margins_top->as<double>(),
+		border_thickness + m_margins_right->as<double>(),
+		border_thickness + m_margins_bottom->as<double>());
 
-void LDialog::update_titlebar()
-{
-	int border_thickness = m_border_thickness->as<double>();
-
-	m_titlebar->corner_radii_top_left()->set_value(
-		inner_radius(corner_radii_top_left()->as<double>(), border_thickness)
-	);
-
-	m_titlebar->corner_radii_top_right()->set_value(
-		inner_radius(corner_radii_top_right()->as<double>(), border_thickness)
-	);
+	QWidget::update();
 }
 
 bool LDialog::nativeEvent(
@@ -174,26 +160,11 @@ void LDialog::init_attributes()
 	m_corner_radii_top_right->set_value(10.0);
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
-
-	update_content_margins();
-	update_titlebar();
-
-	connect(border_thickness(), &LAttribute::changed, [this] {
-		update_content_margins();
-		update_titlebar();
-		});
-
-	for (LAttribute* attr : attributes())
-		if (attr->name().startsWith("margins."))
-			connect(attr, &LAttribute::changed,
-				this, &LDialog::update_content_margins);
 }
 
 void LDialog::init_layout()
 {
 	// Main Layout
-	update_content_margins();
-
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->setAlignment(m_titlebar, Qt::AlignTop);

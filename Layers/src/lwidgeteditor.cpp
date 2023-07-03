@@ -19,7 +19,6 @@ using Layers::LThemeable;
 LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_editor, QWidget* parent) :
 	m_themeable{ themeable }, LWidget(parent)
 {
-	init_attributes();
 	setFixedWidth(300);
 
 	m_control_attribute_editor_group->hide();
@@ -260,10 +259,6 @@ void LWidgetEditor::init_attribute_editors()
 
 	for (LAttribute* attr : m_themeable->attributes())
 		m_attributes_layout->addWidget(create_editor(attr));
-}
-
-void LWidgetEditor::init_attributes()
-{
 }
 
 void LWidgetEditor::init_layout()

@@ -8,8 +8,6 @@ using Layers::LGridlineItemDelegate;
 LGridlineItemDelegate::LGridlineItemDelegate(QObject* parent) :
 	QStyledItemDelegate(parent)
 {
-	init_attributes();
-
 	set_name("Cells");
 }
 
@@ -55,10 +53,4 @@ void LGridlineItemDelegate::paint(
 		);
 		painter->fillRect(border_rect_right, grid_fill);
 	}
-}
-
-void LGridlineItemDelegate::init_attributes()
-{
-	connect(m_grid_fill, &LAttribute::changed, [this] { emit changed(); });
-	connect(m_grid_thickness, &LAttribute::changed, [this] { emit changed(); });
 }

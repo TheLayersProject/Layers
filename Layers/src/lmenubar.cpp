@@ -7,24 +7,15 @@ using Layers::LMenuBar;
 
 LMenuBar::LMenuBar(QWidget* parent) : QMenuBar(parent)
 {
-	init_attributes();
-
 	QFont MainMenuFont = font();
 	MainMenuFont.setPointSize(12);
 
 	setFont(MainMenuFont);
 
-    update_theme_dependencies();
+    update();
 }
 
-void LMenuBar::init_attributes()
-{
-	for (LAttribute* attr : attributes())
-		connect(attr, &LAttribute::changed,
-			[this] { update_theme_dependencies(); });
-}
-
-void LMenuBar::update_theme_dependencies()
+void LMenuBar::update()
 {
 	setStyleSheet(build_stylesheet());
 }

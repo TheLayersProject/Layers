@@ -82,11 +82,9 @@ public:
 	*/
 	LAttribute* handle_corner_radii_top_right() const;
 
+	virtual void update() override;
+
 private:
-	void init_attributes();
-
-	void update_stylesheet();
-
 	LAttribute* m_background_color{
 		new LAttribute("background_color", QColor(Qt::gray), this) };
 

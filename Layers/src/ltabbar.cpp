@@ -8,7 +8,6 @@ using Layers::LTabBar;
 
 LTabBar::LTabBar(QWidget* parent) : LWidget(parent)
 {
-	init_attributes();
 	init_layout();
 
 	m_control_tab->hide();
@@ -49,11 +48,6 @@ void LTabBar::set_current_index(int index)
 QList<LTab*> LTabBar::tabs() const
 {
 	return m_tabs;
-}
-
-void LTabBar::init_attributes()
-{
-	//m_fill->set_disabled();
 }
 
 void LTabBar::init_layout()

@@ -25,9 +25,6 @@ public:
 
 	void show_custom_theme_buttons(bool cond = true);
 
-protected:
-	void init_attributes();
-
 private:
 	void init_layout();
 

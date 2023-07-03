@@ -34,8 +34,6 @@ private:
 
 	void init_attribute_editors();
 
-	void init_attributes();
-
 	void init_layout();
 
 	LAttributeEditorGroup* m_control_attribute_editor_group{

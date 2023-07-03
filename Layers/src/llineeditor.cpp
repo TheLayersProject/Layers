@@ -28,10 +28,7 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 		emit text_edited(m_line_edit->text());
 		});
 
-	connect(m_text, &LAttribute::changed, [this]
-		{
-			update_theme_dependencies();
-		});
+	connect(m_text, &LAttribute::changed, [this] { update(); });
 }
 
 LLineEditor::~LLineEditor()
@@ -60,21 +57,21 @@ void LLineEditor::set_font_size(int size)
 
 	m_line_edit->setFont(line_edit_font);
 
-	update_theme_dependencies();
+	update();
 }
 
 void LLineEditor::set_margin(int margin)
 {
 	LWidget::set_margin(margin);
 
-	update_theme_dependencies();
+	update();
 }
 
 void LLineEditor::set_margin(int left, int top, int right, int bottom)
 {
 	LWidget::set_margin(left, top, right, bottom);
 
-	update_theme_dependencies();
+	update();
 }
 
 void LLineEditor::set_text(const QString& text)
@@ -118,7 +115,7 @@ LAttribute* LLineEditor::text() const
 	return m_text;
 }
 
-void LLineEditor::update_theme_dependencies()
+void LLineEditor::update()
 {
 	m_line_edit->setStyleSheet(
 		"QLineEdit { border: none; background: transparent; color: " + m_text_color->as<QColor>().name() + "; padding-left: " +
@@ -126,6 +123,8 @@ void LLineEditor::update_theme_dependencies()
 
 	if (m_line_edit->text() != m_text->as<QString>())
 		m_line_edit->setText(m_text->as<QString>());
+
+	m_line_edit->update();
 }
 
 bool LLineEditor::eventFilter(QObject* object, QEvent* event)
@@ -149,9 +148,4 @@ void LLineEditor::init_attributes()
 	m_corner_radii_bottom_left->set_value(5.0);
 	m_corner_radii_bottom_right->set_value(5.0);
 	m_fill->set_value(QColor(Qt::lightGray));
-
-	connect(m_text_color, &LAttribute::changed, [this] {
-		update_theme_dependencies();
-		m_line_edit->update();
-		});
 }

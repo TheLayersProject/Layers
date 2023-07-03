@@ -57,8 +57,6 @@ public:
 	using QStyledItemDelegate::updateEditorGeometry;
 
 private:
-	void init_attributes();
-
 	LAttribute* m_grid_fill{
 		new LAttribute("grid.fill", QColor("#808080"), this) };
 

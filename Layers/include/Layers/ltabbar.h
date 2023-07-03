@@ -61,7 +61,6 @@ public:
 	QList<LTab*> tabs() const;
 
 protected:
-	void init_attributes();
 	void init_layout();
 
 	void _add_tab(LTab* tab);

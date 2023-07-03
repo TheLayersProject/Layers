@@ -89,7 +89,7 @@ public:
 	*/
 	LAttribute* text() const;
 
-	void update_theme_dependencies();
+	virtual void update() override;
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
