@@ -52,6 +52,9 @@ LApplication::LApplication(
 
 	qRegisterMetaType<QGradientStops>("QGradientStops");
 
+	init_directories();
+	init_fonts();
+	init_latest_version_tag();
 	setAttribute(Qt::AA_EnableHighDpiScaling);
 	setEffectEnabled(Qt::UI_AnimateCombo, false);
 	set_name("App");
@@ -59,13 +62,7 @@ LApplication::LApplication(
 	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
 	for (int i = 0; i < name_parts.size(); i++)
 		name_parts[i].replace(0, 1, name_parts[i][0].toLower());
-
 	m_name_underscored = name_parts.join("_");
-
-	init_directories();
-	init_fonts();
-	init_themes();
-	init_latest_version_tag();
 
 	m_create_theme_dialog = new LCreateThemeDialog;
 
@@ -76,13 +73,17 @@ LApplication::LApplication(
 	m_theme_compatibility_caution_dialog =
 		new LThemeCompatibilityCautionDialog;
 
-	m_update_dialog = new LUpdateDialog("", "");
+	if (m_latest_version)
+		m_update_dialog =
+			new LUpdateDialog(m_version->to_string(), *m_latest_version);
 
 	add_child_themeable_pointer(*m_create_theme_dialog);
 	add_child_themeable_pointer(*m_color_dialog);
 	add_child_themeable_pointer(*m_gradient_dialog);
 	add_child_themeable_pointer(*m_theme_compatibility_caution_dialog);
 	add_child_themeable_pointer(*m_update_dialog);
+
+	init_themes();
 }
 
 LApplication::~LApplication()
@@ -156,13 +157,29 @@ void LApplication::apply_theme(LTheme& theme)
 
 		m_active_theme->load(app_identifier());
 
-		for (LThemeable* themeable : m_child_themeables)
-			themeable->apply_theme(theme);
+		LThemeable::apply_theme(theme);
 
 		m_settings.setValue("themes/active_theme", theme.id());
 
 		emit active_theme_changed();
 	}
+}
+
+LAttribute* LApplication::attribute(const QString& attr_tag)
+{
+	for (LAttribute* attr : child_attributes(Qt::FindChildrenRecursively))
+	{
+		if (attr->tag() == attr_tag)
+			return attr;
+		else
+		{
+			for (LAttribute* attr_override : attr->overrides())
+				if (attr_override->tag() == attr_tag)
+					return attr_override;
+		}
+	}
+
+	return nullptr;
 }
 
 QList<LThemeable*> LApplication::child_themeables(Qt::FindChildOptions options)
@@ -210,14 +227,9 @@ bool LApplication::update_available()
 
 bool LApplication::update_on_request()
 {
-	LUpdateDialog* update_dialog = new LUpdateDialog(m_version->to_string(), *m_latest_version);
+	m_update_dialog->show();
 
-	if (m_active_theme)
-		update_dialog->apply_theme(*m_active_theme);
-
-	update_dialog->show();
-
-	if (update_dialog->exec())
+	if (m_update_dialog->exec())
 	{
 		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/releases");
 
@@ -303,8 +315,7 @@ LAttribute* LApplication::primary() const
 
 void LApplication::reapply_theme()
 {
-	for (LThemeable* themeable : m_child_themeables)
-		themeable->apply_theme(*m_active_theme);
+	apply_theme(*m_active_theme);
 }
 
 void LApplication::save_theme(LTheme& theme)

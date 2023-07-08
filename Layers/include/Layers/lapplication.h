@@ -128,6 +128,8 @@ public:
 	*/
 	void apply_theme(LTheme& theme);
 
+	LAttribute* attribute(const QString& attr_tag);
+
 	/*!
 		Returns a list of child themeables.
 
@@ -228,7 +230,13 @@ private:
 	void init_themes();
 	void init_latest_version_tag();
 
+	LAttribute* m_foreground{ new LAttribute("Foreground", QColor("#e3e3e3"), this) };
+
 	LAttribute* m_primary{ new LAttribute("Primary", QColor("#36393f"), this)};
+
+	LAttribute* m_secondary{ new LAttribute("Secondary", QColor("#2f3136"), this) };
+
+	LAttribute* m_tertiary{ new LAttribute("Tertiary", QColor("#25272b"), this) };
 
 	QList<LThemeable*> m_child_themeables;
 
