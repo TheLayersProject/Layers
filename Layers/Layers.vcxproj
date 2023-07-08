@@ -19,21 +19,17 @@
     <ClCompile Include="src\lcolor.cpp" />
     <ClCompile Include="src\lcolorcontrol.cpp" />
     <ClCompile Include="src\lcolordialog.cpp" />
-    <ClCompile Include="src\lcoloreditor.cpp" />
     <ClCompile Include="src\lcolorplane.cpp" />
     <ClCompile Include="src\lcombobox.cpp" />
     <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lcornerradiieditor.cpp" />
     <ClCompile Include="src\lcreatethemedialog.cpp" />
     <ClCompile Include="src\ldialog.cpp" />
     <ClCompile Include="src\ldownloader.cpp" />
     <ClCompile Include="src\lfillcontrol.cpp" />
     <ClCompile Include="src\lfilldialog.cpp" />
-    <ClCompile Include="src\lfilleditor.cpp" />
     <ClCompile Include="src\lgithubrepo.cpp" />
     <ClCompile Include="src\lgradientcontrol.cpp" />
     <ClCompile Include="src\lgradientdialog.cpp" />
-    <ClCompile Include="src\lgradienteditor.cpp" />
     <ClCompile Include="src\lgraphic.cpp" />
     <ClCompile Include="src\lgridlineitemdelegate.cpp" />
     <ClCompile Include="src\lheaderview.cpp" />
@@ -45,7 +41,6 @@
     <ClCompile Include="src\lmenubar.cpp" />
     <ClCompile Include="src\lminislider.cpp" />
     <ClCompile Include="src\lnavigator.cpp" />
-    <ClCompile Include="src\lnumbereditor.cpp" />
     <ClCompile Include="src\lpaths.cpp" />
     <ClCompile Include="src\lradiobutton.cpp" />
     <ClCompile Include="src\lradiobuttonpool.cpp" />
@@ -136,7 +131,6 @@
     <QtMoc Include="include\Layers\lscrollarea.h" />
     <QtMoc Include="include\Layers\lradiobuttonpool.h" />
     <QtMoc Include="include\Layers\lradiobutton.h" />
-    <QtMoc Include="include\Layers\lnumbereditor.h" />
     <QtMoc Include="include\Layers\lnavigator.h" />
     <QtMoc Include="include\Layers\lminislider.h" />
     <QtMoc Include="include\Layers\lmenubar.h" />
@@ -145,20 +139,16 @@
     <QtMoc Include="include\Layers\llabel.h" />
     <QtMoc Include="include\Layers\lheaderview.h" />
     <QtMoc Include="include\Layers\lgridlineitemdelegate.h" />
-    <QtMoc Include="include\Layers\lgradienteditor.h" />
     <QtMoc Include="include\Layers\lgradientdialog.h" />
     <QtMoc Include="include\Layers\lgradientcontrol.h" />
-    <QtMoc Include="include\Layers\lfilleditor.h" />
     <QtMoc Include="include\Layers\lfilldialog.h" />
     <QtMoc Include="include\Layers\lfillcontrol.h" />
     <QtMoc Include="include\Layers\ldownloader.h" />
     <QtMoc Include="include\Layers\ldialog.h" />
     <QtMoc Include="include\Layers\lcreatethemedialog.h" />
-    <QtMoc Include="include\Layers\lcornerradiieditor.h" />
     <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />
     <QtMoc Include="include\Layers\lcombobox.h" />
     <QtMoc Include="include\Layers\lcolorplane.h" />
-    <QtMoc Include="include\Layers\lcoloreditor.h" />
     <QtMoc Include="include\Layers\lcolordialog.h" />
     <QtMoc Include="include\Layers\lcolorcontrol.h" />
   </ItemGroup>
@@ -172,7 +162,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C3974001-260F-4BED-8E06-123547376B01}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>

@@ -251,9 +251,6 @@
     <QtMoc Include="include\Layers\lcomboboxitemdelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="include\Layers\lcornerradiieditor.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="include\Layers\lcreatethemedialog.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -267,9 +264,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lfilldialog.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\Layers\lfilleditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lgradientcontrol.h">
@@ -303,9 +297,6 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lnavigator.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\Layers\lnumbereditor.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="include\Layers\lradiobutton.h">
@@ -425,6 +416,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\layers_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lcornerradiieditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lfilleditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lnumbereditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

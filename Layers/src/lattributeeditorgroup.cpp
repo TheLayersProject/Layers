@@ -12,7 +12,7 @@ LAttributeEditorGroup::LAttributeEditorGroup(const QString& name, QWidget* paren
 
 	m_label->setText(name);
 	m_label->set_name("Label");
-	m_label->set_font_size(14);
+	m_label->set_font_size(12);
 
 	m_collapse_button->set_name("Collapse Button");
 
@@ -49,7 +49,7 @@ void LAttributeEditorGroup::set_collapsed(bool collapsed)
 	}
 	else
 	{
-		m_widgets_vbox->setContentsMargins(10, 0, 10, 10);
+		m_widgets_vbox->setContentsMargins(10, 0, 0, 10);
 
 		for (LAttributeEditor* attribute_editor : m_attribute_editors)
 			attribute_editor->show();
@@ -62,11 +62,11 @@ void LAttributeEditorGroup::init_layout()
 {
 	QHBoxLayout* top_hbox = new QHBoxLayout;
 
-	top_hbox->setContentsMargins(8, 0, 8, 0);
+	top_hbox->setContentsMargins(0, 0, 0, 0);
 	top_hbox->setSpacing(0);
 	//top_hbox->addStretch();
-	top_hbox->addWidget(m_label);
 	top_hbox->addWidget(m_collapse_button);
+	top_hbox->addWidget(m_label);
 	top_hbox->addStretch();
 
 	m_widgets_vbox->setContentsMargins(0, 0, 0, 0);

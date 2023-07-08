@@ -28,6 +28,11 @@ LButton* LTab::close_button() const
 	return m_close_button;
 }
 
+LLabel* LTab::icon_label() const
+{
+	return m_icon_label;
+}
+
 LStatePool* LTab::status_states() const
 {
 	return m_status_states;

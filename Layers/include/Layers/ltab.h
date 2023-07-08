@@ -44,6 +44,11 @@ public:
 	*/
 	LButton* close_button() const;
 
+	/*!
+		Returns a pointer to the tab's icon label.
+	*/
+	LLabel* icon_label() const;
+
 	LStatePool* status_states() const;
 
 	/*!

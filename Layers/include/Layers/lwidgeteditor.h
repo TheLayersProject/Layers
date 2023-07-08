@@ -4,11 +4,9 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lattributeeditor.h"
+#include "lattributeeditorgroup.h"
 #include "lbutton.h"
-#include "lcoloreditor.h"
-#include "lcornerradiieditor.h"
-#include "lfilleditor.h"
-#include "lnumbereditor.h"
 #include "lwidgetbuttongroup.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -30,23 +28,15 @@ private:
 
 	void add_widget_button_group(LWidgetButtonGroup* button_group);
 
-	LAttributeEditor* create_editor(LAttribute* attribute);
-
 	void init_attribute_editors();
 
 	void init_layout();
 
-	LAttributeEditorGroup* m_control_attribute_editor_group{
+	LAttributeEditor* m_control_attr_editor{
+		new LAttributeEditor(nullptr, this)};
+
+	LAttributeEditorGroup* m_control_attr_editor_group{
 		new LAttributeEditorGroup("", this)};
-
-	LCornerRadiiEditor* m_control_corner_radii_editor{
-		new LCornerRadiiEditor("", LAttributeMap(), this)};
-
-	LFillEditor* m_control_fill_editor{
-		new LFillEditor(new LAttribute("", QColor()), this) };
-
-	LNumberEditor* m_control_number_editor{
-		new LNumberEditor(new LAttribute("", QVariant::fromValue(0)), new QIntValidator, this) };
 
 	LWidgetButton* m_control_widget_button{
 		new LWidgetButton(LGraphic(":/images/exit.svg", QSize(20, 20)), "", this)};
@@ -64,8 +54,6 @@ private:
 
 	LLabel* m_attributes_label{ new LLabel("Attributes:") };
 	LLabel* m_widgets_label{ new LLabel("Widgets:") };
-
-	//QList<LAttributeEditor*> m_modifier_widgets;
 
 	LThemeable* m_themeable;
 };

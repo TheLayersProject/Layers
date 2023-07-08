@@ -10,7 +10,7 @@
 
 #include "lthemeeditor.h"
 
-using Layers::LAttributeEditor;
+//using Layers::LAttributeEditor;
 using Layers::LButton;
 using Layers::LWidgetEditor;
 using Layers::LLabel;
@@ -21,10 +21,8 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 {
 	setFixedWidth(300);
 
-	m_control_attribute_editor_group->hide();
-	m_control_corner_radii_editor->hide();
-	m_control_fill_editor->hide();
-	m_control_number_editor->hide();
+	m_control_attr_editor->hide();
+	m_control_attr_editor_group->hide();
 	m_control_widget_button->hide();
 	m_control_widget_button_group->hide();
 
@@ -42,7 +40,6 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 
 		QList<LWidgetButton*> button_widget_buttons = QList<LWidgetButton*>();
 		QList<LWidgetButton*> dialog_widget_buttons = QList<LWidgetButton*>();
-		QList<LWidgetButton*> editor_widget_buttons = QList<LWidgetButton*>();
 		QList<LWidgetButton*> label_widget_buttons = QList<LWidgetButton*>();
 		QList<LWidgetButton*> line_editor_widget_buttons = QList<LWidgetButton*>();
 		QList<LWidgetButton*> menu_widget_buttons = QList<LWidgetButton*>();
@@ -96,9 +93,6 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 				else if (dynamic_cast<LDialog*>(child_themeable))
 					dialog_widget_buttons.append(widget_button);
 
-				else if (dynamic_cast<LAttributeEditor*>(child_themeable))
-					editor_widget_buttons.append(widget_button);
-
 				else if (dynamic_cast<LLabel*>(child_themeable))
 					label_widget_buttons.append(widget_button);
 
@@ -128,11 +122,6 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 			organized_widgets[dialog_widget_buttons.first()->label_text()] = dialog_widget_buttons.first();
 		else if (!dialog_widget_buttons.isEmpty())
 			organized_widgets["Dialogs"] = new LWidgetButtonGroup("Dialogs", dialog_widget_buttons);
-
-		if (editor_widget_buttons.size() == 1)
-			organized_widgets[editor_widget_buttons.first()->label_text()] = editor_widget_buttons.first();
-		else if (!editor_widget_buttons.isEmpty())
-			organized_widgets["Editors"] = new LWidgetButtonGroup("Editors", editor_widget_buttons);
 
 		if (label_widget_buttons.size() == 1)
 			organized_widgets[label_widget_buttons.first()->label_text()] = label_widget_buttons.first();
@@ -170,7 +159,7 @@ LWidgetEditor::LWidgetEditor(LThemeable* themeable, LThemeEditor* parent_theme_e
 
 	init_layout();
 
-	if (!m_themeable->attributes().isEmpty())
+	if (!m_themeable->child_attributes().isEmpty())
 		init_attribute_editors();
 	else
 	{
@@ -185,29 +174,6 @@ LWidgetEditor::~LWidgetEditor()
 {
 	//for (LWidgetButton* widget_button : m_widget_buttons)
 	//	widget_button->deleteLater();
-}
-
-LAttributeEditor* LWidgetEditor::create_editor(LAttribute* attribute)
-{
-	LAttributeEditor* editor = nullptr;
-
-	if (QString(attribute->typeName()) == "double")
-	{
-		editor = new LNumberEditor(attribute, new QIntValidator(0, 30));
-		editor->entangle_with(m_control_number_editor);
-	}
-	else if (
-		// TODO: Decide how to differ between when to use a LFillControl or a LColorControl
-		// TEMP: For now, we will assume all use LFillControl
-		QString(attribute->typeName()) == "QColor" ||
-		QString(attribute->typeName()) == "QList<std::pair<double,QColor>>"
-		)
-	{
-		editor = new LFillEditor(attribute);
-		editor->entangle_with(m_control_fill_editor);
-	}
-
-	return editor;
 }
 
 void LWidgetEditor::add_widget_button(LWidgetButton* button)
@@ -231,34 +197,36 @@ LThemeable* LWidgetEditor::themeable() const
 
 void LWidgetEditor::init_attribute_editors()
 {
-	//// Handle groups
-	//for (LAttributeGroup* attr_group : m_themeable->attribute_data().attr_groups)
-	//{
-	//	if (LCornerRadiiAttributes* corner_radii = dynamic_cast<LCornerRadiiAttributes*>(attr_group))
-	//	{
-	//		LCornerRadiiEditor* corner_radii_editor = new LCornerRadiiEditor(corner_radii);
-	//		corner_radii_editor->entangle_with(m_control_corner_radii_editor);
+	QMap<QString, QWidget*> organized_widgets;
+	QMap<QString, LAttributeEditorGroup*> attr_editor_groups;
 
-	//		m_attributes_layout->addWidget(corner_radii_editor);
-	//	}
-	//	else
-	//	{
-	//		LAttributeEditorGroup* attr_editor_group = new LAttributeEditorGroup(attr_group);
-	//		attr_editor_group->entangle_with(m_control_attribute_editor_group);
+	for (const QString& group_name : m_themeable->attribute_group_names())
+	{
+		LAttributeEditorGroup* attr_editor_group =
+			new LAttributeEditorGroup(group_name);
 
-	//		for (LAttribute* group_attr : attr_group->attributes())
-	//			attr_editor_group->add_attribute_editor(create_editor(group_attr));
+		attr_editor_group->entangle_with(m_control_attr_editor);
+		attr_editor_groups[group_name] = attr_editor_group;
+		organized_widgets[group_name] = attr_editor_group;
+	}
 
-	//		m_attributes_layout->addWidget(attr_editor_group);
-	//	}
-	//}
+	for (LAttribute* attr : m_themeable->child_attributes())
+	{
+		LAttributeEditor* attr_editor = new LAttributeEditor(attr);
+		attr_editor->entangle_with(m_control_attr_editor);
 
-	//// Handled ungrouped
-	//for (LAttribute* attr : m_themeable->attribute_data().ungrouped_attrs)
-	//	m_attributes_layout->addWidget(create_editor(attr));
+		if (attr->name().contains("."))
+		{
+			QString group_name = attr->name().split(".").first();
 
-	for (LAttribute* attr : m_themeable->attributes())
-		m_attributes_layout->addWidget(create_editor(attr));
+			attr_editor_groups[group_name]->add_attribute_editor(attr_editor);
+		}
+		else
+			organized_widgets[attr->name()] = attr_editor;
+	}
+
+	for (QWidget* widget : organized_widgets)
+		m_attributes_layout->addWidget(widget);
 }
 
 void LWidgetEditor::init_layout()

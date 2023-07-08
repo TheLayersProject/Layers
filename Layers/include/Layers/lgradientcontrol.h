@@ -28,6 +28,8 @@ public:
 	*/
 	LGradientControl(QWidget* parent = nullptr);
 
+	~LGradientControl();
+
 protected:
 	bool eventFilter(QObject* object, QEvent* event);
 
