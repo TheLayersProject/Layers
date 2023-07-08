@@ -26,7 +26,7 @@ void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
 
 	state_pool->connect(state_pool, &LStatePool::changed, [this]
 		{
-			for (LAttribute* attr : attributes())
+			for (LAttribute* attr : child_attributes())
 				attr->changed();
 		});
 
@@ -41,17 +41,25 @@ void LThemeable::apply_theme(LTheme& theme)
 			"You must apply a name to the widget first.";
 	else
 	{
-		for (LThemeable* child_themeable : child_themeables())
-			if (child_themeable->m_name && child_themeable->m_tag_prefixes_assigned)
-				child_themeable->apply_theme(theme);
-
 		if (theme.contains_attributes_for_tag(tag()))
 		{
 			LAttributeMap& theme_attrs = theme[tag()];
 
-			for (LAttribute* attr : attributes())
+			for (LAttribute* attr : child_attributes())
 				if (theme_attrs.contains(attr->name()))
 					attr->copy(*theme_attrs[attr->name()]);
+		}
+
+		for (LThemeable* child_t : child_themeables())
+			if (child_t->m_name && child_t->m_tag_prefixes_assigned)
+				child_t->apply_theme(theme);
+
+		for (LAttribute* attr : child_attributes())
+		{
+			attr->resolve_uplink();
+
+			for (LAttribute* override_attr : attr->overrides())
+				override_attr->resolve_uplink();
 		}
 	}
 }
@@ -70,75 +78,44 @@ void LThemeable::assign_tag_prefixes(QStringList prefixes)
 	}
 }
 
-LAttribute* LThemeable::attribute(const QString& link)
+QStringList LThemeable::attribute_group_names()
 {
-	QStringList link_parts = link.split('.');
+	QStringList attribute_group_names;
 
-	QString search_tag = link_parts.takeFirst();
-	QString attr_id = link_parts.join(".");
+	for (LAttribute* attr : child_attributes())
+		if (attr->name().contains("."))
+		{
+			QString group_name = attr->name().split(".").first();
 
-	return attribute(search_tag, attr_id);
+			if (!attribute_group_names.contains(group_name))
+				attribute_group_names.append(attr->name().split(".").first());
+		}
+
+	return attribute_group_names;
 }
 
-LAttribute* LThemeable::attribute(const QString& search_tag, const QString& attr_id)
+QList<LAttribute*> LThemeable::child_attributes(Qt::FindChildOptions options)
 {
-	//if (tag() == search_tag)
-	//{
-	//	QStringList attr_parts = attr_id.split('.');
-
-	//	if (attr_parts.size() > 1)
-	//	{
-	//		for (LAttributeGroup* attr_group : m_attr_data.attr_groups)
-	//		{
-	//			if (attr_group->name() == attr_parts[0])
-	//			{
-	//				for (LAttribute* group_attr : (*attr_group))
-	//					if (group_attr->name() == attr_parts[1])
-	//						return group_attr;
-	//			}
-	//		}
-	//	}
-	//	else
-	//	{
-	//		for (LAttribute* attr : m_attr_data.ungrouped_attrs)
-	//			if (attr->name() == attr_parts[0])
-	//				return attr;
-	//	}
-
-	//	// TODO: Add support for override attributes
-	//}
-	//else
-	//{
-	//	for (LThemeable* child_themeable : child_themeables())
-	//	{
-	//		if (search_tag.contains(child_themeable->tag()))
-	//			return child_themeable->attribute(search_tag, attr_id);
-	//	}
-	//}
-
-	return nullptr;
-}
-
-QList<LAttribute*> LThemeable::attributes()
-{
-	QList<LAttribute*> attributes;
+	QList<LAttribute*> child_attributes;
 
 	if (QObject* object = dynamic_cast<QObject*>(this))
 	{
-		QList<QObject*> child_objects =
-			object->findChildren<QObject*>(Qt::FindDirectChildrenOnly);
+		child_attributes.append(
+			object->findChildren<LAttribute*>(Qt::FindDirectChildrenOnly));
 
-		for (QObject* child_object : child_objects)
-			if (LAttribute* attr = dynamic_cast<LAttribute*>(child_object))
-				attributes.append(attr);
+		if (options == Qt::FindChildrenRecursively)
+		{
+			for (LThemeable* child_themeable : child_themeables())
+				child_attributes.append(child_themeable->child_attributes(options));
+		}
 	}
 
-	return attributes;
+	return child_attributes;
 }
 
 QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 {
-	QList<LThemeable*> child_themeables = QList<LThemeable*>();
+	QList<LThemeable*> child_themeables;
 
 	if (QObject* object = dynamic_cast<QObject*>(this))
 	{

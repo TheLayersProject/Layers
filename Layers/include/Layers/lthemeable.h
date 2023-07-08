@@ -176,11 +176,10 @@ public:
 	*/
 	void assign_tag_prefixes(QStringList prefixes = QStringList());
 
-	LAttribute* attribute(const QString& link);
+	QStringList attribute_group_names();
 
-	LAttribute* attribute(const QString& search_tag, const QString& attr_id);
-
-	QList<LAttribute*> attributes();
+	QList<LAttribute*> child_attributes(
+		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
 	/*!
 		Returns a list of child themeables.
@@ -315,11 +314,11 @@ inline void LThemeable::entangle_with(T* t, bool entangle_children)
 {
 	if (typeid(*this) == typeid(*t))
 	{
-		for (LAttribute* attr : attributes())
-			for (LAttribute* t_attr : t->attributes())
+		for (LAttribute* attr : child_attributes())
+			for (LAttribute* t_attr : t->child_attributes())
 				if (attr->name() == t_attr->name())
 				{
-					attr->establish_link(*t_attr);
+					attr->set_uplink_attribute(t_attr);
 					break;
 				}
 
