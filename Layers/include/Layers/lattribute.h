@@ -12,6 +12,7 @@ LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
 
+using LAttributeList = QList<LAttribute*>;
 using LAttributeMap = QMap<QString, LAttribute*>;
 
 /*!
@@ -136,6 +137,23 @@ public:
 	*/
 	void copy(const LAttribute& attribute);
 
+	LAttributeList downlink_attributes() const;
+
+	/*!
+		Returns true if this attribute's data is multi-valued. Otherwise,
+		returns false.
+	*/
+	bool has_overrides() const;
+
+	/*!
+		Returns the name of the attribute.
+	*/
+	QString name() const;
+
+	LAttributeMap overrides() const;
+
+	void resolve_uplink();
+
 	/*!
 		Forces this attribute to point to the data of *attribute*.
 
@@ -151,20 +169,7 @@ public:
 		linked, this function gets called again so this attribute can get a
 		pointer to the new data.
 	*/
-	void establish_link(LAttribute& attr);
-
-	void set_link_new(const QString& link);
-
-	/*!
-		Returns true if this attribute's data is multi-valued. Otherwise,
-		returns false.
-	*/
-	bool has_overrides() const;
-
-	/*!
-		Returns the name of the attribute.
-	*/
-	QString name();
+	void set_uplink_attribute(LAttribute* uplink_attr);
 
 	/*!
 		Sets the data's value.
@@ -174,6 +179,8 @@ public:
 		multi-valued, then the value of the active state is set.
 	*/
 	void set_value(QVariant value);
+
+	QString tag() const;
 
 	/*!
 		Returns attribute represented as a QJsonObject.
@@ -187,14 +194,18 @@ public:
 	*/
 	const char* typeName() const;
 
+	LAttribute* uplink_attribute() const;
+
 private:
-	void establish_link_connection();
+	void establish_uplink_connection();
 
-	QMetaObject::Connection m_link_connection;
+	QMetaObject::Connection m_uplink_connection;
 
-	LAttribute* m_linked_attr{ nullptr };
+	LAttributeList m_downlink_attributes;
 
-	QString m_link;
+	LAttribute* m_uplink_attr{ nullptr };
+
+	QString m_uplink_tag;
 
 	QString m_name;
 
@@ -221,8 +232,8 @@ inline T LAttribute::as(const QStringList& states) const
 		// return the value of this
 	}
 
-	if (m_linked_attr)
-		return m_linked_attr->as<T>(states);
+	if (m_uplink_attr)
+		return m_uplink_attr->as<T>(states);
 
 	return m_value.value<T>();
 }
