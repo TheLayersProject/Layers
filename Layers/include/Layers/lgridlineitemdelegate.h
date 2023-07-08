@@ -58,10 +58,10 @@ public:
 
 private:
 	LAttribute* m_grid_fill{
-		new LAttribute("grid.fill", QColor("#808080"), this) };
+		new LAttribute("Grid.Fill", QColor("#808080"), this) };
 
 	LAttribute* m_grid_thickness{
-		new LAttribute("grid.thickness", 3.0, this) };
+		new LAttribute("Grid.Thickness", 3.0, this) };
 };
 LAYERS_NAMESPACE_END
 

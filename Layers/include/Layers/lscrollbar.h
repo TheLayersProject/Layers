@@ -89,16 +89,16 @@ private:
 		new LAttribute("background_color", QColor(Qt::gray), this) };
 
 	LAttribute* m_corner_radii_bottom_left{
-		new LAttribute("corner_radii.bottom_left", 0.0, this) };
+		new LAttribute("Corner Radii.Bottom Left", 0.0, this) };
 
 	LAttribute* m_corner_radii_bottom_right{
-		new LAttribute("corner_radii.bottom_right", 0.0, this) };
+		new LAttribute("Corner Radii.Bottom Right", 0.0, this) };
 
 	LAttribute* m_corner_radii_top_left{
-		new LAttribute("corner_radii.top_left", 0.0, this) };
+		new LAttribute("Corner Radii.Top Left", 0.0, this) };
 
 	LAttribute* m_corner_radii_top_right{
-		new LAttribute("corner_radii.top_right", 0.0, this) };
+		new LAttribute("Corner Radii.Top Right", 0.0, this) };
 
 	LAttribute* m_handle_color{
 		new LAttribute("handle_color", QColor(Qt::white), this) };

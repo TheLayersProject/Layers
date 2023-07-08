@@ -42,7 +42,7 @@ private:
 		new LAttribute("selected_text_color", QColor(Qt::lightGray), this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("text_color", QColor(Qt::gray), this) };
+		new LAttribute("Text Color", QColor(Qt::gray), this) };
 };
 LAYERS_NAMESPACE_END
 

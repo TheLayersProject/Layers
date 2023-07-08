@@ -98,7 +98,7 @@ private:
 	void init_attributes();
 
 	LAttribute* m_left_padding{ new LAttribute("left_padding", QVariant::fromValue(3.0)) };
-	LAttribute* m_text_color{ new LAttribute("text_color", QColor(Qt::black), this) };
+	LAttribute* m_text_color{ new LAttribute("Text Color", QColor(Qt::black), this) };
 	LAttribute* m_text{ new LAttribute("text", QString("")) };
 
 	QString* m_default_value{ nullptr };

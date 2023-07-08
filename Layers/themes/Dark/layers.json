@@ -1,6 +1,6 @@
 {
   "Color Dialog": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -8,180 +8,180 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
-      "value": "#36393f"
+    "Fill": {
+      "linked_to": "App.Primary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Color Dialog/Apply Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Color Dialog/Apply Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#000000"
     }
   },
   "Color Dialog/Color Name Line Editor": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
-      "value": "#202225"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 8
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 7
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 8
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Color Unit Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Hue Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Hue Line Editor": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
-      "value": "#202225"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 8
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 7
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 8
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Hue Radio Button": {
-    "active_dot_fill": {
-      "value": "#161c22"
+    "Active Dot Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "border.fill": {
-      "value": "#768199"
+    "Border.Fill": {
+      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "overrides": {
         "Active": {
           "value": 0
@@ -189,77 +189,77 @@
       },
       "value": 3
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Active": {
-          "value": "#9daccc"
+          "linked_to": "App.Foreground"
         }
       },
-      "value": "#313640"
+      "linked_to": "Color Dialog.Fill"
     }
   },
   "Color Dialog/Hue Unit Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Saturation Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Saturation Line Editor": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
-      "value": "#202225"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 8
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 7
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 8
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Saturation Radio Button": {
-    "active_dot_fill": {
-      "value": "#161c22"
+    "Active Dot Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "border.fill": {
-      "value": "#768199"
+    "Border.Fill": {
+      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "overrides": {
         "Active": {
           "value": 0
@@ -267,96 +267,96 @@
       },
       "value": 3
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Active": {
-          "value": "#9daccc"
+          "linked_to": "App.Foreground"
         }
       },
-      "value": "#313640"
+      "linked_to": "Color Dialog.Fill"
     }
   },
   "Color Dialog/Saturation Unit Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Titlebar": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
-      "value": "#202225"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Color Dialog/Titlebar/Exit Button": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog/Titlebar.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Color Dialog/Titlebar/Exit Button/Graphic": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog/Titlebar/Exit Button.Fill"
     }
   },
   "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -370,67 +370,67 @@
     }
   },
   "Color Dialog/Titlebar/Title Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog/Titlebar.Fill"
     },
-    "text_color": {
-      "value": "#c0c0c0"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Value Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Value Line Editor": {
-    "border.fill": {
-      "value": "#a0a0a4"
+    "Border.Fill": {
+      "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
-      "value": "#202225"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 8
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 7
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 8
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Color Dialog/Value Radio Button": {
-    "active_dot_fill": {
-      "value": "#161c22"
+    "Active Dot Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "border.fill": {
-      "value": "#768199"
+    "Border.Fill": {
+      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "overrides": {
         "Active": {
           "value": 0
@@ -438,25 +438,25 @@
       },
       "value": 3
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Active": {
-          "value": "#9daccc"
+          "linked_to": "App.Foreground"
         }
       },
-      "value": "#313640"
+      "linked_to": "Color Dialog.Fill"
     }
   },
   "Color Dialog/Value Unit Label": {
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Color Dialog.Fill"
     },
-    "text_color": {
-      "value": "#b9bbbe"
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Create Theme Dialog": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -464,118 +464,118 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#36393f"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Create Theme Dialog/Create Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#61ad50"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 6
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 4
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 4
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 6
     }
   },
   "Create Theme Dialog/Create Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#f8f8f8"
     }
   },
   "Create Theme Dialog/Name Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Create Theme Dialog/Start As Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Create Theme Dialog/Start Theme Combobox": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
     "corner_radii": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#1e2023"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Create Theme Dialog/Start Theme Combobox/Items": {
-    "corner_radius": {
+    "Corner Radius": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Selected": {
           "value": "#2b2e32"
@@ -583,120 +583,120 @@
       },
       "value": "#16181a"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Create Theme Dialog/Theme Name Line Editor": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#1e2023"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#2e2e2e"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     },
-    "text_color": {
+    "Text Color": {
       "value": "#6a6a6a"
     }
   },
   "Create Theme Dialog/Titlebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
+    "Fill": {
       "value": "#202225"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Create Theme Dialog/Titlebar/Exit Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Create Theme Dialog/Titlebar/Exit Button/Graphic": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     }
   },
@@ -711,15 +711,15 @@
     }
   },
   "Create Theme Dialog/Titlebar/Title Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#c0c0c0"
     }
   },
   "Gradient Dialog": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -727,152 +727,152 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#36393f"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Gradient Dialog/Apply Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#61ad50"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 6
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 4
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 4
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 6
     }
   },
   "Gradient Dialog/Apply Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#f8f8f8"
     }
   },
   "Gradient Dialog/Titlebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
+    "Fill": {
       "value": "#202225"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Gradient Dialog/Titlebar/Exit Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Gradient Dialog/Titlebar/Exit Button/Graphic": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     }
   },
@@ -887,15 +887,15 @@
     }
   },
   "Gradient Dialog/Titlebar/Title Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#c0c0c0"
     }
   },
   "Main Window": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -903,162 +903,162 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 15
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
-      "value": "#36393f"
+    "Fill": {
+      "linked_to": "App.Primary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Separator": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 6
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 6
     },
-    "fill": {
-      "value": "#25272b"
+    "Fill": {
+      "linked_to": "App.Tertiary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Settings Menu": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Main Window.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Settings Menu/Sidebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#2f3136"
+    "Fill": {
+      "linked_to": "App.Secondary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Settings Menu/Sidebar/Themes Settings Tab": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Selected": {
           "value": "#42464d"
@@ -1066,16 +1066,16 @@
       },
       "value": "#2f3136"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 7
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 7
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 7
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     }
   },
@@ -1084,92 +1084,92 @@
     "common_color": {
       "overrides": {
         "Selected": {
-          "value": "#fbfbfc"
+          "linked_to": "App.Foreground"
         }
       },
       "value": "#96989d"
     }
   },
   "Main Window/Settings Menu/Sidebar/Themes Settings Tab/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "overrides": {
         "Selected": {
-          "value": "#fbfbfc"
+          "linked_to": "App.Foreground"
         }
       },
       "value": "#96989d"
     }
   },
   "Main Window/Settings Menu/Themes Widget": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Main Window/Settings Menu.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Settings Menu/Themes Widget/Customize Theme Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -1185,37 +1185,37 @@
     }
   },
   "Main Window/Settings Menu/Themes Widget/Delete Theme Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -1231,37 +1231,37 @@
     }
   },
   "Main Window/Settings Menu/Themes Widget/New Theme Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -1277,62 +1277,62 @@
     }
   },
   "Main Window/Settings Menu/Themes Widget/Separators": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#6a6a6a"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Combobox": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
     "corner_radii": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#1e2023"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Combobox/Items": {
-    "corner_radius": {
+    "Corner Radius": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Selected": {
           "value": "#2b2e32"
@@ -1340,42 +1340,42 @@
       },
       "value": "#16181a"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Info Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -1386,80 +1386,80 @@
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Main Window/Theme Editor": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Main Window.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Preview Scroll Area": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -1467,31 +1467,31 @@
     "background_color": {
       "value": "#36393f"
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
     "handle_color": {
       "value": "#202225"
     },
-    "handle_corner_radii.bottom_left": {
+    "handle_Corner Radii.Bottom Left": {
       "value": 5
     },
-    "handle_corner_radii.bottom_right": {
+    "handle_Corner Radii.Bottom Right": {
       "value": 5
     },
-    "handle_corner_radii.top_left": {
+    "handle_Corner Radii.Top Left": {
       "value": 5
     },
-    "handle_corner_radii.top_right": {
+    "handle_Corner Radii.Top Right": {
       "value": 5
     }
   },
@@ -1499,31 +1499,31 @@
     "background_color": {
       "value": "#36393f"
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
     "handle_color": {
       "value": "#202225"
     },
-    "handle_corner_radii.bottom_left": {
+    "handle_Corner Radii.Bottom Left": {
       "value": 5
     },
-    "handle_corner_radii.bottom_right": {
+    "handle_Corner Radii.Bottom Right": {
       "value": 5
     },
-    "handle_corner_radii.top_left": {
+    "handle_Corner Radii.Top Left": {
       "value": 5
     },
-    "handle_corner_radii.top_right": {
+    "handle_Corner Radii.Top Right": {
       "value": 5
     }
   },
@@ -1532,31 +1532,31 @@
     "background_color": {
       "value": "#a0a0a4"
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
     "handle_color": {
       "value": "#ffffff"
     },
-    "handle_corner_radii.bottom_left": {
+    "handle_Corner Radii.Bottom Left": {
       "value": 5
     },
-    "handle_corner_radii.bottom_right": {
+    "handle_Corner Radii.Bottom Right": {
       "value": 5
     },
-    "handle_corner_radii.top_left": {
+    "handle_Corner Radii.Top Left": {
       "value": 5
     },
-    "handle_corner_radii.top_right": {
+    "handle_Corner Radii.Top Right": {
       "value": 5
     }
   },
@@ -1564,1113 +1564,751 @@
     "background_color": {
       "value": "#2f3136"
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
     "handle_color": {
       "value": "#202225"
     },
-    "handle_corner_radii.bottom_left": {
+    "handle_Corner Radii.Bottom Left": {
       "value": 5
     },
-    "handle_corner_radii.bottom_right": {
+    "handle_Corner Radii.Bottom Right": {
       "value": 5
     },
-    "handle_corner_radii.top_left": {
+    "handle_Corner Radii.Top Left": {
       "value": 5
     },
-    "handle_corner_radii.top_right": {
+    "handle_Corner Radii.Top Right": {
       "value": 5
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#2f3136"
+    "Fill": {
+      "linked_to": "App.Secondary"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 10
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 10
+    },
+    "Corner Radii.Top Right": {
+      "value": 10
+    },
+    "Fill": {
+      "value": "#1e2023"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Corner Radii.Bottom Right"
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Corner Radii.Top Right"
+    },
+    "Fill": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic After": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "overrides": {
+        "Active": {
+          "linked_to": "App.Tertiary"
+        }
+      },
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button": {
+    "Border.Fill": {
+      "value": "#a0a0a4"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button/Graphic": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e95454"
+        }
+      },
+      "value": "#5f5f5f"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Icon": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Icon/Svg": {
+    "common_color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Text Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control": {
+    "Border.Fill": {
+      "value": "#d6d6d6"
+    },
+    "Border.Thickness": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Margins.Bottom": {
+      "value": 8
+    },
+    "Margins.Left": {
+      "value": 8
+    },
+    "Margins.Right": {
+      "value": 8
+    },
+    "Margins.Top": {
+      "value": 8
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 4
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 4
+    },
+    "Corner Radii.Top Left": {
+      "value": 4
+    },
+    "Corner Radii.Top Right": {
+      "value": 4
+    },
+    "Fill": {
+      "value": "#404040"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Color Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Fill Type Toggle": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 4
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 4
+    },
+    "Corner Radii.Top Left": {
+      "value": 4
+    },
+    "Corner Radii.Top Right": {
+      "value": 4
+    },
+    "Fill": {
+      "value": "#6fc65b"
+    },
+    "Margins.Bottom": {
+      "value": 10
+    },
+    "Margins.Left": {
+      "value": 10
+    },
+    "Margins.Right": {
+      "value": 10
+    },
+    "Margins.Top": {
+      "value": 10
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Fill Type Toggle/Square": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Gradient Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 3
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 3
+    },
+    "Corner Radii.Top Left": {
+      "value": 3
+    },
+    "Corner Radii.Top Right": {
+      "value": 3
+    },
+    "Fill": {
+      "linked_to": "App.Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget/Icon Labels": {},
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget/Icon Labels/Svg": {
+    "common_color": {
+      "value": "#96989d"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Line Editor": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "value": "#2e2e2e"
+    },
+    "Margins.Bottom": {
+      "value": 5
+    },
+    "Margins.Left": {
+      "value": 5
+    },
+    "Margins.Right": {
+      "value": 5
+    },
+    "Margins.Top": {
+      "value": 5
+    },
+    "Text Color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Links Widget": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 7
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 7
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "App.Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "value": "#e1e1e1"
+    },
+    "Margins.Bottom": {
+      "value": 5
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 5
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider/Bar": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#7c7c7c"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 5
+    },
+    "Margins.Right": {
+      "value": 5
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider/Handle": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#2e2e2e"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Attributes Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 10
-    },
-    "corner_radii.bottom_right": {
-      "value": 10
-    },
-    "corner_radii.top_left": {
-      "value": 10
-    },
-    "corner_radii.top_right": {
-      "value": 10
-    },
-    "fill": {
-      "value": "#1a888888"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Color Editor/Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#fbfbfc"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 10
-    },
-    "corner_radii.bottom_right": {
-      "value": 10
-    },
-    "corner_radii.top_left": {
-      "value": 10
-    },
-    "corner_radii.top_right": {
-      "value": 10
-    },
-    "fill": {
-      "value": "#1a888888"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 0
-    },
-    "corner_radii.bottom_right": {
-      "value": 0
-    },
-    "corner_radii.top_left": {
-      "value": 0
-    },
-    "corner_radii.top_right": {
-      "value": 0
-    },
-    "fill": {
-      "value": "#ffffff"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic After/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Collapse Button/Graphic/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor": {
-    "border.fill": {
-      "value": "#a0a0a4"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 10
-    },
-    "corner_radii.bottom_right": {
-      "value": 10
-    },
-    "corner_radii.top_left": {
-      "value": 10
-    },
-    "corner_radii.top_right": {
-      "value": 10
-    },
-    "fill": {
-      "value": "#1a000000"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Line Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 5
-    },
-    "text_color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#e1e1e1"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Bar": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#7c7c7c"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BL Slider/Handle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Line Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 5
-    },
-    "text_color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#e1e1e1"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Bar": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#7c7c7c"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/BR Slider/Handle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/Example Widget": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "fill": {
-      "value": "#202225"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Line Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 5
-    },
-    "text_color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#e1e1e1"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Bar": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#7c7c7c"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TL Slider/Handle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Line Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 5
-    },
-    "text_color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#e1e1e1"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Bar": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#7c7c7c"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Editor/TR Slider/Handle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Corner Radii Editor/Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#fbfbfc"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 10
-    },
-    "corner_radii.bottom_right": {
-      "value": 10
-    },
-    "corner_radii.top_left": {
-      "value": 10
-    },
-    "corner_radii.top_right": {
-      "value": 10
-    },
-    "fill": {
-      "value": "#1a888888"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control": {
-    "border.fill": {
-      "value": "#d6d6d6"
-    },
-    "border.thickness": {
-      "value": 2
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "margins.bottom": {
-      "value": 8
-    },
-    "margins.left": {
-      "value": 8
-    },
-    "margins.right": {
-      "value": 8
-    },
-    "margins.top": {
-      "value": 8
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 4
-    },
-    "corner_radii.bottom_right": {
-      "value": 4
-    },
-    "corner_radii.top_left": {
-      "value": 4
-    },
-    "corner_radii.top_right": {
-      "value": 4
-    },
-    "fill": {
-      "value": "#404040"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Color Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 4
-    },
-    "corner_radii.bottom_right": {
-      "value": 4
-    },
-    "corner_radii.top_left": {
-      "value": 4
-    },
-    "corner_radii.top_right": {
-      "value": 4
-    },
-    "fill": {
-      "value": "#6fc65b"
-    },
-    "margins.bottom": {
-      "value": 10
-    },
-    "margins.left": {
-      "value": 10
-    },
-    "margins.right": {
-      "value": 10
-    },
-    "margins.top": {
-      "value": 10
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Fill Type Toggle/Square": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#ffffff"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Fill Control/Dialog/Gradient Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Fill Editor/Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#fbfbfc"
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
-      "value": "#1a888888"
+    "Fill": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -2697,301 +2335,115 @@
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#fbfbfc"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 10
-    },
-    "corner_radii.bottom_right": {
-      "value": 10
-    },
-    "corner_radii.top_left": {
-      "value": 10
-    },
-    "corner_radii.top_right": {
-      "value": 10
-    },
-    "fill": {
-      "value": "#1a888888"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Label": {
-    "fill": {
-      "value": "#ffffff"
-    },
-    "text_color": {
-      "value": "#fbfbfc"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Line Editor": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 5
-    },
-    "text_color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 5
-    },
-    "corner_radii.bottom_right": {
-      "value": 5
-    },
-    "corner_radii.top_left": {
-      "value": 5
-    },
-    "corner_radii.top_right": {
-      "value": 5
-    },
-    "fill": {
-      "value": "#e1e1e1"
-    },
-    "margins.bottom": {
-      "value": 5
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Bar": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#7c7c7c"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 5
-    },
-    "margins.right": {
-      "value": 5
-    },
-    "margins.top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Number Editor/Slider/Handle": {
-    "border.fill": {
-      "value": "#000000"
-    },
-    "border.thickness": {
-      "value": 0
-    },
-    "corner_radii.bottom_left": {
-      "value": 2
-    },
-    "corner_radii.bottom_right": {
-      "value": 2
-    },
-    "corner_radii.top_left": {
-      "value": 2
-    },
-    "corner_radii.top_right": {
-      "value": 2
-    },
-    "fill": {
-      "value": "#2e2e2e"
-    },
-    "margins.bottom": {
-      "value": 0
-    },
-    "margins.left": {
-      "value": 0
-    },
-    "margins.right": {
-      "value": 0
-    },
-    "margins.top": {
-      "value": 0
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#1a888888"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#1a888888"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3018,10 +2470,10 @@
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#96989d"
     }
   },
@@ -3037,10 +2489,10 @@
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "overrides": {
         "Selected": {
           "value": "#fbfbfc"
@@ -3050,88 +2502,88 @@
     }
   },
   "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#e1e1e1"
     }
   },
   "Main Window/Theme Editor/Topbar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#2f3136"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Topbar/Apply Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#61ad50"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 7
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 7
     }
   },
   "Main Window/Theme Editor/Topbar/Apply Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#f8f8f8"
     }
   },
@@ -3143,72 +2595,72 @@
     }
   },
   "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#959595"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#e1e1e1"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 10
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 10
     }
   },
@@ -3219,45 +2671,45 @@
     }
   },
   "Main Window/Theme Editor/Topbar/Navigator/Text Buttons": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Theme Editor/Topbar/Navigator/Text Buttons/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "overrides": {
         "Selected": {
           "value": "#fbfbfc"
@@ -3267,72 +2719,72 @@
     }
   },
   "Main Window/Titlebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 6
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 6
     },
-    "fill": {
-      "value": "#ffffff"
+    "Fill": {
+      "linked_to": "Main Window.Fill"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Titlebar/Exit Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3348,37 +2800,37 @@
     }
   },
   "Main Window/Titlebar/Maximize Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3394,60 +2846,60 @@
     }
   },
   "Main Window/Titlebar/Menu Tab Bar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Titlebar/Menu Tab Bar/Tabs": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "overrides": {
         "Active": {
           "value": "#25272b"
@@ -3455,51 +2907,51 @@
       },
       "value": "#36393f"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Main Window/Titlebar/Menu Tab Bar/Tabs/Close Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3521,45 +2973,45 @@
     }
   },
   "Main Window/Titlebar/Menu Tab Bar/Tabs/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#e3e3e3"
     }
   },
   "Main Window/Titlebar/Minimize Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3575,37 +3027,37 @@
     }
   },
   "Main Window/Titlebar/Settings Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
@@ -3621,7 +3073,7 @@
     }
   },
   "Theme Compatibility Caution Dialog": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -3629,87 +3081,87 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#36393f"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Theme Compatibility Caution Dialog/Message Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Theme Compatibility Caution Dialog/Table Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#1e2023"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "item_fill": {
+    "Item Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells": {
-    "grid.fill": {
+    "Grid.Fill": {
       "value": "#25272b"
     },
-    "grid.thickness": {
+    "Grid.Thickness": {
       "value": 3
     }
   },
@@ -3719,103 +3171,103 @@
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 2
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 2
     },
-    "fill": {
+    "Fill": {
       "value": "#25272b"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#b9bbbe"
     }
   },
   "Theme Compatibility Caution Dialog/Titlebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
+    "Fill": {
       "value": "#25272b"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Theme Compatibility Caution Dialog/Titlebar/Exit Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#a0a0a4"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Theme Compatibility Caution Dialog/Titlebar/Exit Button/Graphic": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     }
   },
@@ -3830,15 +3282,15 @@
     }
   },
   "Theme Compatibility Caution Dialog/Titlebar/Title Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#e3e3e3"
     }
   },
   "Update Dialog": {
-    "border.fill": {
+    "Border.Fill": {
       "value": {
         "gradient": [
           "0:#202225",
@@ -3846,160 +3298,160 @@
         ]
       }
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 3
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 10
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 10
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 10
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 10
     },
-    "fill": {
+    "Fill": {
       "value": "#36393f"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Update Dialog/Message Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#c0c0c0"
     }
   },
   "Update Dialog/Remind Me Later Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#6a6a6a"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Update Dialog/Remind Me Later Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#2e2e2e"
     }
   },
   "Update Dialog/Titlebar": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 7
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 7
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 7
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 7
     },
-    "fill": {
+    "Fill": {
       "value": "#202225"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Update Dialog/Titlebar/Exit Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 0
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 0
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 0
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 0
     },
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Update Dialog/Titlebar/Exit Button/Graphic": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     }
   },
@@ -4014,53 +3466,53 @@
     }
   },
   "Update Dialog/Titlebar/Title Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#c0c0c0"
     }
   },
   "Update Dialog/Update Button": {
-    "border.fill": {
+    "Border.Fill": {
       "value": "#000000"
     },
-    "border.thickness": {
+    "Border.Thickness": {
       "value": 0
     },
-    "corner_radii.bottom_left": {
+    "Corner Radii.Bottom Left": {
       "value": 5
     },
-    "corner_radii.bottom_right": {
+    "Corner Radii.Bottom Right": {
       "value": 5
     },
-    "corner_radii.top_left": {
+    "Corner Radii.Top Left": {
       "value": 5
     },
-    "corner_radii.top_right": {
+    "Corner Radii.Top Right": {
       "value": 5
     },
-    "fill": {
+    "Fill": {
       "value": "#61ad50"
     },
-    "margins.bottom": {
+    "Margins.Bottom": {
       "value": 0
     },
-    "margins.left": {
+    "Margins.Left": {
       "value": 0
     },
-    "margins.right": {
+    "Margins.Right": {
       "value": 0
     },
-    "margins.top": {
+    "Margins.Top": {
       "value": 0
     }
   },
   "Update Dialog/Update Button/Text Label": {
-    "fill": {
+    "Fill": {
       "value": "#ffffff"
     },
-    "text_color": {
+    "Text Color": {
       "value": "#f8f8f8"
     }
   }

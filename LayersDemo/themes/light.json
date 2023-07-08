@@ -1,43 +1,37 @@
 {
-    "Layers Demo": {
-        "border": {
-            "fill": {
-                "value": "#a0a0a4"
-            },
-            "thickness": {
-                "value": 0
-            }
-        },
-        "corner_radii": {
-            "bottom_left": {
-                "value": 0
-            },
-            "bottom_right": {
-                "value": 0
-            },
-            "top_left": {
-                "value": 0
-            },
-            "top_right": {
-                "value": 0
-            }
-        },
-        "fill": {
-            "value": "#ffffff"
-        },
-        "margins": {
-            "bottom": {
-                "value": 0
-            },
-            "left": {
-                "value": 0
-            },
-            "right": {
-                "value": 0
-            },
-            "top": {
-                "value": 0
-            }
-        }
+  "Layers Demo": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "Main Window.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
     }
+  }
 }

@@ -102,37 +102,37 @@ protected:
 	void paint(QWidget* widget);
 
 	LAttribute* m_border_fill{
-		new LAttribute("border.fill", QColor(Qt::gray)) };
+		new LAttribute("Border.Fill", QColor(Qt::gray)) };
 
 	LAttribute* m_border_thickness{
-		new LAttribute("border.thickness", 0.0) };
+		new LAttribute("Border.Thickness", 0.0) };
 
 	LAttribute* m_corner_radii_bottom_left{
-		new LAttribute("corner_radii.bottom_left", 0.0) };
+		new LAttribute("Corner Radii.Bottom Left", 0.0) };
 
 	LAttribute* m_corner_radii_bottom_right{
-		new LAttribute("corner_radii.bottom_right", 0.0) };
+		new LAttribute("Corner Radii.Bottom Right", 0.0) };
 
 	LAttribute* m_corner_radii_top_left{
-		new LAttribute("corner_radii.top_left", 0.0) };
+		new LAttribute("Corner Radii.Top Left", 0.0) };
 
 	LAttribute* m_corner_radii_top_right{
-		new LAttribute("corner_radii.top_right", 0.0) };
+		new LAttribute("Corner Radii.Top Right", 0.0) };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor(Qt::white)) };
+		new LAttribute("Fill", QColor(Qt::white)) };
 
 	LAttribute* m_margins_bottom{
-		new LAttribute("margins.bottom", 0.0) };
+		new LAttribute("Margins.Bottom", 0.0) };
 
 	LAttribute* m_margins_left{
-		new LAttribute("margins.left", 0.0) };
+		new LAttribute("Margins.Left", 0.0) };
 
 	LAttribute* m_margins_right{
-		new LAttribute("margins.right", 0.0) };
+		new LAttribute("Margins.Right", 0.0) };
 
 	LAttribute* m_margins_top{
-		new LAttribute("margins.top", 0.0) };
+		new LAttribute("Margins.Top", 0.0) };
 };
 LAYERS_NAMESPACE_END
 

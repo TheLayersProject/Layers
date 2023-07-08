@@ -35,7 +35,7 @@ class LTheme;
 	m_attrs.insert({
 		{ "border", &m_border },
 		{ "corner_radii", &m_corner_radii },
-		{ "fill", &m_fill },
+		{ "Fill", &m_fill },
 		{ "margins", &m_margins }
 	});
 	~~~~~~~~~~~~~

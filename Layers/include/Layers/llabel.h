@@ -65,6 +65,11 @@ public:
 	void set_font_size(int size);
 
 	/*!
+		Sets the *size* of the label's font.
+	*/
+	void set_font_size(qreal size);
+
+	/*!
 		Returns the recommended size for the label.
 	*/
 	virtual QSize sizeHint() const override;
@@ -88,10 +93,10 @@ private:
 	LGraphic* m_graphic{ nullptr };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor(Qt::white), this) };
+		new LAttribute("Fill", QColor(Qt::white), this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("text_color", QColor(Qt::black)) };
+		new LAttribute("Text Color", QColor(Qt::black)) };
 
 	QMetaObject::Connection m_repaint_connection;
 

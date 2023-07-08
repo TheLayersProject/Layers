@@ -28,28 +28,28 @@ public:
 
 private:
 	LAttribute* m_border_fill{
-		new LAttribute("border.fill", QColor(Qt::gray), this) };
+		new LAttribute("Border.Fill", QColor(Qt::gray), this) };
 
 	LAttribute* m_border_thickness{
-		new LAttribute("border.thickness", 0.0, this) };
+		new LAttribute("Border.Thickness", 0.0, this) };
 
 	LAttribute* m_corner_radii_bottom_left{
-		new LAttribute("corner_radii.bottom_left", 0.0, this) };
+		new LAttribute("Corner Radii.Bottom Left", 0.0, this) };
 
 	LAttribute* m_corner_radii_bottom_right{
-		new LAttribute("corner_radii.bottom_right", 0.0, this) };
+		new LAttribute("Corner Radii.Bottom Right", 0.0, this) };
 
 	LAttribute* m_corner_radii_top_left{
-		new LAttribute("corner_radii.top_left", 2.0, this) };
+		new LAttribute("Corner Radii.Top Left", 2.0, this) };
 
 	LAttribute* m_corner_radii_top_right{
-		new LAttribute("corner_radii.top_right", 2.0, this) };
+		new LAttribute("Corner Radii.Top Right", 2.0, this) };
 
 	LAttribute* m_fill{
-		new LAttribute("fill", QColor("#808080"), this) };
+		new LAttribute("Fill", QColor("#808080"), this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("text_color", QColor(Qt::black), this) };
+		new LAttribute("Text Color", QColor(Qt::black), this) };
 };
 LAYERS_NAMESPACE_END
 
