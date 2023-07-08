@@ -20,7 +20,8 @@ LLabel::LLabel(const QString& text, QWidget* parent) :
 }
 
 LLabel::LLabel(const LGraphic& graphic, QWidget* parent) :
-	m_graphic{ new LGraphic(graphic) }
+	m_graphic{ new LGraphic(graphic) },
+	QLabel(parent)
 {
 	init();
 
@@ -83,6 +84,15 @@ void LLabel::set_font_size(int size)
 	QFont f = font();
 
 	f.setPointSize(size);
+
+	setFont(f);
+}
+
+void LLabel::set_font_size(qreal size)
+{
+	QFont f = font();
+
+	f.setPointSizeF(size);
 
 	setFont(f);
 }

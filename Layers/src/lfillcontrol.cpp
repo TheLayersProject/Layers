@@ -27,11 +27,13 @@ LFillControl::~LFillControl()
 	// TODO: Maybe the dialog should just be generated when it is needed
 	delete m_control_dialog;
 	delete m_dialog;
+
+	delete m_fill;
 }
 
 void LFillControl::set_attribute(LAttribute* attribute)
 {
-	fill()->establish_link(*attribute);
+	fill()->set_uplink_attribute(attribute);
 
 	m_dialog->set_attribute(attribute);
 }

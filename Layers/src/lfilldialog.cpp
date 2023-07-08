@@ -15,6 +15,9 @@ LFillDialog::LFillDialog(QWidget* parent) : LWidget(parent)
 	setWindowFlags(Qt::FramelessWindowHint);
 	set_name("Dialog");
 
+	m_color_control->set_name("Color Control");
+	m_gradient_control->set_name("Gradient Control");
+
 	m_fill_type_toggle->setFixedHeight(85);
 	m_fill_type_toggle->set_name("Fill Type Toggle");
 
@@ -60,9 +63,9 @@ LFillDialog::LFillDialog(QWidget* parent) : LWidget(parent)
 
 void LFillDialog::set_attribute(LAttribute* attribute)
 {
-	m_gradient_control->fill()->establish_link(*attribute);
+	m_gradient_control->fill()->set_uplink_attribute(attribute);
 
-	m_color_control->fill()->establish_link(*attribute);
+	m_color_control->fill()->set_uplink_attribute(attribute);
 
 	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
 	{

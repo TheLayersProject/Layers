@@ -32,11 +32,7 @@ LGradientDialog::LGradientDialog(QWidget* parent) :
 
     connect(&m_single_click_timer, &QTimer::timeout, this, &LGradientDialog::click_control);
 
-    // Assign tag prefixes last!
     assign_tag_prefixes();
-
-    // Set theme
-    apply_theme(*layersApp->active_theme());
 }
 
 void LGradientDialog::add_gradient_stop(double stop_val, QColor color)

@@ -36,11 +36,7 @@ LThemeCompatibilityCautionDialog::LThemeCompatibilityCautionDialog(QWidget* pare
 
 	init_lineage_table();
 
-	// Assign tag prefixes last!
 	assign_tag_prefixes();
-
-	// Set theme
-	apply_theme(*layersApp->active_theme());
 }
 
 LThemeable* LThemeCompatibilityCautionDialog::clone()

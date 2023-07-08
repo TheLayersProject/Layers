@@ -164,6 +164,7 @@ void LButton::init()
 
 	if (m_graphic_after_label)
 	{
+		m_graphic_after_label->setAlignment(Qt::AlignCenter);
 		m_graphic_after_label->set_name("Graphic After");
 		m_graphic_after_label->hide();
 

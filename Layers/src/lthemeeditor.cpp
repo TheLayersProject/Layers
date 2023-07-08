@@ -50,7 +50,7 @@ LThemeEditor::LThemeEditor(QWidget* parent) :
 	m_sidebar->set_name("Sidebar");
 	//m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 
-	m_preview_frame->corner_radii_top_left()->set_value(10.0);
+	m_preview_frame->fill()->set_uplink_attribute(m_fill);
 
 	m_preview_scroll_area->set_name("Preview Scroll Area");
 	//m_preview_scroll_area->fill()->set_disabled();
@@ -148,7 +148,10 @@ void LThemeEditor::set_preview_widget(QWidget* widget)
 		m_preview_widget->deleteLater();
 
 	if (LThemeable* preview_themeable = dynamic_cast<LThemeable*>(widget))
+	{
 		preview_themeable->set_functionality_disabled();
+		preview_themeable->apply_theme(*layersApp->active_theme());
+	}
 
 	m_preview_widget = widget;
 	m_preview_layout->addWidget(widget);

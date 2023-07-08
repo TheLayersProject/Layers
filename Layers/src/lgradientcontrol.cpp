@@ -15,6 +15,11 @@ LGradientControl::LGradientControl(QWidget* parent) : LWidget(parent)
 	setFixedSize(40, 40);
 }
 
+LGradientControl::~LGradientControl()
+{
+	delete  m_fill;
+}
+
 bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick)

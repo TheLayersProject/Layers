@@ -111,7 +111,7 @@ void LTheme::copy_attribute_values_of(LThemeable* themeable)
 {
 	clear_tag(themeable->tag());
 
-	QList<LAttribute*> themeable_attrs = themeable->attributes();
+	QList<LAttribute*> themeable_attrs = themeable->child_attributes();
 	LAttributeMap theme_attrs;
 
 	for (LAttribute* attr : themeable_attrs)

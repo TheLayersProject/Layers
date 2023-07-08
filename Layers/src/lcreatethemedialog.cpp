@@ -60,11 +60,7 @@ LCreateThemeDialog::LCreateThemeDialog(QWidget* parent) :
 
 	init_layout();
 
-	// Assign tag prefixes last!
 	assign_tag_prefixes();
-
-	// Set theme
-	apply_theme(*layersApp->active_theme());
 }
 
 QString LCreateThemeDialog::new_theme_name()

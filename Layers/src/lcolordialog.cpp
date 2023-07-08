@@ -29,12 +29,13 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	//QRegularExpression rx("^#[0-9a-f]{3}([0-9a-f]{3})?$")
 	//m_color_name_line_editor->set_validator(new QRegularExpressionValidator(rx));
 
-	connect(m_line_editor_color_name, &LLineEditor::text_edited, [this] {
+	connect(m_line_editor_color_name, &LLineEditor::text_edited, [this]
+	{
 		qsizetype text_size = m_line_editor_color_name->text()->as<QString>().size();
 
 		if (text_size == 6) // || text_size == 8)
 			m_color->set_value(QColor("#" + m_line_editor_color_name->text()->as<QString>()));
-		});
+	});
 
 	m_radio_button_hue->set_name("Hue Radio Button");
 	connect(m_radio_button_hue, &LRadioButton::clicked, [this]
@@ -81,26 +82,22 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	m_color_plane->setFixedSize(160, 160);
 
 	connect(m_color_plane, &LColorPlane::active_mode_changed, [this]
-		{
-			switch (m_color_plane->active_hsv())
-				{
-				case HSV::Hue:
-					m_z_slider->set_limit(359);
-					break;
-				case HSV::Saturation:
-				case HSV::Value:
-					m_z_slider->set_limit(255);
-					break;
-				}
-		});
+	{
+		switch (m_color_plane->active_hsv())
+			{
+			case HSV::Hue:
+				m_z_slider->set_limit(359);
+				break;
+			case HSV::Saturation:
+			case HSV::Value:
+				m_z_slider->set_limit(255);
+				break;
+			}
+	});
 
 	init_layout();
 
-	// Assign tag prefixes last!
 	assign_tag_prefixes();
-
-	// Set theme
-	apply_theme(*layersApp->active_theme());
 }
 
 LColorDialog::~LColorDialog()
@@ -120,26 +117,26 @@ LAttribute* LColorDialog::color() const
 
 void LColorDialog::init_attributes()
 {
-	m_color->establish_link(m_color_plane->color());
+	m_color->set_uplink_attribute(&m_color_plane->color());
 
 	connect(m_color, &LAttribute::changed, [this]
-		{
-			QColor color = m_color->as<QColor>();
+	{
+		QColor color = m_color->as<QColor>();
 
-			m_line_editor_color_name->set_text(
-				color.name().remove("#"));
+		m_line_editor_color_name->set_text(
+			color.name().remove("#"));
 
-			m_line_editor_hue->set_text(
-				QString::number(color.hue()));
+		m_line_editor_hue->set_text(
+			QString::number(color.hue()));
 
-			m_line_editor_sat->set_text(
-				QString::number(int(round(color.saturationF() * 100.f))));
+		m_line_editor_sat->set_text(
+			QString::number(int(round(color.saturationF() * 100.f))));
 
-			m_line_editor_val->set_text(
-				QString::number(int(round(color.valueF() * 100.f))));
-		});
+		m_line_editor_val->set_text(
+			QString::number(int(round(color.valueF() * 100.f))));
+	});
 
-	m_z_slider->value().establish_link(m_color_plane->z_value());
+	m_z_slider->value().set_uplink_attribute(&m_color_plane->z_value());
 }
 
 void LColorDialog::hsv_changed()

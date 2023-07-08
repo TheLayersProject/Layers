@@ -18,6 +18,8 @@ LColorControl::LColorControl(QWidget* parent) : LWidget(parent)
 LColorControl::~LColorControl()
 {
 	disconnect(attribute_connection);
+
+	delete m_fill;
 }
 
 void LColorControl::click()

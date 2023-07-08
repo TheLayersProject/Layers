@@ -273,7 +273,7 @@ void LColorPlane::init_attributes()
 			update();
 		});
 
-	m_cursor->fill()->establish_link(m_color);
+	m_cursor->fill()->set_uplink_attribute(&m_color);
 	m_cursor->border_fill()->set_value(QColor(Qt::lightGray));
 	m_cursor->border_thickness()->set_value(2.0);
 	m_cursor->corner_radii_top_left()->set_value(2.0);

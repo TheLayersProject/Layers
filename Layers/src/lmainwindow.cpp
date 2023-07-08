@@ -6,10 +6,10 @@
 #include <QIcon>
 #include <QPainterPath>
 
-#include <Layers/lcalculate.h>
 #include <Layers/lapplication.h>
-#include <Layers/lwidgeteditor.h>
+#include <Layers/lcalculate.h>
 #include <Layers/lcreatethemedialog.h>
+#include <Layers/lwidgeteditor.h>
 
 #include "lmainwindowtitlebar.h"
 #include "lsettingsmenu.h"
@@ -54,7 +54,6 @@ LMainWindow::LMainWindow(bool preview, QWidget* parent) :
 	m_separator->setFixedHeight(3);
 
 	assign_tag_prefixes();
-	apply_theme(*layersApp->active_theme());
 }
 
 void LMainWindow::edit_themeable(LThemeable* themeable)
@@ -66,7 +65,7 @@ void LMainWindow::set_central_widget(LWidget* central_widget)
 {
 	m_central_widget = central_widget;
 
-	m_central_widget->assign_tag_prefixes({ *m_name });
+	m_central_widget->assign_tag_prefixes();
 	m_central_widget->set_is_app_themeable(true);
 	m_central_widget->apply_theme(*layersApp->active_theme());
 
@@ -317,8 +316,7 @@ void LMainWindow::open_widget_changed(int old_index, int new_index)
 
 void LMainWindow::init_attributes()
 {
-	m_fill->establish_link(*layersApp->primary());
-	//m_fill->set_link_new("App.Primary");
+	m_fill->set_uplink_attribute(layersApp->primary());
 
 	m_border_thickness->set_value(15.0);
 	m_border_fill->set_value(
@@ -351,13 +349,13 @@ void LMainWindow::init_themes_widget_connections()
 	LThemesWidget* themes_widget = m_settings_menu->themes_widget();
 
 	connect(themes_widget->customize_theme_button(), &LButton::clicked, [this]
-		{
-			if (!m_theme_editor->preview_widget())
-				m_theme_editor->edit_themeable(layersApp);
+	{
+		if (!m_theme_editor->preview_widget())
+			m_theme_editor->edit_themeable(layersApp);
 
-			open_widget(m_theme_editor,
-				*m_theme_editor->name(), m_theme_editor->icon());
-		});
+		open_widget(m_theme_editor,
+			*m_theme_editor->name(), m_theme_editor->icon());
+	});
 
 	connect(themes_widget->new_theme_button(), &LButton::clicked,
 		this, &LMainWindow::new_theme_clicked);
@@ -366,29 +364,29 @@ void LMainWindow::init_themes_widget_connections()
 void LMainWindow::init_titlebar_connections()
 {
 	connect(m_titlebar->settings_button(), &LButton::clicked, [this]
-		{
-			open_widget(m_settings_menu,
-			*m_settings_menu->name(), m_settings_menu->icon());
-		});
+	{
+		open_widget(m_settings_menu,
+		*m_settings_menu->name(), m_settings_menu->icon());
+	});
 
 	connect(m_titlebar->minimize_button(), &LButton::clicked, [this]
-		{
-			showMinimized();
-		});
+	{
+		showMinimized();
+	});
 
 	connect(m_titlebar->maximize_button(), &LButton::clicked, [this]
-		{
-			if (isMaximized())
-				showNormal();
-			else
-				showMaximized();
+	{
+		if (isMaximized())
+			showNormal();
+		else
+			showMaximized();
 
-			update();
-		});
+		update();
+	});
 
 	connect(m_titlebar->exit_button(), &LButton::clicked, [this]
-		{
-			if (!m_functionality_disabled)
-				qApp->quit();
-		});
+	{
+		if (!m_functionality_disabled)
+			qApp->quit();
+	});
 }
