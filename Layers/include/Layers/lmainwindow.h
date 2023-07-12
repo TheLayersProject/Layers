@@ -11,7 +11,6 @@
 LAYERS_NAMESPACE_BEGIN
 class Menu;
 class LSettingsMenu;
-class LThemeEditor;
 class LMainWindowTitlebar;
 
 /*!
@@ -25,26 +24,12 @@ public:
 	/*!
 		Constructs a main window.
 	*/
-	LMainWindow(bool preview = false, QWidget* parent = nullptr);
+	LMainWindow(QWidget* parent = nullptr);
 
 	/*!
 		Moves *dialog* to the center of the window.
 	*/
 	void center_dialog(QDialog* dialog);
-
-	/*!
-		Constructs a new LMainWindow and returns it as a pointer to a
-		LThemeable.
-
-		The returned main window is intended to be used as a preview widget
-		in the LThemeEditor.
-	*/
-	virtual LThemeable* clone() override;
-
-	/*!
-		Sets *themeable* as the themeable being edited by the LThemeEditor.
-	*/
-	void edit_themeable(LThemeable* themeable);
 
 	/*!
 		Sets *central_widget* to be the main window's central widget. 
@@ -94,9 +79,7 @@ private:
 
 	LWidget* m_central_widget{ nullptr };
 
-	// Menus
 	LSettingsMenu* m_settings_menu;
-	LThemeEditor* m_theme_editor;
 };
 LAYERS_NAMESPACE_END
 

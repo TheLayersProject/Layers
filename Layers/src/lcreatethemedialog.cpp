@@ -85,11 +85,6 @@ void LCreateThemeDialog::clear_theme_combobox()
 	m_start_theme_combobox->clear();
 }
 
-LThemeable* LCreateThemeDialog::clone()
-{
-	return new LCreateThemeDialog;
-}
-
 QString LCreateThemeDialog::copy_theme_id()
 {
 	return m_start_theme_combobox->currentData().toString();

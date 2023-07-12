@@ -21,8 +21,6 @@ public:
 	LColorDialog(QWidget* parent = nullptr);
 	~LColorDialog();
 
-	virtual LThemeable* clone() override;
-
 	LAttribute* color() const;
 
 protected:

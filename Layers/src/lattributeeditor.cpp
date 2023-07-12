@@ -11,7 +11,6 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 {
 	init_attributes();
 	init_layout();
-	set_name("Attribute Editor");
 	setMinimumHeight(40);
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 

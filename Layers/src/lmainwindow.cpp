@@ -9,22 +9,19 @@
 #include <Layers/lapplication.h>
 #include <Layers/lcalculate.h>
 #include <Layers/lcreatethemedialog.h>
-#include <Layers/lwidgeteditor.h>
+#include <Layers/lthemeeditordialog.h>
 
 #include "lmainwindowtitlebar.h"
 #include "lsettingsmenu.h"
 #include "lthemeswidget.h"
-#include "lthemeeditor.h"
 
-using Layers::LThemeEditor;
 using Layers::LSettingsMenu;
 using Layers::LThemeable;
 using Layers::LMainWindowTitlebar;
 using Layers::LMainWindow;
 
-LMainWindow::LMainWindow(bool preview, QWidget* parent) :
+LMainWindow::LMainWindow(QWidget* parent) :
 	m_settings_menu{ new LSettingsMenu },
-	m_theme_editor{ new LThemeEditor },
 	m_titlebar{ new LMainWindowTitlebar },
 	LWidget(parent)
 {
@@ -37,11 +34,9 @@ LMainWindow::LMainWindow(bool preview, QWidget* parent) :
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
-	if (!preview)
-		layersApp->add_child_themeable_pointer(*this);
+	layersApp->add_child_themeable_pointer(*this);
 	
 	m_settings_menu->hide();
-	m_theme_editor->hide();
 
 	connect(m_titlebar->menu_tab_bar(), SIGNAL(index_changed(int, int)),
 		this, SLOT(open_widget_changed(int, int)));
@@ -54,11 +49,6 @@ LMainWindow::LMainWindow(bool preview, QWidget* parent) :
 	m_separator->setFixedHeight(3);
 
 	assign_tag_prefixes();
-}
-
-void LMainWindow::edit_themeable(LThemeable* themeable)
-{
-	m_theme_editor->edit_themeable(themeable);
 }
 
 void LMainWindow::set_central_widget(LWidget* central_widget)
@@ -91,15 +81,6 @@ void LMainWindow::center_dialog(QDialog* dialog)
 	dialog->move(
 		x() + (width() - dialog->width()) / 2,
 		y() + (height() - dialog->height()) / 2);
-}
-
-LThemeable* LMainWindow::clone()
-{
-	LMainWindow* w = new LMainWindow(true);
-
-	w->setMinimumSize(500, 400);
-
-	return w;
 }
 
 void LMainWindow::close_widget(int index)
@@ -339,7 +320,6 @@ void LMainWindow::init_layout()
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_separator);
 	m_main_layout->addWidget(m_settings_menu);
-	m_main_layout->addWidget(m_theme_editor);
 
 	setLayout(m_main_layout);
 }
@@ -350,11 +330,10 @@ void LMainWindow::init_themes_widget_connections()
 
 	connect(themes_widget->customize_theme_button(), &LButton::clicked, [this]
 	{
-		if (!m_theme_editor->preview_widget())
-			m_theme_editor->edit_themeable(layersApp);
+		if (!layersApp->theme_editor_dialog()->is_root_themeable_set())
+			layersApp->theme_editor_dialog()->init_root_themeable();
 
-		open_widget(m_theme_editor,
-			*m_theme_editor->name(), m_theme_editor->icon());
+		layersApp->theme_editor_dialog()->show();
 	});
 
 	connect(themes_widget->new_theme_button(), &LButton::clicked,

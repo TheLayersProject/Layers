@@ -22,8 +22,6 @@ public:
 
 	void clear_theme_combobox();
 
-	virtual LThemeable* clone() override;
-
 	QString copy_theme_id();
 
 	QString new_theme_name();

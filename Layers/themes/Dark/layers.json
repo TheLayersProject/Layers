@@ -1393,1331 +1393,6 @@
       "value": "#b9bbbe"
     }
   },
-  "Main Window/Theme Editor": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "linked_to": "Main Window.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Preview Scroll Area": {
-    "Border.Fill": {
-      "value": "#a0a0a4"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Preview Scroll Area/Horizontal ScrollBar": {
-    "background_color": {
-      "value": "#36393f"
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "handle_color": {
-      "value": "#202225"
-    },
-    "handle_Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Right": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Preview Scroll Area/Vertical ScrollBar": {
-    "background_color": {
-      "value": "#36393f"
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "handle_color": {
-      "value": "#202225"
-    },
-    "handle_Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Right": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Sidebar": {},
-  "Main Window/Theme Editor/Sidebar/Horizontal ScrollBar": {
-    "background_color": {
-      "value": "#a0a0a4"
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "handle_color": {
-      "value": "#ffffff"
-    },
-    "handle_Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Right": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Vertical ScrollBar": {
-    "background_color": {
-      "value": "#2f3136"
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "handle_color": {
-      "value": "#202225"
-    },
-    "handle_Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Left": {
-      "value": 5
-    },
-    "handle_Corner Radii.Top Right": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "linked_to": "App.Secondary"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 10
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 10
-    },
-    "Corner Radii.Top Right": {
-      "value": 10
-    },
-    "Fill": {
-      "value": "#1e2023"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Corner Radii.Bottom Right"
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Corner Radii.Top Right"
-    },
-    "Fill": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic After": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic After/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Collapse Button/Graphic/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "overrides": {
-        "Active": {
-          "linked_to": "App.Tertiary"
-        }
-      },
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button": {
-    "Border.Fill": {
-      "value": "#a0a0a4"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button/Graphic": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Close Button/Graphic/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#e95454"
-        }
-      },
-      "value": "#5f5f5f"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Icon": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Icon/Svg": {
-    "common_color": {
-      "linked_to": "App.Foreground"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Features Tab Bar/Tabs/Text Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "linked_to": "App.Foreground"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control": {
-    "Border.Fill": {
-      "value": "#d6d6d6"
-    },
-    "Border.Thickness": {
-      "value": 2
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Margins.Bottom": {
-      "value": 8
-    },
-    "Margins.Left": {
-      "value": 8
-    },
-    "Margins.Right": {
-      "value": 8
-    },
-    "Margins.Top": {
-      "value": 8
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 4
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 4
-    },
-    "Corner Radii.Top Left": {
-      "value": 4
-    },
-    "Corner Radii.Top Right": {
-      "value": 4
-    },
-    "Fill": {
-      "value": "#404040"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Color Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Fill Type Toggle": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 4
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 4
-    },
-    "Corner Radii.Top Left": {
-      "value": 4
-    },
-    "Corner Radii.Top Right": {
-      "value": 4
-    },
-    "Fill": {
-      "value": "#6fc65b"
-    },
-    "Margins.Bottom": {
-      "value": 10
-    },
-    "Margins.Left": {
-      "value": 10
-    },
-    "Margins.Right": {
-      "value": 10
-    },
-    "Margins.Top": {
-      "value": 10
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Fill Type Toggle/Square": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 2
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 2
-    },
-    "Corner Radii.Top Left": {
-      "value": 2
-    },
-    "Corner Radii.Top Right": {
-      "value": 2
-    },
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Fill Control/Dialog/Gradient Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 3
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 3
-    },
-    "Corner Radii.Top Left": {
-      "value": 3
-    },
-    "Corner Radii.Top Right": {
-      "value": 3
-    },
-    "Fill": {
-      "linked_to": "App.Tertiary"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget/Icon Labels": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Icons Widget/Icon Labels/Svg": {
-    "common_color": {
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "linked_to": "App.Foreground"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Line Editor": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "value": "#2e2e2e"
-    },
-    "Margins.Bottom": {
-      "value": 5
-    },
-    "Margins.Left": {
-      "value": 5
-    },
-    "Margins.Right": {
-      "value": 5
-    },
-    "Margins.Top": {
-      "value": 5
-    },
-    "Text Color": {
-      "value": "#6a6a6a"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Links Widget": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 7
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 7
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "linked_to": "App.Tertiary"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "value": "#e1e1e1"
-    },
-    "Margins.Bottom": {
-      "value": 5
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 5
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider/Bar": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 2
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 2
-    },
-    "Corner Radii.Top Left": {
-      "value": 2
-    },
-    "Corner Radii.Top Right": {
-      "value": 2
-    },
-    "Fill": {
-      "value": "#7c7c7c"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 5
-    },
-    "Margins.Right": {
-      "value": 5
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attribute Editor/Slider/Handle": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 2
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 2
-    },
-    "Corner Radii.Top Left": {
-      "value": 2
-    },
-    "Corner Radii.Top Right": {
-      "value": 2
-    },
-    "Fill": {
-      "value": "#2e2e2e"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Attributes Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 10
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 10
-    },
-    "Corner Radii.Top Right": {
-      "value": 10
-    },
-    "Fill": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor.Fill"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic After/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Collapse Button/Graphic/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor/Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#fbfbfc"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 10
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 10
-    },
-    "Corner Radii.Top Right": {
-      "value": 10
-    },
-    "Fill": {
-      "value": "#1a888888"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 10
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 10
-    },
-    "Corner Radii.Top Left": {
-      "value": 10
-    },
-    "Corner Radii.Top Right": {
-      "value": 10
-    },
-    "Fill": {
-      "value": "#1a888888"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic After/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Collapse Button/Graphic/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button Group/Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label": {},
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Icon Label/Svg": {
-    "common_color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widget Button/Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
-  "Main Window/Theme Editor/Sidebar/Widget Editor/Widgets Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#e1e1e1"
-    }
-  },
-  "Main Window/Theme Editor/Topbar": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "value": "#2f3136"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Apply Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "value": "#61ad50"
-    },
-    "Margins.Bottom": {
-      "value": 7
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 7
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Apply Button/Text Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "value": "#f8f8f8"
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator": {},
-  "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels": {},
-  "Main Window/Theme Editor/Topbar/Navigator/Arrow Labels/Svg": {
-    "common_color": {
-      "value": "#5e636d"
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "value": "#959595"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 5
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 5
-    },
-    "Corner Radii.Top Left": {
-      "value": 5
-    },
-    "Corner Radii.Top Right": {
-      "value": 5
-    },
-    "Fill": {
-      "value": "#e1e1e1"
-    },
-    "Margins.Bottom": {
-      "value": 10
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 10
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic": {},
-  "Main Window/Theme Editor/Topbar/Navigator/Collapse Menu Button/Graphic/Svg": {
-    "common_color": {
-      "value": "#2e2e2e"
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator/Text Buttons": {
-    "Border.Fill": {
-      "value": "#000000"
-    },
-    "Border.Thickness": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Left": {
-      "value": 0
-    },
-    "Corner Radii.Bottom Right": {
-      "value": 0
-    },
-    "Corner Radii.Top Left": {
-      "value": 0
-    },
-    "Corner Radii.Top Right": {
-      "value": 0
-    },
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Margins.Bottom": {
-      "value": 0
-    },
-    "Margins.Left": {
-      "value": 0
-    },
-    "Margins.Right": {
-      "value": 0
-    },
-    "Margins.Top": {
-      "value": 0
-    }
-  },
-  "Main Window/Theme Editor/Topbar/Navigator/Text Buttons/Text Label": {
-    "Fill": {
-      "value": "#ffffff"
-    },
-    "Text Color": {
-      "overrides": {
-        "Selected": {
-          "value": "#fbfbfc"
-        }
-      },
-      "value": "#96989d"
-    }
-  },
   "Main Window/Titlebar": {
     "Border.Fill": {
       "value": "#000000"
@@ -3287,6 +1962,846 @@
     },
     "Text Color": {
       "value": "#e3e3e3"
+    }
+  },
+  "Theme Editor Dialog": {
+    "Border.Fill": {
+      "value": {
+        "gradient": [
+          "0:#202225",
+          "1:#36393f"
+        ]
+      }
+    },
+    "Border.Thickness": {
+      "value": 3
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 10
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 10
+    },
+    "Corner Radii.Top Right": {
+      "value": 10
+    },
+    "Fill": {
+      "linked_to": "App.Primary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 10
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 10
+    },
+    "Corner Radii.Top Right": {
+      "value": 10
+    },
+    "Fill": {
+      "value": "#33000000"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Collapse Button": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button.Corner Radii.Bottom Right"
+    },
+    "Corner Radii.Bottom Right": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors.Corner Radii.Bottom Right"
+    },
+    "Corner Radii.Top Left": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button.Corner Radii.Top Right"
+    },
+    "Corner Radii.Top Right": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors.Corner Radii.Top Right"
+    },
+    "Fill": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Collapse Button/Graphic": {},
+  "Theme Editor Dialog/Attribute Editors/Collapse Button/Graphic After": {},
+  "Theme Editor Dialog/Attribute Editors/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "Theme Editor Dialog/Attribute Editors.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "overrides": {
+        "Active": {
+          "linked_to": "App.Tertiary"
+        }
+      },
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Features Tab Bar.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Close Button": {
+    "Border.Fill": {
+      "value": "#a0a0a4"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Close Button/Graphic": {},
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Close Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e95454"
+        }
+      },
+      "value": "#5f5f5f"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Icon": {},
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Icon/Svg": {
+    "common_color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Text Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control": {
+    "Border.Fill": {
+      "value": "#d6d6d6"
+    },
+    "Border.Thickness": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Margins.Bottom": {
+      "value": 8
+    },
+    "Margins.Left": {
+      "value": 8
+    },
+    "Margins.Right": {
+      "value": 8
+    },
+    "Margins.Top": {
+      "value": 8
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control/Dialog": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 4
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 4
+    },
+    "Corner Radii.Top Left": {
+      "value": 4
+    },
+    "Corner Radii.Top Right": {
+      "value": 4
+    },
+    "Fill": {
+      "value": "#404040"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control/Dialog/Color Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control/Dialog/Fill Type Toggle": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 4
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 4
+    },
+    "Corner Radii.Top Left": {
+      "value": 4
+    },
+    "Corner Radii.Top Right": {
+      "value": 4
+    },
+    "Fill": {
+      "value": "#6fc65b"
+    },
+    "Margins.Bottom": {
+      "value": 10
+    },
+    "Margins.Left": {
+      "value": 10
+    },
+    "Margins.Right": {
+      "value": 10
+    },
+    "Margins.Top": {
+      "value": 10
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control/Dialog/Fill Type Toggle/Square": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Fill Control/Dialog/Gradient Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "value": "#e1e1e1"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Icons Widget": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 3
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 3
+    },
+    "Corner Radii.Top Left": {
+      "value": 3
+    },
+    "Corner Radii.Top Right": {
+      "value": 3
+    },
+    "Fill": {
+      "linked_to": "App.Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Icons Widget/Icon Labels": {},
+  "Theme Editor Dialog/Attribute Editors/Icons Widget/Icon Labels/Svg": {
+    "common_color": {
+      "value": "#96989d"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App.Foreground"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Line Editor": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "value": "#2e2e2e"
+    },
+    "Margins.Bottom": {
+      "value": 5
+    },
+    "Margins.Left": {
+      "value": 5
+    },
+    "Margins.Right": {
+      "value": 5
+    },
+    "Margins.Top": {
+      "value": 5
+    },
+    "Text Color": {
+      "value": "#6a6a6a"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Links Widget": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 7
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 7
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "App.Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Slider": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Corner Radii.Top Right": {
+      "value": 5
+    },
+    "Fill": {
+      "value": "#e1e1e1"
+    },
+    "Margins.Bottom": {
+      "value": 5
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 5
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Slider/Bar": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#7c7c7c"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 5
+    },
+    "Margins.Right": {
+      "value": 5
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Slider/Handle": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 2
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 2
+    },
+    "Corner Radii.Top Left": {
+      "value": 2
+    },
+    "Corner Radii.Top Right": {
+      "value": 2
+    },
+    "Fill": {
+      "value": "#2e2e2e"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Group Editors": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 10
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 10
+    },
+    "Corner Radii.Top Right": {
+      "value": 10
+    },
+    "Fill": {
+      "linked_to": "Theme Editor Dialog.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Group Editors/Collapse Button": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "Theme Editor Dialog/Group Editors.Fill"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Group Editors/Collapse Button/Graphic": {},
+  "Theme Editor Dialog/Group Editors/Collapse Button/Graphic After": {},
+  "Theme Editor Dialog/Group Editors/Collapse Button/Graphic After/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Theme Editor Dialog/Group Editors/Collapse Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#fbfbfc"
+        }
+      },
+      "value": "#96989d"
+    }
+  },
+  "Theme Editor Dialog/Group Editors/Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "value": "#fbfbfc"
+    }
+  },
+  "Theme Editor Dialog/Titlebar": {
+    "Border.Fill": {
+      "value": "#a0a0a4"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 7
+    },
+    "Corner Radii.Top Right": {
+      "value": 7
+    },
+    "Fill": {
+      "linked_to": "App.Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Titlebar/Exit Button": {
+    "Border.Fill": {
+      "value": "#a0a0a4"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
+  "Theme Editor Dialog/Titlebar/Exit Button/Graphic": {
+    "Fill": {
+      "value": "#ffffff"
+    }
+  },
+  "Theme Editor Dialog/Titlebar/Exit Button/Graphic/Svg": {
+    "common_color": {
+      "overrides": {
+        "Selected": {
+          "value": "#e33036"
+        }
+      },
+      "value": "#6a6a6a"
+    }
+  },
+  "Theme Editor Dialog/Titlebar/Title Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App.Foreground"
     }
   },
   "Update Dialog": {

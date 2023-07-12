@@ -137,11 +137,6 @@ QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
-LThemeable* LThemeable::clone()
-{
-	return new LThemeable;
-}
-
 void LThemeable::copy_attribute_values_to(LTheme* theme)
 {
 	if (m_tag_prefixes_assigned && !m_is_blocked_from_theme)

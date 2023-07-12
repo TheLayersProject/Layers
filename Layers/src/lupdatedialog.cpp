@@ -41,11 +41,6 @@ LUpdateDialog::LUpdateDialog(
 	assign_tag_prefixes();
 }
 
-LThemeable* LUpdateDialog::clone()
-{
-	return new LUpdateDialog("0.0.0", "0.0.0");
-}
-
 void LUpdateDialog::init_layout()
 {
 	// Buttons Layout

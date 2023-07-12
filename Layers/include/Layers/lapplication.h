@@ -21,6 +21,7 @@ class LDownloader;
 class LGitHubRepo;
 class LGradientDialog;
 class LThemeCompatibilityCautionDialog;
+class LThemeEditorDialog;
 class LUpdateDialog;
 class LVersion;
 class LMainWindow;
@@ -197,6 +198,11 @@ public:
 		const;
 
 	/*!
+		Returns a pointer to the application's LThemeEditorDialog.
+	*/
+	LThemeEditorDialog* theme_editor_dialog() const;
+
+	/*!
 		Returns a reference to the QMap containing the application's
 		themes.
 
@@ -247,6 +253,8 @@ private:
 	LGradientDialog* m_gradient_dialog;
 
 	LThemeCompatibilityCautionDialog* m_theme_compatibility_caution_dialog;
+
+	LThemeEditorDialog* m_theme_editor_dialog;
 
 	LUpdateDialog* m_update_dialog;
 

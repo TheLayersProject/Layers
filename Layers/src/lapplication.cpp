@@ -16,6 +16,7 @@
 #include <Layers/lcolordialog.h>
 #include <Layers/lgradientdialog.h>
 #include <Layers/lthemecompatibilitycautiondialog.h>
+#include <Layers/lthemeeditordialog.h>
 #include <Layers/lupdatedialog.h>
 
 using Layers::LApplication;
@@ -26,6 +27,7 @@ using Layers::LGradientDialog;
 using Layers::LTheme;
 using Layers::LThemeable;
 using Layers::LThemeCompatibilityCautionDialog;
+using Layers::LThemeEditorDialog;
 using Layers::LMainWindow;
 
 LApplication::LApplication(
@@ -73,6 +75,8 @@ LApplication::LApplication(
 	m_theme_compatibility_caution_dialog =
 		new LThemeCompatibilityCautionDialog;
 
+	m_theme_editor_dialog = new LThemeEditorDialog;
+
 	if (m_latest_version)
 		m_update_dialog =
 			new LUpdateDialog(m_version->to_string(), *m_latest_version);
@@ -81,6 +85,7 @@ LApplication::LApplication(
 	add_child_themeable_pointer(*m_color_dialog);
 	add_child_themeable_pointer(*m_gradient_dialog);
 	add_child_themeable_pointer(*m_theme_compatibility_caution_dialog);
+	add_child_themeable_pointer(*m_theme_editor_dialog);
 	add_child_themeable_pointer(*m_update_dialog);
 
 	init_themes();
@@ -364,6 +369,11 @@ LTheme* LApplication::theme(const QString& theme_id)
 LThemeCompatibilityCautionDialog* LApplication::theme_compatibility_caution_dialog() const
 {
 	return m_theme_compatibility_caution_dialog;
+}
+
+LThemeEditorDialog* LApplication::theme_editor_dialog() const
+{
+	return m_theme_editor_dialog;
 }
 
 void LApplication::init_directories()

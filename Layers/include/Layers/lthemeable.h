@@ -188,13 +188,6 @@ public:
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
 	/*!
-		Returns a pointer to a new object of the same type as the caller.
-
-		This function should be overridden by top-level widgets.
-	*/
-	virtual LThemeable* clone();
-
-	/*!
 		Copies attribute values of the caller and of child themeables in the
 		caller's hierarchy to *theme*.
 	*/

@@ -74,11 +74,6 @@ void LGradientDialog::add_gradient_stop(double stop_val, QColor color)
     update_gradient();
 }
 
-LThemeable* LGradientDialog::clone()
-{
-    return new LGradientDialog;
-}
-
 QGradientStops LGradientDialog::gradient_stops() const
 {
     return m_gradient_stops;

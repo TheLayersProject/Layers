@@ -19,8 +19,6 @@ class LAYERS_EXPORT LThemeCompatibilityCautionDialog : public LDialog
 public:
 	LThemeCompatibilityCautionDialog(QWidget* parent = nullptr);
 
-	virtual LThemeable* clone() override;
-
 	void set_lineage_table_data(const QStringList& lineage_list);
 
 	void set_theme_name(const QString& theme_name);

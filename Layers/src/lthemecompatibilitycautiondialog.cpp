@@ -39,18 +39,6 @@ LThemeCompatibilityCautionDialog::LThemeCompatibilityCautionDialog(QWidget* pare
 	assign_tag_prefixes();
 }
 
-LThemeable* LThemeCompatibilityCautionDialog::clone()
-{
-	LThemeCompatibilityCautionDialog* dialog = new LThemeCompatibilityCautionDialog;
-
-	dialog->set_lineage_table_data({
-		"Dark",
-		"Second Theme"
-		});
-
-	return dialog;
-}
-
 void LThemeCompatibilityCautionDialog::set_lineage_table_data(
 	const QStringList& lineage_list)
 {

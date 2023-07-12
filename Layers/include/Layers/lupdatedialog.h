@@ -14,8 +14,6 @@ class LUpdateDialog : public LDialog
 public:
 	LUpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
 
-	virtual LThemeable* clone() override;
-
 private:
 	void init_layout();
 

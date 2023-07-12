@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\lthemeabletreeitem.cpp" />
+    <ClCompile Include="src\lthemeabletreemodel.cpp" />
+    <ClCompile Include="src\lthemeabletreeview.cpp" />
+    <ClCompile Include="src\lthemeeditordialog.cpp" />
     <ClCompile Include="src\lapplication.cpp" />
     <ClCompile Include="src\lattribute.cpp" />
     <ClCompile Include="src\lattributeeditor.cpp" />
@@ -40,7 +44,6 @@
     <ClCompile Include="src\lmainwindowtitlebar.cpp" />
     <ClCompile Include="src\lmenubar.cpp" />
     <ClCompile Include="src\lminislider.cpp" />
-    <ClCompile Include="src\lnavigator.cpp" />
     <ClCompile Include="src\lpaths.cpp" />
     <ClCompile Include="src\lradiobutton.cpp" />
     <ClCompile Include="src\lradiobuttonpool.cpp" />
@@ -62,16 +65,12 @@
     <ClCompile Include="src\lthemecomboboxitemmodel.cpp" />
     <ClCompile Include="src\lthemecompatibilitycautiondialog.cpp" />
     <ClCompile Include="src\lthemecompatibilityitemdelegate.cpp" />
-    <ClCompile Include="src\lthemeeditor.cpp" />
     <ClCompile Include="src\lthemelineagemodel.cpp" />
     <ClCompile Include="src\lthemeswidget.cpp" />
     <ClCompile Include="src\ltoggleswitch.cpp" />
     <ClCompile Include="src\lupdatedialog.cpp" />
     <ClCompile Include="src\lversion.cpp" />
     <ClCompile Include="src\lwidget.cpp" />
-    <ClCompile Include="src\lwidgetbutton.cpp" />
-    <ClCompile Include="src\lwidgetbuttongroup.cpp" />
-    <ClCompile Include="src\lwidgeteditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />
@@ -81,9 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lsettingstab.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\lthemeeditor.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lthemeswidget.h" />
@@ -108,10 +104,11 @@
     <ClInclude Include="include\Layers\lpaths.h" />
     <ClInclude Include="include\Layers\lthemeable.h" />
     <ClInclude Include="include\Layers\lthemeablebox.h" />
+    <QtMoc Include="include\Layers\lthemeeditordialog.h" />
+    <QtMoc Include="include\Layers\lthemeabletreeview.h" />
+    <ClInclude Include="include\Layers\lthemeabletreeitem.h" />
+    <QtMoc Include="include\Layers\lthemeabletreemodel.h" />
     <ClInclude Include="include\Layers\lversion.h" />
-    <QtMoc Include="include\Layers\lwidgeteditor.h" />
-    <QtMoc Include="include\Layers\lwidgetbuttongroup.h" />
-    <QtMoc Include="include\Layers\lwidgetbutton.h" />
     <QtMoc Include="include\Layers\lwidget.h" />
     <QtMoc Include="include\Layers\lupdatedialog.h" />
     <QtMoc Include="include\Layers\ltoggleswitch.h" />
@@ -131,7 +128,6 @@
     <QtMoc Include="include\Layers\lscrollarea.h" />
     <QtMoc Include="include\Layers\lradiobuttonpool.h" />
     <QtMoc Include="include\Layers\lradiobutton.h" />
-    <QtMoc Include="include\Layers\lnavigator.h" />
     <QtMoc Include="include\Layers\lminislider.h" />
     <QtMoc Include="include\Layers\lmenubar.h" />
     <QtMoc Include="include\Layers\lmainwindow.h" />

@@ -105,11 +105,6 @@ LColorDialog::~LColorDialog()
 	delete m_color;
 }
 
-LThemeable* LColorDialog::clone()
-{
-	return new LColorDialog;
-}
-
 LAttribute* LColorDialog::color() const
 {
 	return m_color;

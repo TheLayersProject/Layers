@@ -8,7 +8,6 @@ LAttributeEditorGroup::LAttributeEditorGroup(const QString& name, QWidget* paren
 	LWidget(parent)
 {
 	init_attributes();
-	set_name("Group Editor");
 
 	m_label->setText(name);
 	m_label->set_name("Label");

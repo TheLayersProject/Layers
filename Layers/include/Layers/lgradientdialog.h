@@ -20,8 +20,6 @@ public:
 
 	void add_gradient_stop(double stop_val, QColor color);
 
-	virtual LThemeable* clone() override;
-
 	QGradientStops gradient_stops() const;
 
 	void set_gradient_stops(QGradientStops gradient_stops);

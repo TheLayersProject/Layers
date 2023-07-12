@@ -30,7 +30,7 @@ void LStatePool::add_state(const QString& state)
 
 void LStatePool::set_state(const QString& state)
 {
-	if (m_states.contains(state) && m_state != state)
+	if (m_state != state && m_states.contains(state))
 	{
 		m_state = state;
 
