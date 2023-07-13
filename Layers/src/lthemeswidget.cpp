@@ -60,7 +60,10 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
+	m_spacer_1->fill()->set_uplink_attribute(this->fill());
+
 	m_spacer_2->setFixedWidth(12);
+	m_spacer_2->fill()->set_uplink_attribute(this->fill());
 
 	m_control_separator->hide();
 	m_control_separator->set_name("Separators");

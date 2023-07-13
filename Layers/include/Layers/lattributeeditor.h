@@ -16,6 +16,48 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
+class LLinksWidget : public LWidget
+{
+	Q_OBJECT
+
+public:
+	LLinksWidget(LAttribute* attr, QWidget* parent = nullptr);
+
+protected:
+	virtual void paintEvent(QPaintEvent* event) override;
+
+private:
+	void paint_item_dot(
+		QPainter* painter,
+		const QRect& item_rect,
+		int x);
+
+	void paint_item_text(
+		QPainter* painter,
+		const QString& text,
+		const QRect& item_rect,
+		QFont font,
+		int x);
+
+	void update_height();
+
+	QString m_parent_tag;
+
+	QStringList m_uplink_tags;
+	QStringList m_downlink_tags;
+
+	LSvgRenderer* m_dot_svg{ new LSvgRenderer(":/images/dot.svg", this) };
+
+	LSvgRenderer* m_uplink_arrow_svg{
+		new LSvgRenderer(":/images/uplink_arrow.svg", this) };
+
+	LSvgRenderer* m_downlink_arrow_svg{
+		new LSvgRenderer(":/images/downlink_arrow.svg", this) };
+
+	LSvgRenderer* m_downlink_arrow_2_svg{
+		new LSvgRenderer(":/images/downlink_arrow_2.svg", this) };
+};
+
 class LAYERS_EXPORT LAttributeEditor : public LWidget
 {
 	Q_OBJECT
@@ -33,14 +75,12 @@ public:
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;
 
-protected:
+private:
 	void init_attributes();
 	void init_layout();
 
 	QHBoxLayout* m_controls_layout{ new QHBoxLayout };
 	QHBoxLayout* m_icons_layout{ new QHBoxLayout };
-
-	QVBoxLayout* m_links_layout{ new QVBoxLayout };
 
 	LFillControl* m_fill_control{ new LFillControl };
 
@@ -66,7 +106,7 @@ protected:
 
 	QWidget* m_features_widget{ new QWidget };
 
-	LWidget* m_links_widget{ new LWidget };
+	LLinksWidget* m_links_widget;
 };
 LAYERS_NAMESPACE_END
 

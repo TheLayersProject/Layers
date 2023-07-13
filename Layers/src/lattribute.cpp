@@ -228,7 +228,7 @@ QString LAttribute::tag() const
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
 			return parent_attr->tag() + "." + m_name;
 		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
-			return parent_themeable->tag() + "." + m_name;
+			return parent_themeable->tag() + "/" + m_name;
 	}
 		
 	return m_name;

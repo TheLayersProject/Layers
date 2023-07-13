@@ -19,7 +19,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Main Window.Fill"
+      "linked_to": "Main Window/Fill"
     },
     "Margins.Bottom": {
       "value": 0

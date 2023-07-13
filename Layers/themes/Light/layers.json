@@ -24,7 +24,7 @@
       "value": 10
     },
     "Fill": {
-      "linked_to": "App.Primary"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -102,7 +102,7 @@
       "value": 5
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 8
@@ -117,23 +117,23 @@
       "value": 7
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Color Unit Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Hue Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Hue Line Editor": {
@@ -156,7 +156,7 @@
       "value": 5
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 8
@@ -171,15 +171,15 @@
       "value": 7
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Hue Radio Button": {
     "Active Dot Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Border.Fill": {
-      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
+      "linked_to": "Color Dialog/Hue Radio Button/Fill.Active"
     },
     "Border.Thickness": {
       "overrides": {
@@ -192,26 +192,26 @@
     "Fill": {
       "overrides": {
         "Active": {
-          "linked_to": "App.Foreground"
+          "linked_to": "App/Foreground"
         }
       },
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     }
   },
   "Color Dialog/Hue Unit Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Saturation Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Saturation Line Editor": {
@@ -234,7 +234,7 @@
       "value": 5
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 8
@@ -249,15 +249,15 @@
       "value": 7
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Saturation Radio Button": {
     "Active Dot Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Border.Fill": {
-      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
+      "linked_to": "Color Dialog/Saturation Radio Button/Fill.Active"
     },
     "Border.Thickness": {
       "overrides": {
@@ -270,18 +270,18 @@
     "Fill": {
       "overrides": {
         "Active": {
-          "linked_to": "App.Foreground"
+          "linked_to": "App/Foreground"
         }
       },
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     }
   },
   "Color Dialog/Saturation Unit Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Titlebar": {
@@ -304,7 +304,7 @@
       "value": 7
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -339,7 +339,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Color Dialog/Titlebar.Fill"
+      "linked_to": "Color Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -356,7 +356,7 @@
   },
   "Color Dialog/Titlebar/Exit Button/Graphic": {
     "Fill": {
-      "linked_to": "Color Dialog/Titlebar/Exit Button.Fill"
+      "linked_to": "Color Dialog/Titlebar/Exit Button/Fill"
     }
   },
   "Color Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -371,18 +371,18 @@
   },
   "Color Dialog/Titlebar/Title Label": {
     "Fill": {
-      "linked_to": "Color Dialog/Titlebar.Fill"
+      "linked_to": "Color Dialog/Titlebar/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Value Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Value Line Editor": {
@@ -405,7 +405,7 @@
       "value": 5
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 8
@@ -420,15 +420,15 @@
       "value": 7
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Color Dialog/Value Radio Button": {
     "Active Dot Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Border.Fill": {
-      "linked_to": "Color Dialog/Hue Radio Button.Fill.Active"
+      "linked_to": "Color Dialog/Value Radio Button/Fill.Active"
     },
     "Border.Thickness": {
       "overrides": {
@@ -441,18 +441,18 @@
     "Fill": {
       "overrides": {
         "Active": {
-          "linked_to": "App.Foreground"
+          "linked_to": "App/Foreground"
         }
       },
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     }
   },
   "Color Dialog/Value Unit Label": {
     "Fill": {
-      "linked_to": "Color Dialog.Fill"
+      "linked_to": "Color Dialog/Fill"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Create Theme Dialog": {
@@ -480,7 +480,7 @@
       "value": 10
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -543,7 +543,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Create Theme Dialog/Start As Label": {
@@ -551,7 +551,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Create Theme Dialog/Start Theme Combobox": {
@@ -645,7 +645,7 @@
       "value": 7
     },
     "Fill": {
-      "value": "#e1e1e1"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -680,7 +680,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Create Theme Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -715,7 +715,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Gradient Dialog": {
@@ -743,7 +743,7 @@
       "value": 10
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -821,7 +821,7 @@
       "value": 7
     },
     "Fill": {
-      "value": "#e1e1e1"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -856,7 +856,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Gradient Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -891,7 +891,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Main Window": {
@@ -919,7 +919,7 @@
       "value": 10
     },
     "Fill": {
-      "linked_to": "App.Primary"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -954,7 +954,7 @@
       "value": 6
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -989,7 +989,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Main Window.Fill"
+      "linked_to": "Main Window/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1024,7 +1024,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "App.Secondary"
+      "linked_to": "App/Secondary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1084,7 +1084,7 @@
     "common_color": {
       "overrides": {
         "Selected": {
-          "linked_to": "App.Foreground"
+          "linked_to": "App/Foreground"
         }
       },
       "value": "#5d5d5d"
@@ -1097,7 +1097,7 @@
     "Text Color": {
       "overrides": {
         "Selected": {
-          "linked_to": "App.Foreground"
+          "linked_to": "App/Foreground"
         }
       },
       "value": "#5d5d5d"
@@ -1123,7 +1123,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Main Window/Settings Menu.Fill"
+      "linked_to": "Main Window/Settings Menu/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1158,7 +1158,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Settings Menu/Themes Widget/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1204,7 +1204,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Settings Menu/Themes Widget/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1250,7 +1250,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Settings Menu/Themes Widget/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1296,7 +1296,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#c0c0c0"
+      "linked_to": "App/Foreground"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1322,10 +1322,10 @@
       "value": 10
     },
     "Fill": {
-      "value": "#c0c0c0"
+      "linked_to": "App/Tertiary"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Combobox/Items": {
@@ -1341,7 +1341,7 @@
       "value": "#a6a6a6"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "Main Window/Settings Menu/Themes Widget/Theme Combobox/Text Color"
     }
   },
   "Main Window/Settings Menu/Themes Widget/Theme Info Button": {
@@ -1364,7 +1364,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Settings Menu/Themes Widget/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1390,7 +1390,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Main Window/Titlebar": {
@@ -1413,7 +1413,7 @@
       "value": 6
     },
     "Fill": {
-      "linked_to": "Main Window.Fill"
+      "linked_to": "Main Window/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1448,7 +1448,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1494,7 +1494,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1540,7 +1540,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1577,10 +1577,10 @@
     "Fill": {
       "overrides": {
         "Active": {
-          "value": "#e1e1e1"
+          "linked_to": "App/Tertiary"
         }
       },
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Menu Tab Bar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1615,7 +1615,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "value": "#00ffffff"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1644,7 +1644,7 @@
   "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon": {},
   "Main Window/Titlebar/Menu Tab Bar/Tabs/Icon/Svg": {
     "common_color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Main Window/Titlebar/Menu Tab Bar/Tabs/Text Label": {
@@ -1652,7 +1652,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Main Window/Titlebar/Minimize Button": {
@@ -1675,7 +1675,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1721,7 +1721,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Main Window/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1772,7 +1772,7 @@
       "value": 10
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1792,7 +1792,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Compatibility Caution Dialog/Table Label": {
@@ -1800,12 +1800,12 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table": {
     "Border.Fill": {
-      "value": "#6a6a6a"
+      "linked_to": "App/Tertiary"
     },
     "Border.Thickness": {
       "value": 3
@@ -1823,18 +1823,18 @@
       "value": 5
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Theme Compatibility Caution Dialog/Fill"
     },
     "Item Fill": {
-      "value": "#ffffff"
+      "linked_to": "Theme Compatibility Caution Dialog/Theme Lineage Table/Fill"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells": {
     "Grid.Fill": {
-      "value": "#b0b0b0"
+      "linked_to": "App/Tertiary"
     },
     "Grid.Thickness": {
       "value": 3
@@ -1842,7 +1842,7 @@
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table/Cells/Checkmark Svg": {
     "common_color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Compatibility Caution Dialog/Theme Lineage Table/Horizontal Header": {
@@ -1865,10 +1865,10 @@
       "value": 2
     },
     "Fill": {
-      "value": "#b0b0b0"
+      "linked_to": "App/Tertiary"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Compatibility Caution Dialog/Titlebar": {
@@ -1891,7 +1891,7 @@
       "value": 7
     },
     "Fill": {
-      "value": "#e1e1e1"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1926,7 +1926,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Theme Compatibility Caution Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -1961,7 +1961,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#000000"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog": {
@@ -1989,7 +1989,7 @@
       "value": 10
     },
     "Fill": {
-      "linked_to": "App.Primary"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2047,19 +2047,19 @@
       "value": 0
     },
     "Corner Radii.Bottom Left": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button.Corner Radii.Bottom Right"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button/Corner Radii.Bottom Right"
     },
     "Corner Radii.Bottom Right": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors.Corner Radii.Bottom Right"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Corner Radii.Bottom Right"
     },
     "Corner Radii.Top Left": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button.Corner Radii.Top Right"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Collapse Button/Corner Radii.Top Right"
     },
     "Corner Radii.Top Right": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors.Corner Radii.Top Right"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Corner Radii.Top Right"
     },
     "Fill": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors.Fill"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2116,7 +2116,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Theme Editor Dialog/Attribute Editors.Fill"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2153,10 +2153,10 @@
     "Fill": {
       "overrides": {
         "Active": {
-          "linked_to": "App.Tertiary"
+          "linked_to": "App/Tertiary"
         }
       },
-      "linked_to": "Theme Editor Dialog/Attribute Editors/Features Tab Bar.Fill"
+      "linked_to": "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2220,7 +2220,7 @@
   "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Icon": {},
   "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Icon/Svg": {
     "common_color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog/Attribute Editors/Features Tab Bar/Tabs/Text Label": {
@@ -2228,7 +2228,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog/Attribute Editors/Fill Control": {
@@ -2404,7 +2404,7 @@
       "value": 3
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2439,7 +2439,7 @@
       "value": 3
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2465,7 +2465,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog/Attribute Editors/Line Editor": {
@@ -2526,7 +2526,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2539,6 +2539,21 @@
     },
     "Margins.Top": {
       "value": 0
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Links Widget/Dot Svg": {
+    "common_color": {
+      "linked_to": "App/Foreground"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Links Widget/Downlink Arrow Svg": {
+    "common_color": {
+      "value": "#4b4d50"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Links Widget/Uplink Arrow Svg": {
+    "common_color": {
+      "value": "#4b4d50"
     }
   },
   "Theme Editor Dialog/Attribute Editors/Slider": {
@@ -2646,6 +2661,41 @@
       "value": 0
     }
   },
+  "Theme Editor Dialog/Divider": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 0
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "App/Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
+    }
+  },
   "Theme Editor Dialog/Group Editors": {
     "Border.Fill": {
       "value": "#000000"
@@ -2666,7 +2716,7 @@
       "value": 10
     },
     "Fill": {
-      "linked_to": "Theme Editor Dialog.Fill"
+      "linked_to": "Theme Editor Dialog/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2701,7 +2751,7 @@
       "value": 0
     },
     "Fill": {
-      "linked_to": "Main Window/Theme Editor/Sidebar/Widget Editor/Group Editor.Fill"
+      "linked_to": "Theme Editor Dialog/Group Editors/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2743,7 +2793,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog/Titlebar": {
@@ -2766,7 +2816,7 @@
       "value": 7
     },
     "Fill": {
-      "linked_to": "App.Tertiary"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2801,7 +2851,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Theme Editor Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2818,7 +2868,7 @@
   },
   "Theme Editor Dialog/Titlebar/Exit Button/Graphic": {
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Theme Editor Dialog/Titlebar/Exit Button/Fill"
     }
   },
   "Theme Editor Dialog/Titlebar/Exit Button/Graphic/Svg": {
@@ -2836,7 +2886,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "linked_to": "App.Foreground"
+      "linked_to": "App/Foreground"
     }
   },
   "Update Dialog": {
@@ -2864,7 +2914,7 @@
       "value": 10
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "App/Primary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2884,7 +2934,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Update Dialog/Remind Me Later Button": {
@@ -2950,7 +3000,7 @@
       "value": 7
     },
     "Fill": {
-      "value": "#e1e1e1"
+      "linked_to": "App/Tertiary"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2985,7 +3035,7 @@
       "value": 0
     },
     "Fill": {
-      "value": "#ffffff"
+      "linked_to": "Update Dialog/Titlebar/Fill"
     },
     "Margins.Bottom": {
       "value": 0
@@ -3020,7 +3070,7 @@
       "value": "#ffffff"
     },
     "Text Color": {
-      "value": "#2e2e2e"
+      "linked_to": "App/Foreground"
     }
   },
   "Update Dialog/Update Button": {

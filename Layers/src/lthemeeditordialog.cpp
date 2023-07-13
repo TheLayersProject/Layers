@@ -31,6 +31,7 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 		m_themeable_tree_view, SIGNAL(selection_changed(LThemeable*)),
 		this, SLOT(edit_themeable(LThemeable*)));
 
+	m_divider->set_name("Divider");
 	m_divider->setFixedWidth(4);
 
 	m_attr_editors_widget->setSizePolicy(

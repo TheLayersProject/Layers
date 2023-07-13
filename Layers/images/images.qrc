@@ -12,6 +12,9 @@
         <file>combobox_icon.svg</file>
         <file>customize_theme.svg</file>
         <file>delete_theme.svg</file>
+        <file>dot.svg</file>
+        <file>downlink_arrow.svg</file>
+        <file>downlink_arrow_2.svg</file>
         <file>drop_down_icon.svg</file>
         <file>ellipsis.svg</file>
         <file>exit.svg</file>
@@ -36,5 +39,6 @@
         <file>themes_icon.svg</file>
         <file>titlebar_icon.svg</file>
         <file>update_icon.svg</file>
+        <file>uplink_arrow.svg</file>
     </qresource>
 </RCC>
