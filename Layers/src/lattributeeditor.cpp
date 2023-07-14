@@ -217,12 +217,30 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		LGraphic(":/images/chain_link.svg", QSize(11, 24)), "Links");
 	m_features_tab_bar->set_current_index(0);
 
+	connect(m_features_tab_bar, &LTabBar::index_changed, [this]
+	{
+		switch (m_features_tab_bar->current_index())
+		{
+		case 0:
+			m_links_widget->show();
+			m_overrides_widget->hide();
+			break;
+		case 1:
+			m_links_widget->hide();
+			m_overrides_widget->show();
+			break;
+		}
+	});
+
 	LTab* links_tab = m_features_tab_bar->tabs().last();
 	links_tab->text_label()->set_font_size(10.5);
 	links_tab->icon_label()->setFixedWidth(11);
 	links_tab->close_button()->hide();
 	links_tab->layout()->setContentsMargins(8, 0, 8, 0);
 	links_tab->layout()->setSpacing(7);
+
+	m_overrides_widget->set_name("Overrides Widget");
+	m_overrides_widget->hide();
 
 	if (attr)
 	{
@@ -261,6 +279,22 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_icons_layout->addWidget(link_icon_label);
 		}
 
+		if (attr->parent())
+			if (LThemeable* parent_t = dynamic_cast<LThemeable*>(attr->parent()))
+				if (!parent_t->state_pools().isEmpty())
+				{
+					m_features_tab_bar->add_tab(
+						LGraphic(":/images/overrides_icon.svg", QSize(13, 24)),
+						"Overrides");
+
+					LTab* overrides_tab = m_features_tab_bar->tabs().last();
+					overrides_tab->text_label()->set_font_size(10.5);
+					overrides_tab->icon_label()->setFixedWidth(13);
+					overrides_tab->close_button()->hide();
+					overrides_tab->layout()->setContentsMargins(8, 0, 8, 0);
+					overrides_tab->layout()->setSpacing(7);
+				}
+
 		if (attr->has_overrides())
 		{
 			LLabel* overrides_icon_label =
@@ -269,6 +303,16 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			overrides_icon_label->setAlignment(Qt::AlignCenter);
 			overrides_icon_label->setFixedSize(20, 26);
 			m_icons_layout->addWidget(overrides_icon_label);
+
+			for (LAttribute* override_attr : attr->overrides())
+			{
+				LAttributeEditor* override_editor =
+					new LAttributeEditor(override_attr);
+
+				override_editor->entangle_with(this);
+
+				m_overrides_layout->addWidget(override_editor);
+			}
 		}
 	}
 	else
@@ -285,6 +329,7 @@ QList<LThemeable*> LAttributeEditor::child_themeables(Qt::FindChildOptions optio
 
 	child_themeables.append(m_features_tab_bar);
 	child_themeables.append(m_links_widget);
+	child_themeables.append(m_overrides_widget);
 
 	return child_themeables;
 }
@@ -324,9 +369,14 @@ void LAttributeEditor::init_layout()
 	tab_layout->addStretch();
 	tab_layout->setContentsMargins(0, 0, 0, 0);
 
+	m_overrides_layout->setSpacing(3);
+	m_overrides_layout->setContentsMargins(5, 5, 5, 5);
+	m_overrides_widget->setLayout(m_overrides_layout);
+
 	QVBoxLayout* attr_features_layout = new QVBoxLayout;
 	attr_features_layout->addLayout(tab_layout);
 	attr_features_layout->addWidget(m_links_widget);
+	attr_features_layout->addWidget(m_overrides_widget);
 	attr_features_layout->setContentsMargins(5, 5, 5, 5);
 	attr_features_layout->setSpacing(0);
 	m_features_widget->setLayout(attr_features_layout);

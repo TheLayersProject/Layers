@@ -256,6 +256,8 @@ public:
 	*/
 	void set_name(const QString& name);
 
+	QList<LStatePool*> state_pools() const;
+
 	/*!
 		Returns a QStringList containing the available states of this themeable.
 
@@ -311,6 +313,7 @@ inline void LThemeable::entangle_with(T* t, bool entangle_children)
 			for (LAttribute* t_attr : t->child_attributes())
 				if (attr->name() == t_attr->name())
 				{
+					attr->clear_overrides();
 					attr->set_uplink_attribute(t_attr);
 					break;
 				}

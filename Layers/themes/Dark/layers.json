@@ -2024,7 +2024,7 @@
       "value": 10
     },
     "Fill": {
-      "value": "#33000000"
+      "value": "#1e2023"
     },
     "Margins.Bottom": {
       "value": 0
@@ -2519,6 +2519,41 @@
   "Theme Editor Dialog/Attribute Editors/Links Widget/Uplink Arrow Svg": {
     "common_color": {
       "value": "#4b4d50"
+    }
+  },
+  "Theme Editor Dialog/Attribute Editors/Overrides Widget": {
+    "Border.Fill": {
+      "value": "#000000"
+    },
+    "Border.Thickness": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 7
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 7
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Fill": {
+      "linked_to": "App/Tertiary"
+    },
+    "Margins.Bottom": {
+      "value": 0
+    },
+    "Margins.Left": {
+      "value": 0
+    },
+    "Margins.Right": {
+      "value": 0
+    },
+    "Margins.Top": {
+      "value": 0
     }
   },
   "Theme Editor Dialog/Attribute Editors/Slider": {

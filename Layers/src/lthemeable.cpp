@@ -8,6 +8,7 @@
 
 using Layers::LAttribute;
 using Layers::LGraphic;
+using Layers::LStatePool;
 using Layers::LTheme;
 using Layers::LThemeable;
 
@@ -25,13 +26,11 @@ void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
 	m_state_pools.append(state_pool);
 
 	state_pool->connect(state_pool, &LStatePool::changed, [this]
-		{
-			for (LAttribute* attr : child_attributes())
-				attr->changed();
-		});
+		{ update(); });
 
-	for (LThemeable* child_themeable : child_themeables())
-		child_themeable->add_state_pool(state_pool, include_children);
+	if (include_children)
+		for (LThemeable* child_themeable : child_themeables())
+			child_themeable->add_state_pool(state_pool, include_children);
 }
 
 void LThemeable::apply_theme(LTheme& theme)
@@ -209,6 +208,11 @@ void LThemeable::set_name(const QString& name)
 		delete m_name;
 
 	m_name = new QString(name);
+}
+
+QList<LStatePool*> LThemeable::state_pools() const
+{
+	return m_state_pools;
 }
 
 QStringList LThemeable::states() const

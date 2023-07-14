@@ -81,6 +81,7 @@ private:
 
 	QHBoxLayout* m_controls_layout{ new QHBoxLayout };
 	QHBoxLayout* m_icons_layout{ new QHBoxLayout };
+	QVBoxLayout* m_overrides_layout{ new QVBoxLayout };
 
 	LFillControl* m_fill_control{ new LFillControl };
 
@@ -107,6 +108,8 @@ private:
 	QWidget* m_features_widget{ new QWidget };
 
 	LLinksWidget* m_links_widget;
+
+	LWidget* m_overrides_widget{ new LWidget };
 };
 LAYERS_NAMESPACE_END
 

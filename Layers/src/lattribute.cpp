@@ -126,7 +126,12 @@ LAttribute::~LAttribute()
 
 void LAttribute::add_override(const QString& name, QVariant value)
 {
-	m_overrides[name] = new LAttribute(name, value, this);
+	LAttribute* override_attr = new LAttribute(name, value, this);
+
+	m_overrides[name] = override_attr;
+
+	connect(override_attr, &LAttribute::changed, [this]
+		{ emit changed(); });
 }
 
 void LAttribute::clear_overrides()
@@ -153,6 +158,9 @@ void LAttribute::copy(const LAttribute& attribute)
 			LAttribute* copy_override_attr = new LAttribute(override_attr->name());
 			copy_override_attr->copy(*override_attr);
 			copy_override_attr->setParent(this);
+
+			connect(copy_override_attr, &LAttribute::changed, [this]
+				{ emit changed(); });
 
 			m_overrides[override_attr->name()] = copy_override_attr;
 		}
@@ -185,6 +193,8 @@ void LAttribute::resolve_uplink()
 	if (!m_uplink_tag.isEmpty())
 		if (LAttribute* uplink_attr = layersApp->attribute(m_uplink_tag))
 			set_uplink_attribute(uplink_attr);
+
+	emit changed();
 }
 
 void LAttribute::set_uplink_attribute(LAttribute* uplink_attr)
