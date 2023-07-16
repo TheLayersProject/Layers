@@ -41,6 +41,9 @@ private:
 
 	void update_height();
 
+	LAttribute* m_text_color{
+		new LAttribute("Text Color", QColor(Qt::black), this) };
+
 	QString m_parent_tag;
 
 	QStringList m_uplink_tags;

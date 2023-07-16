@@ -150,7 +150,7 @@ void LLinksWidget::paint_item_text(
 		text
 	);
 
-	painter->fillPath(text_path, QColor(Qt::white));
+	painter->fillPath(text_path, m_text_color->as<QColor>());
 }
 
 void LLinksWidget::update_height()

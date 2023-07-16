@@ -948,10 +948,10 @@
       "value": 0
     },
     "Corner Radii.Top Left": {
-      "value": 6
+      "value": 0
     },
     "Corner Radii.Top Right": {
-      "value": 6
+      "value": 0
     },
     "Fill": {
       "linked_to": "App/Tertiary"
@@ -1974,7 +1974,7 @@
       }
     },
     "Border.Thickness": {
-      "value": 3
+      "value": 10
     },
     "Corner Radii.Bottom Left": {
       "value": 10
@@ -2504,6 +2504,9 @@
     },
     "Margins.Top": {
       "value": 0
+    },
+    "Text Color": {
+      "linked_to": "App/Foreground"
     }
   },
   "Theme Editor Dialog/Attribute Editors/Links Widget/Dot Svg": {
@@ -2661,6 +2664,39 @@
       "value": 0
     }
   },
+  "Theme Editor Dialog/Attribute Editors Scroll Area": {},
+  "Theme Editor Dialog/Attribute Editors Scroll Area/Vertical ScrollBar": {
+    "Background Color": {
+      "linked_to": "Theme Editor Dialog/Fill"
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Handle Color": {
+      "linked_to": "App/Tertiary"
+    },
+    "Handle Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Handle Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Handle Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Handle Corner Radii.Top Right": {
+      "value": 5
+    }
+  },
   "Theme Editor Dialog/Divider": {
     "Border.Fill": {
       "value": "#000000"
@@ -2794,6 +2830,54 @@
     },
     "Text Color": {
       "linked_to": "App/Foreground"
+    }
+  },
+  "Theme Editor Dialog/Tag Label": {
+    "Fill": {
+      "value": "#ffffff"
+    },
+    "Text Color": {
+      "linked_to": "App/Foreground"
+    }
+  },
+  "Theme Editor Dialog/Themeable Hierarchy Tree View": {
+    "Fill": {
+      "linked_to": "App/Secondary"
+    },
+    "Text Color": {
+      "linked_to": "App/Foreground"
+    }
+  },
+  "Theme Editor Dialog/Themeable Hierarchy Tree View/Vertical ScrollBar": {
+    "Background Color": {
+      "linked_to": "Theme Editor Dialog/Themeable Hierarchy Tree View/Fill"
+    },
+    "Corner Radii.Bottom Left": {
+      "value": 0
+    },
+    "Corner Radii.Bottom Right": {
+      "value": 10
+    },
+    "Corner Radii.Top Left": {
+      "value": 0
+    },
+    "Corner Radii.Top Right": {
+      "value": 0
+    },
+    "Handle Color": {
+      "linked_to": "App/Tertiary"
+    },
+    "Handle Corner Radii.Bottom Left": {
+      "value": 5
+    },
+    "Handle Corner Radii.Bottom Right": {
+      "value": 5
+    },
+    "Handle Corner Radii.Top Left": {
+      "value": 5
+    },
+    "Handle Corner Radii.Top Right": {
+      "value": 5
     }
   },
   "Theme Editor Dialog/Titlebar": {

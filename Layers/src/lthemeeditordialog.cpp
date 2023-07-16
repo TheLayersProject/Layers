@@ -11,13 +11,12 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 {
 	init_layout();
 	m_attr_editors_widget->installEventFilter(this);
-	setFixedSize(800, 600);
+	resize(800, 600);
 	set_icon(LGraphic(":/images/customize_theme.svg", QSize(24, 24)));
 	set_name("Theme Editor Dialog");
 
+	m_tag_label->set_name("Tag Label");
 	m_tag_label->setFixedHeight(40);
-	//m_topbar->setMouseTracking(true);
-	//m_topbar->set_name("Topbar");
 
 	m_control_attr_editor->set_name("Attribute Editors");
 	m_control_attr_editor->hide();
@@ -25,6 +24,7 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	m_control_attr_editor_group->set_name("Group Editors");
 	m_control_attr_editor_group->hide();
 
+	m_themeable_tree_view->set_name("Themeable Hierarchy Tree View");
 	m_themeable_tree_view->setFixedWidth(298);
 
 	connect(
@@ -37,6 +37,7 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	m_attr_editors_widget->setSizePolicy(
 		QSizePolicy::Minimum, QSizePolicy::Minimum);
 
+	m_attr_editors_scroll_area->set_name("Attribute Editors Scroll Area");
 	m_attr_editors_scroll_area->setHorizontalScrollBarPolicy(
 		Qt::ScrollBarAlwaysOff);
 	m_attr_editors_scroll_area->setWidget(m_attr_editors_widget);
@@ -109,13 +110,19 @@ void LThemeEditorDialog::edit_themeable(LThemeable* themeable)
 
 	update_attr_editors_max_width();
 
-	m_tag_label->setText(themeable->tag());
+	m_tag_text = themeable->tag();
+	update_tag_label();
 }
 
 void LThemeEditorDialog::init_layout()
 {
+	QHBoxLayout* tag_label_layout = new QHBoxLayout;
+	tag_label_layout->addWidget(m_tag_label);
+	tag_label_layout->setSpacing(0);
+	tag_label_layout->setContentsMargins(8, 0, 8, 0);
+
 	QVBoxLayout* right_vbox = new QVBoxLayout;
-	right_vbox->addWidget(m_tag_label);
+	right_vbox->addLayout(tag_label_layout);
 	right_vbox->addWidget(m_attr_editors_scroll_area);
 
 	m_attr_editors_layout->addStretch();
@@ -151,4 +158,13 @@ void LThemeEditorDialog::update_attr_editors_max_width()
 				m_attr_editors_scroll_area->width() -
 				(margins.left() + margins.right() + scroll_bar_width)
 			);
+}
+
+void LThemeEditorDialog::update_tag_label()
+{
+	QFontMetrics font_metrics = QFontMetrics(m_tag_label->font());
+
+	m_tag_label->setText(
+		font_metrics.elidedText(
+			m_tag_text, Qt::ElideLeft, m_tag_label->width()));
 }

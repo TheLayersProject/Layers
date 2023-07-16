@@ -35,6 +35,8 @@ private:
 
 	void update_attr_editors_max_width();
 
+	void update_tag_label();
+
 	bool m_is_root_themeable_set{ false };
 
 	QHBoxLayout* m_main_layout{ new QHBoxLayout };
@@ -44,6 +46,8 @@ private:
 	LThemeableTreeView* m_themeable_tree_view{ new LThemeableTreeView };
 
 	LWidget* m_divider{ new LWidget };
+
+	QString m_tag_text;
 
 	LLabel* m_tag_label{ new LLabel };
 
