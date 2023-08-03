@@ -24,18 +24,16 @@ LColorControl::~LColorControl()
 
 void LColorControl::click()
 {
-	LColorDialog* color_dialog = layersApp->color_dialog();
+	LColorDialog color_dialog;
+	color_dialog.apply_theme(activeTheme()->find_item("App/Color Dialog"));
+	color_dialog.color()->set_value(fill()->as<QColor>());
 
-	color_dialog->color()->set_value(fill()->as<QColor>());
-
-	if (color_dialog->exec())
+	if (color_dialog.exec())
 	{
-		fill()->set_value(color_dialog->color()->as<QColor>());
+		fill()->set_value(color_dialog.color()->as<QColor>());
 
 		emit color_changed();
 	}
-
-	color_dialog->hide();
 
 	open_on_release = false;
 }

@@ -26,7 +26,7 @@ public:
 
 	QString new_theme_name();
 
-	void set_current_start_theme_name(const QString& theme_name);
+	void set_current_start_theme_name(const QString& theme_id);
 
 public slots:
 	virtual int	exec();

@@ -4,7 +4,6 @@
 
 using Layers::LAttribute;
 using Layers::LLineEditor;
-using Layers::LTheme;
 
 LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 {
@@ -37,7 +36,6 @@ LLineEditor::~LLineEditor()
 		delete m_default_value;
 
 	delete m_left_padding;
-	delete m_text_color;
 	delete m_text;
 }
 

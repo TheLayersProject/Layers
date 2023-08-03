@@ -33,8 +33,6 @@ LMainWindow::LMainWindow(QWidget* parent) :
 	set_name("Main Window");
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-
-	layersApp->add_child_themeable_pointer(*this);
 	
 	m_settings_menu->hide();
 
@@ -48,16 +46,13 @@ LMainWindow::LMainWindow(QWidget* parent) :
 	m_separator->set_name("Separator");
 	m_separator->setFixedHeight(3);
 
-	assign_tag_prefixes();
+	m_theme_editor_dialog->apply_theme(
+		activeTheme()->find_item("App/Theme Editor Dialog"));
 }
 
 void LMainWindow::set_central_widget(LWidget* central_widget)
 {
 	m_central_widget = central_widget;
-
-	m_central_widget->assign_tag_prefixes();
-	m_central_widget->set_is_app_themeable(true);
-	m_central_widget->apply_theme(*layersApp->active_theme());
 
 	m_main_layout->addWidget(m_central_widget);
 
@@ -216,25 +211,24 @@ bool LMainWindow::nativeEvent(
 
 void LMainWindow::new_theme_clicked()
 {
-	LCreateThemeDialog* dialog = layersApp->create_theme_dialog();
+	LCreateThemeDialog dialog;
 
-	dialog->clear_theme_combobox();
+	dialog.apply_theme(activeTheme()->find_item("App/Create Theme Dialog"));
 
 	for (LTheme* theme : layersApp->themes())
 		if (theme->has_app_implementation(layersApp->app_identifier()))
-			dialog->add_theme_to_combobox(theme);
+			dialog.add_theme_to_combobox(theme);
 
-	dialog->set_current_start_theme_name(
-		layersApp->active_theme()->name());
+	dialog.set_current_start_theme_name(activeTheme()->id());
 
-	center_dialog(dialog);
+	center_dialog(&dialog);
 
-	dialog->show();
+	dialog.show();
 
-	if (dialog->exec() && !m_functionality_disabled)
+	if (dialog.exec())
 	{
-		LTheme* copy_theme = layersApp->theme(dialog->copy_theme_id());
-		LTheme* new_theme = new LTheme(dialog->new_theme_name());
+		LTheme* copy_theme = layersApp->theme(dialog.copy_theme_id());
+		LTheme* new_theme = new LTheme(dialog.new_theme_name());
 
 		layersApp->themes()[new_theme->id()] = new_theme;
 
@@ -274,13 +268,13 @@ void LMainWindow::new_theme_clicked()
 		layersApp->apply_theme(*new_theme);
 
 		for (int i = 0; i < theme_combobox->count(); i++)
-			if (theme_combobox->itemData(i) == new_theme->id())
+			if (theme_combobox->itemData(i).value<LTheme*>()->id() == new_theme->id())
 			{
 				theme_combobox->setCurrentIndex(i);
 				break;
 			}
 
-		dialog->clear();
+		dialog.clear();
 	}
 }
 
@@ -297,7 +291,7 @@ void LMainWindow::open_widget_changed(int old_index, int new_index)
 
 void LMainWindow::init_attributes()
 {
-	m_fill->set_uplink_attribute(layersApp->primary());
+	m_fill->set_link_attribute(layersApp->primary());
 
 	m_border_thickness->set_value(15.0);
 	m_border_fill->set_value(
@@ -330,10 +324,8 @@ void LMainWindow::init_themes_widget_connections()
 
 	connect(themes_widget->customize_theme_button(), &LButton::clicked, [this]
 	{
-		if (!layersApp->theme_editor_dialog()->is_root_themeable_set())
-			layersApp->theme_editor_dialog()->init_root_themeable();
-
-		layersApp->theme_editor_dialog()->show();
+		m_theme_editor_dialog->show();
+		m_theme_editor_dialog->raise();
 	});
 
 	connect(themes_widget->new_theme_button(), &LButton::clicked,
@@ -364,8 +356,5 @@ void LMainWindow::init_titlebar_connections()
 	});
 
 	connect(m_titlebar->exit_button(), &LButton::clicked, [this]
-	{
-		if (!m_functionality_disabled)
-			qApp->quit();
-	});
+		{ qApp->quit(); });
 }

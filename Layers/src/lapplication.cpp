@@ -7,40 +7,32 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QProcess>
+#include <QWidget>
 
 #include <Layers/ldownloader.h>
 #include <Layers/lgithubrepo.h>
-#include <Layers/lversion.h>
-#include <Layers/lmainwindow.h>
-#include <Layers/lcreatethemedialog.h>
-#include <Layers/lcolordialog.h>
-#include <Layers/lgradientdialog.h>
-#include <Layers/lthemecompatibilitycautiondialog.h>
-#include <Layers/lthemeeditordialog.h>
-#include <Layers/lupdatedialog.h>
 
 using Layers::LApplication;
 using Layers::LAttribute;
-using Layers::LColorDialog;
-using Layers::LCreateThemeDialog;
-using Layers::LGradientDialog;
 using Layers::LTheme;
 using Layers::LThemeable;
-using Layers::LThemeCompatibilityCautionDialog;
-using Layers::LThemeEditorDialog;
 using Layers::LMainWindow;
+
+LTheme* Layers::activeTheme()
+{
+	if (layersApp)
+		return layersApp->active_theme();
+	else
+		return nullptr;
+}
 
 LApplication::LApplication(
 	int& argc, char** argv,
 	const QString& name,
 	const QUuid& uuid,
-	QFile* icon_file,
-	LVersion* version,
 	LGitHubRepo* github_repo) :
 	m_name{ name },
 	m_uuid{ uuid },
-	m_icon_file{ icon_file },
-	m_version{ version },
 	m_github_repo{ github_repo },
 	m_settings{ QSettings(name, name) },
 	m_downloader{ new LDownloader(this) },
@@ -56,7 +48,7 @@ LApplication::LApplication(
 
 	init_directories();
 	init_fonts();
-	init_latest_version_tag();
+	init_latest_version();
 	setAttribute(Qt::AA_EnableHighDpiScaling);
 	setEffectEnabled(Qt::UI_AnimateCombo, false);
 	set_name("App");
@@ -66,28 +58,6 @@ LApplication::LApplication(
 		name_parts[i].replace(0, 1, name_parts[i][0].toLower());
 	m_name_underscored = name_parts.join("_");
 
-	m_create_theme_dialog = new LCreateThemeDialog;
-
-	m_color_dialog = new LColorDialog;
-
-	m_gradient_dialog = new LGradientDialog;
-
-	m_theme_compatibility_caution_dialog =
-		new LThemeCompatibilityCautionDialog;
-
-	m_theme_editor_dialog = new LThemeEditorDialog;
-
-	if (m_latest_version)
-		m_update_dialog =
-			new LUpdateDialog(m_version->to_string(), *m_latest_version);
-
-	add_child_themeable_pointer(*m_create_theme_dialog);
-	add_child_themeable_pointer(*m_color_dialog);
-	add_child_themeable_pointer(*m_gradient_dialog);
-	add_child_themeable_pointer(*m_theme_compatibility_caution_dialog);
-	add_child_themeable_pointer(*m_theme_editor_dialog);
-	add_child_themeable_pointer(*m_update_dialog);
-
 	init_themes();
 }
 
@@ -96,22 +66,10 @@ LApplication::~LApplication()
 	if (m_github_repo)
 		delete m_github_repo;
 
-	if (m_latest_version)
-		delete m_latest_version;
-
-	if (m_version)
-		delete m_version;
-
 	for (LTheme* theme : m_themes)
 		delete theme;
 
 	m_themes.clear();
-
-	delete m_create_theme_dialog;
-	delete m_color_dialog;
-	delete m_gradient_dialog;
-	delete m_theme_compatibility_caution_dialog;
-	delete m_update_dialog;
 }
 
 QString LApplication::app_identifier()
@@ -119,17 +77,11 @@ QString LApplication::app_identifier()
 	return m_name_underscored + "_" + m_uuid.toString(QUuid::WithoutBraces);
 }
 
-void LApplication::add_child_themeable_pointer(LThemeable& themeable)
-{
-	m_child_themeables.append(&themeable);
-}
-
 void LApplication::apply_theme(LTheme& theme)
 {
 	if (m_active_theme != &theme)
 	{
-		if (m_active_theme)
-			m_active_theme->clear();
+		LTheme* previous_active_theme = m_active_theme;
 
 		m_active_theme = &theme;
 
@@ -143,7 +95,7 @@ void LApplication::apply_theme(LTheme& theme)
 				QString theme_name = (theme_id.contains("_")) ?
 					theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
 
-				if (LTheme* theme = layersApp->theme(theme_name))
+				if (LTheme* theme = layersApp->theme(theme_id))
 					if (theme->has_app_implementation(app_identifier()))
 					{
 						QString app_file_name =
@@ -153,68 +105,61 @@ void LApplication::apply_theme(LTheme& theme)
 							theme->dir().filePath(app_file_name));
 						
 						if (last_CAT_app_file.exists())
+						{
 							last_CAT_app_file.copy(
 								m_active_theme->dir().filePath(app_file_name)
 							);
+
+							QFile::setPermissions(
+								m_active_theme->dir().filePath(app_file_name),
+								QFileDevice::WriteUser);
+
+							break;
+						}
 					}
 			}
 		}
 
 		m_active_theme->load(app_identifier());
 
-		LThemeable::apply_theme(theme);
+		clear_theme();
+
+		LThemeable::apply_theme(theme.find_item("App"));
 
 		m_settings.setValue("themes/active_theme", theme.id());
 
 		emit active_theme_changed();
-	}
-}
 
-LAttribute* LApplication::attribute(const QString& attr_tag)
-{
-	for (LAttribute* attr : child_attributes(Qt::FindChildrenRecursively))
-	{
-		if (attr->tag() == attr_tag)
-			return attr;
-		else
-		{
-			for (LAttribute* attr_override : attr->overrides())
-				if (attr_override->tag() == attr_tag)
-					return attr_override;
-		}
+		if (previous_active_theme)
+			previous_active_theme->clear();
 	}
-
-	return nullptr;
 }
 
 QList<LThemeable*> LApplication::child_themeables(Qt::FindChildOptions options)
 {
-	return m_child_themeables;
+	QList<LThemeable*> child_themeables;
+
+	for (QWidget* tl_widget : topLevelWidgets())
+		if (LThemeable* tl_themeable = dynamic_cast<LThemeable*>(tl_widget))
+			if (tl_themeable->name())
+				child_themeables.append(tl_themeable);
+
+	return child_themeables;
 }
 
-LCreateThemeDialog* LApplication::create_theme_dialog() const
-{
-	return m_create_theme_dialog;
-}
-
-LColorDialog* LApplication::color_dialog() const
-{
-	return m_color_dialog;
-}
-
-LTheme* LApplication::active_theme() const
+LTheme* LApplication::active_theme()
 {
 	return m_active_theme;
-}
-
-LGradientDialog* LApplication::gradient_dialog() const
-{
-	return m_gradient_dialog;
 }
 
 QFile* LApplication::icon_file()
 {
 	return m_icon_file;
+}
+
+QString LApplication::latest_version()
+{
+	return m_latest_version;
 }
 
 QMap<QString, LTheme*>& LApplication::themes()
@@ -224,63 +169,59 @@ QMap<QString, LTheme*>& LApplication::themes()
 
 bool LApplication::update_available()
 {
-	if (m_latest_version && m_version)
-		return *m_latest_version != m_version->to_string();
+	if (!m_latest_version.isEmpty() && !version().isEmpty())
+		return m_latest_version != version();
 	else
 		return false;
 }
 
-bool LApplication::update_on_request()
+QString LApplication::version()
 {
-	m_update_dialog->show();
+	return applicationVersion();
+}
 
-	if (m_update_dialog->exec())
+void LApplication::download_and_install_update()
+{
+	QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/releases");
+
+	QNetworkReply* repo_releases_json_download = m_downloader->download(repo_releases_json_download_url);
+
+	QEventLoop loop;
+	connect(repo_releases_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+	loop.exec();
+
+	if (repo_releases_json_download->error() == QNetworkReply::NoError)
 	{
-		QUrl repo_releases_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/releases");
+		QJsonArray repo_releases_json_array = QJsonDocument::fromJson(repo_releases_json_download->readAll()).array();
 
-		QNetworkReply* repo_releases_json_download = m_downloader->download(repo_releases_json_download_url);
+		QJsonArray release_assets_array = repo_releases_json_array.first().toObject()["assets"].toArray();
 
-		QEventLoop loop;
-		connect(repo_releases_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-		loop.exec();
-
-		if (repo_releases_json_download->error() == QNetworkReply::NoError)
+		for (QJsonValueRef release_asset : release_assets_array)
 		{
-			QJsonArray repo_releases_json_array = QJsonDocument::fromJson(repo_releases_json_download->readAll()).array();
+			QString release_asset_name = release_asset.toObject()["name"].toString();
 
-			QJsonArray release_assets_array = repo_releases_json_array.first().toObject()["assets"].toArray();
-
-			for (QJsonValueRef release_asset : release_assets_array)
+			if (release_asset_name.endsWith(".exe") || release_asset_name.endsWith(".msi"))
 			{
-				QString release_asset_name = release_asset.toObject()["name"].toString();
+				QDir temp_dir = local_app_data_path() + "Temp\\";
 
-				if (release_asset_name.endsWith(".exe") || release_asset_name.endsWith(".msi"))
+				QUrl latest_version_download_url = QUrl(release_asset.toObject()["browser_download_url"].toString());
+
+				if (!QFile::exists(latest_version_download_url.fileName()))
 				{
-					QDir temp_dir = local_app_data_path() + "Temp\\";
+					QNetworkReply* update_download = m_downloader->download(latest_version_download_url, temp_dir);
 
-					QUrl latest_version_download_url = QUrl(release_asset.toObject()["browser_download_url"].toString());
-
-					if (!QFile::exists(latest_version_download_url.fileName()))
-					{
-						QNetworkReply* update_download = m_downloader->download(latest_version_download_url, temp_dir);
-
-						QEventLoop loop;
-						connect(update_download, SIGNAL(finished()), &loop, SLOT(quit()));
-						loop.exec();
-					}
-
-					QStringList args = { "/SILENT" };
-
-					QProcess update_process;
-					update_process.startDetached(temp_dir.filePath(latest_version_download_url.fileName()), args);
-
-					return true;
+					QEventLoop loop;
+					connect(update_download, SIGNAL(finished()), &loop, SLOT(quit()));
+					loop.exec();
 				}
+
+				QStringList args = { "/SILENT" };
+
+				QProcess update_process;
+				update_process.startDetached(temp_dir.filePath(latest_version_download_url.fileName()), args);
 			}
 		}
 	}
-
-	return false;
 }
 
 void LApplication::rename_theme(const QString& theme_id, const QString& new_name)
@@ -323,34 +264,9 @@ void LApplication::reapply_theme()
 	apply_theme(*m_active_theme);
 }
 
-void LApplication::save_theme(LTheme& theme)
+void LApplication::set_version(const QString& version)
 {
-	QDir theme_dir = latest_T_version_path() + theme.id() + "\\";
-
-	if (!theme_dir.exists())
-		theme_dir.mkdir(".");
-
-	QFile theme_layers_file(theme_dir.absoluteFilePath("layers.json"));
-
-	if (!theme_layers_file.open(QIODevice::WriteOnly))
-	{
-		qDebug() << "Could not write theme layers file";
-		return;
-	}
-
-	theme_layers_file.write(theme.to_json_document(LThemeDataType::Layers).toJson());
-	theme_layers_file.close();
-
-	QFile app_theme_file(theme_dir.absoluteFilePath(app_identifier() + ".json"));
-
-	if (!app_theme_file.open(QIODevice::WriteOnly))
-	{
-		qDebug() << "Could not create theme app-implementation file";
-		return;
-	}
-
-	app_theme_file.write(theme.to_json_document(LThemeDataType::LApplication).toJson());
-	app_theme_file.close();
+	setApplicationVersion(version);
 }
 
 QSettings& LApplication::settings()
@@ -364,16 +280,6 @@ LTheme* LApplication::theme(const QString& theme_id)
 		return m_themes[theme_id];
 
 	return nullptr;
-}
-
-LThemeCompatibilityCautionDialog* LApplication::theme_compatibility_caution_dialog() const
-{
-	return m_theme_compatibility_caution_dialog;
-}
-
-LThemeEditorDialog* LApplication::theme_editor_dialog() const
-{
-	return m_theme_editor_dialog;
 }
 
 void LApplication::init_directories()
@@ -438,24 +344,26 @@ void LApplication::init_themes()
 		apply_theme(*m_themes["Dark"]);
 }
 
-void LApplication::init_latest_version_tag()
+void LApplication::init_latest_version()
 {
 	if (m_github_repo)
 	{
-		QUrl repo_tags_json_download_url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/tags");
+		QUrl url(m_github_api_repos_url_base + "/" + m_github_repo->to_string() + "/tags");
 
-		QNetworkReply* repo_tags_json_download = m_downloader->download(repo_tags_json_download_url);
+		QNetworkReply* download = m_downloader->download(url);
 
 		QEventLoop loop;
-		connect(repo_tags_json_download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+		connect(download, &QNetworkReply::finished, &loop, &QEventLoop::quit);
 		loop.exec();
 
-		if (repo_tags_json_download->error() == QNetworkReply::NoError)
+		if (download->error() == QNetworkReply::NoError)
 		{
-			QJsonDocument json_doc = QJsonDocument::fromJson(repo_tags_json_download->readAll());
+			QJsonDocument json_doc =
+				QJsonDocument::fromJson(download->readAll());
 
 			if (!json_doc.array().isEmpty())
-				m_latest_version = new QString(json_doc.array().first().toObject()["name"].toString());
+				m_latest_version =
+				json_doc.array().first().toObject()["name"].toString();
 		}
 	}
 }

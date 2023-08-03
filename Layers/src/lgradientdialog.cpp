@@ -31,8 +31,6 @@ LGradientDialog::LGradientDialog(QWidget* parent) :
     m_single_click_timer.setSingleShot(true);
 
     connect(&m_single_click_timer, &QTimer::timeout, this, &LGradientDialog::click_control);
-
-    assign_tag_prefixes();
 }
 
 void LGradientDialog::add_gradient_stop(double stop_val, QColor color)

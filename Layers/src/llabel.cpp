@@ -31,12 +31,10 @@ LLabel::LLabel(const LGraphic& graphic, QWidget* parent) :
 			connect(m_graphic->svg_renderer(), &LSvgRenderer::repaintNeeded,
 				[this] { QWidget::update(); });
 	}
-	else
+	else if (m_graphic->image_sequence())
 	{
-		connect(&m_timer, &QTimer::timeout, [this] {
-			m_timer.start(17);
-			QWidget::update();
-			});
+		connect(&m_timer, &QTimer::timeout, [this]
+			{ QWidget::update(); });
 
 		m_timer.start(17);
 	}

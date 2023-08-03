@@ -7,8 +7,9 @@
 #include "lattributeeditor.h"
 #include "lattributeeditorgroup.h"
 #include "ldialog.h"
+#include "lgrowingdotprogressindicator.h"
 #include "lscrollarea.h"
-#include "lthemeabletreeview.h"
+#include "lthemeview.h"
 
 LAYERS_NAMESPACE_BEGIN
 class LAYERS_EXPORT LThemeEditorDialog : public LDialog
@@ -18,15 +19,15 @@ class LAYERS_EXPORT LThemeEditorDialog : public LDialog
 public:
 	LThemeEditorDialog(QWidget* parent = nullptr);
 
-	void init_root_themeable();
-
-	bool is_root_themeable_set() const;
+	virtual void apply_theme(LThemeItem* theme_item) override;
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 
 public slots:
-	void edit_themeable(LThemeable* themeable);
+	void edit_theme_item(LThemeItem* theme_item);
+
+	void reset_save_timer();
 
 private:
 	void init_layout();
@@ -35,31 +36,37 @@ private:
 
 	void update_attr_editors_max_width();
 
-	void update_tag_label();
+	void update_path_label();
 
-	bool m_is_root_themeable_set{ false };
+	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
-	QHBoxLayout* m_main_layout{ new QHBoxLayout };
+	QHBoxLayout* m_hbox_layout{ new QHBoxLayout };
 
 	QVBoxLayout* m_attr_editors_layout{ new QVBoxLayout };
 
-	LThemeableTreeView* m_themeable_tree_view{ new LThemeableTreeView };
+	QHBoxLayout* m_status_bar_layout{ new QHBoxLayout };
+
+	LThemeView* m_theme_view{ new LThemeView };
 
 	LWidget* m_divider{ new LWidget };
 
-	QString m_tag_text;
+	QString m_path_text;
 
-	LLabel* m_tag_label{ new LLabel };
+	LLabel* m_path_label{ new LLabel };
 
 	LScrollArea* m_attr_editors_scroll_area{ new LScrollArea };
 
 	QWidget* m_attr_editors_widget{ new QWidget };
 
-	LAttributeEditor* m_control_attr_editor{
-		new LAttributeEditor(nullptr, this) };
+	LWidget* m_status_bar{ new LWidget };
 
-	LAttributeEditorGroup* m_control_attr_editor_group{
-		new LAttributeEditorGroup("", this) };
+	LLabel* m_check_label{
+		new LLabel(LGraphic(":/images/check.svg", QSize(16, 13))) };
+
+	LLabel* m_status_label{ new LLabel("Saved") };
+
+	LGrowingDotProgressIndicator* m_save_progress_indicator{
+		new LGrowingDotProgressIndicator };
 };
 LAYERS_NAMESPACE_END
 

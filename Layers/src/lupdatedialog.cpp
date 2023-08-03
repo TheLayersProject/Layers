@@ -1,20 +1,18 @@
 #include <Layers/lupdatedialog.h>
 
-#include <Layers/lapplication.h>
-
 using Layers::LUpdateDialog;
 using Layers::LThemeable;
 
 LUpdateDialog::LUpdateDialog(
-	const QString& current_version_tag,
-	const QString& latest_version_tag, QWidget* parent
+	const QString& version, const QString& latest_version,
+	QWidget* parent
 ) :
 	m_message_label{
 		new LLabel(
 			"There is an update available to download. "
 			"Would you like to update the software now?\n\n"
-			"Current Version: " + current_version_tag + "\n\n"
-			"Latest Version: " + latest_version_tag)
+			"Current Version: " + version + "\n\n"
+			"Latest Version: " + latest_version)
 	},
 	LDialog("Update Available", parent)
 {
@@ -37,8 +35,6 @@ LUpdateDialog::LUpdateDialog(
 	m_message_label->setWordWrap(true);
 
 	init_layout();
-
-	assign_tag_prefixes();
 }
 
 void LUpdateDialog::init_layout()

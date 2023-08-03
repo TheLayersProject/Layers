@@ -62,10 +62,10 @@ bool LTab::eventFilter(QObject* object, QEvent* event)
 
 void LTab::init()
 {
+	add_state_pool(m_status_states);
 	init_attributes();
 	init_layout();
 	installEventFilter(this);
-	add_state_pool(m_status_states);
 
 	m_status_states->set_state("Inactive");
 

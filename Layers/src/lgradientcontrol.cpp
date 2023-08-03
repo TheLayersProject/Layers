@@ -28,18 +28,18 @@ bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			LGradientDialog* gradient_dialog = layersApp->gradient_dialog();
+			LGradientDialog gradient_dialog;
+			gradient_dialog.apply_theme(
+				activeTheme()->find_item("App/Gradient Dialog"));
+			gradient_dialog.set_gradient_stops(fill()->as<QGradientStops>());
 
-			gradient_dialog->set_gradient_stops(fill()->as<QGradientStops>());
-
-			if (gradient_dialog->exec())
+			if (gradient_dialog.exec())
 			{
-				fill()->set_value(QVariant::fromValue(gradient_dialog->gradient_stops()));
+				fill()->set_value(
+					QVariant::fromValue(gradient_dialog.gradient_stops()));
 
 				emit gradient_changed();
 			}
-
-			gradient_dialog->hide();
 		}
 	}
 

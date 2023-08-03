@@ -2,6 +2,7 @@
 #define LATTRIBUTE_H
 
 #include <QHash>
+#include <QJsonObject>
 #include <QObject>
 #include <QVariant>
 
@@ -132,18 +133,19 @@ public:
 
 	void clear_overrides();
 
-	/*!
-		Copies the valuation of *attribute*.
-	*/
-	void copy(const LAttribute& attribute);
+	void clear_theme_attribute();
 
-	LAttributeList downlink_attributes() const;
+	LAttributeList dependent_attributes() const;
 
 	/*!
 		Returns true if this attribute's data is multi-valued. Otherwise,
 		returns false.
 	*/
 	bool has_overrides() const;
+
+	QJsonObject& json_object();
+
+	QString link_path() const;
 
 	/*!
 		Returns the name of the attribute.
@@ -152,7 +154,7 @@ public:
 
 	LAttributeMap overrides() const;
 
-	void resolve_uplink();
+	void set_theme_attribute(LAttribute* theme_attr);
 
 	/*!
 		Forces this attribute to point to the data of *attribute*.
@@ -169,7 +171,7 @@ public:
 		linked, this function gets called again so this attribute can get a
 		pointer to the new data.
 	*/
-	void set_uplink_attribute(LAttribute* uplink_attr);
+	void set_link_attribute(LAttribute* link_attr);
 
 	/*!
 		Sets the data's value.
@@ -180,7 +182,7 @@ public:
 	*/
 	void set_value(QVariant value);
 
-	QString tag() const;
+	QString path() const;
 
 	/*!
 		Returns attribute represented as a QJsonObject.
@@ -194,29 +196,42 @@ public:
 	*/
 	const char* typeName() const;
 
-	LAttribute* uplink_attribute() const;
+	LAttribute* link_attribute() const;
+
+private slots:
+	void update_json_object();
 
 private:
-	void establish_uplink_connection();
+	void establish_link_connections();
+	void establish_theme_connection();
 
-	QMetaObject::Connection m_uplink_connection;
+	QMetaObject::Connection m_link_connection;
+	QMetaObject::Connection m_link_destroyed_connection;
+	QMetaObject::Connection m_theme_connection;
 
-	LAttributeList m_downlink_attributes;
+	LAttributeList m_dependent_attrs;
 
-	LAttribute* m_uplink_attr{ nullptr };
+	LAttribute* m_theme_attr{ nullptr };
 
-	QString m_uplink_tag;
+	LAttribute* m_link_attr{ nullptr };
+
+	QString m_link_path;
 
 	QString m_name;
 
 	LAttributeMap m_overrides;
 
 	QVariant m_value;
+
+	QJsonObject m_json_object;
 };
 
 template<typename T>
 inline T LAttribute::as(const QStringList& states) const
 {
+	if (m_theme_attr)
+		return m_theme_attr->as<T>(states);
+
 	if (!m_overrides.isEmpty() && !states.isEmpty())
 	{
 		for (LAttribute* override_attr : m_overrides)
@@ -232,8 +247,8 @@ inline T LAttribute::as(const QStringList& states) const
 		// return the value of this
 	}
 
-	if (m_uplink_attr)
-		return m_uplink_attr->as<T>(states);
+	if (m_link_attr)
+		return m_link_attr->as<T>(states);
 
 	return m_value.value<T>();
 }

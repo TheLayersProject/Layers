@@ -4,13 +4,12 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattribute.h"
 #include "lstatepool.h"
+#include "lthemeitem.h"
 
 LAYERS_NAMESPACE_BEGIN
 
 class LGraphic;
-class LTheme;
 
 /*!
 	The LThemeable class is designed to be inherited alongside QWidget classes
@@ -164,19 +163,7 @@ public:
 		This function works recursively to apply the theme to the children in
 		the caller's hierarchy.
 	*/
-	virtual void apply_theme(LTheme& theme);
-
-	/*!
-		Assigns tag prefixes to the themeable.
-
-		This function works recursively to assign tag prefixes to the caller
-		and child themeables in the caller's hierarchy. Each themeable's
-		name gets added to *prefixes* as this function gets further down the
-		hierarchy.
-	*/
-	void assign_tag_prefixes(QStringList prefixes = QStringList());
-
-	QStringList attribute_group_names();
+	virtual void apply_theme(LThemeItem* theme_item);
 
 	QList<LAttribute*> child_attributes(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
@@ -187,18 +174,9 @@ public:
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
-	/*!
-		Copies attribute values of the caller and of child themeables in the
-		caller's hierarchy to *theme*.
-	*/
-	void copy_attribute_values_to(LTheme* theme);
+	void clear_theme();
 
-	/*!
-		Entangles this themeable with *themeable* by entangling all attributes
-		with the attributes of *themeable*.
-	*/
-	template<typename T>
-	void entangle_with(T* themeable, bool entangle_children = true);
+	LThemeItem* current_theme_item() const;
 
 	/*!
 		Returns a pointer to the themeable's icon.
@@ -208,25 +186,15 @@ public:
 	LGraphic* icon() const;
 
 	/*!
-		Returns true if the themeable was created by an application as opposed
-		to Layers; otherwise, returns false.
-	*/
-	bool is_app_themeable() const;
-
-	/*!
 		Returns a pointer to the name of this themeable.
 
 		Returns nullptr if no name has been set.
 	*/
 	QString* name() const;
 
-	/*!
-		Sets the functionality of this themeable and its children to *disabled*.
+	QString path();
 
-		This is used primarily to disable certain functionality of the active
-		preview widget of the LThemeEditor.
-	*/
-	void set_functionality_disabled(bool disabled = true);
+	LThemeable* parent_themeable();
 
 	/*!
 		Sets an icon for the themeable; replaces it if one already exists.
@@ -234,27 +202,13 @@ public:
 	void set_icon(const LGraphic& icon);
 
 	/*!
-		Marks the caller and its children as application themeables.
-	*/
-	void set_is_app_themeable(bool is_app_themeable);
-
-	/*!
-		Marks the caller and its children as themeables that are blocked from
-		being copied to a theme.
-	*/
-	void set_is_blocked_from_theme(bool is_blocked_from_theme);
-
-	/*!
-		Marks the caller and its children as preview themeables.
-	*/
-	void set_is_preview_themeable(bool is_preview_themeable);
-
-	/*!
 		Sets the name of this themeable.
 			
 		If a name already exists, it is replaced.
 	*/
 	void set_name(const QString& name);
+
+	void share_theme_item_with(LThemeable* themeable);
 
 	QList<LStatePool*> state_pools() const;
 
@@ -266,67 +220,19 @@ public:
 	*/
 	QStringList states() const;
 
-	/*!
-		Get the tag for this themeable.
-
-		If the tag has not been constructed yet, it will be constructed after
-		the first call to this function and then stored to be returned in
-		subsequent calls.
-	*/
-	QString& tag();
-
-	/*!
-		Returns a QStringList containing the tag prefixes of this themeable.
-	*/
-	QStringList tag_prefixes() const;
-
 	virtual void update();
 
 protected:
-	bool m_functionality_disabled{ false };
+	LThemeItem* m_current_theme_item{ nullptr };
 
 	LGraphic* m_icon{ nullptr };
-		
-	bool m_is_app_themeable{ false };
-
-	bool m_is_blocked_from_theme{ false };
-
-	bool m_is_preview_themeable{ false };
 
 	QString* m_name{ nullptr };
-		
-	QString m_tag{ "" };
+
+	QList<LThemeable*> m_sharing_with_themeables;
 
 	QList<LStatePool*> m_state_pools;
-
-	QStringList m_tag_prefixes;
-
-	bool m_tag_prefixes_assigned{ false };
 };
-
-template<typename T>
-inline void LThemeable::entangle_with(T* t, bool entangle_children)
-{
-	if (typeid(*this) == typeid(*t))
-	{
-		for (LAttribute* attr : child_attributes())
-			for (LAttribute* t_attr : t->child_attributes())
-				if (attr->name() == t_attr->name())
-				{
-					attr->clear_overrides();
-					attr->set_uplink_attribute(t_attr);
-					break;
-				}
-
-		if (entangle_children)
-			for (LThemeable* child_themeable : child_themeables())
-				if (child_themeable->m_name)
-					for (LThemeable* t_child_themeable : t->child_themeables())
-						if (t_child_themeable->m_name)
-							if (*t_child_themeable->m_name == *child_themeable->m_name)
-								child_themeable->entangle_with(t_child_themeable);
-	}
-}
 LAYERS_NAMESPACE_END
 
 #endif // LTHEMEABLE_H

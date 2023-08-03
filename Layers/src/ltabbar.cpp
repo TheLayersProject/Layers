@@ -9,10 +9,6 @@ using Layers::LTabBar;
 LTabBar::LTabBar(QWidget* parent) : LWidget(parent)
 {
 	init_layout();
-
-	m_control_tab->hide();
-	m_control_tab->set_icon(LGraphic(":/images/mll_icon.svg", QSize(20, 6)));
-	m_control_tab->set_name("Tabs");
 }
 
 void LTabBar::add_tab(const LGraphic& icon, const QString& text)
@@ -60,7 +56,10 @@ void LTabBar::init_layout()
 
 void LTabBar::_add_tab(LTab* tab)
 {
-	tab->entangle_with(m_control_tab);
+	tab->set_name("Tabs");
+
+	if (m_current_theme_item)
+		tab->apply_theme(m_current_theme_item->find_item({ "Tabs" }));
 
 	m_tabs.append(tab);
 	m_tab_layout->addWidget(tab);

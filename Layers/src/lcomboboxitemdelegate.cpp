@@ -2,13 +2,12 @@
 
 #include <QPainter>
 
-#include <Layers/lenums.h>
-
 using Layers::LComboBoxItemDelegate;
 
 LComboBoxItemDelegate::LComboBoxItemDelegate(QObject* parent) :
 	QStyledItemDelegate(parent)
 {
+	add_state_pool(m_select_states);
 	init_attributes();
 	set_name("Items");
 }

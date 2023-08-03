@@ -44,7 +44,6 @@ private:
 	LButton* m_theme_info_button{
 		new LButton(LGraphic(":/images/info_theme.svg", QSize(20, 20))) };
 
-	LWidget* m_control_separator{ new LWidget(this) };
 	LWidget* m_separator_1{ new LWidget };
 	LWidget* m_separator_2{ new LWidget };
 	LWidget* m_spacer_1{ new LWidget };

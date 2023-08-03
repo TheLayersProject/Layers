@@ -3,8 +3,13 @@
 #include <QIntValidator>
 #include <QPainterPath>
 
+#include <Layers/lthemeitem.h>
+
 using Layers::LAttributeEditor;
+using Layers::LFillControl;
+using Layers::LLineEditor;
 using Layers::LLinksWidget;
+using Layers::LMiniSlider;
 using Layers::LThemeable;
 
 LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
@@ -18,43 +23,42 @@ LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
 
 	m_dot_svg->set_name("Dot Svg");
 
-	m_uplink_arrow_svg->set_name("Uplink Arrow Svg");
+	m_link_arrow_svg->set_name("Link Arrow Svg");
 
-	m_downlink_arrow_svg->set_name("Downlink Arrow Svg");
-
-	m_downlink_arrow_2_svg->entangle_with(m_downlink_arrow_svg);
+	m_dependent_arrow_svg->set_name("Dependent Arrow Svg");
+	m_dependent_arrow_2_svg->set_name("Dependent Arrow Svg");
 
 	if (attr)
 	{
 		if (attr->parent())
-			if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(attr->parent()))
-				m_parent_tag = parent_themeable->tag();
+			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(attr->parent()))
+				m_parent_path = parent_theme_item->path();
 
-		if (LAttribute* uplink_attr = attr->uplink_attribute())
+		if (LAttribute* link_attr = attr->link_attribute())
 		{
-			while (uplink_attr)
+			while (link_attr)
 			{
-				QString uplink_tag = uplink_attr->tag();
+				QString link_path = link_attr->path();
 
-				if (!m_parent_tag.isEmpty())
-					if (uplink_tag.startsWith(m_parent_tag))
-						uplink_tag.replace(m_parent_tag, ".");
+				if (!m_parent_path.isEmpty())
+					if (link_path.startsWith(m_parent_path))
+						link_path.replace(m_parent_path, ".");
 
-				m_uplink_tags.insert(0, uplink_tag);
+				m_link_paths.insert(0, link_path);
 
-				uplink_attr = uplink_attr->uplink_attribute();
+				link_attr = link_attr->link_attribute();
 			}
 		}
 
-		for (LAttribute* downlink_attr : attr->downlink_attributes())
+		for (LAttribute* dependent_attr : attr->dependent_attributes())
 		{
-			QString downlink_tag = downlink_attr->tag();
+			QString dependent_path = dependent_attr->path();
 
-			if (!m_parent_tag.isEmpty())
-				if (downlink_tag.startsWith(m_parent_tag))
-					downlink_tag.replace(m_parent_tag, ".");
+			if (!m_parent_path.isEmpty())
+				if (dependent_path.startsWith(m_parent_path))
+					dependent_path.replace(m_parent_path, ".");
 
-			m_downlink_tags.append(downlink_tag);
+			m_dependent_paths.append(dependent_path);
 		}
 	}
 
@@ -70,17 +74,17 @@ void LLinksWidget::paintEvent(QPaintEvent* event)
 
 	int item_number = 0;
 
-	for (const QString& uplink_tag : m_uplink_tags)
+	for (const QString& link_path : m_link_paths)
 	{
 		QRect item_rect(
 			0, 40 * item_number++,
 			width(), 40);
 
 		paint_item_dot(&painter, item_rect, 9);
-		paint_item_text(&painter, uplink_tag, item_rect, font(), 27);
+		paint_item_text(&painter, link_path, item_rect, font(), 27);
 
 		int uplink_arrow_y = item_rect.y() + (item_rect.height() / 2) + 5;
-		m_uplink_arrow_svg->render(&painter,
+		m_link_arrow_svg->render(&painter,
 			QRectF(7, uplink_arrow_y, 12, 34));
 	}
 
@@ -92,9 +96,9 @@ void LLinksWidget::paintEvent(QPaintEvent* event)
 	paint_item_dot(&painter, this_text_rect, 9);
 	paint_item_text(&painter, "This", this_text_rect, bold_text_font, 27);
 
-	for (int i = 0; i < m_downlink_tags.size(); i++)
+	for (int i = 0; i < m_dependent_paths.size(); i++)
 	{
-		const QString& downlink_tag = m_downlink_tags[i];
+		const QString& dependent_path = m_dependent_paths[i];
 
 		QRect previous_item_rect(
 			0, 40 * (item_number - 1),
@@ -103,13 +107,13 @@ void LLinksWidget::paintEvent(QPaintEvent* event)
 		if (i == 0)
 		{
 			int downlink_arrow_y = previous_item_rect.y() + (previous_item_rect.height() / 2) + 5;
-			m_downlink_arrow_svg->render(&painter,
+			m_dependent_arrow_svg->render(&painter,
 				QRectF(7, downlink_arrow_y, 13, 37));
 		}
 		else
 		{
 			int downlink_arrow_y = previous_item_rect.y() + (previous_item_rect.height() / 2) - 7;
-			m_downlink_arrow_2_svg->render(&painter,
+			m_dependent_arrow_2_svg->render(&painter,
 				QRectF(12, downlink_arrow_y, 8, 48));
 		}
 
@@ -118,7 +122,7 @@ void LLinksWidget::paintEvent(QPaintEvent* event)
 			width(), 40);
 
 		paint_item_dot(&painter, item_rect, 19);
-		paint_item_text(&painter, downlink_tag, item_rect, font(), 37);
+		paint_item_text(&painter, dependent_path, item_rect, font(), 37);
 	}
 }
 
@@ -159,11 +163,11 @@ void LLinksWidget::update_height()
 
 	int new_height = 40;
 
-	if (m_uplink_tags.isEmpty());
+	if (m_link_paths.isEmpty());
 	else
-		new_height += 40 * m_uplink_tags.count();
+		new_height += 40 * m_link_paths.count();
 
-	new_height += 40 * m_downlink_tags.count();
+	new_height += 40 * m_dependent_paths.count();
 
 	setFixedHeight(new_height);
 }
@@ -181,9 +185,6 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	m_fill_control->set_name("Fill Control");
 
 	QIntValidator* int_validator = new QIntValidator(0, 30);
-
-	control_icon_label->hide();
-	control_icon_label->set_name("Icon Labels");
 
 	m_label->set_name("Label");
 	m_label->set_font_size(12);
@@ -262,26 +263,26 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		else if (QString(attr->typeName()) == "double")
 		{
 			m_line_editor->set_text(attr->as<QString>());
-			m_line_editor->text()->set_uplink_attribute(attr);
+			m_line_editor->text()->set_link_attribute(attr);
 
-			m_slider->value().set_uplink_attribute(m_line_editor->text());
+			m_slider->value().set_link_attribute(m_line_editor->text());
 
 			m_fill_control->hide();
 		}
 
-		if (attr->uplink_attribute())
+		if (attr->link_attribute())
 		{
 			LLabel* link_icon_label =
 				new LLabel(LGraphic(":/images/chain_link.svg", QSize(8, 18)));
-			link_icon_label->entangle_with(control_icon_label);
+			link_icon_label->set_name("Icon Labels");
 			link_icon_label->setAlignment(Qt::AlignCenter);
 			link_icon_label->setFixedSize(20, 26);
 			m_icons_layout->addWidget(link_icon_label);
 		}
 
 		if (attr->parent())
-			if (LThemeable* parent_t = dynamic_cast<LThemeable*>(attr->parent()))
-				if (!parent_t->state_pools().isEmpty())
+			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(attr->parent()))
+				if (parent_theme_item->is_overridable())
 				{
 					m_features_tab_bar->add_tab(
 						LGraphic(":/images/overrides_icon.svg", QSize(13, 24)),
@@ -299,7 +300,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		{
 			LLabel* overrides_icon_label =
 				new LLabel(LGraphic(":/images/overrides_icon.svg", QSize(10, 18)));
-			overrides_icon_label->entangle_with(control_icon_label);
+			overrides_icon_label->set_name("Icon Labels");
 			overrides_icon_label->setAlignment(Qt::AlignCenter);
 			overrides_icon_label->setFixedSize(20, 26);
 			m_icons_layout->addWidget(overrides_icon_label);
@@ -309,7 +310,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				LAttributeEditor* override_editor =
 					new LAttributeEditor(override_attr);
 
-				override_editor->entangle_with(this);
+				override_editor->set_name("Attribute Editors");
+				share_theme_item_with(override_editor);
 
 				m_overrides_layout->addWidget(override_editor);
 			}
@@ -332,6 +334,21 @@ QList<LThemeable*> LAttributeEditor::child_themeables(Qt::FindChildOptions optio
 	child_themeables.append(m_overrides_widget);
 
 	return child_themeables;
+}
+
+LFillControl* LAttributeEditor::fill_control() const
+{
+	return m_fill_control;
+}
+
+LLineEditor* LAttributeEditor::line_editor() const
+{
+	return m_line_editor;
+}
+
+LMiniSlider* LAttributeEditor::slider() const
+{
+	return m_slider;
 }
 
 void LAttributeEditor::init_attributes()

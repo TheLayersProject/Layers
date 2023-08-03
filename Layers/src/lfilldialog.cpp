@@ -63,9 +63,9 @@ LFillDialog::LFillDialog(QWidget* parent) : LWidget(parent)
 
 void LFillDialog::set_attribute(LAttribute* attribute)
 {
-	m_gradient_control->fill()->set_uplink_attribute(attribute);
+	m_gradient_control->fill()->set_link_attribute(attribute);
 
-	m_color_control->fill()->set_uplink_attribute(attribute);
+	m_color_control->fill()->set_link_attribute(attribute);
 
 	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
 	{

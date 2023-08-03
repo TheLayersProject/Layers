@@ -37,8 +37,6 @@ protected:
 private:
 	void init_attributes();
 
-	LFillDialog* m_control_dialog;
-
 	LFillDialog* m_dialog;
 };
 LAYERS_NAMESPACE_END

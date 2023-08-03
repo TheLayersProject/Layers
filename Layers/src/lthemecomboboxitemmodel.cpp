@@ -1,8 +1,8 @@
 #include <Layers/lthemecomboboxitemmodel.h>
 
 #include <Layers/lapplication.h>
-#include <Layers/lenums.h>
 
+using Layers::LTheme;
 using Layers::LThemeComboBoxItemModel;
 
 LThemeComboBoxItemModel::LThemeComboBoxItemModel(QObject* parent) :
@@ -10,52 +10,39 @@ LThemeComboBoxItemModel::LThemeComboBoxItemModel(QObject* parent) :
 
 void LThemeComboBoxItemModel::append(LTheme* value)
 {
-	beginInsertRows({}, m_data.count(), m_data.count());
-	m_data.append(value);
+	beginInsertRows({}, m_themes.count(), m_themes.count());
+	m_themes.append(value);
 	endInsertRows();
 }
 
 void LThemeComboBoxItemModel::clear()
 {
-	if (!m_data.isEmpty())
+	if (!m_themes.isEmpty())
 	{
 		beginResetModel();
-		m_data.clear();
+		m_themes.clear();
 		endResetModel();
 	}
 }
 
 QVariant LThemeComboBoxItemModel::data(const QModelIndex& index, int role) const
 {
-	LTheme* index_theme = m_data[index.row()];
+	if (!index.isValid())
+		return QVariant();
 
-	if (role == Qt::DisplayRole)
-		return index_theme->name();
+	else if (role == Qt::DisplayRole)
+		return m_themes[index.row()]->name();
+
 	else if (role == Qt::UserRole)
-	{
-		if (index_theme->uuid())
-			return index_theme->name() + "_" +
-				index_theme->uuid()->toString(QUuid::WithoutBraces);
-		else
-			return index_theme->name();
-	}
-	else if (role == Layers::UuidIfExists)
-	{
-		if (index_theme->uuid())
-			return index_theme->uuid()->toString(QUuid::WithoutBraces);
-		else
-			return QString();
-	}
-	else if (role == Layers::AppImplementationAvailable)
-		return index_theme->has_app_implementation(layersApp->app_identifier());
-	else
-		return {};
+		return QVariant::fromValue(m_themes[index.row()]);
+	
+	return QVariant();
 }
 
 int LThemeComboBoxItemModel::rowCount(const QModelIndex& index) const
 {
 	if (!index.isValid())
-		return m_data.count();
+		return m_themes.count();
 	else
 		return 0;
 }

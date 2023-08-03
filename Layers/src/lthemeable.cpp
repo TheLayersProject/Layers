@@ -2,14 +2,12 @@
 
 #include <QWidget>
 
-#include <Layers/lattribute.h>
 #include <Layers/lgraphic.h>
-#include <Layers/ltheme.h>
 
 using Layers::LAttribute;
 using Layers::LGraphic;
 using Layers::LStatePool;
-using Layers::LTheme;
+using Layers::LThemeItem;
 using Layers::LThemeable;
 
 LThemeable::~LThemeable()
@@ -33,64 +31,30 @@ void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
 			child_themeable->add_state_pool(state_pool, include_children);
 }
 
-void LThemeable::apply_theme(LTheme& theme)
+void LThemeable::apply_theme(LThemeItem* theme_item)
 {
 	if (!m_name)
 		qDebug() << "Unable to apply theme. "
 			"You must apply a name to the widget first.";
-	else
+	else if (*m_name == theme_item->name())
 	{
-		if (theme.contains_attributes_for_tag(tag()))
-		{
-			LAttributeMap& theme_attrs = theme[tag()];
+		m_current_theme_item = theme_item;
 
+		if (!theme_item->attributes().isEmpty())
 			for (LAttribute* attr : child_attributes())
-				if (theme_attrs.contains(attr->name()))
-					attr->copy(*theme_attrs[attr->name()]);
-		}
+				if (theme_item->attributes().contains(attr->name()))
+					attr->set_theme_attribute(
+						theme_item->attributes()[attr->name()]);
 
-		for (LThemeable* child_t : child_themeables())
-			if (child_t->m_name && child_t->m_tag_prefixes_assigned)
-				child_t->apply_theme(theme);
+		if (!theme_item->child_items().isEmpty())
+			for (LThemeable* child_t : child_themeables())
+				if (child_t->m_name)
+					if (theme_item->child_items().contains(*child_t->name()))
+						child_t->apply_theme(theme_item->child_items()[*child_t->name()]);
 
-		for (LAttribute* attr : child_attributes())
-		{
-			attr->resolve_uplink();
-
-			for (LAttribute* override_attr : attr->overrides())
-				override_attr->resolve_uplink();
-		}
+		for (LThemeable* themeable : m_sharing_with_themeables)
+			themeable->apply_theme(m_current_theme_item);
 	}
-}
-
-void LThemeable::assign_tag_prefixes(QStringList prefixes)
-{
-	if (m_name)
-	{
-		m_tag_prefixes.append(prefixes);
-		m_tag_prefixes_assigned = true;
-
-		prefixes.append(*m_name);
-
-		for (LThemeable* child_themeable : child_themeables())
-			child_themeable->assign_tag_prefixes(prefixes);
-	}
-}
-
-QStringList LThemeable::attribute_group_names()
-{
-	QStringList attribute_group_names;
-
-	for (LAttribute* attr : child_attributes())
-		if (attr->name().contains("."))
-		{
-			QString group_name = attr->name().split(".").first();
-
-			if (!attribute_group_names.contains(group_name))
-				attribute_group_names.append(attr->name().split(".").first());
-		}
-
-	return attribute_group_names;
 }
 
 QList<LAttribute*> LThemeable::child_attributes(Qt::FindChildOptions options)
@@ -136,15 +100,23 @@ QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
-void LThemeable::copy_attribute_values_to(LTheme* theme)
+void LThemeable::clear_theme()
 {
-	if (m_tag_prefixes_assigned && !m_is_blocked_from_theme)
+	if (m_current_theme_item)
 	{
-		theme->copy_attribute_values_of(this);
+		m_current_theme_item = nullptr;
 
-		for (LThemeable* child_themeable : child_themeables())
-			child_themeable->copy_attribute_values_to(theme);
+		for (LAttribute* attr : child_attributes())
+			attr->clear_theme_attribute();
+
+		for (LThemeable* child_t : child_themeables())
+			child_t->clear_theme();
 	}
+}
+
+LThemeItem* LThemeable::current_theme_item() const
+{
+	return m_current_theme_item;
 }
 
 LGraphic* LThemeable::icon() const
@@ -152,22 +124,42 @@ LGraphic* LThemeable::icon() const
 	return m_icon;
 }
 
-bool LThemeable::is_app_themeable() const
-{
-	return m_is_app_themeable;
-}
-
 QString* LThemeable::name() const
 {
 	return m_name;
 }
 
-void LThemeable::set_functionality_disabled(bool disabled)
+QString LThemeable::path()
 {
-	m_functionality_disabled = disabled;
+	QStringList path_names;
 
-	for (LThemeable* child_themeable : child_themeables())
-		child_themeable->set_functionality_disabled(disabled);
+	if (name())
+		path_names.append(*name());
+
+	LThemeable* t = parent_themeable();
+
+	while (t)
+	{
+		if (t->name())
+		{
+			path_names.insert(0, *t->name());
+			t = t->parent_themeable();
+		}
+		else
+			t = nullptr;
+	}
+
+	return path_names.join("/");
+}
+
+LThemeable* LThemeable::parent_themeable()
+{
+	if (QObject* object = dynamic_cast<QObject*>(this))
+		if (QObject* parent = object->parent())
+			if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent))
+				return parent_themeable;
+
+	return nullptr;
 }
 
 void LThemeable::set_icon(const LGraphic& icon)
@@ -178,36 +170,23 @@ void LThemeable::set_icon(const LGraphic& icon)
 	m_icon = new LGraphic(icon);
 }
 
-void LThemeable::set_is_app_themeable(bool is_app_themeable)
-{
-	m_is_app_themeable = is_app_themeable;
-
-	for (LThemeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
-		child_themeable->m_is_app_themeable = is_app_themeable;
-}
-
-void LThemeable::set_is_blocked_from_theme(bool is_blocked_from_theme)
-{
-	m_is_blocked_from_theme = is_blocked_from_theme;
-
-	for (LThemeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
-		child_themeable->m_is_blocked_from_theme = is_blocked_from_theme;
-}
-
-void LThemeable::set_is_preview_themeable(bool is_preview_themeable)
-{
-	m_is_preview_themeable = is_preview_themeable;
-
-	for (LThemeable* child_themeable : child_themeables(Qt::FindChildrenRecursively))
-		child_themeable->m_is_preview_themeable = is_preview_themeable;
-}
-
 void LThemeable::set_name(const QString& name)
 {
 	if (m_name)
 		delete m_name;
 
 	m_name = new QString(name);
+}
+
+void LThemeable::share_theme_item_with(LThemeable* themeable)
+{
+	if (themeable)
+	{
+		if (m_current_theme_item)
+			themeable->apply_theme(m_current_theme_item);
+
+		m_sharing_with_themeables.append(themeable);
+	}
 }
 
 QList<LStatePool*> LThemeable::state_pools() const
@@ -223,27 +202,6 @@ QStringList LThemeable::states() const
 		states.append(state_pool->state());
 
 	return states;
-}
-
-QString& LThemeable::tag()
-{
-	if (m_tag == "")
-	{
-		for (QString prefix : m_tag_prefixes)
-		{
-			m_tag += prefix + "/";
-		}
-
-		if (m_name)
-			m_tag += *m_name;
-	}
-
-	return m_tag;
-}
-
-QStringList LThemeable::tag_prefixes() const
-{
-	return m_tag_prefixes;
 }
 
 void LThemeable::update()

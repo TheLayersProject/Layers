@@ -3,13 +3,10 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
-#include <Layers/lthemeable.h>
-
 using Layers::LAttribute;
 using Layers::LAttributeMap;
 using Layers::LTheme;
-using Layers::LThemeable;
-using Layers::LThemeLineageData;
+using Layers::LThemeItem;
 
 LTheme::LTheme()
 {
@@ -59,7 +56,7 @@ LTheme::LTheme(const QString& name, QUuid* uuid, bool editable) :
 
 LTheme::~LTheme()
 {
-	clear();
+	delete m_root_item;
 
 	if (m_uuid)
 		delete m_uuid;
@@ -72,58 +69,13 @@ void LTheme::append_to_lineage(const QString& theme_id)
 
 void LTheme::clear()
 {
-	for (const QString& tag : m_hash.keys())
-		m_hash[tag].clear();
-
-	for (const QString& tag : m_hash_layers.keys())
-		m_hash_layers[tag].clear();
-
-
-	m_hash.clear();
-	m_hash_layers.clear();
-}
-
-void LTheme::clear_tag(const QString& tag)
-{
-	LAttributeMapHash* relevant_hash = nullptr;
-
-	if (m_hash.contains(tag))
-		relevant_hash = &m_hash;
-	else if (m_hash_layers.contains(tag))
-		relevant_hash = &m_hash_layers;
-
-	if (relevant_hash)
+	if (m_root_item)
 	{
-		(*relevant_hash)[tag].clear();
-
-		relevant_hash->remove(tag);
-	}
-}
-
-bool LTheme::contains_attributes_for_tag(const QString& tag)
-{
-	return
-		m_hash.contains(tag) ||
-		m_hash_layers.contains(tag);
-}
-
-void LTheme::copy_attribute_values_of(LThemeable* themeable)
-{
-	clear_tag(themeable->tag());
-
-	QList<LAttribute*> themeable_attrs = themeable->child_attributes();
-	LAttributeMap theme_attrs;
-
-	for (LAttribute* attr : themeable_attrs)
-	{
-		//if (!attr->link_established())
-		theme_attrs[attr->name()] = new LAttribute(*attr);
+		delete m_root_item;
+		m_root_item = nullptr;
 	}
 
-	if (themeable->is_app_themeable())
-		m_hash[themeable->tag()] = theme_attrs;
-	else
-		m_hash_layers[themeable->tag()] = theme_attrs;
+	m_file_items.clear();
 }
 
 QDir LTheme::dir() const
@@ -134,6 +86,16 @@ QDir LTheme::dir() const
 bool LTheme::editable()
 {
 	return m_editable;
+}
+
+LThemeItem* LTheme::find_item(const QStringList& name_list)
+{
+	return m_root_item->find_item(name_list);
+}
+
+LThemeItem* LTheme::find_item(const QString& path)
+{
+	return find_item(path.split("/"));
 }
 
 bool LTheme::has_app_implementation(const QString& app_id) const
@@ -161,47 +123,17 @@ void LTheme::load(const QString& app_id)
 {
 	if (m_dir.exists())
 	{
-		QFile layers_file(m_dir.filePath("layers.json"));
-		QFile app_file(m_dir.filePath(app_id + ".json"));
+		clear();
+		m_root_item = new LThemeItem("", {}, false, "");
 
-		if (!layers_file.open(QIODevice::ReadOnly))
-			qDebug() << "Could not read theme 'layers.json' file";
+		QFile layers_file = QFile(m_dir.filePath("layers.json"));
+		load_file(layers_file);
 
-		load_document(QJsonDocument::fromJson(layers_file.readAll()), LThemeDataType::Layers);
-
-		layers_file.close();
-
+		QFile app_file = QFile(m_dir.filePath(app_id + ".json"));
 		if (app_file.exists())
-		{
-			if (!app_file.open(QIODevice::ReadOnly))
-				qDebug() << "Could not read theme app file";
+			load_file(app_file);
 
-			load_document(QJsonDocument::fromJson(app_file.readAll()), LThemeDataType::LApplication);
-
-			app_file.close();
-		}
-	}
-}
-
-void LTheme::load_document(
-	const QJsonDocument& json_document, const LThemeDataType& data_type)
-{
-	QJsonObject json_object = json_document.object();
-
-	for (const QString& tag : json_object.keys())
-	{
-		QJsonObject themeable_object = json_object.value(tag).toObject();
-
-		LAttributeMap m_attr_map;
-
-		for (const QString& key : themeable_object.keys())
-			m_attr_map[key] = new LAttribute(
-				key, themeable_object.value(key).toObject());
-
-		if (data_type == LThemeDataType::LApplication)
-			m_hash[tag] = m_attr_map;
-		else if (data_type == LThemeDataType::Layers)
-			m_hash_layers[tag] = m_attr_map;
+		resolve_links(m_root_item);
 	}
 }
 
@@ -244,75 +176,168 @@ void LTheme::save_meta_file()
 	meta_file.close();
 }
 
-QStringList LTheme::themeable_tags()
-{
-	return
-		m_hash.keys() +
-		m_hash_layers.keys();
-}
-
 void LTheme::set_dir(QDir dir)
 {
 	m_dir = dir;
 }
 
-QJsonDocument LTheme::to_json_document(LThemeDataType data_type)
+void LTheme::resolve_links(LThemeItem* item)
 {
-	QJsonDocument document;
-
-	QJsonObject document_object;
-
-	switch (data_type)
+	auto resolve = [this](LAttribute* attr)
 	{
-	case (LThemeDataType::All):
-	case (LThemeDataType::LApplication):
-		for (const QString& tag : m_hash.keys())
+		if (!attr->link_path().isEmpty())
 		{
-			LAttributeMap& tag_attrs = m_hash[tag];
+			QStringList name_list = attr->link_path().split("/");
+			QString attr_name = name_list.takeLast();
 
-			QJsonObject tag_object;
-
-			for (const QString& key : tag_attrs.keys())
-				tag_object.insert(key, tag_attrs[key]->to_json_object());
-
-			document_object.insert(tag, tag_object);
+			if (LThemeItem* item = m_root_item->find_item(name_list))
+			{
+				for (LAttribute* item_attr : item->attributes())
+				{
+					if (item_attr->name() == attr_name)
+					{
+						attr->set_link_attribute(item_attr);
+						return;
+					}
+					else
+					{
+						for (LAttribute* override_attr : item_attr->overrides())
+							if (item_attr->name() + "." + override_attr->name() == attr_name)
+							{
+								attr->set_link_attribute(override_attr);
+								return;
+							}
+					}
+				}
+			}
 		}
+	};
 
-		if (data_type == LThemeDataType::LApplication)
-			break;
+	for (LAttribute* attr : item->attributes())
+	{
+		resolve(attr);
 
-		[[fallthrough]];
-
-	case (LThemeDataType::Layers):
-		for (const QString& tag : m_hash_layers.keys())
-		{
-			LAttributeMap& tag_attrs = m_hash_layers[tag];
-
-			QJsonObject tag_object;
-
-			for (const QString& key : tag_attrs.keys())
-				tag_object.insert(key, tag_attrs[key]->to_json_object());
-
-			document_object.insert(tag, tag_object);
-		}
+		for (LAttribute* override_attr : attr->overrides())
+			resolve(override_attr);
 	}
 
-	document.setObject(document_object);
-
-	return document;
+	for (LThemeItem* child_item : item->child_items())
+		resolve_links(child_item);
 }
 
-LAttributeMap& LTheme::operator[](const QString& tag)
+LThemeItem* LTheme::root_item() const
 {
-	if (m_hash.contains(tag))
-		return m_hash[tag];
-	else if (m_hash_layers.contains(tag))
-		return m_hash_layers[tag];
-	
-	return m_hash_layers[tag];
+	return m_root_item;
+}
+
+void LTheme::save()
+{
+	for (const QString& file_name : m_file_items.keys())
+	{
+		QJsonObject object = QJsonObject();
+
+		for (LThemeItem* theme_item : m_file_items[file_name])
+			object.insert(theme_item->path(), theme_item->to_json_object());
+
+		QJsonDocument document = QJsonDocument();
+
+		document.setObject(object);
+
+		QFile theme_file(file_name);
+
+		if (!theme_file.open(QIODevice::WriteOnly))
+		{
+			qDebug() << "Could not write theme file: " << file_name;
+			return;
+		}
+
+		theme_file.write(document.toJson(QJsonDocument::Indented));
+		theme_file.close();
+	}
 }
 
 QUuid* LTheme::uuid() const
 {
 	return m_uuid;
+}
+
+void LTheme::load_file(QFile& file)
+{
+	if (!file.open(QIODevice::ReadOnly))
+	{
+		qDebug() << __FUNCTION__ << ":"
+			<< " Could not read file:" << file.fileName();
+		return;
+	}
+
+	QJsonDocument document = QJsonDocument::fromJson(file.readAll());
+	file.close();
+
+	QJsonObject object = document.object();
+
+	for (const QString& name : object.keys())
+	{
+		if (name.contains("/"))
+		{
+			QStringList name_list = name.split("/");
+			QString new_name = name_list.takeLast();
+
+			if (LThemeItem* parent_item = m_root_item->find_item(name_list))
+			{
+				LThemeItem* new_item = init_item(
+					new_name, object.value(name).toObject(), file.fileName(),
+					parent_item);
+
+				m_file_items[file.fileName()].append(new_item);
+
+				parent_item->append_child(new_item);
+			}
+		}
+		else
+		{
+			LThemeItem* new_item = init_item(
+				name, object.value(name).toObject(), file.fileName(),
+				m_root_item);
+
+			m_file_items[file.fileName()].append(new_item);
+
+			m_root_item->append_child(new_item);
+		}
+	}
+}
+
+LThemeItem* LTheme::init_item(const QString& name,
+	QJsonObject item_object, const QString& file_name, LThemeItem* parent)
+{
+	LAttributeMap attributes;
+
+	if (item_object.contains("attributes"))
+	{
+		QJsonObject attrs_object = item_object.value("attributes").toObject();
+		
+		for (const QString& key : attrs_object.keys())
+			attributes[key] = new LAttribute(
+				key, attrs_object.value(key).toObject());
+	}
+
+	bool is_overridable = false;
+
+	if (item_object.contains("is_overridable") &&
+		item_object.value("is_overridable").toBool())
+		is_overridable = true;
+
+	LThemeItem* item =
+		new LThemeItem(name, attributes, is_overridable, file_name, parent);
+
+	if (item_object.contains("children"))
+	{
+		QJsonObject children_object = item_object.value("children").toObject();
+
+		for (const QString& key : children_object.keys())
+			item->append_child(
+				init_item(key,
+					children_object.value(key).toObject(), file_name, item));
+	}
+
+	return item;
 }

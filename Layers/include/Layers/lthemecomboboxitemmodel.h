@@ -6,7 +6,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include <Layers/ltheme.h>
+#include "ltheme.h"
 
 LAYERS_NAMESPACE_BEGIN
 class LAYERS_EXPORT LThemeComboBoxItemModel : public QAbstractListModel
@@ -17,7 +17,6 @@ public:
 	LThemeComboBoxItemModel(QObject* parent = nullptr);
 
 	void append(LTheme* value);
-	//void append(const ThemeLineageData& value);
 
 	void clear();
 
@@ -26,7 +25,7 @@ public:
 	virtual int rowCount(const QModelIndex& index) const override;
 
 private:
-	QList<LTheme*> m_data{ QList<LTheme*>() };
+	QList<LTheme*> m_themes{ QList<LTheme*>() };
 };
 LAYERS_NAMESPACE_END
 

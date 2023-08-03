@@ -6,6 +6,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lthemeeditordialog.h"
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -80,6 +81,8 @@ private:
 	LWidget* m_central_widget{ nullptr };
 
 	LSettingsMenu* m_settings_menu;
+
+	LThemeEditorDialog* m_theme_editor_dialog{ new LThemeEditorDialog };
 };
 LAYERS_NAMESPACE_END
 

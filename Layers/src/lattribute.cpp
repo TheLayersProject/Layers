@@ -2,7 +2,6 @@
 
 #include <QGradientStops>
 #include <QJsonArray>
-#include <QJsonObject>
 
 #include <Layers/lapplication.h>
 
@@ -28,12 +27,12 @@ LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
 }
 
 LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* parent) :
-	m_name{ name },
+	m_name{ name }, m_json_object{ json_object },
 	QObject(parent)
 {
 	if (json_object.contains("linked_to"))
 	{
-		m_uplink_tag = json_object.value("linked_to").toString();
+		m_link_path = json_object.value("linked_to").toString();
 
 		m_value = QVariant();
 	}
@@ -89,13 +88,23 @@ LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* pa
 			json_object.value("overrides").toObject();
 
 		for (const QString& key : overrides_object.keys())
-			m_overrides[key] =
+		{
+			LAttribute* override_attr =
 				new LAttribute(key, overrides_object.value(key).toObject(), this);
+
+			m_overrides[key] = override_attr;
+
+			connect(override_attr, &LAttribute::changed, [this]
+				{ emit changed(); });
+		}
 	}
+
+	connect(this, &LAttribute::changed, [this]
+		{ m_json_object = to_json_object(); });
 }
 
 LAttribute::LAttribute(const LAttribute& attribute) :
-	m_uplink_tag{ attribute.m_uplink_tag },
+	m_link_path{ attribute.m_link_path },
 	m_name{ attribute.m_name },
 	m_value{ attribute.m_value },
 	QObject()
@@ -113,14 +122,16 @@ LAttribute::LAttribute(const LAttribute& attribute) :
 
 LAttribute::~LAttribute()
 {
-	QObject::disconnect(m_uplink_connection);
+	disconnect(m_link_connection);
+	disconnect(m_link_destroyed_connection);
+	disconnect(m_theme_connection);
 
-	if (m_uplink_attr)
+	if (m_link_attr)
 	{
-		if (m_uplink_attr->m_downlink_attributes.contains(this))
-			m_uplink_attr->m_downlink_attributes.removeOne(this);
+		if (m_link_attr->m_dependent_attrs.contains(this))
+			m_link_attr->m_dependent_attrs.removeOne(this);
 
-		m_uplink_attr = nullptr;
+		m_link_attr = nullptr;
 	}
 }
 
@@ -145,37 +156,31 @@ void LAttribute::clear_overrides()
 	}
 }
 
-void LAttribute::copy(const LAttribute& attribute)
+void LAttribute::clear_theme_attribute()
 {
-	clear_overrides();
+	m_theme_attr = nullptr;
 
-	m_uplink_tag = attribute.m_uplink_tag;
-	m_value = attribute.m_value;
-
-	if (!attribute.m_overrides.isEmpty())
-		for (LAttribute* override_attr : attribute.m_overrides)
-		{
-			LAttribute* copy_override_attr = new LAttribute(override_attr->name());
-			copy_override_attr->copy(*override_attr);
-			copy_override_attr->setParent(this);
-
-			connect(copy_override_attr, &LAttribute::changed, [this]
-				{ emit changed(); });
-
-			m_overrides[override_attr->name()] = copy_override_attr;
-		}
-	
-	emit changed();
+	disconnect(m_theme_connection);
 }
 
-LAttributeList LAttribute::downlink_attributes() const
+LAttributeList LAttribute::dependent_attributes() const
 {
-	return m_downlink_attributes;
+	return m_dependent_attrs;
 }
 
 bool LAttribute::has_overrides() const
 {
 	return !m_overrides.isEmpty();
+}
+
+QJsonObject& LAttribute::json_object()
+{
+	return m_json_object;
+}
+
+QString LAttribute::link_path() const
+{
+	return m_link_path;
 }
 
 QString LAttribute::name() const
@@ -188,34 +193,32 @@ LAttributeMap LAttribute::overrides() const
 	return m_overrides;
 }
 
-void LAttribute::resolve_uplink()
+void LAttribute::set_theme_attribute(LAttribute* theme_attr)
 {
-	if (!m_uplink_tag.isEmpty())
-		if (LAttribute* uplink_attr = layersApp->attribute(m_uplink_tag))
-			set_uplink_attribute(uplink_attr);
+	m_theme_attr = theme_attr;
+
+	establish_theme_connection();
 
 	emit changed();
 }
 
-void LAttribute::set_uplink_attribute(LAttribute* uplink_attr)
+void LAttribute::set_link_attribute(LAttribute* link_attr)
 {
 	m_value = QVariant();
 
-	QObject::disconnect(m_uplink_connection);
-
-	if (m_uplink_attr)
+	if (m_link_attr)
 	{
-		if (m_uplink_attr->m_downlink_attributes.contains(this))
-			m_uplink_attr->m_downlink_attributes.removeOne(this);
+		if (m_link_attr->m_dependent_attrs.contains(this))
+			m_link_attr->m_dependent_attrs.removeOne(this);
 
-		m_uplink_attr = nullptr;
+		m_link_attr = nullptr;
 	}
 
-	m_uplink_attr = uplink_attr;
+	m_link_attr = link_attr;
 
-	m_uplink_attr->m_downlink_attributes.append(this);
+	m_link_attr->m_dependent_attrs.append(this);
 
-	establish_uplink_connection();
+	establish_link_connections();
 
 	emit linked();
 	emit changed();
@@ -223,22 +226,24 @@ void LAttribute::set_uplink_attribute(LAttribute* uplink_attr)
 
 void LAttribute::set_value(QVariant value)
 {
-	if (m_uplink_attr)
-		m_uplink_attr->set_value(value);
+	if (m_link_attr)
+		m_link_attr->set_value(value);
 	else if (m_value != value)
 		m_value = value;
 
 	emit changed();
 }
 
-QString LAttribute::tag() const
+QString LAttribute::path() const
 {
 	if (parent())
 	{
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
-			return parent_attr->tag() + "." + m_name;
+			return parent_attr->path() + "." + m_name;
 		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
-			return parent_themeable->tag() + "/" + m_name;
+			return parent_themeable->path() + "/" + m_name;
+		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
+			return parent_theme_item->path() + "/" + m_name;
 	}
 		
 	return m_name;
@@ -246,24 +251,19 @@ QString LAttribute::tag() const
 
 const char* LAttribute::typeName() const
 {
-	if (m_uplink_attr)
-		return m_uplink_attr->typeName();
+	if (m_link_attr)
+		return m_link_attr->typeName();
 
 	return m_value.typeName();
 }
 
 QJsonObject LAttribute::to_json_object()
 {
-	qDebug() << "Name:" << m_name;
-
 	QJsonObject json_object;
 
-	if (!m_uplink_tag.isEmpty())
+	if (!m_link_path.isEmpty())
 	{
-		qDebug() << "### ATTRIBUTE LINKED ###";
-		qDebug() << "Name:" << m_name;
-
-		json_object.insert("linked_to", m_uplink_tag);
+		json_object.insert("linked_to", m_link_path);
 	}
 	else if (m_value.isValid())
 	{
@@ -329,15 +329,39 @@ QJsonValue LAttribute::to_json_value()
 	return json_value;
 }
 
-LAttribute* LAttribute::uplink_attribute() const
+LAttribute* LAttribute::link_attribute() const
 {
-	return m_uplink_attr;
+	return m_link_attr;
 }
 
-void LAttribute::establish_uplink_connection()
+void LAttribute::update_json_object()
 {
-	QObject::disconnect(m_uplink_connection);
+	if (!m_link_path.isEmpty())
+	{
+		m_json_object.insert("linked_to", QJsonValue(m_link_path));
+	}
+	else if (m_value.isValid())
+	{
+		m_json_object.insert("value", to_json_value());
+	}
+}
 
-	m_uplink_connection = connect(m_uplink_attr, &LAttribute::changed,
+void LAttribute::establish_link_connections()
+{
+	disconnect(m_link_connection);
+	disconnect(m_link_destroyed_connection);
+
+	m_link_connection = connect(m_link_attr, &LAttribute::changed,
+		[this] { emit changed(); });
+
+	m_link_destroyed_connection = connect(m_link_attr, &QObject::destroyed,
+		[this] { m_link_attr = nullptr; });
+}
+
+void LAttribute::establish_theme_connection()
+{
+	disconnect(m_theme_connection);
+
+	m_theme_connection = connect(m_theme_attr, &LAttribute::changed,
 		[this] { emit changed(); });
 }

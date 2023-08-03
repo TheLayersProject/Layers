@@ -22,19 +22,17 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 		m_theme_combobox->addItem(theme);
 
 	for (int i = 0; i < m_theme_combobox->count(); i++)
-		if (m_theme_combobox->itemData(i) == layersApp->active_theme()->id())
+		if (m_theme_combobox->itemData(i).value<LTheme*>() == activeTheme())
 		{
 			m_theme_combobox->setCurrentIndex(i);
 			break;
 		}
 
 	connect(m_theme_combobox, &LThemeComboBox::currentIndexChanged, [this]
-		{
-			if (!m_functionality_disabled)
-				layersApp->apply_theme(
-					*layersApp->theme(m_theme_combobox->currentData().toString())
-				);
-		});
+	{
+		layersApp->apply_theme(
+			*m_theme_combobox->currentData().value<LTheme*>());
+	});
 
 	m_theme_buttons_handler_connection =
 		connect(layersApp, &LApplication::active_theme_changed, [this]
@@ -42,7 +40,7 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 				handle_theme_buttons_visibility();
 			});
 
-	if (!layersApp->active_theme()->editable())
+	if (!activeTheme()->editable())
 		show_custom_theme_buttons(false);
 
 	m_new_theme_button->set_name("New Theme Button");
@@ -53,21 +51,17 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 
 	m_theme_info_button->set_name("Theme Info Button");
 
-	m_separator_1->entangle_with(m_control_separator);
+	m_separator_1->set_name("Separators");
 	m_separator_1->setFixedSize(1, 30);
 
-	m_separator_2->entangle_with(m_control_separator);
+	m_separator_2->set_name("Separators");
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);
-	m_spacer_1->fill()->set_uplink_attribute(this->fill());
+	m_spacer_1->fill()->set_link_attribute(this->fill());
 
 	m_spacer_2->setFixedWidth(12);
-	m_spacer_2->fill()->set_uplink_attribute(this->fill());
-
-	m_control_separator->hide();
-	m_control_separator->set_name("Separators");
-	m_control_separator->setFixedSize(1, 30);
+	m_spacer_2->fill()->set_link_attribute(this->fill());
 
 	init_layout();
 }
@@ -79,7 +73,7 @@ LThemesWidget::~LThemesWidget()
 
 void LThemesWidget::handle_theme_buttons_visibility()
 {
-	if (layersApp->active_theme()->editable())
+	if (activeTheme()->editable())
 		show_custom_theme_buttons();
 	else
 		show_custom_theme_buttons(false);

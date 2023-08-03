@@ -7,12 +7,13 @@
 #include "ldialog.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LUpdateDialog : public LDialog
+class LAYERS_EXPORT LUpdateDialog : public LDialog
 {
 	Q_OBJECT
 
 public:
-	LUpdateDialog(const QString& current_version_tag, const QString& latest_version_tag, QWidget* parent = nullptr);
+	LUpdateDialog(const QString& version, const QString& latest_version,
+		QWidget* parent = nullptr);
 
 private:
 	void init_layout();

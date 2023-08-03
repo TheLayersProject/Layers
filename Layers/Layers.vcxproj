@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\lthemeabletreeitem.cpp" />
-    <ClCompile Include="src\lthemeabletreemodel.cpp" />
-    <ClCompile Include="src\lthemeabletreeview.cpp" />
+    <ClCompile Include="src\lgrowingdotprogressindicator.cpp" />
+    <ClCompile Include="src\lthememodel.cpp" />
+    <ClCompile Include="src\lthemeview.cpp" />
     <ClCompile Include="src\lthemeeditordialog.cpp" />
     <ClCompile Include="src\lapplication.cpp" />
     <ClCompile Include="src\lattribute.cpp" />
@@ -65,11 +65,11 @@
     <ClCompile Include="src\lthemecomboboxitemmodel.cpp" />
     <ClCompile Include="src\lthemecompatibilitycautiondialog.cpp" />
     <ClCompile Include="src\lthemecompatibilityitemdelegate.cpp" />
+    <ClCompile Include="src\lthemeitem.cpp" />
     <ClCompile Include="src\lthemelineagemodel.cpp" />
     <ClCompile Include="src\lthemeswidget.cpp" />
     <ClCompile Include="src\ltoggleswitch.cpp" />
     <ClCompile Include="src\lupdatedialog.cpp" />
-    <ClCompile Include="src\lversion.cpp" />
     <ClCompile Include="src\lwidget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -97,18 +97,18 @@
     <QtMoc Include="include\Layers\lapplication.h" />
     <ClInclude Include="include\Layers\lcalculate.h" />
     <ClInclude Include="include\Layers\lcolor.h" />
-    <ClInclude Include="include\Layers\lenums.h" />
     <ClInclude Include="include\Layers\lgithubrepo.h" />
     <ClInclude Include="include\Layers\lgraphic.h" />
+    <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
     <ClInclude Include="include\Layers\limagesequence.h" />
     <ClInclude Include="include\Layers\lpaths.h" />
+    <QtMoc Include="include\Layers\ltheme.h" />
     <ClInclude Include="include\Layers\lthemeable.h" />
     <ClInclude Include="include\Layers\lthemeablebox.h" />
     <QtMoc Include="include\Layers\lthemeeditordialog.h" />
-    <QtMoc Include="include\Layers\lthemeabletreeview.h" />
-    <ClInclude Include="include\Layers\lthemeabletreeitem.h" />
-    <QtMoc Include="include\Layers\lthemeabletreemodel.h" />
-    <ClInclude Include="include\Layers\lversion.h" />
+    <QtMoc Include="include\Layers\lthemeview.h" />
+    <QtMoc Include="include\Layers\lthememodel.h" />
+    <QtMoc Include="include\Layers\lthemeitem.h" />
     <QtMoc Include="include\Layers\lwidget.h" />
     <QtMoc Include="include\Layers\lupdatedialog.h" />
     <QtMoc Include="include\Layers\ltoggleswitch.h" />
@@ -118,7 +118,6 @@
     <QtMoc Include="include\Layers\lthemecomboboxitemmodel.h" />
     <QtMoc Include="include\Layers\lthemecomboboxitemdelegate.h" />
     <QtMoc Include="include\Layers\lthemecombobox.h" />
-    <QtMoc Include="include\Layers\ltheme.h" />
     <QtMoc Include="include\Layers\ltableview.h" />
     <QtMoc Include="include\Layers\ltabbar.h" />
     <QtMoc Include="include\Layers\ltab.h" />
@@ -159,7 +158,7 @@
     <ProjectGuid>{C3974001-260F-4BED-8E06-123547376B01}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

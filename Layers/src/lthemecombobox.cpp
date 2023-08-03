@@ -2,21 +2,46 @@
 
 #include <QAbstractItemView>
 #include <QEvent>
+#include <QMouseEvent>
 
 #include <Layers/lapplication.h>
-#include <Layers/lenums.h>
 #include <Layers/lthemecomboboxitemdelegate.h>
 #include <Layers/lthemecomboboxitemmodel.h>
-#include <Layers/lthemecompatibilitycautiondialog.h>
 
 using Layers::LThemeComboBox;
 
 LThemeComboBox::LThemeComboBox(QWidget* parent) :
 	m_model{ new LThemeComboBoxItemModel }, LComboBox(parent)
 {
+	init_item_delegate();
 	setFixedSize(250, 60);
-	setItemDelegate(new LThemeComboBoxItemDelegate);
 	setModel(m_model);
+
+	m_compatibility_dialog->apply_theme(
+		activeTheme()->find_item("App/Theme Compatibility Caution Dialog"));
+
+	connect(this, &QComboBox::highlighted, [this](int index)
+	{
+		m_highlighted_index = index;
+
+		LTheme* theme = itemData(index).value<LTheme*>();
+
+		if (!theme->has_app_implementation(layersApp->app_identifier()))
+		{
+			m_compatibility_dialog->set_lineage_table_data(theme->lineage());
+			m_compatibility_dialog->set_theme_name(theme->name());
+
+			if (!m_compatibility_dialog->isVisible())
+			{
+				m_compatibility_dialog->show();
+				m_compatibility_dialog->raise();
+			}
+		}
+		else
+		{
+			m_compatibility_dialog->hide();
+		}
+	});
 }
 
 void LThemeComboBox::clear()
@@ -34,22 +59,16 @@ bool LThemeComboBox::eventFilter(QObject* object, QEvent* event)
 	LComboBox::eventFilter(object, event);
 
 	if (object == view()->window())
-	{
-		if (event->type() == QEvent::Leave)
-		{
-			LThemeCompatibilityCautionDialog* dialog =
-				layersApp->theme_compatibility_caution_dialog();
-
-			if (dialog->isVisible())
-				dialog->hide();
-		}
-	}
+		if (event->type() == QEvent::Leave && m_compatibility_dialog)
+			m_compatibility_dialog->hide();
 
 	return false;
 }
 
 void LThemeComboBox::paintEvent(QPaintEvent* event)
 {
+	LTheme* current_theme = currentData().value<LTheme*>();
+
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
@@ -65,8 +84,11 @@ void LThemeComboBox::paintEvent(QPaintEvent* event)
 	QPainterPath item_text_path;
 	QPainterPath uuid_text_path;
 
-	QString item_text = currentData(Qt::DisplayRole).toString();
-	QString uuid_text = currentData(Layers::UuidIfExists).toString();
+	QString item_text = current_theme->name();
+	QString uuid_text;
+
+	if (QUuid* uuid = current_theme->uuid())
+		uuid_text = uuid->toString(QUuid::WithoutBraces);
 
 	if (!uuid_text.isEmpty())
 	{
@@ -97,4 +119,29 @@ void LThemeComboBox::paintEvent(QPaintEvent* event)
 
 	painter.fillPath(item_text_path, m_text_color->as<QColor>());
 	painter.fillPath(uuid_text_path, m_text_color->as<QColor>());
+}
+
+void LThemeComboBox::init_item_delegate()
+{
+	LThemeComboBoxItemDelegate* item_delegate = new LThemeComboBoxItemDelegate;
+
+	connect(item_delegate, &LThemeComboBoxItemDelegate::mouse_moved,
+		[this](QPoint mouse_cursor)
+	{
+		if (m_highlighted_index > -1)
+		{
+			LTheme* theme = itemData(m_highlighted_index).value<LTheme*>();
+
+			if (!theme->has_app_implementation(layersApp->app_identifier()))
+				if (!m_compatibility_dialog->isVisible())
+				{
+					m_compatibility_dialog->show();
+					m_compatibility_dialog->raise();
+				}
+		}
+
+		m_compatibility_dialog->move(QCursor::pos() + QPoint(20, 20));
+	});
+
+	setItemDelegate(item_delegate);
 }

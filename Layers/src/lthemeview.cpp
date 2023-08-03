@@ -1,18 +1,26 @@
-#include <Layers/lthemeabletreeview.h>
+#include <Layers/lthemeview.h>
 
 #include <QEvent>
 #include <QPainter>
 
-#include <Layers/lthemeabletreemodel.h>
+#include <Layers/lapplication.h>
+#include <Layers/lthememodel.h>
 
 using Layers::LThemeable;
-using Layers::LThemeableTreeView;
+using Layers::LThemeView;
 
-LThemeableTreeView::LThemeableTreeView(QWidget* parent) :
+LThemeView::LThemeView(QWidget* parent) :
 	QTreeView(parent)
 {
+	m_model->set_theme(activeTheme());
+
+	m_model_update_connection =
+		connect(layersApp, &LApplication::active_theme_changed, [this]
+			{ m_model->set_theme(activeTheme()); });
+
 	setHeaderHidden(true);
 	setHorizontalScrollBar(m_horizontal_scrollbar);
+	setModel(m_model);
 	setVerticalScrollBar(m_vertical_scrollbar);
 
 	m_horizontal_scrollbar->set_name("Horizontal ScrollBar");
@@ -22,7 +30,12 @@ LThemeableTreeView::LThemeableTreeView(QWidget* parent) :
 	update();
 }
 
-QList<LThemeable*> LThemeableTreeView::child_themeables(Qt::FindChildOptions options)
+LThemeView::~LThemeView()
+{
+	disconnect(m_model_update_connection);
+}
+
+QList<LThemeable*> LThemeView::child_themeables(Qt::FindChildOptions options)
 {
 	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
 
@@ -32,12 +45,7 @@ QList<LThemeable*> LThemeableTreeView::child_themeables(Qt::FindChildOptions opt
 	return child_themeables;
 }
 
-void LThemeableTreeView::set_root_themeable(LThemeable* root_themeable)
-{
-	setModel(new LThemeableTreeModel(root_themeable));
-}
-
-void LThemeableTreeView::update()
+void LThemeView::update()
 {
 	QString stylesheet =
 		"QAbstractItemView {"
@@ -57,7 +65,7 @@ void LThemeableTreeView::update()
 	QWidget::update();
 }
 
-void LThemeableTreeView::selectionChanged(
+void LThemeView::selectionChanged(
 	const QItemSelection& selected,
 	const QItemSelection& deselected)
 {
@@ -65,5 +73,5 @@ void LThemeableTreeView::selectionChanged(
 
 	if (!indexes.isEmpty())
 		emit selection_changed(
-			indexes.first().data(Qt::EditRole).value<LThemeable*>());
+			indexes.first().data(Qt::UserRole).value<LThemeItem*>());
 }

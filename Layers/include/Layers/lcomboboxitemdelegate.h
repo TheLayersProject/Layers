@@ -7,7 +7,8 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include <Layers/lthemeable.h>
+#include "lthemeable.h"
+#include "lstatepool.h"
 
 LAYERS_NAMESPACE_BEGIN
 /*!
@@ -61,6 +62,9 @@ private:
 	void init_attributes();
 
 	bool m_is_above_control{ false };
+
+	LStatePool* m_select_states{
+		new LStatePool("Status", { "Selected", "Unselected" }) };
 };
 LAYERS_NAMESPACE_END
 

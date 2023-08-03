@@ -11,6 +11,9 @@ class LAYERS_EXPORT LThemeComboBoxItemDelegate : public LComboBoxItemDelegate
 {
 	Q_OBJECT
 
+signals:
+	void mouse_moved(QPoint cursor_pos);
+
 public:
 	virtual bool editorEvent(QEvent* event,
 		QAbstractItemModel* model,

@@ -1,5 +1,5 @@
-#ifndef LTHEMEABLETREEMODEL_H
-#define LTHEMEABLETREEMODEL_H
+#ifndef LTHEMEMODEL_H
+#define LTHEMEMODEL_H
 
 #include <QAbstractItemModel>
 #include <QModelIndex>
@@ -8,35 +8,39 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lthemeabletreeitem.h"
+#include "ltheme.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LThemeableTreeItem;
+class LThemeItem;
 
-class LThemeableTreeModel : public QAbstractItemModel
+class LThemeModel : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    LThemeableTreeModel(LThemeable* root_themeable, QObject* parent = nullptr);
+    LThemeModel(QObject* parent = nullptr);
 
     QVariant data(const QModelIndex& index, int role) const override;
 
     QModelIndex index(int row, int column,
         const QModelIndex& parent = QModelIndex()) const override;
+
     QModelIndex parent(const QModelIndex& index) const override;
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 
+    void set_theme(LTheme* theme);
+
 private:
-    LThemeableTreeItem* init_item(
-        LThemeable* themeable, LThemeableTreeItem* parent = nullptr);
+    //LThemeItem* init_item(
+    //    LThemeable* themeable, LThemeItem* parent = nullptr);
 
-    LThemeableTreeItem* get_item(const QModelIndex& index) const;
+    LThemeItem* get_item(const QModelIndex& index) const;
 
-    LThemeableTreeItem* m_root_item;
+    LTheme* m_theme{ nullptr };
 };
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEABLETREEMODEL_H
+#endif // LTHEMEMODEL_H

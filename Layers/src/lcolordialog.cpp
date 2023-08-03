@@ -96,8 +96,6 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	});
 
 	init_layout();
-
-	assign_tag_prefixes();
 }
 
 LColorDialog::~LColorDialog()
@@ -112,7 +110,7 @@ LAttribute* LColorDialog::color() const
 
 void LColorDialog::init_attributes()
 {
-	m_color->set_uplink_attribute(&m_color_plane->color());
+	m_color->set_link_attribute(&m_color_plane->color());
 
 	connect(m_color, &LAttribute::changed, [this]
 	{
@@ -131,7 +129,7 @@ void LColorDialog::init_attributes()
 			QString::number(int(round(color.valueF() * 100.f))));
 	});
 
-	m_z_slider->value().set_uplink_attribute(&m_color_plane->z_value());
+	m_z_slider->value().set_link_attribute(&m_color_plane->z_value());
 }
 
 void LColorDialog::hsv_changed()

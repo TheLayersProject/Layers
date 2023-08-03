@@ -91,8 +91,8 @@ void LThemeableBox::init_attributes()
 		m_fill->setParent(object);
 		m_margins_bottom->setParent(object);
 		m_margins_left->setParent(object);
-		m_margins_top->setParent(object);
 		m_margins_right->setParent(object);
+		m_margins_top->setParent(object);
 	}
 }
 

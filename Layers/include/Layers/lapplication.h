@@ -3,6 +3,7 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QGradientStops>
 #include <QSettings>
 #include <QUuid>
 
@@ -15,15 +16,10 @@
 
 LAYERS_NAMESPACE_BEGIN
 
-class LCreateThemeDialog;
-class LColorDialog;
+LAYERS_EXPORT LTheme* activeTheme();
+
 class LDownloader;
 class LGitHubRepo;
-class LGradientDialog;
-class LThemeCompatibilityCautionDialog;
-class LThemeEditorDialog;
-class LUpdateDialog;
-class LVersion;
 class LMainWindow;
 
 /*!
@@ -100,8 +96,6 @@ public:
 	LApplication(int& argc, char** argv,
 		const QString& name,
 		const QUuid& uuid,
-		QFile* icon_file = nullptr,
-		LVersion* version = nullptr,
 		LGitHubRepo* github_repo = nullptr);
 
 	~LApplication();
@@ -109,15 +103,7 @@ public:
 	/*!
 		Returns a pointer to the active theme.
 	*/
-	LTheme* active_theme() const;
-
-	/*!
-		Stores a pointer to the provided themeable.
-
-		This function should be used to make top-level widgets known to the
-		application.
-	*/
-	void add_child_themeable_pointer(LThemeable& themeable);
+	LTheme* active_theme();
 
 	/*!
 		Returns a string representation of the app ID.
@@ -128,8 +114,6 @@ public:
 		Applies *theme* to the known top-level widgets.
 	*/
 	void apply_theme(LTheme& theme);
-
-	LAttribute* attribute(const QString& attr_tag);
 
 	/*!
 		Returns a list of child themeables.
@@ -142,26 +126,13 @@ public:
 	) override;
 
 	/*!
-		Returns a pointer to the application's LCreateThemeDialog.
-	*/
-	LCreateThemeDialog* create_theme_dialog() const;
-
-	/*!
-		Returns a pointer to the application's LColorDialog.
-	*/
-	LColorDialog* color_dialog() const;
-
-	/*!
-		Returns a pointer to the application's LGradientDialog.
-	*/
-	LGradientDialog* gradient_dialog() const;
-
-	/*!
 		Returns a pointer to a QFile of the application icon.
 
 		If no icon was supplied during initialization, nullptr is returned.
 	*/
 	QFile* icon_file();
+
+	QString latest_version();
 
 	/*!
 		Returns the name of the application.
@@ -175,10 +146,7 @@ public:
 	*/
 	void reapply_theme();
 
-	/*!
-		Saves *theme* to the system.
-	*/
-	void save_theme(LTheme& theme);
+	static void set_version(const QString& version);
 
 	/*!
 		Returns the application's settings.
@@ -189,18 +157,6 @@ public:
 		Returns a pointer to the theme specified by *theme_id*.
 	*/
 	LTheme* theme(const QString& theme_id);
-
-	/*!
-		Returns a pointer to the application's
-		LThemeCompatibilityCautionDialog.
-	*/
-	LThemeCompatibilityCautionDialog* theme_compatibility_caution_dialog()
-		const;
-
-	/*!
-		Returns a pointer to the application's LThemeEditorDialog.
-	*/
-	LThemeEditorDialog* theme_editor_dialog() const;
 
 	/*!
 		Returns a reference to the QMap containing the application's
@@ -216,13 +172,15 @@ public:
 	*/
 	bool update_available();
 
+	static QString version();
+
 	/*!
 		Prompts the user with an LUpdateDialog asking if they would like to
 		update the application.
 
 		Returns true if the user decides to update. Otherwise, returns false.
 	*/
-	bool update_on_request();
+	void download_and_install_update();
 
 public slots:
 	/*!
@@ -234,29 +192,24 @@ private:
 	void init_directories();
 	void init_fonts();
 	void init_themes();
-	void init_latest_version_tag();
+	void init_latest_version();
 
-	LAttribute* m_foreground{ new LAttribute("Foreground", QColor("#e3e3e3"), this) };
+	LAttribute* m_foreground{
+		new LAttribute("Foreground", QColor("#e3e3e3"), this) };
 
-	LAttribute* m_primary{ new LAttribute("Primary", QColor("#36393f"), this)};
+	LAttribute* m_gradient{
+		new LAttribute("Gradient", QVariant::fromValue(
+			QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })),
+			this) };
 
-	LAttribute* m_secondary{ new LAttribute("Secondary", QColor("#2f3136"), this) };
+	LAttribute* m_primary{
+		new LAttribute("Primary", QColor("#36393f"), this)};
 
-	LAttribute* m_tertiary{ new LAttribute("Tertiary", QColor("#25272b"), this) };
+	LAttribute* m_secondary{
+		new LAttribute("Secondary", QColor("#2f3136"), this) };
 
-	QList<LThemeable*> m_child_themeables;
-
-	LCreateThemeDialog* m_create_theme_dialog;
-
-	LColorDialog* m_color_dialog;
-
-	LGradientDialog* m_gradient_dialog;
-
-	LThemeCompatibilityCautionDialog* m_theme_compatibility_caution_dialog;
-
-	LThemeEditorDialog* m_theme_editor_dialog;
-
-	LUpdateDialog* m_update_dialog;
+	LAttribute* m_tertiary{
+		new LAttribute("Tertiary", QColor("#25272b"), this) };
 
 	LTheme* m_active_theme{ nullptr };
 
@@ -268,7 +221,7 @@ private:
 
 	QFile* m_icon_file{ nullptr };
 
-	QString* m_latest_version{ nullptr };
+	QString m_latest_version;
 
 	QString m_name;
 
@@ -279,8 +232,6 @@ private:
 	QMap<QString, LTheme*> m_themes;
 
 	QUuid m_uuid;
-
-	LVersion* m_version{ nullptr };
 };
 LAYERS_NAMESPACE_END
 

@@ -4,8 +4,6 @@
 #include <QPainter>
 
 #include <Layers/lapplication.h>
-#include <Layers/lenums.h>
-#include <Layers/lthemecompatibilitycautiondialog.h>
 
 using Layers::LThemeComboBoxItemDelegate;
 
@@ -16,30 +14,7 @@ bool LThemeComboBoxItemDelegate::editorEvent(
 	const QModelIndex& index)
 {
 	if (event->type() == QMouseEvent::MouseMove)
-	{
-		LThemeCompatibilityCautionDialog* dialog =
-			layersApp->theme_compatibility_caution_dialog();
-
-		if (!index.data(Layers::AppImplementationAvailable).toBool())
-		{
-			dialog->move(QCursor::pos() + QPoint(20, 20));
-
-			if (!dialog->isVisible())
-			{
-				LTheme* theme = layersApp->theme(index.data(Qt::UserRole).toString());
-
-				dialog->set_lineage_table_data(theme->lineage());
-				dialog->set_theme_name(theme->name());
-
-				dialog->show();
-				dialog->raise();
-			}
-		}
-		else
-		{
-			dialog->hide();
-		}
-	}
+		emit mouse_moved(QCursor::pos());
 
 	return false;
 }
@@ -49,6 +24,8 @@ void LThemeComboBoxItemDelegate::paint(
 	const QStyleOptionViewItem& option,
 	const QModelIndex& index) const
 {
+	LTheme* theme = index.data(Qt::UserRole).value<LTheme*>();
+
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
 		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>({ "Unselected" });
 
@@ -60,8 +37,11 @@ void LThemeComboBoxItemDelegate::paint(
 	QPainterPath item_text_path;
 	QPainterPath uuid_text_path;
 
-	QString item_text = index.data().toString();
-	QString uuid_text = index.data(Layers::UuidIfExists).toString();
+	QString item_text = theme->name();
+	QString uuid_text;
+
+	if (QUuid* uuid = theme->uuid())
+		uuid_text = uuid->toString(QUuid::WithoutBraces);
 
 	painter->setRenderHint(QPainter::Antialiasing);
 
@@ -98,7 +78,7 @@ void LThemeComboBoxItemDelegate::paint(
 	painter->fillPath(item_text_path, m_text_color->as<QColor>());
 	painter->fillPath(uuid_text_path, m_text_color->as<QColor>());
 
-	if (!index.data(Layers::AppImplementationAvailable).toBool())
+	if (!theme->has_app_implementation(layersApp->app_identifier()))
 	{
 		QPoint caution_image_location = QPoint(
 			option.rect.right() - m_caution_image.width() - 10,

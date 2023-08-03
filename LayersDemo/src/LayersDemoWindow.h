@@ -8,9 +8,7 @@ class LayersDemoWindow : public Layers::LMainWindow
 	Q_OBJECT
 
 public:
-	LayersDemoWindow(bool preview = false, QWidget* parent = nullptr);
-
-	virtual LThemeable* clone() override;
+	LayersDemoWindow(QWidget* parent = nullptr);
 
 private:
 };

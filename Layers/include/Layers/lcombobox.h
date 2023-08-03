@@ -85,7 +85,7 @@ protected:
 		new LAttribute("Border.Thickness", 0.0, this) };
 
 	LAttribute* m_corner_radius{
-		new LAttribute("Corner Radius", QVariant(10.0), this) };
+		new LAttribute("Corner Radius", 10.0, this) };
 
 	LAttribute* m_fill{
 		new LAttribute("Fill", QColor(Qt::white), this) };

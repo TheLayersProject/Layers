@@ -1,5 +1,5 @@
-#ifndef LTHEMEABLETREEVIEW_H
-#define LTHEMEABLETREEVIEW_H
+#ifndef LTHEMEVIEW_H
+#define LTHEMEVIEW_H
 
 #include <QTreeView>
 
@@ -8,27 +8,28 @@
 
 #include "lscrollbar.h"
 #include "lthemeable.h"
+#include "lthememodel.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LThemeableTreeItemModel;
-
 /*!
-	An LThemeableTreeView is a QAbstractItemView and a LThemeable that is
+	An LThemeView is a QAbstractItemView and a LThemeable that is
 	customizable.
 */
-class LAYERS_EXPORT LThemeableTreeView :
+class LAYERS_EXPORT LThemeView :
 	public QTreeView, public LThemeable
 {
 	Q_OBJECT
 
 signals:
-	void selection_changed(LThemeable* themeable);
+	void selection_changed(LThemeItem* theme_item);
 
 public:
 	/*!
 		Constructs a themeable tree view.
 	*/
-	LThemeableTreeView(QWidget* parent = nullptr);
+	LThemeView(QWidget* parent = nullptr);
+
+	~LThemeView();
 
 	/*!
 		Returns a list of child themeables.
@@ -39,8 +40,6 @@ public:
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;
-
-	void set_root_themeable(LThemeable* root_themeable);
 
 	virtual void update() override;
 
@@ -58,7 +57,11 @@ private:
 
 	LScrollBar* m_horizontal_scrollbar{ new LScrollBar };
 	LScrollBar* m_vertical_scrollbar{ new LScrollBar };
+
+	LThemeModel* m_model{ new LThemeModel };
+
+	QMetaObject::Connection m_model_update_connection;
 };
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEABLETREEVIEW_H  
+#endif // LTHEMEVIEW_H  

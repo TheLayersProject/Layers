@@ -37,7 +37,8 @@ LCreateThemeDialog::LCreateThemeDialog(QWidget* parent) :
 
 		for (const QChar& character : text)
 		{
-			if (character != ' ') has_char_other_than_space = true;
+			if (character != ' ')
+				has_char_other_than_space = true;
 		}
 
 		if (!has_char_other_than_space)
@@ -59,8 +60,6 @@ LCreateThemeDialog::LCreateThemeDialog(QWidget* parent) :
 	m_start_theme_combobox->set_name("Start Theme Combobox");
 
 	init_layout();
-
-	assign_tag_prefixes();
 }
 
 QString LCreateThemeDialog::new_theme_name()
@@ -87,8 +86,7 @@ void LCreateThemeDialog::clear_theme_combobox()
 
 QString LCreateThemeDialog::copy_theme_id()
 {
-	return m_start_theme_combobox->currentData().toString();
-	//return m_start_theme_combobox->currentData(Qt::DisplayRole).toString();
+	return m_start_theme_combobox->currentData().value<LTheme*>()->id();
 }
 
 void LCreateThemeDialog::set_current_start_theme_name(const QString& theme_id)
@@ -97,7 +95,7 @@ void LCreateThemeDialog::set_current_start_theme_name(const QString& theme_id)
 	//	m_start_theme_combobox->set_current_item(theme_name);
 
 	for (int i = 0; i < m_start_theme_combobox->count(); i++)
-		if (m_start_theme_combobox->itemData(i) == theme_id)
+		if (m_start_theme_combobox->itemData(i).value<LTheme*>()->id() == theme_id)
 			m_start_theme_combobox->setCurrentIndex(i);
 }
 
@@ -116,10 +114,10 @@ void LCreateThemeDialog::init_attributes()
 	//m_start_theme_combobox->corner_radii_bottom_right()->set_value(7.0);
 
 	m_theme_name_line_editor->border_thickness()->set_value(3.0);
-	m_theme_name_line_editor->corner_radii_top_left()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii_top_right()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii_bottom_left()->set_value(7.0);
-	m_theme_name_line_editor->corner_radii_bottom_right()->set_value(7.0);
+	m_theme_name_line_editor->corner_radii_top_left()->set_value(5.0);
+	m_theme_name_line_editor->corner_radii_top_right()->set_value(5.0);
+	m_theme_name_line_editor->corner_radii_bottom_left()->set_value(5.0);
+	m_theme_name_line_editor->corner_radii_bottom_right()->set_value(5.0);
 	m_theme_name_line_editor->left_padding()->set_value(10.0);
 }
 

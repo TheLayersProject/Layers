@@ -7,7 +7,6 @@
 using Layers::LFillControl;
 
 LFillControl::LFillControl(QWidget* parent) :
-	m_control_dialog{ new LFillDialog(this) },
 	m_dialog{ new LFillDialog },
 	LWidget(parent)
 {
@@ -16,16 +15,11 @@ LFillControl::LFillControl(QWidget* parent) :
 	installEventFilter(this);
 	setFixedSize(40, 40);
 	set_name("Fill Control");
-
-	m_control_dialog->hide();
-
-	m_dialog->entangle_with(m_control_dialog);
 }
 
 LFillControl::~LFillControl()
 {
 	// TODO: Maybe the dialog should just be generated when it is needed
-	delete m_control_dialog;
 	delete m_dialog;
 
 	delete m_fill;
@@ -33,7 +27,7 @@ LFillControl::~LFillControl()
 
 void LFillControl::set_attribute(LAttribute* attribute)
 {
-	fill()->set_uplink_attribute(attribute);
+	m_fill->set_link_attribute(attribute);
 
 	m_dialog->set_attribute(attribute);
 }

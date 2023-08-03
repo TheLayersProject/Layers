@@ -35,8 +35,6 @@ LThemeCompatibilityCautionDialog::LThemeCompatibilityCautionDialog(QWidget* pare
 	m_table_label->setText("Lineage");
 
 	init_lineage_table();
-
-	assign_tag_prefixes();
 }
 
 void LThemeCompatibilityCautionDialog::set_lineage_table_data(
@@ -57,7 +55,7 @@ void LThemeCompatibilityCautionDialog::set_lineage_table_data(
 		else
 			lineage_data.name = theme_id;
 
-		if (LTheme* theme = layersApp->theme(lineage_data.name))
+		if (LTheme* theme = layersApp->theme(theme_id))
 			lineage_data.has_app_implementation_available =
 				theme->has_app_implementation(layersApp->app_identifier());
 

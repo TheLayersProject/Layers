@@ -5,8 +5,10 @@
 #include "layers_exports.h"
 
 #include "lcombobox.h"
+#include "lthemecompatibilitycautiondialog.h"
 
 LAYERS_NAMESPACE_BEGIN
+class LTheme;
 class LThemeComboBoxItemModel;
 
 /*!
@@ -41,7 +43,14 @@ protected:
 	virtual void paintEvent(QPaintEvent* event) override;
 
 private:
+	void init_item_delegate();
+
 	LThemeComboBoxItemModel* m_model;
+
+	LThemeCompatibilityCautionDialog* m_compatibility_dialog{
+		new LThemeCompatibilityCautionDialog };
+
+	int m_highlighted_index = -1;
 };
 LAYERS_NAMESPACE_END
 

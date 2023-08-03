@@ -44,21 +44,21 @@ private:
 	LAttribute* m_text_color{
 		new LAttribute("Text Color", QColor(Qt::black), this) };
 
-	QString m_parent_tag;
+	QString m_parent_path;
 
-	QStringList m_uplink_tags;
-	QStringList m_downlink_tags;
+	QStringList m_link_paths;
+	QStringList m_dependent_paths;
 
 	LSvgRenderer* m_dot_svg{ new LSvgRenderer(":/images/dot.svg", this) };
 
-	LSvgRenderer* m_uplink_arrow_svg{
-		new LSvgRenderer(":/images/uplink_arrow.svg", this) };
+	LSvgRenderer* m_link_arrow_svg{
+		new LSvgRenderer(":/images/link_arrow.svg", this) };
 
-	LSvgRenderer* m_downlink_arrow_svg{
-		new LSvgRenderer(":/images/downlink_arrow.svg", this) };
+	LSvgRenderer* m_dependent_arrow_svg{
+		new LSvgRenderer(":/images/dependent_arrow.svg", this) };
 
-	LSvgRenderer* m_downlink_arrow_2_svg{
-		new LSvgRenderer(":/images/downlink_arrow_2.svg", this) };
+	LSvgRenderer* m_dependent_arrow_2_svg{
+		new LSvgRenderer(":/images/dependent_arrow_2.svg", this) };
 };
 
 class LAYERS_EXPORT LAttributeEditor : public LWidget
@@ -78,6 +78,12 @@ public:
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;
 
+	LFillControl* fill_control() const;
+
+	LLineEditor* line_editor() const;
+
+	LMiniSlider* slider() const;
+
 private:
 	void init_attributes();
 	void init_layout();
@@ -90,9 +96,9 @@ private:
 
 	LLabel* m_label{ new LLabel };
 
-	LLineEditor* m_line_editor{ new LLineEditor };
-
 	LMiniSlider* m_slider{ new LMiniSlider };
+
+	LLineEditor* m_line_editor{ new LLineEditor };
 
 	LAttribute* m_attr;
 
@@ -102,9 +108,6 @@ private:
 			LGraphic(":/images/collapse_arrow_down.svg", QSize(12, 8))) };
 
 	LWidget* m_icons_widget{ new LWidget };
-
-	LLabel* control_icon_label{
-		new LLabel(LGraphic(":/images/settings.svg"), m_icons_widget) };
 
 	LTabBar* m_features_tab_bar{ new LTabBar };
 

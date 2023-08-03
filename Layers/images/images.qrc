@@ -13,8 +13,8 @@
         <file>customize_theme.svg</file>
         <file>delete_theme.svg</file>
         <file>dot.svg</file>
-        <file>downlink_arrow.svg</file>
-        <file>downlink_arrow_2.svg</file>
+        <file>dependent_arrow.svg</file>
+        <file>dependent_arrow_2.svg</file>
         <file>drop_down_icon.svg</file>
         <file>ellipsis.svg</file>
         <file>exit.svg</file>
@@ -23,6 +23,7 @@
         <file>info_theme.svg</file>
         <file>label_icon.svg</file>
         <file>layers_2d.png</file>
+        <file>link_arrow.svg</file>
         <file>maximize.svg</file>
         <file>message_box_icon.svg</file>
         <file>minimize.svg</file>
@@ -39,6 +40,5 @@
         <file>themes_icon.svg</file>
         <file>titlebar_icon.svg</file>
         <file>update_icon.svg</file>
-        <file>uplink_arrow.svg</file>
     </qresource>
 </RCC>

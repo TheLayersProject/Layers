@@ -10,25 +10,17 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattribute.h"
+#include "lthemeitem.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-using LAttributeMapHash = QHash<QString, LAttributeMap>;
-
 class LAttribute;
-class LThemeable;
 
 struct LAYERS_EXPORT LThemeLineageData
 {
 	QString name;
 	QString uuid;
 	bool has_app_implementation_available = false;
-};
-
-enum class LAYERS_EXPORT LThemeDataType
-{
-	All, LApplication, Layers
 };
 
 /*!
@@ -60,7 +52,7 @@ enum class LAYERS_EXPORT LThemeDataType
 
 	When loading themes from theme directories, only their metadata is loaded.
 	This is done to prevent heavy memory usage.
-		
+
 	Relevant implementation files are only loaded for the active theme. This
 	includes the *layers.json* file as well as the app-implementation file
 	associated with the application performing the load.
@@ -111,23 +103,6 @@ public:
 	void clear();
 
 	/*!
-		Removes data from this theme that pertains to the themeable identified
-		by *themeable_tag*.
-	*/
-	void clear_tag(const QString& tag);
-
-	/*!
-		Returns true if this theme contains any attributes identified
-		by *themeable_tag*; otherwise, returns false.
-	*/
-	bool contains_attributes_for_tag(const QString& tag);
-
-	/*!
-		Copies the values of the attributes of *themeable* to this theme.
-	*/
-	void copy_attribute_values_of(LThemeable* themeable);
-
-	/*!
 		Returns the theme directory of this theme.
 	*/
 	QDir dir() const;
@@ -136,6 +111,10 @@ public:
 		Returns true if this is a custom theme; otherwise, returns false.
 	*/
 	bool editable();
+
+	LThemeItem* find_item(const QStringList& name_list);
+
+	LThemeItem* find_item(const QString& path);
 
 	/*!
 		Returns true if this theme has an implementation file for the current
@@ -166,29 +145,15 @@ public:
 	void load(const QString& app_id);
 
 	/*!
-		Loads implementation data from *json_document*.
-
-		The *data_type* parameter specifies whether the data being loaded is
-		Layers data or application data.
-	*/
-	void load_document(
-		const QJsonDocument& json_document,
-		const LThemeDataType& data_type);
-
-	/*!
 		Returns the name of this theme.
 	*/
 	QString name() const;
 
-	/*!
-		Returns a reference to the attribute map in the theme that pertains
-		to *themeable_tag*.
+	void resolve_links(LThemeItem* item);
 
-		This function **does not** check whether an attribute map pertaining
-		to *themeable_tag* exists in the theme. For this reason, it is
-		recommended to call contains_attributes_for_tag() first.
-	*/
-	LAttributeMap& operator[](const QString& tag);
+	LThemeItem* root_item() const;
+
+	void save();
 
 	/*!
 		Saves a *meta.json* file to the directory pertaining to this theme.
@@ -206,28 +171,20 @@ public:
 	void set_name(const QString& new_name);
 
 	/*!
-		Returns a QStringList containing all of the themeable tags found in
-		currently loaded data of this theme.
-	*/
-	QStringList themeable_tags();
-
-	/*!
-		Returns a QJsonDocument containing theme data.
-
-		The *data_type* parameter specifies which data to include in the
-		document.
-	*/
-	QJsonDocument to_json_document(
-		LThemeDataType data_type = LThemeDataType::All);
-
-	/*!
 		Returns a pointer to the UUID of this theme.
 	*/
 	QUuid* uuid() const;
 
 private:
-	LAttributeMapHash m_hash;
-	LAttributeMapHash m_hash_layers;
+	void load_file(QFile& document_file);
+
+	LThemeItem* init_item(const QString& name,
+		QJsonObject item_object, const QString& file_name,
+		LThemeItem* parent = nullptr);
+
+	LThemeItem* m_root_item{ nullptr };
+
+	QMap<QString, QList<LThemeItem*>> m_file_items;
 
 	QDir m_dir;
 

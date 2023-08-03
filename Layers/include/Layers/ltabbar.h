@@ -65,8 +65,6 @@ protected:
 
 	void _add_tab(LTab* tab);
 
-	LTab* m_control_tab{ new LTab(LGraphic(":/images/exit.svg"), "", this)};
-
 	int m_current_index{ -1 };
 
 	QList<LTab*> m_tabs;
