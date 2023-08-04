@@ -74,6 +74,11 @@ public:
 		Sets the font size of the button's text.
 	*/
 	void set_font_size(int size);
+	
+	/*!
+		Sets the font size of the button's text.
+	*/
+	void set_font_size_f(qreal size);
 
 	/*!
 		Sets the button padding with a single value.

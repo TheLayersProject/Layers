@@ -67,7 +67,7 @@ public:
 	/*!
 		Sets the *size* of the label's font.
 	*/
-	void set_font_size(qreal size);
+	void set_font_size_f(qreal size);
 
 	/*!
 		Returns the recommended size for the label.

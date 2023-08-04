@@ -8,14 +8,15 @@
 using Layers::LAttributeEditor;
 using Layers::LFillControl;
 using Layers::LLineEditor;
-using Layers::LLinksWidget;
+using Layers::LLinksView;
 using Layers::LMiniSlider;
 using Layers::LThemeable;
 
-LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
-	LWidget(parent)
+LLinksView::LLinksView(LAttribute* attr, QWidget* parent) :
+	m_attr{ attr },
+	QWidget(parent)
 {
-	set_name("Links Widget");
+	set_name("Links View");
 
 	QFont f = font();
 	f.setPointSizeF(10.5);
@@ -28,13 +29,23 @@ LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
 	m_dependent_arrow_svg->set_name("Dependent Arrow Svg");
 	m_dependent_arrow_2_svg->set_name("Dependent Arrow Svg");
 
-	if (attr)
+	connect(m_attr, &LAttribute::link_changed, this, &LLinksView::update_view);
+
+	update_view();
+}
+
+void LLinksView::update_view()
+{
+	m_link_paths.clear();
+	m_dependent_paths.clear();
+
+	if (m_attr)
 	{
-		if (attr->parent())
-			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(attr->parent()))
+		if (m_attr->parent())
+			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(m_attr->parent()))
 				m_parent_path = parent_theme_item->path();
 
-		if (LAttribute* link_attr = attr->link_attribute())
+		if (LAttribute* link_attr = m_attr->link_attribute())
 		{
 			while (link_attr)
 			{
@@ -50,9 +61,12 @@ LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
 			}
 		}
 
-		for (LAttribute* dependent_attr : attr->dependent_attributes())
+		for (LAttribute* dependent_attr : m_attr->dependent_attributes())
 		{
 			QString dependent_path = dependent_attr->path();
+
+			if (!dependent_path.contains("/"))
+				continue;
 
 			if (!m_parent_path.isEmpty())
 				if (dependent_path.startsWith(m_parent_path))
@@ -63,12 +77,11 @@ LLinksWidget::LLinksWidget(LAttribute* attr, QWidget* parent) :
 	}
 
 	update_height();
+	QWidget::update();
 }
 
-void LLinksWidget::paintEvent(QPaintEvent* event)
+void LLinksView::paintEvent(QPaintEvent* event)
 {
-	LWidget::paintEvent(event);
-
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
@@ -126,7 +139,7 @@ void LLinksWidget::paintEvent(QPaintEvent* event)
 	}
 }
 
-void LLinksWidget::paint_item_dot(
+void LLinksView::paint_item_dot(
 	QPainter* painter,
 	const QRect& item_rect,
 	int x)
@@ -137,7 +150,7 @@ void LLinksWidget::paint_item_dot(
 		QRectF(x, dot_y, 10, 10));
 }
 
-void LLinksWidget::paint_item_text(
+void LLinksView::paint_item_text(
 	QPainter* painter,
 	const QString& text,
 	const QRect& item_rect,
@@ -157,7 +170,7 @@ void LLinksWidget::paint_item_text(
 	painter->fillPath(text_path, m_text_color->as<QColor>());
 }
 
-void LLinksWidget::update_height()
+void LLinksView::update_height()
 {
 	// 40 is item size
 
@@ -174,7 +187,7 @@ void LLinksWidget::update_height()
 
 LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	m_attr{ attr },
-	m_links_widget{ new LLinksWidget(attr)},
+	m_links_view{ new LLinksView(attr)},
 	LWidget(parent)
 {
 	init_attributes();
@@ -199,6 +212,16 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 	m_icons_widget->set_name("Icons Widget");
 	m_icons_widget->setFixedHeight(26);
+
+	m_link_icon_label->set_name("Icon Labels");
+	m_link_icon_label->setAlignment(Qt::AlignCenter);
+	m_link_icon_label->setFixedSize(20, 26);
+
+	m_overrides_icon_label->set_name("Icon Labels");
+	m_overrides_icon_label->setAlignment(Qt::AlignCenter);
+	m_overrides_icon_label->setFixedSize(20, 26);
+
+	update_icon_labels();
 
 	m_collapse_button->set_name("Collapse Button");
 
@@ -233,8 +256,27 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		}
 	});
 
+	m_links_widget->set_name("Links Widget");
+
+	m_new_link_button->set_name("New Link Button");
+	m_new_link_button->set_font_size_f(10.5);
+	m_new_link_button->set_padding(6);
+	m_new_link_button->setFixedHeight(30);
+
+	m_break_link_button->set_name("Break Link Button");
+	m_break_link_button->set_font_size_f(10.5);
+	m_break_link_button->set_padding(6);
+	m_break_link_button->setFixedHeight(30);
+
+	connect(m_break_link_button, &LButton::clicked, [this]
+	{
+		m_attr->break_link();
+		m_break_link_button->hide();
+		update_icon_labels();
+	});
+
 	LTab* links_tab = m_features_tab_bar->tabs().last();
-	links_tab->text_label()->set_font_size(10.5);
+	links_tab->text_label()->set_font_size_f(10.5);
 	links_tab->icon_label()->setFixedWidth(11);
 	links_tab->close_button()->hide();
 	links_tab->layout()->setContentsMargins(8, 0, 8, 0);
@@ -270,14 +312,10 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_fill_control->hide();
 		}
 
-		if (attr->link_attribute())
+		if (!attr->link_attribute())
 		{
-			LLabel* link_icon_label =
-				new LLabel(LGraphic(":/images/chain_link.svg", QSize(8, 18)));
-			link_icon_label->set_name("Icon Labels");
-			link_icon_label->setAlignment(Qt::AlignCenter);
-			link_icon_label->setFixedSize(20, 26);
-			m_icons_layout->addWidget(link_icon_label);
+			m_link_icon_label->hide();
+			m_break_link_button->hide();
 		}
 
 		if (attr->parent())
@@ -289,7 +327,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 						"Overrides");
 
 					LTab* overrides_tab = m_features_tab_bar->tabs().last();
-					overrides_tab->text_label()->set_font_size(10.5);
+					overrides_tab->text_label()->set_font_size_f(10.5);
 					overrides_tab->icon_label()->setFixedWidth(13);
 					overrides_tab->close_button()->hide();
 					overrides_tab->layout()->setContentsMargins(8, 0, 8, 0);
@@ -298,13 +336,6 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 		if (attr->has_overrides())
 		{
-			LLabel* overrides_icon_label =
-				new LLabel(LGraphic(":/images/overrides_icon.svg", QSize(10, 18)));
-			overrides_icon_label->set_name("Icon Labels");
-			overrides_icon_label->setAlignment(Qt::AlignCenter);
-			overrides_icon_label->setFixedSize(20, 26);
-			m_icons_layout->addWidget(overrides_icon_label);
-
 			for (LAttribute* override_attr : attr->overrides())
 			{
 				LAttributeEditor* override_editor =
@@ -316,6 +347,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				m_overrides_layout->addWidget(override_editor);
 			}
 		}
+		else
+			m_overrides_icon_label->hide();
 	}
 	else
 	{
@@ -351,6 +384,19 @@ LMiniSlider* LAttributeEditor::slider() const
 	return m_slider;
 }
 
+void LAttributeEditor::update_icon_labels()
+{
+	if (m_attr->link_attribute())
+		m_link_icon_label->show();
+	else
+		m_link_icon_label->hide();
+
+	if (m_attr->has_overrides())
+		m_overrides_icon_label->show();
+	else
+		m_overrides_icon_label->hide();
+}
+
 void LAttributeEditor::init_attributes()
 {
 	m_fill->set_value(QColor("#1e2023"));
@@ -369,6 +415,8 @@ void LAttributeEditor::init_layout()
 	m_controls_layout->addWidget(m_slider);
 	m_controls_layout->setContentsMargins(0, 0, 0, 0);
 
+	m_icons_layout->addWidget(m_link_icon_label);
+	m_icons_layout->addWidget(m_overrides_icon_label);
 	m_icons_layout->setContentsMargins(0, 0, 0, 0);
 	m_icons_layout->setSpacing(0);
 	m_icons_widget->setLayout(m_icons_layout);
@@ -385,6 +433,18 @@ void LAttributeEditor::init_layout()
 	tab_layout->addWidget(m_features_tab_bar);
 	tab_layout->addStretch();
 	tab_layout->setContentsMargins(0, 0, 0, 0);
+
+	m_links_buttons_layout->addWidget(m_new_link_button);
+	m_links_buttons_layout->addWidget(m_break_link_button);
+	m_links_buttons_layout->addStretch();
+	m_links_buttons_layout->setSpacing(5);
+	m_links_buttons_layout->setContentsMargins(5, 5, 5, 5);
+
+	m_links_layout->addLayout(m_links_buttons_layout);
+	m_links_layout->addWidget(m_links_view);
+	m_links_layout->setSpacing(0);
+	m_links_layout->setContentsMargins(0, 0, 0, 0);
+	m_links_widget->setLayout(m_links_layout);
 
 	m_overrides_layout->setSpacing(3);
 	m_overrides_layout->setContentsMargins(5, 5, 5, 5);

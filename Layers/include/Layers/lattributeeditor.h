@@ -16,12 +16,14 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LLinksWidget : public LWidget
+class LLinksView : public QWidget, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	LLinksWidget(LAttribute* attr, QWidget* parent = nullptr);
+	LLinksView(LAttribute* attr, QWidget* parent = nullptr);
+
+	void update_view();
 
 protected:
 	virtual void paintEvent(QPaintEvent* event) override;
@@ -40,6 +42,8 @@ private:
 		int x);
 
 	void update_height();
+
+	LAttribute* m_attr;
 
 	LAttribute* m_text_color{
 		new LAttribute("Text Color", QColor(Qt::black), this) };
@@ -84,12 +88,18 @@ public:
 
 	LMiniSlider* slider() const;
 
+	void update_icon_labels();
+
 private:
 	void init_attributes();
 	void init_layout();
 
+	LAttribute* m_attr;
+
 	QHBoxLayout* m_controls_layout{ new QHBoxLayout };
 	QHBoxLayout* m_icons_layout{ new QHBoxLayout };
+	QHBoxLayout* m_links_buttons_layout{ new QHBoxLayout };
+	QVBoxLayout* m_links_layout{ new QVBoxLayout };
 	QVBoxLayout* m_overrides_layout{ new QVBoxLayout };
 
 	LFillControl* m_fill_control{ new LFillControl };
@@ -100,7 +110,11 @@ private:
 
 	LLineEditor* m_line_editor{ new LLineEditor };
 
-	LAttribute* m_attr;
+	LLabel* m_link_icon_label =
+		new LLabel(LGraphic(":/images/chain_link.svg", QSize(8, 18)));
+
+	LLabel* m_overrides_icon_label =
+		new LLabel(LGraphic(":/images/overrides_icon.svg", QSize(10, 18)));
 
 	LButton* m_collapse_button{
 		new LButton(
@@ -113,9 +127,19 @@ private:
 
 	QWidget* m_features_widget{ new QWidget };
 
-	LLinksWidget* m_links_widget;
+	LLinksView* m_links_view;
+
+	LWidget* m_links_widget{ new LWidget };
 
 	LWidget* m_overrides_widget{ new LWidget };
+
+	LButton* m_new_link_button{
+		new LButton(
+			LGraphic(":/images/new_theme.svg", QSize(18, 18)), "New Link") };
+
+	LButton* m_break_link_button{
+		new LButton(
+			LGraphic(":/images/tab_exit.svg", QSize(16, 17)), "Break Link") };
 };
 LAYERS_NAMESPACE_END
 

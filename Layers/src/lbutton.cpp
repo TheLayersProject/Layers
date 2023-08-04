@@ -79,6 +79,12 @@ void LButton::set_font_size(int size)
 		m_text_label->set_font_size(size);
 }
 
+void LButton::set_font_size_f(qreal size)
+{
+	if (m_text_label)
+		m_text_label->set_font_size_f(size);
+}
+
 void LButton::set_padding(int padding)
 {
 	main_layout->setContentsMargins(padding, padding, padding, padding);

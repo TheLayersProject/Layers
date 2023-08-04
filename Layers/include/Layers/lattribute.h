@@ -91,9 +91,10 @@ signals:
 	void changed();
 
 	/*!
-		This signal is emitted if the attribute becomes linked.
+		This signal is emitted if the a new link is set or if the active one is
+		broken.
 	*/
-	void linked();
+	void link_changed();
 
 public:
 	/*!
@@ -131,6 +132,8 @@ public:
 	template<typename T>
 	T as(const QStringList& states = QStringList()) const;
 
+	void break_link();
+
 	void clear_overrides();
 
 	void clear_theme_attribute();
@@ -144,6 +147,8 @@ public:
 	bool has_overrides() const;
 
 	QJsonObject& json_object();
+
+	LAttribute* link_attribute() const;
 
 	QString link_path() const;
 
@@ -196,7 +201,7 @@ public:
 	*/
 	const char* typeName() const;
 
-	LAttribute* link_attribute() const;
+	QVariant value();
 
 private slots:
 	void update_json_object();

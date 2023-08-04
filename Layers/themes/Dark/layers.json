@@ -3073,30 +3073,156 @@
                                     },
                                     "Margins.Top": {
                                         "value": 0
-                                    },
-                                    "Text Color": {
-                                        "linked_to": "App/Foreground"
                                     }
                                 },
                                 "children": {
-                                    "Dependent Arrow Svg": {
+                                    "Break Link Button": {
                                         "attributes": {
-                                            "common_color": {
-                                                "value": "#4b4d50"
+                                            "Border.Fill": {
+                                                "value": "#000000"
+                                            },
+                                            "Border.Thickness": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Bottom Left": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Bottom Right": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Top Left": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Top Right": {
+                                                "value": 4
+                                            },
+                                            "Fill": {
+                                                "linked_to": "App/Theme Editor Dialog/Fill"
+                                            },
+                                            "Margins.Bottom": {
+                                                "value": 0
+                                            },
+                                            "Margins.Left": {
+                                                "value": 0
+                                            },
+                                            "Margins.Right": {
+                                                "value": 0
+                                            },
+                                            "Margins.Top": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "children": {
+                                            "Graphic": {
+                                                "children": {
+                                                    "Svg": {
+                                                        "attributes": {
+                                                            "common_color": {
+                                                                "value": "#d9687b"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "Text Label": {
+                                                "attributes": {
+                                                    "Fill": {
+                                                        "value": "#ffffff"
+                                                    },
+                                                    "Text Color": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                }
                                             }
                                         }
                                     },
-                                    "Dot Svg": {
+                                    "Links View": {
                                         "attributes": {
-                                            "common_color": {
+                                            "Text Color": {
                                                 "linked_to": "App/Foreground"
                                             }
+                                        },
+                                        "children": {
+                                            "Dependent Arrow Svg": {
+                                                "attributes": {
+                                                    "common_color": {
+                                                        "value": "#4b4d50"
+                                                    }
+                                                }
+                                            },
+                                            "Dot Svg": {
+                                                "attributes": {
+                                                    "common_color": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                }
+                                            },
+                                            "Link Arrow Svg": {
+                                                "attributes": {
+                                                    "common_color": {
+                                                        "value": "#4b4d50"
+                                                    }
+                                                }
+                                            }
                                         }
                                     },
-                                    "Link Arrow Svg": {
+                                    "New Link Button": {
                                         "attributes": {
-                                            "common_color": {
-                                                "value": "#4b4d50"
+                                            "Border.Fill": {
+                                                "value": "#000000"
+                                            },
+                                            "Border.Thickness": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Bottom Left": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Bottom Right": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Top Left": {
+                                                "value": 4
+                                            },
+                                            "Corner Radii.Top Right": {
+                                                "value": 4
+                                            },
+                                            "Fill": {
+                                                "linked_to": "App/Theme Editor Dialog/Fill"
+                                            },
+                                            "Margins.Bottom": {
+                                                "value": 0
+                                            },
+                                            "Margins.Left": {
+                                                "value": 0
+                                            },
+                                            "Margins.Right": {
+                                                "value": 0
+                                            },
+                                            "Margins.Top": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "children": {
+                                            "Graphic": {
+                                                "children": {
+                                                    "Svg": {
+                                                        "attributes": {
+                                                            "common_color": {
+                                                                "value": "#6fc654"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "Text Label": {
+                                                "attributes": {
+                                                    "Fill": {
+                                                        "value": "#ffffff"
+                                                    },
+                                                    "Text Color": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                }
                                             }
                                         }
                                     }

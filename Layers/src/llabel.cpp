@@ -86,7 +86,7 @@ void LLabel::set_font_size(int size)
 	setFont(f);
 }
 
-void LLabel::set_font_size(qreal size)
+void LLabel::set_font_size_f(qreal size)
 {
 	QFont f = font();
 

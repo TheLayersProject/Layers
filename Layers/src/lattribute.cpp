@@ -145,6 +145,26 @@ void LAttribute::add_override(const QString& name, QVariant value)
 		{ emit changed(); });
 }
 
+void LAttribute::break_link()
+{
+	if (m_link_attr)
+	{
+		m_value = m_link_attr->value();
+
+		disconnect(m_link_connection);
+		disconnect(m_link_destroyed_connection);
+
+		if (m_link_attr->m_dependent_attrs.contains(this))
+			m_link_attr->m_dependent_attrs.removeOne(this);
+
+		m_link_attr = nullptr;
+		m_link_path = "";
+	}
+
+	emit link_changed();
+	emit changed();
+}
+
 void LAttribute::clear_overrides()
 {
 	if (!m_overrides.isEmpty())
@@ -176,6 +196,11 @@ bool LAttribute::has_overrides() const
 QJsonObject& LAttribute::json_object()
 {
 	return m_json_object;
+}
+
+LAttribute* LAttribute::link_attribute() const
+{
+	return m_link_attr;
 }
 
 QString LAttribute::link_path() const
@@ -220,7 +245,7 @@ void LAttribute::set_link_attribute(LAttribute* link_attr)
 
 	establish_link_connections();
 
-	emit linked();
+	emit link_changed();
 	emit changed();
 }
 
@@ -255,6 +280,14 @@ const char* LAttribute::typeName() const
 		return m_link_attr->typeName();
 
 	return m_value.typeName();
+}
+
+QVariant LAttribute::value()
+{
+	if (m_link_attr)
+		return m_link_attr->value();
+
+	return m_value;
 }
 
 QJsonObject LAttribute::to_json_object()
@@ -327,11 +360,6 @@ QJsonValue LAttribute::to_json_value()
 	}
 
 	return json_value;
-}
-
-LAttribute* LAttribute::link_attribute() const
-{
-	return m_link_attr;
 }
 
 void LAttribute::update_json_object()
