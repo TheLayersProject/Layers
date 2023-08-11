@@ -1016,27 +1016,24 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = .gitattributes \
-                         .gitignore \
-                         Layers.sln \
-                         LICENSE \
-                         .git \
-                         .github \
-                         .vs \
-                         docs \
-                         x64 \
-                         ../../LayersCore/LayersCore.vcxproj \
-                         ../../LayersCore/LayersCore.vcxproj.filters \
-                         ../../LayersCore/LayersCore.vcxproj.user \
-                         ../../LayersCore/x64 \
-                         ../../LayersWidgets/LayersWidgets.vcxproj \
-                         ../../LayersWidgets/LayersWidgets.vcxproj.filters \
-                         ../../LayersWidgets/LayersWidgets.vcxproj.user \
-                         ../../LayersWidgets/x64 \
-                         ../../LayersWidgets/fonts \
-                         ../../LayersWidgets/images \
-                         ../../LayersWidgets/image-sequences \
-                         ../../LayersWidgets/themes \
+EXCLUDE                = ../../.gitattributes \
+                         ../../.gitignore \
+                         ../../Layers.sln \
+                         ../../LICENSE \
+                         ../../.git \
+                         ../../.github \
+                         ../../.vs \
+                         ../../docs \
+                         ../../x64 \
+                         ../../Layers/Layers.vcxproj \
+                         ../../Layers/Layers.vcxproj.filters \
+                         ../../Layers/Layers.vcxproj.user \
+                         ../../Layers/x64 \
+                         ../../Layers/fonts \
+                         ../../Layers/images \
+                         ../../Layers/image-sequences \
+                         ../../Layers/src \
+                         ../../Layers/themes \
                          ../../LayersDemo
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or

@@ -42,9 +42,18 @@ QStringList LThemeItem::attribute_group_names()
 	return attribute_group_names;
 }
 
-LAttributeMap& LThemeItem::attributes()
+LAttributeMap LThemeItem::attributes(const QString& type_name)
 {
-	return m_attributes;
+	if (type_name.isEmpty())
+		return m_attributes;
+
+	LAttributeMap attrs;
+
+	for (LAttribute* attr : m_attributes)
+		if (type_name == attr->typeName())
+			attrs[attr->name()] = attr;
+
+	return attrs;
 }
 
 LThemeItem* LThemeItem::child(int number)
@@ -88,6 +97,11 @@ LThemeItem* LThemeItem::find_item(QStringList name_list)
 	}
 
 	return nullptr;
+}
+
+LThemeItem* LThemeItem::find_item(const QString& path)
+{
+	return find_item(path.split("/"));
 }
 
 bool LThemeItem::is_overridable() const

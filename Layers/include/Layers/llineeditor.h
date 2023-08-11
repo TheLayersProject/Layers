@@ -37,17 +37,6 @@ public:
 	LAttribute* left_padding() const;
 
 	/*!
-		Sets the width of the widget to *w* and the height to *h*.
-	*/
-	void setFixedSize(int w, int h);
-
-	/*!
-		Sets both the minimum and maximum width of the widget to *w* without
-		changing the heights.
-	*/
-	void setFixedWidth(int w);
-
-	/*!
 		Sets the default value to be used in the line editor if it is left
 		empty after losing focus.
 	*/
@@ -57,6 +46,11 @@ public:
 		Sets the *size* of the label's font.
 	*/
 	void set_font_size(int size);
+
+	/*!
+		Sets the *size* of the label's font.
+	*/
+	void set_font_size_f(qreal size);
 
 	/*!
 		Sets all margin attributes with one value.

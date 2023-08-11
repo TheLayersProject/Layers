@@ -6,7 +6,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include <Layers/lthemeable.h>
+#include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
 /*!

@@ -26,7 +26,7 @@ public:
 
     QStringList attribute_group_names();
 
-    LAttributeMap& attributes();
+    LAttributeMap attributes(const QString& type_name = "");
 
     LThemeItem* child(int number);
 
@@ -37,6 +37,8 @@ public:
     QString file_name() const;
 
     LThemeItem* find_item(QStringList name_list);
+
+    LThemeItem* find_item(const QString& path);
 
     bool is_overridable() const;
 

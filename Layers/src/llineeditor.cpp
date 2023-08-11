@@ -1,6 +1,7 @@
 #include <Layers/llineeditor.h>
 
 #include <QEvent>
+#include <QResizeEvent>
 
 using Layers::LAttribute;
 using Layers::LLineEditor;
@@ -8,9 +9,10 @@ using Layers::LLineEditor;
 LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 {
 	init_attributes();
+	installEventFilter(this);
 
-	setFixedSize(40, 40);
-	set_margin(5, 5, 5, 5);
+	//setFixedSize(40, 40);
+	//set_margin(5, 5, 5, 5);
 
 	m_line_edit->installEventFilter(this);
 	m_line_edit->setStyleSheet(
@@ -50,9 +52,16 @@ void LLineEditor::set_default_value(const QString& default_value)
 void LLineEditor::set_font_size(int size)
 {
 	QFont line_edit_font = m_line_edit->font();
-
 	line_edit_font.setPointSize(size);
+	m_line_edit->setFont(line_edit_font);
 
+	update();
+}
+
+void LLineEditor::set_font_size_f(qreal size)
+{
+	QFont line_edit_font = m_line_edit->font();
+	line_edit_font.setPointSizeF(size);
 	m_line_edit->setFont(line_edit_font);
 
 	update();
@@ -82,20 +91,6 @@ void LLineEditor::set_text(const QString& text)
 void LLineEditor::set_validator(const QValidator* validator)
 {
 	m_line_edit->setValidator(validator);
-}
-
-void LLineEditor::setFixedSize(int w, int h)
-{
-	QWidget::setFixedSize(w, h);
-
-	m_line_edit->setFixedSize(w, h);
-}
-
-void LLineEditor::setFixedWidth(int w)
-{
-	QWidget::setFixedWidth(w);
-
-	m_line_edit->setFixedWidth(w);
 }
 
 LAttribute* LLineEditor::left_padding() const
@@ -133,6 +128,15 @@ bool LLineEditor::eventFilter(QObject* object, QEvent* event)
 		{
 			if (m_line_edit->text() == "" && m_default_value)
 				m_line_edit->setText(*m_default_value);
+		}
+	}
+	else if (object == this)
+	{
+		if (event->type() == QEvent::Resize)
+		{
+			QResizeEvent* resize_event = static_cast<QResizeEvent*>(event);
+
+			m_line_edit->setFixedSize(resize_event->size());
 		}
 	}
 

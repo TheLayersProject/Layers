@@ -25,7 +25,7 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	m_color_unit_label->set_name("Color Unit Label");
 
 	m_line_editor_color_name->set_name("Color Name Line Editor");
-	m_line_editor_color_name->setFixedWidth(100);
+	m_line_editor_color_name->setFixedSize(100, 40);
 	//QRegularExpression rx("^#[0-9a-f]{3}([0-9a-f]{3})?$")
 	//m_color_name_line_editor->set_validator(new QRegularExpressionValidator(rx));
 
@@ -62,13 +62,13 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	m_label_val_unit->set_name("Value Unit Label");
 
 	m_line_editor_hue->set_name("Hue Line Editor");
-	m_line_editor_hue->setFixedWidth(55);
+	m_line_editor_hue->setFixedSize(55, 40);
 
 	m_line_editor_sat->set_name("Saturation Line Editor");
-	m_line_editor_sat->setFixedWidth(55);
+	m_line_editor_sat->setFixedSize(55, 40);
 
 	m_line_editor_val->set_name("Value Line Editor");
-	m_line_editor_val->setFixedWidth(55);
+	m_line_editor_val->setFixedSize(55, 40);
 
 	connect(m_line_editor_hue, &LLineEditor::text_edited,
 		this, &LColorDialog::hsv_changed);

@@ -1,24 +1,12 @@
-#include <Layers/lthemeview.h>
+#include <Layers/lattributemapview.h>
 
-#include <QEvent>
-#include <QPainter>
-
-#include <Layers/lapplication.h>
-#include <Layers/lthememodel.h>
-
+using Layers::LAttributeMapView;
 using Layers::LThemeable;
-using Layers::LThemeView;
 
-LThemeView::LThemeView(QWidget* parent) :
+LAttributeMapView::LAttributeMapView(QWidget* parent) :
 	QTreeView(parent)
 {
-	set_name("Theme View");
-
-	m_model->set_theme(activeTheme());
-
-	m_model_update_connection =
-		connect(layersApp, &LApplication::active_theme_changed, [this]
-			{ m_model->set_theme(activeTheme()); });
+	set_name("Attribute Map View");
 
 	setHeaderHidden(true);
 	setHorizontalScrollBar(m_horizontal_scrollbar);
@@ -28,16 +16,11 @@ LThemeView::LThemeView(QWidget* parent) :
 	m_horizontal_scrollbar->set_name("Horizontal ScrollBar");
 
 	m_vertical_scrollbar->set_name("Vertical ScrollBar");
-	
+
 	update();
 }
 
-LThemeView::~LThemeView()
-{
-	disconnect(m_model_update_connection);
-}
-
-QList<LThemeable*> LThemeView::child_themeables(Qt::FindChildOptions options)
+QList<LThemeable*> LAttributeMapView::child_themeables(Qt::FindChildOptions options)
 {
 	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
 
@@ -47,7 +30,13 @@ QList<LThemeable*> LThemeView::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
-void LThemeView::update()
+void LAttributeMapView::set_attributes(
+	LAttributeMap attributes, const QStringList& filter_paths)
+{
+	m_model->init_root_item(attributes, filter_paths);
+}
+
+void LAttributeMapView::update()
 {
 	QString stylesheet =
 		"QAbstractItemView {"
@@ -67,13 +56,12 @@ void LThemeView::update()
 	QWidget::update();
 }
 
-void LThemeView::selectionChanged(
-	const QItemSelection& selected,
-	const QItemSelection& deselected)
+void LAttributeMapView::selectionChanged(
+	const QItemSelection& selected, const QItemSelection& deselected)
 {
 	QModelIndexList indexes = selected.indexes();
 
 	if (!indexes.isEmpty())
 		emit selection_changed(
-			indexes.first().data(Qt::UserRole).value<LThemeItem*>());
+			indexes.first().data(Qt::UserRole).value<LAttribute*>());
 }

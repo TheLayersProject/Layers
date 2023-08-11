@@ -60,7 +60,8 @@ int LThemeModel::rowCount(const QModelIndex& parent) const
 
 	const LThemeItem* parent_item = get_item(parent);
 
-	return parent_item ? parent_item->child_count() : 0;
+	return parent_item ?
+		parent_item->child_count() : 0;
 }
 
 int LThemeModel::columnCount(const QModelIndex& parent) const

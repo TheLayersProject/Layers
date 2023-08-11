@@ -5,189 +5,20 @@
 
 #include <Layers/lthemeitem.h>
 
+#include "lnewlinkwidget.h"
+#include "llinksview.h"
+
 using Layers::LAttributeEditor;
 using Layers::LFillControl;
 using Layers::LLineEditor;
 using Layers::LLinksView;
 using Layers::LMiniSlider;
+using Layers::LNewLinkWidget;
 using Layers::LThemeable;
-
-LLinksView::LLinksView(LAttribute* attr, QWidget* parent) :
-	m_attr{ attr },
-	QWidget(parent)
-{
-	set_name("Links View");
-
-	QFont f = font();
-	f.setPointSizeF(10.5);
-	setFont(f);
-
-	m_dot_svg->set_name("Dot Svg");
-
-	m_link_arrow_svg->set_name("Link Arrow Svg");
-
-	m_dependent_arrow_svg->set_name("Dependent Arrow Svg");
-	m_dependent_arrow_2_svg->set_name("Dependent Arrow Svg");
-
-	connect(m_attr, &LAttribute::link_changed, this, &LLinksView::update_view);
-
-	update_view();
-}
-
-void LLinksView::update_view()
-{
-	m_link_paths.clear();
-	m_dependent_paths.clear();
-
-	if (m_attr)
-	{
-		if (m_attr->parent())
-			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(m_attr->parent()))
-				m_parent_path = parent_theme_item->path();
-
-		if (LAttribute* link_attr = m_attr->link_attribute())
-		{
-			while (link_attr)
-			{
-				QString link_path = link_attr->path();
-
-				if (!m_parent_path.isEmpty())
-					if (link_path.startsWith(m_parent_path))
-						link_path.replace(m_parent_path, ".");
-
-				m_link_paths.insert(0, link_path);
-
-				link_attr = link_attr->link_attribute();
-			}
-		}
-
-		for (LAttribute* dependent_attr : m_attr->dependent_attributes())
-		{
-			QString dependent_path = dependent_attr->path();
-
-			if (!dependent_path.contains("/"))
-				continue;
-
-			if (!m_parent_path.isEmpty())
-				if (dependent_path.startsWith(m_parent_path))
-					dependent_path.replace(m_parent_path, ".");
-
-			m_dependent_paths.append(dependent_path);
-		}
-	}
-
-	update_height();
-	QWidget::update();
-}
-
-void LLinksView::paintEvent(QPaintEvent* event)
-{
-	QPainter painter(this);
-	painter.setRenderHint(QPainter::Antialiasing);
-
-	int item_number = 0;
-
-	for (const QString& link_path : m_link_paths)
-	{
-		QRect item_rect(
-			0, 40 * item_number++,
-			width(), 40);
-
-		paint_item_dot(&painter, item_rect, 9);
-		paint_item_text(&painter, link_path, item_rect, font(), 27);
-
-		int uplink_arrow_y = item_rect.y() + (item_rect.height() / 2) + 5;
-		m_link_arrow_svg->render(&painter,
-			QRectF(7, uplink_arrow_y, 12, 34));
-	}
-
-	QFont bold_text_font = font();
-	bold_text_font.setBold(true);
-
-	QRect this_text_rect = QRect(0, 40 * item_number++, width(), 40);
-
-	paint_item_dot(&painter, this_text_rect, 9);
-	paint_item_text(&painter, "This", this_text_rect, bold_text_font, 27);
-
-	for (int i = 0; i < m_dependent_paths.size(); i++)
-	{
-		const QString& dependent_path = m_dependent_paths[i];
-
-		QRect previous_item_rect(
-			0, 40 * (item_number - 1),
-			width(), 40);
-
-		if (i == 0)
-		{
-			int downlink_arrow_y = previous_item_rect.y() + (previous_item_rect.height() / 2) + 5;
-			m_dependent_arrow_svg->render(&painter,
-				QRectF(7, downlink_arrow_y, 13, 37));
-		}
-		else
-		{
-			int downlink_arrow_y = previous_item_rect.y() + (previous_item_rect.height() / 2) - 7;
-			m_dependent_arrow_2_svg->render(&painter,
-				QRectF(12, downlink_arrow_y, 8, 48));
-		}
-
-		QRect item_rect(
-			0, 40 * item_number++,
-			width(), 40);
-
-		paint_item_dot(&painter, item_rect, 19);
-		paint_item_text(&painter, dependent_path, item_rect, font(), 37);
-	}
-}
-
-void LLinksView::paint_item_dot(
-	QPainter* painter,
-	const QRect& item_rect,
-	int x)
-{
-	int dot_y = item_rect.y() + (item_rect.height() / 2) - 5;
-
-	m_dot_svg->render(painter,
-		QRectF(x, dot_y, 10, 10));
-}
-
-void LLinksView::paint_item_text(
-	QPainter* painter,
-	const QString& text,
-	const QRect& item_rect,
-	QFont font,
-	int x)
-{
-	const QFontMetrics& font_metrics = QFontMetrics(font);
-
-	QPainterPath text_path;
-
-	text_path.addText(
-		QPoint(x, item_rect.center().y() + (font_metrics.height() / 2) - 2),
-		font,
-		text
-	);
-
-	painter->fillPath(text_path, m_text_color->as<QColor>());
-}
-
-void LLinksView::update_height()
-{
-	// 40 is item size
-
-	int new_height = 40;
-
-	if (m_link_paths.isEmpty());
-	else
-		new_height += 40 * m_link_paths.count();
-
-	new_height += 40 * m_dependent_paths.count();
-
-	setFixedHeight(new_height);
-}
 
 LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	m_attr{ attr },
-	m_links_view{ new LLinksView(attr)},
+	m_links_view{ new LLinksView(attr) },
 	LWidget(parent)
 {
 	init_attributes();
@@ -223,6 +54,24 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 	update_icon_labels();
 
+	m_attr_link_changed_connection =
+		connect(m_attr, &LAttribute::link_changed,
+			[this]
+			{
+				update_icon_labels();
+
+				if (m_attr->link_attribute())
+				{
+					m_break_link_button->show();
+					m_new_link_button->hide();
+				}
+				else
+				{
+					m_break_link_button->hide();
+					m_new_link_button->show();
+				}
+			});
+
 	m_collapse_button->set_name("Collapse Button");
 
 	connect(m_collapse_button, &LButton::clicked, [this]
@@ -256,12 +105,46 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		}
 	});
 
+	LTab* links_tab = m_features_tab_bar->tabs().last();
+	links_tab->text_label()->set_font_size_f(10.5);
+	links_tab->icon_label()->setFixedWidth(11);
+	links_tab->close_button()->hide();
+	links_tab->layout()->setContentsMargins(8, 0, 8, 0);
+	links_tab->layout()->setSpacing(7);
+
 	m_links_widget->set_name("Links Widget");
+
+	m_status_states->set_state("Inactive");
 
 	m_new_link_button->set_name("New Link Button");
 	m_new_link_button->set_font_size_f(10.5);
 	m_new_link_button->set_padding(6);
 	m_new_link_button->setFixedHeight(30);
+	m_new_link_button->add_state_pool(m_status_states);
+
+	connect(m_new_link_button, &LButton::clicked,
+		[this]
+		{
+			if (m_status_states->state() == "Inactive")
+			{
+				m_status_states->set_state("Active");
+
+				m_new_link_widget = new LNewLinkWidget(m_attr);
+				m_new_link_widget->apply_theme(
+					m_current_theme_item->find_item(
+						"Links Widget/New Link Widget"));
+
+				m_links_layout->insertWidget(1, m_new_link_widget);
+
+				m_new_link_widget_destroyed_connection =
+					connect(m_new_link_widget, &LNewLinkWidget::destroyed,
+						[this] { m_status_states->set_state("Inactive"); });
+			}
+			else
+			{
+				m_new_link_widget->deleteLater();
+			}
+		});
 
 	m_break_link_button->set_name("Break Link Button");
 	m_break_link_button->set_font_size_f(10.5);
@@ -272,15 +155,9 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	{
 		m_attr->break_link();
 		m_break_link_button->hide();
+		m_new_link_button->show();
 		update_icon_labels();
 	});
-
-	LTab* links_tab = m_features_tab_bar->tabs().last();
-	links_tab->text_label()->set_font_size_f(10.5);
-	links_tab->icon_label()->setFixedWidth(11);
-	links_tab->close_button()->hide();
-	links_tab->layout()->setContentsMargins(8, 0, 8, 0);
-	links_tab->layout()->setSpacing(7);
 
 	m_overrides_widget->set_name("Overrides Widget");
 	m_overrides_widget->hide();
@@ -312,11 +189,10 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_fill_control->hide();
 		}
 
-		if (!attr->link_attribute())
-		{
-			m_link_icon_label->hide();
+		if (attr->link_attribute())
+			m_new_link_button->hide();
+		else
 			m_break_link_button->hide();
-		}
 
 		if (attr->parent())
 			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(attr->parent()))
@@ -347,8 +223,6 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				m_overrides_layout->addWidget(override_editor);
 			}
 		}
-		else
-			m_overrides_icon_label->hide();
 	}
 	else
 	{
@@ -356,6 +230,12 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		m_line_editor->hide();
 		m_slider->hide();
 	}
+}
+
+LAttributeEditor::~LAttributeEditor()
+{
+	disconnect(m_attr_link_changed_connection);
+	disconnect(m_new_link_widget_destroyed_connection);
 }
 
 QList<LThemeable*> LAttributeEditor::child_themeables(Qt::FindChildOptions options)
@@ -438,12 +318,13 @@ void LAttributeEditor::init_layout()
 	m_links_buttons_layout->addWidget(m_break_link_button);
 	m_links_buttons_layout->addStretch();
 	m_links_buttons_layout->setSpacing(5);
-	m_links_buttons_layout->setContentsMargins(5, 5, 5, 5);
+	m_links_buttons_layout->setContentsMargins(0, 0, 0, 0);
 
 	m_links_layout->addLayout(m_links_buttons_layout);
+	//m_links_layout->addWidget(m_new_link_widget);
 	m_links_layout->addWidget(m_links_view);
 	m_links_layout->setSpacing(0);
-	m_links_layout->setContentsMargins(0, 0, 0, 0);
+	m_links_layout->setContentsMargins(5, 5, 5, 5);
 	m_links_widget->setLayout(m_links_layout);
 
 	m_overrides_layout->setSpacing(3);

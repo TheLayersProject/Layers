@@ -32,9 +32,7 @@ LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* pa
 {
 	if (json_object.contains("linked_to"))
 	{
-		m_link_path = json_object.value("linked_to").toString();
-
-		m_value = QVariant();
+		set_link_path(json_object.value("linked_to").toString());
 	}
 	else if (json_object.contains("value"))
 	{
@@ -129,7 +127,10 @@ LAttribute::~LAttribute()
 	if (m_link_attr)
 	{
 		if (m_link_attr->m_dependent_attrs.contains(this))
+		{
 			m_link_attr->m_dependent_attrs.removeOne(this);
+			emit m_link_attr->link_changed();
+		}
 
 		m_link_attr = nullptr;
 	}
@@ -155,13 +156,16 @@ void LAttribute::break_link()
 		disconnect(m_link_destroyed_connection);
 
 		if (m_link_attr->m_dependent_attrs.contains(this))
+		{
 			m_link_attr->m_dependent_attrs.removeOne(this);
+			emit m_link_attr->link_changed();
+		}
 
 		m_link_attr = nullptr;
 		m_link_path = "";
 	}
 
-	emit link_changed();
+	emit_link_changed();
 	emit changed();
 }
 
@@ -183,9 +187,18 @@ void LAttribute::clear_theme_attribute()
 	disconnect(m_theme_connection);
 }
 
-LAttributeList LAttribute::dependent_attributes() const
+LAttributeList LAttribute::dependent_attributes(
+	bool include_indirect_dependencies) const
 {
-	return m_dependent_attrs;
+	LAttributeList dependent_attributes = m_dependent_attrs;
+
+	if (include_indirect_dependencies)
+		for (LAttribute* dependent_attr : m_dependent_attrs)
+			dependent_attributes.append(
+				dependent_attr->dependent_attributes(
+					include_indirect_dependencies));
+
+	return dependent_attributes;
 }
 
 bool LAttribute::has_overrides() const
@@ -242,11 +255,19 @@ void LAttribute::set_link_attribute(LAttribute* link_attr)
 	m_link_attr = link_attr;
 
 	m_link_attr->m_dependent_attrs.append(this);
+	emit m_link_attr->link_changed();
 
 	establish_link_connections();
 
-	emit link_changed();
+	emit_link_changed();
 	emit changed();
+}
+
+void LAttribute::set_link_path(const QString& link_path)
+{
+	m_link_path = link_path;
+
+	m_value = QVariant();
 }
 
 void LAttribute::set_value(QVariant value)
@@ -392,4 +413,12 @@ void LAttribute::establish_theme_connection()
 
 	m_theme_connection = connect(m_theme_attr, &LAttribute::changed,
 		[this] { emit changed(); });
+}
+
+void LAttribute::emit_link_changed()
+{
+	emit link_changed();
+
+	for (LAttribute* dependent_attr : dependent_attributes(true))
+		emit dependent_attr->link_changed();
 }

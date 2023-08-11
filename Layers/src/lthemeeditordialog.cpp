@@ -17,11 +17,10 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	m_path_label->set_name("Path Label");
 	m_path_label->setFixedHeight(40);
 
-	m_theme_view->set_name("Theme View");
+	//m_theme_view->set_name("Theme View");
 	m_theme_view->setFixedWidth(298);
 
-	connect(
-		m_theme_view, SIGNAL(selection_changed(LThemeItem*)),
+	connect(m_theme_view, SIGNAL(selection_changed(LThemeItem*)),
 		this, SLOT(edit_theme_item(LThemeItem*)));
 
 	m_divider->set_name("Divider");
@@ -96,7 +95,7 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 
 		if (m_current_theme_item)
 			attr_editor_group->apply_theme(
-				m_current_theme_item->find_item({ "Attribute Editor Groups" }));
+				m_current_theme_item->find_item("Attribute Editor Groups"));
 
 		attr_editor_groups[group_name] = attr_editor_group;
 		organized_widgets[group_name] = attr_editor_group;
@@ -109,7 +108,7 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 
 		if (m_current_theme_item)
 			attr_editor->apply_theme(
-				m_current_theme_item->find_item({ "Attribute Editors" }));
+				m_current_theme_item->find_item("Attribute Editors"));
 
 		connect(attr_editor->fill_control()->fill(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);

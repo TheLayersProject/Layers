@@ -138,7 +138,8 @@ public:
 
 	void clear_theme_attribute();
 
-	LAttributeList dependent_attributes() const;
+	LAttributeList dependent_attributes(
+		bool include_indirect_dependencies = false) const;
 
 	/*!
 		Returns true if this attribute's data is multi-valued. Otherwise,
@@ -178,6 +179,8 @@ public:
 	*/
 	void set_link_attribute(LAttribute* link_attr);
 
+	void set_link_path(const QString& link_path);
+
 	/*!
 		Sets the data's value.
 
@@ -209,6 +212,8 @@ private slots:
 private:
 	void establish_link_connections();
 	void establish_theme_connection();
+
+	void emit_link_changed();
 
 	QMetaObject::Connection m_link_connection;
 	QMetaObject::Connection m_link_destroyed_connection;
@@ -243,7 +248,13 @@ inline T LAttribute::as(const QStringList& states) const
 		{
 			QStringList override_states = override_attr->name().split(":");
 
-			if (override_states == states)
+			bool return_override_attr = true;
+
+			for (const QString& override_state : override_states)
+				if (!states.contains(override_state))
+					return_override_attr = false;
+
+			if (return_override_attr)
 				return override_attr->as<T>();
 		}
 
@@ -253,7 +264,7 @@ inline T LAttribute::as(const QStringList& states) const
 	}
 
 	if (m_link_attr)
-		return m_link_attr->as<T>(states);
+		return m_link_attr->as<T>();
 
 	return m_value.value<T>();
 }

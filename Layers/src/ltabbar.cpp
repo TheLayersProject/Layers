@@ -59,7 +59,7 @@ void LTabBar::_add_tab(LTab* tab)
 	tab->set_name("Tabs");
 
 	if (m_current_theme_item)
-		tab->apply_theme(m_current_theme_item->find_item({ "Tabs" }));
+		tab->apply_theme(m_current_theme_item->find_item("Tabs"));
 
 	m_tabs.append(tab);
 	m_tab_layout->addWidget(tab);

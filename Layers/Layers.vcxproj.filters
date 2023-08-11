@@ -61,6 +61,13 @@
     <ClCompile Include="src\ltheme.cpp" />
     <ClCompile Include="src\lthemeitem.cpp" />
     <ClCompile Include="src\lgrowingdotprogressindicator.cpp" />
+    <ClCompile Include="src\lresizer.cpp" />
+    <ClCompile Include="src\lsplitter.cpp" />
+    <ClCompile Include="src\lattributemapview.cpp" />
+    <ClCompile Include="src\lattributemapmodel.cpp" />
+    <ClCompile Include="src\lattributemapitem.cpp" />
+    <ClCompile Include="src\llinksview.cpp" />
+    <ClCompile Include="src\lnewlinkwidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layers\layers_exports.h" />
@@ -128,6 +135,13 @@
     <QtMoc Include="include\Layers\lthemeitem.h" />
     <QtMoc Include="include\Layers\ltheme.h" />
     <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
+    <QtMoc Include="include\Layers\lresizer.h" />
+    <QtMoc Include="include\Layers\lsplitter.h" />
+    <QtMoc Include="include\Layers\lattributemapview.h" />
+    <QtMoc Include="include\Layers\lattributemapmodel.h" />
+    <QtMoc Include="include\Layers\lattributemapitem.h" />
+    <QtMoc Include="src\llinksview.h" />
+    <QtMoc Include="src\lnewlinkwidget.h" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />

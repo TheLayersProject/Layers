@@ -99,7 +99,7 @@ public:
 	void toggle_graphics();
 
 protected:
-	bool eventFilter(QObject* object, QEvent* event) override;
+	virtual bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
 	void init();

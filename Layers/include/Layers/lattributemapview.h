@@ -1,5 +1,5 @@
-#ifndef LTHEMEVIEW_H
-#define LTHEMEVIEW_H
+#ifndef LATTRIBUTEMAPVIEW_H
+#define LATTRIBUTEMAPVIEW_H
 
 #include <QTreeView>
 
@@ -8,27 +8,27 @@
 
 #include "lscrollbar.h"
 #include "lthemeable.h"
-#include "lthememodel.h"
+#include "lattributemapmodel.h"
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LThemeView is a QTreeView and a LThemeable.
+	An LAttributeMapView is a QTreeView and a LThemeable.
 */
-class LAYERS_EXPORT LThemeView :
+class LAYERS_EXPORT LAttributeMapView :
 	public QTreeView, public LThemeable
 {
 	Q_OBJECT
 
 signals:
-	void selection_changed(LThemeItem* theme_item);
+	void selection_changed(LAttribute* attr);
 
 public:
 	/*!
-		Constructs a theme view.
+		Constructs an attribute map view.
 	*/
-	LThemeView(QWidget* parent = nullptr);
+	LAttributeMapView(QWidget* parent = nullptr);
 
-	~LThemeView();
+	//~LAttributeMapView();
 
 	/*!
 		Returns a list of child themeables.
@@ -39,6 +39,9 @@ public:
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;
+
+	void set_attributes(
+		LAttributeMap attributes, const QStringList& filter_paths);
 
 	virtual void update() override;
 
@@ -57,10 +60,10 @@ private:
 	LScrollBar* m_horizontal_scrollbar{ new LScrollBar };
 	LScrollBar* m_vertical_scrollbar{ new LScrollBar };
 
-	LThemeModel* m_model{ new LThemeModel };
+	LAttributeMapModel* m_model{ new LAttributeMapModel };
 
-	QMetaObject::Connection m_model_update_connection;
+	//QMetaObject::Connection m_model_update_connection;
 };
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEVIEW_H  
+#endif // LATTRIBUTEMAPVIEW_H  
