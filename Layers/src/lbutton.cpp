@@ -164,7 +164,7 @@ void LButton::init()
 
 		m_graphic_label->graphic()->svg_renderer()->common_color()->set_value(
 			QColor(Qt::darkGray));
-		m_graphic_label->graphic()->svg_renderer()->common_color()->add_override(
+		m_graphic_label->graphic()->svg_renderer()->common_color()->create_override(
 			"Selected", QColor(Qt::lightGray));
 	}
 
@@ -176,7 +176,7 @@ void LButton::init()
 
 		m_graphic_after_label->graphic()->svg_renderer()->common_color()->set_value(
 			QColor(Qt::darkGray));
-		m_graphic_after_label->graphic()->svg_renderer()->common_color()->add_override(
+		m_graphic_after_label->graphic()->svg_renderer()->common_color()->create_override(
 			"Selected", QColor(Qt::lightGray));
 	}
 

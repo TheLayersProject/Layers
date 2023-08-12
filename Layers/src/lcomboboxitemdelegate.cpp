@@ -134,5 +134,5 @@ void LComboBoxItemDelegate::set_is_above_control(bool condition)
 
 void LComboBoxItemDelegate::init_attributes()
 {
-	m_fill->add_override("Selected", QColor(Qt::lightGray));
+	m_fill->create_override("Selected", QColor(Qt::lightGray));
 }

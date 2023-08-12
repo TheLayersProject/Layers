@@ -136,7 +136,7 @@ LAttribute::~LAttribute()
 	}
 }
 
-void LAttribute::add_override(const QString& name, QVariant value)
+void LAttribute::create_override(const QString& name, QVariant value)
 {
 	LAttribute* override_attr = new LAttribute(name, value, this);
 
@@ -295,22 +295,6 @@ QString LAttribute::path() const
 	return m_name;
 }
 
-const char* LAttribute::typeName() const
-{
-	if (m_link_attr)
-		return m_link_attr->typeName();
-
-	return m_value.typeName();
-}
-
-QVariant LAttribute::value()
-{
-	if (m_link_attr)
-		return m_link_attr->value();
-
-	return m_value;
-}
-
 QJsonObject LAttribute::to_json_object()
 {
 	QJsonObject json_object;
@@ -381,6 +365,22 @@ QJsonValue LAttribute::to_json_value()
 	}
 
 	return json_value;
+}
+
+const char* LAttribute::typeName() const
+{
+	if (m_link_attr)
+		return m_link_attr->typeName();
+
+	return m_value.typeName();
+}
+
+QVariant LAttribute::value()
+{
+	if (m_link_attr)
+		return m_link_attr->value();
+
+	return m_value;
 }
 
 void LAttribute::update_json_object()

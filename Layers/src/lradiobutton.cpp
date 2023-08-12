@@ -73,7 +73,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 
 void LRadioButton::init_attributes()
 {
-	m_border_thickness->add_override("Active", 0.0);
+	m_border_thickness->create_override("Active", 0.0);
 
-	m_fill->add_override("Active", QColor(Qt::lightGray));
+	m_fill->create_override("Active", QColor(Qt::lightGray));
 }

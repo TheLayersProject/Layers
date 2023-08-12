@@ -238,9 +238,11 @@ LAttributeEditor::~LAttributeEditor()
 	disconnect(m_new_link_widget_destroyed_connection);
 }
 
-QList<LThemeable*> LAttributeEditor::child_themeables(Qt::FindChildOptions options)
+QList<LThemeable*> LAttributeEditor::child_themeables(
+	Qt::FindChildOptions options)
 {
-	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
+	QList<LThemeable*> child_themeables =
+		LThemeable::child_themeables(options);
 
 	child_themeables.append(m_features_tab_bar);
 	child_themeables.append(m_links_widget);
