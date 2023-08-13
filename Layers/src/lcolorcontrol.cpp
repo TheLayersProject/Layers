@@ -54,7 +54,8 @@ bool LColorControl::eventFilter(QObject* object, QEvent* event)
 			open_on_release = true;
 		}
 	}
-	else if (event->type() == QEvent::MouseButtonRelease && open_on_release && !clicking_disabled)
+	else if (event->type() == QEvent::MouseButtonRelease &&
+		open_on_release && !clicking_disabled)
 	{
 		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
 

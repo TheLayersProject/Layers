@@ -8,9 +8,11 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LColorControl is a LWidget that gives the user a way to access the
-	LColorDialog. When the user clicks on the control, the application's
-	LColorDialog is displayed.
+	![LColorControl Example](color_control.png)
+	
+	An LColorControl is an LWidget that displays a color to the user and
+	generates an LColorDialog when clicked, giving the user an interface for
+	changing the color value.
 */
 class LAYERS_EXPORT LColorControl : public LWidget
 {
@@ -31,7 +33,8 @@ public:
 	~LColorControl();
 
 	/*!
-		Displays the application's LColorDialog to the user.
+		Generates an LColorDialog to give the user an interface for changing
+		the color value.
 	*/
 	void click();
 
@@ -42,7 +45,7 @@ public:
 	void disable_clicking(bool cond = true);
 
 protected:
-	bool eventFilter(QObject* object, QEvent* event);
+	virtual bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
 	void init_attributes();
