@@ -24,7 +24,7 @@ class LNewLinkWidget;
 
 	The editor provides a label for the attribute's name and control widgets to
 	modify the attribute's value (the widgets available depend on the value's
-	type). There's also a collapse button (represented with the arrow icon)
+	type). There's also a collapse button (represented with an arrow icon)
 	which expands the editor when clicked to reveal a tab bar and the active
 	feature-widget. The feature-widgets include the *links widget* and
 	the *overrides widget*, and they are only displayed when their associated

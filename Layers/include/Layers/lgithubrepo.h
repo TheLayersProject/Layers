@@ -8,7 +8,7 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	A LGitHubRepo object is an object that references a GitHub repository.
+	An LGitHubRepo object is an object that references a GitHub repository.
 
 	A GitHub repository is referenced by the name of the user/organization that
 	owns the repository, followed by the name of the repository.

@@ -8,19 +8,38 @@
 #include "lbutton.h"
 
 LAYERS_NAMESPACE_BEGIN
+/*!
+	![LAttributeEditorGroup Example](attribute_editor_group.png)
+	
+	An LAttributeEditorGroup is an LWidget that provides a collapsible
+	LAttributeEditor container widget.
+
+	The editor group has a collapse button (represented with an arrow icon)
+	which is used to expand/collapse the contained attribute editors. It also
+	has a label for the group's name.
+
+	The editor group is intended to contain attribute editors associated with
+	attributes that are considered *grouped together*.
+*/
 class LAYERS_EXPORT LAttributeEditorGroup : public LWidget
 {
 	Q_OBJECT
 
 public:
+	/*!
+		Constructs an attribute editor group labeled with *name*.
+	*/
 	LAttributeEditorGroup(const QString& name, QWidget* parent = nullptr);
 
+	/*!
+		Adds *attribute_editor* to this editor group.
+	*/
 	void add_attribute_editor(LAttributeEditor* attribute_editor);
-
-	void set_collapsed(bool collapsed = true);
 
 private:
 	void init_layout();
+
+	void set_collapsed(bool collapsed = true);
 
 	LButton* m_collapse_button{
 		new LButton(
