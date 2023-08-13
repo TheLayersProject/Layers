@@ -37,6 +37,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	m_line_editor->set_default_value("0");
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_validator(int_validator);
+	m_line_editor->setFixedSize(40, 40);
 
 	m_slider->set_name("Slider");
 	m_slider->set_limit(int_validator->top());
@@ -156,7 +157,6 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		m_attr->break_link();
 		m_break_link_button->hide();
 		m_new_link_button->show();
-		update_icon_labels();
 	});
 
 	m_overrides_widget->set_name("Overrides Widget");
