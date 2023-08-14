@@ -10,6 +10,8 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
+	![LDialog Example](dialog.png)
+	
 	An LDialog is a QDialog and a LThemeableBox that is used for short-term
 	tasks or brief communications with the user.
 */
@@ -33,12 +35,19 @@ public:
 	*/
 	void setLayout(QLayout* layout);
 
+	/*!
+		Updates the dialog.
+
+		This function overrides LThemeable::update() to update the margins of
+		the dialog layout content.
+	*/
 	virtual void update() override;
 
 protected:
-	bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
+	virtual bool nativeEvent(
+		const QByteArray& eventType, void* message, qintptr* result) override;
 
-	void paintEvent(QPaintEvent* event) override;
+	virtual void paintEvent(QPaintEvent* event) override;
 
 	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 

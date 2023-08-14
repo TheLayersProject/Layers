@@ -17,6 +17,7 @@ LDialog::LDialog(const QString& title, QWidget* parent) :
 	init_attributes();
 	init_layout();
 	init_titlebar();
+	resize(420, 275);
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::FramelessWindowHint);
 	update();
@@ -153,14 +154,24 @@ void LDialog::init_attributes()
 
 	m_border_fill->set_value(QVariant::fromValue(
 		QGradientStops({
-			{ 0.0, QColor("#c0c0c0") },
-			{ 1.0, Qt::white }
+			{ 0.0, QColor("#3a3c42") },
+			{ 1.0, QColor("#42454d") }
 			})));
-	m_border_thickness->set_value(10.0);
-	m_corner_radii_top_left->set_value(10.0);
-	m_corner_radii_top_right->set_value(10.0);
-	m_corner_radii_bottom_left->set_value(10.0);
-	m_corner_radii_bottom_right->set_value(10.0);
+	m_border_thickness->set_value(5.0);
+	m_corner_radii_top_left->set_value(12.0);
+	m_corner_radii_top_right->set_value(12.0);
+	m_corner_radii_bottom_left->set_value(12.0);
+	m_corner_radii_bottom_right->set_value(12.0);
+	m_fill->set_value(QColor("#36393f"));
+
+	m_titlebar->corner_radii_top_left()->set_value(7);
+	m_titlebar->corner_radii_top_right()->set_value(7);
+	m_titlebar->fill()->set_value("#25272b");
+
+	m_title_label->text_color()->set_value("#e3e3e3");
+
+	m_exit_button->corner_radii_top_right()->set_value(7);
+	m_exit_button->fill()->set_value("#25272b");
 }
 
 void LDialog::init_layout()
@@ -169,33 +180,29 @@ void LDialog::init_layout()
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->setAlignment(m_titlebar, Qt::AlignTop);
-
 	QWidget::setLayout(m_main_layout);
-
 	m_main_layout->activate();
 }
 
 void LDialog::init_titlebar()
 {
-	m_titlebar->setFixedHeight(40);
 	m_titlebar->set_name("Titlebar");
+	m_titlebar->setFixedHeight(40);
 
-	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 	m_title_label->set_name("Title Label");
 	m_title_label->set_font_size(14);
+	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 
-	connect(m_exit_button, &LButton::clicked, [this]
-		{ done(QDialog::Rejected); });
+	connect(m_exit_button, &LButton::clicked,
+		[this] { done(QDialog::Rejected); });
 
 	m_exit_button->set_name("Exit Button");
 
-	// Setup Layout
-
-	m_titlebar_layout->setContentsMargins(0, 0, 0, 0);
+	// Setup Titlebar Layout
+	m_titlebar_layout->setContentsMargins(5, 0, 0, 0);
 	m_titlebar_layout->setSpacing(0);
 	m_titlebar_layout->addWidget(m_title_label);
 	m_titlebar_layout->addStretch();
 	m_titlebar_layout->addWidget(m_exit_button);
-
 	m_titlebar->setLayout(m_titlebar_layout);
 }

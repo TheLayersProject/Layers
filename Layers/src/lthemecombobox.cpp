@@ -18,7 +18,7 @@ LThemeComboBox::LThemeComboBox(QWidget* parent) :
 	setModel(m_model);
 
 	m_compatibility_dialog->apply_theme(
-		activeTheme()->find_item("App/Theme Compatibility Caution Dialog"));
+		activeTheme()->find_item(m_compatibility_dialog->path()));
 
 	connect(this, &QComboBox::highlighted, [this](int index)
 	{

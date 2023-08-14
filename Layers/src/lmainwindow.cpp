@@ -47,7 +47,7 @@ LMainWindow::LMainWindow(QWidget* parent) :
 	m_separator->setFixedHeight(3);
 
 	m_theme_editor_dialog->apply_theme(
-		activeTheme()->find_item("App/Theme Editor Dialog"));
+		activeTheme()->find_item(m_theme_editor_dialog->path()));
 }
 
 void LMainWindow::set_central_widget(LWidget* central_widget)

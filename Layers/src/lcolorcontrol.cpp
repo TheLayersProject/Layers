@@ -25,7 +25,7 @@ LColorControl::~LColorControl()
 void LColorControl::click()
 {
 	LColorDialog color_dialog;
-	color_dialog.apply_theme(activeTheme()->find_item("App/Color Dialog"));
+	color_dialog.apply_theme(activeTheme()->find_item(color_dialog.path()));
 	color_dialog.color()->set_value(fill()->as<QColor>());
 
 	if (color_dialog.exec())

@@ -30,7 +30,7 @@ bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 		{
 			LGradientDialog gradient_dialog;
 			gradient_dialog.apply_theme(
-				activeTheme()->find_item("App/Gradient Dialog"));
+				activeTheme()->find_item(gradient_dialog.path()));
 			gradient_dialog.set_gradient_stops(fill()->as<QGradientStops>());
 
 			if (gradient_dialog.exec())

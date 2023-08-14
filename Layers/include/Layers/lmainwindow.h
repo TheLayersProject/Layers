@@ -55,9 +55,8 @@ public slots:
 	virtual void update() override;
 
 protected:
-	bool nativeEvent(
-		const QByteArray& eventType, void* message, qintptr* result
-	) override;
+	virtual bool nativeEvent(
+		const QByteArray& eventType, void* message, qintptr* result) override;
 
 private slots:
 	void new_theme_clicked();

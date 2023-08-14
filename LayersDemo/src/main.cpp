@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 			LUpdateDialog(app.version(), app.latest_version());
 
 		update_dialog.apply_theme(
-			activeTheme()->find_item("App/Update Dialog"));
+			activeTheme()->find_item(update_dialog.path()));
 
 		if (update_dialog.exec())
 		{
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	}
 
 	LayersDemoWindow window;
-	window.apply_theme(activeTheme()->find_item("App/Main Window"));
+	window.apply_theme(activeTheme()->find_item(window.path()));
 	window.show();
 
 	return app.exec();
