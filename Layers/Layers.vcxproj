@@ -33,7 +33,7 @@
     <ClCompile Include="src\lcolorplane.cpp" />
     <ClCompile Include="src\lcombobox.cpp" />
     <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lcreatethemedialog.cpp" />
+    <ClCompile Include="src\lthemecreatordialog.cpp" />
     <ClCompile Include="src\ldialog.cpp" />
     <ClCompile Include="src\ldownloader.cpp" />
     <ClCompile Include="src\lfillcontrol.cpp" />
@@ -154,7 +154,7 @@
     <QtMoc Include="include\Layers\lfillcontrol.h" />
     <QtMoc Include="include\Layers\ldownloader.h" />
     <QtMoc Include="include\Layers\ldialog.h" />
-    <QtMoc Include="include\Layers\lcreatethemedialog.h" />
+    <QtMoc Include="include\Layers\lthemecreatordialog.h" />
     <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />
     <QtMoc Include="include\Layers\lcombobox.h" />
     <QtMoc Include="include\Layers\lcolorplane.h" />

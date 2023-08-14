@@ -1417,7 +1417,8 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/color_plane_cycle_saturation.gif \
                          img/color_plane_cycle_value.gif \
                          img/combo_box.png \
-                         img/combo_box_item_delegate.png
+                         img/combo_box_item_delegate.png \
+                         img/theme_creator_dialog.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

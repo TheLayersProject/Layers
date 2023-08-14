@@ -77,13 +77,13 @@ QString LApplication::app_identifier()
 	return m_name_underscored + "_" + m_uuid.toString(QUuid::WithoutBraces);
 }
 
-void LApplication::apply_theme(LTheme& theme)
+void LApplication::apply_theme(LTheme* theme)
 {
-	if (m_active_theme != &theme)
+	if (m_active_theme != theme)
 	{
 		LTheme* previous_active_theme = m_active_theme;
 
-		m_active_theme = &theme;
+		m_active_theme = theme;
 
 		if (!m_active_theme->has_app_implementation(app_identifier()))
 		{
@@ -124,9 +124,9 @@ void LApplication::apply_theme(LTheme& theme)
 
 		clear_theme();
 
-		LThemeable::apply_theme(theme.find_item("App"));
+		LThemeable::apply_theme(theme->find_item(path()));
 
-		m_settings.setValue("themes/active_theme", theme.id());
+		m_settings.setValue("themes/active_theme", theme->id());
 
 		emit active_theme_changed();
 
@@ -152,6 +152,13 @@ LTheme* LApplication::active_theme()
 	return m_active_theme;
 }
 
+void LApplication::add_theme(LTheme* theme)
+{
+	m_themes[theme->id()] = theme;
+
+	emit theme_added(theme);
+}
+
 QFile* LApplication::icon_file()
 {
 	return m_icon_file;
@@ -162,7 +169,7 @@ QString LApplication::latest_version()
 	return m_latest_version;
 }
 
-QMap<QString, LTheme*>& LApplication::themes()
+QMap<QString, LTheme*> LApplication::themes()
 {
 	return m_themes;
 }
@@ -261,7 +268,7 @@ LAttribute* LApplication::primary() const
 
 void LApplication::reapply_theme()
 {
-	apply_theme(*m_active_theme);
+	apply_theme(m_active_theme);
 }
 
 void LApplication::set_version(const QString& version)
@@ -339,9 +346,9 @@ void LApplication::init_themes()
 		m_settings.value("themes/active_theme").value<QString>();
 
 	if (m_themes.contains(active_theme_id))
-		apply_theme(*m_themes[active_theme_id]);
+		apply_theme(m_themes[active_theme_id]);
 	else
-		apply_theme(*m_themes["Dark"]);
+		apply_theme(m_themes["Dark"]);
 }
 
 void LApplication::init_latest_version()

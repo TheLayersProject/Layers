@@ -49,9 +49,19 @@ void LThemeComboBox::clear()
 	m_model->clear();
 }
 
-void LThemeComboBox::addItem(LTheme* theme)
+void LThemeComboBox::addItem(LTheme* theme, bool set_as_current_index)
 {
 	m_model->append(theme);
+
+	if (set_as_current_index)
+	{
+		for (int i = 0; i < count(); i++)
+			if (itemData(i).value<LTheme*>()->id() == theme->id())
+			{
+				setCurrentIndex(i);
+				break;
+			}
+	}
 }
 
 bool LThemeComboBox::eventFilter(QObject* object, QEvent* event)

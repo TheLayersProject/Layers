@@ -10,6 +10,7 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 {
 	init_attributes();
 	installEventFilter(this);
+	setFocusProxy(m_line_edit);
 
 	//setFixedSize(40, 40);
 	//set_margin(5, 5, 5, 5);

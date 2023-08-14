@@ -8,7 +8,7 @@
 
 #include <Layers/lapplication.h>
 #include <Layers/lcalculate.h>
-#include <Layers/lcreatethemedialog.h>
+#include <Layers/lthemecreatordialog.h>
 #include <Layers/lthemeeditordialog.h>
 
 #include "lmainwindowtitlebar.h"
@@ -211,71 +211,11 @@ bool LMainWindow::nativeEvent(
 
 void LMainWindow::new_theme_clicked()
 {
-	LCreateThemeDialog dialog;
-
-	dialog.apply_theme(activeTheme()->find_item("App/Create Theme Dialog"));
-
-	for (LTheme* theme : layersApp->themes())
-		if (theme->has_app_implementation(layersApp->app_identifier()))
-			dialog.add_theme_to_combobox(theme);
-
-	dialog.set_current_start_theme_name(activeTheme()->id());
+	LThemeCreatorDialog dialog;
 
 	center_dialog(&dialog);
 
-	dialog.show();
-
-	if (dialog.exec())
-	{
-		LTheme* copy_theme = layersApp->theme(dialog.copy_theme_id());
-		LTheme* new_theme = new LTheme(dialog.new_theme_name());
-
-		layersApp->themes()[new_theme->id()] = new_theme;
-
-		QDir new_theme_dir = latest_T_version_path() + new_theme->id() + "\\";
-		QDir copy_theme_dir = copy_theme->dir();
-
-		new_theme->set_dir(new_theme_dir);
-
-		if (!new_theme_dir.exists())
-			new_theme_dir.mkdir(".");
-
-		for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
-			if (file_name != "meta.json")
-			{
-				QFile::copy(
-					copy_theme_dir.filePath(file_name),
-					new_theme_dir.filePath(file_name));
-
-				QFile::setPermissions(
-					new_theme_dir.filePath(file_name),
-					QFileDevice::WriteUser);
-			}
-
-		for (const QString& theme_id : copy_theme->lineage())
-			new_theme->append_to_lineage(theme_id);
-
-		new_theme->append_to_lineage(copy_theme->id());
-
-		new_theme->save_meta_file();
-		new_theme->load(layersApp->app_identifier());
-
-		LThemeComboBox* theme_combobox =
-			m_settings_menu->themes_widget()->theme_combobox();
-
-		theme_combobox->addItem(new_theme);
-
-		layersApp->apply_theme(*new_theme);
-
-		for (int i = 0; i < theme_combobox->count(); i++)
-			if (theme_combobox->itemData(i).value<LTheme*>()->id() == new_theme->id())
-			{
-				theme_combobox->setCurrentIndex(i);
-				break;
-			}
-
-		dialog.clear();
-	}
+	dialog.exec();
 }
 
 void LMainWindow::open_widget_changed(int old_index, int new_index)

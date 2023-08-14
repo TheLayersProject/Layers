@@ -36,7 +36,7 @@ void LThemeable::apply_theme(LThemeItem* theme_item)
 	if (!m_name)
 		qDebug() << "Unable to apply theme. "
 			"You must apply a name to the widget first.";
-	else if (*m_name == theme_item->name())
+	else if (theme_item && *m_name == theme_item->name())
 	{
 		m_current_theme_item = theme_item;
 
@@ -131,25 +131,23 @@ QString* LThemeable::name() const
 
 QString LThemeable::path()
 {
-	QStringList path_names;
+	QString path;
+
+	if (LThemeable* parent_t = parent_themeable())
+		path = parent_t->path();
+	else if (QWidget* widget = dynamic_cast<QWidget*>(this))
+		if (widget->isWindow())
+			path = "App";
 
 	if (name())
-		path_names.append(*name());
-
-	LThemeable* t = parent_themeable();
-
-	while (t)
 	{
-		if (t->name())
-		{
-			path_names.insert(0, *t->name());
-			t = t->parent_themeable();
-		}
+		if (path.isEmpty())
+			path.append(*name());
 		else
-			t = nullptr;
+			path.append("/" + *name());
 	}
 
-	return path_names.join("/");
+	return path;
 }
 
 LThemeable* LThemeable::parent_themeable()

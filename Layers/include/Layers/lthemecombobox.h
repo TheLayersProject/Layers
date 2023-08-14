@@ -30,7 +30,7 @@ public:
 	/*!
 		Adds a theme to the combo box's item model.
 	*/
-	void addItem(LTheme* theme);
+	void addItem(LTheme* theme, bool set_as_current_index = false);
 
 	/*!
 		Clears the combo box's item model.

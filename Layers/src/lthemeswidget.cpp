@@ -28,10 +28,16 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 			break;
 		}
 
+	connect(layersApp, &LApplication::theme_added,
+		[this](LTheme* theme)
+		{
+			m_theme_combobox->addItem(theme, true);
+		});
+
 	connect(m_theme_combobox, &LThemeComboBox::currentIndexChanged, [this]
 	{
 		layersApp->apply_theme(
-			*m_theme_combobox->currentData().value<LTheme*>());
+			m_theme_combobox->currentData().value<LTheme*>());
 	});
 
 	m_theme_buttons_handler_connection =

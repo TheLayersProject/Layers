@@ -83,6 +83,11 @@ signals:
 	*/
 	void active_theme_changed();
 
+	/*!
+		This signal is emitted when a new theme is added to the application.
+	*/
+	void theme_added(LTheme* theme);
+
 public:
 	/*!
 		Constructs a Layers application.
@@ -105,6 +110,8 @@ public:
 	*/
 	LTheme* active_theme();
 
+	void add_theme(LTheme* theme);
+
 	/*!
 		Returns a string representation of the app ID.
 	*/
@@ -113,7 +120,7 @@ public:
 	/*!
 		Applies *theme* to the known top-level widgets.
 	*/
-	void apply_theme(LTheme& theme);
+	void apply_theme(LTheme* theme);
 
 	/*!
 		Returns a list of child themeables.
@@ -165,7 +172,7 @@ public:
 		The QMap contains QString-LTheme* pairs where the QString matches the
 		name of the associated theme.
 	*/
-	QMap<QString, LTheme*>& themes();
+	QMap<QString, LTheme*> themes();
 
 	/*!
 		Returns true if an application update is available.
