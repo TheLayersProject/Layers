@@ -6,6 +6,7 @@
 
 #include <Layers/lcomboboxitemdelegate.h>
 
+using Layers::LAttribute;
 using Layers::LComboBox;
 using Layers::LThemeable;
 
@@ -22,25 +23,56 @@ LComboBox::LComboBox(QWidget* parent) : QComboBox(parent)
 	update();
 }
 
+LAttribute* LComboBox::border_fill() const
+{
+	return m_border_fill;
+}
+
+LAttribute* LComboBox::border_thickness() const
+{
+	return m_border_thickness;
+}
+
 QList<LThemeable*> LComboBox::child_themeables(Qt::FindChildOptions options)
 {
-	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
+	QList<LThemeable*> child_themeables =
+		LThemeable::child_themeables(options);
 
-	if (LThemeable* themeable_item_delegate = dynamic_cast<LThemeable*>(itemDelegate()))
+	if (LThemeable* themeable_item_delegate =
+		dynamic_cast<LThemeable*>(itemDelegate()))
 	{
 		child_themeables.append(themeable_item_delegate);
 
 		if (options == Qt::FindChildrenRecursively)
 		{
-			QList<QObject*> delegate_child_objects = itemDelegate()->findChildren<QObject*>(options);
+			QList<QObject*> delegate_child_objects =
+				itemDelegate()->findChildren<QObject*>(options);
 
 			for (QObject* delegate_child_object : delegate_child_objects)
-				if (LThemeable* child_themeable = dynamic_cast<LThemeable*>(delegate_child_object))
+				if (LThemeable* child_themeable =
+					dynamic_cast<LThemeable*>(delegate_child_object))
+				{
 					child_themeables.append(child_themeable);
+				}
 		}
 	}
 
 	return child_themeables;
+}
+
+LAttribute* LComboBox::corner_radius() const
+{
+	return m_corner_radius;
+}
+
+LAttribute* LComboBox::fill() const
+{
+	return m_fill;
+}
+
+bool LComboBox::is_view_positioned_above() const
+{
+	return view()->window()->y() <= mapToGlobal(this->rect().topLeft()).y();
 }
 
 void LComboBox::setFixedHeight(int h)
@@ -76,16 +108,21 @@ void LComboBox::showPopup()
 	if (LComboBoxItemDelegate* combobox_delegate =
 		dynamic_cast<LComboBoxItemDelegate*>(itemDelegate()))
 	{
-		combobox_delegate->set_is_above_control(
-			view()->window()->y() <= mapToGlobal(this->rect().topLeft()).y());
+		combobox_delegate->set_is_above_control(is_view_positioned_above());
 	}
+}
+
+LAttribute* LComboBox::text_color() const
+{
+	return m_text_color;
 }
 
 void LComboBox::update()
 {
 	QString stylesheet =
 		"QComboBox {"
-		"border: " + m_border_thickness->as<QString>() + "px solid " + m_border_fill->as<QColor>().name() + ";"
+		"border: " + m_border_thickness->as<QString>() + "px "
+		"	solid " + m_border_fill->as<QColor>().name() + ";"
 		"color: " + m_text_color->as<QColor>().name() + ";"
 		"}"
 		
@@ -105,7 +142,7 @@ void LComboBox::update()
 			"}");
 	else
 	{
-		if (view()->window()->y() <= mapToGlobal(this->rect().topLeft()).y())
+		if (is_view_positioned_above())
 			stylesheet.append(
 				"QComboBox {"
 				"border-top-left-radius: 0px;"
@@ -155,7 +192,7 @@ QPainterPath LComboBox::background_path() const
 
 	if (view()->window()->isVisible())
 	{
-		if (view()->window()->y() <= mapToGlobal(this->rect().topLeft()).y())
+		if (is_view_positioned_above())
 		{
 			cr_tl = 0;
 			cr_tr = 0;

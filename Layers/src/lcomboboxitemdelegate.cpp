@@ -2,6 +2,7 @@
 
 #include <QPainter>
 
+using Layers::LAttribute;
 using Layers::LComboBoxItemDelegate;
 
 LComboBoxItemDelegate::LComboBoxItemDelegate(QObject* parent) :
@@ -101,6 +102,16 @@ QPainterPath LComboBoxItemDelegate::background_path(
 	return background_path;
 }
 
+LAttribute* LComboBoxItemDelegate::corner_radius() const
+{
+	return m_corner_radius;
+}
+
+LAttribute* LComboBoxItemDelegate::fill() const
+{
+	return m_fill;
+}
+
 void LComboBoxItemDelegate::paint(
 	QPainter* painter,
 	const QStyleOptionViewItem& option,
@@ -132,7 +143,12 @@ void LComboBoxItemDelegate::set_is_above_control(bool condition)
 	m_is_above_control = condition;
 }
 
+LAttribute* LComboBoxItemDelegate::text_color() const
+{
+	return m_text_color;
+}
+
 void LComboBoxItemDelegate::init_attributes()
 {
-	m_fill->create_override("Selected", QColor(Qt::lightGray));
+	m_fill->create_override("Selected", QColor("#3c3d47"));
 }

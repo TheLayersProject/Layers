@@ -12,10 +12,13 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LComboBoxItemDelegate is a QStyledItemDelegate and a LThemeable that
-	serves as a basic item delegate for LComboBox.
+	![LComboBoxItemDelegate Example](combo_box_item_delegate.png)
+	
+	An LComboBoxItemDelegate is a QStyledItemDelegate and an LThemeable that
+	serves as the default item delegate for LComboBox.
 */
-class LAYERS_EXPORT LComboBoxItemDelegate : public QStyledItemDelegate, public LThemeable
+class LAYERS_EXPORT LComboBoxItemDelegate :
+	public QStyledItemDelegate, public LThemeable
 {
 	Q_OBJECT
 
@@ -25,14 +28,22 @@ public:
 	*/
 	LComboBoxItemDelegate(QObject* parent = nullptr);
 
-	// TODO: Create a destructor; free the attributes
-
 	/*!
-		Returns a QPainterPath that represents the item's background.
+		Returns a QPainterPath that represents the *index* item's background.
 	*/
 	QPainterPath background_path(
 		const QStyleOptionViewItem& option,
 		const QModelIndex& index) const;
+
+	/*!
+		Returns a pointer to the delegate's corner radius attribute.
+	*/
+	LAttribute* corner_radius() const;
+
+	/*!
+		Returns a pointer to the delegate's fill attribute.
+	*/
+	LAttribute* fill() const;
 
 	/*!
 		Renders the delegate using the given *painter* and style *option* for
@@ -43,20 +54,25 @@ public:
 		const QModelIndex& index) const override;
 
 	/*!
-		Informs the item delegate that the combo box popup widget is displayed
-		above or below the combo box.
+		Informs the item delegate whether the items are displayed above or
+		below the combo box.
 	*/
 	void set_is_above_control(bool condition = true);
 
+	/*!
+		Returns a pointer to the delegate's text color attribute.
+	*/
+	LAttribute* text_color() const;
+
 protected:
-	LAttribute* m_corner_radius{
-		new LAttribute("Corner Radius", QVariant(10.0), this) };
+	LAttribute* m_corner_radius
+		{ new LAttribute("Corner Radius", QVariant(4.0), this) };
 
-	LAttribute* m_fill{
-		new LAttribute("Fill", QColor(Qt::gray), this) };
+	LAttribute* m_fill
+		{ new LAttribute("Fill", QColor("#27272e"), this)};
 
-	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::black), this) };
+	LAttribute* m_text_color
+		{ new LAttribute("Text Color", QColor("#e1e1e1"), this) };
 
 private:
 	void init_attributes();
