@@ -63,25 +63,35 @@
                     "Apply Button": {
                         "attributes": {
                             "Border.Fill": {
-                                "value": "#a0a0a4"
+                                "value": "#000000"
                             },
                             "Border.Thickness": {
                                 "value": 0
                             },
                             "Corner Radii.Bottom Left": {
-                                "value": 7
+                                "overrides": {
+                                    "Active": {
+                                        "value": 0
+                                    }
+                                },
+                                "value": 4
                             },
                             "Corner Radii.Bottom Right": {
-                                "value": 7
+                                "overrides": {
+                                    "Active": {
+                                        "value": 0
+                                    }
+                                },
+                                "value": 4
                             },
                             "Corner Radii.Top Left": {
-                                "value": 7
+                                "value": 4
                             },
                             "Corner Radii.Top Right": {
-                                "value": 7
+                                "value": 4
                             },
                             "Fill": {
-                                "value": "#ffffff"
+                                "value": "#b3b3b3"
                             },
                             "Margins.Bottom": {
                                 "value": 0
@@ -97,13 +107,26 @@
                             }
                         },
                         "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "common_color": {
+                                                "value": "#7bf57d"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
                             "Text Label": {
                                 "attributes": {
                                     "Fill": {
                                         "value": "#ffffff"
                                     },
                                     "Text Color": {
-                                        "value": "#000000"
+                                        "linked_to": "App/Foreground"
                                     }
                                 },
                                 "is_overridable": true
@@ -111,7 +134,7 @@
                         },
                         "is_overridable": true
                     },
-                    "Color Name Line Editor": {
+                    "Color Name Editor": {
                         "attributes": {
                             "Border.Fill": {
                                 "value": "#000000"
@@ -390,7 +413,7 @@
                                         "value": 0
                                     },
                                     "Corner Radii.Top Right": {
-                                        "value": 0
+                                        "linked_to": "App/Color Dialog/Corner Radii.Top Right"
                                     },
                                     "Fill": {
                                         "linked_to": "App/Color Dialog/Titlebar/Fill"
@@ -531,6 +554,119 @@
                             },
                             "Text Color": {
                                 "linked_to": "App/Foreground"
+                            }
+                        }
+                    },
+                    "Z-Slider": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 5
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 5
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 5
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 5
+                            },
+                            "Fill": {
+                                "linked_to": "App/Tertiary"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Bar": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#000000"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 2
+                                    },
+                                    "Fill": {
+                                        "linked_to": "App/Secondary"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 20
+                                    },
+                                    "Margins.Right": {
+                                        "value": 20
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    }
+                                }
+                            },
+                            "Handle": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#000000"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 2
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 2
+                                    },
+                                    "Fill": {
+                                        "linked_to": "App/Foreground"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 5
+                                    },
+                                    "Margins.Left": {
+                                        "value": 15
+                                    },
+                                    "Margins.Right": {
+                                        "value": 15
+                                    },
+                                    "Margins.Top": {
+                                        "value": 5
+                                    }
+                                }
                             }
                         }
                     }
@@ -1072,7 +1208,7 @@
                         "value": 12
                     },
                     "Fill": {
-                        "value": "#f0f0f0"
+                        "linked_to": "App/Primary"
                     },
                     "Margins.Bottom": {
                         "value": 0
@@ -3336,7 +3472,7 @@
                                                             "Svg": {
                                                                 "attributes": {
                                                                     "common_color": {
-                                                                        "value": "#74ce5f"
+                                                                        "value": "#7bf57d"
                                                                     }
                                                                 },
                                                                 "is_overridable": true

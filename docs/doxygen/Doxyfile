@@ -1410,7 +1410,12 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/overrides_icon.svg \
                          img/icons_widget.png \
                          img/attribute_editor_group.png \
-                         img/color_control.png
+                         img/color_control.png \
+                         img/color_dialog.png \
+                         img/color_plane.png \
+                         img/color_plane_cycle_hue.gif \
+                         img/color_plane_cycle_saturation.gif \
+                         img/color_plane_cycle_value.gif
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

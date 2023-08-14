@@ -14,40 +14,49 @@ LColorDialog::LColorDialog(QWidget* parent) :
 {
 	init_attributes();
 
-	setFixedSize(315, 465);
+	setFixedSize(315, 400);
 
 	set_icon(LGraphic(":/images/color_icon.png"));
 	set_name("Color Dialog");
 
 	m_apply_button->set_name("Apply Button");
-	connect(m_apply_button, &LButton::clicked, [this] { done(QDialog::Accepted); });
+	m_apply_button->set_font_size_f(10.5);
+	m_apply_button->set_padding(6);
+	m_apply_button->setFixedHeight(30);
+
+	connect(m_apply_button, &LButton::clicked,
+		[this] { done(QDialog::Accepted); });
 
 	m_color_unit_label->set_name("Color Unit Label");
 
-	m_line_editor_color_name->set_name("Color Name Line Editor");
-	m_line_editor_color_name->setFixedSize(100, 40);
+	m_color_name_editor->set_name("Color Name Editor");
+	m_color_name_editor->setFixedSize(100, 40);
 	//QRegularExpression rx("^#[0-9a-f]{3}([0-9a-f]{3})?$")
-	//m_color_name_line_editor->set_validator(new QRegularExpressionValidator(rx));
+	//m_color_name_line_editor->set_validator(
+	//	new QRegularExpressionValidator(rx));
 
-	connect(m_line_editor_color_name, &LLineEditor::text_edited, [this]
-	{
-		qsizetype text_size = m_line_editor_color_name->text()->as<QString>().size();
+	connect(m_color_name_editor, &LLineEditor::text_edited,
+		[this]
+		{
+			qsizetype text_size =
+				m_color_name_editor->text()->as<QString>().size();
 
-		if (text_size == 6) // || text_size == 8)
-			m_color->set_value(QColor("#" + m_line_editor_color_name->text()->as<QString>()));
-	});
+			if (text_size == 6) // || text_size == 8)
+				m_color->set_value(
+					QColor("#" + m_color_name_editor->text()->as<QString>()));
+		});
 
 	m_radio_button_hue->set_name("Hue Radio Button");
 	connect(m_radio_button_hue, &LRadioButton::clicked, [this]
-		{ m_color_plane->set_active_hsv(HSV::Hue); });
+		{ m_color_plane->set_z_dimension(HSV::Hue); });
 
 	m_radio_button_sat->set_name("Saturation Radio Button");
 	connect(m_radio_button_sat, &LRadioButton::clicked, [this]
-		{ m_color_plane->set_active_hsv(HSV::Saturation); });
+		{ m_color_plane->set_z_dimension(HSV::Saturation); });
 
 	m_radio_button_val->set_name("Value Radio Button");
 	connect(m_radio_button_val, &LRadioButton::clicked, [this]
-		{ m_color_plane->set_active_hsv(HSV::Value); });
+		{ m_color_plane->set_z_dimension(HSV::Value); });
 
 	m_label_hue->set_name("Hue Label");
 
@@ -81,19 +90,22 @@ LColorDialog::LColorDialog(QWidget* parent) :
 
 	m_color_plane->setFixedSize(160, 160);
 
-	connect(m_color_plane, &LColorPlane::active_mode_changed, [this]
-	{
-		switch (m_color_plane->active_hsv())
-			{
-			case HSV::Hue:
-				m_z_slider->set_limit(359);
-				break;
-			case HSV::Saturation:
-			case HSV::Value:
-				m_z_slider->set_limit(255);
-				break;
-			}
-	});
+	connect(m_color_plane, &LColorPlane::z_dimension_changed,
+		[this]
+		{
+			switch (m_color_plane->z_dimension())
+				{
+				case HSV::Hue:
+					m_z_slider->set_limit(MAX_H);
+					break;
+				case HSV::Saturation:
+				case HSV::Value:
+					m_z_slider->set_limit(MAX_SV);
+					break;
+				}
+		});
+
+	m_z_slider->set_name("Z-Slider");
 
 	init_layout();
 }
@@ -108,30 +120,6 @@ LAttribute* LColorDialog::color() const
 	return m_color;
 }
 
-void LColorDialog::init_attributes()
-{
-	m_color->set_link_attribute(&m_color_plane->color());
-
-	connect(m_color, &LAttribute::changed, [this]
-	{
-		QColor color = m_color->as<QColor>();
-
-		m_line_editor_color_name->set_text(
-			color.name().remove("#"));
-
-		m_line_editor_hue->set_text(
-			QString::number(color.hue()));
-
-		m_line_editor_sat->set_text(
-			QString::number(int(round(color.saturationF() * 100.f))));
-
-		m_line_editor_val->set_text(
-			QString::number(int(round(color.valueF() * 100.f))));
-	});
-
-	m_z_slider->value().set_link_attribute(&m_color_plane->z_value());
-}
-
 void LColorDialog::hsv_changed()
 {
 	float hue_f = m_line_editor_hue->text()->as<float>() / float(MAX_H);
@@ -144,6 +132,30 @@ void LColorDialog::hsv_changed()
 	m_color->set_value(new_color);
 }
 
+void LColorDialog::init_attributes()
+{
+	m_color->set_link_attribute(m_color_plane->color());
+
+	connect(m_color, &LAttribute::changed, [this]
+		{
+			QColor color = m_color->as<QColor>();
+
+			m_color_name_editor->set_text(
+				color.name().remove("#"));
+
+			m_line_editor_hue->set_text(
+				QString::number(color.hue()));
+
+			m_line_editor_sat->set_text(
+				QString::number(int(round(color.saturationF() * 100.f))));
+
+			m_line_editor_val->set_text(
+				QString::number(int(round(color.valueF() * 100.f))));
+		});
+
+	m_z_slider->value()->set_link_attribute(m_color_plane->z_axis());
+}
+
 void LColorDialog::init_layout()
 {
 	// Color Name Layout
@@ -151,7 +163,7 @@ void LColorDialog::init_layout()
 	color_name_layout->setContentsMargins(0, 0, 0, 0);
 	color_name_layout->setSpacing(0);
 	color_name_layout->addWidget(m_color_unit_label);
-	color_name_layout->addWidget(m_line_editor_color_name);
+	color_name_layout->addWidget(m_color_name_editor);
 
 	// Left Layout
 	QVBoxLayout* left_layout = new QVBoxLayout;
@@ -210,7 +222,6 @@ void LColorDialog::init_layout()
 	main_layout->addWidget(m_z_slider);
 	main_layout->addStretch();
 	main_layout->addWidget(m_apply_button);
-	//main_layout->setAlignment(m_color_plane, Qt::AlignLeft);
 	main_layout->setAlignment(m_apply_button, Qt::AlignRight);
 	setLayout(main_layout);
 

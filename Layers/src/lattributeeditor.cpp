@@ -184,7 +184,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_line_editor->set_text(attr->as<QString>());
 			m_line_editor->text()->set_link_attribute(attr);
 
-			m_slider->value().set_link_attribute(m_line_editor->text());
+			m_slider->value()->set_link_attribute(m_line_editor->text());
 
 			m_fill_control->hide();
 		}

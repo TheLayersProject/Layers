@@ -19,16 +19,11 @@ LColorPlane::LColorPlane(QWidget* parent)
 	m_cursor->setFixedSize(10, 10);
 	m_cursor->move(width() - margin - (m_cursor->width() / 2), 0);
 
-	connect(this, &LColorPlane::active_mode_changed,
-		this, &LColorPlane::update_z_value);
+	connect(this, &LColorPlane::z_dimension_changed,
+		this, &LColorPlane::update_z_axis);
 }
 
-HSV LColorPlane::active_hsv() const
-{
-	return m_active_hsv;
-}
-
-LAttribute& LColorPlane::color()
+LAttribute* LColorPlane::color()
 {
 	return m_color;
 }
@@ -40,15 +35,15 @@ float LColorPlane::pos_as_ratio(int pos, int available_space)
 			float(available_space - (margin * 2) - 1);
 }
 
-void LColorPlane::set_active_hsv(HSV new_active_hsv)
+void LColorPlane::set_z_dimension(HSV z_dimension)
 {
-	m_active_hsv = new_active_hsv;
+	m_z_dimension = z_dimension;
 
 	update();
 
 	update_cursor_position();
 
-	emit active_mode_changed();
+	emit z_dimension_changed();
 }
 
 void LColorPlane::setFixedHeight(int h)
@@ -81,9 +76,14 @@ void LColorPlane::setFixedWidth(int w)
 	update_width_dependencies();
 }
 
-LAttribute& LColorPlane::z_value()
+LAttribute* LColorPlane::z_axis()
 {
-	return m_z_value;
+	return m_z_axis;
+}
+
+HSV LColorPlane::z_dimension() const
+{
+	return m_z_dimension;
 }
 
 bool LColorPlane::eventFilter(QObject* object, QEvent* event)
@@ -123,13 +123,13 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	QColor paint_color;
 	QPainter painter(this);
 
-	switch (m_active_hsv)
+	switch (m_z_dimension)
 	{
 	case HSV::Hue:
 	{
 		image = QImage(MAX_SV + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int h = m_color.as<QColor>().hue();
+		int h = m_color->as<QColor>().hue();
 
 		for (int s = 0; s <= MAX_SV; s++) {
 			for (int v = 0; v <= MAX_SV; v++) {
@@ -143,7 +143,7 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	{
 		image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int s = m_color.as<QColor>().saturation();
+		int s = m_color->as<QColor>().saturation();
 
 		for (int h = 0; h <= MAX_H; h++) {
 			for (int v = 0; v <= MAX_SV; v++) {
@@ -157,7 +157,7 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	{
 		image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int v = m_color.as<QColor>().value();
+		int v = m_color->as<QColor>().value();
 
 		for (int h = 0; h <= MAX_H; h++) {
 			for (int s = 0; s <= MAX_SV; s++) {
@@ -176,14 +176,14 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 
 void LColorPlane::update_cursor_position()
 {
-	QColor c = m_color.as<QColor>();
+	QColor c = m_color->as<QColor>();
 
 	float w_ratio = 1.f / float(width() - (margin * 2) - 1);
 	float h_ratio = 1.f / float(height() - (margin * 2) - 1);
 
 	QPoint new_cursor_location;
 
-	switch (m_active_hsv)
+	switch (m_z_dimension)
 	{
 	case HSV::Hue:
 		new_cursor_location = QPoint(
@@ -200,22 +200,23 @@ void LColorPlane::update_cursor_position()
 	}
 
 	new_cursor_location += QPoint(margin, margin);
-	new_cursor_location -= QPoint(m_cursor->width() / 2, m_cursor->height() / 2);
+	new_cursor_location -=
+		QPoint(m_cursor->width() / 2, m_cursor->height() / 2);
 	m_cursor->move(new_cursor_location);
 }
 
-void LColorPlane::update_z_value()
+void LColorPlane::update_z_axis()
 {
-	switch (m_active_hsv)
+	switch (m_z_dimension)
 	{
 	case HSV::Hue:
-		m_z_value.set_value(double(m_color.as<QColor>().hue()));
+		m_z_axis->set_value(double(m_color->as<QColor>().hue()));
 		break;
 	case HSV::Saturation:
-		m_z_value.set_value(double(m_color.as<QColor>().saturation()));
+		m_z_axis->set_value(double(m_color->as<QColor>().saturation()));
 		break;
 	case HSV::Value:
-		m_z_value.set_value(double(m_color.as<QColor>().value()));
+		m_z_axis->set_value(double(m_color->as<QColor>().value()));
 		break;
 	}
 }
@@ -247,33 +248,33 @@ void LColorPlane::handle_mouse_event(QPoint& mouse_pos)
 
 void LColorPlane::init_attributes()
 {
-	connect(&m_z_value, &LAttribute::changed, [this] {
-		QColor c = m_color.as<QColor>();
+	connect(m_z_axis, &LAttribute::changed, [this] {
+		QColor c = m_color->as<QColor>();
 
-		switch (m_active_hsv)
+		switch (m_z_dimension)
 		{
 		case HSV::Hue:
-			c.setHsv(m_z_value.as<int>(), c.saturation(), c.value());
+			c.setHsv(m_z_axis->as<int>(), c.saturation(), c.value());
 			break;
 		case HSV::Saturation:
-			c.setHsv(c.hue(), m_z_value.as<int>(), c.value());
+			c.setHsv(c.hue(), m_z_axis->as<int>(), c.value());
 			break;
 		case HSV::Value:
-			c.setHsv(c.hue(), c.saturation(), m_z_value.as<int>());
+			c.setHsv(c.hue(), c.saturation(), m_z_axis->as<int>());
 			break;
 		}
 
-		m_color.set_value(c);
+		m_color->set_value(c);
 		});
 
-	connect(&m_color, &LAttribute::changed, [this]
+	connect(m_color, &LAttribute::changed, [this]
 		{
 			update_cursor_position();
-			//update_z_value();
+			//update_z_axis();
 			update();
 		});
 
-	m_cursor->fill()->set_link_attribute(&m_color);
+	m_cursor->fill()->set_link_attribute(m_color);
 	m_cursor->border_fill()->set_value(QColor(Qt::lightGray));
 	m_cursor->border_thickness()->set_value(2.0);
 	m_cursor->corner_radii_top_left()->set_value(2.0);
@@ -284,9 +285,9 @@ void LColorPlane::init_attributes()
 
 void LColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)
 {
-	QColor c = m_color.as<QColor>();
+	QColor c = m_color->as<QColor>();
 
-	switch (m_active_hsv)
+	switch (m_z_dimension)
 	{
 	case HSV::Hue:
 		c.setHsvF(c.hueF(), x_pos_ratio, 1.f - y_pos_ratio);
@@ -299,7 +300,7 @@ void LColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)
 		break;
 	}
 
-	m_color.set_value(c);
+	m_color->set_value(c);
 }
 
 void LColorPlane::update_height_dependencies()

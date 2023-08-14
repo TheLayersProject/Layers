@@ -25,9 +25,9 @@ void LSlider::set_limit(int limit)
 	update_handle_pos();
 }
 
-LAttribute& LSlider::value()
+LAttribute* LSlider::value()
 {
-	return a_value;
+	return m_value;
 }
 
 bool LSlider::eventFilter(QObject* object, QEvent* event)
@@ -41,10 +41,11 @@ bool LSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.as<double>();
+			m_value_on_click = m_value->as<double>();
 		}
 	}
-	else if (event->type() == QEvent::MouseButtonRelease && m_handle->underMouse())
+	else if (event->type() == QEvent::MouseButtonRelease &&
+		m_handle->underMouse())
 	{
 		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
 
@@ -66,41 +67,44 @@ bool LSlider::eventFilter(QObject* object, QEvent* event)
 
 			float ratio = 1 / range;
 
-			double new_value = float(m_value_on_click) + (float(delta.x()) * ratio);
+			double new_value =
+				float(m_value_on_click) + (float(delta.x()) * ratio);
 
 			if (new_value < 0.0)
 			{
-				if (a_value.as<double>() != 0.0)
+				if (m_value->as<double>() != 0.0)
 				{
-					a_value.set_value(0.0);
+					m_value->set_value(0.0);
 				}
 			}
 			else if (new_value > 1.0)
 			{
-				if (a_value.as<double>() != 1.0)
+				if (m_value->as<double>() != 1.0)
 				{
-					a_value.set_value(1.0);
+					m_value->set_value(1.0);
 				}
 			}
 			else
 			{
-				a_value.set_value(new_value);
+				m_value->set_value(new_value);
 			}
 		}
 		else
 		{
-			double drag_increment = double(m_bar->width() - m_handle->width()) / double(m_limit);
+			double drag_increment =
+				double(m_bar->width() - m_handle->width()) / double(m_limit);
 
-			double new_value = m_value_on_click + float(delta.x() / drag_increment);
+			double new_value =
+				m_value_on_click + float(delta.x() / drag_increment);
 
 			if (new_value < 0.0)
-				a_value.set_value(0.0);
+				m_value->set_value(0.0);
 
 			else if (new_value > m_limit)
-				a_value.set_value(double(m_limit));
+				m_value->set_value(double(m_limit));
 
 			else
-				a_value.set_value(new_value);
+				m_value->set_value(new_value);
 		}
 	}
 
@@ -115,19 +119,18 @@ void LSlider::init()
 	setFixedHeight(40);
 
 	m_bar->setFixedHeight(5);
-	m_bar->set_name("bar");
-	m_bar->set_margin(23, 0, 23, 0);
+	m_bar->set_name("Bar");
 
 	m_handle->setFixedSize(40, 40);
-	m_handle->set_name("handle");
-	m_handle->set_margin(15, 5, 15, 5);
+	m_handle->set_name("Handle");
 
 	init_layout();
 }
 
 void LSlider::init_attributes()
 {
-	connect(&a_value, &LAttribute::changed, [this] { update_handle_pos(); });
+	connect(m_value, &LAttribute::changed,
+		[this] { update_handle_pos(); });
 
 	m_corner_radii_top_left->set_value(10.0); // Need to check these values
 	m_corner_radii_top_right->set_value(10.0);
@@ -139,12 +142,14 @@ void LSlider::init_attributes()
 	m_bar->corner_radii_top_right()->set_value(2.0);
 	m_bar->corner_radii_bottom_left()->set_value(2.0);
 	m_bar->corner_radii_bottom_right()->set_value(2.0);
+	m_bar->set_margin(20, 0, 20, 0);
 
 	m_handle->fill()->set_value(QColor(Qt::darkGray));
 	m_handle->corner_radii_top_left()->set_value(3.0);
 	m_handle->corner_radii_top_right()->set_value(3.0);
 	m_handle->corner_radii_bottom_left()->set_value(3.0);
 	m_handle->corner_radii_bottom_right()->set_value(3.0);
+	m_handle->set_margin(15, 5, 15, 5);
 }
 
 void LSlider::init_layout()
@@ -168,12 +173,13 @@ void LSlider::update_handle_pos()
 
 		float ratio = 1 / range;
 
-		m_handle->move(a_value.as<double>() / ratio, m_handle->y());
+		m_handle->move(m_value->as<double>() / ratio, m_handle->y());
 	}
 	else
 	{
-		double drag_increment = double(width() - m_handle->width()) / double(m_limit);
+		double drag_increment =
+			double(width() - m_handle->width()) / double(m_limit);
 
-		m_handle->move(drag_increment * a_value.as<double>(), m_handle->y());
+		m_handle->move(drag_increment * m_value->as<double>(), m_handle->y());
 	}
 }

@@ -23,7 +23,7 @@ LMiniSlider::LMiniSlider(double limit, QWidget* parent) :
 	m_handle->setFixedSize(5, 13);
 	m_handle->set_name("Handle");
 
-	connect(&a_value, &LAttribute::changed, [this] { update_handle_pos(); });
+	connect(m_value, &LAttribute::changed, [this] { update_handle_pos(); });
 
 	init_layout();
 }
@@ -35,9 +35,9 @@ void LMiniSlider::set_limit(double limit)
 	update_handle_pos();
 }
 
-LAttribute& LMiniSlider::value()
+LAttribute* LMiniSlider::value()
 {
-	return a_value;
+	return m_value;
 }
 
 void LMiniSlider::init_attributes()
@@ -71,7 +71,7 @@ void LMiniSlider::update_handle_pos()
 	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
 	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
 
-	m_handle->move(drag_increment * a_value.as<double>() + 5, m_handle->y()); // 5 is left margin
+	m_handle->move(drag_increment * m_value->as<double>() + 5, m_handle->y()); // 5 is left margin
 }
 
 bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
@@ -88,7 +88,7 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = true;
 
 			m_mouse_click_position = mouse_event->pos();
-			m_value_on_click = a_value.as<double>();
+			m_value_on_click = m_value->as<double>();
 		}
 	}
 	else if (event->type() == QEvent::MouseButtonRelease)
@@ -119,13 +119,13 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 			double new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
 
 			if (new_value < 0.0)
-				a_value.set_value(0.0);
+				m_value->set_value(0.0);
 
 			else if (new_value > m_limit)
-				a_value.set_value(m_limit);
+				m_value->set_value(m_limit);
 
 			else
-				a_value.set_value(new_value);
+				m_value->set_value(new_value);
 		}
 	}
 

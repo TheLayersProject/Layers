@@ -34,7 +34,7 @@ public:
 	/*!
 		Returns a reference to the value attribute of the slider.
 	*/
-	LAttribute& value();
+	LAttribute* value();
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
@@ -48,7 +48,8 @@ private:
 
 	void update_handle_pos();
 
-	LAttribute a_value{ LAttribute("value", QVariant::fromValue(0.0)) };
+	LAttribute* m_value{
+		new LAttribute("value", QVariant::fromValue(0.0), this) };
 
 	LWidget* m_bar{ new LWidget };
 	LWidget* m_handle{ new LWidget(this) };

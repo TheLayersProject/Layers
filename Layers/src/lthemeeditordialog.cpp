@@ -113,7 +113,7 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 		connect(attr_editor->fill_control()->fill(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);
 
-		connect(&attr_editor->slider()->value(), &LAttribute::changed,
+		connect(attr_editor->slider()->value(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);
 
 		if (attr->name().contains("."))

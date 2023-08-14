@@ -11,26 +11,59 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
+	![LColorPlane Example](color_plane.png)
+	
 	An LColorPlane is a QWidget that serves as a two-dimensional slider for
 	selecting a color from an HSV cylinder.
 
-	The %LColorPlane can only represent two dimensions of an HSV cylinder at a
-	time. Because of this, a Z-value attribute is included to control the third
-	dimension.
+	A small cursor is displayed on the plane where the selected color is
+	located. Clicking/dragging the mouse cursor anywhere on the plane will
+	select the color underneath it.
 
-	### Controlling HSV Dimensions
+	## Changing Dimensions
 
-	The dimensions represented by the plane as well as the Z-value attribute
-	depend on the active HSV. The active HSV defines which HSV dimension the
-	Z-value attribute controls, while the remaining dimensions are controlled
-	by the plane. For example, if the active HSV is set to 'Saturation', then
-	the saturation is controlled by the Z-value attribute, while the hue and
-	value are controlled by the plane.
+	The plane can only represent two dimensions of an HSV cylinder at a time.
+	The plane dimensions depend on the active HSV-dimension set for the Z-axis,
+	referred to as the *Z-dimension*. For example, if the Z-dimension is set
+	to *Saturation*, then the plane will represent the *Hue* and *Value*
+	dimensions.
 
-	### Entangling the Z-Value Attribute
+	| Z-Axis Dimension | Plane (Cycling Z-Axis)                                           |
+	|------------------|-----------------------------------------------------------------------|
+	| Hue              | ![Color Plane Hue Cycle Gif](color_plane_cycle_hue.gif)               |
+	| Saturation       | ![Color Plane Saturation Cycle Gif](color_plane_cycle_saturation.gif) |
+	| Value            | ![Color Plane Value Cycle Gif](color_plane_cycle_value.gif)           |
 
-	Since the Z-value is represented with an LAttribute, it can be linked
-	and controlled by another widget, like a LSlider.
+	## Controlling the Z-Axis Value
+
+	The Z-axis is represented with an LAttribute intended to be linked to an
+	external control widget, such as an LSlider. The following is an example of
+	how this can be setup:
+
+	~~~~~~~~~~~~~{.c}
+	LColorPlane* color_plane = new LColorPlane;
+	LSlider* z_slider = new LSlider(MAX_H);
+
+	z_slider->value()->set_link_attribute(color_plane->z_axis());
+
+	connect(color_plane, &LColorPlane::z_dimension_changed,
+		[this]
+		{
+			switch (color_plane->z_dimension())
+				{
+				case HSV::Hue:
+					z_slider->set_limit(MAX_H);
+					break;
+				case HSV::Saturation:
+				case HSV::Value:
+					z_slider->set_limit(MAX_SV);
+					break;
+				}
+		});
+	~~~~~~~~~~~~~
+
+	The connection in the example is established to update the slider's limit
+	when the Z-axis dimension changes.
 */
 class LAYERS_EXPORT LColorPlane : public QWidget
 {
@@ -38,9 +71,9 @@ class LAYERS_EXPORT LColorPlane : public QWidget
 
 signals:
 	/*!
-		This signal is emitted when the active-HSV is changed.
+		This signal is emitted when the Z-axis dimension is changed.
 	*/
-	void active_mode_changed();
+	void z_dimension_changed();
 
 public:
 	/*!
@@ -49,19 +82,14 @@ public:
 	LColorPlane(QWidget* parent = nullptr);
 
 	/*!
-		Returns the active HSV.
+		Returns a pointer to the color attribute.
 	*/
-	HSV active_hsv() const;
+	LAttribute* color();
 
 	/*!
-		Returns a reference to the color attribute.
+		Sets the Z-axis dimension to *z_dimension*.
 	*/
-	LAttribute& color();
-
-	/*!
-		Sets the active HSV to *new_active_hsv*.
-	*/
-	void set_active_hsv(HSV new_active_hsv);
+	void set_z_dimension(HSV z_dimension);
 
 	/*!
 		Sets both the minimum and maximum heights of the widget to *h*
@@ -87,9 +115,14 @@ public:
 	void setFixedWidth(int w);
 
 	/*!
-		Returns a reference to the Z-value attribute.
+		Returns a pointer to the Z-axis attribute.
 	*/
-	LAttribute& z_value();
+	LAttribute* z_axis();
+
+	/*!
+		Returns the active Z-axis dimension.
+	*/
+	HSV z_dimension() const;
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
@@ -98,7 +131,7 @@ protected:
 
 private slots:
 	void update_cursor_position();
-	void update_z_value();
+	void update_z_axis();
 
 private:
 	void handle_mouse_event(QPoint& mouse_pos);
@@ -112,10 +145,13 @@ private:
 	void update_height_dependencies();
 	void update_width_dependencies();
 
-	LAttribute m_color{ LAttribute("color", QColor("#ff0000")) };
-	LAttribute m_z_value{ LAttribute("z_value", QVariant::fromValue(0.0)) };
+	LAttribute* m_color{
+		new LAttribute("color", QColor("#ff0000"), this) };
 
-	HSV m_active_hsv{ HSV::Hue };
+	LAttribute* m_z_axis{
+		new LAttribute("z_axis", QVariant::fromValue(0.0), this) };
+
+	HSV m_z_dimension{ HSV::Hue };
 
 	LWidget* m_cursor{ new LWidget(this) };
 
