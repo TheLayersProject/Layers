@@ -13,11 +13,10 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	LDialog("Color", parent)
 {
 	init_attributes();
-
-	setFixedSize(315, 400);
-
+	init_layout();
 	set_icon(LGraphic(":/images/color_icon.png"));
 	set_name("Color Dialog");
+	setFixedSize(315, 400);
 
 	m_apply_button->set_name("Apply Button");
 	m_apply_button->set_font_size_f(10.5);
@@ -106,8 +105,6 @@ LColorDialog::LColorDialog(QWidget* parent) :
 		});
 
 	m_z_slider->set_name("Z-Slider");
-
-	init_layout();
 }
 
 LColorDialog::~LColorDialog()

@@ -12,7 +12,7 @@ LAYERS_NAMESPACE_BEGIN
 	
 	An LColorControl is an LWidget that displays a color to the user and
 	generates an LColorDialog when clicked, giving the user an interface for
-	changing the color value.
+	changing the color's value.
 */
 class LAYERS_EXPORT LColorControl : public LWidget
 {

@@ -4,44 +4,53 @@
 
 using Layers::LFillDialog;
 
-LFillDialog::LFillDialog(QWidget* parent) : LWidget(parent)
+LFillDialog::LFillDialog(QWidget* parent) :
+	LDialog("Fill", parent)
 {
 	init_attributes();
-
-	installEventFilter(this);
-	setAttribute(Qt::WA_TranslucentBackground);
-	setFixedSize(165, 85);
-	setMouseTracking(true);
-	setWindowFlags(Qt::FramelessWindowHint);
-	set_name("Dialog");
+	init_layout();
+	set_icon(LGraphic(":/images/fill_icon.svg", QSize(22, 20)));
+	set_name("Fill Dialog");
+	setFixedSize(165, 125);
 
 	m_color_control->set_name("Color Control");
 	m_gradient_control->set_name("Gradient Control");
 
+	connect(m_color_control, &LColorControl::color_changed,
+		[this] { done(QDialog::Accepted); });
+
 	m_fill_type_toggle->setFixedHeight(85);
 	m_fill_type_toggle->set_name("Fill Type Toggle");
 
-	connect(m_fill_type_toggle, &LToggleSwitch::toggled_event, [this] {
-		if (m_fill_type_toggle->toggled())
+	connect(m_fill_type_toggle, &LToggleSwitch::toggled_event,
+		[this](bool toggled)
 		{
-			m_color_control->fill()->set_value(QVariant::fromValue(QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+			if (toggled)
+			{
+				m_previous_color = m_color_control->fill()->as<QColor>();
 
-			m_gradient_label_opacity->setOpacity(1.0);
-			m_gradient_control->show();
+				m_gradient_control->fill()->set_value(
+					QVariant::fromValue(m_previous_gradient));
 
-			m_color_label_opacity->setOpacity(0.25);
-			m_color_control->hide();
-		}
-		else
-		{
-			m_color_control->fill()->set_value(QVariant::fromValue(QColor(Qt::white)));
+				m_gradient_label_opacity->setOpacity(1.0);
+				m_gradient_control->show();
 
-			m_color_label_opacity->setOpacity(1.0);
-			m_color_control->show();
+				m_color_label_opacity->setOpacity(0.25);
+				m_color_control->hide();
+			}
+			else
+			{
+				m_previous_gradient =
+					m_gradient_control->fill()->as<QGradientStops>();
 
-			m_gradient_label_opacity->setOpacity(0.25);
-			m_gradient_control->hide();
-		}
+				m_color_control->fill()->set_value(m_previous_color);
+
+				m_color_label_opacity->setOpacity(1.0);
+				m_color_control->show();
+
+				m_gradient_label_opacity->setOpacity(0.25);
+				m_gradient_control->hide();
+			}
 		});
 
 	m_color_label_opacity->setOpacity(1.0);
@@ -57,17 +66,15 @@ LFillDialog::LFillDialog(QWidget* parent) : LWidget(parent)
 	m_gradient_label->setFixedHeight(40);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
 	m_gradient_label->set_name("Gradient Label");
-
-	init_layout();
 }
 
 void LFillDialog::set_attribute(LAttribute* attribute)
 {
 	m_gradient_control->fill()->set_link_attribute(attribute);
-
 	m_color_control->fill()->set_link_attribute(attribute);
 
-	if (QString(m_color_control->fill()->typeName()) == QString("QList<std::pair<double,QColor>>"))
+	if (m_color_control->fill()->typeName() ==
+		"QList<std::pair<double,QColor>>")
 	{
 		m_fill_type_toggle->toggle(false);
 
@@ -77,7 +84,7 @@ void LFillDialog::set_attribute(LAttribute* attribute)
 		m_color_label_opacity->setOpacity(0.25);
 		m_color_control->hide();
 	}
-	else if (QString(m_color_control->fill()->typeName()) == QString("QColor"))
+	else if (m_color_control->fill()->typeName() == "QColor")
 	{
 		m_color_label_opacity->setOpacity(1.0);
 		m_color_control->show();
@@ -87,25 +94,13 @@ void LFillDialog::set_attribute(LAttribute* attribute)
 	}
 }
 
-bool LFillDialog::eventFilter(QObject* object, QEvent* event)
-{
-	if (event->type() == QEvent::FocusOut)
-	{
-		if (m_fill_type_toggle->underMouse())
-			setFocus();
-		else
-			hide();
-	}
-
-	return false;
-}
-
 void LFillDialog::init_attributes()
 {
-	m_corner_radii_top_left->set_value(4.0);
-	m_corner_radii_top_right->set_value(4.0);
-	m_corner_radii_bottom_left->set_value(4.0);
-	m_corner_radii_bottom_right->set_value(4.0);
+	m_border_thickness->set_value(0.0);
+	m_corner_radii_top_left->set_value(7.0);
+	m_corner_radii_top_right->set_value(7.0);
+	m_corner_radii_bottom_left->set_value(7.0);
+	m_corner_radii_bottom_right->set_value(7.0);
 
 	m_color_control->margins_top()->set_value(8.0);
 	m_color_control->margins_bottom()->set_value(8.0);
@@ -141,7 +136,5 @@ void LFillDialog::init_layout()
 	dialog_layout->setSpacing(0);
 	dialog_layout->addWidget(m_fill_type_toggle);
 	dialog_layout->addLayout(control_layouts);
-	//dialog_layout->addStretch();
-
 	setLayout(dialog_layout);
 }

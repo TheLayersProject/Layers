@@ -47,26 +47,26 @@ void LToggleSwitch::toggle(bool emit_toggled_event)
 	if (m_toggle_states->state() == "Untoggled")
 	{
 		m_toggle_states->set_state("Toggled");
-
 		m_spacer->show();
+
+		if (emit_toggled_event)
+			emit toggled_event(true);
 	}
 	else
 	{
 		m_toggle_states->set_state("Untoggled");
-
 		m_spacer->hide();
-	}
 
-	if (emit_toggled_event)
-		emit toggled_event();
+		if (emit_toggled_event)
+			emit toggled_event(false);
+	}
 
 	QWidget::update();
 }
 
 bool LToggleSwitch::toggled() const
 {
-	if (m_toggle_states->state() == "Toggled") return true;
-	else return false;
+	return (m_toggle_states->state() == "Toggled");
 }
 
 bool LToggleSwitch::eventFilter(QObject* object, QEvent* event)

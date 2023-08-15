@@ -185,7 +185,7 @@ public:
 		value is returned.
 	*/
 	template<typename T>
-	T as(const QStringList& states = QStringList()) const;
+	T as(const QStringList& states = QStringList());
 
 	/*!
 		Breaks the link relationship if a link attribute has been set.
@@ -252,6 +252,8 @@ public:
 	*/
 	QString name() const;
 
+	LAttribute* override_attribute(const QStringList& states);
+
 	/*!
 		Returns a map containing the override attributes.
 	*/
@@ -310,7 +312,7 @@ public:
 	/*!
 		Returns the name of type stored in the attribute's value.
 	*/
-	const char* typeName() const;
+	QString typeName(const QStringList& states = QStringList());
 
 	/*!
 		Returns the attribute's value.
@@ -350,31 +352,14 @@ private:
 };
 
 template<typename T>
-inline T LAttribute::as(const QStringList& states) const
+inline T LAttribute::as(const QStringList& states)
 {
 	if (m_theme_attr)
 		return m_theme_attr->as<T>(states);
 
 	if (!m_overrides.isEmpty() && !states.isEmpty())
-	{
-		for (LAttribute* override_attr : m_overrides)
-		{
-			QStringList override_states = override_attr->name().split(":");
-
-			bool return_override_attr = true;
-
-			for (const QString& override_state : override_states)
-				if (!states.contains(override_state))
-					return_override_attr = false;
-
-			if (return_override_attr)
-				return override_attr->as<T>();
-		}
-
-		// TODO: Handle returning override with highest number of matching
-		// states. If there is a conflict (two matching overrides), just
-		// return the value of this
-	}
+		if (LAttribute* override_attr = override_attribute(states))
+			return override_attr->as<T>();
 
 	if (m_link_attr)
 		return m_link_attr->as<T>();

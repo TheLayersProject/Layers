@@ -180,7 +180,7 @@ void LThemeableBox::paint(QWidget* widget)
 	// - Draw Border
 	if (border_thickness)
 	{
-		if (QString(m_border_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
+		if (m_border_fill->typeName(s) == "QList<std::pair<double,QColor>>")
 		{
 			QLinearGradient border_fill_gradient;
 
@@ -194,7 +194,7 @@ void LThemeableBox::paint(QWidget* widget)
 	}
 
 	// - Draw Background
-	if (QString(m_fill->typeName()) == QString("QList<std::pair<double,QColor>>"))
+	if (m_fill->typeName(s) == "QList<std::pair<double,QColor>>")
 	{
 		QLinearGradient fill_gradient;
 

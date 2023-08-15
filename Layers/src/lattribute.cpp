@@ -9,14 +9,13 @@ using Layers::LAttribute;
 using Layers::LAttributeList;
 using Layers::LAttributeMap;
 
-LAttribute::LAttribute(const QString& name, QObject* parent) :
-	m_name{ name },
-	QObject(parent) { }
+LAttribute::LAttribute(
+	const QString& name, QObject* parent) :
+	m_name{ name }, QObject(parent) { }
 
-LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
-	m_value{ value },
-	m_name{ name },
-	QObject(parent)
+LAttribute::LAttribute(
+	const QString& name, QVariant value, QObject* parent) :
+	m_value{ value }, m_name{ name }, QObject(parent)
 {
 	connect(this, &LAttribute::changed, [this]
 	{
@@ -26,9 +25,9 @@ LAttribute::LAttribute(const QString& name, QVariant value, QObject* parent) :
 	});
 }
 
-LAttribute::LAttribute(const QString& name, QJsonObject json_object, QObject* parent) :
-	m_name{ name }, m_json_object{ json_object },
-	QObject(parent)
+LAttribute::LAttribute(
+	const QString& name, QJsonObject json_object, QObject* parent) :
+	m_name{ name }, m_json_object{ json_object }, QObject(parent)
 {
 	if (json_object.contains("linked_to"))
 	{
@@ -226,6 +225,29 @@ QString LAttribute::name() const
 	return m_name;
 }
 
+LAttribute* LAttribute::override_attribute(const QStringList& states)
+{
+	for (LAttribute* override_attr : m_overrides)
+	{
+		QStringList override_states = override_attr->name().split(":");
+
+		bool qualifies = true;
+
+		for (const QString& override_state : override_states)
+			if (!states.contains(override_state))
+				qualifies = false;
+
+		if (qualifies)
+			return override_attr;
+	}
+
+	// TODO: Handle returning override with highest number of matching
+	// states. If there is a conflict (two matching overrides), just
+	// return the value of this
+
+	return nullptr;
+}
+
 LAttributeMap LAttribute::overrides() const
 {
 	return m_overrides;
@@ -326,16 +348,16 @@ QJsonValue LAttribute::to_json_value()
 {
 	QJsonValue json_value;
 
-	if (QString(typeName()) == "bool")
+	if (typeName() == "bool")
 		json_value = QJsonValue(m_value.value<bool>());
 
-	else if (QString(typeName()) == "double")
+	else if (typeName() == "double")
 		json_value = QJsonValue(m_value.value<double>());
 
-	else if (QString(typeName()) == "QString")
+	else if (typeName() == "QString")
 		json_value = QJsonValue(m_value.value<QString>());
 
-	else if (QString(typeName()) == "QColor")
+	else if (typeName() == "QColor")
 	{
 		QColor color = m_value.value<QColor>();
 
@@ -344,7 +366,7 @@ QJsonValue LAttribute::to_json_value()
 		else
 			json_value = QJsonValue(color.name(QColor::HexArgb));
 	}
-	else if (QString(typeName()) == "QList<std::pair<double,QColor>>")
+	else if (typeName() == "QList<std::pair<double,QColor>>")
 	{
 		QJsonObject gradient_json_object;
 		QJsonArray gradient_json_array;
@@ -367,10 +389,17 @@ QJsonValue LAttribute::to_json_value()
 	return json_value;
 }
 
-const char* LAttribute::typeName() const
+QString LAttribute::typeName(const QStringList& states)
 {
+	if (m_theme_attr)
+		return m_theme_attr->typeName(states);
+
+	if (!m_overrides.isEmpty() && !states.isEmpty())
+		if (LAttribute* override_attr = override_attribute(states))
+			return override_attr->typeName();
+
 	if (m_link_attr)
-		return m_link_attr->typeName();
+		return m_link_attr->typeName(states);
 
 	return m_value.typeName();
 }

@@ -10,9 +10,14 @@ LAYERS_NAMESPACE_BEGIN
 class LFillDialog;
 
 /*!
-	An LFillControl is a LWidget that gives the user a way to access the
-	LFillDialog. When the user clicks on the control, a LFillDialog is
-	displayed.
+	![LFillControl Example](fill_control.png)
+	
+	An LFillControl is an LWidget that displays a fill to the user and
+	generates an LFillDialog when clicked, giving the user an interface for
+	changing the fill's value. 
+
+	A **fill** is an attribute type that represents either a *color* or
+	a *gradient* value.
 */
 class LAYERS_EXPORT LFillControl : public LWidget
 {
@@ -27,7 +32,7 @@ public:
 	~LFillControl();
 
 	/*!
-		Sets the attribute to link with the control.
+		Links the control with *attribute*.
 	*/
 	void set_attribute(LAttribute* attribute);
 
@@ -36,8 +41,6 @@ protected:
 
 private:
 	void init_attributes();
-
-	LFillDialog* m_dialog;
 };
 LAYERS_NAMESPACE_END
 

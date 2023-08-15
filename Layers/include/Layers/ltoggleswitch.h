@@ -26,7 +26,7 @@ signals:
 	/*!
 		This signal is emitted when the switch is toggled.
 	*/
-	void toggled_event();
+	void toggled_event(bool toggled);
 
 public:
 	/*!

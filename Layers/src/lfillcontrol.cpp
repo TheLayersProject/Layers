@@ -2,12 +2,12 @@
 
 #include <QMouseEvent>
 
+#include <Layers/lapplication.h>
 #include <Layers/lfilldialog.h>
 
 using Layers::LFillControl;
 
 LFillControl::LFillControl(QWidget* parent) :
-	m_dialog{ new LFillDialog },
 	LWidget(parent)
 {
 	init_attributes();
@@ -19,32 +19,31 @@ LFillControl::LFillControl(QWidget* parent) :
 
 LFillControl::~LFillControl()
 {
-	// TODO: Maybe the dialog should just be generated when it is needed
-	delete m_dialog;
-
 	delete m_fill;
 }
 
 void LFillControl::set_attribute(LAttribute* attribute)
 {
 	m_fill->set_link_attribute(attribute);
-
-	m_dialog->set_attribute(attribute);
 }
 
 bool LFillControl::eventFilter(QObject* object, QEvent* event)
 {
 	if (object == this)
 	{
-		if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick)
+		if (event->type() == QEvent::MouseButtonPress ||
+			event->type() == QEvent::MouseButtonDblClick)
 		{
 			QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
 
 			if (mouse_event->button() & Qt::LeftButton)
 			{
-				m_dialog->move(mapToGlobal(QPoint(0, 0)));
-				m_dialog->show();
-				m_dialog->setFocus();
+				LFillDialog fill_dialog;
+				fill_dialog.apply_theme(
+					activeTheme()->find_item(fill_dialog.path()));
+				fill_dialog.move(mapToGlobal(QPoint(0, 0)));
+				fill_dialog.set_attribute(m_fill);
+				fill_dialog.exec();
 			}
 		}
 	}

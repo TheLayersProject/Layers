@@ -21,10 +21,9 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 		QString::number(m_left_padding->as<double>() + m_margins_left->as<double>()) + "px; padding-bottom: 1px; }");
 
 	connect(m_line_edit, &QLineEdit::textEdited, [this] {
-		if (QString(m_text->typeName()) == "QString")
+		if (m_text->typeName() == "QString")
 			m_text->set_value(m_line_edit->text());
-
-		else if (QString(m_text->typeName()) == "double")
+		else if (m_text->typeName() == "double")
 			m_text->set_value(QVariant(m_line_edit->text().toDouble()));
 
 		emit text_edited(m_line_edit->text());

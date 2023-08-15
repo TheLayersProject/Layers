@@ -170,8 +170,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_label->setText(attr->name());
 
 		if (
-			QString(attr->typeName()) == "QColor" ||
-			QString(attr->typeName()) == "QList<std::pair<double,QColor>>"
+			attr->typeName() == "QColor" ||
+			attr->typeName() == "QList<std::pair<double,QColor>>"
 			)
 		{
 			m_fill_control->set_attribute(attr);
@@ -179,7 +179,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			m_line_editor->hide();
 			m_slider->hide();
 		}
-		else if (QString(attr->typeName()) == "double")
+		else if (attr->typeName() == "double")
 		{
 			m_line_editor->set_text(attr->as<QString>());
 			m_line_editor->text()->set_link_attribute(attr);
