@@ -11,19 +11,21 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LGraphic stores data pertaining to graphical imagery.
+	An LGraphic stores an image object whose type depends on the image data
+	that represents it.
 
-	The data is represented with either a QImage, an LImageSequence, or an
+	The stored image object is either a QImage, an LImageSequence, or an
 	LSvgRenderer.
 */
 class LAYERS_EXPORT LGraphic
 {
 public:
 	/*!
-		Constructs a graphic from a file located at *file_path* with the
-		given *size*.
+		Constructs a graphic of *size* from a loaded file located
+		at *file_path*.
 
-		If the default invalid size if used, the size is derived from the file.
+		If the default, invalid size is used, the size is derived from the
+		file.
 	*/
 	LGraphic(const QString& file_path, QSize size = QSize(),
 		QWidget* parent = nullptr);
@@ -41,14 +43,14 @@ public:
 	~LGraphic();
 
 	/*!
-		Returns a pointer to the graphic's QImage, if this graphic uses
+		Returns a pointer to the graphic's QImage, if this graphic stores
 		one.
 	*/
 	QImage* image() const;
 
 	/*!
-		Returns a pointer to the graphic's LImageSequence, if this graphic uses
-		one.
+		Returns a pointer to the graphic's LImageSequence, if this graphic
+		stores one.
 	*/
 	LImageSequence* image_sequence() const;
 
@@ -58,7 +60,7 @@ public:
 	QSize size() const;
 
 	/*!
-		Returns a pointer to the graphic's LSvgRenderer, if this graphic uses
+		Returns a pointer to the graphic's LSvgRenderer, if this graphic stores
 		one.
 	*/
 	LSvgRenderer* svg_renderer() const;
