@@ -29,7 +29,8 @@ LGraphic::LGraphic(const QString& file_path, QSize size, QWidget* parent)
 	else if (m_image)
 		m_size = m_image->size();
 	else if (m_image_sequence)
-		m_size = (*m_image_sequence)[0].size();
+		if (QImage* first_frame = m_image_sequence->frame(0))
+			m_size = first_frame->size();
 }
 
 LGraphic::LGraphic(const QImage& image, QWidget* parent) :

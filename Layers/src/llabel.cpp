@@ -137,7 +137,8 @@ void LLabel::paintEvent(QPaintEvent* event)
 		}
 		else if (LImageSequence* imgseq = m_graphic->image_sequence())
 		{
-			painter.drawImage(x, y, (*imgseq)[m_frame++]);
+			if (QImage* next_frame = imgseq->frame(m_frame++))
+				painter.drawImage(x, y, *next_frame);
 				
 			if (m_frame == imgseq->size())
 				m_frame = 0;

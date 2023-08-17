@@ -5,14 +5,15 @@
 
 using Layers::LImageSequence;
 
-LImageSequence::LImageSequence(QDir dir)
+LImageSequence::LImageSequence(QDir directory)
 {
 	QStringList image_filenames =
-		dir.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files);
+		directory.entryList(
+			QStringList() << "*.png" << "*.PNG", QDir::Files);
 
 	for (QString filename : image_filenames)
 	{
-		m_frames.append(QImage(dir.filePath(filename)));
+		m_frames.append(QImage(directory.filePath(filename)));
 	}
 }
 
@@ -29,6 +30,14 @@ LImageSequence::LImageSequence(QFile file)
 
 		file.close();
 	}
+}
+
+QImage* LImageSequence::frame(int i)
+{
+	if (!m_frames.isEmpty() && i < m_frames.size())
+		return &m_frames[i];
+
+	return nullptr;
 }
 
 void LImageSequence::save(QFile file)
@@ -49,9 +58,4 @@ void LImageSequence::save(QFile file)
 qsizetype LImageSequence::size() const
 {
 	return m_frames.size();
-}
-
-QImage& LImageSequence::operator[](int i)
-{
-	return m_frames[i];
 }

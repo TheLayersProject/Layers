@@ -38,7 +38,6 @@ LApplication::LApplication(
 	m_downloader{ new LDownloader(this) },
 	QApplication(argc, argv)
 {
-	Q_INIT_RESOURCE(image_sequences);
 	Q_INIT_RESOURCE(roboto_font);
 	Q_INIT_RESOURCE(images);
 	Q_INIT_RESOURCE(theme_light);
