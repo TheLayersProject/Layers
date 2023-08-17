@@ -10,10 +10,15 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LGridlineItemDelegate is a QStyledItemDelegate and a LThemeable that
+	![LGridlineItemDelegate Example](gridline_item_delegate.png)
+	
+	An LGridlineItemDelegate is a QStyledItemDelegate and an LThemeable that
 	provides a customizable gridline.
+
+	The example above is from an LTableView using a gridline item delegate.
 */
-class LAYERS_EXPORT LGridlineItemDelegate : public QStyledItemDelegate, public LThemeable
+class LAYERS_EXPORT LGridlineItemDelegate :
+	public QStyledItemDelegate, public LThemeable
 {
 	Q_OBJECT
 
@@ -30,15 +35,13 @@ public:
 	*/
 	LGridlineItemDelegate(QObject* parent = nullptr);
 
-	// TODO: Create a destructor; free the attributes
-
 	/*!
-		Returns a pointer to the grid fill attribute of this themeable.
+		Returns a pointer to the delegate's grid-fill attribute.
 	*/
 	LAttribute* grid_fill() const;
 
 	/*!
-		Returns a pointer to the grid thickness attribute of this themeable.
+		Returns a pointer to the delegate's grid-thickness attribute.
 	*/
 	LAttribute* grid_thickness() const;
 
