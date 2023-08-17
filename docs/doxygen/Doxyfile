@@ -1425,7 +1425,11 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/gradient_control.png \
                          img/gradient_dialog.png \
                          img/gradient_editor.png \
-                         img/gridline_item_delegate.png
+                         img/gridline_item_delegate.png \
+                         img/growing_dot_progress_indicator.mp4 \
+                         img/color_plane_cycle_hue.mp4 \
+                         img/color_plane_cycle_sat.mp4 \
+                         img/color_plane_cycle_val.mp4
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

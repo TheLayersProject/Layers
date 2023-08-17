@@ -30,9 +30,9 @@ LAYERS_NAMESPACE_BEGIN
 
 	| Z-Axis Dimension | Plane (Cycling Z-Axis)                                           |
 	|------------------|-----------------------------------------------------------------------|
-	| Hue              | ![Color Plane Hue Cycle Gif](color_plane_cycle_hue.gif)               |
-	| Saturation       | ![Color Plane Saturation Cycle Gif](color_plane_cycle_saturation.gif) |
-	| Value            | ![Color Plane Value Cycle Gif](color_plane_cycle_value.gif)           |
+	| Hue              | \htmlonly<video style="max-width:100%;height:auto" width="180" autoplay loop muted disableremoteplayback><source src="color_plane_cycle_hue.mp4" type="video/mp4">Your browser does not support the video tag.</video>\endhtmlonly |
+	| Saturation       | \htmlonly<video style="max-width:100%;height:auto" width="180" autoplay loop muted disableremoteplayback><source src="color_plane_cycle_sat.mp4" type="video/mp4">Your browser does not support the video tag.</video>\endhtmlonly |
+	| Value            | \htmlonly<video style="max-width:100%;height:auto" width="180" autoplay loop muted disableremoteplayback><source src="color_plane_cycle_val.mp4" type="video/mp4">Your browser does not support the video tag.</video>\endhtmlonly |
 
 	## Controlling the Z-Axis Value
 
