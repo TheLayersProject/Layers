@@ -184,8 +184,8 @@ void LThemeableBox::paint(QWidget* widget)
 		{
 			QLinearGradient border_fill_gradient;
 
-			border_fill_gradient.setStart(0, 0);
-			border_fill_gradient.setFinalStop(widget_width, 0);
+			border_fill_gradient.setStart(margin_left, 0);
+			border_fill_gradient.setFinalStop(widget_width - margin_right, 0);
 			border_fill_gradient.setStops(m_border_fill->as<QGradientStops>(s));
 
 			painter.fillPath(border_path, border_fill_gradient);
@@ -198,8 +198,8 @@ void LThemeableBox::paint(QWidget* widget)
 	{
 		QLinearGradient fill_gradient;
 
-		fill_gradient.setStart(0, 0);
-		fill_gradient.setFinalStop(widget_width, 0);
+		fill_gradient.setStart(margin_left + border_thickness, 0);
+		fill_gradient.setFinalStop(widget_width - (border_thickness * 2) - margin_right, 0);
 		fill_gradient.setStops(m_fill->as<QGradientStops>(s));
 
 		painter.fillPath(background_path, fill_gradient);

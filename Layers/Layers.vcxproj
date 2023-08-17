@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\lgradienteditor.cpp" />
     <ClCompile Include="src\lattributemapitem.cpp" />
     <ClCompile Include="src\lattributemapmodel.cpp" />
     <ClCompile Include="src\lattributemapview.cpp" />
@@ -95,6 +96,7 @@
     <QtMoc Include="include\Layers\lbutton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\lgradienteditoritem.h" />
     <QtMoc Include="src\lnewlinkwidget.h" />
     <QtMoc Include="src\llinksview.h" />
     <QtMoc Include="include\Layers\lstatepool.h" />
@@ -110,6 +112,7 @@
     <ClInclude Include="include\Layers\lcalculate.h" />
     <ClInclude Include="include\Layers\lcolor.h" />
     <ClInclude Include="include\Layers\lgithubrepo.h" />
+    <QtMoc Include="include\Layers\lgradienteditor.h" />
     <ClInclude Include="include\Layers\lgraphic.h" />
     <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
     <ClInclude Include="include\Layers\limagesequence.h" />

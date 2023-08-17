@@ -9,55 +9,44 @@
 #include "lbutton.h"
 #include "lcolorcontrol.h"
 #include "ldialog.h"
+#include "lgradienteditor.h"
 
 LAYERS_NAMESPACE_BEGIN
+/*!
+	![LGradientDialog Example](gradient_dialog.png)
+
+	An LGradientDialog is an LDialog that provides an interface for changing a
+	gradient value.
+
+	The dialog contains an LGradientEditor which lets the user edit the
+	gradient.
+
+	Once the desired changes to the gradient have been made, there is an
+	LButton labeled 'Apply' which wraps up execution of the dialog when
+	clicked.
+*/
 class LAYERS_EXPORT LGradientDialog : public LDialog
 {
 	Q_OBJECT
 
 public:
-	LGradientDialog(QWidget* parent = nullptr);
+	/*!
+		Constructs a gradient dialog initialized with *gradient_stops*.
+	*/
+	LGradientDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
 
-	void add_gradient_stop(double stop_val, QColor color);
-
+	/*!
+		Returns the stops of the gradient being edited.
+	*/
 	QGradientStops gradient_stops() const;
 
-	void set_gradient_stops(QGradientStops gradient_stops);
-
-	void update_gradient();
-
-public slots:
-	void click_control();
-	void update_color_control_positions();
-
-protected:
-	bool eventFilter(QObject* object, QEvent* event) override;
-
-	void init_attributes();
-
 private:
-	void init_color_controls();
-
 	void init_layout();
 
-	LWidget* m_gradient_widget{ new LWidget };
+	LGradientEditor* m_gradient_editor;
 
-	QGradientStops m_gradient_stops{ {0.0, Qt::white},{1.0, Qt::black} };
-
-	QList<LColorControl*> m_color_controls;
-
-	LButton* m_apply_button{ new LButton("Apply") };
-
-	LColorControl* m_selected_color_control{ nullptr };
-	LColorControl* m_clicking_color_control{ nullptr };
-
-	QPoint m_selection_start_point;
-
-	int m_selected_control_start_x{ 0 };
-
-	QTimer m_single_click_timer;
-
-	bool m_moved{ false };
+	LButton* m_apply_button{
+		new LButton(LGraphic(":/images/check.svg", QSize(16, 13)), "Apply") };
 };
 LAYERS_NAMESPACE_END
 

@@ -1421,7 +1421,10 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/theme_creator_dialog.png \
                          img/dialog.png \
                          img/fill_control.png \
-                         img/fill_dialog.png
+                         img/fill_dialog.png \
+                         img/gradient_control.png \
+                         img/gradient_dialog.png \
+                         img/gradient_editor.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

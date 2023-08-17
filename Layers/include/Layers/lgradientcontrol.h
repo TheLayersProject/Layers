@@ -8,9 +8,11 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LGradientControl is a LWidget that gives the user a way to access the
-	LGradientDialog. When the user clicks on the control, the application's
-	LGradientDialog is displayed.
+	![LGradientControl Example](gradient_control.png)
+	
+	An LGradientControl is an LWidget that displays a gradient to the user and
+	generates an LGradientDialog when clicked, giving the user an interface for
+	changing the gradient's value.
 */
 class LAYERS_EXPORT LGradientControl : public LWidget
 {

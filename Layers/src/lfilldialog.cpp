@@ -19,6 +19,9 @@ LFillDialog::LFillDialog(QWidget* parent) :
 	connect(m_color_control, &LColorControl::color_changed,
 		[this] { done(QDialog::Accepted); });
 
+	connect(m_gradient_control, &LGradientControl::gradient_changed,
+		[this] { done(QDialog::Accepted); });
+
 	m_fill_type_toggle->setFixedHeight(85);
 	m_fill_type_toggle->set_name("Fill Type Toggle");
 

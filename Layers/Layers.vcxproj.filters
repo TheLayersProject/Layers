@@ -68,6 +68,7 @@
     <ClCompile Include="src\lattributemapitem.cpp" />
     <ClCompile Include="src\llinksview.cpp" />
     <ClCompile Include="src\lnewlinkwidget.cpp" />
+    <ClCompile Include="src\lgradienteditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layers\layers_exports.h" />
@@ -80,6 +81,7 @@
     <ClInclude Include="include\Layers\lpaths.h" />
     <ClInclude Include="include\Layers\lthemeable.h" />
     <ClInclude Include="include\Layers\lthemeablebox.h" />
+    <ClInclude Include="src\lgradienteditoritem.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />
@@ -142,6 +144,7 @@
     <QtMoc Include="include\Layers\lattributemapitem.h" />
     <QtMoc Include="src\llinksview.h" />
     <QtMoc Include="src\lnewlinkwidget.h" />
+    <QtMoc Include="include\Layers\lgradienteditor.h" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
