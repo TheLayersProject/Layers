@@ -8,8 +8,29 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LMiniSlider is a LWidget that provides a mechanism for a user to control
-	a numerical value within a set range.
+	![LMiniSlider Example](mini_slider.png)
+	
+	An LMiniSlider is an LWidget that provides a mechanism for changing a
+	numerically-valued LAttribute within a limited range. Mini sliders are
+	intended to fit into smaller spaces. If a larger slider is needed, see
+	LSlider.
+
+	By click-dragging on the slider, a user can change the attribute linked to
+	it.
+
+	The following demonstrates how to link the slider's *value* attribute
+	with another attribute:
+
+	~~~~~~~~~~~~~{.c}
+	LWidget* widget = new LWidget;
+	LMiniSlider* slider = new LMiniSlider(30.0);
+
+	slider->value()->set_link_attribute(widget->border_thickness());
+	~~~~~~~~~~~~~
+
+	In the example, after the call to LAttribute::set_link_attribute(),
+	the *widget*'s border thickness will change when the slider is interacted
+	with.
 */
 class LAYERS_EXPORT LMiniSlider : public LWidget
 {
@@ -37,6 +58,8 @@ protected:
 	void init_attributes();
 
 private:
+	double drag_increment() const;
+
 	void init_layout();
 
 	void update_handle_pos();
@@ -54,7 +77,7 @@ private:
 
 	bool m_dragging_handle{ false };
 
-	QPoint m_mouse_click_position{ QPoint() };
+	QPoint m_mouse_click_position;
 };
 LAYERS_NAMESPACE_END
 

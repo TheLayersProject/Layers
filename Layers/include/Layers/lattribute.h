@@ -36,9 +36,9 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 
 	<b>Theme attributes</b> modify the value of widget attributes.
 
-	<b>Override attributes</b> overtake the value of their parent attributes when
-	the value is requested with a state-combination that matches the override
-	attribute.
+	<b>Override attributes</b> overtake the value of their parent attributes
+	when the value is requested with a state-combination that matches the
+	override attribute.
 
 	## Applying Theme Attributes to Widget Attributes
 
@@ -152,17 +152,20 @@ public:
 	/*!
 		Constructs an invalid attribute.
 	*/
-	LAttribute(const QString& name, QObject* parent = nullptr);
+	LAttribute(const QString& name,
+		QObject* parent = nullptr);
 
 	/*!
 		Constructs an attribute with a *value*.
 	*/
-	LAttribute(const QString& name, QVariant value, QObject* parent = nullptr);
+	LAttribute(const QString& name, QVariant value,
+		QObject* parent = nullptr);
 
 	/*!
 		Constructs an attribute from a QJsonObject.
 	*/
-	LAttribute(const QString& name, QJsonObject json_object, QObject* parent = nullptr);
+	LAttribute(const QString& name, QJsonObject json_object,
+		QObject* parent = nullptr);
 
 	/*!
 		Constructs a copy of *attribute*.

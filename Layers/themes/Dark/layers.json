@@ -3417,7 +3417,7 @@
                                         "value": 5
                                     },
                                     "Fill": {
-                                        "value": "#2e2e2e"
+                                        "linked_to": "App/Tertiary"
                                     },
                                     "Margins.Bottom": {
                                         "value": 5
@@ -3432,7 +3432,7 @@
                                         "value": 5
                                     },
                                     "Text Color": {
-                                        "value": "#6a6a6a"
+                                        "linked_to": "App/Foreground"
                                     }
                                 }
                             },
@@ -4042,7 +4042,7 @@
                                         "value": 5
                                     },
                                     "Fill": {
-                                        "value": "#e1e1e1"
+                                        "linked_to": "App/Tertiary"
                                     },
                                     "Margins.Bottom": {
                                         "value": 5
@@ -4079,7 +4079,7 @@
                                                 "value": 2
                                             },
                                             "Fill": {
-                                                "value": "#7c7c7c"
+                                                "linked_to": "App/Secondary"
                                             },
                                             "Margins.Bottom": {
                                                 "value": 0
@@ -4116,7 +4116,7 @@
                                                 "value": 2
                                             },
                                             "Fill": {
-                                                "value": "#2e2e2e"
+                                                "linked_to": "App/Foreground"
                                             },
                                             "Margins.Bottom": {
                                                 "value": 0

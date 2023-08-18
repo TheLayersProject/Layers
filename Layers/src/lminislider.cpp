@@ -23,7 +23,8 @@ LMiniSlider::LMiniSlider(double limit, QWidget* parent) :
 	m_handle->setFixedSize(5, 13);
 	m_handle->set_name("Handle");
 
-	connect(m_value, &LAttribute::changed, [this] { update_handle_pos(); });
+	connect(m_value, &LAttribute::changed,
+		[this] { update_handle_pos(); });
 
 	init_layout();
 }
@@ -68,10 +69,10 @@ void LMiniSlider::init_attributes()
 
 void LMiniSlider::update_handle_pos()
 {
-	// 10 is left + right margin; NEW IDEA: Instead of margins, use m_bar->pos() and m_bar->pos() + m_barwidth() (Each end of the bar)
-	double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit);
-
-	m_handle->move(drag_increment * m_value->as<double>() + 5, m_handle->y()); // 5 is left margin
+	m_handle->move(
+		drag_increment() * m_value->as<double>() +
+			m_bar->margins_left()->as<int>(),
+		m_handle->y());
 }
 
 bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
@@ -83,7 +84,6 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 		if (mouse_event->button() & Qt::LeftButton)
 		{
 			QApplication::setOverrideCursor(Qt::BlankCursor);
-			//QApplication::changeOverrideCursor(cursor);
 
 			m_dragging_handle = true;
 
@@ -102,7 +102,6 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 			m_dragging_handle = false;
 
 			QCursor::setPos(mapToGlobal(QPoint(width() / 2, height() / 2)));
-			//QCursor::setPos(mapToGlobal(m_mouse_click_position));
 		}
 	}
 
@@ -114,9 +113,10 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 
 		if (delta.x() % m_mouse_move_scale == 0)
 		{
-			double drag_increment = double(width() - m_handle->width() - 10) / double(m_limit); //double(m_bar->width() - m_handle->width()) / double(range_difference());
-
-			double new_value = m_value_on_click + int((delta.x() / m_mouse_move_scale) / drag_increment);
+			double new_value = int(
+				m_value_on_click + delta.x() /
+					m_mouse_move_scale /
+						drag_increment());
 
 			if (new_value < 0.0)
 				m_value->set_value(0.0);
@@ -130,6 +130,17 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 	}
 
 	return false;
+}
+
+double LMiniSlider::drag_increment() const
+{
+	int bar_margins =
+		m_bar->margins_left()->as<int>() +
+		m_bar->margins_right()->as<int>();
+
+	return
+		double(width() - m_handle->width() - bar_margins) /
+			double(m_limit);
 }
 
 void LMiniSlider::init_layout()
