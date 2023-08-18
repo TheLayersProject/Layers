@@ -12,9 +12,9 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	| Graphic Label                               | Text Label                            |
-	|---------------------------------------------|---------------------------------------|
-	| ![Graphic Label Example](graphic_label.svg) | ![Text Label Example](text_label.svg) |
+	| Text Label                            | Graphic Label                               |
+	|---------------------------------------|---------------------------------------------|
+	| ![Text Label Example](text_label.png) | ![Graphic Label Example](graphic_label.png) |
 	
 	An LLabel is a QLabel and a LThemeable that is used to display text or an
 	LGraphic.

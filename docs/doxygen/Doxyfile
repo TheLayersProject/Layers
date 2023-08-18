@@ -1431,7 +1431,9 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/color_plane_cycle_sat.mp4 \
                          img/color_plane_cycle_val.mp4 \
                          img/header_view.png \
-                         img/image_sequence.mp4
+                         img/image_sequence.mp4 \
+                         img/graphic_label.png \
+                         img/text_label.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.
