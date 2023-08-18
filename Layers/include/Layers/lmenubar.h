@@ -6,12 +6,14 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include <Layers/lthemeable.h>
+#include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LMenuBar is a QMenuBar and a LThemeable that provides a menu bar that
-	consists of a list of pull-down menu items.
+	![LMenuBar Example](menu_bar.png)
+	
+	An LMenuBar is a QMenuBar and an LThemeable that provides a menu bar
+	interface consisting of a list of pull-down menu items.
 */
 class LAYERS_EXPORT LMenuBar : public QMenuBar, public LThemeable
 {
@@ -33,16 +35,22 @@ public:
 	*/
 	LAttribute* text_color() const;
 
+	/*!
+		Updates the menu bar.
+
+		This function overrides LThemeable::update() to update the menu bar's
+		stylesheet.
+	*/
 	virtual void update() override;
 
 private:
 	QString build_stylesheet();
 
-	LAttribute* m_selected_text_color{
-		new LAttribute("selected_text_color", QColor(Qt::lightGray), this) };
+	LAttribute* m_selected_text_color
+		{ new LAttribute("selected_text_color", QColor(Qt::lightGray), this) };
 
-	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::gray), this) };
+	LAttribute* m_text_color
+		{ new LAttribute("Text Color", QColor(Qt::gray), this) };
 };
 LAYERS_NAMESPACE_END
 

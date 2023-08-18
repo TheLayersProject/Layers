@@ -7,17 +7,11 @@ using Layers::LMenuBar;
 
 LMenuBar::LMenuBar(QWidget* parent) : QMenuBar(parent)
 {
-	QFont MainMenuFont = font();
-	MainMenuFont.setPointSize(12);
+	update();
 
-	setFont(MainMenuFont);
-
-    update();
-}
-
-void LMenuBar::update()
-{
-	setStyleSheet(build_stylesheet());
+	QFont f = font();
+	f.setPointSize(12);
+	setFont(f);
 }
 
 LAttribute* LMenuBar::selected_text_color() const
@@ -28,6 +22,11 @@ LAttribute* LMenuBar::selected_text_color() const
 LAttribute* LMenuBar::text_color() const
 {
     return m_text_color;
+}
+
+void LMenuBar::update()
+{
+	setStyleSheet(build_stylesheet());
 }
 
 QString LMenuBar::build_stylesheet()
