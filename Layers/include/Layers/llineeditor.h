@@ -10,7 +10,9 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LLineEditor is a LWidget that allows the user to edit a single line of
+	![LLineEditor Example](line_editor.png)
+	
+	An LLineEditor is an LWidget that allows the user to edit a single line of
 	text.
 */
 class LAYERS_EXPORT LLineEditor : public LWidget
@@ -53,16 +55,6 @@ public:
 	void set_font_size_f(qreal size);
 
 	/*!
-		Sets all margin attributes with one value.
-	*/
-	void set_margin(int margin);
-
-	/*!
-		Sets the margin attributes individually.
-	*/
-	void set_margin(int left, int top, int right, int bottom);
-
-	/*!
 		Sets the line editor's text.
 	*/
 	void set_text(const QString& text);
@@ -91,9 +83,14 @@ protected:
 private:
 	void init_attributes();
 
-	LAttribute* m_left_padding{ new LAttribute("left_padding", QVariant::fromValue(3.0)) };
-	LAttribute* m_text_color{ new LAttribute("Text Color", QColor(Qt::black), this) };
-	LAttribute* m_text{ new LAttribute("text", QString("")) };
+	LAttribute* m_left_padding
+		{ new LAttribute("left_padding", QVariant::fromValue(3.0)) };
+
+	LAttribute* m_text_color
+		{ new LAttribute("Text Color", QColor(Qt::black), this) };
+
+	LAttribute* m_text
+		{ new LAttribute("text", QString("")) };
 
 	QString* m_default_value{ nullptr };
 

@@ -11,14 +11,9 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 	init_attributes();
 	installEventFilter(this);
 	setFocusProxy(m_line_edit);
-
-	//setFixedSize(40, 40);
-	//set_margin(5, 5, 5, 5);
+	update();
 
 	m_line_edit->installEventFilter(this);
-	m_line_edit->setStyleSheet(
-		"QLineEdit { border: none; background: transparent; padding-left: " +
-		QString::number(m_left_padding->as<double>() + m_margins_left->as<double>()) + "px; padding-bottom: 1px; }");
 
 	connect(m_line_edit, &QLineEdit::textEdited, [this] {
 		if (m_text->typeName() == "QString")
@@ -67,20 +62,6 @@ void LLineEditor::set_font_size_f(qreal size)
 	update();
 }
 
-void LLineEditor::set_margin(int margin)
-{
-	LWidget::set_margin(margin);
-
-	update();
-}
-
-void LLineEditor::set_margin(int left, int top, int right, int bottom)
-{
-	LWidget::set_margin(left, top, right, bottom);
-
-	update();
-}
-
 void LLineEditor::set_text(const QString& text)
 {
 	m_line_edit->setText(text);
@@ -111,8 +92,15 @@ LAttribute* LLineEditor::text() const
 void LLineEditor::update()
 {
 	m_line_edit->setStyleSheet(
-		"QLineEdit { border: none; background: transparent; color: " + m_text_color->as<QColor>().name() + "; padding-left: " +
-		QString::number(m_left_padding->as<double>() + m_margins_left->as<double>()) + "px; padding-bottom: 2px; }");
+		"QLineEdit {"
+		"border: none;"
+		"background: transparent;"
+		"color: " + m_text_color->as<QColor>().name() + ";"
+		"padding-left: " + QString::number(
+			m_margins_left->as<double>() +
+			m_left_padding->as<double>()) + "px;"
+		"padding-bottom: 2px;"
+		"}");
 
 	if (m_line_edit->text() != m_text->as<QString>())
 		m_line_edit->setText(m_text->as<QString>());
