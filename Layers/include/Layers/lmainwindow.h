@@ -15,7 +15,41 @@ class LSettingsMenu;
 class LMainWindowTitlebar;
 
 /*!
-	An LMainWindow is a LWidget that provides a main application window.
+	![LMainWindow Example](main_window.png)
+	
+	An LMainWindow is a LWidget that provides a main window interface
+	for *Layers* applications.
+
+	The image above shows how the main window appears in the *Layers Demo*
+	application.
+
+	## Titlebar
+
+	The main window contains a titlebar with an LTabBar for navigating between
+	the window's central widgets and LButton widgets for window management.
+	There is also a special titlebar button called the *settings button*,
+	labeled with a gear icon, that opens the window's LSettingsMenu central
+	widget.
+
+	## Central Widgets
+
+	Central widgets are widgets that appear underneath the window's titlebar.
+	The active central widget takes up a majority of the window's available
+	space.
+
+	To set a central widget, use the set_central_widget() function. For
+	example:
+
+	~~~~~~~~~~~~~{.c}
+	set_central_widget(new LayersDemo);
+	~~~~~~~~~~~~~
+
+	The example above shows how the central widget is set in the *Layers Demo*
+	application.
+
+	## Exiting the Application
+
+	Exiting the main window exits the whole application.
 */
 class LAYERS_EXPORT LMainWindow : public LWidget
 {
@@ -37,6 +71,8 @@ public:
 	*/
 	void set_central_widget(LWidget* central_widget);
 
+	virtual void update() override;
+
 public slots:
 	/*!
 		Closes the widget specified by *index*.
@@ -51,8 +87,6 @@ public slots:
 	*/
 	void open_widget(
 		LWidget* widget, const QString& name, LGraphic* icon = nullptr);
-
-	virtual void update() override;
 
 protected:
 	virtual bool nativeEvent(

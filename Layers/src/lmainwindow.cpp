@@ -29,7 +29,7 @@ LMainWindow::LMainWindow(QWidget* parent) :
 	init_layout();
 	init_themes_widget_connections();
 	init_titlebar_connections();
-	resize(1200, 800);
+	resize(1000, 700);
 	set_name("Main Window");
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -48,6 +48,13 @@ LMainWindow::LMainWindow(QWidget* parent) :
 
 	m_theme_editor_dialog->apply_theme(
 		activeTheme()->find_item(m_theme_editor_dialog->path()));
+}
+
+void LMainWindow::center_dialog(QDialog* dialog)
+{
+	dialog->move(
+		x() + (width() - dialog->width()) / 2,
+		y() + (height() - dialog->height()) / 2);
 }
 
 void LMainWindow::set_central_widget(LWidget* central_widget)
@@ -71,11 +78,22 @@ void LMainWindow::set_central_widget(LWidget* central_widget)
 	app_menu_tab->layout()->setContentsMargins(2, 0, 12, 0);
 }
 
-void LMainWindow::center_dialog(QDialog* dialog)
+void LMainWindow::update()
 {
-	dialog->move(
-		x() + (width() - dialog->width()) / 2,
-		y() + (height() - dialog->height()) / 2);
+	if (isMaximized())
+		m_main_layout->setContentsMargins(0, 0, 0, 0);
+	else
+	{
+		int border_thickness = m_border_thickness->as<double>();
+
+		m_main_layout->setContentsMargins(
+			border_thickness + m_margins_left->as<double>(),
+			border_thickness + m_margins_top->as<double>(),
+			border_thickness + m_margins_right->as<double>(),
+			border_thickness + m_margins_bottom->as<double>());
+	}
+
+	QWidget::update();
 }
 
 void LMainWindow::close_widget(int index)
@@ -99,24 +117,6 @@ void LMainWindow::open_widget(
 	}
 
 	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
-}
-
-void LMainWindow::update()
-{
-	if (isMaximized())
-		m_main_layout->setContentsMargins(0, 0, 0, 0);
-	else
-	{
-		int border_thickness = m_border_thickness->as<double>();
-
-		m_main_layout->setContentsMargins(
-			border_thickness + m_margins_left->as<double>(),
-			border_thickness + m_margins_top->as<double>(),
-			border_thickness + m_margins_right->as<double>(),
-			border_thickness + m_margins_bottom->as<double>());
-	}
-
-	QWidget::update();
 }
 
 bool LMainWindow::nativeEvent(
