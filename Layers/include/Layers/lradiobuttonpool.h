@@ -11,8 +11,8 @@ LAYERS_NAMESPACE_BEGIN
 class LRadioButton;
 
 /*!
-	An LRadioButtonPool is a QObject that ensures that within a group of
-	LRadioButton widgets, only one is active at a time.
+	An LRadioButtonPool is a QObject that manages a group of LRadioButton
+	widgets and ensures that only one can be active a time.
 */
 class LAYERS_EXPORT LRadioButtonPool : public QObject
 {
@@ -20,7 +20,7 @@ class LAYERS_EXPORT LRadioButtonPool : public QObject
 
 public:
 	/*!
-		Constructs a radio button pool object with a set of *radio_buttons*.
+		Constructs a radio button pool with a set of *radio_buttons*.
 	*/
 	LRadioButtonPool(QList<LRadioButton*> radio_buttons);
 
