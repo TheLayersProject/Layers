@@ -5,11 +5,11 @@
 
 using Layers::LResizer;
 
-LResizer::LResizer(Qt::Orientation orientation, QWidget* parent) :
-	m_orientation{ orientation },
-	m_icon_svg{ (orientation == Qt::Horizontal) ?
-		new LSvgRenderer(":/images/resizer_icon_horizontal.svg", this) :
-		new LSvgRenderer(":/images/resizer_icon_vertical.svg", this) },
+LResizer::LResizer(LSizeDimension resize_dimension, QWidget* parent) :
+	m_resize_dimension{ resize_dimension },
+	m_icon_svg{ (resize_dimension == LSizeDimension::Height) ?
+		new LSvgRenderer(":/images/resizer_icon_height.svg", this) :
+		new LSvgRenderer(":/images/resizer_icon_width.svg", this) },
 	QWidget(parent)
 {
 	add_state_pool(m_select_states);
@@ -18,7 +18,7 @@ LResizer::LResizer(Qt::Orientation orientation, QWidget* parent) :
 
 	m_select_states->set_state("Unselected");
 
-	if (orientation == Qt::Horizontal)
+	if (resize_dimension == LSizeDimension::Height)
 	{
 		setFixedHeight(20);
 		m_icon_size = QSize(26, 10);
@@ -62,7 +62,7 @@ bool LResizer::eventFilter(QObject* object, QEvent* event)
 		{
 			QPoint cursor_delta = QCursor::pos() - m_click_pos;
 
-			if (m_orientation == Qt::Horizontal)
+			if (m_resize_dimension == LSizeDimension::Height)
 			{
 				int new_height = m_click_size.height() + cursor_delta.y();
 
@@ -73,7 +73,7 @@ bool LResizer::eventFilter(QObject* object, QEvent* event)
 
 				m_widget->setFixedHeight(new_height);
 			}
-			else if (m_orientation == Qt::Vertical)
+			else if (m_resize_dimension == LSizeDimension::Width)
 			{
 				int new_width = m_click_size.width() + cursor_delta.x();
 

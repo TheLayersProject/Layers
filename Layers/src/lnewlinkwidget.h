@@ -47,7 +47,7 @@ private:
 		new LButton(
 			LGraphic(":/images/tab_exit.svg", QSize(16, 17)), "Cancel") };
 
-	LResizer* m_resizer{ new LResizer(Qt::Horizontal) };
+	LResizer* m_resizer{ new LResizer(LSizeDimension::Height) };
 };
 LAYERS_NAMESPACE_END
 
