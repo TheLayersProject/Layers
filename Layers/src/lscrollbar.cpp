@@ -6,7 +6,6 @@ using Layers::LScrollBar;
 LScrollBar::LScrollBar(QWidget* parent) : QScrollBar(parent)
 {
 	set_name("ScrollBar");
-
 	update();
 }
 
@@ -62,92 +61,68 @@ LAttribute* LScrollBar::handle_corner_radii_top_right() const
 
 void LScrollBar::update()
 {
-	setStyleSheet(
-		/* VERTICAL */
-		"QScrollBar:vertical {"
-		//"border-left: 1px solid black;"
+	QString o = (orientation() == Qt::Horizontal) ?
+		"horizontal" : "vertical";
+
+	QString style_sheet =
+		"QScrollBar:" + o + " {"
 		"background: " + m_background_color->as<QColor>().name() + ";"
-		"width: 45px;"
-		"border-top-left-radius: " + m_corner_radii_top_left->as<QString>() + "px;"
-		"border-top-right-radius: " + m_corner_radii_top_right->as<QString>() + "px;"
-		"border-bottom-left-radius: " + m_corner_radii_bottom_left->as<QString>() + "px;"
-		"border-bottom-right-radius: " + m_corner_radii_bottom_right->as<QString>() + "px;"
-		"margin: 0px 0px 0px 0px;"
-		"}"
+		"border-top-left-radius: " +
+			m_corner_radii_top_left->as<QString>() + "px;"
+		"border-top-right-radius: " +
+			m_corner_radii_top_right->as<QString>() + "px;"
+		"border-bottom-left-radius: " +
+			m_corner_radii_bottom_left->as<QString>() + "px;"
+		"border-bottom-right-radius: " +
+			m_corner_radii_bottom_right->as<QString>() + "px;"
+		"margin: 0px 0px 0px 0px;";
 
-		"QScrollBar::handle:vertical {"
+	if (orientation() == Qt::Horizontal)
+		style_sheet += "height: 40px;";
+	else
+		style_sheet += "width: 40px;";
+
+	style_sheet += "}";
+
+	style_sheet +=
+		"QScrollBar::handle:" + o + " {"
 		"background: " + m_handle_color->as<QColor>().name() + ";"
-		"min-height: 26px;"
-		"border-top-left-radius: " + m_handle_corner_radii_top_left->as<QString>() + "px;"
-		"border-top-right-radius: " + m_handle_corner_radii_top_right->as<QString>() + "px;"
-		"border-bottom-left-radius: " + m_handle_corner_radii_bottom_left->as<QString>() + "px;"
-		"border-bottom-right-radius: " + m_handle_corner_radii_bottom_right->as<QString>() + "px;"
-		"margin: 10px 10px 10px 10px;"
-		"}"
+		"border-top-left-radius: " +
+			m_handle_corner_radii_top_left->as<QString>() + "px;"
+		"border-top-right-radius: " +
+			m_handle_corner_radii_top_right->as<QString>() + "px;"
+		"border-bottom-left-radius: " +
+			m_handle_corner_radii_bottom_left->as<QString>() + "px;"
+		"border-bottom-right-radius: " +
+			m_handle_corner_radii_bottom_right->as<QString>() + "px;"
+		"margin: 7px 7px 7px 7px;";
+		
+	if (orientation() == Qt::Horizontal)
+		style_sheet += "min-width: 26px;";
+	else
+		style_sheet += "min-height: 26px;";
 
-		"QScrollBar::add-line:vertical {"
+	style_sheet += "}";
+
+	style_sheet +=
+		"QScrollBar::add-line:" + o + " {"
 		"border: none;"
 		"background: none;"
 		"}"
-
-		"QScrollBar::sub-line:vertical {"
+		"QScrollBar::sub-line:" + o + " {"
 		"height: 0px;"
 		"width: 0px;"
 		"border: none;"
 		"background: none;"
 		"}"
-
-		"QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {"
+		"QScrollBar:up-arrow:" + o + ", QScrollBar::down-arrow:" + o + " {"
 		"border: none;"
 		"background: none;"
 		"color: none;"
 		"}"
-
-		"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {"
+		"QScrollBar::add-page:" + o + ", QScrollBar::sub-page:" + o + " {"
 		"background: none;"
-		"}"
+		"}";
 
-		/* HORIZONTAL */
-		"QScrollBar:horizontal {"
-		//"border-top: 1px solid black;"
-		"background: " + m_background_color->as<QColor>().name() + ";"
-		"height: 45px;"
-		"border-top-left-radius: " + m_corner_radii_top_left->as<QString>() + "px;"
-		"border-top-right-radius: " + m_corner_radii_top_right->as<QString>() + "px;"
-		"border-bottom-left-radius: " + m_corner_radii_bottom_left->as<QString>() + "px;"
-		"border-bottom-right-radius: " + m_corner_radii_bottom_right->as<QString>() + "px;"
-		"margin: 0px 0px 0px 0px;"
-		"}"
-
-		"QScrollBar::handle:horizontal {"
-		"background: " + m_handle_color->as<QColor>().name() + ";"
-		"min-width: 26px;"
-		"border-top-left-radius: " + m_handle_corner_radii_top_left->as<QString>() + "px;"
-		"border-top-right-radius: " + m_handle_corner_radii_top_right->as<QString>() + "px;"
-		"border-bottom-left-radius: " + m_handle_corner_radii_bottom_left->as<QString>() + "px;"
-		"border-bottom-right-radius: " + m_handle_corner_radii_bottom_right->as<QString>() + "px;"
-		"margin: 10px 10px 10px 10px;"
-		"}"
-
-		"QScrollBar::add-line:horizontal {"
-		"border: none;"
-		"background: none;"
-		"}"
-
-		"QScrollBar::sub-line:horizontal {"
-		"height: 0px;"
-		"width: 0px;"
-		"border: none;"
-		"background: none;"
-		"}"
-
-		"QScrollBar:up-arrow:horizontal, QScrollBar::down-arrow:horizontal {"
-		"border: none;"
-		"background: none;"
-		"color: none;"
-		"}"
-
-		"QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {"
-		"background: none;"
-		"}");
+	setStyleSheet(style_sheet);
 }

@@ -10,9 +10,9 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LScrollBar is a QScrollBar and a LThemeable that provides a control that
-	allows the user to scroll to different parts of a widget in cases where the
-	widget is larger than the available area it is displayed.
+	An LScrollBar is a QScrollBar and an LThemeable that provides a control
+	that allows the user to scroll to different parts of a widget in cases
+	where the widget is larger than the available area displaying it.
 */
 class LAYERS_EXPORT LScrollBar : public QScrollBar, public LThemeable
 {
@@ -82,38 +82,44 @@ public:
 	*/
 	LAttribute* handle_corner_radii_top_right() const;
 
+	/*!
+		Updates the scroll bar.
+
+		This function overrides LThemeable::update() to update the scroll bar's
+		stylesheet.
+	*/
 	virtual void update() override;
 
 private:
-	LAttribute* m_background_color{
-		new LAttribute("Background Color", QColor(Qt::gray), this) };
+	LAttribute* m_background_color
+		{ new LAttribute("Background Color", QColor(Qt::gray), this) };
 
-	LAttribute* m_corner_radii_bottom_left{
-		new LAttribute("Corner Radii.Bottom Left", 0.0, this) };
+	LAttribute* m_corner_radii_bottom_left
+		{ new LAttribute("Corner Radii.Bottom Left", 0.0, this) };
 
-	LAttribute* m_corner_radii_bottom_right{
-		new LAttribute("Corner Radii.Bottom Right", 0.0, this) };
+	LAttribute* m_corner_radii_bottom_right
+		{ new LAttribute("Corner Radii.Bottom Right", 0.0, this) };
 
-	LAttribute* m_corner_radii_top_left{
-		new LAttribute("Corner Radii.Top Left", 0.0, this) };
+	LAttribute* m_corner_radii_top_left
+		{ new LAttribute("Corner Radii.Top Left", 0.0, this) };
 
-	LAttribute* m_corner_radii_top_right{
-		new LAttribute("Corner Radii.Top Right", 0.0, this) };
+	LAttribute* m_corner_radii_top_right
+		{ new LAttribute("Corner Radii.Top Right", 0.0, this) };
 
-	LAttribute* m_handle_color{
-		new LAttribute("Handle Color", QColor(Qt::white), this) };
+	LAttribute* m_handle_color
+		{ new LAttribute("Handle Color", QColor(Qt::white), this) };
 
-	LAttribute* m_handle_corner_radii_bottom_left{
-		new LAttribute("Handle Corner Radii.Bottom Left", 5.0, this) };
+	LAttribute* m_handle_corner_radii_bottom_left
+		{ new LAttribute("Handle Corner Radii.Bottom Left", 5.0, this) };
 
-	LAttribute* m_handle_corner_radii_bottom_right{
-		new LAttribute("Handle Corner Radii.Bottom Right", 5.0, this) };
+	LAttribute* m_handle_corner_radii_bottom_right
+		{ new LAttribute("Handle Corner Radii.Bottom Right", 5.0, this) };
 
-	LAttribute* m_handle_corner_radii_top_left{
-		new LAttribute("Handle Corner Radii.Top Left", 5.0, this) };
+	LAttribute* m_handle_corner_radii_top_left
+		{ new LAttribute("Handle Corner Radii.Top Left", 5.0, this) };
 
-	LAttribute* m_handle_corner_radii_top_right{
-		new LAttribute("Handle Corner Radii.Top Right", 5.0, this) };
+	LAttribute* m_handle_corner_radii_top_right
+		{ new LAttribute("Handle Corner Radii.Top Right", 5.0, this) };
 };
 LAYERS_NAMESPACE_END
 

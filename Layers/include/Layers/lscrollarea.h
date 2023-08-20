@@ -11,8 +11,10 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LScrollArea is a QScrollArea and a LThemeable that provides a scrollable
-	view for another widget.
+	An LScrollArea is a QScrollArea and an LThemeable that provides a
+	scrollable viewing area for another widget.
+
+	LScrollBar is the default scroll-bar type used by %LScrollArea.
 */
 class LAYERS_EXPORT LScrollArea : public QScrollArea, public LThemeable
 {

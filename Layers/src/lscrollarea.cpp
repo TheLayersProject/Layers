@@ -12,7 +12,8 @@ LScrollArea::LScrollArea(QWidget* parent) : QScrollArea(parent)
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	
 	setWidgetResizable(true);
-	setStyleSheet("QScrollArea { background-color:transparent; border:none; }");
+	setStyleSheet(
+		"QScrollArea { background-color:transparent; border:none; }");
 	setHorizontalScrollBar(m_horizontal_scrollbar);
 	setVerticalScrollBar(m_vertical_scrollbar);
 
@@ -21,9 +22,11 @@ LScrollArea::LScrollArea(QWidget* parent) : QScrollArea(parent)
 	m_vertical_scrollbar->set_name("Vertical ScrollBar");
 }
 
-QList<LThemeable*> LScrollArea::child_themeables(Qt::FindChildOptions options)
+QList<LThemeable*> LScrollArea::child_themeables(
+	Qt::FindChildOptions options)
 {
-	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
+	QList<LThemeable*> child_themeables =
+		LThemeable::child_themeables(options);
 
 	child_themeables.append(m_horizontal_scrollbar);
 	child_themeables.append(m_vertical_scrollbar);
@@ -34,11 +37,15 @@ QList<LThemeable*> LScrollArea::child_themeables(Qt::FindChildOptions options)
 
 		if (options == Qt::FindChildrenRecursively)
 		{
-			QList<QObject*> widget_child_objects = widget()->findChildren<QObject*>(options);
+			QList<QObject*> widget_child_objects =
+				widget()->findChildren<QObject*>(options);
 
 			for (QObject* widget_child_object : widget_child_objects)
-				if (LThemeable* child_themeable = dynamic_cast<LThemeable*>(widget_child_object))
+				if (LThemeable* child_themeable =
+					dynamic_cast<LThemeable*>(widget_child_object))
+				{
 					child_themeables.append(child_themeable);
+				}
 		}
 	}
 
