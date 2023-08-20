@@ -2,12 +2,15 @@
 
 using Layers::LStatePool;
 
-LStatePool::LStatePool(const QString& name) :
-	m_name{ name }
+LStatePool::LStatePool(const QString& name, QObject* parent) :
+	m_name{ name },
+	QObject(parent)
 { }
 
-LStatePool::LStatePool(const QString& name, QStringList states) :
-	m_name{ name }
+LStatePool::LStatePool(const QString& name, QStringList states,
+	QObject* parent) :
+	m_name{ name },
+	QObject(parent)
 {
 	for (const QString& state : states)
 		if (!state.isEmpty())
