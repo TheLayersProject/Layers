@@ -7,13 +7,13 @@ using Layers::LAttribute;
 using Layers::LSlider;
 
 LSlider::LSlider(QWidget* parent) :
-	m_is_ratio_slider{ true }, LWidget(parent)
+	m_is_decimal_slider{ true }, LWidget(parent)
 {
 	init();
 }
 
 LSlider::LSlider(int limit, QWidget* parent) :
-	m_is_ratio_slider{ false }, m_limit{ limit }, LWidget(parent)
+	m_is_decimal_slider{ false }, m_limit{ limit }, LWidget(parent)
 {
 	init();
 }
@@ -61,7 +61,7 @@ bool LSlider::eventFilter(QObject* object, QEvent* event)
 
 		QPoint delta = mouse_event->pos() - m_mouse_click_position;
 
-		if (m_is_ratio_slider)
+		if (m_is_decimal_slider)
 		{
 			float range = float(width() - m_handle->width());
 
@@ -132,7 +132,7 @@ void LSlider::init_attributes()
 	connect(m_value, &LAttribute::changed,
 		[this] { update_handle_pos(); });
 
-	m_corner_radii_top_left->set_value(10.0); // Need to check these values
+	m_corner_radii_top_left->set_value(10.0);
 	m_corner_radii_top_right->set_value(10.0);
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
@@ -167,7 +167,7 @@ void LSlider::init_layout()
 
 void LSlider::update_handle_pos()
 {
-	if (m_is_ratio_slider)
+	if (m_is_decimal_slider)
 	{
 		float range = float(width() - m_handle->width());
 

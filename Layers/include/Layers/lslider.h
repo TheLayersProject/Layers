@@ -8,8 +8,30 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LSlider is a LWidget that provides a mechanism for a user to control a
-	numerical value within a set range.
+	![LSlider Example](slider.png)
+	
+	An LSlider is an LWidget that provides a mechanism for changing a
+	numerically-valued LAttribute within a limited range.
+
+	If you need a slider that can fit into smaller spaces, consider using an
+	LMiniSlider.
+
+	By click-dragging on the slider handle, a user can change the attribute
+	linked to it.
+
+	The following demonstrates how to link the slider's *value* attribute
+	with another attribute:
+
+	~~~~~~~~~~~~~{.c}
+	LWidget* widget = new LWidget;
+	LSlider* slider = new LSlider(30.0);
+
+	slider->value()->set_link_attribute(widget->border_thickness());
+	~~~~~~~~~~~~~
+
+	In the example, after the call to LAttribute::set_link_attribute(),
+	the *widget*'s border thickness will change when the slider is interacted
+	with.
 */
 class LAYERS_EXPORT LSlider : public LWidget
 {
@@ -17,7 +39,7 @@ class LAYERS_EXPORT LSlider : public LWidget
 
 public:
 	/*!
-		Constructs a slider delimited by a ratio (0:1).
+		Constructs a decimal slider whose value is equal-to or between 0 and 1.
 	*/
 	LSlider(QWidget* parent = nullptr);
 
@@ -59,7 +81,7 @@ private:
 
 	bool m_dragging_handle{ false };
 
-	bool m_is_ratio_slider;
+	bool m_is_decimal_slider;
 
 	QPoint m_mouse_click_position{ QPoint() };
 };
