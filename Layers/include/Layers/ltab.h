@@ -10,7 +10,9 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LTab is a LWidget that labels another widget and can be clicked by the
+	![LTab Example](tab.png)
+	
+	An LTab is an LWidget that labels another widget and can be clicked by the
 	user to switch between different widgets.
 */
 class LAYERS_EXPORT LTab : public LWidget
@@ -66,15 +68,15 @@ private:
 
 	QHBoxLayout* main_layout = new QHBoxLayout;
 
-	LButton* m_close_button{
-		new LButton(LGraphic(":/images/tab_exit.svg", QSize(16, 17))) };
+	LButton* m_close_button
+		{ new LButton(LGraphic(":/images/tab_exit.svg", QSize(16, 17))) };
 
 	LLabel* m_icon_label{ nullptr };
 
 	LLabel* m_text_label{ nullptr };
 
-	LStatePool* m_status_states{
-		new LStatePool("Status", { "Active", "Inactive" })};
+	LStatePool* m_status_states
+		{ new LStatePool("Status", { "Active", "Inactive" })};
 };
 LAYERS_NAMESPACE_END
 

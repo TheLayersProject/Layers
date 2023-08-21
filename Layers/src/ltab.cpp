@@ -45,7 +45,8 @@ LLabel* LTab::text_label() const
 
 bool LTab::eventFilter(QObject* object, QEvent* event)
 {
-	if (event->type() == QEvent::MouseButtonPress && !m_close_button->underMouse())
+	if (event->type() == QEvent::MouseButtonPress &&
+		!m_close_button->underMouse())
 	{
 		QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
 
@@ -82,8 +83,8 @@ void LTab::init()
 
 	m_close_button->set_name("Close Button");
 
-	connect(m_close_button, &LButton::clicked, [this]
-		{ emit closed(); });
+	connect(m_close_button, &LButton::clicked,
+		[this] { emit closed(); });
 }
 
 void LTab::init_attributes()
@@ -96,10 +97,13 @@ void LTab::init_attributes()
 
 	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 
-	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
-		m_icon_label->graphic()->svg_renderer()->color()->set_value(QColor("#e3e3e3"));
+	if (m_icon_label)
+		if (LSvgRenderer* renderer = m_icon_label->graphic()->svg_renderer())
+			renderer->color()->set_value(QColor("#e3e3e3"));
 
-	m_close_button->graphic_label()->graphic()->svg_renderer()->color()->set_value(QColor("#5f5f5f"));
+	m_close_button->
+		graphic_label()->
+			graphic()->svg_renderer()->color()->set_value(QColor("#5f5f5f"));
 }
 
 void LTab::init_layout()

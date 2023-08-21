@@ -1441,7 +1441,9 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/radio_button.mp4 \
                          img/resizer.mp4 \
                          img/splitter.mp4 \
-                         img/slider.png
+                         img/slider.png \
+                         img/tab.png \
+                         img/tab_bar.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

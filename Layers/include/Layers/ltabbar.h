@@ -11,8 +11,10 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LTabBar is a LWidget that lets the user switch between different widgets
-	that are represented by a set of tabs.
+	![LTabBar Example](tab_bar.png)
+	
+	An LTabBar is an LWidget that lets the user switch between different
+	widgets by clicking child LTab widgets.
 */
 class LAYERS_EXPORT LTabBar : public LWidget
 {
