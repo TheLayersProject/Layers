@@ -152,18 +152,18 @@ void LLabel::update()
 {
 	QStringList s = states();
 
-	QString stylesheet = "QLabel {";
+	QString style_sheet = "QLabel {";
 
 	// TEMP:
-	//stylesheet += "background: " + m_fill->as<QColor>(s).name() + ";";
-	stylesheet += "background: transparent;";
+	//style_sheet += "background: " + m_fill->as<QColor>(s).name() + ";";
+	style_sheet += "background: transparent;";
 
 	if (!m_graphic)
-		stylesheet += "color: " + m_text_color->as<QColor>(s).name() + ";";
+		style_sheet += "color: " + m_text_color->as<QColor>(s).name() + ";";
 
-	stylesheet += "}";
+	style_sheet += "}";
 
-	setStyleSheet(stylesheet);
+	setStyleSheet(style_sheet);
 
 	QWidget::update();
 }

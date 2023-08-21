@@ -38,7 +38,7 @@ void LAttributeMapView::set_attributes(
 
 void LAttributeMapView::update()
 {
-	QString stylesheet =
+	QString style_sheet =
 		"QAbstractItemView {"
 		"background: " + m_fill->as<QColor>().name() + ";"
 		"border: none;"
@@ -50,7 +50,7 @@ void LAttributeMapView::update()
 		"}";
 
 	setStyleSheet(
-		stylesheet
+		style_sheet
 	);
 
 	QWidget::update();

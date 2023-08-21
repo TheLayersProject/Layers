@@ -119,7 +119,7 @@ LAttribute* LComboBox::text_color() const
 
 void LComboBox::update()
 {
-	QString stylesheet =
+	QString style_sheet =
 		"QComboBox {"
 		"border: " + m_border_thickness->as<QString>() + "px "
 		"	solid " + m_border_fill->as<QColor>().name() + ";"
@@ -133,7 +133,7 @@ void LComboBox::update()
 	QString corner_radius = m_corner_radius->as<QString>();
 
 	if (!view()->window()->isVisible())
-		stylesheet.append(
+		style_sheet.append(
 			"QComboBox {"
 			"border-top-left-radius: " + corner_radius + "px;"
 			"border-top-right-radius: " + corner_radius + "px;"
@@ -143,7 +143,7 @@ void LComboBox::update()
 	else
 	{
 		if (is_view_positioned_above())
-			stylesheet.append(
+			style_sheet.append(
 				"QComboBox {"
 				"border-top-left-radius: 0px;"
 				"border-top-right-radius: 0px;"
@@ -151,7 +151,7 @@ void LComboBox::update()
 				"border-bottom-right-radius: " + corner_radius + "px;"
 				"}");
 		else
-			stylesheet.append(
+			style_sheet.append(
 				"QComboBox {"
 				"border-top-left-radius: " + corner_radius + "px;"
 				"border-top-right-radius: " + corner_radius + "px;"
@@ -160,12 +160,12 @@ void LComboBox::update()
 				"}");
 	}
 
-	stylesheet.append(
+	style_sheet.append(
 		"QComboBox {"
 		"background: " + m_fill->as<QColor>().name() + ";"
 		"}");
 
-	setStyleSheet(stylesheet);
+	setStyleSheet(style_sheet);
 
 	view()->setStyleSheet(
 		"QAbstractItemView {"

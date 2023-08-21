@@ -28,7 +28,7 @@ public:
 		Updates the header view.
 
 		This function overrides LThemeable::update() to update the header
-		view's stylesheet.
+		view's style_sheet.
 	*/
 	virtual void update() override;
 

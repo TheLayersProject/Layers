@@ -86,7 +86,7 @@ public:
 		Updates the scroll bar.
 
 		This function overrides LThemeable::update() to update the scroll bar's
-		stylesheet.
+		style_sheet.
 	*/
 	virtual void update() override;
 

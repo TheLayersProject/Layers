@@ -29,19 +29,25 @@ LTableView::LTableView(QWidget* parent) : QTableView(parent)
 
 QList<LThemeable*> LTableView::child_themeables(Qt::FindChildOptions options)
 {
-	QList<LThemeable*> child_themeables = LThemeable::child_themeables(options);
+	QList<LThemeable*> child_themeables =
+		LThemeable::child_themeables(options);
 
-	if (LThemeable* child_themeable_item_delegate = dynamic_cast<LThemeable*>(itemDelegate()))
+	if (LThemeable* child_themeable_item_delegate =
+		dynamic_cast<LThemeable*>(itemDelegate()))
 	{
 		child_themeables.append(child_themeable_item_delegate);
 
 		if (options == Qt::FindChildrenRecursively)
 		{
-			QList<QObject*> delegate_child_objects = itemDelegate()->findChildren<QObject*>(options);
+			QList<QObject*> delegate_child_objects =
+				itemDelegate()->findChildren<QObject*>(options);
 
 			for (QObject* delegate_child_object : delegate_child_objects)
-				if (LThemeable* child_themeable = dynamic_cast<LThemeable*>(delegate_child_object))
+				if (LThemeable* child_themeable =
+					dynamic_cast<LThemeable*>(delegate_child_object))
+				{
 					child_themeables.append(child_themeable);
+				}
 		}
 	}
 
@@ -62,27 +68,27 @@ void LTableView::setItemDelegate(QAbstractItemDelegate* item_delegate)
 
 void LTableView::update()
 {
-	QString stylesheet =
-		"QTableView {"
-		"border: " + m_border_thickness->as<QString>() + "px solid " + m_border_fill->as<QColor>().name() + ";"
-		"border-top-left-radius: " + m_corner_radii_top_left->as<QString>() + "px;"
-		"border-top-right-radius: " + m_corner_radii_top_right->as<QString>() + "px;"
-		"border-bottom-left-radius: " + m_corner_radii_bottom_left->as<QString>() + "px;"
-		"border-bottom-right-radius: " + m_corner_radii_bottom_right->as<QString>() + "px;"
-		"color: " + m_text_color->as<QColor>().name() + ";"
-		"}";
-
-	stylesheet.append(
+	QString style_sheet =
 		"QTableView {"
 		"background: " + m_fill->as<QColor>().name() + ";"
-		"}");
+		"border: " + m_border_thickness->as<QString>() + "px "
+			"solid " + m_border_fill->as<QColor>().name() + ";"
+		"border-top-left-radius: " +
+			m_corner_radii_top_left->as<QString>() + "px;"
+		"border-top-right-radius: " +
+			m_corner_radii_top_right->as<QString>() + "px;"
+		"border-bottom-left-radius: " +
+			m_corner_radii_bottom_left->as<QString>() + "px;"
+		"border-bottom-right-radius: " +
+			m_corner_radii_bottom_right->as<QString>() + "px;"
+		"color: " + m_text_color->as<QColor>().name() + ";"
+		"}"
 
-	stylesheet.append(
 		"QTableView::item {"
 		"background: " + m_item_fill->as<QColor>().name() + ";"
-		"}");
+		"}";
 
-	setStyleSheet(stylesheet);
+	setStyleSheet(style_sheet);
 
 	QWidget::update();
 }

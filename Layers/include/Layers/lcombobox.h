@@ -100,7 +100,7 @@ public:
 		Updates the combo box.
 
 		This function overrides LThemeable::update() to update the combo box's
-		stylesheet.
+		style_sheet.
 	*/
 	virtual void update() override;
 

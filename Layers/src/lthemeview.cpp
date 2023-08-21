@@ -49,7 +49,7 @@ QList<LThemeable*> LThemeView::child_themeables(Qt::FindChildOptions options)
 
 void LThemeView::update()
 {
-	QString stylesheet =
+	QString style_sheet =
 		"QAbstractItemView {"
 		"background: " + m_fill->as<QColor>().name() + ";"
 		"border: none;"
@@ -61,7 +61,7 @@ void LThemeView::update()
 		"}";
 
 	setStyleSheet(
-		stylesheet
+		style_sheet
 	);
 
 	QWidget::update();

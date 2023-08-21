@@ -39,7 +39,7 @@ public:
 		Updates the menu bar.
 
 		This function overrides LThemeable::update() to update the menu bar's
-		stylesheet.
+		style_sheet.
 	*/
 	virtual void update() override;
 
