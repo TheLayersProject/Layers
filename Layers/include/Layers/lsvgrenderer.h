@@ -11,8 +11,8 @@
 
 LAYERS_NAMESPACE_BEGIN
 /*!
-	An LSvgRenderer is a QSvgRenderer and a LThemeable that is used to draw the
-	contents of SVG files.
+	An LSvgRenderer is a QSvgRenderer and an LThemeable that is used to draw
+	the contents of SVG files.
 */
 class LAYERS_EXPORT LSvgRenderer : public QSvgRenderer, public LThemeable
 {
@@ -20,7 +20,7 @@ class LAYERS_EXPORT LSvgRenderer : public QSvgRenderer, public LThemeable
 
 public:
 	/*!
-		Constructs an SVG renderer from a file.
+		Constructs an SVG renderer from a file identified by *file_path*.
 	*/
 	LSvgRenderer(const QString& file_path, QObject* parent = nullptr);
 
@@ -32,9 +32,9 @@ public:
 	~LSvgRenderer();
 
 	/*!
-		Returns a pointer to the common color attribute of the renderer.
+		Returns a pointer to the renderer's common color attribute.
 	*/
-	LAttribute* common_color() const;
+	LAttribute* color() const;
 
 private:
 	void init_svg_elements_list();
@@ -43,8 +43,8 @@ private:
 
 	void update();
 
-	LAttribute* m_common_color{
-		new LAttribute("common_color", QColor(Qt::black), this) };
+	LAttribute* m_color
+		{ new LAttribute("Color", QColor(Qt::black), this) };
 
 	QStringList m_svg_elements;
 

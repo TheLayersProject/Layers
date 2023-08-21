@@ -34,12 +34,12 @@ LSvgRenderer::LSvgRenderer(const LSvgRenderer& svg_renderer)
 
 LSvgRenderer::~LSvgRenderer()
 {
-	delete m_common_color;
+	delete m_color;
 }
 
-LAttribute* LSvgRenderer::common_color() const
+LAttribute* LSvgRenderer::color() const
 {
-	return m_common_color;
+	return m_color;
 }
 
 void LSvgRenderer::rebuild_svg_str()
@@ -61,11 +61,10 @@ void LSvgRenderer::update()
 		if (m_svg_elements[i].startsWith("<path") &&
 			m_svg_elements[i].contains("id="))
 		{
-			QString common_color_name = m_common_color->as<QColor>(states()).name();
+			QString color_name = m_color->as<QColor>(states()).name();
 
 			m_svg_elements[i].replace(
-				m_svg_elements[i].indexOf("fill=") + 6, 7,
-				common_color_name);
+				m_svg_elements[i].indexOf("fill=") + 6, 7, color_name);
 		}
 	}
 

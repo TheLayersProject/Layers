@@ -46,9 +46,9 @@ void LSettingsTab::init_attributes()
 	m_fill->set_value(QColor(Qt::lightGray));
 	m_fill->create_override("Selected", QColor(Qt::white));
 
-	m_icon_label->graphic()->svg_renderer()->common_color()->set_value(
+	m_icon_label->graphic()->svg_renderer()->color()->set_value(
 		QColor(Qt::gray));
-	m_icon_label->graphic()->svg_renderer()->common_color()->create_override(
+	m_icon_label->graphic()->svg_renderer()->color()->create_override(
 		"Selected", QColor(Qt::black));
 
 	m_text_label->text_color()->set_value(QColor(Qt::gray));

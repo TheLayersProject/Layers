@@ -97,9 +97,9 @@ void LTab::init_attributes()
 	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
 
 	if (m_icon_label && m_icon_label->graphic()->svg_renderer())
-		m_icon_label->graphic()->svg_renderer()->common_color()->set_value(QColor("#e3e3e3"));
+		m_icon_label->graphic()->svg_renderer()->color()->set_value(QColor("#e3e3e3"));
 
-	m_close_button->graphic_label()->graphic()->svg_renderer()->common_color()->set_value(QColor("#5f5f5f"));
+	m_close_button->graphic_label()->graphic()->svg_renderer()->color()->set_value(QColor("#5f5f5f"));
 }
 
 void LTab::init_layout()
