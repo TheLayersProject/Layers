@@ -40,8 +40,8 @@ void LThemeComboBoxItemDelegate::paint(
 	QString item_text = theme->name();
 	QString uuid_text;
 
-	if (QUuid* uuid = theme->uuid())
-		uuid_text = uuid->toString(QUuid::WithoutBraces);
+	if (!theme->uuid().isNull())
+		uuid_text = theme->uuid().toString(QUuid::WithoutBraces);
 
 	painter->setRenderHint(QPainter::Antialiasing);
 
@@ -78,7 +78,7 @@ void LThemeComboBoxItemDelegate::paint(
 	painter->fillPath(item_text_path, m_text_color->as<QColor>());
 	painter->fillPath(uuid_text_path, m_text_color->as<QColor>());
 
-	if (!theme->has_app_implementation(layersApp->app_identifier()))
+	if (!theme->has_implementation(layersApp->app_identifier()))
 	{
 		QPoint caution_image_location = QPoint(
 			option.rect.right() - m_caution_image.width() - 10,

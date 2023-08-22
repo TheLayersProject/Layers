@@ -8,9 +8,7 @@ using Layers::LAttributeMap;
 using Layers::LTheme;
 using Layers::LThemeItem;
 
-LTheme::LTheme()
-{
-}
+LTheme::LTheme() {}
 
 LTheme::LTheme(QDir dir) :
 	m_dir{ dir }
@@ -30,7 +28,7 @@ LTheme::LTheme(QDir dir) :
 		m_name = meta_obj.value("name").toString();
 
 		if (meta_obj.contains("uuid"))
-			m_uuid = new QUuid(meta_obj.value("uuid").toString());
+			m_uuid = QUuid(meta_obj.value("uuid").toString());
 
 		if (meta_obj.contains("editable"))
 			m_editable = meta_obj.value("editable").toBool();
@@ -43,11 +41,11 @@ LTheme::LTheme(QDir dir) :
 LTheme::LTheme(const QString& name, bool editable) :
 	m_name{ name },
 	m_editable{ editable },
-	m_uuid{ new QUuid(QUuid::createUuid().toString()) }
+	m_uuid{ QUuid(QUuid::createUuid().toString()) }
 {
 }
 
-LTheme::LTheme(const QString& name, QUuid* uuid, bool editable) :
+LTheme::LTheme(const QString& name, QUuid uuid, bool editable) :
 	m_name{ name },
 	m_editable{ editable },
 	m_uuid{ uuid }
@@ -57,9 +55,6 @@ LTheme::LTheme(const QString& name, QUuid* uuid, bool editable) :
 LTheme::~LTheme()
 {
 	delete m_root_item;
-
-	if (m_uuid)
-		delete m_uuid;
 }
 
 void LTheme::append_to_lineage(const QString& theme_id)
@@ -95,10 +90,10 @@ LThemeItem* LTheme::find_item(const QStringList& name_list)
 
 LThemeItem* LTheme::find_item(const QString& path)
 {
-	return find_item(path.split("/"));
+	return m_root_item->find_item(path.split("/"));
 }
 
-bool LTheme::has_app_implementation(const QString& app_id) const
+bool LTheme::has_implementation(const QString& app_id) const
 {
 	return
 		QFile(
@@ -108,8 +103,8 @@ bool LTheme::has_app_implementation(const QString& app_id) const
 
 QString LTheme::id()
 {
-	if (m_uuid)
-		return m_name + "_" + m_uuid->toString(QUuid::WithoutBraces);
+	if (!m_uuid.isNull())
+		return m_name + "_" + m_uuid.toString(QUuid::WithoutBraces);
 	else
 		return m_name;
 }
@@ -160,7 +155,7 @@ void LTheme::save_meta_file()
 
 	json_object.insert("lineage", lineage_array);
 	json_object.insert("name", m_name);
-	json_object.insert("uuid", m_uuid->toString(QUuid::WithoutBraces));
+	json_object.insert("uuid", m_uuid.toString(QUuid::WithoutBraces));
 
 	json_document.setObject(json_object);
 
@@ -221,7 +216,7 @@ void LTheme::resolve_links(LThemeItem* item)
 			resolve(override_attr);
 	}
 
-	for (LThemeItem* child_item : item->child_items())
+	for (LThemeItem* child_item : item->children())
 		resolve_links(child_item);
 }
 
@@ -256,7 +251,7 @@ void LTheme::save()
 	}
 }
 
-QUuid* LTheme::uuid() const
+QUuid LTheme::uuid() const
 {
 	return m_uuid;
 }

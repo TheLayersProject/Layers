@@ -30,7 +30,7 @@ public:
 
     LAttributeMapItem* parent();
 
-    int child_number() const;
+    int index() const;
 
 private:
     QMap<QString, LAttributeMapItem*> m_child_attr_items;

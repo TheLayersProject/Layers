@@ -117,7 +117,7 @@
     <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
     <ClInclude Include="include\Layers\limagesequence.h" />
     <ClInclude Include="include\Layers\lpaths.h" />
-    <QtMoc Include="include\Layers\ltheme.h" />
+    <ClInclude Include="include\Layers\ltheme.h" />
     <QtMoc Include="include\Layers\lresizer.h" />
     <QtMoc Include="include\Layers\lsplitter.h" />
     <ClInclude Include="include\Layers\lthemeable.h" />

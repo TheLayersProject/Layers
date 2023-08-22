@@ -58,7 +58,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	m_parent_theme_combobox->set_name("Parent Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
-		if (theme->has_app_implementation(layersApp->app_identifier()))
+		if (theme->has_implementation(layersApp->app_identifier()))
 		{
 			if (theme == activeTheme())
 				m_parent_theme_combobox->addItem(theme, true);

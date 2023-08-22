@@ -50,7 +50,7 @@ QModelIndex LThemeModel::parent(const QModelIndex& index) const
 	if (parent_item == m_theme->root_item() || !parent_item)
 		return QModelIndex();
 
-	return createIndex(parent_item->child_number(), 0, parent_item);
+	return createIndex(parent_item->index(), 0, parent_item);
 }
 
 int LThemeModel::rowCount(const QModelIndex& parent) const

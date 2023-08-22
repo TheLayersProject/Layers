@@ -46,11 +46,11 @@ void LThemeable::apply_theme(LThemeItem* theme_item)
 					attr->set_theme_attribute(
 						theme_item->attributes()[attr->name()]);
 
-		if (!theme_item->child_items().isEmpty())
+		if (!theme_item->children().isEmpty())
 			for (LThemeable* child_t : child_themeables())
 				if (child_t->m_name)
-					if (theme_item->child_items().contains(*child_t->name()))
-						child_t->apply_theme(theme_item->child_items()[*child_t->name()]);
+					if (theme_item->children().contains(*child_t->name()))
+						child_t->apply_theme(theme_item->children()[*child_t->name()]);
 
 		for (LThemeable* themeable : m_sharing_with_themeables)
 			themeable->apply_theme(m_current_theme_item);

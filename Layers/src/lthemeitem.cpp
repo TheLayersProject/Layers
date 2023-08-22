@@ -23,7 +23,7 @@ LThemeItem::LThemeItem(
 
 void LThemeItem::append_child(LThemeItem* child)
 {
-	m_child_items[child->name()] = child;
+	m_children[child->name()] = child;
 }
 
 QStringList LThemeItem::attribute_group_names()
@@ -56,26 +56,22 @@ LAttributeMap LThemeItem::attributes(const QString& type_name)
 	return attrs;
 }
 
-LThemeItem* LThemeItem::child(int number)
+LThemeItem* LThemeItem::child(int index)
 {
-	if (number < 0 || number >= m_child_items.size())
+	if (index < 0 || index >= m_children.size())
 		return nullptr;
-	return m_child_items[m_child_items.keys().at(number)];
+
+	return m_children[m_children.keys().at(index)];
 }
 
 int LThemeItem::child_count() const
 {
-	return m_child_items.count();
+	return m_children.count();
 }
 
-QMap<QString, LThemeItem*>& LThemeItem::child_items()
+QMap<QString, LThemeItem*>& LThemeItem::children()
 {
-	return m_child_items;
-}
-
-QString LThemeItem::file_name() const
-{
-	return m_file_name;
+	return m_children;
 }
 
 LThemeItem* LThemeItem::find_item(QStringList name_list)
@@ -84,7 +80,7 @@ LThemeItem* LThemeItem::find_item(QStringList name_list)
 	{
 		QString name = name_list.takeFirst();
 
-		for (LThemeItem* child_item : m_child_items)
+		for (LThemeItem* child_item : m_children)
 		{
 			if (child_item->name() == name)
 			{
@@ -138,20 +134,15 @@ QString LThemeItem::path()
 	return path_names.join("/");
 }
 
-int LThemeItem::child_number() const
+int LThemeItem::index() const
 {
 	if (m_parent)
 	{
-		QStringList keys = m_parent->m_child_items.keys();
+		QStringList keys = m_parent->m_children.keys();
 
 		for (int i = 0; i < keys.size(); i++)
-		{
-			LThemeItem* parent_child_item =
-				m_parent->m_child_items[keys.at(i)];
-
-			if (parent_child_item == this)
+			if (m_parent->m_children[keys.at(i)] == this)
 				return i;
-		}
 	}
 
 	return 0;
@@ -166,14 +157,12 @@ QJsonObject LThemeItem::to_json_object()
 	for (const QString& key : m_attributes.keys())
 		attributes_object.insert(key, m_attributes[key]->json_object());
 
-	for (const QString& key : m_child_items.keys())
+	for (const QString& key : m_children.keys())
 	{
-		LThemeItem* child_item = m_child_items[key];
+		LThemeItem* child = m_children[key];
 
-		if (child_item->file_name() == m_file_name)
-			children_object.insert(
-				child_item->name(),
-				child_item->to_json_object());
+		if (child->m_file_name == m_file_name)
+			children_object.insert(child->name(), child->to_json_object());
 	}
 
 	if (!attributes_object.isEmpty())

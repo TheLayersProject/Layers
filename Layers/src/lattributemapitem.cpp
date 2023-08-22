@@ -44,7 +44,7 @@ LAttributeMapItem* LAttributeMapItem::parent()
 	return m_parent;
 }
 
-int LAttributeMapItem::child_number() const
+int LAttributeMapItem::index() const
 {
 	if (m_parent)
 	{

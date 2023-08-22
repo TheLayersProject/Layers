@@ -131,6 +131,37 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 	~~~~~~~~~~~~~
 
 	Override attributes can not have other override attributes.
+
+	## JSON Data Format
+
+	The JSON data for an attribute is formatted as follows:
+
+		{									 // Beginning of attribute's object
+			"value": <int,string,object>,	 // The attribute's value (if not linked)
+			"linked_to": <link_path>,		 // The attribute's link path (if linked)
+			"overrides": {					 // The attribute's overrides (if any)
+				<attr_name>: <attr_object>,	 // First override attribute
+				...							 // Any other override attributes follow (if any)
+			}
+		}
+
+	If the attribute is linked, it will store a *linked_to* value containing
+	the link-path.
+
+	If the attribute is not linked, it will store a *value* value containing
+	the attribute's value. The attribute values can have different types. The
+	following are some examples of attribute values in JSON format:
+
+		"value": 10			  // Stores a number as an integer
+
+		"value": "#36393f"	  // Stores a color-name as a string
+
+		"value": {			  // Stores a gradient as an object
+			"gradient": [
+                "0:#3a3c42",
+                "1:#42454d"
+            ]
+		}
 */
 class LAYERS_EXPORT LAttribute : public QObject
 {

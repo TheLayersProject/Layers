@@ -84,7 +84,7 @@ void LApplication::apply_theme(LTheme* theme)
 
 		m_active_theme = theme;
 
-		if (!m_active_theme->has_app_implementation(app_identifier()))
+		if (!m_active_theme->has_implementation(app_identifier()))
 		{
 			// Iterate backwards through the lineage to determine last CAT.
 			for (int i = m_active_theme->lineage().size() - 1; i >= 0; i--)
@@ -95,7 +95,7 @@ void LApplication::apply_theme(LTheme* theme)
 					theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
 
 				if (LTheme* theme = layersApp->theme(theme_id))
-					if (theme->has_app_implementation(app_identifier()))
+					if (theme->has_implementation(app_identifier()))
 					{
 						QString app_file_name =
 							layersApp->app_identifier() + ".json";
@@ -235,14 +235,16 @@ void LApplication::rename_theme(const QString& theme_id, const QString& new_name
 	if (m_themes.contains(theme_id))
 	{
 		LTheme* theme = m_themes[theme_id];
-
 		QDir old_theme_dir = theme->dir();
+
+		theme->set_name(new_name);
 
 		old_theme_dir.rename(
 			old_theme_dir.absoluteFilePath("."),
-			latest_T_version_path() + new_name + theme->uuid()->toString(QUuid::WithoutBraces) + "\\");
+			latest_T_version_path() + theme->id() + "\\");
 
-		theme->set_name(new_name);
+		// TEMP
+		//theme->set_dir();
 
 		//old_theme_dir.removeRecursively();
 

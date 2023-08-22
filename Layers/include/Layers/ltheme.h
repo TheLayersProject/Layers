@@ -24,47 +24,94 @@ struct LAYERS_EXPORT LThemeLineageData
 };
 
 /*!
-	An LTheme is a QObject that stores data to change the appearance of
-	LThemeable widgets.
+	An LTheme stores data to change the appearance of LThemeable widgets within
+	a *Layers* application.
 
-	## Theme Directories/Files
+	Themes store data using LThemeItem objects which handle the hierarchical
+	structure of themes. The root item can be obtained using root_item().
 
-	When a theme is stored on the system, the data is separated into
-	different files within a single directory. These files are referred to
-	as *theme files*, and the directory is referred to as a *theme directory*.
+	## Theme Identifier
 
-	Every theme directory should contain a *meta.json* file as well as
-	an *layers.json* file. Other files present in the directory are called
-	app-implementation files. There is an app-implementation file for every
-	application that has been implemented in the theme.
+	A theme has a name and a UUID. When the two are joined together, separated
+	by an underscore, it is called the *theme identifier*, or theme-ID for
+	short. The following is an example of how a theme-ID might look for a
+	theme named *Sky Blue*:
 
-	### meta.json
+		Sky Blue_bbc2fb0e-0b4e-4fcf-b651-dfeeacbffbaf
 
-	The meta file contains metadata pertaining to the theme. This metadata
-	includes the theme's name, UUID, and lineage.
+	The purpose of the UUID in the theme-ID is to allow the same name to be
+	given to multiple themes.
 
-	### layers.json
+	The theme-ID can be obtained using id().
 
-	The layers file is a special implementation file that implements the theme
-	for widgets that exist universally across different Layers apps.
+	## Theme Files and Directories
 
-	## Theme Loading
+	A theme stored on the system is made up of multiple JSON files, known
+	as *theme files*, stored within a directory, known as a *theme directory*.
 
-	When loading themes from theme directories, only their metadata is loaded.
-	This is done to prevent heavy memory usage.
+	A theme directory is labeled with the theme-ID.
+	
+	There is a special theme file that contains the theme's metadata, and then
+	the rest of the theme files are *implementation files*.
+	
+	### Metadata File
 
-	Relevant implementation files are only loaded for the active theme. This
-	includes the *layers.json* file as well as the app-implementation file
-	associated with the application performing the load.
+	The theme's metadata is stored within a theme file labeled *meta.json*. It
+	contains data regarding the theme's *name*, *UUID*, and *lineage*. This
+	file should be present in every theme directory and is used as a way to
+	partially load a theme without loading implementation files.
 
-	When a different theme gets applied, relevant implementation files of the
-	previous theme are unloaded before loading the relevant implementation
-	files of the next theme.
+	### Implementation Files
+
+	An implementation file is a theme file that contains theme data pertaining
+	to a specific application. Implementation files are typically labeled with
+	the *app ID* (see LApplication). The following is an example of how an
+	implementation file for the *Layers Demo* application would be labeled:
+
+		layers_demo_f97aae7f-2076-4918-93ce-19321584f675.json
+
+	#### Layers Implementation File
+
+	There is a special implementation file labeled *layers.json* which contains
+	the theme data pertaining to the widgets that are included with *Layers*.
+	These widgets are considered universal across different *Layers*
+	applications.
+
+	## Loading Themes
+
+	System themes are partially loaded when the application is initialized.
+	Only the theme's metadata is loaded while none of the implementation files
+	get loaded until the theme becomes the active application theme. This
+	partial-loading is performed to save system resources.
+
+	When the theme becomes the active application theme, the application uses
+	the load() function, passing the *app ID* as an argument to ensure that the
+	theme loads the correct implementation file. During this function, the
+	implementation file relevant to the application and the *Layers*
+	implementation file get loaded. Other implementation files are left
+	untouched.
+
+	## Managing Attribute Links
+
+	Once implementation files have been loaded, theme attributes with valid
+	link paths have their links resolved. See LAttribute for more information
+	on attribute linking.
+
+	## Theme Lineage
+
+	When a new theme is created, it starts as a copy of another theme, referred
+	to as the parent theme. The ID of the parent theme is tracked as part of
+	the new theme's *lineage*. The new theme also inherits the parent theme's
+	lineage.
+
+	Themes that make up the lineage are called *ancestor themes*.
+
+	The main purpose for tracking theme lineage is to be able to acquire
+	implementation files from ancestor themes when they don't already exist in
+	a theme being loaded.
 */
-class LAYERS_EXPORT LTheme : public QObject
+class LAYERS_EXPORT LTheme
 {
-	Q_OBJECT
-
 public:
 	/*!
 		Constructs an empty, nameless theme.
@@ -88,7 +135,7 @@ public:
 		Constructs a theme with the given *name*, *uuid*, and *editable*
 		status.
 	*/
-	LTheme(const QString& name, QUuid* uuid, bool editable);
+	LTheme(const QString& name, QUuid uuid, bool editable);
 
 	~LTheme();
 
@@ -98,7 +145,9 @@ public:
 	void append_to_lineage(const QString& theme_id);
 
 	/*!
-		Unloads implementation data.
+		Clears out any loaded implementation data.
+
+		The root item becomes nullptr after calling this function.
 	*/
 	void clear();
 
@@ -108,55 +157,78 @@ public:
 	QDir dir() const;
 
 	/*!
-		Returns true if this is a custom theme; otherwise, returns false.
+		Returns a boolean value determining whether or not the theme is
+		editable.
 	*/
 	bool editable();
 
+	/*!
+		Returns the child item identified by *name_list*.
+
+		This function operates recursively down the theme's hierarchy, starting
+		at the root item. If no item is found, then nullptr is returned.
+	*/
 	LThemeItem* find_item(const QStringList& name_list);
 
+	/*!
+		Returns the child item identified by *path*.
+
+		This function operates recursively down the theme's hierarchy, starting
+		at the root item. If no item is found, then nullptr is returned.
+	*/
 	LThemeItem* find_item(const QString& path);
 
 	/*!
-		Returns true if this theme has an implementation file for the current
-		application; otherwise, returns false.
+		Returns a boolean value determining whether or not the theme directory
+		contains an implementation file for the given *app_id*.
 	*/
-	bool has_app_implementation(const QString& app_id) const;
+	bool has_implementation(const QString& app_id) const;
 
 	/*!
-		Returns the ID of this theme.
+		Returns the theme-ID of this theme.
 
-		The ID is composed of the theme's name followed by the theme's UUID,
-		separated by an underscore.
+		The theme-ID is composed of the theme's name and UUID, separated by an
+		underscore.
 	*/
 	QString id();
 
 	/*!
-		Returns a QStringList containing the IDs of the ancestor themes in this
+		Returns a list containing the theme-IDs of the ancestor themes in the
 		theme's lineage.
 	*/
 	QStringList lineage() const;
 
 	/*!
-		Loads the implementation files of this theme.
+		Loads the relevant implementation files of this theme.
 
-		This includes the *layers.json* file as well as the app-implementation
-		file associated with the current application.
+		The relevant files are the *Layers* implementation file and the
+		implementation file for the given *app_id*. Other implementation files
+		are left untouched.
 	*/
 	void load(const QString& app_id);
 
 	/*!
-		Returns the name of this theme.
+		Returns the name of the theme.
 	*/
 	QString name() const;
 
-	void resolve_links(LThemeItem* item);
-
+	/*!
+		Returns a pointer to the theme's root item.
+	*/
 	LThemeItem* root_item() const;
 
+	/*!
+		Saves the theme.
+
+		The currently loaded theme data is separated into corresponding 
+		implementation files which are stored in the theme directory.
+	*/
 	void save();
 
 	/*!
-		Saves a *meta.json* file to the directory pertaining to this theme.
+		Saves a the metadata file to the theme directory.
+
+		The file is labeled *meta.json*.
 	*/
 	void save_meta_file();
 
@@ -171,9 +243,9 @@ public:
 	void set_name(const QString& new_name);
 
 	/*!
-		Returns a pointer to the UUID of this theme.
+		Returns the UUID of this theme.
 	*/
-	QUuid* uuid() const;
+	QUuid uuid() const;
 
 private:
 	void load_file(QFile& document_file);
@@ -181,6 +253,8 @@ private:
 	LThemeItem* init_item(const QString& name,
 		QJsonObject item_object, const QString& file_name,
 		LThemeItem* parent = nullptr);
+
+	void resolve_links(LThemeItem* item);
 
 	LThemeItem* m_root_item{ nullptr };
 
@@ -194,7 +268,7 @@ private:
 
 	QString m_name;
 
-	QUuid* m_uuid{ nullptr };
+	QUuid m_uuid;
 };
 LAYERS_NAMESPACE_END
 

@@ -26,7 +26,7 @@ LThemeComboBox::LThemeComboBox(QWidget* parent) :
 
 		LTheme* theme = itemData(index).value<LTheme*>();
 
-		if (!theme->has_app_implementation(layersApp->app_identifier()))
+		if (!theme->has_implementation(layersApp->app_identifier()))
 		{
 			m_compatibility_dialog->set_lineage_table_data(theme->lineage());
 			m_compatibility_dialog->set_theme_name(theme->name());
@@ -97,8 +97,8 @@ void LThemeComboBox::paintEvent(QPaintEvent* event)
 	QString item_text = current_theme->name();
 	QString uuid_text;
 
-	if (QUuid* uuid = current_theme->uuid())
-		uuid_text = uuid->toString(QUuid::WithoutBraces);
+	if (!current_theme->uuid().isNull())
+		uuid_text = current_theme->uuid().toString(QUuid::WithoutBraces);
 
 	if (!uuid_text.isEmpty())
 	{
@@ -142,7 +142,7 @@ void LThemeComboBox::init_item_delegate()
 		{
 			LTheme* theme = itemData(m_highlighted_index).value<LTheme*>();
 
-			if (!theme->has_app_implementation(layersApp->app_identifier()))
+			if (!theme->has_implementation(layersApp->app_identifier()))
 				if (!m_compatibility_dialog->isVisible())
 				{
 					m_compatibility_dialog->show();

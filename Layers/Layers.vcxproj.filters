@@ -82,6 +82,7 @@
     <ClInclude Include="include\Layers\lthemeable.h" />
     <ClInclude Include="include\Layers\lthemeablebox.h" />
     <ClInclude Include="src\lgradienteditoritem.h" />
+    <ClInclude Include="include\Layers\ltheme.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />
@@ -135,7 +136,6 @@
     <QtMoc Include="include\Layers\lcolordialog.h" />
     <QtMoc Include="include\Layers\lcolorcontrol.h" />
     <QtMoc Include="include\Layers\lthemeitem.h" />
-    <QtMoc Include="include\Layers\ltheme.h" />
     <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
     <QtMoc Include="include\Layers\lresizer.h" />
     <QtMoc Include="include\Layers\lsplitter.h" />
