@@ -50,7 +50,7 @@ LApplication::LApplication(
 	init_latest_version();
 	setAttribute(Qt::AA_EnableHighDpiScaling);
 	setEffectEnabled(Qt::UI_AnimateCombo, false);
-	set_name("App");
+	setObjectName("App");
 
 	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
 	for (int i = 0; i < name_parts.size(); i++)
@@ -121,9 +121,9 @@ void LApplication::apply_theme(LTheme* theme)
 
 		m_active_theme->load(app_identifier());
 
-		clear_theme();
+		_clear_theme();
 
-		LThemeable::apply_theme(theme->find_item(path()));
+		apply_theme_item(theme->find_item(path()));
 
 		m_settings.setValue("themes/active_theme", theme->id());
 
@@ -140,8 +140,7 @@ QList<LThemeable*> LApplication::child_themeables(Qt::FindChildOptions options)
 
 	for (QWidget* tl_widget : topLevelWidgets())
 		if (LThemeable* tl_themeable = dynamic_cast<LThemeable*>(tl_widget))
-			if (tl_themeable->name())
-				child_themeables.append(tl_themeable);
+			child_themeables.append(tl_themeable);
 
 	return child_themeables;
 }
@@ -288,6 +287,12 @@ LTheme* LApplication::theme(const QString& theme_id)
 		return m_themes[theme_id];
 
 	return nullptr;
+}
+
+void LApplication::_clear_theme()
+{
+	if (current_theme_item())
+		apply_theme_item(nullptr);
 }
 
 void LApplication::init_directories()

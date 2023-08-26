@@ -156,11 +156,8 @@ void LButton::init()
 
 	if (m_graphic_label)
 	{
-		set_icon(*m_graphic_label->graphic());
-
 		m_graphic_label->setAlignment(Qt::AlignCenter);
-		m_graphic_label->set_icon(*m_graphic_label->graphic());
-		m_graphic_label->set_name("Graphic");
+		m_graphic_label->setObjectName("Graphic");
 
 		m_graphic_label->graphic()->svg_renderer()->color()->set_value(
 			QColor(Qt::darkGray));
@@ -171,7 +168,7 @@ void LButton::init()
 	if (m_graphic_after_label)
 	{
 		m_graphic_after_label->setAlignment(Qt::AlignCenter);
-		m_graphic_after_label->set_name("Graphic After");
+		m_graphic_after_label->setObjectName("Graphic After");
 		m_graphic_after_label->hide();
 
 		m_graphic_after_label->graphic()->svg_renderer()->color()->set_value(
@@ -181,7 +178,7 @@ void LButton::init()
 	}
 
 	if (m_text_label)
-		m_text_label->set_name("Text Label");
+		m_text_label->setObjectName("Text Label");
 }
 
 void LButton::init_layout()

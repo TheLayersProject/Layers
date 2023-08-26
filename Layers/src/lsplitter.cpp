@@ -16,6 +16,6 @@ LSplitter::LSplitter(Qt::Orientation orientation, QWidget* parent) :
 
 void LSplitter::init()
 {
-	set_name("Splitter");
+	setObjectName("Splitter");
 	setHandleWidth(20);
 }

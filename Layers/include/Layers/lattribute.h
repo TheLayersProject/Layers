@@ -42,11 +42,11 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 
 	## Applying Theme Attributes to Widget Attributes
 
-	When a theme is applied to a Layers widget via LThemeable::apply_theme(),
-	the theme attributes are applied to the widget's attributes using
-	set_theme_attribute(). After this, when the value is requested from one of
-	the widget attributes, the value of the theme attribute is returned
-	instead.
+	When a theme is applied to a Layers widget via
+	LThemeable::apply_theme_item(), the theme attributes are applied to the
+	widget's attributes using set_theme_attribute(). After this, when the value
+	is requested from one of the widget attributes, the value of the theme
+	attribute is returned instead.
 
 	## Attribute Linking
 
@@ -126,8 +126,8 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 	QColor color = button_fill->as<QColor>();
 	QColor selected_color = button_fill->as<QColor>({ "Selected" });
 
-	//  color should be the value of Qt::green.
-	//  selected_color should be the value of Qt::lightGreen.
+	//  color should be Qt::green.
+	//  selected_color should be Qt::lightGreen.
 	~~~~~~~~~~~~~
 
 	Override attributes can not have other override attributes.
@@ -158,9 +158,9 @@ using LAttributeMap = QMap<QString, LAttribute*>;
 
 		"value": {			  // Stores a gradient as an object
 			"gradient": [
-                "0:#3a3c42",
-                "1:#42454d"
-            ]
+				"0:#3a3c42",
+				"1:#42454d"
+			]
 		}
 */
 class LAYERS_EXPORT LAttribute : public QObject
@@ -211,7 +211,7 @@ public:
 		If a theme attribute has been set, its value is returned.
 
 		If the attribute contains an override attribute that matches the list
-		of *states*, then its value is returned.
+		of *state_combo*, then its value is returned.
 
 		If a link attribute has been set, its value is returned.
 
@@ -219,7 +219,7 @@ public:
 		value is returned.
 	*/
 	template<typename T>
-	T as(const QStringList& states = QStringList());
+	T as(const QStringList& state_combo = QStringList());
 
 	/*!
 		Breaks the link relationship if a link attribute has been set.
@@ -281,12 +281,7 @@ public:
 	*/
 	QString link_path() const;
 
-	/*!
-		Returns the name of the attribute.
-	*/
-	QString name() const;
-
-	LAttribute* override_attribute(const QStringList& states);
+	LAttribute* override_attribute(const QStringList& state_combo);
 
 	/*!
 		Returns a map containing the override attributes.
@@ -296,9 +291,9 @@ public:
 	/*!
 		Sets the theme attribute to *theme_attr*.
 
-		This function is called by LThemeable::apply_theme() to apply theme
-		attributes to widget attributes. Library users are unlikely to ever
-		need to call this function manually.
+		This function is called by LThemeable::apply_theme_item() to apply
+		theme attributes to widget attributes. Library users are unlikely to
+		ever need to call this function manually.
 	*/
 	void set_theme_attribute(LAttribute* theme_attr);
 
@@ -346,7 +341,7 @@ public:
 	/*!
 		Returns the name of type stored in the attribute's value.
 	*/
-	QString typeName(const QStringList& states = QStringList());
+	QString typeName(const QStringList& state_combo = QStringList());
 
 	/*!
 		Returns the attribute's value.
@@ -376,8 +371,6 @@ private:
 
 	QString m_link_path;
 
-	QString m_name;
-
 	LAttributeMap m_overrides;
 
 	QVariant m_value;
@@ -386,13 +379,13 @@ private:
 };
 
 template<typename T>
-inline T LAttribute::as(const QStringList& states)
+inline T LAttribute::as(const QStringList& state_combo)
 {
 	if (m_theme_attr)
-		return m_theme_attr->as<T>(states);
+		return m_theme_attr->as<T>(state_combo);
 
-	if (!m_overrides.isEmpty() && !states.isEmpty())
-		if (LAttribute* override_attr = override_attribute(states))
+	if (!m_overrides.isEmpty() && !state_combo.isEmpty())
+		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as<T>();
 
 	if (m_link_attr)

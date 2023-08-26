@@ -12,14 +12,14 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	init_layout();
 
 	set_icon(LGraphic(":/images/new_theme.svg", QSize(20, 20)));
-	set_name("Theme Creator Dialog");
+	setObjectName("Theme Creator Dialog");
 	setFixedSize(290, 300);
 	setModal(true);
 
-	m_name_label->set_name("Name Label");
+	m_name_label->setObjectName("Name Label");
 	m_name_label->set_font_size(15);
 
-	m_name_editor->set_name("Name Editor");
+	m_name_editor->setObjectName("Name Editor");
 	m_name_editor->setFixedSize(250, 50);
 	m_name_editor->set_margin(0);
 	m_name_editor->set_font_size(15);
@@ -52,10 +52,10 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 				m_create_button->set_disabled(false);
 		});
 
-	m_parent_theme_label->set_name("Parent Theme Label");
+	m_parent_theme_label->setObjectName("Parent Theme Label");
 	m_parent_theme_label->set_font_size(15);
 
-	m_parent_theme_combobox->set_name("Parent Theme Combobox");
+	m_parent_theme_combobox->setObjectName("Parent Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
 		if (theme->has_implementation(layersApp->app_identifier()))
@@ -66,7 +66,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 				m_parent_theme_combobox->addItem(theme);
 		}
 
-	m_create_button->set_name("Create Button");
+	m_create_button->setObjectName("Create Button");
 	m_create_button->set_disabled();
 	m_create_button->set_font_size_f(10.5);
 	m_create_button->set_padding(6);
@@ -74,7 +74,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	connect(m_create_button, &LButton::clicked,
 		this, &LThemeCreatorDialog::create_theme);
 
-	apply_theme(activeTheme()->find_item(path()));
+	apply_theme_item(activeTheme()->find_item(path()));
 }
 
 int LThemeCreatorDialog::exec()

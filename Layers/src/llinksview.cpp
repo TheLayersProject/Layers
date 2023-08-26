@@ -9,18 +9,18 @@ LLinksView::LLinksView(LAttribute* attr, QWidget* parent) :
 	m_attr{ attr },
 	QWidget(parent)
 {
-	set_name("Links View");
+	setObjectName("Links View");
 
 	QFont f = font();
 	f.setPointSizeF(10.5);
 	setFont(f);
 
-	m_dot_svg->set_name("Dot Svg");
+	m_dot_svg->setObjectName("Dot Svg");
 
-	m_link_arrow_svg->set_name("Link Arrow Svg");
+	m_link_arrow_svg->setObjectName("Link Arrow Svg");
 
-	m_dependent_arrow_svg->set_name("Dependent Arrow Svg");
-	m_dependent_arrow_2_svg->set_name("Dependent Arrow Svg");
+	m_dependent_arrow_svg->setObjectName("Dependent Arrow Svg");
+	m_dependent_arrow_2_svg->setObjectName("Dependent Arrow Svg");
 
 	connect(m_attr, &LAttribute::link_changed, this, &LLinksView::update_view);
 

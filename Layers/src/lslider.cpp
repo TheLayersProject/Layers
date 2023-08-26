@@ -119,10 +119,10 @@ void LSlider::init()
 	setFixedHeight(40);
 
 	m_bar->setFixedHeight(5);
-	m_bar->set_name("Bar");
+	m_bar->setObjectName("Bar");
 
 	m_handle->setFixedSize(40, 40);
-	m_handle->set_name("Handle");
+	m_handle->setObjectName("Handle");
 
 	init_layout();
 }

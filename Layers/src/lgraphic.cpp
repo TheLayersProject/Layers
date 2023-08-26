@@ -15,7 +15,7 @@ LGraphic::LGraphic(const QString& file_path, QSize size, QWidget* parent)
 	else if (file_path.endsWith(".svg"))
 	{
 		m_svg_renderer = new LSvgRenderer(file_path);
-		m_svg_renderer->set_name("Svg");
+		m_svg_renderer->setObjectName("Svg");
 	}
 	else if (file_path.endsWith(".imgseq"))
 	{
@@ -44,7 +44,7 @@ LGraphic::LGraphic(const LGraphic& graphic)
 	if (graphic.m_svg_renderer)
 	{
 		m_svg_renderer = new LSvgRenderer(*graphic.m_svg_renderer);
-		m_svg_renderer->set_name("Svg");
+		m_svg_renderer->setObjectName("Svg");
 	}
 	else if (graphic.m_image)
 	{

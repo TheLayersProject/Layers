@@ -189,7 +189,7 @@ void LTheme::resolve_links(LThemeItem* item)
 			{
 				for (LAttribute* item_attr : item->attributes())
 				{
-					if (item_attr->name() == attr_name)
+					if (item_attr->objectName() == attr_name)
 					{
 						attr->set_link_attribute(item_attr);
 						return;
@@ -197,7 +197,7 @@ void LTheme::resolve_links(LThemeItem* item)
 					else
 					{
 						for (LAttribute* override_attr : item_attr->overrides())
-							if (item_attr->name() + "." + override_attr->name() == attr_name)
+							if (item_attr->objectName() + "." + override_attr->objectName() == attr_name)
 							{
 								attr->set_link_attribute(override_attr);
 								return;

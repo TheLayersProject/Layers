@@ -9,7 +9,6 @@
 #include <Layers/lapplication.h>
 #include <Layers/lcalculate.h>
 #include <Layers/lthemecreatordialog.h>
-#include <Layers/lthemeeditordialog.h>
 
 #include "lmainwindowtitlebar.h"
 #include "lsettingsmenu.h"
@@ -21,61 +20,60 @@ using Layers::LMainWindowTitlebar;
 using Layers::LMainWindow;
 
 LMainWindow::LMainWindow(QWidget* parent) :
-	m_settings_menu{ new LSettingsMenu },
 	m_titlebar{ new LMainWindowTitlebar },
 	LWidget(parent)
 {
 	init_attributes();
 	init_layout();
-	init_themes_widget_connections();
 	init_titlebar_connections();
 	resize(1000, 700);
-	set_name("Main Window");
+	setObjectName("Main Window");
 	setAttribute(Qt::WA_TranslucentBackground);
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-	
-	m_settings_menu->hide();
 
-	connect(m_titlebar->menu_tab_bar(), SIGNAL(index_changed(int, int)),
-		this, SLOT(open_widget_changed(int, int)));
+	connect(m_titlebar->menu_tab_bar(), &LTabBar::index_changed,
+		[this](int prev_index, int new_index)
+		{
+			if (QWidget* prev_widget = (prev_index != -1) ?
+				m_central_widgets[prev_index] : nullptr)
+			{
+				prev_widget->hide();
+			}
 
-	connect(m_titlebar->menu_tab_bar(), SIGNAL(tab_closed(int)),
-		this, SLOT(close_widget(int)));
+			if (QWidget* new_widget = (new_index != -1) ?
+				m_central_widgets[new_index] : nullptr)
+			{
+				new_widget->show();
+			}
+		});
 
-	m_separator->set_icon(LGraphic(":/images/separator_h_icon.svg"));
-	m_separator->set_name("Separator");
+	connect(m_titlebar->menu_tab_bar(), &LTabBar::tab_closed,
+		[this](int i)
+		{
+			m_central_widgets.takeAt(i)->deleteLater();
+
+			if (m_central_widgets.isEmpty())
+				qApp->quit();
+		});
+
+	m_separator->setObjectName("Separator");
 	m_separator->setFixedHeight(3);
-
-	m_theme_editor_dialog->apply_theme(
-		activeTheme()->find_item(m_theme_editor_dialog->path()));
 }
 
-void LMainWindow::center_dialog(QDialog* dialog)
+void LMainWindow::open_central_widget(QWidget* central_widget)
 {
-	dialog->move(
-		x() + (width() - dialog->width()) / 2,
-		y() + (height() - dialog->height()) / 2);
+	m_titlebar->menu_tab_bar()->add_tab(central_widget->objectName());
+
+	_open_central_widget(central_widget);
 }
 
-void LMainWindow::set_central_widget(LWidget* central_widget)
+void LMainWindow::open_central_widget(
+	QWidget* central_widget, const LGraphic& tab_icon_graphic)
 {
-	m_central_widget = central_widget;
+	m_titlebar->menu_tab_bar()->add_tab(
+		tab_icon_graphic, central_widget->objectName());
 
-	m_main_layout->addWidget(m_central_widget);
-
-	if (m_central_widget->icon())
-	{
-		set_icon(LGraphic(*m_central_widget->icon()));
-
-		open_widget(m_central_widget, *m_central_widget->name(),
-			m_central_widget->icon());
-	}
-	else
-		open_widget(m_central_widget, *m_central_widget->name());
-
-	LTab* app_menu_tab = m_titlebar->menu_tab_bar()->tabs().last();
-	app_menu_tab->close_button()->hide();
-	app_menu_tab->layout()->setContentsMargins(2, 0, 12, 0);
+	_open_central_widget(central_widget);
 }
 
 void LMainWindow::update()
@@ -94,29 +92,6 @@ void LMainWindow::update()
 	}
 
 	QWidget::update();
-}
-
-void LMainWindow::close_widget(int index)
-{
-	m_opened_widgets.removeAt(index);
-}
-
-void LMainWindow::open_widget(
-	LWidget* widget, const QString& name, LGraphic* icon)
-{
-	LTabBar* tab_bar = m_titlebar->menu_tab_bar();
-
-	if (!m_opened_widgets.contains(widget))
-	{
-		m_opened_widgets.append(widget);
-
-		if (icon)
-			tab_bar->add_tab(*icon, name);
-		else
-			tab_bar->add_tab(name);
-	}
-
-	tab_bar->set_current_index(m_opened_widgets.indexOf(widget));
 }
 
 bool LMainWindow::nativeEvent(
@@ -213,20 +188,9 @@ void LMainWindow::new_theme_clicked()
 {
 	LThemeCreatorDialog dialog;
 
-	center_dialog(&dialog);
+	center(&dialog, this);
 
 	dialog.exec();
-}
-
-void LMainWindow::open_widget_changed(int old_index, int new_index)
-{
-	if (QWidget* old_widget = (old_index != -1) ?
-		m_opened_widgets[old_index] : nullptr)
-	{
-		old_widget->hide();
-	}
-
-	m_opened_widgets[new_index]->show();
 }
 
 void LMainWindow::init_attributes()
@@ -253,48 +217,65 @@ void LMainWindow::init_layout()
 	m_main_layout->setSpacing(0);
 	m_main_layout->addWidget(m_titlebar);
 	m_main_layout->addWidget(m_separator);
-	m_main_layout->addWidget(m_settings_menu);
 
 	setLayout(m_main_layout);
 }
 
-void LMainWindow::init_themes_widget_connections()
-{
-	LThemesWidget* themes_widget = m_settings_menu->themes_widget();
-
-	connect(themes_widget->customize_theme_button(), &LButton::clicked, [this]
-	{
-		m_theme_editor_dialog->show();
-		m_theme_editor_dialog->raise();
-	});
-
-	connect(themes_widget->new_theme_button(), &LButton::clicked,
-		this, &LMainWindow::new_theme_clicked);
-}
-
 void LMainWindow::init_titlebar_connections()
 {
-	connect(m_titlebar->settings_button(), &LButton::clicked, [this]
+	connect(m_titlebar->settings_button(), &LButton::clicked,
+		[this]
+		{
+			LSettingsMenu* settings_menu = new LSettingsMenu;
+
+			connect(settings_menu->themes_widget()->new_theme_button(),
+				&LButton::clicked,
+				this, &LMainWindow::new_theme_clicked);
+
+			open_central_widget(settings_menu,
+				LGraphic(":/images/settings_animated.svg", QSize(24, 24)));
+		});
+
+	connect(m_titlebar->minimize_button(), &LButton::clicked,
+		[this]
+		{
+			showMinimized();
+		});
+
+	connect(m_titlebar->maximize_button(), &LButton::clicked,
+		[this]
+		{
+			if (isMaximized())
+				showNormal();
+			else
+				showMaximized();
+
+			update();
+		});
+
+	connect(m_titlebar->exit_button(), &LButton::clicked,
+		[this] { qApp->quit(); });
+}
+
+void LMainWindow::_open_central_widget(QWidget* central_widget)
+{
+	if (LThemeable* central_themeable =
+		dynamic_cast<LThemeable*>(central_widget))
 	{
-		open_widget(m_settings_menu,
-		*m_settings_menu->name(), m_settings_menu->icon());
-	});
+		if (current_theme_item())
+			central_themeable->apply_theme_item(
+				current_theme_item()->find_item(central_widget->objectName()));
+	}
 
-	connect(m_titlebar->minimize_button(), &LButton::clicked, [this]
-	{
-		showMinimized();
-	});
+	m_central_widgets.append(central_widget);
+	m_main_layout->addWidget(central_widget);
 
-	connect(m_titlebar->maximize_button(), &LButton::clicked, [this]
-	{
-		if (isMaximized())
-			showNormal();
-		else
-			showMaximized();
+	set_active_central_widget(central_widget);
+}
 
-		update();
-	});
-
-	connect(m_titlebar->exit_button(), &LButton::clicked, [this]
-		{ qApp->quit(); });
+void LMainWindow::set_active_central_widget(QWidget* central_widget)
+{
+	if (m_central_widgets.contains(central_widget))
+		m_titlebar->menu_tab_bar()->set_current_index(
+			m_central_widgets.indexOf(central_widget));
 }

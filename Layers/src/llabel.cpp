@@ -150,7 +150,7 @@ void LLabel::paintEvent(QPaintEvent* event)
 
 void LLabel::update()
 {
-	QStringList s = states();
+	QStringList s = state_combo();
 
 	QString style_sheet = "QLabel {";
 
@@ -171,10 +171,6 @@ void LLabel::update()
 void LLabel::init()
 {
 	init_attributes();
-
-	if (!m_graphic)
-		set_icon(LGraphic(":/images/label_icon.svg", QSize(17, 6)));
-
 	update();
 }
 

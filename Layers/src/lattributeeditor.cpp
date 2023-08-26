@@ -26,30 +26,30 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	setMinimumHeight(40);
 	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
-	m_fill_control->set_name("Fill Control");
+	m_fill_control->setObjectName("Fill Control");
 
 	QIntValidator* int_validator = new QIntValidator(0, 30);
 
-	m_label->set_name("Label");
+	m_label->setObjectName("Label");
 	m_label->set_font_size(12);
 
-	m_line_editor->set_name("Line Editor");
+	m_line_editor->setObjectName("Line Editor");
 	m_line_editor->set_default_value("0");
 	m_line_editor->set_font_size(13);
 	m_line_editor->set_validator(int_validator);
 	m_line_editor->setFixedSize(40, 40);
 
-	m_slider->set_name("Slider");
+	m_slider->setObjectName("Slider");
 	m_slider->set_limit(int_validator->top());
 
-	m_icons_widget->set_name("Icons Widget");
+	m_icons_widget->setObjectName("Icons Widget");
 	m_icons_widget->setFixedHeight(26);
 
-	m_link_icon_label->set_name("Icon Labels");
+	m_link_icon_label->setObjectName("Icon Labels");
 	m_link_icon_label->setAlignment(Qt::AlignCenter);
 	m_link_icon_label->setFixedSize(20, 26);
 
-	m_overrides_icon_label->set_name("Icon Labels");
+	m_overrides_icon_label->setObjectName("Icon Labels");
 	m_overrides_icon_label->setAlignment(Qt::AlignCenter);
 	m_overrides_icon_label->setFixedSize(20, 26);
 
@@ -73,7 +73,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				}
 			});
 
-	m_collapse_button->set_name("Collapse Button");
+	m_collapse_button->setObjectName("Collapse Button");
 
 	connect(m_collapse_button, &LButton::clicked, [this]
 		{
@@ -85,7 +85,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 	m_features_widget->hide();
 
-	m_features_tab_bar->set_name("Features Tab Bar");
+	m_features_tab_bar->setObjectName("Features Tab Bar");
 	m_features_tab_bar->setFixedHeight(40);
 	m_features_tab_bar->add_tab(
 		LGraphic(":/images/chain_link.svg", QSize(11, 24)), "Links");
@@ -113,11 +113,11 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 	links_tab->layout()->setContentsMargins(8, 0, 8, 0);
 	links_tab->layout()->setSpacing(7);
 
-	m_links_widget->set_name("Links Widget");
+	m_links_widget->setObjectName("Links Widget");
 
 	m_status_states->set_state("Inactive");
 
-	m_new_link_button->set_name("New Link Button");
+	m_new_link_button->setObjectName("New Link Button");
 	m_new_link_button->set_font_size_f(10.5);
 	m_new_link_button->set_padding(6);
 	m_new_link_button->setFixedHeight(30);
@@ -131,8 +131,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				m_status_states->set_state("Active");
 
 				m_new_link_widget = new LNewLinkWidget(m_attr);
-				m_new_link_widget->apply_theme(
-					m_current_theme_item->find_item(
+				m_new_link_widget->apply_theme_item(
+					current_theme_item()->find_item(
 						"Links Widget/New Link Widget"));
 
 				m_links_layout->insertWidget(1, m_new_link_widget);
@@ -147,7 +147,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 			}
 		});
 
-	m_break_link_button->set_name("Break Link Button");
+	m_break_link_button->setObjectName("Break Link Button");
 	m_break_link_button->set_font_size_f(10.5);
 	m_break_link_button->set_padding(6);
 	m_break_link_button->setFixedHeight(30);
@@ -159,15 +159,15 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		m_new_link_button->show();
 	});
 
-	m_overrides_widget->set_name("Overrides Widget");
+	m_overrides_widget->setObjectName("Overrides Widget");
 	m_overrides_widget->hide();
 
 	if (attr)
 	{
-		if (attr->name().contains("."))
-			m_label->setText(attr->name().split(".").last());
+		if (attr->objectName().contains("."))
+			m_label->setText(attr->objectName().split(".").last());
 		else
-			m_label->setText(attr->name());
+			m_label->setText(attr->objectName());
 
 		if (
 			attr->typeName() == "QColor" ||
@@ -217,8 +217,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 				LAttributeEditor* override_editor =
 					new LAttributeEditor(override_attr);
 
-				override_editor->set_name("Attribute Editors");
-				share_theme_item_with(override_editor);
+				override_editor->setObjectName("Attribute Editors");
+				add_share_themeable(override_editor);
 
 				m_overrides_layout->addWidget(override_editor);
 			}

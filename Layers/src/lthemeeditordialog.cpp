@@ -12,24 +12,24 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	m_attr_editors_widget->installEventFilter(this);
 	resize(800, 600);
 	set_icon(LGraphic(":/images/customize_theme.svg", QSize(24, 24)));
-	set_name("Theme Editor Dialog");;
+	setObjectName("Theme Editor Dialog");;
 
-	m_path_label->set_name("Path Label");
+	m_path_label->setObjectName("Path Label");
 	m_path_label->setFixedHeight(40);
 
-	//m_theme_view->set_name("Theme View");
+	//m_theme_view->setObjectName("Theme View");
 	m_theme_view->setFixedWidth(298);
 
 	connect(m_theme_view, SIGNAL(selection_changed(LThemeItem*)),
 		this, SLOT(edit_theme_item(LThemeItem*)));
 
-	m_divider->set_name("Divider");
+	m_divider->setObjectName("Divider");
 	m_divider->setFixedWidth(4);
 
 	m_attr_editors_widget->setSizePolicy(
 		QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-	m_attr_editors_scroll_area->set_name("Attribute Editors Scroll Area");
+	m_attr_editors_scroll_area->setObjectName("Attribute Editors Scroll Area");
 	m_attr_editors_scroll_area->setHorizontalScrollBarPolicy(
 		Qt::ScrollBarAlwaysOff);
 	m_attr_editors_scroll_area->setWidget(m_attr_editors_widget);
@@ -46,19 +46,19 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	});
 
 	m_status_bar->setFixedHeight(40);
-	m_status_bar->set_name("Status Bar");
+	m_status_bar->setObjectName("Status Bar");
 
-	m_check_label->set_name("Check Label");
+	m_check_label->setObjectName("Check Label");
 	m_check_label->hide();
 
-	m_status_label->set_name("Status Label");
+	m_status_label->setObjectName("Status Label");
 	m_status_label->hide();
 
-	m_save_progress_indicator->set_name("Save Progress Indicator");
+	m_save_progress_indicator->setObjectName("Save Progress Indicator");
 	m_save_progress_indicator->hide();
 }
 
-void LThemeEditorDialog::apply_theme(LThemeItem* theme_item)
+void LThemeEditorDialog::apply_theme_item(LThemeItem* theme_item)
 {
 	clear_attr_editors();
 	m_check_label->hide();
@@ -66,7 +66,7 @@ void LThemeEditorDialog::apply_theme(LThemeItem* theme_item)
 	m_path_text = "";
 	update_path_label();
 
-	LThemeable::apply_theme(theme_item);
+	LThemeable::apply_theme_item(theme_item);
 }
 
 bool LThemeEditorDialog::eventFilter(QObject* object, QEvent* event)
@@ -91,11 +91,12 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 	{
 		LAttributeEditorGroup* attr_editor_group =
 			new LAttributeEditorGroup(group_name);
-		attr_editor_group->set_name("Attribute Editor Groups");
+		attr_editor_group->setObjectName("Attribute Editor Groups");
 
-		if (m_current_theme_item)
-			attr_editor_group->apply_theme(
-				m_current_theme_item->find_item("Attribute Editor Groups"));
+		if (current_theme_item())
+			attr_editor_group->apply_theme_item(
+				current_theme_item()->find_item(
+					attr_editor_group->objectName()));
 
 		attr_editor_groups[group_name] = attr_editor_group;
 		organized_widgets[group_name] = attr_editor_group;
@@ -104,11 +105,11 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 	for (LAttribute* attr : theme_item->attributes())
 	{
 		LAttributeEditor* attr_editor = new LAttributeEditor(attr);
-		attr_editor->set_name("Attribute Editors");
+		attr_editor->setObjectName("Attribute Editors");
 
-		if (m_current_theme_item)
-			attr_editor->apply_theme(
-				m_current_theme_item->find_item("Attribute Editors"));
+		if (current_theme_item())
+			attr_editor->apply_theme_item(
+				current_theme_item()->find_item(attr_editor->objectName()));
 
 		connect(attr_editor->fill_control()->fill(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);
@@ -116,14 +117,14 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 		connect(attr_editor->slider()->value(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);
 
-		if (attr->name().contains("."))
+		if (attr->objectName().contains("."))
 		{
-			QString group_name = attr->name().split(".").first();
+			QString group_name = attr->objectName().split(".").first();
 
 			attr_editor_groups[group_name]->add_attribute_editor(attr_editor);
 		}
 		else
-			organized_widgets[attr->name()] = attr_editor;
+			organized_widgets[attr->objectName()] = attr_editor;
 	}
 
 	for (QWidget* widget : organized_widgets)

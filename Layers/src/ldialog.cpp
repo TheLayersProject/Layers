@@ -25,10 +25,8 @@ LDialog::LDialog(const QString& title, QWidget* parent) :
 
 void LDialog::set_icon(const LGraphic& icon)
 {
-	LThemeable::set_icon(icon);
-
 	m_icon_label = new LLabel(icon);
-	m_icon_label->set_name("Icon Label");
+	m_icon_label->setObjectName("Icon Label");
 	m_icon_label->setAlignment(Qt::AlignCenter);
 	m_icon_label->setMinimumWidth(40);
 
@@ -186,17 +184,17 @@ void LDialog::init_layout()
 
 void LDialog::init_titlebar()
 {
-	m_titlebar->set_name("Titlebar");
+	m_titlebar->setObjectName("Titlebar");
 	m_titlebar->setFixedHeight(40);
 
-	m_title_label->set_name("Title Label");
+	m_title_label->setObjectName("Title Label");
 	m_title_label->set_font_size(14);
 	m_title_label->setAttribute(Qt::WA_TransparentForMouseEvents);
 
 	connect(m_exit_button, &LButton::clicked,
 		[this] { done(QDialog::Rejected); });
 
-	m_exit_button->set_name("Exit Button");
+	m_exit_button->setObjectName("Exit Button");
 
 	// Setup Titlebar Layout
 	m_titlebar_layout->setContentsMargins(5, 0, 0, 0);
@@ -205,4 +203,11 @@ void LDialog::init_titlebar()
 	m_titlebar_layout->addStretch();
 	m_titlebar_layout->addWidget(m_exit_button);
 	m_titlebar->setLayout(m_titlebar_layout);
+}
+
+void Layers::center(QWidget* upper_widget, QWidget* lower_widget)
+{
+	upper_widget->move(
+		lower_widget->x() + (lower_widget->width() - upper_widget->width()) / 2,
+		lower_widget->y() + (lower_widget->height() - upper_widget->height()) / 2);
 }

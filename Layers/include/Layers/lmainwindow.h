@@ -6,7 +6,6 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lthemeeditordialog.h"
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -23,33 +22,37 @@ class LMainWindowTitlebar;
 	The image above shows how the main window appears in the *Layers Demo*
 	application.
 
-	## Titlebar
-
-	The main window contains a titlebar with an LTabBar for navigating between
-	the window's central widgets and LButton widgets for window management.
-	There is also a special titlebar button called the *settings button*,
-	labeled with a gear icon, that opens the window's LSettingsMenu central
-	widget.
-
 	## Central Widgets
 
-	Central widgets are widgets that appear underneath the window's titlebar.
-	The active central widget takes up a majority of the window's available
-	space.
+	Central widgets are widgets that appear underneath the window's titlebar
+	and take up a majority of the window's visible space. Multiple central
+	widgets can be opened at a time, but only one visible, so there is a
+	corresponding tab in the titlebar for each open central widget to give the
+	user a way to switch between them.
 
-	To set a central widget, use the set_central_widget() function. For
+	To open a central widget, use the open_central_widget() function. For
 	example:
 
 	~~~~~~~~~~~~~{.c}
-	set_central_widget(new LayersDemo);
+	open_central_widget(new LayersDemo,
+		LGraphic(":/images/layers.imgseq", QSize(35, 35)));
 	~~~~~~~~~~~~~
 
-	The example above shows how the central widget is set in the *Layers Demo*
-	application.
+	The example above shows how the LayersDemo central widget is set in
+	the *Layers Demo* application.
 
-	## Exiting the Application
+	## Titlebar
 
-	Exiting the main window exits the whole application.
+	The main window contains a titlebar with an LTabBar for swapping between
+	central widgets and LButton widgets for window management.
+	
+	There is a special titlebar button called the *settings button*, labeled
+	with a gear icon, that opens a LSettingsMenu as a central widget.
+
+	## Closing the Application
+
+	The user can close the application by clicking on the *exit button* in the
+	window's titlebar, or by closing all of the central widget tabs.
 */
 class LAYERS_EXPORT LMainWindow : public LWidget
 {
@@ -62,31 +65,27 @@ public:
 	LMainWindow(QWidget* parent = nullptr);
 
 	/*!
-		Moves *dialog* to the center of the window.
+		Opens *central_widget* and associates it with a tab in the window's
+		titlebar.
 	*/
-	void center_dialog(QDialog* dialog);
+	void open_central_widget(QWidget* central_widget);
 
 	/*!
-		Sets *central_widget* to be the main window's central widget. 
-	*/
-	void set_central_widget(LWidget* central_widget);
+		Opens *central_widget* and associates it with a tab in the window's
+		titlebar.
 
+		The *tab_icon_graphic* is the graphic given to the tab's icon.
+	*/
+	void open_central_widget(
+		QWidget* central_widget, const LGraphic& tab_icon_graphic);
+
+	/*!
+		Updates the main window.
+
+		This function overrides LThemeable::update() to adjust the window's
+		layout according to the border thickness and margins.
+	*/
 	virtual void update() override;
-
-public slots:
-	/*!
-		Closes the widget specified by *index*.
-	*/
-	void close_widget(int index);
-
-	/*!
-		Opens the specified *widget*.
-
-		The *name* and *icon* parameters are used to create the tab that
-		corresponds to the widget.
-	*/
-	void open_widget(
-		LWidget* widget, const QString& name, LGraphic* icon = nullptr);
 
 protected:
 	virtual bool nativeEvent(
@@ -95,27 +94,22 @@ protected:
 private slots:
 	void new_theme_clicked();
 
-	void open_widget_changed(int old_index, int new_index);
-
 private:
 	void init_attributes();
 	void init_layout();
-	void init_themes_widget_connections();
 	void init_titlebar_connections();
 
-	QVBoxLayout* m_main_layout{ new QVBoxLayout };
+	void _open_central_widget(QWidget* central_widget);
 
-	QList<QWidget*> m_opened_widgets;
+	void set_active_central_widget(QWidget* central_widget);
+
+	QVBoxLayout* m_main_layout{ new QVBoxLayout };
 
 	LMainWindowTitlebar* m_titlebar;
 
 	LWidget* m_separator{ new LWidget };
 
-	LWidget* m_central_widget{ nullptr };
-
-	LSettingsMenu* m_settings_menu;
-
-	LThemeEditorDialog* m_theme_editor_dialog{ new LThemeEditorDialog };
+	QList<QWidget*> m_central_widgets;
 };
 LAYERS_NAMESPACE_END
 

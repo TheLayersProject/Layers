@@ -6,16 +6,16 @@ using Layers::LThemeable;
 LAttributeMapView::LAttributeMapView(QWidget* parent) :
 	QTreeView(parent)
 {
-	set_name("Attribute Map View");
+	setObjectName("Attribute Map View");
 
 	setHeaderHidden(true);
 	setHorizontalScrollBar(m_horizontal_scrollbar);
 	setModel(m_model);
 	setVerticalScrollBar(m_vertical_scrollbar);
 
-	m_horizontal_scrollbar->set_name("Horizontal ScrollBar");
+	m_horizontal_scrollbar->setObjectName("Horizontal ScrollBar");
 
-	m_vertical_scrollbar->set_name("Vertical ScrollBar");
+	m_vertical_scrollbar->setObjectName("Vertical ScrollBar");
 
 	update();
 }

@@ -37,7 +37,8 @@ void LTabBar::set_current_index(int index)
 		if (old_index != -1)
 			m_tabs[old_index]->status_states()->set_state("Inactive");
 
-		m_tabs[index]->status_states()->set_state("Active");
+		if (index != -1)
+			m_tabs[index]->status_states()->set_state("Active");
 	}
 }
 
@@ -56,10 +57,11 @@ void LTabBar::init_layout()
 
 void LTabBar::_add_tab(LTab* tab)
 {
-	tab->set_name("Tabs");
+	tab->setObjectName("Tabs");
 
-	if (m_current_theme_item)
-		tab->apply_theme(m_current_theme_item->find_item("Tabs"));
+	if (current_theme_item())
+		tab->apply_theme_item(
+			current_theme_item()->find_item(tab->objectName()));
 
 	m_tabs.append(tab);
 	m_tab_layout->addWidget(tab);

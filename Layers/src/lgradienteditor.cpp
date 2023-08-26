@@ -14,7 +14,7 @@ LGradientEditor::LGradientEditor(
 	init_attributes(gradient_stops);
 	init_items(gradient_stops);
 	init_add_stop_buttons();
-	set_name("Gradient Editor");
+	setObjectName("Gradient Editor");
 	installEventFilter(this);
 	setMinimumHeight(80);
 	setMouseTracking(true);
@@ -177,7 +177,7 @@ void LGradientEditor::init_add_stop_buttons()
 		LButton* add_stop_button = new LButton(
 			LGraphic(":/images/new_theme.svg", QSize(14, 14)), this);
 		add_stop_button->show();
-		add_stop_button->set_name("Add Stop Buttons");
+		add_stop_button->setObjectName("Add Stop Buttons");
 		add_stop_button->set_padding(0);
 		add_stop_button->setFixedSize(40, 40);
 		m_add_stop_buttons.append(add_stop_button);
@@ -199,9 +199,10 @@ void LGradientEditor::init_add_stop_buttons()
 				update_positions();
 			});
 
-		if (m_current_theme_item)
-			add_stop_button->apply_theme(
-				m_current_theme_item->find_item("Add Stop Buttons"));
+		if (current_theme_item())
+			add_stop_button->apply_theme_item(
+				current_theme_item()->find_item(
+					add_stop_button->objectName()));
 	}
 }
 

@@ -31,12 +31,12 @@ QStringList LThemeItem::attribute_group_names()
 	QStringList attribute_group_names;
 
 	for (LAttribute* attr : m_attributes)
-		if (attr->name().contains("."))
+		if (attr->objectName().contains("."))
 		{
-			QString group_name = attr->name().split(".").first();
+			QString group_name = attr->objectName().split(".").first();
 
 			if (!attribute_group_names.contains(group_name))
-				attribute_group_names.append(attr->name().split(".").first());
+				attribute_group_names.append(attr->objectName().split(".").first());
 		}
 
 	return attribute_group_names;
@@ -51,7 +51,7 @@ LAttributeMap LThemeItem::attributes(const QString& type_name)
 
 	for (LAttribute* attr : m_attributes)
 		if (type_name == attr->typeName())
-			attrs[attr->name()] = attr;
+			attrs[attr->objectName()] = attr;
 
 	return attrs;
 }

@@ -83,6 +83,7 @@
     <ClInclude Include="include\Layers\lthemeablebox.h" />
     <ClInclude Include="src\lgradienteditoritem.h" />
     <ClInclude Include="include\Layers\ltheme.h" />
+    <ClInclude Include="include\Layers\lpaint.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />

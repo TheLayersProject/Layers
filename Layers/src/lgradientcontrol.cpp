@@ -30,8 +30,10 @@ bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 		if (mouse_event->button() & Qt::LeftButton)
 		{
 			LGradientDialog gradient_dialog(m_fill->as<QGradientStops>());
-			gradient_dialog.apply_theme(
+			gradient_dialog.apply_theme_item(
 				activeTheme()->find_item(gradient_dialog.path()));
+
+			center(&gradient_dialog, window());
 
 			if (gradient_dialog.exec())
 			{

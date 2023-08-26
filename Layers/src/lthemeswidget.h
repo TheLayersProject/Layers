@@ -7,6 +7,8 @@
 #include <Layers/lthemecombobox.h>
 
 LAYERS_NAMESPACE_BEGIN
+class LThemeEditorDialog;
+
 class LThemesWidget : public LWidget
 {
 	Q_OBJECT
@@ -50,6 +52,8 @@ private:
 	LWidget* m_spacer_2{ new LWidget };
 
 	QMetaObject::Connection m_theme_buttons_handler_connection;
+
+	LThemeEditorDialog* m_theme_editor_dialog{ nullptr };
 };
 LAYERS_NAMESPACE_END
 

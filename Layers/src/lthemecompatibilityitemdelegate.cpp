@@ -8,7 +8,7 @@ using Layers::LThemeCompatibilityItemDelegate;
 LThemeCompatibilityItemDelegate::LThemeCompatibilityItemDelegate(QObject* parent) :
 	LGridlineItemDelegate(parent)
 {
-	m_check_svg->set_name("Checkmark Svg");
+	m_check_svg->setObjectName("Checkmark Svg");
 }
 
 void LThemeCompatibilityItemDelegate::paint(

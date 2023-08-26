@@ -19,7 +19,7 @@ QVariant LAttributeMapModel::data(const QModelIndex& index, int role) const
 		return QVariant();
 
 	else if (role == Qt::DisplayRole)
-		return get_item(index)->attribute()->name();
+		return get_item(index)->attribute()->objectName();
 
 	else if (role == Qt::UserRole)
 		return QVariant::fromValue(get_item(index)->attribute());

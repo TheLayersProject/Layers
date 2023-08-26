@@ -12,144 +12,101 @@ LAYERS_NAMESPACE_BEGIN
 class LGraphic;
 
 /*!
-	The LThemeable class is designed to be inherited alongside QWidget classes
-	to provide them functionality to apply Layers themes.
+	LThemeable is intended to be inherited alongside QWidget classes to
+	provide them with functionality to apply *Layers* themes (see LTheme and
+	LThemeItem).
 
-	Before a theme can be applied to a themeable, some setup is required.
+	The terms *themeable* and *widget* are often interchangeable
+	throughout *Layers* since most *Layers* widgets inherit LThemeable. The
+	term *themeable widget* is also used.
 
-	## Populate the Attribute Map
+	Themeables recognize the QObject hierarchy. A parent-child relationship
+	between two *widgets* is also a parent-child relationship between
+	two *themeables*, as long as the widget-classes inherit LThemeable. They
+	also recognize any child LAttribute objects owned by their widget
+	counterparts. Attributes owned by themeable widgets are
+	called *widget attributes*.
 
-	Themeables need to store a map of pointers to all attributes and attribute
-	groups associated with them. Without this map, themeables would have no way
-	of accessing the attributes they are supposed to apply theme values to.
+	Child themeables can be obtained through child_themeables(), and child
+	attributes can be obtained through child_attributes().
 
-	Attributes and attribute groups are typically declared as member variables
-	in classes that implement %LThemeable. These subclasses will need to
-	populate the map with pointers to these variables. The map is accessible
-	through a protected member variable called *m_attrs*.
-		
-	~~~~~~~~~~~~~{.c}
-	// Example from LThemeableBox::init_attributes()
+	## Themeable Paths
 
-	m_attrs.insert({
-		{ "border", &m_border },
-		{ "corner_radii", &m_corner_radii },
-		{ "Fill", &m_fill },
-		{ "margins", &m_margins }
-	});
-	~~~~~~~~~~~~~
+	A themeable path is a string that contains the names of the widgets
+	that make up the themeable's hierarchy, as well as the themeable's name,
+	separated by a '/'. The following is an example of a themeable path:
 
-	## LThemeable Tags
+		App/Main Window/Settings Menu
 
-	![LThemeable Tag Example](themeable_tag_example.png)
+	Themeable paths are used to match themeables with the correct LThemeItem
+	objects whose paths should be the same. So, the above example would also be
+	the path of the theme-item containing data for the *Settings Menu* in an
+	LTheme.
 
-	A themeable tag is an identifier used to identify a particular themeable.
+	## Applying Theme Items
 
-	### Setting a Name
-
-	The primary component of the themeable tag is the themeable's name which is
-	appended to the end of the tag. By default, themeables are nameless, so
-	<b>it is important to remember to set themeable names since they are
-	required for tag construction</b>. You can do this using set_name():
-
-	~~~~~~~~~~~~~{.c}
-	// Example from LDialog::init_titlebar()
-
-	m_exit_button->set_name("Exit Button");
-	~~~~~~~~~~~~~
-
-	### Prefix Assignment
-
-	Tag prefixes consist of the names of the parent themeables in the widget
-	hierarchy.
-
-	Prefix assignment is handled by calling assign_tag_prefixes(). It works
-	recursively to assign prefixes to associated child themeables. It should be
-	called by top-level widgets, such as windows and dialogs.
-		
-	<b>You will NOT need to call assign_tag_prefixes() if your themeable is
-	initialized as a child of a top-level widget that already calls it</b>.
-	However, if your themeable is not a child of a top-level widget during its
-	initialization, and instead, your themeable is initialized after the
-	top-level widget at the top of its hierarchy, then you will need to
-	manually call assign_tag_prefixes().
-
-	### Constructing and Caching the Tag
-
-	Once a name and any necessary tag prefixes have been assigned, a tag can be
-	constructed. Tag construction is done automatically after the first call to
-	tag() (typically during the first apply_theme() call). The tag is cached,
-	so any subsequent calls to tag() will return the cached tag.
-
-	## Applying Themes
-
-	Once the attribute map has been populated and conditions for tag
-	construction are met, a LTheme can be applied. This is done by calling
-	apply_theme() and passing the theme as an argument.
-
-	Themes store values labeled under themeable tags. When a theme is applied,
-	the themeable obtains its data from the theme by passing along its tag.
-
-	apply_theme() works recursively to apply the theme to the caller and to the
-	child themeables in the caller's hierarchy. <b>As long as your themeable is
-	part of the hierarchy of a top-level widget that is known by the
-	LApplication, you will not need to call apply_theme() manually</b>.
-
-	## Copying Attribute Values to Themes
-
-	After a user makes changes to a custom theme, they will likely want to
-	apply those changes. They do this by clicking on the apply button in the
-	LThemeEditor. This causes copy_attribute_values_to() to be called on the
-	theme editor's active preview widget, passing along the active theme.
-
-	copy_attribute_values_to() copies attribute values of the caller and of
-	child themeables in the caller's hierarchy to the provided theme. It is
-	effectively the reverse of applying a theme.
-
-	## LThemeable Entanglement
-
-	A themeable can be *linked* with another themeable. This is handled by
-	entangle_with() and works by entangling all of caller's attributes with the
-	attributes of the argument themeable.
-
-	It is important to note that entangle_with() will only entangle attributes
-	whose pointers have been stored in *m_attrs*.
-
-	This should only be done with themeables that are of the same type.
-
-	Example of %LThemeable Entanglement:
+	A theme item is applied to a themeable through apply_theme_item(). This
+	sets the item's *theme attributes* to the themeable's widget attributes.
+	
+	In most cases, you will not have to manually call apply_theme_item() as
+	long as the themeable is already a part of the application's QObject
+	hierarchy when the application's theme changes.
+	
+	However, if a themeable is initialized *after* the application's theme has
+	been set, you may need to manually call apply_theme_item(). In these cases,
+	it is usually helpful to obtain the parent themeable's current theme item
+	using the protected member variable m_current_theme_item, and then call
+	LThemeItem::find_item() to obtain the desired theme item to apply. The
+	following is an example:
 
 	~~~~~~~~~~~~~{.c}
-	LButton* control_button = new LButton("");
-	LButton* button_1 = new LButton("Button 1");
-	LButton* button_2 = new LButton("Button 2");
-	LButton* button_3 = new LButton("Button 3");
+	// From LThemeEditorDialog:
 
-	button_1->entangle_with(control_button);
-	button_2->entangle_with(control_button);
-	button_3->entangle_with(control_button);
-
-	control_button->fill()->set_value(QColor(Qt::green));
-
-	// After setting the fill of control_button to green, the other 3 buttons
-	// will also have a green fill.
+	if (m_current_theme_item)
+			attr_editor->apply_theme_item(
+				m_current_theme_item->find_item("Attribute Editors"));
 	~~~~~~~~~~~~~
+	
+	### Sharing Theme Items
 
-	### Constrain Theme LApplication to One Entangled LThemeable
+	A themeable can share its theme item with other themeables. These other
+	themeables are called *share themeables* and can be added using
+	add_share_themeable(). When a theme item is applied to the original
+	themeable, the item is also applied to the share themeables.
 
-	Once one themeable has been linked with another, a theme can be applied
-	to a single one of them to change both. You will want to constrain theme
-	application to a single themeable in the entanglement relationship;
-	otherwise, you may get unexpected results.
+	This is useful for *recursive widgets* (widgets that have widgets of the
+	same type as children).
 
-	If you want to apply different values to two different themeables, they
-	shouldn't be linked in the first place.
+	## State Pools
+
+	A themeable can contain one or more LStatePool objects. A state pool
+	contains a group of states, with one of them being considered
+	the *active state* from that pool. To add a state pool to a themeable, use
+	add_state_pool(). Themeables typically share their state pools with their
+	children.
+
+	### Overriding Attributes with State Combinations
+
+	A list of all the active states make up the *state combination*, obtained
+	through state_combo(). The combination is used when obtaining attribute
+	values. If an attribute contains an override with a matching combination,
+	the override's value is used instead. See LAttribute for more information
+	on *attribute overriding*.
 */
 class LAYERS_EXPORT LThemeable
 {
 public:
-	~LThemeable();
+	/*!
+		Adds *themeable* to the list of share themeables.
+	*/
+	void add_share_themeable(LThemeable* themeable);
 
+	/*!
+		Adds *state_pool* to the themeable.
+
+		Also adds the state pool to child themeables if *include_children* is
+		true, which is the default.
+	*/
 	void add_state_pool(LStatePool* state_pool, bool include_children = true);
 
 	/*!
@@ -157,14 +114,14 @@ public:
 
 		A name must be set with set_name() before themes can be applied.
 
-		The theme should contain a map of attributes pertaining to this
-		themeable.
-
 		This function works recursively to apply the theme to the children in
-		the caller's hierarchy.
+		the themeable's hierarchy.
 	*/
-	virtual void apply_theme(LThemeItem* theme_item);
+	virtual void apply_theme_item(LThemeItem* theme_item);
 
+	/*!
+		Returns a list of child attributes.
+	*/
 	QList<LAttribute*> child_attributes(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
@@ -174,62 +131,48 @@ public:
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
-	void clear_theme();
+	/*!
+		Returns a pointer to the themeable's currently applied theme item.
 
+		See also: apply_theme_item()
+	*/
 	LThemeItem* current_theme_item() const;
 
 	/*!
-		Returns a pointer to the themeable's icon.
-			
-		Returns nullptr if no icon has been set.
+		Returns a string representing the themeable's path.
 	*/
-	LGraphic* icon() const;
-
-	/*!
-		Returns a pointer to the name of this themeable.
-
-		Returns nullptr if no name has been set.
-	*/
-	QString* name() const;
-
 	QString path();
 
-	LThemeable* parent_themeable();
-
 	/*!
-		Sets an icon for the themeable; replaces it if one already exists.
+		Returns a list containing pointers to the state pools associated with
+		the themeable.
+
+		See also: LStatePool
 	*/
-	void set_icon(const LGraphic& icon);
-
-	/*!
-		Sets the name of this themeable.
-			
-		If a name already exists, it is replaced.
-	*/
-	void set_name(const QString& name);
-
-	void share_theme_item_with(LThemeable* themeable);
-
 	QList<LStatePool*> state_pools() const;
 
 	/*!
-		Returns a QStringList containing the available states of this themeable.
+		Returns a QStringList containing the available state_combo of this
+		themeable.
 
-		The themeable's available states are a sum of the available states of
-		the themeable's attributes.
+		The themeable's available state_combo are a sum of the available
+		state_combo of the themeable's attributes.
 	*/
-	QStringList states() const;
+	QStringList state_combo() const;
 
+	/*!
+		Updates the themeable.
+	*/
 	virtual void update();
 
-protected:
+private:
+	LThemeable* _parent_themeable();
+
+	QString _name();
+
 	LThemeItem* m_current_theme_item{ nullptr };
 
-	LGraphic* m_icon{ nullptr };
-
-	QString* m_name{ nullptr };
-
-	QList<LThemeable*> m_sharing_with_themeables;
+	QList<LThemeable*> m_share_themeables;
 
 	QList<LStatePool*> m_state_pools;
 };

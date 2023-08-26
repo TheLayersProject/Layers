@@ -10,9 +10,9 @@ LHeaderView::LHeaderView(Qt::Orientation orientation, QWidget* parent) :
 	update();
 
 	if (orientation == Qt::Horizontal)
-		set_name("Horizontal Header");
+		setObjectName("Horizontal Header");
 	else
-		set_name("Vertical Header");
+		setObjectName("Vertical Header");
 }
 
 void LHeaderView::update()

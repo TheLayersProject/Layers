@@ -19,7 +19,7 @@ class LAYERS_EXPORT LThemeEditorDialog : public LDialog
 public:
 	LThemeEditorDialog(QWidget* parent = nullptr);
 
-	virtual void apply_theme(LThemeItem* theme_item) override;
+	virtual void apply_theme_item(LThemeItem* theme_item) override;
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;

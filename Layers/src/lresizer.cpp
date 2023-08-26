@@ -14,7 +14,7 @@ LResizer::LResizer(LSizeDimension resize_dimension, QWidget* parent) :
 {
 	add_state_pool(m_select_states);
 	installEventFilter(this);
-	set_name("Resizer");
+	setObjectName("Resizer");
 
 	m_select_states->set_state("Unselected");
 
@@ -29,7 +29,7 @@ LResizer::LResizer(LSizeDimension resize_dimension, QWidget* parent) :
 		m_icon_size = QSize(10, 26);
 	}
 
-	m_icon_svg->set_name("Icon Svg");
+	m_icon_svg->setObjectName("Icon Svg");
 }
 
 void LResizer::set_widget(QWidget* widget, int lower_limit, int upper_limit)

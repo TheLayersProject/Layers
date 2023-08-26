@@ -10,7 +10,7 @@ LComboBoxItemDelegate::LComboBoxItemDelegate(QObject* parent) :
 {
 	add_state_pool(m_select_states);
 	init_attributes();
-	set_name("Items");
+	setObjectName("Items");
 }
 
 QPainterPath LComboBoxItemDelegate::background_path(

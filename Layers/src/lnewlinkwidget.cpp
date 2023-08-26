@@ -7,7 +7,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 	LWidget(parent)
 {
 	init_layout();
-	set_name("New Link Widget");
+	setObjectName("New Link Widget");
 	setFixedHeight(357);
 
 	connect(m_theme_view, &LThemeView::selection_changed,
@@ -38,7 +38,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 	m_splitter->addWidget(m_theme_view);
 	m_splitter->addWidget(m_attr_map_view);
 
-	m_path_editor->set_name("Path Editor");
+	m_path_editor->setObjectName("Path Editor");
 	m_path_editor->set_font_size_f(10.5);
 	m_path_editor->setFixedHeight(30);
 	m_path_editor->setSizePolicy(
@@ -50,7 +50,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 			m_apply_link_button->set_disabled();
 		});
 
-	m_apply_link_button->set_name("Apply Link Button");
+	m_apply_link_button->setObjectName("Apply Link Button");
 	m_apply_link_button->set_font_size_f(10.5);
 	m_apply_link_button->set_padding(6);
 	m_apply_link_button->setFixedHeight(30);
@@ -67,7 +67,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 			deleteLater();
 		});
 
-	m_cancel_button->set_name("Cancel Button");
+	m_cancel_button->setObjectName("Cancel Button");
 	m_cancel_button->set_font_size_f(10.5);
 	m_cancel_button->set_padding(6);
 	m_cancel_button->setFixedHeight(30);

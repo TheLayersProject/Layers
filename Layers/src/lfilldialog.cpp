@@ -10,11 +10,11 @@ LFillDialog::LFillDialog(QWidget* parent) :
 	init_attributes();
 	init_layout();
 	set_icon(LGraphic(":/images/fill_icon.svg", QSize(22, 20)));
-	set_name("Fill Dialog");
+	setObjectName("Fill Dialog");
 	setFixedSize(165, 125);
 
-	m_color_control->set_name("Color Control");
-	m_gradient_control->set_name("Gradient Control");
+	m_color_control->setObjectName("Color Control");
+	m_gradient_control->setObjectName("Gradient Control");
 
 	connect(m_color_control, &LColorControl::color_changed,
 		[this] { done(QDialog::Accepted); });
@@ -23,7 +23,7 @@ LFillDialog::LFillDialog(QWidget* parent) :
 		[this] { done(QDialog::Accepted); });
 
 	m_fill_type_toggle->setFixedHeight(85);
-	m_fill_type_toggle->set_name("Fill Type Toggle");
+	m_fill_type_toggle->setObjectName("Fill Type Toggle");
 
 	connect(m_fill_type_toggle, &LToggleSwitch::toggled_event,
 		[this](bool toggled)
@@ -61,14 +61,14 @@ LFillDialog::LFillDialog(QWidget* parent) :
 	m_color_label->set_font_size(14);
 	m_color_label->setFixedHeight(40);
 	m_color_label->setGraphicsEffect(m_color_label_opacity);
-	m_color_label->set_name("Color Label");
+	m_color_label->setObjectName("Color Label");
 
 	m_gradient_label_opacity->setOpacity(1.0);
 
 	m_gradient_label->set_font_size(14);
 	m_gradient_label->setFixedHeight(40);
 	m_gradient_label->setGraphicsEffect(m_gradient_label_opacity);
-	m_gradient_label->set_name("Gradient Label");
+	m_gradient_label->setObjectName("Gradient Label");
 }
 
 void LFillDialog::set_attribute(LAttribute* attribute)

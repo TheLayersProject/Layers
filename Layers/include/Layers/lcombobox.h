@@ -7,6 +7,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lpaint.h"
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -105,14 +106,11 @@ public:
 	virtual void update() override;
 
 protected:
-	/*!
-		Returns a QPainterPath that represents the background.
-	*/
-	QPainterPath background_path() const;
-
 	virtual bool eventFilter(QObject* object, QEvent* event) override;
 
 	bool is_view_positioned_above() const;
+
+	void paint_box(QPainter* painter);
 
 	virtual void paintEvent(QPaintEvent* event) override;
 

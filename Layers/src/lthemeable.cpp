@@ -10,50 +10,62 @@ using Layers::LStatePool;
 using Layers::LThemeItem;
 using Layers::LThemeable;
 
-LThemeable::~LThemeable()
+void LThemeable::add_share_themeable(LThemeable* themeable)
 {
-	if (m_name)
-		delete m_name;
+	if (themeable)
+	{
+		if (m_current_theme_item)
+			themeable->apply_theme_item(m_current_theme_item);
 
-	if (m_icon)
-		delete m_icon;
+		m_share_themeables.append(themeable);
+	}
 }
 
 void LThemeable::add_state_pool(LStatePool* state_pool, bool include_children)
 {
 	m_state_pools.append(state_pool);
 
-	state_pool->connect(state_pool, &LStatePool::changed, [this]
-		{ update(); });
+	state_pool->connect(state_pool, &LStatePool::changed,
+		[this] { update(); });
 
 	if (include_children)
 		for (LThemeable* child_themeable : child_themeables())
 			child_themeable->add_state_pool(state_pool, include_children);
 }
 
-void LThemeable::apply_theme(LThemeItem* theme_item)
+void LThemeable::apply_theme_item(LThemeItem* theme_item)
 {
-	if (!m_name)
-		qDebug() << "Unable to apply theme. "
-			"You must apply a name to the widget first.";
-	else if (theme_item && *m_name == theme_item->name())
+	if (theme_item)
 	{
-		m_current_theme_item = theme_item;
+		if (_name() == theme_item->name())
+		{
+			m_current_theme_item = theme_item;
 
-		if (!theme_item->attributes().isEmpty())
-			for (LAttribute* attr : child_attributes())
-				if (theme_item->attributes().contains(attr->name()))
-					attr->set_theme_attribute(
-						theme_item->attributes()[attr->name()]);
+			if (!theme_item->attributes().isEmpty())
+				for (LAttribute* attr : child_attributes())
+					if (theme_item->attributes().contains(attr->objectName()))
+						attr->set_theme_attribute(
+							theme_item->attributes()[attr->objectName()]);
 
-		if (!theme_item->children().isEmpty())
-			for (LThemeable* child_t : child_themeables())
-				if (child_t->m_name)
-					if (theme_item->children().contains(*child_t->name()))
-						child_t->apply_theme(theme_item->children()[*child_t->name()]);
+			if (!theme_item->children().isEmpty())
+				for (LThemeable* child_t : child_themeables())
+					if (theme_item->children().contains(child_t->_name()))
+						child_t->apply_theme_item(
+							theme_item->children()[child_t->_name()]);
 
-		for (LThemeable* themeable : m_sharing_with_themeables)
-			themeable->apply_theme(m_current_theme_item);
+			for (LThemeable* themeable : m_share_themeables)
+				themeable->apply_theme_item(m_current_theme_item);
+		}
+	}
+	else
+	{
+		m_current_theme_item = nullptr;
+
+		for (LAttribute* attr : child_attributes())
+			attr->clear_theme_attribute();
+
+		for (LThemeable* child_t : child_themeables())
+			child_t->apply_theme_item(nullptr);
 	}
 }
 
@@ -69,7 +81,8 @@ QList<LAttribute*> LThemeable::child_attributes(Qt::FindChildOptions options)
 		if (options == Qt::FindChildrenRecursively)
 		{
 			for (LThemeable* child_themeable : child_themeables())
-				child_attributes.append(child_themeable->child_attributes(options));
+				child_attributes.append(
+					child_themeable->child_attributes(options));
 		}
 	}
 
@@ -78,6 +91,17 @@ QList<LAttribute*> LThemeable::child_attributes(Qt::FindChildOptions options)
 
 QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 {
+	/*	IMPORTANT NOTE:
+		This function only calls QObject::findChildren() with
+		Qt::FindDirectChildrenOnly, even if *options* is
+		Qt::FindChildrenRecursively. Recursion is handled after finding
+		the direct children and calling child_themeables() on them.
+
+		This is important because child_themeables() is a virtual function and
+		calling QObject::findChildren() with Qt::FindChildrenRecursively will
+		cause subsequent child_themeables() calls to be missed.
+	*/
+
 	QList<LThemeable*> child_themeables;
 
 	if (QObject* object = dynamic_cast<QObject*>(this))
@@ -87,12 +111,14 @@ QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 
 		for (QObject* child_object : child_objects)
 		{
-			if (LThemeable* child_themeable = dynamic_cast<LThemeable*>(child_object))
+			if (LThemeable* child_themeable =
+				dynamic_cast<LThemeable*>(child_object))
 			{
 				child_themeables.append(child_themeable);
 
 				if (options == Qt::FindChildrenRecursively)
-					child_themeables.append(child_themeable->child_themeables(options));
+					child_themeables.append(
+						child_themeable->child_themeables(options));
 			}
 		}
 	}
@@ -100,91 +126,31 @@ QList<LThemeable*> LThemeable::child_themeables(Qt::FindChildOptions options)
 	return child_themeables;
 }
 
-void LThemeable::clear_theme()
-{
-	if (m_current_theme_item)
-	{
-		m_current_theme_item = nullptr;
-
-		for (LAttribute* attr : child_attributes())
-			attr->clear_theme_attribute();
-
-		for (LThemeable* child_t : child_themeables())
-			child_t->clear_theme();
-	}
-}
-
 LThemeItem* LThemeable::current_theme_item() const
 {
 	return m_current_theme_item;
-}
-
-LGraphic* LThemeable::icon() const
-{
-	return m_icon;
-}
-
-QString* LThemeable::name() const
-{
-	return m_name;
 }
 
 QString LThemeable::path()
 {
 	QString path;
 
-	if (LThemeable* parent_t = parent_themeable())
-		path = parent_t->path();
-	else if (QWidget* widget = dynamic_cast<QWidget*>(this))
-		if (widget->isWindow())
-			path = "App";
-
-	if (name())
+	if (QObject* object = dynamic_cast<QObject*>(this))
 	{
+		if (LThemeable* parent_t = _parent_themeable())
+			path = parent_t->path();
+		else if (QWidget* widget = dynamic_cast<QWidget*>(this))
+			if (widget->isWindow())
+				path = "App";
+
+
 		if (path.isEmpty())
-			path.append(*name());
+			path.append(object->objectName());
 		else
-			path.append("/" + *name());
+			path.append("/" + object->objectName());
 	}
 
 	return path;
-}
-
-LThemeable* LThemeable::parent_themeable()
-{
-	if (QObject* object = dynamic_cast<QObject*>(this))
-		if (QObject* parent = object->parent())
-			if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent))
-				return parent_themeable;
-
-	return nullptr;
-}
-
-void LThemeable::set_icon(const LGraphic& icon)
-{
-	if (m_icon)
-		delete m_icon;
-
-	m_icon = new LGraphic(icon);
-}
-
-void LThemeable::set_name(const QString& name)
-{
-	if (m_name)
-		delete m_name;
-
-	m_name = new QString(name);
-}
-
-void LThemeable::share_theme_item_with(LThemeable* themeable)
-{
-	if (themeable)
-	{
-		if (m_current_theme_item)
-			themeable->apply_theme(m_current_theme_item);
-
-		m_sharing_with_themeables.append(themeable);
-	}
 }
 
 QList<LStatePool*> LThemeable::state_pools() const
@@ -192,18 +158,39 @@ QList<LStatePool*> LThemeable::state_pools() const
 	return m_state_pools;
 }
 
-QStringList LThemeable::states() const
+QStringList LThemeable::state_combo() const
 {
-	QStringList states;
+	QStringList state_combo;
 
 	for (LStatePool* state_pool : m_state_pools)
-		states.append(state_pool->state());
+		state_combo.append(state_pool->state());
 
-	return states;
+	return state_combo;
 }
 
 void LThemeable::update()
 {
 	if (QWidget* widget = dynamic_cast<QWidget*>(this))
 		widget->update();
+}
+
+LThemeable* LThemeable::_parent_themeable()
+{
+	if (QObject* object = dynamic_cast<QObject*>(this))
+		if (QObject* parent = object->parent())
+			if (LThemeable* parent_themeable =
+				dynamic_cast<LThemeable*>(parent))
+			{
+				return parent_themeable;
+			}
+
+	return nullptr;
+}
+
+QString LThemeable::_name()
+{
+	if (QObject* object = dynamic_cast<QObject*>(this))
+		return object->objectName();
+
+	return QString();
 }

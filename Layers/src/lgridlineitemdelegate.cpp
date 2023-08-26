@@ -8,7 +8,7 @@ using Layers::LGridlineItemDelegate;
 LGridlineItemDelegate::LGridlineItemDelegate(QObject* parent) :
 	QStyledItemDelegate(parent)
 {
-	set_name("Cells");
+	setObjectName("Cells");
 }
 
 LAttribute* LGridlineItemDelegate::grid_fill() const

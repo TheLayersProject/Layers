@@ -5,7 +5,7 @@ using Layers::LScrollBar;
 
 LScrollBar::LScrollBar(QWidget* parent) : QScrollBar(parent)
 {
-	set_name("ScrollBar");
+	setObjectName("ScrollBar");
 	update();
 }
 

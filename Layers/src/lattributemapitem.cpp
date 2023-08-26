@@ -14,7 +14,7 @@ LAttributeMapItem::LAttributeMapItem(
 
 void LAttributeMapItem::append_child(LAttributeMapItem* child)
 {
-	m_child_attr_items[child->m_attribute->name()] = child;
+	m_child_attr_items[child->m_attribute->objectName()] = child;
 }
 
 LAttribute* LAttributeMapItem::attribute() const

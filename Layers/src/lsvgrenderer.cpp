@@ -61,7 +61,7 @@ void LSvgRenderer::update()
 		if (m_svg_elements[i].startsWith("<path") &&
 			m_svg_elements[i].contains("id="))
 		{
-			QString color_name = m_color->as<QColor>(states()).name();
+			QString color_name = m_color->as<QColor>(state_combo()).name();
 
 			m_svg_elements[i].replace(
 				m_svg_elements[i].indexOf("fill=") + 6, 7, color_name);

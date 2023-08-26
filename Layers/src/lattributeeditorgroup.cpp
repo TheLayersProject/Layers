@@ -12,10 +12,10 @@ LAttributeEditorGroup::LAttributeEditorGroup(
 	init_attributes();
 
 	m_label->setText(name);
-	m_label->set_name("Label");
+	m_label->setObjectName("Label");
 	m_label->set_font_size(12);
 
-	m_collapse_button->set_name("Collapse Button");
+	m_collapse_button->setObjectName("Collapse Button");
 
 	connect(m_collapse_button, &LButton::clicked, [this] {
 		if (m_collapsed)

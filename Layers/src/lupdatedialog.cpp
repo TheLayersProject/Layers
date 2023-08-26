@@ -18,19 +18,19 @@ LUpdateDialog::LUpdateDialog(
 {
 	setFixedSize(525, 300);
 	set_icon(LGraphic(":/images/update_icon.svg"));
-	set_name("Update Dialog");
+	setObjectName("Update Dialog");
 
-	m_remind_me_later_button->set_name("Remind Me Later Button");
+	m_remind_me_later_button->setObjectName("Remind Me Later Button");
 	m_remind_me_later_button->set_padding(8, 6, 8, 6);
 	connect(m_remind_me_later_button, &LButton::clicked,
 		[this] { done(QDialog::Rejected); });
 
-	m_update_button->set_name("Update Button");
+	m_update_button->setObjectName("Update Button");
 	m_update_button->set_padding(8, 6, 8, 6);
 	connect(m_update_button, &LButton::clicked,
 		[this] { done(QDialog::Accepted); });
 
-	m_message_label->set_name("Message Label");
+	m_message_label->setObjectName("Message Label");
 	m_message_label->set_font_size(15);
 	m_message_label->setWordWrap(true);
 

@@ -11,12 +11,17 @@ using Layers::LAttributeMap;
 
 LAttribute::LAttribute(
 	const QString& name, QObject* parent) :
-	m_name{ name }, QObject(parent) { }
+	QObject(parent)
+{
+	setObjectName(name);
+}
 
 LAttribute::LAttribute(
 	const QString& name, QVariant value, QObject* parent) :
-	m_value{ value }, m_name{ name }, QObject(parent)
+	m_value{ value }, QObject(parent)
 {
+	setObjectName(name);
+
 	connect(this, &LAttribute::changed, [this]
 	{
 		if (this->parent())
@@ -27,8 +32,10 @@ LAttribute::LAttribute(
 
 LAttribute::LAttribute(
 	const QString& name, QJsonObject json_object, QObject* parent) :
-	m_name{ name }, m_json_object{ json_object }, QObject(parent)
+	m_json_object{ json_object }, QObject(parent)
 {
+	setObjectName(name);
+
 	if (json_object.contains("linked_to"))
 	{
 		set_link_path(json_object.value("linked_to").toString());
@@ -102,10 +109,11 @@ LAttribute::LAttribute(
 
 LAttribute::LAttribute(const LAttribute& attribute) :
 	m_link_path{ attribute.m_link_path },
-	m_name{ attribute.m_name },
 	m_value{ attribute.m_value },
 	QObject()
 {
+	setObjectName(attribute.objectName());
+
 	if (!attribute.m_overrides.isEmpty())
 		for (LAttribute* override_attr : attribute.m_overrides)
 		{
@@ -113,7 +121,7 @@ LAttribute::LAttribute(const LAttribute& attribute) :
 
 			copy_override_attr->setParent(this);
 
-			m_overrides[override_attr->name()] = copy_override_attr;
+			m_overrides[override_attr->objectName()] = copy_override_attr;
 		}
 }
 
@@ -220,21 +228,16 @@ QString LAttribute::link_path() const
 	return m_link_path;
 }
 
-QString LAttribute::name() const
-{
-	return m_name;
-}
-
-LAttribute* LAttribute::override_attribute(const QStringList& states)
+LAttribute* LAttribute::override_attribute(const QStringList& state_combo)
 {
 	for (LAttribute* override_attr : m_overrides)
 	{
-		QStringList override_states = override_attr->name().split(":");
+		QStringList override_states = override_attr->objectName().split(":");
 
 		bool qualifies = true;
 
 		for (const QString& override_state : override_states)
-			if (!states.contains(override_state))
+			if (!state_combo.contains(override_state))
 				qualifies = false;
 
 		if (qualifies)
@@ -307,14 +310,14 @@ QString LAttribute::path() const
 	if (parent())
 	{
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
-			return parent_attr->path() + "." + m_name;
+			return parent_attr->path() + "." + objectName();
 		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
-			return parent_themeable->path() + "/" + m_name;
+			return parent_themeable->path() + "/" + objectName();
 		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
-			return parent_theme_item->path() + "/" + m_name;
+			return parent_theme_item->path() + "/" + objectName();
 	}
 		
-	return m_name;
+	return objectName();
 }
 
 QJsonObject LAttribute::to_json_object()
@@ -336,7 +339,7 @@ QJsonObject LAttribute::to_json_object()
 
 		for (LAttribute* override_attr : m_overrides)
 			overrides_json_object.insert(
-				override_attr->name(), override_attr->to_json_object());
+				override_attr->objectName(), override_attr->to_json_object());
 
 		json_object.insert("overrides", overrides_json_object);
 	}
@@ -389,17 +392,17 @@ QJsonValue LAttribute::to_json_value()
 	return json_value;
 }
 
-QString LAttribute::typeName(const QStringList& states)
+QString LAttribute::typeName(const QStringList& state_combo)
 {
 	if (m_theme_attr)
-		return m_theme_attr->typeName(states);
+		return m_theme_attr->typeName(state_combo);
 
-	if (!m_overrides.isEmpty() && !states.isEmpty())
-		if (LAttribute* override_attr = override_attribute(states))
+	if (!m_overrides.isEmpty() && !state_combo.isEmpty())
+		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->typeName();
 
 	if (m_link_attr)
-		return m_link_attr->typeName(states);
+		return m_link_attr->typeName(state_combo);
 
 	return m_value.typeName();
 }

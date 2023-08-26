@@ -20,10 +20,10 @@ LThemeCompatibilityCautionDialog::LThemeCompatibilityCautionDialog(QWidget* pare
 	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
 	setWindowFlags(windowFlags() | Qt::Tool | Qt::WindowStaysOnTopHint);
 	set_icon(LGraphic(":/images/caution.png"));
-	set_name("Theme Compatibility Caution Dialog");
+	setObjectName("Theme Compatibility Caution Dialog");
 
 	m_message_label->set_font_size(14);
-	m_message_label->set_name("Message Label");
+	m_message_label->setObjectName("Message Label");
 	m_message_label->setText(
 		layersApp->name() + " has not been implemented in this theme. An "
 		"implementation will be inherited from the last compatible ancestor "
@@ -31,7 +31,7 @@ LThemeCompatibilityCautionDialog::LThemeCompatibilityCautionDialog(QWidget* pare
 	m_message_label->setWordWrap(true);
 
 	m_table_label->set_font_size(14);
-	m_table_label->set_name("Table Label");
+	m_table_label->setObjectName("Table Label");
 	m_table_label->setText("Lineage");
 
 	init_lineage_table();
@@ -110,7 +110,7 @@ void LThemeCompatibilityCautionDialog::init_lineage_table()
 
 	m_lineage_table->setItemDelegate(item_delegate);
 
-	m_lineage_table->set_name("Theme Lineage Table");
+	m_lineage_table->setObjectName("Theme Lineage Table");
 	m_lineage_table->setModel(&m_theme_lineage_model);
 
 	// Set 'Theme' column to fized size:

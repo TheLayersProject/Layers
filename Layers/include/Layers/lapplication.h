@@ -196,6 +196,8 @@ public slots:
 	void rename_theme(const QString& old_name, const QString& new_name);
 
 private:
+	void _clear_theme();
+
 	void init_directories();
 	void init_fonts();
 	void init_themes();

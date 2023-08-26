@@ -15,10 +15,10 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	init_attributes();
 	init_layout();
 	set_icon(LGraphic(":/images/color_icon.png"));
-	set_name("Color Dialog");
+	setObjectName("Color Dialog");
 	setFixedSize(315, 400);
 
-	m_apply_button->set_name("Apply Button");
+	m_apply_button->setObjectName("Apply Button");
 	m_apply_button->set_font_size_f(10.5);
 	m_apply_button->set_padding(6);
 	m_apply_button->setFixedHeight(30);
@@ -26,9 +26,9 @@ LColorDialog::LColorDialog(QWidget* parent) :
 	connect(m_apply_button, &LButton::clicked,
 		[this] { done(QDialog::Accepted); });
 
-	m_color_unit_label->set_name("Color Unit Label");
+	m_color_unit_label->setObjectName("Color Unit Label");
 
-	m_color_name_editor->set_name("Color Name Editor");
+	m_color_name_editor->setObjectName("Color Name Editor");
 	m_color_name_editor->setFixedSize(100, 40);
 	//QRegularExpression rx("^#[0-9a-f]{3}([0-9a-f]{3})?$")
 	//m_color_name_line_editor->set_validator(
@@ -45,37 +45,37 @@ LColorDialog::LColorDialog(QWidget* parent) :
 					QColor("#" + m_color_name_editor->text()->as<QString>()));
 		});
 
-	m_radio_button_hue->set_name("Hue Radio Button");
+	m_radio_button_hue->setObjectName("Hue Radio Button");
 	connect(m_radio_button_hue, &LRadioButton::clicked, [this]
 		{ m_color_plane->set_z_dimension(HSV::Hue); });
 
-	m_radio_button_sat->set_name("Saturation Radio Button");
+	m_radio_button_sat->setObjectName("Saturation Radio Button");
 	connect(m_radio_button_sat, &LRadioButton::clicked, [this]
 		{ m_color_plane->set_z_dimension(HSV::Saturation); });
 
-	m_radio_button_val->set_name("Value Radio Button");
+	m_radio_button_val->setObjectName("Value Radio Button");
 	connect(m_radio_button_val, &LRadioButton::clicked, [this]
 		{ m_color_plane->set_z_dimension(HSV::Value); });
 
-	m_label_hue->set_name("Hue Label");
+	m_label_hue->setObjectName("Hue Label");
 
-	m_label_hue_unit->set_name("Hue Unit Label");
+	m_label_hue_unit->setObjectName("Hue Unit Label");
 
-	m_label_sat->set_name("Saturation Label");
+	m_label_sat->setObjectName("Saturation Label");
 
-	m_label_sat_unit->set_name("Saturation Unit Label");
+	m_label_sat_unit->setObjectName("Saturation Unit Label");
 
-	m_label_val->set_name("Value Label");
+	m_label_val->setObjectName("Value Label");
 
-	m_label_val_unit->set_name("Value Unit Label");
+	m_label_val_unit->setObjectName("Value Unit Label");
 
-	m_line_editor_hue->set_name("Hue Line Editor");
+	m_line_editor_hue->setObjectName("Hue Line Editor");
 	m_line_editor_hue->setFixedSize(55, 40);
 
-	m_line_editor_sat->set_name("Saturation Line Editor");
+	m_line_editor_sat->setObjectName("Saturation Line Editor");
 	m_line_editor_sat->setFixedSize(55, 40);
 
-	m_line_editor_val->set_name("Value Line Editor");
+	m_line_editor_val->setObjectName("Value Line Editor");
 	m_line_editor_val->setFixedSize(55, 40);
 
 	connect(m_line_editor_hue, &LLineEditor::text_edited,
@@ -104,7 +104,7 @@ LColorDialog::LColorDialog(QWidget* parent) :
 				}
 		});
 
-	m_z_slider->set_name("Z-Slider");
+	m_z_slider->setObjectName("Z-Slider");
 }
 
 LColorDialog::~LColorDialog()

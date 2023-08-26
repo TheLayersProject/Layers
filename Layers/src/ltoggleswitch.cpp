@@ -13,9 +13,9 @@ LToggleSwitch::LToggleSwitch(bool vertical, QWidget* parent) :
 
 	installEventFilter(this);
 	setFixedSize(40, 40);
-	set_name("Toggle Switch");
+	setObjectName("Toggle Switch");
 
-	m_square->set_name("Square");
+	m_square->setObjectName("Square");
 	m_square->setFixedSize(10, 10);
 
 	update_spacer_size();

@@ -69,6 +69,12 @@ private:
 	LButton* m_exit_button = new LButton(
 		LGraphic(":/images/exit.svg", QSize(20, 20)));
 };
+
+/*!
+	Moves *upper_widget* to the center of *lower_widget*.
+*/
+LAYERS_EXPORT void center(QWidget* upper_widget, QWidget* lower_widget);
+
 LAYERS_NAMESPACE_END
 
 #endif // LDIALOG_H

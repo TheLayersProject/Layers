@@ -74,14 +74,14 @@ void LTab::init()
 	{
 		m_icon_label->setAlignment(Qt::AlignCenter);
 		m_icon_label->setMinimumWidth(42);
-		m_icon_label->set_name("Icon");
+		m_icon_label->setObjectName("Icon");
 	}
 
 	m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_text_label->set_name("Text Label");
+	m_text_label->setObjectName("Text Label");
 	m_text_label->set_font_size(12);
 
-	m_close_button->set_name("Close Button");
+	m_close_button->setObjectName("Close Button");
 
 	connect(m_close_button, &LButton::clicked,
 		[this] { emit closed(); });

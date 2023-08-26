@@ -95,7 +95,7 @@ struct LAYERS_EXPORT LThemeLineageData
 
 	Once implementation files have been loaded, theme attributes with valid
 	link paths have their links resolved. See LAttribute for more information
-	on attribute linking.
+	on *attribute linking*.
 
 	## Theme Lineage
 

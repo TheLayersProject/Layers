@@ -1399,8 +1399,7 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = img/themeable_tag_example.png \
-                         img/attribute_editor.png \
+HTML_EXTRA_FILES       = img/attribute_editor.png \
                          img/links_widget.png \
                          img/links_view.png \
                          img/attribute_editor_unlinked.png \
@@ -1443,7 +1442,9 @@ HTML_EXTRA_FILES       = img/themeable_tag_example.png \
                          img/splitter.mp4 \
                          img/slider.png \
                          img/tab.png \
-                         img/tab_bar.png
+                         img/tab_bar.png \
+                         img/table_view.png \
+                         img/themeable_box.png
 
 # The HTML_COLORSTYLE tag can be used to specify if the generated HTML output
 # should be rendered with a dark or light theme.

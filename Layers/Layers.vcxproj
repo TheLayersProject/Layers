@@ -96,6 +96,7 @@
     <QtMoc Include="include\Layers\lbutton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Layers\lpaint.h" />
     <ClInclude Include="src\lgradienteditoritem.h" />
     <QtMoc Include="src\lnewlinkwidget.h" />
     <QtMoc Include="src\llinksview.h" />

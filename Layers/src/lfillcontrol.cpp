@@ -14,7 +14,7 @@ LFillControl::LFillControl(QWidget* parent) :
 
 	installEventFilter(this);
 	setFixedSize(40, 40);
-	set_name("Fill Control");
+	setObjectName("Fill Control");
 }
 
 LFillControl::~LFillControl()
@@ -39,7 +39,7 @@ bool LFillControl::eventFilter(QObject* object, QEvent* event)
 			if (mouse_event->button() & Qt::LeftButton)
 			{
 				LFillDialog fill_dialog;
-				fill_dialog.apply_theme(
+				fill_dialog.apply_theme_item(
 					activeTheme()->find_item(fill_dialog.path()));
 				fill_dialog.move(mapToGlobal(QPoint(0, 0)));
 				fill_dialog.set_attribute(m_fill);

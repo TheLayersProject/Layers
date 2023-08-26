@@ -1,12 +1,17 @@
 #include "LayersDemoWindow.h"
 
+#include <Layers/lgraphic.h>
+
 #include "LayersDemo.h"
 
+using Layers::LGraphic;
 using Layers::LThemeable;
 
 LayersDemoWindow::LayersDemoWindow(QWidget* parent) :
 	LMainWindow(parent)
 {
-	set_central_widget(new LayersDemo);
+	open_central_widget(new LayersDemo,
+		LGraphic(":/images/layers.imgseq", QSize(35, 35)));
+
 	setWindowIcon(QIcon(":/images/layers_2d.png"));
 }

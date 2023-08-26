@@ -4,8 +4,6 @@
 #include <QPainterPath>
 #include <QWidget>
 
-#include <Layers/lcalculate.h>
-
 using Layers::LAttribute;
 using Layers::LThemeableBox;
 
@@ -17,6 +15,62 @@ LAttribute* LThemeableBox::border_fill() const
 LAttribute* LThemeableBox::border_thickness() const
 {
 	return m_border_thickness;
+}
+
+QPainterPath LThemeableBox::box_path(
+	const QRect& box_rect, const LCornerRadii& corner_radii)
+{
+	QPainterPath path;
+
+	int corner_diameter_tl = corner_radii.top_left * 2;
+	int corner_diameter_tr = corner_radii.top_right * 2;
+	int corner_diameter_bl = corner_radii.bottom_left * 2;
+	int corner_diameter_br = corner_radii.bottom_right * 2;
+
+	/* Move to starting point */
+	path.moveTo(box_rect.topLeft() + QPoint(0, corner_radii.top_left));
+
+	/* Arc TL */
+	path.arcTo(
+		QRect(box_rect.topLeft(),
+			lsize(corner_diameter_tl)),
+		180, -90);
+
+	/* Line Top */
+	path.lineTo(
+		box_rect.right() - corner_radii.top_right,
+		box_rect.top());
+
+	/* Arc TR */
+	path.arcTo(
+		QRect(box_rect.topRight() - QPoint(corner_diameter_tr, 0),
+			lsize(corner_diameter_tr)),
+		90, -90);
+
+	/* Line Right */
+	path.lineTo(
+		box_rect.right(),
+		box_rect.bottom() - corner_radii.bottom_right);
+
+	/* Arc BR */
+	path.arcTo(
+		QRect(box_rect.bottomRight() - lpoint(corner_diameter_br),
+			lsize(corner_diameter_br)),
+		0, -90);
+
+	/* Line Bottom */
+	path.lineTo(box_rect.bottomLeft() + QPoint(corner_radii.bottom_left, 0));
+
+	/* Arc BL */
+	path.arcTo(
+		QRect(box_rect.bottomLeft() - QPoint(0, corner_diameter_bl),
+			lsize(corner_diameter_bl)),
+		-90, -90);
+
+	/* Line Left */
+	path.lineTo(box_rect.topLeft() + QPoint(0, corner_radii.top_left));
+
+	return path;
 }
 
 LAttribute* LThemeableBox::corner_radii_bottom_left() const
@@ -98,114 +152,93 @@ void LThemeableBox::init_attributes()
 
 void LThemeableBox::paint(QWidget* widget)
 {
-	// CREATE VARIABLES:
+	QPainter painter(widget);
+	painter.setRenderHint(QPainter::Antialiasing);
 
-	// The active states of the themeable
-	QStringList s = states();
+	QStringList s = state_combo();
 
-	int border_thickness = m_border_thickness->as<double>(s);
+	int border_thickness = (widget->isMaximized()) ?
+		0 : m_border_thickness->as<double>(s);
 
 	int margin_left = m_margins_left->as<double>(s);
 	int margin_top = m_margins_top->as<double>(s);
 	int margin_right = m_margins_right->as<double>(s);
 	int margin_bottom = m_margins_bottom->as<double>(s);
 
-	int widget_width = widget->width();
-	int widget_height = widget->height();
+	QSize draw_size = QSize(
+		widget->width() - margin_left - margin_right,
+		widget->height() - margin_top - margin_bottom);
 
-	int draw_width = widget_width - margin_left - margin_right;
-	int draw_height = widget_height - margin_top - margin_bottom;
+	LCornerRadii border_cr;
+	LCornerRadii fill_cr;
 
-	/*	NOTE:
-		cr = corner radius
-		tl = top-left
-	*/
+	border_cr.top_left = (widget->isMaximized()) ?
+		0 : m_corner_radii_top_left->as<double>(s);
 
-	int cr_tl = m_corner_radii_top_left->as<double>(s);
-	int cr_tr = m_corner_radii_top_right->as<double>(s);
-	int cr_bl = m_corner_radii_bottom_left->as<double>(s);
-	int cr_br = m_corner_radii_bottom_right->as<double>(s);
+	border_cr.top_right = (widget->isMaximized()) ?
+		0 : m_corner_radii_top_right->as<double>(s);
 
-	if (widget->isMaximized())
-	{
-		border_thickness = 0;
-		cr_tl = 0;
-		cr_tr = 0;
-		cr_bl = 0;
-		cr_br = 0;
-	}
+	border_cr.bottom_left = (widget->isMaximized()) ?
+		0 : m_corner_radii_bottom_left->as<double>(s);
 
-	int tl_background_radius = (border_thickness) ?
-		inner_radius(cr_tl, border_thickness) : cr_tl;
-	int tr_background_radius = (border_thickness) ?
-		inner_radius(cr_tr, border_thickness) : cr_tr;
-	int bl_background_radius = (border_thickness) ?
-		inner_radius(cr_bl, border_thickness) : cr_bl;
-	int br_background_radius = (border_thickness) ?
-		inner_radius(cr_br, border_thickness) : cr_br;
+	border_cr.bottom_right = (widget->isMaximized()) ?
+		0 : m_corner_radii_bottom_right->as<double>(s);
 
-	// CREATE PATHS:
+	fill_cr.top_left = (border_thickness) ?
+		inner_radius(border_cr.top_left, border_thickness) :
+		border_cr.top_left;
 
-	// - Create Border Path
-	QPainterPath border_path;
-	border_path.moveTo(margin_left, margin_top + cr_tl);
-	border_path.arcTo(QRect(margin_left, margin_top, cr_tl * 2, cr_tl * 2), 180, -90);
-	border_path.lineTo(margin_left + draw_width - cr_tr, margin_top);
-	border_path.arcTo(QRect(margin_left + draw_width - cr_tr * 2, margin_top, cr_tr * 2, cr_tr * 2), 90, -90);
-	border_path.lineTo(margin_left + draw_width, margin_top + draw_height - cr_br);
-	border_path.arcTo(QRect(margin_left + draw_width - cr_br * 2, margin_top + draw_height - cr_br * 2, cr_br * 2, cr_br * 2), 0, -90);
-	border_path.lineTo(margin_left + cr_bl, margin_top + draw_height);
-	border_path.arcTo(QRect(margin_left, margin_top + draw_height - cr_bl * 2, cr_bl * 2, cr_bl * 2), -90, -90);
-	border_path.lineTo(margin_left, margin_top + cr_tl);
+	fill_cr.top_right = (border_thickness) ?
+		inner_radius(border_cr.top_right, border_thickness) :
+		border_cr.top_right;
 
-	// - Create Background Path
-	QPainterPath background_path;
-	background_path.moveTo(margin_left + border_thickness, margin_top + border_thickness + tl_background_radius);
-	background_path.arcTo(QRect(margin_left + border_thickness, margin_top + border_thickness, tl_background_radius * 2, tl_background_radius * 2), 180, -90);
-	background_path.lineTo(margin_left + draw_width - tr_background_radius - border_thickness, margin_top + border_thickness);
-	background_path.arcTo(QRect(margin_left + draw_width - tr_background_radius * 2 - border_thickness, margin_top + border_thickness, tr_background_radius * 2, tr_background_radius * 2), 90, -90);
-	background_path.lineTo(margin_left + draw_width - border_thickness, margin_top + draw_height - br_background_radius - border_thickness);
-	background_path.arcTo(QRect(margin_left + draw_width - br_background_radius * 2 - border_thickness, margin_top + draw_height - br_background_radius * 2 - border_thickness, br_background_radius * 2, br_background_radius * 2), 0, -90);
-	background_path.lineTo(margin_left + border_thickness + bl_background_radius, margin_top + draw_height - border_thickness);
-	background_path.arcTo(QRect(margin_left + border_thickness, margin_top + draw_height - bl_background_radius * 2 - border_thickness, bl_background_radius * 2, bl_background_radius * 2), -90, -90);
-	background_path.lineTo(margin_left + border_thickness, margin_top + border_thickness + tl_background_radius);
+	fill_cr.bottom_left = (border_thickness) ?
+		inner_radius(border_cr.bottom_left, border_thickness) :
+		border_cr.bottom_left;
 
-	border_path = border_path - background_path;
+	fill_cr.bottom_right = (border_thickness) ?
+		inner_radius(border_cr.bottom_right, border_thickness) :
+		border_cr.bottom_right;
 
-	// DRAW:
+	QRect border_rect = QRect(
+		QPoint(margin_left, margin_top),
+		draw_size + lsize(1));
 
-	QPainter painter(widget);
-	painter.setRenderHint(QPainter::Antialiasing);
+	QRect fill_rect = QRect(
+		border_rect.topLeft() + lpoint(border_thickness),
+		draw_size + lsize(1) - lsize(border_thickness * 2));
 
-	// - Draw Border
+	QPainterPath fill_path = box_path(fill_rect, fill_cr);
+	QPainterPath border_path = box_path(border_rect, border_cr) - fill_path;
+
+	/* Draw Border */
 	if (border_thickness)
 	{
 		if (m_border_fill->typeName(s) == "QList<std::pair<double,QColor>>")
 		{
-			QLinearGradient border_fill_gradient;
+			QLinearGradient border_fill_grad;
 
-			border_fill_gradient.setStart(margin_left, 0);
-			border_fill_gradient.setFinalStop(widget_width - margin_right, 0);
-			border_fill_gradient.setStops(m_border_fill->as<QGradientStops>(s));
+			border_fill_grad.setStart(border_rect.left(), 0);
+			border_fill_grad.setFinalStop(border_rect.right() + 1, 0);
+			border_fill_grad.setStops(m_border_fill->as<QGradientStops>(s));
 
-			painter.fillPath(border_path, border_fill_gradient);
+			painter.fillPath(border_path, border_fill_grad);
 		}
-		else painter.fillPath(border_path, m_border_fill->as<QColor>(s));
+		else
+			painter.fillPath(border_path, m_border_fill->as<QColor>(s));
 	}
 
-	// - Draw Background
+	/* Draw Fill */
 	if (m_fill->typeName(s) == "QList<std::pair<double,QColor>>")
 	{
-		QLinearGradient fill_gradient;
+		QLinearGradient fill_grad;
 
-		fill_gradient.setStart(margin_left + border_thickness, 0);
-		fill_gradient.setFinalStop(widget_width - (border_thickness * 2) - margin_right, 0);
-		fill_gradient.setStops(m_fill->as<QGradientStops>(s));
+		fill_grad.setStart(fill_rect.left(), 0);
+		fill_grad.setFinalStop(fill_rect.right() + 1, 0);
+		fill_grad.setStops(m_fill->as<QGradientStops>(s));
 
-		painter.fillPath(background_path, fill_gradient);
+		painter.fillPath(fill_path, fill_grad);
 	}
 	else
-	{
-		painter.fillPath(background_path, m_fill->as<QColor>(s));
-	}
+		painter.fillPath(fill_path, m_fill->as<QColor>(s));
 }

@@ -36,7 +36,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	QStringList s = states();
+	QStringList s = state_combo();
 
 	int border_thickness = m_border_thickness->as<int>(s);
 	qreal margin = m_margin->as<qreal>(s);

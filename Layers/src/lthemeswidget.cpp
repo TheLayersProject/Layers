@@ -1,6 +1,7 @@
 #include "lthemeswidget.h"
 
-#include "Layers/lapplication.h"
+#include <Layers/lapplication.h>
+#include <Layers/lthemeeditordialog.h>
 
 using Layers::LButton;
 using Layers::LTheme;
@@ -9,14 +10,12 @@ using Layers::LThemesWidget;
 
 LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 {
-	set_icon(LGraphic(":/images/panel_icon.svg", QSize(20, 20)));
-	set_name("Themes Widget");
+	setObjectName("Themes Widget");
 
-	m_theme_label->set_name("Theme Label");
+	m_theme_label->setObjectName("Theme Label");
 	m_theme_label->set_font_size(15);
 
-	m_theme_combobox->set_icon(LGraphic(":/images/combobox_icon.svg", QSize(21, 18)));
-	m_theme_combobox->set_name("Theme Combobox");
+	m_theme_combobox->setObjectName("Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
 		m_theme_combobox->addItem(theme);
@@ -49,18 +48,43 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 	if (!activeTheme()->editable())
 		show_custom_theme_buttons(false);
 
-	m_new_theme_button->set_name("New Theme Button");
+	m_new_theme_button->setObjectName("New Theme Button");
 
-	m_customize_theme_button->set_name("Customize Theme Button");
+	m_customize_theme_button->setObjectName("Customize Theme Button");
 
-	m_delete_theme_button->set_name("Delete Theme Button");
+	connect(m_customize_theme_button, &LButton::clicked,
+		[this]
+		{
+			if (!m_theme_editor_dialog)
+			{
+				m_theme_editor_dialog = new LThemeEditorDialog;
 
-	m_theme_info_button->set_name("Theme Info Button");
+				center(m_theme_editor_dialog, window());
 
-	m_separator_1->set_name("Separators");
+				m_theme_editor_dialog->apply_theme_item(
+					activeTheme()->find_item(
+						m_theme_editor_dialog->path()));
+
+				connect(m_theme_editor_dialog, &QDialog::finished,
+					[this]
+					{
+						m_theme_editor_dialog->deleteLater();
+						m_theme_editor_dialog = nullptr;
+					});
+			}
+
+			m_theme_editor_dialog->show();
+			m_theme_editor_dialog->raise();
+		});
+
+	m_delete_theme_button->setObjectName("Delete Theme Button");
+
+	m_theme_info_button->setObjectName("Theme Info Button");
+
+	m_separator_1->setObjectName("Separators");
 	m_separator_1->setFixedSize(1, 30);
 
-	m_separator_2->set_name("Separators");
+	m_separator_2->setObjectName("Separators");
 	m_separator_2->setFixedSize(1, 30);
 
 	m_spacer_1->setFixedWidth(12);

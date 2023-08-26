@@ -5,6 +5,7 @@
 #include <QPainter>
 
 #include <Layers/lcomboboxitemdelegate.h>
+#include <Layers/lthemeablebox.h>
 
 using Layers::LAttribute;
 using Layers::LComboBox;
@@ -120,50 +121,9 @@ LAttribute* LComboBox::text_color() const
 void LComboBox::update()
 {
 	QString style_sheet =
-		"QComboBox {"
-		"border: " + m_border_thickness->as<QString>() + "px "
-		"	solid " + m_border_fill->as<QColor>().name() + ";"
-		"color: " + m_text_color->as<QColor>().name() + ";"
-		"}"
-		
 		"QComboBox::drop-down { "
 		"width: 0px; "
 		"}";
-
-	QString corner_radius = m_corner_radius->as<QString>();
-
-	if (!view()->window()->isVisible())
-		style_sheet.append(
-			"QComboBox {"
-			"border-top-left-radius: " + corner_radius + "px;"
-			"border-top-right-radius: " + corner_radius + "px;"
-			"border-bottom-left-radius: " + corner_radius + "px;"
-			"border-bottom-right-radius: " + corner_radius + "px;"
-			"}");
-	else
-	{
-		if (is_view_positioned_above())
-			style_sheet.append(
-				"QComboBox {"
-				"border-top-left-radius: 0px;"
-				"border-top-right-radius: 0px;"
-				"border-bottom-left-radius: " + corner_radius + "px;"
-				"border-bottom-right-radius: " + corner_radius + "px;"
-				"}");
-		else
-			style_sheet.append(
-				"QComboBox {"
-				"border-top-left-radius: " + corner_radius + "px;"
-				"border-top-right-radius: " + corner_radius + "px;"
-				"border-bottom-left-radius: 0px;"
-				"border-bottom-right-radius: 0px;"
-				"}");
-	}
-
-	style_sheet.append(
-		"QComboBox {"
-		"background: " + m_fill->as<QColor>().name() + ";"
-		"}");
 
 	setStyleSheet(style_sheet);
 
@@ -181,84 +141,6 @@ void LComboBox::update()
 	QWidget::update();
 }
 
-QPainterPath LComboBox::background_path() const
-{
-	QPainterPath background_path;
-
-	int cr_tl = m_corner_radius->as<int>();
-	int cr_tr = cr_tl;
-	int cr_bl = cr_tl;
-	int cr_br = cr_tl;
-
-	if (view()->window()->isVisible())
-	{
-		if (is_view_positioned_above())
-		{
-			cr_tl = 0;
-			cr_tr = 0;
-		}
-		else
-		{
-			cr_bl = 0;
-			cr_br = 0;
-		}
-	}
-
-	int doubled_cr_tl = cr_tl * 2;
-	int doubled_cr_tr = cr_tr * 2;
-	int doubled_cr_bl = cr_bl * 2;
-	int doubled_cr_br = cr_br * 2;
-
-	// Move to start point
-	background_path.moveTo(0, cr_tl);
-
-	// Arc Top-Left
-	background_path.arcTo(
-		QRect(
-			0, 0,
-			doubled_cr_tl, doubled_cr_tl
-		),
-		180, -90);
-
-	// Line Top
-	background_path.lineTo(width() - cr_tr, 0);
-
-	// Arc Top-Right
-	background_path.arcTo(
-		QRect(
-			width() - doubled_cr_tr, 0,
-			doubled_cr_tr, doubled_cr_tr
-		),
-		90, -90);
-
-	// Line Right
-	background_path.lineTo(width(), height() - cr_br);
-
-	// Arc Bottom-Right
-	background_path.arcTo(
-		QRect(
-			width() - doubled_cr_br, height() - doubled_cr_br,
-			doubled_cr_br, doubled_cr_br
-		),
-		0, -90);
-
-	// Line Bottom
-	background_path.lineTo(cr_bl, height());
-
-	// Arc Bottom-Left
-	background_path.arcTo(
-		QRect(
-			0, height() - doubled_cr_bl,
-			doubled_cr_bl, doubled_cr_bl
-		),
-		-90, -90);
-
-	// Line Left
-	background_path.lineTo(0, cr_tl);
-
-	return background_path;
-}
-
 bool LComboBox::eventFilter(QObject* object, QEvent* event)
 {
 	if (object == view()->window())
@@ -268,13 +150,102 @@ bool LComboBox::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
+void LComboBox::paint_box(QPainter* painter)
+{
+	if (!painter)
+		return;
+
+	QStringList s = state_combo();
+
+	int border_thickness = m_border_thickness->as<double>(s);
+
+	LCornerRadii border_cr;
+	LCornerRadii fill_cr;
+
+	border_cr.top_left = m_corner_radius->as<double>(s);
+	border_cr.top_right = border_cr.top_left;
+	border_cr.bottom_left = border_cr.top_left;
+	border_cr.bottom_right = border_cr.top_left;
+
+	if (view()->window()->isVisible())
+		if (is_view_positioned_above())
+		{
+			border_cr.top_left = 0;
+			border_cr.top_right = 0;
+		}
+		else
+		{
+			border_cr.bottom_left = 0;
+			border_cr.bottom_right = 0;
+		}
+
+	fill_cr.top_left = (border_thickness) ?
+		inner_radius(border_cr.top_left, border_thickness) :
+		border_cr.top_left;
+
+	fill_cr.top_right = (border_thickness) ?
+		inner_radius(border_cr.top_right, border_thickness) :
+		border_cr.top_right;
+
+	fill_cr.bottom_left = (border_thickness) ?
+		inner_radius(border_cr.bottom_left, border_thickness) :
+		border_cr.bottom_left;
+
+	fill_cr.bottom_right = (border_thickness) ?
+		inner_radius(border_cr.bottom_right, border_thickness) :
+		border_cr.bottom_right;
+
+	QRect border_rect = QRect(
+		QPoint(0, 0),
+		size() + lsize(1));
+
+	QRect fill_rect = QRect(
+		lpoint(border_thickness),
+		size() + lsize(1) - lsize(border_thickness * 2));
+
+	QPainterPath fill_path =
+		LThemeableBox::box_path(fill_rect, fill_cr);
+	QPainterPath border_path =
+		LThemeableBox::box_path(border_rect, border_cr) - fill_path;
+
+	/* Draw Border */
+	if (border_thickness)
+	{
+		if (m_border_fill->typeName(s) == "QList<std::pair<double,QColor>>")
+		{
+			QLinearGradient border_fill_grad;
+
+			border_fill_grad.setStart(border_rect.left(), 0);
+			border_fill_grad.setFinalStop(border_rect.right() + 1, 0);
+			border_fill_grad.setStops(m_border_fill->as<QGradientStops>(s));
+
+			painter->fillPath(border_path, border_fill_grad);
+		}
+		else
+			painter->fillPath(border_path, m_border_fill->as<QColor>(s));
+	}
+
+	/* Draw Fill */
+	if (m_fill->typeName(s) == "QList<std::pair<double,QColor>>")
+	{
+		QLinearGradient fill_gradient;
+
+		fill_gradient.setStart(fill_rect.left(), 0);
+		fill_gradient.setFinalStop(fill_rect.right() + 1, 0);
+		fill_gradient.setStops(m_fill->as<QGradientStops>(s));
+
+		painter->fillPath(fill_path, fill_gradient);
+	}
+	else
+		painter->fillPath(fill_path, m_fill->as<QColor>(s));
+}
+
 void LComboBox::paintEvent(QPaintEvent* event)
 {
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	// Draw background
-	painter.fillPath(background_path(), m_fill->as<QColor>());
+	paint_box(&painter);
 
 	QFont item_font = font();
 

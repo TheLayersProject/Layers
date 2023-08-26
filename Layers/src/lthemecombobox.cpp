@@ -17,7 +17,7 @@ LThemeComboBox::LThemeComboBox(QWidget* parent) :
 	setFixedSize(250, 60);
 	setModel(m_model);
 
-	m_compatibility_dialog->apply_theme(
+	m_compatibility_dialog->apply_theme_item(
 		activeTheme()->find_item(m_compatibility_dialog->path()));
 
 	connect(this, &QComboBox::highlighted, [this](int index)
@@ -77,13 +77,12 @@ bool LThemeComboBox::eventFilter(QObject* object, QEvent* event)
 
 void LThemeComboBox::paintEvent(QPaintEvent* event)
 {
-	LTheme* current_theme = currentData().value<LTheme*>();
-
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	// Draw background
-	painter.fillPath(background_path(), m_fill->as<QColor>());
+	LTheme* current_theme = currentData().value<LTheme*>();
+
+	paint_box(&painter);
 
 	QFont item_font = font();
 	QFont uuid_font(item_font.family(), 8);

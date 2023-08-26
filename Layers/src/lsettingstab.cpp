@@ -27,15 +27,13 @@ LSettingsTab::LSettingsTab(const LGraphic& icon, const QString& label_text, QWid
 	setMouseTracking(true);
 	setFixedHeight(60);
 
-	set_icon(LGraphic(":/images/settings_tab_icon.svg", QSize(20, 9)));
-	set_name("Setting Tab");
+	setObjectName("Setting Tab");
 
 	m_icon_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_icon_label->set_icon(icon);
-	m_icon_label->set_name("Icon Label");
+	m_icon_label->setObjectName("Icon Label");
 
 	m_text_label->setAttribute(Qt::WA_TransparentForMouseEvents);
-	m_text_label->set_name("Text Label");
+	m_text_label->setObjectName("Text Label");
 	m_text_label->set_font_size(14);
 }
 

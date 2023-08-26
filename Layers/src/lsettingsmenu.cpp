@@ -15,23 +15,21 @@ LSettingsMenu::LSettingsMenu(QWidget* parent) :
 {
 	init_layout();
 	setMouseTracking(true);
-	set_icon(LGraphic(":/images/settings_animated.svg", QSize(24, 24)));
-	set_name("Settings Menu");
+	setObjectName("Settings Menu");
 
 	//m_themes_settings_panel->hide();
 	m_themes_widget->setMouseTracking(true);
 	
 	// Add Themes Settings Tab
 	add_settings_tab(LGraphic(":/images/themes_icon.svg", QSize(25, 25)), "Themes");
-	m_settings_tabs.last()->set_name("Themes Settings Tab");
+	m_settings_tabs.last()->setObjectName("Themes Settings Tab");
 	//connect(m_settings_tabs.last(), &LSettingsTab::clicked, [this] { m_app_preferences_settings_panel->hide(); m_themes_settings_panel->show(); });
 
 	m_settings_tabs.first()->select_states()->set_state("Selected");
 
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
 	m_sidebar->setMouseTracking(true);
-	m_sidebar->set_icon(LGraphic(":/images/sidebar_icon.svg", QSize(20, 20)));
-	m_sidebar->set_name("Sidebar");
+	m_sidebar->setObjectName("Sidebar");
 	m_sidebar->fill()->set_value(QColor(Qt::lightGray));
 }
 

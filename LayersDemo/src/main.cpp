@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		LUpdateDialog update_dialog =
 			LUpdateDialog(app.version(), app.latest_version());
 
-		update_dialog.apply_theme(
+		update_dialog.apply_theme_item(
 			activeTheme()->find_item(update_dialog.path()));
 
 		if (update_dialog.exec())
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	}
 
 	LayersDemoWindow window;
-	window.apply_theme(activeTheme()->find_item(window.path()));
+	window.apply_theme_item(activeTheme()->find_item(window.path()));
 	window.show();
 
 	return app.exec();
