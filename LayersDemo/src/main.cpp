@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	LApplication app(argc, argv,
 		"Layers Demo",
 		QUuid("f97aae7f-2076-4918-93ce-19321584f675"),
-		new LGitHubRepo("huntermalm/Layers"));
+		new LGitHubRepo("TheLayersProject/Layers"));
 	app.set_version("0.16.0");
 
 	if (app.update_available())
