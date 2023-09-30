@@ -1,453 +1,92 @@
-<svg 
-	xmlns="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="500px" height="500px">
+<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ec2244" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="red_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 
-	<path id="red_out" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="orange_in" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="orange_out" fill-rule="evenodd" opacity="0" fill="#ec8b22" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="yellow_in" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="yellow_out" fill-rule="evenodd" opacity="0" fill="#ecea22" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="green_in" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="green_out" fill-rule="evenodd" opacity="0" fill="#3aec22" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="blue_in" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="blue_out" fill-rule="evenodd" opacity="0" fill="#228bec" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="indigo_in" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="indigo_out" fill-rule="evenodd" opacity="0" fill="#2227ec" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="violet_in" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="violet_out" fill-rule="evenodd" opacity="0" fill="#8622ec" transform="translate(100,100)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
-	
-	<path id="red_in" fill-rule="evenodd" opacity="0" fill="#ec2244" transform="translate(42,142)"
-		d="M40.000,-0.000 L260.000,-0.000 C282.091,-0.000 300.000,17.909 300.000,40.000 L300.000,260.000 C300.000,282.091 282.091,300.000 260.000,300.000 L40.000,300.000 C17.909,300.000 -0.000,282.091 -0.000,260.000 L-0.000,40.000 C-0.000,17.909 17.909,-0.000 40.000,-0.000 Z"/>
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ec8b22" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="red_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="red_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="red_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="red_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="orange_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="red_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 
-<animateTransform
-	xlink:href="#red_out"
-	id="red_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="0;red_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ecea22" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="orange_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="orange_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="orange_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="orange_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="yellow_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="orange_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 
-<animateTransform
-	xlink:href="#red_out"
-	id="red_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="0;red_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#3aec22" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="green_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 
-<animate
-	xlink:href="#red_out"
-	id="red_out_fade_anim"
-	attributeName="opacity"
-	begin="0;red_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#228bec" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="green_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="green_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="green_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="green_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="blue_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="green_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 
-<animateTransform
-	xlink:href="#orange_in"
-	id="orange_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="red_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#orange_in"
-	id="orange_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="red_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#orange_in"
-	id="orange_in_fade_anim"
-	attributeName="opacity"
-	begin="red_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#orange_out"
-	id="orange_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="orange_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#orange_out"
-	id="orange_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="orange_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#orange_out"
-	id="orange_out_fade_anim"
-	attributeName="opacity"
-	begin="orange_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#yellow_in"
-	id="yellow_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="orange_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#yellow_in"
-	id="yellow_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="orange_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#yellow_in"
-	id="yellow_in_fade_anim"
-	attributeName="opacity"
-	begin="orange_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#yellow_out"
-	id="yellow_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="yellow_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#yellow_out"
-	id="yellow_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="yellow_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#yellow_out"
-	id="yellow_out_fade_anim"
-	attributeName="opacity"
-	begin="yellow_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#green_in"
-	id="green_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="yellow_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#green_in"
-	id="green_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="yellow_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#green_in"
-	id="green_in_fade_anim"
-	attributeName="opacity"
-	begin="yellow_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#green_out"
-	id="green_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="green_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#green_out"
-	id="green_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="green_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#green_out"
-	id="green_out_fade_anim"
-	attributeName="opacity"
-	begin="green_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#blue_in"
-	id="blue_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="green_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#blue_in"
-	id="blue_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="green_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#blue_in"
-	id="blue_in_fade_anim"
-	attributeName="opacity"
-	begin="green_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#blue_out"
-	id="blue_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="blue_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#blue_out"
-	id="blue_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="blue_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#blue_out"
-	id="blue_out_fade_anim"
-	attributeName="opacity"
-	begin="blue_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#indigo_in"
-	id="indigo_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="blue_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#indigo_in"
-	id="indigo_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="blue_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#indigo_in"
-	id="indigo_in_fade_anim"
-	attributeName="opacity"
-	begin="blue_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#indigo_out"
-	id="indigo_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="indigo_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#indigo_out"
-	id="indigo_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="indigo_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#indigo_out"
-	id="indigo_out_fade_anim"
-	attributeName="opacity"
-	begin="indigo_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#violet_in"
-	id="violet_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="indigo_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#violet_in"
-	id="violet_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="indigo_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#violet_in"
-	id="violet_in_fade_anim"
-	attributeName="opacity"
-	begin="indigo_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
-
-<animateTransform
-	xlink:href="#violet_out"
-	id="violet_out_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="violet_in_translate_anim.end"
-	dur="0.666666666s"
-	values="100,100; 157,57"/>
-
-<animateTransform
-	xlink:href="#violet_out"
-	id="violet_out_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="violet_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1, 1; .95,.95"
-	additive="sum"/>
-
-<animate
-	xlink:href="#violet_out"
-	id="violet_out_fade_anim"
-	attributeName="opacity"
-	begin="violet_in_translate_anim.end"
-	dur="0.666666666s"
-	values="1;0"/>
-
-<animateTransform
-	xlink:href="#red_in"
-	id="red_in_translate_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="translate"
-	begin="violet_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="42,142; 100,100"/>
-
-<animateTransform
-	xlink:href="#red_in"
-	id="red_in_scale_anim"
-	attributeType="xml" 
-	attributeName="transform"
-	type="scale"
-	begin="violet_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="1.05, 1.05; 1,1"
-	additive="sum"/>
-
-<animate
-	xlink:href="#red_in"
-	id="red_in_fade_anim"
-	attributeName="opacity"
-	begin="violet_out_translate_anim.begin"
-	dur="0.666666666s"
-	values="0;1"/>
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#2227ec" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="indigo_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
+  
+  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#8622ec" opacity="0">
+    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
+      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
+      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
+      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+    <animate attributeName="y" from="12" to="0" dur="1.3333s"
+      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+    <animate id="violet_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
+      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+  </rect>
 </svg>
