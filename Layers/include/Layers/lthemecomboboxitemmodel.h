@@ -16,13 +16,13 @@ class LAYERS_EXPORT LThemeComboBoxItemModel : public QAbstractListModel
 public:
 	LThemeComboBoxItemModel(QObject* parent = nullptr);
 
-	void append(LTheme* value);
+	void append(LTheme* theme);
 
 	void clear();
 
 	virtual QVariant data(const QModelIndex& index, int role) const override;
 
-	virtual int rowCount(const QModelIndex& index) const override;
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 private:
 	QList<LTheme*> m_themes{ QList<LTheme*>() };

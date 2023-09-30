@@ -12,47 +12,20 @@
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LTableView Example](table_view.png)
-	
-	An LTableView is a QTableView and an LThemeable that displays items from a
-	model in the form of a table.
-*/
 class LAYERS_EXPORT LTableView : public QTableView, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a table view.
-	*/
 	LTableView(QWidget* parent = nullptr);
 
-	/*!
-		Returns a list of child themeables.
-
-		This function overrides LThemeable::child_themeables() to include the
-		table's item delegate as well as its children.
-	*/
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly) override;
 
-	/*!
-		Sets the item delegate of the table view.
-	*/
 	void setItemDelegate(QAbstractItemDelegate* item_delegate);
 
-	/*!
-		Updates the table view.
-
-		This function overrides LThemeable::update() to set the table view's
-		style sheet.
-	*/
 	virtual void update() override;
 
-	/*!
-		Updates the height of the table view.
-	*/
 	void update_height();
 
 private:

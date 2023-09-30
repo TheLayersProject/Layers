@@ -10,7 +10,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 	setObjectName("New Link Widget");
 	setFixedHeight(357);
 
-	connect(m_theme_view, &LThemeView::selection_changed,
+	connect(m_theme_view, &LThemeView::selected_theme_item_changed,
 		[this](LThemeItem* theme_item)
 		{
 			QStringList filter_paths = { m_attr->path() };

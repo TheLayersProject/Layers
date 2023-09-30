@@ -20,7 +20,7 @@ LThemeEditorDialog::LThemeEditorDialog(QWidget* parent) :
 	//m_theme_view->setObjectName("Theme View");
 	m_theme_view->setFixedWidth(298);
 
-	connect(m_theme_view, SIGNAL(selection_changed(LThemeItem*)),
+	connect(m_theme_view, SIGNAL(selected_theme_item_changed(LThemeItem*)),
 		this, SLOT(edit_theme_item(LThemeItem*)));
 
 	m_divider->setObjectName("Divider");

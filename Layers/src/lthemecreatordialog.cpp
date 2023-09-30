@@ -61,9 +61,9 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 		if (theme->has_implementation(layersApp->app_identifier()))
 		{
 			if (theme == activeTheme())
-				m_parent_theme_combobox->addItem(theme, true);
+				m_parent_theme_combobox->add_theme(theme, true);
 			else
-				m_parent_theme_combobox->addItem(theme);
+				m_parent_theme_combobox->add_theme(theme);
 		}
 
 	m_create_button->setObjectName("Create Button");

@@ -22,7 +22,7 @@ void LThemeLineageModel::clear()
 	}
 }
 
-int LThemeLineageModel::columnCount(const QModelIndex& index) const
+int LThemeLineageModel::columnCount(const QModelIndex& parent) const
 {
 	return 2;
 }
@@ -75,9 +75,9 @@ QVariant LThemeLineageModel::headerData(int section, Qt::Orientation orientation
 	}
 }
 
-int LThemeLineageModel::rowCount(const QModelIndex& index) const
+int LThemeLineageModel::rowCount(const QModelIndex& parent) const
 {
-	if (!index.isValid())
+	if (!parent.isValid())
 		return m_lineage_data.count();
 	else
 		return 0;

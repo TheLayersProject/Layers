@@ -23,15 +23,9 @@ public:
 
 	void set_theme_name(const QString& theme_name);
 
-protected:
-	/*!
-		Overrides the QWidget::eventFilter() to handle widget hover coloring
-	*/
-	//bool eventFilter(QObject* object, QEvent* event) override;
-
+private:
 	void init_attributes();
 
-private:
 	void init_layout();
 
 	void init_lineage_table();

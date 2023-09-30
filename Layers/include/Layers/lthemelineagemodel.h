@@ -20,7 +20,7 @@ public:
 
 	void clear();
 
-	virtual int columnCount(const QModelIndex& index) const override;
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 
 	virtual QVariant data(
 		const QModelIndex& index, int role) const override;
@@ -28,7 +28,7 @@ public:
 	virtual QVariant headerData(
 		int section, Qt::Orientation orientation, int role) const override;
 
-	virtual int rowCount(const QModelIndex& index) const override;
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 private:
 	QList<LThemeLineageData> m_lineage_data{ QList<LThemeLineageData>() };

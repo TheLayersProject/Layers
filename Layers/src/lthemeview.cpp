@@ -74,6 +74,6 @@ void LThemeView::selectionChanged(
 	QModelIndexList indexes = selected.indexes();
 
 	if (!indexes.isEmpty())
-		emit selection_changed(
+		emit selected_theme_item_changed(
 			indexes.first().data(Qt::UserRole).value<LThemeItem*>());
 }

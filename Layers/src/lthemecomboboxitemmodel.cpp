@@ -8,10 +8,10 @@ using Layers::LThemeComboBoxItemModel;
 LThemeComboBoxItemModel::LThemeComboBoxItemModel(QObject* parent) :
 	QAbstractListModel(parent) {}
 
-void LThemeComboBoxItemModel::append(LTheme* value)
+void LThemeComboBoxItemModel::append(LTheme* theme)
 {
 	beginInsertRows({}, m_themes.count(), m_themes.count());
-	m_themes.append(value);
+	m_themes.append(theme);
 	endInsertRows();
 }
 
@@ -39,9 +39,9 @@ QVariant LThemeComboBoxItemModel::data(const QModelIndex& index, int role) const
 	return QVariant();
 }
 
-int LThemeComboBoxItemModel::rowCount(const QModelIndex& index) const
+int LThemeComboBoxItemModel::rowCount(const QModelIndex& parent) const
 {
-	if (!index.isValid())
+	if (!parent.isValid())
 		return m_themes.count();
 	else
 		return 0;

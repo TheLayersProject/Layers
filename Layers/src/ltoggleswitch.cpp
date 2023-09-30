@@ -8,8 +8,9 @@ using Layers::LToggleSwitch;
 LToggleSwitch::LToggleSwitch(bool vertical, QWidget* parent) :
 	m_vertical{ vertical }, LWidget(parent)
 {
-	add_state_pool(m_toggle_states);
 	init_attributes();
+	init_layout();
+	add_state_pool(m_toggle_states);
 
 	installEventFilter(this);
 	setFixedSize(40, 40);
@@ -21,16 +22,7 @@ LToggleSwitch::LToggleSwitch(bool vertical, QWidget* parent) :
 	update_spacer_size();
 	m_spacer->hide();
 
-	init_layout();
-
 	m_toggle_states->set_state("Untoggled");
-}
-
-void LToggleSwitch::setFixedHeight(int h)
-{
-	LWidget::setFixedHeight(h);
-
-	update_spacer_size();
 }
 
 void LToggleSwitch::set_toggled(bool toggled)
@@ -40,6 +32,13 @@ void LToggleSwitch::set_toggled(bool toggled)
 	{
 		toggle();
 	}
+}
+
+void LToggleSwitch::setFixedHeight(int h)
+{
+	LWidget::setFixedHeight(h);
+
+	update_spacer_size();
 }
 
 void LToggleSwitch::toggle(bool emit_toggled_event)
@@ -87,14 +86,14 @@ bool LToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void LToggleSwitch::init_attributes()
 {
-	border_fill()->set_value(QColor(Qt::black));
-	border_fill()->create_override("Active", QColor("#6fc65b"));
+	border_fill()->set_value(QColor("#1e2023"));
+	border_fill()->create_override("Toggled", QColor("#6fc65b"));
 	border_thickness()->set_value(3.0);
 	corner_radii_top_left()->set_value(4.0);
 	corner_radii_top_right()->set_value(4.0);
 	corner_radii_bottom_left()->set_value(4.0);
 	corner_radii_bottom_right()->set_value(4.0);
-	m_fill->set_value(QColor(Qt::white));
+	m_fill->set_value(QColor("#00000000"));
 	m_fill->create_override("Toggled", QColor("#6fc65b"));
 	if (m_vertical)
 		set_margin(10.0);
@@ -108,7 +107,7 @@ void LToggleSwitch::init_attributes()
 	m_square->corner_radii_top_right()->set_value(2.0);
 	m_square->corner_radii_bottom_left()->set_value(2.0);
 	m_square->corner_radii_bottom_right()->set_value(2.0);
-	m_square->fill()->set_value(QColor(Qt::black));
+	m_square->fill()->set_value(QColor("#1e2023"));
 	m_square->fill()->create_override("Toggled", QColor(Qt::white));
 
 	//m_spacer->fill()->set_disabled();

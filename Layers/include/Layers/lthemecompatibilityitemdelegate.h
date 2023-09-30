@@ -9,7 +9,8 @@
 #include "lgridlineitemdelegate.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LThemeCompatibilityItemDelegate : public LGridlineItemDelegate
+class LAYERS_EXPORT LThemeCompatibilityItemDelegate :
+	public LGridlineItemDelegate
 {
 	Q_OBJECT
 

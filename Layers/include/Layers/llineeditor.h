@@ -9,71 +9,33 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LLineEditor Example](line_editor.png)
-	
-	An LLineEditor is an LWidget that allows the user to edit a single line of
-	text.
-*/
 class LAYERS_EXPORT LLineEditor : public LWidget
 {
 	Q_OBJECT
 
 signals:
-	/*!
-		This signal is emitted when the line editor's text is changed.
-	*/
 	void text_edited(const QString& text);
 
 public:
-	/*!
-		Constructs a line editor.
-	*/
 	LLineEditor(QWidget* parent = nullptr);
 
 	~LLineEditor();
 
-	/*!
-		Returns a pointer to the left-padding attribute of the line editor.
-	*/
 	LAttribute* left_padding() const;
 
-	/*!
-		Sets the default value to be used in the line editor if it is left
-		empty after losing focus.
-	*/
 	void set_default_value(const QString& default_value);
 
-	/*!
-		Sets the *size* of the label's font.
-	*/
 	void set_font_size(int size);
 
-	/*!
-		Sets the *size* of the label's font.
-	*/
 	void set_font_size_f(qreal size);
 
-	/*!
-		Sets the line editor's text.
-	*/
 	void set_text(const QString& text);
 
-	/*!
-		Sets the validator to constrain values entered into the line
-		editor.
-	*/
 	void set_validator(const QValidator* validator);
 
-	/*!
-		Returns a pointer to the text color attribute of the line editor.
-	*/
-	LAttribute* text_color() const;
-
-	/*!
-		Returns a pointer to the text attribute of the line editor.
-	*/
 	LAttribute* text() const;
+
+	LAttribute* text_color() const;
 
 	virtual void update() override;
 

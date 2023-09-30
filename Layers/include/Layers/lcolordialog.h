@@ -13,42 +13,15 @@
 #include "lslider.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LColorDialog Example](color_dialog.png)
-
-	An LColorDialog is an LDialog that provides an interface for changing a
-	color value.
-
-	The dialog contains an LColorPlane which displays&mdash;and makes colors
-	selectable from&mdash;an HSV cylinder. Since the plane can only display two
-	dimensions at a time, the dialog has an LSlider, referred to as
-	the *Z-Slider*, that is linked to the plane's Z-axis attribute.
-
-	For each dimension of HSV, the dialog contains an LRadioButton and an
-	LLineEditor. The radio buttons control the plane's Z-dimension. The line
-	editors control the HSV values individually via numerical text.
-
-	There is also another line editor that displays and edits the color's name,
-	referred to as the *Color Name Editor*.
-
-	Once the desired color is selected, there is an LButton labeled 'Apply'
-	which wraps up execution of the dialog when clicked.
-*/
 class LAYERS_EXPORT LColorDialog : public LDialog
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a color dialog.
-	*/
 	LColorDialog(QWidget* parent = nullptr);
 
 	~LColorDialog();
 
-	/*!
-		Returns a pointer to the dialog's color attribute.
-	*/
 	LAttribute* color() const;
 
 private slots:

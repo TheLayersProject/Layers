@@ -4,7 +4,7 @@ using Layers::LGraphic;
 using Layers::LImageSequence;
 using Layers::LSvgRenderer;
 
-LGraphic::LGraphic(const QString& file_path, QSize size, QWidget* parent)
+LGraphic::LGraphic(const QString& file_path, QSize size)
 {
 	if (file_path.endsWith(".png") || file_path.endsWith(".jpg") ||
 		file_path.endsWith(".jpeg") || file_path.endsWith(".bmp") ||
@@ -33,7 +33,7 @@ LGraphic::LGraphic(const QString& file_path, QSize size, QWidget* parent)
 			m_size = first_frame->size();
 }
 
-LGraphic::LGraphic(const QImage& image, QWidget* parent) :
+LGraphic::LGraphic(const QImage& image) :
 	m_image{ new QImage(image) }
 {
 	m_size = m_image->size();

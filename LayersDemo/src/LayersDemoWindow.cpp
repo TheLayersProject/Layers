@@ -5,7 +5,6 @@
 #include "LayersDemo.h"
 
 using Layers::LGraphic;
-using Layers::LThemeable;
 
 LayersDemoWindow::LayersDemoWindow(QWidget* parent) :
 	LMainWindow(parent)

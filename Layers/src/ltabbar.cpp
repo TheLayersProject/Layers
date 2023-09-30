@@ -47,14 +47,6 @@ QList<LTab*> LTabBar::tabs() const
 	return m_tabs;
 }
 
-void LTabBar::init_layout()
-{
-	m_tab_layout->setContentsMargins(0, 0, 0, 0);
-	m_tab_layout->setSpacing(0);
-
-	setLayout(m_tab_layout);
-}
-
 void LTabBar::_add_tab(LTab* tab)
 {
 	tab->setObjectName("Tabs");
@@ -88,4 +80,13 @@ void LTabBar::_add_tab(LTab* tab)
 
 			emit tab_closed(remove_index);
 		});
+}
+
+
+void LTabBar::init_layout()
+{
+	m_tab_layout->setContentsMargins(0, 0, 0, 0);
+	m_tab_layout->setSpacing(0);
+
+	setLayout(m_tab_layout);
 }

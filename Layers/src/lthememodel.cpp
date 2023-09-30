@@ -8,6 +8,12 @@ LThemeModel::LThemeModel(QObject* parent) :
 {
 }
 
+int LThemeModel::columnCount(const QModelIndex& parent) const
+{
+	Q_UNUSED(parent);
+	return 1;
+}
+
 QVariant LThemeModel::data(const QModelIndex& index, int role) const
 {
 	if (!index.isValid())
@@ -62,12 +68,6 @@ int LThemeModel::rowCount(const QModelIndex& parent) const
 
 	return parent_item ?
 		parent_item->child_count() : 0;
-}
-
-int LThemeModel::columnCount(const QModelIndex& parent) const
-{
-	Q_UNUSED(parent);
-	return 1;
 }
 
 void LThemeModel::set_theme(LTheme* theme)

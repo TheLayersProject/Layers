@@ -256,13 +256,19 @@ LAttributeMap LAttribute::overrides() const
 	return m_overrides;
 }
 
-void LAttribute::set_theme_attribute(LAttribute* theme_attr)
+QString LAttribute::path() const
 {
-	m_theme_attr = theme_attr;
+	if (parent())
+	{
+		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
+			return parent_attr->path() + "." + objectName();
+		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
+			return parent_themeable->path() + "/" + objectName();
+		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
+			return parent_theme_item->path() + "/" + objectName();
+	}
 
-	establish_theme_connection();
-
-	emit changed();
+	return objectName();
 }
 
 void LAttribute::set_link_attribute(LAttribute* link_attr)
@@ -295,6 +301,15 @@ void LAttribute::set_link_path(const QString& link_path)
 	m_value = QVariant();
 }
 
+void LAttribute::set_theme_attribute(LAttribute* theme_attr)
+{
+	m_theme_attr = theme_attr;
+
+	establish_theme_connection();
+
+	emit changed();
+}
+
 void LAttribute::set_value(QVariant value)
 {
 	if (m_link_attr)
@@ -303,21 +318,6 @@ void LAttribute::set_value(QVariant value)
 		m_value = value;
 
 	emit changed();
-}
-
-QString LAttribute::path() const
-{
-	if (parent())
-	{
-		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
-			return parent_attr->path() + "." + objectName();
-		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
-			return parent_themeable->path() + "/" + objectName();
-		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
-			return parent_theme_item->path() + "/" + objectName();
-	}
-		
-	return objectName();
 }
 
 QJsonObject LAttribute::to_json_object()

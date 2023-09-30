@@ -26,7 +26,7 @@ void LThemeItem::append_child(LThemeItem* child)
 	m_children[child->name()] = child;
 }
 
-QStringList LThemeItem::attribute_group_names()
+QStringList LThemeItem::attribute_group_names() const
 {
 	QStringList attribute_group_names;
 
@@ -56,7 +56,7 @@ LAttributeMap LThemeItem::attributes(const QString& type_name)
 	return attrs;
 }
 
-LThemeItem* LThemeItem::child(int index)
+LThemeItem* LThemeItem::child(int index) const
 {
 	if (index < 0 || index >= m_children.size())
 		return nullptr;
@@ -72,6 +72,11 @@ int LThemeItem::child_count() const
 QMap<QString, LThemeItem*>& LThemeItem::children()
 {
 	return m_children;
+}
+
+LThemeItem* LThemeItem::find_item(const QString& path)
+{
+	return find_item(path.split("/"));
 }
 
 LThemeItem* LThemeItem::find_item(QStringList name_list)
@@ -95,9 +100,18 @@ LThemeItem* LThemeItem::find_item(QStringList name_list)
 	return nullptr;
 }
 
-LThemeItem* LThemeItem::find_item(const QString& path)
+int LThemeItem::index() const
 {
-	return find_item(path.split("/"));
+	if (m_parent)
+	{
+		QStringList keys = m_parent->m_children.keys();
+
+		for (int i = 0; i < keys.size(); i++)
+			if (m_parent->m_children[keys.at(i)] == this)
+				return i;
+	}
+
+	return 0;
 }
 
 bool LThemeItem::is_overridable() const
@@ -110,12 +124,12 @@ QString LThemeItem::name() const
 	return m_name;
 }
 
-LThemeItem* LThemeItem::parent()
+LThemeItem* LThemeItem::parent() const
 {
 	return m_parent;
 }
 
-QString LThemeItem::path()
+QString LThemeItem::path() const
 {
 	QStringList path_names;
 
@@ -134,21 +148,7 @@ QString LThemeItem::path()
 	return path_names.join("/");
 }
 
-int LThemeItem::index() const
-{
-	if (m_parent)
-	{
-		QStringList keys = m_parent->m_children.keys();
-
-		for (int i = 0; i < keys.size(); i++)
-			if (m_parent->m_children[keys.at(i)] == this)
-				return i;
-	}
-
-	return 0;
-}
-
-QJsonObject LThemeItem::to_json_object()
+QJsonObject LThemeItem::to_json_object() const
 {
 	QJsonObject item_object;
 	QJsonObject attributes_object;

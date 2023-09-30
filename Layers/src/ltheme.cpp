@@ -78,19 +78,19 @@ QDir LTheme::dir() const
 	return m_dir;
 }
 
-bool LTheme::editable()
+bool LTheme::editable() const
 {
 	return m_editable;
-}
-
-LThemeItem* LTheme::find_item(const QStringList& name_list)
-{
-	return m_root_item->find_item(name_list);
 }
 
 LThemeItem* LTheme::find_item(const QString& path)
 {
 	return m_root_item->find_item(path.split("/"));
+}
+
+LThemeItem* LTheme::find_item(const QStringList& name_list)
+{
+	return m_root_item->find_item(name_list);
 }
 
 bool LTheme::has_implementation(const QString& app_id) const
@@ -101,7 +101,7 @@ bool LTheme::has_implementation(const QString& app_id) const
 		).exists();
 }
 
-QString LTheme::id()
+QString LTheme::id() const
 {
 	if (!m_uuid.isNull())
 		return m_name + "_" + m_uuid.toString(QUuid::WithoutBraces);

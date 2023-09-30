@@ -12,30 +12,13 @@
 #include "ltoggleswitch.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LFillDialog Example](fill_dialog.png)
-
-	An LFillDialog is an LDialog that provides an interface for changing a
-	fill value.
-
-	The dialog contains an LToggleSwitch for switching the fill type
-	between *color* and *gradient*. If the fill type is color, then an
-	LColorControl is shown to allow for changing the color. If the fill type is
-	gradient, an LGradientControl is shown to allow for changing the gradient.
-*/
 class LAYERS_EXPORT LFillDialog : public LDialog
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a fill dialog.
-	*/
 	LFillDialog(QWidget* parent = nullptr);
 
-	/*!
-		Links the controls with *attribute*.
-	*/
 	void set_attribute(LAttribute* attribute);
 
 private:

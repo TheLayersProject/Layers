@@ -9,85 +9,33 @@
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	An LScrollBar is a QScrollBar and an LThemeable that provides a control
-	that allows the user to scroll to different parts of a widget in cases
-	where the widget is larger than the available area displaying it.
-*/
 class LAYERS_EXPORT LScrollBar : public QScrollBar, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a scroll bar.
-	*/
 	LScrollBar(QWidget* parent = nullptr);
 
-	/*!
-		Returns a pointer to the background color attribute of the scroll bar.
-	*/
 	LAttribute* background_color() const;
 
-	/*!
-		Returns a pointer to the bottom-left corner radii attribute of the
-		scroll bar.
-	*/
 	LAttribute* corner_radii_bottom_left() const;
 
-	/*!
-		Returns a pointer to the bottom-right corner radii attribute of the
-		scroll bar.
-	*/
 	LAttribute* corner_radii_bottom_right() const;
 
-	/*!
-		Returns a pointer to the top-left corner radii attribute of the scroll
-		bar.
-	*/
 	LAttribute* corner_radii_top_left() const;
 
-	/*!
-		Returns a pointer to the top-right corner radii attribute of the scroll
-		bar.
-	*/
 	LAttribute* corner_radii_top_right() const;
 
-	/*!
-		Returns a pointer to the handle color attribute of the scroll bar.
-	*/
 	LAttribute* handle_color() const;
 
-	/*!
-		Returns a pointer to the bottom-left corner radii attribute of the
-		scroll bar's handle.
-	*/
 	LAttribute* handle_corner_radii_bottom_left() const;
 
-	/*!
-		Returns a pointer to the bottom-right corner radii attribute of the
-		scroll bar's handle.
-	*/
 	LAttribute* handle_corner_radii_bottom_right() const;
 
-	/*!
-		Returns a pointer to the top-left corner radii attribute of the scroll
-		bar's handle.
-	*/
 	LAttribute* handle_corner_radii_top_left() const;
 
-	/*!
-		Returns a pointer to the top-right corner radii attribute of the scroll
-		bar's handle.
-	*/
 	LAttribute* handle_corner_radii_top_right() const;
 
-	/*!
-		Updates the scroll bar.
-
-		This function overrides LThemeable::update() to update the scroll bar's
-		style_sheet.
-	*/
 	virtual void update() override;
 
 private:

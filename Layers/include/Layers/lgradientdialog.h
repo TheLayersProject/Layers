@@ -12,32 +12,13 @@
 #include "lgradienteditor.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LGradientDialog Example](gradient_dialog.png)
-
-	An LGradientDialog is an LDialog that provides an interface for changing a
-	gradient value.
-
-	The dialog contains an LGradientEditor which lets the user edit the
-	gradient.
-
-	Once the desired changes to the gradient have been made, there is an
-	LButton labeled 'Apply' which wraps up execution of the dialog when
-	clicked.
-*/
 class LAYERS_EXPORT LGradientDialog : public LDialog
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a gradient dialog initialized with *gradient_stops*.
-	*/
 	LGradientDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
 
-	/*!
-		Returns the stops of the gradient being edited.
-	*/
 	QGradientStops gradient_stops() const;
 
 private:

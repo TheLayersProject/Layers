@@ -11,31 +11,19 @@
 #include "lthememodel.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	An LThemeView is a QTreeView and a LThemeable.
-*/
 class LAYERS_EXPORT LThemeView :
 	public QTreeView, public LThemeable
 {
 	Q_OBJECT
 
 signals:
-	void selection_changed(LThemeItem* theme_item);
+	void selected_theme_item_changed(LThemeItem* theme_item);
 
 public:
-	/*!
-		Constructs a theme view.
-	*/
 	LThemeView(QWidget* parent = nullptr);
 
 	~LThemeView();
 
-	/*!
-		Returns a list of child themeables.
-
-		This function overrides LThemeable::child_themeables() to include the
-		scroll bars.
-	*/
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;

@@ -49,7 +49,7 @@ void LThemeComboBox::clear()
 	m_model->clear();
 }
 
-void LThemeComboBox::addItem(LTheme* theme, bool set_as_current_index)
+void LThemeComboBox::add_theme(LTheme* theme, bool set_as_current_index)
 {
 	m_model->append(theme);
 

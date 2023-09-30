@@ -9,38 +9,17 @@
 #include "lbutton.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LDialog Example](dialog.png)
-	
-	An LDialog is a QDialog and a LThemeableBox that is used for short-term
-	tasks or brief communications with the user.
-*/
 class LAYERS_EXPORT LDialog : public QDialog, public LThemeableBox
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a dialog labeled with *title*.
-	*/
 	LDialog(const QString& title = "Dialog", QWidget* parent = nullptr);
 
-	/*!
-		Sets the dialog's icon.
-	*/
 	void set_icon(const LGraphic& icon);
 
-	/*!
-		Sets the layout of the dialog.
-	*/
 	void setLayout(QLayout* layout);
 
-	/*!
-		Updates the dialog.
-
-		This function overrides LThemeable::update() to update the margins of
-		the dialog layout content.
-	*/
 	virtual void update() override;
 
 protected:

@@ -9,37 +9,13 @@
 LAYERS_NAMESPACE_BEGIN
 enum class LAYERS_EXPORT LSizeDimension { Width, Height };
 
-/*!
-	\htmlonly
-		<video style="max-width:100%;height:auto;" width="448" height="376"
-		autoplay loop muted disableRemotePlayback>
-			<source src="resizer.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video>
-	\endhtmlonly
-	
-	An LResizer is a QWidget and an LThemeable that gives the user a way to
-	resize another widget on the screen.
-
-	By click-dragging the resizer, the user can resize the connected widget. To
-	connect a widget to the resizer, use set_widget().
-*/
 class LAYERS_EXPORT LResizer : public QWidget, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a resizer.
-	*/
 	LResizer(LSizeDimension resize_dimension, QWidget* parent = nullptr);
 
-	/*!
-		Sets the *widget* that the resizer resizes.
-
-		The *lower_limit* and *upper_limit* parameters are used to restrict the
-		widget's size.
-	*/
 	void set_widget(QWidget* widget, int lower_limit, int upper_limit);
 
 protected:

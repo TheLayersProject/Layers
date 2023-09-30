@@ -18,7 +18,7 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 	m_theme_combobox->setObjectName("Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
-		m_theme_combobox->addItem(theme);
+		m_theme_combobox->add_theme(theme);
 
 	for (int i = 0; i < m_theme_combobox->count(); i++)
 		if (m_theme_combobox->itemData(i).value<LTheme*>() == activeTheme())
@@ -30,7 +30,7 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 	connect(layersApp, &LApplication::theme_added,
 		[this](LTheme* theme)
 		{
-			m_theme_combobox->addItem(theme, true);
+			m_theme_combobox->add_theme(theme, true);
 		});
 
 	connect(m_theme_combobox, &LThemeComboBox::currentIndexChanged, [this]

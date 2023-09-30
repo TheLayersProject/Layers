@@ -7,55 +7,17 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LSlider Example](slider.png)
-	
-	An LSlider is an LWidget that provides a mechanism for changing a
-	numerically-valued LAttribute within a limited range.
-
-	If you need a slider that can fit into smaller spaces, consider using an
-	LMiniSlider.
-
-	By click-dragging on the slider handle, a user can change the attribute
-	linked to it.
-
-	The following demonstrates how to link the slider's *value* attribute
-	with another attribute:
-
-	~~~~~~~~~~~~~{.c}
-	LWidget* widget = new LWidget;
-	LSlider* slider = new LSlider(30.0);
-
-	slider->value()->set_link_attribute(widget->border_thickness());
-	~~~~~~~~~~~~~
-
-	In the example, after the call to LAttribute::set_link_attribute(),
-	the *widget*'s border thickness will change when the slider is interacted
-	with.
-*/
 class LAYERS_EXPORT LSlider : public LWidget
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a decimal slider whose value is equal-to or between 0 and 1.
-	*/
 	LSlider(QWidget* parent = nullptr);
 
-	/*!
-		Constructs a slider with a fixed *limit*.
-	*/
 	LSlider(int limit, QWidget* parent = nullptr);
 
-	/*!
-		Sets the upper limit of the slider.
-	*/
 	void set_limit(int limit);
 
-	/*!
-		Returns a reference to the value attribute of the slider.
-	*/
 	LAttribute* value();
 
 protected:

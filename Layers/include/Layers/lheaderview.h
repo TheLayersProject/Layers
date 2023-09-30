@@ -9,27 +9,13 @@
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LHeaderView Example](header_view.png)
-	
-	An LHeaderView is a QHeaderView and an LThemeable.
-*/
 class LAYERS_EXPORT LHeaderView : public QHeaderView, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a header view with a specified *orientation*.
-	*/
 	LHeaderView(Qt::Orientation orientation, QWidget* parent = nullptr);
 
-	/*!
-		Updates the header view.
-
-		This function overrides LThemeable::update() to update the header
-		view's style_sheet.
-	*/
 	virtual void update() override;
 
 private:

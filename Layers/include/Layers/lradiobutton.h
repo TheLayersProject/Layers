@@ -9,41 +9,16 @@
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	\htmlonly
-		<video style="max-width:100%;height:auto;" width="120" height="120"
-		autoplay loop muted disableRemotePlayback>
-			<source src="radio_button.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video>
-	\endhtmlonly
-	
-	An LRadioButton is a QWidget and an LThemeable that provides the user with
-	a button that can be switched on or off. Typically, in a group of radio
-	buttons, only one radio button can be active at a time.
-
-	To enforce the idea that only one radio button can be active at a time, it
-	is recommended to add related radio buttons to a LRadioButtonPool.
-*/
 class LAYERS_EXPORT LRadioButton : public QWidget, public LThemeable
 {
 	Q_OBJECT
 
 signals:
-	/*!
-		This signal is emitted whenever the button is pressed.
-	*/
 	void clicked();
 
 public:
-	/*!
-		Constructs a radio button.
-	*/
 	LRadioButton(QWidget* parent = nullptr);
 
-	/*!
-		Returns a pointer to the radio button's status state pool.
-	*/
 	LStatePool* status_states() const;
 
 protected:

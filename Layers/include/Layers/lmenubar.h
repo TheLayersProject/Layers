@@ -9,38 +9,17 @@
 #include "lthemeable.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LMenuBar Example](menu_bar.png)
-	
-	An LMenuBar is a QMenuBar and an LThemeable that provides a menu bar
-	interface consisting of a list of pull-down menu items.
-*/
 class LAYERS_EXPORT LMenuBar : public QMenuBar, public LThemeable
 {
 	Q_OBJECT
 
 public:
-	/*!
-		Constructs a menu bar.
-	*/
 	LMenuBar(QWidget* parent = nullptr);
 
-	/*!
-		Returns a pointer to the selected text color attribute of the menu bar.
-	*/
 	LAttribute* selected_text_color() const;
 
-	/*!
-		Returns a pointer to the text color attribute of the menu bar.
-	*/
 	LAttribute* text_color() const;
 
-	/*!
-		Updates the menu bar.
-
-		This function overrides LThemeable::update() to update the menu bar's
-		style_sheet.
-	*/
 	virtual void update() override;
 
 private:

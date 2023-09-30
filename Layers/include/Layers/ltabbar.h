@@ -10,62 +10,32 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	![LTabBar Example](tab_bar.png)
-	
-	An LTabBar is an LWidget that lets the user switch between different
-	widgets by clicking child LTab widgets.
-*/
 class LAYERS_EXPORT LTabBar : public LWidget
 {
 	Q_OBJECT
 
 signals:
-	/*!
-		This signal is emitted when the current index changes.
-	*/
 	void index_changed(int old_index, int new_index);
 
-	/*!
-		This signal is emitted when a tab is closed.
-	*/
 	void tab_closed(int index);
 
 public:
-	/*!
-		Constructs a tab bar.
-	*/
 	LTabBar(QWidget* parent = nullptr);
 
-	/*!
-		Creates a tab labeled with an *icon* and *text*.
-	*/
 	void add_tab(const LGraphic& icon, const QString& text);
 
-	/*!
-		Creates a tab labeled with *text*.
-	*/
 	void add_tab(const QString& text);
 
-	/*!
-		Returns the current index of the tab bar.
-	*/
 	int current_index() const;
 
-	/*!
-		Sets the current index of the tab bar.
-	*/
 	void set_current_index(int index);
 
-	/*!
-		Returns a list of pointers to the tabs of the tab bar.
-	*/
 	QList<LTab*> tabs() const;
 
-protected:
-	void init_layout();
-
+private:
 	void _add_tab(LTab* tab);
+
+	void init_layout();
 
 	int m_current_index{ -1 };
 
