@@ -48,26 +48,28 @@ void LThemeComboBoxItemDelegate::paint(
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
 		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>({ "Unselected" });
 
-	QFont uuid_font(option.font.family(), 8);
+	QFont secondary_font(option.font.family(), 8);
 
 	const QFontMetrics& item_font_metrics = option.fontMetrics;
-	const QFontMetrics& uuid_font_metrics = QFontMetrics(uuid_font);
+	const QFontMetrics& secondary_font_metrics = QFontMetrics(secondary_font);
 
 	QPainterPath item_text_path;
-	QPainterPath uuid_text_path;
+	QPainterPath secondary_text_path;
 
 	QString item_text = theme->name();
-	QString uuid_text;
+	QString secondary_text;
 
-	if (!theme->uuid().isNull())
-		uuid_text = theme->uuid().toString(QUuid::WithoutBraces);
+	if (!theme->publisher().isEmpty())
+		secondary_text = theme->publisher();
+	else if (!theme->uuid().isNull())
+		secondary_text = theme->uuid().toString(QUuid::WithoutBraces);
 
 	painter->setRenderHint(QPainter::Antialiasing);
 
 	// Draw background
 	painter->fillPath(background_path(option, index), fill_color);
 
-	if (!uuid_text.isEmpty())
+	if (!secondary_text.isEmpty())
 	{
 		// Draw item text and uuid text
 
@@ -77,10 +79,10 @@ void LThemeComboBoxItemDelegate::paint(
 			item_text
 		);
 
-		uuid_text_path.addText(
-			QPoint(10, option.rect.center().y() + (uuid_font_metrics.height() / 2) + 8),
-			uuid_font,
-			uuid_text
+		secondary_text_path.addText(
+			QPoint(10, option.rect.center().y() + (secondary_font_metrics.height() / 2) + 8),
+			secondary_font,
+			secondary_text
 		);
 	}
 	else
@@ -95,9 +97,9 @@ void LThemeComboBoxItemDelegate::paint(
 	}
 
 	painter->fillPath(item_text_path, m_text_color->as<QColor>());
-	painter->fillPath(uuid_text_path, m_text_color->as<QColor>());
+	painter->fillPath(secondary_text_path, m_text_color->as<QColor>());
 
-	if (!theme->has_implementation(layersApp->app_identifier()))
+	if (!theme->has_implementation(layersApp->app_display_id()))
 	{
 		QPoint caution_image_location = QPoint(
 			option.rect.right() - m_caution_image.width() - 10,

@@ -77,7 +77,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	m_parent_theme_combobox->setObjectName("Parent Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
-		if (theme->has_implementation(layersApp->app_identifier()))
+		if (theme->has_implementation(layersApp->app_display_id()))
 		{
 			if (theme == activeTheme())
 				m_parent_theme_combobox->add_theme(theme, true);
@@ -110,37 +110,54 @@ void LThemeCreatorDialog::create_theme()
 	LTheme* new_theme =
 		new LTheme(m_name_editor->text()->as<QString>().simplified());
 
-	QDir new_theme_dir = latest_T_version_path() + new_theme->id() + "\\";
+	QDir new_theme_dir = latest_T_version_path() + new_theme->display_id() + "\\";
 	QDir copy_theme_dir = copy_theme->dir();
 
 	new_theme->set_dir(new_theme_dir);
 
-	if (!new_theme_dir.exists())
-		new_theme_dir.mkdir(".");
-
-	// Copy all files except meta.json since a new one is created below
-	for (const QString& file_name : copy_theme_dir.entryList(QDir::Files))
-		if (file_name != "meta.json")
-		{
-			QFile::copy(
-				copy_theme_dir.filePath(file_name),
-				new_theme_dir.filePath(file_name));
-
-			QFile::setPermissions(
-				new_theme_dir.filePath(file_name),
-				QFileDevice::WriteUser);
-		}
+	copy_directory(copy_theme_dir, new_theme_dir, {".theme", "meta.json"});
 
 	for (const QString& theme_id : copy_theme->lineage())
 		new_theme->append_to_lineage(theme_id);
 
-	new_theme->append_to_lineage(copy_theme->id());
+	new_theme->append_to_lineage(copy_theme->display_id());
 	new_theme->save_meta_file();
 
 	layersApp->add_theme(new_theme);
 	layersApp->apply_theme(new_theme);
 
 	done(QDialog::Accepted);
+}
+
+void LThemeCreatorDialog::copy_directory(
+	const QDir& copy_dir, const QDir& new_dir,
+	const QList<QString>& filter_names)
+{
+	if (!new_dir.exists())
+		new_dir.mkdir(".");
+
+	for (const QString& file_name : copy_dir.entryList(QDir::Files))
+		if (!filter_names.contains(file_name))
+		{
+			QFile::copy(
+				copy_dir.filePath(file_name),
+				new_dir.filePath(file_name));
+
+			QFile::setPermissions(
+				new_dir.filePath(file_name),
+				QFileDevice::WriteUser);
+		}
+
+	for (const QString& dir_name :
+		copy_dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+	{
+		if (!filter_names.contains(dir_name))
+		{
+			copy_directory(
+				copy_dir.filePath(dir_name), new_dir.filePath(dir_name),
+				filter_names);
+		}
+	}
 }
 
 void LThemeCreatorDialog::init_attributes()

@@ -56,7 +56,7 @@ void LThemeable::apply_theme_item(LThemeItem* theme_item)
 {
 	if (theme_item)
 	{
-		if (_name() == theme_item->name())
+		if (_name() == theme_item->objectName())
 		{
 			m_current_theme_item = theme_item;
 

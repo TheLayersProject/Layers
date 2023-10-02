@@ -42,6 +42,9 @@ private slots:
 	void create_theme();
 
 private:
+	void copy_directory(const QDir& copy_dir, const QDir& new_dir,
+		const QList<QString>& filter_names);
+
 	void init_attributes();
 	void init_layout();
 

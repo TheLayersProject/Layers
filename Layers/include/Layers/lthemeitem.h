@@ -61,19 +61,13 @@ public:
 
 	bool is_overridable() const;
 
-	QString name() const;
-
-	LThemeItem* parent() const;
-
 	QString path() const;
 
 	QJsonObject to_json_object() const;
 
 private:
-	LThemeItem* m_parent{ nullptr };
 	QMap<QString, LThemeItem*> m_children;
 
-	QString m_name;
 	LAttributeMap m_attributes;
 	QString m_file_name;
 	bool m_is_overridable{ false };

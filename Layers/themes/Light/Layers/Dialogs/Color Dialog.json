@@ -1,0 +1,651 @@
+{
+    "App/Color Dialog": {
+        "attributes": {
+            "Border.Fill": {
+                "linked_to": "App/Gradient"
+            },
+            "Border.Thickness": {
+                "value": 5
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 12
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 12
+            },
+            "Corner Radii.Top Left": {
+                "value": 12
+            },
+            "Corner Radii.Top Right": {
+                "value": 12
+            },
+            "Fill": {
+                "linked_to": "App/Primary"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Apply Button": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 4
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 4
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 4
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 4
+                    },
+                    "Fill": {
+                        "value": "#b3b3b3"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Graphic": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "value": "#7bf57d"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Text Label": {
+                        "attributes": {
+                            "Fill": {
+                                "value": "#ffffff"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                },
+                "is_overridable": true
+            },
+            "Color Name Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 8
+                    },
+                    "Margins.Left": {
+                        "value": 7
+                    },
+                    "Margins.Right": {
+                        "value": 8
+                    },
+                    "Margins.Top": {
+                        "value": 7
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Color Unit Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Hue Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Hue Line Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 8
+                    },
+                    "Margins.Left": {
+                        "value": 7
+                    },
+                    "Margins.Right": {
+                        "value": 8
+                    },
+                    "Margins.Top": {
+                        "value": 7
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Hue Radio Button": {
+                "attributes": {
+                    "Active Dot Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Border.Fill": {
+                        "linked_to": "App/Color Dialog/Hue Radio Button/Fill.Active"
+                    },
+                    "Border.Thickness": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill",
+                        "overrides": {
+                            "Active": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                },
+                "is_overridable": true
+            },
+            "Hue Unit Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Saturation Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Saturation Line Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 8
+                    },
+                    "Margins.Left": {
+                        "value": 7
+                    },
+                    "Margins.Right": {
+                        "value": 8
+                    },
+                    "Margins.Top": {
+                        "value": 7
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Saturation Radio Button": {
+                "attributes": {
+                    "Active Dot Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Border.Fill": {
+                        "linked_to": "App/Color Dialog/Saturation Radio Button/Fill.Active"
+                    },
+                    "Border.Thickness": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill",
+                        "overrides": {
+                            "Active": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                },
+                "is_overridable": true
+            },
+            "Saturation Unit Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Titlebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 7
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 7
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Exit Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "linked_to": "App/Color Dialog/Corner Radii.Top Right"
+                            },
+                            "Fill": {
+                                "linked_to": "App/Color Dialog/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "attributes": {
+                                    "Fill": {
+                                        "linked_to": "App/Color Dialog/Titlebar/Exit Button/Fill"
+                                    }
+                                },
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e33036"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Title Label": {
+                        "attributes": {
+                            "Fill": {
+                                "linked_to": "App/Color Dialog/Titlebar/Fill"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            },
+            "Value Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Value Line Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 8
+                    },
+                    "Margins.Left": {
+                        "value": 7
+                    },
+                    "Margins.Right": {
+                        "value": 8
+                    },
+                    "Margins.Top": {
+                        "value": 7
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Value Radio Button": {
+                "attributes": {
+                    "Active Dot Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Border.Fill": {
+                        "linked_to": "App/Color Dialog/Value Radio Button/Fill.Active"
+                    },
+                    "Border.Thickness": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill",
+                        "overrides": {
+                            "Active": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                },
+                "is_overridable": true
+            },
+            "Value Unit Label": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Color Dialog/Fill"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Z-Slider": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Bar": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 2
+                            },
+                            "Fill": {
+                                "linked_to": "App/Secondary"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 20
+                            },
+                            "Margins.Right": {
+                                "value": 20
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        }
+                    },
+                    "Handle": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 2
+                            },
+                            "Fill": {
+                                "linked_to": "App/Foreground"
+                            },
+                            "Margins.Bottom": {
+                                "value": 5
+                            },
+                            "Margins.Left": {
+                                "value": 15
+                            },
+                            "Margins.Right": {
+                                "value": 15
+                            },
+                            "Margins.Top": {
+                                "value": 5
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

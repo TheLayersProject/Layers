@@ -39,11 +39,6 @@
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="themes\themes.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="layers_2d_logo.ico">
       <Filter>Resource Files</Filter>
     </Image>
@@ -52,5 +47,13 @@
     <ResourceCompile Include="LayersDemo.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="themes\Dark\theme_dark.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtRcc Include="themes\Light\theme_light.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

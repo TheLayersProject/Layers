@@ -1,0 +1,262 @@
+{
+    "App/Fill Dialog": {
+        "attributes": {
+            "Border.Fill": {
+                "value": "#000000"
+            },
+            "Border.Thickness": {
+                "value": 0
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 7
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 7
+            },
+            "Corner Radii.Top Left": {
+                "value": 7
+            },
+            "Corner Radii.Top Right": {
+                "value": 7
+            },
+            "Fill": {
+                "linked_to": "App/Secondary"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Color Label": {
+                "attributes": {
+                    "Fill": {
+                        "value": "#ffffff"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Fill Type Toggle": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 4
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 4
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 4
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 4
+                    },
+                    "Fill": {
+                        "value": "#6fc65b"
+                    },
+                    "Margins.Bottom": {
+                        "value": 10
+                    },
+                    "Margins.Left": {
+                        "value": 10
+                    },
+                    "Margins.Right": {
+                        "value": 10
+                    },
+                    "Margins.Top": {
+                        "value": 10
+                    }
+                },
+                "children": {
+                    "Square": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 2
+                            },
+                            "Fill": {
+                                "value": "#ffffff"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                },
+                "is_overridable": true
+            },
+            "Gradient Label": {
+                "attributes": {
+                    "Fill": {
+                        "value": "#ffffff"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Titlebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 7
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 7
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Exit Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "linked_to": "App/Fill Dialog/Titlebar/Corner Radii.Top Right"
+                            },
+                            "Fill": {
+                                "linked_to": "App/Fill Dialog/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "attributes": {
+                                    "Fill": {
+                                        "linked_to": "App/Fill Dialog/Titlebar/Exit Button/Fill"
+                                    }
+                                },
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e33036"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Icon Label": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Title Label": {
+                        "attributes": {
+                            "Fill": {
+                                "linked_to": "App/Fill Dialog/Titlebar/Fill"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

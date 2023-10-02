@@ -34,7 +34,9 @@ int main(int argc, char *argv[])
 		"Layers Demo",
 		QUuid("f97aae7f-2076-4918-93ce-19321584f675"),
 		new LGitHubRepo("TheLayersProject/Layers"));
+	app.set_publisher("The Layers Project");
 	app.set_version("0.16.0");
+	app.init();
 
 	if (app.update_available())
 	{

@@ -1,0 +1,487 @@
+{
+    "App/Theme Editor Dialog": {
+        "attributes": {
+            "Border.Fill": {
+                "linked_to": "App/Gradient"
+            },
+            "Border.Thickness": {
+                "value": 8
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 12
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 12
+            },
+            "Corner Radii.Top Left": {
+                "value": 12
+            },
+            "Corner Radii.Top Right": {
+                "value": 12
+            },
+            "Fill": {
+                "linked_to": "App/Primary"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Attribute Editor Groups": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 10
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 10
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 10
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 10
+                    },
+                    "Fill": {
+                        "linked_to": "App/Theme Editor Dialog/Fill"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Collapse Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Attribute Editor Groups/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#fbfbfc"
+                                                    }
+                                                },
+                                                "value": "#96989d"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Graphic After": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#fbfbfc"
+                                                    }
+                                                },
+                                                "value": "#96989d"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Label": {
+                        "attributes": {
+                            "Fill": {
+                                "value": "#ffffff"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            },
+            "Attribute Editors Scroll Area": {
+                "children": {
+                    "Vertical ScrollBar": {
+                        "attributes": {
+                            "Background Color": {
+                                "linked_to": "App/Theme Editor Dialog/Fill"
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 10
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Handle Color": {
+                                "linked_to": "App/Tertiary"
+                            },
+                            "Handle Corner Radii.Bottom Left": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Bottom Right": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Top Left": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Top Right": {
+                                "value": 5
+                            }
+                        }
+                    }
+                }
+            },
+            "Divider": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                }
+            },
+            "Path Label": {
+                "attributes": {
+                    "Fill": {
+                        "value": "#ffffff"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Status Bar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 3
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 3
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Check Label": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Save Progress Indicator": {
+                        "attributes": {
+                            "Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    },
+                    "Status Label": {
+                        "attributes": {
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Status Bar/Fill"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            },
+            "Theme View": {
+                "attributes": {
+                    "Fill": {
+                        "linked_to": "App/Secondary"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                },
+                "children": {
+                    "Vertical ScrollBar": {
+                        "attributes": {
+                            "Background Color": {
+                                "linked_to": "App/Theme Editor Dialog/Theme View/Fill"
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 10
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Handle Color": {
+                                "linked_to": "App/Tertiary"
+                            },
+                            "Handle Corner Radii.Bottom Left": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Bottom Right": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Top Left": {
+                                "value": 5
+                            },
+                            "Handle Corner Radii.Top Right": {
+                                "value": 5
+                            }
+                        }
+                    }
+                }
+            },
+            "Titlebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 3
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Exit Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "attributes": {
+                                    "Fill": {
+                                        "linked_to": "App/Theme Editor Dialog/Titlebar/Exit Button/Fill"
+                                    }
+                                },
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e33036"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Icon Label": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Title Label": {
+                        "attributes": {
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Titlebar/Fill"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

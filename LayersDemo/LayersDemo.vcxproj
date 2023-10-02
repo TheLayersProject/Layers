@@ -133,13 +133,14 @@ $(QtDir)\bin\windeployqt.exe "$(OutDir)$(TargetName).exe"
     <QtMoc Include="src\LayersDemoWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="themes\themes.qrc" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="layers_2d_logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LayersDemo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="themes\Dark\theme_dark.qrc" />
+    <QtRcc Include="themes\Light\theme_light.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

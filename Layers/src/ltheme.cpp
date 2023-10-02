@@ -46,6 +46,9 @@ LTheme::LTheme(QDir dir) :
 
 		m_name = meta_obj.value("name").toString();
 
+		if (meta_obj.contains("publisher"))
+			m_publisher = meta_obj.value("publisher").toString();
+
 		if (meta_obj.contains("uuid"))
 			m_uuid = QUuid(meta_obj.value("uuid").toString());
 
@@ -97,6 +100,14 @@ QDir LTheme::dir() const
 	return m_dir;
 }
 
+QString LTheme::display_id() const
+{
+	if (!m_uuid.isNull())
+		return m_name + " (" + m_uuid.toString(QUuid::WithoutBraces) + ")";
+	else
+		return m_name;
+}
+
 bool LTheme::editable() const
 {
 	return m_editable;
@@ -112,20 +123,9 @@ LThemeItem* LTheme::find_item(const QStringList& name_list)
 	return m_root_item->find_item(name_list);
 }
 
-bool LTheme::has_implementation(const QString& app_id) const
+bool LTheme::has_implementation(const QString& app_display_id) const
 {
-	return
-		QFile(
-			m_dir.filePath(app_id + ".json")
-		).exists();
-}
-
-QString LTheme::id() const
-{
-	if (!m_uuid.isNull())
-		return m_name + "_" + m_uuid.toString(QUuid::WithoutBraces);
-	else
-		return m_name;
+	return QDir(m_dir.filePath(app_display_id)).exists();
 }
 
 QStringList LTheme::lineage() const
@@ -133,20 +133,23 @@ QStringList LTheme::lineage() const
 	return m_lineage;
 }
 
-void LTheme::load(const QString& app_id)
+void LTheme::load(const QString& app_display_id)
 {
 	if (m_dir.exists())
 	{
 		clear();
 		m_root_item = new LThemeItem("", {}, false, "");
 
-		QFile layers_file = QFile(m_dir.filePath("layers.json"));
-		load_file(layers_file);
+		QFile app_file = QFile(m_dir.filePath("app.json"));
+		QDir implementation_dir = QDir(m_dir.filePath(app_display_id));
 
-		QFile app_file = QFile(m_dir.filePath(app_id + ".json"));
-		if (app_file.exists())
-			load_file(app_file);
+		load_file(app_file);
+		load_dir(QDir(m_dir.filePath("Layers")));
 
+		if (implementation_dir.exists())
+			load_dir(implementation_dir);
+
+		resolve_parents();
 		resolve_links(m_root_item);
 	}
 }
@@ -154,6 +157,11 @@ void LTheme::load(const QString& app_id)
 QString LTheme::name() const
 {
 	return m_name;
+}
+
+QString LTheme::publisher() const
+{
+	return m_publisher;
 }
 
 void LTheme::set_name(const QString& new_name)
@@ -239,6 +247,26 @@ void LTheme::resolve_links(LThemeItem* item)
 		resolve_links(child_item);
 }
 
+void LTheme::resolve_parents()
+{
+	for (LThemeItem* unparented_theme_item : m_unparented_theme_items)
+	{
+		QString unparented_theme_item_name = unparented_theme_item->objectName();
+
+		QStringList name_list = unparented_theme_item->objectName().split("/");
+		QString new_name = name_list.takeLast();
+
+		if (LThemeItem* parent_item = m_root_item->find_item(name_list))
+		{
+			unparented_theme_item->setObjectName(new_name);
+			unparented_theme_item->setParent(parent_item);
+			parent_item->append_child(unparented_theme_item);
+		}
+	}
+
+	m_unparented_theme_items.clear();
+}
+
 LThemeItem* LTheme::root_item() const
 {
 	return m_root_item;
@@ -277,10 +305,12 @@ QUuid LTheme::uuid() const
 
 void LTheme::load_file(QFile& file)
 {
+	QString file_name = file.fileName();
+
 	if (!file.open(QIODevice::ReadOnly))
 	{
 		qDebug() << __FUNCTION__ << ":"
-			<< " Could not read file:" << file.fileName();
+			<< " Could not read file:" << file_name;
 		return;
 	}
 
@@ -293,30 +323,39 @@ void LTheme::load_file(QFile& file)
 	{
 		if (name.contains("/"))
 		{
-			QStringList name_list = name.split("/");
-			QString new_name = name_list.takeLast();
+			LThemeItem* new_item = init_item(
+				name, object.value(name).toObject(), file_name);
 
-			if (LThemeItem* parent_item = m_root_item->find_item(name_list))
-			{
-				LThemeItem* new_item = init_item(
-					new_name, object.value(name).toObject(), file.fileName(),
-					parent_item);
+			m_file_items[file_name].append(new_item);
 
-				m_file_items[file.fileName()].append(new_item);
-
-				parent_item->append_child(new_item);
-			}
+			m_unparented_theme_items[name] = new_item;
 		}
 		else
 		{
 			LThemeItem* new_item = init_item(
-				name, object.value(name).toObject(), file.fileName(),
+				name, object.value(name).toObject(), file_name,
 				m_root_item);
 
-			m_file_items[file.fileName()].append(new_item);
+			m_file_items[file_name].append(new_item);
 
 			m_root_item->append_child(new_item);
 		}
+	}
+}
+
+void LTheme::load_dir(const QDir& dir)
+{
+	for (const QString& file_name :
+		dir.entryList(QDir::Files | QDir::NoDotAndDotDot))
+	{
+		QFile file = QFile(dir.filePath(file_name));
+		load_file(file);
+	}
+
+	for (const QString& dir_name :
+		dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+	{
+		load_dir(QDir(dir.filePath(dir_name)));
 	}
 }
 

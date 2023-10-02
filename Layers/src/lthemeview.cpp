@@ -36,8 +36,10 @@ LThemeView::LThemeView(QWidget* parent) :
 	m_model->set_theme(activeTheme());
 
 	m_model_update_connection =
-		connect(layersApp, &LApplication::active_theme_changed, [this]
-			{ m_model->set_theme(activeTheme()); });
+		connect(layersApp, &LApplication::active_theme_changed,
+			[this] {
+				m_model->set_theme(activeTheme());
+			});
 
 	setHeaderHidden(true);
 	setHorizontalScrollBar(m_horizontal_scrollbar);

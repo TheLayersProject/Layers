@@ -1,0 +1,321 @@
+{
+    "App/Gradient Dialog": {
+        "attributes": {
+            "Border.Fill": {
+                "linked_to": "App/Gradient"
+            },
+            "Border.Thickness": {
+                "value": 5
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 12
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 12
+            },
+            "Corner Radii.Top Left": {
+                "value": 12
+            },
+            "Corner Radii.Top Right": {
+                "value": 12
+            },
+            "Fill": {
+                "linked_to": "App/Primary"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Apply Button": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 4
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "overrides": {
+                            "Active": {
+                                "value": 0
+                            }
+                        },
+                        "value": 4
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 4
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 4
+                    },
+                    "Fill": {
+                        "value": "#b3b3b3"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Graphic": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "value": "#7bf57d"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Text Label": {
+                        "attributes": {
+                            "Fill": {
+                                "value": "#ffffff"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                },
+                "is_overridable": true
+            },
+            "Gradient Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Border.Thickness": {
+                        "value": 2
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 8
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 8
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 8
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 8
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 18
+                    },
+                    "Margins.Right": {
+                        "value": 18
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Add Stop Buttons": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "linked_to": "App/Tertiary"
+                            },
+                            "Border.Thickness": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 4
+                            },
+                            "Fill": {
+                                "linked_to": "App/Gradient Dialog/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 8
+                            },
+                            "Margins.Left": {
+                                "value": 8
+                            },
+                            "Margins.Right": {
+                                "value": 8
+                            },
+                            "Margins.Top": {
+                                "value": 8
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#8cfa6a"
+                                                    }
+                                                },
+                                                "value": "#6fc654"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                }
+            },
+            "Titlebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 7
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 7
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Exit Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "linked_to": "App/Gradient Dialog/Titlebar/Corner Radii.Top Right"
+                            },
+                            "Fill": {
+                                "linked_to": "App/Gradient Dialog/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "attributes": {
+                                    "Fill": {
+                                        "linked_to": "App/Gradient Dialog/Titlebar/Exit Button/Fill"
+                                    }
+                                },
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e33036"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Title Label": {
+                        "attributes": {
+                            "Fill": {
+                                "linked_to": "App/Gradient Dialog/Titlebar/Fill"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

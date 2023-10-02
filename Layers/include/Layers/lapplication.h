@@ -132,9 +132,9 @@ public:
 	void add_theme(LTheme* theme);
 
 	/*!
-		Returns a string representation of the app ID.
+		Returns the application's display-ID.
 	*/
-	QString app_identifier();
+	QString app_display_id() const;
 
 	/*!
 		Applies *theme* to the known top-level widgets.
@@ -158,6 +158,8 @@ public:
 	*/
 	QFile* icon_file();
 
+	void init();
+
 	QString latest_version();
 
 	/*!
@@ -171,6 +173,8 @@ public:
 		Reapplies the active theme.
 	*/
 	void reapply_theme();
+
+	void set_publisher(const QString& publisher);
 
 	static void set_version(const QString& version);
 
@@ -222,6 +226,8 @@ private:
 	void init_themes();
 	void init_latest_version();
 
+	bool m_initialized{ false };
+
 	LAttribute* m_foreground{
 		new LAttribute("Foreground", QColor("#e3e3e3"), this) };
 
@@ -254,6 +260,8 @@ private:
 	QString m_name;
 
 	QString m_name_underscored;
+
+	QString m_publisher;
 
 	QSettings m_settings;
 

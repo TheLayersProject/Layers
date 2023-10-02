@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/themes/Light">
+        <file>Layers Demo (The Layers Project)/Layers Demo.json</file>
+    </qresource>
+</RCC>

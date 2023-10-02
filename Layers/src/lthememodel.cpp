@@ -39,7 +39,7 @@ QVariant LThemeModel::data(const QModelIndex& index, int role) const
 		return QVariant();
 
 	else if (role == Qt::DisplayRole)
-		return get_item(index)->name();
+		return get_item(index)->objectName();
 
 	else if (role == Qt::UserRole)
 		return QVariant::fromValue(get_item(index));
@@ -70,7 +70,8 @@ QModelIndex LThemeModel::parent(const QModelIndex& index) const
 		return QModelIndex();
 
 	LThemeItem* child_item = get_item(index);
-	LThemeItem* parent_item = child_item ? child_item->parent() : nullptr;
+	LThemeItem* parent_item =
+		child_item ? dynamic_cast<LThemeItem*>(child_item->parent()) : nullptr;
 
 	if (parent_item == m_theme->root_item() || !parent_item)
 		return QModelIndex();

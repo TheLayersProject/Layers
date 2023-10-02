@@ -57,26 +57,6 @@ LApplication::LApplication(
 	m_downloader{ new LDownloader(this) },
 	QApplication(argc, argv)
 {
-	Q_INIT_RESOURCE(roboto_font);
-	Q_INIT_RESOURCE(images);
-	Q_INIT_RESOURCE(theme_light);
-	Q_INIT_RESOURCE(theme_dark);
-
-	qRegisterMetaType<QGradientStops>("QGradientStops");
-
-	init_directories();
-	init_fonts();
-	init_latest_version();
-	setAttribute(Qt::AA_EnableHighDpiScaling);
-	setEffectEnabled(Qt::UI_AnimateCombo, false);
-	setObjectName("App");
-
-	QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
-	for (int i = 0; i < name_parts.size(); i++)
-		name_parts[i].replace(0, 1, name_parts[i][0].toLower());
-	m_name_underscored = name_parts.join("_");
-
-	init_themes();
 }
 
 LApplication::~LApplication()
@@ -90,9 +70,9 @@ LApplication::~LApplication()
 	m_themes.clear();
 }
 
-QString LApplication::app_identifier()
+QString LApplication::app_display_id() const
 {
-	return m_name_underscored + "_" + m_uuid.toString(QUuid::WithoutBraces);
+	return m_name + " (" + m_publisher + ")";
 }
 
 void LApplication::apply_theme(LTheme* theme)
@@ -103,48 +83,49 @@ void LApplication::apply_theme(LTheme* theme)
 
 		m_active_theme = theme;
 
-		if (!m_active_theme->has_implementation(app_identifier()))
+		if (!m_active_theme->has_implementation(app_display_id()))
 		{
 			// Iterate backwards through the lineage to determine last CAT.
-			for (int i = m_active_theme->lineage().size() - 1; i >= 0; i--)
-			{
-				QString theme_id = m_active_theme->lineage()[i];
+			// TEMPORARILY DISABLED
+			//for (int i = m_active_theme->lineage().size() - 1; i >= 0; i--)
+			//{
+			//	QString theme_id = m_active_theme->lineage()[i];
 
-				QString theme_name = (theme_id.contains("_")) ?
-					theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
+			//	QString theme_name = (theme_id.contains("_")) ?
+			//		theme_id.left(theme_id.lastIndexOf("_")) : theme_id;
 
-				if (LTheme* theme = layersApp->theme(theme_id))
-					if (theme->has_implementation(app_identifier()))
-					{
-						QString app_file_name =
-							layersApp->app_identifier() + ".json";
+			//	if (LTheme* theme = layersApp->theme(theme_id))
+			//		if (theme->has_implementation(app_display_id()))
+			//		{
+			//			QString app_file_name =
+			//				layersApp->app_identifier() + ".json";
 
-						QFile last_CAT_app_file(
-							theme->dir().filePath(app_file_name));
-						
-						if (last_CAT_app_file.exists())
-						{
-							last_CAT_app_file.copy(
-								m_active_theme->dir().filePath(app_file_name)
-							);
+			//			QFile last_CAT_app_file(
+			//				theme->dir().filePath(app_file_name));
+			//			
+			//			if (last_CAT_app_file.exists())
+			//			{
+			//				last_CAT_app_file.copy(
+			//					m_active_theme->dir().filePath(app_file_name)
+			//				);
 
-							QFile::setPermissions(
-								m_active_theme->dir().filePath(app_file_name),
-								QFileDevice::WriteUser);
+			//				QFile::setPermissions(
+			//					m_active_theme->dir().filePath(app_file_name),
+			//					QFileDevice::WriteUser);
 
-							break;
-						}
-					}
-			}
+			//				break;
+			//			}
+			//		}
+			//}
 		}
 
-		m_active_theme->load(app_identifier());
+		m_active_theme->load(app_display_id());
 
 		_clear_theme();
 
 		apply_theme_item(theme->find_item(path()));
 
-		m_settings.setValue("themes/active_theme", theme->id());
+		m_settings.setValue("themes/active_theme", theme->display_id());
 
 		emit active_theme_changed();
 
@@ -171,7 +152,7 @@ LTheme* LApplication::active_theme()
 
 void LApplication::add_theme(LTheme* theme)
 {
-	m_themes[theme->id()] = theme;
+	m_themes[theme->display_id()] = theme;
 
 	emit theme_added(theme);
 }
@@ -179,6 +160,35 @@ void LApplication::add_theme(LTheme* theme)
 QFile* LApplication::icon_file()
 {
 	return m_icon_file;
+}
+
+void LApplication::init()
+{
+	if (!m_initialized)
+	{
+		Q_INIT_RESOURCE(roboto_font);
+		Q_INIT_RESOURCE(images);
+		Q_INIT_RESOURCE(theme_light);
+		Q_INIT_RESOURCE(theme_dark);
+
+		qRegisterMetaType<QGradientStops>("QGradientStops");
+
+		init_directories();
+		init_fonts();
+		init_latest_version();
+		setAttribute(Qt::AA_EnableHighDpiScaling);
+		setEffectEnabled(Qt::UI_AnimateCombo, false);
+		setObjectName("App");
+
+		QStringList name_parts = m_name.split(' ', Qt::SkipEmptyParts);
+		for (int i = 0; i < name_parts.size(); i++)
+			name_parts[i].replace(0, 1, name_parts[i][0].toLower());
+		m_name_underscored = name_parts.join("_");
+
+		init_themes();
+
+		m_initialized = true;
+	}
 }
 
 QString LApplication::latest_version()
@@ -259,7 +269,7 @@ void LApplication::rename_theme(const QString& theme_id, const QString& new_name
 
 		old_theme_dir.rename(
 			old_theme_dir.absoluteFilePath("."),
-			latest_T_version_path() + theme->id() + "\\");
+			latest_T_version_path() + theme->display_id() + "\\");
 
 		// TEMP
 		//theme->set_dir();
@@ -288,6 +298,11 @@ LAttribute* LApplication::primary() const
 void LApplication::reapply_theme()
 {
 	apply_theme(m_active_theme);
+}
+
+void LApplication::set_publisher(const QString& publisher)
+{
+	m_publisher = publisher;
 }
 
 void LApplication::set_version(const QString& version)
@@ -364,7 +379,7 @@ void LApplication::init_themes()
 	{
 		LTheme* loaded_theme = new LTheme(QDir(latest_T_version_dir.absoluteFilePath(dir_name)));
 
-		m_themes[loaded_theme->id()] = loaded_theme;
+		m_themes[loaded_theme->display_id()] = loaded_theme;
 	}
 
 	QString active_theme_id =
