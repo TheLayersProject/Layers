@@ -26,7 +26,6 @@ LAttributeMapItem::LAttributeMapItem(
 	LAttribute* attribute, LAttributeMapItem* parent
 ) :
 	m_attribute{ attribute },
-	m_parent{ parent },
 	QObject(parent)
 {
 }
@@ -41,11 +40,11 @@ LAttribute* LAttributeMapItem::attribute() const
 	return m_attribute;
 }
 
-LAttributeMapItem* LAttributeMapItem::child(int number)
+LAttributeMapItem* LAttributeMapItem::child(int index) const
 {
-	if (number < 0 || number >= m_child_attr_items.size())
+	if (index < 0 || index >= m_child_attr_items.size())
 		return nullptr;
-	return m_child_attr_items[m_child_attr_items.keys().at(number)];
+	return m_child_attr_items[m_child_attr_items.keys().at(index)];
 }
 
 int LAttributeMapItem::child_count() const
@@ -53,26 +52,22 @@ int LAttributeMapItem::child_count() const
 	return m_child_attr_items.count();
 }
 
-QMap<QString, LAttributeMapItem*>& LAttributeMapItem::child_attribute_items()
+QMap<QString, LAttributeMapItem*>& LAttributeMapItem::children()
 {
 	return m_child_attr_items;
 }
 
-LAttributeMapItem* LAttributeMapItem::parent()
-{
-	return m_parent;
-}
-
 int LAttributeMapItem::index() const
 {
-	if (m_parent)
+	if (LAttributeMapItem* parent_item =
+		dynamic_cast<LAttributeMapItem*>(parent()))
 	{
-		QStringList keys = m_parent->m_child_attr_items.keys();
+		QStringList keys = parent_item->m_child_attr_items.keys();
 
 		for (int i = 0; i < keys.size(); i++)
 		{
 			LAttributeMapItem* parent_child_attr_item =
-				m_parent->m_child_attr_items[keys.at(i)];
+				parent_item->m_child_attr_items[keys.at(i)];
 
 			if (parent_child_attr_item == this)
 				return i;
@@ -81,3 +76,8 @@ int LAttributeMapItem::index() const
 
 	return 0;
 }
+
+//LAttributeMapItem* LAttributeMapItem::parent()
+//{
+//	return m_parent;
+//}

@@ -30,31 +30,19 @@
 #include "lattributemapmodel.h"
 
 LAYERS_NAMESPACE_BEGIN
-/*!
-	An LAttributeMapView is a QTreeView and a LThemeable.
-*/
 class LAYERS_EXPORT LAttributeMapView :
 	public QTreeView, public LThemeable
 {
 	Q_OBJECT
 
 signals:
-	void selection_changed(LAttribute* attr);
+	void selected_map_item_changed(LAttribute* attr);
 
 public:
-	/*!
-		Constructs an attribute map view.
-	*/
 	LAttributeMapView(QWidget* parent = nullptr);
 
 	//~LAttributeMapView();
 
-	/*!
-		Returns a list of child themeables.
-
-		This function overrides LThemeable::child_themeables() to include the
-		scroll bars.
-	*/
 	virtual QList<LThemeable*> child_themeables(
 		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly
 	) override;

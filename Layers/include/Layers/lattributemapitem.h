@@ -31,30 +31,27 @@
 LAYERS_NAMESPACE_BEGIN
 class LAttributeMapItem : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    LAttributeMapItem(LAttribute* attribute,
-        LAttributeMapItem* parent = nullptr);
+	LAttributeMapItem(LAttribute* attribute,
+		LAttributeMapItem* parent = nullptr);
 
-    void append_child(LAttributeMapItem* child);
+	void append_child(LAttributeMapItem* child);
 
-    LAttribute* attribute() const;
+	LAttribute* attribute() const;
 
-    LAttributeMapItem* child(int number);
+	LAttributeMapItem* child(int index) const;
 
-    int child_count() const;
+	int child_count() const;
 
-    QMap<QString, LAttributeMapItem*>& child_attribute_items();
+	QMap<QString, LAttributeMapItem*>& children();
 
-    LAttributeMapItem* parent();
-
-    int index() const;
+	int index() const;
 
 private:
-    QMap<QString, LAttributeMapItem*> m_child_attr_items;
-    LAttributeMapItem* m_parent{ nullptr };
-    LAttribute* m_attribute{ nullptr };
+	QMap<QString, LAttributeMapItem*> m_child_attr_items;
+	LAttribute* m_attribute{ nullptr };
 };
 LAYERS_NAMESPACE_END
 

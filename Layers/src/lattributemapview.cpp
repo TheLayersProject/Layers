@@ -52,7 +52,7 @@ QList<LThemeable*> LAttributeMapView::child_themeables(Qt::FindChildOptions opti
 void LAttributeMapView::set_attributes(
 	LAttributeMap attributes, const QStringList& filter_paths)
 {
-	m_model->init_root_item(attributes, filter_paths);
+	m_model->set_attributes(attributes, filter_paths);
 }
 
 void LAttributeMapView::update()
@@ -81,6 +81,6 @@ void LAttributeMapView::selectionChanged(
 	QModelIndexList indexes = selected.indexes();
 
 	if (!indexes.isEmpty())
-		emit selection_changed(
+		emit selected_map_item_changed(
 			indexes.first().data(Qt::UserRole).value<LAttribute*>());
 }

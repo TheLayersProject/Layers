@@ -32,35 +32,35 @@
 LAYERS_NAMESPACE_BEGIN
 class LAttributeMapModel : public QAbstractItemModel
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    LAttributeMapModel(QObject* parent = nullptr);
+	LAttributeMapModel(QObject* parent = nullptr);
 
-    ~LAttributeMapModel();
+	~LAttributeMapModel();
 
-    QVariant data(const QModelIndex& index, int role) const override;
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    QModelIndex index(int row, int column,
-        const QModelIndex& parent = QModelIndex()) const override;
+	virtual QVariant data(const QModelIndex& index, int role) const override;
 
-    QModelIndex parent(const QModelIndex& index) const override;
+	virtual QModelIndex index(int row, int column,
+		const QModelIndex& parent = QModelIndex()) const override;
 
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	virtual QModelIndex parent(const QModelIndex& index) const override;
 
-    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    void init_root_item(
-        LAttributeMap attributes, const QStringList& filter_paths);
+	void set_attributes(
+		LAttributeMap attributes, const QStringList& filter_paths);
 
 private:
-    LAttributeMapItem* init_item(
-        LAttribute* attribute, const QStringList& filter_paths,
-        LAttributeMapItem* parent = nullptr);
+	LAttributeMapItem* init_item(
+		LAttribute* attribute, const QStringList& filter_paths,
+		LAttributeMapItem* parent = nullptr);
 
-    LAttributeMapItem* get_item(const QModelIndex& index) const;
+	LAttributeMapItem* get_item(const QModelIndex& index) const;
 
-    LAttributeMapItem* m_root_item{ nullptr };
+	LAttributeMapItem* m_root_item{ nullptr };
 };
 LAYERS_NAMESPACE_END
 

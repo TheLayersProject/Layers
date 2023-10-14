@@ -32,6 +32,12 @@ LAttributeMapModel::~LAttributeMapModel()
 	delete m_root_item;
 }
 
+int LAttributeMapModel::columnCount(const QModelIndex& parent) const
+{
+	Q_UNUSED(parent);
+	return 1;
+}
+
 QVariant LAttributeMapModel::data(const QModelIndex& index, int role) const
 {
 	if (!index.isValid())
@@ -70,7 +76,7 @@ QModelIndex LAttributeMapModel::parent(const QModelIndex& index) const
 
 	LAttributeMapItem* child_item = get_item(index);
 	LAttributeMapItem* parent_item = child_item ?
-		child_item->parent() : nullptr;
+		dynamic_cast<LAttributeMapItem*>(child_item->parent()) : nullptr;
 
 	if (parent_item == m_root_item || !parent_item)
 		return QModelIndex();
@@ -89,13 +95,7 @@ int LAttributeMapModel::rowCount(const QModelIndex& parent) const
 		parent_item->child_count() : 0;
 }
 
-int LAttributeMapModel::columnCount(const QModelIndex& parent) const
-{
-	Q_UNUSED(parent);
-	return 1;
-}
-
-void LAttributeMapModel::init_root_item(
+void LAttributeMapModel::set_attributes(
 	LAttributeMap attributes, const QStringList& filter_paths)
 {
 	beginResetModel();

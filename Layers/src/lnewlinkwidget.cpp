@@ -45,7 +45,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 			m_apply_link_button->set_disabled();
 		});
 
-	connect(m_attr_map_view, &LAttributeMapView::selection_changed,
+	connect(m_attr_map_view, &LAttributeMapView::selected_map_item_changed,
 		[this](LAttribute* attr)
 		{
 			m_selected_link_attr = attr;

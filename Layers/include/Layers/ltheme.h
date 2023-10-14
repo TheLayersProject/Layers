@@ -20,7 +20,6 @@
 #ifndef LTHEME_H
 #define LTHEME_H
 
-#include <QDataStream>
 #include <QDir>
 #include <QJsonDocument>
 #include <QString>
