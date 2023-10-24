@@ -49,7 +49,7 @@ LSettingsMenu::LSettingsMenu(QWidget* parent) :
 	m_sidebar->setFixedWidth(recommended_minimum_tab_width());
 	m_sidebar->setMouseTracking(true);
 	m_sidebar->setObjectName("Sidebar");
-	m_sidebar->fill()->set_value(QColor(Qt::lightGray));
+	m_sidebar->fill()->set_value("#c0c0c0");
 }
 
 void LSettingsMenu::add_settings_tab(const LGraphic& icon, const QString& label_text)

@@ -55,13 +55,13 @@ void LLinksView::update_view()
 	{
 		if (m_attr->parent())
 			if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(m_attr->parent()))
-				m_parent_path = parent_theme_item->path();
+				m_parent_path = QString::fromStdString(parent_theme_item->path());
 
 		if (LAttribute* link_attr = m_attr->link_attribute())
 		{
 			while (link_attr)
 			{
-				QString link_path = link_attr->path();
+				QString link_path = QString::fromStdString(link_attr->path());
 
 				if (!m_parent_path.isEmpty())
 					if (link_path.startsWith(m_parent_path))
@@ -75,7 +75,7 @@ void LLinksView::update_view()
 
 		for (LAttribute* dependent_attr : m_attr->dependent_attributes())
 		{
-			QString dependent_path = dependent_attr->path();
+			QString dependent_path = QString::fromStdString(dependent_attr->path());
 
 			if (!dependent_path.contains("/"))
 				continue;
@@ -179,7 +179,8 @@ void LLinksView::paint_item_text(
 		text
 	);
 
-	painter->fillPath(text_path, m_text_color->as<QColor>());
+	painter->fillPath(text_path,
+		QColor(QString::fromStdString(m_text_color->as<std::string>())));
 }
 
 void LLinksView::update_height()

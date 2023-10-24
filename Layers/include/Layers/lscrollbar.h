@@ -59,7 +59,7 @@ public:
 
 private:
 	LAttribute* m_background_color
-		{ new LAttribute("Background Color", QColor(Qt::gray), this) };
+		{ new LAttribute("Background Color", "#a0a0a4", this) };
 
 	LAttribute* m_corner_radii_bottom_left
 		{ new LAttribute("Corner Radii.Bottom Left", 0.0, this) };
@@ -74,7 +74,7 @@ private:
 		{ new LAttribute("Corner Radii.Top Right", 0.0, this) };
 
 	LAttribute* m_handle_color
-		{ new LAttribute("Handle Color", QColor(Qt::white), this) };
+		{ new LAttribute("Handle Color", "#ffffff", this) };
 
 	LAttribute* m_handle_corner_radii_bottom_left
 		{ new LAttribute("Handle Corner Radii.Bottom Left", 5.0, this) };

@@ -148,7 +148,8 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	{
 		image = QImage(MAX_SV + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int h = m_color->as<QColor>().hue();
+		int h = QColor(
+			QString::fromStdString(m_color->as<std::string>())).hue();
 
 		for (int s = 0; s <= MAX_SV; s++) {
 			for (int v = 0; v <= MAX_SV; v++) {
@@ -162,7 +163,8 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	{
 		image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int s = m_color->as<QColor>().saturation();
+		int s = QColor(
+			QString::fromStdString(m_color->as<std::string>())).saturation();
 
 		for (int h = 0; h <= MAX_H; h++) {
 			for (int v = 0; v <= MAX_SV; v++) {
@@ -176,7 +178,8 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 	{
 		image = QImage(MAX_H + 1, MAX_SV + 1, QImage::Format_RGB32);
 
-		int v = m_color->as<QColor>().value();
+		int v = QColor(
+			QString::fromStdString(m_color->as<std::string>())).value();
 
 		for (int h = 0; h <= MAX_H; h++) {
 			for (int s = 0; s <= MAX_SV; s++) {
@@ -195,7 +198,7 @@ void LColorPlane::paintEvent(QPaintEvent* event)
 
 void LColorPlane::update_cursor_position()
 {
-	QColor c = m_color->as<QColor>();
+	QColor c = QColor(QString::fromStdString(m_color->as<std::string>()));
 
 	float w_ratio = 1.f / float(width() - (margin * 2) - 1);
 	float h_ratio = 1.f / float(height() - (margin * 2) - 1);
@@ -229,13 +232,16 @@ void LColorPlane::update_z_axis()
 	switch (m_z_dimension)
 	{
 	case HSV::Hue:
-		m_z_axis->set_value(double(m_color->as<QColor>().hue()));
+		m_z_axis->set_value(double(QColor(
+			QString::fromStdString(m_color->as<std::string>())).hue()));
 		break;
 	case HSV::Saturation:
-		m_z_axis->set_value(double(m_color->as<QColor>().saturation()));
+		m_z_axis->set_value(double(QColor(
+			QString::fromStdString(m_color->as<std::string>())).saturation()));
 		break;
 	case HSV::Value:
-		m_z_axis->set_value(double(m_color->as<QColor>().value()));
+		m_z_axis->set_value(double(QColor(
+			QString::fromStdString(m_color->as<std::string>())).value()));
 		break;
 	}
 }
@@ -268,22 +274,22 @@ void LColorPlane::handle_mouse_event(QPoint& mouse_pos)
 void LColorPlane::init_attributes()
 {
 	connect(m_z_axis, &LAttribute::changed, [this] {
-		QColor c = m_color->as<QColor>();
+		QColor c = QColor(QString::fromStdString(m_color->as<std::string>()));
 
 		switch (m_z_dimension)
 		{
 		case HSV::Hue:
-			c.setHsv(m_z_axis->as<int>(), c.saturation(), c.value());
+			c.setHsv(m_z_axis->as<double>(), c.saturation(), c.value());
 			break;
 		case HSV::Saturation:
-			c.setHsv(c.hue(), m_z_axis->as<int>(), c.value());
+			c.setHsv(c.hue(), m_z_axis->as<double>(), c.value());
 			break;
 		case HSV::Value:
-			c.setHsv(c.hue(), c.saturation(), m_z_axis->as<int>());
+			c.setHsv(c.hue(), c.saturation(), m_z_axis->as<double>());
 			break;
 		}
 
-		m_color->set_value(c);
+		m_color->set_value(c.name().toStdString());
 		});
 
 	connect(m_color, &LAttribute::changed, [this]
@@ -294,7 +300,7 @@ void LColorPlane::init_attributes()
 		});
 
 	m_cursor->fill()->set_link_attribute(m_color);
-	m_cursor->border_fill()->set_value(QColor(Qt::lightGray));
+	m_cursor->border_fill()->set_value("#c0c0c0");
 	m_cursor->border_thickness()->set_value(2.0);
 	m_cursor->corner_radii_top_left()->set_value(2.0);
 	m_cursor->corner_radii_top_right()->set_value(2.0);
@@ -304,7 +310,7 @@ void LColorPlane::init_attributes()
 
 void LColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)
 {
-	QColor c = m_color->as<QColor>();
+	QColor c = QColor(QString::fromStdString(m_color->as<std::string>()));
 
 	switch (m_z_dimension)
 	{
@@ -319,7 +325,7 @@ void LColorPlane::update_color(float x_pos_ratio, float y_pos_ratio)
 		break;
 	}
 
-	m_color->set_value(c);
+	m_color->set_value(c.name().toStdString());
 }
 
 void LColorPlane::update_height_dependencies()

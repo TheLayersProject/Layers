@@ -28,8 +28,8 @@ using Layers::LGradientDialog;
 using Layers::LThemeable;
 
 LGradientDialog::LGradientDialog(
-	QGradientStops gradient_stops, QWidget* parent) :
-	m_gradient_editor{ new LGradientEditor(gradient_stops) },
+	std::vector<std::string> stops, QWidget* parent) :
+	m_gradient_editor{ new LGradientEditor(stops) },
 	LDialog("Gradient", parent)
 {
 	init_layout();
@@ -46,9 +46,9 @@ LGradientDialog::LGradientDialog(
 		[this] { done(QDialog::Accepted); });
 }
 
-QGradientStops LGradientDialog::gradient_stops() const
+std::vector<std::string> LGradientDialog::stops() const
 {
-	return m_gradient_editor->gradient_stops();
+	return m_gradient_editor->stops();
 }
 
 void LGradientDialog::init_layout()

@@ -56,13 +56,13 @@ public:
 
 protected:
 	LAttribute* m_corner_radius
-		{ new LAttribute("Corner Radius", QVariant(4.0), this) };
+		{ new LAttribute("Corner Radius", 4.0, this) };
 
 	LAttribute* m_fill
-		{ new LAttribute("Fill", QColor("#27272e"), this)};
+		{ new LAttribute("Fill", "#27272e", this)};
 
 	LAttribute* m_text_color
-		{ new LAttribute("Text Color", QColor("#e1e1e1"), this) };
+		{ new LAttribute("Text Color", "#e1e1e1", this) };
 
 private:
 	void init_attributes();

@@ -32,16 +32,16 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 	connect(m_theme_view, &LThemeView::selected_theme_item_changed,
 		[this](LThemeItem* theme_item)
 		{
-			QStringList filter_paths = { m_attr->path() };
+			QStringList filter_paths = { QString::fromStdString(m_attr->path()) };
 			for (LAttribute* dependent_attr : m_attr->dependent_attributes(true))
-				filter_paths.append(dependent_attr->path());
+				filter_paths.append(QString::fromStdString(dependent_attr->path()));
 
 			m_attr_map_view->set_attributes(
-				theme_item->attributes(m_attr->typeName()), filter_paths);
+				theme_item->attributes(m_attr->type_index()), filter_paths);
 
 			m_selected_link_attr = nullptr;
 
-			m_path_editor->set_text(theme_item->path() + "/");
+			m_path_editor->set_text(QString::fromStdString(theme_item->path()) + "/");
 			m_apply_link_button->set_disabled();
 		});
 
@@ -50,7 +50,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 		{
 			m_selected_link_attr = attr;
 
-			m_path_editor->set_text(attr->path());
+			m_path_editor->set_text(QString::fromStdString(attr->path()));
 			m_apply_link_button->set_disabled(false);
 		});
 
@@ -80,7 +80,7 @@ LNewLinkWidget::LNewLinkWidget(LAttribute* attr, QWidget* parent) :
 	connect(m_apply_link_button, &LButton::clicked,
 		[this]
 		{
-			m_attr->set_link_path(m_path_editor->text()->as<QString>());
+			m_attr->set_link_path(m_path_editor->text()->as<std::string>());
 			m_attr->set_link_attribute(m_selected_link_attr);
 
 			deleteLater();

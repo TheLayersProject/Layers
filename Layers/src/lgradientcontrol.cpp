@@ -36,7 +36,7 @@ LGradientControl::LGradientControl(QWidget* parent) : LWidget(parent)
 
 LGradientControl::~LGradientControl()
 {
-	delete  m_fill;
+	delete m_fill;
 }
 
 bool LGradientControl::eventFilter(QObject* object, QEvent* event)
@@ -48,16 +48,15 @@ bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 
 		if (mouse_event->button() & Qt::LeftButton)
 		{
-			LGradientDialog gradient_dialog(m_fill->as<QGradientStops>());
+			LGradientDialog gradient_dialog(m_fill->as<std::vector<std::string>>());
 			gradient_dialog.apply_theme_item(
-				activeTheme()->find_item(gradient_dialog.path()));
+				activeTheme()->find_item(gradient_dialog.path().toStdString()));
 
 			center(&gradient_dialog, window());
 
 			if (gradient_dialog.exec())
 			{
-				fill()->set_value(
-					QVariant::fromValue(gradient_dialog.gradient_stops()));
+				fill()->set_value(gradient_dialog.stops());
 
 				emit gradient_changed();
 			}
@@ -72,7 +71,7 @@ void LGradientControl::init_attributes()
 	// Remove control attribute
 	m_fill->setParent(nullptr);
 
-	m_border_fill->set_value(QColor("#D6D6D6"));
+	m_border_fill->set_value("#D6D6D6");
 	m_border_thickness->set_value(2.0);
 	m_corner_radii_top_left->set_value(5.0);
 	m_corner_radii_top_right->set_value(5.0);
@@ -83,7 +82,5 @@ void LGradientControl::init_attributes()
 	m_margins_right->set_value(8.0);
 	m_margins_bottom->set_value(8.0);
 
-	m_fill->set_value(
-		QVariant::fromValue(
-			QGradientStops({ { 0.0, Qt::white },{ 1.0, Qt::black } })));
+	m_fill->set_value(std::vector<std::string>({ "0:#ffffff", "1:#000000" }));
 }

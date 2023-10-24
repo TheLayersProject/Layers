@@ -1,0 +1,515 @@
+{
+    "App/Main Window": {
+        "attributes": {
+            "Border.Fill": {
+                "linked_to": "App/Gradient"
+            },
+            "Border.Thickness": {
+                "value": 8
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 12
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 12
+            },
+            "Corner Radii.Top Left": {
+                "value": 12
+            },
+            "Corner Radii.Top Right": {
+                "value": 12
+            },
+            "Fill": {
+                "linked_to": "App/Primary"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Separator": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                }
+            },
+            "Titlebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 3
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Main Window/Fill"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Exit Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e33034"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Maximize Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Menu Tab Bar": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#a0a0a4"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 3
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 3
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Tabs": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#000000"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 3
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 3
+                                    },
+                                    "Fill": {
+                                        "linked_to": "App/Main Window/Titlebar/Menu Tab Bar/Fill",
+                                        "overrides": {
+                                            "Active": {
+                                                "linked_to": "App/Tertiary"
+                                            }
+                                        }
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 0
+                                    },
+                                    "Margins.Right": {
+                                        "value": 0
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    }
+                                },
+                                "children": {
+                                    "Close Button": {
+                                        "attributes": {
+                                            "Border.Fill": {
+                                                "value": "#a0a0a4"
+                                            },
+                                            "Border.Thickness": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Bottom Left": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Bottom Right": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Top Left": {
+                                                "value": 0
+                                            },
+                                            "Corner Radii.Top Right": {
+                                                "value": 0
+                                            },
+                                            "Fill": {
+                                                "value": "#00ffffff"
+                                            },
+                                            "Margins.Bottom": {
+                                                "value": 0
+                                            },
+                                            "Margins.Left": {
+                                                "value": 0
+                                            },
+                                            "Margins.Right": {
+                                                "value": 0
+                                            },
+                                            "Margins.Top": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "children": {
+                                            "Graphic": {
+                                                "children": {
+                                                    "Svg": {
+                                                        "attributes": {
+                                                            "Color": {
+                                                                "overrides": {
+                                                                    "Selected": {
+                                                                        "value": "#e95454"
+                                                                    }
+                                                                },
+                                                                "value": "#5f5f5f"
+                                                            }
+                                                        },
+                                                        "is_overridable": true
+                                                    }
+                                                },
+                                                "is_overridable": true
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    },
+                                    "Icon": {
+                                        "children": {
+                                            "Svg": {
+                                                "attributes": {
+                                                    "Color": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "is_overridable": true
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    },
+                                    "Text Label": {
+                                        "attributes": {
+                                            "Fill": {
+                                                "value": "#ffffff"
+                                            },
+                                            "Text Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        }
+                    },
+                    "Minimize Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Settings Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Titlebar/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                }
+            }
+        }
+    }
+}

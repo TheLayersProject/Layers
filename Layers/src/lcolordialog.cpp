@@ -57,11 +57,11 @@ LColorDialog::LColorDialog(QWidget* parent) :
 		[this]
 		{
 			qsizetype text_size =
-				m_color_name_editor->text()->as<QString>().size();
+				QString::fromStdString(m_color_name_editor->text()->as<std::string>()).size();
 
 			if (text_size == 6) // || text_size == 8)
 				m_color->set_value(
-					QColor("#" + m_color_name_editor->text()->as<QString>()));
+					"#" + m_color_name_editor->text()->as<std::string>());
 		});
 
 	m_radio_button_hue->setObjectName("Hue Radio Button");
@@ -138,14 +138,14 @@ LAttribute* LColorDialog::color() const
 
 void LColorDialog::hsv_changed()
 {
-	float hue_f = m_line_editor_hue->text()->as<float>() / float(MAX_H);
-	float sat_f = m_line_editor_sat->text()->as<float>() / 100.f;
-	float val_f = m_line_editor_val->text()->as<float>() / 100.f;
+	float hue_f = m_line_editor_hue->text()->as<double>() / float(MAX_H);
+	float sat_f = m_line_editor_sat->text()->as<double>() / 100.f;
+	float val_f = m_line_editor_val->text()->as<double>() / 100.f;
 
 	QColor new_color;
 	new_color.setHsvF(hue_f, sat_f, val_f);
 
-	m_color->set_value(new_color);
+	m_color->set_value(new_color.name().toStdString());
 }
 
 void LColorDialog::init_attributes()
@@ -154,7 +154,8 @@ void LColorDialog::init_attributes()
 
 	connect(m_color, &LAttribute::changed, [this]
 		{
-			QColor color = m_color->as<QColor>();
+			QColor color =
+				QColor(QString::fromStdString(m_color->as<std::string>()));
 
 			m_color_name_editor->set_text(
 				color.name().remove("#"));

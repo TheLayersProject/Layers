@@ -156,14 +156,14 @@ void LSlider::init_attributes()
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
 
-	m_bar->fill()->set_value(QColor(Qt::lightGray));
+	m_bar->fill()->set_value("#c0c0c0");
 	m_bar->corner_radii_top_left()->set_value(2.0);
 	m_bar->corner_radii_top_right()->set_value(2.0);
 	m_bar->corner_radii_bottom_left()->set_value(2.0);
 	m_bar->corner_radii_bottom_right()->set_value(2.0);
 	m_bar->set_margin(20, 0, 20, 0);
 
-	m_handle->fill()->set_value(QColor(Qt::darkGray));
+	m_handle->fill()->set_value("#808080");
 	m_handle->corner_radii_top_left()->set_value(3.0);
 	m_handle->corner_radii_top_right()->set_value(3.0);
 	m_handle->corner_radii_bottom_left()->set_value(3.0);

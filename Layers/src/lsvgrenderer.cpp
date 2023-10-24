@@ -20,6 +20,7 @@
 #include <Layers/lsvgrenderer.h>
 
 #include <QFile>
+#include <QTextStream>
 
 using Layers::LAttribute;
 using Layers::LSvgRenderer;
@@ -80,7 +81,9 @@ void LSvgRenderer::update()
 		if (m_svg_elements[i].startsWith("<path") &&
 			m_svg_elements[i].contains("id="))
 		{
-			QString color_name = m_color->as<QColor>(state_combo()).name();
+			QString color_name =
+				QString::fromStdString(
+					m_color->as<std::string>(state_combo()));
 
 			m_svg_elements[i].replace(
 				m_svg_elements[i].indexOf("fill=") + 6, 7, color_name);

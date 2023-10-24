@@ -169,25 +169,21 @@ void LDialog::init_attributes()
 {
 	LThemeableBox::init_attributes();
 
-	m_border_fill->set_value(QVariant::fromValue(
-		QGradientStops({
-			{ 0.0, QColor("#3a3c42") },
-			{ 1.0, QColor("#42454d") }
-			})));
+	m_border_fill->set_value(std::vector<std::string>({ "0:#3a3c42", "1:#42454d" }));
 	m_border_thickness->set_value(5.0);
 	m_corner_radii_top_left->set_value(12.0);
 	m_corner_radii_top_right->set_value(12.0);
 	m_corner_radii_bottom_left->set_value(12.0);
 	m_corner_radii_bottom_right->set_value(12.0);
-	m_fill->set_value(QColor("#36393f"));
+	m_fill->set_value("#36393f");
 
-	m_titlebar->corner_radii_top_left()->set_value(7);
-	m_titlebar->corner_radii_top_right()->set_value(7);
+	m_titlebar->corner_radii_top_left()->set_value(7.0);
+	m_titlebar->corner_radii_top_right()->set_value(7.0);
 	m_titlebar->fill()->set_value("#25272b");
 
 	m_title_label->text_color()->set_value("#e3e3e3");
 
-	m_exit_button->corner_radii_top_right()->set_value(7);
+	m_exit_button->corner_radii_top_right()->set_value(7.0);
 	m_exit_button->fill()->set_value("#25272b");
 }
 

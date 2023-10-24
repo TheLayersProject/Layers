@@ -57,9 +57,8 @@ private:
 	LColorControl* m_color_control{ new LColorControl };
 	LGradientControl* m_gradient_control{ new LGradientControl };
 
-	QColor m_previous_color{ "#f0f0f0" };
-	QGradientStops m_previous_gradient
-		{ { 0.0, "#f0f0f0" },{ 1.0, "#0f0f0f" } };
+	std::string m_previous_color{ "#f0f0f0" };
+	std::vector<std::string> m_previous_gradient{ "0:#f0f0f0", "0:#0f0f0f" };
 };
 LAYERS_NAMESPACE_END
 

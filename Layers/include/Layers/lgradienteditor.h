@@ -35,20 +35,20 @@ class LAYERS_EXPORT LGradientEditor : public LWidget
 	Q_OBJECT
 
 public:
-	LGradientEditor(QGradientStops gradient_stops, QWidget* parent = nullptr);
+	LGradientEditor(std::vector<std::string> stops, QWidget* parent = nullptr);
 
 	~LGradientEditor();
 
-	QGradientStops gradient_stops() const;
+	std::vector<std::string> stops() const;
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
-	LGradientEditorItem* create_item(const QGradientStop& stop);
+	LGradientEditorItem* create_item(const std::string& stop);
 
-	void init_attributes(const QGradientStops& gradient_stops);
-	void init_items(const QGradientStops& gradient_stops);
+	void init_attributes(const std::vector<std::string>& stops);
+	void init_items(const std::vector<std::string>& stops);
 	void init_add_stop_buttons();
 
 	void update_gradient();

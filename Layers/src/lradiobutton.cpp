@@ -57,7 +57,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 
 	QStringList s = state_combo();
 
-	int border_thickness = m_border_thickness->as<int>(s);
+	int border_thickness = m_border_thickness->as<double>(s);
 	qreal margin = m_margin->as<qreal>(s);
 
 	qreal radius_h = (width() / 2) - margin;
@@ -68,7 +68,8 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 	fill_path.addEllipse(rect().center(),
 		radius_h - border_thickness, radius_v - border_thickness);
 
-	painter.fillPath(fill_path, m_fill->as<QColor>(s));
+	painter.fillPath(fill_path,
+		QColor(QString::fromStdString(m_fill->as<std::string>(s))));
 
 	// Border
 	QPainterPath border_path;
@@ -77,7 +78,8 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 	border_path = border_path - fill_path;
 
 	if (border_thickness)
-		painter.fillPath(border_path, m_border_fill->as<QColor>(s));
+		painter.fillPath(border_path,
+			QColor(QString::fromStdString(m_border_fill->as<std::string>(s))));
 
 	// Active Dot
 	if (s.contains("Active"))
@@ -86,7 +88,9 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 		active_dot_path.addEllipse(rect().center(),
 			radius_h * 0.385, radius_v * 0.385);
 
-		painter.fillPath(active_dot_path, m_active_dot_fill->as<QColor>(s));
+		painter.fillPath(active_dot_path,
+			QColor(QString::fromStdString(
+				m_active_dot_fill->as<std::string>(s))));
 	}
 }
 
@@ -94,5 +98,5 @@ void LRadioButton::init_attributes()
 {
 	m_border_thickness->create_override("Active", 0.0);
 
-	m_fill->create_override("Active", QColor(Qt::lightGray));
+	m_fill->create_override("Active", "#c0c0c0");
 }

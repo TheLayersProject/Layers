@@ -30,7 +30,7 @@ LColorControl::LColorControl(QWidget* parent) : LWidget(parent)
 {
 	init_attributes();
 
-    setFixedSize(40, 40);
+	setFixedSize(40, 40);
 	installEventFilter(this);
 }
 
@@ -44,14 +44,15 @@ LColorControl::~LColorControl()
 void LColorControl::click()
 {
 	LColorDialog color_dialog;
-	color_dialog.apply_theme_item(activeTheme()->find_item(color_dialog.path()));
-	color_dialog.color()->set_value(fill()->as<QColor>());
+	color_dialog.apply_theme_item(
+		activeTheme()->find_item(color_dialog.path().toStdString()));
+	color_dialog.color()->set_value(fill()->as<std::string>());
 
 	center(&color_dialog, window());
 
 	if (color_dialog.exec())
 	{
-		fill()->set_value(color_dialog.color()->as<QColor>());
+		fill()->set_value(color_dialog.color()->as<std::string>());
 
 		emit color_changed();
 	}
@@ -90,7 +91,7 @@ bool LColorControl::eventFilter(QObject* object, QEvent* event)
 		open_on_release = false;
 	}
 
-    return false;
+	return false;
 }
 
 void LColorControl::init_attributes()
@@ -98,7 +99,7 @@ void LColorControl::init_attributes()
 	// Remove control attribute
 	m_fill->setParent(nullptr);
 
-	m_border_fill->set_value(QColor("#D6D6D6"));
+	m_border_fill->set_value("#D6D6D6");
 	m_border_thickness->set_value(2.0);
 	m_corner_radii_top_left->set_value(5.0);
 	m_corner_radii_top_right->set_value(5.0);

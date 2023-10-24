@@ -35,10 +35,10 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 	m_line_edit->installEventFilter(this);
 
 	connect(m_line_edit, &QLineEdit::textEdited, [this] {
-		if (m_text->typeName() == "QString")
-			m_text->set_value(m_line_edit->text());
-		else if (m_text->typeName() == "double")
-			m_text->set_value(QVariant(m_line_edit->text().toDouble()));
+		if (std::string* text_string = m_text->as_if<std::string>())
+			m_text->set_value(m_line_edit->text().toStdString());
+		else if (double* text_double = m_text->as_if<double>())
+			m_text->set_value(m_line_edit->text().toDouble());
 
 		emit text_edited(m_line_edit->text());
 		});
@@ -85,7 +85,7 @@ void LLineEditor::set_text(const QString& text)
 {
 	m_line_edit->setText(text);
 
-	m_text->set_value(text);
+	m_text->set_value(text.toStdString());
 }
 
 void LLineEditor::set_validator(const QValidator* validator)
@@ -114,15 +114,23 @@ void LLineEditor::update()
 		"QLineEdit {"
 		"border: none;"
 		"background: transparent;"
-		"color: " + m_text_color->as<QColor>().name() + ";"
+		"color: " + QString::fromStdString(
+			m_text_color->as<std::string>()) + ";"
 		"padding-left: " + QString::number(
 			m_margins_left->as<double>() +
 			m_left_padding->as<double>()) + "px;"
 		"padding-bottom: 2px;"
 		"}");
 
-	if (m_line_edit->text() != m_text->as<QString>())
-		m_line_edit->setText(m_text->as<QString>());
+	QString text_qstring;
+
+	if (std::string* text_string = m_text->as_if<std::string>())
+		text_qstring = QString::fromStdString(*text_string);
+	else if (double* text_double = m_text->as_if<double>())
+		text_qstring = QString::number(*text_double);
+
+	if (m_line_edit->text() != text_qstring)
+		m_line_edit->setText(text_qstring);
 
 	m_line_edit->update();
 }
@@ -156,5 +164,5 @@ void LLineEditor::init_attributes()
 	m_corner_radii_top_right->set_value(5.0);
 	m_corner_radii_bottom_left->set_value(5.0);
 	m_corner_radii_bottom_right->set_value(5.0);
-	m_fill->set_value(QColor(Qt::lightGray));
+	m_fill->set_value("#c0c0c0");
 }

@@ -36,9 +36,9 @@ class LAYERS_EXPORT LGradientDialog : public LDialog
 	Q_OBJECT
 
 public:
-	LGradientDialog(QGradientStops gradient_stops, QWidget* parent = nullptr);
+	LGradientDialog(std::vector<std::string> stops, QWidget* parent = nullptr);
 
-	QGradientStops gradient_stops() const;
+	std::vector<std::string> stops() const;
 
 private:
 	void init_layout();

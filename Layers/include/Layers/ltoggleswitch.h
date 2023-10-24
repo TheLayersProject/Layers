@@ -51,10 +51,10 @@ public:
 
 	bool toggled() const;
 
-	LAttribute a_padding_left{ LAttribute("Left Padding", QVariant::fromValue(2.0)) };
-	LAttribute a_padding_top{ LAttribute("Top Padding", QVariant::fromValue(2.0)) };
-	LAttribute a_padding_right{ LAttribute("Right Padding", QVariant::fromValue(2.0)) };
-	LAttribute a_padding_bottom{ LAttribute("Bottom Padding", QVariant::fromValue(2.0)) };
+	LAttribute a_padding_left{ LAttribute("Left Padding", 2.0) };
+	LAttribute a_padding_top{ LAttribute("Top Padding", 2.0) };
+	LAttribute a_padding_right{ LAttribute("Right Padding", 2.0) };
+	LAttribute a_padding_bottom{ LAttribute("Bottom Padding", 2.0) };
 
 protected:
 	bool eventFilter(QObject* object, QEvent* event) override;

@@ -68,7 +68,7 @@ protected:
 	void paint(QWidget* widget);
 
 	LAttribute* m_border_fill
-		{ new LAttribute("Border.Fill", QColor(Qt::gray)) };
+		{ new LAttribute("Border.Fill", "#a0a0a4") };
 
 	LAttribute* m_border_thickness
 		{ new LAttribute("Border.Thickness", 0.0) };
@@ -86,7 +86,7 @@ protected:
 		{ new LAttribute("Corner Radii.Top Right", 0.0) };
 
 	LAttribute* m_fill
-		{ new LAttribute("Fill", QColor(Qt::white)) };
+		{ new LAttribute("Fill", "#ffffff") };
 
 	LAttribute* m_margins_bottom
 		{ new LAttribute("Margins.Bottom", 0.0) };

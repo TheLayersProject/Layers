@@ -55,7 +55,7 @@ private:
 	QMetaObject::Connection m_update_timer_timeout_connection;
 
 	LAttribute* m_color{
-		new LAttribute("Color", QColor(Qt::lightGray), this) };
+		new LAttribute("Color", "#c0c0c0", this)};
 };
 LAYERS_NAMESPACE_END
 

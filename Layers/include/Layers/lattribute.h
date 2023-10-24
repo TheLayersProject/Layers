@@ -20,22 +20,32 @@
 #ifndef LATTRIBUTE_H
 #define LATTRIBUTE_H
 
-#include <QHash>
-#include <QJsonObject>
-#include <QObject>
-#include <QVariant>
+#include <map>
+
+//#include <QObject>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lobject.h"
+#include "ljson.h"
+
 LAYERS_NAMESPACE_BEGIN
 
+class LInvalidVariant {};
+
+using LVariant = std::variant<
+	LInvalidVariant,			// 0
+	double,						// 1
+	bool,						// 2
+	std::string,				// 3
+	std::vector<std::string>>;	// 4
+
 class LAttribute;
+using LAttributeList = std::vector<LAttribute*>;
+using LAttributeMap = std::map<std::string, LAttribute*>;
 
-using LAttributeList = QList<LAttribute*>;
-using LAttributeMap = QMap<QString, LAttribute*>;
-
-class LAYERS_EXPORT LAttribute : public QObject
+class LAYERS_EXPORT LAttribute : public LObject
 {
 	Q_OBJECT
 
@@ -45,14 +55,17 @@ signals:
 	void link_changed();
 
 public:
-	LAttribute(const QString& name,
-		QObject* parent = nullptr);
+	LAttribute(const std::string& name,
+		LObject* parent = nullptr);
 
-	LAttribute(const QString& name, QVariant value,
-		QObject* parent = nullptr);
+	LAttribute(const std::string& name, const char* value,
+		LObject* parent = nullptr);
 
-	LAttribute(const QString& name, QJsonObject json_object,
-		QObject* parent = nullptr);
+	LAttribute(const std::string& name, LVariant value,
+		LObject* parent = nullptr);
+
+	LAttribute(const std::string& name, LJsonObject json_object,
+		LObject* parent = nullptr);
 
 	LAttribute(const LAttribute& attribute);
 
@@ -61,46 +74,53 @@ public:
 	template<typename T>
 	T as(const QStringList& state_combo = QStringList());
 
+	template<typename T>
+	T* as_if(const QStringList& state_combo = QStringList());
+
 	void break_link();
 
 	void clear_overrides();
 
 	void clear_theme_attribute();
 
-	void create_override(const QString& name, QVariant value);
+	void create_override(const std::string& name, const char* value);
+
+	void create_override(const std::string& name, LVariant value);
 
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies = false) const;
 
 	bool has_overrides() const;
 
-	QJsonObject& json_object();
+	LJsonObject& json_object();
 
 	LAttribute* link_attribute() const;
 
-	QString link_path() const;
+	std::string link_path() const;
 
 	LAttribute* override_attribute(const QStringList& state_combo);
 
 	LAttributeMap overrides() const;
 
-	QString path() const;
+	std::string path() const;
 
 	void set_link_attribute(LAttribute* link_attr);
 
-	void set_link_path(const QString& link_path);
+	void set_link_path(const std::string& link_path);
 
 	void set_theme_attribute(LAttribute* theme_attr);
 
-	void set_value(QVariant value);
+	void set_value(const char* value);
 
-	QJsonObject to_json_object();
+	void set_value(LVariant value);
 
-	QJsonValue to_json_value();
+	LJsonObject to_json_object();
 
-	QString typeName(const QStringList& state_combo = QStringList());
+	LJsonValue to_json_value();
 
-	QVariant value();
+	int type_index() const;
+
+	LVariant value();
 
 private slots:
 	void update_json_object();
@@ -121,13 +141,13 @@ private:
 
 	LAttribute* m_link_attr{ nullptr };
 
-	QString m_link_path;
+	std::string m_link_path;
 
 	LAttributeMap m_overrides;
 
-	QVariant m_value;
+	LVariant m_value;
 
-	QJsonObject m_json_object;
+	LJsonObject m_json_object;
 };
 
 template<typename T>
@@ -136,14 +156,30 @@ inline T LAttribute::as(const QStringList& state_combo)
 	if (m_theme_attr)
 		return m_theme_attr->as<T>(state_combo);
 
-	if (!m_overrides.isEmpty() && !state_combo.isEmpty())
+	if (!m_overrides.empty() && !state_combo.isEmpty())
 		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as<T>();
 
 	if (m_link_attr)
 		return m_link_attr->as<T>();
 
-	return m_value.value<T>();
+	return std::get<T>(m_value);
+}
+
+template<typename T>
+inline T* LAttribute::as_if(const QStringList& state_combo)
+{
+	if (m_theme_attr)
+		return m_theme_attr->as_if<T>(state_combo);
+
+	if (!m_overrides.empty() && !state_combo.isEmpty())
+		if (LAttribute* override_attr = override_attribute(state_combo))
+			return override_attr->as_if<T>();
+
+	if (m_link_attr)
+		return m_link_attr->as_if<T>();
+
+	return std::get_if<T>(&m_value);
 }
 
 LAYERS_NAMESPACE_END

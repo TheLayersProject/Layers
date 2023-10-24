@@ -60,20 +60,36 @@ void LThemeable::apply_theme_item(LThemeItem* theme_item)
 		{
 			m_current_theme_item = theme_item;
 
-			if (!theme_item->attributes().isEmpty())
+			const auto& attributes_map = theme_item->attributes();
+			if (!attributes_map.empty())
+			{
 				for (LAttribute* attr : child_attributes())
-					if (theme_item->attributes().contains(attr->objectName()))
-						attr->set_theme_attribute(
-							theme_item->attributes()[attr->objectName()]);
+				{
+					auto it = attributes_map.find(attr->objectName().toStdString());
+					if (it != attributes_map.end())
+					{
+						attr->set_theme_attribute(it->second);
+					}
+				}
+			}
 
-			if (!theme_item->children().isEmpty())
+			const auto& children_map = theme_item->children();
+			if (!children_map.empty())
+			{
 				for (LThemeable* child_t : child_themeables())
-					if (theme_item->children().contains(child_t->_name()))
-						child_t->apply_theme_item(
-							theme_item->children()[child_t->_name()]);
+				{
+					auto it = children_map.find(child_t->_name().toStdString());
+					if (it != children_map.end())
+					{
+						child_t->apply_theme_item(it->second);
+					}
+				}
+			}
 
 			for (LThemeable* themeable : m_share_themeables)
+			{
 				themeable->apply_theme_item(m_current_theme_item);
+			}
 		}
 	}
 	else
@@ -81,10 +97,14 @@ void LThemeable::apply_theme_item(LThemeItem* theme_item)
 		m_current_theme_item = nullptr;
 
 		for (LAttribute* attr : child_attributes())
+		{
 			attr->clear_theme_attribute();
+		}
 
 		for (LThemeable* child_t : child_themeables())
+		{
 			child_t->apply_theme_item(nullptr);
+		}
 	}
 }
 

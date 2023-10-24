@@ -188,19 +188,16 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 		else
 			m_label->setText(attr->objectName());
 
-		if (
-			attr->typeName() == "QColor" ||
-			attr->typeName() == "QList<std::pair<double,QColor>>"
-			)
+		if (attr->type_index() == 3 || attr->type_index() == 4)
 		{
 			m_fill_control->set_attribute(attr);
 
 			m_line_editor->hide();
 			m_slider->hide();
 		}
-		else if (attr->typeName() == "double")
+		else if (attr->type_index() == 1)
 		{
-			m_line_editor->set_text(attr->as<QString>());
+			m_line_editor->set_text(QString::number(attr->as<double>()));
 			m_line_editor->text()->set_link_attribute(attr);
 
 			m_slider->value()->set_link_attribute(m_line_editor->text());
@@ -231,7 +228,7 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 		if (attr->has_overrides())
 		{
-			for (LAttribute* override_attr : attr->overrides())
+			for (const auto& [key, override_attr] : attr->overrides())
 			{
 				LAttributeEditor* override_editor =
 					new LAttributeEditor(override_attr);
@@ -300,13 +297,13 @@ void LAttributeEditor::update_icon_labels()
 
 void LAttributeEditor::init_attributes()
 {
-	m_fill->set_value(QColor("#1e2023"));
+	m_fill->set_value("#1e2023");
 	m_corner_radii_top_left->set_value(10.0);
 	m_corner_radii_top_right->set_value(10.0);
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
 
-	m_label->text_color()->set_value(QColor(Qt::white));
+	m_label->text_color()->set_value("#ffffff");
 }
 
 void LAttributeEditor::init_layout()

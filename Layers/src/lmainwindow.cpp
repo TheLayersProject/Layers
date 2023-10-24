@@ -217,15 +217,13 @@ void LMainWindow::init_attributes()
 	m_fill->set_link_attribute(layersApp->primary());
 
 	m_border_thickness->set_value(15.0);
-	m_border_fill->set_value(
-		QVariant::fromValue(
-			QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })));
+	m_border_fill->set_value(std::vector<std::string>({ "0:#3a3c42", "1:#42454d" }));
 	m_corner_radii_top_left->set_value(10.0);
 	m_corner_radii_top_right->set_value(10.0);
 	m_corner_radii_bottom_left->set_value(10.0);
 	m_corner_radii_bottom_right->set_value(10.0);
 
-	m_separator->fill()->set_value(QColor("#25272b"));
+	m_separator->fill()->set_value("#25272b");
 }
 
 void LMainWindow::init_layout()
@@ -283,7 +281,7 @@ void LMainWindow::_open_central_widget(QWidget* central_widget)
 	{
 		if (current_theme_item())
 			central_themeable->apply_theme_item(
-				current_theme_item()->find_item(central_widget->objectName()));
+				current_theme_item()->find_item(central_widget->objectName().toStdString()));
 	}
 
 	m_central_widgets.append(central_widget);

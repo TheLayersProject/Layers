@@ -37,16 +37,38 @@ class LJsonValue;
 using LJsonArray = std::vector<LJsonValue>;
 using LJsonObject = std::map<std::string, LJsonValue>;
 using LJsonVariant =
-	std::variant<bool, int, std::string, LJsonObject, LJsonArray>;
+	std::variant<bool, double, std::string, LJsonArray, LJsonObject>;
 
 class LAYERS_EXPORT LJsonValue
 {
 public:
 	LJsonValue();
+	LJsonValue(bool value);
+	LJsonValue(double value);
 	LJsonValue(std::string value);
-	LJsonValue(int value);
 	LJsonValue(LJsonObject value);
 	LJsonValue(LJsonArray value);
+
+	bool is_bool() const;
+
+	bool is_double() const;
+
+	bool is_object() const;
+
+	bool is_string() const;
+
+	LJsonArray to_array() const;
+
+	bool to_bool() const;
+
+	double to_double() const;
+
+	LJsonObject to_object() const;
+
+	std::string to_string() const;
+
+	std::string to_output(
+		int indent_space_count = 2, int indent_level = 0) const;
 
 private:
 	LJsonVariant m_variant;
@@ -61,7 +83,7 @@ enum class LAYERS_EXPORT LJsonTokenType
 	LBRACKET, RBRACKET,
 	COLON, COMMA,
 	STRING, NUMBER,
-	TRUE, FALSE,
+	T, F,
 	NONE, END
 };
 

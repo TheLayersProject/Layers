@@ -39,7 +39,7 @@ public:
 
 private:
 	LAttribute* m_border_fill{
-		new LAttribute("Border.Fill", QColor(Qt::gray), this) };
+		new LAttribute("Border.Fill", "#a0a0a4", this) };
 
 	LAttribute* m_border_thickness{
 		new LAttribute("Border.Thickness", 0.0, this) };
@@ -57,10 +57,10 @@ private:
 		new LAttribute("Corner Radii.Top Right", 2.0, this) };
 
 	LAttribute* m_fill{
-		new LAttribute("Fill", QColor("#808080"), this) };
+		new LAttribute("Fill", "#808080", this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::black), this) };
+		new LAttribute("Text Color", "#000000", this) };
 };
 LAYERS_NAMESPACE_END
 

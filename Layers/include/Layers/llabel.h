@@ -73,10 +73,10 @@ private:
 	LGraphic* m_graphic{ nullptr };
 
 	LAttribute* m_fill{
-		new LAttribute("Fill", QColor(Qt::white), this) };
+		new LAttribute("Fill", "#ffffff", this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::black)) };
+		new LAttribute("Text Color", "#000000") };
 
 	QMetaObject::Connection m_repaint_connection;
 

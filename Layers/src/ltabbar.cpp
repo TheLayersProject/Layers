@@ -72,7 +72,7 @@ void LTabBar::_add_tab(LTab* tab)
 
 	if (current_theme_item())
 		tab->apply_theme_item(
-			current_theme_item()->find_item(tab->objectName()));
+			current_theme_item()->find_item(tab->objectName().toStdString()));
 
 	m_tabs.append(tab);
 	m_tab_layout->addWidget(tab);

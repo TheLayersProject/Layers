@@ -119,8 +119,7 @@ public:
 	*/
 	LApplication(int& argc, char** argv,
 		const QString& name,
-		const QUuid& uuid,
-		LGitHubRepo* github_repo = nullptr);
+		const QUuid& uuid);
 
 	~LApplication();
 
@@ -174,6 +173,8 @@ public:
 	*/
 	void reapply_theme();
 
+	void set_github_repo(const QString& github_repo_url);
+
 	void set_publisher(const QString& publisher);
 
 	static void set_version(const QString& version);
@@ -216,7 +217,7 @@ public slots:
 	/*!
 		Renames the theme specified by *old_name* to *new_name*.
 	*/
-	void rename_theme(const QString& old_name, const QString& new_name);
+	void rename_theme(const QString& old_name, const std::string& new_name);
 
 private:
 	void _clear_theme();
@@ -229,21 +230,20 @@ private:
 	bool m_initialized{ false };
 
 	LAttribute* m_foreground{
-		new LAttribute("Foreground", QColor("#e3e3e3"), this) };
+		new LAttribute("Foreground", "#e3e3e3", this) };
 
 	LAttribute* m_gradient{
-		new LAttribute("Gradient", QVariant::fromValue(
-			QGradientStops({ { 0.0, Qt::lightGray },{ 1.0, Qt::darkGray } })),
-			this) };
+		new LAttribute("Gradient",
+			std::vector<std::string>({ "0:#3a3c42", "1:#42454d" }), this) };
 
 	LAttribute* m_primary{
-		new LAttribute("Primary", QColor("#36393f"), this)};
+		new LAttribute("Primary", "#36393f", this)};
 
 	LAttribute* m_secondary{
-		new LAttribute("Secondary", QColor("#2f3136"), this) };
+		new LAttribute("Secondary", "#2f3136", this) };
 
 	LAttribute* m_tertiary{
-		new LAttribute("Tertiary", QColor("#25272b"), this) };
+		new LAttribute("Tertiary", "#25272b", this) };
 
 	LTheme* m_active_theme{ nullptr };
 

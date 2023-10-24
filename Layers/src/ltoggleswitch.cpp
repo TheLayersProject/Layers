@@ -105,15 +105,15 @@ bool LToggleSwitch::eventFilter(QObject* object, QEvent* event)
 
 void LToggleSwitch::init_attributes()
 {
-	border_fill()->set_value(QColor("#1e2023"));
-	border_fill()->create_override("Toggled", QColor("#6fc65b"));
+	border_fill()->set_value("#1e2023");
+	border_fill()->create_override("Toggled", "#6fc65b");
 	border_thickness()->set_value(3.0);
 	corner_radii_top_left()->set_value(4.0);
 	corner_radii_top_right()->set_value(4.0);
 	corner_radii_bottom_left()->set_value(4.0);
 	corner_radii_bottom_right()->set_value(4.0);
-	m_fill->set_value(QColor("#00000000"));
-	m_fill->create_override("Toggled", QColor("#6fc65b"));
+	m_fill->set_value("#00000000");
+	m_fill->create_override("Toggled", "#6fc65b");
 	if (m_vertical)
 		set_margin(10.0);
 	else
@@ -126,11 +126,11 @@ void LToggleSwitch::init_attributes()
 	m_square->corner_radii_top_right()->set_value(2.0);
 	m_square->corner_radii_bottom_left()->set_value(2.0);
 	m_square->corner_radii_bottom_right()->set_value(2.0);
-	m_square->fill()->set_value(QColor("#1e2023"));
-	m_square->fill()->create_override("Toggled", QColor(Qt::white));
+	m_square->fill()->set_value("#1e2023");
+	m_square->fill()->create_override("Toggled", "#ffffff");
 
 	//m_spacer->fill()->set_disabled();
-	m_spacer->fill()->set_value(QColor(Qt::blue));
+	m_spacer->fill()->set_value("#0000ff");
 }
 
 void LToggleSwitch::init_layout()

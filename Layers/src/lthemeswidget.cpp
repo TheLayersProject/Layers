@@ -82,7 +82,7 @@ LThemesWidget::LThemesWidget(QWidget* parent) : LWidget(parent)
 
 				m_theme_editor_dialog->apply_theme_item(
 					activeTheme()->find_item(
-						m_theme_editor_dialog->path()));
+						m_theme_editor_dialog->path().toStdString()));
 
 				connect(m_theme_editor_dialog, &QDialog::finished,
 					[this]

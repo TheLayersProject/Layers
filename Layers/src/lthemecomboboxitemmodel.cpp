@@ -50,7 +50,7 @@ QVariant LThemeComboBoxItemModel::data(const QModelIndex& index, int role) const
 		return QVariant();
 
 	else if (role == Qt::DisplayRole)
-		return m_themes[index.row()]->name();
+		return QString::fromStdString(m_themes[index.row()]->name());
 
 	else if (role == Qt::UserRole)
 		return QVariant::fromValue(m_themes[index.row()]);

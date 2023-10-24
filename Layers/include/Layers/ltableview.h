@@ -51,7 +51,7 @@ private:
 	void init_attributes();
 
 	LAttribute* m_border_fill
-		{ new LAttribute("Border.Fill", QColor(Qt::gray), this) };
+		{ new LAttribute("Border.Fill", "#a0a0a4", this) };
 
 	LAttribute* m_border_thickness
 		{ new LAttribute("Border.Thickness", 3.0, this) };
@@ -69,15 +69,15 @@ private:
 		{ new LAttribute("Corner Radii.Top Right", 5.0, this) };
 
 	LAttribute* m_fill
-		{ new LAttribute("Fill", QColor(Qt::white), this) };
+		{ new LAttribute("Fill", "#ffffff", this) };
 
 	LAttribute* m_item_fill
-		{ new LAttribute("Item Fill", QColor(Qt::white), this) };
+		{ new LAttribute("Item Fill", "#ffffff", this) };
 
 	QAbstractItemDelegate* m_table_delegate{ nullptr };
 
 	LAttribute* m_text_color
-		{ new LAttribute("Text Color", QColor(Qt::black), this) };
+		{ new LAttribute("Text Color", "#000000", this) };
 
 	int m_visible_row_limit{ 3 };
 };

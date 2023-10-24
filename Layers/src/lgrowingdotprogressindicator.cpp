@@ -80,7 +80,8 @@ void LGrowingDotProgressIndicator::paintEvent(QPaintEvent* event)
 		center, outline_outer_radius, outline_outer_radius);
 	outline_outer_path = outline_outer_path - outline_inner_path;
 
-	painter.fillPath(outline_outer_path, m_color->as<QColor>(s));
+	painter.fillPath(outline_outer_path,
+		QColor(QString::fromStdString(m_color->as<std::string>(s))));
 
 	// Draw Growing Dot
 
@@ -96,5 +97,6 @@ void LGrowingDotProgressIndicator::paintEvent(QPaintEvent* event)
 
 	dot_path.addEllipse(center, dot_radius, dot_radius);
 
-	painter.fillPath(dot_path, m_color->as<QColor>(s));
+	painter.fillPath(dot_path,
+		QColor(QString::fromStdString(m_color->as<std::string>(s))));
 }

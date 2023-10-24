@@ -115,20 +115,20 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 		if (current_theme_item())
 			attr_editor_group->apply_theme_item(
 				current_theme_item()->find_item(
-					attr_editor_group->objectName()));
+					attr_editor_group->objectName().toStdString()));
 
 		attr_editor_groups[group_name] = attr_editor_group;
 		organized_widgets[group_name] = attr_editor_group;
 	}
 
-	for (LAttribute* attr : theme_item->attributes())
+	for (const auto& [key, attr] : theme_item->attributes())
 	{
 		LAttributeEditor* attr_editor = new LAttributeEditor(attr);
 		attr_editor->setObjectName("Attribute Editors");
 
 		if (current_theme_item())
 			attr_editor->apply_theme_item(
-				current_theme_item()->find_item(attr_editor->objectName()));
+				current_theme_item()->find_item(attr_editor->objectName().toStdString()));
 
 		connect(attr_editor->fill_control()->fill(), &LAttribute::changed,
 			this, &LThemeEditorDialog::reset_save_timer);
@@ -156,7 +156,7 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 
 	update_attr_editors_max_width();
 
-	m_path_text = theme_item->path();
+	m_path_text = QString::fromStdString(theme_item->path());
 	update_path_label();
 }
 

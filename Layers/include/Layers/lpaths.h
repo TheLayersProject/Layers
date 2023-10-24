@@ -20,19 +20,20 @@
 #ifndef LPATHS_H
 #define LPATHS_H
 
-#include <QString>
+//#include <QString>
+#include <filesystem>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-LAYERS_EXPORT QString app_path(const QString& app_name);
-LAYERS_EXPORT QString latest_T_version_path();
-LAYERS_EXPORT QString layers_path();
-LAYERS_EXPORT QString themes_path();
-LAYERS_EXPORT QString T1_path();
-LAYERS_EXPORT QString local_app_data_path();
+LAYERS_EXPORT std::filesystem::path app_path(const std::string& app_name);
+LAYERS_EXPORT std::filesystem::path latest_T_version_path();
+LAYERS_EXPORT std::filesystem::path layers_path();
+LAYERS_EXPORT std::filesystem::path themes_path();
+LAYERS_EXPORT std::filesystem::path T1_path();
+LAYERS_EXPORT std::filesystem::path local_app_data_path();
 
 LAYERS_NAMESPACE_END
 

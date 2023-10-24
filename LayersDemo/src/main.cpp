@@ -19,7 +19,6 @@
 
 #include "LayersDemoWindow.h"
 
-#include <QIcon>
 #include <QUuid>
 
 #include <Layers/lapplication.h>
@@ -32,8 +31,8 @@ int main(int argc, char *argv[])
 {
 	LApplication app(argc, argv,
 		"Layers Demo",
-		QUuid("f97aae7f-2076-4918-93ce-19321584f675"),
-		new LGitHubRepo("TheLayersProject/Layers"));
+		QUuid("f97aae7f-2076-4918-93ce-19321584f675"));
+	app.set_github_repo("TheLayersProject/Layers");
 	app.set_publisher("The Layers Project");
 	app.set_version("0.16.0");
 	app.init();
@@ -44,7 +43,7 @@ int main(int argc, char *argv[])
 			LUpdateDialog(app.version(), app.latest_version());
 
 		update_dialog.apply_theme_item(
-			activeTheme()->find_item(update_dialog.path()));
+			activeTheme()->find_item(update_dialog.path().toStdString()));
 
 		if (update_dialog.exec())
 		{
@@ -54,7 +53,7 @@ int main(int argc, char *argv[])
 	}
 
 	LayersDemoWindow window;
-	window.apply_theme_item(activeTheme()->find_item(window.path()));
+	window.apply_theme_item(activeTheme()->find_item(window.path().toStdString()));
 	window.show();
 
 	return app.exec();

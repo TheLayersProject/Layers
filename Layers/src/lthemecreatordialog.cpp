@@ -20,6 +20,7 @@
 #include <Layers/lthemecreatordialog.h>
 
 #include <Layers/lapplication.h>
+#include <Layers/lsystem.h>
 
 using Layers::LThemeCreatorDialog;
 using Layers::LThemeable;
@@ -47,7 +48,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 		{
 			bool has_char_other_than_space = false;
 
-			QString text = m_name_editor->text()->as<QString>();
+			QString text = QString::fromStdString(m_name_editor->text()->as<std::string>());
 
 			for (const QChar& character : text)
 			{
@@ -77,7 +78,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	m_parent_theme_combobox->setObjectName("Parent Theme Combobox");
 
 	for (LTheme* theme : layersApp->themes())
-		if (theme->has_implementation(layersApp->app_display_id()))
+		if (theme->has_implementation(layersApp->app_display_id().toStdString()))
 		{
 			if (theme == activeTheme())
 				m_parent_theme_combobox->add_theme(theme, true);
@@ -93,7 +94,7 @@ LThemeCreatorDialog::LThemeCreatorDialog(QWidget* parent) :
 	connect(m_create_button, &LButton::clicked,
 		this, &LThemeCreatorDialog::create_theme);
 
-	apply_theme_item(activeTheme()->find_item(path()));
+	apply_theme_item(activeTheme()->find_item(path().toStdString()));
 }
 
 int LThemeCreatorDialog::exec()
@@ -108,16 +109,19 @@ void LThemeCreatorDialog::create_theme()
 	LTheme* copy_theme =
 		m_parent_theme_combobox->currentData().value<LTheme*>();
 	LTheme* new_theme =
-		new LTheme(m_name_editor->text()->as<QString>().simplified());
+		new LTheme(m_name_editor->text()->as<std::string>());
 
-	QDir new_theme_dir = latest_T_version_path() + new_theme->display_id() + "\\";
-	QDir copy_theme_dir = copy_theme->dir();
+	new_theme->set_publisher(get_current_username());
+
+	std::filesystem::path new_theme_dir =
+		latest_T_version_path() / new_theme->display_id();
+	std::filesystem::path copy_theme_dir = copy_theme->path();
 
 	new_theme->set_dir(new_theme_dir);
 
 	copy_directory(copy_theme_dir, new_theme_dir, {".theme", "meta.json"});
 
-	for (const QString& theme_id : copy_theme->lineage())
+	for (const std::string& theme_id : copy_theme->lineage())
 		new_theme->append_to_lineage(theme_id);
 
 	new_theme->append_to_lineage(copy_theme->display_id());

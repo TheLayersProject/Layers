@@ -55,7 +55,7 @@ public:
 
 private:
 	LAttribute* m_grid_fill{
-		new LAttribute("Grid.Fill", QColor("#808080"), this) };
+		new LAttribute("Grid.Fill", "#808080", this) };
 
 	LAttribute* m_grid_thickness{
 		new LAttribute("Grid.Thickness", 3.0, this) };

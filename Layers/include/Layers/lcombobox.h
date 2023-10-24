@@ -73,7 +73,7 @@ protected:
 	virtual void paintEvent(QPaintEvent* event) override;
 
 	LAttribute* m_border_fill
-		{ new LAttribute("Border.Fill", QColor(Qt::gray), this) };
+		{ new LAttribute("Border.Fill", "#a0a0a4", this) };
 
 	LAttribute* m_border_thickness
 		{ new LAttribute("Border.Thickness", 0.0, this) };
@@ -82,10 +82,10 @@ protected:
 		{ new LAttribute("Corner Radius", 4.0, this) };
 
 	LAttribute* m_fill
-		{ new LAttribute("Fill", QColor("#31323b"), this)};
+		{ new LAttribute("Fill", "#31323b", this)};
 
 	LAttribute* m_text_color
-		{ new LAttribute("Text Color", QColor("#e1e1e1"), this) };
+		{ new LAttribute("Text Color", "#e1e1e1", this) };
 };
 LAYERS_NAMESPACE_END
 

@@ -48,16 +48,12 @@ LTheme* Layers::activeTheme()
 LApplication::LApplication(
 	int& argc, char** argv,
 	const QString& name,
-	const QUuid& uuid,
-	LGitHubRepo* github_repo) :
+	const QUuid& uuid) :
 	m_name{ name },
 	m_uuid{ uuid },
-	m_github_repo{ github_repo },
 	m_settings{ QSettings(name, name) },
 	m_downloader{ new LDownloader(this) },
-	QApplication(argc, argv)
-{
-}
+	QApplication(argc, argv) {}
 
 LApplication::~LApplication()
 {
@@ -83,7 +79,7 @@ void LApplication::apply_theme(LTheme* theme)
 
 		m_active_theme = theme;
 
-		if (!m_active_theme->has_implementation(app_display_id()))
+		if (!m_active_theme->has_implementation(app_display_id().toStdString()))
 		{
 			// Iterate backwards through the lineage to determine last CAT.
 			// TEMPORARILY DISABLED
@@ -101,16 +97,16 @@ void LApplication::apply_theme(LTheme* theme)
 			//				layersApp->app_identifier() + ".json";
 
 			//			QFile last_CAT_app_file(
-			//				theme->dir().filePath(app_file_name));
+			//				theme->path().filePath(app_file_name));
 			//			
 			//			if (last_CAT_app_file.exists())
 			//			{
 			//				last_CAT_app_file.copy(
-			//					m_active_theme->dir().filePath(app_file_name)
+			//					m_active_theme->path().filePath(app_file_name)
 			//				);
 
 			//				QFile::setPermissions(
-			//					m_active_theme->dir().filePath(app_file_name),
+			//					m_active_theme->path().filePath(app_file_name),
 			//					QFileDevice::WriteUser);
 
 			//				break;
@@ -119,13 +115,15 @@ void LApplication::apply_theme(LTheme* theme)
 			//}
 		}
 
-		m_active_theme->load(app_display_id());
+		m_active_theme->load(app_display_id().toStdString());
 
 		_clear_theme();
 
-		apply_theme_item(theme->find_item(path()));
+		apply_theme_item(theme->find_item(path().toStdString()));
 
-		m_settings.setValue("themes/active_theme", theme->display_id());
+		m_settings.setValue(
+			"themes/active_theme",
+			QString::fromStdString(theme->display_id()));
 
 		emit active_theme_changed();
 
@@ -152,7 +150,7 @@ LTheme* LApplication::active_theme()
 
 void LApplication::add_theme(LTheme* theme)
 {
-	m_themes[theme->display_id()] = theme;
+	m_themes[QString::fromStdString(theme->display_id())] = theme;
 
 	emit theme_added(theme);
 }
@@ -168,8 +166,6 @@ void LApplication::init()
 	{
 		Q_INIT_RESOURCE(roboto_font);
 		Q_INIT_RESOURCE(images);
-		Q_INIT_RESOURCE(theme_light);
-		Q_INIT_RESOURCE(theme_dark);
 
 		qRegisterMetaType<QGradientStops>("QGradientStops");
 
@@ -236,7 +232,7 @@ void LApplication::download_and_install_update()
 
 			if (release_asset_name.endsWith(".exe") || release_asset_name.endsWith(".msi"))
 			{
-				QDir temp_dir = local_app_data_path() + "Temp\\";
+				QDir temp_dir = local_app_data_path() / "Temp\\";
 
 				QUrl latest_version_download_url = QUrl(release_asset.toObject()["browser_download_url"].toString());
 
@@ -258,18 +254,18 @@ void LApplication::download_and_install_update()
 	}
 }
 
-void LApplication::rename_theme(const QString& theme_id, const QString& new_name)
+void LApplication::rename_theme(const QString& theme_id, const std::string& new_name)
 {
 	if (m_themes.contains(theme_id))
 	{
 		LTheme* theme = m_themes[theme_id];
-		QDir old_theme_dir = theme->dir();
+		QDir old_theme_dir = theme->path();
 
 		theme->set_name(new_name);
 
 		old_theme_dir.rename(
 			old_theme_dir.absoluteFilePath("."),
-			latest_T_version_path() + theme->display_id() + "\\");
+			QString::fromStdString((latest_T_version_path() / theme->display_id()).string()));
 
 		// TEMP
 		//theme->set_dir();
@@ -298,6 +294,14 @@ LAttribute* LApplication::primary() const
 void LApplication::reapply_theme()
 {
 	apply_theme(m_active_theme);
+}
+
+void LApplication::set_github_repo(const QString& github_repo_url)
+{
+	if (m_github_repo)
+		delete m_github_repo;
+
+	m_github_repo = new LGitHubRepo(github_repo_url);
 }
 
 void LApplication::set_publisher(const QString& publisher)
@@ -331,7 +335,7 @@ void LApplication::_clear_theme()
 
 void LApplication::init_directories()
 {
-	QDir app_dir = app_path(m_name);
+	QDir app_dir = app_path(m_name.toStdString());
 	QDir layers_dir = layers_path();
 	QDir themes_dir = themes_path();
 	QDir latest_T_version_dir = latest_T_version_path();
@@ -366,20 +370,26 @@ void LApplication::init_fonts()
 
 void LApplication::init_themes()
 {
-	/* TODO: Might need to handle case where theme files labeled "dark" or "light"
-	   appear in the custom themes directory. */
+	/*
+		TODO: Might need to handle case where theme files labeled "dark" or
+		"light" appear in the custom themes directory.
+	*/
 
 	// Load prebuilt theme files
-	m_themes["Dark"] = new LTheme(QDir(":/themes/Dark"));
-	m_themes["Light"] = new LTheme(QDir(":/themes/Light"));
+	m_themes["Dark"] = new LTheme(std::filesystem::path("./themes/Dark"));
+	m_themes["Light"] = new LTheme(std::filesystem::path("./themes/Light"));
 
-	QDir latest_T_version_dir = latest_T_version_path();
+	std::filesystem::path latest_path = latest_T_version_path();
 
-	for (const QString& dir_name : latest_T_version_dir.entryList(QDir::NoDotAndDotDot|QDir::Dirs))
+	for (const auto& dir_entry :
+		std::filesystem::directory_iterator(latest_path))
 	{
-		LTheme* loaded_theme = new LTheme(QDir(latest_T_version_dir.absoluteFilePath(dir_name)));
+		if (dir_entry.is_directory())
+		{
+			LTheme* loaded_theme = new LTheme(dir_entry.path());
 
-		m_themes[loaded_theme->display_id()] = loaded_theme;
+			m_themes[QString::fromStdString(loaded_theme->display_id())] = loaded_theme;
+		}
 	}
 
 	QString active_theme_id =

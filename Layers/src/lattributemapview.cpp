@@ -59,13 +59,15 @@ void LAttributeMapView::update()
 {
 	QString style_sheet =
 		"QAbstractItemView {"
-		"background: " + m_fill->as<QColor>().name() + ";"
+		"background: " +
+			QString::fromStdString(m_fill->as<std::string>()) + ";"
 		"border: none;"
 		"}"
 
 		"QAbstractItemView::item {"
 		"height: 40px;"
-		"color: " + m_text_color->as<QColor>().name() + ";"
+		"color: " +
+			QString::fromStdString(m_text_color->as<std::string>()) + ";"
 		"}";
 
 	setStyleSheet(

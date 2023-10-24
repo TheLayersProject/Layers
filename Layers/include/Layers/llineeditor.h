@@ -65,13 +65,13 @@ private:
 	void init_attributes();
 
 	LAttribute* m_left_padding
-		{ new LAttribute("left_padding", QVariant::fromValue(3.0)) };
+		{ new LAttribute("left_padding", 3.0) };
 
 	LAttribute* m_text_color
-		{ new LAttribute("Text Color", QColor(Qt::black), this) };
+		{ new LAttribute("Text Color", "#000000", this) };
 
 	LAttribute* m_text
-		{ new LAttribute("text", QString("")) };
+		{ new LAttribute("text", std::string("")) };
 
 	QString* m_default_value{ nullptr };
 

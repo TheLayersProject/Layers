@@ -85,15 +85,16 @@ void LScrollBar::update()
 
 	QString style_sheet =
 		"QScrollBar:" + o + " {"
-		"background: " + m_background_color->as<QColor>().name() + ";"
+		"background: " +
+			QString::fromStdString(m_background_color->as<std::string>()) + ";"
 		"border-top-left-radius: " +
-			m_corner_radii_top_left->as<QString>() + "px;"
+			QString::number(m_corner_radii_top_left->as<double>()) + "px;"
 		"border-top-right-radius: " +
-			m_corner_radii_top_right->as<QString>() + "px;"
+			QString::number(m_corner_radii_top_right->as<double>()) + "px;"
 		"border-bottom-left-radius: " +
-			m_corner_radii_bottom_left->as<QString>() + "px;"
+			QString::number(m_corner_radii_bottom_left->as<double>()) + "px;"
 		"border-bottom-right-radius: " +
-			m_corner_radii_bottom_right->as<QString>() + "px;"
+			QString::number(m_corner_radii_bottom_right->as<double>()) + "px;"
 		"margin: 0px 0px 0px 0px;";
 
 	if (orientation() == Qt::Horizontal)
@@ -105,15 +106,16 @@ void LScrollBar::update()
 
 	style_sheet +=
 		"QScrollBar::handle:" + o + " {"
-		"background: " + m_handle_color->as<QColor>().name() + ";"
+		"background: " +
+			QString::fromStdString(m_handle_color->as<std::string>()) + ";"
 		"border-top-left-radius: " +
-			m_handle_corner_radii_top_left->as<QString>() + "px;"
+			QString::number(m_handle_corner_radii_top_left->as<double>()) + "px;"
 		"border-top-right-radius: " +
-			m_handle_corner_radii_top_right->as<QString>() + "px;"
+			QString::number(m_handle_corner_radii_top_right->as<double>()) + "px;"
 		"border-bottom-left-radius: " +
-			m_handle_corner_radii_bottom_left->as<QString>() + "px;"
+			QString::number(m_handle_corner_radii_bottom_left->as<double>()) + "px;"
 		"border-bottom-right-radius: " +
-			m_handle_corner_radii_bottom_right->as<QString>() + "px;"
+			QString::number(m_handle_corner_radii_bottom_right->as<double>()) + "px;"
 		"margin: 7px 7px 7px 7px;";
 		
 	if (orientation() == Qt::Horizontal)

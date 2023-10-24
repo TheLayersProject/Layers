@@ -69,6 +69,8 @@
     <ClCompile Include="src\llinksview.cpp" />
     <ClCompile Include="src\lnewlinkwidget.cpp" />
     <ClCompile Include="src\lgradienteditor.cpp" />
+    <ClCompile Include="src\ljson.cpp" />
+    <ClCompile Include="src\lobject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layers\layers_exports.h" />
@@ -84,6 +86,11 @@
     <ClInclude Include="src\lgradienteditoritem.h" />
     <ClInclude Include="include\Layers\ltheme.h" />
     <ClInclude Include="include\Layers\lpaint.h" />
+    <ClInclude Include="include\Layers\ljson.h" />
+    <ClInclude Include="include\Layers\lalgorithms.h" />
+    <ClInclude Include="include\Layers\lsystem.h" />
+    <ClInclude Include="include\Layers\lgenerate.h" />
+    <ClInclude Include="include\Layers\lobject.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />
@@ -150,7 +157,5 @@
   <ItemGroup>
     <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
     <QtRcc Include="images\images.qrc" />
-    <QtRcc Include="themes\Dark\theme_dark.qrc" />
-    <QtRcc Include="themes\Light\theme_light.qrc" />
   </ItemGroup>
 </Project>

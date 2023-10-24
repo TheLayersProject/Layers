@@ -53,7 +53,7 @@ QPainterPath LComboBoxItemDelegate::background_path(
 	{
 		if (index.row() == 0)
 			{
-			cr_tl = m_corner_radius->as<int>();
+			cr_tl = m_corner_radius->as<double>();
 			cr_tr = cr_tl;
 		}
 	}
@@ -61,7 +61,7 @@ QPainterPath LComboBoxItemDelegate::background_path(
 	{
 		if (index.row() == index.model()->rowCount() - 1)
 		{
-			cr_bl = m_corner_radius->as<int>();
+			cr_bl = m_corner_radius->as<double>();
 			cr_br = cr_bl;
 		}
 	}
@@ -137,7 +137,9 @@ void LComboBoxItemDelegate::paint(
 	const QModelIndex& index) const
 {
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
-		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>();
+		QColor(QString::fromStdString(
+			m_fill->as<std::string>({ "Selected" }))) :
+		QColor(QString::fromStdString(m_fill->as<std::string>()));
 
 	const QFontMetrics& item_font_metrics = option.fontMetrics;
 
@@ -154,7 +156,8 @@ void LComboBoxItemDelegate::paint(
 		index.data().toString()
 	);
 
-	painter->fillPath(item_text_path, m_text_color->as<QColor>());
+	painter->fillPath(item_text_path,
+		QColor(QString::fromStdString(m_text_color->as<std::string>())));
 }
 
 void LComboBoxItemDelegate::set_is_above_control(bool condition)
@@ -169,5 +172,5 @@ LAttribute* LComboBoxItemDelegate::text_color() const
 
 void LComboBoxItemDelegate::init_attributes()
 {
-	m_fill->create_override("Selected", QColor("#3c3d47"));
+	m_fill->create_override("Selected", "#3c3d47");
 }

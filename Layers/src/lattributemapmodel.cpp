@@ -104,8 +104,8 @@ void LAttributeMapModel::set_attributes(
 
 	m_root_item = new LAttributeMapItem(nullptr);
 
-	for (LAttribute* attr : attributes)
-		if (!filter_paths.contains(attr->path()))
+	for (const auto& [key, attr] : attributes)
+		if (!filter_paths.contains(QString::fromStdString(attr->path())))
 			m_root_item->append_child(
 				init_item(attr, filter_paths, m_root_item));
 
@@ -118,7 +118,7 @@ LAttributeMapItem* LAttributeMapModel::init_item(
 {
 	LAttributeMapItem* item = new LAttributeMapItem(attribute, parent);
 
-	for (LAttribute* override_attr : attribute->overrides())
+	for (const auto& [key, override_attr] : attribute->overrides())
 		item->append_child(init_item(override_attr, filter_paths, item));
 
 	return item;

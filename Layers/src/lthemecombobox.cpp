@@ -37,7 +37,7 @@ LThemeComboBox::LThemeComboBox(QWidget* parent) :
 	setModel(m_model);
 
 	m_compatibility_dialog->apply_theme_item(
-		activeTheme()->find_item(m_compatibility_dialog->path()));
+		activeTheme()->find_item(m_compatibility_dialog->path().toStdString()));
 
 	connect(this, &QComboBox::highlighted, [this](int index)
 	{
@@ -45,10 +45,15 @@ LThemeComboBox::LThemeComboBox(QWidget* parent) :
 
 		LTheme* theme = itemData(index).value<LTheme*>();
 
-		if (!theme->has_implementation(layersApp->app_display_id()))
+		if (!theme->has_implementation(layersApp->app_display_id().toStdString()))
 		{
-			m_compatibility_dialog->set_lineage_table_data(theme->lineage());
-			m_compatibility_dialog->set_theme_name(theme->name());
+			QStringList lineage_str_list;
+
+			for (const std::string& lineage_id : theme->lineage())
+				lineage_str_list.append(QString::fromStdString(lineage_id));
+
+			m_compatibility_dialog->set_lineage_table_data(lineage_str_list);
+			m_compatibility_dialog->set_theme_name(QString::fromStdString(theme->name()));
 
 			if (!m_compatibility_dialog->isVisible())
 			{
@@ -112,13 +117,13 @@ void LThemeComboBox::paintEvent(QPaintEvent* event)
 	QPainterPath item_text_path;
 	QPainterPath secondary_text_path;
 
-	QString item_text = current_theme->name();
+	QString item_text = QString::fromStdString(current_theme->name());
 	QString secondary_text;
 
-	if (!current_theme->publisher().isEmpty())
-		secondary_text = current_theme->publisher();
-	else if (!current_theme->uuid().isNull())
-		secondary_text = current_theme->uuid().toString(QUuid::WithoutBraces);
+	if (!current_theme->publisher().empty())
+		secondary_text = QString::fromStdString(current_theme->publisher());
+	else if (!current_theme->uuid().empty())
+		secondary_text = QString::fromStdString(current_theme->uuid());
 
 	if (!secondary_text.isEmpty())
 	{
@@ -147,8 +152,11 @@ void LThemeComboBox::paintEvent(QPaintEvent* event)
 		);
 	}
 
-	painter.fillPath(item_text_path, m_text_color->as<QColor>());
-	painter.fillPath(secondary_text_path, m_text_color->as<QColor>());
+	QColor text_color =
+		QColor(QString::fromStdString(m_text_color->as<std::string>()));
+
+	painter.fillPath(item_text_path, text_color);
+	painter.fillPath(secondary_text_path, text_color);
 }
 
 void LThemeComboBox::init_item_delegate()
@@ -162,7 +170,7 @@ void LThemeComboBox::init_item_delegate()
 		{
 			LTheme* theme = itemData(m_highlighted_index).value<LTheme*>();
 
-			if (!theme->has_implementation(layersApp->app_display_id()))
+			if (!theme->has_implementation(layersApp->app_display_id().toStdString()))
 				if (!m_compatibility_dialog->isVisible())
 				{
 					m_compatibility_dialog->show();

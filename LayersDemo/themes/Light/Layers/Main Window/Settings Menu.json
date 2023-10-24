@@ -1,0 +1,512 @@
+{
+    "App/Main Window/Settings Menu": {
+        "attributes": {
+            "Border.Fill": {
+                "value": "#000000"
+            },
+            "Border.Thickness": {
+                "value": 0
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 0
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 0
+            },
+            "Corner Radii.Top Left": {
+                "value": 0
+            },
+            "Corner Radii.Top Right": {
+                "value": 0
+            },
+            "Fill": {
+                "linked_to": "App/Main Window/Fill"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Sidebar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Secondary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Themes Settings Tab": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 5
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 5
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 5
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 5
+                            },
+                            "Fill": {
+                                "overrides": {
+                                    "Selected": {
+                                        "value": "#f0f0f0"
+                                    }
+                                },
+                                "value": "#2f3136"
+                            },
+                            "Margins.Bottom": {
+                                "value": 7
+                            },
+                            "Margins.Left": {
+                                "value": 7
+                            },
+                            "Margins.Right": {
+                                "value": 7
+                            },
+                            "Margins.Top": {
+                                "value": 7
+                            }
+                        },
+                        "children": {
+                            "Icon Label": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "value": "#96989d"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Text Label": {
+                                "attributes": {
+                                    "Fill": {
+                                        "value": "#ffffff"
+                                    },
+                                    "Text Color": {
+                                        "overrides": {
+                                            "Selected": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "value": "#96989d"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                }
+            },
+            "Themes Widget": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Main Window/Settings Menu/Fill"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Customize Theme Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Settings Menu/Themes Widget/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#e6e6e6"
+                                                    }
+                                                },
+                                                "value": "#c3c3c3"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Delete Theme Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Settings Menu/Themes Widget/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#ff7f7f"
+                                                    }
+                                                },
+                                                "value": "#e95454"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "New Theme Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Settings Menu/Themes Widget/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "value": "#8cfa6a"
+                                                    }
+                                                },
+                                                "value": "#6fc654"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Separators": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Foreground"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        }
+                    },
+                    "Theme Combobox": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radius": {
+                                "value": 5
+                            },
+                            "Fill": {
+                                "linked_to": "App/Tertiary"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        },
+                        "children": {
+                            "Items": {
+                                "attributes": {
+                                    "Corner Radius": {
+                                        "value": 5
+                                    },
+                                    "Fill": {
+                                        "overrides": {
+                                            "Selected": {
+                                                "value": "#ffffff"
+                                            }
+                                        },
+                                        "value": "#bfbfbf"
+                                    },
+                                    "Text Color": {
+                                        "linked_to": "App/Main Window/Settings Menu/Themes Widget/Theme Combobox/Text Color"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        }
+                    },
+                    "Theme Info Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 0
+                            },
+                            "Fill": {
+                                "linked_to": "App/Main Window/Settings Menu/Themes Widget/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "value": "#6a6a6a"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Theme Label": {
+                        "attributes": {
+                            "Fill": {
+                                "value": "#ffffff"
+                            },
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

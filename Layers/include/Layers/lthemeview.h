@@ -56,10 +56,10 @@ protected:
 
 private:
 	LAttribute* m_fill{
-		new LAttribute("Fill", QColor(Qt::white), this) };
+		new LAttribute("Fill", "#ffffff", this) };
 
 	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::black), this) };
+		new LAttribute("Text Color", "#000000", this) };
 
 	LScrollBar* m_horizontal_scrollbar{ new LScrollBar };
 	LScrollBar* m_vertical_scrollbar{ new LScrollBar };

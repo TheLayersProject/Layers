@@ -46,7 +46,10 @@ void LThemeComboBoxItemDelegate::paint(
 	LTheme* theme = index.data(Qt::UserRole).value<LTheme*>();
 
 	QColor fill_color = (option.state & QStyle::State_HasFocus) ?
-		m_fill->as<QColor>({ "Selected" }) : m_fill->as<QColor>({ "Unselected" });
+		QColor(QString::fromStdString(
+			m_fill->as<std::string>({ "Selected" }))) :
+		QColor(QString::fromStdString(
+			m_fill->as<std::string>({ "Unselected" })));
 
 	QFont secondary_font(option.font.family(), 8);
 
@@ -56,13 +59,13 @@ void LThemeComboBoxItemDelegate::paint(
 	QPainterPath item_text_path;
 	QPainterPath secondary_text_path;
 
-	QString item_text = theme->name();
+	QString item_text = QString::fromStdString(theme->name());
 	QString secondary_text;
 
-	if (!theme->publisher().isEmpty())
-		secondary_text = theme->publisher();
-	else if (!theme->uuid().isNull())
-		secondary_text = theme->uuid().toString(QUuid::WithoutBraces);
+	if (!theme->publisher().empty())
+		secondary_text = QString::fromStdString(theme->publisher());
+	else if (!theme->uuid().empty())
+		secondary_text = QString::fromStdString(theme->uuid());
 
 	painter->setRenderHint(QPainter::Antialiasing);
 
@@ -96,10 +99,13 @@ void LThemeComboBoxItemDelegate::paint(
 		);
 	}
 
-	painter->fillPath(item_text_path, m_text_color->as<QColor>());
-	painter->fillPath(secondary_text_path, m_text_color->as<QColor>());
+	QColor text_color =
+		QColor(QString::fromStdString(m_text_color->as<std::string>()));
 
-	if (!theme->has_implementation(layersApp->app_display_id()))
+	painter->fillPath(item_text_path, text_color);
+	painter->fillPath(secondary_text_path, text_color);
+
+	if (!theme->has_implementation(layersApp->app_display_id().toStdString()))
 	{
 		QPoint caution_image_location = QPoint(
 			option.rect.right() - m_caution_image.width() - 10,

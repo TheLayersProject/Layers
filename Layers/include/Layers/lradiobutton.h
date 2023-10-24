@@ -49,17 +49,17 @@ private:
 	void init_attributes();
 
 	LAttribute* m_active_dot_fill{
-		new LAttribute("Active Dot Fill", QColor(Qt::black), this) };
+		new LAttribute("Active Dot Fill", "#000000", this) };
 
 	LAttribute* m_border_fill{
-		new LAttribute("Border.Fill", QColor(Qt::gray), this) };
+		new LAttribute("Border.Fill", "#a0a0a4", this) };
 
 	LAttribute* m_border_thickness{
 		new LAttribute("Border.Thickness", 3.0, this) };
 
-	LAttribute* m_fill{ new LAttribute("Fill", QColor(Qt::darkGray), this) };
+	LAttribute* m_fill{ new LAttribute("Fill", "#808080", this) };
 
-	LAttribute* m_margin{ new LAttribute("Margin", QVariant(10.0), this) };
+	LAttribute* m_margin{ new LAttribute("Margin", 10.0, this) };
 
 	//LStatePool* m_select_states{
 	//	new LStatePool("Select", { "Selected", "Unselected" }) };

@@ -77,10 +77,10 @@ private:
 	void update_width_dependencies();
 
 	LAttribute* m_color
-		{ new LAttribute("color", QColor("#ff0000"), this) };
+		{ new LAttribute("color", "#ff0000", this) };
 
 	LAttribute* m_z_axis
-		{ new LAttribute("z_axis", QVariant::fromValue(0.0), this) };
+		{ new LAttribute("z_axis", 0.0, this) };
 
 	HSV m_z_dimension{ HSV::Hue };
 

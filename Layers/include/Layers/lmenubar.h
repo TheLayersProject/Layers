@@ -45,10 +45,10 @@ private:
 	QString build_stylesheet();
 
 	LAttribute* m_selected_text_color
-		{ new LAttribute("selected_text_color", QColor(Qt::lightGray), this) };
+		{ new LAttribute("selected_text_color", "#c0c0c0", this) };
 
 	LAttribute* m_text_color
-		{ new LAttribute("Text Color", QColor(Qt::gray), this) };
+		{ new LAttribute("Text Color", "#a0a0a4", this) };
 };
 LAYERS_NAMESPACE_END
 

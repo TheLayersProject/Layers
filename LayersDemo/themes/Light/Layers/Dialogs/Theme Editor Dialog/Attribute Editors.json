@@ -1,0 +1,1118 @@
+{
+    "App/Theme Editor Dialog/Attribute Editors": {
+        "attributes": {
+            "Border.Fill": {
+                "value": "#000000"
+            },
+            "Border.Thickness": {
+                "value": 0
+            },
+            "Corner Radii.Bottom Left": {
+                "value": 10
+            },
+            "Corner Radii.Bottom Right": {
+                "value": 10
+            },
+            "Corner Radii.Top Left": {
+                "value": 10
+            },
+            "Corner Radii.Top Right": {
+                "value": 10
+            },
+            "Fill": {
+                "value": "#b3b3b3"
+            },
+            "Margins.Bottom": {
+                "value": 0
+            },
+            "Margins.Left": {
+                "value": 0
+            },
+            "Margins.Right": {
+                "value": 0
+            },
+            "Margins.Top": {
+                "value": 0
+            }
+        },
+        "children": {
+            "Collapse Button": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Collapse Button/Corner Radii.Bottom Right"
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Corner Radii.Bottom Right"
+                    },
+                    "Corner Radii.Top Left": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Collapse Button/Corner Radii.Top Right"
+                    },
+                    "Corner Radii.Top Right": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Corner Radii.Top Right"
+                    },
+                    "Fill": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Fill"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Graphic": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "overrides": {
+                                            "Selected": {
+                                                "value": "#fbfbfc"
+                                            }
+                                        },
+                                        "value": "#96989d"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Graphic After": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "overrides": {
+                                            "Selected": {
+                                                "value": "#fbfbfc"
+                                            }
+                                        },
+                                        "value": "#96989d"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                },
+                "is_overridable": true
+            },
+            "Features Tab Bar": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Fill"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Tabs": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 5
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 5
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Attribute Editors/Features Tab Bar/Fill",
+                                "overrides": {
+                                    "Active": {
+                                        "linked_to": "App/Tertiary"
+                                    }
+                                }
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Close Button": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#a0a0a4"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 0
+                                    },
+                                    "Fill": {
+                                        "value": "#ffffff"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 0
+                                    },
+                                    "Margins.Right": {
+                                        "value": 0
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    }
+                                },
+                                "children": {
+                                    "Graphic": {
+                                        "children": {
+                                            "Svg": {
+                                                "attributes": {
+                                                    "Color": {
+                                                        "overrides": {
+                                                            "Selected": {
+                                                                "value": "#e95454"
+                                                            }
+                                                        },
+                                                        "value": "#5f5f5f"
+                                                    }
+                                                },
+                                                "is_overridable": true
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Icon": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Text Label": {
+                                "attributes": {
+                                    "Fill": {
+                                        "value": "#ffffff"
+                                    },
+                                    "Text Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    }
+                }
+            },
+            "Fill Control": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#d6d6d6"
+                    },
+                    "Border.Thickness": {
+                        "value": 2
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Margins.Bottom": {
+                        "value": 8
+                    },
+                    "Margins.Left": {
+                        "value": 8
+                    },
+                    "Margins.Right": {
+                        "value": 8
+                    },
+                    "Margins.Top": {
+                        "value": 8
+                    }
+                }
+            },
+            "Icons Widget": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 3
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 3
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 3
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 3
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                },
+                "children": {
+                    "Icon Labels": {
+                        "children": {
+                            "Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "value": "#96989d"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Label": {
+                "attributes": {
+                    "Fill": {
+                        "value": "#ffffff"
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Line Editor": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 5
+                    },
+                    "Margins.Left": {
+                        "value": 5
+                    },
+                    "Margins.Right": {
+                        "value": 5
+                    },
+                    "Margins.Top": {
+                        "value": 5
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                }
+            },
+            "Links Widget": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 7
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 7
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    },
+                    "Text Color": {
+                        "linked_to": "App/Foreground"
+                    }
+                },
+                "children": {
+                    "Break Link Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 4
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "value": "#d9687b"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Text Label": {
+                                "attributes": {
+                                    "Fill": {
+                                        "value": "#ffffff"
+                                    },
+                                    "Text Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "Links View": {
+                        "attributes": {
+                            "Text Color": {
+                                "linked_to": "App/Foreground"
+                            }
+                        },
+                        "children": {
+                            "Dependent Arrow Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "value": "#9e9e9e"
+                                    }
+                                }
+                            },
+                            "Dot Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                }
+                            },
+                            "Link Arrow Svg": {
+                                "attributes": {
+                                    "Color": {
+                                        "value": "#9e9e9e"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "New Link Button": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "overrides": {
+                                    "Active": {
+                                        "value": 0
+                                    }
+                                },
+                                "value": 4
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "overrides": {
+                                    "Active": {
+                                        "value": 0
+                                    }
+                                },
+                                "value": 4
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 4
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Graphic": {
+                                "children": {
+                                    "Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "value": "#6fc654"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Text Label": {
+                                "attributes": {
+                                    "Fill": {
+                                        "value": "#ffffff"
+                                    },
+                                    "Text Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                },
+                                "is_overridable": true
+                            }
+                        },
+                        "is_overridable": true
+                    },
+                    "New Link Widget": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 4
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 4
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 0
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 4
+                            },
+                            "Fill": {
+                                "linked_to": "App/Theme Editor Dialog/Fill"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        },
+                        "children": {
+                            "Apply Link Button": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#000000"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "overrides": {
+                                            "Active": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "overrides": {
+                                            "Active": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 4
+                                    },
+                                    "Fill": {
+                                        "value": "#b3b3b3"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 0
+                                    },
+                                    "Margins.Right": {
+                                        "value": 0
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    }
+                                },
+                                "children": {
+                                    "Graphic": {
+                                        "children": {
+                                            "Svg": {
+                                                "attributes": {
+                                                    "Color": {
+                                                        "value": "#7bf57d"
+                                                    }
+                                                },
+                                                "is_overridable": true
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    },
+                                    "Text Label": {
+                                        "attributes": {
+                                            "Fill": {
+                                                "value": "#ffffff"
+                                            },
+                                            "Text Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Cancel Button": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#000000"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 0
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "overrides": {
+                                            "Active": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "overrides": {
+                                            "Active": {
+                                                "value": 0
+                                            }
+                                        },
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 4
+                                    },
+                                    "Fill": {
+                                        "value": "#b3b3b3"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 0
+                                    },
+                                    "Margins.Right": {
+                                        "value": 0
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    }
+                                },
+                                "children": {
+                                    "Graphic": {
+                                        "children": {
+                                            "Svg": {
+                                                "attributes": {
+                                                    "Color": {
+                                                        "value": "#d9687b"
+                                                    }
+                                                },
+                                                "is_overridable": true
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    },
+                                    "Text Label": {
+                                        "attributes": {
+                                            "Fill": {
+                                                "value": "#ffffff"
+                                            },
+                                            "Text Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Path Editor": {
+                                "attributes": {
+                                    "Border.Fill": {
+                                        "value": "#b3b3b3"
+                                    },
+                                    "Border.Thickness": {
+                                        "value": 3
+                                    },
+                                    "Corner Radii.Bottom Left": {
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Bottom Right": {
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Left": {
+                                        "value": 4
+                                    },
+                                    "Corner Radii.Top Right": {
+                                        "value": 4
+                                    },
+                                    "Fill": {
+                                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Links Widget/New Link Widget/Fill"
+                                    },
+                                    "Margins.Bottom": {
+                                        "value": 0
+                                    },
+                                    "Margins.Left": {
+                                        "value": 0
+                                    },
+                                    "Margins.Right": {
+                                        "value": 0
+                                    },
+                                    "Margins.Top": {
+                                        "value": 0
+                                    },
+                                    "Text Color": {
+                                        "linked_to": "App/Foreground"
+                                    }
+                                }
+                            },
+                            "Resizer": {
+                                "children": {
+                                    "Icon Svg": {
+                                        "attributes": {
+                                            "Color": {
+                                                "overrides": {
+                                                    "Selected": {
+                                                        "linked_to": "App/Foreground"
+                                                    }
+                                                },
+                                                "value": "#96989d"
+                                            }
+                                        },
+                                        "is_overridable": true
+                                    }
+                                },
+                                "is_overridable": true
+                            },
+                            "Splitter": {
+                                "children": {
+                                    "Attribute Map View": {
+                                        "attributes": {
+                                            "Fill": {
+                                                "linked_to": "App/Secondary"
+                                            },
+                                            "Text Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "children": {
+                                            "Vertical ScrollBar": {
+                                                "attributes": {
+                                                    "Background Color": {
+                                                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Links Widget/New Link Widget/Splitter/Theme View/Fill"
+                                                    },
+                                                    "Corner Radii.Bottom Left": {
+                                                        "value": 0
+                                                    },
+                                                    "Corner Radii.Bottom Right": {
+                                                        "value": 10
+                                                    },
+                                                    "Corner Radii.Top Left": {
+                                                        "value": 0
+                                                    },
+                                                    "Corner Radii.Top Right": {
+                                                        "value": 0
+                                                    },
+                                                    "Handle Color": {
+                                                        "linked_to": "App/Tertiary"
+                                                    },
+                                                    "Handle Corner Radii.Bottom Left": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Bottom Right": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Top Left": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Top Right": {
+                                                        "value": 5
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "Theme View": {
+                                        "attributes": {
+                                            "Fill": {
+                                                "linked_to": "App/Secondary"
+                                            },
+                                            "Text Color": {
+                                                "linked_to": "App/Foreground"
+                                            }
+                                        },
+                                        "children": {
+                                            "Vertical ScrollBar": {
+                                                "attributes": {
+                                                    "Background Color": {
+                                                        "linked_to": "App/Theme Editor Dialog/Attribute Editors/Links Widget/New Link Widget/Splitter/Theme View/Fill"
+                                                    },
+                                                    "Corner Radii.Bottom Left": {
+                                                        "value": 0
+                                                    },
+                                                    "Corner Radii.Bottom Right": {
+                                                        "value": 10
+                                                    },
+                                                    "Corner Radii.Top Left": {
+                                                        "value": 0
+                                                    },
+                                                    "Corner Radii.Top Right": {
+                                                        "value": 0
+                                                    },
+                                                    "Handle Color": {
+                                                        "linked_to": "App/Tertiary"
+                                                    },
+                                                    "Handle Corner Radii.Bottom Left": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Bottom Right": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Top Left": {
+                                                        "value": 5
+                                                    },
+                                                    "Handle Corner Radii.Top Right": {
+                                                        "value": 5
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Overrides Widget": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 7
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 7
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 0
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 0
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 0
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 0
+                    }
+                }
+            },
+            "Slider": {
+                "attributes": {
+                    "Border.Fill": {
+                        "value": "#000000"
+                    },
+                    "Border.Thickness": {
+                        "value": 0
+                    },
+                    "Corner Radii.Bottom Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Bottom Right": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Left": {
+                        "value": 5
+                    },
+                    "Corner Radii.Top Right": {
+                        "value": 5
+                    },
+                    "Fill": {
+                        "linked_to": "App/Tertiary"
+                    },
+                    "Margins.Bottom": {
+                        "value": 5
+                    },
+                    "Margins.Left": {
+                        "value": 0
+                    },
+                    "Margins.Right": {
+                        "value": 0
+                    },
+                    "Margins.Top": {
+                        "value": 5
+                    }
+                },
+                "children": {
+                    "Bar": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 2
+                            },
+                            "Fill": {
+                                "linked_to": "App/Secondary"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 5
+                            },
+                            "Margins.Right": {
+                                "value": 5
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        }
+                    },
+                    "Handle": {
+                        "attributes": {
+                            "Border.Fill": {
+                                "value": "#000000"
+                            },
+                            "Border.Thickness": {
+                                "value": 0
+                            },
+                            "Corner Radii.Bottom Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Bottom Right": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Left": {
+                                "value": 2
+                            },
+                            "Corner Radii.Top Right": {
+                                "value": 2
+                            },
+                            "Fill": {
+                                "linked_to": "App/Foreground"
+                            },
+                            "Margins.Bottom": {
+                                "value": 0
+                            },
+                            "Margins.Left": {
+                                "value": 0
+                            },
+                            "Margins.Right": {
+                                "value": 0
+                            },
+                            "Margins.Top": {
+                                "value": 0
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

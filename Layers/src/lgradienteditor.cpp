@@ -21,17 +21,19 @@
 
 #include <QMouseEvent>
 
+#include <Layers/lalgorithms.h>
+
 #include "lgradienteditoritem.h"
 
 using Layers::LGradientEditor;
 using Layers::LGradientEditorItem;
 
 LGradientEditor::LGradientEditor(
-	QGradientStops gradient_stops, QWidget* parent) :
+	std::vector<std::string> stops, QWidget* parent) :
 	LWidget(parent)
 {
-	init_attributes(gradient_stops);
-	init_items(gradient_stops);
+	init_attributes(stops);
+	init_items(stops);
 	init_add_stop_buttons();
 	setObjectName("Gradient Editor");
 	installEventFilter(this);
@@ -47,13 +49,15 @@ LGradientEditor::~LGradientEditor()
 		delete item;
 }
 
-QGradientStops LGradientEditor::gradient_stops() const
+std::vector<std::string> LGradientEditor::stops() const
 {
-	QGradientStops gradient_stops;
+	std::vector<std::string> gradient_stops;
 
 	for (LGradientEditorItem* item : m_items)
 		if (item != m_replace_item)
-			gradient_stops.append(item->stop);
+			gradient_stops.push_back(
+				std::to_string(item->stop.first) + ":" +
+				item->stop.second.name().toStdString());
 
 	return gradient_stops;
 }
@@ -146,19 +150,27 @@ bool LGradientEditor::eventFilter(QObject* object, QEvent* event)
 	return false;
 }
 
-LGradientEditorItem* LGradientEditor::create_item(const QGradientStop& stop)
+LGradientEditorItem* LGradientEditor::create_item(const std::string& stop)
 {
+	std::vector<std::string> stop_parts =
+		split<std::vector<std::string>>(stop, ':');
+
+	QGradientStop gradient_stop = QGradientStop(
+		std::stod(stop_parts[0]),
+		QString::fromStdString(stop_parts[1]));
+
 	LGradientEditorItem* item = new LGradientEditorItem;
-	item->stop = stop;
+	item->stop = gradient_stop;
 	item->control = new LColorControl(this);
-	item->control->fill()->set_value(stop.second);
+	item->control->fill()->set_value(stop_parts[1]);
 	item->control->show();
 
 	connect(item->control, &LColorControl::color_changed,
 		[this, item]
 		{
 			item->stop.second =
-				item->control->fill()->as<QColor>();
+				QColor(QString::fromStdString(
+					item->control->fill()->as<std::string>()));
 
 			update_gradient();
 		});
@@ -166,22 +178,22 @@ LGradientEditorItem* LGradientEditor::create_item(const QGradientStop& stop)
 	return item;
 }
 
-void LGradientEditor::init_attributes(const QGradientStops& gradient_stops)
+void LGradientEditor::init_attributes(const std::vector<std::string>& stops)
 {
-	m_border_fill->set_value(QColor(Qt::black));
+	m_border_fill->set_value("#000000");
 	m_border_thickness->set_value(2.0);
 	m_corner_radii_top_left->set_value(8.0);
 	m_corner_radii_top_right->set_value(8.0);
 	m_corner_radii_bottom_left->set_value(8.0);
 	m_corner_radii_bottom_right->set_value(8.0);
-	m_fill->set_value(QVariant::fromValue(gradient_stops));
+	m_fill->set_value(stops);
 	m_margins_left->set_value(18.0);
 	m_margins_right->set_value(18.0);
 }
 
-void LGradientEditor::init_items(const QGradientStops& gradient_stops)
+void LGradientEditor::init_items(const std::vector<std::string>& stops)
 {
-	for (const QGradientStop& stop : gradient_stops)
+	for (const auto& stop : stops)
 		m_items.append(create_item(stop));
 }
 
@@ -204,11 +216,14 @@ void LGradientEditor::init_add_stop_buttons()
 		connect(add_stop_button, &LButton::clicked,
 			[this, add_stop_button, i]
 			{
-				m_items.insert(i + 1, create_item(
-					QGradientStop(
-						qreal(add_stop_button->x()) / qreal(width() - 40),
-						grab().toImage().pixelColor(
-							add_stop_button->pos().x(), height() / 2))));
+				m_items.insert(i + 1,
+				create_item(
+					std::to_string(
+						double(add_stop_button->x()) / double(width() - 40)) +
+					":" +
+					grab().toImage().pixelColor(
+						add_stop_button->pos().x(),
+						height() / 2).name().toStdString()));
 
 				m_add_stop_buttons.removeOne(add_stop_button);
 				add_stop_button->deleteLater();
@@ -221,13 +236,13 @@ void LGradientEditor::init_add_stop_buttons()
 		if (current_theme_item())
 			add_stop_button->apply_theme_item(
 				current_theme_item()->find_item(
-					add_stop_button->objectName()));
+					add_stop_button->objectName().toStdString()));
 	}
 }
 
 void LGradientEditor::update_gradient()
 {
-	m_fill->set_value(QVariant::fromValue(gradient_stops()));
+	m_fill->set_value(stops());
 }
 
 void LGradientEditor::update_indexes()

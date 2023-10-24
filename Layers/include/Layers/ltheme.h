@@ -20,14 +20,12 @@
 #ifndef LTHEME_H
 #define LTHEME_H
 
-#include <QDir>
-#include <QJsonDocument>
-#include <QString>
-#include <QUuid>
+#include <filesystem>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "ljson.h"
 #include "lthemeitem.h"
 
 LAYERS_NAMESPACE_BEGIN
@@ -46,37 +44,37 @@ class LAYERS_EXPORT LTheme
 public:
 	LTheme();
 
-	LTheme(QDir dir);
+	LTheme(const std::filesystem::path& path);
 
-	LTheme(const QString& name, bool editable = true);
+	LTheme(const std::string& name, bool editable = true);
 
-	LTheme(const QString& name, QUuid uuid, bool editable);
+	LTheme(const std::string& name, std::string uuid, bool editable);
 
 	~LTheme();
 
-	void append_to_lineage(const QString& theme_id);
+	void append_to_lineage(const std::string& theme_id);
 
 	void clear();
 
-	QDir dir() const;
+	std::filesystem::path path() const;
 
-	QString display_id() const;
+	std::string display_id() const;
 
 	bool editable() const;
 
-	LThemeItem* find_item(const QString& path);
+	LThemeItem* find_item(const std::string& path);
 
-	LThemeItem* find_item(const QStringList& name_list);
+	LThemeItem* find_item(const std::deque<std::string>& name_list);
 
-	bool has_implementation(const QString& app_display_id) const;
+	bool has_implementation(const std::string& app_display_id) const;
 
-	QStringList lineage() const;
+	std::vector<std::string> lineage() const;
 
-	void load(const QString& app_id);
+	void load(const std::string& app_id);
 
-	QString name() const;
+	std::string name() const;
 
-	QString publisher() const;
+	std::string publisher() const;
 
 	LThemeItem* root_item() const;
 
@@ -84,19 +82,21 @@ public:
 
 	void save_meta_file();
 
-	void set_dir(QDir dir);
+	void set_dir(const std::filesystem::path& path);
 
-	void set_name(const QString& new_name);
+	void set_name(const std::string& new_name);
 
-	QUuid uuid() const;
+	void set_publisher(const std::string& publisher);
+
+	std::string uuid() const;
 
 private:
-	void load_file(QFile& document_file);
+	void load_file(const std::string& file_name);
 
-	void load_dir(const QDir& dir);
+	void load_dir(const std::filesystem::path& path);
 
-	LThemeItem* init_item(const QString& name,
-		QJsonObject item_object, const QString& file_name,
+	LThemeItem* init_item(const std::string& name,
+		LJsonObject item_object, const std::string& file_name,
 		LThemeItem* parent = nullptr);
 
 	void resolve_links(LThemeItem* item);
@@ -105,21 +105,24 @@ private:
 
 	LThemeItem* m_root_item{ nullptr };
 
-	QMap<QString, LThemeItem*> m_unparented_theme_items;
+	std::map<std::string, LThemeItem*> m_unparented_theme_items;
 
-	QMap<QString, QList<LThemeItem*>> m_file_items;
+	std::map<std::string, std::vector<LThemeItem*>> m_file_items;
 
-	QDir m_dir;
+	std::filesystem::path m_path;
 
 	bool m_editable{ true };
 
-	QStringList m_lineage;
+	std::vector<std::string> m_lineage;
 
-	QString m_name;
+	std::string m_name;
 
-	QString m_publisher;
+	std::string m_publisher;
 
-	QUuid m_uuid;
+	std::string m_local_user;
+
+	//QUuid m_uuid;
+	std::string m_uuid;
 };
 LAYERS_NAMESPACE_END
 

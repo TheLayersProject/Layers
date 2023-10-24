@@ -50,7 +50,7 @@ private:
 	void update_handle_pos();
 
 	LAttribute* m_value
-		{ new LAttribute("value", QVariant::fromValue(0.0), this) };
+		{ new LAttribute("value", 0.0, this) };
 
 	LWidget* m_bar{ new LWidget };
 	LWidget* m_handle{ new LWidget(this) };

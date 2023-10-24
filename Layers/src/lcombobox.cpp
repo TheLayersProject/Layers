@@ -23,6 +23,7 @@
 #include <QListView>
 #include <QPainter>
 
+#include <Layers/lalgorithms.h>
 #include <Layers/lcomboboxitemdelegate.h>
 #include <Layers/lthemeablebox.h>
 
@@ -230,33 +231,36 @@ void LComboBox::paint_box(QPainter* painter)
 	/* Draw Border */
 	if (border_thickness)
 	{
-		if (m_border_fill->typeName(s) == "QList<std::pair<double,QColor>>")
+		if (auto stops = m_border_fill->as_if<std::vector<std::string>>(s))
 		{
 			QLinearGradient border_fill_grad;
 
 			border_fill_grad.setStart(border_rect.left(), 0);
 			border_fill_grad.setFinalStop(border_rect.right() + 1, 0);
-			border_fill_grad.setStops(m_border_fill->as<QGradientStops>(s));
+			border_fill_grad.setStops(to_QGradientStops(*stops));
 
 			painter->fillPath(border_path, border_fill_grad);
 		}
 		else
-			painter->fillPath(border_path, m_border_fill->as<QColor>(s));
+			painter->fillPath(border_path,
+				QColor(QString::fromStdString(
+						m_border_fill->as<std::string>(s))));
 	}
 
 	/* Draw Fill */
-	if (m_fill->typeName(s) == "QList<std::pair<double,QColor>>")
+	if (auto stops = m_fill->as_if<std::vector<std::string>>(s))
 	{
 		QLinearGradient fill_gradient;
 
 		fill_gradient.setStart(fill_rect.left(), 0);
 		fill_gradient.setFinalStop(fill_rect.right() + 1, 0);
-		fill_gradient.setStops(m_fill->as<QGradientStops>(s));
+		fill_gradient.setStops(to_QGradientStops(*stops));
 
 		painter->fillPath(fill_path, fill_gradient);
 	}
 	else
-		painter->fillPath(fill_path, m_fill->as<QColor>(s));
+		painter->fillPath(fill_path,
+			QColor(QString::fromStdString(m_fill->as<std::string>(s))));
 }
 
 void LComboBox::paintEvent(QPaintEvent* event)
@@ -280,5 +284,6 @@ void LComboBox::paintEvent(QPaintEvent* event)
 		item_text
 	);
 
-	painter.fillPath(item_text_path, m_text_color->as<QColor>());
+	painter.fillPath(item_text_path,
+		QColor(QString::fromStdString(m_text_color->as<std::string>())));
 }

@@ -178,7 +178,8 @@ void LLabel::update()
 	style_sheet += "background: transparent;";
 
 	if (!m_graphic)
-		style_sheet += "color: " + m_text_color->as<QColor>(s).name() + ";";
+		style_sheet += "color: " +
+			QString::fromStdString(m_text_color->as<std::string>(s)) + ";";
 
 	style_sheet += "}";
 

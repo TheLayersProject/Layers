@@ -108,21 +108,21 @@ void LTab::init()
 
 void LTab::init_attributes()
 {
-	m_fill->set_value(QColor("#36393f"));
-	m_fill->create_override("Active", QColor("#25272b"));
+	m_fill->set_value("#36393f");
+	m_fill->create_override("Active", std::string("#25272b"));
 
 	corner_radii_top_left()->set_value(5.0);
 	corner_radii_top_right()->set_value(5.0);
 
-	m_text_label->text_color()->set_value(QColor("#e3e3e3"));
+	m_text_label->text_color()->set_value("#e3e3e3");
 
 	if (m_icon_label)
 		if (LSvgRenderer* renderer = m_icon_label->graphic()->svg_renderer())
-			renderer->color()->set_value(QColor("#e3e3e3"));
+			renderer->color()->set_value("#e3e3e3");
 
 	m_close_button->
 		graphic_label()->
-			graphic()->svg_renderer()->color()->set_value(QColor("#5f5f5f"));
+			graphic()->svg_renderer()->color()->set_value("#5f5f5f");
 }
 
 void LTab::init_layout()

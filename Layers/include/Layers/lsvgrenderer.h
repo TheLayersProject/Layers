@@ -50,7 +50,7 @@ private:
 	void update();
 
 	LAttribute* m_color
-		{ new LAttribute("Color", QColor(Qt::black), this) };
+		{ new LAttribute("Color", "#000000", this) };
 
 	QStringList m_svg_elements;
 

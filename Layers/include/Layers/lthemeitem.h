@@ -20,8 +20,7 @@
 #ifndef LTHEMEITEM_H
 #define LTHEMEITEM_H
 
-#include <QVariant>
-#include <QList>
+#include <deque>
 
 #include "layers_global.h"
 #include "layers_exports.h"
@@ -35,43 +34,44 @@ class LThemeItem : public QObject
 
 public:
 	LThemeItem(
-		const QString& name,
+		const std::string& name,
 		const LAttributeMap& attributes,
 		bool is_overridable,
-		const QString& file_name,
+		const std::string& file_name,
 		LThemeItem* parent = nullptr);
 
 	void append_child(LThemeItem* child);
 
 	QStringList attribute_group_names() const;
 
-	LAttributeMap attributes(const QString& type_name = "");
+	LAttributeMap attributes(int type_index = -1);
 
 	LThemeItem* child(int index) const;
 
-	int child_count() const;
+	size_t child_count() const;
 
-	QMap<QString, LThemeItem*>& children();
+	std::map<std::string, LThemeItem*>& children();
 
-	LThemeItem* find_item(const QString& path);
+	LThemeItem* find_item(const std::string& path);
 
-	LThemeItem* find_item(QStringList name_list);
+	LThemeItem* find_item(std::deque<std::string> name_list);
 
 	int index() const;
 
 	bool is_overridable() const;
 
-	QString path() const;
+	std::string path() const;
 
-	QJsonObject to_json_object() const;
+	LJsonObject to_json_object() const;
 
 private:
-	QMap<QString, LThemeItem*> m_children;
+	std::map<std::string, LThemeItem*> m_children;
 
 	LAttributeMap m_attributes;
-	QString m_file_name;
+	std::string m_file_name;
 	bool m_is_overridable{ false };
 };
+
 LAYERS_NAMESPACE_END
 
 #endif // LTHEMEITEM_H

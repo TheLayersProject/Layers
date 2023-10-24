@@ -58,7 +58,7 @@ private:
 	LAttribute* m_attr;
 
 	LAttribute* m_text_color{
-		new LAttribute("Text Color", QColor(Qt::black), this) };
+		new LAttribute("Text Color", "#000000", this) };
 
 	QString m_parent_path;
 

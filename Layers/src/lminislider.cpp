@@ -79,18 +79,18 @@ void LMiniSlider::init_attributes()
 	m_handle->corner_radii_bottom_right()->set_value(2.0);
 
 	// TODO: TEMP!
-	m_fill->set_value(QColor(Qt::lightGray));
+	m_fill->set_value("#c0c0c0");
 
-	m_bar->fill()->set_value(QColor(Qt::blue));
+	m_bar->fill()->set_value("#0000ff");
 
-	m_handle->fill()->set_value(QColor(Qt::red));
+	m_handle->fill()->set_value("#ff0000");
 }
 
 void LMiniSlider::update_handle_pos()
 {
 	m_handle->move(
 		drag_increment() * m_value->as<double>() +
-			m_bar->margins_left()->as<int>(),
+			m_bar->margins_left()->as<double>(),
 		m_handle->y());
 }
 
@@ -154,8 +154,8 @@ bool LMiniSlider::eventFilter(QObject* object, QEvent* event)
 double LMiniSlider::drag_increment() const
 {
 	int bar_margins =
-		m_bar->margins_left()->as<int>() +
-		m_bar->margins_right()->as<int>();
+		m_bar->margins_left()->as<double>() +
+		m_bar->margins_right()->as<double>();
 
 	return
 		double(width() - m_handle->width() - bar_margins) /

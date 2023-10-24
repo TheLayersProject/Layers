@@ -59,7 +59,7 @@ bool LFillControl::eventFilter(QObject* object, QEvent* event)
 			{
 				LFillDialog fill_dialog;
 				fill_dialog.apply_theme_item(
-					activeTheme()->find_item(fill_dialog.path()));
+					activeTheme()->find_item(fill_dialog.path().toStdString()));
 				fill_dialog.move(mapToGlobal(QPoint(0, 0)));
 				fill_dialog.set_attribute(m_fill);
 				fill_dialog.exec();
@@ -75,7 +75,7 @@ void LFillControl::init_attributes()
 	// Remove control attribute
 	m_fill->setParent(nullptr);
 
-	m_border_fill->set_value(QColor("#D6D6D6"));
+	m_border_fill->set_value("#D6D6D6");
 	m_border_thickness->set_value(2.0);
 	m_corner_radii_top_left->set_value(5.0);
 	m_corner_radii_top_right->set_value(5.0);

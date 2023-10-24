@@ -60,16 +60,16 @@ void LSettingsTab::init_attributes()
 {
 	m_corner_radii_top_left->set_value(5.0);
 	m_corner_radii_bottom_left->set_value(5.0);
-	m_fill->set_value(QColor(Qt::lightGray));
-	m_fill->create_override("Selected", QColor(Qt::white));
+	m_fill->set_value("#c0c0c0");
+	m_fill->create_override("Selected", "#ffffff");
 
 	m_icon_label->graphic()->svg_renderer()->color()->set_value(
-		QColor(Qt::gray));
+		"#a0a0a4");
 	m_icon_label->graphic()->svg_renderer()->color()->create_override(
-		"Selected", QColor(Qt::black));
+		"Selected", "#000000");
 
-	m_text_label->text_color()->set_value(QColor(Qt::gray));
-	m_text_label->text_color()->create_override("Selected", QColor(Qt::black));
+	m_text_label->text_color()->set_value("#a0a0a4");
+	m_text_label->text_color()->create_override("Selected", "#000000");
 }
 
 int LSettingsTab::recommended_minimum_width()

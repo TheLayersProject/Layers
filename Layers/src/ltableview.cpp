@@ -89,22 +89,26 @@ void LTableView::update()
 {
 	QString style_sheet =
 		"QTableView {"
-		"background: " + m_fill->as<QColor>().name() + ";"
-		"border: " + m_border_thickness->as<QString>() + "px "
-			"solid " + m_border_fill->as<QColor>().name() + ";"
+		"background: " +
+			QString::fromStdString(m_fill->as<std::string>()) + ";"
+		"border: " + QString::number(m_border_thickness->as<double>()) + "px "
+			"solid " +
+				QString::fromStdString(m_border_fill->as<std::string>()) + ";"
 		"border-top-left-radius: " +
-			m_corner_radii_top_left->as<QString>() + "px;"
+			QString::number(m_corner_radii_top_left->as<double>()) + "px;"
 		"border-top-right-radius: " +
-			m_corner_radii_top_right->as<QString>() + "px;"
+			QString::number(m_corner_radii_top_right->as<double>()) + "px;"
 		"border-bottom-left-radius: " +
-			m_corner_radii_bottom_left->as<QString>() + "px;"
+			QString::number(m_corner_radii_bottom_left->as<double>()) + "px;"
 		"border-bottom-right-radius: " +
-			m_corner_radii_bottom_right->as<QString>() + "px;"
-		"color: " + m_text_color->as<QColor>().name() + ";"
+			QString::number(m_corner_radii_bottom_right->as<double>()) + "px;"
+		"color: " +
+			QString::fromStdString(m_text_color->as<std::string>()) + ";"
 		"}"
 
 		"QTableView::item {"
-		"background: " + m_item_fill->as<QColor>().name() + ";"
+		"background: " +
+			QString::fromStdString(m_item_fill->as<std::string>()) + ";"
 		"}";
 
 	setStyleSheet(style_sheet);
@@ -117,7 +121,7 @@ void LTableView::update_height()
 	int visible_row_count = model()->rowCount() < m_visible_row_limit ?
 		model()->rowCount() : m_visible_row_limit;
 
-	int new_height = m_border_thickness->as<int>() * 2;
+	int new_height = m_border_thickness->as<double>() * 2;
 
 	new_height += horizontalHeader()->height();
 

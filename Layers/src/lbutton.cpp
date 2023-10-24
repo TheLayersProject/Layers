@@ -179,9 +179,9 @@ void LButton::init()
 		m_graphic_label->setObjectName("Graphic");
 
 		m_graphic_label->graphic()->svg_renderer()->color()->set_value(
-			QColor(Qt::darkGray));
+			"#808080");
 		m_graphic_label->graphic()->svg_renderer()->color()->create_override(
-			"Selected", QColor(Qt::lightGray));
+			"Selected", "#c0c0c0");
 	}
 
 	if (m_graphic_after_label)
@@ -191,9 +191,9 @@ void LButton::init()
 		m_graphic_after_label->hide();
 
 		m_graphic_after_label->graphic()->svg_renderer()->color()->set_value(
-			QColor(Qt::darkGray));
+			"#808080");
 		m_graphic_after_label->graphic()->svg_renderer()->color()->create_override(
-			"Selected", QColor(Qt::lightGray));
+			"Selected", "#c0c0c0");
 	}
 
 	if (m_text_label)

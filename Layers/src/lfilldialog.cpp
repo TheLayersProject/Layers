@@ -49,10 +49,9 @@ LFillDialog::LFillDialog(QWidget* parent) :
 		{
 			if (toggled)
 			{
-				m_previous_color = m_color_control->fill()->as<QColor>();
+				m_previous_color = m_color_control->fill()->as<std::string>();
 
-				m_gradient_control->fill()->set_value(
-					QVariant::fromValue(m_previous_gradient));
+				m_gradient_control->fill()->set_value(m_previous_gradient);
 
 				m_gradient_label_opacity->setOpacity(1.0);
 				m_gradient_control->show();
@@ -63,7 +62,7 @@ LFillDialog::LFillDialog(QWidget* parent) :
 			else
 			{
 				m_previous_gradient =
-					m_gradient_control->fill()->as<QGradientStops>();
+					m_gradient_control->fill()->as<std::vector<std::string>>();
 
 				m_color_control->fill()->set_value(m_previous_color);
 
@@ -95,8 +94,8 @@ void LFillDialog::set_attribute(LAttribute* attribute)
 	m_gradient_control->fill()->set_link_attribute(attribute);
 	m_color_control->fill()->set_link_attribute(attribute);
 
-	if (m_color_control->fill()->typeName() ==
-		"QList<std::pair<double,QColor>>")
+	if (std::vector<std::string>* gradient_stops =
+		m_color_control->fill()->as_if<std::vector<std::string>>())
 	{
 		m_fill_type_toggle->toggle(false);
 
@@ -106,7 +105,8 @@ void LFillDialog::set_attribute(LAttribute* attribute)
 		m_color_label_opacity->setOpacity(0.25);
 		m_color_control->hide();
 	}
-	else if (m_color_control->fill()->typeName() == "QColor")
+	else if (std::string* color =
+		m_color_control->fill()->as_if<std::string>())
 	{
 		m_color_label_opacity->setOpacity(1.0);
 		m_color_control->show();

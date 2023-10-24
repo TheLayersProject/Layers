@@ -47,9 +47,10 @@ void LGridlineItemDelegate::paint(
 {
 	QStyledItemDelegate::paint(painter, option, index);
 
-	QColor grid_fill = m_grid_fill->as<QColor>();
+	QColor grid_fill =
+		QColor(QString::fromStdString(m_grid_fill->as<std::string>()));
 
-	int grid_thickness = m_grid_thickness->as<int>();
+	int grid_thickness = m_grid_thickness->as<double>();
 
 	if (index.row() < index.model()->rowCount() - 1)
 	{

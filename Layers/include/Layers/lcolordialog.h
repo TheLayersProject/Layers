@@ -61,7 +61,7 @@ private:
 
 	LSlider* m_z_slider{ new LSlider(MAX_H) };
 
-	LAttribute* m_color{ new LAttribute("color", QColor()) };
+	LAttribute* m_color{ new LAttribute("color", "#000000")};
 
 	LRadioButton* m_radio_button_hue{ new LRadioButton };
 	LRadioButton* m_radio_button_sat{ new LRadioButton };

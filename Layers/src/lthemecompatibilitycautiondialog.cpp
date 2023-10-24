@@ -76,7 +76,7 @@ void LThemeCompatibilityCautionDialog::set_lineage_table_data(
 
 		if (LTheme* theme = layersApp->theme(theme_id))
 			lineage_data.has_app_implementation_available =
-				theme->has_implementation(layersApp->app_display_id());
+				theme->has_implementation(layersApp->app_display_id().toStdString());
 
 		lineage_table_data.append(lineage_data);
 	}
