@@ -26,7 +26,7 @@ using Layers::LAttribute;
 using Layers::LSvgRenderer;
 
 LSvgRenderer::LSvgRenderer(const QString& file_path, QObject* parent) :
-	QSvgRenderer(parent)
+	QSvgRenderer(parent), LThemeable()
 {
 	QFile file(file_path);
 
@@ -54,7 +54,7 @@ LSvgRenderer::LSvgRenderer(const LSvgRenderer& svg_renderer)
 
 LSvgRenderer::~LSvgRenderer()
 {
-	delete m_color;
+	//delete m_color;
 }
 
 LAttribute* LSvgRenderer::color() const

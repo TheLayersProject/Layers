@@ -128,7 +128,7 @@ LColorDialog::LColorDialog(QWidget* parent) :
 
 LColorDialog::~LColorDialog()
 {
-	delete m_color;
+	//delete m_color;
 }
 
 LAttribute* LColorDialog::color() const
@@ -152,8 +152,8 @@ void LColorDialog::init_attributes()
 {
 	m_color->set_link_attribute(m_color_plane->color());
 
-	connect(m_color, &LAttribute::changed, [this]
-		{
+	m_color->on_change(
+		[this] {
 			QColor color =
 				QColor(QString::fromStdString(m_color->as<std::string>()));
 
@@ -168,7 +168,8 @@ void LColorDialog::init_attributes()
 
 			m_line_editor_val->set_text(
 				QString::number(int(round(color.valueF() * 100.f))));
-		});
+		}
+	);
 
 	m_z_slider->value()->set_link_attribute(m_color_plane->z_axis());
 }

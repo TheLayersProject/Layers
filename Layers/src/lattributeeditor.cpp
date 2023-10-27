@@ -22,6 +22,7 @@
 #include <QIntValidator>
 #include <QPainterPath>
 
+#include <Layers/lalgorithms.h>
 #include <Layers/lthemeitem.h>
 
 #include "lnewlinkwidget.h"
@@ -74,23 +75,22 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 	update_icon_labels();
 
-	m_attr_link_changed_connection =
-		connect(m_attr, &LAttribute::link_changed,
-			[this]
-			{
-				update_icon_labels();
+	m_attr_link_changed_connection = m_attr->on_link_change(
+		[this] {
+			update_icon_labels();
 
-				if (m_attr->link_attribute())
-				{
-					m_break_link_button->show();
-					m_new_link_button->hide();
-				}
-				else
-				{
-					m_break_link_button->hide();
-					m_new_link_button->show();
-				}
-			});
+			if (m_attr->link_attribute())
+			{
+				m_break_link_button->show();
+				m_new_link_button->hide();
+			}
+			else
+			{
+				m_break_link_button->hide();
+				m_new_link_button->show();
+			}
+		}
+	);
 
 	m_collapse_button->setObjectName("Collapse Button");
 
@@ -183,10 +183,17 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 	if (attr)
 	{
-		if (attr->objectName().contains("."))
-			m_label->setText(attr->objectName().split(".").last());
+		std::string attr_name = attr->object_name();
+
+		if (std::find(attr_name.begin(), attr_name.end(),
+			'.') != attr_name.end())
+		{
+			m_label->setText(QString::fromStdString(
+				split<std::vector<std::string>>(
+				attr_name, '.').back()));
+		}
 		else
-			m_label->setText(attr->objectName());
+			m_label->setText(QString::fromStdString(attr->object_name()));
 
 		if (attr->type_index() == 3 || attr->type_index() == 4)
 		{
@@ -250,7 +257,8 @@ LAttributeEditor::LAttributeEditor(LAttribute* attr, QWidget* parent) :
 
 LAttributeEditor::~LAttributeEditor()
 {
-	disconnect(m_attr_link_changed_connection);
+	m_attr->disconnect_link_change(m_attr_link_changed_connection);
+
 	disconnect(m_new_link_widget_destroyed_connection);
 }
 

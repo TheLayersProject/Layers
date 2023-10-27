@@ -26,12 +26,11 @@
 #include "layers_exports.h"
 
 #include "lattribute.h"
+#include "lobject.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LThemeItem : public QObject
+class LThemeItem : public LObject
 {
-	Q_OBJECT
-
 public:
 	LThemeItem(
 		const std::string& name,
@@ -42,7 +41,7 @@ public:
 
 	void append_child(LThemeItem* child);
 
-	QStringList attribute_group_names() const;
+	std::vector<std::string> attribute_group_names() const;
 
 	LAttributeMap attributes(int type_index = -1);
 

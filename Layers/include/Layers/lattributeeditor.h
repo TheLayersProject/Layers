@@ -97,7 +97,7 @@ private:
 
 	LNewLinkWidget* m_new_link_widget{ nullptr };
 
-	QMetaObject::Connection m_attr_link_changed_connection;
+	LConnectionID m_attr_link_changed_connection;
 	QMetaObject::Connection m_new_link_widget_destroyed_connection;
 
 	LWidget* m_links_widget{ new LWidget };

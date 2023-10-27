@@ -148,8 +148,11 @@ void LSlider::init()
 
 void LSlider::init_attributes()
 {
-	connect(m_value, &LAttribute::changed,
-		[this] { update_handle_pos(); });
+	m_value->on_change(
+		[this] {
+			update_handle_pos();
+		}
+	);
 
 	m_corner_radii_top_left->set_value(10.0);
 	m_corner_radii_top_right->set_value(10.0);

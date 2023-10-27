@@ -32,7 +32,9 @@ LAttributeMapItem::LAttributeMapItem(
 
 void LAttributeMapItem::append_child(LAttributeMapItem* child)
 {
-	m_child_attr_items[child->m_attribute->objectName()] = child;
+	m_child_attr_items[
+		QString::fromStdString(child->m_attribute->object_name())
+	] = child;
 }
 
 LAttribute* LAttributeMapItem::attribute() const

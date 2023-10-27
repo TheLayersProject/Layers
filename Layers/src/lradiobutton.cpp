@@ -55,7 +55,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	QStringList s = state_combo();
+	std::vector<std::string> s = state_combo();
 
 	int border_thickness = m_border_thickness->as<double>(s);
 	qreal margin = m_margin->as<qreal>(s);
@@ -82,7 +82,7 @@ void LRadioButton::paintEvent(QPaintEvent* event)
 			QColor(QString::fromStdString(m_border_fill->as<std::string>(s))));
 
 	// Active Dot
-	if (s.contains("Active"))
+	if (std::find(s.begin(), s.end(), "Active") != s.end())
 	{
 		QPainterPath active_dot_path;
 		active_dot_path.addEllipse(rect().center(),

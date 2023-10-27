@@ -175,7 +175,7 @@ void LComboBox::paint_box(QPainter* painter)
 	if (!painter)
 		return;
 
-	QStringList s = state_combo();
+	std::vector<std::string> s = state_combo();
 
 	int border_thickness = m_border_thickness->as<double>(s);
 

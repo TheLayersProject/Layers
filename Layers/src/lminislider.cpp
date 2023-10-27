@@ -42,8 +42,11 @@ LMiniSlider::LMiniSlider(double limit, QWidget* parent) :
 	m_handle->setFixedSize(5, 13);
 	m_handle->setObjectName("Handle");
 
-	connect(m_value, &LAttribute::changed,
-		[this] { update_handle_pos(); });
+	m_value->on_change(
+		[this] {
+			update_handle_pos();
+		}
+	);
 
 	init_layout();
 }

@@ -244,19 +244,23 @@ void LTheme::resolve_links(LThemeItem* item)
 			{
 				for (const auto& [key, item_attr] : item->attributes())
 				{
-					if (item_attr->objectName().toStdString() == attr_name)
+					if (item_attr->object_name() == attr_name)
 					{
 						attr->set_link_attribute(item_attr);
 						return;
 					}
 					else
 					{
-						for (const auto& [override_key, override_attr] : item_attr->overrides())
-							if (item_attr->objectName().toStdString() + "." + override_attr->objectName().toStdString() == attr_name)
+						for (const auto& [override_key, override_attr] :
+							item_attr->overrides())
+						{
+							if (item_attr->object_name() + "." +
+								override_attr->object_name() == attr_name)
 							{
 								attr->set_link_attribute(override_attr);
 								return;
 							}
+						}
 					}
 				}
 			}
@@ -279,17 +283,18 @@ void LTheme::resolve_parents()
 {
 	for (const auto& [key, unparented_theme_item] : m_unparented_theme_items)
 	{
-		QString unparented_theme_item_name = unparented_theme_item->objectName();
+		std::string unparented_theme_item_name =
+			unparented_theme_item->object_name();
 
 		auto name_list = split<std::deque<std::string>>(
-				unparented_theme_item->objectName().toStdString(), '/');
+				unparented_theme_item->object_name(), '/');
 		std::string new_name = name_list.back();
 		name_list.pop_back();
 
 		if (LThemeItem* parent_item = m_root_item->find_item(name_list))
 		{
-			unparented_theme_item->setObjectName(new_name);
-			unparented_theme_item->setParent(parent_item);
+			unparented_theme_item->set_object_name(new_name);
+			unparented_theme_item->set_parent(parent_item);
 			parent_item->append_child(unparented_theme_item);
 		}
 	}

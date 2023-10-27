@@ -41,13 +41,18 @@ int LAttributeMapModel::columnCount(const QModelIndex& parent) const
 QVariant LAttributeMapModel::data(const QModelIndex& index, int role) const
 {
 	if (!index.isValid())
+	{
 		return QVariant();
-
+	}
 	else if (role == Qt::DisplayRole)
-		return get_item(index)->attribute()->objectName();
-
+	{
+		return QString::fromStdString(
+			get_item(index)->attribute()->object_name());
+	}
 	else if (role == Qt::UserRole)
+	{
 		return QVariant::fromValue(get_item(index)->attribute());
+	}
 
 	return QVariant();
 }

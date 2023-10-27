@@ -62,7 +62,7 @@ void LGrowingDotProgressIndicator::paintEvent(QPaintEvent* event)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	QStringList s = state_combo();
+	std::vector<std::string> s = state_combo();
 
 	QPoint center = rect().center() + QPoint(1, 1);
 

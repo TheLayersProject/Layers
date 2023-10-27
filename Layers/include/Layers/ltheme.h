@@ -34,8 +34,8 @@ class LAttribute;
 
 struct LAYERS_EXPORT LThemeLineageData
 {
-	QString name;
-	QString uuid;
+	std::string name;
+	std::string uuid;
 	bool has_app_implementation_available = false;
 };
 

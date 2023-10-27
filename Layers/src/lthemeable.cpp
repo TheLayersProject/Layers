@@ -56,7 +56,7 @@ void LThemeable::apply_theme_item(LThemeItem* theme_item)
 {
 	if (theme_item)
 	{
-		if (_name() == theme_item->objectName())
+		if (_name() == QString::fromStdString(theme_item->object_name()))
 		{
 			m_current_theme_item = theme_item;
 
@@ -65,7 +65,7 @@ void LThemeable::apply_theme_item(LThemeItem* theme_item)
 			{
 				for (LAttribute* attr : child_attributes())
 				{
-					auto it = attributes_map.find(attr->objectName().toStdString());
+					auto it = attributes_map.find(attr->object_name());
 					if (it != attributes_map.end())
 					{
 						attr->set_theme_attribute(it->second);
@@ -114,14 +114,20 @@ QList<LAttribute*> LThemeable::child_attributes(Qt::FindChildOptions options)
 
 	if (QObject* object = dynamic_cast<QObject*>(this))
 	{
-		child_attributes.append(
-			object->findChildren<LAttribute*>(Qt::FindDirectChildrenOnly));
+		LAttributeList found_attributes = find_children<LAttribute>();
+
+		for (const auto& attr : found_attributes)
+		{
+			child_attributes.append(attr);
+		}
 
 		if (options == Qt::FindChildrenRecursively)
 		{
 			for (LThemeable* child_themeable : child_themeables())
+			{
 				child_attributes.append(
 					child_themeable->child_attributes(options));
+			}
 		}
 	}
 
@@ -197,12 +203,12 @@ QList<LStatePool*> LThemeable::state_pools() const
 	return m_state_pools;
 }
 
-QStringList LThemeable::state_combo() const
+std::vector<std::string> LThemeable::state_combo() const
 {
-	QStringList state_combo;
+	std::vector<std::string> state_combo;
 
 	for (LStatePool* state_pool : m_state_pools)
-		state_combo.append(state_pool->state());
+		state_combo.push_back(state_pool->state().toStdString());
 
 	return state_combo;
 }

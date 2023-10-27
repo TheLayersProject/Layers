@@ -20,15 +20,15 @@
 #ifndef LATTRIBUTE_H
 #define LATTRIBUTE_H
 
+#include <functional>
 #include <map>
-
-//#include <QObject>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lobject.h"
+#include "lconnections.h"
 #include "ljson.h"
+#include "lobject.h"
 
 LAYERS_NAMESPACE_BEGIN
 
@@ -47,13 +47,6 @@ using LAttributeMap = std::map<std::string, LAttribute*>;
 
 class LAYERS_EXPORT LAttribute : public LObject
 {
-	Q_OBJECT
-
-signals:
-	void changed();
-
-	void link_changed();
-
 public:
 	LAttribute(const std::string& name,
 		LObject* parent = nullptr);
@@ -72,10 +65,10 @@ public:
 	~LAttribute();
 
 	template<typename T>
-	T as(const QStringList& state_combo = QStringList());
+	T as(const std::vector<std::string>& state_combo = std::vector<std::string>());
 
 	template<typename T>
-	T* as_if(const QStringList& state_combo = QStringList());
+	T* as_if(const std::vector<std::string>& state_combo = std::vector<std::string>());
 
 	void break_link();
 
@@ -90,6 +83,10 @@ public:
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies = false) const;
 
+	void disconnect_change(LConnectionID connection);
+
+	void disconnect_link_change(LConnectionID connection);
+
 	bool has_overrides() const;
 
 	LJsonObject& json_object();
@@ -98,7 +95,12 @@ public:
 
 	std::string link_path() const;
 
-	LAttribute* override_attribute(const QStringList& state_combo);
+	LConnectionID on_change(std::function<void()> callback);
+
+	LConnectionID on_link_change(std::function<void()> callback);
+
+	LAttribute* override_attribute(
+		const std::vector<std::string>& state_combo);
 
 	LAttributeMap overrides() const;
 
@@ -122,18 +124,13 @@ public:
 
 	LVariant value();
 
-private slots:
+private:
+	void update_dependencies();
+	void update_link_dependencies();
 	void update_json_object();
 
-private:
-	void establish_link_connections();
-	void establish_theme_connection();
-
-	void emit_link_changed();
-
-	QMetaObject::Connection m_link_connection;
-	QMetaObject::Connection m_link_destroyed_connection;
-	QMetaObject::Connection m_theme_connection;
+	LConnectionID m_link_destroyed_connection;
+	LConnectionID m_theme_connection;
 
 	LAttributeList m_dependent_attrs;
 
@@ -148,15 +145,21 @@ private:
 	LVariant m_value;
 
 	LJsonObject m_json_object;
+
+	LConnections m_change_connections;
+	LConnectionID m_change_connections_next_id;
+
+	LConnections m_link_change_connections;
+	LConnectionID m_link_change_connections_next_id;
 };
 
 template<typename T>
-inline T LAttribute::as(const QStringList& state_combo)
+inline T LAttribute::as(const std::vector<std::string>& state_combo)
 {
 	if (m_theme_attr)
 		return m_theme_attr->as<T>(state_combo);
 
-	if (!m_overrides.empty() && !state_combo.isEmpty())
+	if (!m_overrides.empty() && !state_combo.empty())
 		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as<T>();
 
@@ -167,12 +170,12 @@ inline T LAttribute::as(const QStringList& state_combo)
 }
 
 template<typename T>
-inline T* LAttribute::as_if(const QStringList& state_combo)
+inline T* LAttribute::as_if(const std::vector<std::string>& state_combo)
 {
 	if (m_theme_attr)
 		return m_theme_attr->as_if<T>(state_combo);
 
-	if (!m_overrides.empty() && !state_combo.isEmpty())
+	if (!m_overrides.empty() && !state_combo.empty())
 		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as_if<T>();
 

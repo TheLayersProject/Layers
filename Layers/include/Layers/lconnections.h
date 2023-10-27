@@ -17,42 +17,38 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LCOLORCONTROL_H
-#define LCOLORCONTROL_H
+#ifndef LCONNECTIONS_H
+#define LCONNECTIONS_H
+
+#include <functional>
+#include <map>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lwidget.h"
-
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LColorControl : public LWidget
+
+class LAYERS_EXPORT LConnectionID
 {
-	Q_OBJECT
-
-signals:
-	void color_changed();
-
 public:
-	LColorControl(QWidget* parent = nullptr);
+	LConnectionID();
 
-	~LColorControl();
+	LConnectionID(int value);
 
-	void click();
+	LConnectionID(const LConnectionID& other);
 
-	void disable_clicking(bool cond = true);
+	LConnectionID& operator=(const LConnectionID& other);
 
-protected:
-	virtual bool eventFilter(QObject* object, QEvent* event) override;
+	bool operator<(const LConnectionID& other) const;
+
+	LConnectionID operator++(int);
 
 private:
-	void init_attributes();
-
-	bool clicking_disabled{ false };
-	bool open_on_release{ false };
-
-	QStringList m_attribute_states;
+	int m_value;
 };
+
+using LConnections = std::map<LConnectionID, std::function<void()>>;
+
 LAYERS_NAMESPACE_END
 
-#endif // LCOLORCONTROL_H
+#endif // LCONNECTIONS_H

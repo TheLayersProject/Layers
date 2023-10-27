@@ -23,6 +23,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lobject.h"
 #include "lstatepool.h"
 #include "lthemeitem.h"
 
@@ -30,7 +31,7 @@ LAYERS_NAMESPACE_BEGIN
 
 class LGraphic;
 
-class LAYERS_EXPORT LThemeable
+class LAYERS_EXPORT LThemeable : public LObject
 {
 public:
 	void add_share_themeable(LThemeable* themeable);
@@ -51,7 +52,7 @@ public:
 
 	QList<LStatePool*> state_pools() const;
 
-	QStringList state_combo() const;
+	std::vector<std::string> state_combo() const;
 
 	virtual void update();
 

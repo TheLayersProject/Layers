@@ -19,9 +19,86 @@
 
 #include <Layers/lobject.h>
 
+using Layers::LConnectionID;
 using Layers::LObject;
 
-LObject::LObject(LObject* parent) :
-	m_parent{ parent }
+LObject::LObject(LObject* parent)
 {
+	set_parent(parent);
+}
+
+LObject::~LObject()
+{
+	for (auto& destroyed_connection : m_destroyed_connections)
+	{
+		destroyed_connection.second();
+	}
+
+	for (LObject* child : std::vector<LObject*>(m_children))
+	{
+		delete child;
+	}
+
+	if (m_parent)
+	{
+		m_parent->remove_child(this);
+	}
+}
+
+void LObject::add_child(LObject* child)
+{
+	m_children.push_back(child);
+}
+
+std::vector<LObject*>& LObject::children()
+{
+	return m_children;
+}
+
+void LObject::disconnect_destroyed(LConnectionID connection)
+{
+	m_destroyed_connections.erase(connection);
+}
+
+std::string LObject::object_name() const
+{
+	return m_object_name;
+}
+
+LConnectionID LObject::on_destroyed(std::function<void()> callback)
+{
+	m_destroyed_connections[m_destroyed_connections_next_id++] = callback;
+	return std::prev(m_destroyed_connections.end())->first;
+}
+
+LObject* LObject::parent() const
+{
+	return m_parent;
+}
+
+void LObject::remove_child(LObject* child)
+{
+	m_children.erase(
+		std::remove(m_children.begin(), m_children.end(), child),
+		m_children.end());
+}
+
+void LObject::set_object_name(const std::string& object_name)
+{
+	m_object_name = object_name;
+}
+
+void LObject::set_parent(LObject* parent)
+{
+	if (m_parent != nullptr)
+	{
+		m_parent->remove_child(this);
+	}
+
+	m_parent = parent;
+
+	if (m_parent != nullptr)
+	{
+		m_parent->add_child(this);
+	}
 }

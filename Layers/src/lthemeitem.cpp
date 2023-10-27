@@ -20,6 +20,7 @@
 #include <Layers/lthemeitem.h>
 
 #include <vector>
+#include <string>
 
 #include <Layers/lalgorithms.h>
 
@@ -37,31 +38,41 @@ LThemeItem::LThemeItem(
 	m_attributes{ attributes },
 	m_is_overridable{ is_overridable },
 	m_file_name{ file_name },
-	QObject(parent)
+	LObject(parent)
 {
-	setObjectName(name);
+	set_object_name(name);
 
 	for (const auto& [key, attr] : attributes)
-		attr->setParent(this);
+		attr->set_parent(this);
 }
 
 void LThemeItem::append_child(LThemeItem* child)
 {
-	m_children[child->objectName().toStdString()] = child;
+	m_children[child->object_name()] = child;
 }
 
-QStringList LThemeItem::attribute_group_names() const
+std::vector<std::string> LThemeItem::attribute_group_names() const
 {
-	QStringList attribute_group_names;
+	std::vector<std::string> attribute_group_names;
 
 	for (const auto& [key, attr] : m_attributes)
-		if (attr->objectName().contains("."))
-		{
-			QString group_name = attr->objectName().split(".").first();
+	{
+		std::string attr_name = attr->object_name();
 
-			if (!attribute_group_names.contains(group_name))
-				attribute_group_names.append(attr->objectName().split(".").first());
+		if (std::find(attr_name.begin(), attr_name.end(),
+			'.') != attr_name.end())
+		{
+			auto group_name = split<std::vector<std::string>>(
+				attr_name, '.').front();
+
+			if (std::find(attribute_group_names.begin(),
+				attribute_group_names.end(),
+				group_name) == attribute_group_names.end())
+			{
+				attribute_group_names.push_back(group_name);
+			}
 		}
+	}
 
 	return attribute_group_names;
 }
@@ -75,7 +86,7 @@ LAttributeMap LThemeItem::attributes(int type_index)
 
 	for (const auto& [key, attr] : m_attributes)
 		if (attr->type_index() == type_index)
-			attrs[attr->objectName().toStdString()] = attr;
+			attrs[attr->object_name()] = attr;
 
 	return attrs;
 }
@@ -116,7 +127,7 @@ LThemeItem* LThemeItem::find_item(std::deque<std::string> name_list)
 
 		for (const auto& [key, child_item] : m_children)
 		{
-			if (child_item->objectName().toStdString() == name)
+			if (child_item->object_name() == name)
 			{
 				if (name_list.empty())
 					return child_item;
@@ -153,13 +164,13 @@ std::string LThemeItem::path() const
 {
 	std::vector<std::string> path_names;
 
-	path_names.push_back(objectName().toStdString());
+	path_names.push_back(object_name());
 
 	LThemeItem* theme_item = dynamic_cast<LThemeItem*>(parent());
 
 	while (theme_item)
 	{
-		std::string name = theme_item->objectName().toStdString();
+		std::string name = theme_item->object_name();
 		if (!name.empty())
 			path_names.insert(path_names.begin(), name);
 
@@ -185,7 +196,7 @@ LJsonObject LThemeItem::to_json_object() const
 
 	for (const auto& [key, child] : m_children)
 		if (child->m_file_name == m_file_name)
-			children_object[child->objectName().toStdString()] =
+			children_object[child->object_name()] =
 				child->to_json_object();
 
 	if (!attributes_object.empty())

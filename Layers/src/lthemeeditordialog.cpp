@@ -19,6 +19,7 @@
 
 #include <Layers/lthemeeditordialog.h>
 
+#include <Layers/lalgorithms.h>
 #include <Layers/lapplication.h>
 
 using Layers::LThemeable;
@@ -106,10 +107,10 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 	QMap<QString, QWidget*> organized_widgets;
 	QMap<QString, LAttributeEditorGroup*> attr_editor_groups;
 
-	for (const QString& group_name : theme_item->attribute_group_names())
+	for (auto group_name : theme_item->attribute_group_names())
 	{
 		LAttributeEditorGroup* attr_editor_group =
-			new LAttributeEditorGroup(group_name);
+			new LAttributeEditorGroup(QString::fromStdString(group_name));
 		attr_editor_group->setObjectName("Attribute Editor Groups");
 
 		if (current_theme_item())
@@ -117,8 +118,8 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 				current_theme_item()->find_item(
 					attr_editor_group->objectName().toStdString()));
 
-		attr_editor_groups[group_name] = attr_editor_group;
-		organized_widgets[group_name] = attr_editor_group;
+		attr_editor_groups[QString::fromStdString(group_name)] = attr_editor_group;
+		organized_widgets[QString::fromStdString(group_name)] = attr_editor_group;
 	}
 
 	for (const auto& [key, attr] : theme_item->attributes())
@@ -130,20 +131,29 @@ void LThemeEditorDialog::edit_theme_item(LThemeItem* theme_item)
 			attr_editor->apply_theme_item(
 				current_theme_item()->find_item(attr_editor->objectName().toStdString()));
 
-		connect(attr_editor->fill_control()->fill(), &LAttribute::changed,
-			this, &LThemeEditorDialog::reset_save_timer);
+		attr_editor->fill_control()->fill()->on_change(
+			[this] {
+				reset_save_timer();
+			});
 
-		connect(attr_editor->slider()->value(), &LAttribute::changed,
-			this, &LThemeEditorDialog::reset_save_timer);
+		attr_editor->slider()->value()->on_change(
+			[this] {
+				reset_save_timer();
+			});
 
-		if (attr->objectName().contains("."))
+		std::string attr_name = attr->object_name();
+
+		if (std::find(attr_name.begin(), attr_name.end(),
+			'.') != attr_name.end())
 		{
-			QString group_name = attr->objectName().split(".").first();
+			auto group_name = split<std::vector<std::string>>(
+				attr_name, '.').front();
 
-			attr_editor_groups[group_name]->add_attribute_editor(attr_editor);
+			attr_editor_groups[QString::fromStdString(group_name)]->
+				add_attribute_editor(attr_editor);
 		}
 		else
-			organized_widgets[attr->objectName()] = attr_editor;
+			organized_widgets[QString::fromStdString(attr_name)] = attr_editor;
 	}
 
 	for (QWidget* widget : organized_widgets)

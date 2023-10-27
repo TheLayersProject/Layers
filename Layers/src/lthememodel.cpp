@@ -39,7 +39,7 @@ QVariant LThemeModel::data(const QModelIndex& index, int role) const
 		return QVariant();
 
 	else if (role == Qt::DisplayRole)
-		return get_item(index)->objectName();
+		return QString::fromStdString(get_item(index)->object_name());
 
 	else if (role == Qt::UserRole)
 		return QVariant::fromValue(get_item(index));

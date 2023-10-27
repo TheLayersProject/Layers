@@ -67,12 +67,12 @@ void LThemeCompatibilityCautionDialog::set_lineage_table_data(
 
 		if (theme_id.contains("_"))
 		{
-			lineage_data.name = theme_id.left(theme_id.lastIndexOf("_"));
+			lineage_data.name = theme_id.left(theme_id.lastIndexOf("_")).toStdString();
 			lineage_data.uuid =
-				theme_id.right(theme_id.size() - 1 - theme_id.lastIndexOf("_"));
+				theme_id.right(theme_id.size() - 1 - theme_id.lastIndexOf("_")).toStdString();
 		}
 		else
-			lineage_data.name = theme_id;
+			lineage_data.name = theme_id.toStdString();
 
 		if (LTheme* theme = layersApp->theme(theme_id))
 			lineage_data.has_app_implementation_available =

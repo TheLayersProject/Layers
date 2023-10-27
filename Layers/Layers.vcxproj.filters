@@ -71,6 +71,7 @@
     <ClCompile Include="src\lgradienteditor.cpp" />
     <ClCompile Include="src\ljson.cpp" />
     <ClCompile Include="src\lobject.cpp" />
+    <ClCompile Include="src\lconnections.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layers\layers_exports.h" />
@@ -91,6 +92,9 @@
     <ClInclude Include="include\Layers\lsystem.h" />
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\lobject.h" />
+    <ClInclude Include="include\Layers\lattribute.h" />
+    <ClInclude Include="include\Layers\lthemeitem.h" />
+    <ClInclude Include="include\Layers\lconnections.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="src\lmainwindowtitlebar.h" />
@@ -101,7 +105,6 @@
     <QtMoc Include="include\Layers\lstatepool.h" />
     <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
     <QtMoc Include="include\Layers\lattributeeditor.h" />
-    <QtMoc Include="include\Layers\lattribute.h" />
     <QtMoc Include="include\Layers\lapplication.h" />
     <QtMoc Include="include\Layers\lthemeeditordialog.h" />
     <QtMoc Include="include\Layers\lthemeview.h" />
@@ -143,7 +146,6 @@
     <QtMoc Include="include\Layers\lcolorplane.h" />
     <QtMoc Include="include\Layers\lcolordialog.h" />
     <QtMoc Include="include\Layers\lcolorcontrol.h" />
-    <QtMoc Include="include\Layers\lthemeitem.h" />
     <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
     <QtMoc Include="include\Layers\lresizer.h" />
     <QtMoc Include="include\Layers\lsplitter.h" />

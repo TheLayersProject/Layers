@@ -35,6 +35,8 @@ class LLinksView : public QWidget, public LThemeable
 public:
 	LLinksView(LAttribute* attr, QWidget* parent = nullptr);
 
+	~LLinksView();
+
 	void update_view();
 
 protected:
@@ -56,6 +58,8 @@ private:
 	void update_height();
 
 	LAttribute* m_attr;
+
+	LConnectionID m_attr_link_changed_connection;
 
 	LAttribute* m_text_color{
 		new LAttribute("Text Color", "#000000", this) };

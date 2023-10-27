@@ -41,9 +41,18 @@ LLinksView::LLinksView(LAttribute* attr, QWidget* parent) :
 	m_dependent_arrow_svg->setObjectName("Dependent Arrow Svg");
 	m_dependent_arrow_2_svg->setObjectName("Dependent Arrow Svg");
 
-	connect(m_attr, &LAttribute::link_changed, this, &LLinksView::update_view);
+	m_attr_link_changed_connection = m_attr->on_link_change(
+		[this] {
+			update_view();
+		}
+	);
 
 	update_view();
+}
+
+LLinksView::~LLinksView()
+{
+	m_attr->disconnect_link_change(m_attr_link_changed_connection);
 }
 
 void LLinksView::update_view()

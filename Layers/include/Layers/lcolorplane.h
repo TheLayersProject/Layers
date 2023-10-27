@@ -29,7 +29,7 @@
 #include "lwidget.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LColorPlane : public QWidget
+class LAYERS_EXPORT LColorPlane : public QWidget, public LThemeable
 {
 	Q_OBJECT
 

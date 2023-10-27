@@ -50,15 +50,15 @@ QVariant LThemeLineageModel::data(const QModelIndex& index, int role) const
 {
 	if (role == Qt::DisplayRole || role == Qt::EditRole)
 	{
-		const QString& theme_name = m_lineage_data[index.row()].name;
-		const QString& theme_uuid = m_lineage_data[index.row()].uuid;
+		auto theme_name = m_lineage_data[index.row()].name;
+		auto theme_uuid = m_lineage_data[index.row()].uuid;
 
 		switch (index.column()) {
 		case 0:
-			if (!theme_uuid.isEmpty())
-				return theme_name + " (" + theme_uuid + ")";
+			if (!theme_uuid.empty())
+				return QString::fromStdString(theme_name + " (" + theme_uuid + ")");
 			else
-				return theme_name;
+				return QString::fromStdString(theme_name);
 		default:
 			return {};
 		}

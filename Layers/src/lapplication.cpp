@@ -57,6 +57,8 @@ LApplication::LApplication(
 
 LApplication::~LApplication()
 {
+	_clear_theme();
+
 	if (m_github_repo)
 		delete m_github_repo;
 

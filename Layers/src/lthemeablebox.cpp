@@ -155,19 +155,19 @@ void LThemeableBox::set_margin(
 
 void LThemeableBox::init_attributes()
 {
-	if (QObject* object = dynamic_cast<QObject*>(this))
+	if (LObject* object = dynamic_cast<LObject*>(this))
 	{
-		m_border_fill->setParent(object);
-		m_border_thickness->setParent(object);
-		m_corner_radii_bottom_left->setParent(object);
-		m_corner_radii_bottom_right->setParent(object);
-		m_corner_radii_top_left->setParent(object);
-		m_corner_radii_top_right->setParent(object);
-		m_fill->setParent(object);
-		m_margins_bottom->setParent(object);
-		m_margins_left->setParent(object);
-		m_margins_right->setParent(object);
-		m_margins_top->setParent(object);
+		m_border_fill->set_parent(object);
+		m_border_thickness->set_parent(object);
+		m_corner_radii_bottom_left->set_parent(object);
+		m_corner_radii_bottom_right->set_parent(object);
+		m_corner_radii_top_left->set_parent(object);
+		m_corner_radii_top_right->set_parent(object);
+		m_fill->set_parent(object);
+		m_margins_bottom->set_parent(object);
+		m_margins_left->set_parent(object);
+		m_margins_right->set_parent(object);
+		m_margins_top->set_parent(object);
 	}
 }
 
@@ -176,7 +176,7 @@ void LThemeableBox::paint(QWidget* widget)
 	QPainter painter(widget);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	QStringList s = state_combo();
+	std::vector<std::string> s = state_combo();
 
 	int border_thickness = (widget->isMaximized()) ?
 		0 : m_border_thickness->as<double>(s);

@@ -58,7 +58,7 @@ void LColorPlane::set_z_dimension(HSV z_dimension)
 {
 	m_z_dimension = z_dimension;
 
-	update();
+	QWidget::update();
 
 	update_cursor_position();
 
@@ -273,31 +273,34 @@ void LColorPlane::handle_mouse_event(QPoint& mouse_pos)
 
 void LColorPlane::init_attributes()
 {
-	connect(m_z_axis, &LAttribute::changed, [this] {
-		QColor c = QColor(QString::fromStdString(m_color->as<std::string>()));
+	m_z_axis->on_change(
+		[this] {
+			QColor c = QColor(QString::fromStdString(m_color->as<std::string>()));
 
-		switch (m_z_dimension)
-		{
-		case HSV::Hue:
-			c.setHsv(m_z_axis->as<double>(), c.saturation(), c.value());
-			break;
-		case HSV::Saturation:
-			c.setHsv(c.hue(), m_z_axis->as<double>(), c.value());
-			break;
-		case HSV::Value:
-			c.setHsv(c.hue(), c.saturation(), m_z_axis->as<double>());
-			break;
+			switch (m_z_dimension)
+			{
+			case HSV::Hue:
+				c.setHsv(m_z_axis->as<double>(), c.saturation(), c.value());
+				break;
+			case HSV::Saturation:
+				c.setHsv(c.hue(), m_z_axis->as<double>(), c.value());
+				break;
+			case HSV::Value:
+				c.setHsv(c.hue(), c.saturation(), m_z_axis->as<double>());
+				break;
+			}
+
+			m_color->set_value(c.name().toStdString());
 		}
+	);
 
-		m_color->set_value(c.name().toStdString());
-		});
-
-	connect(m_color, &LAttribute::changed, [this]
-		{
+	m_color->on_change(
+		[this] {
 			update_cursor_position();
 			//update_z_axis();
-			update();
-		});
+			QWidget::update();
+		}
+	);
 
 	m_cursor->fill()->set_link_attribute(m_color);
 	m_cursor->border_fill()->set_value("#c0c0c0");

@@ -43,7 +43,11 @@ LLineEditor::LLineEditor(QWidget* parent) : LWidget(parent)
 		emit text_edited(m_line_edit->text());
 		});
 
-	connect(m_text, &LAttribute::changed, [this] { update(); });
+	m_text->on_change(
+		[this] {
+			update();
+		}
+	);
 }
 
 LLineEditor::~LLineEditor()

@@ -17,42 +17,33 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LCOLORCONTROL_H
-#define LCOLORCONTROL_H
+#include <Layers/lconnections.h>
 
-#include "layers_global.h"
-#include "layers_exports.h"
+using Layers::LConnectionID;
 
-#include "lwidget.h"
+LConnectionID::LConnectionID() :
+	m_value{ 0 } {}
 
-LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LColorControl : public LWidget
+LConnectionID::LConnectionID(int value) :
+	m_value{ value } {}
+
+LConnectionID::LConnectionID(const LConnectionID& other) :
+	m_value(other.m_value) {}
+
+LConnectionID& LConnectionID::operator=(const LConnectionID& other)
 {
-	Q_OBJECT
+	m_value = other.m_value;
+	return *this;
+}
 
-signals:
-	void color_changed();
+bool LConnectionID::operator<(const LConnectionID& other) const
+{
+	return m_value < other.m_value;
+}
 
-public:
-	LColorControl(QWidget* parent = nullptr);
-
-	~LColorControl();
-
-	void click();
-
-	void disable_clicking(bool cond = true);
-
-protected:
-	virtual bool eventFilter(QObject* object, QEvent* event) override;
-
-private:
-	void init_attributes();
-
-	bool clicking_disabled{ false };
-	bool open_on_release{ false };
-
-	QStringList m_attribute_states;
-};
-LAYERS_NAMESPACE_END
-
-#endif // LCOLORCONTROL_H
+LConnectionID LConnectionID::operator++(int)
+{
+	LConnectionID temp(*this);
+	m_value++;
+	return temp;
+}

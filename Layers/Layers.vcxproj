@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\lconnections.cpp" />
     <ClCompile Include="src\lobject.cpp" />
     <ClCompile Include="src\lgradienteditor.cpp" />
     <ClCompile Include="src\lattributemapitem.cpp" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Layers\lalgorithms.h" />
+    <ClInclude Include="include\Layers\lconnections.h" />
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\ljson.h" />
     <ClInclude Include="include\Layers\lobject.h" />
@@ -115,7 +117,7 @@
     <ClInclude Include="include\Layers\layers_global.h" />
     <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
     <QtMoc Include="include\Layers\lattributeeditor.h" />
-    <QtMoc Include="include\Layers\lattribute.h" />
+    <ClInclude Include="include\Layers\lattribute.h" />
     <QtMoc Include="include\Layers\lapplication.h" />
     <ClInclude Include="include\Layers\lcalculate.h" />
     <ClInclude Include="include\Layers\lcolor.h" />
@@ -133,7 +135,7 @@
     <QtMoc Include="include\Layers\lthemeeditordialog.h" />
     <QtMoc Include="include\Layers\lthemeview.h" />
     <QtMoc Include="include\Layers\lthememodel.h" />
-    <QtMoc Include="include\Layers\lthemeitem.h" />
+    <ClInclude Include="include\Layers\lthemeitem.h" />
     <QtMoc Include="include\Layers\lwidget.h" />
     <QtMoc Include="include\Layers\lupdatedialog.h" />
     <QtMoc Include="include\Layers\ltoggleswitch.h" />

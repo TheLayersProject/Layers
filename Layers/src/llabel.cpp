@@ -65,7 +65,7 @@ LLabel::~LLabel()
 {
 	disconnect(m_repaint_connection);
 
-	delete m_fill;
+	//delete m_fill;
 
 	if (!m_text_color->parent())
 		delete m_text_color;
@@ -169,7 +169,7 @@ void LLabel::paintEvent(QPaintEvent* event)
 
 void LLabel::update()
 {
-	QStringList s = state_combo();
+	std::vector<std::string> s = state_combo();
 
 	QString style_sheet = "QLabel {";
 
@@ -197,5 +197,5 @@ void LLabel::init()
 void LLabel::init_attributes()
 {
 	if (!m_graphic)
-		m_text_color->setParent(this);
+		m_text_color->set_parent(this);
 }

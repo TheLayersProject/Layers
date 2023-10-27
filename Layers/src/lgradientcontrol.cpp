@@ -69,7 +69,7 @@ bool LGradientControl::eventFilter(QObject* object, QEvent* event)
 void LGradientControl::init_attributes()
 {
 	// Remove control attribute
-	m_fill->setParent(nullptr);
+	m_fill->set_parent(nullptr);
 
 	m_border_fill->set_value("#D6D6D6");
 	m_border_thickness->set_value(2.0);
