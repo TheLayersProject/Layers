@@ -26,18 +26,12 @@
 #include "layers_exports.h"
 
 #include "ljson.h"
+#include "lstring.h"
 #include "lthemeitem.h"
 
 LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
-
-struct LAYERS_EXPORT LThemeLineageData
-{
-	std::string name;
-	std::string uuid;
-	bool has_app_implementation_available = false;
-};
 
 class LAYERS_EXPORT LTheme
 {
@@ -46,35 +40,35 @@ public:
 
 	LTheme(const std::filesystem::path& path);
 
-	LTheme(const std::string& name, bool editable = true);
+	LTheme(const LString& name, bool editable = true);
 
-	LTheme(const std::string& name, std::string uuid, bool editable);
+	LTheme(const LString& name, const LString& uuid, bool editable);
 
 	~LTheme();
 
-	void append_to_lineage(const std::string& theme_id);
+	void append_to_lineage(const LString& theme_id);
 
 	void clear();
 
 	std::filesystem::path path() const;
 
-	std::string display_id() const;
+	LString display_id() const;
 
 	bool editable() const;
 
-	LThemeItem* find_item(const std::string& path);
+	LThemeItem* find_item(const LString& path);
 
-	LThemeItem* find_item(const std::deque<std::string>& name_list);
+	LThemeItem* find_item(const std::deque<LString>& name_list);
 
-	bool has_implementation(const std::string& app_display_id) const;
+	bool has_implementation(const LString& app_display_id) const;
 
-	std::vector<std::string> lineage() const;
+	std::vector<LString> lineage() const;
 
-	void load(const std::string& app_id);
+	void load(const LString& app_display_id);
 
-	std::string name() const;
+	LString name() const;
 
-	std::string publisher() const;
+	LString publisher() const;
 
 	LThemeItem* root_item() const;
 
@@ -84,45 +78,15 @@ public:
 
 	void set_dir(const std::filesystem::path& path);
 
-	void set_name(const std::string& new_name);
+	void set_name(const LString& new_name);
 
-	void set_publisher(const std::string& publisher);
+	void set_publisher(const LString& publisher);
 
-	std::string uuid() const;
+	LString uuid() const;
 
 private:
-	void load_file(const std::string& file_name);
-
-	void load_dir(const std::filesystem::path& path);
-
-	LThemeItem* init_item(const std::string& name,
-		LJsonObject item_object, const std::string& file_name,
-		LThemeItem* parent = nullptr);
-
-	void resolve_links(LThemeItem* item);
-
-	void resolve_parents();
-
-	LThemeItem* m_root_item{ nullptr };
-
-	std::map<std::string, LThemeItem*> m_unparented_theme_items;
-
-	std::map<std::string, std::vector<LThemeItem*>> m_file_items;
-
-	std::filesystem::path m_path;
-
-	bool m_editable{ true };
-
-	std::vector<std::string> m_lineage;
-
-	std::string m_name;
-
-	std::string m_publisher;
-
-	std::string m_local_user;
-
-	//QUuid m_uuid;
-	std::string m_uuid;
+	class Impl;
+	Impl* pimpl;
 };
 LAYERS_NAMESPACE_END
 

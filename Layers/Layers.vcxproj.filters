@@ -1,163 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\lthememodel.cpp" />
-    <ClCompile Include="src\lthemeview.cpp" />
-    <ClCompile Include="src\lthemeeditordialog.cpp" />
-    <ClCompile Include="src\lapplication.cpp" />
-    <ClCompile Include="src\lattribute.cpp" />
-    <ClCompile Include="src\lattributeeditor.cpp" />
-    <ClCompile Include="src\lattributeeditorgroup.cpp" />
-    <ClCompile Include="src\lbutton.cpp" />
-    <ClCompile Include="src\lcolor.cpp" />
-    <ClCompile Include="src\lcolorcontrol.cpp" />
-    <ClCompile Include="src\lcolordialog.cpp" />
-    <ClCompile Include="src\lcolorplane.cpp" />
-    <ClCompile Include="src\lcombobox.cpp" />
-    <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lthemecreatordialog.cpp" />
-    <ClCompile Include="src\ldialog.cpp" />
-    <ClCompile Include="src\ldownloader.cpp" />
-    <ClCompile Include="src\lfillcontrol.cpp" />
-    <ClCompile Include="src\lfilldialog.cpp" />
-    <ClCompile Include="src\lgithubrepo.cpp" />
-    <ClCompile Include="src\lgradientcontrol.cpp" />
-    <ClCompile Include="src\lgradientdialog.cpp" />
-    <ClCompile Include="src\lgraphic.cpp" />
-    <ClCompile Include="src\lgridlineitemdelegate.cpp" />
-    <ClCompile Include="src\lheaderview.cpp" />
-    <ClCompile Include="src\limagesequence.cpp" />
-    <ClCompile Include="src\llabel.cpp" />
-    <ClCompile Include="src\llineeditor.cpp" />
-    <ClCompile Include="src\lmainwindow.cpp" />
-    <ClCompile Include="src\lmainwindowtitlebar.cpp" />
-    <ClCompile Include="src\lmenubar.cpp" />
-    <ClCompile Include="src\lminislider.cpp" />
-    <ClCompile Include="src\lpaths.cpp" />
-    <ClCompile Include="src\lradiobutton.cpp" />
-    <ClCompile Include="src\lradiobuttonpool.cpp" />
-    <ClCompile Include="src\lscrollarea.cpp" />
-    <ClCompile Include="src\lscrollbar.cpp" />
-    <ClCompile Include="src\lsettingsmenu.cpp" />
-    <ClCompile Include="src\lsettingstab.cpp" />
-    <ClCompile Include="src\lslider.cpp" />
-    <ClCompile Include="src\lstatepool.cpp" />
-    <ClCompile Include="src\lsvgrenderer.cpp" />
-    <ClCompile Include="src\ltab.cpp" />
-    <ClCompile Include="src\ltabbar.cpp" />
-    <ClCompile Include="src\ltableview.cpp" />
-    <ClCompile Include="src\lthemeable.cpp" />
-    <ClCompile Include="src\lthemeablebox.cpp" />
-    <ClCompile Include="src\lthemecombobox.cpp" />
-    <ClCompile Include="src\lthemecomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lthemecomboboxitemmodel.cpp" />
-    <ClCompile Include="src\lthemecompatibilitycautiondialog.cpp" />
-    <ClCompile Include="src\lthemecompatibilityitemdelegate.cpp" />
-    <ClCompile Include="src\lthemelineagemodel.cpp" />
-    <ClCompile Include="src\lthemeswidget.cpp" />
-    <ClCompile Include="src\ltoggleswitch.cpp" />
-    <ClCompile Include="src\lupdatedialog.cpp" />
-    <ClCompile Include="src\lwidget.cpp" />
-    <ClCompile Include="src\ltheme.cpp" />
-    <ClCompile Include="src\lthemeitem.cpp" />
-    <ClCompile Include="src\lgrowingdotprogressindicator.cpp" />
-    <ClCompile Include="src\lresizer.cpp" />
-    <ClCompile Include="src\lsplitter.cpp" />
-    <ClCompile Include="src\lattributemapview.cpp" />
-    <ClCompile Include="src\lattributemapmodel.cpp" />
-    <ClCompile Include="src\lattributemapitem.cpp" />
-    <ClCompile Include="src\llinksview.cpp" />
-    <ClCompile Include="src\lnewlinkwidget.cpp" />
-    <ClCompile Include="src\lgradienteditor.cpp" />
-    <ClCompile Include="src\ljson.cpp" />
-    <ClCompile Include="src\lobject.cpp" />
-    <ClCompile Include="src\lconnections.cpp" />
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Layers\layers_exports.h" />
-    <ClInclude Include="include\Layers\layers_global.h" />
-    <ClInclude Include="include\Layers\lcalculate.h" />
-    <ClInclude Include="include\Layers\lcolor.h" />
-    <ClInclude Include="include\Layers\lgithubrepo.h" />
-    <ClInclude Include="include\Layers\lgraphic.h" />
-    <ClInclude Include="include\Layers\limagesequence.h" />
-    <ClInclude Include="include\Layers\lpaths.h" />
-    <ClInclude Include="include\Layers\lthemeable.h" />
-    <ClInclude Include="include\Layers\lthemeablebox.h" />
-    <ClInclude Include="src\lgradienteditoritem.h" />
-    <ClInclude Include="include\Layers\ltheme.h" />
-    <ClInclude Include="include\Layers\lpaint.h" />
-    <ClInclude Include="include\Layers\ljson.h" />
-    <ClInclude Include="include\Layers\lalgorithms.h" />
-    <ClInclude Include="include\Layers\lsystem.h" />
-    <ClInclude Include="include\Layers\lgenerate.h" />
-    <ClInclude Include="include\Layers\lobject.h" />
-    <ClInclude Include="include\Layers\lattribute.h" />
-    <ClInclude Include="include\Layers\lthemeitem.h" />
-    <ClInclude Include="include\Layers\lconnections.h" />
+    <ClInclude Include="include\Layers\ljson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\layers_exports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\layers_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\ljsonvalue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lconnections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lattribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lthemeitem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\ltheme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lgenerate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lalgorithms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lthemeable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\lmainwindowtitlebar.h" />
-    <QtMoc Include="src\lsettingsmenu.h" />
-    <QtMoc Include="src\lsettingstab.h" />
-    <QtMoc Include="src\lthemeswidget.h" />
-    <QtMoc Include="include\Layers\lbutton.h" />
-    <QtMoc Include="include\Layers\lstatepool.h" />
-    <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
-    <QtMoc Include="include\Layers\lattributeeditor.h" />
-    <QtMoc Include="include\Layers\lapplication.h" />
-    <QtMoc Include="include\Layers\lthemeeditordialog.h" />
-    <QtMoc Include="include\Layers\lthemeview.h" />
-    <QtMoc Include="include\Layers\lthememodel.h" />
-    <QtMoc Include="include\Layers\lwidget.h" />
-    <QtMoc Include="include\Layers\lupdatedialog.h" />
-    <QtMoc Include="include\Layers\ltoggleswitch.h" />
-    <QtMoc Include="include\Layers\lthemelineagemodel.h" />
-    <QtMoc Include="include\Layers\lthemecompatibilityitemdelegate.h" />
-    <QtMoc Include="include\Layers\lthemecompatibilitycautiondialog.h" />
-    <QtMoc Include="include\Layers\lthemecomboboxitemmodel.h" />
-    <QtMoc Include="include\Layers\lthemecomboboxitemdelegate.h" />
-    <QtMoc Include="include\Layers\lthemecombobox.h" />
-    <QtMoc Include="include\Layers\ltableview.h" />
-    <QtMoc Include="include\Layers\ltabbar.h" />
-    <QtMoc Include="include\Layers\ltab.h" />
-    <QtMoc Include="include\Layers\lsvgrenderer.h" />
-    <QtMoc Include="include\Layers\lslider.h" />
-    <QtMoc Include="include\Layers\lscrollbar.h" />
-    <QtMoc Include="include\Layers\lscrollarea.h" />
-    <QtMoc Include="include\Layers\lradiobuttonpool.h" />
-    <QtMoc Include="include\Layers\lradiobutton.h" />
-    <QtMoc Include="include\Layers\lminislider.h" />
-    <QtMoc Include="include\Layers\lmenubar.h" />
-    <QtMoc Include="include\Layers\lmainwindow.h" />
-    <QtMoc Include="include\Layers\llineeditor.h" />
-    <QtMoc Include="include\Layers\llabel.h" />
-    <QtMoc Include="include\Layers\lheaderview.h" />
-    <QtMoc Include="include\Layers\lgridlineitemdelegate.h" />
-    <QtMoc Include="include\Layers\lgradientdialog.h" />
-    <QtMoc Include="include\Layers\lgradientcontrol.h" />
-    <QtMoc Include="include\Layers\lfilldialog.h" />
-    <QtMoc Include="include\Layers\lfillcontrol.h" />
-    <QtMoc Include="include\Layers\ldownloader.h" />
-    <QtMoc Include="include\Layers\ldialog.h" />
-    <QtMoc Include="include\Layers\lthemecreatordialog.h" />
-    <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />
-    <QtMoc Include="include\Layers\lcombobox.h" />
-    <QtMoc Include="include\Layers\lcolorplane.h" />
-    <QtMoc Include="include\Layers\lcolordialog.h" />
-    <QtMoc Include="include\Layers\lcolorcontrol.h" />
-    <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
-    <QtMoc Include="include\Layers\lresizer.h" />
-    <QtMoc Include="include\Layers\lsplitter.h" />
-    <QtMoc Include="include\Layers\lattributemapview.h" />
-    <QtMoc Include="include\Layers\lattributemapmodel.h" />
-    <QtMoc Include="include\Layers\lattributemapitem.h" />
-    <QtMoc Include="src\llinksview.h" />
-    <QtMoc Include="src\lnewlinkwidget.h" />
-    <QtMoc Include="include\Layers\lgradienteditor.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
-    <QtRcc Include="images\images.qrc" />
+    <ClCompile Include="src\ljson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lstring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ljsonvalue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lconnections.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lattribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lthemeitem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ltheme.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lthemeable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

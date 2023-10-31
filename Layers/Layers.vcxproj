@@ -1,6 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -11,262 +19,182 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\lconnections.cpp" />
-    <ClCompile Include="src\lobject.cpp" />
-    <ClCompile Include="src\lgradienteditor.cpp" />
-    <ClCompile Include="src\lattributemapitem.cpp" />
-    <ClCompile Include="src\lattributemapmodel.cpp" />
-    <ClCompile Include="src\lattributemapview.cpp" />
-    <ClCompile Include="src\lgrowingdotprogressindicator.cpp" />
-    <ClCompile Include="src\ljson.cpp" />
-    <ClCompile Include="src\llinksview.cpp" />
-    <ClCompile Include="src\lnewlinkwidget.cpp" />
-    <ClCompile Include="src\lresizer.cpp" />
-    <ClCompile Include="src\lsplitter.cpp" />
-    <ClCompile Include="src\lthememodel.cpp" />
-    <ClCompile Include="src\lthemeview.cpp" />
-    <ClCompile Include="src\lthemeeditordialog.cpp" />
-    <ClCompile Include="src\lapplication.cpp" />
-    <ClCompile Include="src\lattribute.cpp" />
-    <ClCompile Include="src\lattributeeditor.cpp" />
-    <ClCompile Include="src\lattributeeditorgroup.cpp" />
-    <ClCompile Include="src\lbutton.cpp" />
-    <ClCompile Include="src\lcolor.cpp" />
-    <ClCompile Include="src\lcolorcontrol.cpp" />
-    <ClCompile Include="src\lcolordialog.cpp" />
-    <ClCompile Include="src\lcolorplane.cpp" />
-    <ClCompile Include="src\lcombobox.cpp" />
-    <ClCompile Include="src\lcomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lthemecreatordialog.cpp" />
-    <ClCompile Include="src\ldialog.cpp" />
-    <ClCompile Include="src\ldownloader.cpp" />
-    <ClCompile Include="src\lfillcontrol.cpp" />
-    <ClCompile Include="src\lfilldialog.cpp" />
-    <ClCompile Include="src\lgithubrepo.cpp" />
-    <ClCompile Include="src\lgradientcontrol.cpp" />
-    <ClCompile Include="src\lgradientdialog.cpp" />
-    <ClCompile Include="src\lgraphic.cpp" />
-    <ClCompile Include="src\lgridlineitemdelegate.cpp" />
-    <ClCompile Include="src\lheaderview.cpp" />
-    <ClCompile Include="src\limagesequence.cpp" />
-    <ClCompile Include="src\llabel.cpp" />
-    <ClCompile Include="src\llineeditor.cpp" />
-    <ClCompile Include="src\lmainwindow.cpp" />
-    <ClCompile Include="src\lmainwindowtitlebar.cpp" />
-    <ClCompile Include="src\lmenubar.cpp" />
-    <ClCompile Include="src\lminislider.cpp" />
-    <ClCompile Include="src\lpaths.cpp" />
-    <ClCompile Include="src\lradiobutton.cpp" />
-    <ClCompile Include="src\lradiobuttonpool.cpp" />
-    <ClCompile Include="src\lscrollarea.cpp" />
-    <ClCompile Include="src\lscrollbar.cpp" />
-    <ClCompile Include="src\lsettingsmenu.cpp" />
-    <ClCompile Include="src\lsettingstab.cpp" />
-    <ClCompile Include="src\lslider.cpp" />
-    <ClCompile Include="src\lstatepool.cpp" />
-    <ClCompile Include="src\lsvgrenderer.cpp" />
-    <ClCompile Include="src\ltab.cpp" />
-    <ClCompile Include="src\ltabbar.cpp" />
-    <ClCompile Include="src\ltableview.cpp" />
-    <ClCompile Include="src\ltheme.cpp" />
-    <ClCompile Include="src\lthemeable.cpp" />
-    <ClCompile Include="src\lthemeablebox.cpp" />
-    <ClCompile Include="src\lthemecombobox.cpp" />
-    <ClCompile Include="src\lthemecomboboxitemdelegate.cpp" />
-    <ClCompile Include="src\lthemecomboboxitemmodel.cpp" />
-    <ClCompile Include="src\lthemecompatibilitycautiondialog.cpp" />
-    <ClCompile Include="src\lthemecompatibilityitemdelegate.cpp" />
-    <ClCompile Include="src\lthemeitem.cpp" />
-    <ClCompile Include="src\lthemelineagemodel.cpp" />
-    <ClCompile Include="src\lthemeswidget.cpp" />
-    <ClCompile Include="src\ltoggleswitch.cpp" />
-    <ClCompile Include="src\lupdatedialog.cpp" />
-    <ClCompile Include="src\lwidget.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\lmainwindowtitlebar.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\lsettingsmenu.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\lsettingstab.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="src\lthemeswidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="include\Layers\lbutton.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="include\Layers\lalgorithms.h" />
+    <ClInclude Include="include\Layers\lattribute.h" />
+    <ClInclude Include="include\Layers\layers_exports.h" />
+    <ClInclude Include="include\Layers\layers_global.h" />
     <ClInclude Include="include\Layers\lconnections.h" />
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\ljson.h" />
     <ClInclude Include="include\Layers\lobject.h" />
-    <ClInclude Include="include\Layers\lpaint.h" />
-    <ClInclude Include="include\Layers\lsystem.h" />
-    <ClInclude Include="src\lgradienteditoritem.h" />
-    <QtMoc Include="src\lnewlinkwidget.h" />
-    <QtMoc Include="src\llinksview.h" />
-    <QtMoc Include="include\Layers\lstatepool.h" />
-    <QtMoc Include="include\Layers\lattributemapview.h" />
-    <QtMoc Include="include\Layers\lattributemapmodel.h" />
-    <QtMoc Include="include\Layers\lattributemapitem.h" />
-    <ClInclude Include="include\Layers\layers_exports.h" />
-    <ClInclude Include="include\Layers\layers_global.h" />
-    <QtMoc Include="include\Layers\lattributeeditorgroup.h" />
-    <QtMoc Include="include\Layers\lattributeeditor.h" />
-    <ClInclude Include="include\Layers\lattribute.h" />
-    <QtMoc Include="include\Layers\lapplication.h" />
-    <ClInclude Include="include\Layers\lcalculate.h" />
-    <ClInclude Include="include\Layers\lcolor.h" />
-    <ClInclude Include="include\Layers\lgithubrepo.h" />
-    <QtMoc Include="include\Layers\lgradienteditor.h" />
-    <ClInclude Include="include\Layers\lgraphic.h" />
-    <QtMoc Include="include\Layers\lgrowingdotprogressindicator.h" />
-    <ClInclude Include="include\Layers\limagesequence.h" />
-    <ClInclude Include="include\Layers\lpaths.h" />
+    <ClInclude Include="include\Layers\lstring.h" />
+    <ClInclude Include="include\Layers\ljsonvalue.h" />
     <ClInclude Include="include\Layers\ltheme.h" />
-    <QtMoc Include="include\Layers\lresizer.h" />
-    <QtMoc Include="include\Layers\lsplitter.h" />
     <ClInclude Include="include\Layers\lthemeable.h" />
-    <ClInclude Include="include\Layers\lthemeablebox.h" />
-    <QtMoc Include="include\Layers\lthemeeditordialog.h" />
-    <QtMoc Include="include\Layers\lthemeview.h" />
-    <QtMoc Include="include\Layers\lthememodel.h" />
     <ClInclude Include="include\Layers\lthemeitem.h" />
-    <QtMoc Include="include\Layers\lwidget.h" />
-    <QtMoc Include="include\Layers\lupdatedialog.h" />
-    <QtMoc Include="include\Layers\ltoggleswitch.h" />
-    <QtMoc Include="include\Layers\lthemelineagemodel.h" />
-    <QtMoc Include="include\Layers\lthemecompatibilityitemdelegate.h" />
-    <QtMoc Include="include\Layers\lthemecompatibilitycautiondialog.h" />
-    <QtMoc Include="include\Layers\lthemecomboboxitemmodel.h" />
-    <QtMoc Include="include\Layers\lthemecomboboxitemdelegate.h" />
-    <QtMoc Include="include\Layers\lthemecombobox.h" />
-    <QtMoc Include="include\Layers\ltableview.h" />
-    <QtMoc Include="include\Layers\ltabbar.h" />
-    <QtMoc Include="include\Layers\ltab.h" />
-    <QtMoc Include="include\Layers\lsvgrenderer.h" />
-    <QtMoc Include="include\Layers\lslider.h" />
-    <QtMoc Include="include\Layers\lscrollbar.h" />
-    <QtMoc Include="include\Layers\lscrollarea.h" />
-    <QtMoc Include="include\Layers\lradiobuttonpool.h" />
-    <QtMoc Include="include\Layers\lradiobutton.h" />
-    <QtMoc Include="include\Layers\lminislider.h" />
-    <QtMoc Include="include\Layers\lmenubar.h" />
-    <QtMoc Include="include\Layers\lmainwindow.h" />
-    <QtMoc Include="include\Layers\llineeditor.h" />
-    <QtMoc Include="include\Layers\llabel.h" />
-    <QtMoc Include="include\Layers\lheaderview.h" />
-    <QtMoc Include="include\Layers\lgridlineitemdelegate.h" />
-    <QtMoc Include="include\Layers\lgradientdialog.h" />
-    <QtMoc Include="include\Layers\lgradientcontrol.h" />
-    <QtMoc Include="include\Layers\lfilldialog.h" />
-    <QtMoc Include="include\Layers\lfillcontrol.h" />
-    <QtMoc Include="include\Layers\ldownloader.h" />
-    <QtMoc Include="include\Layers\ldialog.h" />
-    <QtMoc Include="include\Layers\lthemecreatordialog.h" />
-    <QtMoc Include="include\Layers\lcomboboxitemdelegate.h" />
-    <QtMoc Include="include\Layers\lcombobox.h" />
-    <QtMoc Include="include\Layers\lcolorplane.h" />
-    <QtMoc Include="include\Layers\lcolordialog.h" />
-    <QtMoc Include="include\Layers\lcolorcontrol.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="fonts\Roboto\roboto_font.qrc" />
-    <QtRcc Include="images\images.qrc" />
+    <ClCompile Include="src\lattribute.cpp" />
+    <ClCompile Include="src\lconnections.cpp" />
+    <ClCompile Include="src\ljsonvalue.cpp" />
+    <ClCompile Include="src\lobject.cpp" />
+    <ClCompile Include="src\lstring.cpp" />
+    <ClCompile Include="src\ljson.cpp" />
+    <ClCompile Include="src\ltheme.cpp" />
+    <ClCompile Include="src\lthemeable.cpp" />
+    <ClCompile Include="src\lthemeitem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C3974001-260F-4BED-8E06-123547376B01}</ProjectGuid>
-    <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{ba4366e2-4f68-4b98-8146-25da3717aae1}</ProjectGuid>
+    <RootNamespace>Layers</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
-    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.5</QtInstall>
-    <QtModules>core;network;widgets;svgwidgets</QtModules>
-    <QtBuildConfig>debug</QtBuildConfig>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>6.5</QtInstall>
-    <QtModules>core;network;widgets;svgwidgets</QtModules>
-    <QtBuildConfig>release</QtBuildConfig>
-  </PropertyGroup>
-  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
-  </Target>
-  <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(QtMsBuild)\Qt.props" />
+  <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
-    <ClCompile>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>LAYERS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;LAYERS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat>None</DebugInformationFormat>
-      <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>LAYERS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;LAYERS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;LAYERS_LIB;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;LAYERS_LIB;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <PostBuildEvent>
+      <Command>del /q "$(SolutionDir)$(IntDir)Layers.exp"
+
+mkdir "$(SolutionDir)$(IntDir)bin"
+mkdir "$(SolutionDir)$(IntDir)include"
+mkdir "$(SolutionDir)$(IntDir)lib"
+
+move "$(SolutionDir)$(IntDir)Layers.dll" "$(SolutionDir)$(IntDir)bin\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\Layersd.dll" "$(SolutionDir)$(IntDir)bin\"
+
+move "$(SolutionDir)$(IntDir)Layers.lib" "$(SolutionDir)$(IntDir)lib\"
+xcopy /y /d /i /r "$(SolutionDir)x64\Debug\Layersd.lib" "$(SolutionDir)$(IntDir)lib\"
+
+xcopy /y /d /i /r "$(SolutionDir)Layers\include\Layers" "$(SolutionDir)$(IntDir)include\Layers\"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
-    <Import Project="$(QtMsBuild)\qt.targets" />
-  </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>

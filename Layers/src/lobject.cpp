@@ -21,13 +21,15 @@
 
 using Layers::LConnectionID;
 using Layers::LObject;
+using Layers::LObjectImpl;
+using Layers::LString;
 
-LObject::LObject(LObject* parent)
-{
-	set_parent(parent);
-}
+//LObjectImpl::LObjectImpl(LObject* parent)
+//{
+//	set_parent(parent);
+//}
 
-LObject::~LObject()
+LObjectImpl::~LObjectImpl()
 {
 	for (auto& destroyed_connection : m_destroyed_connections)
 	{
@@ -38,67 +40,129 @@ LObject::~LObject()
 	{
 		delete child;
 	}
-
-	if (m_parent)
-	{
-		m_parent->remove_child(this);
-	}
 }
 
-void LObject::add_child(LObject* child)
+void LObjectImpl::add_child(LObject* child)
 {
 	m_children.push_back(child);
 }
 
-std::vector<LObject*>& LObject::children()
+std::vector<LObject*>& LObjectImpl::children()
 {
 	return m_children;
 }
 
-void LObject::disconnect_destroyed(LConnectionID connection)
+void LObjectImpl::disconnect_destroyed(LConnectionID connection)
 {
 	m_destroyed_connections.erase(connection);
 }
 
-std::string LObject::object_name() const
+LString LObjectImpl::object_name() const
 {
 	return m_object_name;
 }
 
-LConnectionID LObject::on_destroyed(std::function<void()> callback)
+LConnectionID LObjectImpl::on_destroyed(std::function<void()> callback)
 {
 	m_destroyed_connections[m_destroyed_connections_next_id++] = callback;
 	return std::prev(m_destroyed_connections.end())->first;
 }
 
-LObject* LObject::parent() const
+LObject* LObjectImpl::parent() const
 {
 	return m_parent;
 }
 
-void LObject::remove_child(LObject* child)
+void LObjectImpl::remove_child(LObject* child)
 {
 	m_children.erase(
 		std::remove(m_children.begin(), m_children.end(), child),
 		m_children.end());
 }
 
-void LObject::set_object_name(const std::string& object_name)
+void LObjectImpl::set_object_name(const LString& object_name)
 {
 	m_object_name = object_name;
 }
 
-void LObject::set_parent(LObject* parent)
+//void LObjectImpl::set_parent(LObject* parent)
+//{
+//	m_parent = parent;
+//}
+
+LObject::LObject(LObject* parent) :
+	pimpl{ new LObjectImpl() }
 {
-	if (m_parent != nullptr)
+	set_parent(parent);
+}
+
+LObject::~LObject()
+{
+	if (pimpl->m_parent)
 	{
-		m_parent->remove_child(this);
+		pimpl->m_parent->remove_child(this);
 	}
 
-	m_parent = parent;
+	delete pimpl;
+}
 
-	if (m_parent != nullptr)
+void LObject::add_child(LObject* child)
+{
+	pimpl->add_child(child);
+}
+
+std::vector<LObject*>& LObject::children()
+{
+	return pimpl->children();
+}
+
+void LObject::disconnect_destroyed(LConnectionID connection)
+{
+	pimpl->disconnect_destroyed(connection);
+}
+
+//template<typename T>
+//inline std::vector<T*> LObject::find_children(bool recursive)
+//{
+//	return pimpl->find_children<T>(recursive);
+//}
+
+LString LObject::object_name() const
+{
+	return pimpl->object_name();
+}
+
+LConnectionID LObject::on_destroyed(std::function<void()> callback)
+{
+	return pimpl->on_destroyed(callback);
+}
+
+LObject* LObject::parent() const
+{
+	return pimpl->parent();
+}
+
+void LObject::remove_child(LObject* child)
+{
+	pimpl->remove_child(child);
+}
+
+void LObject::set_object_name(const LString& object_name)
+{
+	pimpl->set_object_name(object_name);
+}
+
+void LObject::set_parent(LObject* parent)
+{
+	if (pimpl->m_parent != nullptr)
 	{
-		m_parent->add_child(this);
+		pimpl->m_parent->remove_child(this);
+	}
+
+	pimpl->m_parent = parent;
+
+	if (pimpl->m_parent != nullptr)
+	{
+		pimpl->m_parent->add_child(this);
 	}
 }

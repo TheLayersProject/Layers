@@ -26,22 +26,25 @@
 #include "layers_exports.h"
 
 #include "lattribute.h"
+#include "lstring.h"
 #include "lobject.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LThemeItem : public LObject
+class LAYERS_EXPORT LThemeItem : public LObject
 {
 public:
 	LThemeItem(
-		const std::string& name,
+		const LString& name,
 		const LAttributeMap& attributes,
 		bool is_overridable,
-		const std::string& file_name,
+		const LString& file_name,
 		LThemeItem* parent = nullptr);
+
+	~LThemeItem();
 
 	void append_child(LThemeItem* child);
 
-	std::vector<std::string> attribute_group_names() const;
+	std::vector<LString> attribute_group_names() const;
 
 	LAttributeMap attributes(int type_index = -1);
 
@@ -49,26 +52,23 @@ public:
 
 	size_t child_count() const;
 
-	std::map<std::string, LThemeItem*>& children();
+	std::map<LString, LThemeItem*>& children();
 
-	LThemeItem* find_item(const std::string& path);
+	LThemeItem* find_item(const LString& path);
 
-	LThemeItem* find_item(std::deque<std::string> name_list);
+	LThemeItem* find_item(std::deque<LString> name_list);
 
 	int index() const;
 
 	bool is_overridable() const;
 
-	std::string path() const;
+	LString path() const;
 
 	LJsonObject to_json_object() const;
 
 private:
-	std::map<std::string, LThemeItem*> m_children;
-
-	LAttributeMap m_attributes;
-	std::string m_file_name;
-	bool m_is_overridable{ false };
+	class Impl;
+	Impl* pimpl;
 };
 
 LAYERS_NAMESPACE_END

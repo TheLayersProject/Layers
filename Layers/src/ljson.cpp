@@ -175,11 +175,11 @@ LJsonObject LJsonParser::parse_pair_list()
 
 		match(LJsonTokenType::STRING);
 
-		key = key.substr(1, key.length() - 2);
+		LString lstring_key = key.substr(1, key.length() - 2).c_str();
 
 		match(LJsonTokenType::COLON);
 
-		object.insert({ key, parse_value() });
+		object.insert({ lstring_key, parse_value() });
 
 		if (m_current_token.type == LJsonTokenType::COMMA)
 			next_token();
@@ -198,7 +198,7 @@ LJsonValue LJsonParser::parse_value()
 
 		return LJsonValue(
 			value_token.value.substr(
-				1, value_token.value.length() - 2));
+				1, value_token.value.length() - 2).c_str());
 	}
 	else if (m_current_token.type == LJsonTokenType::NUMBER)
 	{
@@ -257,130 +257,4 @@ void LJsonParser::match(LJsonTokenType expected_type)
 void LJsonParser::next_token()
 {
 	m_current_token = m_lexer.get_next_token();
-}
-
-LJsonValue::LJsonValue() {}
-
-LJsonValue::LJsonValue(bool value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(double value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(std::string value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(LJsonObject value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(LJsonArray value) :
-	m_variant{ value } {}
-
-bool LJsonValue::is_bool() const
-{
-	return std::get_if<bool>(&m_variant);
-}
-
-bool LJsonValue::is_double() const
-{
-	return std::get_if<double>(&m_variant);
-}
-
-bool LJsonValue::is_object() const
-{
-	return std::get_if<LJsonObject>(&m_variant);
-}
-
-bool LJsonValue::is_string() const
-{
-	return std::get_if<std::string>(&m_variant);
-}
-
-LJsonArray LJsonValue::to_array() const
-{
-	return std::get<LJsonArray>(m_variant);
-}
-
-bool LJsonValue::to_bool() const
-{
-	return std::get<bool>(m_variant);
-}
-
-double LJsonValue::to_double() const
-{
-	return std::get<double>(m_variant);
-}
-
-LJsonObject LJsonValue::to_object() const
-{
-	return std::get<LJsonObject>(m_variant);
-}
-
-std::string LJsonValue::to_string() const
-{
-	return std::get<std::string>(m_variant);
-}
-
-std::string LJsonValue::to_output(
-	int indent_space_count, int indent_level) const
-{
-	std::ostringstream oss;
-	std::string indent(indent_level * indent_space_count, ' ');
-
-	if (auto string_val = std::get_if<std::string>(&m_variant))
-	{
-		return "\"" + *string_val + "\"";
-	}
-	else if (auto object_val = std::get_if<LJsonObject>(&m_variant))
-	{
-		oss << "{\n";
-		for (const auto& [key, value] : *object_val)
-		{
-			oss << indent << std::string(indent_space_count, ' ')
-				<< "\"" << key << "\": "
-				<< value.to_output(indent_space_count, indent_level + 1)
-				<< ",\n";
-		}
-		if (!object_val->empty())
-		{
-			auto str = oss.str();
-			// Remove trailing comma and newline
-			str = str.substr(0, str.length() - 2);
-			oss.str("");
-			oss << str;
-		}
-		oss << "\n" << indent << "}";
-		return oss.str();
-	}
-	else if (auto double_val = std::get_if<double>(&m_variant))
-	{
-		oss << *double_val;
-		return oss.str();
-	}
-	else if (auto bool_val = std::get_if<bool>(&m_variant))
-	{
-		return *bool_val ? "true" : "false";
-	}
-	else if (auto array_val = std::get_if<LJsonArray>(&m_variant))
-	{
-		oss << "[\n";
-		for (const auto& val : *array_val)
-		{
-			oss << indent << std::string(indent_space_count, ' ')
-				<< val.to_output(indent_space_count, indent_level + 1)
-				<< ",\n";
-		}
-		if (!array_val->empty())
-		{
-			auto str = oss.str();
-			// Remove trailing comma and newline
-			str = str.substr(0, str.length() - 2);
-			oss.str("");
-			oss << str;
-		}
-		oss << "\n" << indent << "]";
-		return oss.str();
-	}
-
-	return "";
 }

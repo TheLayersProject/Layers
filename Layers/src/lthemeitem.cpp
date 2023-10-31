@@ -26,18 +26,154 @@
 
 using Layers::LAttributeMap;
 using Layers::LJsonObject;
+using Layers::LString;
 using Layers::LThemeItem;
 
+class LThemeItem::Impl
+{
+public:
+	Impl(
+		const LAttributeMap& attributes,
+		bool is_overridable,
+		const LString& file_name) :
+		m_attributes{ attributes },
+		m_is_overridable{ is_overridable },
+		m_file_name{ file_name } {}
+
+	void append_child(LThemeItem* child)
+	{
+		m_children[child->object_name()] = child;
+	}
+
+	std::vector<LString> attribute_group_names() const
+	{
+		std::vector<LString> attribute_group_names;
+
+		for (const auto& [key, attr] : m_attributes)
+		{
+			LString attr_name = attr->object_name();
+
+			if (std::find(attr_name.begin(), attr_name.end(),
+				'.') != attr_name.end())
+			{
+				auto group_name = split<std::vector<LString>>(
+					attr_name, '.').front();
+
+				if (std::find(attribute_group_names.begin(),
+					attribute_group_names.end(),
+					group_name) == attribute_group_names.end())
+				{
+					attribute_group_names.push_back(group_name);
+				}
+			}
+		}
+
+		return attribute_group_names;
+	}
+
+	LAttributeMap attributes(int type_index = -1)
+	{
+		if (type_index < 0)
+			return m_attributes;
+
+		LAttributeMap attrs;
+
+		for (const auto& [key, attr] : m_attributes)
+			if (attr->type_index() == type_index)
+				attrs[attr->object_name()] = attr;
+
+		return attrs;
+	}
+
+	LThemeItem* child(int index) const
+	{
+		if (index < 0 || index >= m_children.size())
+			return nullptr;
+
+		auto it = m_children.begin();
+		std::advance(it, index);
+
+		return it->second;
+	}
+
+	size_t child_count() const
+	{
+		return m_children.size();
+	}
+
+	std::map<LString, LThemeItem*>& children()
+	{
+		return m_children;
+	}
+
+	LThemeItem* find_item(std::deque<LString> name_list)
+	{
+		if (!name_list.empty())
+		{
+			LString name = *name_list.begin();
+			name_list.pop_front();
+
+			for (const auto& [key, child_item] : m_children)
+			{
+				if (child_item->object_name() == name)
+				{
+					if (name_list.empty())
+						return child_item;
+					else
+						return child_item->find_item(name_list);
+				}
+			}
+		}
+
+		return nullptr;
+	}
+
+	bool is_overridable() const
+	{
+		return m_is_overridable;
+	}
+
+	LJsonObject to_json_object() const
+	{
+		LJsonObject item_object;
+		LJsonObject attributes_object;
+		LJsonObject children_object;
+
+		for (const auto& [key, attr] : m_attributes)
+			attributes_object[key] = attr->json_object();
+
+		for (const auto& [key, child] : m_children)
+			if (child->pimpl->m_file_name == m_file_name)
+				children_object[child->object_name()] =
+				child->to_json_object();
+
+		if (!attributes_object.empty())
+			item_object["attributes"] = attributes_object;
+
+		if (!children_object.empty())
+			item_object["children"] = children_object;
+
+		if (m_is_overridable)
+			item_object["is_overridable"] = m_is_overridable;
+
+		return item_object;
+	}
+
+	std::map<LString, LThemeItem*> m_children;
+
+	LAttributeMap m_attributes;
+	LString m_file_name;
+	bool m_is_overridable{ false };
+};
+
 LThemeItem::LThemeItem(
-	const std::string &name,
+	const LString& name,
 	const LAttributeMap& attributes,
 	bool is_overridable,
-	const std::string& file_name,
+	const LString& file_name,
 	LThemeItem* parent
 ) :
-	m_attributes{ attributes },
-	m_is_overridable{ is_overridable },
-	m_file_name{ file_name },
+	pimpl{ new Impl(attributes, is_overridable, file_name) },
 	LObject(parent)
 {
 	set_object_name(name);
@@ -46,98 +182,49 @@ LThemeItem::LThemeItem(
 		attr->set_parent(this);
 }
 
-void LThemeItem::append_child(LThemeItem* child)
+LThemeItem::~LThemeItem()
 {
-	m_children[child->object_name()] = child;
+	delete pimpl;
 }
 
-std::vector<std::string> LThemeItem::attribute_group_names() const
+void LThemeItem::append_child(LThemeItem* child)
 {
-	std::vector<std::string> attribute_group_names;
+	pimpl->append_child(child);
+}
 
-	for (const auto& [key, attr] : m_attributes)
-	{
-		std::string attr_name = attr->object_name();
-
-		if (std::find(attr_name.begin(), attr_name.end(),
-			'.') != attr_name.end())
-		{
-			auto group_name = split<std::vector<std::string>>(
-				attr_name, '.').front();
-
-			if (std::find(attribute_group_names.begin(),
-				attribute_group_names.end(),
-				group_name) == attribute_group_names.end())
-			{
-				attribute_group_names.push_back(group_name);
-			}
-		}
-	}
-
-	return attribute_group_names;
+std::vector<LString> LThemeItem::attribute_group_names() const
+{
+	return pimpl->attribute_group_names();
 }
 
 LAttributeMap LThemeItem::attributes(int type_index)
 {
-	if (type_index < 0)
-		return m_attributes;
-
-	LAttributeMap attrs;
-
-	for (const auto& [key, attr] : m_attributes)
-		if (attr->type_index() == type_index)
-			attrs[attr->object_name()] = attr;
-
-	return attrs;
+	return pimpl->attributes(type_index);
 }
 
 LThemeItem* LThemeItem::child(int index) const
 {
-	if (index < 0 || index >= m_children.size())
-		return nullptr;
-
-	auto it = m_children.begin();
-	std::advance(it, index);
-
-	return it->second;
+	return pimpl->child(index);
 }
-
 
 size_t LThemeItem::child_count() const
 {
-	return m_children.size();
+	return pimpl->child_count();
 }
 
-std::map<std::string, LThemeItem*>& LThemeItem::children()
+std::map<LString, LThemeItem*>& LThemeItem::children()
 {
-	return m_children;
+	return pimpl->children();
 }
 
-LThemeItem* LThemeItem::find_item(const std::string& path)
+LThemeItem* LThemeItem::find_item(const LString& path)
 {
-	return find_item(split<std::deque<std::string>>(path, '/'));
+	return find_item(split<std::deque<LString>>(path, '/'));
 }
 
-LThemeItem* LThemeItem::find_item(std::deque<std::string> name_list)
+LThemeItem* LThemeItem::find_item(std::deque<LString> name_list)
 {
-	if (!name_list.empty())
-	{
-		std::string name = *name_list.begin();
-		name_list.pop_front();
-
-		for (const auto& [key, child_item] : m_children)
-		{
-			if (child_item->object_name() == name)
-			{
-				if (name_list.empty())
-					return child_item;
-				else
-					return child_item->find_item(name_list);
-			}
-		}
-	}
-
-	return nullptr;
+	return pimpl->find_item(name_list);
 }
 
 int LThemeItem::index() const
@@ -145,8 +232,8 @@ int LThemeItem::index() const
 	if (LThemeItem* parent_item = dynamic_cast<LThemeItem*>(parent()))
 	{
 		int i = 0;
-		for (auto it = parent_item->m_children.begin();
-			it != parent_item->m_children.end(); ++it, ++i)
+		for (auto it = parent_item->pimpl->m_children.begin();
+			it != parent_item->pimpl->m_children.end(); ++it, ++i)
 		{
 			if (it->second == this)
 				return i;
@@ -157,12 +244,12 @@ int LThemeItem::index() const
 
 bool LThemeItem::is_overridable() const
 {
-	return m_is_overridable;
+	return pimpl->is_overridable();
 }
 
-std::string LThemeItem::path() const
+LString LThemeItem::path() const
 {
-	std::vector<std::string> path_names;
+	std::vector<LString> path_names;
 
 	path_names.push_back(object_name());
 
@@ -170,7 +257,7 @@ std::string LThemeItem::path() const
 
 	while (theme_item)
 	{
-		std::string name = theme_item->object_name();
+		LString name = theme_item->object_name();
 		if (!name.empty())
 			path_names.insert(path_names.begin(), name);
 
@@ -179,34 +266,13 @@ std::string LThemeItem::path() const
 
 	std::ostringstream joined_names;
 	std::copy(path_names.begin(), path_names.end(),
-		std::ostream_iterator<std::string>(joined_names, "/"));
+		std::ostream_iterator<LString>(joined_names, "/"));
 	std::string result = joined_names.str();
 
-	return result.substr(0, result.length() - 1);
+	return result.substr(0, result.length() - 1).c_str();
 }
 
 LJsonObject LThemeItem::to_json_object() const
 {
-	LJsonObject item_object;
-	LJsonObject attributes_object;
-	LJsonObject children_object;
-
-	for (const auto& [key, attr] : m_attributes)
-		attributes_object[key] = attr->json_object();
-
-	for (const auto& [key, child] : m_children)
-		if (child->m_file_name == m_file_name)
-			children_object[child->object_name()] =
-				child->to_json_object();
-
-	if (!attributes_object.empty())
-		item_object["attributes"] = attributes_object;
-
-	if (!children_object.empty())
-		item_object["children"] = children_object;
-
-	if (m_is_overridable)
-		item_object["is_overridable"] = m_is_overridable;
-
-	return item_object;
+	return pimpl->to_json_object();
 }

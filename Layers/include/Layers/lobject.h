@@ -27,10 +27,54 @@
 #include "layers_exports.h"
 
 #include "lconnections.h"
+#include "lstring.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-class LObject
+class LObject;
+
+class LObjectImpl
+{
+public:
+	//LObjectImpl(LObject* parent = nullptr);
+
+	~LObjectImpl();
+
+	void add_child(LObject* child);
+
+	std::vector<LObject*>& children();
+
+	void disconnect_destroyed(LConnectionID connection);
+
+	//template <typename T>
+	//void find_children_helper(
+	//	LObject* parent, std::vector<T*>& children, bool recursive);
+
+	//template <typename T>
+	//std::vector<T*> find_children(bool recursive = false);
+
+	LString object_name() const;
+
+	LConnectionID on_destroyed(std::function<void()> callback);
+
+	LObject* parent() const;
+
+	void remove_child(LObject* child);
+
+	void set_object_name(const LString& object_name);
+
+	//void set_parent(LObject* parent);
+
+	LString m_object_name;
+
+	LObject* m_parent{ nullptr };
+	std::vector<LObject*> m_children;
+
+	LConnections m_destroyed_connections;
+	LConnectionID m_destroyed_connections_next_id;
+};
+
+class LAYERS_EXPORT LObject
 {
 public:
 	LObject(LObject* parent = nullptr);
@@ -44,9 +88,13 @@ public:
 	void disconnect_destroyed(LConnectionID connection);
 
 	template <typename T>
+	void find_children_helper(
+		LObject* parent, std::vector<T*>& children, bool recursive);
+
+	template <typename T>
 	std::vector<T*> find_children(bool recursive = false);
 
-	std::string object_name() const;
+	LString object_name() const;
 
 	LConnectionID on_destroyed(std::function<void()> callback);
 
@@ -54,22 +102,17 @@ public:
 
 	void remove_child(LObject* child);
 
-	void set_object_name(const std::string& object_name);
+	void set_object_name(const LString& object_name);
 
 	void set_parent(LObject* parent);
 
 private:
-	std::string m_object_name;
-
-	LObject* m_parent{ nullptr };
-	std::vector<LObject*> m_children;
-
-	LConnections m_destroyed_connections;
-	LConnectionID m_destroyed_connections_next_id;
+	LObjectImpl* pimpl;
 };
 
 template <typename T>
-void find_children_helper(LObject* parent, std::vector<T*>& children, bool recursive)
+inline void LObject::find_children_helper(
+	LObject* parent, std::vector<T*>& children, bool recursive)
 {
 	for (LObject* child : parent->children())
 	{
@@ -85,11 +128,11 @@ void find_children_helper(LObject* parent, std::vector<T*>& children, bool recur
 	}
 }
 
-template<typename T>
+template <typename T>
 inline std::vector<T*> LObject::find_children(bool recursive)
 {
 	std::vector<T*> children;
-	find_children_helper(this, children, recursive);
+	find_children_helper<T>(this, children, recursive);
 	return children;
 }
 

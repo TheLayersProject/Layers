@@ -20,16 +20,28 @@
 #ifndef LAYERS_EXPORTS_H
 #define LAYERS_EXPORTS_H
 
-#include <QtCore/qglobal.h>
+ // Platform-specific checks
+#if defined(_WIN32) || defined(_WIN64)
+	#define LAYERS_WINDOWS
+#endif
 
+// Dynamic linkage handling
 #ifndef BUILD_STATIC
-# if defined(LAYERS_LIB)
-#  define LAYERS_EXPORT Q_DECL_EXPORT
-# else
-#  define LAYERS_EXPORT Q_DECL_IMPORT
-# endif
+	#ifdef LAYERS_WINDOWS
+		#ifdef LAYERS_LIB
+			#define LAYERS_EXPORT __declspec(dllexport)
+		#else
+			#define LAYERS_EXPORT __declspec(dllimport)
+		#endif
+	#else
+		#ifdef LAYERS_LIB
+			#define LAYERS_EXPORT __attribute__((visibility("default")))
+		#else
+			#define LAYERS_EXPORT
+		#endif
+	#endif
 #else
-# define LAYERS_EXPORT
+	#define LAYERS_EXPORT
 #endif
 
 #endif // LAYERS_EXPORTS_H

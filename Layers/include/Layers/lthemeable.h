@@ -20,52 +20,75 @@
 #ifndef LTHEMEABLE_H
 #define LTHEMEABLE_H
 
+#include <vector>
+
 #include "layers_global.h"
 #include "layers_exports.h"
 
 #include "lobject.h"
-#include "lstatepool.h"
+#include "lstring.h"
 #include "lthemeitem.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-class LGraphic;
-
 class LAYERS_EXPORT LThemeable : public LObject
 {
 public:
+	//LThemeable(LObject* parent = nullptr);
+
+	LThemeable();
+
+	LThemeable(const LThemeable& other);
+
+	~LThemeable();
+
 	void add_share_themeable(LThemeable* themeable);
 
-	void add_state_pool(LStatePool* state_pool, bool include_children = true);
+	//void add_state_pool(LStatePool* state_pool, bool include_children = true);
 
 	virtual void apply_theme_item(LThemeItem* theme_item);
 
-	QList<LAttribute*> child_attributes(
-		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
+	virtual std::vector<LThemeable*> child_themeables(
+		bool recursive = false) = 0;
 
-	virtual QList<LThemeable*> child_themeables(
-		Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
+	//QList<LAttribute*> child_attributes(
+	//	Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
+
+	//virtual QList<LThemeable*> child_themeables(
+	//	Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
 
 	LThemeItem* current_theme_item() const;
 
-	QString path();
+	virtual LString path() = 0;
 
-	QList<LStatePool*> state_pools() const;
+	//QList<LStatePool*> state_pools() const;
 
-	std::vector<std::string> state_combo() const;
+	//QStringList state_combo() const;
 
-	virtual void update();
+	virtual void update() = 0;
+
+//protected:
+//	void init();
 
 private:
-	LThemeable* _parent_themeable();
+	class Impl;
+	Impl* pimpl;
 
-	QString _name();
+	//LThemeable* _parent_themeable();
 
-	LThemeItem* m_current_theme_item{ nullptr };
+	/*
+		NOTE:
+		Use LObject::m_object_name internally. In QLThemeable, overwrite
+		QObject::setObjectName() and set both the QObject name and LObject
+		name.
+	*/
+	//QString _name();
 
-	QList<LThemeable*> m_share_themeables;
+	/*LThemeItem* m_current_theme_item{ nullptr };
 
-	QList<LStatePool*> m_state_pools;
+	std::vector<LThemeable*> m_share_themeables;*/
+
+	//QList<LStatePool*> m_state_pools;
 };
 LAYERS_NAMESPACE_END
 

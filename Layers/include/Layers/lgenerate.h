@@ -28,9 +28,11 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lstring.h"
+
 LAYERS_NAMESPACE_BEGIN
 
-LAYERS_EXPORT inline std::string generate_uuid()
+LAYERS_EXPORT inline LString generate_uuid()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -46,7 +48,7 @@ LAYERS_EXPORT inline std::string generate_uuid()
         }
     }
 
-    return ss.str();
+    return ss.str().c_str();
 }
 
 LAYERS_NAMESPACE_END

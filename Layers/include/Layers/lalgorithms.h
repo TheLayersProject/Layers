@@ -28,18 +28,18 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include <QGradientStops>
+#include "lstring.h"
 
 LAYERS_NAMESPACE_BEGIN
 
 template<typename T>
-inline LAYERS_EXPORT T split(const std::string& s, char delimiter)
+inline LAYERS_EXPORT T split(const LString& s, char delimiter)
 {
 	T tokens;
 	std::string token;
-	std::istringstream tokenStream(s);
+	std::istringstream tokenStream(s.c_str());
 	while (std::getline(tokenStream, token, delimiter)) {
-		tokens.push_back(token);
+		tokens.push_back(LString(token.c_str()));
 	}
 	return tokens;
 }
@@ -61,26 +61,6 @@ std::string remove_whitespace(const std::string& str)
 	}
 
 	return result;
-}
-
-/* Qt Conversion Functions */
-
-inline LAYERS_EXPORT
-QGradientStops to_QGradientStops(const std::vector<std::string>& stops)
-{
-	QGradientStops q_gradient_stops;
-
-	for (const auto& stop : stops)
-	{
-		auto stop_parts =
-			split<std::vector<std::string>>(stop, ':');
-
-		q_gradient_stops.append(QGradientStop(
-			std::stod(stop_parts[0]),
-			QString::fromStdString(stop_parts[1])));
-	}
-
-	return q_gradient_stops;
 }
 
 LAYERS_NAMESPACE_END
