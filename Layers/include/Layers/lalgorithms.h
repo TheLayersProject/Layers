@@ -17,60 +17,52 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LTHEMEITEM_H
-#define LTHEMEITEM_H
+#ifndef LALGORITHMS_H
+#define LALGORITHMS_H
 
-#include <deque>
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <string>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattribute.h"
 #include "lstring.h"
-#include "lobject.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LThemeItem : public LObject
+
+template<typename T>
+inline LAYERS_EXPORT T split(const LString& s, char delimiter)
 {
-public:
-	LThemeItem(
-		const LString& name,
-		const LAttributeMap& attributes,
-		bool is_overridable,
-		const LString& file_name,
-		LThemeItem* parent = nullptr);
+	T tokens;
+	std::string token;
+	std::istringstream tokenStream(s.c_str());
+	while (std::getline(tokenStream, token, delimiter)) {
+		tokens.push_back(LString(token.c_str()));
+	}
+	return tokens;
+}
 
-	~LThemeItem();
+inline LAYERS_EXPORT
+std::string remove_whitespace(const std::string& str)
+{
+	std::string result;
 
-	void append_child(LThemeItem* child);
+	bool insideQuotes = false;
 
-	std::vector<LString> attribute_group_names() const;
+	for (char c : str)
+	{
+		if (c == '\"')
+			insideQuotes = !insideQuotes;
 
-	LAttributeMap attributes(int type_index = -1);
+		if (insideQuotes || (c != ' ' && c != '\n' && c != '\r'))
+			result.push_back(c);
+	}
 
-	LThemeItem* child(int index) const;
-
-	size_t child_count() const;
-
-	std::map<LString, LThemeItem*>& children();
-
-	LThemeItem* find_item(const LString& path);
-
-	LThemeItem* find_item(std::deque<LString> name_list);
-
-	int index() const;
-
-	bool is_overridable() const;
-
-	LString path() const;
-
-	LJsonObject to_json_object() const;
-
-private:
-	class Impl;
-	Impl* pimpl;
-};
+	return result;
+}
 
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEITEM_H
+#endif // LALGORITHMS_H

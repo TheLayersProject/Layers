@@ -22,57 +22,33 @@
 
 #include <map>
 #include <string>
-#include <variant>
-#include <vector>
 
 #include "layers_global.h"
-#include "layers_exports.h"
+
+#include "ljsonvalue.h"
+#include "lstring.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-/* JSON DATA STRUCTURES */
-
-class LJsonValue;
-
-using LJsonArray = std::vector<LJsonValue>;
-using LJsonObject = std::map<std::string, LJsonValue>;
-using LJsonVariant =
-	std::variant<bool, int, std::string, LJsonObject, LJsonArray>;
-
-class LAYERS_EXPORT LJsonValue
-{
-public:
-	LJsonValue();
-	LJsonValue(std::string value);
-	LJsonValue(int value);
-	LJsonValue(LJsonObject value);
-	LJsonValue(LJsonArray value);
-
-private:
-	LJsonVariant m_variant;
-};
-
-/* JSON PARSER */
-
-enum class LAYERS_EXPORT LJsonTokenType
+enum class LJsonTokenType
 {
 	INVALID,
 	LBRACE, RBRACE,
 	LBRACKET, RBRACKET,
 	COLON, COMMA,
 	STRING, NUMBER,
-	TRUE, FALSE,
+	T, F,
 	NONE, END
 };
 
-class LAYERS_EXPORT LJsonToken
+class LJsonToken
 {
 public:
 	LJsonTokenType type{ LJsonTokenType::INVALID };
 	std::string value;
 };
 
-class LAYERS_EXPORT LJsonLexer
+class LJsonLexer
 {
 public:
 	LJsonLexer(const std::string& input);
@@ -86,7 +62,7 @@ private:
 	size_t m_pos;
 };
 
-class LAYERS_EXPORT LJsonParser {
+class LJsonParser {
 public:
 	LJsonParser(const LJsonLexer& lexer);
 

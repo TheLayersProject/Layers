@@ -19,245 +19,225 @@
 
 #include <Layers/lattribute.h>
 
-#include <QGradientStops>
-#include <QJsonArray>
-
-#include <Layers/lapplication.h>
+#include <Layers/lalgorithms.h>
+#include <Layers/lthemeable.h>
+#include <Layers/lthemeitem.h>
 
 using Layers::LAttribute;
+using Layers::LAttributeImpl;
 using Layers::LAttributeList;
 using Layers::LAttributeMap;
+using Layers::LConnectionID;
+using Layers::LJsonObject;
+using Layers::LJsonValue;
+using Layers::LString;
+using Layers::LVariant;
 
-LAttribute::LAttribute(
-	const QString& name, QObject* parent) :
-	QObject(parent)
+/* LAttributeImpl */
+
+LAttributeImpl::LAttributeImpl(const LString& name) {}
+
+LAttributeImpl::LAttributeImpl(const LString& name, const char* value) :
+	m_value{ LString(value) } {}
+
+LAttributeImpl::LAttributeImpl(const LString& name, const LVariant& value) :
+	m_value{ value } {}
+
+LAttributeImpl::LAttributeImpl(const LString& name, LJsonObject json_object) :
+	m_json_object{ json_object }
 {
-	setObjectName(name);
-}
-
-LAttribute::LAttribute(
-	const QString& name, QVariant value, QObject* parent) :
-	m_value{ value }, QObject(parent)
-{
-	setObjectName(name);
-
-	connect(this, &LAttribute::changed, [this]
+	if (json_object.find("linked_to") != json_object.end())
 	{
-		if (this->parent())
-			if (LThemeable* t = dynamic_cast<LThemeable*>(this->parent()))
-				t->update();
-	});
-}
-
-LAttribute::LAttribute(
-	const QString& name, QJsonObject json_object, QObject* parent) :
-	m_json_object{ json_object }, QObject(parent)
-{
-	setObjectName(name);
-
-	if (json_object.contains("linked_to"))
-	{
-		set_link_path(json_object.value("linked_to").toString());
+		_set_link_path(json_object["linked_to"].to_string());
 	}
-	else if (json_object.contains("value"))
+	else if (json_object.find("value") != json_object.end())
 	{
-		QJsonValue json_value = json_object.value("value");
+		LJsonValue json_value = json_object["value"];
 
-		if (json_value.isBool())
-			m_value = QVariant::fromValue(json_value.toBool());
+		if (json_value.is_bool())
+			m_value = json_value.to_bool();
 
-		else if (json_value.isDouble())
-			m_value = QVariant::fromValue(json_value.toDouble());
+		else if (json_value.is_double())
+			m_value = json_value.to_double();
 
-		else if (json_value.isString())
+		else if (json_value.is_string())
+			m_value = json_value.to_string();
+
+		else if (json_value.is_object())
 		{
-			QString value_str = json_value.toString();
+			LJsonObject object = json_value.to_object();
 
-			if (value_str.startsWith("#"))
-				m_value = QVariant::fromValue(QColor(value_str));
-		}
-		else if (json_value.isObject())
-		{
-			QJsonObject value_object = json_value.toObject();
-
-			if (value_object.contains("gradient"))
+			if (object.find("gradient") != object.end())
 			{
-				QJsonArray gradient_array = value_object.value("gradient").toArray();
+				std::vector<LString> gradient_stops;
 
-				QGradientStops gradient_stops;
+				for (const LJsonValue& value : object["gradient"].to_array())
+					gradient_stops.push_back(value.to_string());
 
-				for (QJsonValueConstRef array_value : gradient_array)
-				{
-					QString array_string = array_value.toString();
-
-					QStringList string_parts = array_string.split(":");
-
-					gradient_stops.append(
-						QGradientStop(
-							string_parts[0].toDouble(),
-							string_parts[1]
-						)
-					);
-				}
-
-				m_value = QVariant::fromValue(gradient_stops);
+				m_value = gradient_stops;
 			}
 		}
 	}
-	
-	if (json_object.contains("overrides"))
+
+	_on_change(
+		[this] {
+			m_json_object = _to_json_object();
+		}
+	);
+}
+
+//LAttributeImpl(const LAttribute& attribute)
+//{
+
+//}
+
+LAttributeImpl::~LAttributeImpl()
+{
+	if (m_theme_attr)
 	{
-		QJsonObject overrides_object =
-			json_object.value("overrides").toObject();
-
-		for (const QString& key : overrides_object.keys())
-		{
-			LAttribute* override_attr =
-				new LAttribute(key, overrides_object.value(key).toObject(), this);
-
-			m_overrides[key] = override_attr;
-
-			connect(override_attr, &LAttribute::changed, [this]
-				{ emit changed(); });
-		}
+		m_theme_attr->disconnect_change(m_theme_connection);
 	}
-
-	connect(this, &LAttribute::changed, [this]
-		{ m_json_object = to_json_object(); });
-}
-
-LAttribute::LAttribute(const LAttribute& attribute) :
-	m_link_path{ attribute.m_link_path },
-	m_value{ attribute.m_value },
-	QObject()
-{
-	setObjectName(attribute.objectName());
-
-	if (!attribute.m_overrides.isEmpty())
-		for (LAttribute* override_attr : attribute.m_overrides)
-		{
-			LAttribute* copy_override_attr = new LAttribute(*override_attr);
-
-			copy_override_attr->setParent(this);
-
-			m_overrides[override_attr->objectName()] = copy_override_attr;
-		}
-}
-
-LAttribute::~LAttribute()
-{
-	disconnect(m_link_connection);
-	disconnect(m_link_destroyed_connection);
-	disconnect(m_theme_connection);
 
 	if (m_link_attr)
 	{
-		if (m_link_attr->m_dependent_attrs.contains(this))
+		m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
+
+		for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+			dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
 		{
-			m_link_attr->m_dependent_attrs.removeOne(this);
-			emit m_link_attr->link_changed();
+			if ((*dep_attr)->pimpl == this)
+			{
+				dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+				m_link_attr->pimpl->_update_link_dependencies();
+				break;
+			}
 		}
 
 		m_link_attr = nullptr;
 	}
 }
 
-void LAttribute::create_override(const QString& name, QVariant value)
-{
-	LAttribute* override_attr = new LAttribute(name, value, this);
-
-	m_overrides[name] = override_attr;
-
-	connect(override_attr, &LAttribute::changed, [this]
-		{ emit changed(); });
-}
-
-void LAttribute::break_link()
+void LAttributeImpl::_break_link(LObject* parent)
 {
 	if (m_link_attr)
 	{
 		m_value = m_link_attr->value();
 
-		disconnect(m_link_connection);
-		disconnect(m_link_destroyed_connection);
+		m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
 
-		if (m_link_attr->m_dependent_attrs.contains(this))
+		for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+			dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
 		{
-			m_link_attr->m_dependent_attrs.removeOne(this);
-			emit m_link_attr->link_changed();
+			if ((*dep_attr)->pimpl == this)
+			{
+				dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+				m_link_attr->pimpl->_update_link_dependencies();
+				break;
+			}
 		}
 
 		m_link_attr = nullptr;
 		m_link_path = "";
 	}
 
-	emit_link_changed();
-	emit changed();
+	_update_link_dependencies();
+	_update_dependencies(parent);
 }
 
-void LAttribute::clear_overrides()
+void LAttributeImpl::_clear_theme_attribute()
 {
-	if (!m_overrides.isEmpty())
+	if (m_theme_attr)
 	{
-		for (LAttribute* override_attr : m_overrides)
-			delete override_attr;
-
-		m_overrides.clear();
+		m_theme_attr->disconnect_change(m_theme_connection);
+		m_theme_attr = nullptr;
 	}
 }
 
-void LAttribute::clear_theme_attribute()
+void LAttributeImpl::_create_override(
+	const LString& name, LAttribute* override_attr)
 {
-	m_theme_attr = nullptr;
-
-	disconnect(m_theme_connection);
+	m_overrides[name] = override_attr;
 }
 
-LAttributeList LAttribute::dependent_attributes(
+LAttributeList LAttributeImpl::_dependent_attributes(
 	bool include_indirect_dependencies) const
 {
 	LAttributeList dependent_attributes = m_dependent_attrs;
 
 	if (include_indirect_dependencies)
 		for (LAttribute* dependent_attr : m_dependent_attrs)
-			dependent_attributes.append(
+		{
+			LAttributeList attrs =
 				dependent_attr->dependent_attributes(
-					include_indirect_dependencies));
+					include_indirect_dependencies);
+
+			std::copy(attrs.begin(), attrs.end(),
+				std::back_inserter(dependent_attributes));
+		}
 
 	return dependent_attributes;
 }
 
-bool LAttribute::has_overrides() const
+void LAttributeImpl::_disconnect_change(LConnectionID connection)
 {
-	return !m_overrides.isEmpty();
+	m_change_connections.erase(connection);
 }
 
-QJsonObject& LAttribute::json_object()
+void LAttributeImpl::_disconnect_link_change(LConnectionID connection)
+{
+	m_link_change_connections.erase(connection);
+}
+
+bool LAttributeImpl::_has_overrides() const
+{
+	return !m_overrides.empty();
+}
+
+LJsonObject& LAttributeImpl::_json_object()
 {
 	return m_json_object;
 }
 
-LAttribute* LAttribute::link_attribute() const
+LAttribute* LAttributeImpl::_link_attribute() const
 {
 	return m_link_attr;
 }
 
-QString LAttribute::link_path() const
+LString LAttributeImpl::_link_path() const
 {
 	return m_link_path;
 }
 
-LAttribute* LAttribute::override_attribute(const QStringList& state_combo)
+LConnectionID LAttributeImpl::_on_change(std::function<void()> callback)
 {
-	for (LAttribute* override_attr : m_overrides)
+	m_change_connections[m_change_connections_next_id++] = callback;
+	return std::prev(m_change_connections.end())->first;
+}
+
+LConnectionID LAttributeImpl::_on_link_change(std::function<void()> callback)
+{
+	m_link_change_connections[m_link_change_connections_next_id++] = callback;
+	return std::prev(m_link_change_connections.end())->first;
+}
+
+LAttribute* LAttributeImpl::_override_attribute(
+	const std::vector<LString>& state_combo)
+{
+	for (const auto& [key, override_attr] : m_overrides)
 	{
-		QStringList override_states = override_attr->objectName().split(":");
+		auto override_states =
+			split<std::vector<LString>>(override_attr->object_name(), ':');
 
 		bool qualifies = true;
 
-		for (const QString& override_state : override_states)
-			if (!state_combo.contains(override_state))
+		for (const auto& override_state : override_states)
+		{
+			if (std::find(state_combo.begin(), state_combo.end(),
+				override_state) == state_combo.end())
+			{
 				qualifies = false;
+			}
+		}
 
 		if (qualifies)
 			return override_attr;
@@ -270,163 +250,177 @@ LAttribute* LAttribute::override_attribute(const QStringList& state_combo)
 	return nullptr;
 }
 
-LAttributeMap LAttribute::overrides() const
+LAttributeMap LAttributeImpl::_overrides() const
 {
 	return m_overrides;
 }
 
-QString LAttribute::path() const
+void LAttributeImpl::_set_link_attribute(LObject* parent, LAttribute* link_attr)
 {
-	if (parent())
-	{
-		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
-			return parent_attr->path() + "." + objectName();
-		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
-			return parent_themeable->path() + "/" + objectName();
-		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
-			return parent_theme_item->path() + "/" + objectName();
-	}
-
-	return objectName();
-}
-
-void LAttribute::set_link_attribute(LAttribute* link_attr)
-{
-	m_value = QVariant();
+	m_value = LVariant();
 
 	if (m_link_attr)
 	{
-		if (m_link_attr->m_dependent_attrs.contains(this))
-			m_link_attr->m_dependent_attrs.removeOne(this);
+		m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
+
+		for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+			dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
+		{
+			if ((*dep_attr)->pimpl == this)
+			{
+				dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+				break;
+			}
+		}
 
 		m_link_attr = nullptr;
 	}
 
 	m_link_attr = link_attr;
 
-	m_link_attr->m_dependent_attrs.append(this);
-	emit m_link_attr->link_changed();
+	m_link_destroyed_connection = m_link_attr->on_destroyed(
+		[this] {
+			m_link_attr = nullptr;
+		}
+	);
 
-	establish_link_connections();
-
-	emit_link_changed();
-	emit changed();
+	_update_link_dependencies();
+	_update_dependencies(parent);
 }
 
-void LAttribute::set_link_path(const QString& link_path)
+void LAttributeImpl::_set_link_path(const LString& link_path)
 {
 	m_link_path = link_path;
 
-	m_value = QVariant();
+	m_value = LVariant();
 }
 
-void LAttribute::set_theme_attribute(LAttribute* theme_attr)
+void LAttributeImpl::_set_theme_attribute(LObject* parent, LAttribute* theme_attr)
 {
 	m_theme_attr = theme_attr;
 
-	establish_theme_connection();
+	m_theme_connection = m_theme_attr->on_change(
+		[this, parent] {
+			_update_dependencies(parent);
+		}
+	);
 
-	emit changed();
+	_update_dependencies(parent);
 }
 
-void LAttribute::set_value(QVariant value)
+void LAttributeImpl::_set_value(LObject* parent, LVariant value)
 {
 	if (m_link_attr)
+	{
 		m_link_attr->set_value(value);
-	else if (m_value != value)
-		m_value = value;
+		_update_dependencies(parent);
+	}
+	else if (m_value.index() == value.index())
+	{
+		bool same_value = false;
 
-	emit changed();
+		switch (m_value.index())
+		{
+		case 0:
+			same_value = true;
+			break;
+		case 1:
+			if (std::get<double>(m_value) == std::get<double>(value))
+				same_value = true;
+			break;
+		case 2:
+			if (std::get<bool>(m_value) == std::get<bool>(value))
+				same_value = true;
+			break;
+		case 3:
+			if (std::get<LString>(m_value) == std::get<LString>(value))
+				same_value = true;
+			break;
+		case 4:
+			if (std::get<std::vector<LString>>(m_value) == std::get<std::vector<LString>>(value))
+				same_value = true;
+			break;
+		}
+
+		if (same_value)
+			return;
+	}
+
+	m_value = value;
+	_update_dependencies(parent);
 }
 
-QJsonObject LAttribute::to_json_object()
+LJsonObject LAttributeImpl::_to_json_object()
 {
-	QJsonObject json_object;
+	LJsonObject json_object;
 
-	if (!m_link_path.isEmpty())
+	if (!m_link_path.empty())
 	{
-		json_object.insert("linked_to", m_link_path);
+		json_object["linked_to"] = m_link_path;
 	}
-	else if (m_value.isValid())
+	else if (m_value.index() > 0)
 	{
-		json_object.insert("value", to_json_value());
+		json_object["value"] = _to_json_value();
 	}
 
-	if (has_overrides())
+	if (_has_overrides())
 	{
-		QJsonObject overrides_json_object;
+		LJsonObject overrides_json_object;
 
-		for (LAttribute* override_attr : m_overrides)
-			overrides_json_object.insert(
-				override_attr->objectName(), override_attr->to_json_object());
+		for (const auto& [key, override_attr] : m_overrides)
+			overrides_json_object[override_attr->object_name()] =
+			override_attr->to_json_object();
 
-		json_object.insert("overrides", overrides_json_object);
+		json_object["overrides"] = overrides_json_object;
 	}
 
 	return json_object;
 }
 
-QJsonValue LAttribute::to_json_value()
+LJsonValue LAttributeImpl::_to_json_value()
 {
-	QJsonValue json_value;
+	LJsonValue json_value;
 
-	if (typeName() == "bool")
-		json_value = QJsonValue(m_value.value<bool>());
+	if (const auto& bool_val = std::get_if<bool>(&m_value))
+		json_value = *bool_val;
 
-	else if (typeName() == "double")
-		json_value = QJsonValue(m_value.value<double>());
+	else if (const auto& double_val = std::get_if<double>(&m_value))
+		json_value = *double_val;
 
-	else if (typeName() == "QString")
-		json_value = QJsonValue(m_value.value<QString>());
+	else if (const auto& string_val = std::get_if<LString>(&m_value))
+		json_value = *string_val;
 
-	else if (typeName() == "QColor")
+	else if (const auto& gradient_stops_val =
+		std::get_if<std::vector<LString>>(&m_value))
 	{
-		QColor color = m_value.value<QColor>();
+		LJsonArray gradient;
 
-		if (color.alpha() == 255)
-			json_value = QJsonValue(color.name());
-		else
-			json_value = QJsonValue(color.name(QColor::HexArgb));
-	}
-	else if (typeName() == "QList<std::pair<double,QColor>>")
-	{
-		QJsonObject gradient_json_object;
-		QJsonArray gradient_json_array;
+		for (auto stop : *gradient_stops_val)
+			gradient.push_back(stop);
 
-		QGradientStops gradient_stops = m_value.value<QGradientStops>();
-
-		for (const QGradientStop& stop : gradient_stops)
-		{
-			QString stop_string =
-				QString::number(stop.first) + ":" + stop.second.name();
-
-			gradient_json_array.append(QJsonValue(stop_string));
-		}
-
-		gradient_json_object.insert("gradient", gradient_json_array);
-
-		json_value = gradient_json_object;
+		json_value = LJsonObject({ {"gradient", gradient } });
 	}
 
 	return json_value;
 }
 
-QString LAttribute::typeName(const QStringList& state_combo)
+size_t LAttributeImpl::_type_index() const
 {
 	if (m_theme_attr)
-		return m_theme_attr->typeName(state_combo);
+		return m_theme_attr->type_index();
 
-	if (!m_overrides.isEmpty() && !state_combo.isEmpty())
-		if (LAttribute* override_attr = override_attribute(state_combo))
-			return override_attr->typeName();
+	if (!m_overrides.empty())
+		return (*m_overrides.begin()).second->type_index();
 
 	if (m_link_attr)
-		return m_link_attr->typeName(state_combo);
+		return m_link_attr->type_index();
 
-	return m_value.typeName();
+	return m_value.index();
+
+	//return m_value.index();
 }
 
-QVariant LAttribute::value()
+LVariant LAttributeImpl::_value()
 {
 	if (m_link_attr)
 		return m_link_attr->value();
@@ -434,42 +428,281 @@ QVariant LAttribute::value()
 	return m_value;
 }
 
-void LAttribute::update_json_object()
+void LAttributeImpl::_update_dependencies(LObject* parent)
 {
-	if (!m_link_path.isEmpty())
+	for (auto& change_function : m_change_connections)
 	{
-		m_json_object.insert("linked_to", QJsonValue(m_link_path));
+		change_function.second();
 	}
-	else if (m_value.isValid())
+
+	if (!m_dependent_attrs.empty())
 	{
-		m_json_object.insert("value", to_json_value());
+		for (const auto& dependent_attr : m_dependent_attrs)
+		{
+			dependent_attr->update_dependencies();
+		}
+	}
+
+	if (parent)
+	{
+		if (LThemeable* t = dynamic_cast<LThemeable*>(parent))
+		{
+			t->update();
+		}
+		else if (LAttribute* a = dynamic_cast<LAttribute*>(parent))
+		{
+			a->update_dependencies();
+		}
 	}
 }
 
-void LAttribute::establish_link_connections()
+void LAttributeImpl::_update_link_dependencies()
 {
-	disconnect(m_link_connection);
-	disconnect(m_link_destroyed_connection);
+	for (auto& link_change_function : m_link_change_connections)
+	{
+		link_change_function.second();
+	}
 
-	m_link_connection = connect(m_link_attr, &LAttribute::changed,
-		[this] { emit changed(); });
-
-	m_link_destroyed_connection = connect(m_link_attr, &QObject::destroyed,
-		[this] { m_link_attr = nullptr; });
+	for (LAttribute* dependent_attr : _dependent_attributes(true))
+	{
+		dependent_attr->pimpl->_update_link_dependencies();
+	}
 }
 
-void LAttribute::establish_theme_connection()
+void LAttributeImpl::_update_json_object()
 {
-	disconnect(m_theme_connection);
-
-	m_theme_connection = connect(m_theme_attr, &LAttribute::changed,
-		[this] { emit changed(); });
+	if (!m_link_path.empty())
+	{
+		m_json_object["linked_to"] = m_link_path;
+	}
+	else if (m_value.index() > 0)
+	{
+		m_json_object["value"] = _to_json_value();
+	}
 }
 
-void LAttribute::emit_link_changed()
-{
-	emit link_changed();
+/* LAttribute */
 
-	for (LAttribute* dependent_attr : dependent_attributes(true))
-		emit dependent_attr->link_changed();
+LAttribute::LAttribute(
+	const LString& name, LObject* parent) :
+	pimpl{ new LAttributeImpl(name) }, LObject(parent)
+{
+	set_object_name(name);
+}
+
+LAttribute::LAttribute(
+	const LString& name, const char* value, LObject* parent) :
+	pimpl{ new LAttributeImpl(name, value) }, LObject(parent)
+{
+	set_object_name(name);
+}
+
+LAttribute::LAttribute(
+	const LString& name, const LVariant& value, LObject* parent) :
+	pimpl{ new LAttributeImpl(name, value) }, LObject(parent)
+{
+	set_object_name(name);
+}
+
+LAttribute::LAttribute(
+	const LString& name, LJsonObject json_object, LObject* parent) :
+	pimpl{ new LAttributeImpl(name, json_object) }, LObject(parent)
+{
+	set_object_name(name);
+
+	if (json_object.find("overrides") != json_object.end())
+	{
+		LJsonObject overrides = json_object["overrides"].to_object();
+
+		for (const auto& [key, override_val] : overrides)
+		{
+			LAttribute* override_attr =
+				new LAttribute(key, override_val.to_object(), this);
+
+			pimpl->m_overrides[key] = override_attr;
+		}
+	}
+}
+
+//LAttribute::LAttribute(const LAttribute& attribute) :
+//	m_link_path{ attribute.m_link_path },
+//	m_value{ attribute.m_value },
+//	LObject()
+//{
+//	set_object_name(attribute.object_name());
+//
+//	if (!attribute.m_overrides.empty())
+//		for (const auto& [key, override_attr] : attribute.m_overrides)
+//		{
+//			LAttribute* copy_override_attr = new LAttribute(*override_attr);
+//
+//			copy_override_attr->set_parent(this);
+//
+//			m_overrides[override_attr->object_name()] =
+//				copy_override_attr;
+//		}
+//}
+
+LAttribute::~LAttribute()
+{
+	delete pimpl;
+}
+
+void LAttribute::create_override(const LString& name, const char* value)
+{
+	create_override(name, LString(value));
+}
+
+void LAttribute::create_override(const LString& name, LVariant value)
+{
+	pimpl->_create_override(name, new LAttribute(name, value, this));
+}
+
+void LAttribute::break_link()
+{
+	pimpl->_break_link(parent());
+}
+
+void LAttribute::clear_overrides()
+{
+	if (!pimpl->m_overrides.empty())
+	{
+		for (const auto& [key, override_attr] : pimpl->m_overrides)
+		{
+			remove_child(override_attr);
+			delete override_attr;
+		}
+
+		pimpl->m_overrides.clear();
+	}
+}
+
+void LAttribute::clear_theme_attribute()
+{
+	pimpl->_clear_theme_attribute();
+}
+
+LAttributeList LAttribute::dependent_attributes(
+	bool include_indirect_dependencies) const
+{
+	return pimpl->_dependent_attributes(include_indirect_dependencies);
+}
+
+void LAttribute::disconnect_change(LConnectionID connection)
+{
+	pimpl->_disconnect_change(connection);
+}
+
+void LAttribute::disconnect_link_change(LConnectionID connection)
+{
+	pimpl->_disconnect_link_change(connection);
+}
+
+bool LAttribute::has_overrides() const
+{
+	return pimpl->_has_overrides();
+}
+
+LJsonObject& LAttribute::json_object()
+{
+	return pimpl->_json_object();
+}
+
+LAttribute* LAttribute::link_attribute() const
+{
+	return pimpl->_link_attribute();
+}
+
+LString LAttribute::link_path() const
+{
+	return pimpl->_link_path();
+}
+
+LConnectionID LAttribute::on_change(std::function<void()> callback)
+{
+	return pimpl->_on_change(callback);
+}
+
+LConnectionID LAttribute::on_link_change(std::function<void()> callback)
+{
+	return pimpl->_on_link_change(callback);
+}
+
+LAttribute* LAttribute::override_attribute(
+	const std::vector<LString>& state_combo)
+{
+	return pimpl->_override_attribute(state_combo);
+}
+
+LAttributeMap LAttribute::overrides() const
+{
+	return pimpl->_overrides();
+}
+
+LString LAttribute::path() const
+{
+	if (parent())
+	{
+		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
+			return parent_attr->path() + "." + object_name();
+		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
+			return parent_themeable->path() + "/" + object_name();
+		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
+			return parent_theme_item->path() + "/" + object_name();
+	}
+
+	return object_name();
+}
+
+void LAttribute::set_link_attribute(LAttribute* link_attr)
+{
+	pimpl->_set_link_attribute(parent(), link_attr);
+
+	link_attr->pimpl->m_dependent_attrs.push_back(this);
+	link_attr->pimpl->_update_link_dependencies();
+}
+
+void LAttribute::set_link_path(const LString& link_path)
+{
+	pimpl->_set_link_path(link_path);
+}
+
+void LAttribute::set_theme_attribute(LAttribute* theme_attr)
+{
+	pimpl->_set_theme_attribute(parent(), theme_attr);
+}
+
+void LAttribute::set_value(const char* value)
+{
+	set_value(LString(value));
+}
+
+void LAttribute::set_value(LVariant value)
+{
+	pimpl->_set_value(parent(), value);
+}
+
+LJsonObject LAttribute::to_json_object()
+{
+	return pimpl->_to_json_object();
+}
+
+LJsonValue LAttribute::to_json_value()
+{
+	return pimpl->_to_json_value();
+}
+
+size_t LAttribute::type_index() const
+{
+	return pimpl->_type_index();
+}
+
+LVariant LAttribute::value()
+{
+	return pimpl->_value();
+}
+
+void LAttribute::update_dependencies()
+{
+	pimpl->_update_dependencies(parent());
 }

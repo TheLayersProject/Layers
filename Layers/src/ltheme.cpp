@@ -19,378 +19,563 @@
 
 #include <Layers/ltheme.h>
 
-#include <QJsonArray>
-#include <QJsonObject>
+#include <fstream>
+
+#include <Layers/lalgorithms.h>
+#include <Layers/lgenerate.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeMap;
+using Layers::LString;
 using Layers::LTheme;
 using Layers::LThemeItem;
 
-LTheme::LTheme() {}
-
-LTheme::LTheme(QDir dir) :
-	m_dir{ dir }
+class LTheme::Impl
 {
-	QFile meta_file(dir.filePath("meta.json"));
+public:
+	Impl() {}
 
-	if (meta_file.exists())
+	Impl(const std::filesystem::path& path) :
+		m_path{ path }
 	{
-		if (!meta_file.open(QIODevice::ReadOnly))
-			qDebug() << "Could not read theme 'meta.json' file";
+		std::ifstream meta_file(m_path / "meta.json");
 
-		QJsonDocument meta_doc = QJsonDocument::fromJson(meta_file.readAll());
-		QJsonObject meta_obj = meta_doc.object();
+		if (meta_file.is_open())
+		{
+			std::stringstream buffer;
+			buffer << meta_file.rdbuf();
+			std::string meta_data = buffer.str();
+			meta_file.close();
 
-		meta_file.close();
+			meta_data = remove_whitespace(meta_data);
 
-		m_name = meta_obj.value("name").toString();
+			LJsonLexer meta_lexer = LJsonLexer(meta_data);
+			LJsonParser meta_parser = LJsonParser(meta_lexer);
+			LJsonObject meta_obj = meta_parser.parse_object();
 
-		if (meta_obj.contains("publisher"))
-			m_publisher = meta_obj.value("publisher").toString();
+			m_name = meta_obj["name"].to_string();
 
-		if (meta_obj.contains("uuid"))
-			m_uuid = QUuid(meta_obj.value("uuid").toString());
+			if (meta_obj.find("uuid") != meta_obj.end())
+				m_uuid = meta_obj["uuid"].to_string();
 
-		if (meta_obj.contains("editable"))
-			m_editable = meta_obj.value("editable").toBool();
+			if (meta_obj.find("publisher") != meta_obj.end())
+				m_publisher = meta_obj["publisher"].to_string();
 
-		for (QJsonValue lineage_value : meta_obj.value("lineage").toArray())
-			append_to_lineage(lineage_value.toString());
+			if (meta_obj.find("editable") != meta_obj.end())
+				m_editable = meta_obj["editable"].to_bool();
+
+			if (meta_obj.find("lineage") != meta_obj.end())
+				for (LJsonValue lineage_value : meta_obj["lineage"].to_array())
+					append_to_lineage(lineage_value.to_string());
+		}
+		else
+		{
+			std::cerr << "Could not read theme 'meta.json' file" << std::endl;
+		}
 	}
-}
 
-LTheme::LTheme(const QString& name, bool editable) :
-	m_name{ name },
-	m_editable{ editable },
-	m_uuid{ QUuid(QUuid::createUuid().toString()) }
-{
-}
+	Impl(const LString& name, bool editable = true) :
+		m_name{ name },
+		m_uuid{ generate_uuid() },
+		m_editable{ editable } {}
 
-LTheme::LTheme(const QString& name, QUuid uuid, bool editable) :
-	m_name{ name },
-	m_editable{ editable },
-	m_uuid{ uuid }
-{
-}
+	Impl(const LString& name, const LString& uuid, bool editable) :
+		m_name{ name },
+		m_uuid{ uuid },
+		m_editable{ editable } {}
+
+	~Impl()
+	{
+		delete m_root_item;
+	}
+
+	void append_to_lineage(const LString& theme_id)
+	{
+		m_lineage.push_back(theme_id);
+	}
+
+	void clear()
+	{
+		if (m_root_item)
+		{
+			delete m_root_item;
+			m_root_item = nullptr;
+		}
+
+		m_file_items.clear();
+	}
+
+	std::filesystem::path path() const
+	{
+		return m_path;
+	}
+
+	LString display_id() const
+	{
+		if (!m_publisher.empty())
+		{
+			return m_name + " (" + m_publisher + ")";
+		}
+		else if (!m_uuid.empty())
+		{
+			return m_name + " (" + m_uuid + ")";
+		}
+
+		return m_name;
+	}
+
+	bool editable() const
+	{
+		return m_editable;
+	}
+
+	LThemeItem* find_item(const LString& path)
+	{
+		return m_root_item->find_item(split<std::deque<LString>>(path, '/'));
+	}
+
+	LThemeItem* find_item(const std::deque<LString>& name_list)
+	{
+		return m_root_item->find_item(name_list);
+	}
+
+	bool has_implementation(const LString& app_display_id) const
+	{
+		std::filesystem::path dir_path = m_path / app_display_id.c_str();
+		return std::filesystem::exists(dir_path);
+	}
+
+	std::vector<LString> lineage() const
+	{
+		return m_lineage;
+	}
+
+	void load(const LString& app_display_id)
+	{
+		if (std::filesystem::exists(m_path))
+		{
+			clear();
+			m_root_item = new LThemeItem("", {}, false, "");
+
+			load_file((m_path / "app.json").string().c_str());
+
+			load_dir(m_path / "Layers");
+
+			std::filesystem::path implementation_dir = m_path / app_display_id.c_str();
+			if (std::filesystem::exists(implementation_dir))
+				load_dir(implementation_dir);
+
+			resolve_parents();
+			resolve_links(m_root_item);
+		}
+	}
+
+	LString name() const
+	{
+		return m_name;
+	}
+
+	LString publisher() const
+	{
+		return m_publisher;
+	}
+
+	LThemeItem* root_item() const
+	{
+		return m_root_item;
+	}
+
+	void save()
+	{
+		for (const auto& [file_name, file_items] : m_file_items)
+		{
+			LJsonObject object;
+
+			for (LThemeItem* theme_item : file_items)
+			{
+				object[theme_item->path()] = theme_item->to_json_object();
+			}
+
+			std::ofstream theme_file(file_name.c_str());
+			if (!theme_file.is_open())
+			{
+				std::cerr << "Could not write theme file: " << file_name << std::endl;
+				continue;
+			}
+
+			theme_file << LJsonValue(object).to_output();
+			theme_file.close();
+		}
+	}
+
+	void save_meta_file()
+	{
+		LJsonObject json_object;
+
+		LJsonArray lineage_array;
+
+		for (const auto& theme_id : m_lineage)
+		{
+			lineage_array.emplace_back(theme_id);
+		}
+
+		json_object["lineage"] = lineage_array;
+		json_object["name"] = m_name;
+		json_object["uuid"] = m_uuid;
+
+		if (!m_publisher.empty())
+		{
+			json_object["publisher"] = m_publisher;
+		}
+
+		LJsonValue json_value(json_object);
+
+		std::ofstream meta_file(m_path / "meta.json");
+
+		if (!meta_file.is_open())
+		{
+			std::cerr << "Could not create theme 'meta.json' file" << std::endl;
+			return;
+		}
+
+		meta_file << json_value.to_output();
+		meta_file.close();
+	}
+
+	void set_dir(const std::filesystem::path& path)
+	{
+		m_path = path;
+	}
+
+	void set_name(const LString& new_name)
+	{
+		m_name = new_name;
+	}
+
+	void set_publisher(const LString& publisher)
+	{
+		m_publisher = publisher;
+	}
+
+	LString uuid() const
+	{
+		return m_uuid;
+	}
+
+	// Previously Private
+
+	void load_file(const LString& file_name)
+	{
+		std::ifstream file(file_name.c_str(), std::ios::in);
+		if (!file.is_open())
+		{
+			std::cerr << __FUNCTION__ << ": Could not read file: " << file_name << std::endl;
+			return;
+		}
+
+		std::stringstream buffer;
+		buffer << file.rdbuf();
+		std::string data = buffer.str();
+		file.close();
+
+		data = remove_whitespace(data);
+
+		LJsonLexer lexer = LJsonLexer(data);
+		LJsonParser parser = LJsonParser(lexer);
+		LJsonObject object = parser.parse_object();
+
+		for (const auto& [key, object_val] : object)
+		{
+			if (std::string(key.c_str()).find("/") != std::string::npos)
+			{
+				LThemeItem* new_item = init_item(
+					key, object_val.to_object(), file_name);
+
+				m_file_items[file_name].push_back(new_item);
+
+				m_unparented_theme_items[key] = new_item;
+			}
+			else
+			{
+				LThemeItem* new_item = init_item(
+					key, object_val.to_object(), file_name,
+					m_root_item);
+
+				m_file_items[file_name].push_back(new_item);
+
+				m_root_item->append_child(new_item);
+			}
+		}
+	}
+
+	void load_dir(const std::filesystem::path& path)
+	{
+		for (const auto& entry : std::filesystem::directory_iterator(path))
+		{
+			if (entry.is_regular_file())
+			{
+				load_file(entry.path().string().c_str());
+			}
+			else if (entry.is_directory())
+			{
+				load_dir(entry.path());
+			}
+		}
+	}
+
+	LThemeItem* init_item(const LString& name,
+		LJsonObject item_object, const LString& file_name,
+		LThemeItem* parent = nullptr)
+	{
+		LAttributeMap attributes;
+
+		if (item_object.find("attributes") != item_object.end())
+		{
+			LJsonObject attrs = item_object["attributes"].to_object();
+
+			for (const auto& [key, attr] : attrs)
+				attributes[key] = new LAttribute(
+					key, attrs[key].to_object());
+		}
+
+		bool is_overridable = false;
+
+		if (item_object.find("is_overridable") != item_object.end() &&
+			item_object["is_overridable"].to_bool())
+			is_overridable = true;
+
+		LThemeItem* item = new LThemeItem(
+			name, attributes, is_overridable, file_name, parent);
+
+		if (item_object.find("children") != item_object.end())
+		{
+			LJsonObject children = item_object["children"].to_object();
+
+			for (const auto& [key, attr] : children)
+				item->append_child(
+					init_item(key,
+						children[key].to_object(), file_name, item));
+		}
+
+		return item;
+	}
+
+	void resolve_links(LThemeItem* item)
+	{
+		auto resolve = [this](LAttribute* attr)
+		{
+			if (!attr->link_path().empty())
+			{
+				auto name_list =
+					split<std::deque<LString>>(attr->link_path(), '/');
+				LString attr_name = name_list.back();
+				name_list.pop_back();
+
+				if (LThemeItem* item = m_root_item->find_item(name_list))
+				{
+					for (const auto& [key, item_attr] : item->attributes())
+					{
+						if (item_attr->object_name() == attr_name)
+						{
+							attr->set_link_attribute(item_attr);
+							return;
+						}
+						else
+						{
+							for (const auto& [override_key, override_attr] :
+								item_attr->overrides())
+							{
+								if (item_attr->object_name() + "." +
+									override_attr->object_name() == attr_name)
+								{
+									attr->set_link_attribute(override_attr);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		};
+
+		for (const auto& [key, attr] : item->attributes())
+		{
+			resolve(attr);
+
+			for (const auto& [override_key, override_attr] : attr->overrides())
+				resolve(override_attr);
+		}
+
+		for (const auto& [key, child_item] : item->children())
+		{
+			resolve_links(child_item);
+		}
+	}
+
+	void resolve_parents()
+	{
+		for (const auto& [key, unparented_theme_item] : m_unparented_theme_items)
+		{
+			LString unparented_theme_item_name =
+				unparented_theme_item->object_name();
+
+			auto name_list = split<std::deque<LString>>(
+				unparented_theme_item->object_name(), '/');
+			LString new_name = name_list.back();
+			name_list.pop_back();
+
+			if (LThemeItem* parent_item = m_root_item->find_item(name_list))
+			{
+				unparented_theme_item->set_object_name(new_name);
+				unparented_theme_item->set_parent(parent_item);
+				parent_item->append_child(unparented_theme_item);
+			}
+		}
+
+		m_unparented_theme_items.clear();
+	}
+
+	LThemeItem* m_root_item{ nullptr };
+
+	std::map<LString, LThemeItem*> m_unparented_theme_items;
+
+	std::map<LString, std::vector<LThemeItem*>> m_file_items;
+
+	std::filesystem::path m_path;
+
+	bool m_editable{ true };
+
+	std::vector<LString> m_lineage;
+
+	LString m_name;
+	LString m_publisher;
+	LString m_uuid;
+};
+
+LTheme::LTheme() :
+	pimpl{ new Impl() } {}
+
+LTheme::LTheme(const std::filesystem::path& path) :
+	pimpl{ new Impl(path) } {}
+
+LTheme::LTheme(const LString& name, bool editable) :
+	pimpl{ new Impl(name, editable) } {}
+
+LTheme::LTheme(const LString& name, const LString& uuid, bool editable) :
+	pimpl{ new Impl(name, uuid, editable) } {}
 
 LTheme::~LTheme()
 {
-	delete m_root_item;
+	delete pimpl;
 }
 
-void LTheme::append_to_lineage(const QString& theme_id)
+void LTheme::append_to_lineage(const LString& theme_id)
 {
-	m_lineage.append(theme_id);
+	pimpl->append_to_lineage(theme_id);
 }
 
 void LTheme::clear()
 {
-	if (m_root_item)
-	{
-		delete m_root_item;
-		m_root_item = nullptr;
-	}
-
-	m_file_items.clear();
+	pimpl->clear();
 }
 
-QDir LTheme::dir() const
+std::filesystem::path LTheme::path() const
 {
-	return m_dir;
+	return pimpl->path();
 }
 
-QString LTheme::display_id() const
+LString LTheme::display_id() const
 {
-	if (!m_uuid.isNull())
-		return m_name + " (" + m_uuid.toString(QUuid::WithoutBraces) + ")";
-	else
-		return m_name;
+	return pimpl->display_id();
 }
 
 bool LTheme::editable() const
 {
-	return m_editable;
+	return pimpl->editable();
 }
 
-LThemeItem* LTheme::find_item(const QString& path)
+LThemeItem* LTheme::find_item(const LString& path)
 {
-	return m_root_item->find_item(path.split("/"));
+	return pimpl->find_item(path);
 }
 
-LThemeItem* LTheme::find_item(const QStringList& name_list)
+LThemeItem* LTheme::find_item(const std::deque<LString>& name_list)
 {
-	return m_root_item->find_item(name_list);
+	return pimpl->find_item(name_list);
 }
 
-bool LTheme::has_implementation(const QString& app_display_id) const
+bool LTheme::has_implementation(const LString& app_display_id) const
 {
-	return QDir(m_dir.filePath(app_display_id)).exists();
+	return pimpl->has_implementation(app_display_id);
 }
 
-QStringList LTheme::lineage() const
+std::vector<LString> LTheme::lineage() const
 {
-	return m_lineage;
+	return pimpl->lineage();
 }
 
-void LTheme::load(const QString& app_display_id)
+void LTheme::load(const LString& app_display_id)
 {
-	if (m_dir.exists())
-	{
-		clear();
-		m_root_item = new LThemeItem("", {}, false, "");
-
-		QFile app_file = QFile(m_dir.filePath("app.json"));
-		QDir implementation_dir = QDir(m_dir.filePath(app_display_id));
-
-		load_file(app_file);
-		load_dir(QDir(m_dir.filePath("Layers")));
-
-		if (implementation_dir.exists())
-			load_dir(implementation_dir);
-
-		resolve_parents();
-		resolve_links(m_root_item);
-	}
+	pimpl->load(app_display_id);
 }
 
-QString LTheme::name() const
+LString LTheme::name() const
 {
-	return m_name;
+	return pimpl->name();
 }
 
-QString LTheme::publisher() const
+LString LTheme::publisher() const
 {
-	return m_publisher;
+	return pimpl->publisher();
 }
 
-void LTheme::set_name(const QString& new_name)
+void LTheme::set_name(const LString& new_name)
 {
-	m_name = new_name;
+	pimpl->set_name(new_name);
+}
+
+void LTheme::set_publisher(const LString& publisher)
+{
+	pimpl->set_publisher(publisher);
 }
 
 void LTheme::save_meta_file()
 {
-	QJsonDocument json_document;
-
-	QJsonObject json_object;
-
-	QJsonArray lineage_array;
-
-	for (const QString& theme_id : m_lineage)
-		lineage_array.append(theme_id);
-
-	json_object.insert("lineage", lineage_array);
-	json_object.insert("name", m_name);
-	json_object.insert("uuid", m_uuid.toString(QUuid::WithoutBraces));
-
-	json_document.setObject(json_object);
-
-	QFile meta_file(m_dir.filePath("meta.json"));
-
-	if (!meta_file.open(QIODevice::WriteOnly))
-	{
-		qDebug() << "Could not create theme 'meta.json' file";
-		return;
-	}
-
-	meta_file.write(json_document.toJson());
-	meta_file.close();
+	pimpl->save_meta_file();
 }
 
-void LTheme::set_dir(QDir dir)
+void LTheme::set_dir(const std::filesystem::path& path)
 {
-	m_dir = dir;
-}
-
-void LTheme::resolve_links(LThemeItem* item)
-{
-	auto resolve = [this](LAttribute* attr)
-	{
-		if (!attr->link_path().isEmpty())
-		{
-			QStringList name_list = attr->link_path().split("/");
-			QString attr_name = name_list.takeLast();
-
-			if (LThemeItem* item = m_root_item->find_item(name_list))
-			{
-				for (LAttribute* item_attr : item->attributes())
-				{
-					if (item_attr->objectName() == attr_name)
-					{
-						attr->set_link_attribute(item_attr);
-						return;
-					}
-					else
-					{
-						for (LAttribute* override_attr : item_attr->overrides())
-							if (item_attr->objectName() + "." + override_attr->objectName() == attr_name)
-							{
-								attr->set_link_attribute(override_attr);
-								return;
-							}
-					}
-				}
-			}
-		}
-	};
-
-	for (LAttribute* attr : item->attributes())
-	{
-		resolve(attr);
-
-		for (LAttribute* override_attr : attr->overrides())
-			resolve(override_attr);
-	}
-
-	for (LThemeItem* child_item : item->children())
-		resolve_links(child_item);
-}
-
-void LTheme::resolve_parents()
-{
-	for (LThemeItem* unparented_theme_item : m_unparented_theme_items)
-	{
-		QString unparented_theme_item_name = unparented_theme_item->objectName();
-
-		QStringList name_list = unparented_theme_item->objectName().split("/");
-		QString new_name = name_list.takeLast();
-
-		if (LThemeItem* parent_item = m_root_item->find_item(name_list))
-		{
-			unparented_theme_item->setObjectName(new_name);
-			unparented_theme_item->setParent(parent_item);
-			parent_item->append_child(unparented_theme_item);
-		}
-	}
-
-	m_unparented_theme_items.clear();
+	pimpl->set_dir(path);
 }
 
 LThemeItem* LTheme::root_item() const
 {
-	return m_root_item;
+	return pimpl->root_item();
 }
 
 void LTheme::save()
 {
-	for (const QString& file_name : m_file_items.keys())
-	{
-		QJsonObject object = QJsonObject();
-
-		for (LThemeItem* theme_item : m_file_items[file_name])
-			object.insert(theme_item->path(), theme_item->to_json_object());
-
-		QJsonDocument document = QJsonDocument();
-
-		document.setObject(object);
-
-		QFile theme_file(file_name);
-
-		if (!theme_file.open(QIODevice::WriteOnly))
-		{
-			qDebug() << "Could not write theme file: " << file_name;
-			return;
-		}
-
-		theme_file.write(document.toJson(QJsonDocument::Indented));
-		theme_file.close();
-	}
+	pimpl->save();
 }
 
-QUuid LTheme::uuid() const
+LString LTheme::uuid() const
 {
-	return m_uuid;
+	return pimpl->uuid();
 }
 
-void LTheme::load_file(QFile& file)
-{
-	QString file_name = file.fileName();
-
-	if (!file.open(QIODevice::ReadOnly))
-	{
-		qDebug() << __FUNCTION__ << ":"
-			<< " Could not read file:" << file_name;
-		return;
-	}
-
-	QJsonDocument document = QJsonDocument::fromJson(file.readAll());
-	file.close();
-
-	QJsonObject object = document.object();
-
-	for (const QString& name : object.keys())
-	{
-		if (name.contains("/"))
-		{
-			LThemeItem* new_item = init_item(
-				name, object.value(name).toObject(), file_name);
-
-			m_file_items[file_name].append(new_item);
-
-			m_unparented_theme_items[name] = new_item;
-		}
-		else
-		{
-			LThemeItem* new_item = init_item(
-				name, object.value(name).toObject(), file_name,
-				m_root_item);
-
-			m_file_items[file_name].append(new_item);
-
-			m_root_item->append_child(new_item);
-		}
-	}
-}
-
-void LTheme::load_dir(const QDir& dir)
-{
-	for (const QString& file_name :
-		dir.entryList(QDir::Files | QDir::NoDotAndDotDot))
-	{
-		QFile file = QFile(dir.filePath(file_name));
-		load_file(file);
-	}
-
-	for (const QString& dir_name :
-		dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
-	{
-		load_dir(QDir(dir.filePath(dir_name)));
-	}
-}
-
-LThemeItem* LTheme::init_item(const QString& name,
-	QJsonObject item_object, const QString& file_name, LThemeItem* parent)
-{
-	LAttributeMap attributes;
-
-	if (item_object.contains("attributes"))
-	{
-		QJsonObject attrs_object = item_object.value("attributes").toObject();
-		
-		for (const QString& key : attrs_object.keys())
-			attributes[key] = new LAttribute(
-				key, attrs_object.value(key).toObject());
-	}
-
-	bool is_overridable = false;
-
-	if (item_object.contains("is_overridable") &&
-		item_object.value("is_overridable").toBool())
-		is_overridable = true;
-
-	LThemeItem* item =
-		new LThemeItem(name, attributes, is_overridable, file_name, parent);
-
-	if (item_object.contains("children"))
-	{
-		QJsonObject children_object = item_object.value("children").toObject();
-
-		for (const QString& key : children_object.keys())
-			item->append_child(
-				init_item(key,
-					children_object.value(key).toObject(), file_name, item));
-	}
-
-	return item;
-}
+//void LTheme::load_file(const LString& file_name)
+//{
+//	
+//}
+//
+//void LTheme::load_dir(const std::filesystem::path& path)
+//{
+//	
+//}
+//
+//LThemeItem* LTheme::init_item(const std::string& name,
+//	LJsonObject item_object, const std::string& file_name, LThemeItem* parent)
+//{
+//	
+//}

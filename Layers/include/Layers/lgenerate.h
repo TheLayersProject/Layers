@@ -17,31 +17,40 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LAYERS_EXPORTS_H
-#define LAYERS_EXPORTS_H
+#ifndef LGENERATE_H
+#define LGENERATE_H
 
- // Platform-specific checks
-#if defined(_WIN32) || defined(_WIN64)
-	#define LAYERS_WINDOWS
-#endif
+#include <random>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
-// Dynamic linkage handling
-#ifndef BUILD_STATIC
-	#ifdef LAYERS_WINDOWS
-		#ifdef LAYERS_LIB
-			#define LAYERS_EXPORT __declspec(dllexport)
-		#else
-			#define LAYERS_EXPORT __declspec(dllimport)
-		#endif
-	#else
-		#ifdef LAYERS_LIB
-			#define LAYERS_EXPORT __attribute__((visibility("default")))
-		#else
-			#define LAYERS_EXPORT
-		#endif
-	#endif
-#else
-	#define LAYERS_EXPORT
-#endif
+#include "layers_global.h"
+#include "layers_exports.h"
 
-#endif // LAYERS_EXPORTS_H
+#include "lstring.h"
+
+LAYERS_NAMESPACE_BEGIN
+
+LAYERS_EXPORT inline LString generate_uuid()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 255);
+
+    std::stringstream ss;
+    ss << std::hex << std::setfill('0');
+
+    for (int i = 0; i < 16; ++i) {
+        ss << std::setw(2) << dis(gen);
+        if (i == 3 || i == 5 || i == 7 || i == 9) {
+            ss << "-";
+        }
+    }
+
+    return ss.str().c_str();
+}
+
+LAYERS_NAMESPACE_END
+
+#endif // !LGENERATE_H

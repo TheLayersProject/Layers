@@ -17,31 +17,33 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LAYERS_EXPORTS_H
-#define LAYERS_EXPORTS_H
+#include <Layers/lconnections.h>
 
- // Platform-specific checks
-#if defined(_WIN32) || defined(_WIN64)
-	#define LAYERS_WINDOWS
-#endif
+using Layers::LConnectionID;
 
-// Dynamic linkage handling
-#ifndef BUILD_STATIC
-	#ifdef LAYERS_WINDOWS
-		#ifdef LAYERS_LIB
-			#define LAYERS_EXPORT __declspec(dllexport)
-		#else
-			#define LAYERS_EXPORT __declspec(dllimport)
-		#endif
-	#else
-		#ifdef LAYERS_LIB
-			#define LAYERS_EXPORT __attribute__((visibility("default")))
-		#else
-			#define LAYERS_EXPORT
-		#endif
-	#endif
-#else
-	#define LAYERS_EXPORT
-#endif
+LConnectionID::LConnectionID() :
+	m_value{ 0 } {}
 
-#endif // LAYERS_EXPORTS_H
+LConnectionID::LConnectionID(int value) :
+	m_value{ value } {}
+
+LConnectionID::LConnectionID(const LConnectionID& other) :
+	m_value(other.m_value) {}
+
+LConnectionID& LConnectionID::operator=(const LConnectionID& other)
+{
+	m_value = other.m_value;
+	return *this;
+}
+
+bool LConnectionID::operator<(const LConnectionID& other) const
+{
+	return m_value < other.m_value;
+}
+
+LConnectionID LConnectionID::operator++(int)
+{
+	LConnectionID temp(*this);
+	m_value++;
+	return temp;
+}

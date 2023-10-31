@@ -21,6 +21,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <sstream>
 #include <stdexcept>
 
 using Layers::LJsonArray;
@@ -58,10 +59,15 @@ LJsonToken LJsonLexer::get_next_token()
 
 LJsonToken LJsonLexer::_build_token(std::string value)
 {
+	/*
+		Start with an invalid token. If no other token type is determined from
+		the *value*, then the invalid token is returned.
+	*/
 	LJsonToken token;
 
-	/* Determine Token Type */
-
+	/*
+		Determine token type
+	*/
 	if (value == "{")
 	{
 		token.type = LJsonTokenType::LBRACE;
@@ -105,29 +111,31 @@ LJsonToken LJsonLexer::_build_token(std::string value)
 			remain as 'INVALID' so that the next digit is included as part of
 			the entire number.
 		*/
-		if (m_pos < m_input.size() &&
-			!std::isdigit(m_input[m_pos]))
+		if (m_pos < m_input.size() && !std::isdigit(m_input[m_pos]))
 		{
 			token.type = LJsonTokenType::NUMBER;
 		}
 	}
 	else if (value == "true")
 	{
-		token.type = LJsonTokenType::TRUE;
+		token.type = LJsonTokenType::T;
 	}
 	else if (value == "false")
 	{
-		token.type = LJsonTokenType::FALSE;
+		token.type = LJsonTokenType::F;
 	}
 	else if (value == "null")
 	{
 		token.type = LJsonTokenType::NONE;
 	}
 
-	/* Set Token Value */
-
+	/*
+		Set token value
+	*/
 	if (token.type != LJsonTokenType::INVALID)
+	{
 		token.value = value;
+	}
 
 	return token;
 }
@@ -167,9 +175,11 @@ LJsonObject LJsonParser::parse_pair_list()
 
 		match(LJsonTokenType::STRING);
 
+		LString lstring_key = key.substr(1, key.length() - 2).c_str();
+
 		match(LJsonTokenType::COLON);
 
-		object.insert({ key, parse_value() });
+		object.insert({ lstring_key, parse_value() });
 
 		if (m_current_token.type == LJsonTokenType::COMMA)
 			next_token();
@@ -185,17 +195,30 @@ LJsonValue LJsonParser::parse_value()
 	if (m_current_token.type == LJsonTokenType::STRING)
 	{
 		next_token();
-		return LJsonValue(value_token.value);
+
+		return LJsonValue(
+			value_token.value.substr(
+				1, value_token.value.length() - 2).c_str());
 	}
 	else if (m_current_token.type == LJsonTokenType::NUMBER)
 	{
 		next_token();
-		return LJsonValue(std::stoi(value_token.value));
+		return LJsonValue(std::stod(value_token.value));
 	}
 	else if (m_current_token.type == LJsonTokenType::LBRACE)
 		return LJsonValue(parse_object());
 	else if (m_current_token.type == LJsonTokenType::LBRACKET)
 		return LJsonValue(parse_array());
+	else if (m_current_token.type == LJsonTokenType::T)
+	{
+		next_token();
+		return LJsonValue(true);
+	}
+	else if (m_current_token.type == LJsonTokenType::F)
+	{
+		next_token();
+		return LJsonValue(false);
+	}
 
 	return LJsonValue();
 }
@@ -235,17 +258,3 @@ void LJsonParser::next_token()
 {
 	m_current_token = m_lexer.get_next_token();
 }
-
-LJsonValue::LJsonValue() {}
-
-LJsonValue::LJsonValue(std::string value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(int value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(LJsonObject value) :
-	m_variant{ value } {}
-
-LJsonValue::LJsonValue(LJsonArray value) :
-	m_variant{ value } {}

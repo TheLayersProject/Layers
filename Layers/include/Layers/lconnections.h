@@ -17,60 +17,40 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LTHEMEITEM_H
-#define LTHEMEITEM_H
+#ifndef LCONNECTIONS_H
+#define LCONNECTIONS_H
 
-#include <deque>
+#include <functional>
+#include <map>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattribute.h"
-#include "lstring.h"
-#include "lobject.h"
+//#include "lfunction.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LThemeItem : public LObject
+
+class LAYERS_EXPORT LConnectionID
 {
 public:
-	LThemeItem(
-		const LString& name,
-		const LAttributeMap& attributes,
-		bool is_overridable,
-		const LString& file_name,
-		LThemeItem* parent = nullptr);
+	LConnectionID();
 
-	~LThemeItem();
+	LConnectionID(int value);
 
-	void append_child(LThemeItem* child);
+	LConnectionID(const LConnectionID& other);
 
-	std::vector<LString> attribute_group_names() const;
+	LConnectionID& operator=(const LConnectionID& other);
 
-	LAttributeMap attributes(int type_index = -1);
+	bool operator<(const LConnectionID& other) const;
 
-	LThemeItem* child(int index) const;
-
-	size_t child_count() const;
-
-	std::map<LString, LThemeItem*>& children();
-
-	LThemeItem* find_item(const LString& path);
-
-	LThemeItem* find_item(std::deque<LString> name_list);
-
-	int index() const;
-
-	bool is_overridable() const;
-
-	LString path() const;
-
-	LJsonObject to_json_object() const;
+	LConnectionID operator++(int);
 
 private:
-	class Impl;
-	Impl* pimpl;
+	int m_value;
 };
+
+using LConnections = std::map<LConnectionID, std::function<void()>>;
 
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEITEM_H
+#endif // LCONNECTIONS_H
