@@ -2,11 +2,11 @@
 
 <img src="https://github.com/TheLayersProject/Layers/blob/main/images/layers_logo.svg?raw=true" alt="Layers Logo Image"/>
 
-Layers is a C++ library that provides a framework for user-customizable application themes. *Let users decide* how your applications should look.
+Layers is a C++ library that provides a framework for user-customizable application themes. Layers is built with the philosophy that users should have a say in how their applications look. It offers both developers and users more control over application aesthetics. 
 
 ## Theme Framework
 
-The Layers theme framework offers a flexible and efficient system for customizing the look and behavior of applications. Developers who integrate Layers into their applications are encouraged to pass this flexibility down to their users.
+Layers introduces a theme framework that combines flexibility with efficiency. It's a practical solution for developers looking to offer customizable themes in their applications, and for users eager to personalize their app experience. 
 
 ### Structured Theme Storage
 
@@ -16,7 +16,7 @@ The Layers theme framework offers a flexible and efficient system for customizin
 
 ### Customization Across Multiple Apps
 
--   **Generalized Customization:** Every theme includes a general implementation set for universal customization.
+-   **Generalized Customization:** Includes a general implementation set that allows for broad customization across different applications. 
 -   **App-Specific Customization:** Implementation sets can be defined for specific applications, allowing for highly targeted customization.
 
 ### Versatile Attributes
