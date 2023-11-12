@@ -35,8 +35,8 @@ class LTheme::Impl
 public:
 	Impl() {}
 
-	Impl(const std::filesystem::path& path) :
-		m_path{ path }
+	Impl(const std::filesystem::path& directory) :
+		m_path{ directory }
 	{
 		std::ifstream meta_file(m_path / "meta.json");
 
@@ -105,7 +105,7 @@ public:
 		m_file_items.clear();
 	}
 
-	std::filesystem::path path() const
+	std::filesystem::path directory() const
 	{
 		return m_path;
 	}
@@ -242,9 +242,9 @@ public:
 		meta_file.close();
 	}
 
-	void set_dir(const std::filesystem::path& path)
+	void set_dir(const std::filesystem::path& directory)
 	{
-		m_path = path;
+		m_path = directory;
 	}
 
 	void set_name(const LString& new_name)
@@ -308,9 +308,9 @@ public:
 		}
 	}
 
-	void load_dir(const std::filesystem::path& path)
+	void load_dir(const std::filesystem::path& directory)
 	{
-		for (const auto& entry : std::filesystem::directory_iterator(path))
+		for (const auto& entry : std::filesystem::directory_iterator(directory))
 		{
 			if (entry.is_regular_file())
 			{
@@ -455,8 +455,8 @@ public:
 LTheme::LTheme() :
 	pimpl{ new Impl() } {}
 
-LTheme::LTheme(const std::filesystem::path& path) :
-	pimpl{ new Impl(path) } {}
+LTheme::LTheme(const std::filesystem::path& directory) :
+	pimpl{ new Impl(directory) } {}
 
 LTheme::LTheme(const LString& name, bool editable) :
 	pimpl{ new Impl(name, editable) } {}
@@ -479,9 +479,9 @@ void LTheme::clear()
 	pimpl->clear();
 }
 
-std::filesystem::path LTheme::path() const
+std::filesystem::path LTheme::directory() const
 {
-	return pimpl->path();
+	return pimpl->directory();
 }
 
 LString LTheme::display_id() const
@@ -544,9 +544,9 @@ void LTheme::save_meta_file()
 	pimpl->save_meta_file();
 }
 
-void LTheme::set_dir(const std::filesystem::path& path)
+void LTheme::set_dir(const std::filesystem::path& directory)
 {
-	pimpl->set_dir(path);
+	pimpl->set_dir(directory);
 }
 
 LThemeItem* LTheme::root_item() const
@@ -569,7 +569,7 @@ LString LTheme::uuid() const
 //	
 //}
 //
-//void LTheme::load_dir(const std::filesystem::path& path)
+//void LTheme::load_dir(const std::filesystem::path& directory)
 //{
 //	
 //}

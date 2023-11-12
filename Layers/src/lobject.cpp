@@ -20,78 +20,80 @@
 #include <Layers/lobject.h>
 
 using Layers::LConnectionID;
+using Layers::LConnections;
 using Layers::LObject;
-using Layers::LObjectImpl;
 using Layers::LString;
 
-//LObjectImpl::LObjectImpl(LObject* parent)
-//{
-//	set_parent(parent);
-//}
-
-LObjectImpl::~LObjectImpl()
+class LObject::Impl
 {
-	for (auto& destroyed_connection : m_destroyed_connections)
+public:
+	~Impl()
 	{
-		destroyed_connection.second();
+		for (auto& destroyed_connection : m_destroyed_connections)
+		{
+			destroyed_connection.second();
+		}
+
+		for (LObject* child : std::vector<LObject*>(m_children))
+		{
+			delete child;
+		}
 	}
 
-	for (LObject* child : std::vector<LObject*>(m_children))
+	void add_child(LObject* child)
 	{
-		delete child;
+		m_children.push_back(child);
 	}
-}
 
-void LObjectImpl::add_child(LObject* child)
-{
-	m_children.push_back(child);
-}
+	std::vector<LObject*>& children()
+	{
+		return m_children;
+	}
 
-std::vector<LObject*>& LObjectImpl::children()
-{
-	return m_children;
-}
+	void disconnect_destroyed(const LConnectionID& connection)
+	{
+		m_destroyed_connections.erase(connection);
+	}
 
-void LObjectImpl::disconnect_destroyed(LConnectionID connection)
-{
-	m_destroyed_connections.erase(connection);
-}
+	LString object_name() const
+	{
+		return m_object_name;
+	}
 
-LString LObjectImpl::object_name() const
-{
-	return m_object_name;
-}
+	LConnectionID on_destroyed(std::function<void()> callback)
+	{
+		m_destroyed_connections[m_destroyed_connections_next_id++] = callback;
+		return std::prev(m_destroyed_connections.end())->first;
+	}
 
-LConnectionID LObjectImpl::on_destroyed(std::function<void()> callback)
-{
-	m_destroyed_connections[m_destroyed_connections_next_id++] = callback;
-	return std::prev(m_destroyed_connections.end())->first;
-}
+	LObject* parent() const
+	{
+		return m_parent;
+	}
 
-LObject* LObjectImpl::parent() const
-{
-	return m_parent;
-}
+	void remove_child(LObject* child)
+	{
+		m_children.erase(
+			std::remove(m_children.begin(), m_children.end(), child),
+			m_children.end());
+	}
 
-void LObjectImpl::remove_child(LObject* child)
-{
-	m_children.erase(
-		std::remove(m_children.begin(), m_children.end(), child),
-		m_children.end());
-}
+	void set_object_name(const LString& object_name)
+	{
+		m_object_name = object_name;
+	}
 
-void LObjectImpl::set_object_name(const LString& object_name)
-{
-	m_object_name = object_name;
-}
+	LString m_object_name;
 
-//void LObjectImpl::set_parent(LObject* parent)
-//{
-//	m_parent = parent;
-//}
+	LObject* m_parent{ nullptr };
+	std::vector<LObject*> m_children;
+
+	LConnections m_destroyed_connections;
+	LConnectionID m_destroyed_connections_next_id;
+};
 
 LObject::LObject(LObject* parent) :
-	pimpl{ new LObjectImpl() }
+	pimpl{ new Impl() }
 {
 	set_parent(parent);
 }
@@ -116,7 +118,7 @@ std::vector<LObject*>& LObject::children()
 	return pimpl->children();
 }
 
-void LObject::disconnect_destroyed(LConnectionID connection)
+void LObject::disconnect_destroyed(const LConnectionID& connection)
 {
 	pimpl->disconnect_destroyed(connection);
 }

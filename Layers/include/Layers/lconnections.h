@@ -26,8 +26,6 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-//#include "lfunction.h"
-
 LAYERS_NAMESPACE_BEGIN
 
 class LAYERS_EXPORT LConnectionID

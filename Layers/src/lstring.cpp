@@ -20,25 +20,56 @@
 #include <Layers/lstring.h>
 
 using Layers::LString;
-using Layers::LStringImpl;
 
-/* LStringImpl */
+class LString::Impl
+{
+public:
+	Impl() {}
 
-LStringImpl::LStringImpl() {}
+	Impl(const char* string) :
+		m_string{ string } {}
 
-LStringImpl::LStringImpl(const char* string) :
-	m_string{ string } {}
+	inline const char* c_str() const noexcept
+	{
+		return m_string.c_str();
+	}
 
-/* LString */
+	inline bool empty() const
+	{
+		return m_string.empty();
+	}
+
+	inline std::string::iterator begin()
+	{
+		return m_string.begin();
+	}
+
+	inline std::string::const_iterator begin() const
+	{
+		return m_string.begin();
+	}
+
+	inline std::string::iterator end()
+	{
+		return m_string.end();
+	}
+
+	inline std::string::const_iterator end() const
+	{
+		return m_string.end();
+	}
+
+	std::string m_string;
+};
 
 LString::LString() :
-	pimpl{ new LStringImpl() } {}
+	pimpl{ new Impl() } {}
 
 LString::LString(const char* string) :
-	pimpl{ new LStringImpl(string) } {}
+	pimpl{ new Impl(string) } {}
 
 LString::LString(const LString& other) :
-	pimpl{ new LStringImpl(*(other.pimpl)) } {}
+	pimpl{ new Impl(*(other.pimpl)) } {}
 
 LString::LString(LString&& other) noexcept :
 	pimpl{ std::exchange(other.pimpl, nullptr) } {}
@@ -50,6 +81,36 @@ LString::~LString()
 		delete pimpl;
 		pimpl = nullptr;
 	}
+}
+
+std::string::iterator LString::begin()
+{
+	return pimpl->begin();
+}
+
+std::string::const_iterator LString::begin() const
+{
+	return pimpl->begin();
+}
+
+const char* LString::c_str() const noexcept
+{
+	return pimpl->c_str();
+}
+
+bool LString::empty() const
+{
+	return pimpl->empty();
+}
+
+std::string::iterator LString::end()
+{
+	return pimpl->end();
+}
+
+std::string::const_iterator LString::end() const
+{
+	return pimpl->end();
 }
 
 LString LString::operator+(const char* other) const
@@ -75,7 +136,7 @@ LString& LString::operator=(const LString& other)
 	}
 
 	delete pimpl;
-	pimpl = new LStringImpl(*other.pimpl);
+	pimpl = new Impl(*other.pimpl);
 	return *this;
 }
 
@@ -100,11 +161,6 @@ std::ostream& Layers::operator<<(std::ostream& os, const LString& str) {
 	os << std::string(str.c_str());
 	return os;
 }
-
-//bool Layers::operator==(const LString& lhs, const LString& rhs)
-//{
-//	return lhs.pimpl->m_string == rhs.pimpl->m_string;
-//}
 
 bool Layers::operator!=(const LString& lhs, const LString& rhs)
 {

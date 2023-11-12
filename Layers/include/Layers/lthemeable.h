@@ -34,8 +34,6 @@ LAYERS_NAMESPACE_BEGIN
 class LAYERS_EXPORT LThemeable : public LObject
 {
 public:
-	//LThemeable(LObject* parent = nullptr);
-
 	LThemeable();
 
 	LThemeable(const LThemeable& other);
@@ -44,51 +42,20 @@ public:
 
 	void add_share_themeable(LThemeable* themeable);
 
-	//void add_state_pool(LStatePool* state_pool, bool include_children = true);
-
 	virtual void apply_theme_item(LThemeItem* theme_item);
 
 	virtual std::vector<LThemeable*> child_themeables(
 		bool recursive = false) = 0;
 
-	//QList<LAttribute*> child_attributes(
-	//	Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
-
-	//virtual QList<LThemeable*> child_themeables(
-	//	Qt::FindChildOptions options = Qt::FindDirectChildrenOnly);
-
 	LThemeItem* current_theme_item() const;
 
 	virtual LString path() = 0;
 
-	//QList<LStatePool*> state_pools() const;
-
-	//QStringList state_combo() const;
-
 	virtual void update() = 0;
-
-//protected:
-//	void init();
 
 private:
 	class Impl;
 	Impl* pimpl;
-
-	//LThemeable* _parent_themeable();
-
-	/*
-		NOTE:
-		Use LObject::m_object_name internally. In QLThemeable, overwrite
-		QObject::setObjectName() and set both the QObject name and LObject
-		name.
-	*/
-	//QString _name();
-
-	/*LThemeItem* m_current_theme_item{ nullptr };
-
-	std::vector<LThemeable*> m_share_themeables;*/
-
-	//QList<LStatePool*> m_state_pools;
 };
 LAYERS_NAMESPACE_END
 

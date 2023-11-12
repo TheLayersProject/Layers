@@ -27,46 +27,6 @@
 #include "layers_exports.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LStringImpl
-{
-public:
-	LStringImpl();
-
-	LStringImpl(const char* string);
-
-	inline const char* c_str() const noexcept
-	{
-		return m_string.c_str();
-	}
-
-	inline bool empty() const
-	{
-		return m_string.empty();
-	}
-
-	inline std::string::iterator begin()
-	{
-		return m_string.begin();
-	}
-
-	inline std::string::const_iterator begin() const
-	{
-		return m_string.begin();
-	}
-
-	inline std::string::iterator end()
-	{
-		return m_string.end();
-	}
-
-	inline std::string::const_iterator end() const
-	{
-		return m_string.end();
-	}
-
-	std::string m_string;
-};
-
 class LAYERS_EXPORT LString
 {
 public:
@@ -76,35 +36,17 @@ public:
 	LString(LString&& other) noexcept;
 	~LString();
 
-	inline const char* c_str() const noexcept
-	{
-		return pimpl->c_str();
-	}
+	std::string::iterator begin();
 
-	inline bool empty() const
-	{
-		return pimpl->empty();
-	}
+	std::string::const_iterator begin() const;
 
-	inline std::string::iterator begin()
-	{
-		return pimpl->begin();
-	}
+	const char* c_str() const noexcept;
 
-	inline std::string::const_iterator begin() const
-	{
-		return pimpl->begin();
-	}
+	bool empty() const;
 
-	inline std::string::iterator end()
-	{
-		return pimpl->end();
-	}
+	std::string::iterator end();
 
-	inline std::string::const_iterator end() const
-	{
-		return pimpl->end();
-	}
+	std::string::const_iterator end() const;
 
 	LString& operator=(const LString& other);
 
@@ -120,12 +62,11 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const LString& lstr);
 
-	//friend bool operator==(const Layers::LString& lhs, const Layers::LString& rhs);
-
 	friend bool operator!=(const LString& lhs, const LString& rhs);
 
 private:
-	LStringImpl* pimpl;
+	class Impl;
+	Impl* pimpl;
 };
 
 LAYERS_EXPORT LString operator+(const char* lhs, const LString& rhs);

@@ -38,7 +38,7 @@ class LAYERS_EXPORT LTheme
 public:
 	LTheme();
 
-	LTheme(const std::filesystem::path& path);
+	LTheme(const std::filesystem::path& directory);
 
 	LTheme(const LString& name, bool editable = true);
 
@@ -50,13 +50,13 @@ public:
 
 	void clear();
 
-	std::filesystem::path path() const;
+	std::filesystem::path directory() const;
 
 	LString display_id() const;
 
 	bool editable() const;
 
-	LThemeItem* find_item(const LString& path);
+	LThemeItem* find_item(const LString& directory);
 
 	LThemeItem* find_item(const std::deque<LString>& name_list);
 
@@ -76,7 +76,7 @@ public:
 
 	void save_meta_file();
 
-	void set_dir(const std::filesystem::path& path);
+	void set_dir(const std::filesystem::path& directory);
 
 	void set_name(const LString& new_name);
 

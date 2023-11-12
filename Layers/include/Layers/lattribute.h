@@ -49,103 +49,6 @@ class LAttribute;
 using LAttributeList = std::vector<LAttribute*>;
 using LAttributeMap = std::map<LString, LAttribute*>;
 
-class LAttributeImpl
-{
-public:
-	LAttributeImpl(const LString& name);
-
-	LAttributeImpl(const LString& name, const char* value);
-
-	LAttributeImpl(const LString& name, const LVariant& value);
-
-	LAttributeImpl(const LString& name, LJsonObject json_object);
-
-	//LAttributeImpl(const LAttribute& attribute);
-
-	~LAttributeImpl();
-
-	//template<typename T>
-	//LAYERS_EXPORT T _as(const std::vector<LString>& state_combo = std::vector<LString>());
-
-	//template<typename T>
-	//LAYERS_EXPORT T* _as_if(const std::vector<LString>& state_combo = std::vector<LString>());
-
-	void _break_link(LObject* parent);
-
-	void _clear_theme_attribute();
-
-	void _create_override(const LString& name, LAttribute* override_attr);
-
-	LAttributeList _dependent_attributes(
-		bool include_indirect_dependencies = false) const;
-
-	void _disconnect_change(LConnectionID connection);
-
-	void _disconnect_link_change(LConnectionID connection);
-
-	bool _has_overrides() const;
-
-	LJsonObject& _json_object();
-
-	LAttribute* _link_attribute() const;
-
-	LString _link_path() const;
-
-	LConnectionID _on_change(std::function<void()> callback);
-
-	LConnectionID _on_link_change(std::function<void()> callback);
-
-	LAttribute* _override_attribute(
-		const std::vector<LString>& state_combo);
-
-	LAttributeMap _overrides() const;
-
-	void _set_link_attribute(LObject* parent, LAttribute* link_attr);
-
-	void _set_link_path(const LString& link_path);
-
-	void _set_theme_attribute(LObject* parent, LAttribute* theme_attr);
-
-	void _set_value(LObject* parent, LVariant value);
-
-	LJsonObject _to_json_object();
-
-	LJsonValue _to_json_value();
-
-	size_t _type_index() const;
-
-	LVariant _value();
-
-	void _update_dependencies(LObject* parent);
-
-	void _update_link_dependencies();
-
-	void _update_json_object();
-
-	LConnectionID m_link_destroyed_connection;
-	LConnectionID m_theme_connection;
-
-	LAttributeList m_dependent_attrs;
-
-	LAttribute* m_theme_attr{ nullptr };
-
-	LAttribute* m_link_attr{ nullptr };
-
-	LString m_link_path;
-
-	LAttributeMap m_overrides;
-
-	LVariant m_value;
-
-	LJsonObject m_json_object;
-
-	LConnections m_change_connections;
-	LConnectionID m_change_connections_next_id;
-
-	LConnections m_link_change_connections;
-	LConnectionID m_link_change_connections_next_id;
-};
-
 class LAYERS_EXPORT LAttribute : public LObject
 {
 public:
@@ -161,15 +64,13 @@ public:
 	LAttribute(const LString& name, LJsonObject json_object,
 		LObject* parent = nullptr);
 
-	//LAttribute(const LAttribute& attribute);
-
 	~LAttribute();
 
 	template<typename T>
 	T as(const std::vector<LString>& state_combo = std::vector<LString>());
 
 	template<typename T>
-	T* as_if(const std::vector<LString>& state_combo = std::vector<LString>());
+	const T* as_if(const std::vector<LString>& state_combo = std::vector<LString>());
 
 	void break_link();
 
@@ -184,9 +85,9 @@ public:
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies = false) const;
 
-	void disconnect_change(LConnectionID connection);
+	void disconnect_change(const LConnectionID& connection);
 
-	void disconnect_link_change(LConnectionID connection);
+	void disconnect_link_change(const LConnectionID& connection);
 
 	bool has_overrides() const;
 
@@ -215,7 +116,9 @@ public:
 
 	void set_value(const char* value);
 
-	void set_value(LVariant value);
+	void set_value(const LVariant& value);
+
+	LAttribute* theme_attribute() const;
 
 	LJsonObject to_json_object();
 
@@ -223,81 +126,45 @@ public:
 
 	size_t type_index() const;
 
-	LVariant value();
+	const LVariant& value();
 
 private:
 	void update_dependencies();
 
-	friend class LAttributeImpl;
-	LAttributeImpl* pimpl;
+	class Impl;
+	Impl* pimpl;
 };
 
-//template<typename T>
-//inline T LAttributeImpl::_as(const std::vector<LString>& state_combo)
-//{
-//	if (m_theme_attr)
-//		return m_theme_attr->as<T>(state_combo);
-//
-//	if (!m_overrides.empty() && !state_combo.empty())
-//		if (LAttribute* override_attr = _override_attribute(state_combo))
-//			return override_attr->as<T>();
-//
-//	if (m_link_attr)
-//		return m_link_attr->as<T>();
-//
-//	return std::get<T>(m_value);
-//}
-//
-//template<typename T>
-//inline T* LAttributeImpl::_as_if(const std::vector<LString>& state_combo)
-//{
-//	if (m_theme_attr)
-//		return m_theme_attr->as_if<T>(state_combo);
-//
-//	if (!m_overrides.empty() && !state_combo.empty())
-//		if (LAttribute* override_attr = _override_attribute(state_combo))
-//			return override_attr->as_if<T>();
-//
-//	if (m_link_attr)
-//		return m_link_attr->as_if<T>();
-//
-//	return std::get_if<T>(&m_value);
-//}
-
 template<typename T>
-inline T LAttribute::as(const std::vector<LString>& state_combo)
-{
-	//return pimpl->_as<T>(state_combo);
+T LAttribute::as(const std::vector<LString>& state_combo) {
+	if (theme_attribute())
+		return theme_attribute()->as<T>(state_combo);
 
-	if (pimpl->m_theme_attr)
-		return pimpl->m_theme_attr->as<T>(state_combo);
-
-	if (!pimpl->m_overrides.empty() && !state_combo.empty())
+	if (!overrides().empty() && !state_combo.empty()) {
 		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as<T>();
+	}
 
-	if (pimpl->m_link_attr)
-		return pimpl->m_link_attr->as<T>();
+	if (link_attribute())
+		return link_attribute()->as<T>();
 
-	return std::get<T>(pimpl->m_value);
+	return std::get<T>(value());
 }
 
 template<typename T>
-inline T* LAttribute::as_if(const std::vector<LString>& state_combo)
-{
-	//return pimpl->_as_if<T>(state_combo);
+const T* LAttribute::as_if(const std::vector<LString>& state_combo) {
+	if (theme_attribute())
+		return theme_attribute()->as_if<T>(state_combo);
 
-	if (pimpl->m_theme_attr)
-		return pimpl->m_theme_attr->as_if<T>(state_combo);
-
-	if (!pimpl->m_overrides.empty() && !state_combo.empty())
+	if (!overrides().empty() && !state_combo.empty()) {
 		if (LAttribute* override_attr = override_attribute(state_combo))
 			return override_attr->as_if<T>();
+	}
 
-	if (pimpl->m_link_attr)
-		return pimpl->m_link_attr->as_if<T>();
+	if (link_attribute())
+		return link_attribute()->as_if<T>();
 
-	return std::get_if<T>(&pimpl->m_value);
+	return std::get_if<T>(&value());
 }
 
 LAYERS_NAMESPACE_END

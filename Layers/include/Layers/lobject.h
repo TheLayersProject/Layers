@@ -33,47 +33,6 @@ LAYERS_NAMESPACE_BEGIN
 
 class LObject;
 
-class LObjectImpl
-{
-public:
-	//LObjectImpl(LObject* parent = nullptr);
-
-	~LObjectImpl();
-
-	void add_child(LObject* child);
-
-	std::vector<LObject*>& children();
-
-	void disconnect_destroyed(LConnectionID connection);
-
-	//template <typename T>
-	//void find_children_helper(
-	//	LObject* parent, std::vector<T*>& children, bool recursive);
-
-	//template <typename T>
-	//std::vector<T*> find_children(bool recursive = false);
-
-	LString object_name() const;
-
-	LConnectionID on_destroyed(std::function<void()> callback);
-
-	LObject* parent() const;
-
-	void remove_child(LObject* child);
-
-	void set_object_name(const LString& object_name);
-
-	//void set_parent(LObject* parent);
-
-	LString m_object_name;
-
-	LObject* m_parent{ nullptr };
-	std::vector<LObject*> m_children;
-
-	LConnections m_destroyed_connections;
-	LConnectionID m_destroyed_connections_next_id;
-};
-
 class LAYERS_EXPORT LObject
 {
 public:
@@ -85,11 +44,7 @@ public:
 
 	std::vector<LObject*>& children();
 
-	void disconnect_destroyed(LConnectionID connection);
-
-	template <typename T>
-	void find_children_helper(
-		LObject* parent, std::vector<T*>& children, bool recursive);
+	void disconnect_destroyed(const LConnectionID& connection);
 
 	template <typename T>
 	std::vector<T*> find_children(bool recursive = false);
@@ -107,7 +62,12 @@ public:
 	void set_parent(LObject* parent);
 
 private:
-	LObjectImpl* pimpl;
+	template <typename T>
+	void find_children_helper(
+		LObject* parent, std::vector<T*>& children, bool recursive);
+
+	class Impl;
+	Impl* pimpl;
 };
 
 template <typename T>
