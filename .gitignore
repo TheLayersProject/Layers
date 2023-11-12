@@ -58,3 +58,10 @@ release/
 # Generated Docs
 docs/html
 docs/latex
+
+# Layers Website
+layersproject.org/
+docs.layersproject.org/
+
+# Private Directories
+Concepts/

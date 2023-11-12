@@ -1,68 +1,57 @@
 # Layers
 
-<img src="https://github.com/huntermalm/Layers/blob/main/LayersWidgets/images/layers_banner.svg?raw=true" alt="layers_banner"/>
+<img src="https://github.com/TheLayersProject/Layers/blob/main/images/layers_logo.svg?raw=true" alt="Layers Logo Image"/>
 
-Layers is a Qt library that provides an application template with a focus on themes and user customization.
+Layers is a C++ library that provides a framework for user-customizable application themes. Layers is built with the philosophy that users should have a say in how their applications look. It offers both developers and users more control over application aesthetics. 
 
-With Layers, you will be able to create simple, modern desktop apps that give users the freedom to change the appearance of your apps!
+## Theme Framework
 
-Features include:
+Layers introduces a theme framework that combines flexibility with efficiency. It's a practical solution for developers looking to offer customizable themes in their applications, and for users eager to personalize their app experience. 
 
-- Template window with built-in features
-- Theme creation and customization
-- Themes that work across multiple apps
-- User-friendly control widgets
-- Updating system for apps hosted on GitHub
+### Structured Theme Storage
 
-**NOTE: At this time, Layers only supports Windows. Other operating systems will be supported in the future.**
+-   **Theme Directory:** A theme is organized into a directory of files and sub-directories.
+-   **JSON-Based:** Theme files are stored in JSON format.
+-   **Implementation Sets:** An implementation set is a collection of theme files designed to implement the theme for specific applications. Sets are stored as sub-directories within the theme directory.
 
-## Development and Testing
+### Customization Across Multiple Apps
 
-### Building Layers
+-   **Generalized Customization:** Includes a general implementation set that allows for broad customization across different applications. 
+-   **App-Specific Customization:** Implementation sets can be defined for specific applications, allowing for highly targeted customization.
 
-These are the steps to build Layers from source-code with Microsoft Visual Studio (MSVC).
+### Versatile Attributes
 
-1. Install [Microsoft Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (2019 should also work)
-    - Be sure to select *Desktop development with C++* from *Workloads*
-2. Install the *Qt Visual Studio Tools* extension
-    - Launch VS
-    - From the menu bar, select *Extensions > Manage Extensions*
-    - Search for *Qt Visual Studio Tools* and download it
-    - Exit VS for the extension to install
-3. Install Qt 6.5.x for open source use
-    - Download [Qt Online Installer](https://www.qt.io/download-qt-installer-oss) and run it
-    - When you get to the section labeled *Installation Folder*, choose the *Custom Installation* option
-    - When you get to the section labeled *Select Components*, select the following options:
-        - *Qt > Qt 6.5.x > MSVC 2019 64-bit*
-        - *Qt > Developer and Designer Tools > OpenSSL 1.1.1q Toolkit*
-4. Link the downloaded Qt version with Visual Studio
-    - Launch VS
-    - From the menu bar, select *Extensions > Qt VS Tools > Qt Versions*
-    - Under *Version*, click the option to *add new Qt version*
-    - Label the version as *6.5*
-    - Under *Path*, click the folder icon and browse to the qmake executable from the Qt installation. It should be in the following directory
-        - <i>...\Qt\6.5.x\msvc2019_64\bin</i>
-5. Build Layers
-    - Clone this project
-    - Open the solution file *Layers.sln*
-    - From the menu bar, select *Build > Build Solution*
+-   **What Are Attributes?:** Attributes are the value containers in Layers. Each basic attribute has a *name* and a *value*.
+-   **Attribute Linking:** An attribute can be *linked to* another attribute. In this case, it will use the value of the other attribute instead of its own.
+-   **Attribute Overriding:** An attribute can be *overridden* by sub-attributes based on state-specific conditions, such as a fill color changing when a user hovers over a button.
 
-### Testing Layers
+### Other Features
 
-To test Layers, select *Debug > Start Debugging* from the menu bar. This will launch the *Layers Demo* application.
+-   **Efficient Loading:** To save system resources, only the metadata for a theme is initially loaded. Implementation sets are loaded as needed.
+-   **Lineage Tracking**: Themes maintain a record of their ancestor themes in their metadata. This feature may be useful in the future to aid in compatibility.
+
+## Layers Development
 
 ### Documentation
 
-Documentation for Layers can be found at [here](https://huntermalm.github.io/Layers/).
+**NOTE: Documentation is NOT 100% complete at this time!**
 
-**NOTE: Layers Documentation is NOT 100% complete at this time!**
+Documentation for Layers can be found at the following site:
+
+[https://docs.layersproject.org/Layers](https://docs.layersproject.org/Layers)
+
+### Building
+
+Steps to build Layers are detailed in the Layers documentation:
+
+[https://docs.layersproject.org/Layers/0.17/build.html](https://docs.layersproject.org/Layers/0.17/build.html)
 
 ## Authors
 
-* Hunter Malm - *Project creator/Lead developer* - [huntermalm](https://github.com/huntermalm)
+-   **Hunter Malm** ([huntermalm](https://github.com/huntermalm)) - _Creator/Lead Developer_
 
-See also the list of [contributors](https://github.com/huntermalm/Layers/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/TheLayersProject/Layers/contributors) who have participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/huntermalm/Layers/blob/main/LICENSE) file for details.
+This project is licensed under the LGPLv3. See the [LICENSE](https://github.com/TheLayersProject/Layers/blob/main/LICENSE) file for details.

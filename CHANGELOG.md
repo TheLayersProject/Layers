@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+Layers has been split into different projects, Layers and QLayers. Layers provides the theme framework, and QLayers provides Layers integration for Qt applications.
+
+### Added
+
+- LThemeItem has been implemented to handle the hierarchy structure of theme data.
+
+### Changed
+
+- License has been changed to LGPLv3.
+- Reworked theme structure. Theme JSON format has also been updated to better reflect the hierarchy structure of themes.
+- Theme implementation sets can now be divided into any number of theme files and organized into any number of subdirectories. Their organization on the file system does not affect the theme-item hierarchy.
+- Attribute entanglement is now referred to as *attribute linking*. When an attribute is linked to another, it will use the value of the other attribute instead of it's own.
+- Attributes states have been overhauled with *attribute overriding* which allows attributes to store multiple different values associated with different states.
+
 ## [0.16.0] - 2023-06-12
 
 ### Added
