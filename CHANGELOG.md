@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.17.0] - 2023-11-12
 
 Layers has been split into different projects, Layers and QLayers. Layers provides the theme framework, and QLayers provides Layers integration for Qt applications.
 

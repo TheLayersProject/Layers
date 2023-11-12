@@ -2,7 +2,11 @@
 
 <img src="https://layersproject.org/images/layers_logo.svg" alt="Layers Logo Image"/>
 
-Layers is a C++ library that provides a framework for user-customizable application themes. Layers is built with the philosophy that users should have a say in how their applications look. It offers both developers and users more control over application aesthetics. 
+Layers is a C++ library that provides a framework for user-customizable application themes. Layers is built with the philosophy that users should have a say in how their applications look. It offers both developers and users more control over application aesthetics.
+
+### Caution:
+
+**Layers is still under active development.  It is not yet recommended for production use. Developers should proceed with caution.**
 
 ## Theme Framework
 
