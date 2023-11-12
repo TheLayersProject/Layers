@@ -185,12 +185,13 @@ mkdir "$(SolutionDir)$(IntDir)include"
 mkdir "$(SolutionDir)$(IntDir)lib"
 
 move "$(SolutionDir)$(IntDir)Layers.dll" "$(SolutionDir)$(IntDir)bin\"
-xcopy /y /d /i /r "$(SolutionDir)x64\Debug\Layersd.dll" "$(SolutionDir)$(IntDir)bin\"
+xcopy /y /d /r "$(SolutionDir)x64\Debug\Layersd.dll" "$(SolutionDir)$(IntDir)bin\"
 
 move "$(SolutionDir)$(IntDir)Layers.lib" "$(SolutionDir)$(IntDir)lib\"
-xcopy /y /d /i /r "$(SolutionDir)x64\Debug\Layersd.lib" "$(SolutionDir)$(IntDir)lib\"
+xcopy /y /d /r "$(SolutionDir)x64\Debug\Layersd.lib" "$(SolutionDir)$(IntDir)lib\"
 
-xcopy /y /d /i /r "$(SolutionDir)Layers\include\Layers" "$(SolutionDir)$(IntDir)include\Layers\"
+xcopy /y /d /r "$(SolutionDir)Layers\include\Layers" "$(SolutionDir)$(IntDir)include\Layers\"
+xcopy /y /d /r "$(SolutionDir)LICENSE" "$(SolutionDir)$(IntDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
