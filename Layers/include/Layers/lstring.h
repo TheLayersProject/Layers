@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -20,6 +20,7 @@
 #ifndef LSTRING_H
 #define LSTRING_H
 
+#include <filesystem>
 #include <ostream>
 #include <string>
 
@@ -27,6 +28,10 @@
 #include "layers_exports.h"
 
 LAYERS_NAMESPACE_BEGIN
+
+class LString;
+using LStringList = std::vector<LString>;
+
 class LAYERS_EXPORT LString
 {
 public:
@@ -48,6 +53,10 @@ public:
 
 	std::string::const_iterator end() const;
 
+	LString& remove(const LString& substring);
+
+	bool starts_with(const LString& prefix) const;
+
 	LString& operator=(const LString& other);
 
 	LString& operator=(LString&& other) noexcept;
@@ -60,9 +69,9 @@ public:
 
 	bool operator==(const LString& other) const;
 
-	friend std::ostream& operator<<(std::ostream& os, const LString& lstr);
+	friend LAYERS_EXPORT std::ostream& operator<<(std::ostream& os, const LString& lstr);
 
-	friend bool operator!=(const LString& lhs, const LString& rhs);
+	friend LAYERS_EXPORT bool operator!=(const LString& lhs, const LString& rhs);
 
 private:
 	class Impl;

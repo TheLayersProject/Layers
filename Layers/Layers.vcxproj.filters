@@ -39,7 +39,7 @@
     <ClInclude Include="include\Layers\lattribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Layers\lthemeitem.h">
+    <ClInclude Include="include\Layers\ldefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Layers\ltheme.h">
@@ -51,7 +51,16 @@
     <ClInclude Include="include\Layers\lalgorithms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Layers\lthemeable.h">
+    <ClInclude Include="include\Layers\ldefinable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\lpaths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Layers\llink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,13 +83,22 @@
     <ClCompile Include="src\lattribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lthemeitem.cpp">
+    <ClCompile Include="src\ldefinition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ltheme.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lthemeable.cpp">
+    <ClCompile Include="src\ldefinable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lcontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lpaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\llink.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

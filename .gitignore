@@ -48,6 +48,9 @@ x64/
 debug/
 release/
 
+# VS Code
+.vscode/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -65,3 +68,10 @@ docs.layersproject.org/
 
 # Private Directories
 Concepts/
+
+# MacOS
+.DS_Store
+
+# CMake
+CMakeLists.txt
+CMakePresets.json

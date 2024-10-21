@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -27,22 +27,28 @@
 
 #include "ljson.h"
 #include "lstring.h"
-#include "lthemeitem.h"
+#include "ldefinition.h"
 
 LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
 
-class LAYERS_EXPORT LTheme
+class LAYERS_EXPORT LTheme : public LDefinition
 {
 public:
 	LTheme();
 
-	LTheme(const std::filesystem::path& directory);
+	LTheme(
+		const LString& name,
+		const LJsonValue& value,
+		const std::filesystem::path& file_path,
+		LDefinition* parent = nullptr);
 
-	LTheme(const LString& name, bool editable = true);
+	// LTheme(const std::filesystem::path& directory);
 
-	LTheme(const LString& name, const LString& uuid, bool editable);
+	// LTheme(const LString& name, bool editable = true);
+
+	// LTheme(const LString& name, const LString& uuid, bool editable);
 
 	~LTheme();
 
@@ -56,29 +62,33 @@ public:
 
 	bool editable() const;
 
-	LThemeItem* find_item(const LString& directory);
+	//LDefinition* find_item(const LString& directory);
 
-	LThemeItem* find_item(const std::deque<LString>& name_list);
+	//LDefinition* find_item(const std::deque<LString>& name_list);
 
 	bool has_implementation(const LString& app_display_id) const;
 
 	std::vector<LString> lineage() const;
 
-	void load(const LString& app_display_id);
+	//void load();
 
-	LString name() const;
+	//std::map<LString, LDefinition*> load_file(const LString& file_name);
+
+	//LString name() const;
 
 	LString publisher() const;
 
-	LThemeItem* root_item() const;
+	//LDefinition* root_item() const;
 
-	void save();
+	//void save();
 
 	void save_meta_file();
 
 	void set_dir(const std::filesystem::path& directory);
 
-	void set_name(const LString& new_name);
+	void set_edit_mode_enabled(bool enabled = true);
+
+	//void set_name(const LString& new_name);
 
 	void set_publisher(const LString& publisher);
 

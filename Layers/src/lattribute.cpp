@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -18,10 +18,7 @@
  */
 
 #include <Layers/lattribute.h>
-
-#include <Layers/lalgorithms.h>
-#include <Layers/lthemeable.h>
-#include <Layers/lthemeitem.h>
+#include <Layers/ldefinition.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeList;
@@ -29,151 +26,181 @@ using Layers::LAttributeMap;
 using Layers::LConnectionID;
 using Layers::LJsonObject;
 using Layers::LJsonValue;
+using Layers::LLink;
 using Layers::LString;
 using Layers::LVariant;
 
-template double LAttribute::as<double>(const std::vector<LString>&);
-template bool LAttribute::as<bool>(const std::vector<LString>&);
-template LString LAttribute::as<LString>(const std::vector<LString>&);
-template std::vector<LString> LAttribute::as<std::vector<LString>>(const std::vector<LString>&);
+template double LAttribute::as<double>(const LString&, LDefinition*);
+template bool LAttribute::as<bool>(const LString&, LDefinition*);
+template LString LAttribute::as<LString>(const LString&, LDefinition*);
+template std::vector<LString> LAttribute::as<std::vector<LString>>(const LString&, LDefinition*);
 
 class LAttribute::Impl
 {
 public:
+	//LConnectionID m_link_destroyed_connection;
+	LConnectionID theme_connection;
+
+	//LAttributeList m_dependent_attrs;
+
+	LAttribute* def_attr{ nullptr };
+
+	LLink* link{ nullptr };
+
+	LAttributeMap states;
+
+	LVariant value;
+
+	LJsonValue json_value;
+
+	//LConnections m_change_connections;
+	//LConnectionID m_change_connections_next_id;
+
+	//LConnections m_link_change_connections;
+	//LConnectionID m_link_change_connections_next_id;
+
 	Impl(const LString& name) {}
 
+	Impl(const LString& name, double value) :
+		value{ value } {}
+
 	Impl(const LString& name, const char* value) :
-		m_value{ LString(value) } {}
+		value{ LString(value) } {}
 
 	Impl(const LString& name, const LVariant& value) :
-		m_value{ value } {}
+		value{ value } {}
 
-	Impl(const LString& name, LJsonObject json_object) :
-		m_json_object{ json_object }
+	Impl(const LString& name, LJsonValue json_value) :
+		json_value{ json_value }
 	{
-		if (json_object.find("linked_to") != json_object.end())
+		if (json_value.is_double())
 		{
-			set_link_path(json_object["linked_to"].to_string());
+			value = json_value.to_double();
 		}
-		else if (json_object.find("value") != json_object.end())
+		else if (json_value.is_string())
 		{
-			LJsonValue json_value = json_object["value"];
+			LString str_val = json_value.to_string();
 
-			if (json_value.is_bool())
-				m_value = json_value.to_bool();
+			if (str_val.starts_with("L:"))
+				link = new LLink(str_val.remove("L:"));
+			
+			else
+				value = json_value.to_string();
+		}
+		else if (json_value.is_array())
+		{
+			LJsonArray array = json_value.to_array();
 
-			else if (json_value.is_double())
-				m_value = json_value.to_double();
-
-			else if (json_value.is_string())
-				m_value = json_value.to_string();
-
-			else if (json_value.is_object())
+			if (!array.empty() && array[0].is_string())
 			{
-				LJsonObject object = json_value.to_object();
-
-				if (object.find("gradient") != object.end())
+				if (is_link(array[0].to_string()))
+				{
+					link = new LLink(
+						array[1].to_string().remove("L:"),
+						array[0].to_string().remove("L:"));
+				}
+				else if (is_gradient_stop(array[0].to_string()))
 				{
 					std::vector<LString> gradient_stops;
 
-					for (const LJsonValue& value : object["gradient"].to_array())
-						gradient_stops.push_back(value.to_string());
+					for (auto val : array)
+						gradient_stops.push_back(val.to_string());
 
-					m_value = gradient_stops;
+					value = gradient_stops;
 				}
 			}
-		}
 
-		on_change(
-			[this] {
-				m_json_object = to_json_object();
+			if (array.size() == 2 && array[0].is_string())
+			{
+				link = new LLink(
+					array[1].to_string().remove("L:"),
+					array[0].to_string().remove("L:"));
 			}
-		);
+		}
 	}
 
 	~Impl()
 	{
-		if (m_theme_attr)
-		{
-			m_theme_attr->disconnect_change(m_theme_connection);
-		}
+		if (def_attr)
+			def_attr->disconnect_change(theme_connection);
 
-		if (m_link_attr)
-		{
-			m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
+		//if (static_link)
+		//{
+			// m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
 
-			for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
-				dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
-			{
-				if ((*dep_attr)->pimpl == this)
-				{
-					dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
-					m_link_attr->pimpl->update_link_dependencies();
-					break;
-				}
-			}
+			// for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+			// 	dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
+			// {
+			// 	if ((*dep_attr)->pimpl == this)
+			// 	{
+			// 		dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+			// 		m_link_attr->pimpl->update_link_dependencies();
+			// 		break;
+			// 	}
+			// }
 
-			m_link_attr = nullptr;
-		}
+			//static_link = nullptr;
+		//}
 	}
 
 	void break_link(LObject* parent)
 	{
-		if (m_link_attr)
-		{
-			m_value = m_link_attr->value();
+		// if (m_link_attr)
+		// {
+		// 	m_value = m_link_attr->value();
 
-			m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
+		// 	m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
 
-			for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
-				dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
-			{
-				if ((*dep_attr)->pimpl == this)
-				{
-					dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
-					m_link_attr->pimpl->update_link_dependencies();
-					break;
-				}
-			}
+		// 	for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+		// 		dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
+		// 	{
+		// 		if ((*dep_attr)->pimpl == this)
+		// 		{
+		// 			dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+		// 			m_link_attr->pimpl->update_link_dependencies();
+		// 			break;
+		// 		}
+		// 	}
 
-			m_link_attr = nullptr;
-			m_link_path = "";
-		}
+		// 	m_link_attr = nullptr;
+		// 	m_link_path = "";
+		// }
 
-		update_link_dependencies();
-		update_dependencies(parent);
+		// update_link_dependencies();
+		// update_dependencies(parent);
 	}
 
 	void clear_theme_attribute()
 	{
-		if (m_theme_attr)
+		if (def_attr)
 		{
-			m_theme_attr->disconnect_change(m_theme_connection);
-			m_theme_attr = nullptr;
+			def_attr->disconnect_change(theme_connection);
+			def_attr = nullptr;
 		}
 	}
 
-	void create_override(
-		const LString& name, LAttribute* override_attr)
+	void create_state(
+		const LString& name, LAttribute* state_attr)
 	{
-		m_overrides[name] = override_attr;
+		states[name] = state_attr;
 	}
 
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies) const
 	{
-		LAttributeList dependent_attributes = m_dependent_attrs;
+		LAttributeList dependent_attributes;
+		//LAttributeList dependent_attributes = m_dependent_attrs;
 
-		if (include_indirect_dependencies)
-			for (LAttribute* dependent_attr : m_dependent_attrs)
-			{
-				LAttributeList attrs =
-					dependent_attr->dependent_attributes(
-						include_indirect_dependencies);
+		// if (include_indirect_dependencies)
+		// 	for (LAttribute* dependent_attr : m_dependent_attrs)
+		// 	{
+		// 		LAttributeList attrs =
+		// 			dependent_attr->dependent_attributes(
+		// 				include_indirect_dependencies);
 
-				std::copy(attrs.begin(), attrs.end(),
-					std::back_inserter(dependent_attributes));
-			}
+		// 		std::copy(attrs.begin(), attrs.end(),
+		// 			std::back_inserter(dependent_attributes));
+		// 	}
 
 		return dependent_attributes;
 	}
@@ -181,64 +208,88 @@ public:
 	void disconnect_change(
 		const LConnectionID& connection)
 	{
-		m_change_connections.erase(connection);
+		//m_change_connections.erase(connection);
 	}
 
 	void disconnect_link_change(
 		const LConnectionID& connection)
 	{
-		m_link_change_connections.erase(connection);
+		//m_link_change_connections.erase(connection);
 	}
 
-	bool has_overrides() const
+	bool has_states() const
 	{
-		return !m_overrides.empty();
+		return !states.empty();
 	}
 
-	LJsonObject& json_object()
+	bool is_link(const LString& str) const
 	{
-		return m_json_object;
+		if (str.starts_with("L:"))
+			return true;
+		
+		return false;
 	}
 
-	LString link_path() const
+	bool is_gradient_stop(const LString& str) const
 	{
-		return m_link_path;
+		/*
+			TODO: Improve this function! It only works for the first gradient stop
+			and assumes that it is written as a 0
+		*/
+		if (str.starts_with("0:"))
+			return true;
+		
+		return false;
 	}
+
+	// LJsonObject& json_object()
+	// {
+	// 	return m_json_object;
+	// }
+
+	// LString link_path() const
+	// {
+	// 	return static_link->path();
+	// }
 
 	LConnectionID on_change(std::function<void()> callback)
 	{
-		m_change_connections[m_change_connections_next_id++] = callback;
-		return std::prev(m_change_connections.end())->first;
+		//m_change_connections[m_change_connections_next_id++] = callback;
+		//return std::prev(m_change_connections.end())->first;
+		return LConnectionID();
 	}
 
 	LConnectionID on_link_change(std::function<void()> callback)
 	{
-		m_link_change_connections[m_link_change_connections_next_id++] = callback;
-		return std::prev(m_link_change_connections.end())->first;
+		//m_link_change_connections[m_link_change_connections_next_id++] = callback;
+		//return std::prev(m_link_change_connections.end())->first;
+		return LConnectionID();
 	}
 
-	LAttribute* override_attribute(
-		const std::vector<LString>& state_combo)
+	LAttribute* state(const LString& name)
 	{
-		for (const auto& [key, override_attr] : m_overrides)
-		{
-			auto override_states =
-				split<std::vector<LString>>(override_attr->object_name(), ':');
+		if (states.count(name))
+			return states[name];
 
-			bool qualifies = true;
+		//for (const auto& [key, state_attr] : states)
+		//{
+		//	auto override_states =
+		//		split<LStringList>(state_attr->object_name(), ':');
 
-			for (const auto& override_state : override_states)
-			{
-				if (std::find(state_combo.begin(), state_combo.end(),
-					override_state) == state_combo.end())
-				{
-					qualifies = false;
-				}
-			}
+		//	bool qualifies = true;
 
-			if (qualifies)
-				return override_attr;
-		}
+		//	for (const auto& override_state : override_states)
+		//	{
+		//		if (std::find(state_combo.begin(), state_combo.end(),
+		//			override_state) == state_combo.end())
+		//		{
+		//			qualifies = false;
+		//		}
+		//	}
+
+		//	if (qualifies)
+		//		return state_attr;
+		//}
 
 		// TODO: Handle returning override with highest number of matching
 		// states. If there is a conflict (two matching overrides), just
@@ -247,56 +298,64 @@ public:
 		return nullptr;
 	}
 
-	LAttributeMap overrides() const
-	{
-		return m_overrides;
-	}
+	// void set_link_attribute(LObject* parent, LAttribute* link_attr)
+	// {
+	// 	value = LVariant();
 
-	void set_link_attribute(LObject* parent, LAttribute* link_attr)
-	{
-		m_value = LVariant();
+	// 	if (m_link_attr)
+	// 	{
+	// 		m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
 
-		if (m_link_attr)
+	// 		for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
+	// 			dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
+	// 		{
+	// 			if ((*dep_attr)->pimpl == this)
+	// 			{
+	// 				dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
+	// 				break;
+	// 			}
+	// 		}
+
+	// 		m_link_attr = nullptr;
+	// 	}
+
+	// 	m_link_attr = link_attr;
+
+	// 	m_link_destroyed_connection = m_link_attr->on_destroyed(
+	// 		[this] {
+	// 			m_link_attr = nullptr;
+	// 		}
+	// 	);
+
+	// 	update_link_dependencies();
+	// 	update_dependencies(parent);
+	// }
+
+	// void set_link_path(const LString& link_path)
+	// {
+	// 	m_link_path = link_path;
+
+	// 	m_value = LVariant();
+	// }
+
+	void resolve_links(LDefinition* definition)
+	{
+		if (link)
 		{
-			m_link_attr->disconnect_destroyed(m_link_destroyed_connection);
-
-			for (auto dep_attr = m_link_attr->pimpl->m_dependent_attrs.begin();
-				dep_attr != m_link_attr->pimpl->m_dependent_attrs.end(); dep_attr++)
-			{
-				if ((*dep_attr)->pimpl == this)
-				{
-					dep_attr = m_link_attr->pimpl->m_dependent_attrs.erase(dep_attr);
-					break;
-				}
-			}
-
-			m_link_attr = nullptr;
+			if (!link->resolve(definition));
+			// TODO: Handle link resolution failure
 		}
 
-		m_link_attr = link_attr;
-
-		m_link_destroyed_connection = m_link_attr->on_destroyed(
-			[this] {
-				m_link_attr = nullptr;
-			}
-		);
-
-		update_link_dependencies();
-		update_dependencies(parent);
+		for (const auto& [key, state] : states)
+			state->pimpl->resolve_links(definition);
 	}
 
-	void set_link_path(const LString& link_path)
+	void set_definition_attribute(
+		LObject* parent, LAttribute* definition_attribute)
 	{
-		m_link_path = link_path;
+		def_attr = definition_attribute;
 
-		m_value = LVariant();
-	}
-
-	void set_theme_attribute(LObject* parent, LAttribute* theme_attr)
-	{
-		m_theme_attr = theme_attr;
-
-		m_theme_connection = m_theme_attr->on_change(
+		theme_connection = def_attr->on_change(
 			[this, parent] {
 				update_dependencies(parent);
 			}
@@ -305,36 +364,36 @@ public:
 		update_dependencies(parent);
 	}
 
-	void set_value(LObject* parent, const LVariant& value)
+	void set_value(LObject* parent, const LVariant& v)
 	{
-		if (m_link_attr)
+		if (link)
 		{
-			m_link_attr->set_value(value);
-			update_dependencies(parent);
+			//m_link_attr->set_value(value);
+			//update_dependencies(parent);
 		}
-		else if (m_value.index() == value.index())
+		if (!link && value.index() == v.index())
 		{
 			bool same_value = false;
 
-			switch (m_value.index())
+			switch (v.index())
 			{
 			case 0:
 				same_value = true;
 				break;
 			case 1:
-				if (std::get<double>(m_value) == std::get<double>(value))
+				if (std::get<double>(value) == std::get<double>(v))
 					same_value = true;
 				break;
 			case 2:
-				if (std::get<bool>(m_value) == std::get<bool>(value))
+				if (std::get<bool>(value) == std::get<bool>(v))
 					same_value = true;
 				break;
 			case 3:
-				if (std::get<LString>(m_value) == std::get<LString>(value))
+				if (std::get<LString>(value) == std::get<LString>(v))
 					same_value = true;
 				break;
 			case 4:
-				if (std::get<std::vector<LString>>(m_value) == std::get<std::vector<LString>>(value))
+				if (std::get<std::vector<LString>>(value) == std::get<std::vector<LString>>(v))
 					same_value = true;
 				break;
 			}
@@ -343,7 +402,7 @@ public:
 				return;
 		}
 
-		m_value = value;
+		value = v;
 		update_dependencies(parent);
 	}
 
@@ -351,25 +410,25 @@ public:
 	{
 		LJsonObject json_object;
 
-		if (!m_link_path.empty())
-		{
-			json_object["linked_to"] = m_link_path;
-		}
-		else if (m_value.index() > 0)
-		{
-			json_object["value"] = to_json_value();
-		}
+		// if (!m_link_path.empty())
+		// {
+		// 	json_object["linked_to"] = m_link_path;
+		// }
+		// else if (m_value.index() > 0)
+		// {
+		// 	json_object["value"] = to_json_value();
+		// }
 
-		if (has_overrides())
-		{
-			LJsonObject overrides_json_object;
+		// if (has_overrides())
+		// {
+		// 	LJsonObject overrides_json_object;
 
-			for (const auto& [key, override_attr] : m_overrides)
-				overrides_json_object[override_attr->object_name()] =
-				override_attr->to_json_object();
+		// 	for (const auto& [key, override_attr] : m_overrides)
+		// 		overrides_json_object[override_attr->object_name()] =
+		// 		override_attr->to_json_object();
 
-			json_object["overrides"] = overrides_json_object;
-		}
+		// 	json_object["overrides"] = overrides_json_object;
+		// }
 
 		return json_object;
 	}
@@ -378,63 +437,61 @@ public:
 	{
 		LJsonValue json_value;
 
-		if (const auto& bool_val = std::get_if<bool>(&m_value))
-			json_value = *bool_val;
+		// if (const auto& bool_val = std::get_if<bool>(&m_value))
+		// 	json_value = *bool_val;
 
-		else if (const auto& double_val = std::get_if<double>(&m_value))
-			json_value = *double_val;
+		// else if (const auto& double_val = std::get_if<double>(&m_value))
+		// 	json_value = *double_val;
 
-		else if (const auto& string_val = std::get_if<LString>(&m_value))
-			json_value = *string_val;
+		// else if (const auto& string_val = std::get_if<LString>(&m_value))
+		// 	json_value = *string_val;
 
-		else if (const auto& gradient_stops_val =
-			std::get_if<std::vector<LString>>(&m_value))
-		{
-			LJsonArray gradient;
+		// else if (const auto& gradient_stops_val =
+		// 	std::get_if<std::vector<LString>>(&m_value))
+		// {
+		// 	LJsonArray gradient;
 
-			for (auto stop : *gradient_stops_val)
-				gradient.push_back(stop);
+		// 	for (auto stop : *gradient_stops_val)
+		// 		gradient.push_back(stop);
 
-			json_value = LJsonObject({ {"gradient", gradient } });
-		}
+		// 	json_value = LJsonObject({ {"gradient", gradient } });
+		// }
 
 		return json_value;
 	}
 
 	size_t type_index() const
 	{
-		if (m_theme_attr)
-			return m_theme_attr->type_index();
+		if (def_attr)
+			return def_attr->type_index();
 
-		if (!m_overrides.empty())
-			return (*m_overrides.begin()).second->type_index();
+		if (!states.empty())
+			return (*states.begin()).second->type_index();
 
-		if (m_link_attr)
-			return m_link_attr->type_index();
+		// if (link && link->attribute())
+		// 	return link->attribute()->type_index();
 
-		return m_value.index();
-
-		//return m_value.index();
+		return value.index();
 	}
 
 	void update_dependencies(LObject* parent)
 	{
-		for (auto& change_function : m_change_connections)
-		{
-			change_function.second();
-		}
+		// for (auto& change_function : m_change_connections)
+		// {
+		// 	change_function.second();
+		// }
 
-		if (!m_dependent_attrs.empty())
-		{
-			for (const auto& dependent_attr : m_dependent_attrs)
-			{
-				dependent_attr->update_dependencies();
-			}
-		}
+		// if (!m_dependent_attrs.empty())
+		// {
+		// 	for (const auto& dependent_attr : m_dependent_attrs)
+		// 	{
+		// 		dependent_attr->update_dependencies();
+		// 	}
+		// }
 
 		if (parent)
 		{
-			if (LThemeable* t = dynamic_cast<LThemeable*>(parent))
+			if (LDefinable* t = dynamic_cast<LDefinable*>(parent))
 			{
 				t->update();
 			}
@@ -447,56 +504,40 @@ public:
 
 	void update_link_dependencies()
 	{
-		for (auto& link_change_function : m_link_change_connections)
-		{
-			link_change_function.second();
-		}
+		// for (auto& link_change_function : m_link_change_connections)
+		// {
+		// 	link_change_function.second();
+		// }
 
-		for (LAttribute* dependent_attr : dependent_attributes(true))
-		{
-			dependent_attr->pimpl->update_link_dependencies();
-		}
+		// for (LAttribute* dependent_attr : dependent_attributes(true))
+		// {
+		// 	dependent_attr->pimpl->update_link_dependencies();
+		// }
 	}
 
 	void update_json_object()
 	{
-		if (!m_link_path.empty())
-		{
-			m_json_object["linked_to"] = m_link_path;
-		}
-		else if (m_value.index() > 0)
-		{
-			m_json_object["value"] = to_json_value();
-		}
+		// if (!m_link_path.empty())
+		// {
+		// 	m_json_object["linked_to"] = m_link_path;
+		// }
+		// else if (m_value.index() > 0)
+		// {
+		// 	m_json_object["value"] = to_json_value();
+		// }
 	}
-
-	LConnectionID m_link_destroyed_connection;
-	LConnectionID m_theme_connection;
-
-	LAttributeList m_dependent_attrs;
-
-	LAttribute* m_theme_attr{ nullptr };
-
-	LAttribute* m_link_attr{ nullptr };
-
-	LString m_link_path;
-
-	LAttributeMap m_overrides;
-
-	LVariant m_value;
-
-	LJsonObject m_json_object;
-
-	LConnections m_change_connections;
-	LConnectionID m_change_connections_next_id;
-
-	LConnections m_link_change_connections;
-	LConnectionID m_link_change_connections_next_id;
 };
 
 LAttribute::LAttribute(
 	const LString& name, LObject* parent) :
 	pimpl{ new Impl(name) }, LObject(parent)
+{
+	set_object_name(name);
+}
+
+LAttribute::LAttribute(
+	const LString& name, double value, LObject* parent) :
+	pimpl{ new Impl(name, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
@@ -516,21 +557,26 @@ LAttribute::LAttribute(
 }
 
 LAttribute::LAttribute(
-	const LString& name, LJsonObject json_object, LObject* parent) :
-	pimpl{ new Impl(name, json_object) }, LObject(parent)
+	const LString& name, LJsonValue value, LObject* parent) :
+	pimpl{ new Impl(name, value) }, LObject(parent)
 {
 	set_object_name(name);
 
-	if (json_object.find("overrides") != json_object.end())
+	if (value.is_object())
 	{
-		LJsonObject overrides = json_object["overrides"].to_object();
+		LJsonObject json_object = value.to_object();
 
-		for (const auto& [key, override_val] : overrides)
+		if (json_object.find("states") != json_object.end())
 		{
-			LAttribute* override_attr =
-				new LAttribute(key, override_val.to_object(), this);
+			LJsonObject states_obj = json_object["states"].to_object();
 
-			pimpl->m_overrides[key] = override_attr;
+			for (const auto& [key, state_val] : states_obj)
+			{
+				LAttribute* state_attr =
+					new LAttribute(key, state_val, this);
+
+				pimpl->states[key] = state_attr;
+			}
 		}
 	}
 }
@@ -540,14 +586,19 @@ LAttribute::~LAttribute()
 	delete pimpl;
 }
 
-void LAttribute::create_override(const LString& name, const char* value)
+void LAttribute::create_link(LAttribute* link_attr)
 {
-	create_override(name, LString(value));
+	pimpl->link = new LLink(link_attr);
 }
 
-void LAttribute::create_override(const LString& name, LVariant value)
+void LAttribute::create_state(const LString& name, const char* value)
 {
-	pimpl->create_override(name, new LAttribute(name, value, this));
+	create_state(name, LString(value));
+}
+
+void LAttribute::create_state(const LString& name, LVariant value)
+{
+	pimpl->create_state(name, new LAttribute(name, value, this));
 }
 
 void LAttribute::break_link()
@@ -555,17 +606,17 @@ void LAttribute::break_link()
 	pimpl->break_link(parent());
 }
 
-void LAttribute::clear_overrides()
+void LAttribute::clear_states()
 {
-	if (!pimpl->m_overrides.empty())
+	if (!pimpl->states.empty())
 	{
-		for (const auto& [key, override_attr] : pimpl->m_overrides)
+		for (const auto& [key, state] : pimpl->states)
 		{
-			remove_child(override_attr);
-			delete override_attr;
+			remove_child(state);
+			delete state;
 		}
 
-		pimpl->m_overrides.clear();
+		pimpl->states.clear();
 	}
 }
 
@@ -590,25 +641,25 @@ void LAttribute::disconnect_link_change(const LConnectionID& connection)
 	pimpl->disconnect_link_change(connection);
 }
 
-bool LAttribute::has_overrides() const
+// LLink* LAttribute::dynamic_link() const
+// {
+// 	return pimpl->dynamic_link;
+// }
+
+bool LAttribute::has_states() const
 {
-	return pimpl->has_overrides();
+	return pimpl->has_states();
 }
 
-LJsonObject& LAttribute::json_object()
-{
-	return pimpl->json_object();
-}
+// LJsonObject& LAttribute::json_object()
+// {
+// 	return pimpl->json_object();
+// }
 
-LAttribute* LAttribute::link_attribute() const
-{
-	return pimpl->m_link_attr;
-}
-
-LString LAttribute::link_path() const
-{
-	return pimpl->link_path();
-}
+// LAttribute* LAttribute::link_attribute() const
+// {
+// 	return pimpl->m_link_attr;
+// }
 
 LConnectionID LAttribute::on_change(std::function<void()> callback)
 {
@@ -620,15 +671,35 @@ LConnectionID LAttribute::on_link_change(std::function<void()> callback)
 	return pimpl->on_link_change(callback);
 }
 
-LAttribute* LAttribute::override_attribute(
-	const std::vector<LString>& state_combo)
+LAttribute* LAttribute::state(const LString& name)
+
 {
-	return pimpl->override_attribute(state_combo);
+	return pimpl->state(name);
 }
 
-LAttributeMap LAttribute::overrides() const
+LAttributeMap LAttribute::states() const
 {
-	return pimpl->overrides();
+	LAttributeMap states;
+
+	states.insert(pimpl->states.begin(), pimpl->states.end());
+
+	if (parent())
+	{
+		if (LDefinition* parent_as_def = dynamic_cast<LDefinition*>(parent()))
+		{
+			if (parent_as_def->base())
+			{
+				if (LAttribute* base_attr = parent_as_def->base()->find_attribute(object_name()))
+				{
+					LAttributeMap base_states = base_attr->states();
+
+					states.insert(base_states.begin(), base_states.end());
+				}
+			}
+		}
+	}
+
+	return states;
 }
 
 LString LAttribute::path() const
@@ -637,31 +708,44 @@ LString LAttribute::path() const
 	{
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
 			return parent_attr->path() + "." + object_name();
-		else if (LThemeable* parent_themeable = dynamic_cast<LThemeable*>(parent()))
+		else if (LDefinable* parent_themeable = dynamic_cast<LDefinable*>(parent()))
 			return parent_themeable->path() + "/" + object_name();
-		else if (LThemeItem* parent_theme_item = dynamic_cast<LThemeItem*>(parent()))
+		else if (LDefinition* parent_theme_item = dynamic_cast<LDefinition*>(parent()))
 			return parent_theme_item->path() + "/" + object_name();
 	}
 
 	return object_name();
 }
 
-void LAttribute::set_link_attribute(LAttribute* link_attr)
+void LAttribute::resolve_links(LDefinition* definition)
 {
-	pimpl->set_link_attribute(parent(), link_attr);
+	pimpl->resolve_links(definition);
 
-	link_attr->pimpl->m_dependent_attrs.push_back(this);
-	link_attr->pimpl->update_link_dependencies();
+	if (!link() && value().index() == 0)
+	{
+		if (definition->base())
+		{
+			definition->base()->find_attribute(object_name())->resolve_links(definition);
+		}
+	}
 }
 
-void LAttribute::set_link_path(const LString& link_path)
-{
-	pimpl->set_link_path(link_path);
-}
+// void LAttribute::set_link_attribute(LAttribute* link_attr)
+// {
+// 	pimpl->set_link_attribute(parent(), link_attr);
 
-void LAttribute::set_theme_attribute(LAttribute* theme_attr)
+// 	link_attr->pimpl->m_dependent_attrs.push_back(this);
+// 	link_attr->pimpl->update_link_dependencies();
+// }
+
+// void LAttribute::set_link_path(const LString& link_path)
+// {
+// 	pimpl->set_link_path(link_path);
+// }
+
+void LAttribute::set_definition_attribute(LAttribute* definition_attribute)
 {
-	pimpl->set_theme_attribute(parent(), theme_attr);
+	pimpl->set_definition_attribute(parent(), definition_attribute);
 }
 
 void LAttribute::set_value(const char* value)
@@ -674,9 +758,14 @@ void LAttribute::set_value(const LVariant& value)
 	pimpl->set_value(parent(), value);
 }
 
-LAttribute* LAttribute::theme_attribute() const
+LLink* LAttribute::link() const
 {
-	return pimpl->m_theme_attr;
+	return pimpl->link;
+}
+
+LAttribute* LAttribute::definition_attribute() const
+{
+	return pimpl->def_attr;
 }
 
 LJsonObject LAttribute::to_json_object()
@@ -696,10 +785,10 @@ size_t LAttribute::type_index() const
 
 const LVariant& LAttribute::value()
 {
-	if (pimpl->m_link_attr)
-		return pimpl->m_link_attr->value();
+	// if (pimpl->link && pimpl->link->attribute())
+	// 	return pimpl->link->attribute()->value();
 
-	return pimpl->m_value;
+	return pimpl->value;
 }
 
 void LAttribute::update_dependencies()

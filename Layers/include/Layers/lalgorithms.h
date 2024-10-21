@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -21,6 +21,7 @@
 #define LALGORITHMS_H
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <vector>
 #include <string>
@@ -61,6 +62,27 @@ std::string remove_whitespace(const std::string& str)
 	}
 
 	return result;
+}
+
+inline LAYERS_EXPORT
+std::string load_json_file(const std::filesystem::path& path)
+{
+	std::ifstream file(path.c_str(), std::ios::in);
+	if (!file.is_open())
+	{
+		std::cerr << __FUNCTION__ << ": Could not read file: "
+			<< path << std::endl;
+		return "";
+	}
+
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	std::string data = buffer.str();
+	file.close();
+
+	data = remove_whitespace(data);
+
+	return data;
 }
 
 LAYERS_NAMESPACE_END
