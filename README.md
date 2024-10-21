@@ -1,38 +1,22 @@
 # Layers
 
-<img src="https://layersproject.org/images/layers_logo.svg" alt="Layers Logo Image"/>
-
-Layers is a C++ library that provides a framework for user-customizable application themes. Layers is built with the philosophy that users should have a say in how their applications look. It offers both developers and users more control over application aesthetics.
+![Layers Logo Image](https://github.com/TheLayersProject/Layers/blob/main/images/layers_logo.svg?raw=true)
 
 ### Caution:
 
 **Layers is still under active development.  It is not yet recommended for production use. Developers should proceed with caution.**
 
-## Theme Framework
+Layers is a C++ library that provides a framework for application themes and user-customization. The goal of Layers is to *let users decide* by making every aspect of an application's appearance customizable.
 
-Layers introduces a theme framework that combines flexibility with efficiency. It's a practical solution for developers looking to offer customizable themes in their applications, and for users eager to personalize their app experience. 
+Developers can integrate Layers with their apps to give this customizability to their users. Integration begins with the concept of a *definable widget*, which is a [widget](https://en.wikipedia.org/wiki/Graphical_widget) whose appearance can be represented with a Layers *definition*.
 
-### Structured Theme Storage
+Layers introduces three data structures:
 
--   **Theme Directory:** A theme is organized into a directory of files and sub-directories.
--   **JSON-Based:** Theme files are stored in JSON format.
--   **Implementation Sets:** An implementation set is a collection of theme files designed to implement the theme for specific applications. Sets are stored as sub-directories within the theme directory.
+- **Definitions** - A definition defines the hierarchy and default attribute values of a definable widget.
+- **Themes** - A theme is a special definition that contains a small set of attributes intended to be linked to by a majority of definition attributes, directly or indirectly. This means that most of an app's appearance is controlled by the theme.
+- **Styles** - A style overrides a definition to allow for very specific changes. Users can personalize any aspect of an app using styles.
 
-### Customization Across Multiple Apps
-
--   **Generalized Customization:** Includes a general implementation set that allows for broad customization across different applications. 
--   **App-Specific Customization:** Implementation sets can be defined for specific applications, allowing for highly targeted customization.
-
-### Versatile Attributes
-
--   **What Are Attributes?:** Attributes are the value containers in Layers. Each basic attribute has a *name* and a *value*.
--   **Attribute Linking:** An attribute can be *linked to* another attribute. In this case, it will use the value of the other attribute instead of its own.
--   **Attribute Overriding:** An attribute can be *overridden* by sub-attributes based on state-specific conditions, such as a fill color changing when a user hovers over a button.
-
-### Other Features
-
--   **Efficient Loading:** To save system resources, only the metadata for a theme is initially loaded. Implementation sets are loaded as needed.
--   **Lineage Tracking**: Themes maintain a record of their ancestor themes in their metadata. This feature may be useful in the future to aid in compatibility.
+Developers need to create a set of definitions for the widgets of their Layers software. Users create themes and styles to personalize apps.
 
 ## Layers Development
 
