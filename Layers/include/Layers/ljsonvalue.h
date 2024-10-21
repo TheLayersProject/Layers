@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -51,6 +51,8 @@ public:
 	LJsonValue(const LJsonValue& other);
 	LJsonValue(LJsonValue&& other) noexcept;
 	~LJsonValue();
+
+	bool is_array() const;
 
 	bool is_bool() const;
 

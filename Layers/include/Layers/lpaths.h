@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -17,46 +17,24 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LTHEMEABLE_H
-#define LTHEMEABLE_H
+#ifndef LPATHS_H
+#define LPATHS_H
 
-#include <vector>
+#include <filesystem>
+#include <string>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lobject.h"
-#include "lstring.h"
-#include "lthemeitem.h"
-
 LAYERS_NAMESPACE_BEGIN
-
-class LAYERS_EXPORT LThemeable : public LObject
-{
-public:
-	LThemeable();
-
-	LThemeable(const LThemeable& other);
-
-	~LThemeable();
-
-	void add_share_themeable(LThemeable* themeable);
-
-	virtual void apply_theme_item(LThemeItem* theme_item);
-
-	virtual std::vector<LThemeable*> child_themeables(
-		bool recursive = false) = 0;
-
-	LThemeItem* current_theme_item() const;
-
-	virtual LString path() = 0;
-
-	virtual void update() = 0;
-
-private:
-	class Impl;
-	Impl* pimpl;
-};
+LAYERS_EXPORT std::filesystem::path app_path(const std::string& app_name);
+LAYERS_EXPORT std::filesystem::path latest_T_version_path();
+LAYERS_EXPORT std::filesystem::path layers_path();
+LAYERS_EXPORT std::filesystem::path definitions_path();
+LAYERS_EXPORT std::filesystem::path themes_path();
+LAYERS_EXPORT std::filesystem::path T1_path();
+LAYERS_EXPORT std::filesystem::path T2_path();
+LAYERS_EXPORT std::filesystem::path local_app_data_path();
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEABLE_H
+#endif // !LPATHS_H

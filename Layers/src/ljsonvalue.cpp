@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -44,6 +44,11 @@ public:
 
 	Impl(const LJsonArray& v) :
 		m_variant{ v } {}
+
+	bool is_array() const
+	{
+		return std::get_if<LJsonArray>(&m_variant);
+	}
 
 	bool is_bool() const
 	{
@@ -187,6 +192,11 @@ LJsonValue::LJsonValue(LJsonValue&& other) noexcept :
 LJsonValue::~LJsonValue()
 {
 	delete pimpl;
+}
+
+bool LJsonValue::is_array() const
+{
+    return pimpl->is_array();
 }
 
 bool LJsonValue::is_bool() const

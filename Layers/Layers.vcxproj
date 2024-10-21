@@ -26,23 +26,29 @@
     <ClInclude Include="include\Layers\lconnections.h" />
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\ljson.h" />
+    <ClInclude Include="include\Layers\llink.h" />
     <ClInclude Include="include\Layers\lobject.h" />
+    <ClInclude Include="include\Layers\lpaths.h" />
     <ClInclude Include="include\Layers\lstring.h" />
     <ClInclude Include="include\Layers\ljsonvalue.h" />
     <ClInclude Include="include\Layers\ltheme.h" />
-    <ClInclude Include="include\Layers\lthemeable.h" />
-    <ClInclude Include="include\Layers\lthemeitem.h" />
+    <ClInclude Include="include\Layers\ldefinable.h" />
+    <ClInclude Include="include\Layers\lcontroller.h" />
+    <ClInclude Include="include\Layers\ldefinition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lattribute.cpp" />
     <ClCompile Include="src\lconnections.cpp" />
     <ClCompile Include="src\ljsonvalue.cpp" />
+    <ClCompile Include="src\llink.cpp" />
     <ClCompile Include="src\lobject.cpp" />
+    <ClCompile Include="src\lpaths.cpp" />
     <ClCompile Include="src\lstring.cpp" />
     <ClCompile Include="src\ljson.cpp" />
     <ClCompile Include="src\ltheme.cpp" />
-    <ClCompile Include="src\lthemeable.cpp" />
-    <ClCompile Include="src\lthemeitem.cpp" />
+    <ClCompile Include="src\ldefinable.cpp" />
+    <ClCompile Include="src\lcontroller.cpp" />
+    <ClCompile Include="src\ldefinition.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -154,6 +160,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

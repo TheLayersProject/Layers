@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -113,6 +113,22 @@ std::string::const_iterator LString::end() const
 	return pimpl->end();
 }
 
+LString& LString::remove(const LString& substring)
+{
+    if (!substring.empty())
+	{
+		size_t pos = pimpl->m_string.find(substring.pimpl->m_string);
+		if (pos != std::string::npos)
+			pimpl->m_string.erase(pos, substring.pimpl->m_string.length());
+	}
+
+	return *this;
+}
+
+bool LString::starts_with(const LString& prefix) const {
+    return pimpl->m_string.rfind(prefix.pimpl->m_string, 0) == 0;
+}
+
 LString LString::operator+(const char* other) const
 {
 	return (pimpl->m_string + other).c_str();
@@ -170,3 +186,4 @@ bool Layers::operator!=(const LString& lhs, const LString& rhs)
 LAYERS_EXPORT LString Layers::operator+(const char* lhs, const LString& rhs) {
 	return LString((std::string(lhs) + rhs.c_str()).c_str());
 }
+

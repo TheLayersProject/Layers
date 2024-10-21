@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2024 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -17,60 +17,46 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LTHEMEITEM_H
-#define LTHEMEITEM_H
+#ifndef LDEFINABLE_H
+#define LDEFINABLE_H
 
-#include <deque>
+#include <vector>
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lattribute.h"
-#include "lstring.h"
 #include "lobject.h"
+#include "lstring.h"
+#include "ldefinition.h"
 
 LAYERS_NAMESPACE_BEGIN
-class LAYERS_EXPORT LThemeItem : public LObject
+
+class LAYERS_EXPORT LDefinable : public LObject
 {
 public:
-	LThemeItem(
-		const LString& name,
-		const LAttributeMap& attributes,
-		bool is_overridable,
-		const LString& file_name,
-		LThemeItem* parent = nullptr);
+	LDefinable();
 
-	~LThemeItem();
+	LDefinable(const LDefinable& other);
 
-	void append_child(LThemeItem* child);
+	~LDefinable();
 
-	std::vector<LString> attribute_group_names() const;
+	void add_share_definable(LDefinable* themeable);
 
-	LAttributeMap attributes(int type_index = -1);
+	virtual void apply_definition(LDefinition* definition);
 
-	LThemeItem* child(int index) const;
+	virtual std::vector<LDefinable*> child_definables(
+		bool recursive = false) = 0;
 
-	size_t child_count() const;
+	LDefinition* definition() const;
 
-	std::map<LString, LThemeItem*>& children();
+	virtual LString path() = 0;
 
-	LThemeItem* find_item(const LString& path);
-
-	LThemeItem* find_item(std::deque<LString> name_list);
-
-	int index() const;
-
-	bool is_overridable() const;
-
-	LString path() const;
-
-	LJsonObject to_json_object() const;
+	virtual void update() = 0;
 
 private:
 	class Impl;
 	Impl* pimpl;
 };
-
 LAYERS_NAMESPACE_END
 
-#endif // LTHEMEITEM_H
+#endif // LDEFINABLE_H

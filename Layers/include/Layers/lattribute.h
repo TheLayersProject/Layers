@@ -29,8 +29,12 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lalgorithms.h" // TODO: Might be able to remove this include?
 #include "lconnections.h"
+#include "lcontroller.h"
+#include "ldefinable.h"
 #include "ljson.h"
+#include "llink.h"
 #include "lobject.h"
 #include "lstring.h"
 
@@ -55,32 +59,39 @@ public:
 	LAttribute(const LString& name,
 		LObject* parent = nullptr);
 
+	LAttribute(const LString& name, double value,
+		LObject* parent = nullptr);
+
 	LAttribute(const LString& name, const char* value,
 		LObject* parent = nullptr);
 
 	LAttribute(const LString& name, const LVariant& value,
 		LObject* parent = nullptr);
 
-	LAttribute(const LString& name, LJsonObject json_object,
+	LAttribute(const LString& name, LJsonValue value,
 		LObject* parent = nullptr);
 
 	~LAttribute();
 
 	template<typename T>
-	T as(const std::vector<LString>& state_combo = std::vector<LString>());
+	T as(const LString& state_name = "", LDefinition* definition = nullptr);
+	//T as(const std::vector<LString>& state_combo = std::vector<LString>());
 
 	template<typename T>
-	const T* as_if(const std::vector<LString>& state_combo = std::vector<LString>());
+	const T* as_if(const LString& state_name = "", LDefinition* definition = nullptr);
+	//const T* as_if(const std::vector<LString>& state_combo = std::vector<LString>());
 
 	void break_link();
 
-	void clear_overrides();
+	void clear_states();
 
 	void clear_theme_attribute();
 
-	void create_override(const LString& name, const char* value);
+	void create_link(LAttribute* link_attr);
 
-	void create_override(const LString& name, LVariant value);
+	void create_state(const LString& name, const char* value);
+
+	void create_state(const LString& name, LVariant value);
 
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies = false) const;
@@ -89,36 +100,41 @@ public:
 
 	void disconnect_link_change(const LConnectionID& connection);
 
-	bool has_overrides() const;
+	//LLink* dynamic_link() const;
 
-	LJsonObject& json_object();
+	bool has_states() const;
 
-	LAttribute* link_attribute() const;
+	//LJsonObject& json_object();
 
-	LString link_path() const;
+	//LAttribute* link_attribute() const;
+
+	//LString link_path() const;
 
 	LConnectionID on_change(std::function<void()> callback);
 
 	LConnectionID on_link_change(std::function<void()> callback);
 
-	LAttribute* override_attribute(
-		const std::vector<LString>& state_combo);
+	LAttribute* state(const LString& name);
 
-	LAttributeMap overrides() const;
+	LAttributeMap states() const;
 
 	LString path() const;
 
-	void set_link_attribute(LAttribute* link_attr);
+	void resolve_links(LDefinition* definition);
 
-	void set_link_path(const LString& link_path);
+	//void set_link_attribute(LAttribute* link_attr);
 
-	void set_theme_attribute(LAttribute* theme_attr);
+	//void set_link_path(const LString& link_path);
+
+	void set_definition_attribute(LAttribute* definition_attribute);
 
 	void set_value(const char* value);
 
 	void set_value(const LVariant& value);
 
-	LAttribute* theme_attribute() const;
+	LLink* link() const;
+
+	LAttribute* definition_attribute() const;
 
 	LJsonObject to_json_object();
 
@@ -136,33 +152,158 @@ private:
 };
 
 template<typename T>
-T LAttribute::as(const std::vector<LString>& state_combo) {
-	if (theme_attribute())
-		return theme_attribute()->as<T>(state_combo);
+T LAttribute::as(const LString& state_name, LDefinition* definition)
+{
+	/*
+		TODO:
+		Need to consider all cases that need definition context.
+		For now, context is only passed when a definition attribute is present
+		(in cases where this is likely a definable attribute), when the
+		base attribute value is returned, and when a link resolution exists for
+		the context.
+	*/
 
-	if (!overrides().empty() && !state_combo.empty()) {
-		if (LAttribute* override_attr = override_attribute(state_combo))
-			return override_attr->as<T>();
+	if (definition_attribute())
+		return definition_attribute()->as<T>(state_name, definition);
+
+	// TEMP
+	if (definition && definition->object_name() == "Close Button" && object_name() == "Fill")
+	{
+		int i = 0;
+	}
+	
+	LAttributeMap _states = states();
+
+	LStringList state_names = split<LStringList>(state_name, '::');
+
+	for (LString state_n : state_names)
+	{
+		if (_states.count(state_n))
+			return _states[state_n]->as<T>("", definition);
 	}
 
-	if (link_attribute())
-		return link_attribute()->as<T>();
+	//if (state_name != "" && _states.count(state_name))
+	//	return _states[state_name]->as<T>("", definition);
+	
+	if (link())
+	{
+		if (link()->attribute())
+			return link()->attribute()->as<T>();
+
+		else if (link()->resolutions().count(definition))
+		{
+			LResolution res = link()->resolutions()[definition];
+
+        	return res.target_attribute->as<T>("", res.target_definition);
+		}
+	}
+
+	if (value().index() == 0)
+	{
+		if (definition->base())
+			return definition->base()->find_attribute(object_name())->as<T>(state_name, definition);
+
+		/*
+			- Check if base attribute exists and return its value
+		*/
+	}
 
 	return std::get<T>(value());
 }
 
+// template<typename T>
+// T LAttribute::as(LDefinition* definition)
+// {
+// //T LAttribute::as(const std::vector<LString>& state_combo) {
+// 	if (definition_attribute())
+// 		return definition_attribute()->as<T>(definition);
+
+// 	// TEMP: Disabling override valuation
+// 	// if (!overrides().empty() && !state_combo.empty())
+// 	// 	if (LAttribute* override_attr = override_attribute(definable))
+// 	// 		return override_attr->as<T>();
+
+// 	if (dynamic_link())
+// 	{
+// 		LStringList link_parts =
+// 			split<LStringList>(dynamic_link()->path(), '/');
+
+// 		/*
+// 			NOTE:
+// 			The following assumes that dynamic links always begin with double-
+// 			dot notation and that there is always only 1 of them. Other cases
+// 			have not yet been considered.
+// 		*/
+// 		if (link_parts[0] == "..")
+// 		{
+// 			if (LObject* parent_parent_obj = definition->parent())
+// 			{
+// 				if (LDefinition* parent_parent_as_def = dynamic_cast<LDefinition*>(parent_parent_obj))
+// 				{
+// 					for (const auto& [key, attr] : parent_parent_as_def->attributes())
+// 						if (attr->object_name() == link_parts[1])
+// 							return attr->as<T>(parent_parent_as_def);
+// 				}
+// 			}
+// 			else
+// 			{
+// 				auto static_link_parts =
+// 					split<std::deque<LString>>(static_link()->path(), '/');
+// 				LString static_link_attr_name = static_link_parts.back();
+// 				static_link_parts.pop_back();
+
+// 				if (LDefinition* def = lController.find_definition(static_link_parts))
+// 					for (const auto& [attr_name, attr] : def->attributes())
+// 						if (attr_name == static_link_attr_name)
+// 							return attr->as<T>();
+// 			}
+// 		}
+// 	}
+// 	// TODO: Need to handle static link
+
+// 	//if (link_attribute())
+// 	//	return link_attribute()->as<T>();
+
+// 	return std::get<T>(value());
+// }
+
 template<typename T>
-const T* LAttribute::as_if(const std::vector<LString>& state_combo) {
-	if (theme_attribute())
-		return theme_attribute()->as_if<T>(state_combo);
+const T* LAttribute::as_if(const LString& state_name, LDefinition* definition)
+{
+//const T* LAttribute::as_if(const std::vector<LString>& state_combo) {
+	// if (definition_attribute())
+	// 	return definition_attribute()->as_if<T>(defintion);
 
-	if (!overrides().empty() && !state_combo.empty()) {
-		if (LAttribute* override_attr = override_attribute(state_combo))
-			return override_attr->as_if<T>();
+	// // if (!overrides().empty() && !state_combo.empty()) {
+	// // 	if (LAttribute* override_attr = override_attribute(definable))
+	// // 		return override_attr->as_if<T>();
+	// // }
+
+	// // if (link_attribute())
+	// // 	return link_attribute()->as_if<T>();
+
+	// return std::get_if<T>(&value());
+
+	if (definition_attribute())
+		return definition_attribute()->as_if<T>(state_name, definition);
+
+	LAttributeMap _states = states();
+
+	if (state_name != "" && _states.count(state_name))
+		return _states[state_name]->as_if<T>();
+	
+	if (link())
+	{
+		if (link()->attribute())
+			return link()->attribute()->as_if<T>();
+
+		else if (link()->resolutions().count(definition))
+		{
+			LResolution res = link()->resolutions()[definition];
+
+        	return res.target_attribute->as_if<T>(state_name, res.target_definition);
+		}
 	}
-
-	if (link_attribute())
-		return link_attribute()->as_if<T>();
 
 	return std::get_if<T>(&value());
 }
