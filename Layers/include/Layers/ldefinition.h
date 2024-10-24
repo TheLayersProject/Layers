@@ -53,6 +53,12 @@ public:
 		const std::filesystem::path& file_path,
 		LDefinition* parent = nullptr);
 
+	LDefinition(
+		const LString& name,
+		const LJsonObject& attributes_obj,
+		const std::filesystem::path& file_path,
+		LDefinition* parent = nullptr);
+
 	~LDefinition();
 
 	void append_child(LDefinition* child);
@@ -75,7 +81,7 @@ public:
 
 	LString file_name() const;
 
-	void finalize_attributes();
+	void finalize();
 
 	LAttribute* find_attribute(const LString& attr_name);
 
@@ -100,6 +106,13 @@ public:
 private:
 	class Impl;
 	Impl* pimpl;
+};
+
+struct LDefinitionBuilder
+{
+	LJsonObject attributes;
+	std::filesystem::path base_path;
+	LString base_name;
 };
 
 LAYERS_NAMESPACE_END

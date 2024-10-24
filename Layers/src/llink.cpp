@@ -26,26 +26,24 @@
 using Layers::LAttribute;
 using Layers::LDefinition;
 using Layers::LLink;
-using Layers::LResolution;
 using Layers::LString;
 
 class LLink::Impl
 {
 public:
-    LString absolute_path;
+    LString path;
     LString relative_path;
 
-    std::map<LDefinition*, LResolution> resolutions;
-
 	LAttribute* attribute{ nullptr };
+	LAttribute* relative_attribute{ nullptr };
 
-    Impl(const LString& absolute_path, const LString& relative_path) :
-        absolute_path{ absolute_path }, relative_path{ relative_path } {}
+    Impl(const LString& path, const LString& relative_path) :
+        path{ path }, relative_path{ relative_path } {}
 
     Impl(LAttribute* attribute) :
         attribute{ attribute } {}
 
-    bool resolve(LDefinition* definition)
+    bool resolve(LAttribute* attr)
     {
         if (!relative_path.empty())
         {
@@ -60,67 +58,47 @@ public:
             */
             if (relative_path_parts[0] == "..")
             {
-                if (LObject* def_parent_as_obj = definition->parent())
+                if (attr->parent())
                 {
-                    if (LDefinition* def_parent = dynamic_cast<LDefinition*>(def_parent_as_obj))
+                    if (LDefinition* def = dynamic_cast<LDefinition*>(attr->parent()))
                     {
-                        for (const auto& [key, attr] : def_parent->attributes())
-                            if (attr->object_name() == relative_path_parts[1])
+                        if (def->parent())
+                        {
+                            if (LDefinition* def_parent = dynamic_cast<LDefinition*>(def->parent()))
                             {
-                                LResolution res;
-                                res.target_definition = def_parent;
-                                res.target_attribute = attr;
+                                for (const auto& [key, attr] : def_parent->attributes())
+                                    if (attr->object_name() == relative_path_parts[1])
+                                    {
+                                        relative_attribute = attr;
 
-                                resolutions[definition] = res;
-                                return true;
-                                //return attr->as<T>(parent_parent_as_def);
+                                        //return true;
+                                        //return attr->as<T>(parent_parent_as_def);
+                                    }
                             }
+                        }
                     }
-                }
-                else
-                {
-                    auto absolute_path_parts =
-                        split<std::deque<LString>>(absolute_path, '/');
-                    LString absolute_attr_name = absolute_path_parts.back();
-                    absolute_path_parts.pop_back();
-
-                    if (LDefinition* def = lController.find_definition(absolute_path_parts))
-                        for (const auto& [attr_name, attr] : def->attributes())
-                            if (attr_name == absolute_attr_name)
-                            {
-                                LResolution res;
-                                res.target_definition = def;
-                                res.target_attribute = attr;
-
-                                resolutions[definition] = res;
-                                return true;
-                                //return attr->as<T>();
-                            }
                 }
             }
         }
-        else if (!absolute_path.empty())
+        
+        if (!path.empty())
         {
-            auto absolute_path_parts =
-                        split<std::deque<LString>>(absolute_path, '/');
-                    LString absolute_attr_name = absolute_path_parts.back();
-                    absolute_path_parts.pop_back();
+            auto path_parts = split<std::deque<LString>>(path, '/');
+                    LString absolute_attr_name = path_parts.back();
+                    path_parts.pop_back();
 
-                    if (LDefinition* def = lController.find_definition(absolute_path_parts))
+                    if (LDefinition* def = lController.find_definition(path_parts))
                         for (const auto& [attr_name, attr] : def->attributes())
                             if (attr_name == absolute_attr_name)
                             {
-                                LResolution res;
-                                res.target_definition = def;
-                                res.target_attribute = attr;
+                                attribute = attr;
 
-                                resolutions[definition] = res;
                                 return true;
                                 //return attr->as<T>();
                             }
         }
 
-        return false;
+        return true;
     }
 };
 
@@ -131,16 +109,16 @@ LLink::LLink(LAttribute* attribute) :
 	pimpl{ new Impl(attribute) } {}
 
  LAttribute* LLink::attribute() const
- {
-     return pimpl->attribute;
- }
-
-std::map<LDefinition*, LResolution> LLink::resolutions()
 {
-    return pimpl->resolutions;
+    return pimpl->attribute;
 }
 
-bool LLink::resolve(LDefinition* definition)
+ LAttribute* LLink::relative_attribute() const
+ {
+     return pimpl->relative_attribute;
+ }
+
+bool LLink::resolve(LAttribute* attr)
 {
-    return pimpl->resolve(definition);
+    return pimpl->resolve(attr);
 }

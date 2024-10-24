@@ -27,13 +27,15 @@ using Layers::LConnectionID;
 using Layers::LJsonObject;
 using Layers::LJsonValue;
 using Layers::LLink;
+using Layers::LObject;
 using Layers::LString;
+using Layers::LStringList;
 using Layers::LVariant;
 
-template double LAttribute::as<double>(const LString&, LDefinition*);
-template bool LAttribute::as<bool>(const LString&, LDefinition*);
-template LString LAttribute::as<LString>(const LString&, LDefinition*);
-template std::vector<LString> LAttribute::as<std::vector<LString>>(const LString&, LDefinition*);
+template double LAttribute::as<double>(const LStringList&);
+template bool LAttribute::as<bool>(const LStringList&);
+template LString LAttribute::as<LString>(const LStringList&);
+template LStringList LAttribute::as<LStringList>(const LStringList&);
 
 class LAttribute::Impl
 {
@@ -116,6 +118,22 @@ public:
 					array[1].to_string().remove("L:"),
 					array[0].to_string().remove("L:"));
 			}
+		}
+		else if (json_value.is_object())
+		{
+			LJsonObject obj = json_value.to_object();
+
+			LString absolute_link_path = "";
+			LString relative_link_path = "";
+
+			if (obj.count("link"))
+				absolute_link_path = obj["link"].to_string().remove("L:");
+
+			if (obj.count("link_relative"))
+				relative_link_path = obj["link_relative"].to_string().remove("L:");
+
+			if (!absolute_link_path.empty())
+				link = new LLink(absolute_link_path, relative_link_path);
 		}
 	}
 
@@ -266,30 +284,27 @@ public:
 		return LConnectionID();
 	}
 
-	LAttribute* state(const LString& name)
+	LAttribute* state(const LStringList& state_combo)
 	{
-		if (states.count(name))
-			return states[name];
+		for (const auto& [key, state_attr] : states)
+		{
+			auto state_names =
+				split<LStringList>(state_attr->object_name(), ':');
 
-		//for (const auto& [key, state_attr] : states)
-		//{
-		//	auto override_states =
-		//		split<LStringList>(state_attr->object_name(), ':');
+			bool qualifies = true;
 
-		//	bool qualifies = true;
+			for (const auto& state_name : state_names)
+			{
+				if (std::find(state_combo.begin(), state_combo.end(),
+					state_name) == state_combo.end())
+				{
+					qualifies = false;
+				}
+			}
 
-		//	for (const auto& override_state : override_states)
-		//	{
-		//		if (std::find(state_combo.begin(), state_combo.end(),
-		//			override_state) == state_combo.end())
-		//		{
-		//			qualifies = false;
-		//		}
-		//	}
-
-		//	if (qualifies)
-		//		return state_attr;
-		//}
+			if (qualifies)
+				return state_attr;
+		}
 
 		// TODO: Handle returning override with highest number of matching
 		// states. If there is a conflict (two matching overrides), just
@@ -337,18 +352,6 @@ public:
 
 	// 	m_value = LVariant();
 	// }
-
-	void resolve_links(LDefinition* definition)
-	{
-		if (link)
-		{
-			if (!link->resolve(definition));
-			// TODO: Handle link resolution failure
-		}
-
-		for (const auto& [key, state] : states)
-			state->pimpl->resolve_links(definition);
-	}
 
 	void set_definition_attribute(
 		LObject* parent, LAttribute* definition_attribute)
@@ -671,10 +674,9 @@ LConnectionID LAttribute::on_link_change(std::function<void()> callback)
 	return pimpl->on_link_change(callback);
 }
 
-LAttribute* LAttribute::state(const LString& name)
-
+LAttribute* LAttribute::state(const LStringList& state_combo)
 {
-	return pimpl->state(name);
+	return pimpl->state(state_combo);
 }
 
 LAttributeMap LAttribute::states() const
@@ -717,17 +719,24 @@ LString LAttribute::path() const
 	return object_name();
 }
 
-void LAttribute::resolve_links(LDefinition* definition)
+void LAttribute::resolve_links()
 {
-	pimpl->resolve_links(definition);
-
-	if (!link() && value().index() == 0)
+	if (pimpl->link)
 	{
-		if (definition->base())
-		{
-			definition->base()->find_attribute(object_name())->resolve_links(definition);
-		}
+		if (!pimpl->link->resolve(this));
+		// TODO: Handle link resolution failure
 	}
+
+	for (const auto& [key, state] : pimpl->states)
+		state->resolve_links();
+
+	//if (!link() && value().index() == 0)
+	//{
+	//	if (definition->base())
+	//	{
+	//		definition->base()->find_attribute(object_name())->resolve_links(definition);
+	//	}
+	//}
 }
 
 // void LAttribute::set_link_attribute(LAttribute* link_attr)
@@ -794,4 +803,16 @@ const LVariant& LAttribute::value()
 void LAttribute::update_dependencies()
 {
 	pimpl->update_dependencies(parent());
+}
+
+LAYERS_EXPORT LAttributeMap Layers::attributes_from_json(const LJsonValue& json_val, LObject* parent)
+{
+	LAttributeMap attributes;
+
+	LJsonObject json_obj = json_val.to_object();
+
+	for (const auto& [key, attr] : json_obj)
+		attributes[key] = new LAttribute(key, json_obj[key]);
+
+	return attributes;
 }

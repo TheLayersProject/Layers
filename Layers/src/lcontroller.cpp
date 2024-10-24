@@ -42,7 +42,9 @@ public:
 	std::map<LString, LTheme*> themes;
 	LTheme* active_theme{ nullptr };
 
-	LDefinition* root_definition{ new LDefinition("", LJsonValue(), "") };
+	std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>> definition_builders;
+
+	LDefinition* root_definition{ new LDefinition  };
 
 	Impl()
 	{
@@ -60,20 +62,6 @@ public:
 		if (theme)
 			themes[theme->display_id()] = theme;
 	}
-
-	// void finalize_attributes(LDefinition* def)
-	// {
-	// 	/* 
-	// 		TODO:
-	// 		The attributes() function needs to only operate on
-	// 		local attributes, not base attributes.
-	// 	*/
-	// 	for (auto [attr_name, attr] : def->attributes())
-	// 		attr->finalize();
-
-	// 	for (auto [child_name, child] : def->children())
-	// 		finalize_attributes(child);
-	// }
 
 	std::map<std::filesystem::path, std::string> load_definition_path(
 		const std::filesystem::path& path)
@@ -100,91 +88,102 @@ public:
 
 	void load_definitions(const std::filesystem::path& path)
 	{
-        std::map<std::filesystem::path, std::string> file_strings = 
-			load_definition_path(path);
+		// Load and Parse Aliases
+		std::map<std::filesystem::path, std::string> file_strings = load_definition_path(path);
+		parse_aliases(path, file_strings);
 
-		std::map<std::filesystem::path, std::set<std::filesystem::path>>
-            dependencies;
+		// Build Definition Builders
 
-        std::map<std::filesystem::path, std::vector<LDefinition*>>
-            path_definitions;
-		
-        std::vector<LDefinition*> unparented_definitions;
+		std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>> unresolved_builders =
+			build_definition_builders(file_strings);
 
-		// Parse aliases
+		// Build Definitions
 
-		for (const auto& entry : std::filesystem::directory_iterator(path))
+		build_definitions(unresolved_builders);
+
+		//// Resolve Links
+
+		//root_definition->resolve_links();
+
+		int x = 26;
+	}
+
+	void build_definitions(std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>>& unresolved_builders)
+	{
+		std::vector<LDefinition*> unparented_definitions;
+
+		while (!unresolved_builders.empty())
 		{
-			if (entry.is_regular_file() && entry.path().filename() == "_aliases.json")
+			std::set<std::filesystem::path> resolvable_paths;
+
+			for (const auto& [path, file_builders] : unresolved_builders)
 			{
-				std::string aliases_data = load_json_file(entry.path());
+				bool ready_to_finalize = true;
 
-				aliases_data = remove_whitespace(aliases_data);
-
-				std::map<LString, LString> aliases;
-
-				LJsonLexer aliases_lexer = LJsonLexer(aliases_data);
-				LJsonParser aliases_parser = LJsonParser(aliases_lexer);
-				LJsonObject aliases_object = aliases_parser.parse_object();
-
-				for (const auto& [key, object_val] : aliases_object)
-					aliases[key] = object_val.to_string();
-
-				for (const auto& [alias_key, alias] : aliases)
+				for (const auto& [key, builder] : file_builders)
 				{
-					for (auto& [file_path, file_string] : file_strings)
+					if (!builder.base_path.empty())
 					{
-						size_t pos = 0;
-
-						while ((pos = file_string.find(alias_key.c_str(), pos)) != std::string::npos)
+						if (definition_builders.count(builder.base_path))
 						{
-							file_string.replace(pos, std::string(alias_key.c_str()).length(), std::string(alias.c_str()));
-							pos += std::string(alias.c_str()).length(); // Move past the last replaced substring
+							if (!definition_builders[builder.base_path].count(builder.base_name.c_str()))
+								ready_to_finalize = false;
 						}
+						else
+							ready_to_finalize = false;
 					}
 				}
+
+				if (ready_to_finalize)
+				{
+					resolvable_paths.insert(path);
+					//break;
+				}
+			}
+
+			// If none of the paths can resolve, break the loop
+			if (resolvable_paths.empty())
+				break;
+
+			for (const auto& path : resolvable_paths)
+			{
+				for (auto& [key, builder] : unresolved_builders[path])
+				{
+					// Merge Attributes
+
+					if (!builder.base_path.empty())
+					{
+						LDefinitionBuilder& base_builder =
+							definition_builders[builder.base_path][builder.base_name];
+
+						builder.attributes = merge_attributes(base_builder.attributes, builder.attributes);
+					}
+
+					// Create Definition
+
+					LDefinition* def = new LDefinition(key, builder.attributes, path);
+
+					// Append Definition
+
+					if (std::string(key.c_str()).find("/") != std::string::npos)
+						unparented_definitions.push_back(def);
+					else
+						root_definition->append_child(def);
+
+					// Store Builder
+
+					definition_builders[path][key] = builder;
+				}
+
+				unresolved_builders.erase(path);
 			}
 		}
 
-        // Init Definitions
+		// Resolve Parents
 
-        for (const auto& [file_path, file_string] : file_strings)
-        {
-            LJsonLexer lexer(file_string);
-			LJsonParser parser(lexer);
-			LJsonObject json_object = parser.parse_object();
-
-            std::set<std::filesystem::path> file_dependencies;
-
-            for (const auto& [key, value] : json_object)
-            {
-                LDefinition* def = new LDefinition(key, value, file_path);
-
-                path_definitions[file_path].push_back(def);
-
-                for (const std::filesystem::path& dep : def->dependencies())
-                    if (!dep.empty())
-                        file_dependencies.insert(dep);
-            }
-
-            if (!file_dependencies.empty())
-                dependencies[file_path] = file_dependencies;
-        }
-
-        // Resolve Parents
-
-        for (const auto& [path, definitions] : path_definitions)
-            for (const auto& def : definitions)
-            {
-                if (std::string(def->object_name().c_str()).find("/") != std::string::npos)
-                    unparented_definitions.push_back(def);
-                else
-                    root_definition->append_child(def);
-            }
-
-        for (const auto& unparented_def : unparented_definitions)
-        {
-            LString unparented_def_name =
+		for (const auto& unparented_def : unparented_definitions)
+		{
+			LString unparented_def_name =
 				unparented_def->object_name();
 
 			auto name_list = split<std::deque<LString>>(
@@ -198,50 +197,166 @@ public:
 				unparented_def->set_parent(parent_def);
 				parent_def->append_child(unparented_def);
 			}
-        }
+		}
+	}
 
-        // Resolve Inheritances
+	LJsonObject merge_attributes(const LJsonObject& base_attributes, const LJsonObject& attributes)
+	{
+		LJsonObject merged_attributes = base_attributes;
 
-        while (!dependencies.empty())
-        {
-            std::set<std::filesystem::path> resolvable_paths;
+		for (const auto& [key, attr_val] : attributes)
+		{
+			if (merged_attributes.count(key))
+			{
+				if (attr_val.is_object())
+				{
+					LJsonObject attr_obj = attr_val.to_object();
 
-            for (const auto& [path, file_dependencies] : dependencies)
-            {
-                bool ready_to_finalize = true;
+					if (attr_obj.count("states"))
+					{
+						// Append states that are not already present
+						// Override states that are already present
+					}
+				}
+				else
+					merged_attributes[key] = attr_val;
+			}
+			else
+				merged_attributes[key] = attr_val;
+		}
 
-                for (const auto& dep : file_dependencies)
-                    if (dependencies.count(dep))
-                        ready_to_finalize = false;
+		return merged_attributes;
+	}
 
-                if (ready_to_finalize)
-                    resolvable_paths.insert(path);
-            }
+	void parse_aliases(const std::filesystem::path& path, std::map<std::filesystem::path, std::string>& file_strings)
+	{
+		for (const auto& entry : std::filesystem::directory_iterator(path))
+		{
+			if (entry.is_regular_file() && entry.path().filename() == "_aliases.json")
+			{
+				std::string aliases_data = load_json_file(entry.path());
+				aliases_data = remove_whitespace(aliases_data);
 
-            // If none of the paths can resolve, break the loop
-            if (resolvable_paths.empty())
-                break;
+				std::map<LString, LString> aliases;
+				LJsonLexer aliases_lexer = LJsonLexer(aliases_data);
+				LJsonParser aliases_parser = LJsonParser(aliases_lexer);
+				LJsonObject aliases_object = aliases_parser.parse_object();
 
-            for (const auto& path : resolvable_paths)
-            {
-                for (const auto& definition : path_definitions[path])
-                    resolve_base(definition);
+				for (const auto& [key, object_val] : aliases_object)
+					aliases[key] = object_val.to_string();
 
-                dependencies.erase(path);
-            }
-        }
+				for (const auto& [alias_key, alias] : aliases)
+				{
+					for (auto& [file_path, file_string] : file_strings)
+					{
+						size_t pos = 0;
+						while ((pos = file_string.find(alias_key.c_str(), pos)) != std::string::npos)
+						{
+							file_string.replace(pos, std::string(alias_key.c_str()).length(), std::string(alias.c_str()));
+							pos += std::string(alias.c_str()).length();
+						}
+					}
+				}
+			}
+		}
+	}
 
-		// Copy Base
+	void process_json_object(
+		std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>>& definition_builders,
+		const std::filesystem::path& file_path,
+		const LJsonObject& json_obj,
+		const LString& parent_path = "") 
+	{
+		for (const auto& [key, value] : json_obj) {
+			LString current_path = parent_path.empty() ? key : parent_path + "/" + key;
 
-		//for (const auto& [path, definitions] : path_definitions)
-		//	for (const auto& def : definitions)
-		//		def->copy_base();
+			LDefinitionBuilder definition_builder;
 
-		// Finalize Attributes
+			// Check if this object includes another definition
+			if (value.is_string())
+			{
+				std::string include(value.to_string().c_str());
+				size_t delim_pos = include.find("::");
+				std::string file_part = include.substr(0, delim_pos);
+				std::string widget_name = include.substr(delim_pos + 2);
 
-		//for (const auto& [path, definitions] : path_definitions)
-  //          for (const auto& def : definitions)
-		//		def->finalize_attributes();
+				// Check if the path contains a slash character
+				if (file_part.find('/') != std::string::npos ||
+					file_part.find('\\') != std::string::npos)
+				{
+					definition_builder.base_path = definitions_path() / file_part;
+				}
+				else
+				{
+					// File is a relative path within the same project directory
+					definition_builder.base_path = file_path.parent_path() / file_part;
+				}
+
+				definition_builder.base_name = widget_name.c_str();
+			}
+			else if (value.is_object())
+			{
+				LJsonObject value_obj = value.to_object();
+
+				if (value_obj.count("_include"))
+				{
+					std::string include(value_obj["_include"].to_string().c_str());
+					size_t delim_pos = include.find("::");
+					std::string file_part = include.substr(0, delim_pos);
+					std::string widget_name = include.substr(delim_pos + 2);
+
+					// Check if the path contains a slash character
+					if (file_part.find('/') != std::string::npos ||
+						file_part.find('\\') != std::string::npos)
+					{
+						definition_builder.base_path = definitions_path() / file_part;
+					}
+					else
+					{
+						// File is a relative path within the same project directory
+						definition_builder.base_path = file_path.parent_path() / file_part;
+					}
+
+					definition_builder.base_name = widget_name.c_str();
+				}
+
+				if (value_obj.count("attributes"))
+				{
+					definition_builder.attributes = value_obj["attributes"].to_object();
+				}
+
+				// Recursively process children if they exist
+				if (value_obj.count("children"))
+				{
+					process_json_object(
+						definition_builders,
+						file_path,
+						value_obj["children"].to_object(),
+						current_path);
+				}
+			}
+
+			definition_builders[file_path][current_path] = definition_builder;
+		}
+	}
+
+	std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>> build_definition_builders(
+		const std::map<std::filesystem::path, std::string>& file_strings)
+	{
+		std::map<std::filesystem::path, std::map<LString, LDefinitionBuilder>> definition_builders;
+
+		for (const auto& [file_path, content] : file_strings) {
+			// Parse the JSON content
+			LJsonLexer lexer(content);
+			LJsonParser parser(lexer);
+			LJsonObject root = parser.parse_object();
+
+			// Process the JSON object to build the definition builders
+			for (const auto& [key, value] : root) {
+				process_json_object(definition_builders, file_path, root);
+			}
+		}
+		return definition_builders;
 	}
 
 	LTheme* load_theme(const std::filesystem::path& directory)
@@ -309,56 +424,6 @@ public:
         for (const auto& [child_name, child_def] : definition->children())
             resolve_base(child_def);
     }
-
-    // void resolve_links(LDefinition* definition)
-	// {
-	// 	auto resolve = [this](LAttribute* attr)
-	// 		{
-	// 			if (!attr->link_path().empty())
-	// 			{
-	// 				auto name_list =
-	// 					split<std::deque<LString>>(attr->link_path(), '/');
-	// 				LString attr_name = name_list.back();
-	// 				name_list.pop_back();
-
-	// 				if (LDefinition* item = root__linksdefinition->find_item(name_list))
-	// 				{
-	// 					for (const auto& [key, item_attr] : item->attributes())
-	// 					{
-	// 						if (item_attr->object_name() == attr_name)
-	// 						{
-	// 							attr->set_link_attribute(item_attr);
-	// 							return;
-	// 						}
-	// 						else
-	// 						{
-	// 							for (const auto& [override_key, override_attr] :
-	// 								item_attr->overrides())
-	// 							{
-	// 								if (item_attr->object_name() + "." +
-	// 									override_attr->object_name() == attr_name)
-	// 								{
-	// 									attr->set_link_attribute(override_attr);
-	// 									return;
-	// 								}
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		};
-
-	// 	for (const auto& [key, attr] : definition->attributes())
-	// 	{
-	// 		resolve(attr);
-
-	// 		for (const auto& [override_key, override_attr] : attr->overrides())
-	// 			resolve(override_attr);
-	// 	}
-
-	// 	for (const auto& [key, child_def] : definition->children())
-	// 		resolve_links(child_def);
-	// }
 };
 
 LController::LController() : pimpl(new Impl) {}

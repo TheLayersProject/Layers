@@ -53,6 +53,9 @@ class LAttribute;
 using LAttributeList = std::vector<LAttribute*>;
 using LAttributeMap = std::map<LString, LAttribute*>;
 
+LAYERS_EXPORT LAttributeMap attributes_from_json(
+	const LJsonValue& json_val, LObject* parent = nullptr);
+
 class LAYERS_EXPORT LAttribute : public LObject
 {
 public:
@@ -74,12 +77,10 @@ public:
 	~LAttribute();
 
 	template<typename T>
-	T as(const LString& state_name = "", LDefinition* definition = nullptr);
-	//T as(const std::vector<LString>& state_combo = std::vector<LString>());
+	T as(const LStringList& state_combo = LStringList());
 
 	template<typename T>
-	const T* as_if(const LString& state_name = "", LDefinition* definition = nullptr);
-	//const T* as_if(const std::vector<LString>& state_combo = std::vector<LString>());
+	const T* as_if(const LStringList& state_combo = LStringList());
 
 	void break_link();
 
@@ -114,13 +115,13 @@ public:
 
 	LConnectionID on_link_change(std::function<void()> callback);
 
-	LAttribute* state(const LString& name);
+	LAttribute* state(const LStringList& state_combo);
 
 	LAttributeMap states() const;
 
 	LString path() const;
 
-	void resolve_links(LDefinition* definition);
+	void resolve_links();
 
 	//void set_link_attribute(LAttribute* link_attr);
 
@@ -152,60 +153,31 @@ private:
 };
 
 template<typename T>
-T LAttribute::as(const LString& state_name, LDefinition* definition)
+T LAttribute::as(const LStringList& state_combo)
 {
-	/*
-		TODO:
-		Need to consider all cases that need definition context.
-		For now, context is only passed when a definition attribute is present
-		(in cases where this is likely a definable attribute), when the
-		base attribute value is returned, and when a link resolution exists for
-		the context.
-	*/
-
-	if (definition_attribute())
-		return definition_attribute()->as<T>(state_name, definition);
-
-	// TEMP
-	if (definition && definition->object_name() == "Close Button" && object_name() == "Fill")
+	if (parent() && parent()->object_name() == "Tabs" && object_name() == "Fill")
 	{
-		int i = 0;
-	}
-	
-	LAttributeMap _states = states();
-
-	LStringList state_names = split<LStringList>(state_name, '::');
-
-	for (LString state_n : state_names)
-	{
-		if (_states.count(state_n))
-			return _states[state_n]->as<T>("", definition);
-	}
-
-	//if (state_name != "" && _states.count(state_name))
-	//	return _states[state_name]->as<T>("", definition);
-	
-	if (link())
-	{
-		if (link()->attribute())
-			return link()->attribute()->as<T>();
-
-		else if (link()->resolutions().count(definition))
+		if (LDefinition* parent_def = dynamic_cast<LDefinition*>(parent()))
 		{
-			LResolution res = link()->resolutions()[definition];
-
-        	return res.target_attribute->as<T>("", res.target_definition);
+			int x = 26;
 		}
 	}
 
-	if (value().index() == 0)
+	if (definition_attribute())
+		return definition_attribute()->as<T>(state_combo);
+	
+	if (!states().empty() && !state_combo.empty()) {
+		if (LAttribute* state_attr = state(state_combo))
+			return state_attr->as<T>();
+	}
+	
+	if (link())
 	{
-		if (definition->base())
-			return definition->base()->find_attribute(object_name())->as<T>(state_name, definition);
+		if (link()->relative_attribute())
+			return link()->attribute()->as<T>();
 
-		/*
-			- Check if base attribute exists and return its value
-		*/
+		else if (link()->attribute())
+			return link()->attribute()->as<T>();
 	}
 
 	return std::get<T>(value());
@@ -268,7 +240,7 @@ T LAttribute::as(const LString& state_name, LDefinition* definition)
 // }
 
 template<typename T>
-const T* LAttribute::as_if(const LString& state_name, LDefinition* definition)
+const T* LAttribute::as_if(const LStringList& state_combo)
 {
 //const T* LAttribute::as_if(const std::vector<LString>& state_combo) {
 	// if (definition_attribute())
@@ -285,24 +257,20 @@ const T* LAttribute::as_if(const LString& state_name, LDefinition* definition)
 	// return std::get_if<T>(&value());
 
 	if (definition_attribute())
-		return definition_attribute()->as_if<T>(state_name, definition);
+		return definition_attribute()->as_if<T>(state_combo);
 
-	LAttributeMap _states = states();
-
-	if (state_name != "" && _states.count(state_name))
-		return _states[state_name]->as_if<T>();
+	if (!states().empty() && !state_combo.empty()) {
+		if (LAttribute* state_attr = state(state_combo))
+			return state_attr->as_if<T>();
+	}
 	
 	if (link())
 	{
-		if (link()->attribute())
+		if (link()->relative_attribute())
 			return link()->attribute()->as_if<T>();
 
-		else if (link()->resolutions().count(definition))
-		{
-			LResolution res = link()->resolutions()[definition];
-
-        	return res.target_attribute->as_if<T>(state_name, res.target_definition);
-		}
+		else if (link()->attribute())
+			return link()->attribute()->as_if<T>();
 	}
 
 	return std::get_if<T>(&value());

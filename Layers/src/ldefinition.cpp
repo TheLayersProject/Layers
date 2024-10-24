@@ -43,7 +43,7 @@ public:
 
 	std::map<LString, LDefinition*> m_children;
 	std::map<LString, LAttribute*> m_attributes;
-	//LString m_file_name;
+
 	bool m_is_overridable{ false };
 
 	Impl() {}
@@ -118,6 +118,15 @@ public:
 				for (const auto& [key, value] : object["children"].to_object())
 					append_child(new LDefinition(key, value, file_path));
 		}
+	}
+
+	Impl(
+		const LJsonObject& attributes_obj,
+		const std::filesystem::path& file_path) :
+		file_path{ file_path }
+		//value{ value }
+	{
+		m_attributes = attributes_from_json(attributes_obj);
 	}
 
 	void append_child(LDefinition* child)
@@ -228,8 +237,20 @@ public:
 		return LString(file_path.filename().string().c_str());
 	}
 
-	void finalize_attributes()
+	void finalize()
 	{
+		//for (auto& [base_attr_name, base_attr] : base->attributes())
+		//{
+		//	if (m_attributes.count(base_attr_name))
+		//	{
+		//		// Handle attribute overriding and amendment
+		//	}
+		//	else
+		//	{
+		//		m_attributes[base_attr_name] = LAttribute(base_attr);
+		//	}
+		//}
+
 		// for (auto [attr_name, attr] : m_attributes)
 		// {
 		// 	/*
@@ -339,22 +360,37 @@ LDefinition::LDefinition() :
 	pimpl{ new Impl() },
 	LObject() {}
 
+//LDefinition::LDefinition(
+//	const LString& name,
+//	const LJsonValue& value,
+//	const std::filesystem::path& file_path,
+//	LDefinition* parent
+//) :
+//	pimpl{ new Impl(value, file_path) },
+//	LObject(parent)
+//{
+//	set_object_name(name);
+//
+//	for (const auto& [key, attr] : attributes())
+//		attr->set_parent(this);
+//
+//	for (const auto& [name, definition] : children())
+//		definition->set_parent(this);
+//}
+
 LDefinition::LDefinition(
 	const LString& name,
-	const LJsonValue& value,
+	const LJsonObject& attributes_obj,
 	const std::filesystem::path& file_path,
 	LDefinition* parent
 ) :
-	pimpl{ new Impl(value, file_path) },
+	pimpl{ new Impl(attributes_obj, file_path) },
 	LObject(parent)
 {
 	set_object_name(name);
 
 	for (const auto& [key, attr] : attributes())
 		attr->set_parent(this);
-
-	for (const auto& [name, definition] : children())
-		definition->set_parent(this);
 }
 
 LDefinition::~LDefinition()
@@ -411,9 +447,9 @@ LString LDefinition::file_name() const
 	return pimpl->file_name();
 }
 
-void LDefinition::finalize_attributes()
+void LDefinition::finalize()
 {
-	pimpl->finalize_attributes();
+	pimpl->finalize();
 }
 
 LAttribute* LDefinition::find_attribute(const LString& attr_name)
@@ -487,7 +523,7 @@ LString LDefinition::path() const
 void LDefinition::resolve_links()
 {
 	for (const auto& [attr_name, attr] : attributes())
-		attr->resolve_links(this);
+		attr->resolve_links();
 
 	for (const auto& [def_name, def] : children())
 		def->resolve_links();

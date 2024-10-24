@@ -36,24 +36,18 @@ class LDefinition;
 class LLink;
 using LLinkList = std::vector<LLink*>;
 
-struct LAYERS_EXPORT LResolution
-{
-    LDefinition* target_definition{ nullptr };
-    LAttribute* target_attribute{ nullptr };
-};
-
 class LAYERS_EXPORT LLink
 {
 public:
-	LLink(const LString& absolute_path, const LString& relative_path = "");
+	LLink(const LString& path, const LString& relative_path = "");
 
     LLink(LAttribute* attribute);
 
     LAttribute* attribute() const;
 
-    std::map<LDefinition*, LResolution> resolutions();
+	LAttribute* relative_attribute() const;
 
-    bool resolve(LDefinition* definition);
+    bool resolve(LAttribute* attr);
 
 private:
 	class Impl;
