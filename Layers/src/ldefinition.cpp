@@ -379,8 +379,20 @@ public:
 		LJsonObject attributes_object;
 		LJsonObject children_object;
 
-		//for (const auto& [key, attr] : m_attributes)
-		//	attributes_object[key] = attr->json_object();
+		for (const auto& [key, attr] : m_attributes)
+		{
+			LJsonObject attr_object = attr->to_json_object();
+
+			if (attr_object.size() == 1 &&
+				attr_object.begin()->first == "value")
+			{
+				attributes_object[key] = attr_object["value"];
+			}
+			else
+			{
+				attributes_object[key] = attr_object;
+			}
+		}
 
 		for (const auto& [key, child] : m_children)
 			if (child->pimpl->file_name() == file_name())
@@ -392,9 +404,6 @@ public:
 
 		if (!children_object.empty())
 			item_object["children"] = children_object;
-
-		if (m_is_overridable)
-			item_object["is_overridable"] = m_is_overridable;
 
 		return item_object;
 	}
@@ -425,6 +434,13 @@ LDefinition::LDefinition(
 LDefinition::~LDefinition()
 {
 	delete pimpl;
+}
+
+void LDefinition::add_attribute(LAttribute* attribute)
+{
+	pimpl->m_attributes[attribute->object_name()] = attribute;
+
+	attribute->set_parent(this);
 }
 
 void LDefinition::append_child(LDefinition* child)

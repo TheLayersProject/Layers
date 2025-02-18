@@ -38,6 +38,8 @@ class LAYERS_EXPORT LTheme : public LDefinition
 public:
 	LTheme();
 
+	LTheme(const LString& name, const LString& publisher);
+
 	LTheme(
 		const LString& name,
 		const LJsonValue& value,
@@ -60,6 +62,8 @@ public:
 
 	LString publisher() const;
 
+	void save();
+
 	void save_meta_file();
 
 	void set_dir(const std::filesystem::path& directory);
@@ -67,6 +71,8 @@ public:
 	void set_edit_mode_enabled(bool enabled = true);
 
 	void set_publisher(const LString& publisher);
+
+	LJsonObject to_json_object() const;
 
 	LString uuid() const;
 

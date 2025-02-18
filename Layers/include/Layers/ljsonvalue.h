@@ -73,7 +73,7 @@ public:
 	LString to_string() const;
 
 	LString to_output(
-		int indent_space_count = 2, int indent_level = 0) const;
+		int indent_space_count = 4, int indent_level = 0) const;
 
 	LJsonValue& operator=(const LJsonValue& other);
 

@@ -48,6 +48,8 @@ public:
 
 	~LDefinition();
 
+	void add_attribute(LAttribute* attribute);
+
 	void append_child(LDefinition* child);
 
 	void apply_style(LDefinition* style_def);

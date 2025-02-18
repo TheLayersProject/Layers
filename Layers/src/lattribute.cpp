@@ -53,8 +53,6 @@ public:
 
 	LVariant value;
 
-	LJsonValue json_value;
-
 	LConnections m_change_connections;
 	LConnectionID m_change_connections_next_id;
 
@@ -72,8 +70,7 @@ public:
 	Impl(const LString& name, const LVariant& value) :
 		value{ value } {}
 
-	Impl(const LString& name, LJsonValue json_value) :
-		json_value{ json_value }
+	Impl(const LString& name, LJsonValue json_value)
 	{
 		if (json_value.is_object())
 		{
@@ -363,25 +360,32 @@ public:
 	{
 		LJsonObject json_object;
 
-		// if (!m_link_path.empty())
-		// {
-		// 	json_object["linked_to"] = m_link_path;
-		// }
-		// else if (m_value.index() > 0)
-		// {
-		// 	json_object["value"] = to_json_value();
-		// }
+		if (link)
+		{
+			if (!link->path().empty())
+			{
+				json_object["link"] = link->path();
+			}
+			else if (!link->relative_path().empty())
+			{
+				json_object["link_relative"] = link->relative_path();
+			}
+		}
+		else if (value.index() > 0)
+		{
+			json_object["value"] = to_json_value();
+		}
 
-		// if (has_overrides())
-		// {
-		// 	LJsonObject overrides_json_object;
+		if (!states.empty())
+		{
+			LJsonObject overrides_json_object;
 
-		// 	for (const auto& [key, override_attr] : m_overrides)
-		// 		overrides_json_object[override_attr->object_name()] =
-		// 		override_attr->to_json_object();
+			for (const auto& [key, override_attr] : states)
+				overrides_json_object[override_attr->object_name()] =
+				override_attr->to_json_object();
 
-		// 	json_object["overrides"] = overrides_json_object;
-		// }
+			json_object["states"] = overrides_json_object;
+		}
 
 		return json_object;
 	}
@@ -390,25 +394,25 @@ public:
 	{
 		LJsonValue json_value;
 
-		// if (const auto& bool_val = std::get_if<bool>(&m_value))
-		// 	json_value = *bool_val;
+		if (const auto& bool_val = std::get_if<bool>(&value))
+			json_value = *bool_val;
 
-		// else if (const auto& double_val = std::get_if<double>(&m_value))
-		// 	json_value = *double_val;
+		else if (const auto& double_val = std::get_if<double>(&value))
+			json_value = *double_val;
 
-		// else if (const auto& string_val = std::get_if<LString>(&m_value))
-		// 	json_value = *string_val;
+		else if (const auto& string_val = std::get_if<LString>(&value))
+			json_value = *string_val;
 
-		// else if (const auto& gradient_stops_val =
-		// 	std::get_if<std::vector<LString>>(&m_value))
-		// {
-		// 	LJsonArray gradient;
+		else if (const auto& gradient_stops_val =
+			std::get_if<std::vector<LString>>(&value))
+		{
+			LJsonArray gradient;
 
-		// 	for (auto stop : *gradient_stops_val)
-		// 		gradient.push_back(stop);
+			for (auto stop : *gradient_stops_val)
+		 		gradient.push_back(stop);
 
-		// 	json_value = LJsonObject({ {"gradient", gradient } });
-		// }
+			json_value = gradient;
+		}
 
 		return json_value;
 	}
@@ -464,18 +468,6 @@ public:
 		 {
 		 	dependent_attr->pimpl->update_link_dependencies();
 		 }
-	}
-
-	void update_json_object()
-	{
-		// if (!m_link_path.empty())
-		// {
-		// 	m_json_object["linked_to"] = m_link_path;
-		// }
-		// else if (m_value.index() > 0)
-		// {
-		// 	m_json_object["value"] = to_json_value();
-		// }
 	}
 };
 

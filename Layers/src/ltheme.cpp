@@ -25,11 +25,13 @@
 #include <Layers/lattribute.h>
 #include <Layers/lgenerate.h>
 #include <Layers/lcontroller.h>
+#include <Layers/lpaths.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeMap;
 using Layers::LString;
 using Layers::LTheme;
+using Layers::LJsonObject;
 using Layers::LController;
 using Layers::LDefinition;
 
@@ -37,43 +39,6 @@ class LTheme::Impl
 {
 public:
 	Impl() {}
-
-	Impl(const std::filesystem::path& directory) :
-		m_path{ directory }
-	{
-		std::ifstream meta_file(m_path / "meta.json");
-
-		if (meta_file.is_open())
-		{
-			std::stringstream buffer;
-			buffer << meta_file.rdbuf();
-			std::string meta_data = buffer.str();
-			meta_file.close();
-
-			meta_data = remove_whitespace(meta_data);
-
-			LJsonLexer meta_lexer = LJsonLexer(meta_data);
-			LJsonParser meta_parser = LJsonParser(meta_lexer);
-			LJsonObject meta_obj = meta_parser.parse_object();
-
-			if (meta_obj.find("uuid") != meta_obj.end())
-				m_uuid = meta_obj["uuid"].to_string();
-
-			if (meta_obj.find("publisher") != meta_obj.end())
-				publisher = meta_obj["publisher"].to_string();
-
-			if (meta_obj.find("editable") != meta_obj.end())
-				m_editable = meta_obj["editable"].to_bool();
-
-			if (meta_obj.find("lineage") != meta_obj.end())
-				for (LJsonValue lineage_value : meta_obj["lineage"].to_array())
-					append_to_lineage(lineage_value.to_string());
-		}
-		else
-		{
-			std::cerr << "Could not read theme 'meta.json' file" << std::endl;
-		}
-	}
 
 	Impl(const LString& name, bool editable = true) :
 		m_uuid{ generate_uuid() },
@@ -169,7 +134,24 @@ public:
 };
 
 LTheme::LTheme() :
-	pimpl{ new Impl() }, LDefinition() {}
+	pimpl{ new Impl() }, LDefinition()
+{
+	add_attribute(new LAttribute("Foreground", "#000000"));
+	add_attribute(new LAttribute("Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" })));
+	add_attribute(new LAttribute("Primary", "#ffffff"));
+	add_attribute(new LAttribute("Secondary", "#ffffff"));
+	add_attribute(new LAttribute("Tertiary", "#ffffff"));
+}
+
+LTheme::LTheme(const LString& name, const LString& publisher) :
+	LTheme()
+{
+	set_object_name(name);
+	set_publisher(publisher);
+	pimpl->m_uuid = generate_uuid();
+
+	set_dir(latest_T_version_path() / LString(name + " (" + publisher + ")").c_str());
+}
 
 LTheme::LTheme(
 	const LString& name,
@@ -179,6 +161,8 @@ LTheme::LTheme(
 	pimpl{ new Impl() },
 	LDefinition(name, value.to_object(), file_path, parent)
 {
+	pimpl->m_path = file_path.parent_path();
+
 	if (value.is_object())
 	{
 		LJsonObject object = value.to_object();
@@ -250,6 +234,24 @@ void LTheme::set_publisher(const LString& publisher)
 	pimpl->publisher = publisher;
 }
 
+void LTheme::save()
+{
+	if (!std::filesystem::exists(directory()))
+	{
+		std::filesystem::create_directory(directory());
+	}
+
+	std::ofstream theme_file(directory() / "theme.json");
+	if (!theme_file.is_open())
+	{
+		std::cerr << "Could not write theme file: " << file_name().c_str() << std::endl;
+		return;
+	}
+
+	theme_file << LJsonValue(to_json_object()).to_output();
+	theme_file.close();
+}
+
 void LTheme::save_meta_file()
 {
 	pimpl->save_meta_file();
@@ -268,4 +270,19 @@ void LTheme::set_edit_mode_enabled(bool enabled)
 LString LTheme::uuid() const
 {
 	return pimpl->uuid();
+}
+
+LJsonObject LTheme::to_json_object() const
+{
+	LJsonObject meta_object;
+	meta_object["publisher"] = pimpl->publisher;
+	meta_object["uuid"] = pimpl->m_uuid;
+
+	LJsonObject theme_object = LDefinition::to_json_object();
+	theme_object["_meta"] = meta_object;
+
+	LJsonObject object;
+	object[object_name()] = theme_object;
+
+	return object;
 }
