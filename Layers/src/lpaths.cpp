@@ -24,11 +24,6 @@ std::filesystem::path Layers::app_path(const std::string& app_name)
 	return local_app_data_path() / app_name;
 }
 
-std::filesystem::path Layers::latest_T_version_path()
-{
-	return T2_path();
-}
-
 std::filesystem::path Layers::layers_path()
 {
 	return local_app_data_path() / "Layers";
@@ -39,24 +34,9 @@ std::filesystem::path Layers::definitions_path()
 	return layers_path() / "Definitions";
 }
 
-std::filesystem::path Layers::themes_path()
-{
-	return layers_path() / "Themes";
-}
-
 std::filesystem::path Layers::styles_path()
 {
 	return layers_path() / "Styles";
-}
-
-std::filesystem::path Layers::T1_path()
-{
-	return themes_path() / "T1";
-}
-
-std::filesystem::path Layers::T2_path()
-{
-	return themes_path() / "T2";
 }
 
 std::filesystem::path Layers::local_app_data_path()

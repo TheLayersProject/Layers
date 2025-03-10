@@ -28,13 +28,9 @@
 
 LAYERS_NAMESPACE_BEGIN
 LAYERS_EXPORT std::filesystem::path app_path(const std::string& app_name);
-LAYERS_EXPORT std::filesystem::path latest_T_version_path();
 LAYERS_EXPORT std::filesystem::path layers_path();
 LAYERS_EXPORT std::filesystem::path definitions_path();
-LAYERS_EXPORT std::filesystem::path themes_path();
 LAYERS_EXPORT std::filesystem::path styles_path();
-LAYERS_EXPORT std::filesystem::path T1_path();
-LAYERS_EXPORT std::filesystem::path T2_path();
 LAYERS_EXPORT std::filesystem::path local_app_data_path();
 LAYERS_NAMESPACE_END
 

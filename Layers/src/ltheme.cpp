@@ -150,7 +150,7 @@ LTheme::LTheme(const LString& name, const LString& publisher) :
 	set_publisher(publisher);
 	pimpl->m_uuid = generate_uuid();
 
-	set_dir(latest_T_version_path() / LString(name + " (" + publisher + ")").c_str());
+	//set_dir(latest_T_version_path() / LString(name + " (" + publisher + ")").c_str());
 }
 
 LTheme::LTheme(

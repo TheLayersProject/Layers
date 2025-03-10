@@ -61,6 +61,8 @@ public:
 
     LTheme* load_theme(const std::string& file_string);
 
+	void load_themes(const std::filesystem::path& path);
+
     LDefinition* root_definition() const;
 
     bool set_active_theme(LTheme* theme);

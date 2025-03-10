@@ -61,10 +61,6 @@ public:
 
 	std::map<LString, LDefinition*> unparented_definitions;
 
-	Impl()
-	{
-		init_themes();
-	}
 
 	~Impl()
 	{
@@ -375,29 +371,14 @@ public:
 		return nullptr;
 	}
 
-	void init_themes()
+	void load_themes(const std::filesystem::path& path)
 	{
-		/*
-			TODO: Might need to handle case where theme files labeled "dark" or
-			"light" appear in the custom themes directory.
-		*/
-
-		// Load prebuilt theme files
-		// TEMP: Disabled
-		// themes["Dark"] =
-		// 	load_theme(std::filesystem::path("./themes/Dark"));
-		// 	//new LTheme(std::filesystem::path("./themes/Dark"));
-		// themes["Light"] =
-		// 	load_theme(std::filesystem::path("./themes/Dark"));
-		// 	//new LTheme(std::filesystem::path("./themes/Light"));
-
-		std::filesystem::path latest_path = latest_T_version_path();
-
-		for (const auto& dir_entry :
-			std::filesystem::directory_iterator(latest_path))
+		for (const auto& dir_entry : std::filesystem::directory_iterator(path))
 		{
 			if (dir_entry.is_directory())
-			   add_theme(load_theme(dir_entry.path()));
+			{
+				add_theme(load_theme(dir_entry.path()));
+			}
 		}
 	}
 
@@ -458,6 +439,11 @@ LController& LController::instance()
 LTheme* LController::load_theme(const std::string& file_string)
 {
 	return pimpl->load_theme(file_string);
+}
+
+void LController::load_themes(const std::filesystem::path& path)
+{
+	pimpl->load_themes(path);
 }
 
 LDefinition* LController::root_definition() const
