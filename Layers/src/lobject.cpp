@@ -29,10 +29,7 @@ class LObject::Impl
 public:
 	~Impl()
 	{
-		for (auto& destroyed_connection : destroyed_connections)
-		{
-			destroyed_connection.second();
-		}
+		connector_destroyed.execute();
 
 		for (LObject* child : std::vector<LObject*>(children))
 		{
@@ -47,13 +44,12 @@ public:
 
 	void disconnect_destroyed(const LConnectionID& connection)
 	{
-		destroyed_connections.erase(connection);
+		connector_destroyed.disconnect(connection);
 	}
 
 	LConnectionID on_destroyed(std::function<void()> callback)
 	{
-		destroyed_connections[destroyed_connections_next_id++] = callback;
-		return std::prev(destroyed_connections.end())->first;
+		return connector_destroyed.connect(callback);
 	}
 
 	void remove_child(LObject* child)
@@ -73,8 +69,7 @@ public:
 	LObject* parent{ nullptr };
 	std::vector<LObject*> children;
 
-	LConnections destroyed_connections;
-	LConnectionID destroyed_connections_next_id;
+	LConnector<> connector_destroyed;
 };
 
 LObject::LObject(LObject* parent) :

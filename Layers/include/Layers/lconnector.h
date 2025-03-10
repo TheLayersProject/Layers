@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2025 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -17,40 +17,51 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LCONNECTIONS_H
-#define LCONNECTIONS_H
-
-#include <functional>
-#include <map>
+#ifndef LCONNECTOR_H
+#define LCONNECTOR_H
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-LAYERS_NAMESPACE_BEGIN
+#include "lconnections.h"
 
-class LAYERS_EXPORT LConnectionID
+LAYERS_NAMESPACE_BEGIN
+template <typename... Args>
+class LAYERS_EXPORT LConnector
 {
 public:
-	LConnectionID();
+    using Callback = std::function<void(Args...)>;
 
-	LConnectionID(int value);
+    LConnectionID connect(Callback callback)
+    {
+		connections[next_connection_id++] = callback;
+		return std::prev(connections.end())->first;
+    }
 
-	LConnectionID(const LConnectionID& other) = default;
+    void disconnect(const LConnectionID& connection)
+    {
+		connections.erase(connection);
+    }
 
-	LConnectionID& operator=(const LConnectionID& other);
+    void disconnect_all()
+    {
+        connections.clear();
+    }
 
-	bool operator<(const LConnectionID& other) const;
+    void execute(Args... args)
+    {
+		for (auto& [id, callback] : connections)
+		{
+			callback(args...);
+		}
 
-	bool operator==(const LConnectionID& other) const;
-
-	LConnectionID operator++(int);
+    }
 
 private:
-	int m_value;
+    std::map<LConnectionID, Callback> connections;
+    LConnectionID next_connection_id = 0;
 };
-
-using LConnections = std::map<LConnectionID, std::function<void()>>;
 
 LAYERS_NAMESPACE_END
 
-#endif // LCONNECTIONS_H
+#endif // LCONNECTOR_H

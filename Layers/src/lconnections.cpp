@@ -27,8 +27,8 @@ LConnectionID::LConnectionID() :
 LConnectionID::LConnectionID(int value) :
 	m_value{ value } {}
 
-LConnectionID::LConnectionID(const LConnectionID& other) :
-	m_value(other.m_value) {}
+//LConnectionID::LConnectionID(const LConnectionID& other) :
+//	m_value(other.m_value) {}
 
 LConnectionID& LConnectionID::operator=(const LConnectionID& other)
 {
@@ -41,9 +41,16 @@ bool LConnectionID::operator<(const LConnectionID& other) const
 	return m_value < other.m_value;
 }
 
+bool LConnectionID::operator==(const LConnectionID& other) const
+{
+	return m_value == other.m_value;
+}
+
 LConnectionID LConnectionID::operator++(int)
 {
-	LConnectionID temp(*this);
-	m_value++;
-	return temp;
+	return LConnectionID(m_value++);
+
+	//LConnectionID temp(*this);
+	//m_value++;
+	//return temp;
 }

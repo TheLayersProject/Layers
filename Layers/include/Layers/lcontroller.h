@@ -23,6 +23,7 @@
 #include <deque>
 #include <map>
 #include <filesystem>
+#include <functional>
 #include <vector>
 
 #include "layers_global.h"
@@ -62,6 +63,8 @@ public:
     LTheme* load_theme(const std::string& file_string);
 
 	void load_themes(const std::filesystem::path& path);
+
+	void on_theme_added(std::function<void(LTheme*)> callback);
 
     LDefinition* root_definition() const;
 

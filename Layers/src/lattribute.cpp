@@ -19,6 +19,7 @@
 
 #include <Layers/lattribute.h>
 #include <Layers/ldefinition.h>
+#include <Layers/lconnector.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeList;
@@ -53,11 +54,8 @@ public:
 
 	LVariant value;
 
-	LConnections m_change_connections;
-	LConnectionID m_change_connections_next_id;
-
-	LConnections m_link_change_connections;
-	LConnectionID m_link_change_connections_next_id;
+	LConnector<> connector_change;
+	LConnector<> connector_link_change;
 
 	Impl(const LString& name) {}
 
@@ -236,13 +234,13 @@ public:
 	void disconnect_change(
 		const LConnectionID& connection)
 	{
-		m_change_connections.erase(connection);
+		connector_change.disconnect(connection);
 	}
 
 	void disconnect_link_change(
 		const LConnectionID& connection)
 	{
-		m_link_change_connections.erase(connection);
+		connector_link_change.disconnect(connection);
 	}
 
 	bool has_states() const
@@ -260,14 +258,12 @@ public:
 
 	LConnectionID on_change(std::function<void()> callback)
 	{
-		m_change_connections[m_change_connections_next_id++] = callback;
-		return std::prev(m_change_connections.end())->first;
+		return connector_change.connect(callback);
 	}
 
 	LConnectionID on_link_change(std::function<void()> callback)
 	{
-		m_link_change_connections[m_link_change_connections_next_id++] = callback;
-		return std::prev(m_link_change_connections.end())->first;
+		return connector_link_change.connect(callback);
 	}
 
 	LAttribute* state(const LStringList& state_combo)
@@ -433,16 +429,15 @@ public:
 
 	void update_dependencies(LObject* parent)
 	{
-		 for (auto& change_function : m_change_connections)
-		 	change_function.second();
+		connector_change.execute();
 
-		 if (!m_dependent_attrs.empty())
-		 {
-		 	for (const auto& dependent_attr : m_dependent_attrs)
-		 	{
+		if (!m_dependent_attrs.empty())
+		{
+			for (const auto& dependent_attr : m_dependent_attrs)
+			{
 		 		dependent_attr->update_dependencies();
-		 	}
-		 }
+			}
+		}
 
 		if (parent)
 		{
@@ -459,15 +454,12 @@ public:
 
 	void update_link_dependencies()
 	{
-		 for (auto& link_change_function : m_link_change_connections)
-		 {
-		 	link_change_function.second();
-		 }
+		connector_link_change.execute();
 
-		 for (LAttribute* dependent_attr : dependent_attributes(true))
-		 {
-		 	dependent_attr->pimpl->update_link_dependencies();
-		 }
+		for (LAttribute* dependent_attr : dependent_attributes(true))
+		{
+			dependent_attr->pimpl->update_link_dependencies();
+		}
 	}
 };
 

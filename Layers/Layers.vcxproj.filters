@@ -66,6 +66,9 @@
     <ClInclude Include="include\Layers\lstyle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Layers\lconnector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ljson.cpp">

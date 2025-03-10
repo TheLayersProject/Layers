@@ -24,6 +24,7 @@
     <ClInclude Include="include\Layers\layers_exports.h" />
     <ClInclude Include="include\Layers\layers_global.h" />
     <ClInclude Include="include\Layers\lconnections.h" />
+    <ClInclude Include="include\Layers\lconnector.h" />
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\ljson.h" />
     <ClInclude Include="include\Layers\llink.h" />

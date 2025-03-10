@@ -28,6 +28,7 @@
 
 #include <Layers/lalgorithms.h>
 #include <Layers/lattribute.h>
+#include <Layers/lconnector.h>
 #include <Layers/lpaths.h>
 #include <Layers/lstyle.h>
 #include <Layers/ltheme.h>
@@ -61,6 +62,7 @@ public:
 
 	std::map<LString, LDefinition*> unparented_definitions;
 
+	LConnector<LTheme*> connector_theme_added;
 
 	~Impl()
 	{
@@ -77,7 +79,10 @@ public:
 	void add_theme(LTheme* theme)
 	{
 		if (theme)
+		{
 			themes[theme->display_id()] = theme;
+			connector_theme_added.execute(theme);
+		}
 	}
 
 	std::map<std::filesystem::path, LJsonObject> build_file_objects(
@@ -444,6 +449,11 @@ LTheme* LController::load_theme(const std::string& file_string)
 void LController::load_themes(const std::filesystem::path& path)
 {
 	pimpl->load_themes(path);
+}
+
+void LController::on_theme_added(std::function<void(LTheme*)> callback)
+{
+	pimpl->connector_theme_added.connect(callback);
 }
 
 LDefinition* LController::root_definition() const

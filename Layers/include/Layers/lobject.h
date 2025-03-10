@@ -26,7 +26,7 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lconnections.h"
+#include "lconnector.h"
 #include "lstring.h"
 
 LAYERS_NAMESPACE_BEGIN
