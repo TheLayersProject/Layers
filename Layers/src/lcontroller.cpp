@@ -29,12 +29,14 @@
 #include <Layers/lalgorithms.h>
 #include <Layers/lattribute.h>
 #include <Layers/lconnector.h>
+#include <Layers/lresources.h>
 #include <Layers/lpaths.h>
 #include <Layers/lstyle.h>
 #include <Layers/ltheme.h>
 
 using Layers::LDefinition;
 using Layers::LString;
+using Layers::LStringList;
 using Layers::LStyle;
 using Layers::LStyleList;
 using Layers::LTheme;
@@ -163,7 +165,7 @@ public:
 		for (const auto& [file_path, object] : file_objects)
 			for (const auto& [key, value] : object)
 			{
-				LDefinition* def = new LDefinition(key, value, file_path);
+				LDefinition* def = new LDefinition(key, value, "");
 
 				definitions.insert(def);
 
@@ -237,6 +239,53 @@ public:
 		}
 	}
 
+	// New function for internal alias parsing
+	void parse_aliases_internal(std::map<std::filesystem::path, std::string>& file_strings)
+	{
+		// Look for an entry where the filename is "_aliases.json"
+		for (const auto& entry : file_strings)
+		{
+			if (entry.first.filename() == "_aliases.json")
+			{
+				std::string aliases_data = entry.second;
+				// Remove unnecessary whitespace (assuming remove_whitespace() is defined)
+				aliases_data = remove_whitespace(aliases_data);
+
+				// Parse the JSON aliases
+				std::map<LString, LString> aliases;
+				LJsonLexer aliases_lexer(aliases_data);
+				LJsonParser aliases_parser(aliases_lexer);
+				LJsonObject aliases_object = aliases_parser.parse_object();
+
+				for (const auto& [key, object_val] : aliases_object)
+					aliases[key] = object_val.to_string();
+
+				// Iterate over all file strings (except the alias file itself)
+				for (auto& file_entry : file_strings)
+				{
+					if (file_entry.first.filename() == "_aliases.json")
+						continue;
+
+					// Replace each alias key with its corresponding value
+					for (const auto& [alias_key, alias_value] : aliases)
+					{
+						size_t pos = 0;
+						std::string alias_key_str = alias_key.c_str();
+						std::string alias_value_str = alias_value.c_str();
+						while ((pos = file_entry.second.find(alias_key_str, pos)) != std::string::npos)
+						{
+							file_entry.second.replace(pos, alias_key_str.length(), alias_value_str);
+							pos += alias_value_str.length();
+						}
+					}
+				}
+				// Assuming there's only one _aliases.json file, break after processing it.
+				break;
+			}
+		}
+	}
+
+
 	std::map<std::filesystem::path, std::string> load_definition_path(
 		const std::filesystem::path& path)
 	{
@@ -260,44 +309,31 @@ public:
 		return file_strings;
 	}
 
-	void load_definitions(const std::filesystem::path& path)
+	void process_definition_set(
+		const std::filesystem::path& path,
+		std::map<std::filesystem::path, std::string>& file_strings)
 	{
-		// Load and Parse Aliases
-		std::map<std::filesystem::path, std::string> file_strings = load_definition_path(path);
-		parse_aliases(path, file_strings);
+		// Convert file strings to JSON objects
+		auto file_objects = build_file_objects(file_strings);
 
-		// Parse file_strings into file_objects
-		std::map<std::filesystem::path, LJsonObject> file_objects =
-			build_file_objects(file_strings);
-
-		// Build Definitions
-
+		// Build and process definitions
 		std::set<LDefinition*> unresolved_definitions = build_definitions(file_objects);
-
-		// Resolve Bases
-
 		for (LDefinition* def : unresolved_definitions)
 			resolve_base(def);
 
-		// Build Dependency Graph
+		// Build dependency graph and topologically sort
 		DependencyData dep_data = build_dependency_data(unresolved_definitions);
-
 		std::vector<LDefinition*> ordered_definitions = topological_sort(dep_data);
 
-		// Copy Bases
-
+		// Finalize definitions
 		for (LDefinition* def : ordered_definitions)
 			def->finalize();
 
-		// Resolve Parents
-
+		// Resolve parent-child relationships as in your current implementation
 		for (const auto& [_, unparented_def] : unparented_definitions)
 		{
-			LString unparented_def_name =
-				unparented_def->object_name();
-
-			auto name_list = split<std::deque<LString>>(
-				unparented_def->object_name(), '/');
+			LString unparented_def_name = unparented_def->object_name();
+			auto name_list = split<std::deque<LString>>(unparented_def->object_name(), '/');
 			LString new_name = name_list.back();
 			name_list.pop_back();
 
@@ -308,6 +344,39 @@ public:
 				parent_def->append_child(unparented_def);
 			}
 		}
+	}
+
+
+	void load_definitions(const std::filesystem::path& path)
+	{
+		// Load and Parse Aliases
+		std::map<std::filesystem::path, std::string> file_strings = load_definition_path(path);
+
+		parse_aliases(path, file_strings);
+
+		process_definition_set(path, file_strings);
+	}
+
+	void load_internal_definitions(const LString& path)
+	{
+		std::map<LString, LResource> set_resources = lResourceManager.resources(path);
+
+		// Convert resources to file strings
+
+		std::map<std::filesystem::path, std::string> file_strings;
+
+		for (const auto& [resource_path, resource] : set_resources)
+		{
+			std::string resource_string(
+				reinterpret_cast<const char*>(resource.data), resource.size);
+
+			file_strings[std::filesystem::path(resource_path.c_str())] =
+				remove_whitespace(resource_string);
+		}
+
+		parse_aliases_internal(file_strings);
+
+		process_definition_set(path.c_str(), file_strings);
 	}
 
 	LStyle* load_style(const std::filesystem::path& style_file_path)
@@ -467,6 +536,11 @@ void LController::include(const LString& path, bool is_application)
 
 	if (is_application)
 		pimpl->load_styles(styles_path() / std::string(path.c_str()));
+}
+
+void LController::include_internal(const LString& path)
+{
+	pimpl->load_internal_definitions(path.c_str());
 }
 
 bool LController::set_active_theme(LTheme* theme)

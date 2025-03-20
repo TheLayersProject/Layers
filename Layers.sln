@@ -5,6 +5,11 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Layers", "Layers\Layers.vcxproj", "{BA4366E2-4F68-4B98-8146-25DA3717AAE1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LayersResourceCompiler", "LayersResourceCompiler\LayersResourceCompiler.vcxproj", "{B7633541-7E3D-4212-AC5F-3312FDC28672}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA4366E2-4F68-4B98-8146-25DA3717AAE1} = {BA4366E2-4F68-4B98-8146-25DA3717AAE1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +26,14 @@ Global
 		{BA4366E2-4F68-4B98-8146-25DA3717AAE1}.Release|x64.Build.0 = Release|x64
 		{BA4366E2-4F68-4B98-8146-25DA3717AAE1}.Release|x86.ActiveCfg = Release|Win32
 		{BA4366E2-4F68-4B98-8146-25DA3717AAE1}.Release|x86.Build.0 = Release|Win32
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Debug|x64.ActiveCfg = Debug|x64
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Debug|x64.Build.0 = Debug|x64
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Debug|x86.ActiveCfg = Debug|Win32
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Debug|x86.Build.0 = Debug|Win32
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Release|x64.ActiveCfg = Release|x64
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Release|x64.Build.0 = Release|x64
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Release|x86.ActiveCfg = Release|Win32
+		{B7633541-7E3D-4212-AC5F-3312FDC28672}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

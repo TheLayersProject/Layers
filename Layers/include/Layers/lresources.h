@@ -17,71 +17,49 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LJSON_H
-#define LJSON_H
-
-#include <map>
-#include <string>
+#ifndef LRESOURCES_H
+#define LRESOURCES_H
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "ljsonvalue.h"
+#include <map>
+
 #include "lstring.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-enum class LJsonTokenType
+struct LResource
 {
-	INVALID,
-	LBRACE, RBRACE,
-	LBRACKET, RBRACKET,
-	COLON, COMMA,
-	STRING, NUMBER,
-	T, F,
-	NONE, END
+    const unsigned char* data;
+    size_t size;
 };
 
-class LJsonToken
+class LAYERS_EXPORT LResourceManager
 {
 public:
-	LJsonTokenType type{ LJsonTokenType::INVALID };
-	std::string value;
-};
+    void init(const void* entries, size_t count);
 
-class LAYERS_EXPORT LJsonLexer
-{
-public:
-	LJsonLexer(const std::string& input);
+    static LResourceManager& instance();
 
-	LJsonToken get_next_token();
+    LResource resource(const LString& path) const;
+
+    std::map<LString, LResource> resources(const LString& path) const;
 
 private:
-	LJsonToken _build_token(std::string value);
+    LResourceManager();
+    ~LResourceManager();
 
-	std::string m_input;
-	size_t m_pos;
+    LResourceManager(const LResourceManager&) = delete;
+    LResourceManager& operator=(const LResourceManager&) = delete;
+
+    class Impl;
+    Impl* pimpl;
 };
 
-class LAYERS_EXPORT LJsonParser {
-public:
-	LJsonParser(const LJsonLexer& lexer);
-
-	LJsonArray parse_array();
-	LJsonObject parse_object();
-	LJsonObject parse_pair_list();
-	LJsonValue parse_value();
-	LJsonArray parse_value_list();
-
-private:
-	void match(LJsonTokenType expected_type);
-
-	void next_token();
-
-	LJsonLexer m_lexer;
-	LJsonToken m_current_token;
-};
+#define lResourceManager (Layers::LResourceManager::instance())
+#define LRC (Layers::LResourceManager::resource)
 
 LAYERS_NAMESPACE_END
 
-#endif // LJSON_H
+#endif // LRESOURCES_H

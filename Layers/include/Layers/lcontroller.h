@@ -58,6 +58,8 @@ public:
 
     void include(const LString& path, bool is_application = false);
 
+    void include_internal(const LString& path);
+
     static LController& instance();
 
     LTheme* load_theme(const std::string& file_string);
