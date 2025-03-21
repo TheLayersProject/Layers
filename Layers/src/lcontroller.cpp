@@ -239,53 +239,6 @@ public:
 		}
 	}
 
-	// New function for internal alias parsing
-	void parse_aliases_internal(std::map<std::filesystem::path, std::string>& file_strings)
-	{
-		// Look for an entry where the filename is "_aliases.json"
-		for (const auto& entry : file_strings)
-		{
-			if (entry.first.filename() == "_aliases.json")
-			{
-				std::string aliases_data = entry.second;
-				// Remove unnecessary whitespace (assuming remove_whitespace() is defined)
-				aliases_data = remove_whitespace(aliases_data);
-
-				// Parse the JSON aliases
-				std::map<LString, LString> aliases;
-				LJsonLexer aliases_lexer(aliases_data);
-				LJsonParser aliases_parser(aliases_lexer);
-				LJsonObject aliases_object = aliases_parser.parse_object();
-
-				for (const auto& [key, object_val] : aliases_object)
-					aliases[key] = object_val.to_string();
-
-				// Iterate over all file strings (except the alias file itself)
-				for (auto& file_entry : file_strings)
-				{
-					if (file_entry.first.filename() == "_aliases.json")
-						continue;
-
-					// Replace each alias key with its corresponding value
-					for (const auto& [alias_key, alias_value] : aliases)
-					{
-						size_t pos = 0;
-						std::string alias_key_str = alias_key.c_str();
-						std::string alias_value_str = alias_value.c_str();
-						while ((pos = file_entry.second.find(alias_key_str, pos)) != std::string::npos)
-						{
-							file_entry.second.replace(pos, alias_key_str.length(), alias_value_str);
-							pos += alias_value_str.length();
-						}
-					}
-				}
-				// Assuming there's only one _aliases.json file, break after processing it.
-				break;
-			}
-		}
-	}
-
-
 	std::map<std::filesystem::path, std::string> load_definition_path(
 		const std::filesystem::path& path)
 	{
@@ -373,8 +326,6 @@ public:
 			file_strings[std::filesystem::path(resource_path.c_str())] =
 				remove_whitespace(resource_string);
 		}
-
-		parse_aliases_internal(file_strings);
 
 		process_definition_set(path.c_str(), file_strings);
 	}
