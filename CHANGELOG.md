@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Implemented definitions, themes, and styles which split up tasks that themes used to handle on their own.
+    - Definitions represent the appearance of definable widgets. Developers of Layers apps should create their UI with definable widgets and create a set of definitions to represent those widgets.
+    - Themes are just a small collection of attributes (Primary, Secondary, Tertiary, etc.) that most definition attributes link to.
+    - Styles override specific values from definitions giving users precise control over app appearances.
+- Themes and styles are both implemented as types of definitions. They also generally use the same JSON format, with themes and styles adding support for additional metadata.
+- Definitions support inheritance which allows for significant reuse.
+- Definition attributes override widget attributes. Style attributes override definition attributes. 
+- Introducing the Layers controller, a statically initialized construct that handles the serialization and integration between the new Layers data formats.
+- Attributes now support relative linking. Relative linking depends on the context of the caller  requesting the attribute’s value. Due to base attribute sharing, these links are not pre-resolved. Instead, they get resolved during attribute valuation where the context definition is passed as an argument.
+- Developed a resource system composed of a resource compiler application and a resource manager instance. Layers software should bundle and load definitions using the new resource system.
+
+### Changed
+
+- Some theme related classes were converted to support definitions. LThemeable is now LDefinable. LThemeItem is now LDefinition.
+
 ## [0.17.0] - 2023-11-12
 
 Layers has been split into different projects, Layers and QLayers. Layers provides the theme framework, and QLayers provides Layers integration for Qt applications.
