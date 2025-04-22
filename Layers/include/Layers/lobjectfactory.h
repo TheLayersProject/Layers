@@ -17,51 +17,26 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LLINK_H
-#define LLINK_H
+#ifndef LOBJECTFACTORY_H
+#define LOBJECTFACTORY_H
 
-#include "layers_global.h"
-#include "layers_exports.h"
+#include "lobject.h"
 
-#include <map>
-#include <vector>
-
-#include "lstring.h"
+#include <cassert>
 
 LAYERS_NAMESPACE_BEGIN
 
-class LAttribute;
-class LDefinition;
-
-class LLink;
-using LLinkList = std::vector<LLink*>;
-
-class LAYERS_EXPORT LLink
+template <typename T, typename... Args>
+T* lMake(LObject* parent, Args&&... args)
 {
-public:
-	LLink(const LString& path, const LString& relative_path = "");
+    static_assert(std::is_base_of<LObject, T>::value, "T must be an LObject");
+    assert(parent && "Parent must not be null");
 
-    LLink(LAttribute* attribute);
+    parent->add_child(std::make_unique<T>(std::forward<Args>(args)..., parent));
 
-	LLink(const LLink& l);
-
-	~LLink();
-
-    LAttribute* attribute() const;
-
-	LString path() const;
-
-	LString relative_path() const;
-
-    bool resolve(LAttribute* attr);
-
-	LAttribute* resolve(LDefinition* context);
-
-private:
-	class Impl;
-	std::unique_ptr<Impl> pimpl;
-};
+	return static_cast<T*>(parent->children().back().get());
+}
 
 LAYERS_NAMESPACE_END
 
-#endif // LLINK_H
+#endif // LOBJECTFACTORY_H

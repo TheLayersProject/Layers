@@ -50,7 +50,7 @@ public:
 
     LTheme* active_theme() const;
 
-    void add_theme(LTheme* theme);
+    void add_theme(std::unique_ptr<LTheme> theme);
 
     LDefinition* find_definition(const LString& path);
 
@@ -62,7 +62,7 @@ public:
 
     static LController& instance();
 
-    LTheme* load_theme(const std::string& file_string);
+    std::unique_ptr<LTheme> load_theme(const std::string& file_string);
 
 	void load_themes(const std::filesystem::path& path);
 
@@ -76,13 +76,13 @@ public:
 
     LTheme* theme(const LString& themeId) const;
 
-    std::map<LString, LTheme*> themes() const;
+    std::map<LString, std::unique_ptr<LTheme>>& themes() const;
 
     bool toggle_style(const LString& style_id);
 
 private:
     class Impl;
-    Impl* pimpl;
+    std::unique_ptr<Impl> pimpl;
 };
 
 #define lController (Layers::LController::instance())

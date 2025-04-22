@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2025 The Layers Project
  *
  * This file is part of Layers.
  *
@@ -40,14 +40,16 @@ public:
 
 	virtual ~LObject();
 
-	void add_child(LObject* child);
+	void add_child(std::unique_ptr<LObject> child);
 
-	std::vector<LObject*>& children();
+	std::vector<std::unique_ptr<LObject>>& children();
+
+	const std::vector<std::unique_ptr<LObject>>& children() const;
 
 	void disconnect_destroyed(const LConnectionID& connection);
 
 	template <typename T>
-	std::vector<T*> find_children(bool recursive = false);
+	std::vector<T*> find_children(bool recursive = false) const;
 
 	LString object_name() const;
 
@@ -64,32 +66,33 @@ public:
 private:
 	template <typename T>
 	void find_children_helper(
-		LObject* parent, std::vector<T*>& children, bool recursive);
+		const LObject* parent, std::vector<T*>& children, bool recursive) const;
 
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
 };
 
 template <typename T>
 inline void LObject::find_children_helper(
-	LObject* parent, std::vector<T*>& children, bool recursive)
+	const LObject* parent, std::vector<T*>& children, bool recursive) const
 {
-	for (LObject* child : parent->children())
+	for (const auto& child : parent->children())
 	{
-		if (T* typed_child = dynamic_cast<T*>(child))
+		if (T* typed_child = dynamic_cast<T*>(child.get()))
 		{
 			children.push_back(typed_child);
 		}
 
 		if (recursive)
 		{
-			find_children_helper(child, children, recursive);
+			find_children_helper(child.get(), children, recursive);
 		}
 	}
+
 }
 
 template <typename T>
-inline std::vector<T*> LObject::find_children(bool recursive)
+inline std::vector<T*> LObject::find_children(bool recursive) const
 {
 	std::vector<T*> children;
 	find_children_helper<T>(this, children, recursive);

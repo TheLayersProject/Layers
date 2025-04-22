@@ -54,7 +54,7 @@ private:
     LResourceManager& operator=(const LResourceManager&) = delete;
 
     class Impl;
-    Impl* pimpl;
+    std::unique_ptr<Impl> pimpl;
 };
 
 #define lResourceManager (Layers::LResourceManager::instance())

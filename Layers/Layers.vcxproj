@@ -28,6 +28,7 @@
     <ClInclude Include="include\Layers\lgenerate.h" />
     <ClInclude Include="include\Layers\ljson.h" />
     <ClInclude Include="include\Layers\llink.h" />
+    <ClInclude Include="include\Layers\llogger.h" />
     <ClInclude Include="include\Layers\lobject.h" />
     <ClInclude Include="include\Layers\lpaths.h" />
     <ClInclude Include="include\Layers\lstring.h" />
@@ -40,6 +41,8 @@
     <ClInclude Include="include\Layers\lresources.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\llogger.cpp" />
+    <ClCompile Include="include\Layers\lobjectfactory.h" />
     <ClCompile Include="src\lresources.cpp" />
     <ClCompile Include="src\lattribute.cpp" />
     <ClCompile Include="src\lconnections.cpp" />
@@ -109,6 +112,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)d</TargetName>
+    <OutDir>$(ProjectDir)..\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

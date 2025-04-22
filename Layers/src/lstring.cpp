@@ -63,25 +63,18 @@ public:
 };
 
 LString::LString() :
-	pimpl{ new Impl() } {}
+	pimpl{ std::make_unique<Impl>() } {}
 
 LString::LString(const char* string) :
-	pimpl{ new Impl(string) } {}
+	pimpl{ std::make_unique<Impl>(string) } {}
 
 LString::LString(const LString& other) :
-	pimpl{ new Impl(*(other.pimpl)) } {}
+	pimpl{ std::make_unique<Impl>(*(other.pimpl)) } {}
 
 LString::LString(LString&& other) noexcept :
-	pimpl{ std::exchange(other.pimpl, nullptr) } {}
+	pimpl{ std::move(other.pimpl) } {}
 
-LString::~LString()
-{
-	if (pimpl)
-	{
-		delete pimpl;
-		pimpl = nullptr;
-	}
-}
+LString::~LString() = default;
 
 std::string::iterator LString::begin()
 {
@@ -151,8 +144,7 @@ LString& LString::operator=(const LString& other)
 		return *this;
 	}
 
-	delete pimpl;
-	pimpl = new Impl(*other.pimpl);
+	pimpl = std::make_unique<Impl>(*other.pimpl);
 	return *this;
 }
 
@@ -163,8 +155,7 @@ LString& LString::operator=(LString&& other) noexcept
 		return *this;
 	}
 
-	delete pimpl;
-	pimpl = std::exchange(other.pimpl, nullptr);
+	pimpl = std::move(other.pimpl);
 	return *this;
 }
 

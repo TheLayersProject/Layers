@@ -25,6 +25,7 @@
 #include <Layers/lattribute.h>
 #include <Layers/lgenerate.h>
 #include <Layers/lcontroller.h>
+#include <Layers/lobjectfactory.h>
 #include <Layers/lpaths.h>
 
 using Layers::LAttribute;
@@ -134,13 +135,13 @@ public:
 };
 
 LTheme::LTheme() :
-	pimpl{ new Impl() }, LDefinition()
+	pimpl{ std::make_unique<Impl>() }, LDefinition()
 {
-	add_attribute(new LAttribute("Foreground", "#000000"));
-	add_attribute(new LAttribute("Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" })));
-	add_attribute(new LAttribute("Primary", "#ffffff"));
-	add_attribute(new LAttribute("Secondary", "#ffffff"));
-	add_attribute(new LAttribute("Tertiary", "#ffffff"));
+	Layers::lMake<LAttribute>(this, "Foreground", "#000000");
+	Layers::lMake<LAttribute>(this, "Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" }));
+	Layers::lMake<LAttribute>(this, "Primary", "#ffffff");
+	Layers::lMake<LAttribute>(this, "Secondary", "#ffffff");
+	Layers::lMake<LAttribute>(this, "Tertiary", "#ffffff");
 }
 
 LTheme::LTheme(const LString& name, const LString& publisher) :
@@ -149,8 +150,6 @@ LTheme::LTheme(const LString& name, const LString& publisher) :
 	set_object_name(name);
 	set_publisher(publisher);
 	pimpl->m_uuid = generate_uuid();
-
-	//set_dir(latest_T_version_path() / LString(name + " (" + publisher + ")").c_str());
 }
 
 LTheme::LTheme(
@@ -158,7 +157,7 @@ LTheme::LTheme(
 	const LJsonValue& value,
 	const std::filesystem::path& file_path,
 	LDefinition* parent) :
-	pimpl{ new Impl() },
+	pimpl{ std::make_unique<Impl>() },
 	LDefinition(name, value.to_object(), file_path, parent)
 {
 	pimpl->m_path = file_path.parent_path();
@@ -180,10 +179,7 @@ LTheme::LTheme(
 	}
 }
 
-LTheme::~LTheme()
-{
-	delete pimpl;
-}
+LTheme::~LTheme() = default;
 
 void LTheme::append_to_lineage(const LString& theme_id)
 {

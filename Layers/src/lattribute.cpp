@@ -18,8 +18,11 @@
  */
 
 #include <Layers/lattribute.h>
+
+#include <Layers/lalgorithms.h>
 #include <Layers/ldefinition.h>
 #include <Layers/lconnector.h>
+#include <Layers/lobjectfactory.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeList;
@@ -41,6 +44,8 @@ template LStringList LAttribute::as<LStringList>(const LStringList&, LDefinition
 class LAttribute::Impl
 {
 public:
+	LAttribute* owner{ nullptr };
+
 	LConnectionID m_link_destroyed_connection;
 	LConnectionID def_connection;
 
@@ -48,27 +53,29 @@ public:
 
 	LAttribute* def_attr{ nullptr };
 
-	LLink* link{ nullptr };
+	LDefinable* parent_definable{ nullptr };
 
-	LAttributeMap states;
+	std::unique_ptr<LLink> link;
 
-	LVariant value;
+	LVariant _value;
 
 	LConnector<> connector_change;
 	LConnector<> connector_link_change;
 
-	Impl(const LString& name) {}
+	Impl(LAttribute* owner) :
+		owner{ owner } {}
 
-	Impl(const LString& name, double value) :
-		value{ value } {}
+	Impl(LAttribute* owner, double value) :
+		owner{ owner }, _value{ value } {}
 
-	Impl(const LString& name, const char* value) :
-		value{ LString(value) } {}
+	Impl(LAttribute* owner, const char* value) :
+		owner{ owner }, _value{ LString(value) } {}
 
-	Impl(const LString& name, const LVariant& value) :
-		value{ value } {}
+	Impl(LAttribute* owner, const LVariant& value) :
+		owner{ owner }, _value{ value } {}
 
-	Impl(const LString& name, LJsonValue json_value)
+	Impl(LAttribute* owner, LJsonValue json_value) :
+		owner{ owner }
 	{
 		if (json_value.is_object())
 		{
@@ -84,7 +91,7 @@ public:
 				relative_link_path = obj["link_relative"].to_string().remove("L:");
 
 			if (!absolute_link_path.empty() || !relative_link_path.empty())
-				link = new LLink(absolute_link_path, relative_link_path);
+				link = std::make_unique<LLink>(absolute_link_path, relative_link_path);
 
 			if (obj.count("value"))
 				init_value(obj["value"]);
@@ -93,45 +100,21 @@ public:
 			init_value(json_value);
 	}
 
-	~Impl()
-	{
-		if (def_attr)
-			def_attr->disconnect_change(def_connection);
-
-		if (link && link->attribute())
-		{
-			link->attribute()->disconnect_destroyed(m_link_destroyed_connection);
-
-			 for (auto dep_attr = link->attribute()->pimpl->m_dependent_attrs.begin();
-			 	dep_attr != link->attribute()->pimpl->m_dependent_attrs.end(); dep_attr++)
-			 {
-			 	if ((*dep_attr)->pimpl == this)
-			 	{
-			 		dep_attr = link->attribute()->pimpl->m_dependent_attrs.erase(dep_attr);
-					link->attribute()->pimpl->update_link_dependencies();
-			 		break;
-			 	}
-			 }
-
-			link = nullptr;
-		}
-	}
-
 	void init_value(const LJsonValue json_value)
 	{
 		if (json_value.is_double())
 		{
-			value = json_value.to_double();
+			_value = json_value.to_double();
 		}
 		else if (json_value.is_string())
 		{
 			LString str_val = json_value.to_string();
 
 			if (str_val.starts_with("L:"))
-				link = new LLink(str_val.remove("L:"));
+				link = std::make_unique<LLink>(str_val.remove("L:"));
 
 			else
-				value = json_value.to_string();
+				_value = json_value.to_string();
 		}
 		else if (json_value.is_array())
 		{
@@ -144,39 +127,37 @@ public:
 				for (const auto& val : array)
 					gradient_stops.push_back(val.to_string());
 
-				value = gradient_stops;
+				_value = gradient_stops;
 			}
 		}
 	}
 
-	void break_link(LObject* parent)
+	void break_link(bool update)
 	{
-		 if (link && link->attribute())
-		 {
-		 	value = link->attribute()->value();
+		if (!link || !link->attribute()) return;
 
-			link->attribute()->disconnect_destroyed(m_link_destroyed_connection);
+		// 1) Copy the link attribute's value
+		_value = link->attribute()->value();
 
-		 	for (auto dep_attr = link->attribute()->pimpl->m_dependent_attrs.begin();
-		 		dep_attr != link->attribute()->pimpl->m_dependent_attrs.end(); dep_attr++)
-		 	{
-		 		if ((*dep_attr)->pimpl == this)
-		 		{
-		 			dep_attr = link->attribute()->pimpl->m_dependent_attrs.erase(dep_attr);
-					link->attribute()->pimpl->update_link_dependencies();
-		 			break;
-		 		}
-		 	}
+		// 2) Unsubscribe the link attribute from destruction notifications
+		link->attribute()->disconnect_destroyed(m_link_destroyed_connection);
 
-			delete link;
-			link = nullptr;
+		// 3) Remove owner from the link attribute's dependent list
+		auto& deps = link->attribute()->pimpl->m_dependent_attrs;
+		deps.erase(std::remove(deps.begin(), deps.end(), owner), deps.end());
 
-			update_link_dependencies();
-			update_dependencies(parent);
-		 }
+		// 4) Destroy the link
+		link.reset();
+
+		// 5) Update
+		connector_link_change.execute();
+		if (update)
+		{
+			connector_change.execute();
+		}
 	}
 
-	void clear_definition_attribute(LObject* parent)
+	void clear_definition_attribute()
 	{
 		if (def_attr)
 		{
@@ -184,32 +165,47 @@ public:
 			def_attr = nullptr;
 		}
 
-		update_dependencies(parent);
+		connector_change.execute();
 	}
 
-	void create_link(LObject* parent, LAttribute* link_attr)
+	void create_link(LAttribute* link_attr)
 	{
-		value = LVariant();
+		_value = LVariant();
 
-		break_link(parent);
+		/*
+			Shouldn't need to update since an update will already occur
+			below after the new link is created.
+		*/
+		break_link(false);
 
-		link = new LLink(link_attr);
-
-		m_link_destroyed_connection = link_attr->on_destroyed(
-			[this] {
-				delete link;
-				link = nullptr;
-			}
-		);
+		link = std::make_unique<LLink>(link_attr);
 
 		update_link_dependencies();
-		update_dependencies(parent);
+		connector_change.execute();
+
+		link_attr->pimpl->m_dependent_attrs.push_back(owner);
+		link_attr->update_link_dependencies();
 	}
 
-	void create_state(
-		const LString& name, LAttribute* state_attr)
+	void create_link(LLink* new_link)
 	{
-		states[name] = state_attr;
+		if (new_link)
+		{
+			_value = LVariant();
+
+			break_link(false);
+
+			link = std::make_unique<LLink>(*new_link);
+
+			if (LAttribute* link_attr = link->attribute())
+			{
+				link_attr->pimpl->m_dependent_attrs.push_back(owner);
+				link_attr->update_link_dependencies();
+			}
+
+			update_link_dependencies();
+			connector_change.execute();
+		}
 	}
 
 	LAttributeList dependent_attributes(
@@ -243,11 +239,6 @@ public:
 		connector_link_change.disconnect(connection);
 	}
 
-	bool has_states() const
-	{
-		return !states.empty();
-	}
-
 	bool is_link(const LString& str) const
 	{
 		if (str.starts_with("L:"))
@@ -266,93 +257,68 @@ public:
 		return connector_link_change.connect(callback);
 	}
 
-	LAttribute* state(const LStringList& state_combo)
+	void resolve_links()
 	{
-		for (const auto& [key, state_attr] : states)
+		if (link)
 		{
-			auto state_names =
-				split<LStringList>(state_attr->object_name(), ':');
+			if (!link->resolve(owner));
+			// TODO: Handle link resolution failure
 
-			bool qualifies = true;
-
-			for (const auto& state_name : state_names)
+			if (const auto& link_attr = link->attribute())
 			{
-				if (std::find(state_combo.begin(), state_combo.end(),
-					state_name) == state_combo.end())
-				{
-					qualifies = false;
-				}
-			}
+				bool link_attr_already_has_this_dependency = false;
 
-			if (qualifies)
-				return state_attr;
+				for (const auto& dep_attr : link_attr->pimpl->m_dependent_attrs)
+				{
+					if (dep_attr == owner)
+						link_attr_already_has_this_dependency = true;
+				}
+
+				if (!link_attr_already_has_this_dependency)
+					link_attr->pimpl->m_dependent_attrs.push_back(owner);
+			}
 		}
 
-		// TODO: Handle returning override with highest number of matching
-		// states. If there is a conflict (two matching overrides), just
-		// return the value of this
+		for (const auto& [key, state] : owner->states(false))
+			state->resolve_links();
 
-		return nullptr;
+		connector_change.execute();
 	}
 
-	void set_definition_attribute(
-		LObject* parent, LAttribute* definition_attribute)
+	void set_definition_attribute(LAttribute* new_def_attr)
 	{
-		def_attr = definition_attribute;
+		if (def_attr)
+		{
+			def_attr->disconnect_change(def_connection);
+			def_attr = nullptr;
+		}
 
-		def_connection = def_attr->on_change(
-			[this, parent] {
-				update_dependencies(parent);
-			}
-		);
+		if (new_def_attr)
+		{
+			def_attr = new_def_attr;
 
-		update_dependencies(parent);
+			def_connection = def_attr->on_change(
+				[this] { connector_change.execute(); });
+		}
+
+		connector_change.execute();
 	}
 
-	void set_value(LObject* parent, const LVariant& v)
+	void set_value(const LVariant& new_value)
 	{
 		if (link && link->attribute())
 		{
-			link->attribute()->set_value(v);
-			update_dependencies(parent);
+			link->attribute()->set_value(new_value);
 		}
 
-		if (!link && value.index() == v.index())
-		{
-			bool same_value = false;
+		if (!link && _value == new_value)
+			return;
 
-			switch (v.index())
-			{
-			case 0:
-				same_value = true;
-				break;
-			case 1:
-				if (std::get<double>(value) == std::get<double>(v))
-					same_value = true;
-				break;
-			case 2:
-				if (std::get<bool>(value) == std::get<bool>(v))
-					same_value = true;
-				break;
-			case 3:
-				if (std::get<LString>(value) == std::get<LString>(v))
-					same_value = true;
-				break;
-			case 4:
-				if (std::get<std::vector<LString>>(value) == std::get<std::vector<LString>>(v))
-					same_value = true;
-				break;
-			}
-
-			if (same_value)
-				return;
-		}
-
-		value = v;
-		update_dependencies(parent);
+		_value = new_value;
+		connector_change.execute();
 	}
 
-	LJsonObject to_json_object()
+	LJsonObject to_json_object() const
 	{
 		LJsonObject json_object;
 
@@ -367,16 +333,18 @@ public:
 				json_object["link_relative"] = link->relative_path();
 			}
 		}
-		else if (value.index() > 0)
+		else if (_value.index() > 0)
 		{
 			json_object["value"] = to_json_value();
 		}
 
-		if (!states.empty())
+		LAttributeMap s = owner->states();
+
+		if (!s.empty())
 		{
 			LJsonObject overrides_json_object;
 
-			for (const auto& [key, override_attr] : states)
+			for (const auto& [key, override_attr] : s)
 				overrides_json_object[override_attr->object_name()] =
 				override_attr->to_json_object();
 
@@ -386,21 +354,21 @@ public:
 		return json_object;
 	}
 
-	LJsonValue to_json_value()
+	LJsonValue to_json_value() const
 	{
 		LJsonValue json_value;
 
-		if (const auto& bool_val = std::get_if<bool>(&value))
+		if (const auto& bool_val = std::get_if<bool>(&_value))
 			json_value = *bool_val;
 
-		else if (const auto& double_val = std::get_if<double>(&value))
+		else if (const auto& double_val = std::get_if<double>(&_value))
 			json_value = *double_val;
 
-		else if (const auto& string_val = std::get_if<LString>(&value))
+		else if (const auto& string_val = std::get_if<LString>(&_value))
 			json_value = *string_val;
 
 		else if (const auto& gradient_stops_val =
-			std::get_if<std::vector<LString>>(&value))
+			std::get_if<std::vector<LString>>(&_value))
 		{
 			LJsonArray gradient;
 
@@ -418,36 +386,27 @@ public:
 		if (def_attr)
 			return def_attr->type_index();
 
-		if (!states.empty())
-			return (*states.begin()).second->type_index();
+		//if (link && link->attribute())
+		//	return link->attribute()->type_index();
 
-		// if (link && link->attribute())
-		// 	return link->attribute()->type_index();
+		//if (!states.empty())
+		//	return (*states.begin()).second->type_index();
 
-		return value.index();
+		return _value.index();
 	}
 
-	void update_dependencies(LObject* parent)
+	void update_parent_definable()
 	{
-		connector_change.execute();
-
-		if (!m_dependent_attrs.empty())
+		if (parent_definable)
 		{
-			for (const auto& dependent_attr : m_dependent_attrs)
-			{
-		 		dependent_attr->update_dependencies();
-			}
+			parent_definable->update();
 		}
-
-		if (parent)
+		else if (owner->parent())
 		{
-			if (LDefinable* d = dynamic_cast<LDefinable*>(parent))
+			if (LAttribute* parent_attr =
+				dynamic_cast<LAttribute*>(owner->parent()))
 			{
-				d->update();
-			}
-			else if (LAttribute* a = dynamic_cast<LAttribute*>(parent))
-			{
-				a->update_dependencies();
+				parent_attr->pimpl->update_parent_definable();
 			}
 		}
 	}
@@ -456,44 +415,52 @@ public:
 	{
 		connector_link_change.execute();
 
-		for (LAttribute* dependent_attr : dependent_attributes(true))
+		for (LAttribute* dep_attr : dependent_attributes(true))
 		{
-			dependent_attr->pimpl->update_link_dependencies();
+			dep_attr->update_link_dependencies();
 		}
+	}
+
+	const LVariant& value()
+	{
+		if (link && link->attribute())
+			return link->attribute()->value();
+
+		return _value;
 	}
 };
 
 LAttribute::LAttribute(
 	const LString& name, LObject* parent) :
-	pimpl{ new Impl(name) }, LObject(parent)
+	pimpl{ std::make_unique<Impl>(this) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, double value, LObject* parent) :
-	pimpl{ new Impl(name, value) }, LObject(parent)
+	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, const char* value, LObject* parent) :
-	pimpl{ new Impl(name, value) }, LObject(parent)
+	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, const LVariant& value, LObject* parent) :
-	pimpl{ new Impl(name, value) }, LObject(parent)
+	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, LJsonValue value, LObject* parent) :
-	pimpl{ new Impl(name, value) }, LObject(parent)
+	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 
@@ -507,10 +474,7 @@ LAttribute::LAttribute(
 
 			for (const auto& [key, state_val] : states_obj)
 			{
-				LAttribute* state_attr =
-					new LAttribute(key, state_val, this);
-
-				pimpl->states[key] = state_attr;
+				lMake<LAttribute>(this, key, state_val);
 			}
 		}
 	}
@@ -518,55 +482,39 @@ LAttribute::LAttribute(
 
 LAttribute::~LAttribute()
 {
-	delete pimpl;
+	// 1) break *all* links from attributes that depend on me
+	auto deps = pimpl->m_dependent_attrs;   // copy the list
+	for (LAttribute* dep : deps)
+	{
+		dep->break_link(false);
+	}
+
+	// 2) tear down any definition-attribute subscription
+	if (pimpl->def_attr)
+		pimpl->def_attr->disconnect_change(pimpl->def_connection);
+
+	// 3) break *my* own link (to some other attribute), but don't emit update
+	break_link(false);
 }
 
 void LAttribute::create_link(LAttribute* link_attr)
 {
-	pimpl->create_link(parent(), link_attr);
-
-	link_attr->pimpl->m_dependent_attrs.push_back(this);
-	link_attr->pimpl->update_link_dependencies();
+	pimpl->create_link(link_attr);
 }
 
 void LAttribute::create_link(LLink* link)
 {
-	if (link)
-		pimpl->link = new LLink(*link);
+	pimpl->create_link(link);
 }
 
-void LAttribute::create_state(const LString& name, const char* value)
+void LAttribute::break_link(bool update)
 {
-	create_state(name, LString(value));
-}
-
-void LAttribute::create_state(const LString& name, LVariant value)
-{
-	pimpl->create_state(name, new LAttribute(name, value, this));
-}
-
-void LAttribute::break_link()
-{
-	pimpl->break_link(parent());
-}
-
-void LAttribute::clear_states()
-{
-	if (!pimpl->states.empty())
-	{
-		for (const auto& [key, state] : pimpl->states)
-		{
-			remove_child(state);
-			delete state;
-		}
-
-		pimpl->states.clear();
-	}
+	pimpl->break_link(update);
 }
 
 void LAttribute::clear_definition_attribute()
 {
-	pimpl->clear_definition_attribute(parent());
+	pimpl->clear_definition_attribute();
 }
 
 LAttributeList LAttribute::dependent_attributes(
@@ -587,7 +535,7 @@ void LAttribute::disconnect_link_change(const LConnectionID& connection)
 
 bool LAttribute::has_states() const
 {
-	return pimpl->has_states();
+	return !states().empty();
 }
 
 LConnectionID LAttribute::on_change(std::function<void()> callback)
@@ -598,36 +546,6 @@ LConnectionID LAttribute::on_change(std::function<void()> callback)
 LConnectionID LAttribute::on_link_change(std::function<void()> callback)
 {
 	return pimpl->on_link_change(callback);
-}
-
-LAttribute* LAttribute::state(const LStringList& state_combo)
-{
-	return pimpl->state(state_combo);
-}
-
-LAttributeMap LAttribute::states() const
-{
-	LAttributeMap states;
-
-	states.insert(pimpl->states.begin(), pimpl->states.end());
-
-	if (parent())
-	{
-		if (LDefinition* parent_as_def = dynamic_cast<LDefinition*>(parent()))
-		{
-			if (parent_as_def->base())
-			{
-				if (LAttribute* base_attr = parent_as_def->base()->find_attribute(object_name()))
-				{
-					LAttributeMap base_states = base_attr->states();
-
-					states.insert(base_states.begin(), base_states.end());
-				}
-			}
-		}
-	}
-
-	return states;
 }
 
 LString LAttribute::path() const
@@ -647,51 +565,93 @@ LString LAttribute::path() const
 
 void LAttribute::resolve_links()
 {
-	if (pimpl->link)
+	pimpl->resolve_links();
+}
+
+void LAttribute::set_definition_attribute(LAttribute* new_def_attr)
+{
+	pimpl->set_definition_attribute(new_def_attr);
+}
+
+void LAttribute::set_parent_definable(LDefinable* parent_definable)
+{
+	pimpl->parent_definable = parent_definable;
+}
+
+void LAttribute::set_value(const char* new_value)
+{
+	set_value(LString(new_value));
+}
+
+void LAttribute::set_value(const LVariant& new_value)
+{
+	pimpl->set_value(new_value);
+}
+
+LAttribute* LAttribute::state(const LStringList& state_combo)
+{
+	for (const auto& [key, state_attr] : states())
 	{
-		if (!pimpl->link->resolve(this));
-		// TODO: Handle link resolution failure
+		auto state_names =
+			split<LStringList>(state_attr->object_name(), ':');
 
-		if (const auto& link_attr = pimpl->link->attribute())
+		bool qualifies = true;
+
+		for (const auto& state_name : state_names)
 		{
-			bool link_attr_already_has_this_dependency = false;
-
-			for (const auto& dep_attr : link_attr->pimpl->m_dependent_attrs)
+			if (std::find(state_combo.begin(), state_combo.end(),
+				state_name) == state_combo.end())
 			{
-				if (dep_attr == this)
-					link_attr_already_has_this_dependency = true;
+				qualifies = false;
 			}
+		}
 
-			if (!link_attr_already_has_this_dependency)
-				link_attr->pimpl->m_dependent_attrs.push_back(this);
-			//link_attr->pimpl->update_link_dependencies();
+		if (qualifies)
+			return state_attr;
+	}
+
+	// TODO: Handle returning override with highest number of matching
+	// states. If there is a conflict (two matching overrides), just
+	// return the value of this
+
+	return nullptr;
+
+	//return pimpl->state(state_combo);
+}
+
+LAttributeMap LAttribute::states(bool include_parent_states) const
+{
+	LAttributeMap states;
+
+	std::vector<LAttribute*> attr_list = find_children<LAttribute>();
+
+	for (const auto& attr : attr_list)
+	{
+		states[attr->object_name()] = attr;
+	}
+
+	if (include_parent_states && parent())
+	{
+		if (LDefinition* parent_as_def = dynamic_cast<LDefinition*>(parent()))
+		{
+			if (parent_as_def->base())
+			{
+				if (LAttribute* base_attr = parent_as_def->base()->find_attribute(object_name()))
+				{
+					LAttributeMap base_states = base_attr->states();
+
+					states.insert(base_states.begin(), base_states.end());
+				}
+			}
 		}
 	}
 
-	for (const auto& [key, state] : pimpl->states)
-		state->resolve_links();
-
-	update_dependencies();
-}
-
-void LAttribute::set_definition_attribute(LAttribute* definition_attribute)
-{
-	pimpl->set_definition_attribute(parent(), definition_attribute);
-}
-
-void LAttribute::set_value(const char* value)
-{
-	set_value(LString(value));
-}
-
-void LAttribute::set_value(const LVariant& value)
-{
-	pimpl->set_value(parent(), value);
+	return states;
 }
 
 LLink* LAttribute::link() const
 {
-	return pimpl->link;
+	return pimpl->link.get();
 }
 
 LAttribute* LAttribute::definition_attribute() const
@@ -699,12 +659,12 @@ LAttribute* LAttribute::definition_attribute() const
 	return pimpl->def_attr;
 }
 
-LJsonObject LAttribute::to_json_object()
+LJsonObject LAttribute::to_json_object() const
 {
 	return pimpl->to_json_object();
 }
 
-LJsonValue LAttribute::to_json_value()
+LJsonValue LAttribute::to_json_value() const
 {
 	return pimpl->to_json_value();
 }
@@ -716,25 +676,10 @@ size_t LAttribute::type_index() const
 
 const LVariant& LAttribute::value()
 {
-	 if (pimpl->link && pimpl->link->attribute())
-	 	return pimpl->link->attribute()->value();
-
-	return pimpl->value;
+	return pimpl->value();
 }
 
-void LAttribute::update_dependencies()
+void LAttribute::update_link_dependencies()
 {
-	pimpl->update_dependencies(parent());
-}
-
-LAYERS_EXPORT LAttributeMap Layers::attributes_from_json(const LJsonValue& json_val, LObject* parent)
-{
-	LAttributeMap attributes;
-
-	LJsonObject json_obj = json_val.to_object();
-
-	for (const auto& [key, attr] : json_obj)
-		attributes[key] = new LAttribute(key, json_obj[key]);
-
-	return attributes;
+	pimpl->update_link_dependencies();
 }

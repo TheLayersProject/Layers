@@ -78,7 +78,7 @@ public:
 
 private:
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
 };
 LAYERS_NAMESPACE_END
 

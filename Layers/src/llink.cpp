@@ -85,16 +85,18 @@ public:
 };
 
 LLink::LLink(const LString& absolute_path, const LString& relative_path) :
-    pimpl{ new Impl(absolute_path, relative_path) } {}
+    pimpl{ std::make_unique<Impl>(absolute_path, relative_path) } {}
 
 LLink::LLink(LAttribute* attribute) :
-	pimpl{ new Impl(attribute) } {}
+	pimpl{ std::make_unique<Impl>(attribute) } {}
 
 LLink::LLink(const LLink& l) :
-    pimpl{ new Impl(l.pimpl->path, l.pimpl->relative_path) }
+    pimpl{ std::make_unique<Impl>(l.pimpl->path, l.pimpl->relative_path) }
 {
 	pimpl->attribute = l.pimpl->attribute;
 }
+
+LLink::~LLink() = default;
 
 LAttribute* LLink::attribute() const
 {

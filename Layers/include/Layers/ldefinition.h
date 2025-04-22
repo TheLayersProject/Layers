@@ -34,6 +34,8 @@
 LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
+class LDefinition;
+using LDefinitionMap = std::map<LString, LDefinition*>;
 
 class LAYERS_EXPORT LDefinition : public LObject
 {
@@ -44,19 +46,19 @@ public:
 		const LString& name,
 		const LJsonValue& value,
 		const std::filesystem::path& file_path,
-		LDefinition* parent = nullptr);
+		LObject* parent = nullptr);
 
 	~LDefinition();
 
-	void add_attribute(LAttribute* attribute);
+	//void add_attribute(std::unique_ptr<LAttribute> attribute);
 
-	void append_child(LDefinition* child);
+	//void append_child(LDefinition* child);
 
 	void apply_style(LDefinition* style_def);
 
 	std::vector<LString> attribute_group_names() const;
 
-	std::map<LString, LAttribute*> attributes(int type_index = -1);
+	std::map<LString, LAttribute*> attributes(int type_index = -1) const;
 
 	LDefinition* base() const;
 
@@ -66,7 +68,7 @@ public:
 
 	size_t child_count() const;
 
-	std::map<LString, LDefinition*> children();
+	std::map<LString, LDefinition*> children() const;
 
 	void clear_style();
 
@@ -100,7 +102,7 @@ public:
 
 private:
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
 };
 
 LAYERS_NAMESPACE_END

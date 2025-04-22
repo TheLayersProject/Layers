@@ -75,7 +75,7 @@ public:
 
 private:
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
 };
 
 LAYERS_EXPORT LString operator+(const char* lhs, const LString& rhs);

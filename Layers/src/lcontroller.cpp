@@ -30,6 +30,7 @@
 #include <Layers/lattribute.h>
 #include <Layers/lconnector.h>
 #include <Layers/lresources.h>
+#include <Layers/lobjectfactory.h>
 #include <Layers/lpaths.h>
 #include <Layers/lstyle.h>
 #include <Layers/ltheme.h>
@@ -54,23 +55,18 @@ struct DependencyData
 class LController::Impl
 {
 public:
-	LDefinition* root_definition{ new LDefinition };
+	std::unique_ptr<LDefinition> root_definition{
+		std::make_unique<LDefinition>() };
 
 	std::map<LString, LStyle*> styles;
-	std::map<LString, LTheme*> themes;
+	std::map<LString, std::unique_ptr<LTheme>> themes;
 
 	LStyleList active_styles;
 	LTheme* active_theme{ nullptr };
 
-	std::map<LString, LDefinition*> unparented_definitions;
+	std::map<LString, std::unique_ptr<LDefinition>> unparented_definitions;
 
 	LConnector<LTheme*> connector_theme_added;
-
-	~Impl()
-	{
-		for (auto& theme : themes)
-			delete theme.second;
-	}
 
 	void add_style(LStyle* style)
 	{
@@ -78,12 +74,12 @@ public:
 			styles[style->object_name()] = style;
 	}
 
-	void add_theme(LTheme* theme)
+	void add_theme(std::unique_ptr<LTheme> theme)
 	{
 		if (theme)
 		{
-			themes[theme->display_id()] = theme;
-			connector_theme_added.execute(theme);
+			connector_theme_added.execute(theme.get());
+			themes[theme->display_id()] = std::move(theme);
 		}
 	}
 
@@ -157,6 +153,10 @@ public:
 		return sorted;
 	}
 
+	/*
+		TODO:
+		Consider returning a set of definition references instead of pointers
+	*/
 	std::set<LDefinition*> build_definitions(
 		const std::map<std::filesystem::path, LJsonObject>& file_objects)
 	{
@@ -165,14 +165,21 @@ public:
 		for (const auto& [file_path, object] : file_objects)
 			for (const auto& [key, value] : object)
 			{
-				LDefinition* def = new LDefinition(key, value, "");
+				std::unique_ptr<LDefinition> def =
+					std::make_unique<LDefinition>(key, value, "");
 
-				definitions.insert(def);
+				definitions.insert(def.get());
 
 				if (std::string(key.c_str()).find("/") != std::string::npos)
-					unparented_definitions[key] = def;
+				{
+					unparented_definitions[key] = std::move(def);
+				}
 				else
-					root_definition->append_child(def);
+				{
+					def->set_parent(root_definition.get());
+					root_definition->add_child(std::move(def));
+					//root_definition->append_child(def);
+				}
 			}
 
 		return definitions;
@@ -246,6 +253,11 @@ public:
 
 		for (const auto& entry : std::filesystem::directory_iterator(path))
 		{
+			// Needs to only load files that end with .json
+
+			if (entry.path().extension() != ".json")
+				continue;
+
 			if (entry.is_regular_file() && entry.path().filename().string()[0] != '_')
 			{
 				file_strings[entry.path()] = load_json_file(entry.path());
@@ -283,7 +295,7 @@ public:
 			def->finalize();
 
 		// Resolve parent-child relationships as in your current implementation
-		for (const auto& [_, unparented_def] : unparented_definitions)
+		for (auto& [_, unparented_def] : unparented_definitions)
 		{
 			LString unparented_def_name = unparented_def->object_name();
 			auto name_list = split<std::deque<LString>>(unparented_def->object_name(), '/');
@@ -294,9 +306,26 @@ public:
 			{
 				unparented_def->set_object_name(new_name);
 				unparented_def->set_parent(parent_def);
-				parent_def->append_child(unparented_def);
+				parent_def->add_child(std::move(unparented_def));
 			}
 		}
+
+		// Remove empty unparented definitions
+		for (auto it = unparented_definitions.begin();
+			it != unparented_definitions.end(); )
+		{
+			if (it->second == nullptr)
+			{
+				it = unparented_definitions.erase(it);
+			}
+			else ++it;
+		}
+
+		/*
+			TODO:
+			Handle situation where there might be leftover unparented
+			definitions.
+		*/
 	}
 
 
@@ -346,7 +375,10 @@ public:
 		for (const auto& [key, value] : json_object)
 		{
 			if (!key.starts_with("_"))
-				style->append_child(new LDefinition(key, value, style_file_path));
+			{
+				lMake<LDefinition>(style, key, value, style_file_path);
+				//style->append_child(new LDefinition(key, value, style_file_path));
+			}
 		}
 
 		return style;
@@ -362,7 +394,7 @@ public:
 		}
 	}
 
-	LTheme* load_theme(const std::filesystem::path& directory)
+	std::unique_ptr<LTheme> load_theme(const std::filesystem::path& directory)
 	{
 		std::map<std::filesystem::path, std::string> file_strings = 
 			load_definition_path(directory);
@@ -378,22 +410,22 @@ public:
 			LJsonObject json_object = parser.parse_object();
 
 			for (const auto& [key, value] : json_object)
-				return new LTheme(key, value, file_path);
+				return std::make_unique<LTheme>(key, value, file_path);
 		}
 
-		return nullptr;
+		return std::unique_ptr<LTheme>();
 	}
 
-	LTheme* load_theme(const std::string& file_string)
+	std::unique_ptr<LTheme> load_theme(const std::string& file_string)
 	{
 		LJsonLexer lexer(file_string);
 		LJsonParser parser(lexer);
 		LJsonObject json_object = parser.parse_object();
 
 		for (const auto& [key, value] : json_object)
-			return new LTheme(key, value, "");
+			return std::make_unique<LTheme>(key, value, "");
 
-		return nullptr;
+		return std::unique_ptr<LTheme>();
 	}
 
 	void load_themes(const std::filesystem::path& path)
@@ -402,7 +434,7 @@ public:
 		{
 			if (dir_entry.is_directory())
 			{
-				add_theme(load_theme(dir_entry.path()));
+				add_theme(std::move(load_theme(dir_entry.path())));
 			}
 		}
 	}
@@ -417,12 +449,9 @@ public:
     }
 };
 
-LController::LController() : pimpl(new Impl) {}
+LController::LController() : pimpl{ std::make_unique<Impl>() } {}
 
-LController::~LController()
-{
-	delete pimpl;
-}
+LController::~LController() = default;
 
 LStyleList LController::active_styles()
 {
@@ -434,9 +463,9 @@ LTheme* LController::active_theme() const
 	return pimpl->active_theme;
 }
 
-void LController::add_theme(LTheme* theme)
+void LController::add_theme(std::unique_ptr<LTheme> theme)
 {
-	pimpl->add_theme(theme);
+	pimpl->add_theme(std::move(theme));
 }
 
 LDefinition* LController::find_definition(const LString& path)
@@ -461,7 +490,7 @@ LController& LController::instance()
 	return instance;
 }
 
-LTheme* LController::load_theme(const std::string& file_string)
+std::unique_ptr<LTheme> LController::load_theme(const std::string& file_string)
 {
 	return pimpl->load_theme(file_string);
 }
@@ -478,15 +507,15 @@ void LController::on_theme_added(std::function<void(LTheme*)> callback)
 
 LDefinition* LController::root_definition() const
 {
-	return pimpl->root_definition;
+	return pimpl->root_definition.get();
 }
 
 void LController::include(const LString& path, bool is_application)
 {
-	pimpl->load_definitions(definitions_path() / std::string(path.c_str()));
+	pimpl->load_definitions(std::string(path.c_str()));
 
-	if (is_application)
-		pimpl->load_styles(styles_path() / std::string(path.c_str()));
+	//if (is_application)
+	//	pimpl->load_styles(styles_path() / std::string(path.c_str()));
 }
 
 void LController::include_internal(const LString& path)
@@ -498,14 +527,11 @@ bool LController::set_active_theme(LTheme* theme)
 {
 	if (pimpl->active_theme != theme)
 	{
-		//LTheme* previous_active_theme = pimpl->active_theme;
-
 		pimpl->active_theme = theme;
 
-		// if (previous_active_theme)
-		// 	previous_active_theme->clear();
-
 		pimpl->root_definition->resolve_links();
+
+		LDefinable::flush_updates();
 
 		return true;
 	}
@@ -521,10 +547,10 @@ std::map<LString, LStyle*> LController::styles() const
 LTheme* LController::theme(const LString& themeId) const
 {
 	auto it = pimpl->themes.find(themeId);
-	return it != pimpl->themes.end() ? it->second : nullptr;
+	return it != pimpl->themes.end() ? it->second.get() : nullptr;
 }
 
-std::map<LString, LTheme*> LController::themes() const
+std::map<LString, std::unique_ptr<LTheme>>& LController::themes() const
 {
 	return pimpl->themes;
 }

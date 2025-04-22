@@ -20,6 +20,8 @@
 #ifndef LDEFINABLE_H
 #define LDEFINABLE_H
 
+#include <cassert>
+#include <unordered_set>
 #include <vector>
 
 #include "layers_global.h"
@@ -31,23 +33,32 @@
 
 LAYERS_NAMESPACE_BEGIN
 
-class LAYERS_EXPORT LDefinable : public LObject
+class LAYERS_EXPORT LDefinable
 {
 public:
 	LDefinable();
 
 	LDefinable(const LDefinable& other);
 
-	~LDefinable();
+	virtual ~LDefinable();
 
-	void add_share_definable(LDefinable* themeable);
+	void add_attribute(std::unique_ptr<LAttribute> attribute);
 
-	virtual void apply_definition(LDefinition* definition);
+	void add_share_definable(LDefinable* definable);
+
+	virtual void apply_definition(
+		LDefinition* definition, bool is_top_level = true);
+
+	const std::vector<std::unique_ptr<LAttribute>>& attributes() const;
 
 	virtual std::vector<LDefinable*> child_definables(
 		bool recursive = false) = 0;
 
 	LDefinition* definition() const;
+
+	static void flush_updates();
+
+	virtual LString name() = 0;
 
 	virtual LString path() = 0;
 
@@ -55,8 +66,26 @@ public:
 
 private:
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
+
+	void mark_dirty();
+
+	bool is_dirty{ false };
+
+	static std::unordered_set<LDefinable*> dirty_definables;
 };
+
+template <typename... Args>
+LAttribute* lMakeDefinableAttribute(LDefinable* parent, Args&&... args)
+{
+	assert(parent && "Parent must not be null");
+
+	parent->add_attribute(
+		std::make_unique<LAttribute>(std::forward<Args>(args)...));
+
+	return parent->attributes().back().get();
+}
+
 LAYERS_NAMESPACE_END
 
 #endif // LDEFINABLE_H

@@ -29,7 +29,6 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lalgorithms.h" // TODO: Might be able to remove this include?
 #include "lconnections.h"
 #include "lcontroller.h"
 #include "ldefinable.h"
@@ -40,10 +39,8 @@
 
 LAYERS_NAMESPACE_BEGIN
 
-class LInvalidVariant {};
-
 using LVariant = std::variant<
-	LInvalidVariant,			// 0
+	std::monostate,				// 0
 	double,						// 1
 	bool,						// 2
 	LString,					// 3
@@ -52,9 +49,6 @@ using LVariant = std::variant<
 class LAttribute;
 using LAttributeList = std::vector<LAttribute*>;
 using LAttributeMap = std::map<LString, LAttribute*>;
-
-LAYERS_EXPORT LAttributeMap attributes_from_json(
-	const LJsonValue& json_val, LObject* parent = nullptr);
 
 class LAYERS_EXPORT LAttribute : public LObject
 {
@@ -74,7 +68,7 @@ public:
 	LAttribute(const LString& name, LJsonValue value,
 		LObject* parent = nullptr);
 
-	~LAttribute();
+	virtual ~LAttribute();
 
 	template<typename T>
 	T as(
@@ -86,19 +80,13 @@ public:
 		const LStringList& state_combo = LStringList(),
 		LDefinition* context = nullptr);
 
-	void break_link();
-
-	void clear_states();
+	void break_link(bool update = true);
 
 	void clear_definition_attribute();
 
 	void create_link(LAttribute* link_attr);
 
 	void create_link(LLink* link);
-
-	void create_state(const LString& name, const char* value);
-
-	void create_state(const LString& name, LVariant value);
 
 	LAttributeList dependent_attributes(
 		bool include_indirect_dependencies = false) const;
@@ -109,15 +97,9 @@ public:
 
 	bool has_states() const;
 
-	//LJsonObject& json_object();
-
 	LConnectionID on_change(std::function<void()> callback);
 
 	LConnectionID on_link_change(std::function<void()> callback);
-
-	LAttribute* state(const LStringList& state_combo);
-
-	LAttributeMap states() const;
 
 	LString path() const;
 
@@ -125,27 +107,33 @@ public:
 
 	void set_definition_attribute(LAttribute* definition_attribute);
 
+	void set_parent_definable(LDefinable* parent_definable);
+
 	void set_value(const char* value);
 
 	void set_value(const LVariant& value);
+
+	LAttribute* state(const LStringList& state_combo);
+
+	LAttributeMap states(bool include_parent_states = true) const;
 
 	LLink* link() const;
 
 	LAttribute* definition_attribute() const;
 
-	LJsonObject to_json_object();
+	LJsonObject to_json_object() const;
 
-	LJsonValue to_json_value();
+	LJsonValue to_json_value() const;
 
 	size_t type_index() const;
 
 	const LVariant& value();
 
 private:
-	void update_dependencies();
+	void update_link_dependencies();
 
 	class Impl;
-	Impl* pimpl;
+	std::unique_ptr<Impl> pimpl;
 };
 
 template<typename T>

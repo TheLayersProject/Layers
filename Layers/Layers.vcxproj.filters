@@ -72,6 +72,9 @@
     <ClInclude Include="include\Layers\lresources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Layers\llogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ljson.cpp">
@@ -114,6 +117,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lresources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Layers\lobjectfactory.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\llogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

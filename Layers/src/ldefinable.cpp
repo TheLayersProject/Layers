@@ -25,6 +25,8 @@ using Layers::LAttribute;
 using Layers::LDefinition;
 using Layers::LDefinable;
 
+std::unordered_set<LDefinable*> LDefinable::dirty_definables;
+
 class LDefinable::Impl
 {
 public:
@@ -32,109 +34,130 @@ public:
 
 	Impl(const Impl& other) {}
 
-	void add_share_definable(LDefinable* themeable)
-	{
-		if (themeable)
-		{
-			if (m_definition)
-				themeable->apply_definition(m_definition);
+	std::vector<std::unique_ptr<LAttribute>> attributes;
 
-			m_share_themeables.push_back(themeable);
-		}
-	}
+	LDefinition* definition{ nullptr };
 
-	void apply_definition(LDefinable* t, LDefinition* definition)
-	{
-		if (definition)
-		{
-			if (t->object_name() == definition->object_name())
-			{
-				m_definition = definition;
-
-				const auto& attributes_map = definition->attributes();
-				if (!attributes_map.empty())
-				{
-					for (LAttribute* attr : t->find_children<LAttribute>())
-					{
-						auto it = attributes_map.find(attr->object_name());
-						if (it != attributes_map.end())
-						{
-							attr->set_definition_attribute(it->second);
-						}
-					}
-				}
-
-				const auto& children_map = definition->children();
-				if (!children_map.empty())
-				{
-					for (LDefinable* child_t : t->child_definables())
-					{
-						auto it = children_map.find(child_t->object_name());
-						if (it != children_map.end())
-						{
-							child_t->apply_definition(it->second);
-						}
-					}
-				}
-
-				for (LDefinable* themeable : m_share_themeables)
-				{
-					themeable->apply_definition(m_definition);
-				}
-			}
-		}
-		else
-		{
-			m_definition = nullptr;
-
-			for (LAttribute* attr : t->find_children<LAttribute>())
-			{
-				attr->clear_definition_attribute();
-			}
-
-			for (LDefinable* child_t : t->find_children<LDefinable>())
-			{
-				child_t->apply_definition(nullptr);
-			}
-		}
-	}
-
-	LDefinition* definition() const
-	{
-		return m_definition;
-	}
-
-	LDefinition* m_definition{ nullptr };
-
-	std::vector<LDefinable*> m_share_themeables;
+	std::vector<LDefinable*> share_definables;
 };
 
 LDefinable::LDefinable() :
-	pimpl{ new Impl() } {}
+	pimpl{ std::make_unique<Impl>() } {}
 
 LDefinable::LDefinable(const LDefinable& other) :
-	pimpl{ new Impl(*(other.pimpl)) } {}
+	pimpl{ std::make_unique<Impl>(*(other.pimpl)) } {}
 
-LDefinable::~LDefinable()
+LDefinable::~LDefinable() = default;
+
+void LDefinable::add_attribute(std::unique_ptr<LAttribute> attr)
 {
-	if (pimpl)
+	if (!attr) return;
+
+	attr->set_parent_definable(this);
+
+	attr->on_change([this](){ mark_dirty(); });
+
+	pimpl->attributes.push_back(std::move(attr));
+
+}
+
+void LDefinable::add_share_definable(LDefinable* definable)
+{
+	if (definable)
 	{
-		delete pimpl;
-		pimpl = nullptr;
+		if (pimpl->definition)
+			definable->apply_definition(pimpl->definition);
+
+		pimpl->share_definables.push_back(definable);
 	}
 }
 
-void LDefinable::add_share_definable(LDefinable* themeable)
+void LDefinable::apply_definition(LDefinition* definition, bool is_top_level)
 {
-	pimpl->add_share_definable(themeable);
+	if (definition)
+	{
+		if (name() == definition->object_name())
+		{
+			pimpl->definition = definition;
+
+			const auto& attributes_map = definition->attributes();
+			if (!attributes_map.empty())
+			{
+				for (const auto& attr : pimpl->attributes)
+				{
+					auto it = attributes_map.find(attr->object_name());
+					if (it != attributes_map.end())
+					{
+						attr->set_definition_attribute(it->second);
+					}
+				}
+			}
+
+			const auto& children_map = definition->children();
+			if (!children_map.empty())
+			{
+				for (LDefinable* child : child_definables())
+				{
+					auto it = children_map.find(child->name());
+					if (it != children_map.end())
+					{
+						child->apply_definition(it->second, false);
+					}
+				}
+			}
+
+			for (LDefinable* themeable : pimpl->share_definables)
+			{
+				themeable->apply_definition(pimpl->definition);
+			}
+		}
+	}
+	else
+	{
+		pimpl->definition = nullptr;
+
+		for (const auto& attr : pimpl->attributes)
+		{
+			attr->clear_definition_attribute();
+		}
+
+		for (LDefinable* child : child_definables())
+		{
+			child->apply_definition(nullptr, false);
+		}
+	}
+
+	if (is_top_level)
+	{
+		LDefinable::flush_updates();
+	}
 }
 
-void LDefinable::apply_definition(LDefinition* theme_item)
+const std::vector<std::unique_ptr<LAttribute>>& LDefinable::attributes() const
 {
-	pimpl->apply_definition(this, theme_item);
+	return pimpl->attributes;
 }
 
 LDefinition* LDefinable::definition() const
 {
-	return pimpl->definition();
+	return pimpl->definition;
+}
+
+void LDefinable::flush_updates()
+{
+	for (auto* d : dirty_definables)
+	{
+		d->is_dirty = false;
+		d->update();
+	}
+	dirty_definables.clear();
+}
+
+void LDefinable::mark_dirty()
+{
+	if (!is_dirty)
+	{
+		is_dirty = true;
+		dirty_definables.insert(this);
+	}
 }

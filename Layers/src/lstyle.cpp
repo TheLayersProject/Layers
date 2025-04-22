@@ -33,7 +33,7 @@ LStyle::LStyle(
 	const LJsonValue& value,
 	const std::filesystem::path& file_path,
 	LDefinition* parent) :
-	pimpl{ new Impl() },
+	pimpl{ std::make_unique<Impl>() },
 	LDefinition(name, value, file_path, parent)
 {
 	if (value.is_object())
@@ -50,10 +50,7 @@ LStyle::LStyle(
 	}
 }
 
-LStyle::~LStyle()
-{
-	delete pimpl;
-}
+LStyle::~LStyle() = default;
 
 LString LStyle::publisher() const
 {

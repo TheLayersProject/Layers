@@ -24,9 +24,12 @@
 
 #include <Layers/lalgorithms.h>
 #include <Layers/lattribute.h>
+#include <Layers/lobjectfactory.h>
 #include <Layers/lpaths.h>
 
 using Layers::LAttribute;
+using Layers::LAttributeMap;
+using Layers::LDefinitionMap;
 using Layers::LJsonObject;
 using Layers::LString;
 using Layers::LDefinition;
@@ -41,8 +44,8 @@ public:
 	LJsonValue value;
 	std::filesystem::path file_path;
 
-	std::map<LString, LDefinition*> m_children;
-	std::map<LString, LAttribute*> m_attributes;
+	//std::map<LString, LDefinition*> m_children;
+	//std::map<LString, LAttribute*> m_attributes;
 
 	LDefinition* style_definition{ nullptr };
 
@@ -51,6 +54,7 @@ public:
 	Impl() {}
 
 	Impl(
+		LDefinition* self,
 		const LJsonValue& value,
 		const std::filesystem::path& file_path) :
 		file_path{ file_path },
@@ -110,166 +114,25 @@ public:
 
 			if (object.find("attributes") != object.end())
 			{
-				LJsonObject attrs = object["attributes"].to_object();
+				LJsonObject json_attrs = object["attributes"].to_object();
 
-				for (const auto& [key, attr] : attrs)
-					m_attributes[key] = new LAttribute(key, attrs[key]);
+				for (const auto& [key, json_attr] : json_attrs)
+				{
+					//m_attributes[key] = new LAttribute(key, json_attr, self);
+					lMake<LAttribute>(self, key, json_attr);
+				}
 			}
 
 			if (object.find("children") != object.end())
+			{
 				for (const auto& [key, value] : object["children"].to_object())
-					append_child(new LDefinition(key, value, file_path));
-		}
-	}
-
-	Impl(
-		const LJsonObject& attributes_obj,
-		const std::filesystem::path& file_path) :
-		file_path{ file_path }
-		//value{ value }
-	{
-		m_attributes = attributes_from_json(attributes_obj);
-	}
-
-	void append_child(LDefinition* child)
-	{
-		m_children[child->object_name()] = child;
-	}
-
-	void apply_style(LDefinition* style_def)
-	{
-		style_definition = style_def;
-
-		const auto& style_attrs = style_def->attributes();
-		if (!style_attrs.empty())
-		{
-			for (const auto& [attr_name, attr] : attributes())
-			{
-				auto it = style_attrs.find(attr->object_name());
-				if (it != style_attrs.end())
 				{
-					attr->set_definition_attribute(it->second);
+					lMake<LDefinition>(self, key, value, file_path);
 				}
 			}
+				//for (const auto& [key, value] : object["children"].to_object())
+				//	append_child(new LDefinition(key, value, file_path, self));
 		}
-
-		const auto& style_children = style_def->children();
-		if (!style_children.empty())
-		{
-			for (auto [child_name, child] : m_children)
-			{
-				auto it = style_children.find(child->object_name());
-				if (it != style_children.end())
-				{
-					child->apply_style(it->second);
-				}
-			}
-		}
-	}
-
-	std::vector<LString> attribute_group_names() const
-	{
-		std::vector<LString> attribute_group_names;
-
-		for (const auto& [key, attr] : m_attributes)
-		{
-			LString attr_name = attr->object_name();
-
-			if (std::find(attr_name.begin(), attr_name.end(),
-				'.') != attr_name.end())
-			{
-				auto group_name = split<std::vector<LString>>(
-					attr_name, '.').front();
-
-				if (std::find(attribute_group_names.begin(),
-					attribute_group_names.end(),
-					group_name) == attribute_group_names.end())
-				{
-					attribute_group_names.push_back(group_name);
-				}
-			}
-		}
-
-		return attribute_group_names;
-	}
-
-	std::map<LString, LAttribute*> attributes(int type_index = -1)
-	{		
-		if (type_index < 0)
-			return m_attributes;
-
-		LAttributeMap filtered_attrs;
-
-		for (const auto& [key, attr] : m_attributes)
-			if (attr->type_index() == type_index)
-				filtered_attrs[key] = attr;
-
-		return filtered_attrs;
-	}
-
-	LDefinition* child(int index) const
-	{
-		if (index < 0 || index >= m_children.size())
-			return nullptr;
-
-		auto it = m_children.begin();
-		std::advance(it, index);
-
-		return it->second;
-	}
-
-	size_t child_count() const
-	{
-		return m_children.size();
-	}
-
-	void clear_style()
-	{
-		if (style_definition)
-		{
-			const auto& style_attrs = style_definition->attributes();
-			if (!style_attrs.empty())
-			{
-				for (const auto& [attr_name, attr] : attributes())
-				{
-					auto it = style_attrs.find(attr->object_name());
-					if (it != style_attrs.end())
-					{
-						attr->clear_definition_attribute();
-					}
-				}
-			}
-
-			const auto& style_children = style_definition->children();
-			if (!style_children.empty())
-			{
-				for (auto [child_name, child] : m_children)
-				{
-					auto it = style_children.find(child->object_name());
-					if (it != style_children.end())
-					{
-						child->clear_style();
-					}
-				}
-			}
-
-			style_definition = nullptr;
-		}
-	}
-
-	std::set<LDefinition*> dependencies()
-	{
-		std::set<LDefinition*> dependencies;
-
-		if (base)
-			dependencies.insert(base);
-
-		for (const auto& [name, child_def]: m_children)
-			for (const auto& child_dep : child_def->dependencies())
-				if (child_dep)
-					dependencies.insert(child_dep);
-
-		return dependencies;
 	}
 
 	LString file_name() const
@@ -277,190 +140,209 @@ public:
 		return LString(file_path.filename().string().c_str());
 	}
 
-	void finalize()
+	void merge_from(LDefinition* base, LDefinition* self)
 	{
-		// Finalize all children first
-		for (const auto& [child_name, child] : m_children)
-		{
-			child->finalize();
-		}
+		LAttributeMap attributes = self->attributes();
+		LDefinitionMap children = self->children();
 
-		if (base)
-		{
-			merge_from(base);
-		}
-	}
-
-	void merge_from(LDefinition* base)
-	{
 		// Merge attributes from base
 		for (const auto& [base_key, base_attr] : base->attributes())
 		{
-			if (m_attributes.count(base_key))
+			/*
+				If *this* definition defines an attribute with the same name as
+				a base attribute, then its value/link should automatically take
+				precedence over the base attribute.
+
+				However, there may be cases where the derivative attribute only
+				defines additional states. To handle this, the derivative
+				attribute will acquire the base's value/link as well as any
+				base states.
+			*/
+			if (attributes.count(base_key))
 			{
-				if (m_attributes[base_key]->value().index() == 0 &&
-					!m_attributes[base_key]->link())
+				if (attributes[base_key]->value().index() == 0 &&
+					!attributes[base_key]->link())
 				{
 					if (base_attr->link())
-						m_attributes[base_key]->create_link(base_attr->link());
+						attributes[base_key]->create_link(base_attr->link());
 					else
-						m_attributes[base_key]->set_value(base_attr->value());
+						attributes[base_key]->set_value(base_attr->value());
 				}
 				for (const auto& [state, state_attr] : base_attr->states())
 				{
-					if (!m_attributes[base_key]->states().count(state))
-						m_attributes[base_key]->create_state(state, state_attr->value());
+					if (!attributes[base_key]->states().count(state))
+					{
+						//attributes[base_key]->create_state(state, state_attr->value());
+						lMake<LAttribute>(attributes[base_key], state, state_attr->value());
+					}
 				}
 			}
-			else
-			{
-				m_attributes[base_key] = base_attr;
-			}
+			/*
+				The following is still being considered.
+
+				The attributes map is not a reference, so adding the base_attr
+				here does not actually add the base to this definition's attribute
+				list.
+
+				NOTE:
+				This might be handled now that attributes() includes base
+				attributes!
+			*/
+			//else
+			//{
+			//	attributes[base_key] = base_attr;
+			//}
 		}
 
 		// Recursively merge children
 		for (const auto& [base_child_name, base_child] : base->children())
 		{
-			if (m_children.count(base_child_name))
+			if (children.count(base_child_name))
 			{
-				m_children[base_child_name]->pimpl->merge_from(base_child);
+				children[base_child_name]->pimpl->merge_from(base_child, children[base_child_name]);
 			}
-			else
-			{
-				m_children[base_child_name] = base_child;
-			}
+			//else
+			//{
+			//	m_children[base_child_name] = base_child;
+			//}
 		}
-	}
-
-	LAttribute* find_attribute(const LString& name)
-	{
-		for (auto [attr_name, attr] : m_attributes)
-		{
-			if (attr_name == name)
-				return attr;
-		}
-		
-		return nullptr;
-	}
-
-	LDefinition* find_item(std::deque<LString> name_list)
-	{
-		if (!name_list.empty())
-		{
-			std::deque<LString> new_name_list = name_list;
-
-			LString name = *new_name_list.begin();
-			new_name_list.pop_front();
-
-			// Check children
-			for (const auto& [key, child_item] : m_children)
-			{
-				if (child_item->object_name() == name)
-				{
-					if (new_name_list.empty())
-						return child_item;
-					else
-						return child_item->find_item(new_name_list);
-				}
-			}
-		}
-
-		return nullptr;
 	}
 
 	bool is_overridable() const
 	{
 		return m_is_overridable;
 	}
-
-	LJsonObject to_json_object() const
-	{
-		LJsonObject item_object;
-		LJsonObject attributes_object;
-		LJsonObject children_object;
-
-		for (const auto& [key, attr] : m_attributes)
-		{
-			LJsonObject attr_object = attr->to_json_object();
-
-			if (attr_object.size() == 1 &&
-				attr_object.begin()->first == "value")
-			{
-				attributes_object[key] = attr_object["value"];
-			}
-			else
-			{
-				attributes_object[key] = attr_object;
-			}
-		}
-
-		for (const auto& [key, child] : m_children)
-			if (child->pimpl->file_name() == file_name())
-				children_object[child->object_name()] =
-				child->to_json_object();
-
-		if (!attributes_object.empty())
-			item_object["attributes"] = attributes_object;
-
-		if (!children_object.empty())
-			item_object["children"] = children_object;
-
-		return item_object;
-	}
 };
 
 LDefinition::LDefinition() :
-	pimpl{ new Impl() },
+	pimpl{ std::make_unique<Impl>() },
 	LObject() {}
 
 LDefinition::LDefinition(
 	const LString& name,
 	const LJsonValue& value,
 	const std::filesystem::path& file_path,
-	LDefinition* parent
+	LObject* parent
 ) :
-	pimpl{ new Impl(value, file_path) },
+	pimpl{ std::make_unique<Impl>(this, value, file_path) },
 	LObject(parent)
 {
 	set_object_name(name);
 
-	for (const auto& [key, attr] : attributes())
-		attr->set_parent(this);
+	//for (const auto& [key, attr] : attributes())
+	//	attr->set_parent(this);
 
-	for (const auto& [name, definition] : children())
-		definition->set_parent(this);
+	//for (const auto& [name, definition] : children())
+	//	definition->set_parent(this);
 }
 
-LDefinition::~LDefinition()
-{
-	delete pimpl;
-}
+LDefinition::~LDefinition() = default;
 
-void LDefinition::add_attribute(LAttribute* attribute)
-{
-	pimpl->m_attributes[attribute->object_name()] = attribute;
-
-	attribute->set_parent(this);
-}
-
-void LDefinition::append_child(LDefinition* child)
-{
-	pimpl->append_child(child);
-}
+//void LDefinition::append_child(LDefinition* child)
+//{
+//	pimpl->append_child(child);
+//}
 
 void LDefinition::apply_style(LDefinition* style_def)
 {
-	pimpl->apply_style(style_def);
+	pimpl->style_definition = style_def;
+
+	const auto& style_attrs = style_def->attributes();
+	if (!style_attrs.empty())
+	{
+		for (const auto& [attr_name, attr] : attributes())
+		{
+			auto it = style_attrs.find(attr->object_name());
+			if (it != style_attrs.end())
+			{
+				attr->set_definition_attribute(it->second);
+			}
+		}
+	}
+
+	const auto& style_children = style_def->children();
+	if (!style_children.empty())
+	{
+		for (auto [child_name, child] : children())
+		{
+			auto it = style_children.find(child->object_name());
+			if (it != style_children.end())
+			{
+				child->apply_style(it->second);
+			}
+		}
+	}
+
+	//pimpl->apply_style(style_def);
 }
 
 std::vector<LString> LDefinition::attribute_group_names() const
 {
-	return pimpl->attribute_group_names();
+	std::vector<LString> attribute_group_names;
+
+	for (const auto& [key, attr] : attributes())
+	{
+		LString attr_name = attr->object_name();
+
+		if (std::find(attr_name.begin(), attr_name.end(),
+			'.') != attr_name.end())
+		{
+			auto group_name = split<std::vector<LString>>(
+				attr_name, '.').front();
+
+			if (std::find(attribute_group_names.begin(),
+				attribute_group_names.end(),
+				group_name) == attribute_group_names.end())
+			{
+				attribute_group_names.push_back(group_name);
+			}
+		}
+	}
+
+	return attribute_group_names;
+
+	//return pimpl->attribute_group_names();
 }
 
-std::map<LString, LAttribute*> LDefinition::attributes(int type_index)
+std::map<LString, LAttribute*> LDefinition::attributes(int type_index) const
 {
-	return pimpl->attributes(type_index);
+	LAttributeMap attributes;
+
+	std::vector<LAttribute*> attr_list = find_children<LAttribute>();
+
+	for (const auto& attr : attr_list)
+	{
+		attributes[attr->object_name()] = attr;
+	}
+
+	// Need to add any base attributes with names that are not already in the
+	// attributes map
+
+	if (pimpl->base)
+	{
+		LAttributeMap base_attrs = pimpl->base->attributes();
+
+		for (const auto& [key, attr] : base_attrs)
+		{
+			if (attributes.find(key) == attributes.end())
+			{
+				attributes[key] = attr;
+			}
+		}
+	}
+
+	if (type_index < 0)
+		return attributes;
+
+	LAttributeMap filtered_attrs;
+
+	for (const auto& [key, attr] : attributes)
+		if (attr->type_index() == type_index)
+			filtered_attrs[key] = attr;
+
+	return filtered_attrs;
+
+	//return pimpl->attributes(this, type_index);
 }
 
 LDefinition *LDefinition::base() const
@@ -474,27 +356,112 @@ LString LDefinition::base_name() const
 
 LDefinition* LDefinition::child(int index) const
 {
-	return pimpl->child(index);
+	const std::map<LString, LDefinition*>& c = children();
+
+	if (index < 0 || index >= c.size())
+		return nullptr;
+
+	auto it = c.begin();
+	std::advance(it, index);
+
+	return it->second;
+
+	//return pimpl->child(index);
 }
 
 size_t LDefinition::child_count() const
 {
-	return pimpl->child_count();
+	return children().size();
+
+	//return pimpl->child_count();
 }
 
-std::map<LString, LDefinition*> LDefinition::children()
+std::map<LString, LDefinition*> LDefinition::children() const
 {
-	return pimpl->m_children;
+	std::map<LString, LDefinition*> children;
+
+	std::vector<LDefinition*> children_list = find_children<LDefinition>();
+
+	for (const auto& child : children_list)
+	{
+		if (child->pimpl->file_name() == file_name())
+		{
+			children[child->object_name()] = child;
+		}
+	}
+
+	// Need to add any base children with names that are not already in the
+	// children map
+
+	if (pimpl->base)
+	{
+		LDefinitionMap base_children = pimpl->base->children();
+
+		for (const auto& [key, child] : base_children)
+		{
+			if (children.find(key) == children.end())
+			{
+				children[key] = child;
+			}
+		}
+	}
+
+	return children;
+
+	//return pimpl->m_children;
 }
 
 void LDefinition::clear_style()
 {
-	pimpl->clear_style();
+	if (pimpl->style_definition)
+	{
+		const auto& style_attrs = pimpl->style_definition->attributes();
+		if (!style_attrs.empty())
+		{
+			for (const auto& [attr_name, attr] : attributes())
+			{
+				auto it = style_attrs.find(attr->object_name());
+				if (it != style_attrs.end())
+				{
+					attr->clear_definition_attribute();
+				}
+			}
+		}
+
+		const auto& style_children = pimpl->style_definition->children();
+		if (!style_children.empty())
+		{
+			for (auto [child_name, child] : children())
+			{
+				auto it = style_children.find(child->object_name());
+				if (it != style_children.end())
+				{
+					child->clear_style();
+				}
+			}
+		}
+
+		pimpl->style_definition = nullptr;
+	}
+
+	//pimpl->clear_style();
 }
 
 std::set<LDefinition*> LDefinition::dependencies()
 {
-	return pimpl->dependencies();
+	std::set<LDefinition*> dependencies;
+
+	if (pimpl->base)
+		dependencies.insert(pimpl->base);
+
+	for (const auto& [name, child_def] : children())
+		for (const auto& child_dep : child_def->dependencies())
+			if (child_dep)
+				dependencies.insert(child_dep);
+
+	return dependencies;
+
+	//return pimpl->dependencies();
 }
 
 LString LDefinition::file_name() const
@@ -504,12 +471,31 @@ LString LDefinition::file_name() const
 
 void LDefinition::finalize()
 {
-	pimpl->finalize();
+	// Finalize all children first
+	for (const auto& [child_name, child] : children())
+	{
+		child->finalize();
+	}
+
+	if (pimpl->base)
+	{
+		pimpl->merge_from(pimpl->base, this);
+	}
+
+	//pimpl->finalize();
 }
 
-LAttribute* LDefinition::find_attribute(const LString& attr_name)
+LAttribute* LDefinition::find_attribute(const LString& name)
 {
-	return pimpl->find_attribute(attr_name);
+	for (auto [attr_name, attr] : attributes())
+	{
+		if (attr_name == name)
+			return attr;
+	}
+
+	return nullptr;
+
+	//return pimpl->find_attribute(attr_name);
 }
 
 LDefinition* LDefinition::find_item(const LString& path)
@@ -519,7 +505,29 @@ LDefinition* LDefinition::find_item(const LString& path)
 
 LDefinition* LDefinition::find_item(std::deque<LString> name_list)
 {
-	return pimpl->find_item(name_list);
+	if (!name_list.empty())
+	{
+		std::deque<LString> new_name_list = name_list;
+
+		LString name = *new_name_list.begin();
+		new_name_list.pop_front();
+
+		// Check children
+		for (const auto& [key, child_item] : children())
+		{
+			if (child_item->object_name() == name)
+			{
+				if (new_name_list.empty())
+					return child_item;
+				else
+					return child_item->find_item(new_name_list);
+			}
+		}
+	}
+
+	return nullptr;
+
+	//return pimpl->find_item(name_list);
 }
 
 bool LDefinition::has_unresolved_base() const
@@ -534,9 +542,11 @@ int LDefinition::index() const
 {
 	if (LDefinition* parent_item = dynamic_cast<LDefinition*>(parent()))
 	{
+		auto parent_children = parent_item->children();
+
 		int i = 0;
-		for (auto it = parent_item->pimpl->m_children.begin();
-			it != parent_item->pimpl->m_children.end(); ++it, ++i)
+		for (auto it = parent_children.begin();
+			it != parent_children.end(); ++it, ++i)
 		{
 			if (it->second == this)
 				return i;
@@ -602,5 +612,37 @@ void LDefinition::set_base(LDefinition* base_def)
 
 LJsonObject LDefinition::to_json_object() const
 {
-	return pimpl->to_json_object();
+	LJsonObject item_object;
+	LJsonObject attributes_object;
+	LJsonObject children_object;
+
+	for (const auto& [key, attr] : attributes())
+	{
+		LJsonObject attr_object = attr->to_json_object();
+
+		if (attr_object.size() == 1 &&
+			attr_object.begin()->first == "value")
+		{
+			attributes_object[key] = attr_object["value"];
+		}
+		else
+		{
+			attributes_object[key] = attr_object;
+		}
+	}
+
+	for (const auto& [key, child] : children())
+		if (child->pimpl->file_name() == file_name())
+			children_object[child->object_name()] =
+			child->to_json_object();
+
+	if (!attributes_object.empty())
+		item_object["attributes"] = attributes_object;
+
+	if (!children_object.empty())
+		item_object["children"] = children_object;
+
+	return item_object;
+
+	//return pimpl->to_json_object();
 }

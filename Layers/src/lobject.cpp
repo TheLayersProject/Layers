@@ -19,6 +19,8 @@
 
 #include <Layers/lobject.h>
 
+#include <Layers/llogger.h>
+
 using Layers::LConnectionID;
 using Layers::LConnections;
 using Layers::LObject;
@@ -30,16 +32,6 @@ public:
 	~Impl()
 	{
 		connector_destroyed.execute();
-
-		for (LObject* child : std::vector<LObject*>(children))
-		{
-			delete child;
-		}
-	}
-
-	void add_child(LObject* child)
-	{
-		children.push_back(child);
 	}
 
 	void disconnect_destroyed(const LConnectionID& connection)
@@ -54,9 +46,16 @@ public:
 
 	void remove_child(LObject* child)
 	{
-		children.erase(
-			std::remove(children.begin(), children.end(), child),
-			children.end());
+		auto it = std::find_if(children.begin(), children.end(),
+			[child](const std::unique_ptr<LObject>& ptr)
+			{
+				return ptr.get() == child;
+			});
+
+		if (it != children.end())
+		{
+			children.erase(it);
+		}
 	}
 
 	void set_object_name(const LString& new_name)
@@ -66,34 +65,34 @@ public:
 
 	LString object_name;
 
+	std::vector<std::unique_ptr<LObject>> children;
 	LObject* parent{ nullptr };
-	std::vector<LObject*> children;
 
 	LConnector<> connector_destroyed;
 };
 
 LObject::LObject(LObject* parent) :
-	pimpl{ new Impl() }
+	pimpl{ std::make_unique<Impl>() }
 {
 	set_parent(parent);
 }
 
 LObject::~LObject()
 {
-	if (pimpl->parent)
-	{
-		pimpl->parent->remove_child(this);
-	}
-
-	delete pimpl;
+	Layers::log("~LObject(): Name: " + pimpl->object_name);
 }
 
-void LObject::add_child(LObject* child)
+void LObject::add_child(std::unique_ptr<LObject> child)
 {
-	pimpl->add_child(child);
+	pimpl->children.push_back(std::move(child));
 }
 
-std::vector<LObject*>& LObject::children()
+std::vector<std::unique_ptr<LObject>>& LObject::children()
+{
+	return pimpl->children;
+}
+
+const std::vector<std::unique_ptr<LObject>>& LObject::children() const
 {
 	return pimpl->children;
 }
@@ -102,12 +101,6 @@ void LObject::disconnect_destroyed(const LConnectionID& connection)
 {
 	pimpl->disconnect_destroyed(connection);
 }
-
-//template<typename T>
-//inline std::vector<T*> LObject::find_children(bool recursive)
-//{
-//	return pimpl->find_children<T>(recursive);
-//}
 
 LString LObject::object_name() const
 {
@@ -134,17 +127,12 @@ void LObject::set_object_name(const LString& object_name)
 	pimpl->set_object_name(object_name);
 }
 
-void LObject::set_parent(LObject* parent)
+void LObject::set_parent(LObject* new_parent)
 {
-	if (pimpl->parent != nullptr)
+	if (pimpl->parent)
 	{
 		pimpl->parent->remove_child(this);
 	}
 
-	pimpl->parent = parent;
-
-	if (pimpl->parent != nullptr)
-	{
-		pimpl->parent->add_child(this);
-	}
+	pimpl->parent = new_parent;
 }
