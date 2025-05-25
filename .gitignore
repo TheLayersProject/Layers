@@ -77,3 +77,4 @@ documents/
 # CMake
 CMakeLists.txt
 CMakePresets.json
+build/

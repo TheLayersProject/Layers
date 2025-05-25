@@ -31,8 +31,101 @@ using Layers::LJsonParser;
 using Layers::LJsonToken;
 using Layers::LJsonValue;
 
+class LJsonLexer::Impl
+{
+public:
+	std::string input;
+	size_t pos{ 0 };
+
+	LJsonToken build_token(std::string value)
+	{
+		/*
+			Start with an invalid token. If no other token type is determined from
+			the *value*, then the invalid token is returned.
+		*/
+		LJsonToken token;
+
+		/*
+			Determine token type
+		*/
+		if (value == "{")
+		{
+			token.type = LJsonTokenType::LBRACE;
+		}
+		else if (value == "}")
+		{
+			token.type = LJsonTokenType::RBRACE;
+		}
+		else if (value == "[")
+		{
+			token.type = LJsonTokenType::LBRACKET;
+		}
+		else if (value == "]")
+		{
+			token.type = LJsonTokenType::RBRACKET;
+		}
+		else if (value == ":")
+		{
+			token.type = LJsonTokenType::COLON;
+		}
+		else if (value == ",")
+		{
+			token.type = LJsonTokenType::COMMA;
+		}
+		else if (
+			std::count(value.begin(), value.end(), '"') == 2 &&
+			value.front() == '"' && value.back() == '"')
+		{
+			token.type = LJsonTokenType::STRING;
+		}
+		else if (std::all_of(value.begin(), value.end(),
+			[](char c) { return std::isdigit(c); }))
+		{
+			/*
+				The above checks if all of the characters in 'value' are digits to
+				decide if it contains a number. This check alone would cause every
+				individual digit to be passed as 'NUMBER' tokens.
+				
+				An additional check is needed to determine if the next input
+				character is also a digit. In that case, the token type should
+				remain as 'INVALID' so that the next digit is included as part of
+				the entire number.
+			*/
+			if (pos < input.size() && !std::isdigit(input[pos]))
+			{
+				token.type = LJsonTokenType::NUMBER;
+			}
+		}
+		else if (value == "true")
+		{
+			token.type = LJsonTokenType::T;
+		}
+		else if (value == "false")
+		{
+			token.type = LJsonTokenType::F;
+		}
+		else if (value == "null")
+		{
+			token.type = LJsonTokenType::NONE;
+		}
+
+		/*
+			Set token value
+		*/
+		if (token.type != LJsonTokenType::INVALID)
+		{
+			token.value = value;
+		}
+
+		return token;
+	}
+};
+
 LJsonLexer::LJsonLexer(const std::string& input) :
-	m_input{ input }, m_pos{ 0 } {}
+	pimpl{ new Impl() }
+{
+	pimpl->input = input;
+}
 
 LJsonToken LJsonLexer::get_next_token()
 {
@@ -42,100 +135,17 @@ LJsonToken LJsonLexer::get_next_token()
 
 	do
 	{
-		if (m_pos == m_input.size())
+		if (pimpl->pos == pimpl->input.size())
 		{
 			token.type = LJsonTokenType::END;
 			return token;
 		}
 
-		token_value += m_input[m_pos++];
+		token_value += pimpl->input[pimpl->pos++];
 
-		token = _build_token(token_value);
+		token = pimpl->build_token(token_value);
 	}
 	while (token.type == LJsonTokenType::INVALID);
-
-	return token;
-}
-
-LJsonToken LJsonLexer::_build_token(std::string value)
-{
-	/*
-		Start with an invalid token. If no other token type is determined from
-		the *value*, then the invalid token is returned.
-	*/
-	LJsonToken token;
-
-	/*
-		Determine token type
-	*/
-	if (value == "{")
-	{
-		token.type = LJsonTokenType::LBRACE;
-	}
-	else if (value == "}")
-	{
-		token.type = LJsonTokenType::RBRACE;
-	}
-	else if (value == "[")
-	{
-		token.type = LJsonTokenType::LBRACKET;
-	}
-	else if (value == "]")
-	{
-		token.type = LJsonTokenType::RBRACKET;
-	}
-	else if (value == ":")
-	{
-		token.type = LJsonTokenType::COLON;
-	}
-	else if (value == ",")
-	{
-		token.type = LJsonTokenType::COMMA;
-	}
-	else if (
-		std::count(value.begin(), value.end(), '"') == 2 &&
-		value.front() == '"' && value.back() == '"')
-	{
-		token.type = LJsonTokenType::STRING;
-	}
-	else if (std::all_of(value.begin(), value.end(),
-		[](char c) { return std::isdigit(c); }))
-	{
-		/*
-			The above checks if all of the characters in 'value' are digits to
-			decide if it contains a number. This check alone would cause every
-			individual digit to be passed as 'NUMBER' tokens.
-			
-			An additional check is needed to determine if the next input
-			character is also a digit. In that case, the token type should
-			remain as 'INVALID' so that the next digit is included as part of
-			the entire number.
-		*/
-		if (m_pos < m_input.size() && !std::isdigit(m_input[m_pos]))
-		{
-			token.type = LJsonTokenType::NUMBER;
-		}
-	}
-	else if (value == "true")
-	{
-		token.type = LJsonTokenType::T;
-	}
-	else if (value == "false")
-	{
-		token.type = LJsonTokenType::F;
-	}
-	else if (value == "null")
-	{
-		token.type = LJsonTokenType::NONE;
-	}
-
-	/*
-		Set token value
-	*/
-	if (token.type != LJsonTokenType::INVALID)
-	{
-		token.value = value;
-	}
 
 	return token;
 }

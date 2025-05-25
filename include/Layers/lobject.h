@@ -33,34 +33,85 @@ LAYERS_NAMESPACE_BEGIN
 
 class LObject;
 
+/*
+	The LObject class is used to establish a hierarchy between Layers objects. 
+*/
 class LAYERS_EXPORT LObject
 {
 public:
+	/*
+		Constructs a Layers object and sets its *parent*.
+	*/
 	LObject(LObject* parent = nullptr);
 
 	virtual ~LObject();
 
+	/*
+		Adds *child* to this object's list of child objects.
+	*/
 	void add_child(std::unique_ptr<LObject> child);
 
+	/*
+		Returns a vector containing pointers to the child objects associated
+		with this object. 
+	*/
 	std::vector<std::unique_ptr<LObject>>& children();
 
+	/*
+		Returns a const vector containing pointers to the child objects
+		associated with this object.
+	*/
 	const std::vector<std::unique_ptr<LObject>>& children() const;
 
+	/*
+		Disconnects the callback associated with *connection* to stop it from
+		processing when this object gets destroyed. 
+	*/
 	void disconnect_destroyed(const LConnectionID& connection);
 
+	/*
+		Returns a vector containing pointers to the child objects, of type T,
+		associated with this object. 
+
+		If *recursive* is true, then the returned vector will include children
+		of children.
+	*/
 	template <typename T>
 	std::vector<T*> find_children(bool recursive = false) const;
 
+	/*
+		Returns the name of the object.
+	*/
 	LString object_name() const;
 
+	/*
+		Stores *callback* and processes it whenever this object gets destroyed.
+
+		Returns an LConnectionID which can be used to disconnect the callback
+		later through disconnect_destroyed().
+	*/
 	LConnectionID on_destroyed(std::function<void()> callback);
 
+	/*
+		Returns a pointer to the object's parent.
+
+		Returns nullptr if no parent has been set.
+	*/
 	LObject* parent() const;
 
+	/*
+		Removes *child* from this object's list of child objects. 
+	*/
 	void remove_child(LObject* child);
 
-	void set_object_name(const LString& object_name);
+	/*
+		Sets the object's name to *new_name*.
+	*/
+	void set_object_name(const LString& new_name);
 
+	/*
+		Sets the object's *parent*.
+	*/
 	void set_parent(LObject* parent);
 
 private:
@@ -69,7 +120,7 @@ private:
 		const LObject* parent, std::vector<T*>& children, bool recursive) const;
 
 	class Impl;
-	std::unique_ptr<Impl> pimpl;
+	Impl* pimpl;
 };
 
 template <typename T>

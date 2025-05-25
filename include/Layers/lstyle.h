@@ -17,51 +17,38 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LCONNECTOR_H
-#define LCONNECTOR_H
+#ifndef LSTYLE_H
+#define LSTYLE_H
 
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "lconnections.h"
+#include "ldefinition.h"
 
 LAYERS_NAMESPACE_BEGIN
-template <typename... Args>
-class LAYERS_EXPORT LConnector
+
+class LStyle;
+using LStyleList = std::vector<LStyle*>;
+
+class LAYERS_EXPORT LStyle : public LDefinition
 {
 public:
-    using Callback = std::function<void(Args...)>;
+	LStyle(
+		const LString& name,
+		const LJsonValue& value,
+		const std::filesystem::path& file_path,
+		LDefinition* parent = nullptr);
 
-    LConnectionID connect(Callback callback)
-    {
-		connections[next_connection_id++] = callback;
-		return std::prev(connections.end())->first;
-    }
+	~LStyle();
 
-    void disconnect(const LConnectionID& connection)
-    {
-		connections.erase(connection);
-    }
+	LString publisher() const;
 
-    void disconnect_all()
-    {
-        connections.clear();
-    }
-
-    void execute(Args... args)
-    {
-		for (auto& [id, callback] : connections)
-		{
-			callback(args...);
-		}
-
-    }
+	void set_publisher(const LString& publisher);
 
 private:
-    std::map<LConnectionID, Callback> connections;
-    LConnectionID next_connection_id = 0;
+	class Impl;
+	Impl* pimpl;
 };
-
 LAYERS_NAMESPACE_END
 
-#endif // LCONNECTOR_H
+#endif // LSTYLE_H

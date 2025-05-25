@@ -82,7 +82,7 @@ public:
 
 private:
     class Impl;
-    std::unique_ptr<Impl> pimpl;
+    Impl* pimpl;
 };
 
 #define lController (Layers::LController::instance())

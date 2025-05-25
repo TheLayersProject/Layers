@@ -25,7 +25,7 @@ using Layers::LAttribute;
 using Layers::LDefinition;
 using Layers::LDefinable;
 
-std::unordered_set<LDefinable*> LDefinable::dirty_definables;
+//std::unordered_set<LDefinable*> LDefinable::dirty_definables;
 
 class LDefinable::Impl
 {
@@ -42,12 +42,15 @@ public:
 };
 
 LDefinable::LDefinable() :
-	pimpl{ std::make_unique<Impl>() } {}
+	pimpl{ new Impl() } {}
 
 LDefinable::LDefinable(const LDefinable& other) :
-	pimpl{ std::make_unique<Impl>(*(other.pimpl)) } {}
+	pimpl{ new Impl(*(other.pimpl)) } {}
 
-LDefinable::~LDefinable() = default;
+LDefinable::~LDefinable()
+{
+	delete pimpl;
+}
 
 void LDefinable::add_attribute(std::unique_ptr<LAttribute> attr)
 {
@@ -145,12 +148,12 @@ LDefinition* LDefinable::definition() const
 
 void LDefinable::flush_updates()
 {
-	for (auto* d : dirty_definables)
+	for (auto* d : dirty_definables())
 	{
 		d->is_dirty = false;
 		d->update();
 	}
-	dirty_definables.clear();
+	dirty_definables().clear();
 }
 
 void LDefinable::mark_dirty()
@@ -158,6 +161,12 @@ void LDefinable::mark_dirty()
 	if (!is_dirty)
 	{
 		is_dirty = true;
-		dirty_definables.insert(this);
+		dirty_definables().insert(this);
 	}
+}
+
+std::unordered_set<LDefinable *> &LDefinable::dirty_definables()
+{
+  static std::unordered_set<LDefinable*> dirty_definables;
+    return dirty_definables;
 }

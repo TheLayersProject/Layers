@@ -135,7 +135,7 @@ public:
 };
 
 LTheme::LTheme() :
-	pimpl{ std::make_unique<Impl>() }, LDefinition()
+	pimpl{ new Impl() }, LDefinition()
 {
 	Layers::lMake<LAttribute>(this, "Foreground", "#000000");
 	Layers::lMake<LAttribute>(this, "Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" }));
@@ -157,7 +157,7 @@ LTheme::LTheme(
 	const LJsonValue& value,
 	const std::filesystem::path& file_path,
 	LDefinition* parent) :
-	pimpl{ std::make_unique<Impl>() },
+	pimpl{ new Impl() },
 	LDefinition(name, value.to_object(), file_path, parent)
 {
 	pimpl->m_path = file_path.parent_path();
@@ -179,7 +179,10 @@ LTheme::LTheme(
 	}
 }
 
-LTheme::~LTheme() = default;
+LTheme::~LTheme()
+{
+	delete pimpl;
+}
 
 void LTheme::append_to_lineage(const LString& theme_id)
 {

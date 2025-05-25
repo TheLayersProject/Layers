@@ -261,7 +261,8 @@ public:
 	{
 		if (link)
 		{
-			if (!link->resolve(owner));
+			link->resolve(owner);
+			//if (!link->resolve(owner));
 			// TODO: Handle link resolution failure
 
 			if (const auto& link_attr = link->attribute())
@@ -432,35 +433,35 @@ public:
 
 LAttribute::LAttribute(
 	const LString& name, LObject* parent) :
-	pimpl{ std::make_unique<Impl>(this) }, LObject(parent)
+	pimpl{ new Impl(this) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, double value, LObject* parent) :
-	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
+	pimpl{ new Impl(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, const char* value, LObject* parent) :
-	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
+	pimpl{ new Impl(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, const LVariant& value, LObject* parent) :
-	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
+	pimpl{ new Impl(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 }
 
 LAttribute::LAttribute(
 	const LString& name, LJsonValue value, LObject* parent) :
-	pimpl{ std::make_unique<Impl>(this, value) }, LObject(parent)
+	pimpl{ new Impl(this, value) }, LObject(parent)
 {
 	set_object_name(name);
 
@@ -495,6 +496,8 @@ LAttribute::~LAttribute()
 
 	// 3) break *my* own link (to some other attribute), but don't emit update
 	break_link(false);
+
+	delete pimpl;
 }
 
 void LAttribute::create_link(LAttribute* link_attr)

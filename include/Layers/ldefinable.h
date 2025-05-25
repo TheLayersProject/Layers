@@ -66,13 +66,15 @@ public:
 
 private:
 	class Impl;
-	std::unique_ptr<Impl> pimpl;
+	Impl* pimpl;
 
 	void mark_dirty();
 
 	bool is_dirty{ false };
 
-	static std::unordered_set<LDefinable*> dirty_definables;
+	static std::unordered_set<LDefinable*>& dirty_definables();
+
+	//static std::unordered_set<LDefinable*> dirty_definables;
 };
 
 template <typename... Args>

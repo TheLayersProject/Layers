@@ -41,25 +41,25 @@ class LAYERS_EXPORT LLink
 public:
 	LLink(const LString& path, const LString& relative_path = "");
 
-    LLink(LAttribute* attribute);
+	LLink(LAttribute* attribute);
 
 	LLink(const LLink& l);
 
 	~LLink();
 
-    LAttribute* attribute() const;
+	LAttribute* attribute() const;
 
 	LString path() const;
 
 	LString relative_path() const;
 
-    bool resolve(LAttribute* attr);
+	bool resolve(LAttribute* attr);
 
 	LAttribute* resolve(LDefinition* context);
 
 private:
 	class Impl;
-	std::unique_ptr<Impl> pimpl;
+	Impl* pimpl;
 };
 
 LAYERS_NAMESPACE_END

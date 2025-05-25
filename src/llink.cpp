@@ -85,18 +85,21 @@ public:
 };
 
 LLink::LLink(const LString& absolute_path, const LString& relative_path) :
-    pimpl{ std::make_unique<Impl>(absolute_path, relative_path) } {}
+    pimpl{ new Impl(absolute_path, relative_path) } {}
 
 LLink::LLink(LAttribute* attribute) :
-	pimpl{ std::make_unique<Impl>(attribute) } {}
+	pimpl{ new Impl(attribute) } {}
 
 LLink::LLink(const LLink& l) :
-    pimpl{ std::make_unique<Impl>(l.pimpl->path, l.pimpl->relative_path) }
+    pimpl{ new Impl(l.pimpl->path, l.pimpl->relative_path) }
 {
 	pimpl->attribute = l.pimpl->attribute;
 }
 
-LLink::~LLink() = default;
+LLink::~LLink()
+{
+    delete pimpl;
+}
 
 LAttribute* LLink::attribute() const
 {
@@ -152,11 +155,11 @@ LAttribute* LLink::resolve(LDefinition* starting_context)
     }
 
     // The remaining tokens (if any) specify the path to the attribute relative to currentContext.
-    // For simplicity, if there’s only one token left, treat that as the attribute name.
+    // For simplicity, if thereï¿½s only one token left, treat that as the attribute name.
     // If there are multiple tokens, you might need to recursively walk sub-containers,
     // or join them into one key, depending on your data structure.
     if (tokenIndex < tokens.size()) {
-        // For illustration, let’s assume a simple attribute lookup using a joined key.
+        // For illustration, letï¿½s assume a simple attribute lookup using a joined key.
         // (Alternatively, you might iterate over the tokens and do a hierarchical lookup.)
         LString remainingKey;
         // Join remaining tokens with your delimiter (for example, using a simple loop)
@@ -171,6 +174,6 @@ LAttribute* LLink::resolve(LDefinition* starting_context)
     }
 
     // If no tokens remain, you might want to return the whole context as an attribute,
-    // or simply return nullptr depending on what “../” alone means in your system.
+    // or simply return nullptr depending on what ï¿½../ï¿½ alone means in your system.
     return nullptr;
 }

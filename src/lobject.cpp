@@ -72,7 +72,7 @@ public:
 };
 
 LObject::LObject(LObject* parent) :
-	pimpl{ std::make_unique<Impl>() }
+	pimpl{ new Impl() }
 {
 	set_parent(parent);
 }
@@ -80,6 +80,8 @@ LObject::LObject(LObject* parent) :
 LObject::~LObject()
 {
 	Layers::log("~LObject(): Name: " + pimpl->object_name);
+
+	delete pimpl;
 }
 
 void LObject::add_child(std::unique_ptr<LObject> child)
@@ -122,9 +124,9 @@ void LObject::remove_child(LObject* child)
 	pimpl->remove_child(child);
 }
 
-void LObject::set_object_name(const LString& object_name)
+void LObject::set_object_name(const LString& new_name)
 {
-	pimpl->set_object_name(object_name);
+	pimpl->set_object_name(new_name);
 }
 
 void LObject::set_parent(LObject* new_parent)

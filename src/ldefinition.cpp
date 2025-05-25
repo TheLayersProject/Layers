@@ -215,7 +215,7 @@ public:
 };
 
 LDefinition::LDefinition() :
-	pimpl{ std::make_unique<Impl>() },
+	pimpl{ new Impl() },
 	LObject() {}
 
 LDefinition::LDefinition(
@@ -224,7 +224,7 @@ LDefinition::LDefinition(
 	const std::filesystem::path& file_path,
 	LObject* parent
 ) :
-	pimpl{ std::make_unique<Impl>(this, value, file_path) },
+	pimpl{ new Impl(this, value, file_path) },
 	LObject(parent)
 {
 	set_object_name(name);
@@ -236,7 +236,10 @@ LDefinition::LDefinition(
 	//	definition->set_parent(this);
 }
 
-LDefinition::~LDefinition() = default;
+LDefinition::~LDefinition()
+{
+	delete pimpl;
+}
 
 //void LDefinition::append_child(LDefinition* child)
 //{

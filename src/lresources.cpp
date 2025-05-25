@@ -79,6 +79,9 @@ std::map<LString, LResource> LResourceManager::resources(const LString& path) co
 	return result;
 }
 
-LResourceManager::LResourceManager() : pimpl{ std::make_unique<Impl>() } {}
+LResourceManager::LResourceManager() : pimpl{ new Impl() } {}
 
-LResourceManager::~LResourceManager() = default;
+LResourceManager::~LResourceManager()
+{
+	delete pimpl;
+}

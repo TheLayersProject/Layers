@@ -449,9 +449,12 @@ public:
     }
 };
 
-LController::LController() : pimpl{ std::make_unique<Impl>() } {}
+LController::LController() : pimpl{ new Impl() } {}
 
-LController::~LController() = default;
+LController::~LController()
+{
+	delete pimpl;
+}
 
 LStyleList LController::active_styles()
 {

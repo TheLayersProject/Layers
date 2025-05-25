@@ -63,18 +63,27 @@ public:
 };
 
 LString::LString() :
-	pimpl{ std::make_unique<Impl>() } {}
+	pimpl{ new Impl() } {}
 
 LString::LString(const char* string) :
-	pimpl{ std::make_unique<Impl>(string) } {}
+	pimpl{ new Impl(string) } {}
 
 LString::LString(const LString& other) :
-	pimpl{ std::make_unique<Impl>(*(other.pimpl)) } {}
+	pimpl{ new Impl(*(other.pimpl)) } {}
 
 LString::LString(LString&& other) noexcept :
-	pimpl{ std::move(other.pimpl) } {}
+	pimpl{ other.pimpl }
+{
+	other.pimpl = nullptr; // Prevent double delete
+}
 
-LString::~LString() = default;
+// LString::LString(LString&& other) noexcept :
+// 	pimpl{ std::move(other.pimpl) } {}
+
+LString::~LString()
+{
+	delete pimpl;
+}
 
 std::string::iterator LString::begin()
 {
@@ -144,7 +153,7 @@ LString& LString::operator=(const LString& other)
 		return *this;
 	}
 
-	pimpl = std::make_unique<Impl>(*other.pimpl);
+	pimpl = new Impl(*other.pimpl);
 	return *this;
 }
 
@@ -152,11 +161,21 @@ LString& LString::operator=(LString&& other) noexcept
 {
 	if (this == &other)
 	{
-		return *this;
+			return *this;
 	}
 
-	pimpl = std::move(other.pimpl);
+	delete pimpl; // Delete old implementation first
+	pimpl = other.pimpl;
+	other.pimpl = nullptr; // Prevent double delete
 	return *this;
+
+	// if (this == &other)
+	// {
+	// 	return *this;
+	// }
+
+	// pimpl = std::move(other.pimpl);
+	// return *this;
 }
 
 bool LString::operator==(const LString& other) const

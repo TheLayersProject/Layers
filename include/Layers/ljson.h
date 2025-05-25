@@ -57,10 +57,13 @@ public:
 	LJsonToken get_next_token();
 
 private:
-	LJsonToken _build_token(std::string value);
+	//LJsonToken _build_token(std::string value);
 
-	std::string m_input;
-	size_t m_pos;
+	//std::string m_input;
+	//size_t m_pos;
+
+	class Impl;
+	Impl* pimpl;
 };
 
 class LAYERS_EXPORT LJsonParser {

@@ -163,37 +163,40 @@ public:
 };
 
 LJsonValue::LJsonValue() :
-	pimpl{ std::make_unique<Impl>() } {}
+	pimpl{ new Impl() } {}
 
 LJsonValue::LJsonValue(bool v) :
-	pimpl{ std::make_unique<Impl>(v) } {}
+	pimpl{ new Impl(v) } {}
 
 LJsonValue::LJsonValue(double v) :
-	pimpl{ std::make_unique<Impl>(v) } {}
+	pimpl{ new Impl(v) } {}
 
 LJsonValue::LJsonValue(const char* v) :
-	pimpl{ std::make_unique<Impl>(LString(v)) } {}
+	pimpl{ new Impl(LString(v)) } {}
 
 LJsonValue::LJsonValue(const LString& v) :
-	pimpl{ std::make_unique<Impl>(v) } {}
+	pimpl{ new Impl(v) } {}
 
 LJsonValue::LJsonValue(const LJsonObject& v) :
-	pimpl{ std::make_unique<Impl>(v) } {}
+	pimpl{ new Impl(v) } {}
 
 LJsonValue::LJsonValue(const LJsonArray& v) :
-	pimpl{ std::make_unique<Impl>(v) } {}
+	pimpl{ new Impl(v) } {}
 
 LJsonValue::LJsonValue(const LJsonValue& other) :
-	pimpl{ std::make_unique<Impl>(*(other.pimpl)) } {}
+	pimpl{ new Impl(*(other.pimpl)) } {}
 
 LJsonValue::LJsonValue(LJsonValue&& other) noexcept :
 	pimpl{ std::exchange(other.pimpl, nullptr) } {}
 
-LJsonValue::~LJsonValue() = default;
+LJsonValue::~LJsonValue()
+{
+	delete pimpl;
+}
 
 bool LJsonValue::is_array() const
 {
-    return pimpl->is_array();
+	return pimpl->is_array();
 }
 
 bool LJsonValue::is_bool() const
@@ -254,7 +257,7 @@ LJsonValue& LJsonValue::operator=(const LJsonValue& other)
 		return *this;
 	}
 
-	pimpl = std::make_unique<Impl>(*other.pimpl);
+	pimpl = new Impl(*other.pimpl);
 	return *this;
 }
 

@@ -133,7 +133,7 @@ private:
 	void update_link_dependencies();
 
 	class Impl;
-	std::unique_ptr<Impl> pimpl;
+	Impl* pimpl;
 };
 
 template<typename T>
