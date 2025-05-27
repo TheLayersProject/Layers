@@ -1,92 +1,113 @@
 <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ec2244" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="red_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="0s;violet_opacity.begin+0.66665s" fill="freeze" />
-  </rect>
-
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ec8b22" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="red_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="red_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="red_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="red_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="orange_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="red_opacity.begin+0.66665s" fill="freeze" />
-  </rect>
-
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#ecea22" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="orange_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="orange_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="orange_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="orange_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="yellow_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="orange_opacity.begin+0.66665s" fill="freeze" />
-  </rect>
-
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#3aec22" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="green_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="yellow_opacity.begin+0.66665s" fill="freeze" />
-  </rect>
-
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#228bec" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="green_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="green_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="green_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="green_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="blue_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="green_opacity.begin+0.66665s" fill="freeze" />
-  </rect>
-
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#2227ec" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="blue_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="blue_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="blue_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="blue_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="indigo_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="blue_opacity.begin+0.66665s" fill="freeze" />
+  <!-- Starting violet rect -->
+  <rect x="0" y="12" width="37" height="37" rx="5" ry="5" fill="#8622ec" opacity="1">
+    <animate attributeName="opacity"
+      values="1;0;0" keyTimes="0;0.1429;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="7;14;14" keyTimes="0;0.1429;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="6;0;0" keyTimes="0;0.1429;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="37;36;36" keyTimes="0;0.1429;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="37;36;36" keyTimes="0;0.1429;1" dur="5s" repeatCount="indefinite" />
   </rect>
   
-  <rect x="0" y="20" width="38" height="38" rx="5" ry="5" fill="#8622ec" opacity="0">
-    <animate attributeName="width" from="38" to="36.1" dur="1.3333s"
-      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="height" from="38" to="36.1" dur="1.3333s"
-      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="x" from="0" to="13.9" dur="1.3333s"
-      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
-    <animate attributeName="y" from="12" to="0" dur="1.3333s"
-      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
-    <animate id="violet_opacity" attributeName="opacity" values="0;1;0" dur="1.3333s"
-      begin="indigo_opacity.begin+0.66665s" fill="freeze" />
+  <!-- Red rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#ec2244" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0;0.1429;0.2857;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0;0.2857;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0;0.2857;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0;0.2857;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0;0.2857;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Orange rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#ec8b22" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0.1429;0.2857;0.4286;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0.1429;0.4286;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0.1429;0.4286;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0.1429;0.4286;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0.1429;0.4286;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Yellow rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#ecea22" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0.2857;0.4286;0.5714;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0.2857;0.5714;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0.2857;0.5714;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0.2857;0.5714;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0.2857;0.5714;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Green rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#3aec22" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0.4286;0.5714;0.7143;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0.4286;0.7143;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0.4286;0.7143;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0.4286;0.7143;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0.4286;0.7143;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Blue rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#228bec" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0.5714;0.7143;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0.5714;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0.5714;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0.5714;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0.5714;0.8571;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Dark Blue rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#2227ec" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1;0;0" keyTimes="0;0.7143;0.8571;1;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;14;14" keyTimes="0;0.7143;1;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;0;0" keyTimes="0;0.7143;1;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;36;36" keyTimes="0;0.7143;1;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;36;36" keyTimes="0;0.7143;1;1" dur="5s" repeatCount="indefinite" />
+  </rect>
+  
+  <!-- Ending violet rect -->
+  <rect x="0" y="12" width="38" height="38" rx="5" ry="5" fill="#8622ec" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0;1" keyTimes="0;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="x"
+      values="0;0;7" keyTimes="0;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="y"
+      values="12;12;6" keyTimes="0;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="width"
+      values="38;38;37" keyTimes="0;0.8571;1" dur="5s" repeatCount="indefinite" />
+    <animate attributeName="height"
+      values="38;38;37" keyTimes="0;0.8571;1" dur="5s" repeatCount="indefinite" />
   </rect>
 </svg>
