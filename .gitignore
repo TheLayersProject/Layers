@@ -62,11 +62,6 @@ release/
 docs/html
 docs/latex
 
-# Layers Website
-layersproject.org/
-docs.layersproject.org/
-notes.layersproject.org/
-
 # Private Directories
 concepts/
 documents/
@@ -75,6 +70,5 @@ documents/
 .DS_Store
 
 # CMake
-CMakeLists.txt
 CMakePresets.json
 build/
