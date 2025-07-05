@@ -20,7 +20,7 @@
 #include <Layers/lattribute.h>
 
 #include <Layers/lalgorithms.h>
-#include <Layers/ldefinition.h>
+#include <Layers/lstyle.h>
 #include <Layers/lconnector.h>
 #include <Layers/lobjectfactory.h>
 
@@ -36,10 +36,10 @@ using Layers::LString;
 using Layers::LStringList;
 using Layers::LVariant;
 
-template double LAttribute::as<double>(const LStringList&, LDefinition*);
-template bool LAttribute::as<bool>(const LStringList&, LDefinition*);
-template LString LAttribute::as<LString>(const LStringList&, LDefinition*);
-template LStringList LAttribute::as<LStringList>(const LStringList&, LDefinition*);
+template double LAttribute::as<double>(const LStringList&, LStyle*);
+template bool LAttribute::as<bool>(const LStringList&, LStyle*);
+template LString LAttribute::as<LString>(const LStringList&, LStyle*);
+template LStringList LAttribute::as<LStringList>(const LStringList&, LStyle*);
 
 class LAttribute::Impl
 {
@@ -53,7 +53,7 @@ public:
 
 	LAttribute* def_attr{ nullptr };
 
-	LDefinable* parent_definable{ nullptr };
+	LStylable* parent_stylable{ nullptr };
 
 	std::unique_ptr<LLink> link;
 
@@ -157,7 +157,7 @@ public:
 		}
 	}
 
-	void clear_definition_attribute()
+	void clear_style_attribute()
 	{
 		if (def_attr)
 		{
@@ -286,7 +286,7 @@ public:
 		connector_change.execute();
 	}
 
-	void set_definition_attribute(LAttribute* new_def_attr)
+	void set_style_attribute(LAttribute* new_def_attr)
 	{
 		if (def_attr)
 		{
@@ -398,9 +398,9 @@ public:
 
 	void update_parent_definable()
 	{
-		if (parent_definable)
+		if (parent_stylable)
 		{
-			parent_definable->update();
+			parent_stylable->update();
 		}
 		else if (owner->parent())
 		{
@@ -490,7 +490,7 @@ LAttribute::~LAttribute()
 		dep->break_link(false);
 	}
 
-	// 2) tear down any definition-attribute subscription
+	// 2) tear down any style-attribute subscription
 	if (pimpl->def_attr)
 		pimpl->def_attr->disconnect_change(pimpl->def_connection);
 
@@ -515,9 +515,9 @@ void LAttribute::break_link(bool update)
 	pimpl->break_link(update);
 }
 
-void LAttribute::clear_definition_attribute()
+void LAttribute::clear_style_attribute()
 {
-	pimpl->clear_definition_attribute();
+	pimpl->clear_style_attribute();
 }
 
 LAttributeList LAttribute::dependent_attributes(
@@ -557,9 +557,9 @@ LString LAttribute::path() const
 	{
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
 			return parent_attr->path() + "." + object_name();
-		else if (LDefinable* parent_themeable = dynamic_cast<LDefinable*>(parent()))
+		else if (LStylable* parent_themeable = dynamic_cast<LStylable*>(parent()))
 			return parent_themeable->path() + "/" + object_name();
-		else if (LDefinition* parent_theme_item = dynamic_cast<LDefinition*>(parent()))
+		else if (LStyle* parent_theme_item = dynamic_cast<LStyle*>(parent()))
 			return parent_theme_item->path() + "/" + object_name();
 	}
 
@@ -571,14 +571,14 @@ void LAttribute::resolve_links()
 	pimpl->resolve_links();
 }
 
-void LAttribute::set_definition_attribute(LAttribute* new_def_attr)
+void LAttribute::set_style_attribute(LAttribute* new_def_attr)
 {
-	pimpl->set_definition_attribute(new_def_attr);
+	pimpl->set_style_attribute(new_def_attr);
 }
 
-void LAttribute::set_parent_definable(LDefinable* parent_definable)
+void LAttribute::set_parent_stylable(LStylable* parent_stylable)
 {
-	pimpl->parent_definable = parent_definable;
+	pimpl->parent_stylable = parent_stylable;
 }
 
 void LAttribute::set_value(const char* new_value)
@@ -635,7 +635,7 @@ LAttributeMap LAttribute::states(bool include_parent_states) const
 
 	if (include_parent_states && parent())
 	{
-		if (LDefinition* parent_as_def = dynamic_cast<LDefinition*>(parent()))
+		if (LStyle* parent_as_def = dynamic_cast<LStyle*>(parent()))
 		{
 			if (parent_as_def->base())
 			{
@@ -657,7 +657,7 @@ LLink* LAttribute::link() const
 	return pimpl->link.get();
 }
 
-LAttribute* LAttribute::definition_attribute() const
+LAttribute* LAttribute::style_attribute() const
 {
 	return pimpl->def_attr;
 }

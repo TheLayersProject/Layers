@@ -27,13 +27,13 @@
 
 #include "ljson.h"
 #include "lstring.h"
-#include "ldefinition.h"
+#include "lstyle.h"
 
 LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
 
-class LAYERS_EXPORT LTheme : public LDefinition
+class LAYERS_EXPORT LTheme : public LStyle
 {
 public:
 	LTheme();
@@ -44,7 +44,7 @@ public:
 		const LString& name,
 		const LJsonValue& value,
 		const std::filesystem::path& file_path,
-		LDefinition* parent = nullptr);
+		LStyle* parent = nullptr);
 
 	~LTheme();
 

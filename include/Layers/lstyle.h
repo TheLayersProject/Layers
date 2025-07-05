@@ -20,35 +20,97 @@
 #ifndef LSTYLE_H
 #define LSTYLE_H
 
+#include <deque>
+#include <set>
+
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "ldefinition.h"
+//#include "lattribute.h"
+#include "ljsonvalue.h"
+#include "lstring.h"
+#include "lobject.h"
 
 LAYERS_NAMESPACE_BEGIN
 
+class LAttribute;
 class LStyle;
 using LStyleList = std::vector<LStyle*>;
+using LStyleMap = std::map<LString, LStyle*>;
 
-class LAYERS_EXPORT LStyle : public LDefinition
+class LAYERS_EXPORT LStyle : public LObject
 {
 public:
+	LStyle();
+
 	LStyle(
 		const LString& name,
 		const LJsonValue& value,
 		const std::filesystem::path& file_path,
-		LDefinition* parent = nullptr);
+		LObject* parent = nullptr);
 
 	~LStyle();
 
+	//void add_attribute(std::unique_ptr<LAttribute> attribute);
+
+	//void append_child(LStyle* child);
+
+	// TODO: Needs attention!
+	void apply_style(LStyle* style_def);
+
+	std::vector<LString> attribute_group_names() const;
+
+	std::map<LString, LAttribute*> attributes(int type_index = -1) const;
+
+	LStyle* base() const;
+
+	LString base_name() const;
+
+	LStyle* child(int index) const;
+
+	size_t child_count() const;
+
+	std::map<LString, LStyle*> children() const;
+
+	void clear_style();
+
+	std::set<LStyle*> dependencies();
+
+	LString file_name() const;
+
+	void finalize();
+
+	LAttribute* find_attribute(const LString& attr_name);
+
+	LStyle* find_item(const LString& path);
+
+	LStyle* find_item(std::deque<LString> name_list);
+
+	bool has_unresolved_base() const;
+
+	int index() const;
+
+	bool is_overridable() const;
+
+	LString path() const;
+
+	LStyle* parent() const;
+
 	LString publisher() const;
 
+	void resolve_links();
+
+	void set_base(LStyle* base_def);
+
 	void set_publisher(const LString& publisher);
+
+	LJsonObject to_json_object() const;
 
 private:
 	class Impl;
 	Impl* pimpl;
 };
+
 LAYERS_NAMESPACE_END
 
 #endif // LSTYLE_H

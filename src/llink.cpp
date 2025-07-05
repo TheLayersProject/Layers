@@ -21,10 +21,10 @@
 
 #include <Layers/lalgorithms.h>
 #include <Layers/lattribute.h>
-#include <Layers/ldefinition.h>
+#include <Layers/lstyle.h>
 
 using Layers::LAttribute;
-using Layers::LDefinition;
+using Layers::LStyle;
 using Layers::LLink;
 using Layers::LString;
 
@@ -54,7 +54,7 @@ public:
             {
                 if (attr->parent())
                 {
-                    if (LDefinition* def = dynamic_cast<LDefinition*>(attr->parent()))
+                    if (LStyle* def = dynamic_cast<LStyle*>(attr->parent()))
                     {
                         for (const auto& [key, attr] : def->attributes())
                             if (attr->object_name() == absolute_attr_name)
@@ -67,7 +67,7 @@ public:
                     }
                 }
             }
-            else if (LDefinition* def = lController.find_definition(path_parts))
+            else if (LStyle* def = lController.find_style(path_parts))
             {
                 for (const auto& [attr_name, attr] : def->attributes())
                     if (attr_name == absolute_attr_name)
@@ -121,7 +121,7 @@ bool LLink::resolve(LAttribute* attr)
     return pimpl->resolve(attr);
 }
 
-LAttribute* LLink::resolve(LDefinition* starting_context)
+LAttribute* LLink::resolve(LStyle* starting_context)
 {
     if (!starting_context) {
         // Cannot resolve without a valid starting context.
@@ -133,13 +133,13 @@ LAttribute* LLink::resolve(LDefinition* starting_context)
     std::vector<LString> tokens = split<std::vector<LString>>(pimpl->relative_path, '/');
 
     // Begin with the provided derivative definition.
-    LDefinition* context = starting_context;
+    LStyle* context = starting_context;
 
     // Walk up the hierarchy for each ".." token.
     size_t tokenIndex = 0;
     while (tokenIndex < tokens.size() && tokens[tokenIndex] == "..") {
         // Move one level up in the definition hierarchy.
-        LDefinition* parent_context = context->parent();
+        LStyle* parent_context = context->parent();
         if (!parent_context) {
             // You could choose to handle this as an error or simply break out.
             // For now, we break out or return nullptr.

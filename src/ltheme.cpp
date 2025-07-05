@@ -34,7 +34,7 @@ using Layers::LString;
 using Layers::LTheme;
 using Layers::LJsonObject;
 using Layers::LController;
-using Layers::LDefinition;
+using Layers::LStyle;
 
 class LTheme::Impl
 {
@@ -135,7 +135,7 @@ public:
 };
 
 LTheme::LTheme() :
-	pimpl{ new Impl() }, LDefinition()
+	pimpl{ new Impl() }, LStyle()
 {
 	Layers::lMake<LAttribute>(this, "Foreground", "#000000");
 	Layers::lMake<LAttribute>(this, "Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" }));
@@ -156,9 +156,9 @@ LTheme::LTheme(
 	const LString& name,
 	const LJsonValue& value,
 	const std::filesystem::path& file_path,
-	LDefinition* parent) :
+	LStyle* parent) :
 	pimpl{ new Impl() },
-	LDefinition(name, value.to_object(), file_path, parent)
+	LStyle(name, value.to_object(), file_path, parent)
 {
 	pimpl->m_path = file_path.parent_path();
 
@@ -277,7 +277,7 @@ LJsonObject LTheme::to_json_object() const
 	meta_object["publisher"] = pimpl->publisher;
 	meta_object["uuid"] = pimpl->m_uuid;
 
-	LJsonObject theme_object = LDefinition::to_json_object();
+	LJsonObject theme_object = LStyle::to_json_object();
 	theme_object["_meta"] = meta_object;
 
 	LJsonObject object;

@@ -31,7 +31,7 @@
 LAYERS_NAMESPACE_BEGIN
 
 class LAttribute;
-class LDefinition;
+class LStyle;
 
 class LLink;
 using LLinkList = std::vector<LLink*>;
@@ -55,7 +55,7 @@ public:
 
 	bool resolve(LAttribute* attr);
 
-	LAttribute* resolve(LDefinition* context);
+	LAttribute* resolve(LStyle* context);
 
 private:
 	class Impl;

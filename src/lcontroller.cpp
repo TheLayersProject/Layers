@@ -32,10 +32,10 @@
 #include <Layers/lresources.h>
 #include <Layers/lobjectfactory.h>
 #include <Layers/lpaths.h>
-#include <Layers/lstyle.h>
+//#include <Layers/lstyle.h>
 #include <Layers/ltheme.h>
 
-using Layers::LDefinition;
+using Layers::LStyle;
 using Layers::LString;
 using Layers::LStringList;
 using Layers::LStyle;
@@ -43,8 +43,8 @@ using Layers::LStyleList;
 using Layers::LTheme;
 using Layers::LController;
 
-using DependencyGraph = std::map<LDefinition*, std::vector<LDefinition*>>;
-using DependencyCount = std::map<LDefinition*, int>;
+using DependencyGraph = std::map<LStyle*, std::vector<LStyle*>>;
+using DependencyCount = std::map<LStyle*, int>;
 
 struct DependencyData
 {
@@ -55,23 +55,23 @@ struct DependencyData
 class LController::Impl
 {
 public:
-	std::unique_ptr<LDefinition> root_definition{
-		std::make_unique<LDefinition>() };
+	std::unique_ptr<LStyle> root_style{
+		std::make_unique<LStyle>() };
 
-	std::map<LString, LStyle*> styles;
+	std::map<LString, LStyle*> custom_styles;
 	std::map<LString, std::unique_ptr<LTheme>> themes;
 
-	LStyleList active_styles;
+	LStyleList active_custom_styles;
 	LTheme* active_theme{ nullptr };
 
-	std::map<LString, std::unique_ptr<LDefinition>> unparented_definitions;
+	std::map<LString, std::unique_ptr<LStyle>> unparented_styles;
 
 	LConnector<LTheme*> connector_theme_added;
 
-	void add_style(LStyle* style)
+	void add_custom_style(LStyle* custom_style)
 	{
-		if (style)
-			styles[style->object_name()] = style;
+		if (custom_style)
+		custom_styles[custom_style->object_name()] = custom_style;
 	}
 
 	void add_theme(std::unique_ptr<LTheme> theme)
@@ -100,20 +100,20 @@ public:
 	}
 
 	DependencyData build_dependency_data(
-		const std::set<LDefinition*>& definitions)
+		const std::set<LStyle*>& styles)
 	{
 		DependencyGraph graph;
 		DependencyCount indegree;
 
-		for (LDefinition* def : definitions)
+		for (LStyle* def : styles)
 		{
 			graph[def];
 			indegree[def];
 
-			for (LDefinition* base : def->dependencies())
+			for (LStyle* base : def->dependencies())
 			{
 				// Skip already resolved dependencies
-				if (definitions.find(base) == definitions.end())
+				if (styles.find(base) == styles.end())
 					continue;
 
 				graph[base].push_back(def);
@@ -124,10 +124,10 @@ public:
 		return { graph, indegree };
 	}
 
-	std::vector<LDefinition*> topological_sort(DependencyData& dep_data)
+	std::vector<LStyle*> topological_sort(DependencyData& dep_data)
 	{
-		std::vector<LDefinition*> sorted;
-		std::deque<LDefinition*> queue;
+		std::vector<LStyle*> sorted;
+		std::deque<LStyle*> queue;
 
 		// Start with nodes with no unresolved dependencies in the current set
 		for (auto& [def, count] : dep_data.indegree)
@@ -136,11 +136,11 @@ public:
 
 		while (!queue.empty())
 		{
-			LDefinition* def = queue.front();
+			LStyle* def = queue.front();
 			queue.pop_front();
 			sorted.push_back(def);
 
-			for (LDefinition* dependent : dep_data.graph.at(def))
+			for (LStyle* dependent : dep_data.graph.at(def))
 				if (--dep_data.indegree[dependent] == 0)
 					queue.push_back(dependent);
 		}
@@ -155,34 +155,34 @@ public:
 
 	/*
 		TODO:
-		Consider returning a set of definition references instead of pointers
+		Consider returning a set of style references instead of pointers
 	*/
-	std::set<LDefinition*> build_definitions(
+	std::set<LStyle*> build_styles(
 		const std::map<std::filesystem::path, LJsonObject>& file_objects)
 	{
-		std::set<LDefinition*> definitions;
+		std::set<LStyle*> styles;
 
 		for (const auto& [file_path, object] : file_objects)
 			for (const auto& [key, value] : object)
 			{
-				std::unique_ptr<LDefinition> def =
-					std::make_unique<LDefinition>(key, value, "");
+				std::unique_ptr<LStyle> def =
+					std::make_unique<LStyle>(key, value, "");
 
-				definitions.insert(def.get());
+				styles.insert(def.get());
 
 				if (std::string(key.c_str()).find("/") != std::string::npos)
 				{
-					unparented_definitions[key] = std::move(def);
+					unparented_styles[key] = std::move(def);
 				}
 				else
 				{
-					def->set_parent(root_definition.get());
-					root_definition->add_child(std::move(def));
-					//root_definition->append_child(def);
+					def->set_parent(root_style.get());
+					root_style->add_child(std::move(def));
+					//root_style->append_child(def);
 				}
 			}
 
-		return definitions;
+		return styles;
 	}
 
 	LJsonObject merge_attributes(const LJsonObject& base_attributes, const LJsonObject& attributes)
@@ -246,7 +246,7 @@ public:
 		}
 	}
 
-	std::map<std::filesystem::path, std::string> load_definition_path(
+	std::map<std::filesystem::path, std::string> load_style_path(
 		const std::filesystem::path& path)
 	{
 		std::map<std::filesystem::path, std::string> file_strings;
@@ -265,7 +265,7 @@ public:
 			else if (entry.is_directory())
 			{
 				std::map<std::filesystem::path, std::string> child_file_strings =
-					load_definition_path(entry.path());
+					load_style_path(entry.path());
 
 				file_strings.insert(child_file_strings.begin(), child_file_strings.end());
 			}
@@ -274,35 +274,35 @@ public:
 		return file_strings;
 	}
 
-	void process_definition_set(
+	void process_style_set(
 		const std::filesystem::path& path,
 		std::map<std::filesystem::path, std::string>& file_strings)
 	{
 		// Convert file strings to JSON objects
 		auto file_objects = build_file_objects(file_strings);
 
-		// Build and process definitions
-		std::set<LDefinition*> unresolved_definitions = build_definitions(file_objects);
-		for (LDefinition* def : unresolved_definitions)
+		// Build and process styles
+		std::set<LStyle*> unresolved_styles = build_styles(file_objects);
+		for (LStyle* def : unresolved_styles)
 			resolve_base(def);
 
 		// Build dependency graph and topologically sort
-		DependencyData dep_data = build_dependency_data(unresolved_definitions);
-		std::vector<LDefinition*> ordered_definitions = topological_sort(dep_data);
+		DependencyData dep_data = build_dependency_data(unresolved_styles);
+		std::vector<LStyle*> ordered_styles = topological_sort(dep_data);
 
-		// Finalize definitions
-		for (LDefinition* def : ordered_definitions)
+		// Finalize styles
+		for (LStyle* def : ordered_styles)
 			def->finalize();
 
 		// Resolve parent-child relationships as in your current implementation
-		for (auto& [_, unparented_def] : unparented_definitions)
+		for (auto& [_, unparented_def] : unparented_styles)
 		{
 			LString unparented_def_name = unparented_def->object_name();
 			auto name_list = split<std::deque<LString>>(unparented_def->object_name(), '/');
 			LString new_name = name_list.back();
 			name_list.pop_back();
 
-			if (LDefinition* parent_def = root_definition->find_item(name_list))
+			if (LStyle* parent_def = root_style->find_item(name_list))
 			{
 				unparented_def->set_object_name(new_name);
 				unparented_def->set_parent(parent_def);
@@ -310,13 +310,13 @@ public:
 			}
 		}
 
-		// Remove empty unparented definitions
-		for (auto it = unparented_definitions.begin();
-			it != unparented_definitions.end(); )
+		// Remove empty unparented styles
+		for (auto it = unparented_styles.begin();
+			it != unparented_styles.end(); )
 		{
 			if (it->second == nullptr)
 			{
-				it = unparented_definitions.erase(it);
+				it = unparented_styles.erase(it);
 			}
 			else ++it;
 		}
@@ -324,22 +324,22 @@ public:
 		/*
 			TODO:
 			Handle situation where there might be leftover unparented
-			definitions.
+			styles.
 		*/
 	}
 
 
-	void load_definitions(const std::filesystem::path& path)
+	void load_styles(const std::filesystem::path& path)
 	{
 		// Load and Parse Aliases
-		std::map<std::filesystem::path, std::string> file_strings = load_definition_path(path);
+		std::map<std::filesystem::path, std::string> file_strings = load_style_path(path);
 
 		parse_aliases(path, file_strings);
 
-		process_definition_set(path, file_strings);
+		process_style_set(path, file_strings);
 	}
 
-	void load_internal_definitions(const LString& path)
+	void load_internal_styles(const LString& path)
 	{
 		std::map<LString, LResource> set_resources = lResourceManager.resources(path);
 
@@ -356,10 +356,10 @@ public:
 				remove_whitespace(resource_string);
 		}
 
-		process_definition_set(path.c_str(), file_strings);
+		process_style_set(path.c_str(), file_strings);
 	}
 
-	LStyle* load_style(const std::filesystem::path& style_file_path)
+	LStyle* load_custom_style(const std::filesystem::path& style_file_path)
 	{
 		std::string style_file_str = load_json_file(style_file_path);
 
@@ -376,28 +376,28 @@ public:
 		{
 			if (!key.starts_with("_"))
 			{
-				lMake<LDefinition>(style, key, value, style_file_path);
-				//style->append_child(new LDefinition(key, value, style_file_path));
+				lMake<LStyle>(style, key, value, style_file_path);
+				//style->append_child(new LStyle(key, value, style_file_path));
 			}
 		}
 
 		return style;
 	}
 
-	void load_styles(const std::filesystem::path& path)
+	void load_custom_styles(const std::filesystem::path& path)
 	{
 		for (const auto& dir_entry :
 			std::filesystem::directory_iterator(path))
 		{
 			if (dir_entry.is_regular_file())
-				add_style(load_style(dir_entry.path()));
+				add_custom_style(load_custom_style(dir_entry.path()));
 		}
 	}
 
 	std::unique_ptr<LTheme> load_theme(const std::filesystem::path& directory)
 	{
 		std::map<std::filesystem::path, std::string> file_strings = 
-			load_definition_path(directory);
+			load_style_path(directory);
 
 		// There should only be a single theme file, theme.json
 
@@ -439,12 +439,12 @@ public:
 		}
 	}
 
-    void resolve_base(LDefinition* definition)
+    void resolve_base(LStyle* style)
     {
-        if (definition->has_unresolved_base())
-            definition->set_base(root_definition->find_item(definition->base_name()));
+        if (style->has_unresolved_base())
+            style->set_base(root_style->find_item(style->base_name()));
 
-        for (const auto& [child_name, child_def] : definition->children())
+        for (const auto& [child_name, child_def] : style->children())
             resolve_base(child_def);
     }
 };
@@ -456,9 +456,9 @@ LController::~LController()
 	delete pimpl;
 }
 
-LStyleList LController::active_styles()
+LStyleList LController::active_custom_styles()
 {
-	return pimpl->active_styles;
+	return pimpl->active_custom_styles;
 }
 
 LTheme* LController::active_theme() const
@@ -471,20 +471,20 @@ void LController::add_theme(std::unique_ptr<LTheme> theme)
 	pimpl->add_theme(std::move(theme));
 }
 
-LDefinition* LController::find_definition(const LString& path)
+LStyle* LController::find_style(const LString& path)
 {
 	if (path == "Theme")
 		return active_theme();
 
-	return pimpl->root_definition->find_item(path);
+	return pimpl->root_style->find_item(path);
 }
 
-LDefinition* LController::find_definition(std::deque<LString> name_list)
+LStyle* LController::find_style(std::deque<LString> name_list)
 {
 	if (!name_list.empty() && name_list[0] == "Theme")
 		return active_theme();
 
-	return pimpl->root_definition->find_item(name_list);
+	return pimpl->root_style->find_item(name_list);
 }
 
 LController& LController::instance()
@@ -508,14 +508,14 @@ void LController::on_theme_added(std::function<void(LTheme*)> callback)
 	pimpl->connector_theme_added.connect(callback);
 }
 
-LDefinition* LController::root_definition() const
+LStyle* LController::root_style() const
 {
-	return pimpl->root_definition.get();
+	return pimpl->root_style.get();
 }
 
 void LController::include(const LString& path, bool is_application)
 {
-	pimpl->load_definitions(std::string(path.c_str()));
+	pimpl->load_styles(std::string(path.c_str()));
 
 	//if (is_application)
 	//	pimpl->load_styles(styles_path() / std::string(path.c_str()));
@@ -523,7 +523,7 @@ void LController::include(const LString& path, bool is_application)
 
 void LController::include_internal(const LString& path)
 {
-	pimpl->load_internal_definitions(path.c_str());
+	pimpl->load_internal_styles(path.c_str());
 }
 
 bool LController::set_active_theme(LTheme* theme)
@@ -532,9 +532,9 @@ bool LController::set_active_theme(LTheme* theme)
 	{
 		pimpl->active_theme = theme;
 
-		pimpl->root_definition->resolve_links();
+		pimpl->root_style->resolve_links();
 
-		LDefinable::flush_updates();
+		LStylable::flush_updates();
 
 		return true;
 	}
@@ -544,7 +544,7 @@ bool LController::set_active_theme(LTheme* theme)
 
 std::map<LString, LStyle*> LController::styles() const
 {
-	return pimpl->styles;
+	return pimpl->custom_styles;
 }
 
 LTheme* LController::theme(const LString& themeId) const
@@ -558,26 +558,26 @@ std::map<LString, std::unique_ptr<LTheme>>& LController::themes() const
 	return pimpl->themes;
 }
 
-bool LController::toggle_style(const LString& style_id)
+bool LController::toggle_custom_style(const LString& style_id)
 {
-	LStyle* style = pimpl->styles[style_id];
+	LStyle* style = pimpl->custom_styles[style_id];
 
-	if (std::count(pimpl->active_styles.begin(), pimpl->active_styles.end(), style))
+	if (std::count(pimpl->active_custom_styles.begin(), pimpl->active_custom_styles.end(), style))
 	{
 		// Style is already active, so it needs to be toggled off here!
 
 		for (const auto& [style_def_name, style_def] : style->children())
 		{
-			if (LDefinition* def = pimpl->root_definition->find_item(style_def_name))
+			if (LStyle* def = pimpl->root_style->find_item(style_def_name))
 			{
 				def->clear_style();
 			}
 		}
 
-		auto it = std::find(pimpl->active_styles.begin(), pimpl->active_styles.end(), style);
-		if (it != pimpl->active_styles.end())
+		auto it = std::find(pimpl->active_custom_styles.begin(), pimpl->active_custom_styles.end(), style);
+		if (it != pimpl->active_custom_styles.end())
 		{
-			pimpl->active_styles.erase(it);
+			pimpl->active_custom_styles.erase(it);
 		}
 
 		return false;
@@ -587,13 +587,13 @@ bool LController::toggle_style(const LString& style_id)
 
 	for (const auto& [style_def_name, style_def] : style->children())
 	{
-		if (LDefinition* def = pimpl->root_definition->find_item(style_def_name))
+		if (LStyle* def = pimpl->root_style->find_item(style_def_name))
 		{
 			def->apply_style(style_def);
 		}
 	}
 
-	pimpl->active_styles.push_back(style);
+	pimpl->active_custom_styles.push_back(style);
 
 	return true;
 }

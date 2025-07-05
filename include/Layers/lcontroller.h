@@ -31,7 +31,7 @@
 
 LAYERS_NAMESPACE_BEGIN
 
-class LDefinition;
+class LStyle;
 class LString;
 class LStyle;
 class LTheme;
@@ -46,15 +46,15 @@ public:
     LController(const LController&) = delete;
     LController& operator=(const LController&) = delete;
 
-    LStyleList active_styles();
+    LStyleList active_custom_styles();
 
     LTheme* active_theme() const;
 
     void add_theme(std::unique_ptr<LTheme> theme);
 
-    LDefinition* find_definition(const LString& path);
+    LStyle* find_style(const LString& path);
 
-	LDefinition* find_definition(std::deque<LString> name_list);
+	LStyle* find_style(std::deque<LString> name_list);
 
     void include(const LString& path, bool is_application = false);
 
@@ -68,7 +68,7 @@ public:
 
 	void on_theme_added(std::function<void(LTheme*)> callback);
 
-    LDefinition* root_definition() const;
+    LStyle* root_style() const;
 
     bool set_active_theme(LTheme* theme);
 
@@ -78,7 +78,7 @@ public:
 
     std::map<LString, std::unique_ptr<LTheme>>& themes() const;
 
-    bool toggle_style(const LString& style_id);
+    bool toggle_custom_style(const LString& style_id);
 
 private:
     class Impl;

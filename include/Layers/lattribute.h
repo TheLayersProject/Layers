@@ -31,7 +31,7 @@
 
 #include "lconnections.h"
 #include "lcontroller.h"
-#include "ldefinable.h"
+#include "lstylable.h"
 #include "ljson.h"
 #include "llink.h"
 #include "lobject.h"
@@ -73,16 +73,16 @@ public:
 	template<typename T>
 	T as(
 		const LStringList& state_combo = LStringList(),
-		LDefinition* context = nullptr);
+		LStyle* context = nullptr);
 
 	template<typename T>
 	const T* as_if(
 		const LStringList& state_combo = LStringList(),
-		LDefinition* context = nullptr);
+		LStyle* context = nullptr);
 
 	void break_link(bool update = true);
 
-	void clear_definition_attribute();
+	void clear_style_attribute();
 
 	void create_link(LAttribute* link_attr);
 
@@ -105,9 +105,9 @@ public:
 
 	void resolve_links();
 
-	void set_definition_attribute(LAttribute* definition_attribute);
+	void set_style_attribute(LAttribute* style_attribute);
 
-	void set_parent_definable(LDefinable* parent_definable);
+	void set_parent_stylable(LStylable* parent_stylable);
 
 	void set_value(const char* value);
 
@@ -119,7 +119,7 @@ public:
 
 	LLink* link() const;
 
-	LAttribute* definition_attribute() const;
+	LAttribute* style_attribute() const;
 
 	LJsonObject to_json_object() const;
 
@@ -137,19 +137,19 @@ private:
 };
 
 template<typename T>
-T LAttribute::as(const LStringList& state_combo, LDefinition* context)
+T LAttribute::as(const LStringList& state_combo, LStyle* context)
 {
-	if (definition_attribute())
+	if (style_attribute())
 	{
 		if (LObject* p = parent())
 		{
-			if (LDefinable* d = dynamic_cast<LDefinable*>(p))
+			if (LStylable* d = dynamic_cast<LStylable*>(p))
 			{
-				return definition_attribute()->as<T>(state_combo, d->definition());
+				return style_attribute()->as<T>(state_combo, d->style());
 			}
 		}
 		
-		return definition_attribute()->as<T>(state_combo);
+		return style_attribute()->as<T>(state_combo);
 	}
 	
 	if (!states().empty() && !state_combo.empty()) {
@@ -176,19 +176,19 @@ T LAttribute::as(const LStringList& state_combo, LDefinition* context)
 }
 
 template<typename T>
-const T* LAttribute::as_if(const LStringList& state_combo, LDefinition* context)
+const T* LAttribute::as_if(const LStringList& state_combo, LStyle* context)
 {
-	if (definition_attribute())
+	if (style_attribute())
 	{
 		if (LObject* p = parent())
 		{
-			if (LDefinable* d = dynamic_cast<LDefinable*>(p))
+			if (LStylable* d = dynamic_cast<LStylable*>(p))
 			{
-				return definition_attribute()->as_if<T>(state_combo, d->definition());
+				return style_attribute()->as_if<T>(state_combo, d->style());
 			}
 		}
 		
-		return definition_attribute()->as_if<T>(state_combo);
+		return style_attribute()->as_if<T>(state_combo);
 	}
 
 	if (!states().empty() && !state_combo.empty()) {

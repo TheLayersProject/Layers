@@ -17,8 +17,8 @@
  * along with Layers. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef LDEFINABLE_H
-#define LDEFINABLE_H
+#ifndef LSTYLABLE_H
+#define LSTYLABLE_H
 
 #include <cassert>
 #include <unordered_set>
@@ -29,32 +29,32 @@
 
 #include "lobject.h"
 #include "lstring.h"
-#include "ldefinition.h"
+#include "lstyle.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-class LAYERS_EXPORT LDefinable
+class LAYERS_EXPORT LStylable
 {
 public:
-	LDefinable();
+	LStylable();
 
-	LDefinable(const LDefinable& other);
+	LStylable(const LStylable& other);
 
-	virtual ~LDefinable();
+	virtual ~LStylable();
 
 	void add_attribute(std::unique_ptr<LAttribute> attribute);
 
-	void add_share_definable(LDefinable* definable);
+	void add_share_stylable(LStylable* stylable);
 
-	virtual void apply_definition(
-		LDefinition* definition, bool is_top_level = true);
+	virtual void apply_style(
+		LStyle* style, bool is_top_level = true);
 
 	const std::vector<std::unique_ptr<LAttribute>>& attributes() const;
 
-	virtual std::vector<LDefinable*> child_definables(
+	virtual std::vector<LStylable*> child_stylables(
 		bool recursive = false) = 0;
 
-	LDefinition* definition() const;
+	LStyle* style() const;
 
 	static void flush_updates();
 
@@ -72,13 +72,13 @@ private:
 
 	bool is_dirty{ false };
 
-	static std::unordered_set<LDefinable*>& dirty_definables();
+	static std::unordered_set<LStylable*>& dirty_stylables();
 
-	//static std::unordered_set<LDefinable*> dirty_definables;
+	//static std::unordered_set<LStylable*> dirty_stylables;
 };
 
 template <typename... Args>
-LAttribute* lMakeDefinableAttribute(LDefinable* parent, Args&&... args)
+LAttribute* lMakeDefinableAttribute(LStylable* parent, Args&&... args)
 {
 	assert(parent && "Parent must not be null");
 
@@ -90,4 +90,4 @@ LAttribute* lMakeDefinableAttribute(LDefinable* parent, Args&&... args)
 
 LAYERS_NAMESPACE_END
 
-#endif // LDEFINABLE_H
+#endif // LSTYLABLE_H
