@@ -20,8 +20,14 @@ file(GLOB HEADERS "include/Layers/*.h" "include/Layers/*.hpp")
 add_library(Layers SHARED ${SOURCES} ${HEADERS})
 target_compile_definitions(Layers PRIVATE LAYERS_LIB)
 
+# Create executable for resource compiler
+add_executable(LayersResourceCompiler LayersResourceCompiler/main.cpp)
+
+target_link_libraries(LayersResourceCompiler PRIVATE Layers)
+target_include_directories(LayersResourceCompiler PRIVATE include)
+
 # Specify the output directory for the library
-set_target_properties(Layers PROPERTIES
+set_target_properties(Layers LayersResourceCompiler PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
     ARCHIVE_OUTPUT_DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/lib"
     LIBRARY_OUTPUT_DIRECTORY  "${CMAKE_CURRENT_SOURCE_DIR}/lib"
