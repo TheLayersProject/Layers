@@ -84,12 +84,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::stringstream buffer;
-    buffer << jsonFile.rdbuf();
-    std::string jsonContent = buffer.str();
-
-    jsonContent = Layers::remove_whitespace(jsonContent);
-
     // Parse the JSON.
     json root;
     try
