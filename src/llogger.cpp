@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -33,5 +33,5 @@ void Layers::log(const LString& message)
     if (log_function)
         log_function(message);
     else
-        std::cout << "[Layers] " << message.c_str() << std::endl;
+        std::cout << "[Layers] " << message << std::endl;
 }

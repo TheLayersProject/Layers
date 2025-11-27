@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -29,10 +29,10 @@
 #include "layers_global.h"
 #include "layers_exports.h"
 
+#include "lstring.h"
+
 LAYERS_NAMESPACE_BEGIN
 
-class LStyle;
-class LString;
 class LStyle;
 class LTheme;
 

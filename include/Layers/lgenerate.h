@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -48,7 +48,7 @@ LAYERS_EXPORT inline LString generate_uuid()
         }
     }
 
-    return ss.str().c_str();
+    return ss.str();
 }
 
 LAYERS_NAMESPACE_END

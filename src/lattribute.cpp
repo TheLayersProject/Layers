@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -22,20 +22,18 @@
 #include <Layers/lalgorithms.h>
 #include <Layers/lstyle.h>
 #include <Layers/lconnector.h>
-#include <Layers/lobjectfactory.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeList;
 using Layers::LAttributeMap;
 using Layers::LConnectionID;
-using Layers::LJsonObject;
-using Layers::LJsonValue;
 using Layers::LLink;
 using Layers::LObject;
 using Layers::LString;
 using Layers::LStringList;
 using Layers::LVariant;
 
+// Might be able to delete these
 template double LAttribute::as<double>(const LStringList&, LStyle*);
 template bool LAttribute::as<bool>(const LStringList&, LStyle*);
 template LString LAttribute::as<LString>(const LStringList&, LStyle*);
@@ -52,8 +50,6 @@ public:
 	LAttributeList m_dependent_attrs;
 
 	LAttribute* def_attr{ nullptr };
-
-	LStylable* parent_stylable{ nullptr };
 
 	std::unique_ptr<LLink> link;
 
@@ -74,82 +70,88 @@ public:
 	Impl(LAttribute* owner, const LVariant& value) :
 		owner{ owner }, _value{ value } {}
 
-	Impl(LAttribute* owner, LJsonValue json_value) :
+	Impl(LAttribute* owner, const json& j) :
 		owner{ owner }
 	{
-		if (json_value.is_object())
-		{
-			LJsonObject obj = json_value.to_object();
+		if (j.is_object())
+        {
+            // Handle Links
+            LString absolute_link_path = "";
+            LString relative_link_path = "";
 
-			LString absolute_link_path = "";
-			LString relative_link_path = "";
+            if (j.contains("link"))
+				absolute_link_path =
+					remove_substring(j["link"].get<std::string>(), "L:");
 
-			if (obj.count("link"))
-				absolute_link_path = obj["link"].to_string().remove("L:");
+            if (j.contains("link_relative"))
+                relative_link_path = 
+					remove_substring(j["link_relative"].get<std::string>(), "L:");
 
-			if (obj.count("link_relative"))
-				relative_link_path = obj["link_relative"].to_string().remove("L:");
+            if (!absolute_link_path.empty() || !relative_link_path.empty())
+                link = std::make_unique<LLink>(absolute_link_path, relative_link_path);
 
-			if (!absolute_link_path.empty() || !relative_link_path.empty())
-				link = std::make_unique<LLink>(absolute_link_path, relative_link_path);
-
-			if (obj.count("value"))
-				init_value(obj["value"]);
-		}
-		else
-			init_value(json_value);
+            // Handle Value
+            if (j.contains("value"))
+                init_value(j["value"]);
+        }
+        else
+        {
+            init_value(j);
+        }
 	}
 
-	void init_value(const LJsonValue json_value)
-	{
-		if (json_value.is_double())
-		{
-			_value = json_value.to_double();
-		}
-		else if (json_value.is_string())
-		{
-			LString str_val = json_value.to_string();
+	void init_value(const json& j)
+    {
+        if (j.is_number())
+        {
+            _value = j.get<double>();
+        }
+        else if (j.is_boolean())
+        {
+            // Your LVariant needs to support bool, or cast to double/string
+             _value = j.get<bool>(); 
+        }
+        else if (j.is_string())
+        {
+            LString str_val = j.get<std::string>();
 
-			if (str_val.starts_with("L:"))
-				link = std::make_unique<LLink>(str_val.remove("L:"));
-
-			else
-				_value = json_value.to_string();
-		}
-		else if (json_value.is_array())
-		{
-			LJsonArray array = json_value.to_array();
-
-			if (!array.empty() && array[0].is_string())
+            if (starts_with(str_val, "L:"))
 			{
-				std::vector<LString> gradient_stops;
-
-				for (const auto& val : array)
-					gradient_stops.push_back(val.to_string());
-
-				_value = gradient_stops;
+				link = std::make_unique<LLink>(
+					remove_substring(str_val, "L:"));
 			}
-		}
-	}
+            else
+                _value = str_val;
+        }
+        else if (j.is_array())
+        {
+            // Check if it is a string array (gradient)
+            if (!j.empty() && j[0].is_string())
+            {
+                std::vector<LString> gradient_stops;
+                // nlohmann allows direct conversion to std::vector
+                for (const auto& val : j)
+                {
+                    gradient_stops.push_back(val.get<std::string>());
+                }
+                _value = gradient_stops;
+            }
+        }
+    }
 
 	void break_link(bool update)
 	{
 		if (!link || !link->attribute()) return;
 
-		// 1) Copy the link attribute's value
 		_value = link->attribute()->value();
 
-		// 2) Unsubscribe the link attribute from destruction notifications
 		link->attribute()->disconnect_destroyed(m_link_destroyed_connection);
 
-		// 3) Remove owner from the link attribute's dependent list
 		auto& deps = link->attribute()->pimpl->m_dependent_attrs;
 		deps.erase(std::remove(deps.begin(), deps.end(), owner), deps.end());
 
-		// 4) Destroy the link
 		link.reset();
 
-		// 5) Update
 		connector_link_change.execute();
 		if (update)
 		{
@@ -172,10 +174,6 @@ public:
 	{
 		_value = LVariant();
 
-		/*
-			Shouldn't need to update since an update will already occur
-			below after the new link is created.
-		*/
 		break_link(false);
 
 		link = std::make_unique<LLink>(link_attr);
@@ -241,7 +239,7 @@ public:
 
 	bool is_link(const LString& str) const
 	{
-		if (str.starts_with("L:"))
+		if (starts_with(str, "L:"))
 			return true;
 		
 		return false;
@@ -319,68 +317,59 @@ public:
 		connector_change.execute();
 	}
 
-	LJsonObject to_json_object() const
-	{
-		LJsonObject json_object;
+	json to_json_object() const
+    {
+        json j;
 
-		if (link)
-		{
-			if (!link->path().empty())
-			{
-				json_object["link"] = link->path();
-			}
-			else if (!link->relative_path().empty())
-			{
-				json_object["link_relative"] = link->relative_path();
-			}
-		}
-		else if (_value.index() > 0)
-		{
-			json_object["value"] = to_json_value();
-		}
+        if (link)
+        {
+            if (!link->path().empty())
+                j["link"] = link->path(); // implicit conversion to std::string
+            else if (!link->relative_path().empty())
+                j["link_relative"] = link->relative_path();
+        }
+        else if (_value.index() > 0)
+        {
+            j["value"] = to_json_value();
+        }
 
-		LAttributeMap s = owner->states();
+        LAttributeMap s = owner->states();
 
-		if (!s.empty())
-		{
-			LJsonObject overrides_json_object;
+        if (!s.empty())
+        {
+            json overrides_json_object;
 
-			for (const auto& [key, override_attr] : s)
-				overrides_json_object[override_attr->object_name()] =
-				override_attr->to_json_object();
+            for (const auto& [key, override_attr] : s)
+                overrides_json_object[key] = override_attr->to_json_object();
 
-			json_object["states"] = overrides_json_object;
-		}
+            j["states"] = overrides_json_object;
+        }
 
-		return json_object;
-	}
+        return j;
+    }
 
-	LJsonValue to_json_value() const
-	{
-		LJsonValue json_value;
-
-		if (const auto& bool_val = std::get_if<bool>(&_value))
-			json_value = *bool_val;
-
-		else if (const auto& double_val = std::get_if<double>(&_value))
-			json_value = *double_val;
-
-		else if (const auto& string_val = std::get_if<LString>(&_value))
-			json_value = *string_val;
-
-		else if (const auto& gradient_stops_val =
-			std::get_if<std::vector<LString>>(&_value))
-		{
-			LJsonArray gradient;
-
-			for (auto stop : *gradient_stops_val)
-		 		gradient.push_back(stop);
-
-			json_value = gradient;
-		}
-
-		return json_value;
-	}
+    json to_json_value() const
+    {
+        // Use std::visit to handle the LVariant (std::variant)
+        return std::visit([](const auto& arg) -> json {
+            using T = std::decay_t<decltype(arg)>;
+            
+            // Handle std::vector<LString> specifically
+            if constexpr (std::is_same_v<T, std::vector<LString>>) {
+                json j_array = json::array();
+                for (const auto& s : arg) j_array.push_back(s);
+                return j_array;
+            }
+            // Handle LString -> std::string conversion
+            else if constexpr (std::is_same_v<T, LString>) {
+                return std::string(arg); 
+            }
+            // Handle empty variant (monostate) or basic types (double, bool)
+            else {
+                return json(); 
+            }
+        }, _value);
+    }
 
 	size_t type_index() const
 	{
@@ -394,22 +383,6 @@ public:
 		//	return (*states.begin()).second->type_index();
 
 		return _value.index();
-	}
-
-	void update_parent_definable()
-	{
-		if (parent_stylable)
-		{
-			parent_stylable->update();
-		}
-		else if (owner->parent())
-		{
-			if (LAttribute* parent_attr =
-				dynamic_cast<LAttribute*>(owner->parent()))
-			{
-				parent_attr->pimpl->update_parent_definable();
-			}
-		}
 	}
 
 	void update_link_dependencies()
@@ -431,54 +404,45 @@ public:
 	}
 };
 
-LAttribute::LAttribute(
-	const LString& name, LObject* parent) :
-	pimpl{ new Impl(this) }, LObject(parent)
+LAttribute::LAttribute(const LString& name) :
+	pimpl{ new Impl(this) }, LObject()
 {
 	set_object_name(name);
 }
 
-LAttribute::LAttribute(
-	const LString& name, double value, LObject* parent) :
-	pimpl{ new Impl(this, value) }, LObject(parent)
+LAttribute::LAttribute(const LString& name, double value) :
+	pimpl{ new Impl(this, value) }, LObject()
 {
 	set_object_name(name);
 }
 
-LAttribute::LAttribute(
-	const LString& name, const char* value, LObject* parent) :
-	pimpl{ new Impl(this, value) }, LObject(parent)
+LAttribute::LAttribute(const LString& name, const char* value) :
+	pimpl{ new Impl(this, value) }, LObject()
 {
 	set_object_name(name);
 }
 
-LAttribute::LAttribute(
-	const LString& name, const LVariant& value, LObject* parent) :
-	pimpl{ new Impl(this, value) }, LObject(parent)
+LAttribute::LAttribute(const LString& name, const LVariant& value) :
+	pimpl{ new Impl(this, value) }, LObject()
 {
 	set_object_name(name);
 }
 
-LAttribute::LAttribute(
-	const LString& name, LJsonValue value, LObject* parent) :
-	pimpl{ new Impl(this, value) }, LObject(parent)
+LAttribute::LAttribute(const LString& name, const json& value) :
+    pimpl{ new Impl(this, value) }, LObject()
 {
-	set_object_name(name);
+    set_object_name(name);
 
-	if (value.is_object())
-	{
-		LJsonObject json_object = value.to_object();
-
-		if (json_object.find("states") != json_object.end())
-		{
-			LJsonObject states_obj = json_object["states"].to_object();
-
-			for (const auto& [key, state_val] : states_obj)
-			{
-				lMake<LAttribute>(this, key, state_val);
-			}
-		}
-	}
+    if (value.is_object())
+    {
+        if (value.contains("states"))
+        {
+            for (const auto& [key, state_val] : value["states"].items())
+            {
+                lMake<LAttribute>(this, key, state_val);
+            }
+        }
+    }
 }
 
 LAttribute::~LAttribute()
@@ -557,8 +521,6 @@ LString LAttribute::path() const
 	{
 		if (LAttribute* parent_attr = dynamic_cast<LAttribute*>(parent()))
 			return parent_attr->path() + "." + object_name();
-		else if (LStylable* parent_themeable = dynamic_cast<LStylable*>(parent()))
-			return parent_themeable->path() + "/" + object_name();
 		else if (LStyle* parent_theme_item = dynamic_cast<LStyle*>(parent()))
 			return parent_theme_item->path() + "/" + object_name();
 	}
@@ -574,11 +536,6 @@ void LAttribute::resolve_links()
 void LAttribute::set_style_attribute(LAttribute* new_def_attr)
 {
 	pimpl->set_style_attribute(new_def_attr);
-}
-
-void LAttribute::set_parent_stylable(LStylable* parent_stylable)
-{
-	pimpl->parent_stylable = parent_stylable;
 }
 
 void LAttribute::set_value(const char* new_value)
@@ -662,12 +619,12 @@ LAttribute* LAttribute::style_attribute() const
 	return pimpl->def_attr;
 }
 
-LJsonObject LAttribute::to_json_object() const
+json LAttribute::to_json_object() const
 {
 	return pimpl->to_json_object();
 }
 
-LJsonValue LAttribute::to_json_value() const
+json LAttribute::to_json_value() const
 {
 	return pimpl->to_json_value();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -71,10 +71,9 @@ public:
 	LConnector<> connector_destroyed;
 };
 
-LObject::LObject(LObject* parent) :
+LObject::LObject() :
 	pimpl{ new Impl() }
 {
-	set_parent(parent);
 }
 
 LObject::~LObject()
@@ -86,6 +85,7 @@ LObject::~LObject()
 
 void LObject::add_child(std::unique_ptr<LObject> child)
 {
+	child->pimpl->parent = this;
 	pimpl->children.push_back(std::move(child));
 }
 
@@ -127,14 +127,4 @@ void LObject::remove_child(LObject* child)
 void LObject::set_object_name(const LString& new_name)
 {
 	pimpl->set_object_name(new_name);
-}
-
-void LObject::set_parent(LObject* new_parent)
-{
-	if (pimpl->parent)
-	{
-		pimpl->parent->remove_child(this);
-	}
-
-	pimpl->parent = new_parent;
 }

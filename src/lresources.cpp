@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -25,8 +25,6 @@ using Layers::LResource;
 using Layers::LResourceManager;
 using Layers::LString;
 
-// Define a ResourceEntry structure that matches what your resource compiler generates.
-// (In your generated file, you might already have a similar struct. Adjust the names as needed.)
 struct ResourceEntry
 {
 	const char* path;
@@ -59,19 +57,19 @@ LResourceManager& LResourceManager::instance()
 
 LResource LResourceManager::resource(const LString& path) const
 {
-	return pimpl->resource_map.at(path.c_str());
+	return pimpl->resource_map.at(path);
 }
 
 std::map<LString, LResource> LResourceManager::resources(const LString& path) const
 {
 	std::map<LString, LResource> result;
 
-	std::string path_std_str = std::string(path.c_str());
+	//std::string path_std_str = path;
 
 	for (auto& [entry_path, entry] : pimpl->resource_map)
 	{
 		// Check if the resource path starts with the specified prefix.
-		if (std::string(entry_path.c_str()).compare(0, path_std_str.size(), path_std_str) == 0)
+		if (entry_path.compare(0, path.size(), path) == 0)
 		{
 			result[entry_path] = (entry);
 		}

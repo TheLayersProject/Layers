@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -20,65 +20,29 @@
 #ifndef LSTRING_H
 #define LSTRING_H
 
-#include <filesystem>
-#include <ostream>
 #include <string>
-
+#include <vector>
+#include <algorithm>
 #include "layers_global.h"
-#include "layers_exports.h"
 
 LAYERS_NAMESPACE_BEGIN
 
-class LString;
-using LStringList = std::vector<LString>;
+using LString = std::string;
+using LStringList = std::vector<std::string>;
 
-class LAYERS_EXPORT LString
+inline bool starts_with(const LString& str, const LString& prefix)
 {
-public:
-	LString();
-	LString(const char* string);
-	LString(const LString& other);
-	LString(LString&& other) noexcept;
-	~LString();
+    return str.rfind(prefix, 0) == 0;
+}
 
-	std::string::iterator begin();
-
-	std::string::const_iterator begin() const;
-
-	const char* c_str() const noexcept;
-
-	bool empty() const;
-
-	std::string::iterator end();
-
-	std::string::const_iterator end() const;
-
-	LString& remove(const LString& substring);
-
-	bool starts_with(const LString& prefix) const;
-
-	LString& operator=(const LString& other);
-
-	LString& operator=(LString&& other) noexcept;
-
-	bool operator<(const LString& other) const;
-
-	LString operator+(const char* other) const;
-
-	LString operator+(const LString& other) const;
-
-	bool operator==(const LString& other) const;
-
-	friend LAYERS_EXPORT std::ostream& operator<<(std::ostream& os, const LString& lstr);
-
-	friend LAYERS_EXPORT bool operator!=(const LString& lhs, const LString& rhs);
-
-private:
-	class Impl;
-	Impl* pimpl;
-};
-
-LAYERS_EXPORT LString operator+(const char* lhs, const LString& rhs);
+inline LString remove_substring(LString str, const std::string& sub)
+{
+    if (sub.empty()) return str;
+    size_t pos = str.find(sub);
+    if (pos != std::string::npos)
+        str.erase(pos, sub.length());
+    return str;
+}
 
 LAYERS_NAMESPACE_END
 

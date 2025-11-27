@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -24,13 +24,10 @@
 
 #include <Layers/lalgorithms.h>
 #include <Layers/lattribute.h>
-#include <Layers/lobjectfactory.h>
-#include <Layers/lpaths.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeMap;
 using Layers::LStyleMap;
-using Layers::LJsonObject;
 using Layers::LString;
 using Layers::LStyle;
 
@@ -43,11 +40,8 @@ public:
 
 	LString publisher;
 
-	LJsonValue value;
+	json value;
 	std::filesystem::path file_path;
-
-	//std::map<LString, LStyle*> m_children;
-	//std::map<LString, LAttribute*> m_attributes;
 
 	LStyle* style_definition{ nullptr };
 
@@ -57,77 +51,66 @@ public:
 
 	Impl(
 		LStyle* self,
-		const LJsonValue& value,
+		const json& value,
 		const std::filesystem::path& file_path) :
 		file_path{ file_path },
 		value{ value }
 	{
 		// Handle dependency parsing
-		auto parse_include = [&](const LString& include_str)
-			-> std::pair<std::filesystem::path, LString>
-			{
-				std::string include(include_str.c_str());
-				size_t delim_pos = include.find("::");
-				std::string file_part = include.substr(0, delim_pos);
-				std::string widget_name = include.substr(delim_pos + 2);
-				std::pair<std::filesystem::path, LString> dep_data;
+		auto parse_include = [&](const std::string& include_str)
+            -> std::pair<std::filesystem::path, LString>
+            {
+                size_t delim_pos = include_str.find("::");
+                std::string file_part = include_str.substr(0, delim_pos);
+                std::string widget_name = include_str.substr(delim_pos + 2);
+                std::pair<std::filesystem::path, LString> dep_data;
 
-				// Check if the path contains a slash character
-				if (file_part.find('/') != std::string::npos ||
-					file_part.find('\\') != std::string::npos)
-				{
-					// External dependency - append definitions_path() to it
-					dep_data.first = definitions_path() / file_part;
-				}
-				else
-				{
-					// File is a relative path within the same project directory
-					dep_data.first = file_path.parent_path() / file_part;
-				}
+                if (file_part.find('/') != std::string::npos ||
+                    file_part.find('\\') != std::string::npos)
+                {
+                    //dep_data.first = styles_path() / file_part;
+					dep_data.first = file_part;
+                }
+                else
+                {
+                    dep_data.first = file_path.parent_path() / file_part;
+                }
 
-				// Store the widget name in the pair's second value
-				dep_data.second = LString(widget_name.c_str());
-
-				return dep_data;
-			};
+                dep_data.second = widget_name;
+                return dep_data;
+            };
 
 		if (value.is_string())
 		{
 			// String-based inheritance (e.g., "Widget": "qlbox.json::Box")
 			std::pair<std::filesystem::path, LString> base_data = 
-				parse_include(value.to_string());
+				parse_include(value.get<std::string>());
 
 				base_path = base_data.first;
 				base_name = base_data.second;
 		}
 		else if (value.is_object())
 		{
-			LJsonObject object = value.to_object();
-
-			if (object.find("_include") != object.end())
+			if (value.contains("_include"))
 			{
 				// Object-based inheritance (e.g., "Dialog": { "_include": "qlbox.json::Box", ... })
-				std::pair<std::filesystem::path, LString> base_data = 
-					parse_include(object["_include"].to_string());
-
-				base_path = base_data.first;
-				base_name = base_data.second;
+				auto base_data = parse_include(value["_include"].get<std::string>());
+                base_path = base_data.first;
+                base_name = base_data.second;
 			}
 
-			if (object.find("attributes") != object.end())
+			if (value.contains("attributes"))
 			{
-				LJsonObject json_attrs = object["attributes"].to_object();
-
-				for (const auto& [key, json_attr] : json_attrs)
+				for (const auto& [key, json_attr] : value["attributes"].items())
 				{
 					//m_attributes[key] = new LAttribute(key, json_attr, self);
 					lMake<LAttribute>(self, key, json_attr);
 				}
 			}
 
-			if (object.find("children") != object.end())
+			if (value.contains("children"))
 			{
-				for (const auto& [key, value] : object["children"].to_object())
+				for (const auto& [key, value] : value["children"].items())
 				{
 					lMake<LStyle>(self, key, value, file_path);
 				}
@@ -139,7 +122,7 @@ public:
 
 	LString file_name() const
 	{
-		return LString(file_path.filename().string().c_str());
+		return file_path.filename().string();
 	}
 
 	void merge_from(LStyle* base, LStyle* self)
@@ -222,12 +205,11 @@ LStyle::LStyle() :
 
 LStyle::LStyle(
 	const LString& name,
-	const LJsonValue& value,
-	const std::filesystem::path& file_path,
-	LObject* parent
+	const json& value,
+	const std::filesystem::path& file_path
 ) :
 	pimpl{ new Impl(this, value, file_path) },
-	LObject(parent)
+	LObject()
 {
 	set_object_name(name);
 
@@ -587,7 +569,7 @@ LString LStyle::path() const
 		std::ostream_iterator<LString>(joined_names, "/"));
 	std::string result = joined_names.str();
 
-	return result.substr(0, result.length() - 1).c_str();
+	return result.substr(0, result.length() - 1);
 }
 
 LStyle* LStyle::parent() const
@@ -625,39 +607,44 @@ void LStyle::set_publisher(const LString& publisher)
 	pimpl->publisher = publisher;
 }
 
-LJsonObject LStyle::to_json_object() const
+json LStyle::to_json_object() const
 {
-	LJsonObject item_object;
-	LJsonObject attributes_object;
-	LJsonObject children_object;
+    json item_object;
+    json attributes_object;
+    json children_object;
 
-	for (const auto& [key, attr] : attributes())
-	{
-		LJsonObject attr_object = attr->to_json_object();
+    // Serialize Attributes
+    for (const auto& [key, attr] : attributes())
+    {
+        json attr_object = attr->to_json_object();
 
-		if (attr_object.size() == 1 &&
-			attr_object.begin()->first == "value")
-		{
-			attributes_object[key] = attr_object["value"];
-		}
-		else
-		{
-			attributes_object[key] = attr_object;
-		}
-	}
+        // Check if we should unwrap the value (shorthand notation)
+        // e.g. "Color": { "value": "#FFF" } -> "Color": "#FFF"
+        if (attr_object.size() == 1 && attr_object.contains("value"))
+        {
+            attributes_object[key] = attr_object["value"];
+        }
+        else
+        {
+            attributes_object[key] = attr_object;
+        }
+    }
 
-	for (const auto& [key, child] : children())
-		if (child->pimpl->file_name() == file_name())
-			children_object[child->object_name()] =
-			child->to_json_object();
+    // Serialize Children
+    for (const auto& [key, child] : children())
+    {
+        if (child->pimpl->file_name() == file_name())
+        {
+            children_object[child->object_name()] = child->to_json_object();
+        }
+    }
 
-	if (!attributes_object.empty())
-		item_object["attributes"] = attributes_object;
+    // Assemble final object
+    if (!attributes_object.empty())
+        item_object["attributes"] = attributes_object;
 
-	if (!children_object.empty())
-		item_object["children"] = children_object;
+    if (!children_object.empty())
+        item_object["children"] = children_object;
 
-	return item_object;
-
-	//return pimpl->to_json_object();
+    return item_object;
 }

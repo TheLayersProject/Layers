@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -23,11 +23,12 @@
 #include <deque>
 #include <set>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "layers_global.h"
 #include "layers_exports.h"
 
-//#include "lattribute.h"
-#include "ljsonvalue.h"
 #include "lstring.h"
 #include "lobject.h"
 
@@ -45,17 +46,11 @@ public:
 
 	LStyle(
 		const LString& name,
-		const LJsonValue& value,
-		const std::filesystem::path& file_path,
-		LObject* parent = nullptr);
+		const json& value,
+		const std::filesystem::path& file_path);
 
 	~LStyle();
 
-	//void add_attribute(std::unique_ptr<LAttribute> attribute);
-
-	//void append_child(LStyle* child);
-
-	// TODO: Needs attention!
 	void apply_style(LStyle* style_def);
 
 	std::vector<LString> attribute_group_names() const;
@@ -104,7 +99,7 @@ public:
 
 	void set_publisher(const LString& publisher);
 
-	LJsonObject to_json_object() const;
+	json to_json_object() const;
 
 private:
 	class Impl;

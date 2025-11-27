@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -22,10 +22,13 @@
 
 #include <filesystem>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "layers_global.h"
 #include "layers_exports.h"
 
-#include "ljson.h"
+//#include "ljson.h"
 #include "lstring.h"
 #include "lstyle.h"
 
@@ -42,9 +45,8 @@ public:
 
 	LTheme(
 		const LString& name,
-		const LJsonValue& value,
-		const std::filesystem::path& file_path,
-		LStyle* parent = nullptr);
+		const json& value,
+		const std::filesystem::path& file_path);
 
 	~LTheme();
 
@@ -72,7 +74,7 @@ public:
 
 	void set_publisher(const LString& publisher);
 
-	LJsonObject to_json_object() const;
+	json to_json_object() const;
 
 	LString uuid() const;
 

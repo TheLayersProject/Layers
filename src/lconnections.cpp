@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -27,9 +27,6 @@ LConnectionID::LConnectionID() :
 LConnectionID::LConnectionID(int value) :
 	m_value{ value } {}
 
-//LConnectionID::LConnectionID(const LConnectionID& other) :
-//	m_value(other.m_value) {}
-
 LConnectionID& LConnectionID::operator=(const LConnectionID& other)
 {
 	m_value = other.m_value;
@@ -49,8 +46,4 @@ bool LConnectionID::operator==(const LConnectionID& other) const
 LConnectionID LConnectionID::operator++(int)
 {
 	return LConnectionID(m_value++);
-
-	//LConnectionID temp(*this);
-	//m_value++;
-	//return temp;
 }

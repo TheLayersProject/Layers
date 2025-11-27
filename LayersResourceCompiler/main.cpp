@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -26,7 +26,9 @@
 #include <cctype>
 #include <filesystem>
 #include <Layers/lalgorithms.h>
-#include <Layers/ljson.h>
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 namespace fs = std::filesystem;
 
@@ -81,22 +83,20 @@ int main(int argc, char* argv[])
         std::cerr << "Error: Unable to open " << resourceJsonFile << "\n";
         return 1;
     }
+
     std::stringstream buffer;
     buffer << jsonFile.rdbuf();
     std::string jsonContent = buffer.str();
 
     jsonContent = Layers::remove_whitespace(jsonContent);
 
-    // Parse the JSON using your Layers JSON code.
-    // Create a lexer and parser and expect the root to be an object.
-    Layers::LJsonLexer lexer(jsonContent);
-    Layers::LJsonParser parser(lexer);
-    Layers::LJsonObject root;
+    // Parse the JSON.
+    json root;
     try
     {
-        root = parser.parse_object();
+        root = json::parse(jsonFile);
     }
-    catch (const std::exception& e)
+    catch (const json::parse_error& e)
     {
         std::cerr << "Error parsing JSON: " << e.what() << "\n";
         return 1;
@@ -111,36 +111,35 @@ int main(int argc, char* argv[])
     // {
     //     "/definitions/qlayers": [ "qlbox.json", "qlcheckbox.json", ... ]
     // }
-    for (const auto& pair : root)
+    for (const auto& [key, value] : root.items())
     {
-        // pair.first is an LString and pair.second is an LJsonValue.
-        // Convert the LString key to std::string (assuming LString provides c_str()).
-        std::string virtualPrefix(pair.first.c_str());
+        std::string virtualPrefix = key; // key is already std::string
 
-        // Ensure the value is an array.
-        if (!pair.second.is_array())
+        if (!value.is_array())
         {
             std::cerr << "Warning: Value for key " << virtualPrefix << " is not an array, skipping.\n";
             continue;
         }
-        Layers::LJsonArray fileList = pair.second.to_array();
-        for (const Layers::LJsonValue& fileVal : fileList) 
+
+        // Iterate over the array of filenames
+        for (const auto& fileVal : value) 
         {
             if (!fileVal.is_string()) {
                 std::cerr << "Warning: File name in array for key " << virtualPrefix << " is not a string, skipping.\n";
                 continue;
             }
-            // Convert the LJsonValue's string to std::string.
-            std::string fileName(std::string(fileVal.to_string().c_str()));
+            
+            // 4. Get string value
+            std::string fileName = fileVal.get<std::string>();
 
-            // Construct the virtual path.
+            // --- The logic below is unchanged ---
+
             std::string virtualPath;
             if (!virtualPrefix.empty() && virtualPrefix.back() != '/')
                 virtualPath = virtualPrefix + "/" + fileName;
             else
                 virtualPath = virtualPrefix + fileName;
 
-            // Construct the local file path (assuming the file is in the same directory as the JSON file).
             fs::path localFilePath = baseDir / fileName;
             if (!fs::exists(localFilePath))
             {
@@ -148,7 +147,6 @@ int main(int argc, char* argv[])
                 continue;
             }
 
-            // Open and read the file in binary mode.
             std::ifstream infile(localFilePath, std::ios::binary);
             if (!infile)
             {
@@ -159,17 +157,14 @@ int main(int argc, char* argv[])
                 std::istreambuf_iterator<char>());
             infile.close();
 
-            // Create a unique identifier based on the virtual path.
             std::string identifier = "res_" + sanitize_identifier(virtualPath);
 
-            // Generate the C++ array code.
             arraysStream << generate_cpp_array(data, identifier) << "\n";
 
-            // Store the resource entry.
             resourceEntries.push_back({ virtualPath, identifier });
         }
     }
-
+    
     // Generate the ResourceEntry structure and the registry array.
     std::ostringstream entriesStream;
     entriesStream << "struct ResourceEntry {\n"

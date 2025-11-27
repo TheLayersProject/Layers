@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -25,14 +25,11 @@
 #include <Layers/lattribute.h>
 #include <Layers/lgenerate.h>
 #include <Layers/lcontroller.h>
-#include <Layers/lobjectfactory.h>
-#include <Layers/lpaths.h>
 
 using Layers::LAttribute;
 using Layers::LAttributeMap;
 using Layers::LString;
 using Layers::LTheme;
-using Layers::LJsonObject;
 using Layers::LController;
 using Layers::LStyle;
 
@@ -66,7 +63,7 @@ public:
 
 	bool has_implementation(const LString& app_display_id) const
 	{
-		std::filesystem::path dir_path = m_path / app_display_id.c_str();
+		std::filesystem::path dir_path = m_path / app_display_id;
 		return std::filesystem::exists(dir_path);
 	}
 
@@ -77,13 +74,12 @@ public:
 
 	void save_meta_file()
 	{
-		LJsonObject json_object;
-
-		LJsonArray lineage_array;
+		json json_object;
+        json lineage_array = json::array();
 
 		for (const auto& theme_id : m_lineage)
 		{
-			lineage_array.emplace_back(theme_id);
+			lineage_array.push_back(theme_id);
 		}
 
 		json_object["lineage"] = lineage_array;
@@ -94,7 +90,7 @@ public:
 			json_object["publisher"] = publisher;
 		}
 
-		LJsonValue json_value(json_object);
+		//LJsonValue json_value(json_object);
 
 		std::ofstream meta_file(m_path / "meta.json");
 
@@ -104,7 +100,8 @@ public:
 			return;
 		}
 
-		meta_file << json_value.to_output();
+		//meta_file << json_value.to_output();
+		meta_file << json_object.dump(4);
 		meta_file.close();
 	}
 
@@ -138,7 +135,7 @@ LTheme::LTheme() :
 	pimpl{ new Impl() }, LStyle()
 {
 	Layers::lMake<LAttribute>(this, "Foreground", "#000000");
-	Layers::lMake<LAttribute>(this, "Gradient", std::vector<LString>({ "0:#ffffff", "1:#ffffff" }));
+	Layers::lMake<LAttribute>(this, "Gradient", LVariant(std::vector<LString>({ "0:#ffffff", "1:#ffffff" })));
 	Layers::lMake<LAttribute>(this, "Primary", "#ffffff");
 	Layers::lMake<LAttribute>(this, "Secondary", "#ffffff");
 	Layers::lMake<LAttribute>(this, "Tertiary", "#ffffff");
@@ -154,27 +151,26 @@ LTheme::LTheme(const LString& name, const LString& publisher) :
 
 LTheme::LTheme(
 	const LString& name,
-	const LJsonValue& value,
-	const std::filesystem::path& file_path,
-	LStyle* parent) :
+	const json& value,
+	const std::filesystem::path& file_path) :
 	pimpl{ new Impl() },
-	LStyle(name, value.to_object(), file_path, parent)
+	LStyle(name, value, file_path)
 {
 	pimpl->m_path = file_path.parent_path();
 
 	if (value.is_object())
 	{
-		LJsonObject object = value.to_object();
+		//LJsonObject object = value.to_object();
 
-		if (object.find("_meta") != object.end())
+		if (value.contains("_meta"))
 		{
-			LJsonObject meta_object = object["_meta"].to_object();
+			const auto& meta_object = value["_meta"];
 
-			if (meta_object.find("publisher") != meta_object.end())
-				set_publisher(meta_object["publisher"].to_string());
-			
-			if (meta_object.find("uuid") != meta_object.end())
-				pimpl->m_uuid = meta_object["uuid"].to_string();
+			if (meta_object.contains("publisher"))
+                set_publisher(meta_object["publisher"].get<std::string>());
+            
+            if (meta_object.contains("uuid"))
+                pimpl->m_uuid = meta_object["uuid"].get<std::string>();
 		}
 	}
 }
@@ -243,11 +239,11 @@ void LTheme::save()
 	std::ofstream theme_file(directory() / "theme.json");
 	if (!theme_file.is_open())
 	{
-		std::cerr << "Could not write theme file: " << file_name().c_str() << std::endl;
+		std::cerr << "Could not write theme file: " << file_name() << std::endl;
 		return;
 	}
 
-	theme_file << LJsonValue(to_json_object()).to_output();
+	theme_file << to_json_object().dump(4);
 	theme_file.close();
 }
 
@@ -271,17 +267,19 @@ LString LTheme::uuid() const
 	return pimpl->uuid();
 }
 
-LJsonObject LTheme::to_json_object() const
+json LTheme::to_json_object() const
 {
-	LJsonObject meta_object;
-	meta_object["publisher"] = pimpl->publisher;
-	meta_object["uuid"] = pimpl->m_uuid;
+    json meta_object;
+    meta_object["publisher"] = pimpl->publisher;
+    meta_object["uuid"] = pimpl->m_uuid;
 
-	LJsonObject theme_object = LStyle::to_json_object();
-	theme_object["_meta"] = meta_object;
+    // Call base class LStyle to get the style definition JSON
+    json theme_object = LStyle::to_json_object();
+    theme_object["_meta"] = meta_object;
 
-	LJsonObject object;
-	object[object_name()] = theme_object;
+    // Wrap in the theme name key
+    json object;
+    object[object_name()] = theme_object;
 
-	return object;
+    return object;
 }

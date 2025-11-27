@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -20,6 +20,7 @@
 #ifndef LALGORITHMS_H
 #define LALGORITHMS_H
 
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -38,9 +39,9 @@ inline LAYERS_EXPORT T split(const LString& s, char delimiter)
 {
 	T tokens;
 	std::string token;
-	std::istringstream tokenStream(s.c_str());
+	std::istringstream tokenStream(s);
 	while (std::getline(tokenStream, token, delimiter)) {
-		tokens.push_back(LString(token.c_str()));
+		tokens.push_back(LString(token));
 	}
 	return tokens;
 }
@@ -67,11 +68,11 @@ std::string remove_whitespace(const std::string& str)
 inline LAYERS_EXPORT
 std::string load_json_file(const std::filesystem::path& path)
 {
-	std::ifstream file(path.c_str(), std::ios::in);
+	std::ifstream file(path, std::ios::in);
 	if (!file.is_open())
 	{
 		std::cerr << __FUNCTION__ << ": Could not read file: "
-			<< path << std::endl;
+			<< path.string() << std::endl;
 		return "";
 	}
 

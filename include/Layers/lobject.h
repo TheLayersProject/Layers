@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "layers_global.h"
 #include "layers_exports.h"
@@ -40,9 +41,9 @@ class LAYERS_EXPORT LObject
 {
 public:
 	/*
-		Constructs a Layers object and sets its *parent*.
+		Constructs a Layers object.
 	*/
-	LObject(LObject* parent = nullptr);
+	LObject();
 
 	virtual ~LObject();
 
@@ -109,11 +110,6 @@ public:
 	*/
 	void set_object_name(const LString& new_name);
 
-	/*
-		Sets the object's *parent*.
-	*/
-	void set_parent(LObject* parent);
-
 private:
 	template <typename T>
 	void find_children_helper(
@@ -148,6 +144,17 @@ inline std::vector<T*> LObject::find_children(bool recursive) const
 	std::vector<T*> children;
 	find_children_helper<T>(this, children, recursive);
 	return children;
+}
+
+template <typename T, typename... Args>
+T* lMake(LObject* parent, Args&&... args)
+{
+    static_assert(std::is_base_of<LObject, T>::value, "T must be an LObject");
+    assert(parent && "Parent must not be null");
+
+    parent->add_child(std::make_unique<T>(std::forward<Args>(args)...));
+
+	return static_cast<T*>(parent->children().back().get());
 }
 
 LAYERS_NAMESPACE_END

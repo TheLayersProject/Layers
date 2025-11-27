@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Layers Project
+ * Copyright (C) 2025 Huntr Software LLC
  *
  * This file is part of Layers.
  *
@@ -26,13 +26,14 @@
 #include <variant>
 #include <vector>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "layers_global.h"
 #include "layers_exports.h"
 
 #include "lconnections.h"
 #include "lcontroller.h"
-#include "lstylable.h"
-#include "ljson.h"
 #include "llink.h"
 #include "lobject.h"
 #include "lstring.h"
@@ -53,20 +54,15 @@ using LAttributeMap = std::map<LString, LAttribute*>;
 class LAYERS_EXPORT LAttribute : public LObject
 {
 public:
-	LAttribute(const LString& name,
-		LObject* parent = nullptr);
+	LAttribute(const LString& name);
 
-	LAttribute(const LString& name, double value,
-		LObject* parent = nullptr);
+	LAttribute(const LString& name, double value);
 
-	LAttribute(const LString& name, const char* value,
-		LObject* parent = nullptr);
+	LAttribute(const LString& name, const char* value);
 
-	LAttribute(const LString& name, const LVariant& value,
-		LObject* parent = nullptr);
+	LAttribute(const LString& name, const LVariant& value);
 
-	LAttribute(const LString& name, LJsonValue value,
-		LObject* parent = nullptr);
+	LAttribute(const LString& name, const json& value);
 
 	virtual ~LAttribute();
 
@@ -107,8 +103,6 @@ public:
 
 	void set_style_attribute(LAttribute* style_attribute);
 
-	void set_parent_stylable(LStylable* parent_stylable);
-
 	void set_value(const char* value);
 
 	void set_value(const LVariant& value);
@@ -121,9 +115,8 @@ public:
 
 	LAttribute* style_attribute() const;
 
-	LJsonObject to_json_object() const;
-
-	LJsonValue to_json_value() const;
+	json to_json_object() const;
+	json to_json_value() const;
 
 	size_t type_index() const;
 
@@ -140,22 +133,11 @@ template<typename T>
 T LAttribute::as(const LStringList& state_combo, LStyle* context)
 {
 	if (style_attribute())
-	{
-		if (LObject* p = parent())
-		{
-			if (LStylable* d = dynamic_cast<LStylable*>(p))
-			{
-				return style_attribute()->as<T>(state_combo, d->style());
-			}
-		}
-		
 		return style_attribute()->as<T>(state_combo);
-	}
 	
-	if (!states().empty() && !state_combo.empty()) {
+	if (!states().empty() && !state_combo.empty())
 		if (LAttribute* state_attr = state(state_combo))
 			return state_attr->as<T>();
-	}
 	
 	if (link())
 	{
@@ -179,22 +161,11 @@ template<typename T>
 const T* LAttribute::as_if(const LStringList& state_combo, LStyle* context)
 {
 	if (style_attribute())
-	{
-		if (LObject* p = parent())
-		{
-			if (LStylable* d = dynamic_cast<LStylable*>(p))
-			{
-				return style_attribute()->as_if<T>(state_combo, d->style());
-			}
-		}
-		
 		return style_attribute()->as_if<T>(state_combo);
-	}
 
-	if (!states().empty() && !state_combo.empty()) {
+	if (!states().empty() && !state_combo.empty())
 		if (LAttribute* state_attr = state(state_combo))
 			return state_attr->as_if<T>();
-	}
 
 	if (link())
 	{
