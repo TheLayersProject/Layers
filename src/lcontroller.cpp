@@ -58,7 +58,7 @@ class LController::Impl
 public:
     std::unique_ptr<LStyle> root_style{ std::make_unique<LStyle>() };
 
-    std::map<LString, LStyle*> custom_styles;
+    std::map<LString, std::unique_ptr<LStyle>> custom_styles;
     std::map<LString, std::unique_ptr<LTheme>> themes;
 
     LStyleList active_custom_styles;
@@ -68,10 +68,10 @@ public:
 
     LConnector<LTheme*> connector_theme_added;
 
-    void add_custom_style(LStyle* custom_style)
+    void add_custom_style(std::unique_ptr<LStyle> custom_style)
     {
         if (custom_style)
-            custom_styles[custom_style->object_name()] = custom_style;
+            custom_styles[custom_style->object_name()] = std::move(custom_style);
     }
 
     void add_theme(std::unique_ptr<LTheme> theme)
@@ -346,29 +346,17 @@ public:
         process_style_set(path, file_strings);
     }
 
-    LStyle* load_custom_style(const std::filesystem::path& style_file_path)
+    std::unique_ptr<LStyle> load_custom_style(const std::filesystem::path& style_file_path)
     {
         std::string style_file_str = load_json_file(style_file_path);
         
         try 
         {
             // 6. Parsing logic updated
-            json json_object = json::parse(style_file_str);
+            json file_json = json::parse(style_file_str);
 
-            LStyle* style = new LStyle(
-                style_file_path.filename().string(),
-                json_object,
-                style_file_path);
-
-            for (const auto& [key, value] : json_object.items())
-            {
-                //if (!key.starts_with("_"))
-				if (key.length() > 0 && key[0] != '_')
-                {
-                    lMake<LStyle>(style, key, value, style_file_path);
-                }
-            }
-            return style;
+            for (const auto& [key, value] : file_json.items())
+                return std::make_unique<LStyle>(key, value, style_file_path);
         }
         catch (const json::parse_error& e)
         {
@@ -379,10 +367,18 @@ public:
 
     void load_custom_styles(const std::filesystem::path& path)
     {
-        for (const auto& dir_entry : std::filesystem::directory_iterator(path))
+        for (const auto& entry : std::filesystem::directory_iterator(path))
         {
-            if (dir_entry.is_regular_file())
-                add_custom_style(load_custom_style(dir_entry.path()));
+            if (entry.is_directory())
+            {
+                // Check if enry contains style.json file
+                std::filesystem::path style_file_path = entry.path() / "style.json";
+
+                if (std::filesystem::exists(style_file_path))
+                {
+                    add_custom_style(load_custom_style(style_file_path));
+                }
+            }
         }
     }
 
@@ -501,6 +497,11 @@ void LController::load_themes(const std::filesystem::path& path)
 	pimpl->load_themes(path);
 }
 
+void LController::load_user_styles(const std::filesystem::path& path)
+{
+    pimpl->load_custom_styles(path);
+}
+
 void LController::on_theme_added(std::function<void(LTheme*)> callback)
 {
 	pimpl->connector_theme_added.connect(callback);
@@ -538,7 +539,7 @@ bool LController::set_active_theme(LTheme* theme)
 	return false;
 }
 
-std::map<LString, LStyle*> LController::styles() const
+std::map<LString, std::unique_ptr<LStyle>>& LController::styles() const
 {
 	return pimpl->custom_styles;
 }
@@ -556,7 +557,7 @@ std::map<LString, std::unique_ptr<LTheme>>& LController::themes() const
 
 bool LController::toggle_custom_style(const LString& style_id)
 {
-	LStyle* style = pimpl->custom_styles[style_id];
+	LStyle* style = pimpl->custom_styles[style_id].get();
 
 	if (std::count(pimpl->active_custom_styles.begin(), pimpl->active_custom_styles.end(), style))
 	{

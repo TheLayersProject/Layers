@@ -66,13 +66,15 @@ public:
 
 	void load_themes(const std::filesystem::path& path);
 
+    void load_user_styles(const std::filesystem::path& path);
+
 	void on_theme_added(std::function<void(LTheme*)> callback);
 
     LStyle* root_style() const;
 
     bool set_active_theme(LTheme* theme);
 
-    std::map<LString, LStyle*> styles() const;
+    std::map<LString, std::unique_ptr<LStyle>>& styles() const;
 
     LTheme* theme(const LString& themeId) const;
 

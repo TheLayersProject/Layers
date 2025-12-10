@@ -71,6 +71,10 @@ public:
 
 	std::set<LStyle*> dependencies();
 
+	json extension(const LString& key) const;
+	
+	const json& extensions() const;
+
 	LString file_name() const;
 
 	void finalize();
@@ -81,11 +85,15 @@ public:
 
 	LStyle* find_item(std::deque<LString> name_list);
 
+	bool has_extension(const LString& key) const;
+
 	bool has_unresolved_base() const;
 
 	int index() const;
 
 	bool is_overridable() const;
+
+	void on_style_applied(std::function<void()> callback);
 
 	LString path() const;
 
@@ -98,6 +106,8 @@ public:
 	void set_base(LStyle* base_def);
 
 	void set_publisher(const LString& publisher);
+
+	LStyle* style() const;
 
 	json to_json_object() const;
 

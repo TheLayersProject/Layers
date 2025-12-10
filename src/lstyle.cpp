@@ -43,7 +43,12 @@ public:
 	json value;
 	std::filesystem::path file_path;
 
+	// Stores unrecognized '_' prefixed keys
+	json extensions;
+
 	LStyle* style_definition{ nullptr };
+
+	LConnector<> connector_style_applied;
 
 	bool m_is_overridable{ false };
 
@@ -91,6 +96,16 @@ public:
 		}
 		else if (value.is_object())
 		{
+			if (value.contains("_meta"))
+			{
+				auto meta = value["_meta"];
+
+				if (meta.contains("_publisher"))
+				{
+					publisher = meta["_publisher"].get<std::string>();
+				}
+			}
+
 			if (value.contains("_include"))
 			{
 				// Object-based inheritance (e.g., "Dialog": { "_include": "qlbox.json::Box", ... })
@@ -115,8 +130,16 @@ public:
 					lMake<LStyle>(self, key, value, file_path);
 				}
 			}
-				//for (const auto& [key, value] : object["children"].to_object())
-				//	append_child(new LStyle(key, value, file_path, self));
+
+			for (const auto& [key, val] : value.items())
+			{
+					if (!key.empty() && key[0] == '_' &&
+							key != "_meta" && 
+							key != "_include")
+					{
+							extensions[key] = val;
+					}
+			}
 		}
 	}
 
@@ -259,6 +282,8 @@ void LStyle::apply_style(LStyle* style_def)
 			}
 		}
 	}
+
+	pimpl->connector_style_applied.execute();
 
 	//pimpl->apply_style(style_def);
 }
@@ -431,6 +456,8 @@ void LStyle::clear_style()
 		pimpl->style_definition = nullptr;
 	}
 
+	pimpl->connector_style_applied.execute();
+
 	//pimpl->clear_style();
 }
 
@@ -449,6 +476,19 @@ std::set<LStyle*> LStyle::dependencies()
 	return dependencies;
 
 	//return pimpl->dependencies();
+}
+
+json LStyle::extension(const LString& key) const
+{
+    if (pimpl->extensions.contains(key))
+        return pimpl->extensions[key];
+
+    return json{};
+}
+
+const json& LStyle::extensions() const
+{
+    return pimpl->extensions;
 }
 
 LString LStyle::file_name() const
@@ -517,6 +557,11 @@ LStyle* LStyle::find_item(std::deque<LString> name_list)
 	//return pimpl->find_item(name_list);
 }
 
+bool LStyle::has_extension(const LString& key) const
+{
+    return pimpl->extensions.contains(key);
+}
+
 bool LStyle::has_unresolved_base() const
 {
 	if (!pimpl->base && !pimpl->base_path.empty() && !pimpl->base_name.empty())
@@ -545,6 +590,11 @@ int LStyle::index() const
 bool LStyle::is_overridable() const
 {
 	return pimpl->is_overridable();
+}
+
+void LStyle::on_style_applied(std::function<void()> callback)
+{
+	pimpl->connector_style_applied.connect(callback);
 }
 
 LString LStyle::path() const
@@ -607,6 +657,11 @@ void LStyle::set_publisher(const LString& publisher)
 	pimpl->publisher = publisher;
 }
 
+LStyle* LStyle::style() const
+{
+	return pimpl->style_definition;
+}
+
 json LStyle::to_json_object() const
 {
     json item_object;
@@ -645,6 +700,9 @@ json LStyle::to_json_object() const
 
     if (!children_object.empty())
         item_object["children"] = children_object;
+
+		for (const auto& [key, val] : pimpl->extensions.items())
+        item_object[key] = val;
 
     return item_object;
 }
