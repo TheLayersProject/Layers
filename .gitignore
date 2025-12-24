@@ -72,3 +72,5 @@ documents/
 # CMake
 CMakePresets.json
 build/
+bin/
+lib/

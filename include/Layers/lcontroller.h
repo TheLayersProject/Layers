@@ -88,6 +88,7 @@ private:
 };
 
 #define lController (Layers::LController::instance())
+#define lTheme (Layers::LController::instance().active_theme())
 
 LAYERS_NAMESPACE_END
 
